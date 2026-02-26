@@ -15,6 +15,8 @@ var DistanceTraveled = 0
 
 var MoveTw : Tween
 
+var CurrentSteerRot : float
+
 func Toggle(t : bool) -> void:
 	if (!t):
 		MoveTw = create_tween()
@@ -47,24 +49,60 @@ func UpdateSteerFloat(Dir : float) -> void:
 	set_physics_process(true)
 	SteeringDir += Dir
 
+
 func ForceSteer(st : float) -> void:
-	$TextureRect.rotation = rad_to_deg(st)
+	#var rotamm = st - CurrentSteerRot
+	if (Syncing):
+		return
+	CurrentSteerRot = st
+	#SteerRotated(rotamm)
+	
+var forceTw : Tween
+var Syncing : bool = false
+func SyncSteer(st : float) -> void:
+	if (forceTw != null):
+		forceTw.kill()
+	CurrentSteerRot = st
+	#Syncing = true
+	#forceTw = create_tween()
+	##print("Forcing steer of value {0}".format([st]))
+	#forceTw.set_ease(Tween.EASE_OUT)
+	#forceTw.set_trans(Tween.TRANS_QUINT)
+	#forceTw.tween_method(RotateTexture, CurrentSteerRot, st, 1)
+	#forceTw.finished.connect(set.bind("Syncing", false))
+	#$TextureRect.rotation = rad_to_deg(st)
+
+func RotateTexture(NewRot : float) -> void:
+	var rotamm = NewRot - $TextureRect.rotation
+	SteerRotated(rotamm)
+	CurrentSteerRot = NewRot
+
+func SteerRotated(Amm : float) -> void:
+	DistanceTraveled += abs(Amm)
+	if (DistanceTraveled > 0.2):
+		DistanceTraveled = 0
+		$AudioStreamPlayer.play()
+		Input.vibrate_handheld(30)
 
 func CopyShipSteer(Ship : MapShip) -> void:
 	$TextureRect.rotation = Ship.rotation
 
-func _physics_process(_delta: float) -> void:
-	$TextureRect.rotation += SteeringDir / 5
-	DistanceTraveled += abs(SteeringDir)
+func _process(delta: float) -> void:
+	var newrot = move_toward($TextureRect.rotation, CurrentSteerRot, delta * 3)
+	var rotamm = newrot - $TextureRect.rotation
+	$TextureRect.rotation = newrot
+	SteerRotated(rotamm)
+
+func _physics_process(delta: float) -> void:
 	SteeringDir = lerp(SteeringDir, 0.0, 0.2)
+	#$TextureRect.rotation = wrap($TextureRect.rotation + SteeringDir / 5, -PI, PI)
+	
 	SteeringOffseted.emit(SteeringDir)
 	SteeringDitChanged.emit(SteeringDir)
 	if (abs(SteeringDir) < 0.001):
 		set_physics_process(false)
-	if (DistanceTraveled > 3):
-		DistanceTraveled = 0
-		$AudioStreamPlayer.play()
-		Input.vibrate_handheld(30)
+	
+	
 	#if (!$AudioStreamPlayer.playing):
 		
 	

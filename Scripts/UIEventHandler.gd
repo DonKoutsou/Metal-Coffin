@@ -8,6 +8,8 @@ signal ElevationEnded(Value : float)
 signal ElevationChanged(Value : float)
 signal SpeedSet(Value : float)
 signal SpeedForced(Value : float)
+signal SteerSet(Value : float)
+signal SteerForced(Value : float)
 signal ElevationSet(Value : float)
 signal ElevationForced(Value : float)
 #signal AccelerationForced(ForceVal : float)
@@ -69,6 +71,12 @@ func OnSpeedSet(Speed : float) -> void:
 
 func OnSpeedForced(Speed : float) -> void:
 	SpeedForced.emit(Speed)
+
+func OnSteerSet(Speed : float) -> void:
+	SteerSet.emit(Speed)
+
+func OnSteerForced(Speed : float) -> void:
+	SteerForced.emit(Speed)
 
 func OnElevationSet(Elevation : float) -> void:
 	ElevationSet.emit(Elevation)

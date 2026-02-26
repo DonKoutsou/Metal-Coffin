@@ -15,8 +15,8 @@ uniform float color_offset_multiplier: hint_range(0.0, 0.1) =  0.004;
 //uniform float color_offset: hint_range(-0.1, 0.1) = 0.005;
 //uniform float blur_amount: hint_range(0.0, 3.0, 0.1);
 
-uniform float hardScan : hint_range(-12.0, -1.0) = -8.0;
-uniform float hardPix : hint_range(-4.0, 0.0) = -2.0;
+//uniform float hardScan : hint_range(-12.0, -1.0) = -8.0;
+//uniform float hardPix : hint_range(-4.0, 0.0) = -2.0;
 
 uniform vec2 warp = vec2(64.0, 24.0);
 
@@ -27,7 +27,7 @@ uniform float scanlines_opacity: hint_range(0., 2., .01) = 1.;
 uniform float scanlines_speed: hint_range(0., 5., .01) = 1.;
 uniform float scanline_thickness: hint_range(0., .6, .01) = 0.5;
 uniform float scanlines_spacing: hint_range(0.3, 3., .01) = 1.;
-uniform float scanline_intensity : hint_range(0.0, 10.0) = 0;
+//uniform float scanline_intensity : hint_range(0.0, 10.0) = 0;
 uniform float static_chromatic_aberration : hint_range(0.0, 1.0) = 0.1;
 //uniform float ColorAmm: hint_range(16, 256, 1.0) = 1.;
 
@@ -65,36 +65,36 @@ vec3 Fetch(vec2 pos, vec2 off, sampler2D iChannel0){
 	return ToLinear(texture(iChannel0, pos.xy, -16.0).rgb);
 }
 
-vec2 Dist(vec2 pos){
-	pos *= res;
-	return (vec2(0.5) - (pos - floor(pos)));
-}
+//vec2 Dist(vec2 pos){
+	//pos *= res;
+	//return (vec2(0.5) - (pos - floor(pos)));
+//}
+//
+//float Gaus(float pos, float scale){ return exp2(scale * pos * pos); }
+//
+//vec3 Horz3(vec2 pos, float off, sampler2D iChannel0){
+	//vec3 b = Fetch(pos, vec2(-1.0, off), iChannel0);
+	//vec3 c = Fetch(pos, vec2(0.0, off), iChannel0);
+	//vec3 d = Fetch(pos, vec2(1.0, off), iChannel0);
+	//float dst = Dist(pos).x;
+	//float scale = hardPix;
+//
+	//float wb = Gaus(dst - 1.0, scale);
+	//float wc = Gaus(dst, scale);
+	//float wd = Gaus(dst + 1.0, scale);
+//
+	//return (b * wb + c * wc + d * wd) / (wb + wc + wd);
+//}
 
-float Gaus(float pos, float scale){ return exp2(scale * pos * pos); }
-
-vec3 Horz3(vec2 pos, float off, sampler2D iChannel0){
-	vec3 b = Fetch(pos, vec2(-1.0, off), iChannel0);
-	vec3 c = Fetch(pos, vec2(0.0, off), iChannel0);
-	vec3 d = Fetch(pos, vec2(1.0, off), iChannel0);
-	float dst = Dist(pos).x;
-	float scale = hardPix;
-
-	float wb = Gaus(dst - 1.0, scale);
-	float wc = Gaus(dst, scale);
-	float wd = Gaus(dst + 1.0, scale);
-
-	return (b * wb + c * wc + d * wd) / (wb + wc + wd);
-}
-
-vec3 Tri(vec2 pos, sampler2D iChannel0){
-	vec3 a = Horz3(pos, -1.0, iChannel0);
-	vec3 b = Horz3(pos, 0.0, iChannel0);
-	vec3 c = Horz3(pos, 1.0, iChannel0);
-	float wa = Gaus(Dist(pos).y - 1.0, hardScan);
-	float wb = Gaus(Dist(pos).y, hardScan);
-	float wc = Gaus(Dist(pos).y + 1.0, hardScan);
-	return a * wa + b * wb + c * wc;
-}
+//vec3 Tri(vec2 pos, sampler2D iChannel0){
+	//vec3 a = Horz3(pos, -1.0, iChannel0);
+	//vec3 b = Horz3(pos, 0.0, iChannel0);
+	//vec3 c = Horz3(pos, 1.0, iChannel0);
+	//float wa = Gaus(Dist(pos).y - 1.0, hardScan);
+	//float wb = Gaus(Dist(pos).y, hardScan);
+	//float wc = Gaus(Dist(pos).y + 1.0, hardScan);
+	//return a * wa + b * wb + c * wc;
+//}
 
 vec2 Warp(vec2 pos){
 pos = pos * 2.0 - 1.0;
@@ -166,7 +166,8 @@ vec3 yuv_to_rgb(vec3 yuv) {
 void fragment(){
 	vec2 pos = Warp(FRAGCOORD.xy / (1.0 / SCREEN_PIXEL_SIZE).xy);
 
-	COLOR.rgb = Tri(pos, SCREEN_TEXTURE) * Mask(FRAGCOORD.xy);
+	COLOR.rgb = texture(SCREEN_TEXTURE, pos).rgb * Mask(FRAGCOORD.xy);
+	//COLOR.rgb = Tri(pos, SCREEN_TEXTURE) * Mask(FRAGCOORD.xy);
 	vec2 look = pos;
 	float window = 1.0 / (1.0 + 20.0 * pow(look.y - mod(TIME / 4.0, 1.0), 2.0)) * image_flicker;
 	look.x += sin(look.y * 10.0 + TIME) / 50.0 * onOff(4.0, 4.0, 0.3) * (1.0 + cos(TIME * 80.0)) * window;

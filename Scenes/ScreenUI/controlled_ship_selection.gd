@@ -48,14 +48,15 @@ func ShipChanged(NewShip : PlayerDrivenShip) -> void:
 	
 	var h = currentShip.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL) / currentShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL) * 100
 	
-	CurrentCaptainFuelLabel.text = "FUEL:{0}%".format([roundi(f)])
-	CurrentCaptainHullLabel.text = "HULL:{0}%".format([roundi(h)])
+	CurrentCaptainFuelLabel.text = "F:{0}%".format([roundi(f)])
+	CurrentCaptainHullLabel.text = "H:{0}%".format([roundi(h)])
 
 	var DroneText : String = ""
 	for g : Captain in currentShip.GetDroneDock().GetCaptains():
 		
 		var Droneh = g.GetStatCurrentValue(STAT_CONST.STATS.HULL) / g.GetStatFinalValue(STAT_CONST.STATS.HULL) * 100
-		DroneText += "{0}\n{1}%\n-----------\n".format([g.GetCaptainName(), roundi(Droneh)])
+		var Dronef = g.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) / g.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK) * 100
+		DroneText += "{0}\nH:{1}% | F:{2}%\n-----------------\n".format([g.GetCaptainName(), roundi(Droneh), roundi(Dronef)])
 	DroneLabel.text = DroneText
 
 func Selected(Ship : PlayerDrivenShip) -> void:
@@ -82,7 +83,7 @@ func _on_drone_gas_range_snaped_chaned(Dir: bool) -> void:
 
 
 func _on_button_pressed() -> void:
-	ShipCamera.GetInstance().FrameCamToShip(currentShip)
+	ShipCamera.GetInstance().FrameCamToShip(currentShip, 1, false)
 
 
 func _on_before_captain_pressed() -> void:

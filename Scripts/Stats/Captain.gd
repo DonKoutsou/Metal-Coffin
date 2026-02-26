@@ -253,7 +253,7 @@ func GetCharacterInventory() -> CharacterInventory:
 	return _CharInv
 
 func GetValue() -> int:
-	var Value : int = ProvidingFunds
+	var Value : int = ProvidingFunds / 2.0
 	if (_CharInv != null):
 		var InvContents : Dictionary[Item, int] = GetCharacterInventory().GetInventoryContents()
 		for g : Item in InvContents.keys():

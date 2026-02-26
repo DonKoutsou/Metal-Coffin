@@ -33,7 +33,7 @@ func _ready() -> void:
 	GroundMat = Ground.material
 
 	CloudMat.set_shader_parameter("Camera_Offset", global_position / 1500)
-	GroundMat.set_shader_parameter("offset", global_position / 1500)
+	GroundMat.set_shader_parameter("offset",( global_position / 1500) + Vector2(1.5, 1.5))
 	GroundMap.ChangeOffset((global_position / 6000))
 	WeatherMan.UpdateCameraOffset((global_position / 6000))
 	UIEventHandle.ZoomDialMoved.connect(_HANDLE_ZOOM.bind(false))
@@ -192,8 +192,7 @@ func MoveCameraX(value : float) -> void:
 	UpdateCameraPos(Vector2(value, 0), true, false)
 
 func UpdateCameraPos(relativeMovement : Vector2, Unfocus : bool = true, FromSelf : bool = true):
-	if (FrameTween != null):
-		FrameTween.kill()
+	
 	
 	if (Unfocus):
 		FocusedShip = null
@@ -204,24 +203,33 @@ func UpdateCameraPos(relativeMovement : Vector2, Unfocus : bool = true, FromSelf
 	
 	var extent = get_viewport_rect().size / 2 / zoom.x
 	
-	var maxposY = Vector2(1000 - extent.y, WorldBounds.y - 1000 + extent.y)
-	var maxposX = Vector2(-((WorldBounds.x + 3000) / 2 - extent.x), (WorldBounds.x + 3000) / 2 - extent.x)
+	var maxposY = Vector2(3000 - extent.y, WorldBounds.y - 3000 + extent.y)
+	var maxposX = Vector2(-((WorldBounds.x + 3000) / 2 - extent.x) - 1000, ((WorldBounds.x + 3000) / 2 - extent.x) + 1000)
 
 	var rel = relativeMovement / zoom
 	var newpos = Vector2(clamp(position.x - rel.x, maxposX.x, maxposX.y) ,clamp(position.y - rel.y, maxposY.y, maxposY.x) )
+	
+	Grid.UpdateOffset(position)
+	
+	if (newpos == position):
+		return
+	if (FrameTween != null):
+		FrameTween.kill()
 	position = newpos
 	
 	CloudMat.set_shader_parameter("Camera_Offset", global_position / 1500)
-	GroundMat.set_shader_parameter("offset", global_position / 1500)
+	GroundMat.set_shader_parameter("offset", (global_position / 1500) + Vector2(1.5, 1.5))
 	GroundMap.ChangeOffset((global_position / 6000))
 	WeatherMan.UpdateCameraOffset((global_position / 6000))
-	Grid.UpdateOffset(position)
+	
 	PositionChanged.emit(position)
 
 #var CloudTime = 0.0
 var CloudOffset = Vector2.ZERO
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	if (World.WORLDST != World.WORLDSTATE.NORMAL):
+		return
 	if (!SimulationManager.IsPaused()):
 		#CloudTime += delta * SimulationManager.SimSpeed()
 		#CloudMat.set_shader_parameter("custom_time", CloudTime)
@@ -231,7 +239,8 @@ func _physics_process(_delta: float) -> void:
 		#CloudMat.set_shader_parameter("fractal_lacunarity", clamp(l + randf_range(-0.01,0.01), 1,2))
 	
 	if (FocusedShip != null):
-		ForceCamPosition(FocusedShip.global_position)
+		UpdateCameraPos((global_position - FocusedShip.global_position) * delta, false, true)
+		#ForceCamPosition(FocusedShip.global_position)
 	
 	var rel : Vector2
 	if (Input.is_action_pressed("MapDown")):
@@ -275,27 +284,27 @@ func FrameCamToPos(pos : Vector2, OverrideTime : float = 1, Unzoom : bool = true
 	if (Unzoom):
 		ForceZoomOut()
 
-func FrameCamToShip(Ship : PlayerDrivenShip, _OverrideTime : float = 1, _Unzoom : bool = true) -> void:
+func FrameCamToShip(Ship : PlayerDrivenShip, OverrideTime : float = 1, Unzoom : bool = true) -> void:
 	if (FrameTween != null):
 		FrameTween.kill()
-
 	FocusedShip = Ship
 
 
 func ForceCamPosition(Pos : Vector2) -> void:
 	var extent = get_viewport_rect().size / 2 / zoom.x
 	
-	var maxposY = Vector2(1000 - extent.y, WorldBounds.y - 1000 + extent.y)
-	var maxposX = Vector2(-((WorldBounds.x + 3000) / 2 - extent.x), (WorldBounds.x + 3000) / 2 - extent.x)
-
+	var maxposY = Vector2(3000 - extent.y, WorldBounds.y - 3000 + extent.y)
+	var maxposX = Vector2(-((WorldBounds.x + 3000) / 2 - extent.x) - 1000, ((WorldBounds.x + 3000) / 2 - extent.x) + 1000)
+	
 	var newpos = Vector2(clamp(Pos.x, maxposX.x, maxposX.y) ,clamp(Pos.y, maxposY.y, maxposY.x) )
-	var RelMovement = newpos - global_position
-	UIEventHandle.OnYChangedFromScreen(RelMovement.y / 100)
-	UIEventHandle.OnXchangedFromScreen(RelMovement.x / 100)
-	global_position = newpos
-	CloudMat.set_shader_parameter("Camera_Offset", global_position / 1500)
-	GroundMat.set_shader_parameter("offset", global_position / 1500)
-	GroundMap.ChangeOffset((global_position / 6000))
-	WeatherMan.UpdateCameraOffset((global_position / 6000))
-	PositionChanged.emit(position)
-	Grid.UpdateOffset(global_position)
+	var relativeMovement = newpos - global_position
+
+	UIEventHandle.OnYChangedFromScreen(relativeMovement.y / 100)
+	UIEventHandle.OnXchangedFromScreen(relativeMovement.x / 100)
+	position = newpos
+	CloudMat.set_shader_parameter("Camera_Offset", newpos / 1500)
+	GroundMat.set_shader_parameter("offset", (newpos / 1500) + Vector2(1.5, 1.5))
+	GroundMap.ChangeOffset((newpos / 6000))
+	WeatherMan.UpdateCameraOffset((newpos / 6000))
+	Grid.UpdateOffset(newpos)
+	PositionChanged.emit(newpos)

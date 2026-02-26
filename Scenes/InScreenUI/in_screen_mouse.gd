@@ -26,11 +26,11 @@ func SwitchMouse(Mode : MouseMode) -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 
-	var mousepos = get_global_mouse_position()
+	var mousepos = get_viewport().get_mouse_position()
 	var Local = mousepos - get_viewport().canvas_transform.origin
 	var MouseInScreen = Local.x > 0 and Local.y > 0 and Local.x < get_viewport_rect().size.x and Local.y < get_viewport_rect().size.y
 	if (MouseInScreen):
-		position = mousepos
+		global_position = mousepos
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		#print("mouse hidden " + var_to_str(Time.get_ticks_msec()))
 	else:

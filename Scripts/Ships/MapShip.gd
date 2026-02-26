@@ -49,6 +49,8 @@ signal AltitudeChanged(NewAlt : float)
 signal TargetAltitudeChanged(NewAlt : float)
 signal AChanged(NewAccel : float)
 signal AForced(NewAccel : float)
+signal SteerChanged(NewSteer : float)
+signal SteerForced(NewSteer : float)
 signal Teleported
 
 #var IsLanded : bool = false
@@ -290,7 +292,7 @@ func AccelerationChanged(value: float, forced : bool = false) -> void:
 	#GetShipAcelerationNode().position.x = max(0,min(value,1) * GetShipMaxSpeed()) 
 	
 func Steer(Rotation : float) -> void:
-	rotation += Rotation / 50
+	rotation = wrap(rotation + (Rotation / 50), -PI, PI)
 	
 	var Mat = ShipSprite.material as ShaderMaterial
 	Mat.set_shader_parameter("sprite_rotation", ShipSprite.global_rotation)
@@ -299,7 +301,9 @@ func Steer(Rotation : float) -> void:
 		g.ForceSteer(rotation)
 
 func ForceSteer(Rotation : float) -> void:
-	rotation = Rotation
+	rotation = wrap(Rotation, -PI, PI)
+
+	#print("{0}'s new rotation is {1}".format([Cpt.GetCaptainName(), rotation]))
 	var Mat = ShipSprite.material as ShaderMaterial
 	Mat.set_shader_parameter("sprite_rotation", ShipSprite.global_rotation)
 	for g in GetDroneDock().GetDockedShips():
@@ -778,7 +782,7 @@ func IsFuelFull() -> bool:
 	return Cpt.IsResourceFull(STAT_CONST.STATS.FUEL_TANK)
 
 func GetValue() -> int:
-	var Value : int = Cpt.ProvidingFunds
+	var Value : int = Cpt.ProvidingFunds / 2.0
 	var InvContents : Dictionary[Item, int] = Cpt.GetCharacterInventory().GetInventoryContents()
 	for g : Item in InvContents.keys():
 		for z in InvContents[g]:

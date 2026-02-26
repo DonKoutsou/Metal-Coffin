@@ -6,7 +6,7 @@ extends CanvasLayer
 func _physics_process(_delta: float) -> void:
 	var storm = ShipContoller.ControlledShipStormValue
 	RainMat.set_shader_parameter("frequency" ,(1 - storm) * 4.0)
-	RainSound.volume_db = linear_to_db(storm)
+	RainSound.volume_db = linear_to_db(storm) - 6
 
 func _exit_tree() -> void:
 	RainMat.set_shader_parameter("frequency" , 4.0)

@@ -60,7 +60,7 @@ func _physics_process(_delta: float) -> void:
 			DistanceTraveled = 0
 			
 			Sound.play()
-			Input.vibrate_handheld(30)
+			Input.vibrate_handheld(10)
 			if (CustomAccumulated > 0):
 				if (frame + 1 == framecount):
 					frame = 0

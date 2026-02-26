@@ -34,6 +34,7 @@ const StatText = "[color=#ffc315]HULL[/color][p][color=#6be2e9]SHIELD[/color][p]
 
 signal OnFallbackPressed()
 
+
 var Ship : BattleShipStats
 var Fr : bool
 
@@ -97,6 +98,8 @@ func Destroy() -> void:
 
 func _ready() -> void:
 	#Destroy()
+	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2.visible = false
+	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3.visible = false
 	ToggleFire(false)
 	set_physics_process(false)
 
@@ -105,7 +108,7 @@ func _physics_process(delta: float) -> void:
 	#CurrentCardShown.global_position = get_global_mouse_position() - CurrentCardShown.size
 
 func PositionCard() -> void:
-	var Mpos = get_global_mouse_position() 
+	var Mpos = get_global_mouse_position() + Vector2(0,50)
 	var VPRect =  get_viewport().get_visible_rect()
 	var DistanceFromDown = VPRect.size.y - get_global_mouse_position().y
 	var DistFromRight = VPRect.size.x - get_global_mouse_position().x
@@ -295,12 +298,27 @@ func ShipDestroyed() -> void:
 func _on_button_pressed() -> void:
 	OnFallbackPressed.emit()
 
+var tw : Tween
 
 func _on_panel_container_2_mouse_entered() -> void:
-	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2.visible = true
-	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3.visible = true
+	if (tw != null):
+		tw.kill()
+	tw = create_tween()
+	tw.set_ease(Tween.EASE_OUT)
+	tw.set_trans(Tween.TRANS_BACK)
+	tw.tween_property($HBoxContainer/VBoxContainer/PanelContainer2, "custom_minimum_size", Vector2(0,97), 0.15)
+	tw.finished.connect(ToggleStatVisibility.bind(true))
+
+func ToggleStatVisibility(t : bool) -> void:
+	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2.visible = t
+	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3.visible = t
 
 
 func _on_panel_container_2_mouse_exited() -> void:
-	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2.visible = false
-	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3.visible = false
+	if (tw != null):
+		tw.kill()
+	tw = create_tween()
+	tw.set_ease(Tween.EASE_IN)
+	tw.set_trans(Tween.TRANS_BACK)
+	tw.tween_property($HBoxContainer/VBoxContainer/PanelContainer2, "custom_minimum_size", Vector2.ZERO, 0.15)
+	ToggleStatVisibility(false)

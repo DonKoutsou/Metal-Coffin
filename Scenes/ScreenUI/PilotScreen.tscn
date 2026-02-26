@@ -71,8 +71,10 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -80.0
-offset_right = 274.0
+offset_left = 274.0
+offset_top = -54.0
+offset_right = 548.0
+offset_bottom = -2.0
 grow_vertical = 0
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("5_ojc6g")
@@ -105,7 +107,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ForecastButton" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer" unique_id=279776748 groups=["Buttons"]]
-custom_minimum_size = Vector2(26, 64)
+custom_minimum_size = Vector2(20, 54)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -133,7 +135,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="GridButton" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer2" unique_id=1953102047 groups=["Buttons"]]
-custom_minimum_size = Vector2(26, 64)
+custom_minimum_size = Vector2(20, 54)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -162,7 +164,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TopoButton" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer8" unique_id=1539479977 groups=["Buttons"]]
-custom_minimum_size = Vector2(26, 64)
+custom_minimum_size = Vector2(20, 54)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -191,7 +193,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ZoomLevelButton" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer4" unique_id=1146945370 groups=["Buttons"]]
-custom_minimum_size = Vector2(26, 64)
+custom_minimum_size = Vector2(20, 54)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
@@ -220,7 +222,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="SteerButton" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer3" unique_id=673202409 groups=["Buttons"]]
-custom_minimum_size = Vector2(26, 64)
+custom_minimum_size = Vector2(20, 54)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -318,15 +320,6 @@ offset_left = 385.0
 offset_top = -269.0
 offset_right = 553.0
 offset_bottom = -101.0
-
-[node name="ScreenUi" type="Control" parent="." unique_id=1868534827]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
 
 [node name="Fan" parent="." unique_id=159958918 instance=ExtResource("8_bpouu")]
 position = Vector2(1002, -125.00001)
@@ -672,7 +665,7 @@ rotation = -1.5707964
 scale = Vector2(0.8, 0.8)
 
 [node name="XDial" parent="." unique_id=884440325 instance=ExtResource("26_ecvfe")]
-position = Vector2(640, 688)
+position = Vector2(664, 688)
 rotation = -3.1415927
 scale = Vector2(0.8, 0.8)
 

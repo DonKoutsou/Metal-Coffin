@@ -38,6 +38,7 @@ offset_right = 750.0
 offset_bottom = 750.0
 
 [node name="Clouds" type="ColorRect" parent="." unique_id=367161667]
+modulate = Color(1, 1, 1, 0)
 texture_filter = 1
 material = ExtResource("5_eqfuc")
 anchors_preset = 8

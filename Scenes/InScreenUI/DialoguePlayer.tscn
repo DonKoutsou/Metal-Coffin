@@ -31,7 +31,6 @@ grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
 theme = ExtResource("2_rodwx")
-theme_override_styles/panel = ExtResource("3_h75l1")
 
 [node name="Label" type="Label" parent="PanelContainer2" unique_id=2104639469]
 custom_minimum_size = Vector2(50, 50)
@@ -52,7 +51,6 @@ offset_right = -13.0
 offset_bottom = -14.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_styles/panel = ExtResource("3_h75l1")
 OrientationUpDown = false
 Speed = 20.0
 amplitude = 10.0

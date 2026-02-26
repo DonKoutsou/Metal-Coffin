@@ -80,7 +80,7 @@ expand_mode = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=668548890]
 stream = ExtResource("4_w1h5k")
-volume_db = -10.0
+volume_db = -15.0
 pitch_scale = 0.88
 bus = &"UI"
 

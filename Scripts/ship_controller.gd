@@ -43,8 +43,6 @@ func _ready() -> void:
 func Update() -> void:
 	if (ControlledShip.StormValue >= 0.9):
 		UIEventH.OnStorm((ControlledShip.StormValue - 0.9) * 10)
-	if (SimulationManager.IsPaused()):
-		return
 	UpdatePlayerInfo()
 
 
@@ -73,6 +71,8 @@ func SetInitialShip() -> void:
 	AvailableShips.append(ControlledShip)
 	ControlledShip.AChanged.connect(OnControlledShipSpeedChanged)
 	ControlledShip.AForced.connect(OnControlledShipSpeedForced)
+	ControlledShip.SteerChanged.connect(OnControlledShipSteerChanged)
+	ControlledShip.SteerForced.connect(OnControlledShipSteerForced)
 	ControlledShip.AltitudeChanged.connect(OnControlledShipElevationChanged)
 	ControlledShip.TargetAltitudeChanged.connect(OnControlledShipElevationForced)
 
@@ -83,10 +83,7 @@ func RegisterSelf(D : MapShip) -> void:
 
 	D.ToggleFuelRangeVisibility(false)
 	
-	D.OnShipDestroyed.connect(OnShipDestroyed)
-	D.OnShipDamaged.connect(OnShipDamaged)
-	D.AChanged.connect(OnControlledShipSpeedChanged)
-	D.AForced.connect(OnControlledShipSpeedForced)
+	
 
 func RadarButtonPressed() -> void:
 	var Instigator = ControlledShip
@@ -133,6 +130,12 @@ func OnControlledShipSpeedChanged(NewSpeed : float) -> void:
 
 func OnControlledShipSpeedForced(NewSpeed : float) -> void:
 	UIEventH.OnSpeedForced(NewSpeed / ControlledShip.GetShipMaxSpeed())
+
+func OnControlledShipSteerChanged(NewSteer : float) -> void:
+	UIEventH.OnSteerSet(NewSteer)
+
+func OnControlledShipSteerForced(NewSteer : float) -> void:
+	UIEventH.OnSteerForced(NewSteer)
 
 func OnControlledShipElevationChanged(NewElevation : float) -> void:
 	UIEventH.OnElevationSet(NewElevation / 10000)
@@ -202,6 +205,20 @@ func OnTargetShipPicked(Target : MapShip) -> void:
 	
 
 func OnShipChanged(NewShip : PlayerDrivenShip) -> void:
+	ControlledShip.OnShipDestroyed.disconnect(OnShipDestroyed)
+	ControlledShip.OnShipDamaged.disconnect(OnShipDamaged)
+	ControlledShip.AChanged.disconnect(OnControlledShipSpeedChanged)
+	ControlledShip.AForced.disconnect(OnControlledShipSpeedForced)
+	ControlledShip.SteerChanged.disconnect(OnControlledShipSteerChanged)
+	ControlledShip.SteerForced.disconnect(OnControlledShipSteerForced)
+	
+	NewShip.OnShipDestroyed.connect(OnShipDestroyed)
+	NewShip.OnShipDamaged.connect(OnShipDamaged)
+	NewShip.AChanged.connect(OnControlledShipSpeedChanged)
+	NewShip.AForced.connect(OnControlledShipSpeedForced)
+	NewShip.SteerChanged.connect(OnControlledShipSteerChanged)
+	NewShip.SteerForced.connect(OnControlledShipSteerForced)
+	
 	ControlledShip.ToggleFuelRangeVisibility(false)
 	ControlledShip.Teleported.disconnect(UpdatePlayerInfo)
 	

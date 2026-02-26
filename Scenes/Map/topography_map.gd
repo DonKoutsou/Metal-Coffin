@@ -20,6 +20,8 @@ func _ready() -> void:
 
 	var newoffset = Mat.get_shader_parameter("offset")
 	Offset = newoffset
+	#tex = NoiseData.get_image()
+	#tex.decompress()
 
 func ChangeOffset(NewOffset : Vector2) -> void:
 	Mat.set_shader_parameter("offset", NewOffset)

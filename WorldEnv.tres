@@ -3,7 +3,7 @@
 [sub_resource type="Gradient" id="Gradient_a2ujk"]
 interpolation_mode = 2
 interpolation_color_space = 2
-offsets = PackedFloat32Array(0, 0.5934066, 1)
+offsets = PackedFloat32Array(0, 0.73214287, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0.509698, 0.524902, 0.54199, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_7mma4"]
@@ -16,8 +16,6 @@ background_canvas_max_layer = 4
 ambient_light_source = 1
 reflected_light_source = 1
 tonemap_mode = 4
-tonemap_agx_white = 16.5
-tonemap_agx_contrast = 1.0
 glow_enabled = true
 glow_levels/2 = 0.15
 glow_levels/3 = 0.0

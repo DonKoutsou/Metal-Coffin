@@ -126,7 +126,7 @@ func _draw():
 			#draw_polyline(poly, Col, 1 / CamZoom, true)
 	
 	for g in Lines:
-		draw_multiline(g, Col, 1 / CamZoom, false)
+		draw_multiline(g, Col, 2 / CamZoom, false)
 	
 func FromPolylineToLine(Polyline : PackedVector2Array) -> PackedVector2Array:
 	var Line : PackedVector2Array

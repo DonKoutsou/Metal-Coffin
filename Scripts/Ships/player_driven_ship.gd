@@ -153,7 +153,10 @@ func Update(delta: float) -> void:
 		
 		var directiontoDestination = (NextLoc - global_position).normalized().angle()
 		if (rotation != directiontoDestination):
-			ForceSteer(lerp_angle(rotation, directiontoDestination, delta))
+			var newrot = lerp_angle(rotation, directiontoDestination, delta)
+			ForceSteer(newrot)
+			SteerForced.emit(newrot)
+			
 	
 	if (StoredSteer != 0):
 		var SteertToAdd = min((delta), abs(StoredSteer)) * sign(StoredSteer)
@@ -363,9 +366,11 @@ func TargetShipDestroyed(Sh : MapShip) -> void:
 
 func Steer(Rotation : float) -> void:
 	StoredSteer += Rotation / 50
-	StoredSteer = wrap(StoredSteer, -PI, PI)
+	#StoredSteer = wrap(StoredSteer, -PI, PI)
 	var Mat = ShipSprite.material as ShaderMaterial
 	Mat.set_shader_parameter("sprite_rotation", ShipSprite.global_rotation)
+
+	SteerForced.emit(rotation + StoredSteer)
 
 	for g in GetDroneDock().GetDockedShips():
 		g.ForceSteer(rotation)

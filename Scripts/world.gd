@@ -148,7 +148,7 @@ func _ready() -> void:
 			else:
 				var Cardi = Helper.GetInstance().GetSpotByName("Cardi")
 				var Pl = get_tree().get_nodes_in_group("PlayerShips")[0] as PlayerShip
-				Pl.global_position = Cardi.global_position
+				Pl.SetShipPosition(Cardi.global_position)
 				Cardi.Event.SkipStory(Pl)
 				Cardi.OnSpotVisited(false)
 		else:
@@ -163,7 +163,8 @@ func _ready() -> void:
 		await GetMap().GetScreenUi().FullScreenToggleStarted
 		Loadingscr.queue_free()
 	WORLDST = WORLDSTATE.NORMAL
-
+	WeatherManage.Instance.Update(0)
+	
 var WeatherManagerUpdate : float
 
 func _physics_process(delta: float) -> void:

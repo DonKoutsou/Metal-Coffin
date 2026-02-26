@@ -386,7 +386,6 @@ script = ExtResource("4_cmntb")
 metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=1065534830]
-visible = false
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
@@ -414,7 +413,6 @@ autowrap_mode = 0
 vertical_alignment = 1
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=1831587837]
-visible = false
 layout_mode = 2
 mouse_filter = 2
 alignment = 1

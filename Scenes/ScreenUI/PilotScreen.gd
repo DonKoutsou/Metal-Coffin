@@ -43,6 +43,8 @@ func _ready() -> void:
 	ControlledShipSwitched(ControllerEventH.CurrentControlled)
 	EventHandler.SpeedForced.connect(ShipSpeedForced)
 	EventHandler.SpeedSet.connect(ShipSpeedSet)
+	EventHandler.SteerForced.connect(ShipSteerForced)
+	EventHandler.SteerSet.connect(ShipSteerSet)
 	
 	EventHandler.ElevationForced.connect(ShipElevationForced)
 	#EventHandler.ElevationSet.connect(ShipElevationSet)
@@ -69,6 +71,12 @@ func ShipSpeedSet(NewSpeed : float) -> void:
 
 func ShipSpeedForced(NewSpeed : float) -> void:
 	Thrust.ForceValue(NewSpeed)
+
+func ShipSteerSet(NewSpeed : float) -> void:
+	Steer.ForceSteer(NewSpeed)
+
+func ShipSteerForced(NewSpeed : float) -> void:
+	Steer.ForceSteer(NewSpeed)
 	
 func ShipElevationSet(NewSpeed : float) -> void:
 	ElevationThrust.UpdateHandle(NewSpeed)
@@ -80,7 +88,7 @@ func ShipElevationForced(NewSpeed : float) -> void:
 func ControlledShipSwitched(NewShip : MapShip) -> void:
 	Thrust.ForceValue(NewShip.GetShipSpeed() / NewShip.GetShipMaxSpeed())
 	ElevationThrust.ForceValue(NewShip.TargetAltitude / 10000)
-	Steer.ForceSteer(NewShip.rotation)
+	Steer.SyncSteer(NewShip.rotation + NewShip.StoredSteer)
 
 func Acceleration_Ended(value_changed: float) -> void:
 	EventHandler.OnAccelerationEnded(value_changed)
