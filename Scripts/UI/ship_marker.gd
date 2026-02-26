@@ -265,7 +265,7 @@ func Update(IsControlled : bool, CamPos : Vector2, delta : float) -> void:
 			Fuel_Range = CurrentShip.GetFuelRange()
 
 			global_position = CurrentShip.GetShipParalaxPosition(CamPos, CurrentZoom)
-			UpdateTrajectory(CurrentShip.global_rotation + CurrentShip.StoredSteer)
+			UpdateTrajectory(CurrentShip.global_rotation)
 				
 			ToggleShipDetails(IsControlled)
 			UpdateSpeed(CurrentShip.GetAffectedSpeed())

@@ -455,7 +455,7 @@ func OnReachedPursuing() -> void:
 	OnPlayerShipMet.emit(plships, hostships, [])
 
 func GetCurrentDestination() -> Vector2:
-	var destination
+	var destination : Vector2
 	#if (RefuelSpot != null):
 		#destination = RefuelSpot.global_position
 	if (PursuingShips.size() > 0):
@@ -482,7 +482,7 @@ func GetCurrentDestination() -> Vector2:
 #██      ██   ██    ██    ███████ ██  ██████ ███████     ███████   ████   ███████ ██   ████    ██    ███████ 
 #Overriding events from MapShip as extra functionality is needed for enemies to let know of the COMMANDER of what was found/lost
 
-func OnShipSeen(SeenBy : Node2D):
+func OnShipSeen(SeenBy : Node2D) -> void:
 	if (Docked):
 		Command.OnShipSeen(SeenBy)
 		return
@@ -493,7 +493,7 @@ func OnShipSeen(SeenBy : Node2D):
 		return
 	
 	MapPointerManager.GetInstance().AddShip(self, false, true)
-	for g in GetDroneDock().DockedDrones:
+	for g : HostileShip in GetDroneDock().DockedDrones:
 		g.VisibleBy.append(SeenBy)
 		MapPointerManager.GetInstance().AddShip(g, false)
 		
@@ -504,13 +504,13 @@ func OnShipSeen(SeenBy : Node2D):
 func wait(seconds : float) -> Signal:
 	return get_tree().create_timer(seconds).timeout
 
-func OnShipUnseen(UnSeenBy : Node2D):
+func OnShipUnseen(UnSeenBy : Node2D) -> void:
 	if (Docked):
 		Command.OnShipUnseen(UnSeenBy)
 		return
 		
 	VisibleBy.erase(UnSeenBy)
-	for g in GetDroneDock().DockedDrones:
+	for g : HostileShip in GetDroneDock().DockedDrones:
 		g.VisibleBy.erase(UnSeenBy)
 		
 	if (VisibleBy.size() == 0):
@@ -751,11 +751,11 @@ func Evaporate() -> void:
 func RephreshVisRange() -> void:
 	if (Destroyed):
 		return
-	var VisualRange = VisibilityValue
+	var VisualRange : float = VisibilityValue
 	if (RadarWorking):
 		VisualRange = Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE)
-	var RadarRangeCollisionShape = RadarShape.get_node("CollisionShape2D")
-	(RadarRangeCollisionShape.shape as CircleShape2D).radius = max(VisualRange, VisibilityValue)
+	var RadarRangeCollisionShape : CircleShape2D = RadarShape.get_node("CollisionShape2D").shape
+	RadarRangeCollisionShape.radius = max(VisualRange, VisibilityValue)
 
 func Kill() -> void:
 	OnShipDestroyed.emit(self)

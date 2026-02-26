@@ -35,7 +35,7 @@ func _ready() -> void:
 		#position = Vector2(-5 , get_viewport_rect().size.y + 8)
 
 func UpdateSteer(RelativeRot : Vector2, EvPos : Vector2):
-	var rel = clamp(RelativeRot / 100, Vector2(-0.3, -0.3), Vector2(0.3, 0.3))
+	var rel = clamp(RelativeRot / 10, Vector2(-0.3, -0.3), Vector2(0.3, 0.3))
 	#var prevsteer = SteeringDir
 	set_physics_process(true)
 	if (EvPos.x < position.x):
@@ -47,7 +47,7 @@ func UpdateSteer(RelativeRot : Vector2, EvPos : Vector2):
 
 func UpdateSteerFloat(Dir : float) -> void:
 	set_physics_process(true)
-	SteeringDir += Dir
+	SteeringDir += Dir * 10
 
 
 func ForceSteer(st : float) -> void:
@@ -55,14 +55,16 @@ func ForceSteer(st : float) -> void:
 	if (Syncing):
 		return
 	CurrentSteerRot = st
+	SteeringDir = 0
+	# set_physics_process(false)
 	#SteerRotated(rotamm)
 	
 var forceTw : Tween
 var Syncing : bool = false
 func SyncSteer(st : float) -> void:
-	if (forceTw != null):
-		forceTw.kill()
 	CurrentSteerRot = st
+	SteeringDir = 0
+	#set_physics_process(false)
 	#Syncing = true
 	#forceTw = create_tween()
 	##print("Forcing steer of value {0}".format([st]))
@@ -88,7 +90,7 @@ func CopyShipSteer(Ship : MapShip) -> void:
 	$TextureRect.rotation = Ship.rotation
 
 func _process(delta: float) -> void:
-	var newrot = move_toward($TextureRect.rotation, CurrentSteerRot, delta * 3)
+	var newrot = lerp($TextureRect.rotation, CurrentSteerRot * 10, delta * 4)
 	var rotamm = newrot - $TextureRect.rotation
 	$TextureRect.rotation = newrot
 	SteerRotated(rotamm)

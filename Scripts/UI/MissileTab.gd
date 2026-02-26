@@ -13,6 +13,7 @@ class_name MissileTab
 @export var RangeText : Label
 @export var SelectedMissileText : Label
 @export var TurnOffButton : Button
+@export var Cap : Panel
 
 signal MissileLaunched
 
@@ -31,6 +32,13 @@ var Armed = false
 var AmmountArmed = false
 var Ammount : int = 0
 
+func FleetHasMissileLauncher() -> bool:
+	if (ConnectedShip.Cpt.GetCharacterInventory().HasWeapon(CardStats.WeaponType.ML)):
+		return true
+	for g : Captain in ConnectedShip.GetDroneDock().GetCaptains():
+		if (g.GetCharacterInventory().HasWeapon(CardStats.WeaponType.ML)):
+			return true
+	return false
 
 func _ready() -> void:
 	Initialise()
@@ -44,13 +52,20 @@ func DroneRemoved(Dr : Drone, Target : MapShip) -> void:
 		if (Armed):
 			DissarmMiss()
 		UpdateAvailableMissiles()
+		var FleetHasLauncher : bool = FleetHasMissileLauncher()
+		Cap.visible = !FleetHasLauncher
+		if (!FleetHasLauncher):
+			_on_turn_off_toggled(false)
 
 func DroneAdded(Dr : Drone, Target : MapShip) -> void:
 	if (Target == ConnectedShip):
 		if (Armed):
 			DissarmMiss()
 		UpdateAvailableMissiles()
-		
+		var FleetHasLauncher : bool = FleetHasMissileLauncher()
+		Cap.visible = !FleetHasLauncher
+		if (!FleetHasLauncher):
+			_on_turn_off_toggled(false)
 
 func UpdateConnectedShip(Ship : PlayerDrivenShip) -> void:
 	if (Ship == ConnectedShip):
@@ -66,6 +81,11 @@ func UpdateConnectedShip(Ship : PlayerDrivenShip) -> void:
 	ConnectedShip = Ship
 	UpdateAvailableMissiles()
 	call_deferred("UpdateMissileSelect")
+	
+	var FleetHasLauncher : bool = FleetHasMissileLauncher()
+	Cap.visible = !FleetHasLauncher
+	if (!FleetHasLauncher):
+		_on_turn_off_toggled(false)
 
 func Initialise() -> void:
 	#for g : PlayerDrivenShip in get_tree().get_nodes_in_group("PlayerShips"):
@@ -260,8 +280,6 @@ func ProgressMissileSelect(Front : bool = true):
 	RangeText.text = "Range : " + var_to_str(CurrentlySelectedMissile.Distance) + "km"
 	
 
-	
-
 func TurnOff() -> void:
 	if (!Showing):
 		return
@@ -277,9 +295,11 @@ func _on_turn_off_toggled(toggled_on: bool) -> void:
 		RangeText.visible = false
 		SelectedMissileText.visible = false
 		MissileSelectLight.Toggle(false, false)
+		TurnOffButton.set_pressed_no_signal(false)
 	else:
 		Showing = true
 		UpdateMissileSelect()
 		RangeText.visible = true
 		SelectedMissileText.visible = true
 		MissileSelectLight.Toggle(true, true)
+		TurnOffButton.set_pressed_no_signal(true)

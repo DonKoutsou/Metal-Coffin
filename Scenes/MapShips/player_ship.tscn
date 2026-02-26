@@ -41,13 +41,12 @@ radius = 350.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_utfkb"]
 radius = 1000.0
 
-[node name="w" type="Node2D" unique_id=286802223 node_paths=PackedStringArray("AccelerationAudio", "L", "SonalVisual", "SonarShape", "MissileD", "TrailLines", "RadarShape", "ElintShape", "BodyShape", "DroneDok", "ShipSprite", "Acceleration") groups=["PlayerShips", "Ships"]]
+[node name="w" type="Node2D" unique_id=286802223 node_paths=PackedStringArray("AccelerationAudio", "L", "SonarShape", "MissileD", "TrailLines", "RadarShape", "ElintShape", "BodyShape", "DroneDok", "ShipSprite", "Acceleration") groups=["PlayerShips", "Ships"]]
 z_index = 1
 material = SubResource("CanvasItemMaterial_vppi8")
 script = ExtResource("1_ekbhy")
 AccelerationAudio = NodePath("AudioStreamPlayer2D")
 L = NodePath("PointLight2D")
-SonalVisual = NodePath("")
 SonarShape = NodePath("Sonar")
 MissileD = NodePath("MissileDock")
 LowStatsToNotifyAbout = Array[String](["FUEL", "OXYGEN", "HP", "HULL"])

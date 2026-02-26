@@ -12,6 +12,8 @@ class_name  AeroSonar
 @export var SonalVisual : TextureRect
 @export var GainLabel : Label
 @export var Spkr : RadioSpeaker
+@export var Cap : Panel
+@export var B :Button
 
 var Offset = 0.0
 var CurrentAngle : float
@@ -26,7 +28,7 @@ func _ready() -> void:
 	DroneDockEventH.DroneUndocked.connect(DroneRemoved)
 	#connect to be notified that the controlled ship has changed
 	ControllerEventH.OnControlledShipChanged.connect(ControlledShipUpdated)
-	Controller = ControllerEventH.CurrentControlled
+	ControlledShipUpdated(ControllerEventH.CurrentControlled)
 	#connect to the found signal. when a signal is visible in the sonar we call a function
 	LineContainer.Found.connect(SignalFound)
 	#turn everything off
@@ -36,21 +38,19 @@ func _ready() -> void:
 
 func DroneAdded(Dr : Drone, Target : MapShip) -> void:
 	if (Target == Controller):
-		Working = FleetHasAerosonar()
-		Controller.ToggleSonarVisual(Enabled)
-		if (!Working):
-			LineContainer.OffsetAmmount = 0
-		else:
-			LineContainer.OffsetAmmount = CurrentOffset
+		var fleethassonar = FleetHasAerosonar()
+	
+		Cap.visible = !fleethassonar
+		if (!fleethassonar and Enabled):
+			ToggleSonar(false)
 
 func DroneRemoved(Dr : Drone, Target : MapShip) -> void:
 	if (Target == Controller):
-		Working = FleetHasAerosonar()
-		Controller.ToggleSonarVisual(Enabled)
-		if (!Working):
-			LineContainer.OffsetAmmount = 0
-		else:
-			LineContainer.OffsetAmmount = CurrentOffset
+		var fleethassonar = FleetHasAerosonar()
+	
+		Cap.visible = !fleethassonar
+		if (!fleethassonar and Enabled):
+			ToggleSonar(false)
 
 func SignalFound(Str : float) -> void:
 	Spkr.PlaySound(RadioSpeaker.RadioSound.BEEP, Str - 35)
@@ -62,13 +62,11 @@ func ControlledShipUpdated(NewController : PlayerDrivenShip) -> void:
 	
 	Controller = NewController
 	
-	Working = FleetHasAerosonar()
-	Controller.ToggleSonarVisual(Working and Enabled)
-	if (!Working and Enabled):
-		PopUpManager.GetInstance().DoFadeNotif("Ship missing sonar")
-		LineContainer.OffsetAmmount = 0
-	else:
-		LineContainer.OffsetAmmount = CurrentOffset
+	var fleethassonar = FleetHasAerosonar()
+	
+	Cap.visible = !fleethassonar
+	if (!fleethassonar and Enabled):
+		ToggleSonar(false)
 
 func FleetHasAerosonar() -> bool:
 	if (Controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE) > 0):
@@ -163,12 +161,10 @@ func ToggleSonar(t : bool) -> void:
 	if (t):
 		Working = FleetHasAerosonar()
 		Controller.ToggleSonarVisual(Working)
-		if (!Working):
-			PopUpManager.GetInstance().DoFadeNotif("Ship missing sonar")
-			LineContainer.OffsetAmmount = 0
-		else:
-			LineContainer.OffsetAmmount = CurrentOffset
+		LineContainer.OffsetAmmount = CurrentOffset
+		B.set_pressed_no_signal(true)
 	else:
+		B.set_pressed_no_signal(false)
 		Controller.ToggleSonarVisual(false)
 
 

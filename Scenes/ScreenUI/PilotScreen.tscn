@@ -72,9 +72,9 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 274.0
-offset_top = -54.0
+offset_top = -53.0
 offset_right = 548.0
-offset_bottom = -2.0
+offset_bottom = -1.0
 grow_vertical = 0
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("5_ojc6g")
@@ -327,39 +327,29 @@ scale = Vector2(1.64062, 1.64062)
 frame_progress = 0.96041
 frequency = 40.0
 
-[node name="Missile Tab" parent="." unique_id=1968593876 instance=ExtResource("7_ojc6g")]
-layout_mode = 1
-anchors_preset = 4
-anchor_left = 0.0
-anchor_right = 0.0
-offset_left = 24.0
-offset_top = -68.0
-offset_right = 64.0
-offset_bottom = -28.0
-grow_horizontal = 1
-
 [node name="MapMarkerControls" parent="." unique_id=329577773 instance=ExtResource("9_yjfdw")]
 layout_mode = 1
 anchors_preset = 4
 anchor_left = 0.0
 anchor_right = 0.0
 offset_left = 91.0
-offset_top = 205.0
+offset_top = 217.0
 offset_right = 131.0
-offset_bottom = 245.0
+offset_bottom = 257.0
 grow_horizontal = 1
 
 [node name="ControledShipSelector" parent="." unique_id=397832360 instance=ExtResource("28_hc833")]
+custom_minimum_size = Vector2(273, 128)
 layout_mode = 1
 anchors_preset = 2
 anchor_left = 0.0
 anchor_top = 1.0
 anchor_right = 0.0
 anchor_bottom = 1.0
-offset_left = -1.0
-offset_top = -372.0
+offset_left = 0.0
+offset_top = -374.0
 offset_right = 273.0
-offset_bottom = -244.0
+offset_bottom = -233.0
 grow_horizontal = 1
 grow_vertical = 0
 
@@ -380,10 +370,21 @@ PositionOnStart = false
 
 [node name="Sonar" parent="." unique_id=1555836270 instance=ExtResource("11_jqinv")]
 layout_mode = 1
-offset_left = 15.0
+offset_left = 13.0
 offset_top = -20.0
-offset_right = 55.0
+offset_right = 53.0
 offset_bottom = 20.0
+
+[node name="Missile Tab" parent="." unique_id=1968593876 instance=ExtResource("7_ojc6g")]
+layout_mode = 1
+anchors_preset = 4
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 25.0
+offset_top = -70.0
+offset_right = 65.0
+offset_bottom = -30.0
+grow_horizontal = 1
 
 [node name="SpeedSimulation" type="TextureButton" parent="." unique_id=559113668 groups=["Buttons"]]
 layout_mode = 1

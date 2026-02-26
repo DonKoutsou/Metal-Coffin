@@ -35,18 +35,18 @@ func _ready() -> void:
 func SwitchMusic(t : bool) -> void:
 	if (t):
 		FightStream.volume_db = -64
-		var FightMusicTween = create_tween()
+		var FightMusicTween : Tween = create_tween()
 		FightMusicTween.tween_property(FightStream, "volume_db", -14, 2)
 		FightStream.play()
 		
-		var AmbientMusicTween = create_tween()
+		var AmbientMusicTween : Tween = create_tween()
 		AmbientMusicTween.tween_property(Stream, "volume_db", -64, 2)
 	else:
 
-		var AmbientMusicTween = create_tween()
+		var AmbientMusicTween : Tween = create_tween()
 		AmbientMusicTween.tween_property(Stream, "volume_db", -14, 2)
 		
-		var FightMusicTween = create_tween()
+		var FightMusicTween : Tween = create_tween()
 		FightMusicTween.tween_property(FightStream, "volume_db", -64, 2)
 		await FightMusicTween.finished
 		FightStream.stop()

@@ -17,8 +17,9 @@
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="15_pknbg"]
 [ext_resource type="FontFile" uid="uid://c6hwlc2fgceix" path="res://Fonts/digital-7.ttf" id="16_6ithd"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/AnimatedDroneGas.tscn" id="17_ptq1t"]
+[ext_resource type="StyleBox" uid="uid://cicae3yqgxkcm" path="res://Theme/MetalPanel.tres" id="18_uy6ab"]
 
-[node name="Missile Tab" type="Control" unique_id=1968593876 node_paths=PackedStringArray("MissileSelectLight", "AngleSelectLight", "RangeText", "SelectedMissileText", "TurnOffButton")]
+[node name="Missile Tab" type="Control" unique_id=1968593876 node_paths=PackedStringArray("MissileSelectLight", "AngleSelectLight", "RangeText", "SelectedMissileText", "TurnOffButton", "Cap")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -42,6 +43,7 @@ AngleSelectLight = NodePath("AngleSelectLight")
 RangeText = NodePath("RangeText")
 SelectedMissileText = NodePath("SelectedMissileText")
 TurnOffButton = NodePath("TurnOff")
+Cap = NodePath("PanelContainer")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=641583344]
 layout_mode = 0
@@ -189,6 +191,14 @@ autowrap_mode = 2
 position = Vector2(209, -34)
 rotation = 1.57079
 scale = Vector2(0.529254, 0.369254)
+
+[node name="PanelContainer" type="Panel" parent="." unique_id=1109730313]
+layout_mode = 0
+offset_left = -25.0
+offset_top = -124.0
+offset_right = 248.0
+offset_bottom = 56.0
+theme_override_styles/panel = ExtResource("18_uy6ab")
 
 [connection signal="pressed" from="LaunchButton" to="." method="OnLaunchPressed"]
 [connection signal="pressed" from="DissarmButton" to="." method="OnDissarmPressed"]
