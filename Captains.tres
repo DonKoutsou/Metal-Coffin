@@ -1,0 +1,81 @@
+[gd_resource type="Resource" script_class="Registry" format=3 uid="uid://bul4m4onv76v4"]
+
+[ext_resource type="Script" uid="uid://dqtv77mng5dyh" path="res://addons/yard/registry.gd" id="1_wjat0"]
+
+[resource]
+script = ExtResource("1_wjat0")
+_class_restriction = &"Captain"
+_scan_directory = "res://Resources/Captains"
+_recursive_scan = true
+_uids_to_string_ids = Dictionary[StringName, StringName]({
+&"uid://22pk1grsmvjx": &"Tick",
+&"uid://3hahntw45cog": &"EnemyMissileCarrier4",
+&"uid://5jwwsypnqyqo": &"EnemyFireship4",
+&"uid://6n7k1biixh2y": &"EnemyMissileCarrier2",
+&"uid://8nr6ss128jfn": &"LandEnemyFireship2",
+&"uid://b1e5ovklwmp7v": &"Amol",
+&"uid://b4smeavm0axw3": &"EnemyTanker3",
+&"uid://b8vvlcvjkqhjt": &"EnemyCorvete3",
+&"uid://baci05am3ufd7": &"Elena",
+&"uid://bbwgf8gho2f6u": &"EnemyCorvete2",
+&"uid://bf4xrtdscw4m3": &"EnemyCorvete1",
+&"uid://bfqcga4l0b5l5": &"EnemyRadarShip3",
+&"uid://bipfcwumlbq7u": &"EnemyFireship2",
+&"uid://bkfcg5rwf7vhu": &"Dimitry",
+&"uid://bvv346qqjamj6": &"EnemyRadarShip4",
+&"uid://c6f3bxpe2rsxd": &"Baron",
+&"uid://c75as8yglsqcy": &"Gilian",
+&"uid://c8b3lpqbi11up": &"Jor",
+&"uid://caroffy3ubxip": &"Craden",
+&"uid://cf4b4c1bssfsr": &"EnemyTanker1",
+&"uid://cga5buofwr6yr": &"Sirius",
+&"uid://cnqhhk0a4yp6e": &"Corkan",
+&"uid://cphts382xybqn": &"EnemyFireship3",
+&"uid://cta70yn02gqg5": &"LandEnemyFireship1",
+&"uid://cvk1mvgokhtus": &"EnemyTanker4",
+&"uid://d02w2y7dmmv6c": &"EnemyFireship1",
+&"uid://dakrxyltg3y8x": &"EnemyRadarShip2",
+&"uid://disqw5cbdncos": &"Samir",
+&"uid://dl7x2cmre3owx": &"EnemyMissileCarrier3",
+&"uid://dyp56hloowbhq": &"EnemyCorvete4",
+&"uid://mtu8yrc4q3l8": &"EnemyConvoy1",
+&"uid://quqnjrytm6df": &"EnemyMissileCarrier1",
+&"uid://wdewnahxdu77": &"EnemyTanker2",
+&"uid://y1ohb6oss4v0": &"EnemyRadarShip1"
+})
+_string_ids_to_uids = Dictionary[StringName, StringName]({
+&"Amol": &"uid://b1e5ovklwmp7v",
+&"Baron": &"uid://c6f3bxpe2rsxd",
+&"Corkan": &"uid://cnqhhk0a4yp6e",
+&"Craden": &"uid://caroffy3ubxip",
+&"Dimitry": &"uid://bkfcg5rwf7vhu",
+&"Elena": &"uid://baci05am3ufd7",
+&"EnemyConvoy1": &"uid://mtu8yrc4q3l8",
+&"EnemyCorvete1": &"uid://bf4xrtdscw4m3",
+&"EnemyCorvete2": &"uid://bbwgf8gho2f6u",
+&"EnemyCorvete3": &"uid://b8vvlcvjkqhjt",
+&"EnemyCorvete4": &"uid://dyp56hloowbhq",
+&"EnemyFireship1": &"uid://d02w2y7dmmv6c",
+&"EnemyFireship2": &"uid://bipfcwumlbq7u",
+&"EnemyFireship3": &"uid://cphts382xybqn",
+&"EnemyFireship4": &"uid://5jwwsypnqyqo",
+&"EnemyMissileCarrier1": &"uid://quqnjrytm6df",
+&"EnemyMissileCarrier2": &"uid://6n7k1biixh2y",
+&"EnemyMissileCarrier3": &"uid://dl7x2cmre3owx",
+&"EnemyMissileCarrier4": &"uid://3hahntw45cog",
+&"EnemyRadarShip1": &"uid://y1ohb6oss4v0",
+&"EnemyRadarShip2": &"uid://dakrxyltg3y8x",
+&"EnemyRadarShip3": &"uid://bfqcga4l0b5l5",
+&"EnemyRadarShip4": &"uid://bvv346qqjamj6",
+&"EnemyTanker1": &"uid://cf4b4c1bssfsr",
+&"EnemyTanker2": &"uid://wdewnahxdu77",
+&"EnemyTanker3": &"uid://b4smeavm0axw3",
+&"EnemyTanker4": &"uid://cvk1mvgokhtus",
+&"Gilian": &"uid://c75as8yglsqcy",
+&"Jor": &"uid://c8b3lpqbi11up",
+&"LandEnemyFireship1": &"uid://cta70yn02gqg5",
+&"LandEnemyFireship2": &"uid://8nr6ss128jfn",
+&"Samir": &"uid://disqw5cbdncos",
+&"Sirius": &"uid://cga5buofwr6yr",
+&"Tick": &"uid://22pk1grsmvjx"
+})

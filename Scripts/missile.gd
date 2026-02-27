@@ -21,7 +21,7 @@ var Altitude : float
 var TargetAltitude : float
 var DistanceTraveled : float
 var WindEffect : float
-
+var Killed : bool = true
 var FiredBy : MapShip
 var VisibleBy : Array[MapShip]
 
@@ -75,7 +75,7 @@ func UpdateShipWindManipulationModifier() -> void:
 	var StormValue = WeatherManage.Instance.StormValueInPosition(global_position)
 	var StormAffectedWind = WindVel + (WindVel * StormValue)
 	var Height = 0.3 + 0.7 * (Altitude / 10000)
-	var WindProt = TopographyMap.Instance.GetWindProtection(global_position ,Altitude)
+	var WindProt = TopographyMap.GetWindProtection(global_position ,Altitude)
 	WindEffect = (StormAffectedWind * Height) * WindProt
 
 func _physics_process(delta: float) -> void:
@@ -90,15 +90,15 @@ func _physics_process(delta: float) -> void:
 			CurrentTarget = g
 			break
 	
-	CurrentLandAltitude = TopographyMap.Instance.GetAltitudeAtGlobalPosition(global_position)
+	CurrentLandAltitude = TopographyMap.GetAltitudeAtGlobalPosition(global_position)
 	
 	var IncommingCollision : Vector3
 	var Collided : bool = false
 	if (CurrentTarget != null):
-		IncommingCollision = TopographyMap.Instance.GetCollisionPoint3(global_position, Altitude, CurrentTarget.global_position, CurrentTarget.Altitude)
+		IncommingCollision = TopographyMap.GetCollisionPoint3(global_position, Altitude, CurrentTarget.global_position, CurrentTarget.Altitude)
 		Collided = Vector2(IncommingCollision.x, IncommingCollision.y) != CurrentTarget.global_position
 	else:
-		IncommingCollision = TopographyMap.Instance.GetCollisionPoint3(global_position, Altitude, CollisionDetector.global_position, Altitude)
+		IncommingCollision = TopographyMap.GetCollisionPoint3(global_position, Altitude, CollisionDetector.global_position, Altitude)
 		Collided = Vector2(IncommingCollision.x, IncommingCollision.y) != CollisionDetector.global_position
 	
 	if (Vector2(IncommingCollision.x, IncommingCollision.y) == global_position):
@@ -168,23 +168,29 @@ func OnMissDest(Mis : Missile) -> void:
 	FoundShips.erase(Mis)
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
+	if (Killed):
+		return
 	var bod = area.get_parent()
 	if (bod == FiredBy):
 		return
+	
 	if (bod is HostileShip):
 		if (bod.Destroyed):
 			return
-	if (!FoundShips.has(area.get_parent())):
-		FoundShips.append(area.get_parent())
-		if (area.get_parent() is MapShip):
-			area.get_parent().connect("OnShipDestroyed" ,OnShipDest)
-		else : if (area.get_parent() is Missile):
-			area.get_parent().connect("OnShipDestroyed" ,OnMissDest)
+		
+	if (!FoundShips.has(bod)):
+		FoundShips.append(bod)
+		if (bod is MapShip):
+			bod.connect("OnShipDestroyed" ,OnShipDest)
+		else : if (bod is Missile):
+			bod.connect("OnShipDestroyed" ,OnMissDest)
 		if (FiredBy is PlayerDrivenShip):
-			if (area.get_parent() is HostileShip):
-				area.get_parent().OnShipSeen(self)
+			if (bod is HostileShip):
+				bod.OnShipSeen(self)
 				
 func _on_area_2d_area_exited(area: Area2D) -> void:
+	if (Killed):
+		return
 	if (FoundShips.has(area.get_parent())):
 		FoundShips.erase(area.get_parent())
 		if (area.get_parent() is MapShip):
@@ -211,13 +217,17 @@ func _on_missile_body_area_entered(area: Area2D) -> void:
 		return
 		
 	if (Bod is HostileShip):
+		if (FiredBy is HostileShip):
+			Bod.Damage(Damage)
+			Kill()
+			return
 		if (Bod.Destroyed):
 			return
 	if (area.get_parent() is Missile):
-		area.get_parent().Kill()
+		Bod.Kill()
 		Kill()
 		return
-	var s : MapShip = area.get_parent()
+	var s : MapShip = Bod
 	var Command : MapShip
 	if (s.Command == null):
 		Command = s
@@ -307,7 +317,8 @@ func Kill() -> void:
 	OnShipDestroyed.emit(self)
 	StopSeeing()
 	queue_free()
-	get_parent().remove_child(self)
+	Killed = true
+	#get_parent().remove_child(self)
 
 func GetBattleStats() -> BattleShipStats:
 	

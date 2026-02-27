@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://clst6a32c5mmn" path="res://Assets/ShipTextures/Scarab.png" id="8_usara"]
 [ext_resource type="PackedScene" uid="uid://dp3qdp4mcnmly" path="res://Scenes/tutorial_trigger.tscn" id="9_6an1p"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="9_m188n"]
-[ext_resource type="World3D" uid="uid://bt2lx0rufeimw" path="res://WorldEnv.tres" id="10_28wu2"]
+[ext_resource type="World3D" uid="uid://bt2lx0rufeimw" path="res://Enviroments/WorldEnv.tres" id="10_28wu2"]
 [ext_resource type="PackedScene" uid="uid://dv64iu4t4ja87" path="res://Scenes/Enemies/HostileDroneDock.tscn" id="10_gjdv7"]
 [ext_resource type="Resource" uid="uid://c1buiwym6qkh8" path="res://Resources/Merch/1.EnemySpawnDecider.tres" id="12_m1k6s"]
 [ext_resource type="PackedScene" uid="uid://cja47tyjnyae" path="res://Scenes/MapMarkers/map_line_drawer.tscn" id="16_sp82o"]

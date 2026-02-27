@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://cmiywlc06uva1" path="res://Scenes/Map/clouds.gd" id="14_sfqvw"]
 [ext_resource type="Gradient" uid="uid://wj66sajtr3qj" path="res://Shaders/Clouds/CloudGradient.tres" id="15_twifd"]
 [ext_resource type="PackedScene" uid="uid://caawadxe1hjwo" path="res://Scenes/Map/topography_map.tscn" id="16_w5jc1"]
-[ext_resource type="PackedScene" uid="uid://boe0re3ai5qdj" path="res://dark_blue_background.tscn" id="22_5m85t"]
+[ext_resource type="PackedScene" uid="uid://boe0re3ai5qdj" path="res://Scenes/Map/dark_blue_background.tscn" id="22_5m85t"]
 [ext_resource type="AudioStream" uid="uid://bq5ennd48voeu" path="res://Assets/Sounds/MetalClick.mp3" id="23_aktxw"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tk0jd"]

@@ -4,7 +4,7 @@ class_name AltitudeText
 
 func _physics_process(delta: float) -> void:
 	var pos = ShipCamera.Instance.get_screen_center_position()
-	var alt = TopographyMap.Instance.GetAltitudeAtGlobalPosition(pos)
+	var alt = TopographyMap.GetAltitudeAtGlobalPosition(pos)
 	#var Storm = WeatherManage.Instance.StormValueInPosition(pos)
 	#var turbelance = TopographyMap.Instance.GetTurbelance(pos)
 	#var WindFeel = WeatherManage.WindSpeed * TopographyMap.Instance.GetWindProtection(pos, alt)

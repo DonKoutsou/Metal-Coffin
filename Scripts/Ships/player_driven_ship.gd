@@ -38,7 +38,7 @@ func EvaluateRadarrPoint() -> void:
 		var Dir = GetPointInCircle(CurrentRadarPointToEvaluate, CurrentVisualRange / 5.0)
 		var MaxPoint = Dir * CurrentVisualRange
 		var GlobalPoint = global_position + MaxPoint
-		var EvaluatedPoint = TopographyMap.Instance.GetCollisionPoint(global_position, Altitude, GlobalPoint, 10000)
+		var EvaluatedPoint = TopographyMap.GetCollisionPoint(global_position, Altitude, GlobalPoint, 10000)
 		RadarCircle[CurrentRadarPointToEvaluate] = EvaluatedPoint - global_position
 		CurrentRadarPointToEvaluate = wrap(CurrentRadarPointToEvaluate + 1, 0, RadarCircle.size())
 
@@ -107,7 +107,7 @@ func GetSonarTargets() -> Array[Node2D]:
 
 func EvaluateRadarTargets() -> void:
 	for g in InsideRadar:
-		if (TopographyMap.Instance.WithinLineOfSight(global_position, Altitude, g.global_position, g.Altitude)):
+		if (TopographyMap.WithinLineOfSight(global_position, Altitude, g.global_position, g.Altitude)):
 			g.OnShipSeen(self)
 		else:
 			g.OnShipUnseen(self)
@@ -130,9 +130,9 @@ func Update(delta: float) -> void:
 	
 	EvaluateRadarTargets()
 	if (GetShipSpeed() == 0):
-		CurrentLandAltitude = TopographyMap.Instance.GetAltitudeAtGlobalPosition(global_position)
+		CurrentLandAltitude = TopographyMap.GetAltitudeAtGlobalPosition(global_position)
 	else:
-		CurrentLandAltitude = TopographyMap.Instance.GetAltitudeAtGlobalPosition(global_position) + 200
+		CurrentLandAltitude = TopographyMap.GetAltitudeAtGlobalPosition(global_position) + 200
 	_HandleLanding(delta)
 	
 	if (TargetShip != null):

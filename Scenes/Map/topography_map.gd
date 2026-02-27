@@ -4,31 +4,22 @@ class_name TopographyMap
 
 	
 const GROUND_TEXTURE_RESOLUTION : int = 256
+const SIZE : Vector2 = Vector2(6000,6000)
 
+@export_file("*.tres") var DataTextureFile : String
+
+static var DataTexture : Image
 var Mat : ShaderMaterial
 
-#var CachedPixels : Dictionary[Vector2i, float]
-@export var tex : Image
-var Offset : Vector2
-
-static var Instance : TopographyMap
 
 func _ready() -> void:
-
-	Instance = self
+	DataTexture = ResourceLoader.load(DataTextureFile)
 	Mat = material
-
-	var newoffset = Mat.get_shader_parameter("offset")
-	Offset = newoffset
-	#tex = NoiseData.get_image()
-	#tex.decompress()
 
 func ChangeOffset(NewOffset : Vector2) -> void:
 	Mat.set_shader_parameter("offset", NewOffset)
-	Offset = NewOffset
 
-
-func GetWindProtection(Pos : Vector2, Height : float) -> float:
+static func GetWindProtection(Pos : Vector2, Height : float) -> float:
 	var WindPos = Pos + (-WeatherManage.WindDirection * 500)
 	var LineOfSight = GetCollisionPoint3(WindPos, Height + 200, Pos, Height)
 	if (LineOfSight == Vector3(Pos.x, Pos.y, Height)):
@@ -40,23 +31,19 @@ func GetWindProtection(Pos : Vector2, Height : float) -> float:
 		#var Angle = rad_to_deg(LineOfSight.angle_to(Vector3(Pos.x, Pos.y, Height)))
 		return clamp(blockAngle / 80, 0, 1)
 
-func GetWindAtPos(Pos : Vector2, Height : float) ->  float:
+static func GetWindAtPos(Pos : Vector2, Height : float) ->  float:
 	var prot = GetWindProtection(Pos, Height)
 	var HeightModifier = 0.3 + 0.7 * (Height / 10000)
 	var WindVel = WeatherManage.WindSpeed
 	return (WindVel * HeightModifier) * prot
 
-func GetTurbelance(Pos : Vector2) -> float:
+static func GetTurbelance(Pos : Vector2) -> float:
 	var Grad : Vector2 = GetGradientAtGlobalPosition(Pos)
 	var Facing : float = Grad.dot(WeatherManage.WindDirection)
 	var Turbelance = max(0, (WeatherManage.WindSpeed * Grad.length()) * Facing)
 	return Turbelance
-#func _physics_process(delta: float) -> void:
-	#var plship : PlayerShip = get_tree().get_nodes_in_group("PlayerShips")[0]
-	#var InLineOfSight = radar_line_of_sight_with_height_func(plship.global_position, plship.Altitude, ShipCamera.GetInstance().get_screen_center_position(), 1)
-	#print(InLineOfSight)
-
-func GetGradientAtGlobalPosition(pos : Vector2) -> Vector2:
+	
+static func GetGradientAtGlobalPosition(pos : Vector2) -> Vector2:
 	var RoundedPos = Vector2i(pos + Vector2(3000, 3000))
 	
 	var Offsets : PackedVector2Array = [Vector2(-2, 0), Vector2(2, 0), Vector2(0, -2), Vector2(0,2)]
@@ -67,7 +54,7 @@ func GetGradientAtGlobalPosition(pos : Vector2) -> Vector2:
 		var WrapedX = wrap((Normalisedx * GROUND_TEXTURE_RESOLUTION) + g.x, 0, GROUND_TEXTURE_RESOLUTION)
 		var WrapedY = wrap((Normalisedy * GROUND_TEXTURE_RESOLUTION) + g.y, 0, GROUND_TEXTURE_RESOLUTION)
 		var PixelCoords = Vector2i(WrapedX, WrapedY)
-		var Alt = tex.get_pixelv(PixelCoords).r
+		var Alt = DataTexture.get_pixelv(PixelCoords).r
 		#Bring to -1/1 range
 		var RangedAlt = (Alt - 0.5) * 2.0
 		Altitudes.append(RangedAlt)
@@ -76,21 +63,21 @@ func GetGradientAtGlobalPosition(pos : Vector2) -> Vector2:
 	#CachedPixels[WrapedPos] = Alt
 	return Grad
 
-func GetAltitudeAtGlobalPosition(pos: Vector2) -> float:
-	var RoundedPos = Vector2i(pos + (size / 2))
+static func GetAltitudeAtGlobalPosition(pos: Vector2) -> float:
+	var RoundedPos = Vector2i(pos + (SIZE / 2))
 
 	var Normalisedx = Helper.normalize_value(wrap(RoundedPos.x, 0, 24000), 0, 24000)
 	var Normalisedy = Helper.normalize_value(wrap(RoundedPos.y, 0, 24000), 0, 24000)
 
 	var PixelCoords = Vector2i(Normalisedx * GROUND_TEXTURE_RESOLUTION, Normalisedy * GROUND_TEXTURE_RESOLUTION)
 		
-	var Alt = tex.get_pixelv(PixelCoords).r
+	var Alt = DataTexture.get_pixelv(PixelCoords).r
 	#Bring to -1/1 range
 	var RangedAlt = (Alt - 0.5) * 2.0
 	#CachedPixels[WrapedPos] = Alt
 	return RangedAlt * 8000
 
-func WithinLineOfSight(
+static func WithinLineOfSight(
 		radar_pos: Vector2,       # Global position
 		radar_height: float,
 		ship_pos: Vector2,        # Global position
@@ -111,7 +98,7 @@ func WithinLineOfSight(
 			return false
 	return true
 
-func GetCollisionPoint(radar_pos: Vector2,       # Global position
+static func GetCollisionPoint(radar_pos: Vector2,       # Global position
 		radar_height: float,
 		ship_pos: Vector2,        # Global position
 		ship_height: float,
@@ -131,7 +118,7 @@ func GetCollisionPoint(radar_pos: Vector2,       # Global position
 			return pos
 	return ship_pos
 
-func IncommingCollision(radar_pos: Vector2,       # Global position
+static func IncommingCollision(radar_pos: Vector2,       # Global position
 		radar_height: float,
 		ship_pos: Vector2,        # Global position
 		ship_height: float,
@@ -151,7 +138,7 @@ func IncommingCollision(radar_pos: Vector2,       # Global position
 			return true
 	return false
 
-func GetCollisionPoint3(radar_pos: Vector2,       # Global position
+static func GetCollisionPoint3(radar_pos: Vector2,       # Global position
 		radar_height: float,
 		ship_pos: Vector2,        # Global position
 		ship_height: float,
@@ -170,6 +157,8 @@ func GetCollisionPoint3(radar_pos: Vector2,       # Global position
 		if terrain_height > expected_height:
 			return Vector3(pos.x, pos.y, terrain_height)
 	return Vector3(ship_pos.x, ship_pos.y, ship_height)
+
+#DRAWING USED FOR DEBUG
 #var DrawPos : Array[Vector2]
 
 #func _draw() -> void:

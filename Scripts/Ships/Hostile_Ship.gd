@@ -88,7 +88,7 @@ func  _ready() -> void:
 		MapPointerManager.GetInstance().AddShip(self, false)
 	
 	if (!Patrol and !Convoy):
-		Altitude = TopographyMap.Instance.GetAltitudeAtGlobalPosition(PosToSpawn)
+		Altitude = TopographyMap.GetAltitudeAtGlobalPosition(PosToSpawn)
 
 func _exit_tree() -> void:
 	WeatherManage.UnregisterShip(self)
@@ -534,7 +534,7 @@ func BodyLeftElint(area: Area2D) -> void:
 
 func EvaluateRadarTargets() -> void:
 	for g in InsideRadar:
-		if (TopographyMap.Instance.WithinLineOfSight(global_position, Altitude, g.global_position, g.Altitude)):
+		if (TopographyMap.WithinLineOfSight(global_position, Altitude, g.global_position, g.Altitude)):
 			if (!Patrol and !Convoy):
 				GarissonVisualContact(g)
 			else:
@@ -746,7 +746,7 @@ func Evaporate() -> void:
 	ToggleRadar()
 	MapPointerManager.GetInstance().RemoveShip(self)
 	queue_free()
-	get_parent().remove_child(self)
+	#get_parent().remove_child(self)
 
 func RephreshVisRange() -> void:
 	if (Destroyed):

@@ -42,8 +42,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_fq67n")
-Thrust = NodePath("ThrustSlider")
-ElevationThrust = NodePath("ThrustSlider2")
+Thrust = NodePath("ThrustLever")
+ElevationThrust = NodePath("ElevationLever")
 Steer = NodePath("SteeringWheel")
 EventHandler = ExtResource("2_ecvfe")
 ControllerEventH = ExtResource("3_w258d")
@@ -578,14 +578,14 @@ theme_override_styles/normal = ExtResource("22_fq67n")
 theme_override_styles/pressed = ExtResource("23_eeg0m")
 theme_override_styles/hover = ExtResource("22_fq67n")
 
-[node name="ThrustSlider" parent="." unique_id=1806408407 instance=ExtResource("3_ecvfe")]
+[node name="ThrustLever" parent="." unique_id=1806408407 instance=ExtResource("3_ecvfe")]
 layout_mode = 1
 offset_left = -114.0
 offset_top = -371.0
 offset_right = -13.0
 offset_bottom = -46.0
 
-[node name="ThrustSlider2" parent="." unique_id=833959843 instance=ExtResource("6_jqinv")]
+[node name="ElevationLever" parent="." unique_id=833959843 instance=ExtResource("6_jqinv")]
 layout_mode = 1
 offset_left = -240.0
 offset_top = -306.0
@@ -693,10 +693,10 @@ scale = Vector2(0.8, 0.8)
 [connection signal="pressed" from="OpenHatchButton" to="." method="Open_Hatch_Button_Pressed"]
 [connection signal="pressed" from="RadarButton" to="." method="Radar_Button_Pressed"]
 [connection signal="pressed" from="LandButton" to="." method="Land_Pressed"]
-[connection signal="AccelerationChangeEnded" from="ThrustSlider" to="." method="Acceleration_Ended"]
-[connection signal="AccelerationChanged" from="ThrustSlider" to="." method="Acceleration_Changed"]
-[connection signal="AccelerationChangeEnded" from="ThrustSlider2" to="." method="Elevation_Ended"]
-[connection signal="AccelerationChanged" from="ThrustSlider2" to="." method="Elevation_Changed"]
+[connection signal="AccelerationChangeEnded" from="ThrustLever" to="." method="Acceleration_Ended"]
+[connection signal="AccelerationChanged" from="ThrustLever" to="." method="Acceleration_Changed"]
+[connection signal="AccelerationChangeEnded" from="ElevationLever" to="." method="Elevation_Ended"]
+[connection signal="AccelerationChanged" from="ElevationLever" to="." method="Elevation_Changed"]
 [connection signal="pressed" from="Pause" to="." method="Pause_Pressed"]
 [connection signal="RangeChanged" from="ZoomDial" to="." method="_on_zoom_dial_range_changed"]
 [connection signal="RangeChanged" from="YDial" to="." method="_on_y_dial_range_changed"]

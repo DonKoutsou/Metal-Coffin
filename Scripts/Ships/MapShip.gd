@@ -714,7 +714,7 @@ func UpdateShipWindManipulationModifier() -> void:
 	var StormAffectedWind = WindVel + (WindVel * StormValue)
 	var WeightModifier = 1 - Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT) / STAT_CONST.GetStatMaxValue(STAT_CONST.STATS.WEIGHT)
 	var Height = 0.3 + 0.7 * (Altitude / 10000)
-	var WindProt = TopographyMap.Instance.GetWindProtection(global_position ,Altitude)
+	var WindProt = TopographyMap.GetWindProtection(global_position ,Altitude)
 	WindEffect = (StormAffectedWind * WeightModifier * Height) * WindProt
 
 func GetShipThrust() -> float:
