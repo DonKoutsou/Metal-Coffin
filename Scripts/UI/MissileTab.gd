@@ -13,7 +13,11 @@ class_name MissileTab
 @export var RangeText : Label
 @export var SelectedMissileText : Label
 @export var TurnOffButton : Button
+@export var ArmButton : Button
+@export var DissarmButton : Button
+@export var LaunchButton : Button
 @export var Cap : Panel
+@export var missile_dial : Dial
 
 signal MissileLaunched
 
@@ -31,6 +35,18 @@ var Showing = false
 var Armed = false
 var AmmountArmed = false
 var Ammount : int = 0
+
+func DoIntroductionTutorial() -> void:
+	ActionTracker.GetInstance().QueueTutorial("Missile Launcher", "To turn on the missile launcher use this nob", [Map.UI_ELEMENT.MISSILE_TOGGLE])
+
+func DoMissileArmTutorial() -> void:
+	ActionTracker.GetInstance().QueueTutorial("Missile Arming", "Turn the dial to pass over the missiles the current fleet has on them, after selecting the type of the missile press the arm button to start the launching sequence", [Map.UI_ELEMENT.MISSILE_ARM, Map.UI_ELEMENT.MISSILE_DIAL])
+	
+func DoMissileAmmountTutorial() -> void:
+	ActionTracker.GetInstance().QueueTutorial("Missile Ammout","Turn the dial to pick the ammount of missiles you want to shoot and press the arm button again to be prompted to pick a direction", [Map.UI_ELEMENT.MISSILE_ARM, Map.UI_ELEMENT.MISSILE_DIAL])
+
+func DoMissileLaucnhTutorial() -> void:
+	ActionTracker.GetInstance().QueueTutorial("Missile Launch","Finally turn the dial to aim the missile, when ready press the Launch button to send it away.", [Map.UI_ELEMENT.MISSILE_LAUNCH, Map.UI_ELEMENT.MISSILE_DIAL])
 
 func FleetHasMissileLauncher() -> bool:
 	if (ConnectedShip.Cpt.GetCharacterInventory().HasWeapon(CardStats.WeaponType.ML)):
@@ -81,11 +97,14 @@ func UpdateConnectedShip(Ship : PlayerDrivenShip) -> void:
 	ConnectedShip = Ship
 	UpdateAvailableMissiles()
 	call_deferred("UpdateMissileSelect")
-	
 	var FleetHasLauncher : bool = FleetHasMissileLauncher()
 	Cap.visible = !FleetHasLauncher
 	if (!FleetHasLauncher):
 		_on_turn_off_toggled(false)
+	else:
+		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.MISSILE_TOGGLE)):
+			ActionTracker.OnActionCompleted(ActionTracker.Action.MISSILE_TOGGLE)
+			DoIntroductionTutorial()
 
 func Initialise() -> void:
 	#for g : PlayerDrivenShip in get_tree().get_nodes_in_group("PlayerShips"):
@@ -200,11 +219,17 @@ func OnArmPressed() -> void:
 		MissileSelectLight.Toggle(false, false)
 		AngleSelectLight.Toggle(true, true)
 		MissileDockEventH.MissileArmed(CurrentlySelectedMissile, ConnectedShip.Cpt)
+		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.MISSILE_LAUNCH)):
+			ActionTracker.OnActionCompleted(ActionTracker.Action.MISSILE_LAUNCH)
+			DoMissileLaucnhTutorial()
 		return
 	if (AmmountArmed):
 		PopUpManager.GetInstance().DoFadeNotif("A missile is already armed")
 		return 
-		
+	
+	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.MISSILE_SELECT_NUM)):
+		ActionTracker.OnActionCompleted(ActionTracker.Action.MISSILE_SELECT_NUM)
+		DoMissileAmmountTutorial()
 	Armed = true
 	Ammount = 1
 	RangeText.text = "Ammount : " + var_to_str(Ammount)
@@ -297,6 +322,9 @@ func _on_turn_off_toggled(toggled_on: bool) -> void:
 		MissileSelectLight.Toggle(false, false)
 		TurnOffButton.set_pressed_no_signal(false)
 	else:
+		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.MISSILE_ARM)):
+			ActionTracker.OnActionCompleted(ActionTracker.Action.MISSILE_ARM)
+			DoMissileArmTutorial()
 		Showing = true
 		UpdateMissileSelect()
 		RangeText.visible = true

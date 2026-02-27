@@ -11,8 +11,8 @@ class_name Tutorial
 @export var InSound : AudioStream
 @export var OutSound : AudioStream
 
-var Target : Control
-var Target2 : Control
+var Target : Node
+var Target2 : Node
 var Line1Target : Vector2
 var Line2Target : Vector2
 
@@ -31,19 +31,23 @@ func SetData(Title : String, Text : String, TutorialSubjects : Array[Map.UI_ELEM
 		
 	if (TutorialSubjects.size() > 1):
 		Target2 = Map.GetInstance().GetUIElement(TutorialSubjects[1])
-		
+	
+
 func _ready() -> void:
 	set_physics_process(false)
 	UISoundMan.GetInstance().AddSelf($VBoxContainer/Button)
 	call_deferred("DoFadeInAnim")
-	if (Target2 != null):
-		SetTargetRect(Target.get_global_rect(), Target2.get_global_rect())
-		
-	else: if (Target != null):
-		SetTargetRect(Target.get_global_rect())
 	
-	else:
-		SetTargetRect()
+	var R1 = Rect2(0,0,0,0)
+	var R2 = Rect2(0,0,0,0)
+	
+	if (Target2 != null):
+		R2 = Target2.get_global_rect()
+			
+	if (Target != null):
+		R1 = Target.get_global_rect()
+	
+	SetTargetRect(R1, R2)
 	
 
 func DoFadeInAnim() -> void:
@@ -79,6 +83,10 @@ func DoFadeInAnim() -> void:
 		#Line.visible = false
 	
 	await Tw.finished
+	
+	InScreenCursor.Instance.ToggleMouse(false)
+	Input.mouse_mode =  Input.MOUSE_MODE_VISIBLE
+	
 	set_physics_process(true)
 	$VBoxContainer/PanelContainer/VBoxContainer2.visible = true
 	$VBoxContainer/Button.visible = true
@@ -108,9 +116,6 @@ func UpdateDarkness(Darkness : float) -> void:
 		#Line2Target = lerp(Line2.global_position, Target2.global_position + Vector2( Target2.size.x / 2, 0), NewSize.x / OriginalSize.x)
 		#Line2.set_point_position(1, Line2.to_local(Line2Target))
 
-func _process(delta: float) -> void:
-	Input.mouse_mode =  Input.MOUSE_MODE_VISIBLE
-
 func _physics_process(delta: float) -> void:
 	
 	
@@ -124,6 +129,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_button_pressed() -> void:
 	set_physics_process(false)
+	InScreenCursor.Instance.ToggleMouse(true)
 	
 	var Tw = create_tween()
 	Tw.set_ease(Tween.EASE_IN)

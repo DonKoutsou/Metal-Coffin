@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c3ev6wyyc7j75"]
 
-[ext_resource type="Script" uid="uid://csr430cdphqjd" path="res://Scenes/ScreenUI/transition_panel.gd" id="1_h0tkp"]
+[ext_resource type="Script" uid="uid://csr430cdphqjd" path="res://Scenes/ScreenUI/Scripts/transition_panel.gd" id="1_h0tkp"]
 [ext_resource type="Texture2D" uid="uid://b4hidsx46gkgt" path="res://Assets/UIPiecies/Screen/PanelBig_FullQuality.png" id="1_iek8p"]
 [ext_resource type="AudioStream" uid="uid://wkejeryqqtkt" path="res://Assets/Sounds/DoorClose.mp3" id="2_7bj5d"]
 [ext_resource type="Texture2D" uid="uid://dgutk8ry2sqqp" path="res://Assets/smoke_02.png" id="3_h0tkp"]

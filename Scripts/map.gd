@@ -62,24 +62,39 @@ enum UI_ELEMENT{
 	CARD_FIGHT_RESERVE_BAR,
 	STEER,
 	THRUST,
+	MISSILE_TOGGLE,
+	MISSILE_ARM,
+	MISSILE_DISSARM,
+	MISSILE_LAUNCH,
+	MISSILE_DIAL,
 }
 
-func GetUIElement(Element : UI_ELEMENT) -> Control:
+func GetUIElement(Element : UI_ELEMENT) -> Node:
 	match(Element):
 		UI_ELEMENT.PILOT_SIMULATION_BUTTON:
-			return _ScreenUI.PilotScreen.GetUIElement(PilotScreenUI.PILOT_UI_ELEMENTS.SIMULATION_BUTTON)
+			return _ScreenUI.PilotScreen.PauseSimulationButton
 		UI_ELEMENT.PILOT_SIMULATION_SPEED_BUTTON:
-			return _ScreenUI.PilotScreen.GetUIElement(PilotScreenUI.PILOT_UI_ELEMENTS.SPEED_SIMULATION_BUTTON)
+			return _ScreenUI.PilotScreen.SpeedSimulationButton
 		UI_ELEMENT.PILOT_MAP_MARKER_TOGGLE:
-			return _ScreenUI.PilotScreen.GetUIElement(PilotScreenUI.PILOT_UI_ELEMENTS.MAP_MARKER_TOGGLE)
+			return _ScreenUI.PilotScreen.map_marker_controls.ToggleButton
 		UI_ELEMENT.CARD_FIGHT_ENERGY_BAR:
 			return _ScreenUI.CardFightUI.GetEnergyBar()
 		UI_ELEMENT.CARD_FIGHT_RESERVE_BAR:
 			return _ScreenUI.CardFightUI.GetReserveBar()
 		UI_ELEMENT.STEER:
-			return _ScreenUI.PilotScreen.GetUIElement(PilotScreenUI.PILOT_UI_ELEMENTS.STEER)
+			return _ScreenUI.PilotScreen.Steer
 		UI_ELEMENT.THRUST:
-			return _ScreenUI.PilotScreen.GetUIElement(PilotScreenUI.PILOT_UI_ELEMENTS.THRUST)
+			return _ScreenUI.PilotScreen.Thrust
+		UI_ELEMENT.MISSILE_TOGGLE:
+			return _ScreenUI.PilotScreen.MisisleUI.TurnOffButton
+		UI_ELEMENT.MISSILE_ARM:
+			return _ScreenUI.PilotScreen.MisisleUI.ArmButton
+		UI_ELEMENT.MISSILE_DISSARM:
+			return _ScreenUI.PilotScreen.MisisleUI.DissarmButton
+		UI_ELEMENT.MISSILE_LAUNCH:
+			return _ScreenUI.PilotScreen.MisisleUI.LaunchButton
+		UI_ELEMENT.MISSILE_DIAL:
+			return _ScreenUI.PilotScreen.MisisleUI.missile_dial
 	return null
 
 func UIElementExists(Element : UI_ELEMENT) -> bool:
@@ -98,6 +113,16 @@ func UIElementExists(Element : UI_ELEMENT) -> bool:
 			return _ScreenUI.PilotScreen != null
 		UI_ELEMENT.THRUST:
 			return _ScreenUI.PilotScreen != null
+		UI_ELEMENT.MISSILE_TOGGLE:
+			return _ScreenUI.PilotScreen.MisisleUI.TurnOffButton != null
+		UI_ELEMENT.MISSILE_ARM:
+			return _ScreenUI.PilotScreen.MisisleUI.ArmButton != null
+		UI_ELEMENT.MISSILE_DISSARM:
+			return _ScreenUI.PilotScreen.MisisleUI.DissarmButton != null
+		UI_ELEMENT.MISSILE_LAUNCH:
+			return _ScreenUI.PilotScreen.MisisleUI.LaunchButton != null
+		UI_ELEMENT.MISSILE_DIAL:
+			return _ScreenUI.PilotScreen.MisisleUI.missile_dial != null
 	return false
 
 static var Instance : Map

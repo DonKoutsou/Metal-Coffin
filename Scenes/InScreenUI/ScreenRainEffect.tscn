@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://cary2uh0sdos1"]
+
+[ext_resource type="Script" uid="uid://ddyh2ounnfapu" path="res://Scenes/InScreenUI/ScreenRainEffect.gd" id="1_skesx"]
+[ext_resource type="Material" uid="uid://dfyldqd1bqaq3" path="res://Shaders/RainMat.tres" id="2_psq1t"]
+[ext_resource type="AudioStream" uid="uid://bwci15q31ick8" path="res://Assets/Sounds/RainSound2.mp3" id="3_p3mox"]
+
+[node name="CanvasLayer2" type="CanvasLayer" unique_id=574561548 node_paths=PackedStringArray("RainSound")]
+layer = 5
+script = ExtResource("1_skesx")
+RainMat = ExtResource("2_psq1t")
+RainSound = NodePath("AudioStreamPlayer2D")
+
+[node name="RainEffect" type="ColorRect" parent="." unique_id=997444341]
+z_index = 1
+material = ExtResource("2_psq1t")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="." unique_id=620691899]
+stream = ExtResource("3_p3mox")
+volume_db = -80.0
+autoplay = true
+bus = &"MapSounds"

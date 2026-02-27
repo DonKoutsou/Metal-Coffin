@@ -255,9 +255,7 @@ func OnEnemySeen(Ship : MapShip, SeenBy : HostileShip) -> void:
 		KnownEnemies[Ship] = [SeenBy]
 
 func OnEnemyVisualLost(Ship : MapShip, LostBy : HostileShip) -> void:
-	if (KnownEnemies.has(Ship) and KnownEnemies[Ship].size() > 1):
-		KnownEnemies[Ship].erase(LostBy)
-	else :
+	if (KnownEnemies.has(Ship)):
 		KnownEnemies.erase(Ship)
 		if (IsShipBeingPursued(Ship)):
 			PursuitOrderCanceled(Ship)

@@ -19,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/AnimatedDroneGas.tscn" id="17_ptq1t"]
 [ext_resource type="StyleBox" uid="uid://cicae3yqgxkcm" path="res://Theme/MetalPanel.tres" id="18_uy6ab"]
 
-[node name="Missile Tab" type="Control" unique_id=1968593876 node_paths=PackedStringArray("MissileSelectLight", "AngleSelectLight", "RangeText", "SelectedMissileText", "TurnOffButton", "Cap")]
+[node name="Missile Tab" type="Control" unique_id=1968593876 node_paths=PackedStringArray("MissileSelectLight", "AngleSelectLight", "RangeText", "SelectedMissileText", "TurnOffButton", "ArmButton", "DissarmButton", "LaunchButton", "Cap", "missile_dial")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -43,7 +43,11 @@ AngleSelectLight = NodePath("AngleSelectLight")
 RangeText = NodePath("RangeText")
 SelectedMissileText = NodePath("SelectedMissileText")
 TurnOffButton = NodePath("TurnOff")
+ArmButton = NodePath("ArmButton")
+DissarmButton = NodePath("DissarmButton")
+LaunchButton = NodePath("LaunchButton")
 Cap = NodePath("PanelContainer")
+missile_dial = NodePath("DroneGas")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=641583344]
 layout_mode = 0
@@ -63,12 +67,11 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -60.99997
-offset_top = -10.0
-offset_right = -36.99997
-offset_bottom = 24.30664
+offset_top = -34.0
+offset_right = -24.99997
+offset_bottom = -10.0
 grow_horizontal = 0
 grow_vertical = 0
-rotation = -1.57079
 theme_override_styles/normal = ExtResource("5_fka4o")
 theme_override_styles/pressed = ExtResource("6_2m6j3")
 theme_override_styles/hover = ExtResource("5_fka4o")
@@ -81,12 +84,11 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -60.99997
-offset_top = -64.0
-offset_right = -33.744507
-offset_bottom = -29.79541
+offset_top = -90.0
+offset_right = -25.99997
+offset_bottom = -66.0
 grow_horizontal = 0
 grow_vertical = 0
-rotation = -1.57079
 scale = Vector2(1, 1.00062)
 theme_override_styles/normal = ExtResource("7_fka4o")
 theme_override_styles/pressed = ExtResource("8_2m6j3")
@@ -100,12 +102,11 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -60.99999
-offset_top = -117.80176
-offset_right = -34.88448
-offset_bottom = -82.22577
+offset_top = -143.0
+offset_right = -25.999989
+offset_bottom = -119.0
 grow_horizontal = 0
 grow_vertical = 0
-rotation = -1.57079
 theme_override_styles/normal = ExtResource("9_fka4o")
 theme_override_styles/pressed = ExtResource("10_2m6j3")
 theme_override_styles/hover = ExtResource("9_fka4o")
@@ -193,6 +194,7 @@ rotation = 1.57079
 scale = Vector2(0.529254, 0.369254)
 
 [node name="PanelContainer" type="Panel" parent="." unique_id=1109730313]
+visible = false
 layout_mode = 0
 offset_left = -25.0
 offset_top = -124.0

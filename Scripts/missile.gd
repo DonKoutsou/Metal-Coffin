@@ -15,13 +15,12 @@ var Amm : int
 @export var AltitudeChangeSpeed : float = 1.0
 
 var FoundShips : Array[Node2D] = []
-var Paused = false
 var Friendly = false
 var Altitude : float
 var TargetAltitude : float
 var DistanceTraveled : float
 var WindEffect : float
-var Killed : bool = true
+var Killed : bool = false
 var FiredBy : MapShip
 var VisibleBy : Array[MapShip]
 
@@ -39,11 +38,6 @@ func SetData(Dat :Array[MissileItem]) -> void:
 	Damage = Dat[0].Damage
 	Distance = Dat[0].Distance
 	Amm = Dat.size()
-	
-func TogglePause(t : bool):
-	Paused = t
-
-
 
 func GetSpeed() -> float:
 	return Speed
@@ -53,7 +47,6 @@ func GetShipName() -> String:
 
 func _ready() -> void:
 	TargetAltitude = Altitude
-	Paused = SimulationManager.IsPaused()
 	if (FiredBy is not HostileShip):
 		var s = DeletableSound.new()
 		s.stream = MissileLaunchSound
@@ -79,7 +72,7 @@ func UpdateShipWindManipulationModifier() -> void:
 	WindEffect = (StormAffectedWind * Height) * WindProt
 
 func _physics_process(delta: float) -> void:
-	if (Paused):
+	if (SimulationManager.Paused):
 		return
 	
 	var SimulatedDelta = delta * SimulationManager.SimSpeed()

@@ -12,6 +12,11 @@ enum MouseMode {
 
 var CurrentMode : MouseMode
 
+static var Instance : InScreenCursor
+
+func _ready() -> void:
+	Instance = self
+
 func SwitchMouse(Mode : MouseMode) -> void:
 	if (Mode == CurrentMode):
 		return
@@ -22,6 +27,9 @@ func SwitchMouse(Mode : MouseMode) -> void:
 		MouseMode.DIRECTIONAL:
 			CurrentMode = MouseMode.DIRECTIONAL
 			texture = ResourceLoader.load(DirectionalPointer)
+
+func ToggleMouse(t : bool) -> void:
+	set_physics_process(t)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:

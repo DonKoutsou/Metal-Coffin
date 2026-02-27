@@ -33,6 +33,7 @@ func TogglePause(t : bool) -> void:
 	SimulationNotification.GetInstance().SimPaused(t)
 	Paused = t
 	get_tree().call_group("Ships", "TogglePause", t)
+	#get_tree().call_group("Missiles", "TogglePause", t)
 	#Inventory.GetInstance().OnSimulationPaused(t)
 	_Map.GetInScreenUI().GetInventory().OnSimulationPaused(t)
 	#Commander.GetInstance().OnSimulationPaused(t)

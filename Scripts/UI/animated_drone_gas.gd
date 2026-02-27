@@ -18,6 +18,14 @@ func _ready() -> void:
 	set_physics_process(false)
 	Sound.pitch_scale = randf_range(0.8, 1.2)
 
+func get_global_rect() -> Rect2:
+	var r : Rect2 = $Control.get_global_rect()
+	if (rotation != 0):
+		var size = r.size
+		r.size.x = size.y
+		r.size.y = size.x
+	return r
+
 func _physics_process(_delta: float) -> void:
 	if (accumulatedrel == 0 and CustomAccumulated == 0):
 		set_physics_process(false)

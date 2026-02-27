@@ -301,15 +301,9 @@ enum CardSoundType{
 func _on_pause_pressed() -> void:
 	EventH.OnPausePressed()
 
-func _physics_process(delta: float) -> void:
-	Input.mouse_mode =  Input.MOUSE_MODE_VISIBLE
-	#Input.set_deferred("mouse_mode", Input.MOUSE_MODE_VISIBLE)
-
-
 func MouseIn() -> void:
-	set_physics_process(true)
-
-
+	InScreenCursor.Instance.ToggleMouse(false)
+	Input.mouse_mode =  Input.MOUSE_MODE_VISIBLE
 
 func MouseOut() -> void:
-	set_physics_process(false)
+	InScreenCursor.Instance.ToggleMouse(true)

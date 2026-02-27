@@ -32,7 +32,7 @@ interpolation_color_space = 1
 offsets = PackedFloat32Array(0, 0.505804, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.313, 0.313, 0.313, 0)
 
-[node name="Missile" type="Node2D" unique_id=1696527019 node_paths=PackedStringArray("MissileVisual", "CollisionDetector") groups=["Missiles", "Ships", "ZoomAffected"]]
+[node name="Missile" type="Node2D" unique_id=1696527019 node_paths=PackedStringArray("MissileVisual", "CollisionDetector") groups=["Missiles", "ZoomAffected"]]
 z_index = 1
 script = ExtResource("1_dxfkf")
 MissileLaunchSound = SubResource("AudioStreamRandomizer_brtn2")
