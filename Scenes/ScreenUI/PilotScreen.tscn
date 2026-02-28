@@ -31,7 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://c2tp3xgyap8ar" path="res://Scenes/ScreenUI/ELint.tscn" id="27_uojtp"]
 [ext_resource type="PackedScene" uid="uid://dmmhk1exrryca" path="res://Scenes/ScreenUI/ControlledShipSelection.tscn" id="28_hc833"]
 
-[node name="PilotScreen" type="Control" unique_id=1109053421 node_paths=PackedStringArray("elint", "map_marker_controls", "Thrust", "ElevationThrust", "Steer", "PilotScreenSet", "SpeedSimulationButton", "PauseSimulationButton", "regroup_button", "ship_dock_button", "radar_button", "ZoomDial", "YDial", "XDial", "MisisleUI")]
+[node name="PilotScreen" type="Control" unique_id=1109053421 node_paths=PackedStringArray("elint", "mapMarkerControls", "thrust", "elevationThrust", "steer", "pilotScreenSet", "speedSimulationButton", "pauseSimulationButton", "regroupButton", "shipDockButton", "radarButton", "zoomDial", "yDial", "xDial", "missileUI")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -40,23 +40,23 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_fq67n")
-ui_event_handler = ExtResource("2_ecvfe")
-controller_event_handler = ExtResource("3_w258d")
+uiEventHandler = ExtResource("2_ecvfe")
+controllerEventHandler = ExtResource("3_w258d")
 elint = NodePath("Elint")
-map_marker_controls = NodePath("MapMarkerControls")
-Thrust = NodePath("ThrustLever")
-ElevationThrust = NodePath("ElevationLever")
-Steer = NodePath("SteeringWheel")
-PilotScreenSet = NodePath("Pilot_Screen_Settings")
-SpeedSimulationButton = NodePath("SpeedSimulation")
-PauseSimulationButton = NodePath("SimulationButton")
-regroup_button = NodePath("Regroup")
-ship_dock_button = NodePath("ShipDockButton")
-radar_button = NodePath("RadarButton")
-ZoomDial = NodePath("ZoomDial")
-YDial = NodePath("YDial")
-XDial = NodePath("XDial")
-MisisleUI = NodePath("Missile Tab")
+mapMarkerControls = NodePath("MapMarkerControls")
+thrust = NodePath("ThrustLever")
+elevationThrust = NodePath("ElevationLever")
+steer = NodePath("SteeringWheel")
+pilotScreenSet = NodePath("Pilot_Screen_Settings")
+speedSimulationButton = NodePath("SpeedSimulation")
+pauseSimulationButton = NodePath("Pause")
+regroupButton = NodePath("Regroup")
+shipDockButton = NodePath("ShipDockButton")
+radarButton = NodePath("RadarButton")
+zoomDial = NodePath("ZoomDial")
+yDial = NodePath("YDial")
+xDial = NodePath("XDial")
+missileUI = NodePath("Missile Tab")
 
 [node name="ScreenBackground" type="TextureRect" parent="." unique_id=776636619]
 custom_minimum_size = Vector2(0, 38.045)
@@ -439,26 +439,25 @@ scale = Vector2(0.8, 0.8)
 
 [connection signal="ForecastToggled" from="Pilot_Screen_Settings" to="." method="_on_forecast_button_toggled"]
 [connection signal="GridToggled" from="Pilot_Screen_Settings" to="." method="_on_grid_button_toggled"]
-[connection signal="SteerToggled" from="Pilot_Screen_Settings" to="." method="_on_steer_button_toggled"]
+[connection signal="SteerToggled" from="Pilot_Screen_Settings" to="." method="_onSteerButtonToggled"]
 [connection signal="TopologyTogled" from="Pilot_Screen_Settings" to="." method="_on_topo_button_toggled"]
 [connection signal="ZoomToggled" from="Pilot_Screen_Settings" to="." method="_on_zoom_level_button_toggled"]
-[connection signal="SteeringDitChanged" from="SteeringWheel" to="." method="Steering_Direction_Changed"]
-[connection signal="SteeringOffseted" from="SteeringWheel" to="." method="Steer_Offseted"]
+[connection signal="SteeringDitChanged" from="SteeringWheel" to="." method="steeringDirectionChanged"]
+[connection signal="SteeringOffseted" from="SteeringWheel" to="." method="steerOffseted"]
 [connection signal="toggled" from="SpeedSimulation" to="." method="_on_speed_simulation_toggled"]
-[connection signal="toggled" from="SimulationButton" to="." method="Sim_Pause_Toggled"]
-[connection signal="pressed" from="InventoryButton" to="." method="Inventory_Pressed"]
-[connection signal="pressed" from="Regroup" to="." method="Regroup_Pressed"]
-[connection signal="pressed" from="MarkerEditorButton" to="." method="Marker_Editor_Button_Pressed"]
-[connection signal="pressed" from="ShipDockButton" to="." method="Ship_Dock_Button_Pressed"]
-[connection signal="pressed" from="MissileButton" to="." method="Missile_Button_Pressed"]
-[connection signal="pressed" from="OpenHatchButton" to="." method="Open_Hatch_Button_Pressed"]
-[connection signal="pressed" from="RadarButton" to="." method="Radar_Button_Pressed"]
-[connection signal="pressed" from="LandButton" to="." method="Land_Pressed"]
-[connection signal="AccelerationChangeEnded" from="ThrustLever" to="." method="Acceleration_Ended"]
-[connection signal="AccelerationChanged" from="ThrustLever" to="." method="Acceleration_Changed"]
-[connection signal="AccelerationChangeEnded" from="ElevationLever" to="." method="Elevation_Ended"]
-[connection signal="AccelerationChanged" from="ElevationLever" to="." method="Elevation_Changed"]
-[connection signal="pressed" from="Pause" to="." method="Pause_Pressed"]
+[connection signal="toggled" from="SimulationButton" to="." method="simPauseToggled"]
+[connection signal="pressed" from="InventoryButton" to="." method="inventoryPressed"]
+[connection signal="pressed" from="Regroup" to="." method="regroupPressed"]
+[connection signal="pressed" from="MarkerEditorButton" to="." method="markerEditorButtonPressed"]
+[connection signal="pressed" from="ShipDockButton" to="." method="shipDockButtonPressed"]
+[connection signal="pressed" from="OpenHatchButton" to="." method="openHatchButtonPressed"]
+[connection signal="pressed" from="RadarButton" to="." method="radarButtonPressed"]
+[connection signal="pressed" from="LandButton" to="." method="landPressed"]
+[connection signal="AccelerationChangeEnded" from="ThrustLever" to="." method="accelerationEnded"]
+[connection signal="AccelerationChanged" from="ThrustLever" to="." method="accelerationChanged"]
+[connection signal="AccelerationChangeEnded" from="ElevationLever" to="." method="elevationEnded"]
+[connection signal="AccelerationChanged" from="ElevationLever" to="." method="elevationChanged"]
+[connection signal="pressed" from="Pause" to="." method="pausePressed"]
 [connection signal="RangeChanged" from="ZoomDial" to="." method="_on_zoom_dial_range_changed"]
 [connection signal="RangeChanged" from="YDial" to="." method="_on_y_dial_range_changed"]
 [connection signal="RangeChanged" from="XDial" to="." method="_on_x_dial_range_changed"]

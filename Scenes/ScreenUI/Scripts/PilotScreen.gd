@@ -1,174 +1,168 @@
 extends Control
-
 class_name PilotScreenUI
 
+# --- EXPORTED REFERENCES ---
+
 @export_group("Event_Handlers")
-@export var ui_event_handler : UIEventHandler
-@export var controller_event_handler : ShipControllerEventHandler
+@export var uiEventHandler: UIEventHandler
+@export var controllerEventHandler: ShipControllerEventHandler
 
 @export_group("UI_Elements")
-@export var elint : ElingUI
-@export var map_marker_controls : MapMarkerControls
-@export var Thrust : ThrustSlider
-@export var ElevationThrust : ThrustSlider
-@export var Steer : SteeringWheelUI
-@export var PilotScreenSet : PilotScreenSettings
-@export var SpeedSimulationButton : TextureButton
-@export var PauseSimulationButton : Button
-@export var regroup_button : Button
-@export var ship_dock_button : Button
-@export var radar_button : Button
-@export var ZoomDial : Dial
-@export var YDial : Dial
-@export var XDial : Dial
-@export var MisisleUI : MissileTab
-	
-	
-func _ready() -> void:
-	controller_event_handler.OnControlledShipChanged.connect(ControlledShipSwitched)
-	
-	ControlledShipSwitched(controller_event_handler.CurrentControlled)
-	
-	ui_event_handler.SpeedForced.connect(ShipSpeedForced)
-	ui_event_handler.SpeedSet.connect(ShipSpeedSet)
-	ui_event_handler.SteerForced.connect(ShipSteerForced)
-	ui_event_handler.SteerSet.connect(ShipSteerSet)
-	ui_event_handler.ElevationForced.connect(ShipElevationForced)
-	#ui_event_handler.ElevationSet.connect(ShipElevationSet)
+@export var elint: ElingUI
+@export var mapMarkerControls: MapMarkerControls
+@export var thrust: ThrustSlider
+@export var elevationThrust: ThrustSlider
+@export var steer: SteeringWheelUI
+@export var pilotScreenSet: PilotScreenSettings
+@export var speedSimulationButton: TextureButton
+@export var pauseSimulationButton: Button
+@export var regroupButton: Button
+@export var shipDockButton: Button
+@export var radarButton: Button
+@export var zoomDial: Dial
+@export var yDial: Dial
+@export var xDial: Dial
+@export var missileUI: MissileTab
 
-	ui_event_handler.ZoomChangedFromScreen.connect(ZoomDial.addCustomMovement)
-	ui_event_handler.YChangedFromScreen.connect(YDial.addCustomMovement)
-	ui_event_handler.XChangedFromScreen.connect(XDial.addCustomMovement)
+# --- INITIALIZATION ---
+
+func _ready() -> void:
+	controllerEventHandler.OnControlledShipChanged.connect(controlledShipSwitched)
+	controlledShipSwitched(controllerEventHandler.CurrentControlled)
+	
+	uiEventHandler.SpeedForced.connect(shipSpeedForced)
+	uiEventHandler.SpeedSet.connect(shipSpeedSet)
+	uiEventHandler.SteerForced.connect(shipSteerForced)
+	uiEventHandler.SteerSet.connect(shipSteerSet)
+	uiEventHandler.ElevationForced.connect(shipElevationForced)
+	# uiEventHandler.ElevationSet.connect(shipElevationSet)
+
+	uiEventHandler.ZoomChangedFromScreen.connect(zoomDial.addCustomMovement)
+	uiEventHandler.YChangedFromScreen.connect(yDial.addCustomMovement)
+	uiEventHandler.XChangedFromScreen.connect(xDial.addCustomMovement)
+	
 	UISoundMan.GetInstance().Refresh()
 	
-	SpeedSimulationButton.set_pressed_no_signal(SimulationManager.SimSpeed() > 1)
-	PauseSimulationButton.set_pressed_no_signal(!SimulationManager.IsPaused())
-	_on_steer_button_toggled(PilotScreenSet.SteerState)
+	speedSimulationButton.set_pressed_no_signal(SimulationManager.SimSpeed() > 1)
+	pauseSimulationButton.set_pressed_no_signal(!SimulationManager.IsPaused())
+	_onSteerButtonToggled(pilotScreenSet.SteerState)
 
-#--------------------------------------------------
-#INCOMMING
+# --- INCOMING EVENTS FROM GAME LOGIC ---
 
-func SpeedUpdated(t : bool) -> void:
-	SpeedSimulationButton.set_pressed_no_signal(t)
-	SpeedSimulationButton.button_down.emit()
+func speedUpdated(enabled: bool) -> void:
+	speedSimulationButton.set_pressed_no_signal(enabled)
+	speedSimulationButton.button_down.emit()
 
-func SimulationToggled(t : bool) -> void:
-	PauseSimulationButton.set_pressed_no_signal(!t)
-	PauseSimulationButton.button_down.emit()
+func simulationToggled(paused: bool) -> void:
+	pauseSimulationButton.set_pressed_no_signal(!paused)
+	pauseSimulationButton.button_down.emit()
 
-func ShipSpeedSet(NewSpeed : float) -> void:
-	Thrust.UpdateHandle(NewSpeed)
+func shipSpeedSet(newSpeed: float) -> void:
+	thrust.UpdateHandle(newSpeed)
 
+func shipSpeedForced(newSpeed: float) -> void:
+	thrust.ForceValue(newSpeed)
 
-func ShipSpeedForced(NewSpeed : float) -> void:
-	Thrust.ForceValue(NewSpeed)
+func shipSteerSet(newValue: float) -> void:
+	steer.ForceSteer(newValue)
 
+func shipSteerForced(newValue: float) -> void:
+	steer.ForceSteer(newValue)
 
-func ShipSteerSet(NewSpeed : float) -> void:
-	Steer.ForceSteer(NewSpeed)
+func shipElevationSet(newValue: float) -> void:
+	elevationThrust.UpdateHandle(newValue)
 
+func shipElevationForced(newValue: float) -> void:
+	elevationThrust.ForceValue(newValue)
 
-func ShipSteerForced(NewSpeed : float) -> void:
-	Steer.ForceSteer(NewSpeed)
+func controlledShipSwitched(newShip: MapShip) -> void:
+	thrust.ForceValue(newShip.GetShipSpeed() / newShip.GetShipMaxSpeed())
+	elevationThrust.ForceValue(newShip.TargetAltitude / 10000)  # Assume altitude scaling
+	steer.SyncSteer(newShip.rotation + newShip.StoredSteer)
 
-	
-func ShipElevationSet(NewSpeed : float) -> void:
-	ElevationThrust.UpdateHandle(NewSpeed)
+# --- OUTGOING EVENTS TO GAME LOGIC/UI DISPATCH ---
 
+func _on_altitude_dial_range_changed(newVal: float) -> void:
+	controllerEventHandler.OnTargetAltitudeChanged(newVal)
 
-func ShipElevationForced(NewSpeed : float) -> void:
-	ElevationThrust.ForceValue(NewSpeed)
+func _onSteerButtonToggled(toggledOn: bool) -> void:
+	steer.Toggle(toggledOn)
 
+func _on_speed_simulation_toggled(toggledOn: bool) -> void:
+	SimulationManager.GetInstance().SpeedToggle(toggledOn)
 
-func ControlledShipSwitched(NewShip : MapShip) -> void:
-	Thrust.ForceValue(NewShip.GetShipSpeed() / NewShip.GetShipMaxSpeed())
-	ElevationThrust.ForceValue(NewShip.TargetAltitude / 10000)
-	Steer.SyncSteer(NewShip.rotation + NewShip.StoredSteer)
-	
-#--------------------------------------------------
-#OUTGOING
+func simPauseToggled(toggledOn: bool) -> void:
+	SimulationManager.GetInstance().TogglePause(!toggledOn)
 
-func _on_altitude_dial_range_changed(NewVal: float) -> void:
-	controller_event_handler.OnTargetAltitudeChanged(NewVal)
+func accelerationEnded(valueChanged: float) -> void:
+	uiEventHandler.OnAccelerationEnded(valueChanged)
 
-func _on_steer_button_toggled(toggled_on: bool) -> void:
-	Steer.Toggle(toggled_on)
+func accelerationChanged(value: float) -> void:
+	uiEventHandler.OnAccelerationChanged(value)
 
-func _on_speed_simulation_toggled(toggled_on: bool) -> void:
-	SimulationManager.GetInstance().SpeedToggle(toggled_on)
+func elevationEnded(valueChanged: float) -> void:
+	uiEventHandler.OnElevationEnded(valueChanged)
 
-func Sim_Pause_Toggled(toggled_on: bool) -> void:
-	SimulationManager.GetInstance().TogglePause(!toggled_on)
+func elevationChanged(value: float) -> void:
+	uiEventHandler.OnElevationChanged(value)
+	elevationThrust.UpdateHandle(value)
 
-func Acceleration_Ended(value_changed: float) -> void:
-	ui_event_handler.OnAccelerationEnded(value_changed)
+func steeringDirectionChanged(newValue: float) -> void:
+	uiEventHandler.OnSteeringDirectionChanged(newValue)
 
-func Acceleration_Changed(value: float) -> void:
-	ui_event_handler.OnAccelerationChanged(value)
+func steerOffseted(offset: float) -> void:
+	uiEventHandler.OnSteerOffseted(offset)
 
-func Elevation_Ended(value_changed: float) -> void:
-	ui_event_handler.OnElevationEnded(value_changed)
-	#ElevationThrust.UpdateHandle(value_changed)
+func inventoryPressed() -> void:
+	uiEventHandler.OnInventoryPressed()
 
-func Elevation_Changed(value: float) -> void:
-	ui_event_handler.OnElevationChanged(value)
-	ElevationThrust.UpdateHandle(value)
+func regroupPressed() -> void:
+	uiEventHandler.OnRegroupPressed()
 
-func Steering_Direction_Changed(NewValue: float) -> void:
-	ui_event_handler.OnSteeringDirectionChanged(NewValue)
+func openHatchButtonPressed() -> void:
+	uiEventHandler.OnOpenHatchPressed()
 
-func Steer_Offseted(Offset: float) -> void:
-	ui_event_handler.OnSteerOffseted(Offset)
+func radarButtonPressed() -> void:
+	uiEventHandler.OnRadarButtonPressed()
 
-func Inventory_Pressed() -> void:
-	ui_event_handler.OnInventoryPressed()
+func landPressed() -> void:
+	uiEventHandler.OnLandPressed()
 
-func Regroup_Pressed() -> void:
-	ui_event_handler.OnRegroupPressed()
+func pausePressed() -> void:
+	uiEventHandler.OnPausePressed()
 
-func Open_Hatch_Button_Pressed() -> void:
-	ui_event_handler.OnOpenHatchPressed()
+func markerEditorButtonPressed() -> void:
+	uiEventHandler.OnMarkerEditorToggled(false)
 
-func Radar_Button_Pressed() -> void:
-	ui_event_handler.OnRadarButtonPressed()
+func shipDockButtonPressed() -> void:
+	uiEventHandler.OnFleetSeparationPressed()
 
-func Land_Pressed() -> void:
-	ui_event_handler.OnLandPressed()
+func _on_forecast_button_toggled(toggledOn: bool) -> void:
+	uiEventHandler.OnForecastPressed(toggledOn)
 
-func Pause_Pressed() -> void:
-	ui_event_handler.OnPausePressed()
+func _on_grid_button_toggled(toggledOn: bool) -> void:
+	uiEventHandler.OnGridPressed(toggledOn)
 
-func Marker_Editor_Button_Pressed() -> void:
-	ui_event_handler.OnMarkerEditorToggled(false)
+func _on_zoom_level_button_toggled(toggledOn: bool) -> void:
+	uiEventHandler.OnZoomTogglePressed(toggledOn)
 
-func Ship_Dock_Button_Pressed() -> void:
-	ui_event_handler.OnFleetSeparationPressed()
+func _on_altitude_toggled(toggledOn: bool) -> void:
+	uiEventHandler.OnAltTogglePressed(toggledOn)
 
-func _on_forecast_button_toggled(toggled_on: bool) -> void:
-	ui_event_handler.OnForecastPressed(toggled_on)
+func _on_team_button_toggled(toggledOn: bool) -> void:
+	uiEventHandler.OnTeamTogglePressed(toggledOn)
 
-func _on_grid_button_toggled(toggled_on: bool) -> void:
-	ui_event_handler.OnGridPressed(toggled_on)
+func _on_sonar_button_toggled(toggledOn: bool) -> void:
+	uiEventHandler.OnSonarPressed(toggledOn)
 
-func _on_zoom_level_button_toggled(toggled_on: bool) -> void:
-	ui_event_handler.OnZoomTogglePressed(toggled_on)
+func _on_zoom_dial_range_changed(newVal: float) -> void:
+	uiEventHandler.OnZoomDialMoved(-newVal / 10)
 
-func _on_altitude_toggled(toggled_on: bool) -> void:
-	ui_event_handler.OnAltTogglePressed(toggled_on)
-	
-func _on_team_button_toggled(toggled_on: bool) -> void:
-	ui_event_handler.OnTeamTogglePressed(toggled_on)
-	
-func _on_sonar_button_toggled(toggled_on: bool) -> void:
-	ui_event_handler.OnSonarPressed(toggled_on)
-func _on_zoom_dial_range_changed(NewVal: float) -> void:
-	ui_event_handler.OnZoomDialMoved(-NewVal / 10)
-	
-func _on_y_dial_range_changed(NewVal: float) -> void:
-	ui_event_handler.OnYDialMoved(-NewVal * 10)
+func _on_y_dial_range_changed(newVal: float) -> void:
+	uiEventHandler.OnYDialMoved(-newVal * 10)
 
-func _on_x_dial_range_changed(NewVal: float) -> void:
-	ui_event_handler.OnXDialMoved(-NewVal * 10)
+func _on_x_dial_range_changed(newVal: float) -> void:
+	uiEventHandler.OnXDialMoved(-newVal * 10)
 
-func _on_topo_button_toggled(toggled_on: bool) -> void:
-	ui_event_handler.OnTopoPressed(toggled_on)
+func _on_topo_button_toggled(toggledOn: bool) -> void:
+	uiEventHandler.OnTopoPressed(toggledOn)

@@ -72,29 +72,29 @@ enum UI_ELEMENT{
 func GetUIElement(Element : UI_ELEMENT) -> Node:
 	match(Element):
 		UI_ELEMENT.PILOT_SIMULATION_BUTTON:
-			return _ScreenUI.PilotScreen.PauseSimulationButton
+			return _ScreenUI.PilotScreen.pauseSimulationButton
 		UI_ELEMENT.PILOT_SIMULATION_SPEED_BUTTON:
-			return _ScreenUI.PilotScreen.SpeedSimulationButton
+			return _ScreenUI.PilotScreen.speedSimulationButton
 		UI_ELEMENT.PILOT_MAP_MARKER_TOGGLE:
-			return _ScreenUI.PilotScreen.map_marker_controls.ToggleButton
+			return _ScreenUI.PilotScreen.mapMarkerControls.ToggleButton
 		UI_ELEMENT.CARD_FIGHT_ENERGY_BAR:
 			return _ScreenUI.CardFightUI.GetEnergyBar()
 		UI_ELEMENT.CARD_FIGHT_RESERVE_BAR:
 			return _ScreenUI.CardFightUI.GetReserveBar()
 		UI_ELEMENT.STEER:
-			return _ScreenUI.PilotScreen.Steer
+			return _ScreenUI.PilotScreen.steer
 		UI_ELEMENT.THRUST:
-			return _ScreenUI.PilotScreen.Thrust
+			return _ScreenUI.PilotScreen.thrust
 		UI_ELEMENT.MISSILE_TOGGLE:
-			return _ScreenUI.PilotScreen.MisisleUI.turnOffButton
+			return _ScreenUI.PilotScreen.missileUI.turnOffButton
 		UI_ELEMENT.MISSILE_ARM:
-			return _ScreenUI.PilotScreen.MisisleUI.armButton
+			return _ScreenUI.PilotScreen.missileUI.armButton
 		UI_ELEMENT.MISSILE_DISSARM:
-			return _ScreenUI.PilotScreen.MisisleUI.dissarmButton
+			return _ScreenUI.PilotScreen.missileUI.dissarmButton
 		UI_ELEMENT.MISSILE_LAUNCH:
-			return _ScreenUI.PilotScreen.MisisleUI.launchButton
+			return _ScreenUI.PilotScreen.missileUI.launchButton
 		UI_ELEMENT.MISSILE_DIAL:
-			return _ScreenUI.PilotScreen.MisisleUI.missileDial
+			return _ScreenUI.PilotScreen.missileUI.missileDial
 	return null
 
 func UIElementExists(Element : UI_ELEMENT) -> bool:
@@ -114,15 +114,15 @@ func UIElementExists(Element : UI_ELEMENT) -> bool:
 		UI_ELEMENT.THRUST:
 			return _ScreenUI.PilotScreen != null
 		UI_ELEMENT.MISSILE_TOGGLE:
-			return _ScreenUI.PilotScreen.MisisleUI.turnOffButton != null
+			return _ScreenUI.PilotScreen != null
 		UI_ELEMENT.MISSILE_ARM:
-			return _ScreenUI.PilotScreen.MisisleUI.armButton != null
+			return _ScreenUI.PilotScreen != null
 		UI_ELEMENT.MISSILE_DISSARM:
-			return _ScreenUI.PilotScreen.MisisleUI.dissarmButton != null
+			return _ScreenUI.PilotScreen != null
 		UI_ELEMENT.MISSILE_LAUNCH:
-			return _ScreenUI.PilotScreen.MisisleUI.launchButton != null
+			return _ScreenUI.PilotScreen != null
 		UI_ELEMENT.MISSILE_DIAL:
-			return _ScreenUI.PilotScreen.MisisleUI.missileDial != null
+			return _ScreenUI.PilotScreen != null
 	return false
 
 static var Instance : Map
@@ -136,7 +136,7 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	set_physics_process(false)
 	$SubViewportContainer.visible = false
-	_ScreenUI.connect("FullScreenToggleStarted", ToggleFullScreen)
+	_ScreenUI.FullScreenToggleStarted.connect(ToggleFullScreen)
 	_Camera.connect("PositionChanged", CamPosChanged)
 	_Camera.connect("ZoomChanged", CamZoomChanged)
 	_InScreenUI.GetInventory().InventoryToggled.connect(HideWorld)
