@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cwnxxystgxrjm"]
 
-[ext_resource type="Script" uid="uid://cveotxqirn2cw" path="res://Scripts/UI/MissileTab.gd" id="1_2m6j3"]
+[ext_resource type="Script" uid="uid://cveotxqirn2cw" path="res://Scenes/ScreenUI/MissileTab/MissileTab.gd" id="1_2m6j3"]
 [ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/EventHandlers/MissileDockEventHandler.tres" id="2_uy6ab"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="3_fka4o"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="4_2m6j3"]
@@ -16,7 +16,7 @@
 [ext_resource type="StyleBox" uid="uid://21mi6l2i2tkk" path="res://Theme/Buttons/NobButton_Pressed.tres" id="12_fka4o"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="15_pknbg"]
 [ext_resource type="FontFile" uid="uid://c6hwlc2fgceix" path="res://Fonts/digital-7.ttf" id="16_6ithd"]
-[ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/AnimatedDroneGas.tscn" id="17_ptq1t"]
+[ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/Dial/Dial.tscn" id="17_ptq1t"]
 [ext_resource type="StyleBox" uid="uid://cicae3yqgxkcm" path="res://Theme/MetalPanel.tres" id="18_uy6ab"]
 
 [node name="Missile Tab" type="Control" unique_id=1968593876 node_paths=PackedStringArray("missileSelectLight", "angleSelectLight", "rangeText", "selectedMissileText", "turnOffButton", "armButton", "dissarmButton", "launchButton", "cap", "missileDial")]
@@ -35,8 +35,6 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_2m6j3")
 missileDockEventH = ExtResource("2_uy6ab")
-shipControllerEventH = ExtResource("3_fka4o")
-dockEventH = ExtResource("4_2m6j3")
 uiEventH = ExtResource("4_fka4o")
 missileSelectLight = NodePath("MissileSelectLight")
 angleSelectLight = NodePath("AngleSelectLight")
@@ -48,6 +46,8 @@ dissarmButton = NodePath("DissarmButton")
 launchButton = NodePath("LaunchButton")
 cap = NodePath("PanelContainer")
 missileDial = NodePath("DroneGas")
+controllerEventHandler = ExtResource("3_fka4o")
+droneDockEventHandler = ExtResource("4_2m6j3")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=641583344]
 layout_mode = 0

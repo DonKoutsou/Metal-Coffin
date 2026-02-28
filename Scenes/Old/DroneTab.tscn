@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cdo5cmf14mb45" path="res://Assets/UIPiecies/Screen/Buttons/Launchbutton_Camera 1.png" id="9_e2gey"]
 [ext_resource type="Texture2D" uid="uid://cd0iin8gg5vcl" path="res://Assets/UIPiecies/Screen/Buttons/offbuttonon_Camera 1.png" id="10_dh2x3"]
 [ext_resource type="Texture2D" uid="uid://dcsls1a11y11x" path="res://Assets/UIPiecies/Screen/Buttons/offbutton_Camera 1.png" id="11_3k85b"]
-[ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/AnimatedDroneGas.tscn" id="12_g1s84"]
+[ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/Dial/Dial.tscn" id="12_g1s84"]
 [ext_resource type="Texture2D" uid="uid://drv3dq5g8m3b2" path="res://Assets/UIPiecies/CrewDisplay_Camera 1.png" id="13_edp3y"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="14_uvckv"]
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bdyul5l380bmt" path="res://Scripts/UI/map_marker_controls.gd" id="1_67mm3"]
 [ext_resource type="Texture2D" uid="uid://bhijweehoxrmw" path="res://Assets/UIPiecies/Screen/SidePanels/Panel_FullQuality.png" id="1_sg83c"]
-[ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/AnimatedDroneGas.tscn" id="2_67mm3"]
+[ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/Dial/Dial.tscn" id="2_67mm3"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_djntk"]
 [ext_resource type="StyleBox" uid="uid://bc1y4hhkl7ce6" path="res://Theme/Buttons/NobButton.tres" id="5_67mm3"]
 [ext_resource type="StyleBox" uid="uid://21mi6l2i2tkk" path="res://Theme/Buttons/NobButton_Pressed.tres" id="6_djntk"]

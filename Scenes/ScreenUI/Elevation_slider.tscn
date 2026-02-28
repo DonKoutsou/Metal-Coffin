@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://k7pqywm80h3m"]
 
-[ext_resource type="Script" uid="uid://b7vls3p4lfb5v" path="res://Scripts/UI/thrust_slider.gd" id="1_vkcln"]
+[ext_resource type="Script" uid="uid://b7vls3p4lfb5v" path="res://Scenes/ScreenUI/ThrustSlider/thrust_slider.gd" id="1_vkcln"]
 [ext_resource type="Texture2D" uid="uid://xhd53g36p6gd" path="res://Assets/UIPiecies/Screen/SidePanels/handle_Camera 3.png" id="2_clt26"]
 [ext_resource type="Texture2D" uid="uid://p3h2a0mgmb12" path="res://Assets/UIPiecies/Screen/SidePanels/handleshadow_Camera 3.png" id="3_borvm"]
 [ext_resource type="AudioStream" uid="uid://bq5ennd48voeu" path="res://Assets/Sounds/MetalClick.mp3" id="4_08ohp"]

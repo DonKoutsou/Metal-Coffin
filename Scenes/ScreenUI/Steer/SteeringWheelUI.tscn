@@ -1,7 +1,10 @@
 [gd_scene format=3 uid="uid://hiw68h8srifm"]
 
-[ext_resource type="Script" uid="uid://buq0xxelj3jfe" path="res://Scripts/UI/steering_wheelUI.gd" id="1_akv35"]
+[ext_resource type="Script" uid="uid://buq0xxelj3jfe" path="res://Scenes/ScreenUI/Steer/steering_wheelUI.gd" id="1_akv35"]
+[ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_bbu0y"]
+[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="3_8lfa1"]
 [ext_resource type="Texture2D" uid="uid://rxtmxyrt7f07" path="res://Assets/UIPiecies/Screen/SidePanels/Steer_FullQuality.png" id="3_dkc7s"]
+[ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="4_plcts"]
 [ext_resource type="AudioStream" uid="uid://ciqrupf71u8wm" path="res://Assets/Sounds/Steer-003.wav" id="4_w1h5k"]
 
 [node name="SteeringWheel" type="Control" unique_id=760456773]
@@ -21,6 +24,9 @@ scale = Vector2(0.8, 0.8)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 mouse_filter = 2
 script = ExtResource("1_akv35")
+uiEventHandler = ExtResource("2_bbu0y")
+controllerEventHandler = ExtResource("3_8lfa1")
+droneDockEventHandler = ExtResource("4_plcts")
 
 [node name="TextureButton" type="TextureButton" parent="." unique_id=2016977382]
 layout_mode = 1

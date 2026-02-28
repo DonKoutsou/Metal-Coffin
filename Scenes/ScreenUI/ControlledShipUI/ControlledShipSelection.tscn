@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://dmmhk1exrryca"]
 
-[ext_resource type="Script" uid="uid://cmbh7qwscnfdd" path="res://Scenes/ScreenUI/Scripts/controlled_ship_selection.gd" id="1_5p1jf"]
-[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="2_7r4pq"]
+[ext_resource type="Script" uid="uid://cmbh7qwscnfdd" path="res://Scenes/ScreenUI/ControlledShipUI/controlled_ship_selection.gd" id="1_5p1jf"]
+[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="2_1kjib"]
+[ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="3_cgsst"]
 [ext_resource type="FontFile" uid="uid://c6hwlc2fgceix" path="res://Fonts/digital-7.ttf" id="3_qsb3g"]
 [ext_resource type="FontFile" uid="uid://m8psk06kkwa4" path="res://Fonts/P22 Typewriter Regular.ttf" id="6_6xqx0"]
 [ext_resource type="StyleBox" uid="uid://c5x3vcw8x46rj" path="res://Theme/Buttons/ButtonRed.tres" id="6_8snke"]
@@ -13,7 +14,7 @@
 [ext_resource type="StyleBox" uid="uid://cim71fta6nvsv" path="res://Theme/Buttons/ButtonGreen_Pressed.tres" id="9_6xqx0"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="12_h5vnd"]
 
-[node name="ControledShipSelector" type="Control" unique_id=397832360 node_paths=PackedStringArray("CurrentCaptainLabel", "CurrentCaptainHullLabel", "CurrentCaptainFuelLabel", "DroneLabel")]
+[node name="ControledShipSelector" type="Control" unique_id=397832360 node_paths=PackedStringArray("captainLabel", "captainHullLabel", "captainFuelLabel", "droneLabel")]
 custom_minimum_size = Vector2(274, 128)
 layout_mode = 3
 anchors_preset = 8
@@ -28,11 +29,12 @@ offset_bottom = 73.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5p1jf")
-ShipControllerEventH = ExtResource("2_7r4pq")
-CurrentCaptainLabel = NodePath("PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/CaptainName")
-CurrentCaptainHullLabel = NodePath("PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2/CaptainHull")
-CurrentCaptainFuelLabel = NodePath("PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2/CaptainFuel")
-DroneLabel = NodePath("PanelContainer/HBoxContainer/VBoxContainer2/PanelContainer/InputScroll/Captains")
+captainLabel = NodePath("PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/CaptainName")
+captainHullLabel = NodePath("PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2/CaptainHull")
+captainFuelLabel = NodePath("PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2/CaptainFuel")
+droneLabel = NodePath("PanelContainer/HBoxContainer/VBoxContainer2/PanelContainer/InputScroll/Captains")
+controllerEventHandler = ExtResource("2_1kjib")
+droneDockEventHandler = ExtResource("3_cgsst")
 
 [node name="PanelContainer" type="Panel" parent="." unique_id=1460591157]
 layout_mode = 1

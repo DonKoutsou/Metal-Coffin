@@ -32,8 +32,7 @@ func _ready() -> void:
 	
 	uiEventHandler.SpeedForced.connect(shipSpeedForced)
 	uiEventHandler.SpeedSet.connect(shipSpeedSet)
-	uiEventHandler.SteerForced.connect(shipSteerForced)
-	uiEventHandler.SteerSet.connect(shipSteerSet)
+	
 	uiEventHandler.ElevationForced.connect(shipElevationForced)
 	# uiEventHandler.ElevationSet.connect(shipElevationSet)
 
@@ -63,11 +62,7 @@ func shipSpeedSet(newSpeed: float) -> void:
 func shipSpeedForced(newSpeed: float) -> void:
 	thrust.ForceValue(newSpeed)
 
-func shipSteerSet(newValue: float) -> void:
-	steer.ForceSteer(newValue)
 
-func shipSteerForced(newValue: float) -> void:
-	steer.ForceSteer(newValue)
 
 func shipElevationSet(newValue: float) -> void:
 	elevationThrust.UpdateHandle(newValue)
@@ -78,7 +73,6 @@ func shipElevationForced(newValue: float) -> void:
 func controlledShipSwitched(newShip: MapShip) -> void:
 	thrust.ForceValue(newShip.GetShipSpeed() / newShip.GetShipMaxSpeed())
 	elevationThrust.ForceValue(newShip.TargetAltitude / 10000)  # Assume altitude scaling
-	steer.SyncSteer(newShip.rotation + newShip.StoredSteer)
 
 # --- OUTGOING EVENTS TO GAME LOGIC/UI DISPATCH ---
 
@@ -106,12 +100,6 @@ func elevationEnded(valueChanged: float) -> void:
 func elevationChanged(value: float) -> void:
 	uiEventHandler.OnElevationChanged(value)
 	elevationThrust.UpdateHandle(value)
-
-func steeringDirectionChanged(newValue: float) -> void:
-	uiEventHandler.OnSteeringDirectionChanged(newValue)
-
-func steerOffseted(offset: float) -> void:
-	uiEventHandler.OnSteerOffseted(offset)
 
 func inventoryPressed() -> void:
 	uiEventHandler.OnInventoryPressed()

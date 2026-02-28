@@ -1,11 +1,7 @@
-extends Control
+extends BasePilotScreenInterface
 class_name ElingUI
 
 ##    --- EXPORTS / INSPECTOR SETUP ---
-
-# Ship controller event handler reference, for ship-related events
-@export var shipControllerEventH: ShipControllerEventHandler
-@export var droneDockEventH : DroneDockEventHandler
 @export_group("Files")
 @export_file var directionMaskFiles: Array[String]
 @export_file("*.png") var distanceMasks: Array[String]
@@ -26,7 +22,6 @@ class_name ElingUI
 ##    --- STATE VARIABLES ---
 
 var lights: Array[Light2D] = []         # All Light2D children to be toggled.
-var connectedShip: MapShip = null       # Currently controlled ship
 var foundContact: bool = false          # Is a contact found currently?
 var currentState: ElintState            # Current detection state
 
@@ -44,17 +39,12 @@ enum ElintState {
 ##    --- SCENE LIFECYCLE ---
 
 func _ready() -> void:
+	super()
 	# Gather Light2Ds under this node and hide
 	for node in get_children():
 		if node is Light2D:
 			lights.append(node)
 			node.visible = false
-
-	# Register to controlled ship change
-	updateConnectedShip(shipControllerEventH.CurrentControlled)
-	shipControllerEventH.OnControlledShipChanged.connect(updateConnectedShip)
-	droneDockEventH.DroneDocked.connect(droneAdded)
-	droneDockEventH.DroneUndocked.connect(droneRemoved)
 
 ##    --- PUBLIC / SIGNAL API ---
 
@@ -64,36 +54,35 @@ func toggleElint(isOn: bool) -> void:
 	elintText.texture = ResourceLoader.load(texPath)
 	set_physics_process(isOn)
 
-func updateConnectedShip(ship: MapShip) -> void:
-	connectedShip = ship
+func _onControlledShipUpdated(ship: MapShip) -> void:
+	controller = ship
 	var hasElint = fleetHasElint()
 	toggleElint(hasElint)
 	if not hasElint:
 		for l in lights:
 			l.visible = false
 
-func droneRemoved(_dr : Drone, target : MapShip) -> void:
-	if (target == connectedShip):
+func _onDroneAdded(_dr : Drone, target : MapShip) -> void:
+	if (target == controller):
 		var hasElint = fleetHasElint()
 		toggleElint(hasElint)
 		if not hasElint:
 			for l in lights:
 				l.visible = false
 
-func droneAdded(_dr : Drone, target : MapShip) -> void:
-	if (target == connectedShip):
+func _onDroneRemoved(_dr : Drone, target : MapShip) -> void:
+	if (target == controller):
 		var hasElint = fleetHasElint()
 		toggleElint(hasElint)
 		if not hasElint:
 			for l in lights:
 				l.visible = false
-
 
 func fleetHasElint() -> bool:
 	# Check if the currently controlled ship or its docked drones have ELINT
-	if connectedShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT) > 0:
+	if controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT) > 0:
 		return true
-	for c: Captain in connectedShip.GetDroneDock().GetCaptains():
+	for c: Captain in controller.GetDroneDock().GetCaptains():
 		if c.GetStatFinalValue(STAT_CONST.STATS.ELINT) > 0:
 			return true
 	return false
@@ -106,7 +95,7 @@ func _physics_process(delta: float) -> void:
 		return
 	pollDelay = 0.4
 
-	var elintLevel = connectedShip.GetClosestElintLevel()
+	var elintLevel = controller.GetClosestElintLevel()
 
 	if elintLevel < 0:
 		currentState = ElintState.NONE
@@ -119,7 +108,7 @@ func _physics_process(delta: float) -> void:
 		RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.ELINT_DETECTED)
 
 	foundContact = true
-	setDirection(rad_to_deg(connectedShip.global_position.angle_to_point(connectedShip.GetClosestElint())) + 180)
+	setDirection(rad_to_deg(controller.global_position.angle_to_point(controller.GetClosestElint())) + 180)
 	setElintLevel(elintLevel)
 
 	for l in lights:
@@ -177,6 +166,9 @@ func setElintLevel(elintLevel: int) -> void:
 				dangerCloseLight.visible = false
 				beepSound.stream = beep
 				beepSound.pitch_scale = 1
+
+func _getInterfaceName() -> String:
+	return "ELint"
 
 ##    --- UNUSED / DEVELOPMENT ---
 

@@ -1,11 +1,9 @@
-extends Control
+extends BasePilotScreenInterface
 class_name MissileTab
 
 # --- EXPORTED MEMBER VARIABLES ---
 
 @export var missileDockEventH: MissileDockEventHandler
-@export var shipControllerEventH: ShipControllerEventHandler
-@export var dockEventH: DroneDockEventHandler
 @export var uiEventH: UIEventHandler
 
 @export_group("Nodes")
@@ -28,7 +26,6 @@ signal MissileLaunched
 
 var currentlySelectedMissile: MissileItem = null
 var selectedIndex: int = 0
-var connectedShip: PlayerDrivenShip = null
 var availableMissiles: Array[MissileItem] = []
 var showing: bool = false
 var armed: bool = false
@@ -60,9 +57,9 @@ func doMissileLaunchTutorial() -> void:
 # --- MISSILE/FLEET LOGIC ---
 
 func fleetHasMissileLauncher() -> bool:
-	if connectedShip.Cpt.GetCharacterInventory().HasWeapon(CardStats.WeaponType.ML):
+	if controller.Cpt.GetCharacterInventory().HasWeapon(CardStats.WeaponType.ML):
 		return true
-	for cap: Captain in connectedShip.GetDroneDock().GetCaptains():
+	for cap: Captain in controller.GetDroneDock().GetCaptains():
 		if cap.GetCharacterInventory().HasWeapon(CardStats.WeaponType.ML):
 			return true
 	return false
@@ -70,28 +67,22 @@ func fleetHasMissileLauncher() -> bool:
 # --- INITIALIZATION & CONNECTION ---
 
 func _ready() -> void:
-	initialise()
+	super()
 	MissileLaunched.connect(uiEventH.OnMissilgeLaunched)
-	dockEventH.DroneDocked.connect(droneAdded)
-	dockEventH.DroneUndocked.connect(droneRemoved)
-
-func initialise() -> void:
-	updateConnectedShip(shipControllerEventH.CurrentControlled)
-	shipControllerEventH.OnControlledShipChanged.connect(updateConnectedShip)
 	missileDockEventH.connect("MissileAdded", missileAdded)
 	missileDockEventH.connect("MissileRemoved", missileRemoved)
 
 # --- SHIP/EVENT MANAGEMENT ---
 
-func updateConnectedShip(ship: PlayerDrivenShip) -> void:
-	if ship == connectedShip:
+func _onControlledShipUpdated(ship: PlayerDrivenShip) -> void:
+	if ship == controller:
 		return
-	if connectedShip != null:
-		connectedShip.disconnect("OnShipDestroyed", onShipDest)
+	if controller != null:
+		controller.disconnect("OnShipDestroyed", onShipDest)
 	ship.connect("OnShipDestroyed", onShipDest)
 	if armed:
 		dissarmMiss()
-	connectedShip = ship
+	controller = ship
 	updateAvailableMissiles()
 	call_deferred("updateMissileSelect")
 	var hasLauncher = fleetHasMissileLauncher()
@@ -103,8 +94,8 @@ func updateConnectedShip(ship: PlayerDrivenShip) -> void:
 			ActionTracker.OnActionCompleted(ActionTracker.Action.MISSILE_TOGGLE)
 			doIntroductionTutorial()
 
-func droneAdded(drone: Drone, target: MapShip) -> void:
-	if target == connectedShip:
+func _onDroneAdded(drone: Drone, target: MapShip) -> void:
+	if target == controller:
 		if armed:
 			dissarmMiss()
 		updateAvailableMissiles()
@@ -113,8 +104,8 @@ func droneAdded(drone: Drone, target: MapShip) -> void:
 		if not hasLauncher:
 			_on_turn_off_toggled(false)
 
-func droneRemoved(drone: Drone, target: MapShip) -> void:
-	if target == connectedShip:
+func _onDroneRemoved(drone: Drone, target: MapShip) -> void:
+	if target == controller:
 		if armed:
 			dissarmMiss()
 		updateAvailableMissiles()
@@ -128,15 +119,15 @@ func droneRemoved(drone: Drone, target: MapShip) -> void:
 func updateAvailableMissiles() -> void:
 	var sizeBefore = availableMissiles.size()
 	var missiles: Array[MissileItem] = []
-	missiles.append_array(connectedShip.Cpt.GetCharacterInventory().GetMissile())
-	for ship: PlayerDrivenShip in connectedShip.GetDroneDock().GetDockedShips():
+	missiles.append_array(controller.Cpt.GetCharacterInventory().GetMissile())
+	for ship: PlayerDrivenShip in controller.GetDroneDock().GetDockedShips():
 		missiles.append_array(ship.Cpt.GetCharacterInventory().GetMissile())
 	availableMissiles = missiles
 	if sizeBefore != availableMissiles.size():
 		updateMissileSelect()
 
 func missileAdded(_missile: MissileItem, target: Captain) -> void:
-	if target == connectedShip.Cpt:
+	if target == controller.Cpt:
 		updateAvailableMissiles()
 
 func missileRemoved(_missile: MissileItem, _target: Captain) -> void:
@@ -161,7 +152,7 @@ func onLaunchPressed() -> void:
 	var missilesToLaunch: Array[MissileItem]
 	for _i in amount:
 		missilesToLaunch.append(currentlySelectedMissile)
-	missileDockEventH.OnMissileLaunched(missilesToLaunch, connectedShip.Cpt, connectedShip.Cpt)
+	missileDockEventH.OnMissileLaunched(missilesToLaunch, controller.Cpt, controller.Cpt)
 	AchievementManager.GetInstance().UlockAchievement("MC_MISSILEFIRE")
 	MissileLaunched.emit()
 	dissarmMiss()
@@ -178,7 +169,7 @@ func onArmPressed() -> void:
 		PopUpManager.GetInstance().DoFadeNotif("Amount Picked")
 		missileSelectLight.Toggle(false, false)
 		angleSelectLight.Toggle(true, true)
-		missileDockEventH.MissileArmed(currentlySelectedMissile, connectedShip.Cpt)
+		missileDockEventH.MissileArmed(currentlySelectedMissile, controller.Cpt)
 		if not ActionTracker.IsActionCompleted(ActionTracker.Action.MISSILE_LAUNCH):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.MISSILE_LAUNCH)
 			doMissileLaunchTutorial()
@@ -205,13 +196,13 @@ func dissarmMiss() -> void:
 	amountArmed = false
 	missileSelectLight.Toggle(true, true)
 	angleSelectLight.Toggle(false, false)
-	missileDockEventH.MissileDissarmed(connectedShip.Cpt)
+	missileDockEventH.MissileDissarmed(controller.Cpt)
 
 func updateSteer(relativeRot: float) -> void:
 	if not showing or not armed or not amountArmed:
 		return
 	steeringDir = relativeRot
-	missileDockEventH.MissileDirectionChanged(steeringDir / 50, connectedShip.Cpt)
+	missileDockEventH.MissileDirectionChanged(steeringDir / 50, controller.Cpt)
 
 func updateSelected(dir: bool) -> void:
 	if not showing:
@@ -282,3 +273,6 @@ func _on_turn_off_toggled(toggled_on: bool) -> void:
 		selectedMissileText.visible = true
 		missileSelectLight.Toggle(true, true)
 		turnOffButton.set_pressed_no_signal(true)
+
+func _getInterfaceName() -> String:
+	return "Missile Tab"

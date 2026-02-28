@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://cvhgybnbwc0e4"]
 
-[ext_resource type="Script" uid="uid://bxtv6l5octf8v" path="res://Scripts/UI/Aerosonar.gd" id="1_5vs2h"]
-[ext_resource type="Script" uid="uid://cvjx6yhssr224" path="res://Scripts/UI/Aerosonal_Line.gd" id="1_u0q8c"]
+[ext_resource type="Script" uid="uid://bxtv6l5octf8v" path="res://Scenes/ScreenUI/Aerophone/Aerosonar.gd" id="1_5vs2h"]
+[ext_resource type="Script" uid="uid://cvjx6yhssr224" path="res://Scenes/ScreenUI/Aerophone/Aerosonal_Line.gd" id="1_u0q8c"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="2_6e8xg"]
-[ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/AnimatedDroneGas.tscn" id="2_6guy7"]
+[ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/Dial/Dial.tscn" id="2_6guy7"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="3_fw736"]
 [ext_resource type="Texture2D" uid="uid://byfcxaxg7epni" path="res://Assets/UIPiecies/Screen/SidePanels/Sonar.png" id="3_mi4l8"]
 [ext_resource type="StyleBox" uid="uid://bc1y4hhkl7ce6" path="res://Theme/Buttons/NobButton.tres" id="6_4wgxe"]
-[ext_resource type="PackedScene" uid="uid://b7cgarcbvixw6" path="res://Scenes/ScreenUI/speaker.tscn" id="6_jiwdy"]
+[ext_resource type="PackedScene" uid="uid://b7cgarcbvixw6" path="res://Scenes/ScreenUI/Aerophone/speaker.tscn" id="6_jiwdy"]
 [ext_resource type="StyleBox" uid="uid://21mi6l2i2tkk" path="res://Theme/Buttons/NobButton_Pressed.tres" id="7_mi4l8"]
 [ext_resource type="StyleBox" uid="uid://cicae3yqgxkcm" path="res://Theme/MetalPanel.tres" id="9_fw736"]
 
@@ -17,21 +17,20 @@ light_mode = 1
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4wgxe"]
 light_mode = 1
 
-[node name="Control" type="Control" unique_id=1555836270 node_paths=PackedStringArray("LineContainer", "SonalVisual", "GainLabel", "Spkr", "Cap", "B")]
+[node name="Aerophone" type="Control" unique_id=1555836270 node_paths=PackedStringArray("lineContainer", "sonarVisual", "gainLabel", "radioSpeaker", "cap", "toggleButton")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_5vs2h")
-ControllerEventH = ExtResource("2_6e8xg")
-DroneDockEventH = ExtResource("3_fw736")
-OffsetAmmount = 10.0
-LineContainer = NodePath("TextureRect2/Control")
-SonalVisual = NodePath("TextureRect2")
-GainLabel = NodePath("TextureRect2/Label")
-Spkr = NodePath("Speaker")
-Cap = NodePath("PanelContainer")
-B = NodePath("TextureRect2/Close")
+lineContainer = NodePath("TextureRect2/AeroSonarLine")
+sonarVisual = NodePath("TextureRect2")
+gainLabel = NodePath("TextureRect2/Label")
+radioSpeaker = NodePath("Speaker")
+cap = NodePath("PanelContainer")
+toggleButton = NodePath("TextureRect2/Close")
+controllerEventHandler = ExtResource("2_6e8xg")
+droneDockEventHandler = ExtResource("3_fw736")
 
 [node name="TextureRect2" type="TextureRect" parent="." unique_id=788212122]
 layout_mode = 1
@@ -43,7 +42,7 @@ mouse_filter = 0
 texture = ExtResource("3_mi4l8")
 expand_mode = 1
 
-[node name="Control" type="Control" parent="TextureRect2" unique_id=1384447880]
+[node name="AeroSonarLine" type="Control" parent="TextureRect2" unique_id=1384447880]
 material = SubResource("CanvasItemMaterial_mi4l8")
 anchors_preset = 0
 offset_left = 133.0
@@ -94,6 +93,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PanelContainer" type="Panel" parent="." unique_id=1893570508]
+visible = false
 layout_mode = 0
 offset_left = -13.0
 offset_top = 21.0
@@ -110,7 +110,7 @@ offset_bottom = -38.0
 frequency = 15.0
 max_rotation = 0.02
 
-[connection signal="RangeChanged" from="TextureRect2/YGas" to="." method="SonarRotationChanged"]
+[connection signal="RangeChanged" from="TextureRect2/YGas" to="." method="sonarRotationChanged"]
 [connection signal="RangeChanged" from="TextureRect2/GeinControl" to="." method="_on_gein_control_range_changed"]
-[connection signal="toggled" from="TextureRect2/Close" to="." method="_on_close_toggled"]
-[connection signal="Clicked" from="Speaker" to="." method="OnRadioClicked"]
+[connection signal="toggled" from="TextureRect2/Close" to="." method="_onCloseToggled"]
+[connection signal="Clicked" from="Speaker" to="." method="_onRadioClicked"]

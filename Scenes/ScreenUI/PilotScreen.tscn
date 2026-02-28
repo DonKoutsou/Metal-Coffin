@@ -3,19 +3,19 @@
 [ext_resource type="Script" uid="uid://bwb4h83od4vgp" path="res://Scenes/ScreenUI/Scripts/PilotScreen.gd" id="1_fq67n"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_ecvfe"]
 [ext_resource type="Texture2D" uid="uid://s464nk64miu8" path="res://Assets/UIPiecies/Screen/ScreenFrames/Screen2_FullQuality.png" id="2_eeg0m"]
-[ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/ScreenUI/thrust_slider.tscn" id="3_ecvfe"]
+[ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/ScreenUI/ThrustSlider/thrust_slider.tscn" id="3_ecvfe"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="3_w258d"]
 [ext_resource type="Texture2D" uid="uid://bvk1d6i2dr1sf" path="res://Assets/UIPiecies/Screen/Buttons/Switch2.png" id="5_hc833"]
 [ext_resource type="PackedScene" uid="uid://cy532oaym6ul7" path="res://Scenes/ScreenUI/Pilot_Screen_Settings.tscn" id="5_ojc6g"]
 [ext_resource type="StyleBox" uid="uid://bc1y4hhkl7ce6" path="res://Theme/Buttons/NobButton.tres" id="6_bpouu"]
 [ext_resource type="Texture2D" uid="uid://bi5udi6g78ajr" path="res://Assets/UIPiecies/Screen/Buttons/Switch.png" id="6_gmup4"]
 [ext_resource type="PackedScene" uid="uid://k7pqywm80h3m" path="res://Scenes/ScreenUI/Elevation_slider.tscn" id="6_jqinv"]
-[ext_resource type="PackedScene" uid="uid://cwnxxystgxrjm" path="res://Scenes/ScreenUI/MissileTab.tscn" id="7_ojc6g"]
+[ext_resource type="PackedScene" uid="uid://cwnxxystgxrjm" path="res://Scenes/ScreenUI/MissileTab/MissileTab.tscn" id="7_ojc6g"]
 [ext_resource type="StyleBox" uid="uid://21mi6l2i2tkk" path="res://Theme/Buttons/NobButton_Pressed.tres" id="7_yjfdw"]
 [ext_resource type="PackedScene" uid="uid://dwhre3xvmvjwf" path="res://Scenes/ScreenUI/Fan.tscn" id="8_bpouu"]
 [ext_resource type="PackedScene" uid="uid://cugmsxkuwcfc4" path="res://Scenes/ScreenUI/map_marker_controls.tscn" id="9_yjfdw"]
-[ext_resource type="PackedScene" uid="uid://hiw68h8srifm" path="res://Scenes/ScreenUI/SteeringWheelUI.tscn" id="10_w258d"]
-[ext_resource type="PackedScene" uid="uid://cvhgybnbwc0e4" path="res://Scenes/ScreenUI/Aerophone.tscn" id="11_jqinv"]
+[ext_resource type="PackedScene" uid="uid://hiw68h8srifm" path="res://Scenes/ScreenUI/Steer/SteeringWheelUI.tscn" id="10_w258d"]
+[ext_resource type="PackedScene" uid="uid://cvhgybnbwc0e4" path="res://Scenes/ScreenUI/Aerophone/Aerophone.tscn" id="11_jqinv"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="14_ce8jv"]
 [ext_resource type="StyleBox" uid="uid://cpq6h2wwtgr07" path="res://Theme/Buttons/ButtonBlue.tres" id="18_eeg0m"]
 [ext_resource type="StyleBox" uid="uid://chq4sdt1mihdh" path="res://Theme/Buttons/ButtonBlue_Pressed.tres" id="19_ecvfe"]
@@ -27,9 +27,9 @@
 [ext_resource type="StyleBox" uid="uid://ttlagq0nmcyb" path="res://Theme/Buttons/ButtonYellowStripe_Pressed.tres" id="23_eeg0m"]
 [ext_resource type="FontFile" uid="uid://cg8x1e6y1264l" path="res://Fonts/Bank Gothic Light Regular.otf" id="23_j5ioc"]
 [ext_resource type="PackedScene" uid="uid://djgy3lp61vapo" path="res://Resources/Funds/FundsDisplay.tscn" id="24_hpjxi"]
-[ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/AnimatedDroneGas.tscn" id="26_ecvfe"]
-[ext_resource type="PackedScene" uid="uid://c2tp3xgyap8ar" path="res://Scenes/ScreenUI/ELint.tscn" id="27_uojtp"]
-[ext_resource type="PackedScene" uid="uid://dmmhk1exrryca" path="res://Scenes/ScreenUI/ControlledShipSelection.tscn" id="28_hc833"]
+[ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/Dial/Dial.tscn" id="26_ecvfe"]
+[ext_resource type="PackedScene" uid="uid://c2tp3xgyap8ar" path="res://Scenes/ScreenUI/Elint/ELint.tscn" id="27_uojtp"]
+[ext_resource type="PackedScene" uid="uid://dmmhk1exrryca" path="res://Scenes/ScreenUI/ControlledShipUI/ControlledShipSelection.tscn" id="28_hc833"]
 
 [node name="PilotScreen" type="Control" unique_id=1109053421 node_paths=PackedStringArray("elint", "mapMarkerControls", "thrust", "elevationThrust", "steer", "pilotScreenSet", "speedSimulationButton", "pauseSimulationButton", "regroupButton", "shipDockButton", "radarButton", "zoomDial", "yDial", "xDial", "missileUI")]
 layout_mode = 3
@@ -133,7 +133,6 @@ offset_right = 252.00002
 offset_bottom = 248.0
 grow_horizontal = 1
 grow_vertical = 0
-PositionOnStart = false
 
 [node name="Sonar" parent="." unique_id=1555836270 instance=ExtResource("11_jqinv")]
 layout_mode = 1
@@ -442,8 +441,6 @@ scale = Vector2(0.8, 0.8)
 [connection signal="SteerToggled" from="Pilot_Screen_Settings" to="." method="_onSteerButtonToggled"]
 [connection signal="TopologyTogled" from="Pilot_Screen_Settings" to="." method="_on_topo_button_toggled"]
 [connection signal="ZoomToggled" from="Pilot_Screen_Settings" to="." method="_on_zoom_level_button_toggled"]
-[connection signal="SteeringDitChanged" from="SteeringWheel" to="." method="steeringDirectionChanged"]
-[connection signal="SteeringOffseted" from="SteeringWheel" to="." method="steerOffseted"]
 [connection signal="toggled" from="SpeedSimulation" to="." method="_on_speed_simulation_toggled"]
 [connection signal="toggled" from="SimulationButton" to="." method="simPauseToggled"]
 [connection signal="pressed" from="InventoryButton" to="." method="inventoryPressed"]
