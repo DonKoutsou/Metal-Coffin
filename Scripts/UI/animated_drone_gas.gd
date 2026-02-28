@@ -1,103 +1,106 @@
 extends AnimatedSprite2D
-
 class_name Dial
 
-@export var Sound : AudioStreamPlayer2D
+@export var Sound: AudioStreamPlayer2D
 
-signal RangeChanged(NewVal : float)
-signal RangeSnapedChaned(Dir : bool)
+signal RangeChanged(newValue: float)
+signal RangeSnappedChanged(direction: bool)
 
-var framecount : int
-var accumulatedrel : float
-var CustomAccumulated : float
+var frameCount: int = 0
 
-var DistanceTraveled = 0
+var accumulatedRel: float = 0
+var customAccumulated: float = 0
+
+var distanceTraveled: float = 0
+var customDistanceTraveled: float = 0
 
 func _ready() -> void:
-	framecount = sprite_frames.get_frame_count("default")
+	frameCount = sprite_frames.get_frame_count("default")
 	set_physics_process(false)
 	Sound.pitch_scale = randf_range(0.8, 1.2)
 
 func get_global_rect() -> Rect2:
-	var r : Rect2 = $Control.get_global_rect()
-	if (rotation != 0):
-		var size = r.size
-		r.size.x = size.y
-		r.size.y = size.x
-	return r
+	var rect: Rect2 = $Control.get_global_rect()
+	if rotation != 0:
+		var size = rect.size
+		rect.size.x = size.y
+		rect.size.y = size.x
+	return rect
 
 func _physics_process(_delta: float) -> void:
-	if (accumulatedrel == 0 and CustomAccumulated == 0):
-		set_physics_process(false)
-	
-	DistanceTraveled += abs(accumulatedrel)
-	accumulatedrel = lerp(accumulatedrel, 0.0, 0.2)
-	#SteeringDitChanged.emit($TextureRect.rotation)
-	if (abs(accumulatedrel) < 0.0001):
-		#set_physics_process(false)
-		accumulatedrel = 0
-	else:
-		RangeChanged.emit(accumulatedrel * 2)
-		
-		if (DistanceTraveled > 1):
-			DistanceTraveled = 0
-			
-			Sound.play()
-			Input.vibrate_handheld(10)
-			if (accumulatedrel > 0):
-				RangeSnapedChaned.emit(true)
-				if (frame + 1 == framecount):
-					frame = 0
-				else:
-					frame += 1
-			else: if (accumulatedrel < 0):
-				RangeSnapedChaned.emit(false)
-				if (frame == 0):
-					frame = framecount - 1
-				else:
-					frame -= 1
-					
-	DistanceTraveled += abs(CustomAccumulated)
-	CustomAccumulated = lerp(CustomAccumulated, 0.0, 0.2)
-	#SteeringDitChanged.emit($TextureRect.rotation)
-	if (abs(CustomAccumulated) < 0.0001):
-		#set_physics_process(false)
-		CustomAccumulated = 0
-	else:
-		if (DistanceTraveled > 1):
-			DistanceTraveled = 0
-			
-			Sound.play()
-			Input.vibrate_handheld(10)
-			if (CustomAccumulated > 0):
-				if (frame + 1 == framecount):
-					frame = 0
-				else:
-					frame += 1
-			else: if (CustomAccumulated < 0):
-				if (frame == 0):
-					frame = framecount - 1
-				else:
-					frame -= 1
+	# Always smooth down both values
+	var wasActive := false
 
-func AddCustomMovement(value : float) -> void:
-	CustomAccumulated += value
+	if abs(accumulatedRel) > 0.0001:
+		_processAccumulation()
+		wasActive = true
+	else:
+		accumulatedRel = 0
+
+	if abs(customAccumulated) > 0.0001:
+		_processCustomAccumulation()
+		wasActive = true
+	else:
+		customAccumulated = 0
+
+	# Only stop processing when both are at rest
+	if not wasActive:
+		set_physics_process(false)
+
+func _processAccumulation() -> void:
+	distanceTraveled += abs(accumulatedRel)
+	accumulatedRel = lerp(accumulatedRel, 0.0, 0.2)
+	RangeChanged.emit(accumulatedRel * 2)
+
+	if distanceTraveled > 1:
+		distanceTraveled = 0
+		Sound.play()
+		Input.vibrate_handheld(10)
+		var direction = accumulatedRel > 0
+		RangeSnappedChanged.emit(direction)
+		if direction:
+			frame = (frame + 1) % frameCount
+		else:
+			frame = (frame - 1 + frameCount) % frameCount
+
+func _processCustomAccumulation() -> void:
+	customDistanceTraveled += abs(customAccumulated)
+	customAccumulated = lerp(customAccumulated, 0.0, 0.2)
+
+	if customDistanceTraveled > 1:
+		customDistanceTraveled = 0
+		Sound.play()
+		Input.vibrate_handheld(10)
+		var direction = customAccumulated > 0
+		# For custom movement, you may not want to emit RangeSnappedChanged, 
+		# but add it if needed
+		if direction:
+			frame = (frame + 1) % frameCount
+		else:
+			frame = (frame - 1 + frameCount) % frameCount
+
+func addCustomMovement(value: float) -> void:
+	customAccumulated += value
 	set_physics_process(true)
 
-func _on_control_gui_input(event: InputEvent) -> void:
-	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
-		var rel = clamp(event.relative / 100, Vector2(-0.3, -0.3), Vector2(0.3, 0.3))
-		#var rel = event.relative
-		accumulatedrel += rel.x
+func _on_Control_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion and Input.is_action_pressed("Click"):
+		_handleMouseMotion(event)
+	elif event is InputEventScreenDrag:
+		_handleScreenDrag(event)
+	elif event.is_action_pressed("ZoomOut"):
+		accumulatedRel += 0.2
 		set_physics_process(true)
-	if (event is InputEventScreenDrag):
-		var rel = clamp(event.relative / 100, Vector2(-0.3, -0.3), Vector2(0.3, 0.3))
-		accumulatedrel += rel.x
+	elif event.is_action_pressed("ZoomIn"):
+		accumulatedRel -= 0.2
 		set_physics_process(true)
-	if (event.is_action_pressed("ZoomOut")):
-		accumulatedrel += 0.2
-		set_physics_process(true)
-	if (event.is_action_pressed("ZoomIn")):
-		accumulatedrel -= 0.2
-		set_physics_process(true)
-		
+
+func _handleMouseMotion(event: InputEventMouseMotion) -> void:
+	var rel = clamp(event.relative / 100, Vector2(-0.3, -0.3), Vector2(0.3, 0.3))
+	accumulatedRel += rel.x
+	set_physics_process(true)
+
+func _handleScreenDrag(event: InputEventScreenDrag) -> void:
+	var rel = clamp(event.relative / 100, Vector2(-0.3, -0.3), Vector2(0.3, 0.3))
+	accumulatedRel += rel.x
+	set_physics_process(true)

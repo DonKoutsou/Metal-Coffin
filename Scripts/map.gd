@@ -86,15 +86,15 @@ func GetUIElement(Element : UI_ELEMENT) -> Node:
 		UI_ELEMENT.THRUST:
 			return _ScreenUI.PilotScreen.Thrust
 		UI_ELEMENT.MISSILE_TOGGLE:
-			return _ScreenUI.PilotScreen.MisisleUI.TurnOffButton
+			return _ScreenUI.PilotScreen.MisisleUI.turnOffButton
 		UI_ELEMENT.MISSILE_ARM:
-			return _ScreenUI.PilotScreen.MisisleUI.ArmButton
+			return _ScreenUI.PilotScreen.MisisleUI.armButton
 		UI_ELEMENT.MISSILE_DISSARM:
-			return _ScreenUI.PilotScreen.MisisleUI.DissarmButton
+			return _ScreenUI.PilotScreen.MisisleUI.dissarmButton
 		UI_ELEMENT.MISSILE_LAUNCH:
-			return _ScreenUI.PilotScreen.MisisleUI.LaunchButton
+			return _ScreenUI.PilotScreen.MisisleUI.launchButton
 		UI_ELEMENT.MISSILE_DIAL:
-			return _ScreenUI.PilotScreen.MisisleUI.missile_dial
+			return _ScreenUI.PilotScreen.MisisleUI.missileDial
 	return null
 
 func UIElementExists(Element : UI_ELEMENT) -> bool:
@@ -114,15 +114,15 @@ func UIElementExists(Element : UI_ELEMENT) -> bool:
 		UI_ELEMENT.THRUST:
 			return _ScreenUI.PilotScreen != null
 		UI_ELEMENT.MISSILE_TOGGLE:
-			return _ScreenUI.PilotScreen.MisisleUI.TurnOffButton != null
+			return _ScreenUI.PilotScreen.MisisleUI.turnOffButton != null
 		UI_ELEMENT.MISSILE_ARM:
-			return _ScreenUI.PilotScreen.MisisleUI.ArmButton != null
+			return _ScreenUI.PilotScreen.MisisleUI.armButton != null
 		UI_ELEMENT.MISSILE_DISSARM:
-			return _ScreenUI.PilotScreen.MisisleUI.DissarmButton != null
+			return _ScreenUI.PilotScreen.MisisleUI.dissarmButton != null
 		UI_ELEMENT.MISSILE_LAUNCH:
-			return _ScreenUI.PilotScreen.MisisleUI.LaunchButton != null
+			return _ScreenUI.PilotScreen.MisisleUI.launchButton != null
 		UI_ELEMENT.MISSILE_DIAL:
-			return _ScreenUI.PilotScreen.MisisleUI.missile_dial != null
+			return _ScreenUI.PilotScreen.MisisleUI.missileDial != null
 	return false
 
 static var Instance : Map

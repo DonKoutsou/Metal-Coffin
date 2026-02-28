@@ -1,333 +1,284 @@
 extends Control
 class_name MissileTab
 
+# --- EXPORTED MEMBER VARIABLES ---
 
-@export var MissileDockEventH : MissileDockEventHandler
-@export var ShipControllerEventH : ShipControllerEventHandler
-@export var DockEventH : DroneDockEventHandler
-@export var UIEventH : UIEventHandler
+@export var missileDockEventH: MissileDockEventHandler
+@export var shipControllerEventH: ShipControllerEventHandler
+@export var dockEventH: DroneDockEventHandler
+@export var uiEventH: UIEventHandler
 
 @export_group("Nodes")
-@export var MissileSelectLight : Light
-@export var AngleSelectLight : Light
-@export var RangeText : Label
-@export var SelectedMissileText : Label
-@export var TurnOffButton : Button
-@export var ArmButton : Button
-@export var DissarmButton : Button
-@export var LaunchButton : Button
-@export var Cap : Panel
-@export var missile_dial : Dial
+@export var missileSelectLight: Light
+@export var angleSelectLight: Light
+@export var rangeText: Label
+@export var selectedMissileText: Label
+@export var turnOffButton: Button
+@export var armButton: Button
+@export var dissarmButton: Button
+@export var launchButton: Button
+@export var cap: Panel
+@export var missileDial: Dial
+
+# --- SIGNALS ---
 
 signal MissileLaunched
 
-var CurrentlySelectedMissile
+# --- INTERNAL STATE ---
 
-var SelectedIndex : int
+var currentlySelectedMissile: MissileItem = null
+var selectedIndex: int = 0
+var connectedShip: PlayerDrivenShip = null
+var availableMissiles: Array[MissileItem] = []
+var showing: bool = false
+var armed: bool = false
+var amountArmed: bool = false
+var amount: int = 0
+var steeringDir: float = 0.0
 
-var ConnectedShip : PlayerDrivenShip
+# --- TUTORIALS ---
 
-#var Missiles : Dictionary
+func doIntroductionTutorial() -> void:
+	ActionTracker.GetInstance().QueueTutorial("Missile Launcher", 
+		"To turn on the missile launcher use this knob", [Map.UI_ELEMENT.MISSILE_TOGGLE])
 
-var AvailableMissiles : Array[MissileItem]
-
-var Showing = false
-var Armed = false
-var AmmountArmed = false
-var Ammount : int = 0
-
-func DoIntroductionTutorial() -> void:
-	ActionTracker.GetInstance().QueueTutorial("Missile Launcher", "To turn on the missile launcher use this nob", [Map.UI_ELEMENT.MISSILE_TOGGLE])
-
-func DoMissileArmTutorial() -> void:
-	ActionTracker.GetInstance().QueueTutorial("Missile Arming", "Turn the dial to pass over the missiles the current fleet has on them, after selecting the type of the missile press the arm button to start the launching sequence", [Map.UI_ELEMENT.MISSILE_ARM, Map.UI_ELEMENT.MISSILE_DIAL])
+func doMissileArmTutorial() -> void:
+	ActionTracker.GetInstance().QueueTutorial("Missile Arming", 
+		"Turn the dial to select missile types in the current fleet, then arm to start launching.", 
+		[Map.UI_ELEMENT.MISSILE_ARM, Map.UI_ELEMENT.MISSILE_DIAL])
 	
-func DoMissileAmmountTutorial() -> void:
-	ActionTracker.GetInstance().QueueTutorial("Missile Ammout","Turn the dial to pick the ammount of missiles you want to shoot and press the arm button again to be prompted to pick a direction", [Map.UI_ELEMENT.MISSILE_ARM, Map.UI_ELEMENT.MISSILE_DIAL])
+func doMissileAmountTutorial() -> void:
+	ActionTracker.GetInstance().QueueTutorial("Missile Amount",
+		"Turn the dial to pick the amount of missiles you want to shoot and press the arm button again to pick a direction",
+		[Map.UI_ELEMENT.MISSILE_ARM, Map.UI_ELEMENT.MISSILE_DIAL])
 
-func DoMissileLaucnhTutorial() -> void:
-	ActionTracker.GetInstance().QueueTutorial("Missile Launch","Finally turn the dial to aim the missile, when ready press the Launch button to send it away.", [Map.UI_ELEMENT.MISSILE_LAUNCH, Map.UI_ELEMENT.MISSILE_DIAL])
+func doMissileLaunchTutorial() -> void:
+	ActionTracker.GetInstance().QueueTutorial("Missile Launch",
+		"Finally turn the dial to aim, then press Launch to send it away.",
+		[Map.UI_ELEMENT.MISSILE_LAUNCH, Map.UI_ELEMENT.MISSILE_DIAL])
 
-func FleetHasMissileLauncher() -> bool:
-	if (ConnectedShip.Cpt.GetCharacterInventory().HasWeapon(CardStats.WeaponType.ML)):
+# --- MISSILE/FLEET LOGIC ---
+
+func fleetHasMissileLauncher() -> bool:
+	if connectedShip.Cpt.GetCharacterInventory().HasWeapon(CardStats.WeaponType.ML):
 		return true
-	for g : Captain in ConnectedShip.GetDroneDock().GetCaptains():
-		if (g.GetCharacterInventory().HasWeapon(CardStats.WeaponType.ML)):
+	for cap: Captain in connectedShip.GetDroneDock().GetCaptains():
+		if cap.GetCharacterInventory().HasWeapon(CardStats.WeaponType.ML):
 			return true
 	return false
 
+# --- INITIALIZATION & CONNECTION ---
+
 func _ready() -> void:
-	Initialise()
-	MissileLaunched.connect(UIEventH.OnMissilgeLaunched)
-	DockEventH.DroneDocked.connect(DroneAdded)
-	DockEventH.DroneUndocked.connect(DroneRemoved)
-	#visible = false
+	initialise()
+	MissileLaunched.connect(uiEventH.OnMissilgeLaunched)
+	dockEventH.DroneDocked.connect(droneAdded)
+	dockEventH.DroneUndocked.connect(droneRemoved)
 
-func DroneRemoved(Dr : Drone, Target : MapShip) -> void:
-	if (Target == ConnectedShip):
-		if (Armed):
-			DissarmMiss()
-		UpdateAvailableMissiles()
-		var FleetHasLauncher : bool = FleetHasMissileLauncher()
-		Cap.visible = !FleetHasLauncher
-		if (!FleetHasLauncher):
-			_on_turn_off_toggled(false)
+func initialise() -> void:
+	updateConnectedShip(shipControllerEventH.CurrentControlled)
+	shipControllerEventH.OnControlledShipChanged.connect(updateConnectedShip)
+	missileDockEventH.connect("MissileAdded", missileAdded)
+	missileDockEventH.connect("MissileRemoved", missileRemoved)
 
-func DroneAdded(Dr : Drone, Target : MapShip) -> void:
-	if (Target == ConnectedShip):
-		if (Armed):
-			DissarmMiss()
-		UpdateAvailableMissiles()
-		var FleetHasLauncher : bool = FleetHasMissileLauncher()
-		Cap.visible = !FleetHasLauncher
-		if (!FleetHasLauncher):
-			_on_turn_off_toggled(false)
+# --- SHIP/EVENT MANAGEMENT ---
 
-func UpdateConnectedShip(Ship : PlayerDrivenShip) -> void:
-	if (Ship == ConnectedShip):
+func updateConnectedShip(ship: PlayerDrivenShip) -> void:
+	if ship == connectedShip:
 		return
-	if (ConnectedShip != null):
-		ConnectedShip.disconnect("OnShipDestroyed", OnShipDest)
-	#if (!Missiles.has(Ship)):
-		#var MissileAr : Array[MissileItem] = []
-		#Missiles[Ship] = MissileAr
-	Ship.connect("OnShipDestroyed", OnShipDest)
-	if (Armed):
-		DissarmMiss()
-	ConnectedShip = Ship
-	UpdateAvailableMissiles()
-	call_deferred("UpdateMissileSelect")
-	var FleetHasLauncher : bool = FleetHasMissileLauncher()
-	Cap.visible = !FleetHasLauncher
-	if (!FleetHasLauncher):
+	if connectedShip != null:
+		connectedShip.disconnect("OnShipDestroyed", onShipDest)
+	ship.connect("OnShipDestroyed", onShipDest)
+	if armed:
+		dissarmMiss()
+	connectedShip = ship
+	updateAvailableMissiles()
+	call_deferred("updateMissileSelect")
+	var hasLauncher = fleetHasMissileLauncher()
+	cap.visible = not hasLauncher
+	if not hasLauncher:
 		_on_turn_off_toggled(false)
 	else:
-		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.MISSILE_TOGGLE)):
+		if not ActionTracker.IsActionCompleted(ActionTracker.Action.MISSILE_TOGGLE):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.MISSILE_TOGGLE)
-			DoIntroductionTutorial()
+			doIntroductionTutorial()
 
-func Initialise() -> void:
-	#for g : PlayerDrivenShip in get_tree().get_nodes_in_group("PlayerShips"):
-		#RegisterShip(g)
-	#DroneDockEventH.connect("DroneAdded", RegisterShip)
-	UpdateConnectedShip(ShipControllerEventH.CurrentControlled)
-	ShipControllerEventH.OnControlledShipChanged.connect(UpdateConnectedShip)
-	#MissileUI.UpdateConnectedShip(NewShip)
-	MissileDockEventH.connect("MissileAdded", MissileAdded)
-	MissileDockEventH.connect("MissileRemoved", MissileRemoved)
+func droneAdded(drone: Drone, target: MapShip) -> void:
+	if target == connectedShip:
+		if armed:
+			dissarmMiss()
+		updateAvailableMissiles()
+		var hasLauncher = fleetHasMissileLauncher()
+		cap.visible = not hasLauncher
+		if not hasLauncher:
+			_on_turn_off_toggled(false)
 
-#func FindOwner(Mis : MissileItem) -> Captain:
-	#for g in Missiles.keys():
-		#if (Missiles[g].has(Mis)):
-			#return g.Cpt
-	#return null
+func droneRemoved(drone: Drone, target: MapShip) -> void:
+	if target == connectedShip:
+		if armed:
+			dissarmMiss()
+		updateAvailableMissiles()
+		var hasLauncher = fleetHasMissileLauncher()
+		cap.visible = not hasLauncher
+		if not hasLauncher:
+			_on_turn_off_toggled(false)
 
-#var d = 0.3
-#
-#func _physics_process(delta: float) -> void:
-	#d -= delta
-	#if (d > 0):
-		#return
-	#d = 0.3
-	##if (ConnectedShip != null):
-		##UpdateAvailableMissiles()
-	
-#func RegisterShip(Dr : Drone, _Target : MapShip):
-	#if (!Missiles.has(Dr)):
-		#var MissileAr : Array[MissileItem] = []
-		#Missiles[Dr] = MissileAr
-		#Dr.connect("OnShipDestroyed", OnShipDest)
-#
-#func FindShip(C: Captain ) -> MapShip:
-	#for g in Missiles.keys():
-		#var ship = g as MapShip
-		#if (ship.Cpt == C):
-			#return ship
-	#return null
+# --- MISSILE LIST MANAGEMENT ---
 
-func UpdateAvailableMissiles() -> void:
-	var sizeb = AvailableMissiles.size()
-	var Misses : Array[MissileItem] = []
-	Misses.append_array(ConnectedShip.Cpt.GetCharacterInventory().GetMissile())
-	for g :PlayerDrivenShip in ConnectedShip.GetDroneDock().GetDockedShips():
-		Misses.append_array(g.Cpt.GetCharacterInventory().GetMissile())
-	#for g in ConnectedShip.GetDroneDock().DockedDrones:
-		#Misses.append_array(Missiles[g])
-	AvailableMissiles =  Misses
-	var sizea = AvailableMissiles.size()
-	if (sizeb != sizea):
-		UpdateMissileSelect()
+func updateAvailableMissiles() -> void:
+	var sizeBefore = availableMissiles.size()
+	var missiles: Array[MissileItem] = []
+	missiles.append_array(connectedShip.Cpt.GetCharacterInventory().GetMissile())
+	for ship: PlayerDrivenShip in connectedShip.GetDroneDock().GetDockedShips():
+		missiles.append_array(ship.Cpt.GetCharacterInventory().GetMissile())
+	availableMissiles = missiles
+	if sizeBefore != availableMissiles.size():
+		updateMissileSelect()
 
-func MissileAdded(_MIs : MissileItem, Target : Captain) -> void:
-	if (Target == ConnectedShip.Cpt):
-		UpdateAvailableMissiles()
-	#var Ship = FindShip(Target)
-	#if (MIs.Type == 1):
-		#return
-	#if (Ship == null):
-		#call_deferred("MissileAdded",MIs, Target)
-		#return
-	##Missiles[Ship].append(MIs)
-	#if (CurrentlySelectedMissile == null):
-		#UpdateMissileSelect()
+func missileAdded(_missile: MissileItem, target: Captain) -> void:
+	if target == connectedShip.Cpt:
+		updateAvailableMissiles()
 
-func MissileRemoved(_MIs : MissileItem, Target : Captain) -> void:
-	#if (Target == ConnectedShip.Cpt):
-	UpdateAvailableMissiles()
-	#var Ship = FindShip(Target)
-	#if (MIs.Type == 1):
-		#return
-	##Missiles[Ship].erase(MIs)
-	#if (MIs == CurrentlySelectedMissile):
-		#CurrentlySelectedMissile = null
-		#UpdateMissileSelect()
+func missileRemoved(_missile: MissileItem, _target: Captain) -> void:
+	updateAvailableMissiles()
 
-func OnShipDest(_Ship : MapShip) -> void:
-	TurnOff()
-	#Missiles.erase(Ship)
+func onShipDest(_ship: MapShip) -> void:
+	turnOff()
 
-func OnLaunchPressed() -> void:
-	if (!Showing):
+# --- MISSILE STATE MANAGEMENT & UI ACTIONS ---
+
+func onLaunchPressed() -> void:
+	if not showing:
 		return
-	if (!Armed):
+	if not armed:
 		PopUpManager.GetInstance().DoFadeNotif("No missile is Armed. Launch canceled.")
 		return
-	if (!AmmountArmed):
-		PopUpManager.GetInstance().DoFadeNotif("Missile Ammount hasn't been chosen.")
+	if not amountArmed:
+		PopUpManager.GetInstance().DoFadeNotif("Missile amount hasn't been chosen.")
 		return
-	PopUpManager.GetInstance().DoFadeNotif("{0} Launched".format([CurrentlySelectedMissile.ItemName]))
+	PopUpManager.GetInstance().DoFadeNotif("{0} Launched".format([currentlySelectedMissile.ItemName]))
 	
-	var MissilesToLaunch : Array[MissileItem]
-	for g in Ammount:
-		MissilesToLaunch.append(CurrentlySelectedMissile)
-		
-	MissileDockEventH.OnMissileLaunched(MissilesToLaunch, ConnectedShip.Cpt,ConnectedShip.Cpt)
+	var missilesToLaunch: Array[MissileItem]
+	for _i in amount:
+		missilesToLaunch.append(currentlySelectedMissile)
+	missileDockEventH.OnMissileLaunched(missilesToLaunch, connectedShip.Cpt, connectedShip.Cpt)
 	AchievementManager.GetInstance().UlockAchievement("MC_MISSILEFIRE")
 	MissileLaunched.emit()
-	DissarmMiss()
-	
-func OnArmPressed() -> void:
-	if (!Showing):
+	dissarmMiss()
+
+func onArmPressed() -> void:
+	if not showing:
 		return
-	if (AvailableMissiles.size() == 0):
+	if availableMissiles.size() == 0:
 		PopUpManager.GetInstance().DoFadeNotif("No missiles available")
-		DissarmMiss()
+		dissarmMiss()
 		return
-	if (Armed):
-		AmmountArmed = true
-		PopUpManager.GetInstance().DoFadeNotif("Ammount Picked")
-		MissileSelectLight.Toggle(false, false)
-		AngleSelectLight.Toggle(true, true)
-		MissileDockEventH.MissileArmed(CurrentlySelectedMissile, ConnectedShip.Cpt)
-		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.MISSILE_LAUNCH)):
+	if armed:
+		amountArmed = true
+		PopUpManager.GetInstance().DoFadeNotif("Amount Picked")
+		missileSelectLight.Toggle(false, false)
+		angleSelectLight.Toggle(true, true)
+		missileDockEventH.MissileArmed(currentlySelectedMissile, connectedShip.Cpt)
+		if not ActionTracker.IsActionCompleted(ActionTracker.Action.MISSILE_LAUNCH):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.MISSILE_LAUNCH)
-			DoMissileLaucnhTutorial()
+			doMissileLaunchTutorial()
 		return
-	if (AmmountArmed):
+	if amountArmed:
 		PopUpManager.GetInstance().DoFadeNotif("A missile is already armed")
 		return 
-	
-	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.MISSILE_SELECT_NUM)):
+	if not ActionTracker.IsActionCompleted(ActionTracker.Action.MISSILE_SELECT_NUM):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.MISSILE_SELECT_NUM)
-		DoMissileAmmountTutorial()
-	Armed = true
-	Ammount = 1
-	RangeText.text = "Ammount : " + var_to_str(Ammount)
-	
-	PopUpManager.GetInstance().DoFadeNotif("{0} Armed".format([CurrentlySelectedMissile.ItemName]))
+		doMissileAmountTutorial()
+	armed = true
+	amount = 1
+	rangeText.text = "Amount : %s" % var_to_str(amount)
+	PopUpManager.GetInstance().DoFadeNotif("{0} Armed".format([currentlySelectedMissile.ItemName]))
 
-	
-
-
-func OnDissarmPressed() -> void:
-	if (!Showing):
+func onDissarmPressed() -> void:
+	if not showing:
 		return
-	
-	PopUpManager.GetInstance().DoFadeNotif("{0} Dissarmed".format([CurrentlySelectedMissile.ItemName]))
-	DissarmMiss()
+	PopUpManager.GetInstance().DoFadeNotif("{0} Dissarmed".format([currentlySelectedMissile.ItemName]))
+	dissarmMiss()
 
-func DissarmMiss() -> void:
-	Armed = false
-	AmmountArmed = false
-	MissileSelectLight.Toggle(true, true)
-	AngleSelectLight.Toggle(false, false)
-	MissileDockEventH.MissileDissarmed(ConnectedShip.Cpt)
+func dissarmMiss() -> void:
+	armed = false
+	amountArmed = false
+	missileSelectLight.Toggle(true, true)
+	angleSelectLight.Toggle(false, false)
+	missileDockEventH.MissileDissarmed(connectedShip.Cpt)
 
-var SteeringDir : float = 0.0
-
-func UpdateSteer(RelativeRot : float):
-	if (!Showing):
+func updateSteer(relativeRot: float) -> void:
+	if not showing or not armed or not amountArmed:
 		return
-	
-	if (Armed and AmmountArmed):
-		SteeringDir = RelativeRot
-		MissileDockEventH.MissileDirectionChanged(SteeringDir / 50, ConnectedShip.Cpt)
+	steeringDir = relativeRot
+	missileDockEventH.MissileDirectionChanged(steeringDir / 50, connectedShip.Cpt)
 
-func UpdateSelected(Dir : bool) -> void:
-	if (!Showing):
+func updateSelected(dir: bool) -> void:
+	if not showing:
 		return
-	if (!Armed):
-		ProgressMissileSelect(Dir)
-	else: if (!AmmountArmed):
-		if (!Dir):
-			Ammount = min(Ammount + 1, AvailableMissiles.count(CurrentlySelectedMissile))
+	if not armed:
+		progressMissileSelect(dir)
+	elif not amountArmed:
+		if not dir:
+			amount = min(amount + 1, availableMissiles.count(currentlySelectedMissile))
 		else:
-			Ammount = max(Ammount - 1, 1)
-		RangeText.text = "Ammount : " + var_to_str(Ammount)
+			amount = max(amount - 1, 1)
+		rangeText.text = "Amount : %s" % var_to_str(amount)
 
-func UpdateMissileSelect(Select : int = 0):
-	if (AvailableMissiles.size() > Select):
-		SelectedIndex = Select
-		CurrentlySelectedMissile = AvailableMissiles[Select]
-		SelectedMissileText.text = CurrentlySelectedMissile.ItemName
-		RangeText.text = "Range : " + var_to_str(CurrentlySelectedMissile.Distance) + "km"
+func updateMissileSelect(select: int = 0) -> void:
+	if availableMissiles.size() > select:
+		selectedIndex = select
+		currentlySelectedMissile = availableMissiles[select]
+		selectedMissileText.text = currentlySelectedMissile.ItemName
+		rangeText.text = "Range : %s km" % var_to_str(currentlySelectedMissile.Distance)
 	else:
-		SelectedMissileText.text = "No Missiles"
-		
-func ProgressMissileSelect(Front : bool = true):
-	if (AvailableMissiles.size() == 0):
-		SelectedMissileText.text = "No Missiles"
+		selectedMissileText.text = "No Missiles"
+		rangeText.text = ""
+
+func progressMissileSelect(front: bool = true) -> void:
+	if availableMissiles.is_empty():
+		selectedMissileText.text = "No Missiles"
+		rangeText.text = ""
 		return
-	if (CurrentlySelectedMissile == null):
-		CurrentlySelectedMissile = AvailableMissiles[0]
+	if currentlySelectedMissile == null:
+		currentlySelectedMissile = availableMissiles[0]
+		selectedIndex = 0
 	else:
-		if (Front):
-			SelectedIndex +=  1
-		else :
-			SelectedIndex -= 1
-		if (SelectedIndex >= AvailableMissiles.size()):
-			SelectedIndex = 0
-		else : if (SelectedIndex < 0):
-			SelectedIndex = AvailableMissiles.size() - 1
-		CurrentlySelectedMissile = AvailableMissiles[SelectedIndex]
-		
-	SelectedMissileText.text = CurrentlySelectedMissile.ItemName
-	RangeText.text = "Range : " + var_to_str(CurrentlySelectedMissile.Distance) + "km"
+		if front:
+			selectedIndex += 1
+		else:
+			selectedIndex -= 1
+		if selectedIndex >= availableMissiles.size():
+			selectedIndex = 0
+		elif selectedIndex < 0:
+			selectedIndex = availableMissiles.size() - 1
+		currentlySelectedMissile = availableMissiles[selectedIndex]
 	
+	selectedMissileText.text = currentlySelectedMissile.ItemName
+	rangeText.text = "Range : %s km" % var_to_str(currentlySelectedMissile.Distance)
 
-func TurnOff() -> void:
-	if (!Showing):
+func turnOff() -> void:
+	if not showing:
 		return
-	TurnOffButton.set_pressed_no_signal(false)
+	turnOffButton.set_pressed_no_signal(false)
 	_on_turn_off_toggled(false)
 
-
 func _on_turn_off_toggled(toggled_on: bool) -> void:
-	if (!toggled_on):
-		if (Armed):
-			DissarmMiss()
-		Showing = false
-		RangeText.visible = false
-		SelectedMissileText.visible = false
-		MissileSelectLight.Toggle(false, false)
-		TurnOffButton.set_pressed_no_signal(false)
+	if not toggled_on:
+		if armed:
+			dissarmMiss()
+		showing = false
+		rangeText.visible = false
+		selectedMissileText.visible = false
+		missileSelectLight.Toggle(false, false)
+		turnOffButton.set_pressed_no_signal(false)
 	else:
-		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.MISSILE_ARM)):
+		if not ActionTracker.IsActionCompleted(ActionTracker.Action.MISSILE_ARM):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.MISSILE_ARM)
-			DoMissileArmTutorial()
-		Showing = true
-		UpdateMissileSelect()
-		RangeText.visible = true
-		SelectedMissileText.visible = true
-		MissileSelectLight.Toggle(true, true)
-		TurnOffButton.set_pressed_no_signal(true)
+			doMissileArmTutorial()
+		showing = true
+		updateMissileSelect()
+		rangeText.visible = true
+		selectedMissileText.visible = true
+		missileSelectLight.Toggle(true, true)
+		turnOffButton.set_pressed_no_signal(true)

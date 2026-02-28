@@ -36,9 +36,9 @@ func _ready() -> void:
 	ui_event_handler.ElevationForced.connect(ShipElevationForced)
 	#ui_event_handler.ElevationSet.connect(ShipElevationSet)
 
-	ui_event_handler.ZoomChangedFromScreen.connect(ZoomDial.AddCustomMovement)
-	ui_event_handler.YChangedFromScreen.connect(YDial.AddCustomMovement)
-	ui_event_handler.XChangedFromScreen.connect(XDial.AddCustomMovement)
+	ui_event_handler.ZoomChangedFromScreen.connect(ZoomDial.addCustomMovement)
+	ui_event_handler.YChangedFromScreen.connect(YDial.addCustomMovement)
+	ui_event_handler.XChangedFromScreen.connect(XDial.addCustomMovement)
 	UISoundMan.GetInstance().Refresh()
 	
 	SpeedSimulationButton.set_pressed_no_signal(SimulationManager.SimSpeed() > 1)

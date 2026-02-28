@@ -1,171 +1,188 @@
 extends Control
-
 class_name ElingUI
 
-@export var ShipControllerEvenH : ShipControllerEventHandler
+##    --- EXPORTS / INSPECTOR SETUP ---
 
+# Ship controller event handler reference, for ship-related events
+@export var shipControllerEventH: ShipControllerEventHandler
+@export var droneDockEventH : DroneDockEventHandler
 @export_group("Files")
-@export_file var DirectionMaskFiles : Array[String]
-@export_file("*.png") var DistanceMasks : Array[String]
-@export_file("*.png") var OnOffTextures : Array[String]
+@export_file var directionMaskFiles: Array[String]
+@export_file("*.png") var distanceMasks: Array[String]
+@export_file("*.png") var onOffTextures: Array[String]
 
 @export_group("Nodes")
-@export var RangeIndicator : PointLight2D
-@export var AlertLight : PointLight2D
-@export var DangerCloseLight : PointLight2D
-@export var DirectionLight : PointLight2D
-@export var ElintText : TextureRect
-@export var BeepSound : AudioStreamPlayer2D
+@export var rangeIndicator: PointLight2D
+@export var alertLight: PointLight2D
+@export var dangerCloseLight: PointLight2D
+@export var directionLight: PointLight2D
+@export var elintText: TextureRect
+@export var beepSound: AudioStreamPlayer2D
 
 @export_group("Sounds")
-@export var Alarm : AudioStream
-@export var Beep : AudioStream
+@export var alarm: AudioStream
+@export var beep: AudioStream
 
-#List is used durring process, its itterated though and all lights in it are toggled
-var Lights : Array[Light2D] = []
+##    --- STATE VARIABLES ---
 
-#Currently controlled ship
-var ConnectedShip : MapShip
+var lights: Array[Light2D] = []         # All Light2D children to be toggled.
+var connectedShip: MapShip = null       # Currently controlled ship
+var foundContact: bool = false          # Is a contact found currently?
+var currentState: ElintState            # Current detection state
 
-#Used to declare when a contact is found
-var FoundContact : bool = false
+# Time accumulator for physics polling
+var pollDelay: float = 0.4
 
-#Current elint state, cached to avoid redoing stuff
-var CurrentState : ELINTSTATE
-
-enum ELINTSTATE{
+# ELINT detection states
+enum ElintState {
 	NONE,
 	CLOSE,
 	MEDIUM,
 	FAR,
 }
 
-# Called when the node enters the scene tree for the first time.
+##    --- SCENE LIFECYCLE ---
+
 func _ready() -> void:
-	for g in get_children():
-		if g is Light2D:
-			Lights.append(g)
-			g.visible = false
-	
-	#Set up currently controlled and registering to event
-	UpdateConnectedShip(ShipControllerEvenH.CurrentControlled)
-	ShipControllerEvenH.OnControlledShipChanged.connect(UpdateConnectedShip)
+	# Gather Light2Ds under this node and hide
+	for node in get_children():
+		if node is Light2D:
+			lights.append(node)
+			node.visible = false
 
-func ToggleElint(t : bool) -> void:
-	if (t):
-		var tex = ResourceLoader.load(OnOffTextures[0])
-		ElintText.texture = tex
-		set_physics_process(true)
-	else:
-		var tex = ResourceLoader.load(OnOffTextures[1])
-		ElintText.texture = tex
-		set_physics_process(false)
-		
-func UpdateConnectedShip(Sh : MapShip) -> void:
-	ConnectedShip = Sh
-	var HasElint = FleetHasElint()
-	ToggleElint(HasElint)
-	if (!HasElint):
-		for g in Lights:
-			g.visible = false
+	# Register to controlled ship change
+	updateConnectedShip(shipControllerEventH.CurrentControlled)
+	shipControllerEventH.OnControlledShipChanged.connect(updateConnectedShip)
+	droneDockEventH.DroneDocked.connect(droneAdded)
+	droneDockEventH.DroneUndocked.connect(droneRemoved)
 
-func FleetHasElint() -> bool:
-	if (ConnectedShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT) > 0):
+##    --- PUBLIC / SIGNAL API ---
+
+func toggleElint(isOn: bool) -> void:
+	# Toggle UI and process based on ELINT presence
+	var texPath = onOffTextures[0] if isOn else onOffTextures[1]
+	elintText.texture = ResourceLoader.load(texPath)
+	set_physics_process(isOn)
+
+func updateConnectedShip(ship: MapShip) -> void:
+	connectedShip = ship
+	var hasElint = fleetHasElint()
+	toggleElint(hasElint)
+	if not hasElint:
+		for l in lights:
+			l.visible = false
+
+func droneRemoved(_dr : Drone, target : MapShip) -> void:
+	if (target == connectedShip):
+		var hasElint = fleetHasElint()
+		toggleElint(hasElint)
+		if not hasElint:
+			for l in lights:
+				l.visible = false
+
+func droneAdded(_dr : Drone, target : MapShip) -> void:
+	if (target == connectedShip):
+		var hasElint = fleetHasElint()
+		toggleElint(hasElint)
+		if not hasElint:
+			for l in lights:
+				l.visible = false
+
+
+func fleetHasElint() -> bool:
+	# Check if the currently controlled ship or its docked drones have ELINT
+	if connectedShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT) > 0:
 		return true
-	for g : Captain in ConnectedShip.GetDroneDock().GetCaptains():
-		var CaptainSonarRange = g.GetStatFinalValue(STAT_CONST.STATS.ELINT)
-		if (CaptainSonarRange > 0):
+	for c: Captain in connectedShip.GetDroneDock().GetCaptains():
+		if c.GetStatFinalValue(STAT_CONST.STATS.ELINT) > 0:
 			return true
 	return false
 
-var d = 0.4
+##    --- PHYSICS UPDATE (PERIODIC POLLING) ---
+
 func _physics_process(delta: float) -> void:
-	
-	d -= delta
-	if (d > 0):
+	pollDelay -= delta
+	if pollDelay > 0:
 		return
-	d = 0.4
-	
-	var ElintLevel = ConnectedShip.GetClosestElintLevel()
-	
-	if (ElintLevel < 0):
-		
-		CurrentState = ELINTSTATE.NONE
-		FoundContact = false
-		for g in Lights:
-			g.visible = false
-			
+	pollDelay = 0.4
+
+	var elintLevel = connectedShip.GetClosestElintLevel()
+
+	if elintLevel < 0:
+		currentState = ElintState.NONE
+		foundContact = false
+		for l in lights:
+			l.visible = false
 		return
-		
-	else :
-		
-		if (!FoundContact):
-			RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.ELINT_DETECTED)
-			
-		FoundContact = true
-		SetDirection(rad_to_deg(ConnectedShip.global_position.angle_to_point(ConnectedShip.GetClosestElint())) + 180)
-		SetElintLevel(ElintLevel)
-	
-	for g in Lights:
-		g.visible = !g.visible
-	
-	if (CurrentState != ELINTSTATE.NONE):
-		BeepSound.play()
 
-#func UpdateBasedOnMouse() -> void:
-	#var mpos = get_global_mouse_position()
-	#var pos = global_position + (size / 2)
-	#var ang = (rad_to_deg(pos.angle_to_point(mpos))) + 180
-	#SetDirection(ang)
-	#SetDistance(pos.distance_squared_to(mpos))
+	if not foundContact:
+		RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.ELINT_DETECTED)
 
-func SetDirection(dir : float) -> void:
-	#print(dir)
-	for g in DirectionMaskFiles.size():
-		if (abs((g * 30) - dir) > 15):
+	foundContact = true
+	setDirection(rad_to_deg(connectedShip.global_position.angle_to_point(connectedShip.GetClosestElint())) + 180)
+	setElintLevel(elintLevel)
+
+	for l in lights:
+		l.visible = not l.visible
+
+	if currentState != ElintState.NONE:
+		beepSound.play()
+
+##    --- UI/LOGIC HELPERS ---
+
+func setDirection(dir: float) -> void:
+	# Selects correct direction texture for indicator according to angle
+	for i in directionMaskFiles.size():
+		if abs((i * 30) - dir) > 15:
 			continue
-		var tex : Texture2D = ResourceLoader.load(DirectionMaskFiles[roundi(g)])
-		DirectionLight.set_texture(tex)
+		directionLight.texture = ResourceLoader.load(directionMaskFiles[roundi(i)])
 		break
 
-static func DegreesToElintAngle(Deg : float) -> int:
+static func degreesToElintAngle(degrees: float) -> int:
+	# Maps a degree to the nearest elint direction (0, 30, ..., 330)
 	var dirs = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330]
-	for g in dirs.size():
-		if (abs(dirs[g] - Deg) > 15):
+	for i in dirs.size():
+		if abs(dirs[i] - degrees) > 15:
 			continue
-		return dirs[g]
+		return dirs[i]
 	return 0
-	
-func SetElintLevel(ElintLevel : int) -> void:
-	match(ElintLevel):
+
+func setElintLevel(elintLevel: int) -> void:
+	# Switches range indicator, alert light, and beep based on elint proximity
+	match elintLevel:
 		3:
-			if (CurrentState != ELINTSTATE.CLOSE):
-				CurrentState = ELINTSTATE.CLOSE
-				var text = ResourceLoader.load(DistanceMasks[2])
-				RangeIndicator.texture = text
-				if (!Lights.has(DangerCloseLight)):
-					Lights.append(DangerCloseLight)
-				DangerCloseLight.visible = DirectionLight.visible
-				BeepSound.stream = Alarm
-				BeepSound.pitch_scale = 4
-				
+			if currentState != ElintState.CLOSE:
+				currentState = ElintState.CLOSE
+				rangeIndicator.texture = ResourceLoader.load(distanceMasks[2])
+				if not lights.has(dangerCloseLight):
+					lights.append(dangerCloseLight)
+				dangerCloseLight.visible = directionLight.visible
+				beepSound.stream = alarm
+				beepSound.pitch_scale = 4
+
 		2:
-			if (CurrentState != ELINTSTATE.MEDIUM):
-				CurrentState = ELINTSTATE.MEDIUM
-				var text = ResourceLoader.load(DistanceMasks[1])
-				RangeIndicator.texture = text
-				Lights.erase(DangerCloseLight)
-				DangerCloseLight.visible = false
-				BeepSound.stream = Beep
-				BeepSound.pitch_scale = 1
-			
+			if currentState != ElintState.MEDIUM:
+				currentState = ElintState.MEDIUM
+				rangeIndicator.texture = ResourceLoader.load(distanceMasks[1])
+				lights.erase(dangerCloseLight)
+				dangerCloseLight.visible = false
+				beepSound.stream = beep
+				beepSound.pitch_scale = 1
+
 		1:
-			if (CurrentState != ELINTSTATE.FAR):
-				CurrentState = ELINTSTATE.FAR
-				var text = ResourceLoader.load(DistanceMasks[0])
-				RangeIndicator.texture = text
-				Lights.erase(DangerCloseLight)
-				DangerCloseLight.visible = false
-				BeepSound.stream = Beep
-				BeepSound.pitch_scale = 1
-	
+			if currentState != ElintState.FAR:
+				currentState = ElintState.FAR
+				rangeIndicator.texture = ResourceLoader.load(distanceMasks[0])
+				lights.erase(dangerCloseLight)
+				dangerCloseLight.visible = false
+				beepSound.stream = beep
+				beepSound.pitch_scale = 1
+
+##    --- UNUSED / DEVELOPMENT ---
+
+#func updateBasedOnMouse() -> void:
+#    var mpos = get_global_mouse_position()
+#    var pos = global_position + (size / 2)
+#    var ang = (rad_to_deg(pos.angle_to_point(mpos))) + 180
+#    setDirection(ang)
+#    setDistance(pos.distance_squared_to(mpos))

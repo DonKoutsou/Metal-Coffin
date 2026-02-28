@@ -19,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/AnimatedDroneGas.tscn" id="17_ptq1t"]
 [ext_resource type="StyleBox" uid="uid://cicae3yqgxkcm" path="res://Theme/MetalPanel.tres" id="18_uy6ab"]
 
-[node name="Missile Tab" type="Control" unique_id=1968593876 node_paths=PackedStringArray("MissileSelectLight", "AngleSelectLight", "RangeText", "SelectedMissileText", "TurnOffButton", "ArmButton", "DissarmButton", "LaunchButton", "Cap", "missile_dial")]
+[node name="Missile Tab" type="Control" unique_id=1968593876 node_paths=PackedStringArray("missileSelectLight", "angleSelectLight", "rangeText", "selectedMissileText", "turnOffButton", "armButton", "dissarmButton", "launchButton", "cap", "missileDial")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -34,20 +34,20 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_2m6j3")
-MissileDockEventH = ExtResource("2_uy6ab")
-ShipControllerEventH = ExtResource("3_fka4o")
-DockEventH = ExtResource("4_2m6j3")
-UIEventH = ExtResource("4_fka4o")
-MissileSelectLight = NodePath("MissileSelectLight")
-AngleSelectLight = NodePath("AngleSelectLight")
-RangeText = NodePath("RangeText")
-SelectedMissileText = NodePath("SelectedMissileText")
-TurnOffButton = NodePath("TurnOff")
-ArmButton = NodePath("ArmButton")
-DissarmButton = NodePath("DissarmButton")
-LaunchButton = NodePath("LaunchButton")
-Cap = NodePath("PanelContainer")
-missile_dial = NodePath("DroneGas")
+missileDockEventH = ExtResource("2_uy6ab")
+shipControllerEventH = ExtResource("3_fka4o")
+dockEventH = ExtResource("4_2m6j3")
+uiEventH = ExtResource("4_fka4o")
+missileSelectLight = NodePath("MissileSelectLight")
+angleSelectLight = NodePath("AngleSelectLight")
+rangeText = NodePath("RangeText")
+selectedMissileText = NodePath("SelectedMissileText")
+turnOffButton = NodePath("TurnOff")
+armButton = NodePath("ArmButton")
+dissarmButton = NodePath("DissarmButton")
+launchButton = NodePath("LaunchButton")
+cap = NodePath("PanelContainer")
+missileDial = NodePath("DroneGas")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=641583344]
 layout_mode = 0
@@ -202,9 +202,9 @@ offset_right = 248.0
 offset_bottom = 56.0
 theme_override_styles/panel = ExtResource("18_uy6ab")
 
-[connection signal="pressed" from="LaunchButton" to="." method="OnLaunchPressed"]
-[connection signal="pressed" from="DissarmButton" to="." method="OnDissarmPressed"]
-[connection signal="pressed" from="ArmButton" to="." method="OnArmPressed"]
+[connection signal="pressed" from="LaunchButton" to="." method="onLaunchPressed"]
+[connection signal="pressed" from="DissarmButton" to="." method="onDissarmPressed"]
+[connection signal="pressed" from="ArmButton" to="." method="onArmPressed"]
 [connection signal="toggled" from="TurnOff" to="." method="_on_turn_off_toggled"]
-[connection signal="RangeChanged" from="DroneGas" to="." method="UpdateSteer"]
-[connection signal="RangeSnapedChaned" from="DroneGas" to="." method="UpdateSelected"]
+[connection signal="RangeChanged" from="DroneGas" to="." method="updateSteer"]
+[connection signal="RangeSnappedChanged" from="DroneGas" to="." method="updateSelected"]
