@@ -377,7 +377,7 @@ func RunShipsTurn(Ship : BattleShipStats) -> void:
 	viz.Enable()
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_SPEED_EXPLENATION)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_SPEED_EXPLENATION)
-		ActionTracker.GetInstance().QueueTutorial("Ship Speed", "Each ships has a speed stat. Faster ships get to choose and also get to perform their moves first.", [viz],)
+		ActionTracker.GetInstance().QueueTutorial("Ship Speed", "Each ships has a speed stat. Faster ships get to choose and also get to perform their moves first.", [],)
 	
 	ActionList.AddShip(Ship)
 	if (IsShipFriendly(Ship)):

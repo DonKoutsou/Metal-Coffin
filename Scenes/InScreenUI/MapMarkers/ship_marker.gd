@@ -24,8 +24,8 @@ var TimeSeenText : String = ""
 var FuelText : String = ""
 var HullText : String = ""
 
-var TimeLastSeen : float
 var Showspeed : bool = false
+var TimeLastSeen : float
 
 var ElintNotif : ShipMarkerNotif
 var LandingNotif : ShipMarkerNotif
@@ -39,6 +39,7 @@ var TargetShipPos : Vector2
 var Fuel_Range : float
 
 var CurrentShip : Node2D
+var SavedPosition : Vector2
 
 signal ShipSelected
 signal ShipTargetSelected(Marker : ShipMarker)
@@ -226,6 +227,7 @@ func Update(IsControlled : bool, CamPos : Vector2, delta : float) -> void:
 		modulate.a = 1
 		if (CurrentShip.Destroyed):
 			SetMarkerDetails("Ship Debris", "" ,0)
+			global_position = SavedPosition
 		else: if (CurrentShip.VisibleBy.size() > 0 or Commander.ENEMY_DEBUG):
 			#if (ship.StormValue > 0.9):
 				#var newpos = ship.GetShipParalaxPosition(CamPos, CurrentZoom)
@@ -234,7 +236,7 @@ func Update(IsControlled : bool, CamPos : Vector2, delta : float) -> void:
 				#UpdateTrajectory(randf_range(PI * 2, PI * -2))
 			#else:
 			global_position = CurrentShip.GetShipParalaxPosition(CamPos, CurrentZoom)
-			
+			SavedPosition = global_position
 			if (CurrentShip.ExposedValue > 2):
 				UpdateSpeed(CurrentShip.GetShipSpeed())
 			else:
@@ -252,6 +254,7 @@ func Update(IsControlled : bool, CamPos : Vector2, delta : float) -> void:
 				RemoveSelf.emit()
 			else:
 				UpdateTime(timepast)
+				global_position = SavedPosition
 	else:
 		if (CurrentShip is PlayerDrivenShip):
 			if (CurrentShip.Docked):
@@ -263,8 +266,9 @@ func Update(IsControlled : bool, CamPos : Vector2, delta : float) -> void:
 			TargetShip = CurrentShip.TargetShip
 			TargetShipPos = CurrentShip.TargetShipPos
 			Fuel_Range = CurrentShip.GetFuelRange()
-
+				
 			global_position = CurrentShip.GetShipParalaxPosition(CamPos, CurrentZoom)
+			SavedPosition = global_position
 			UpdateTrajectory(CurrentShip.global_rotation)
 				
 			ToggleShipDetails(IsControlled)
@@ -289,6 +293,7 @@ func Update(IsControlled : bool, CamPos : Vector2, delta : float) -> void:
 			if (CurrentShip.FiredBy is PlayerDrivenShip or CurrentShip.VisibleBy.size() > 0):
 				RadarRange.rotation = CurrentShip.rotation
 				global_position = CurrentShip.global_position
+				SavedPosition = global_position
 				if (LandingNotif != null):
 					#OnLandingStarted()
 					UpdateAltitude(CurrentShip.Altitude)
@@ -296,8 +301,16 @@ func Update(IsControlled : bool, CamPos : Vector2, delta : float) -> void:
 				ClearTime()
 				UpdateTrajectory(CurrentShip.global_rotation)
 				UpdateSpeed(CurrentShip.GetAffectedSpeed())
+				ClearTime()
+				SetTime()
 			else :
-				visible = false
+				modulate.a = 0.5
+				var timepast = Clock.GetHoursSince(TimeLastSeen)
+				if (timepast > 2):
+					RemoveSelf.emit()
+				else:
+					UpdateTime(timepast)
+					global_position = SavedPosition
 	
 	
 	UpdateTexts()

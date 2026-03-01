@@ -132,7 +132,7 @@ func FixMarkerClipping() -> void:
 				continue
 			if (!Marker2.is_visible_in_tree()):
 				continue
-
+			
 			var OffsetToApply : float = 4 * Marker1.scale.x
 			if (Marker2.global_position.x < Marker1.global_position.x):
 				OffsetToApply *= -1

@@ -99,6 +99,8 @@ func _updateContacts() -> void:
 		var thrustValue: float = 0.0
 		if target is MapShip:
 			thrustValue = target.GetShipThrust() / 30
+			if (target.Landed()):
+				thrustValue = 0
 		elif target is Missile:
 			thrustValue = target.Speed / 500
 

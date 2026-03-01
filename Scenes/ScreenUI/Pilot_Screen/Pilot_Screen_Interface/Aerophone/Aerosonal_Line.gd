@@ -23,7 +23,7 @@ func Update(NewContacts : Dictionary[int, float], CurrentAngle : float) -> void:
 	CurrentA = CurrentAngle
 
 func _draw() -> void:
-	var PointAmm = size.x
+	var PointAmm = size.x / 2
 	var Step = size.x / PointAmm
 	
 	var MidPoint = size.y / 2
@@ -36,6 +36,8 @@ func _draw() -> void:
 	#var ascending : bool = true
 	
 	var BiggestFind : float = 0
+	
+	var Lines : PackedVector2Array
 	
 	for g in range(1, PointAmm + 1):
 		
@@ -68,14 +70,18 @@ func _draw() -> void:
 		
 		
 		var NewPoint = Vector2(Step * g, Height)
-		draw_line(LastPoint, NewPoint, Color(1,0,0))
+		Lines.append(LastPoint)
+		Lines.append(NewPoint)
+		#draw_line(LastPoint, NewPoint, Color(1,0,0))
 		LastPoint = NewPoint
 		CurrentOffset = wrap(CurrentOffset + 1, 0, 3)
 		
 		
-		if (!g % 25):
+		if (!g % 10):
 			var v = wrap(roundi(rad_to_deg(CurrentA) - roundedmapped) + 25, 0, 360)
 			draw_string(get_theme_default_font(), Vector2(Step * g, 10), var_to_str(v), HORIZONTAL_ALIGNMENT_FILL, -1, 7, Color(1,0,0))
+	
+	draw_multiline(Lines, Color(1,0,0))
 	
 	if (BiggestFind > 3 and BiggestFind > OffsetAmmount):
 		Found.emit(BiggestFind)

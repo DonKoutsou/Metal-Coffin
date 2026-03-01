@@ -718,8 +718,7 @@ func UpdateShipWindManipulationModifier() -> void:
 	WindEffect = (StormAffectedWind * WeightModifier * Height) * WindProt
 
 func GetShipThrust() -> float:
-	var Thrust = Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * (GetShipSpeed() / GetShipMaxSpeed())
-	
+	var Thrust = Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST)
 	return Thrust
 
 func GetShipSpeedVec() -> Vector2:

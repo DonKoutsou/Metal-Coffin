@@ -88,7 +88,8 @@ func  _ready() -> void:
 		MapPointerManager.GetInstance().AddShip(self, false)
 	
 	if (!Patrol and !Convoy):
-		Altitude = TopographyMap.GetAltitudeAtGlobalPosition(PosToSpawn)
+		CurrentLandAltitude = TopographyMap.GetAltitudeAtGlobalPosition(PosToSpawn)
+		UpdateAltitude(CurrentLandAltitude)
 
 func _exit_tree() -> void:
 	WeatherManage.UnregisterShip(self)
