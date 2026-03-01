@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AmmoItem" format=3 uid="uid://bcatusfs5ku3"]
 
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_81dpr"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="1_81dpr"]
 [ext_resource type="Resource" uid="uid://nq8mf6tl53fc" path="res://Resources/Cards/Barrage/LaserGuidedBarrage100mm.tres" id="2_kbxwy"]
 [ext_resource type="Script" uid="uid://b01o81rjpfdvw" path="res://Scripts/Inventory/AmmoItem.gd" id="3_hcfd3"]
 

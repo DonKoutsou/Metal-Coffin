@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://bhlucco4xwaob"]
 
 [ext_resource type="Texture2D" uid="uid://caiahji60muq5" path="res://Assets/Cards/Revup.png" id="1_uoini"]
-[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_7u3dc"]
-[ext_resource type="Script" uid="uid://ckmhix4w7rxv5" path="res://Scripts/CardFight/BuffCardModule.gd" id="3_p8lq8"]
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="4_8gxxu"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="2_7u3dc"]
+[ext_resource type="Script" uid="uid://ckmhix4w7rxv5" path="res://Scenes/Card_Fight/Card/Card_Modules/BuffCardModule.gd" id="3_p8lq8"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="4_8gxxu"]
 
 [sub_resource type="Resource" id="Resource_r7uwp"]
 script = ExtResource("3_p8lq8")

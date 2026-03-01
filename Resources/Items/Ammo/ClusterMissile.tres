@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="MissileItem" format=3 uid="uid://c77l5prboewm2"]
 
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_1gcl3"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="1_1gcl3"]
 [ext_resource type="Resource" uid="uid://b5dslr0dn6ox8" path="res://Resources/Cards/Missile/ClusterMissile.tres" id="2_1gcl3"]
 [ext_resource type="Script" uid="uid://joaef3hf1eps" path="res://Scripts/Inventory/MissileItem.gd" id="4_o7p4u"]
 

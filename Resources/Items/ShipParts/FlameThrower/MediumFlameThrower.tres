@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="WeaponShipPart" format=3 uid="uid://cdjjdfdrhljqx"]
 
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_nvlxj"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="1_nvlxj"]
 [ext_resource type="Resource" uid="uid://b3fntysvgjvac" path="res://Resources/Cards/Barrage/Scorch.tres" id="2_be5yu"]
 [ext_resource type="Resource" uid="uid://by26q40v5vobx" path="res://Resources/Cards/Barrage/Pyroclasm.tres" id="3_nryit"]
 [ext_resource type="Resource" uid="uid://bdo3te0i8x0f" path="res://Resources/Items/ShipParts/FlameThrower/LargeFlameThrower.tres" id="4_be5yu"]

@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://bc28324vb6uij"]
 
 [ext_resource type="Texture2D" uid="uid://cjfyi8o2n6f3p" path="res://Assets/Cards/ArmorShed.png" id="1_h4odj"]
-[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_ybmh8"]
-[ext_resource type="Script" uid="uid://ckmhix4w7rxv5" path="res://Scripts/CardFight/BuffCardModule.gd" id="3_tenw4"]
-[ext_resource type="Script" uid="uid://cp4u0xqx1hi1a" path="res://Scripts/CardFight/DeBuffSelfCardModule.gd" id="4_kr1d6"]
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="5_r681m"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="2_ybmh8"]
+[ext_resource type="Script" uid="uid://ckmhix4w7rxv5" path="res://Scenes/Card_Fight/Card/Card_Modules/BuffCardModule.gd" id="3_tenw4"]
+[ext_resource type="Script" uid="uid://cp4u0xqx1hi1a" path="res://Scenes/Card_Fight/Card/Card_Modules/DeBuffSelfCardModule.gd" id="4_kr1d6"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="5_r681m"]
 
 [sub_resource type="Resource" id="Resource_r7uwp"]
 script = ExtResource("3_tenw4")

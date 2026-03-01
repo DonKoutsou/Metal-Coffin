@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AmmoItem" format=3 uid="uid://cvfvjs8k8hqxm"]
 
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_6atki"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="1_6atki"]
 [ext_resource type="Resource" uid="uid://c7tfdm7nvifxi" path="res://Resources/Cards/Barrage/IncendiaryBarrage180mm.tres" id="2_6atki"]
 [ext_resource type="Script" uid="uid://b01o81rjpfdvw" path="res://Scripts/Inventory/AmmoItem.gd" id="3_ii2ar"]
 

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AmmoItem" format=3 uid="uid://dlq3h5fmtny57"]
 
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_vo5t0"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="1_vo5t0"]
 [ext_resource type="Resource" uid="uid://d21qwp3yi35au" path="res://Resources/Cards/PayloadStrike.tres" id="2_vo5t0"]
 [ext_resource type="Script" uid="uid://b01o81rjpfdvw" path="res://Scripts/Inventory/AmmoItem.gd" id="3_ok3oc"]
 

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://bh0113ts576au"]
 
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_lpd1a"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="1_lpd1a"]
 [ext_resource type="Resource" uid="uid://cuhyegxnhjaq4" path="res://Resources/Cards/DrawDiscard.tres" id="2_37mfe"]
 [ext_resource type="Resource" uid="uid://bohupsgl50ar7" path="res://Resources/Cards/EmergencyRepairs.tres" id="3_37mfe"]
 [ext_resource type="Resource" uid="uid://p0sngnrp8hgi" path="res://Resources/Items/ShipParts/ELINT/MediumElint.tres" id="5_rphxy"]

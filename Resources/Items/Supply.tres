@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="UsableItem" format=3 uid="uid://cf3nxx0s2bsn5"]
 
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_w8wc6"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="1_w8wc6"]
 [ext_resource type="Texture2D" uid="uid://c54wcb3ctsi1e" path="res://Assets/Items/Wrench.png" id="2_0kf6o"]
 [ext_resource type="Script" uid="uid://c2hy2hwaqy0vp" path="res://Scripts/Inventory/UsableItem.gd" id="3_c4cjt"]
 

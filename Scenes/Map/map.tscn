@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cyujmksfffet"]
 
 [ext_resource type="Script" uid="uid://uwyb0fvd6pvg" path="res://Scripts/map.gd" id="1_vpest"]
-[ext_resource type="Script" uid="uid://qu6263wmeh50" path="res://Scripts/Ships/Hostile_Ship.gd" id="3_lh5em"]
+[ext_resource type="Script" uid="uid://qu6263wmeh50" path="res://Scenes/MapShips/Ships/Hostile_Ship.gd" id="3_lh5em"]
 [ext_resource type="PackedScene" uid="uid://b0gylky44tnsw" path="res://Scenes/Enemies/PatrolBT.tscn" id="4_7nfft"]
 [ext_resource type="PackedScene" uid="uid://buaaiy1bjp87q" path="res://Scenes/InScreenUI/alarm_effect.tscn" id="5_wv6bp"]
 [ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyFireship1.tres" id="6_tk0jd"]
@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dp3qdp4mcnmly" path="res://Scenes/tutorial_trigger.tscn" id="9_6an1p"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="9_m188n"]
 [ext_resource type="World3D" uid="uid://bt2lx0rufeimw" path="res://Enviroments/WorldEnv.tres" id="10_28wu2"]
-[ext_resource type="PackedScene" uid="uid://dv64iu4t4ja87" path="res://Scenes/Enemies/HostileDroneDock.tscn" id="10_gjdv7"]
+[ext_resource type="PackedScene" uid="uid://dv64iu4t4ja87" path="res://Scenes/MapShips/HostileDroneDock.tscn" id="10_gjdv7"]
 [ext_resource type="Resource" uid="uid://c1buiwym6qkh8" path="res://Resources/Merch/1.EnemySpawnDecider.tres" id="12_m1k6s"]
 [ext_resource type="PackedScene" uid="uid://cja47tyjnyae" path="res://Scenes/MapMarkers/map_line_drawer.tscn" id="16_sp82o"]
 [ext_resource type="PackedScene" uid="uid://dnjccg1nj4bm6" path="res://Scenes/Map/ship_camera.tscn" id="17_6an1p"]

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="MissileItem" format=3 uid="uid://da5wwxg8h0n50"]
 
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_0rlix"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="1_0rlix"]
 [ext_resource type="Script" uid="uid://joaef3hf1eps" path="res://Scripts/Inventory/MissileItem.gd" id="4_1mwvx"]
 
 [resource]

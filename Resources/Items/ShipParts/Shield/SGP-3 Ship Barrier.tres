@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://by5pd080gjivc"]
 
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_us157"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="1_us157"]
 [ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="2_epvt7"]
 [ext_resource type="Resource" uid="uid://c2xdu0g24g84o" path="res://Resources/Cards/DecelerationField.tres" id="3_epvt7"]
 [ext_resource type="Resource" uid="uid://carmmqiu3rn2f" path="res://Resources/Items/ShipParts/Shield/SPK-50 Ship Barrier.tres" id="3_ugug2"]

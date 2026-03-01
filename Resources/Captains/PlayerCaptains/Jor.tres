@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bj7yh7r1ym3lw" path="res://Assets/CaptainPortraits/Captain3.png" id="1_xaias"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_6dx32"]
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="3_fklaq"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="3_fklaq"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="3_u6ltl"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_urdjp"]
 [ext_resource type="Texture2D" uid="uid://dw75fupkyb6cd" path="res://Assets/ShipTextures/Ship10.png" id="5_so2fg"]

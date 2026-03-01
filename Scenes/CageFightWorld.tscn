@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://b575fi0e44gkg"]
 
 [ext_resource type="Script" uid="uid://bybwi8eqnkihq" path="res://Scripts/CageFightWorld.gd" id="1_ruv4p"]
-[ext_resource type="PackedScene" uid="uid://bg4oh7r4qnxy8" path="res://Scenes/Cards/CardFight.tscn" id="2_hv6vs"]
-[ext_resource type="PackedScene" uid="uid://dc1y0qs5n466n" path="res://Scenes/Cards/CagefightTeamSetup.tscn" id="3_fhjeu"]
+[ext_resource type="PackedScene" uid="uid://bg4oh7r4qnxy8" path="res://Scenes/Card_Fight/CardFight.tscn" id="2_hv6vs"]
+[ext_resource type="PackedScene" uid="uid://dc1y0qs5n466n" path="res://Scenes/Card_Fight/CagefightTeamSetup.tscn" id="3_fhjeu"]
 [ext_resource type="World3D" uid="uid://bt2lx0rufeimw" path="res://Enviroments/WorldEnv.tres" id="4_fhjeu"]
 [ext_resource type="PackedScene" uid="uid://ijv7nlfv5kot" path="res://Scenes/InScreenUI/Cagefight_in_screen_ui.tscn" id="5_fhjeu"]
 [ext_resource type="PackedScene" uid="uid://biel8sjt8vy5t" path="res://Scenes/ScreenUI/screen_ui.tscn" id="8_6fcln"]

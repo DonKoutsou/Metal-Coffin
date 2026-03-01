@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://bhbf1ia1lwyhx"]
 
 [ext_resource type="Texture2D" uid="uid://2lqhuh4g168i" path="res://Assets/Cards/Revup2.png" id="1_cu3x3"]
-[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_l7hmv"]
-[ext_resource type="Script" uid="uid://ckmhix4w7rxv5" path="res://Scripts/CardFight/BuffCardModule.gd" id="3_dacoj"]
-[ext_resource type="Script" uid="uid://3ov8bjyrnlbj" path="res://Scripts/CardFight/CauseFireModule.gd" id="4_l7hmv"]
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="4_yp615"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="2_l7hmv"]
+[ext_resource type="Script" uid="uid://ckmhix4w7rxv5" path="res://Scenes/Card_Fight/Card/Card_Modules/BuffCardModule.gd" id="3_dacoj"]
+[ext_resource type="Script" uid="uid://3ov8bjyrnlbj" path="res://Scenes/Card_Fight/Card/Card_Modules/CauseFireModule.gd" id="4_l7hmv"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="4_yp615"]
 
 [sub_resource type="Resource" id="Resource_r7uwp"]
 script = ExtResource("3_dacoj")

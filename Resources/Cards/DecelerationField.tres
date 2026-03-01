@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://c2xdu0g24g84o"]
 
 [ext_resource type="Texture2D" uid="uid://dg8qvab47o6h3" path="res://Assets/Cards/DecelerationField.png" id="1_432dy"]
-[ext_resource type="Script" uid="uid://cal2o02w6vol6" path="res://Scripts/CardFight/DamageReductionCardModule.gd" id="2_dcwc3"]
-[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="3_x7h2e"]
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="4_ftjex"]
+[ext_resource type="Script" uid="uid://cal2o02w6vol6" path="res://Scenes/Card_Fight/Card/Card_Modules/DamageReductionCardModule.gd" id="2_dcwc3"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="3_x7h2e"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="4_ftjex"]
 
 [sub_resource type="Resource" id="Resource_4hc72"]
 script = ExtResource("2_dcwc3")

@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://cbdyafmynts2u"]
+
+[ext_resource type="Script" uid="uid://bdvm3q5rknxlm" path="res://Scenes/Card_Fight/Ship_Visuals/offensive_animation.gd" id="1_jaurs"]
+[ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Card_Fight/Card/Card.tscn" id="2_jp0up"]
+[ext_resource type="PackedScene" uid="uid://mxfnm7hywo4f" path="res://Scenes/Old/damage_floater.tscn" id="3_d0xxj"]
+
+[node name="CardOffensiveAnimation" type="Control" unique_id=1215573475]
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+mouse_filter = 2
+script = ExtResource("1_jaurs")
+CardScene = ExtResource("2_jp0up")
+DamageFloater = ExtResource("3_d0xxj")
+ShipVizFile = "uid://dhfqn405u7iov"
+AtackVisualFile = "uid://cqejjvj1hassq"
+DefVisualFile = "uid://5ubeqcn5eqt5"
+ShieldVisualFile = "uid://bu0gnwclyuygc"
+EnergyVisualFile = "uid://cirgeti4ije63"
+BuffVisualFile = "uid://cdkdu7girot7w"
+DebuffVisualFile = "uid://b1j8lcr2bwkvf"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=81172635]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 391.0
+offset_right = -391.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1

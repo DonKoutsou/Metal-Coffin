@@ -20,7 +20,7 @@ static func SaveExists(Sav : String) -> bool:
 	if (!FileAccess.file_exists(Sav)):
 		return false
 	
-	var sav = await Helper.GetInstance().LoadThreaded(Sav).Sign
+	var sav = ResourceLoader.load(Sav)
 	
 	
 	if (sav == null):

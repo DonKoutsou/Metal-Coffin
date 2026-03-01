@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://cix2emi1smed2"]
+
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_pslkc"]
+[ext_resource type="Script" uid="uid://bp1bu8mlf6f3p" path="res://Scenes/InScreenUI/Settings/setting_panel.gd" id="2_vwwor"]
+[ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="3_b4sbe"]
+[ext_resource type="Texture2D" uid="uid://bi5udi6g78ajr" path="res://Assets/UIPiecies/Screen/Buttons/Switch.png" id="4_b4sbe"]
+[ext_resource type="Texture2D" uid="uid://bvk1d6i2dr1sf" path="res://Assets/UIPiecies/Screen/Buttons/Switch2.png" id="5_a6mwh"]
+
+[node name="SettingPanel" type="PanelContainer" unique_id=392127877 node_paths=PackedStringArray("GlitchButton", "FullScreenButton", "SoundButton", "MusicButton", "ShakeEffectButton")]
+self_modulate = Color(1, 1, 1, 0)
+use_parent_material = true
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("1_pslkc")
+script = ExtResource("2_vwwor")
+mat = ExtResource("3_b4sbe")
+GlitchButton = NodePath("Control/GlitchesCheckBox")
+FullScreenButton = NodePath("Control/FullScreenCheckBox")
+SoundButton = NodePath("Control/SoundCheckBox")
+MusicButton = NodePath("Control/SoundCheckBox2")
+ShakeEffectButton = NodePath("Control/ShakeEffectsBox")
+
+[node name="Control" type="Control" parent="." unique_id=1770304556]
+layout_mode = 2
+
+[node name="FullScreenCheckBox" type="TextureButton" parent="Control" unique_id=1652792594 groups=["Buttons"]]
+use_parent_material = true
+layout_mode = 0
+offset_right = 17.0
+offset_bottom = 39.0
+size_flags_horizontal = 10
+toggle_mode = true
+texture_normal = ExtResource("5_a6mwh")
+texture_pressed = ExtResource("4_b4sbe")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="SoundCheckBox" type="TextureButton" parent="Control" unique_id=1813530860 groups=["Buttons"]]
+use_parent_material = true
+layout_mode = 0
+offset_top = 55.0
+offset_right = 17.0
+offset_bottom = 94.0
+size_flags_horizontal = 10
+toggle_mode = true
+texture_normal = ExtResource("5_a6mwh")
+texture_pressed = ExtResource("4_b4sbe")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="SoundCheckBox2" type="TextureButton" parent="Control" unique_id=278533649 groups=["Buttons"]]
+use_parent_material = true
+layout_mode = 0
+offset_left = 68.0
+offset_top = 57.0
+offset_right = 85.0
+offset_bottom = 96.0
+size_flags_horizontal = 10
+toggle_mode = true
+texture_normal = ExtResource("5_a6mwh")
+texture_pressed = ExtResource("4_b4sbe")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="GlitchesCheckBox" type="TextureButton" parent="Control" unique_id=1603069750 groups=["Buttons"]]
+use_parent_material = true
+layout_mode = 0
+offset_top = 110.0
+offset_right = 17.0
+offset_bottom = 149.0
+size_flags_horizontal = 10
+toggle_mode = true
+texture_normal = ExtResource("5_a6mwh")
+texture_pressed = ExtResource("4_b4sbe")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="ShakeEffectsBox" type="TextureButton" parent="Control" unique_id=1138728248 groups=["Buttons"]]
+use_parent_material = true
+layout_mode = 0
+offset_left = 67.0
+offset_top = 110.0
+offset_right = 84.0
+offset_bottom = 149.0
+size_flags_horizontal = 10
+toggle_mode = true
+texture_normal = ExtResource("5_a6mwh")
+texture_pressed = ExtResource("4_b4sbe")
+ignore_texture_size = true
+stretch_mode = 0
+
+[connection signal="toggled" from="Control/FullScreenCheckBox" to="." method="_on_full_screen_check_box_toggled"]
+[connection signal="toggled" from="Control/SoundCheckBox" to="." method="_on_sound_check_box_toggled"]
+[connection signal="toggled" from="Control/SoundCheckBox2" to="." method="_on_music_check_box_toggled"]
+[connection signal="toggled" from="Control/GlitchesCheckBox" to="." method="_on_glitches_check_box_toggled"]
+[connection signal="toggled" from="Control/ShakeEffectsBox" to="." method="_on_glitches_check_box_toggled"]

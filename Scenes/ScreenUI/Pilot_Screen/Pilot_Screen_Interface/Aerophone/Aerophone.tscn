@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://cvhgybnbwc0e4"]
+
+[ext_resource type="Script" uid="uid://bxtv6l5octf8v" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Aerophone/Aerosonar.gd" id="1_5vs2h"]
+[ext_resource type="Script" uid="uid://cvjx6yhssr224" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Aerophone/Aerosonal_Line.gd" id="1_u0q8c"]
+[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="2_6e8xg"]
+[ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/Dial/Dial.tscn" id="2_6guy7"]
+[ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="3_fw736"]
+[ext_resource type="Texture2D" uid="uid://byfcxaxg7epni" path="res://Assets/UIPiecies/Screen/SidePanels/Sonar.png" id="3_mi4l8"]
+[ext_resource type="StyleBox" uid="uid://bc1y4hhkl7ce6" path="res://Theme/Buttons/NobButton.tres" id="6_4wgxe"]
+[ext_resource type="PackedScene" uid="uid://b7cgarcbvixw6" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Aerophone/speaker.tscn" id="6_jiwdy"]
+[ext_resource type="StyleBox" uid="uid://21mi6l2i2tkk" path="res://Theme/Buttons/NobButton_Pressed.tres" id="7_mi4l8"]
+[ext_resource type="StyleBox" uid="uid://cicae3yqgxkcm" path="res://Theme/MetalPanel.tres" id="9_fw736"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mi4l8"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4wgxe"]
+light_mode = 1
+
+[node name="Aerophone" type="Control" unique_id=1555836270 node_paths=PackedStringArray("lineContainer", "sonarVisual", "gainLabel", "radioSpeaker", "cap", "toggleButton")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_5vs2h")
+lineContainer = NodePath("TextureRect2/AeroSonarLine")
+sonarVisual = NodePath("TextureRect2")
+gainLabel = NodePath("TextureRect2/Label")
+radioSpeaker = NodePath("Speaker")
+cap = NodePath("PanelContainer")
+toggleButton = NodePath("TextureRect2/Close")
+controllerEventHandler = ExtResource("2_6e8xg")
+droneDockEventHandler = ExtResource("3_fw736")
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=788212122]
+layout_mode = 1
+offset_left = -96.0
+offset_top = 21.0
+offset_right = 259.2766
+offset_bottom = 186.0
+mouse_filter = 0
+texture = ExtResource("3_mi4l8")
+expand_mode = 1
+
+[node name="AeroSonarLine" type="Control" parent="TextureRect2" unique_id=1384447880]
+material = SubResource("CanvasItemMaterial_mi4l8")
+anchors_preset = 0
+offset_left = 133.0
+offset_top = 12.0006
+offset_right = 343.0
+offset_bottom = 58.0
+script = ExtResource("1_u0q8c")
+OffsetAmmount = 5.0
+
+[node name="YGas" parent="TextureRect2" unique_id=480843960 instance=ExtResource("2_6guy7")]
+position = Vector2(282.46765, 96.00907)
+scale = Vector2(0.520363, 0.520363)
+
+[node name="GeinControl" parent="TextureRect2" unique_id=1393905736 instance=ExtResource("2_6guy7")]
+position = Vector2(282.46765, 139)
+scale = Vector2(0.520363, 0.520363)
+
+[node name="Close" type="Button" parent="TextureRect2" unique_id=617694193 groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.638306
+offset_top = 24.34874
+offset_right = 4.3616943
+offset_bottom = 87.65126
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = ExtResource("6_4wgxe")
+theme_override_styles/pressed = ExtResource("7_mi4l8")
+theme_override_styles/hover = ExtResource("6_4wgxe")
+toggle_mode = true
+
+[node name="Label" type="Label" parent="TextureRect2" unique_id=733326543]
+material = SubResource("CanvasItemMaterial_4wgxe")
+layout_mode = 0
+offset_left = 132.0
+offset_top = 86.0
+offset_right = 204.0
+offset_bottom = 107.0
+theme_override_colors/font_color = Color(0.978254, 0, 0.0338846, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 14
+text = "GAIN:10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer" type="Panel" parent="." unique_id=1893570508]
+visible = false
+layout_mode = 0
+offset_left = -13.0
+offset_top = 21.0
+offset_right = 259.0
+offset_bottom = 186.0
+theme_override_styles/panel = ExtResource("9_fw736")
+
+[node name="Speaker" parent="." unique_id=1248031779 instance=ExtResource("6_jiwdy")]
+layout_mode = 0
+offset_left = -42.0
+offset_top = -78.0
+offset_right = -2.0
+offset_bottom = -38.0
+frequency = 15.0
+max_rotation = 0.02
+
+[connection signal="RangeChanged" from="TextureRect2/YGas" to="." method="sonarRotationChanged"]
+[connection signal="RangeChanged" from="TextureRect2/GeinControl" to="." method="_on_gein_control_range_changed"]
+[connection signal="toggled" from="TextureRect2/Close" to="." method="_onCloseToggled"]
+[connection signal="Clicked" from="Speaker" to="." method="_onRadioClicked"]

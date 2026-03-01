@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://dhfqn405u7iov"]
+
+[ext_resource type="Script" uid="uid://c1614nt44tmoh" path="res://Scenes/Card_Fight/Ship_Visuals/card_fight_ship_viz.gd" id="1_o7oni"]
+[ext_resource type="Texture2D" uid="uid://c6efc2y6xflyc" path="res://Assets/ShipTextures/Ship3_001.png" id="2_lbgr3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3h25u"]
+bg_color = Color(0.231024, 0.490544, 0.236315, 1)
+skew = Vector2(0.1, 0)
+
+[sub_resource type="Gradient" id="Gradient_iq4iy"]
+offsets = PackedFloat32Array(0, 0.998435)
+colors = PackedColorArray(1, 0.380321, 0.138099, 1, 0.96597, 0.782513, 7.70092e-07, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_x4s8m"]
+gradient = SubResource("Gradient_iq4iy")
+
+[sub_resource type="Curve" id="Curve_e1h5p"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0604554), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_tsd2f"]
+curve = SubResource("Curve_e1h5p")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_on4wq"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 34.529
+initial_velocity_min = 35.93
+initial_velocity_max = 35.93
+gravity = Vector3(0, 0, 0)
+scale_min = 10.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_tsd2f")
+color_ramp = SubResource("GradientTexture1D_x4s8m")
+
+[node name="CardFightShipViz" type="Button" unique_id=1247899577 node_paths=PackedStringArray("ShipNameLabel", "ShipIcon", "FriendlyPanel")]
+custom_minimum_size = Vector2(70, 70)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -35.0
+offset_right = 35.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+script = ExtResource("1_o7oni")
+ShipNameLabel = NodePath("HBoxContainer/Label")
+ShipIcon = NodePath("HBoxContainer/TextureRect")
+FriendlyPanel = NodePath("Panel")
+
+[node name="Panel" type="Panel" parent="." unique_id=223157029]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 68.0
+offset_bottom = 68.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3h25u")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1738997181]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 73.0
+offset_bottom = 68.0
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=675017378]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "GER"
+autowrap_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=1923837237]
+layout_mode = 2
+texture = ExtResource("2_lbgr3")
+expand_mode = 2
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=2098314865]
+position = Vector2(39.5, 38.5)
+process_material = SubResource("ParticleProcessMaterial_on4wq")

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="WeaponShipPart" format=3 uid="uid://dyhi12lwtgu4x"]
 
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_2w2o8"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="1_2w2o8"]
 [ext_resource type="Resource" uid="uid://dp1lgf8wdupg3" path="res://Resources/Cards/DroneStrike.tres" id="2_j7t3l"]
 [ext_resource type="Resource" uid="uid://c46f6ph2spg1r" path="res://Resources/Cards/DroneWall.tres" id="3_bjsji"]
 [ext_resource type="Resource" uid="uid://coeod5yhsw6es" path="res://Resources/Items/ShipParts/DroneDock/LargeDroneDock.tres" id="4_j7t3l"]

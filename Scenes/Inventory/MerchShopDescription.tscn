@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://blgxtaj45pjfs"]
 
 [ext_resource type="Script" uid="uid://dgovu7lhdjrjv" path="res://Scripts/Inventory/ItemDescriptor.gd" id="2_1gff0"]
-[ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Cards/Card.tscn" id="3_c5c2l"]
+[ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Card_Fight/Card/Card.tscn" id="3_c5c2l"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="4_ji6lp"]
 [ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="5_tvvk2"]
-[ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scripts/CardFight/CardHandContainer.gd" id="6_pe6aq"]
+[ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scenes/Card_Fight/External_UI/CardHandContainer.gd" id="6_pe6aq"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jut7c"]
 content_margin_left = 4.0

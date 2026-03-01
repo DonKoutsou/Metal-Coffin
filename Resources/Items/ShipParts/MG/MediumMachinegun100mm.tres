@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="WeaponShipPart" format=3 uid="uid://hncmt3swcqbu"]
 
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_1qqs8"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="2_1qqs8"]
 [ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Resources/Cards/Barrage/Barrage100mm.tres" id="2_q5ys8"]
 [ext_resource type="Resource" uid="uid://b25yneeytw20f" path="res://Resources/Cards/Barrage/DrawRandomOffensive.tres" id="3_acqvg"]
 [ext_resource type="Resource" uid="uid://d3ll4cruuw7vf" path="res://Resources/Items/ShipParts/MG/LargeMachinegun100mm.tres" id="3_q5ys8"]

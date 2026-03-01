@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://cxum5qaw20d1q"]
 
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_t7h3x"]
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="2_x01tj"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="2_x01tj"]
 [ext_resource type="Resource" uid="uid://bhlucco4xwaob" path="res://Resources/Cards/RevUp.tres" id="3_j5fk8"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="3_s64vj"]
 [ext_resource type="Resource" uid="uid://bhbf1ia1lwyhx" path="res://Resources/Cards/Overheat.tres" id="4_tq668"]

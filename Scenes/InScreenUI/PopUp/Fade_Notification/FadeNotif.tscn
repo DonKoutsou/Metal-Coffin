@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://1vnrpn8q4byq"]
+
+[ext_resource type="Script" uid="uid://clk1tqw1y8r5" path="res://Scenes/InScreenUI/PopUp/Fade_Notification/fade_notif.gd" id="1_sjfyc"]
+[ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="2_p75xj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xxwjh"]
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.11, 0.11, 0.11, 0.8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3j3ox"]
+
+[node name="FadeNotif" type="PanelContainer" unique_id=689629442 node_paths=PackedStringArray("T") groups=["FadeNotif", "ItemNotification"]]
+process_mode = 3
+modulate = Color(1, 0.763983, 0.0812772, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = -165.0
+offset_right = 8.0
+offset_bottom = -122.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xxwjh")
+script = ExtResource("1_sjfyc")
+T = NodePath("HBoxContainer/Label")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1209036438]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="HBoxContainer" unique_id=1060292891]
+custom_minimum_size = Vector2(3, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3j3ox")
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=740365164]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("2_p75xj")
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Panel2" type="Panel" parent="HBoxContainer" unique_id=524623242]
+custom_minimum_size = Vector2(3, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3j3ox")

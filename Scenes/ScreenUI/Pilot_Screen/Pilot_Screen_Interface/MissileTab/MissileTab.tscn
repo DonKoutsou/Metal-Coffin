@@ -1,0 +1,210 @@
+[gd_scene format=3 uid="uid://cwnxxystgxrjm"]
+
+[ext_resource type="Script" uid="uid://cveotxqirn2cw" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/MissileTab/MissileTab.gd" id="1_2m6j3"]
+[ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/EventHandlers/MissileDockEventHandler.tres" id="2_uy6ab"]
+[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="3_fka4o"]
+[ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="4_2m6j3"]
+[ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="4_fka4o"]
+[ext_resource type="Texture2D" uid="uid://dete7kwckvyap" path="res://Assets/UIPiecies/Screen/SidePanels/MissileTab_FullQuality.png" id="4_nth3v"]
+[ext_resource type="StyleBox" uid="uid://d0w8t1031og62" path="res://Theme/Buttons/ButtonGreen.tres" id="5_fka4o"]
+[ext_resource type="StyleBox" uid="uid://cim71fta6nvsv" path="res://Theme/Buttons/ButtonGreen_Pressed.tres" id="6_2m6j3"]
+[ext_resource type="StyleBox" uid="uid://bog4o82ggjqwb" path="res://Theme/Buttons/ButtonOrange.tres" id="7_fka4o"]
+[ext_resource type="StyleBox" uid="uid://bxfwfq0uxu1w1" path="res://Theme/Buttons/ButtonOrange_Pressed.tres" id="8_2m6j3"]
+[ext_resource type="StyleBox" uid="uid://c5x3vcw8x46rj" path="res://Theme/Buttons/ButtonRed.tres" id="9_fka4o"]
+[ext_resource type="StyleBox" uid="uid://bvwu33dvi8506" path="res://Theme/Buttons/ButtonRed_Pressed.tres" id="10_2m6j3"]
+[ext_resource type="StyleBox" uid="uid://bc1y4hhkl7ce6" path="res://Theme/Buttons/NobButton.tres" id="11_2m6j3"]
+[ext_resource type="StyleBox" uid="uid://21mi6l2i2tkk" path="res://Theme/Buttons/NobButton_Pressed.tres" id="12_fka4o"]
+[ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="15_pknbg"]
+[ext_resource type="FontFile" uid="uid://c6hwlc2fgceix" path="res://Fonts/digital-7.ttf" id="16_6ithd"]
+[ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/Dial/Dial.tscn" id="17_ptq1t"]
+[ext_resource type="StyleBox" uid="uid://cicae3yqgxkcm" path="res://Theme/MetalPanel.tres" id="18_uy6ab"]
+
+[node name="Missile Tab" type="Control" unique_id=1968593876 node_paths=PackedStringArray("missileSelectLight", "angleSelectLight", "rangeText", "selectedMissileText", "turnOffButton", "armButton", "dissarmButton", "launchButton", "cap", "missileDial")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_2m6j3")
+missileDockEventH = ExtResource("2_uy6ab")
+uiEventH = ExtResource("4_fka4o")
+missileSelectLight = NodePath("MissileSelectLight")
+angleSelectLight = NodePath("AngleSelectLight")
+rangeText = NodePath("RangeText")
+selectedMissileText = NodePath("SelectedMissileText")
+turnOffButton = NodePath("TurnOff")
+armButton = NodePath("ArmButton")
+dissarmButton = NodePath("DissarmButton")
+launchButton = NodePath("LaunchButton")
+cap = NodePath("PanelContainer")
+missileDial = NodePath("DroneGas")
+controllerEventHandler = ExtResource("3_fka4o")
+droneDockEventHandler = ExtResource("4_2m6j3")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=641583344]
+layout_mode = 0
+offset_left = -181.0
+offset_top = -124.0
+offset_right = 248.0
+offset_bottom = 56.0
+mouse_filter = 0
+texture = ExtResource("4_nth3v")
+expand_mode = 1
+
+[node name="LaunchButton" type="Button" parent="." unique_id=1478424702 groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -60.99997
+offset_top = -34.0
+offset_right = -24.99997
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = ExtResource("5_fka4o")
+theme_override_styles/pressed = ExtResource("6_2m6j3")
+theme_override_styles/hover = ExtResource("5_fka4o")
+
+[node name="DissarmButton" type="Button" parent="." unique_id=1326463356 groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -60.99997
+offset_top = -90.0
+offset_right = -25.99997
+offset_bottom = -66.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(1, 1.00062)
+theme_override_styles/normal = ExtResource("7_fka4o")
+theme_override_styles/pressed = ExtResource("8_2m6j3")
+theme_override_styles/hover = ExtResource("7_fka4o")
+
+[node name="ArmButton" type="Button" parent="." unique_id=1285015393 groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -60.99999
+offset_top = -143.0
+offset_right = -25.999989
+offset_bottom = -119.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = ExtResource("9_fka4o")
+theme_override_styles/pressed = ExtResource("10_2m6j3")
+theme_override_styles/hover = ExtResource("9_fka4o")
+
+[node name="TurnOff" type="Button" parent="." unique_id=1602153045 groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 183.0
+offset_top = -106.10491
+offset_right = 208.0
+offset_bottom = -46.629463
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = ExtResource("11_2m6j3")
+theme_override_styles/pressed = ExtResource("12_fka4o")
+theme_override_styles/hover = ExtResource("11_2m6j3")
+toggle_mode = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="MissileSelectLight" parent="." unique_id=1859413600 instance=ExtResource("15_pknbg")]
+layout_mode = 0
+offset_left = 167.0
+offset_top = -57.0
+offset_right = 187.0
+offset_bottom = -37.0
+
+[node name="AngleSelectLight" parent="." unique_id=705276192 instance=ExtResource("15_pknbg")]
+layout_mode = 0
+offset_left = 167.0
+offset_top = -27.0
+offset_right = 187.0
+offset_bottom = -7.0
+
+[node name="RangeText" type="Label" parent="." unique_id=1306899280]
+visible = false
+texture_filter = 6
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 0
+offset_left = 68.0
+offset_top = -98.0
+offset_right = 154.0
+offset_bottom = -65.0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.483194, 0.71686, 0.381202, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("16_6ithd")
+theme_override_font_sizes/font_size = 16
+text = "Range : 1000km"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="SelectedMissileText" type="Label" parent="." unique_id=1069982182]
+visible = false
+texture_filter = 6
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 49.0
+offset_top = -24.0
+offset_right = 134.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.483194, 0.71686, 0.381202, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("16_6ithd")
+theme_override_font_sizes/font_size = 16
+text = "Cruise Missile"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="DroneGas" parent="." unique_id=1046752902 instance=ExtResource("17_ptq1t")]
+position = Vector2(209, -34)
+rotation = 1.57079
+scale = Vector2(0.529254, 0.369254)
+
+[node name="PanelContainer" type="Panel" parent="." unique_id=1109730313]
+visible = false
+layout_mode = 0
+offset_left = -25.0
+offset_top = -124.0
+offset_right = 248.0
+offset_bottom = 56.0
+theme_override_styles/panel = ExtResource("18_uy6ab")
+
+[connection signal="pressed" from="LaunchButton" to="." method="onLaunchPressed"]
+[connection signal="pressed" from="DissarmButton" to="." method="onDissarmPressed"]
+[connection signal="pressed" from="ArmButton" to="." method="onArmPressed"]
+[connection signal="toggled" from="TurnOff" to="." method="_on_turn_off_toggled"]
+[connection signal="RangeChanged" from="DroneGas" to="." method="updateSteer"]
+[connection signal="RangeSnappedChanged" from="DroneGas" to="." method="updateSelected"]

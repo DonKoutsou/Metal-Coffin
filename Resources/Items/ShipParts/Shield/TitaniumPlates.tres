@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://yxrblna0s1bo"]
 
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_pwfb6"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="1_pwfb6"]
 [ext_resource type="Resource" uid="uid://bc28324vb6uij" path="res://Resources/Cards/ArmorShed.tres" id="2_44fvt"]
 [ext_resource type="Resource" uid="uid://cenglxsgq1pg0" path="res://Resources/Items/ShipParts/Shield/ReinforcedTitaniumPlates.tres" id="2_tqj0t"]
 [ext_resource type="Resource" uid="uid://bx0i03i2fgvwm" path="res://Resources/Cards/Safeguard .tres" id="3_44fvt"]

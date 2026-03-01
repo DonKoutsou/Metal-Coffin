@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://daou2wqtcgcxt"]
 
 [ext_resource type="Texture2D" uid="uid://b1qh7d3rq6j4t" path="res://Assets/Cards/MaxReserve.png" id="1_rwtaf"]
-[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scripts/CardFight/CardModule.gd" id="2_5uqf0"]
-[ext_resource type="Script" uid="uid://crxgf35d0q8o1" path="res://Scripts/CardFight/MaxReserveModule.gd" id="3_rwtaf"]
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="5_j56gx"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="2_5uqf0"]
+[ext_resource type="Script" uid="uid://crxgf35d0q8o1" path="res://Scenes/Card_Fight/Card/Card_Modules/MaxReserveModule.gd" id="3_rwtaf"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="5_j56gx"]
 
 [sub_resource type="Resource" id="Resource_5uqf0"]
 script = ExtResource("3_rwtaf")

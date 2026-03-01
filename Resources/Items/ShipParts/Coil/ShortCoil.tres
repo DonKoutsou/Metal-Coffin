@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="WeaponShipPart" format=3 uid="uid://b0oy34hfyku06"]
 
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scripts/CardFight/CardStats.gd" id="1_3xmbh"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="1_3xmbh"]
 [ext_resource type="Resource" uid="uid://dyc7jktln3i74" path="res://Resources/Cards/Barrage/TeslaCoil.tres" id="2_aagpo"]
 [ext_resource type="Resource" uid="uid://yxu4yok1d0e" path="res://Resources/Cards/Barrage/DisCharge.tres" id="3_j17v7"]
 [ext_resource type="Resource" uid="uid://gcxghv6bm43p" path="res://Resources/Items/ShipParts/Coil/MediumCoil.tres" id="4_j17v7"]

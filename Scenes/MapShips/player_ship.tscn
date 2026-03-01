@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://dhr5epkvjl588"]
 
-[ext_resource type="Script" uid="uid://dlu3wdrtljpfh" path="res://Scripts/Ships/player_ship.gd" id="1_ekbhy"]
-[ext_resource type="Resource" uid="uid://caroffy3ubxip" path="res://Resources/Captains/PlayerCaptains/Craden.tres" id="2_ddg27"]
+[ext_resource type="Script" uid="uid://dlu3wdrtljpfh" path="res://Scenes/MapShips/Ships/player_ship.gd" id="1_ekbhy"]
+[ext_resource type="PackedScene" uid="uid://wtmojbpjfelb" path="res://Scenes/MapShips/Base_MapShip.tscn" id="1_phbnr"]
+[ext_resource type="Resource" uid="uid://caroffy3ubxip" path="res://Resources/Captains/PlayerCaptains/Craden.tres" id="3_ogc8b"]
 [ext_resource type="PackedScene" uid="uid://cw6nos06km7b3" path="res://Scenes/MapShips/PlayerDroneDock.tscn" id="5_vcup0"]
 [ext_resource type="AudioStream" uid="uid://b5f578ok7pvtj" path="res://Assets/Sounds/turbine_01.wav" id="6_0t4kc"]
 [ext_resource type="Texture2D" uid="uid://c6efc2y6xflyc" path="res://Assets/ShipTextures/Ship3_001.png" id="6_6lhcj"]
@@ -11,13 +12,10 @@
 [ext_resource type="Shader" uid="uid://cqgk0egpp8vmb" path="res://Shaders/ShipVisualTest.gdshader" id="11_ogc8b"]
 [ext_resource type="Texture2D" uid="uid://bn3s18w1rjx3d" path="res://Assets/UIPiecies/Light.png" id="20_hn8tc"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vppi8"]
-light_mode = 1
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mktum"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7aewx"]
 resource_local_to_scene = true
 shader = ExtResource("11_ogc8b")
-shader_parameter/ShipSize = 0.008
+shader_parameter/ShipSize = 0.08
 shader_parameter/shadow_parallax_amount = 0.5
 shader_parameter/sprite_rotation = -1.57
 
@@ -30,47 +28,35 @@ interpolation_color_space = 1
 offsets = PackedFloat32Array(0, 0.715481, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.313, 0.313, 0.313, 0)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_vwreh"]
+resource_local_to_scene = true
+radius = 150.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_ogc8b"]
 radius = 1000.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_rjoek"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_42dgb"]
-radius = 350.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_utfkb"]
-radius = 1000.0
-
-[node name="w" type="Node2D" unique_id=286802223 node_paths=PackedStringArray("AccelerationAudio", "L", "SonarShape", "MissileD", "TrailLines", "RadarShape", "ElintShape", "BodyShape", "DroneDok", "ShipSprite", "Acceleration") groups=["PlayerShips", "Ships"]]
-z_index = 1
-material = SubResource("CanvasItemMaterial_vppi8")
+[node name="PlayerShip" unique_id=974765209 node_paths=PackedStringArray("AccelerationAudio", "L", "SonarShape", "MissileD", "TrailLines", "DroneDok") groups=["PlayerShips"] instance=ExtResource("1_phbnr")]
 script = ExtResource("1_ekbhy")
 AccelerationAudio = NodePath("AudioStreamPlayer2D")
 L = NodePath("PointLight2D")
 SonarShape = NodePath("Sonar")
 MissileD = NodePath("MissileDock")
-LowStatsToNotifyAbout = Array[String](["FUEL", "OXYGEN", "HP", "HULL"])
-Cpt = ExtResource("2_ddg27")
+Cpt = ExtResource("3_ogc8b")
 TrailLines = [NodePath("ColorRect/TrailLine"), NodePath("ColorRect/TrailLine2")]
-RadarShape = NodePath("Radar")
-ElintShape = NodePath("Elint")
-BodyShape = NodePath("ShipBody")
 DroneDok = NodePath("DroneDock")
-ShipSprite = NodePath("ColorRect")
-Acceleration = NodePath("Aceleration")
 
-[node name="Aceleration" type="Node2D" parent="." unique_id=1564058399]
-
-[node name="ColorRect" type="Sprite2D" parent="." unique_id=905533760]
-z_index = -2
-texture_filter = 4
-material = SubResource("ShaderMaterial_mktum")
-rotation = -1.5708
+[node name="ColorRect" parent="." index="1" unique_id=1708187202]
+material = SubResource("ShaderMaterial_7aewx")
 texture = ExtResource("6_6lhcj")
 
-[node name="TrailLine" type="Line2D" parent="ColorRect" unique_id=1949735973]
+[node name="TrailLine" parent="ColorRect" index="0" unique_id=994780843]
+position = Vector2(2.0000796, -21.999992)
+
+[node name="TrailLine2" type="Line2D" parent="ColorRect" index="1" unique_id=2010097455]
 show_behind_parent = true
-position = Vector2(0.445, -1.655)
+position = Vector2(-3.9999206, -22.000015)
+rotation = 1.5708
+scale = Vector2(2, 2)
 points = PackedVector2Array(0, 0)
 width = 2.0
 width_curve = SubResource("Curve_mktum")
@@ -80,68 +66,31 @@ script = ExtResource("9_wfgcg")
 min_distance = 1.0
 metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 
-[node name="TrailLine2" type="Line2D" parent="ColorRect" unique_id=2115693578]
-show_behind_parent = true
-position = Vector2(-0.285, -1.76)
-points = PackedVector2Array(0, 0)
-width = 2.0
-width_curve = SubResource("Curve_mktum")
-gradient = SubResource("Gradient_wfgcg")
-round_precision = 1
-script = ExtResource("9_wfgcg")
-min_distance = 1.0
-metadata/_custom_type_script = "uid://cmkc6lix20rjb"
+[node name="CollisionShape2D" parent="Radar" parent_id_path=PackedInt32Array(1177421846) index="0" unique_id=689109080]
+shape = SubResource("CircleShape2D_vwreh")
 
-[node name="Sonar" type="Area2D" parent="." unique_id=310592165]
+[node name="Sonar" type="Area2D" parent="." index="5" unique_id=1115196160]
 disable_mode = 2
 collision_layer = 0
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sonar" unique_id=1409079965]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sonar" index="0" unique_id=205796897]
 visible = false
 shape = SubResource("CircleShape2D_ogc8b")
 debug_color = Color(0, 0.650296, 0.101282, 0.42)
 
-[node name="ShipBody" type="Area2D" parent="." unique_id=1450037114]
-collision_mask = 5
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipBody" unique_id=1165760597]
-visible = false
-shape = SubResource("CircleShape2D_rjoek")
-debug_color = Color(0.839233, 0.00116919, 0.924893, 0.42)
-
-[node name="Radar" type="Area2D" parent="." unique_id=417947203]
-disable_mode = 2
-collision_layer = 2
-collision_mask = 5
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Radar" unique_id=383169955]
-visible = false
-shape = SubResource("CircleShape2D_42dgb")
-debug_color = Color(0, 0.650296, 0.101282, 0.42)
-
-[node name="Elint" type="Area2D" parent="." unique_id=42357034]
-collision_layer = 0
-collision_mask = 2
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Elint" unique_id=900292555]
-visible = false
-shape = SubResource("CircleShape2D_utfkb")
-debug_color = Color(0.772676, 0.418681, 0.395994, 0.42)
-
-[node name="MissileDock" type="Node2D" parent="." unique_id=1287622509]
+[node name="MissileDock" type="Node2D" parent="." index="6" unique_id=912565508]
 script = ExtResource("9_dl1n1")
 MissileDockEventH = ExtResource("9_jx5d0")
 
-[node name="DroneDock" parent="." unique_id=1032432333 instance=ExtResource("5_vcup0")]
+[node name="DroneDock" parent="." index="7" unique_id=71181084 instance=ExtResource("5_vcup0")]
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=581996111]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="8" unique_id=1453664541]
 stream = ExtResource("6_0t4kc")
 volume_db = -20.0
 bus = &"Engine"
 
-[node name="PointLight2D" type="PointLight2D" parent="." unique_id=596857163]
+[node name="PointLight2D" type="PointLight2D" parent="." index="9" unique_id=808789784]
 blend_mode = 2
 shadow_color = Color(0.767, 0, 0.373, 1)
 texture = ExtResource("20_hn8tc")

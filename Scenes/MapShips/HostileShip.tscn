@@ -1,0 +1,159 @@
+[gd_scene format=3 uid="uid://kwr75a1p3qrm"]
+
+[ext_resource type="PackedScene" uid="uid://wtmojbpjfelb" path="res://Scenes/MapShips/Base_MapShip.tscn" id="1_8a48r"]
+[ext_resource type="Script" uid="uid://qu6263wmeh50" path="res://Scenes/MapShips/Ships/Hostile_Ship.gd" id="1_dinuw"]
+[ext_resource type="Texture2D" uid="uid://djew1bbdsgpqs" path="res://Assets/CaptainPortraits/plane_Wheel_BaseColor.png" id="2_nqjlc"]
+[ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="3_ksaka"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="4_xbxhh"]
+[ext_resource type="Shader" uid="uid://cqgk0egpp8vmb" path="res://Shaders/ShipVisualTest.gdshader" id="5_7v2kq"]
+[ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="5_ghxqh"]
+[ext_resource type="Texture2D" uid="uid://clst6a32c5mmn" path="res://Assets/ShipTextures/Scarab.png" id="6_tlfh0"]
+[ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="7_5qtwm"]
+[ext_resource type="PackedScene" uid="uid://dv64iu4t4ja87" path="res://Scenes/MapShips/HostileDroneDock.tscn" id="7_hahnw"]
+[ext_resource type="Resource" uid="uid://c8wthdbwacfhe" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/Engine2.tres" id="8_ubtua"]
+[ext_resource type="PackedScene" uid="uid://b0gylky44tnsw" path="res://Scenes/Enemies/PatrolBT.tscn" id="8_w8ob0"]
+[ext_resource type="Resource" uid="uid://css6e78uhfsfa" path="res://Resources/Items/ShipParts/MG/ShortMachinegun100mm.tres" id="9_ixrgj"]
+[ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FuelTank.tres" id="10_7bp8q"]
+[ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="11_goor5"]
+[ext_resource type="Resource" uid="uid://f8x3cqxrqo6s" path="res://Resources/Items/Ammo/Flares.tres" id="12_lrb77"]
+[ext_resource type="Resource" uid="uid://cnrek2mbia331" path="res://Resources/Items/Ammo/ProxyFuseAmmoMagazine100mm.tres" id="13_lp55k"]
+
+[sub_resource type="Resource" id="Resource_jvup1"]
+script = ExtResource("3_ksaka")
+StatName = 2
+
+[sub_resource type="Resource" id="Resource_bf8ot"]
+script = ExtResource("3_ksaka")
+StatName = 6
+StatBase = 90.0
+
+[sub_resource type="Resource" id="Resource_mcdo0"]
+script = ExtResource("3_ksaka")
+StatName = 3
+
+[sub_resource type="Resource" id="Resource_ovl1h"]
+resource_local_to_scene = true
+script = ExtResource("3_ksaka")
+StatName = 4
+StatBase = 60.0
+
+[sub_resource type="Resource" id="Resource_7g4dd"]
+script = ExtResource("3_ksaka")
+StatName = 7
+
+[sub_resource type="Resource" id="Resource_hxdnx"]
+script = ExtResource("3_ksaka")
+StatName = 5
+StatBase = 3.0
+metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
+
+[sub_resource type="Resource" id="Resource_4p6v8"]
+script = ExtResource("3_ksaka")
+StatName = 1
+
+[sub_resource type="Resource" id="Resource_2ft0v"]
+resource_local_to_scene = true
+script = ExtResource("3_ksaka")
+
+[sub_resource type="Resource" id="Resource_h3q7u"]
+script = ExtResource("3_ksaka")
+StatName = 8
+
+[sub_resource type="Resource" id="Resource_xmlya"]
+script = ExtResource("3_ksaka")
+StatName = 9
+StatBase = 30.0
+metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
+
+[sub_resource type="Resource" id="Resource_j0vsk"]
+script = ExtResource("3_ksaka")
+StatName = 10
+StatBase = 1.0
+metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
+
+[sub_resource type="Resource" id="Resource_mphws"]
+script = ExtResource("3_ksaka")
+StatName = 11
+StatBase = 1.0
+metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
+
+[sub_resource type="Resource" id="Resource_rjpe7"]
+script = ExtResource("3_ksaka")
+StatName = 12
+StatBase = 1.0
+metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
+
+[sub_resource type="Resource" id="Resource_mil77"]
+script = ExtResource("3_ksaka")
+StatName = 13
+StatBase = 1.0
+metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
+
+[sub_resource type="Resource" id="Resource_xx2gh"]
+script = ExtResource("3_ksaka")
+StatName = 14
+StatBase = 2.0
+metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
+
+[sub_resource type="Resource" id="Resource_bewff"]
+script = ExtResource("3_ksaka")
+StatName = 15
+StatBase = 120.0
+
+[sub_resource type="Resource" id="Resource_aqvi6"]
+script = ExtResource("3_ksaka")
+StatName = 16
+
+[sub_resource type="Resource" id="Resource_lav7j"]
+script = ExtResource("3_ksaka")
+StatName = 17
+
+[sub_resource type="Resource" id="Resource_fukcl"]
+resource_local_to_scene = true
+script = ExtResource("7_5qtwm")
+ItemName = "Fire Suppression Unit"
+ItemDesc = "A dependable propulsion unit, optimized for low-maintenance operation. Suitable for basic fleet configurations, it ensures reliable function under standard conditions."
+MaxStackCount = 99
+CardProviding = Array[ExtResource("4_xbxhh")]([ExtResource("11_goor5")])
+Cost = 200
+
+[sub_resource type="Resource" id="Resource_t4fx1"]
+resource_local_to_scene = true
+script = ExtResource("5_ghxqh")
+CaptainName = "Tick"
+CaptainPortrait = ExtResource("2_nqjlc")
+ShipIcon = ExtResource("6_tlfh0")
+CaptainStats = Array[ExtResource("3_ksaka")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_mcdo0"), SubResource("Resource_ovl1h"), SubResource("Resource_7g4dd"), SubResource("Resource_hxdnx"), SubResource("Resource_4p6v8"), SubResource("Resource_2ft0v"), SubResource("Resource_h3q7u"), SubResource("Resource_xmlya"), SubResource("Resource_j0vsk"), SubResource("Resource_mphws"), SubResource("Resource_rjpe7"), SubResource("Resource_mil77"), SubResource("Resource_xx2gh"), SubResource("Resource_bewff"), SubResource("Resource_aqvi6"), SubResource("Resource_lav7j")])
+ShipCallsign = "P1"
+StartingItems = Array[ExtResource("7_5qtwm")]([ExtResource("8_ubtua"), ExtResource("9_ixrgj"), ExtResource("9_ixrgj"), ExtResource("10_7bp8q"), SubResource("Resource_fukcl"), SubResource("Resource_fukcl"), SubResource("Resource_fukcl"), ExtResource("12_lrb77"), ExtResource("12_lrb77"), ExtResource("12_lrb77"), ExtResource("13_lp55k"), ExtResource("13_lp55k"), ExtResource("13_lp55k")])
+ProvidingFunds = 25000
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jiih6"]
+resource_local_to_scene = true
+shader = ExtResource("5_7v2kq")
+shader_parameter/ShipSize = 0.08
+shader_parameter/shadow_parallax_amount = 0.5
+shader_parameter/sprite_rotation = -1.57
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hnpap"]
+resource_local_to_scene = true
+radius = 150.0
+
+[node name="HostileShip" unique_id=974765209 node_paths=PackedStringArray("DroneDok") groups=["Enemy"] instance=ExtResource("1_8a48r")]
+script = ExtResource("1_dinuw")
+Direction = -1
+ShipName = ""
+Patrol = true
+Convoy = false
+BT = ExtResource("8_w8ob0")
+Cpt = SubResource("Resource_t4fx1")
+DroneDok = NodePath("DroneDock")
+
+[node name="ColorRect" parent="." index="1" unique_id=1708187202]
+material = SubResource("ShaderMaterial_jiih6")
+
+[node name="CollisionShape2D" parent="Radar" parent_id_path=PackedInt32Array(1177421846) index="0" unique_id=689109080]
+shape = SubResource("CircleShape2D_hnpap")
+
+[node name="DroneDock" parent="." index="5" unique_id=2097404777 instance=ExtResource("7_hahnw")]
+collision_layer = 8

@@ -1,24 +1,24 @@
 [gd_scene format=3 uid="uid://buj48d65j7y07"]
 
-[ext_resource type="Script" uid="uid://c72wan3kdku8s" path="res://Scripts/UI/ingame_ui_manager.gd" id="1_3cf0e"]
+[ext_resource type="Script" uid="uid://c72wan3kdku8s" path="res://Scenes/InScreenUI/ingame_ui_manager.gd" id="1_j7r7e"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="3_b4kau"]
-[ext_resource type="PackedScene" uid="uid://bq1ns0us14bn3" path="res://Scenes/InScreenUI/Cursor.tscn" id="3_lbfwx"]
+[ext_resource type="PackedScene" uid="uid://bq1ns0us14bn3" path="res://Scenes/InScreenUI/Cursor/Cursor.tscn" id="3_lbfwx"]
 [ext_resource type="PackedScene" uid="uid://dy41ui65qkhmb" path="res://Scenes/MapMarkers/Map_Marker_Editor.tscn" id="4_w862u"]
-[ext_resource type="PackedScene" uid="uid://ccmqbt58qk8rv" path="res://Scenes/InScreenUI/simulation_notification.tscn" id="5_g51f2"]
-[ext_resource type="PackedScene" uid="uid://cary2uh0sdos1" path="res://Scenes/InScreenUI/ScreenRainEffect.tscn" id="5_j7r7e"]
+[ext_resource type="PackedScene" uid="uid://ccmqbt58qk8rv" path="res://Scenes/InScreenUI/Simulation_Info/simulation_notification.tscn" id="5_g51f2"]
+[ext_resource type="PackedScene" uid="uid://cary2uh0sdos1" path="res://Scenes/InScreenUI/Rain_Effect/ScreenRainEffect.tscn" id="5_j7r7e"]
 [ext_resource type="PackedScene" uid="uid://dslxdgbana1k1" path="res://Scenes/Inventory/inventory.tscn" id="6_u1p46"]
-[ext_resource type="PackedScene" uid="uid://yin8tcre8wf8" path="res://Scenes/InScreenUI/port_notification.tscn" id="7_4bt5v"]
+[ext_resource type="PackedScene" uid="uid://yin8tcre8wf8" path="res://Scenes/InScreenUI/Port_Info/port_notification.tscn" id="7_4bt5v"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="9_8iafl"]
-[ext_resource type="PackedScene" uid="uid://cba7o3slmlft0" path="res://Scenes/ScreenUI/AltitudeLevel.tscn" id="9_avpxw"]
-[ext_resource type="Script" uid="uid://r1gk8eplct22" path="res://Scenes/InScreenUI/altitude_text.gd" id="9_u111i"]
+[ext_resource type="PackedScene" uid="uid://cba7o3slmlft0" path="res://Scenes/InScreenUI/Altitude_Level/AltitudeLevel.tscn" id="9_avpxw"]
+[ext_resource type="Script" uid="uid://r1gk8eplct22" path="res://Scenes/InScreenUI/Altitude_Level/altitude_text.gd" id="9_u111i"]
 [ext_resource type="FontFile" uid="uid://b2yy0s6fyaml0" path="res://Fonts/Play-Bold.ttf" id="10_ljnge"]
 [ext_resource type="Script" uid="uid://w1wbpwvhdq2o" path="res://Scripts/UI/cursor_pos.gd" id="11_avpxw"]
-[ext_resource type="PackedScene" uid="uid://dncqbpsg58qgq" path="res://Scenes/InScreenUI/weather_ui.tscn" id="11_j7r7e"]
+[ext_resource type="PackedScene" uid="uid://dncqbpsg58qgq" path="res://Scenes/InScreenUI/Weather_UI/weather_ui.tscn" id="11_j7r7e"]
 [ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="13_lb8ei"]
-[ext_resource type="PackedScene" uid="uid://d0iiqaijsg1y1" path="res://Scenes/InScreenUI/command_line.tscn" id="17_aessx"]
-[ext_resource type="PackedScene" uid="uid://diq2p5s5u6bc0" path="res://Scenes/ScreenUI/Clock.tscn" id="18_adjny"]
+[ext_resource type="PackedScene" uid="uid://d0iiqaijsg1y1" path="res://Scenes/InScreenUI/Commande_Line/command_line.tscn" id="17_aessx"]
+[ext_resource type="PackedScene" uid="uid://diq2p5s5u6bc0" path="res://Scenes/InScreenUI/Clock/Clock.tscn" id="18_adjny"]
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="19_j7r7e"]
-[ext_resource type="PackedScene" uid="uid://dtym0y7dgx7iv" path="res://Scenes/ScreenUI/ZoomLevel.tscn" id="21_u111i"]
+[ext_resource type="PackedScene" uid="uid://dtym0y7dgx7iv" path="res://Scenes/InScreenUI/Zoom_Level/ZoomLevel.tscn" id="21_u111i"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_avpxw"]
 draw_center = false
@@ -42,7 +42,7 @@ anti_aliasing = false
 process_mode = 1
 layer = 0
 follow_viewport_enabled = true
-script = ExtResource("1_3cf0e")
+script = ExtResource("1_j7r7e")
 _Inventory = NodePath("VBoxContainer/UnderStatUI/Inventory")
 _MapMarkerEditor = NodePath("MapMarkerEditor")
 PopupPlecement = NodePath("CanvasLayer/PopupPlecement")
