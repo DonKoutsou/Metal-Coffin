@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://b5vi65a1j0fjf"]
+
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_s8djp"]
+[ext_resource type="Script" uid="uid://cs5fudgijb2eo" path="res://Scenes/InScreenUI/WorldView/worldview_notif.gd" id="2_5vett"]
+[ext_resource type="PackedScene" uid="uid://mxfnm7hywo4f" path="res://Scenes/Old/damage_floater.tscn" id="3_gdonq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6pg0c"]
+bg_color = Color(1, 0.763983, 0.0812772, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_bottom_left = 5
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4iy22"]
+bg_color = Color(0.11435, 0.205627, 0.212156, 1)
+corner_radius_top_left = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rbex0"]
+bg_color = Color(1, 0.763983, 0.0812772, 1)
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cmob4"]
+bg_color = Color(0.11435, 0.205627, 0.212156, 1)
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_bottom = 1.0
+
+[node name="WorldviewNotif" type="PanelContainer" unique_id=2089384312 node_paths=PackedStringArray("Negativebar", "Possetivebar")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -531.0
+offset_top = 50.0
+offset_right = -53.0
+offset_bottom = 116.0
+grow_horizontal = 0
+theme_override_styles/panel = ExtResource("1_s8djp")
+script = ExtResource("2_5vett")
+Negativebar = NodePath("VBoxContainer/HBoxContainer/ProgressBar")
+Possetivebar = NodePath("VBoxContainer/HBoxContainer/ProgressBar2")
+DamageFloaterScene = ExtResource("3_gdonq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1676186998]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=1429455682]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=1584765440]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "COMPOSURE"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=146500775]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "AGITATION"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=272177022]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer" unique_id=1255246925]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_6pg0c")
+theme_override_styles/fill = SubResource("StyleBoxFlat_4iy22")
+step = 1.0
+fill_mode = 1
+show_percentage = false
+
+[node name="ProgressBar2" type="ProgressBar" parent="VBoxContainer/HBoxContainer" unique_id=802068233]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_rbex0")
+theme_override_styles/fill = SubResource("StyleBoxFlat_cmob4")
+step = 1.0
+value = 11.0
+show_percentage = false

@@ -3,7 +3,7 @@
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_dj5ey"]
 [ext_resource type="Script" uid="uid://c18s5swteqr3n" path="res://Scenes/Card_Fight/cagefight_team_setup.gd" id="1_enhfx"]
 [ext_resource type="PackedScene" uid="uid://dci144io03ffa" path="res://Scenes/CaptainButton.tscn" id="1_ogj7o"]
-[ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="3_dy7ir"]
+[ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scenes/MapShips/Stats/Captain.gd" id="3_dy7ir"]
 [ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scenes/Card_Fight/External_UI/CardHandContainer.gd" id="3_k7fqh"]
 [ext_resource type="Resource" uid="uid://caroffy3ubxip" path="res://Resources/Captains/PlayerCaptains/Craden.tres" id="4_vg4g5"]
 [ext_resource type="Resource" uid="uid://c6f3bxpe2rsxd" path="res://Resources/Captains/PlayerCaptains/Baron.tres" id="5_qxf1y"]

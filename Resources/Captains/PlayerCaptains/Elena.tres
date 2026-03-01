@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Captain" format=3 uid="uid://baci05am3ufd7"]
 
 [ext_resource type="Texture2D" uid="uid://b1m8f03b6gs8n" path="res://Assets/CaptainPortraits/Captain4.png" id="1_th3p2"]
-[ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="2_g2kmb"]
-[ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_vqeqm"]
+[ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scenes/MapShips/Stats/Captain.gd" id="2_g2kmb"]
+[ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scenes/MapShips/Stats/ShipStat.gd" id="2_vqeqm"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_a7xj7"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="3_p36qh"]
 [ext_resource type="Resource" uid="uid://cnqhhk0a4yp6e" path="res://Resources/Captains/PlayerCaptains/Corkan.tres" id="5_pbppl"]

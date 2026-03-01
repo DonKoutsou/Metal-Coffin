@@ -5,9 +5,9 @@ class_name StartingScreen
 @export var StartingMenuScene : String = "res://Scenes/starting_menu.tscn"
 @export var DitherShader : ShaderMaterial
 @export_file("*.tscn") var StudioAnim : String
-@export var GameScene : String = "res://Scenes/World.tscn"
-@export var IntroGameScene : String = "res://Scenes/IntroWorld.tscn"
-@export var CageFightGameScene : String = "res://Scenes/CageFightWorld.tscn"
+@export_file("*.tscn") var GameScene : String = "res://Scenes/World.tscn"
+@export_file("*.tscn") var IntroGameScene : String = "res://Scenes/IntroWorld.tscn"
+@export_file("*.tscn") var CageFightGameScene : String = "res://Scenes/CageFightWorld.tscn"
 
 var StMenu : StartingMenu
 var Wor : World

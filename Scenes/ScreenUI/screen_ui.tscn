@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://biel8sjt8vy5t"]
 
-[ext_resource type="Script" uid="uid://c1lci08gg4rgx" path="res://Scripts/screen_ui.gd" id="2_spr1r"]
+[ext_resource type="Script" uid="uid://c1lci08gg4rgx" path="res://Scenes/ScreenUI/screen_ui.gd" id="2_spr1r"]
 [ext_resource type="AudioStream" uid="uid://cldd76tc7yo40" path="res://Assets/Sounds/Static.wav" id="3_ng3jm"]
 [ext_resource type="AudioStream" uid="uid://cswf3fsn5sfm5" path="res://Assets/Sounds/Towns/Cave_Ambient.mp3" id="4_ao4ul"]
 [ext_resource type="Texture2D" uid="uid://co2070b5ddh8o" path="res://Assets/UIPiecies/cables2_Camera 1.png" id="30_c0ifk"]
 [ext_resource type="Texture2D" uid="uid://pbq8ib83s6uw" path="res://Assets/UIPiecies/cables_Camera 1.png" id="31_g4rws"]
 [ext_resource type="Script" uid="uid://c11sqafe6873w" path="res://Scripts/Cables.gd" id="31_ua54b"]
-[ext_resource type="PackedScene" uid="uid://nt73d42f2o1p" path="res://Scenes/ScreenUI/screen_cam.tscn" id="37_6aw6g"]
+[ext_resource type="PackedScene" uid="uid://nt73d42f2o1p" path="res://Scenes/ScreenUI/Camera/screen_cam.tscn" id="37_6aw6g"]
 
 [node name="ScreenUI" type="CanvasLayer" unique_id=1773636653 node_paths=PackedStringArray("Cam", "Cables")]
 process_mode = 1

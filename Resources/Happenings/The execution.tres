@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Happening" format=3 uid="uid://c5n56ywx45ilm"]
 
-[ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="1_tpfoe"]
-[ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="2_7kn1s"]
-[ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="4_kp7kq"]
+[ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scenes/Map/MapSpot/Happenings/HappeningStage.gd" id="1_tpfoe"]
+[ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scenes/Map/MapSpot/Happenings/HappeningOption.gd" id="2_7kn1s"]
+[ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scenes/Map/MapSpot/Happenings/Happening.gd" id="4_kp7kq"]
 
 [sub_resource type="Resource" id="Resource_4kru7"]
 script = ExtResource("1_tpfoe")

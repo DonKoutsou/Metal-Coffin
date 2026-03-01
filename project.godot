@@ -28,14 +28,14 @@ buses/default_bus_layout="uid://c3nyxeslcljc8"
 
 [autoload]
 
-BeehaveGlobalMetrics="*res://addons/beehave/metrics/beehave_global_metrics.gd"
-BeehaveGlobalDebugger="*res://addons/beehave/debug/global_debugger.gd"
-MusicMan="*res://Scenes/GlobalManagers/music_manager.tscn"
-UiSoundManager="*res://Scenes/GlobalManagers/ui_sound_manager.tscn"
-Help="*res://Scenes/GlobalManagers/helper.tscn"
+BeehaveGlobalMetrics="*uid://d14hw5fhpl8xw"
+BeehaveGlobalDebugger="*uid://csggdkdudqak2"
+MusicMan="*res://Scenes/GlobalManagers/Sound/music_manager.tscn"
+UiSoundManager="*res://Scenes/GlobalManagers/Sound/ui_sound_manager.tscn"
+Help="*res://Scenes/GlobalManagers/Helper/helper.tscn"
 Save="*res://Scripts/Save/save_load_manager.gd"
 TutorialManager="*res://Scenes/GlobalManagers/Tutorial/tutorial_manager.tscn"
-AchMan="*res://Scenes/GlobalManagers/achievement_manager.gd"
+AchMan="*res://Scenes/GlobalManagers/Tutorial/achievement_manager.gd"
 PopupManager="*res://Scenes/GlobalManagers/PopupManager.tscn"
 
 [display]
@@ -56,7 +56,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/BurstParticles2D/plugin.cfg", "res://addons/CaptainCreatorPlugin/plugin.cfg", "res://addons/linepath2d/plugin.cfg", "res://addons/script-ide/plugin.cfg", "res://addons/yard/plugin.cfg")
+enabled=PackedStringArray("res://addons/BurstParticles2D/plugin.cfg", "res://addons/CaptainCreatorPlugin/plugin.cfg", "res://addons/beehave/plugin.cfg", "res://addons/linepath2d/plugin.cfg", "res://addons/script-ide/plugin.cfg", "res://addons/yard/plugin.cfg")
 
 [global_group]
 

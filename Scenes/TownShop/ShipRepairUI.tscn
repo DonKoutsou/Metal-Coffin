@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c7ojj8un8chim"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_k73m2"]
-[ext_resource type="Script" uid="uid://bbqhblx2swobg" path="res://Scripts/TownShop/ship_repair_ui.gd" id="2_k73m2"]
+[ext_resource type="Script" uid="uid://bbqhblx2swobg" path="res://Scenes/TownShop/ship_repair_ui.gd" id="2_k73m2"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="3_0m2lf"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="4_c743t"]
 [ext_resource type="AudioStream" uid="uid://b6f41xjveqo8b" path="res://Assets/Sounds/UI_in.mp3" id="5_tw0o4"]

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://buuo261afg6tg"]
 
-[ext_resource type="Script" uid="uid://cxu4xgn8lpth6" path="res://Scripts/DeckPile.gd" id="2_e8dky"]
+[ext_resource type="Script" uid="uid://cxu4xgn8lpth6" path="res://Scenes/Card_Fight/DeckPile.gd" id="2_e8dky"]
 
 [node name="DeckButton" type="Control" unique_id=69575806]
 layout_mode = 3

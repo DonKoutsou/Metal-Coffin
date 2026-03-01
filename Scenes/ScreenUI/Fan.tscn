@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://chso61of6gp0i" path="res://Assets/FanFrames/Untitled_FullQuality_00012.png" id="13_wew1k"]
 [ext_resource type="Texture2D" uid="uid://cgsva87ebtpa8" path="res://Assets/FanFrames/Untitled_FullQuality_00013.png" id="14_gyl7m"]
 [ext_resource type="AudioStream" uid="uid://d3b26by6x3yig" path="res://Assets/Sounds/Fan.mp3" id="18_3ie5m"]
-[ext_resource type="Script" uid="uid://djvoh3v6ya70x" path="res://Scripts/fan.gd" id="25_33lmu"]
+[ext_resource type="Script" uid="uid://djvoh3v6ya70x" path="res://Scenes/ScreenUI/fan.gd" id="25_33lmu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jvc5q"]
 animations = [{

@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="Captain" format=3 uid="uid://b8vvlcvjkqhjt"]
 
 [ext_resource type="Texture2D" uid="uid://djew1bbdsgpqs" path="res://Assets/CaptainPortraits/plane_Wheel_BaseColor.png" id="1_58xc8"]
-[ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scripts/Stats/ShipStat.gd" id="2_cudfy"]
+[ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scenes/MapShips/Stats/ShipStat.gd" id="2_cudfy"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="3_jf7b8"]
-[ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scripts/Stats/Captain.gd" id="4_er2bu"]
+[ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scenes/MapShips/Stats/Captain.gd" id="4_er2bu"]
 [ext_resource type="Texture2D" uid="uid://dtrrhbntf02a3" path="res://Assets/ShipTextures/ShipElena2.png" id="5_tw1wi"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="6_bak8y"]
 [ext_resource type="Resource" uid="uid://c8wthdbwacfhe" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/Engine2.tres" id="7_fglme"]

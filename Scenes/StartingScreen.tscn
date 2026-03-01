@@ -10,6 +10,9 @@ process_mode = 3
 script = ExtResource("1_kry56")
 DitherShader = ExtResource("2_7bhdu")
 StudioAnim = "uid://cmdvuq7n6nncl"
+GameScene = "uid://cbhf8nh85npqq"
+IntroGameScene = "uid://cid0s6uni7fky"
+CageFightGameScene = "uid://b575fi0e44gkg"
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1758213328]
 material = ExtResource("3_vb6t2")

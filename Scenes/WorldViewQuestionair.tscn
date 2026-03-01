@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://c2db1rw6borur"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_0ey4p"]
-[ext_resource type="Script" uid="uid://feql74pw4kam" path="res://Scripts/WorldView/world_view_questionair.gd" id="2_wn0u1"]
-[ext_resource type="Script" uid="uid://cpsu3uuo3rqxr" path="res://Scripts/WorldView/WorldviewQuestion.gd" id="3_5vy1l"]
+[ext_resource type="Script" uid="uid://feql74pw4kam" path="res://Scenes/InScreenUI/WorldView/world_view_questionair.gd" id="2_wn0u1"]
+[ext_resource type="Script" uid="uid://cpsu3uuo3rqxr" path="res://Scenes/InScreenUI/WorldView/WorldviewQuestion.gd" id="3_5vy1l"]
 [ext_resource type="Resource" uid="uid://b14pf60c6owon" path="res://Resources/Worldview/Questions/ComposureAgitation/Question1.tres" id="4_0jjjo"]
 [ext_resource type="Resource" uid="uid://imhmel7yejn2" path="res://Resources/Worldview/Questions/ComposureAgitation/Question5.tres" id="5_0ey4p"]
 [ext_resource type="Resource" uid="uid://jfvfthb8ap5o" path="res://Resources/Worldview/Questions/ComposureAgitation/Question9.tres" id="6_mkbl6"]

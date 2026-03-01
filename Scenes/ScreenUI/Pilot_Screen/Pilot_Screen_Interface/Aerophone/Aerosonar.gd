@@ -60,15 +60,15 @@ func _onControlledShipUpdated(newController: PlayerDrivenShip) -> void:
 func fleetHasAeroSonar() -> bool:
 	if controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE) > 0:
 		return true
-	for cap: Captain in controller.GetDroneDock().GetCaptains():
-		if cap.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE) > 0:
+	for c: Captain in controller.GetDroneDock().GetCaptains():
+		if c.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE) > 0:
 			return true
 	return false
 
 func getCurrentFleetAeroSonarRange() -> float:
 	var maxRange = controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE)
-	for cap: Captain in controller.GetDroneDock().GetCaptains():
-		var testRange = cap.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE)
+	for c: Captain in controller.GetDroneDock().GetCaptains():
+		var testRange = c.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE)
 		if testRange > maxRange:
 			maxRange = testRange
 	return maxRange
@@ -93,8 +93,8 @@ func _updateContacts() -> void:
 			continue
 		var direction = controller.global_position.direction_to(target.global_position).angle()
 		var diff = Helper.angle_difference_radians(direction, currentAngle)
-		if abs(diff) > PI / 4:
-			continue
+		#if abs(diff) > PI / 4:
+			#continue
 
 		var thrustValue: float = 0.0
 		if target is MapShip:

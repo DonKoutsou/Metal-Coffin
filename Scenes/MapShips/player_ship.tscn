@@ -1,18 +1,18 @@
 [gd_scene format=3 uid="uid://dhr5epkvjl588"]
 
-[ext_resource type="Script" uid="uid://dlu3wdrtljpfh" path="res://Scenes/MapShips/Ships/player_ship.gd" id="1_ekbhy"]
+[ext_resource type="Script" uid="uid://dlu3wdrtljpfh" path="res://Scenes/MapShips/player_ship.gd" id="1_ekbhy"]
 [ext_resource type="PackedScene" uid="uid://wtmojbpjfelb" path="res://Scenes/MapShips/Base_MapShip.tscn" id="1_phbnr"]
 [ext_resource type="Resource" uid="uid://caroffy3ubxip" path="res://Resources/Captains/PlayerCaptains/Craden.tres" id="3_ogc8b"]
-[ext_resource type="PackedScene" uid="uid://cw6nos06km7b3" path="res://Scenes/MapShips/PlayerDroneDock.tscn" id="5_vcup0"]
+[ext_resource type="PackedScene" uid="uid://cw6nos06km7b3" path="res://Scenes/MapShips/DroneDock/PlayerDroneDock.tscn" id="5_vcup0"]
 [ext_resource type="AudioStream" uid="uid://b5f578ok7pvtj" path="res://Assets/Sounds/turbine_01.wav" id="6_0t4kc"]
 [ext_resource type="Texture2D" uid="uid://c6efc2y6xflyc" path="res://Assets/ShipTextures/Ship3_001.png" id="6_6lhcj"]
-[ext_resource type="Script" uid="uid://dn2ybl8146b6t" path="res://Scripts/missile_dock.gd" id="9_dl1n1"]
+[ext_resource type="Script" uid="uid://dn2ybl8146b6t" path="res://Scenes/MapShips/missile_dock.gd" id="9_dl1n1"]
 [ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/EventHandlers/MissileDockEventHandler.tres" id="9_jx5d0"]
-[ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="9_wfgcg"]
+[ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scenes/MapShips/Trail_Line/trail_line.gd" id="9_wfgcg"]
 [ext_resource type="Shader" uid="uid://cqgk0egpp8vmb" path="res://Shaders/ShipVisualTest.gdshader" id="11_ogc8b"]
 [ext_resource type="Texture2D" uid="uid://bn3s18w1rjx3d" path="res://Assets/UIPiecies/Light.png" id="20_hn8tc"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7aewx"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ogc8b"]
 resource_local_to_scene = true
 shader = ExtResource("11_ogc8b")
 shader_parameter/ShipSize = 0.08
@@ -28,7 +28,7 @@ interpolation_color_space = 1
 offsets = PackedFloat32Array(0, 0.715481, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.313, 0.313, 0.313, 0)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_vwreh"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_7aewx"]
 resource_local_to_scene = true
 radius = 150.0
 
@@ -46,17 +46,16 @@ TrailLines = [NodePath("ColorRect/TrailLine"), NodePath("ColorRect/TrailLine2")]
 DroneDok = NodePath("DroneDock")
 
 [node name="ColorRect" parent="." index="1" unique_id=1708187202]
-material = SubResource("ShaderMaterial_7aewx")
+material = SubResource("ShaderMaterial_ogc8b")
 texture = ExtResource("6_6lhcj")
 
 [node name="TrailLine" parent="ColorRect" index="0" unique_id=994780843]
-position = Vector2(2.0000796, -21.999992)
+position = Vector2(0.5, -1)
 
 [node name="TrailLine2" type="Line2D" parent="ColorRect" index="1" unique_id=2010097455]
 show_behind_parent = true
-position = Vector2(-3.9999206, -22.000015)
+position = Vector2(-0.5, -1)
 rotation = 1.5708
-scale = Vector2(2, 2)
 points = PackedVector2Array(0, 0)
 width = 2.0
 width_curve = SubResource("Curve_mktum")
@@ -67,7 +66,7 @@ min_distance = 1.0
 metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 
 [node name="CollisionShape2D" parent="Radar" parent_id_path=PackedInt32Array(1177421846) index="0" unique_id=689109080]
-shape = SubResource("CircleShape2D_vwreh")
+shape = SubResource("CircleShape2D_7aewx")
 
 [node name="Sonar" type="Area2D" parent="." index="5" unique_id=1115196160]
 disable_mode = 2

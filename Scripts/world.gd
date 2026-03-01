@@ -6,12 +6,12 @@ class_name World
 @export var _Command : Commander
 @export var Controller : ShipContoller
 @export_group("Scenes")
-@export var CardFightScene : String = "res://Scenes/Cards/CardFight.tscn"
-@export var LoadingScene : String = "res://Scenes/InScreenUI/loading_screen.tscn"
-@export var FleetSeparationScene : String = "res://Scenes/InScreenUI/FleetSparationScene.tscn"
-@export var HappeningUI : String = "res://Scenes/InScreenUI/HappeningUI.tscn"
-@export var WorldViewQuestionairScene : String = "res://Scenes/WorldViewQuestionair.tscn"
-@export var FuelTradeScene : String = "res://Scenes/TownShop/TownScene.tscn"
+@export_file(".tscn") var CardFightScene : String = "res://Scenes/Cards/CardFight.tscn"
+@export_file(".tscn") var LoadingScene : String = "res://Scenes/InScreenUI/loading_screen.tscn"
+@export_file(".tscn") var FleetSeparationScene : String = "res://Scenes/InScreenUI/FleetSparationScene.tscn"
+@export_file(".tscn") var HappeningUI : String = "res://Scenes/InScreenUI/HappeningUI.tscn"
+@export_file(".tscn") var WorldViewQuestionairScene : String = "res://Scenes/WorldViewQuestionair.tscn"
+@export_file(".tscn") var TownSceneFile : String = "res://Scenes/TownShop/TownScene.tscn"
 #@export var IntroText : String
 @export_group("Prologue")
 @export var PrologueTrigger : PackedScene
@@ -419,7 +419,7 @@ func CardFightDestroyed() -> void:
 func OnLandRequested(ControlledShip : MapShip) -> void:
 	RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.LANDING_START)
 	PopUpManager.GetInstance().DoFadeNotif("Landing sequence initiated")
-	ControlledShip.UpdateTargetAltitude(ControlledShip.CurrentLandAltitude)
+	ControlledShip.UpdateTargetAltitude(-1000)
 
 func OnOpenHatchRequested(ControlledShip : MapShip) -> void:
 	var Instigator = ControlledShip
@@ -457,7 +457,7 @@ func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 	if (PlayedEvent):
 		return
 	
-	var TownSc = await Helper.GetInstance().LoadThreaded(FuelTradeScene).Sign
+	var TownSc = await Helper.GetInstance().LoadThreaded(TownSceneFile).Sign
 	var sc = TownSc as PackedScene
 	var fuel = sc.instantiate() as TownScene
 	#fuel.TownMerch = spot.SpotInfo.Merchendise

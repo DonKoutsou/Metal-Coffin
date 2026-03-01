@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="MapSpotType" format=3 uid="uid://d1ccujxqp1ci3"]
 
-[ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="1_g8ta7"]
+[ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scenes/Map/MapSpot/MapSpotCompleteInfo.gd" id="1_g8ta7"]
 [ext_resource type="Resource" uid="uid://dymr3kp27n5to" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Cardi.tres" id="3_gb170"]
 [ext_resource type="Resource" uid="uid://cj1ic1tc1y86i" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Sazma.tres" id="4_ak3j5"]
 [ext_resource type="Resource" uid="uid://ck7jx6746yvdp" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Sirkan.tres" id="5_6uouu"]
@@ -16,8 +16,8 @@
 [ext_resource type="Resource" uid="uid://1ha1dp4lfskf" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Lament.tres" id="15_0v1fn"]
 [ext_resource type="Resource" uid="uid://cijjnpnnmoigc" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Regan.tres" id="16_6xkuq"]
 [ext_resource type="Resource" uid="uid://doq7bspt0uqb4" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Moldi.tres" id="17_hdf04"]
-[ext_resource type="Script" uid="uid://bqgyl8uqmo3sl" path="res://Scripts/MapSpot/MapSpotCustomData_CompletePlaceInfo.gd" id="18_lge3k"]
-[ext_resource type="Script" uid="uid://dcqkyn7a6scl0" path="res://Scripts/MapSpot/MapSpotType.gd" id="19_nhoy7"]
+[ext_resource type="Script" uid="uid://bqgyl8uqmo3sl" path="res://Scenes/Map/MapSpot/MapSpotCustomData_CompletePlaceInfo.gd" id="18_lge3k"]
+[ext_resource type="Script" uid="uid://dcqkyn7a6scl0" path="res://Scenes/Map/MapSpot/MapSpotType.gd" id="19_nhoy7"]
 
 [sub_resource type="Resource" id="Resource_3mffu"]
 script = ExtResource("18_lge3k")

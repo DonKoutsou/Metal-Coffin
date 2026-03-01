@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="MerchandiseInfo" format=3 uid="uid://ct2827d4e42y6"]
 
 [ext_resource type="Resource" uid="uid://dyhi12lwtgu4x" path="res://Resources/Items/ShipParts/DroneDock/MediumDroneDock.tres" id="1_1bu8n"]
-[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_thl00"]
-[ext_resource type="Script" uid="uid://bpenulp2lk361" path="res://Scripts/TownShop/merchandise_info.gd" id="3_iyk6r"]
+[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scenes/TownShop/merchandise.gd" id="2_thl00"]
+[ext_resource type="Script" uid="uid://bpenulp2lk361" path="res://Scenes/TownShop/merchandise_info.gd" id="3_iyk6r"]
 
 [sub_resource type="Resource" id="Resource_ddh8k"]
 script = ExtResource("2_thl00")

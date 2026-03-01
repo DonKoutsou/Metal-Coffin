@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cwnxxystgxrjm" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/MissileTab/MissileTab.tscn" id="7_ojc6g"]
 [ext_resource type="StyleBox" uid="uid://21mi6l2i2tkk" path="res://Theme/Buttons/NobButton_Pressed.tres" id="7_yjfdw"]
 [ext_resource type="PackedScene" uid="uid://dwhre3xvmvjwf" path="res://Scenes/ScreenUI/Fan.tscn" id="8_bpouu"]
-[ext_resource type="PackedScene" uid="uid://cugmsxkuwcfc4" path="res://Scenes/ScreenUI/map_marker_controls.tscn" id="9_yjfdw"]
+[ext_resource type="PackedScene" uid="uid://cugmsxkuwcfc4" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Map_Marker_Controls/map_marker_controls.tscn" id="9_yjfdw"]
 [ext_resource type="PackedScene" uid="uid://hiw68h8srifm" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Steer/SteeringWheelUI.tscn" id="10_w258d"]
 [ext_resource type="PackedScene" uid="uid://cvhgybnbwc0e4" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Aerophone/Aerophone.tscn" id="11_jqinv"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="14_ce8jv"]

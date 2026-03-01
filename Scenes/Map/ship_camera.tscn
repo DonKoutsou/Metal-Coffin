@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dnjccg1nj4bm6"]
 
-[ext_resource type="Script" uid="uid://cu4b2l2v0wida" path="res://Scripts/ship_camera.gd" id="1_vowty"]
+[ext_resource type="Script" uid="uid://cu4b2l2v0wida" path="res://Scenes/Map/ship_camera.gd" id="1_vowty"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_pbaxl"]
 [ext_resource type="Texture2D" uid="uid://bj3kjbbgtmxh8" path="res://Shaders/Clouds/CloudMaskTexture.tres" id="3_1djom"]
 [ext_resource type="PackedScene" uid="uid://delo4ch0hmnr6" path="res://Scenes/Map/ground.tscn" id="4_dlxj6"]

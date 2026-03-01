@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d3irrnfaw10g4"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_5dv8f"]
-[ext_resource type="Script" uid="uid://elkiv7nl5gfy" path="res://Scripts/TownShop/RepairStation.gd" id="2_iywg0"]
+[ext_resource type="Script" uid="uid://elkiv7nl5gfy" path="res://Scenes/TownShop/RepairStation.gd" id="2_iywg0"]
 [ext_resource type="PackedScene" uid="uid://c7ojj8un8chim" path="res://Scenes/TownShop/ShipRepairUI.tscn" id="3_272ke"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="4_xts26"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="5_0bh7o"]

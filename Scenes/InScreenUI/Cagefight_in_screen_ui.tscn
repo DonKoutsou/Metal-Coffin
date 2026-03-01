@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_wgin8"]
 [ext_resource type="PackedScene" uid="uid://bq1ns0us14bn3" path="res://Scenes/InScreenUI/Cursor/Cursor.tscn" id="3_36708"]
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="3_munnc"]
-[ext_resource type="PackedScene" uid="uid://dy41ui65qkhmb" path="res://Scenes/MapMarkers/Map_Marker_Editor.tscn" id="5_8ltns"]
+[ext_resource type="PackedScene" uid="uid://dy41ui65qkhmb" path="res://Scenes/InScreenUI/MapMarkers/Map_Marker_Editor.tscn" id="5_8ltns"]
 [ext_resource type="PackedScene" uid="uid://dslxdgbana1k1" path="res://Scenes/Inventory/inventory.tscn" id="13_ral86"]
 [ext_resource type="PackedScene" uid="uid://d0iiqaijsg1y1" path="res://Scenes/InScreenUI/Commande_Line/command_line.tscn" id="14_cqdt6"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="15_6hexg"]

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="SpawnDecider" format=3 uid="uid://c1buiwym6qkh8"]
 
-[ext_resource type="Script" uid="uid://ci53582k6iewi" path="res://Scripts/EnemyAi/CaptainSpawnInfo.gd" id="1_87ibq"]
+[ext_resource type="Script" uid="uid://ci53582k6iewi" path="res://Scenes/Enemies/EnemyAi/CaptainSpawnInfo.gd" id="1_87ibq"]
 [ext_resource type="Resource" uid="uid://ctb0bey42ck18" path="res://Resources/Captains/SpawnInfos/FireshipLvl1.tres" id="2_wdg75"]
 [ext_resource type="Resource" uid="uid://brklxjupl0rch" path="res://Resources/Captains/SpawnInfos/FireshipLvl2.tres" id="3_2eb0g"]
 [ext_resource type="Resource" uid="uid://brutfvbqof8br" path="res://Resources/Captains/SpawnInfos/FireshipLvl3.tres" id="4_r0vc0"]
@@ -23,7 +23,7 @@
 [ext_resource type="Resource" uid="uid://clant8bk2jbqh" path="res://Resources/Captains/SpawnInfos/CorveteLvl2.tres" id="19_hvwho"]
 [ext_resource type="Resource" uid="uid://cmf0n4eco02nt" path="res://Resources/Captains/SpawnInfos/CorveteLvl3.tres" id="20_ahk72"]
 [ext_resource type="Resource" uid="uid://dx7unrtjdflj2" path="res://Resources/Captains/SpawnInfos/LandFireshipLvl2.tres" id="20_u7j23"]
-[ext_resource type="Script" uid="uid://bpenulp2lk361" path="res://Scripts/TownShop/merchandise_info.gd" id="21_0l8w1"]
+[ext_resource type="Script" uid="uid://bpenulp2lk361" path="res://Scenes/TownShop/merchandise_info.gd" id="21_0l8w1"]
 [ext_resource type="Resource" uid="uid://2ii8eoq0203v" path="res://Resources/Captains/SpawnInfos/CorveteLvl4.tres" id="21_12d78"]
 [ext_resource type="Resource" uid="uid://2r8sbt2ykylv" path="res://Resources/Merch/APAmmoMagazine100mm.tres" id="22_n5x2f"]
 [ext_resource type="Resource" uid="uid://pru1dyotl5qk" path="res://Resources/Merch/APAmmoMagazine180mm.tres" id="23_e0tbx"]
@@ -56,7 +56,7 @@
 [ext_resource type="Resource" uid="uid://e6mu0egpi3h7" path="res://Resources/Merch/ShortCheapRadar.tres" id="74_e63t2"]
 [ext_resource type="Resource" uid="uid://dfkuuikjxrlsx" path="res://Resources/Merch/FuelTank2.tres" id="75_wb6f4"]
 [ext_resource type="Resource" uid="uid://dpv1xl8cl3dei" path="res://Resources/Merch/TitaniumPlates.tres" id="78_nwwh6"]
-[ext_resource type="Script" uid="uid://orkurt2hukf6" path="res://Scripts/EnemyAi/SpawnDecider.gd" id="78_yg7ff"]
+[ext_resource type="Script" uid="uid://orkurt2hukf6" path="res://Scenes/Enemies/EnemyAi/SpawnDecider.gd" id="78_yg7ff"]
 
 [resource]
 script = ExtResource("78_yg7ff")

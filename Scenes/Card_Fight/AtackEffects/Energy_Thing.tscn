@@ -4,7 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://brxf1b36dtg2" path="res://Assets/Sounds/Shield.mp3" id="2_3op8g"]
 [ext_resource type="AudioStream" uid="uid://dnwyg3sfnsrux" path="res://Assets/Sounds/BeamRev.mp3" id="3_fk8ef"]
 [ext_resource type="PackedScene" uid="uid://dlkjo56vcapoo" path="res://Scenes/Card_Fight/AtackEffects/RevEf.tscn" id="4_s0sla"]
-[ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="5_rtjrf"]
+[ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scenes/MapShips/Trail_Line/trail_line.gd" id="5_rtjrf"]
 [ext_resource type="AudioStream" uid="uid://1xjym344ayqp" path="res://Assets/Sounds/beam-fire-282361.mp3" id="6_hx8fa"]
 [ext_resource type="PackedScene" uid="uid://7oa67waokaj0" path="res://Scenes/Card_Fight/AtackEffects/EnergyEffect.tscn" id="7_l88wu"]
 

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cqejjvj1hassq"]
 
 [ext_resource type="Script" uid="uid://d0hiwp6l4fyyy" path="res://Scenes/Card_Fight/missile_viz.gd" id="1_5lbu3"]
-[ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="2_28kke"]
+[ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scenes/MapShips/Trail_Line/trail_line.gd" id="2_28kke"]
 [ext_resource type="Script" uid="uid://dsoavxwjjlytc" path="res://addons/BurstParticles2D/BurstParticleGroup2D.gd" id="3_6elwd"]
 [ext_resource type="PackedScene" uid="uid://dlkjo56vcapoo" path="res://Scenes/Card_Fight/AtackEffects/RevEf.tscn" id="3_n0kd1"]
 [ext_resource type="Script" uid="uid://d2bgkrovxloh1" path="res://addons/BurstParticles2D/BurstParticles2D.gd" id="3_pof7x"]

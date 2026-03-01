@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://iv5o83jfm5t6"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_p43is"]
-[ext_resource type="Script" uid="uid://cdp015csgi2pb" path="res://Scripts/work_shop_item.gd" id="2_jf3g0"]
+[ext_resource type="Script" uid="uid://cdp015csgi2pb" path="res://Scenes/TownShop/WorkShop/work_shop_item.gd" id="2_jf3g0"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="4_dunc5"]
 [ext_resource type="AudioStream" uid="uid://b6f41xjveqo8b" path="res://Assets/Sounds/UI_in.mp3" id="5_nlcni"]
 

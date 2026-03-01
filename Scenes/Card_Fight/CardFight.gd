@@ -172,7 +172,7 @@ func StartFight() -> void:
 func IntroDeclarationFinished() -> void:
 	ActionDeclaration.ActionDeclarationFinished.disconnect(IntroDeclarationFinished)
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT)):
-		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_SPEED_EXPLENATION)
+		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT)
 		ActionTracker.GetInstance().QueueTutorial("Dog Fight", "Close quarters combat is conducted in two distinct phases: the [color=#ffc315]Action Picking Phase[/color] and the [color=#ffc315]Action Performing Phase[/color]. Each ship has their [color=#ffc315]deck[/color] composed out of the parts that exist on the ship. At any given time, a maximum of three ships from each side can engage in combat.\n\nWhen a ship is destroyed, it is immediately replaced by another from the fleet. [color=#ffc315]Victory[/color] is achieved when one side eliminates all enemy ships.\n\nHave faith in your crew captains and good luck!", [])
 	
 	call_deferred("RunTurn")

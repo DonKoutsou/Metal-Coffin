@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bgsgcnyyv1gxm"]
 
-[ext_resource type="Script" uid="uid://c3wcxx1myg0wb" path="res://Scripts/UI/map_spot_marker.gd" id="1_5x46s"]
-[ext_resource type="PackedScene" uid="uid://d2vlvv0emlupr" path="res://Scenes/MapMarkers/ShipMarkerNotif.tscn" id="2_b0564"]
+[ext_resource type="Script" uid="uid://c3wcxx1myg0wb" path="res://Scenes/InScreenUI/MapMarkers/map_spot_marker.gd" id="1_5x46s"]
+[ext_resource type="PackedScene" uid="uid://d2vlvv0emlupr" path="res://Scenes/InScreenUI/MapMarkers/ShipMarkerNotif.tscn" id="2_b0564"]
 [ext_resource type="AudioStream" uid="uid://cnetiaqcwgcdv" path="res://Assets/Sounds/radar-beeping-sound-effect-192404.mp3" id="3_625fb"]
 
 [sub_resource type="Animation" id="Animation_pxthd"]

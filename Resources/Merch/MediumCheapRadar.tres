@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="MerchandiseInfo" format=3 uid="uid://8h0appdsfp2i"]
 
 [ext_resource type="Resource" uid="uid://dn2krxo3cw830" path="res://Resources/Items/ShipParts/Radar/MediumCheapRadar.tres" id="1_cwlc3"]
-[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scripts/TownShop/merchandise.gd" id="2_kku8l"]
-[ext_resource type="Script" uid="uid://bpenulp2lk361" path="res://Scripts/TownShop/merchandise_info.gd" id="3_pbrpx"]
+[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scenes/TownShop/merchandise.gd" id="2_kku8l"]
+[ext_resource type="Script" uid="uid://bpenulp2lk361" path="res://Scenes/TownShop/merchandise_info.gd" id="3_pbrpx"]
 
 [sub_resource type="Resource" id="Resource_rreu3"]
 script = ExtResource("2_kku8l")

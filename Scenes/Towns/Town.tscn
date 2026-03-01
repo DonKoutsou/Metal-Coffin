@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dgf0r7r507qef"]
 
-[ext_resource type="Script" uid="uid://xcs5oqnwk5n5" path="res://Scripts/MapSpot/Town.gd" id="1_sfmn7"]
-[ext_resource type="PackedScene" uid="uid://djtjqkmdep3dh" path="res://Scenes/map_spot.tscn" id="2_l7yg4"]
+[ext_resource type="Script" uid="uid://xcs5oqnwk5n5" path="res://Scenes/Map/MapSpot/Town.gd" id="1_sfmn7"]
+[ext_resource type="PackedScene" uid="uid://djtjqkmdep3dh" path="res://Scenes/Map/map_spot.tscn" id="2_l7yg4"]
 [ext_resource type="Material" uid="uid://g4nd4xc327yt" path="res://Shaders/TownTerainShader.tres" id="3_ot8kj"]
 
 [node name="Town2" type="Node2D" unique_id=1913969858]

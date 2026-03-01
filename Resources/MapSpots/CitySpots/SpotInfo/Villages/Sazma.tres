@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MapSpotCompleteInfo" format=3 uid="uid://cj1ic1tc1y86i"]
 
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="2_2vb63"]
-[ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scripts/MapSpot/MapSpotCompleteInfo.gd" id="2_6whgx"]
+[ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scenes/Map/MapSpot/MapSpotCompleteInfo.gd" id="2_6whgx"]
 [ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="3_dkf8w"]
 
 [resource]

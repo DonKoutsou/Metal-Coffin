@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c72wan3kdku8s" path="res://Scenes/InScreenUI/ingame_ui_manager.gd" id="1_j7r7e"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="3_b4kau"]
 [ext_resource type="PackedScene" uid="uid://bq1ns0us14bn3" path="res://Scenes/InScreenUI/Cursor/Cursor.tscn" id="3_lbfwx"]
-[ext_resource type="PackedScene" uid="uid://dy41ui65qkhmb" path="res://Scenes/MapMarkers/Map_Marker_Editor.tscn" id="4_w862u"]
+[ext_resource type="PackedScene" uid="uid://dy41ui65qkhmb" path="res://Scenes/InScreenUI/MapMarkers/Map_Marker_Editor.tscn" id="4_w862u"]
 [ext_resource type="PackedScene" uid="uid://ccmqbt58qk8rv" path="res://Scenes/InScreenUI/Simulation_Info/simulation_notification.tscn" id="5_g51f2"]
 [ext_resource type="PackedScene" uid="uid://cary2uh0sdos1" path="res://Scenes/InScreenUI/Rain_Effect/ScreenRainEffect.tscn" id="5_j7r7e"]
 [ext_resource type="PackedScene" uid="uid://dslxdgbana1k1" path="res://Scenes/Inventory/inventory.tscn" id="6_u1p46"]

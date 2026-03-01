@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://k821yd6qs51r" path="res://Assets/Logos/icon_monochrome_light.png" id="3_s86m3"]
 [ext_resource type="Material" uid="uid://cahnh8igxy48i" path="res://Shaders/Ground/ground.tres" id="4_t54ed"]
 [ext_resource type="Script" uid="uid://dnjdy3xj0atfy" path="res://Scripts/intro_menu_ships.gd" id="6_yrlew"]
-[ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scripts/trail_line.gd" id="8_eb1s8"]
+[ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scenes/MapShips/Trail_Line/trail_line.gd" id="8_eb1s8"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="9_3vvgq"]
 [ext_resource type="Texture2D" uid="uid://qi37jxow82md" path="res://Assets/ShipTextures/Ship4_001.png" id="9_j43p8"]
 [ext_resource type="Texture2D" uid="uid://dapth5q2elnm6" path="res://Assets/ShipTextures/Tanker.png" id="11_23r0g"]

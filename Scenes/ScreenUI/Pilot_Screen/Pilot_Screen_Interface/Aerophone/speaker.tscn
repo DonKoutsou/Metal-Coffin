@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b7cgarcbvixw6"]
 
-[ext_resource type="Script" uid="uid://jj8scn4ef501" path="res://Scripts/speaker.gd" id="1_mivq8"]
+[ext_resource type="Script" uid="uid://jj8scn4ef501" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Aerophone/speaker.gd" id="1_mivq8"]
 [ext_resource type="AudioStream" uid="uid://chnfc5ch48120" path="res://Assets/Sounds/VoiceLines/LandingStart.mp3" id="2_kxl5j"]
 [ext_resource type="AudioStream" uid="uid://cxcy34qvb67nr" path="res://Assets/Sounds/VoiceLines/LandingComplete.mp3" id="3_pipuo"]
 [ext_resource type="AudioStream" uid="uid://xhsbh60dcdeq" path="res://Assets/Sounds/VoiceLines/Damaged.mp3" id="4_n8my6"]

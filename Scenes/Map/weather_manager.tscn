@@ -3,7 +3,7 @@
 [ext_resource type="Shader" uid="uid://yrc40y0r8y6y" path="res://Scenes/Map/StormShader.gdshader" id="1_8ickh"]
 [ext_resource type="Texture2D" uid="uid://bpghre0s4hi8" path="res://Noises/Weather/weathernoise.tres" id="2_8ickh"]
 [ext_resource type="Texture2D" uid="uid://chlkwju4hw0lw" path="res://Assets/DitherTexture.png" id="3_tye8x"]
-[ext_resource type="Script" uid="uid://bdn5v3wan8hys" path="res://Scenes/WeatherMan/weather_manager.gd" id="4_3wj3p"]
+[ext_resource type="Script" uid="uid://bdn5v3wan8hys" path="res://Scenes/InScreenUI/WeatherMan/weather_manager.gd" id="4_3wj3p"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="5_0w5h3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7nfft"]

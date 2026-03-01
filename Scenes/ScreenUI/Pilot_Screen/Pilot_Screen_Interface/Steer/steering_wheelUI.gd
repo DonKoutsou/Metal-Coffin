@@ -95,7 +95,7 @@ func CopyShipSteer(ship: MapShip) -> void:
 # --- FRAME/PHYSICS LOGIC ---
 
 func _process(delta: float) -> void:
-	var newRot = lerp($TextureRect.rotation, currentSteerRot * 10, delta * 4)
+	var newRot = lerp_angle($TextureRect.rotation, currentSteerRot * 10, delta * 4)
 	var amount = newRot - $TextureRect.rotation
 	$TextureRect.rotation = newRot
 	SteerRotated(amount)

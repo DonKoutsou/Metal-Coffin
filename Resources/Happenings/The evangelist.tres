@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="Happening" format=3 uid="uid://bwwb3anxj624k"]
 
-[ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scripts/MapSpot/Happenings/HappeningStage.gd" id="1_fu0io"]
-[ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scripts/MapSpot/Happenings/HappeningOption.gd" id="2_8a2hk"]
-[ext_resource type="Script" uid="uid://ii12ceb6fgif" path="res://Scripts/MapSpot/Happenings/StringHappeningOption.gd" id="3_y0x4t"]
-[ext_resource type="Script" uid="uid://c1epge81bse84" path="res://Scripts/MapSpot/Happenings/LockTownHappeningOption.gd" id="4_8a2hk"]
-[ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scripts/MapSpot/Happenings/Happening.gd" id="4_p8xji"]
+[ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scenes/Map/MapSpot/Happenings/HappeningStage.gd" id="1_fu0io"]
+[ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scenes/Map/MapSpot/Happenings/HappeningOption.gd" id="2_8a2hk"]
+[ext_resource type="Script" uid="uid://ii12ceb6fgif" path="res://Scenes/Map/MapSpot/Happenings/StringHappeningOption.gd" id="3_y0x4t"]
+[ext_resource type="Script" uid="uid://c1epge81bse84" path="res://Scenes/Map/MapSpot/Happenings/LockTownHappeningOption.gd" id="4_8a2hk"]
+[ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scenes/Map/MapSpot/Happenings/Happening.gd" id="4_p8xji"]
 
 [sub_resource type="Resource" id="Resource_juo3c"]
 script = ExtResource("3_y0x4t")

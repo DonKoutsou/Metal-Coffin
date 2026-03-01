@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dci144io03ffa"]
 
-[ext_resource type="Script" uid="uid://dvx4hdp7fvbi0" path="res://Scripts/fleet_separation_ship_viz.gd" id="2_f1v6n"]
+[ext_resource type="Script" uid="uid://dvx4hdp7fvbi0" path="res://Scenes/InScreenUI/Fleet_Separation/fleet_separation_ship_viz.gd" id="2_f1v6n"]
 [ext_resource type="Texture2D" uid="uid://q6mvdsxwii4x" path="res://Assets/CaptainPortraits/Captain1.png" id="4_5k7vr"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g6ucl"]
