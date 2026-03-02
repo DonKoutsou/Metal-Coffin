@@ -176,8 +176,18 @@ func DrawRuller() -> void:
 	var Lines : PackedVector2Array
 
 	for g in 12:
-		Lines.append(Vector2(vizrange / 3,0).rotated(deg_to_rad(Next)) + ControlledShipPos)
-		Lines.append(Vector2(vizrange,0).rotated(deg_to_rad(Next)) + ControlledShipPos)
+		var LineStartPos = Vector2(vizrange / 3,0).rotated(deg_to_rad(Next)) + ControlledShipPos
+		Lines.append(LineStartPos)
+		var LineEndPos = Vector2(vizrange,0).rotated(deg_to_rad(Next)) + ControlledShipPos
+		Lines.append(LineEndPos)
+		
+		#if (vizrange > 110):
+		var Text = var_to_str(Num)
+		var TextSize = min(8/CamZoom, vizrange / 10)
+		var StringSize = ThemeDB.fallback_font.get_string_size(Text, HORIZONTAL_ALIGNMENT_CENTER, -1, TextSize) / 2
+		StringSize.y *= -0.5
+		var StringOffset = LineStartPos.direction_to(LineEndPos) * TextSize
+		draw_string(ThemeDB.fallback_font, LineEndPos - StringSize + StringOffset, Text, HORIZONTAL_ALIGNMENT_CENTER, -1, TextSize)
 		Next -= 30
 		Num -= 30
 		if Num == 0:

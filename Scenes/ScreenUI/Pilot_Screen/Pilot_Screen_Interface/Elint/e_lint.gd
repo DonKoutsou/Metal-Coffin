@@ -55,7 +55,13 @@ func toggleElint(isOn: bool) -> void:
 	set_physics_process(isOn)
 
 func _onControlledShipUpdated(ship: MapShip) -> void:
+	if (controller != null):
+		controller.ElintRangeChanged.disconnect(CheckIfWorking)
 	controller = ship
+	controller.ElintRangeChanged.connect(CheckIfWorking)
+	CheckIfWorking()
+
+func CheckIfWorking() -> void:
 	var hasElint = fleetHasElint()
 	toggleElint(hasElint)
 	if not hasElint:

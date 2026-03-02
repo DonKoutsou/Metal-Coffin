@@ -124,7 +124,7 @@ func InitialiseShip() -> void:
 		if (Command == null):
 			FigureOutPath()
 	else:
-		VisRange = max(VisRange / 2, 90)
+		VisRange = max(VisRange / 2, 110)
 		SetSpeed(0)
 		UseDefaultBehavior = true
 	

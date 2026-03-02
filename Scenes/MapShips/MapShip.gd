@@ -19,6 +19,7 @@ class_name MapShip
 @export_group("Nodes")
 @export var RadarShape : Area2D
 @export var ElintShape : Area2D
+@export var SonarShape : Area2D
 @export var BodyShape : Area2D
 @export var DroneDok : Node2D
 @export var ShipSprite : Sprite2D
@@ -67,6 +68,10 @@ signal Teleported
 #signal MatchingAltitudeEnded(Ship : MapShip)
 
 signal PortChanged()
+
+signal VisuaLRangeChanged
+signal ElintRangeChanged
+signal AerosonarRangeChanged
 
 signal Elint(T : bool, Lvl : int, Dir : String)
 var ElintContacts : Dictionary
@@ -171,6 +176,8 @@ func PartChanged(It : ShipPart) -> void:
 		if (g.UpgradeName == STAT_CONST.STATS.VISUAL_RANGE):
 			UpdateVizRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
 		else : if (g.UpgradeName == STAT_CONST.STATS.ELINT):
+			UpdateELINTTRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT))
+		else : if (g.UpgradeName == STAT_CONST.STATS.AEROSONAR_RANGE):
 			UpdateELINTTRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT))
 
 func ToggleFuelRangeVisibility(t : bool) -> void:
@@ -401,7 +408,13 @@ func UpdateELINTTRange(rang : float):
 	var ElintRangeCollisionShape = ElintShape.get_node("CollisionShape2D")
 	#scalling collision
 	(ElintRangeCollisionShape.shape as CircleShape2D).radius = rang
+	ElintRangeChanged.emit()
 
+func UpdateSonarRange(rang : float):
+	var SonarCollisionShape : CollisionShape2D = SonarShape.get_child(0)
+	#scalling collision
+	(SonarCollisionShape.shape as CircleShape2D).radius = rang
+	AerosonarRangeChanged.emit()
 
 #//////////////////////////////////////////////////////////
 #██████   █████  ██████   █████  ██████      ██ ███████ ██      ██ ███    ██ ████████ 
@@ -456,6 +469,7 @@ func UpdateVizRange(rang : float):
 	#print("{0}'s radar range has been set to {1}".format([GetShipName(), rang]))
 	var RadarRangeCollisionShape = RadarShape.get_node("CollisionShape2D")
 	(RadarRangeCollisionShape.shape as CircleShape2D).radius = max(rang, 110)
+	VisuaLRangeChanged.emit()
 
 func RephreshVisRange() -> void:
 	var VisualRange = VisibilityValue
@@ -463,6 +477,7 @@ func RephreshVisRange() -> void:
 		VisualRange = Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE)
 	var RadarRangeCollisionShape = RadarShape.get_node("CollisionShape2D")
 	(RadarRangeCollisionShape.shape as CircleShape2D).radius = max(VisualRange, VisibilityValue)
+	VisuaLRangeChanged.emit()
 
 #/////////////////////////////////////////////////////
 #██████  ██   ██ ██    ██ ███████ ██  ██████ ███████     ███████ ██    ██ ███████ ███    ██ ████████ ███████ 

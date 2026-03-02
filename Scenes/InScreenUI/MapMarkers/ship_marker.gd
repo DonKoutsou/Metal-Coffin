@@ -17,7 +17,6 @@ class_name ShipMarker
 @export var Icons : Dictionary
 @export var AlarmVisual : PackedScene
 
-
 var ShipNameText : String = ""
 var ShipSpeedText : String = ""
 var TimeSeenText : String = ""
@@ -80,8 +79,8 @@ func Init(Ship : Node2D) -> void:
 		Ship.Elint.connect(ToggleShowElint)
 		Ship.Cpt.OnNameChanged.connect(OnCaptainNameChanged)
 		Ship.AltitudeChanged.connect(AltitudeChanged)
-		Ship.SonarToggled.connect(ToggleRadarRange)
-		Ship.SonarDirectionChanged.connect(UpdateRadarDir)
+		#Ship.SonarToggled.connect(ToggleRadarRange)
+		#Ship.SonarDirectionChanged.connect(UpdateRadarDir)
 		
 		if (Ship is Drone):
 			Ship.DroneReturning.connect(DroneReturning)
@@ -111,8 +110,8 @@ func Init(Ship : Node2D) -> void:
 func ToggleRadarRange(t : bool) -> void:
 	RadarRange.visible = t
 
-func UpdateRadarDir(NewDir : float) -> void:
-	RadarRange.rotation = NewDir
+#func UpdateRadarDir(NewDir : float) -> void:
+	#RadarRange.rotation = NewDir
 
 func DoAlarm() -> void:
 	add_child(AlarmVisual.instantiate())
@@ -291,7 +290,7 @@ func Update(IsControlled : bool, CamPos : Vector2, delta : float) -> void:
 
 		else : if (CurrentShip is Missile):
 			if (CurrentShip.FiredBy is PlayerDrivenShip or CurrentShip.VisibleBy.size() > 0):
-				RadarRange.rotation = CurrentShip.rotation
+				#RadarRange.rotation = CurrentShip.rotation
 				global_position = CurrentShip.global_position
 				SavedPosition = global_position
 				if (LandingNotif != null):
@@ -384,7 +383,7 @@ func OnCaptainNameChanged(NewName : String) -> void:
 
 var AltitudeChangeCooldown : float = 0
 
-func AltitudeChanged(NewAlt : float) -> void:
+func AltitudeChanged(_NewAlt : float) -> void:
 	AltitudeChangeCooldown = 1
 	if (is_instance_valid(LandingNotif)):
 		return

@@ -148,13 +148,13 @@ radius = 258.136
 [sub_resource type="CircleShape2D" id="CircleShape2D_d15o2"]
 radius = 1000.0
 
-[node name="Drone" unique_id=974765209 node_paths=PackedStringArray("AccelerationAudio", "L", "SonarShape", "MissileD", "DroneDok") groups=["PlayerShips"] instance=ExtResource("1_airq3")]
+[node name="Drone" unique_id=974765209 node_paths=PackedStringArray("AccelerationAudio", "L", "MissileD", "SonarShape", "DroneDok") groups=["PlayerShips"] instance=ExtResource("1_airq3")]
 script = ExtResource("1_vfr1e")
 AccelerationAudio = NodePath("AudioStreamPlayer2D")
 L = NodePath("PointLight2D")
-SonarShape = NodePath("Sonar")
 MissileD = NodePath("MissileDock")
 Cpt = SubResource("Resource_qjc7u")
+SonarShape = NodePath("Sonar")
 DroneDok = NodePath("DroneDock")
 
 [node name="ColorRect" parent="." index="1" unique_id=1708187202]

@@ -35,7 +35,7 @@ radius = 150.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_ogc8b"]
 radius = 1000.0
 
-[node name="PlayerShip" unique_id=974765209 node_paths=PackedStringArray("AccelerationAudio", "L", "SonarShape", "MissileD", "TrailLines", "DroneDok") groups=["PlayerShips"] instance=ExtResource("1_phbnr")]
+[node name="PlayerShip" unique_id=974765209 node_paths=PackedStringArray("AccelerationAudio", "L", "SonarShape", "MissileD", "TrailLines", "SonarShape", "DroneDok") groups=["PlayerShips"] instance=ExtResource("1_phbnr")]
 script = ExtResource("1_ekbhy")
 AccelerationAudio = NodePath("AudioStreamPlayer2D")
 L = NodePath("PointLight2D")
@@ -43,6 +43,7 @@ SonarShape = NodePath("Sonar")
 MissileD = NodePath("MissileDock")
 Cpt = ExtResource("3_ogc8b")
 TrailLines = [NodePath("ColorRect/TrailLine"), NodePath("ColorRect/TrailLine2")]
+SonarShape = NodePath("Sonar")
 DroneDok = NodePath("DroneDock")
 
 [node name="ColorRect" parent="." index="1" unique_id=1708187202]
@@ -76,7 +77,7 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sonar" index="0" unique_id=205796897]
 visible = false
 shape = SubResource("CircleShape2D_ogc8b")
-debug_color = Color(0, 0.650296, 0.101282, 0.42)
+debug_color = Color(0.60916656, 0.32999998, 1, 1)
 
 [node name="MissileDock" type="Node2D" parent="." index="6" unique_id=912565508]
 script = ExtResource("9_dl1n1")

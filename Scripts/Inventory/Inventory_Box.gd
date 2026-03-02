@@ -14,6 +14,8 @@ func Initialise(Parent : CharacterInventory):
 	_ParentInventory = Parent
 
 func _ready() -> void:
+	if (Engine.is_editor_hint()):
+		return
 	UISoundMan.GetInstance().AddSelf(Butto)
 
 func _exit_tree() -> void:

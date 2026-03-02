@@ -9,10 +9,31 @@
 [ext_resource type="StyleBox" uid="uid://bc1y4hhkl7ce6" path="res://Theme/Buttons/NobButton.tres" id="6_4wgxe"]
 [ext_resource type="PackedScene" uid="uid://b7cgarcbvixw6" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Aerophone/speaker.tscn" id="6_jiwdy"]
 [ext_resource type="StyleBox" uid="uid://21mi6l2i2tkk" path="res://Theme/Buttons/NobButton_Pressed.tres" id="7_mi4l8"]
+[ext_resource type="StyleBox" uid="uid://qpvte6fabtg4" path="res://Theme/Monitor_Panel.tres" id="8_8d64h"]
 [ext_resource type="StyleBox" uid="uid://cicae3yqgxkcm" path="res://Theme/MetalPanel.tres" id="9_fw736"]
+
+[sub_resource type="Gradient" id="Gradient_ioad0"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8d64h"]
+gradient = SubResource("Gradient_ioad0")
+height = 1
+fill_from = Vector2(0.3, 0)
+fill_to = Vector2(0.7, 0)
+repeat = 1
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mi4l8"]
 light_mode = 1
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8d64h"]
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kirju"]
+width = 128
+height = 1
+noise = SubResource("FastNoiseLite_8d64h")
+seamless = true
+seamless_blend_skirt = 1.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4wgxe"]
 light_mode = 1
@@ -23,12 +44,13 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_5vs2h")
-lineContainer = NodePath("TextureRect2/AeroSonarLine")
+lineContainer = NodePath("TextureRect2/PanelContainer/AeroSonarLine")
 sonarVisual = NodePath("TextureRect2")
-gainLabel = NodePath("TextureRect2/Label")
+gainLabel = NodePath("TextureRect2/PanelContainer/Label")
 radioSpeaker = NodePath("Speaker")
 cap = NodePath("PanelContainer")
 toggleButton = NodePath("TextureRect2/Close")
+BaseGrad = SubResource("GradientTexture2D_8d64h")
 controllerEventHandler = ExtResource("2_6e8xg")
 droneDockEventHandler = ExtResource("3_fw736")
 
@@ -42,25 +64,18 @@ mouse_filter = 0
 texture = ExtResource("3_mi4l8")
 expand_mode = 1
 
-[node name="AeroSonarLine" type="Control" parent="TextureRect2" unique_id=1384447880]
-material = SubResource("CanvasItemMaterial_mi4l8")
-anchors_preset = 0
-offset_left = 133.0
-offset_top = 13.0
-offset_right = 343.0
-offset_bottom = 58.0
-script = ExtResource("1_u0q8c")
-OffsetAmmount = 5.0
-
 [node name="YGas" parent="TextureRect2" unique_id=480843960 instance=ExtResource("2_6guy7")]
+visible = false
 position = Vector2(282.46765, 96.00907)
 scale = Vector2(0.520363, 0.520363)
 
 [node name="GeinControl" parent="TextureRect2" unique_id=1393905736 instance=ExtResource("2_6guy7")]
-position = Vector2(282.46765, 139)
-scale = Vector2(0.520363, 0.520363)
+position = Vector2(168, 82.7712)
+rotation = 1.5707964
+scale = Vector2(0.60451305, 0.60451305)
 
 [node name="Close" type="Button" parent="TextureRect2" unique_id=617694193 groups=["Buttons"]]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -78,13 +93,26 @@ theme_override_styles/pressed = ExtResource("7_mi4l8")
 theme_override_styles/hover = ExtResource("6_4wgxe")
 toggle_mode = true
 
-[node name="Label" type="Label" parent="TextureRect2" unique_id=733326543]
-material = SubResource("CanvasItemMaterial_4wgxe")
+[node name="PanelContainer" type="PanelContainer" parent="TextureRect2" unique_id=841349730]
 layout_mode = 0
-offset_left = 132.0
-offset_top = 86.0
-offset_right = 204.0
-offset_bottom = 107.0
+offset_left = 191.0
+offset_right = 356.0
+offset_bottom = 165.0
+theme_override_styles/panel = ExtResource("8_8d64h")
+
+[node name="AeroSonarLine" type="Control" parent="TextureRect2/PanelContainer" unique_id=1384447880]
+material = SubResource("CanvasItemMaterial_mi4l8")
+clip_contents = true
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("1_u0q8c")
+OffsetAmmount = 2.0
+Radius = 55.0
+N = SubResource("NoiseTexture2D_kirju")
+
+[node name="Label" type="Label" parent="TextureRect2/PanelContainer" unique_id=733326543]
+material = SubResource("CanvasItemMaterial_4wgxe")
+layout_mode = 2
 theme_override_colors/font_color = Color(0.978254, 0, 0.0338846, 1)
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 14
@@ -111,6 +139,6 @@ frequency = 15.0
 max_rotation = 0.02
 
 [connection signal="RangeChanged" from="TextureRect2/YGas" to="." method="sonarRotationChanged"]
-[connection signal="RangeChanged" from="TextureRect2/GeinControl" to="." method="_on_gein_control_range_changed"]
+[connection signal="RangeSnappedChanged" from="TextureRect2/GeinControl" to="." method="_on_gein_control_range_snapped_changed"]
 [connection signal="toggled" from="TextureRect2/Close" to="." method="_onCloseToggled"]
 [connection signal="Clicked" from="Speaker" to="." method="_onRadioClicked"]

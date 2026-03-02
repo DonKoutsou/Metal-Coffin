@@ -4,7 +4,7 @@ class_name PlayerDrivenShip
 
 @export var AccelerationAudio : AudioStreamPlayer2D
 @export var L : PointLight2D
-@export var SonarShape : Area2D
+
 @export var MissileD : MissileDock
 var CommingBack = false
 var RegroupTarget : MapShip
@@ -20,8 +20,8 @@ var SonarTargets : Array[Node2D]
 var RadarCircle : PackedVector2Array
 var CurrentRadarPointToEvaluate : int = 0
 
-signal SonarToggled(t : bool)
-signal SonarDirectionChanged(NewDir : float)
+#signal SonarToggled(t : bool)
+#signal SonarDirectionChanged(NewDir : float)
 
 func HasArmedMissile() -> bool:
 	return MissileD.ArmedMissile != null
@@ -102,7 +102,9 @@ func GetSonarTargets() -> Array[Node2D]:
 	var Targets : Array[Node2D]
 	Targets.append_array(SonarTargets)
 	for g : PlayerDrivenShip in GetDroneDock().GetDockedShips():
-		Targets.append_array(g.SonarTargets)
+		for targ in g.SonarTargets:
+			if (!Targets.has(targ)):
+				Targets.append(targ)
 	return Targets
 
 func EvaluateRadarTargets() -> void:
@@ -175,11 +177,13 @@ func Update(delta: float) -> void:
 	
 	UpdateShipWindManipulationModifier()
 	
+	if (CommingBack):
+		updatedronecourse()
+	
 	if (GetShipSpeedVec() == Vector2.ZERO):
 		return
 	
-	if (CommingBack):
-		updatedronecourse()
+	
 		
 	var ShipWeight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	var ShipEfficiency = (Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) / pow(ShipWeight, 0.5)) * 10
@@ -239,19 +243,13 @@ func PartChanged(It : ShipPart) -> void:
 		else : if (g.UpgradeName == STAT_CONST.STATS.ELINT):
 			UpdateELINTTRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT))
 		else : if (g.UpgradeName == STAT_CONST.STATS.AEROSONAR_RANGE):
-			UpdateELINTTRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE))
-	
-	
-func UpdateELINTTRange(rang : float):
-	var SonarCollisionShape : CollisionShape2D = SonarShape.get_child(0)
-	#scalling collision
-	(SonarCollisionShape.shape as CircleShape2D).radius = rang
+			UpdateSonarRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE))
 
-func ToggleSonarVisual(t : bool) -> void:
-	SonarToggled.emit(t)
+#func ToggleSonarVisual(t : bool) -> void:
+	#SonarToggled.emit(t)
 
-func SetSonarDirection(Dir : float) -> void:
-	SonarDirectionChanged.emit(Dir)
+#func SetSonarDirection(Dir : float) -> void:
+	#SonarDirectionChanged.emit(Dir)
 
 func BodyEnteredSonar(Body : Area2D) -> void:
 	var Parent = Body.get_parent()

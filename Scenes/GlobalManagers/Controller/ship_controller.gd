@@ -4,7 +4,7 @@ class_name ShipContoller
 
 @export var ShipControllerEventH : ShipControllerEventHandler
 @export var UIEventH : UIEventHandler
-
+@export var droneDockEventHandler: DroneDockEventHandler
 @export_file("*.tscn") var CptSelectSceneFile : String
 @export_file("*.tscn") var DroneSceneFile : String
 
@@ -38,6 +38,17 @@ func _ready() -> void:
 	ShipControllerEventH.TargetPositionPicked.connect(OnTargetPositionChanged)
 	ShipControllerEventH.TargetShipPicked.connect(OnTargetShipPicked)
 	ShipControllerEventH.OnControlledShipChanged.connect(OnShipChanged)
+
+	droneDockEventHandler.DroneDocked.connect(_onDroneAdded)
+	droneDockEventHandler.DroneUndocked.connect(_onDroneRemoved)
+
+func _onDroneAdded(drone: Drone, target: MapShip) -> void:
+	if (drone == ControlledShip):
+		ShipControllerEventH.ShipChanged(target)
+
+func _onDroneRemoved(drone: Drone, target: MapShip) -> void:
+	if (drone == ControlledShip):
+		ShipControllerEventH.ShipChanged(target)
 
 	
 func Update() -> void:
