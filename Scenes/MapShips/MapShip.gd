@@ -736,6 +736,37 @@ func GetShipThrust() -> float:
 	var Thrust = Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST)
 	return Thrust
 
+func GetSquaddB() -> float:
+	var sounds : Array[float]
+	sounds.append(GetdB())
+	for g:MapShip in GetDroneDock().GetDockedShips():
+		sounds.append(g.GetdB())
+	var finaldB = Helper.CombineNoiseAmplitude(sounds)
+	return finaldB
+
+func GetSquad() -> Array[MapShip]:
+	var squad : Array[MapShip]
+	squad.append(self)
+	squad.append_array(GetDroneDock().GetDockedShips())
+	return squad
+
+func GetSquadCaptains() -> Array[Captain]:
+	var squad : Array[Captain]
+	squad.append(Cpt)
+	for g : MapShip in GetDroneDock().GetDockedShips():
+		squad.append(g.Cpt)
+	return squad
+
+func GetdB() -> float:
+	if (Landed()):
+		return 0
+	var MaxdB = GetMaxdB()
+	var CurrentdB = (max(GetShipSpeed() / GetShipMaxSpeed(), 0.1)) * MaxdB
+	return CurrentdB
+
+func GetMaxdB() -> float:
+	return GetShipThrust() / 30
+
 func GetShipSpeedVec() -> Vector2:
 	return Acceleration.global_position - global_position
 	

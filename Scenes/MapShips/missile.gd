@@ -277,6 +277,13 @@ func GetAffectedSpeed() -> float:
 	var AffectedSpeed = Spd + (Spd * WindVel)
 	return AffectedSpeed
 
+func GetdB() -> float:
+	var sounds : Array[float]
+	for g in Amm:
+		sounds.append(Speed / 500)
+	var finaldB = Helper.CombineNoiseAmplitude(sounds)
+	return finaldB
+
 func GetShipSpeedVec() -> Vector2:
 	var Spd = $AccelPosition.global_position - global_position
 	var AffectedSpeed = Spd + (Spd * WindEffect)

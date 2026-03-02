@@ -3,10 +3,11 @@ extends Control
 class_name  AeroSonarLine
 @export var OffsetAmmount : float
 @export var Radius : float = 1.0
-@export var ContactGr : Image
 @export var CircleDivisions : int = 3
 @export var N : NoiseTexture2D
 
+var ContactGr : Image
+var CurrentStormValue : float = 0.0
 var NoiseImage : Image
 var NoiseOffset : float = 0.0
 var Offset = 0.0
@@ -22,9 +23,9 @@ func NoiseChanged() -> void:
 
 func _physics_process(delta: float) -> void:
 	Offset = wrap(Offset + (delta * 10), 0, 2)
-	
 
-func Update(Gr : Image) -> void:
+func Update(Gr : Image, StormValue : float) -> void:
+	CurrentStormValue = StormValue
 	ContactGr = Gr
 	queue_redraw()
 
@@ -63,10 +64,12 @@ func _draw() -> void:
 		var mapped_value = 1 + ((g - 1) / (PointAmm)) / PointAmm
 		var roundedmapped = roundi(mapped_value)
 		
-		var magnitude = amm - (mapped_value - roundedmapped + NoiseValue)
+		var stormnoiseValue = (1- CurrentStormValue) * NoiseValue
+		var magnitude = amm - (mapped_value - roundedmapped + NoiseValue + stormnoiseValue)
 
 		var Dif : float = 0
-		var Height = Radius + amm
+		var Height = Radius + (amm * NoiseValue)
+		
 		if (CurrentOffset == 0):
 			Dif = clamp(OffsetAmmount * (magnitude + 1), 0, AeroSonar.MAX_GAIN)
 			Height += Dif
@@ -88,6 +91,7 @@ func _draw() -> void:
 		
 		var v = roundi(wrap(samplepos - 0.25, 0, 1) * 100)
 		var sampledin = roundi(samplepos * 100)
+		
 		if (!v % 10):
 			var t = "{0}".format([snapped(v * 3.6, 10)])
 			var stringsize = get_theme_default_font().get_string_size(t,HORIZONTAL_ALIGNMENT_FILL, -1, 7)
@@ -99,7 +103,7 @@ func _draw() -> void:
 		r *= g
 		draw_circle(MidPoint, r + 10, Color(1,0,0), false)
 	
-	NoiseOffset = randf_range(-1, 1)
+	NoiseOffset = randf_range(-100, 100)
 	
 	draw_multiline(lines, Color(1,0,0))
 	

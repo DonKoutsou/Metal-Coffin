@@ -6,9 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://c6efc2y6xflyc" path="res://Assets/ShipTextures/Ship3_001.png" id="3_nr51w"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_y0oxi"]
 [ext_resource type="Resource" uid="uid://c8b3lpqbi11up" path="res://Resources/Captains/PlayerCaptains/Jor.tres" id="5_tcmus"]
+[ext_resource type="Resource" uid="uid://dxg1gr0twgav3" path="res://Resources/Items/ShipParts/Radar/MediumRadar.tres" id="8_tfttw"]
 [ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/Engine.tres" id="10_2fph2"]
 [ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FuelTank.tres" id="10_xdro3"]
-[ext_resource type="Resource" uid="uid://c6j0y0r05rijg" path="res://Resources/Items/ShipParts/Radar/ShortRadar.tres" id="11_2fph2"]
 [ext_resource type="Resource" uid="uid://ycrdbo5lywoa" path="res://Resources/Items/ShipParts/Shield/SPK-25 Ship Barrier.tres" id="12_q0d4v"]
 [ext_resource type="Resource" uid="uid://css6e78uhfsfa" path="res://Resources/Items/ShipParts/MG/ShortMachinegun100mm.tres" id="13_m641q"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scenes/MapShips/Stats/Captain.gd" id="14_8itwo"]
@@ -109,7 +109,7 @@ CaptainName = "Craden"
 CaptainPortrait = ExtResource("1_2va48")
 ShipIcon = ExtResource("3_nr51w")
 CaptainStats = Array[ExtResource("2_ttymy")]([SubResource("Resource_bp15r"), SubResource("Resource_s5ab2"), SubResource("Resource_f25rj"), SubResource("Resource_j8fdu"), SubResource("Resource_dap26"), SubResource("Resource_rifue"), SubResource("Resource_pno3o"), SubResource("Resource_pew21"), SubResource("Resource_jnhcl"), SubResource("Resource_tcmus"), SubResource("Resource_bcr2s"), SubResource("Resource_t323b"), SubResource("Resource_8k0mw"), SubResource("Resource_jlepl"), SubResource("Resource_i4ool"), SubResource("Resource_1e2ke"), SubResource("Resource_2khr6"), SubResource("Resource_u01r0")])
-StartingItems = Array[ExtResource("3_y0oxi")]([ExtResource("11_2fph2"), ExtResource("12_q0d4v"), ExtResource("13_m641q"), ExtResource("15_5588k"), ExtResource("15_5588k"), ExtResource("16_tcmus"), ExtResource("16_tcmus"), ExtResource("10_xdro3"), ExtResource("10_xdro3"), ExtResource("10_2fph2"), ExtResource("10_2fph2")])
+StartingItems = Array[ExtResource("3_y0oxi")]([ExtResource("8_tfttw"), ExtResource("12_q0d4v"), ExtResource("13_m641q"), ExtResource("15_5588k"), ExtResource("15_5588k"), ExtResource("16_tcmus"), ExtResource("16_tcmus"), ExtResource("10_xdro3"), ExtResource("10_xdro3"), ExtResource("10_2fph2"), ExtResource("10_2fph2")])
 CheckForErrors = true
 ProvidingFunds = 20000
 ProvidingCaptains = Array[ExtResource("14_8itwo")]([ExtResource("5_tcmus")])

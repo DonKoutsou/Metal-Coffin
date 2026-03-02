@@ -308,7 +308,7 @@ func IntersectShip(Target : MapShip) -> Vector2:
 	var ship_velocity = plship.GetShipSpeedVec()
 
 	# Predict where the ship will be in a future time `t`
-	var time_to_interception = (position.distance_to(ship_position)) / (GetAffectedSpeed() / 360)
+	var time_to_interception = (position.distance_to(ship_position)) / (max(GetAffectedSpeed(), 0.001) / 360)
 
 	# Calculate the predicted interception point
 	var predicted_position = ship_position + ship_velocity * time_to_interception

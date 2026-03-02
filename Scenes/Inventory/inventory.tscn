@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bxog70dwnkaal" path="res://Scenes/InScreenUI/ItemsAddedNotif.tscn" id="6_q7t14"]
 [ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/EventHandlers/MissileDockEventHandler.tres" id="7_ffxnd"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="8_0fcos"]
+[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="8_37qp6"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="8_n1gkd"]
 [ext_resource type="PackedScene" uid="uid://bnonfp8ywr3vl" path="res://Scenes/Inventory/captain_stat_container.tscn" id="9_o4jeo"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="9_ubet6"]
@@ -52,6 +53,7 @@ DescriptorPlace = NodePath("VBoxContainer2/PanelContainer/HBoxContainer/VBoxCont
 CaptainStats = NodePath("VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/CaptainStatContainer")
 MissileDockEventH = ExtResource("7_ffxnd")
 DroneDockEventH = ExtResource("8_0fcos")
+ControlledEventH = ExtResource("8_37qp6")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=774366542]
 layout_mode = 1

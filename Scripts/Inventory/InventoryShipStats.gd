@@ -9,6 +9,7 @@ var Stats : Array[ShipStatContainer]
 var SpeedStat : ShipStatContainer
 var Rangestat : ShipStatContainer
 var ValueStat : ShipStatContainer
+var NoiseStat : ShipStatContainer
 
 func _ready() -> void:
 	for g in StatsShown.size():
@@ -29,6 +30,10 @@ func _ready() -> void:
 	ValueStat = ShipStatScene.instantiate() as ShipStatContainer
 	ValueStat.SetDataCustom(1000000, "₯", "VALUE", STAT_CONST.STATS.VALUE)
 	add_child(ValueStat)
+	
+	NoiseStat = ShipStatScene.instantiate() as ShipStatContainer
+	NoiseStat.SetDataCustom(STAT_CONST.GetStatMaxValue(STAT_CONST.STATS.SOUND_SIGNATURE), STAT_CONST.GetStatMetric(STAT_CONST.STATS.SOUND_SIGNATURE), "SOUND SIGNATURE", STAT_CONST.STATS.SOUND_SIGNATURE)
+	add_child(NoiseStat)
 
 func UpdateValues() -> void:
 	var FuelCap
@@ -58,6 +63,9 @@ func UpdateValues() -> void:
 	var ChValue = CurrentShownCaptain.ProvidingFunds
 	var Itvalue = CurrentShownCaptain.GetValue() - ChValue
 	ValueStat.UpdateStatCustom(ChValue, Itvalue, 0)
+	
+	var NoisedB = CurrentShownCaptain.CaptainShip.GetMaxdB()
+	NoiseStat.UpdateStatCustom(0, NoisedB * 10, 0)
 
 func SetCaptain(Cpt : Captain) -> void:
 	CurrentShownCaptain = Cpt

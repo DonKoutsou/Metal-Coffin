@@ -296,3 +296,10 @@ func reconstruct_path(parent: Dictionary, end_city: String) -> Array:
 
 func GetColorForRegion(R : MapSpotCompleteInfo.REGIONS):
 	return RegionColors[R]
+
+static func CombineNoiseAmplitude(noiseAmplitudes: Array[float]) -> float:
+	var sumSq := 0.0
+	for a in noiseAmplitudes:
+		var aa = max(a, 0.0)
+		sumSq += aa * aa
+	return sqrt(sumSq)

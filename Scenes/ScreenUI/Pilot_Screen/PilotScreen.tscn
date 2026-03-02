@@ -70,14 +70,10 @@ expand_mode = 1
 
 [node name="Pilot_Screen_Settings" parent="." unique_id=1173233523 instance=ExtResource("5_ojc6g")]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -359.0
-offset_top = -55.0
-offset_right = -85.0
-offset_bottom = -3.0
-grow_horizontal = 2
+offset_left = 0.0
+offset_top = -58.0
+offset_right = 273.0
+offset_bottom = 0.0
 
 [node name="Elint" parent="." unique_id=502600520 instance=ExtResource("27_uojtp")]
 layout_mode = 1
@@ -98,9 +94,9 @@ anchors_preset = 4
 anchor_left = 0.0
 anchor_right = 0.0
 offset_left = 91.0
-offset_top = 217.0
+offset_top = 228.0
 offset_right = 131.0
-offset_bottom = 257.0
+offset_bottom = 268.0
 grow_horizontal = 1
 
 [node name="ControledShipSelector" parent="." unique_id=397832360 instance=ExtResource("28_hc833")]
@@ -112,9 +108,9 @@ anchor_top = 1.0
 anchor_right = 0.0
 anchor_bottom = 1.0
 offset_left = 0.0
-offset_top = -374.0
+offset_top = -363.0
 offset_right = 273.0
-offset_bottom = -233.0
+offset_bottom = -222.0
 grow_horizontal = 1
 grow_vertical = 0
 
@@ -135,10 +131,17 @@ positionOnStart = null
 
 [node name="Sonar" parent="." unique_id=1555836270 instance=ExtResource("11_jqinv")]
 layout_mode = 1
-offset_left = 13.0
-offset_top = -20.0
-offset_right = 53.0
-offset_bottom = 20.0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 273.0
+offset_bottom = 176.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="Missile Tab" parent="." unique_id=1968593876 instance=ExtResource("7_ojc6g")]
 layout_mode = 1
@@ -146,9 +149,9 @@ anchors_preset = 4
 anchor_left = 0.0
 anchor_right = 0.0
 offset_left = 25.0
-offset_top = -70.0
+offset_top = -59.0
 offset_right = 65.0
-offset_bottom = -30.0
+offset_bottom = -19.0
 grow_horizontal = 1
 
 [node name="SpeedSimulation" type="TextureButton" parent="." unique_id=559113668 groups=["Buttons"]]

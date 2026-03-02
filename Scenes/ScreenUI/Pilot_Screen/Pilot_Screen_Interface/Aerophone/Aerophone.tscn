@@ -5,10 +5,7 @@
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="2_6e8xg"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/Dial/Dial.tscn" id="2_6guy7"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="3_fw736"]
-[ext_resource type="Texture2D" uid="uid://byfcxaxg7epni" path="res://Assets/UIPiecies/Screen/SidePanels/Sonar.png" id="3_mi4l8"]
-[ext_resource type="StyleBox" uid="uid://bc1y4hhkl7ce6" path="res://Theme/Buttons/NobButton.tres" id="6_4wgxe"]
 [ext_resource type="PackedScene" uid="uid://b7cgarcbvixw6" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Aerophone/speaker.tscn" id="6_jiwdy"]
-[ext_resource type="StyleBox" uid="uid://21mi6l2i2tkk" path="res://Theme/Buttons/NobButton_Pressed.tres" id="7_mi4l8"]
 [ext_resource type="StyleBox" uid="uid://qpvte6fabtg4" path="res://Theme/Monitor_Panel.tres" id="8_8d64h"]
 [ext_resource type="StyleBox" uid="uid://cicae3yqgxkcm" path="res://Theme/MetalPanel.tres" id="9_fw736"]
 
@@ -38,66 +35,54 @@ seamless_blend_skirt = 1.0
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4wgxe"]
 light_mode = 1
 
-[node name="Aerophone" type="Control" unique_id=1555836270 node_paths=PackedStringArray("lineContainer", "sonarVisual", "gainLabel", "radioSpeaker", "cap", "toggleButton")]
+[node name="Aerophone" type="Control" unique_id=1555836270 node_paths=PackedStringArray("lineContainer", "gainLabel", "radioSpeaker", "cap")]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("1_5vs2h")
-lineContainer = NodePath("TextureRect2/PanelContainer/AeroSonarLine")
-sonarVisual = NodePath("TextureRect2")
-gainLabel = NodePath("TextureRect2/PanelContainer/Label")
-radioSpeaker = NodePath("Speaker")
-cap = NodePath("PanelContainer")
-toggleButton = NodePath("TextureRect2/Close")
-BaseGrad = SubResource("GradientTexture2D_8d64h")
-controllerEventHandler = ExtResource("2_6e8xg")
-droneDockEventHandler = ExtResource("3_fw736")
-
-[node name="TextureRect2" type="TextureRect" parent="." unique_id=788212122]
-layout_mode = 1
-offset_left = -96.0
-offset_top = 21.0
-offset_right = 259.2766
-offset_bottom = 186.0
-mouse_filter = 0
-texture = ExtResource("3_mi4l8")
-expand_mode = 1
-
-[node name="YGas" parent="TextureRect2" unique_id=480843960 instance=ExtResource("2_6guy7")]
-visible = false
-position = Vector2(282.46765, 96.00907)
-scale = Vector2(0.520363, 0.520363)
-
-[node name="GeinControl" parent="TextureRect2" unique_id=1393905736 instance=ExtResource("2_6guy7")]
-position = Vector2(168, 82.7712)
-rotation = 1.5707964
-scale = Vector2(0.60451305, 0.60451305)
-
-[node name="Close" type="Button" parent="TextureRect2" unique_id=617694193 groups=["Buttons"]]
-visible = false
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -22.638306
-offset_top = 24.34874
-offset_right = 4.3616943
-offset_bottom = 87.65126
+offset_left = -129.5
+offset_top = -88.0
+offset_right = 144.5
+offset_bottom = 88.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/normal = ExtResource("6_4wgxe")
-theme_override_styles/pressed = ExtResource("7_mi4l8")
-theme_override_styles/hover = ExtResource("6_4wgxe")
-toggle_mode = true
+script = ExtResource("1_5vs2h")
+lineContainer = NodePath("TextureRect2/PanelContainer/AeroSonarLine")
+gainLabel = NodePath("TextureRect2/PanelContainer/Label")
+radioSpeaker = NodePath("Speaker")
+cap = NodePath("TextureRect2/PanelContainer2")
+BaseGrad = SubResource("GradientTexture2D_8d64h")
+controllerEventHandler = ExtResource("2_6e8xg")
+droneDockEventHandler = ExtResource("3_fw736")
+
+[node name="TextureRect2" type="Panel" parent="." unique_id=59733242]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("9_fw736")
+
+[node name="GeinControl" parent="TextureRect2" unique_id=1393905736 instance=ExtResource("2_6guy7")]
+position = Vector2(75.5, 88.76887)
+rotation = 1.5707964
+scale = Vector2(0.6427263, 0.60451305)
 
 [node name="PanelContainer" type="PanelContainer" parent="TextureRect2" unique_id=841349730]
-layout_mode = 0
-offset_left = 191.0
-offset_right = 356.0
-offset_bottom = 165.0
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -176.0
+offset_top = -88.0
+offset_bottom = 88.0
+grow_horizontal = 0
+grow_vertical = 2
 theme_override_styles/panel = ExtResource("8_8d64h")
 
 [node name="AeroSonarLine" type="Control" parent="TextureRect2/PanelContainer" unique_id=1384447880]
@@ -107,7 +92,7 @@ layout_mode = 2
 mouse_filter = 2
 script = ExtResource("1_u0q8c")
 OffsetAmmount = 2.0
-Radius = 55.0
+Radius = 65.0
 N = SubResource("NoiseTexture2D_kirju")
 
 [node name="Label" type="Label" parent="TextureRect2/PanelContainer" unique_id=733326543]
@@ -120,25 +105,24 @@ text = "GAIN:10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PanelContainer" type="Panel" parent="." unique_id=1893570508]
+[node name="PanelContainer2" type="Panel" parent="TextureRect2" unique_id=1893570508]
 visible = false
-layout_mode = 0
-offset_left = -13.0
-offset_top = 21.0
-offset_right = 259.0
-offset_bottom = 186.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/panel = ExtResource("9_fw736")
 
 [node name="Speaker" parent="." unique_id=1248031779 instance=ExtResource("6_jiwdy")]
-layout_mode = 0
-offset_left = -42.0
-offset_top = -78.0
-offset_right = -2.0
-offset_bottom = -38.0
+layout_mode = 1
+offset_left = -28.5
+offset_top = -96.0
+offset_right = 11.5
+offset_bottom = -56.0
 frequency = 15.0
 max_rotation = 0.02
 
-[connection signal="RangeChanged" from="TextureRect2/YGas" to="." method="sonarRotationChanged"]
 [connection signal="RangeSnappedChanged" from="TextureRect2/GeinControl" to="." method="_on_gein_control_range_snapped_changed"]
-[connection signal="toggled" from="TextureRect2/Close" to="." method="_onCloseToggled"]
 [connection signal="Clicked" from="Speaker" to="." method="_onRadioClicked"]

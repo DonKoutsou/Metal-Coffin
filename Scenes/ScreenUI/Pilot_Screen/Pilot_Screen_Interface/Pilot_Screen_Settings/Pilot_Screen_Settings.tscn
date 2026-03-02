@@ -36,6 +36,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 theme_override_constants/separation = -25
+alignment = 1
 
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=842363251]
 layout_mode = 2
@@ -64,6 +65,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 theme_override_constants/separation = -25
+alignment = 1
 
 [node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer2" unique_id=2053534997]
 layout_mode = 2
@@ -93,6 +95,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 theme_override_constants/separation = -25
+alignment = 1
 
 [node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer8" unique_id=1343482083]
 layout_mode = 2
@@ -122,6 +125,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 theme_override_constants/separation = -25
+alignment = 1
 
 [node name="Label3" type="Label" parent="HBoxContainer/VBoxContainer4" unique_id=1069436407]
 layout_mode = 2
@@ -151,6 +155,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 theme_override_constants/separation = -25
+alignment = 1
 
 [node name="Label3" type="Label" parent="HBoxContainer/VBoxContainer3" unique_id=502570191]
 layout_mode = 2
@@ -181,6 +186,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 theme_override_constants/separation = -25
+alignment = 1
 
 [node name="Label3" type="Label" parent="HBoxContainer/VBoxContainer7" unique_id=108218335]
 layout_mode = 2
@@ -211,6 +217,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 theme_override_constants/separation = -25
+alignment = 1
 
 [node name="Label5" type="Label" parent="HBoxContainer/VBoxContainer5" unique_id=176909658]
 layout_mode = 2
@@ -237,6 +244,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 theme_override_constants/separation = -25
+alignment = 1
 
 [node name="Label5" type="Label" parent="HBoxContainer/VBoxContainer6" unique_id=866337947]
 layout_mode = 2

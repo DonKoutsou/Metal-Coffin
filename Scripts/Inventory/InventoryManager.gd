@@ -15,6 +15,9 @@ class_name InventoryManager
 @export_group("Event Handlers")
 @export var MissileDockEventH : MissileDockEventHandler
 @export var DroneDockEventH : DroneDockEventHandler
+@export var ControlledEventH : ShipControllerEventHandler
+
+var controller : PlayerDrivenShip
 
 var _CharacterInventories : Dictionary
 var SimPaused : bool = false
@@ -30,7 +33,27 @@ static func GetInstance() -> InventoryManager:
 func _ready() -> void:
 	MissileDockEventH.connect("MissileLaunched", OnMissileLaunched)
 	DroneDockEventH.connect("DroneAdded", DroneAdded)
+	DroneDockEventH.DroneDocked.connect(OnDroneDocked)
+	DroneDockEventH.DroneUndocked.connect(OnDroneUnDocked)
+	ControlledEventH.OnControlledShipChanged.connect(ControllerChanged)
+	controller = ControlledEventH.CurrentControlled
 	Instance = self
+
+func ControllerChanged(NewController : PlayerDrivenShip) -> void:
+	controller = NewController
+	var squad : Array[Captain] = NewController.GetSquadCaptains()
+	InspectCharacter(squad[0])
+	for g in _CharacterInventories:
+		var inv : CharacterInventory = _CharacterInventories[g]
+		inv.visible = g in squad
+	
+func OnDroneDocked(Dr : Drone, Target : MapShip) -> void:
+	if (Target == controller):
+		ControllerChanged(Target)
+	
+func OnDroneUnDocked(Dr : Drone, Target : MapShip) -> void:
+	if (Target == controller):
+		ControllerChanged(Target)
 
 func GetCharacterInventory(Cha : Captain) -> CharacterInventory:
 	if (_CharacterInventories.has(Cha)):

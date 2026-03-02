@@ -32,11 +32,11 @@ func PortUpdated(NewAlt : float) -> void:
 	#else: if(CurrentShip.TakingOff):
 		#LandingText.text = "FLYING OVER {0}\nCLEAR TO LAND".format([CurrentShip.CurrentPort.GetSpotName()])
 		
-	else: if (CurrentShip.Altitude == CurrentShip.CurrentLandAltitude):
+	else: if (CurrentShip.Landed()):
 		LandingText.text = "Landed on {0}".format([CurrentShip.CurrentPort.GetSpotName()])
 	else:
 		#$PanelContainer4/VBoxContainer.modulate = PortAvailableCol
-		LandingText.text = "FLYING OVER {0}\nCLEAR TO LAND".format([CurrentShip.CurrentPort.GetSpotName()])
+		LandingText.text = "FLYING OVER {0}".format([CurrentShip.CurrentPort.GetSpotName()])
 		#var PortThings = ""
 		#if (NewPort.HasFuel()):
 			#PortThings += "REFUEL TIME/COST -\n"
