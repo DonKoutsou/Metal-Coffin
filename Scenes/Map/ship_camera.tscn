@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_pbaxl"]
 [ext_resource type="Texture2D" uid="uid://bj3kjbbgtmxh8" path="res://Shaders/Clouds/CloudMaskTexture.tres" id="3_1djom"]
 [ext_resource type="PackedScene" uid="uid://delo4ch0hmnr6" path="res://Scenes/Map/ground.tscn" id="4_dlxj6"]
-[ext_resource type="Material" uid="uid://c43qdgvsab5kq" path="res://Shaders/Clouds/CloudsStartingMenu.tres" id="5_eqfuc"]
+[ext_resource type="Material" uid="uid://jnxte4c68wyq" path="res://Shaders/Clouds/CloudMap.tres" id="5_5ixku"]
 [ext_resource type="PackedScene" uid="uid://ch28kdo2pv6ta" path="res://Scenes/Map/weather_manager.tscn" id="7_ph7p1"]
 [ext_resource type="Script" uid="uid://cmiywlc06uva1" path="res://Scenes/Map/clouds.gd" id="14_sfqvw"]
 [ext_resource type="Gradient" uid="uid://wj66sajtr3qj" path="res://Shaders/Clouds/CloudGradient.tres" id="15_twifd"]
@@ -38,9 +38,8 @@ offset_right = 750.0
 offset_bottom = 750.0
 
 [node name="Clouds" type="ColorRect" parent="." unique_id=367161667]
-modulate = Color(1, 1, 1, 0)
 texture_filter = 1
-material = ExtResource("5_eqfuc")
+material = ExtResource("5_5ixku")
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

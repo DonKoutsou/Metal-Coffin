@@ -11,9 +11,9 @@ signal StartPrologue(SkipStory : bool)
 signal StartCampaign(SkipStory : bool)
 
 func _ready() -> void:
-	if (!OS.is_debug_build() or OS.get_name() != "Windows"):
-		queue_free()
-		return
+	#if (!OS.is_debug_build() or OS.get_name() != "Windows"):
+		#queue_free()
+		#return
 	visible = false
 	set_physics_process(false)
 	#RefrshExistingItems()

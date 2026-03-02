@@ -32,6 +32,8 @@ corner_radius_top_right = 90
 corner_radius_bottom_right = 90
 corner_radius_bottom_left = 90
 corner_detail = 1
+shadow_color = Color(0, 0, 0, 0.3137255)
+shadow_size = 100
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lbfwx"]
 bg_color = Color(0, 0, 0, 1)

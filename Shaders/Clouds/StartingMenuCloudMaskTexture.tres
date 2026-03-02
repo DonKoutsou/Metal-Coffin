@@ -1,6 +1,6 @@
-[gd_resource type="NoiseTexture2D" format=3 uid="uid://bj3kjbbgtmxh8"]
+[gd_resource type="NoiseTexture2D" format=3 uid="uid://bltj8hktgnom6"]
 
-[ext_resource type="Gradient" uid="uid://wj66sajtr3qj" path="res://Shaders/Clouds/CloudGradient.tres" id="1_yvoto"]
+[ext_resource type="Gradient" uid="uid://bq6yjb35h1he3" path="res://Shaders/Clouds/CloudStartingMenuGradient.tres" id="1_m08v7"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_n7y6y"]
 noise_type = 3
@@ -16,7 +16,7 @@ domain_warp_fractal_octaves = 1
 [resource]
 width = 1024
 noise = SubResource("FastNoiseLite_n7y6y")
-color_ramp = ExtResource("1_yvoto")
+color_ramp = ExtResource("1_m08v7")
 seamless = true
 normalize = false
 seamless_blend_skirt = 1.0

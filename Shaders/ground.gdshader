@@ -7,7 +7,6 @@ uniform sampler2D GroundTexture2: repeat_enable, filter_linear_mipmap;
 uniform sampler2D GroundTexture3: repeat_enable, filter_linear_mipmap;
 // Noise texture
 uniform sampler2D NoiseTexture: repeat_enable, filter_linear_mipmap;  // Add noise texture
-uniform sampler2D NoiseTexture3: repeat_enable, filter_linear_mipmap;  // Add noise texture
 // Normal texture
 uniform sampler2D GroundNormalTexture: hint_normal, filter_linear_mipmap, repeat_enable;
 uniform sampler2D GroundNormal2Texture: hint_normal, filter_linear_mipmap, repeat_enable;
@@ -43,7 +42,6 @@ void fragment() {
 	vec4 texColor3 = texture(GroundTexture3, uv2);
 
 	vec3 texNormal1 = texture(GroundNormalTexture, uv1).rgb;
-	vec3 n = texture(NoiseTexture3, uvnoise).rgb;
 	//texNormal1 /= vec3(1, 1, n.b * 10.0);
 	vec3 texNormal2 = texture(GroundNormal2Texture, uv2).rgb;
 	vec3 texNormal3 = texture(GroundNormal3Texture, uv2).rgb;
@@ -56,11 +54,11 @@ void fragment() {
 	vec3 finNorm = mix(texNormal1, texNormal2, patternNoise.g);
 	finNorm = mix(finNorm, texNormal3, patternNoise.b);
 	
-    COLOR.rgb = mix(fincol.rgb, fincol.rgb * n, 0.7);
+    COLOR.rgb = fincol.rgb;
 	COLOR.rgb *= Light;
 	//COLOR = t;
 	NORMAL_MAP = finNorm;
 	//NORMAL_MAP += texture(NoiseTexture3, uv1).rgb;
-    NORMAL_MAP_DEPTH = NormalD + (n.r / 10.0);
+    NORMAL_MAP_DEPTH = NormalD;
 	
 }

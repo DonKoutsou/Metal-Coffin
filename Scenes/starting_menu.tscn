@@ -278,7 +278,6 @@ min_distance = 1.0
 metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 
 [node name="Clouds" type="ColorRect" parent="SubViewportContainer/SubViewport" unique_id=1027507446]
-visible = false
 texture_filter = 1
 material = ExtResource("12_t54ed")
 anchors_preset = 15

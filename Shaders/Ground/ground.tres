@@ -1,27 +1,6 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://cahnh8igxy48i"]
 
 [ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="1_bwem4"]
-[ext_resource type="Texture2D" uid="uid://0o8p7b3b8vyl" path="res://Assets/Sand/Ground055S_1K-PNG_NormalGL.png" id="2_2m2um"]
-[ext_resource type="Texture2D" uid="uid://bc5mvcfngqtha" path="res://Assets/Sand/Ice002_1K-PNG_NormalGL.png" id="3_68rdk"]
-[ext_resource type="Texture2D" uid="uid://bd38upwrq6cdy" path="res://Assets/Sand/Rock062_1K-PNG_NormalGL.png" id="3_qsscu"]
-[ext_resource type="Texture2D" uid="uid://oviytxhbkdkv" path="res://Assets/Sand/Rock062_1K-PNG_Color.png" id="4_68rdk"]
-[ext_resource type="Texture2D" uid="uid://dwkm7bjn0sv1p" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="5_6wk2i"]
-[ext_resource type="Texture2D" uid="uid://djfgqyck6mnie" path="res://Assets/Sand/Ice002_1K-PNG_Color.png" id="7_6wk2i"]
-[ext_resource type="Texture2D" uid="uid://bih6x8swa3dhe" path="res://Noises/Ground/TEX_GroundVisualNoiseMask.png" id="8_68rdk"]
-[ext_resource type="Texture2D" uid="uid://cprshvfjenjh6" path="res://Noises/Topography/TEX_Topo_Noise_Visual.png" id="9_68rdk"]
 
 [resource]
 shader = ExtResource("1_bwem4")
-shader_parameter/GroundTexture = ExtResource("4_68rdk")
-shader_parameter/GroundTexture2 = ExtResource("5_6wk2i")
-shader_parameter/GroundTexture3 = ExtResource("7_6wk2i")
-shader_parameter/NoiseTexture = ExtResource("8_68rdk")
-shader_parameter/NoiseTexture3 = ExtResource("9_68rdk")
-shader_parameter/GroundNormalTexture = ExtResource("3_qsscu")
-shader_parameter/GroundNormal2Texture = ExtResource("2_2m2um")
-shader_parameter/GroundNormal3Texture = ExtResource("3_68rdk")
-shader_parameter/NormalD = 1.0
-shader_parameter/Light = 1.0
-shader_parameter/offset = Vector2(0, 0)
-shader_parameter/Scale1 = Vector2(40, 40)
-shader_parameter/Scale2 = Vector2(160, 160)

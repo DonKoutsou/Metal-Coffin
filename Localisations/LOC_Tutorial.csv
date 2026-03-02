@@ -1,0 +1,25 @@
+,english
+TUT_MissileToggleTitle,Missile Launcher
+TUT_MissileToggleText,To turn on the missile launcher use this knob
+TUT_MissileArmTitle,Missile Arming
+TUT_MissileArmText,"Turn the dial to select missile types in the current fleet, then arm to start launching."
+TUT_MissileAmmountTitle,Missile Amount
+TUT_MissileAmmountText,Turn the dial to pick the amount of missiles you want to shoot and press the arm button again to pick a direction
+TUT_MissileLaunchTitle,Missile Launcher
+TUT_MissileLaunchText,"Finally turn the dial to aim, then press Launch to send it away."
+TUT_CardfightTitle,Dog Fight
+TUT_CardfightText,"Close quarters combat is conducted in two distinct phases: the [color=#ffc315]Action Picking Phase[/color] and the [color=#ffc315]Action Performing Phase[/color]. Each ship has their [color=#ffc315]deck[/color] composed out of the parts that exist on the ship. At any given time, a maximum of three ships from each side can engage in combat.\n\nWhen a ship is destroyed, it is immediately replaced by another from the fleet. [color=#ffc315]Victory[/color] is achieved when one side eliminates all enemy ships.\n\nHave faith in your crew captains and good luck!"
+TUT_Cardfight_ActionPickingTitle,Action Picking Phase
+TUT_Cardfight_ActionPickingText,"the Action Picking Phase, each ship selects its moves for the upcoming Action Performing Phase. Ships with higher speed have the advantage of choosing and executing their moves first.\nRemember that every offensive action has a corresponding defensive option, so it’s crucial to protect your ship while maintaining a strong offensive stance."
+TUT_Cardfight_EnergyTitle,Energy
+TUT_Cardfight_EnergyText,Each card has a cost that needs to be payed in order to use it. \nEach ship starts their action picking phase with 10 energy to spare. \nAny unused energy is lost at the end of turn.
+TUT_Cardfight_EnergyReserveTitle,Energy Reserves
+TUT_Cardfight_EnergyReserveText,Some cards can provide a ship with energy reserves. Energy reserves are kept until the player decides to use them and can be accumulated indefinetly. At any point the 'Pull Reserves' is pressed any amount of reserves kept on the ship will be lost and gained as energy to use on that turn.
+TUT_Cardfight_ActionPTitle,Action Perform Phase
+TUT_Cardfight_ActionPText,"In the Action Perform Phase each ship performs the moves they've picked in the Action Pick Phase.\nIn the end of the phase any unused card, like an extra deffensive card, will be returned to the discard pile."
+TUT_Cardfight_TargetTitle,Target Picking
+TUT_Cardfight_TargetText,"Some cards require you to pick a target, weather that is a friendly or enemy depends on the card.\nOther cards can be multi target, meaning they instantly target the whole team, or self use meaning they are used by the performer. Those cards will be used instantly without asking for a target."
+TUT_Cardfight_ShipLossTitle,Lossing Ships
+TUT_Cardfight_ShipLossText,"When a ships hull reaches zero, they are threwn out of the fight and the capmaign. Make use of the 'Switch Ship' button to switch up ships in the fight. The ship that gets switched in loses one turn."
+TUT_Cardfight_HandLimitTitle,Hand Limit
+TUT_Cardfight_HandLimitText,"At any time you can hold a max of {0} cards in your hand. If at any point an extra hand is about to be placed in your hand, you will be asked to choose one card to throw out. Picked card is placed on the discard pile."

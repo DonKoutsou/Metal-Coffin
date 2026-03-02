@@ -58,9 +58,8 @@ func _draw() -> void:
 		#Map is  within the gradient range, gradient is from 0.3, to 0.7
 		var MappedSamplePos = Helper.mapvalue(samplepos, 0.3, 0.7)
 		#Sample texture, multiply normalised value with texture width to get pixel
-		
 		var amm : float = ContactGr.get_pixelv(Vector2i(MappedSamplePos * ContactGr.get_width(), 0)).r * 2
-		#amm = floor(amm)
+
 		var mapped_value = 1 + ((g - 1) / (PointAmm)) / PointAmm
 		var roundedmapped = roundi(mapped_value)
 		

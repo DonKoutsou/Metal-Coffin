@@ -91,38 +91,48 @@ func _physics_process(delta: float) -> void:
 	_updateContacts()
 	radioSpeaker.PlaySound(RadioSpeaker.RadioSound.STATIC, volume - 15)
 
+#Update contacts of controller
 func _updateContacts() -> void:
 	var contactList: Dictionary[float, float] = {}
+	#retrieve contacts and iterate over them
 	for target in controller.GetSonarTargets():
+		#we only want the head of a squad
 		if (target is MapShip and target.Command != null):
 			continue
+		#make sure we dont register ships from the controllers fleed
 		if (isPartOfFleet(target)):
 			continue
+		#terain collision
 		if not TopographyMap.WithinLineOfSight(controller.global_position, controller.Altitude, target.global_position, target.Altitude):
 			continue
+			
+		#take the direction to the target
 		var direction = controller.global_position.angle_to_point(target.global_position)
 		
-		var stormvalue = 1 - WeatherManage.GetBiggestStormValue(controller.global_position, target.global_position)
-		#var diff = Helper.angle_difference_radians(direction, PI/2)
-		#var diff = 0
-		#if abs(diff) > PI / 4:
-			#continue
-
+		#get the sound signature of the target
 		var SounddB: float = 0.0
 		if target is MapShip:
 			SounddB = target.GetSquaddB()
 		elif target is Missile:
 			SounddB = target.GetdB()
-
+		
+		#do raycast and find storm collision
+		var stormvalue = 1 - WeatherManage.GetBiggestStormValue(controller.global_position, target.global_position)
+		#figure out distance, at the end is normalised value. Bigger values means target is closer, means sound signature is stronger
 		var dist = 1 - (controller.global_position.distance_to(target.global_position) / CurrentSonarRange)
+		
+		#calculate final signature by applying the distance and storm to the SoundSignature
 		var finalsignature = dist * SounddB * stormvalue
+		#if contact exists, add to it.
 		if (contactList.has(direction)):
 			var sounds : Array[float]
 			sounds.append(finalsignature)
 			sounds.append(contactList.has(direction))
 			finalsignature = Helper.CombineNoiseAmplitude(sounds)
+
 		contactList[direction] = finalsignature
 	
+	#bake the contact list into a gradient and send it to the UI
 	var Im = ContactsToGradient(contactList)
 	lineContainer.Update(Im, WeatherManage.StormValueInPosition(controller.global_position))
 

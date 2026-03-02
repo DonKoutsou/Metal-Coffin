@@ -36,17 +36,17 @@ var steeringDir: float = 0.0
 # --- TUTORIALS ---
 
 func doIntroductionTutorial() -> void:
-	ActionTracker.GetInstance().QueueTutorial("Missile Launcher", 
-		"To turn on the missile launcher use this knob", [Map.UI_ELEMENT.MISSILE_TOGGLE])
+	ActionTracker.GetInstance().QueueTutorial("TUT_MissileToggleTitle", 
+		"TUT_MissileToggleText", [Map.UI_ELEMENT.MISSILE_TOGGLE])
 
 func doMissileArmTutorial() -> void:
-	ActionTracker.GetInstance().QueueTutorial("Missile Arming", 
-		"Turn the dial to select missile types in the current fleet, then arm to start launching.", 
+	ActionTracker.GetInstance().QueueTutorial("TUT_MissileArmTitle",
+		"TUT_MissileArmText", 
 		[Map.UI_ELEMENT.MISSILE_ARM, Map.UI_ELEMENT.MISSILE_DIAL])
 	
 func doMissileAmountTutorial() -> void:
-	ActionTracker.GetInstance().QueueTutorial("Missile Amount",
-		"Turn the dial to pick the amount of missiles you want to shoot and press the arm button again to pick a direction",
+	ActionTracker.GetInstance().QueueTutorial("TUT_MissileAmmountTitle",
+		"TUT_MissileAmmountText",
 		[Map.UI_ELEMENT.MISSILE_ARM, Map.UI_ELEMENT.MISSILE_DIAL])
 
 func doMissileLaunchTutorial() -> void:

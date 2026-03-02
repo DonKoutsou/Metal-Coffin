@@ -15,7 +15,7 @@ corner_radius_top_left = 12
 corner_radius_bottom_left = 12
 corner_detail = 1
 
-[node name="VBoxContainer" type="Control" unique_id=3025055 node_paths=PackedStringArray("Text")]
+[node name="VBoxContainer" type="Control" unique_id=1339738195 node_paths=PackedStringArray("Text")]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 3
 anchors_preset = 11
@@ -39,12 +39,12 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -10.0
-offset_bottom = 10.0
+offset_left = -36.0
+offset_top = -12.5
+offset_bottom = 12.5
 grow_horizontal = 0
 grow_vertical = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 8
 size_flags_vertical = 4
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_a2q7o")
@@ -62,8 +62,7 @@ vertical_alignment = 1
 
 [node name="Label" type="Label" parent="." unique_id=906432484]
 visible = false
-layout_mode = 1
-anchors_preset = 6
+layout_mode = 0
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
