@@ -106,7 +106,7 @@ func GetMerchForPosition(YPos: float, HasUp : bool) -> Array[Merchandise]:
 			points -= m.Cost
 	return available_merch
 
-#TODO implement
+
 func GetRecruitsForPosition(YPos: float, HasRec : bool) -> Array[Captain]:
 	var available_Recruits : Array[Captain] = []
 	var points = GetRecruitPointsForPosition(abs(YPos))

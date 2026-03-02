@@ -164,7 +164,7 @@ var hulls: Array[PackedVector2Array] = []
 
 func _physics_process(delta: float) -> void:
 	
-	FixLabelClipping()
+	
 
 	hulls.clear()
 	
@@ -188,6 +188,7 @@ func _physics_process(delta: float) -> void:
 		
 		_ShipMarkers[g].Update(Ship == ControlledShip, CamPos, d)
 	CircleDr.UpdatePolygons(hulls)
+	FixLabelClipping()
 	FixMarkerClipping()
 
 func get_circle_points(center: Vector2, radius: float, num_points: int = 10) -> PackedVector2Array:

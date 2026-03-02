@@ -15,6 +15,8 @@ class_name PilotScreenUI
 @export var pilotScreenSet: PilotScreenSettings
 @export var speedSimulationButton: TextureButton
 @export var pauseSimulationButton: Button
+@export var landButton : Button
+@export var hatchButton : Button
 @export var regroupButton: Button
 @export var shipDockButton: Button
 @export var radarButton: Button

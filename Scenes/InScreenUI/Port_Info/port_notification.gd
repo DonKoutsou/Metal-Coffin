@@ -33,6 +33,10 @@ func PortUpdated(NewAlt : float) -> void:
 		#LandingText.text = "FLYING OVER {0}\nCLEAR TO LAND".format([CurrentShip.CurrentPort.GetSpotName()])
 		
 	else: if (CurrentShip.Landed()):
+		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.HATCH)):
+			ActionTracker.OnActionCompleted(ActionTracker.Action.HATCH)
+			ActionTracker.GetInstance().QueueTutorial("Disembarkation", "You've landed in a town. To disembark and visit it press the [color=#ffc315]Open Hatch[/color] button.", [Map.UI_ELEMENT.HATCH_BUTTON])
+		
 		LandingText.text = "Landed on {0}".format([CurrentShip.CurrentPort.GetSpotName()])
 	else:
 		#$PanelContainer4/VBoxContainer.modulate = PortAvailableCol

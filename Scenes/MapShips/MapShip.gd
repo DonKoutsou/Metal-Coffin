@@ -549,8 +549,7 @@ func BodyEnteredBody(Body : Area2D) -> void:
 	if (Parent is MapSpot):
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.LANDING)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.LANDING)
-			#TODO fix this
-			#ActionTracker.GetInstance().QueueTutorial("Landing", "You have entrered the perimiter of a [color=#ffc315]Town[/color].\nTo visit the [color=#ffc315]town[/color]'s verdors and resuply you'll need to land your fleet.\nTo do so click the [color=#ffc315]Land Button[/color] while over a [color=#ffc315]Town[/color] to initiate the landing procedure. Once the landing is complete press the [color=#ffc315]Open Hatch[/color] button bellow the land button to visit the town.", [World.GetInstance().GetMap().GetScreenUi().LandButton, World.GetInstance().GetMap().GetScreenUi().HatchButton], false)
+			ActionTracker.GetInstance().QueueTutorial("Landing", "You have entrered the perimiter of a [color=#ffc315]Town[/color].\nTo visit the [color=#ffc315]town[/color]'s verdors and resuply you'll need to land your fleet.\nTo do so click the [color=#ffc315]Land Button[/color] to initiate the landing procedure or lower the [color=#ffc315]Altitude Lever[/color] all the way to the bottom. Once the landing is complete press the [color=#ffc315]Open Hatch[/color] button bellow the land button to visit the town.", [Map.UI_ELEMENT.LAND_BUTTON, Map.UI_ELEMENT.ELEVATION])
 		SetCurrentPort(Parent)
 		Parent.OnSpotAproached(self)
 		for g in GetDroneDock().GetDockedShips():

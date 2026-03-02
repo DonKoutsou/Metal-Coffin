@@ -27,12 +27,15 @@ func _ready() -> void:
 	$SubViewportContainer/SubViewport/TownBackground.set_physics_process(false)
 	$SubViewportContainer/SubViewport/TownBackground.Dissable()
 	TextLabel.text = Text
-	call_deferred("StartTextScroll")
+	Helper.Instance.CallLater(StartTextScroll, 0.5)
+	#call_deferred("StartTextScroll")
 	#queue_free()
 
 func StartTextScroll() -> void:
 	Tw = create_tween()
-	Tw.tween_property(TextPar, "position", Vector2(TextPar.position.x,-TextPar.size.y - get_viewport_rect().size.y), 8 * TextLabel.get_line_count())
+	var t = 1.5 * TextLabel.get_line_count()
+	var finalpos = Vector2(TextPar.position.x, -TextPar.size.y)
+	Tw.tween_property(TextPar, "position", finalpos, t)
 	await Tw.finished
 	#Tw.kill()
 	IntroFinished.emit()

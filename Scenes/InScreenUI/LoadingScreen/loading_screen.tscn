@@ -3,30 +3,12 @@
 [ext_resource type="Script" uid="uid://b6akb2f5doubl" path="res://Scenes/InScreenUI/LoadingScreen/loading_screen.gd" id="2_ehbru"]
 [ext_resource type="PackedScene" uid="uid://d0ujbu68jgisw" path="res://Scenes/TownShop/Capital_background.tscn" id="3_jmxc3"]
 [ext_resource type="Texture2D" uid="uid://36sdd8u5ow2j" path="res://Assets/Logos/ΜΧΨ1.png" id="4_57mps"]
-[ext_resource type="Texture2D" uid="uid://cdjyh4jw770am" path="res://Assets/Logos/tbrender.png" id="4_nnckq"]
 [ext_resource type="Texture2D" uid="uid://dodt4h752gnsl" path="res://Assets/Logos/ΜΧΨ2.png" id="5_bbvsw"]
+[ext_resource type="StyleBox" uid="uid://ejo4cwqpxtwg" path="res://Theme/TransparentGreyBackground.tres" id="5_p0tw4"]
 [ext_resource type="Texture2D" uid="uid://l88wxmvdavph" path="res://Assets/Logos/ΜΧΨ3.png" id="6_pg350"]
 [ext_resource type="Texture2D" uid="uid://lfap5cvp64kl" path="res://Assets/Logos/ΜΧΨ4.png" id="7_6jo5o"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="7_s87fu"]
 [ext_resource type="Texture2D" uid="uid://c4wt61vflmlml" path="res://Assets/Logos/ΜΧΨ5.png" id="8_1dav1"]
-
-[sub_resource type="Environment" id="Environment_t244x"]
-background_mode = 3
-ambient_light_source = 1
-reflected_light_source = 1
-tonemap_mode = 2
-tonemap_white = 16.0
-adjustment_enabled = true
-
-[sub_resource type="World3D" id="World3D_qc4cv"]
-environment = SubResource("Environment_t244x")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qc4cv"]
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-bg_color = Color(0, 0, 0, 0.5)
 
 [sub_resource type="Animation" id="Animation_n8xlk"]
 resource_name = "Logo"
@@ -131,7 +113,6 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=849051841]
 disable_3d = true
 own_world_3d = true
-world_3d = SubResource("World3D_qc4cv")
 handle_input_locally = false
 size = Vector2i(1280, 720)
 render_target_update_mode = 4
@@ -139,34 +120,18 @@ render_target_update_mode = 4
 [node name="TownBackground" parent="SubViewportContainer/SubViewport" unique_id=712655483 instance=ExtResource("3_jmxc3")]
 Zoom = 0.67
 
-[node name="TextureRect6" type="TextureRect" parent="." unique_id=866109676]
-modulate = Color(1, 1, 1, 0.8)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -42.0
-offset_bottom = -42.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 8
-size_flags_vertical = 6
-texture = ExtResource("4_nnckq")
-expand_mode = 1
-stretch_mode = 5
-
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=912032770]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 212.0
-offset_top = 259.0
+offset_top = 720.0
 offset_right = -212.0
-offset_bottom = 335.0
+offset_bottom = 800.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_qc4cv")
+theme_override_styles/panel = ExtResource("5_p0tw4")
 
 [node name="Label2" type="Label" parent="PanelContainer" unique_id=1609695849]
 layout_mode = 2

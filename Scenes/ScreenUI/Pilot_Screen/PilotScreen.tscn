@@ -30,7 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://c2tp3xgyap8ar" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Elint/ELint.tscn" id="27_uojtp"]
 [ext_resource type="PackedScene" uid="uid://dmmhk1exrryca" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/ControlledShipUI/ControlledShipSelection.tscn" id="28_hc833"]
 
-[node name="PilotScreen" type="Control" unique_id=1109053421 node_paths=PackedStringArray("elint", "mapMarkerControls", "thrust", "elevationThrust", "steer", "pilotScreenSet", "speedSimulationButton", "pauseSimulationButton", "regroupButton", "shipDockButton", "radarButton", "zoomDial", "yDial", "xDial", "missileUI")]
+[node name="PilotScreen" type="Control" unique_id=1109053421 node_paths=PackedStringArray("elint", "mapMarkerControls", "thrust", "elevationThrust", "steer", "pilotScreenSet", "speedSimulationButton", "pauseSimulationButton", "landButton", "hatchButton", "regroupButton", "shipDockButton", "radarButton", "zoomDial", "yDial", "xDial", "missileUI")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -48,6 +48,8 @@ steer = NodePath("SteeringWheel")
 pilotScreenSet = NodePath("Pilot_Screen_Settings")
 speedSimulationButton = NodePath("SpeedSimulation")
 pauseSimulationButton = NodePath("SimulationButton")
+landButton = NodePath("LandButton")
+hatchButton = NodePath("OpenHatchButton")
 regroupButton = NodePath("Regroup")
 shipDockButton = NodePath("ShipDockButton")
 radarButton = NodePath("RadarButton")
@@ -70,10 +72,14 @@ expand_mode = 1
 
 [node name="Pilot_Screen_Settings" parent="." unique_id=1173233523 instance=ExtResource("5_ojc6g")]
 layout_mode = 1
-offset_left = 0.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -366.0
 offset_top = -58.0
-offset_right = 273.0
+offset_right = -93.0
 offset_bottom = 0.0
+grow_horizontal = 2
 
 [node name="Elint" parent="." unique_id=502600520 instance=ExtResource("27_uojtp")]
 layout_mode = 1

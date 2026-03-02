@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dsw1gh7af04md" path="res://Scenes/Dialogue/Equalizer.tscn" id="5_fjydm"]
 [ext_resource type="PackedScene" uid="uid://dp5ghsxs3xitl" path="res://Scenes/Dialogue/linetest.tscn" id="5_ylhno"]
 [ext_resource type="AudioStream" uid="uid://b5e6m5xcjj8wb" path="res://Assets/Sounds/TextSound.mp3" id="6_6q6vd"]
+[ext_resource type="StyleBox" uid="uid://ejo4cwqpxtwg" path="res://Theme/TransparentGreyBackground.tres" id="7_qx7ak"]
 [ext_resource type="PackedScene" uid="uid://biiakq2r2vasn" path="res://Scenes/InScreenUI/WorldView/WorldviewUI.tscn" id="8_gqhsy"]
 
 [sub_resource type="Environment" id="Environment_vaeb3"]
@@ -124,10 +125,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Control2" type="PanelContainer" parent="VBoxContainer/HBoxContainer2/VBoxContainer2" unique_id=914227486]
-self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("7_qx7ak")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/Control2" unique_id=621816629]
 layout_mode = 2
