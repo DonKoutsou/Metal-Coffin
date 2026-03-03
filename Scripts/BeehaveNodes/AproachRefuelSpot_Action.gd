@@ -36,7 +36,9 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 			
 		MainShip.SetSpeed(MainShip.GetShipMaxSpeed())
 		#var SimulationSpeed = Ship.SimulationSpeed
-		MainShip.global_position += MainShip.GetShipSpeedVec() * SimulationSpeed * TickRate
+		var offset = MainShip.GetShipSpeedVec() * TickRate 
+		MainShip.LastRecordedOffset = offset
+		MainShip.global_position += offset * SimulationSpeed
 		MainShip.ShipLookAt(DestinationPos)
 		return RUNNING
 	

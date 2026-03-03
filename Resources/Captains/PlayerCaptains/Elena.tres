@@ -105,12 +105,18 @@ StatName = 16
 script = ExtResource("2_vqeqm")
 StatName = 17
 
+[sub_resource type="Resource" id="Resource_2de6x"]
+script = ExtResource("2_vqeqm")
+StatName = 22
+StatBase = 250.0
+metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
+
 [resource]
 script = ExtResource("2_g2kmb")
 CaptainName = "Elena"
 CaptainPortrait = ExtResource("1_th3p2")
 ShipIcon = ExtResource("7_pbppl")
-CaptainStats = Array[ExtResource("2_vqeqm")]([SubResource("Resource_t21ml"), SubResource("Resource_bob4r"), SubResource("Resource_laqgl"), SubResource("Resource_ecade"), SubResource("Resource_ws6c0"), SubResource("Resource_mwl6h"), SubResource("Resource_fem14"), SubResource("Resource_06of4"), SubResource("Resource_35fxm"), SubResource("Resource_pbppl"), SubResource("Resource_ohxm6"), SubResource("Resource_iditt"), SubResource("Resource_c64jo"), SubResource("Resource_n1x11"), SubResource("Resource_moxpq"), SubResource("Resource_6yq07"), SubResource("Resource_ri8ae"), SubResource("Resource_hvxhi")])
+CaptainStats = Array[ExtResource("2_vqeqm")]([SubResource("Resource_t21ml"), SubResource("Resource_bob4r"), SubResource("Resource_laqgl"), SubResource("Resource_ecade"), SubResource("Resource_ws6c0"), SubResource("Resource_mwl6h"), SubResource("Resource_fem14"), SubResource("Resource_06of4"), SubResource("Resource_35fxm"), SubResource("Resource_pbppl"), SubResource("Resource_ohxm6"), SubResource("Resource_iditt"), SubResource("Resource_c64jo"), SubResource("Resource_n1x11"), SubResource("Resource_moxpq"), SubResource("Resource_6yq07"), SubResource("Resource_ri8ae"), SubResource("Resource_hvxhi"), SubResource("Resource_2de6x")])
 StartingItems = Array[ExtResource("3_a7xj7")]([ExtResource("7_777j8"), ExtResource("6_38vj0"), ExtResource("9_gnr4m"), ExtResource("8_khliy"), ExtResource("12_pbppl"), ExtResource("7_b2r4g"), ExtResource("10_4nffx"), ExtResource("10_4nffx"), ExtResource("10_4nffx"), ExtResource("10_4nffx"), ExtResource("10_4nffx")])
 CheckForErrors = true
 ProvidingCaptains = Array[ExtResource("2_g2kmb")]([ExtResource("5_pbppl")])

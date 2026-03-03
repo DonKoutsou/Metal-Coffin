@@ -675,11 +675,6 @@ func GetBattleStats() -> BattleShipStats:
 	
 func GetShipName() -> String:
 	return ShipName
-	
-func GetShipSpeed() -> float:
-	if (Docked):
-		return Command.GetShipSpeed()
-	return super()
 
 #/////////////////////////////////////////////////////////////
 #███████  █████  ██    ██ ███████     ██ ██       ██████   █████  ██████  

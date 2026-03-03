@@ -83,10 +83,16 @@ StatName = 16
 script = ExtResource("2_ufoo0")
 StatName = 17
 
+[sub_resource type="Resource" id="Resource_sgmt4"]
+script = ExtResource("2_ufoo0")
+StatName = 22
+StatBase = 150.0
+metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
+
 [resource]
 script = ExtResource("3_3cbbo")
 CaptainName = "Samir"
 CaptainPortrait = ExtResource("1_ofvjl")
 ShipIcon = ExtResource("3_yl744")
-CaptainStats = Array[ExtResource("2_ufoo0")]([SubResource("Resource_ju8ek"), SubResource("Resource_w0tur"), SubResource("Resource_34f4w"), SubResource("Resource_hjfxs"), SubResource("Resource_wxl3a"), SubResource("Resource_haf7u"), SubResource("Resource_knqm1"), SubResource("Resource_fwmht"), SubResource("Resource_ofvjl"), SubResource("Resource_el1gt"), SubResource("Resource_e88pt"), SubResource("Resource_3h6tm"), SubResource("Resource_dtywx"), SubResource("Resource_v30r8"), SubResource("Resource_heiep"), SubResource("Resource_cmo0y"), SubResource("Resource_nx2e3"), SubResource("Resource_cussd")])
+CaptainStats = Array[ExtResource("2_ufoo0")]([SubResource("Resource_ju8ek"), SubResource("Resource_w0tur"), SubResource("Resource_34f4w"), SubResource("Resource_hjfxs"), SubResource("Resource_wxl3a"), SubResource("Resource_haf7u"), SubResource("Resource_knqm1"), SubResource("Resource_fwmht"), SubResource("Resource_ofvjl"), SubResource("Resource_el1gt"), SubResource("Resource_e88pt"), SubResource("Resource_3h6tm"), SubResource("Resource_dtywx"), SubResource("Resource_v30r8"), SubResource("Resource_heiep"), SubResource("Resource_cmo0y"), SubResource("Resource_nx2e3"), SubResource("Resource_cussd"), SubResource("Resource_sgmt4")])
 CheckForErrors = true

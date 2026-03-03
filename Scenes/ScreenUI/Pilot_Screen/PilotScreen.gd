@@ -128,3 +128,6 @@ func _on_x_dial_range_changed(newVal: float) -> void:
 
 func _on_topo_button_toggled(toggledOn: bool) -> void:
 	uiEventHandler.OnTopoPressed(toggledOn)
+
+func _on_wind_correction_toggled(t: bool) -> void:
+	uiEventHandler.OnWindCorrectionToggled(t)

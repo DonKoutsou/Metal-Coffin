@@ -75,9 +75,9 @@ layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -366.0
+offset_left = -364.0
 offset_top = -58.0
-offset_right = -93.0
+offset_right = 124.0
 offset_bottom = 0.0
 grow_horizontal = 2
 
@@ -440,7 +440,7 @@ rotation = -1.5707964
 scale = Vector2(0.8, 0.8)
 
 [node name="XDial" parent="." unique_id=884440325 instance=ExtResource("26_ecvfe")]
-position = Vector2(664, 688)
+position = Vector2(885.00006, 688)
 rotation = -3.1415927
 scale = Vector2(0.8, 0.8)
 
@@ -448,6 +448,7 @@ scale = Vector2(0.8, 0.8)
 [connection signal="GridToggled" from="Pilot_Screen_Settings" to="." method="_on_grid_button_toggled"]
 [connection signal="SteerToggled" from="Pilot_Screen_Settings" to="." method="_onSteerButtonToggled"]
 [connection signal="TopologyTogled" from="Pilot_Screen_Settings" to="." method="_on_topo_button_toggled"]
+[connection signal="WindCorrectionToggled" from="Pilot_Screen_Settings" to="." method="_on_wind_correction_toggled"]
 [connection signal="ZoomToggled" from="Pilot_Screen_Settings" to="." method="_on_zoom_level_button_toggled"]
 [connection signal="toggled" from="SpeedSimulation" to="." method="_on_speed_simulation_toggled"]
 [connection signal="toggled" from="SimulationButton" to="." method="simPauseToggled"]

@@ -19,6 +19,7 @@
 
 [node name="Commander" type="Node2D" unique_id=193911798]
 process_mode = 1
+visible = false
 script = ExtResource("1_2gt3m")
 Armaments = Dictionary[ExtResource("2_3pmjh"), int]({
 ExtResource("2_fb4ti"): 2,

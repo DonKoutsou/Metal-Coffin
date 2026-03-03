@@ -12,6 +12,9 @@ signal SteerSet(Value : float)
 signal SteerForced(Value : float)
 signal ElevationSet(Value : float)
 signal ElevationForced(Value : float)
+
+signal WindCorrectionToggled(t : bool)
+
 #signal AccelerationForced(ForceVal : float)
 signal DroneButtonPressed()
 signal MissileButtonPressed()
@@ -65,6 +68,9 @@ signal MissileShake
 #signal AlarmRaised
 
 signal ShipDamaged(DammageAmm : float)
+
+func OnWindCorrectionToggled(t : bool) -> void:
+	WindCorrectionToggled.emit(t)
 
 func OnSpeedSet(Speed : float) -> void:
 	SpeedSet.emit(Speed)

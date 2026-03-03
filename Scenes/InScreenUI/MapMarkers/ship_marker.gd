@@ -86,7 +86,7 @@ func Init(Ship : Node2D) -> void:
 			Ship.DroneReturning.connect(DroneReturning)
 		
 		call_deferred("ToggleShipDetails", true)
-		SetMarkerDetails(Ship.Cpt.GetCaptainName(), "F",Ship.GetAffectedSpeed())
+		SetMarkerDetails(Ship.Cpt.GetCaptainName(), "F",Ship.GetShipSpeed())
 		SetType("Ship")
 		
 	else : if (Ship is Missile):
@@ -268,10 +268,13 @@ func Update(IsControlled : bool, CamPos : Vector2, delta : float) -> void:
 				
 			global_position = CurrentShip.GetShipParalaxPosition(CamPos, CurrentZoom)
 			SavedPosition = global_position
-			UpdateTrajectory(CurrentShip.global_rotation)
+			UpdateTrajectory(CurrentShip.LastRecordedOffset.angle())
 				
 			ToggleShipDetails(IsControlled)
-			UpdateSpeed(CurrentShip.GetAffectedSpeed())
+			#if (!ShipContoller.AutoCorrectWind):
+			UpdateSpeed(CurrentShip.GetShipSpeed())
+			#else:
+				#UpdateSpeed(CurrentShip.GetShipSpeed())
 			
 			#if (CurrentShip.Landing or CurrentShip.TakingOff or CurrentShip.MatchingAltitude):
 				#TODO find proper fix
@@ -290,7 +293,7 @@ func Update(IsControlled : bool, CamPos : Vector2, delta : float) -> void:
 
 		else : if (CurrentShip is Missile):
 			if (CurrentShip.FiredBy is PlayerDrivenShip or CurrentShip.VisibleBy.size() > 0):
-				#RadarRange.rotation = CurrentShip.rotation
+				RadarRange.rotation = CurrentShip.rotation
 				global_position = CurrentShip.global_position
 				SavedPosition = global_position
 				if (LandingNotif != null):

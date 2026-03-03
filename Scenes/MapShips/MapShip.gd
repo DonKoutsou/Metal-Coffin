@@ -54,6 +54,7 @@ signal SteerChanged(NewSteer : float)
 signal SteerForced(NewSteer : float)
 signal Teleported
 
+var LastRecordedOffset : Vector2
 #var IsLanded : bool = false
 #var Landing : bool = false
 #signal LandingStarted
@@ -80,7 +81,7 @@ var Detectable = true
 
 var VisibilityValue : float = 0
 var StormValue : float = 0
-var WindEffect : float
+var WindVector : Vector2
 var FuelWindEffect : float
 
 func _ready() -> void:
@@ -99,9 +100,6 @@ func _ready() -> void:
 	_UpdateShipIcon(Cpt.ShipIcon)
 	for g in Cpt.CaptainStats:
 		g.ForceMaxValue()
-		
-
-
 
 #Refuel logic
 func Refuel() -> void:
@@ -714,22 +712,14 @@ func GetShipName() -> String:
 func GetShipSpeed() -> float:
 	if (Command != null):
 		return Command.GetShipSpeed()
-	return (Acceleration.position.x * 360)
-
-func GetAffectedSpeed() -> float:
-	if (Command != null):
-		return Command.GetAffectedSpeed()
-	var Spd = GetShipSpeed()
-	var AffectedSpeed = Spd + (Spd * WindEffect)
-	return AffectedSpeed
+	return LastRecordedOffset.length() * 360
 
 func UpdateShipWindManipulationModifier() -> void:
-	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * (WeatherManage.WindSpeed / WeatherManage.MAX_WIND_SPEED) * 0.2
-	var StormAffectedWind = WindVel + (WindVel * StormValue)
+	var StormAffectedWind = WeatherManage.WindDirection + (WeatherManage.WindDirection * StormValue)
 	var WeightModifier = 1 - Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT) / STAT_CONST.GetStatMaxValue(STAT_CONST.STATS.WEIGHT)
 	var Height = 0.3 + 0.7 * (Altitude / 10000)
 	var WindProt = TopographyMap.GetWindProtection(global_position ,Altitude)
-	WindEffect = (StormAffectedWind * WeightModifier * Height) * WindProt
+	WindVector = (StormAffectedWind * WeightModifier * Height) * WindProt
 
 func GetShipThrust() -> float:
 	var Thrust = Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST)

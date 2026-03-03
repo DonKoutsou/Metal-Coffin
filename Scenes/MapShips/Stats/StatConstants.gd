@@ -25,7 +25,8 @@ const StatToolTips : Dictionary = {
 	STATS.SPEED : "Derived stat calculated from other attributes:[p][color=#ffc315]SPEED[/color] = ([color=#ffc315]THRUST[/color] × 1000) / [color=#ffc315]WEIGHT[/color]",
 	STATS.RANGE : "Derived stat calculated from other attributes:[p][color=#ffc315]RANGE[/color] = [color=#ffc315]FUEL TANK[/color] * (([color=#ffc315]FUEL EFFICIENCY[/color] / pow([color=#ffc315]WEIGHT[/color], 0.5)) * 10)",
 	STATS.VALUE : "Value of ship derived from original ship price and all items on it.",
-	STATS.SOUND_SIGNATURE : "Value of ship derived from original ship price and all items on it."
+	STATS.SOUND_SIGNATURE : "Value of ship derived from original ship price and all items on it.",
+	STATS.WINDAGE : ""
 }
 
 const StatMaxValues : Dictionary = {
@@ -48,6 +49,7 @@ const StatMaxValues : Dictionary = {
 	STATS.REPAIR_PRICE : 1000,
 	STATS.AEROSONAR_RANGE : 3000,
 	STATS.SOUND_SIGNATURE : 100,
+	STATS.WINDAGE : 2000
 }
 const StatShouldStack : Dictionary = {
 	STATS.FUEL_TANK : true,
@@ -67,7 +69,8 @@ const StatShouldStack : Dictionary = {
 	STATS.WEAPON_SLOTS : false,
 	STATS.MAX_SHIELD : true,
 	STATS.REPAIR_PRICE : true,
-	STATS.AEROSONAR_RANGE : false
+	STATS.AEROSONAR_RANGE : false,
+	STATS.WINDAGE : false
 }
 
 static func GetTooltip(Stat : STATS) -> String:
@@ -100,6 +103,8 @@ static func GetStatMetric(Stat : STATS) -> String:
 			Metric = "km"
 		STATS.SOUND_SIGNATURE:
 			Metric = "dB"
+		STATS.WINDAGE:
+			Metric = "m²"
 	return Metric
 
 static func GetStatItemBuff(Stat : STATS, Buffs : Array[float]) -> float:
@@ -142,4 +147,5 @@ enum STATS{
 	RANGE,
 	VALUE,
 	SOUND_SIGNATURE,
+	WINDAGE,
 }

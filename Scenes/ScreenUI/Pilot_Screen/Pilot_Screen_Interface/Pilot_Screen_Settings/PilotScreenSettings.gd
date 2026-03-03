@@ -12,12 +12,16 @@ static var SteerState : bool = true
 var ZoomState : bool = true
 @export var TopoButton : Button
 static var TopoState : bool = false
+@export var WindCorrectionButton : Button
+static var WindCorrectionState : bool = true
+
 
 signal ForecastToggled(t : bool)
 signal GridToggled(t : bool)
 signal TopologyTogled(t : bool)
 signal ZoomToggled(t : bool)
 signal SteerToggled(t : bool)
+signal WindCorrectionToggled(t : bool)
 
 func _ready() -> void:
 	ForecastButton.set_pressed_no_signal(ForecastState)
@@ -30,6 +34,8 @@ func _ready() -> void:
 	TopologyTogled.emit(TopoState)
 	ZoomButton.set_pressed_no_signal(ZoomState)
 	ZoomToggled.emit(ZoomState)
+	WindCorrectionButton.set_pressed_no_signal(WindCorrectionState)
+	WindCorrectionToggled.emit(WindCorrectionState)
 	
 
 func _on_forecast_button_toggled(toggled_on: bool) -> void:
@@ -55,3 +61,8 @@ func _on_topo_button_toggled(toggled_on: bool) -> void:
 func _on_zoom_level_button_toggled(toggled_on: bool) -> void:
 	ZoomState = toggled_on
 	ZoomToggled.emit(toggled_on)
+
+
+func _on_wind_correction_toggled(toggled_on: bool) -> void:
+	WindCorrectionState = toggled_on
+	WindCorrectionToggled.emit(toggled_on)

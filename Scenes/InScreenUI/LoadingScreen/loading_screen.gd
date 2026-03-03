@@ -33,7 +33,7 @@ func _ready() -> void:
 
 func StartTextScroll() -> void:
 	Tw = create_tween()
-	var t = 1.5 * TextLabel.get_line_count()
+	var t = TextLabel.get_line_count()
 	var finalpos = Vector2(TextPar.position.x, -TextPar.size.y)
 	Tw.tween_property(TextPar, "position", finalpos, t)
 	await Tw.finished

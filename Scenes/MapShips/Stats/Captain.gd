@@ -252,6 +252,13 @@ func OnShipPartRemovedFromInventory(It : ShipPart) -> void:
 func GetCharacterInventory() -> CharacterInventory:
 	return _CharInv
 
+func GetMaxdB() -> float:
+	return GetShipThrust() / 30
+
+func GetShipThrust() -> float:
+	var Thrust = GetStatFinalValue(STAT_CONST.STATS.THRUST)
+	return Thrust
+
 func GetValue() -> int:
 	var Value : int = ProvidingFunds / 2.0
 	if (_CharInv != null):

@@ -64,9 +64,11 @@ func GetBiggestVisRange() -> float:
 			Biggest = g.CurrentVisualRange
 	return Biggest
 
+
 func GetPointInCircle(Point : int, num_points : int = 20) -> Vector2:
 	var angle = float(Point) / float(num_points) * PI * 2.0
 	return Vector2(cos(angle), sin(angle))
+
 
 func get_circle_points(radius: float, num_points: int = 20) -> PackedVector2Array:
 	var circle_points = PackedVector2Array()
@@ -119,7 +121,6 @@ func Update(delta: float) -> void:
 	UpdateElint(delta)
 	
 	var SimulationSpeed = SimulationManager.SimSpeed()
-	
 
 	EvaluateRadarrPoint()
 	
@@ -180,22 +181,35 @@ func Update(delta: float) -> void:
 	if (CommingBack):
 		updatedronecourse()
 	
-	if (GetShipSpeedVec() == Vector2.ZERO):
+	if (Landed()):
+		LastRecordedOffset = Vector2.ZERO
 		return
 	
-	
+	var CorrectionExtra : float = 0.0
+	var offset : Vector2
+	if (ShipContoller.AutoCorrectWind):
+		offset = GetShipSpeedVec()
 		
+		var Windage = Cpt.GetStatFinalValue(STAT_CONST.STATS.WINDAGE) * 0.0001
+		var SideWindage = Windage * 0.1
+		
+		if (offset.length() < WindVector.length() * Windage):
+			CorrectionExtra = (WindVector.length() * Windage) - offset.length()
+			
+		var sidecorrection = abs(offset.rotated(PI/2).normalized().dot(WindVector.normalized())) * WindVector.length() * SideWindage
+		
+		var frontcorrection = offset.normalized().dot(WindVector.normalized()) * WindVector.length() * Windage
+		
+		offset -= (offset.normalized() * sidecorrection) - (offset.normalized() * frontcorrection)
+		#print("Head wind penalty : {0} - Side wind penalty : {1}".format([snapped(frontcorrection * 10, 0.1), snapped(sidecorrection * 100, 0.1)]))
+	else:
+		offset = GetShipAffectedSpeedVec()
+	
 	var ShipWeight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	var ShipEfficiency = (Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) / pow(ShipWeight, 0.5)) * 10
-	#var f = Acceleration.position.x / ShipEfficiency * SimulationSpeed
-	var FuelConsumtion = Acceleration.position.x / ShipEfficiency
+	var FuelConsumtion = (Acceleration.position.x + CorrectionExtra) / ShipEfficiency
 	
-	#Apply a small penalty durring storms
-	#if (StormValue > 0.9):
-		#FuelConsumtion *= 1 + (1 - StormValue) * 3
-	#Apply wind buff debuff
-	
-	FuelConsumtion -= FuelConsumtion * WindEffect
+	#FuelConsumtion -= FuelConsumtion * WindEffect
 	
 	FuelConsumtion *= SimulationSpeed
 	#Consume fuel on shif if enough
@@ -210,16 +224,21 @@ func Update(delta: float) -> void:
 		PopUpManager.GetInstance().DoFadeNotif("Your drone has run out of fuel.")
 		return
 	
-	for g in GetDroneDock().GetDockedShips():
+	for g : PlayerDrivenShip in GetDroneDock().GetDockedShips():
 		var Cap = g.Cpt as Captain
 		
-		var DroneWeight = Cap.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
-		var DroneEfficiency = (Cap.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) / pow(DroneWeight, 0.5)) * 10
+		var droneWeight = Cap.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
+		var droneEfficiency = (Cap.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) / pow(droneWeight, 0.5)) * 10
+		var droneCorrectionExtra : float = 0.0
+		if (CorrectionExtra > 0):
+			var Windage = Cap.GetStatFinalValue(STAT_CONST.STATS.WINDAGE) * 0.0001
+			droneCorrectionExtra = (g.WindVector.length() * Windage) - offset.length()
 		
-		var DroneFuelConsumtion = Acceleration.position.x / DroneEfficiency
+		var DroneFuelConsumtion = (Acceleration.position.x + droneCorrectionExtra) / droneEfficiency
+		
 		if (StormValue > 0.9):
 			DroneFuelConsumtion *= 1.3
-		DroneFuelConsumtion -= DroneFuelConsumtion * WindEffect
+		#DroneFuelConsumtion -= DroneFuelConsumtion * WindEffect
 		DroneFuelConsumtion *= SimulationSpeed
 		
 		if (Cap.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) > DroneFuelConsumtion):
@@ -232,7 +251,7 @@ func Update(delta: float) -> void:
 			HaltShip()
 			PopUpManager.GetInstance().DoFadeNotif("Your ships have run out of fuel.")
 	
-	var offset = GetShipSpeedVec()
+	LastRecordedOffset = offset
 	global_position += offset * SimulationSpeed
 
 
@@ -290,7 +309,7 @@ func updatedronecourse():
 	var ship_velocity = plship.GetShipSpeedVec()
 
 	# Predict where the ship will be in a future time `t`
-	var time_to_interception = (position.distance_to(ship_position)) / (GetAffectedSpeed() / 360)
+	var time_to_interception = (position.distance_to(ship_position)) / (GetShipSpeed() / 360)
 
 	# Calculate the predicted interception point
 	var predicted_position = ship_position + ship_velocity * time_to_interception
@@ -308,13 +327,14 @@ func IntersectShip(Target : MapShip) -> Vector2:
 	var ship_velocity = plship.GetShipSpeedVec()
 
 	# Predict where the ship will be in a future time `t`
-	var time_to_interception = (position.distance_to(ship_position)) / (max(GetAffectedSpeed(), 0.001) / 360)
+	var time_to_interception = (position.distance_to(ship_position)) / (max(GetShipSpeed(), 0.001) / 360)
 
 	# Calculate the predicted interception point
 	var predicted_position = ship_position + ship_velocity * time_to_interception
 
 	return predicted_position
-	
+
+
 func fuel_used_for_distance(dist: float, FuelNow: float, FuelEff: float, Weight: float) -> float:
 	var eff_eff = FuelEff - (Weight / 40.0)
 	var A = pow(FuelNow * eff_eff, 0.55)
@@ -324,11 +344,14 @@ func fuel_used_for_distance(dist: float, FuelNow: float, FuelEff: float, Weight:
 	var FuelAfter = pow(arg, 1.0/0.55) / eff_eff
 	return FuelNow - FuelAfter
 
-
-
 func GetShipSpeedVec() -> Vector2:
 	var Spd = Acceleration.global_position - global_position
-	var AffectedSpeed = Spd + (Spd * WindEffect)
+	return Spd
+
+func GetShipAffectedSpeedVec() -> Vector2:
+	var Spd = Acceleration.global_position - global_position
+	var Windage = Cpt.GetStatFinalValue(STAT_CONST.STATS.WINDAGE) * 0.0001
+	var AffectedSpeed = Spd + (WindVector * Windage)
 	return AffectedSpeed
 
 func SetTargetLocation(pos : Vector2) -> void:

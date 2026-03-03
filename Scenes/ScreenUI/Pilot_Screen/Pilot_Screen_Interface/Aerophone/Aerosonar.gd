@@ -97,11 +97,14 @@ func _updateContacts() -> void:
 	#retrieve contacts and iterate over them
 	for target in controller.GetSonarTargets():
 		#we only want the head of a squad
-		if (target is MapShip and target.Command != null):
-			continue
+		if (target is MapShip):
+			if (target.Command != null):
+				continue
+			if (isPartOfFleet(target)):
+				continue
+			
 		#make sure we dont register ships from the controllers fleed
-		if (isPartOfFleet(target)):
-			continue
+		
 		#terain collision
 		if not TopographyMap.WithinLineOfSight(controller.global_position, controller.Altitude, target.global_position, target.Altitude):
 			continue

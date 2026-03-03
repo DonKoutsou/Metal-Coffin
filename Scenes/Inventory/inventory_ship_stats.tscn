@@ -37,7 +37,7 @@ size_flags_vertical = 3
 alignment = 1
 script = ExtResource("1_oud7i")
 ShipStatScene = ExtResource("2_82v18")
-StatsShown = Array[int]([4, 0, 1, 2, 9, 6, 7, 3, 5])
+StatsShown = Array[int]([4, 0, 1, 2, 9, 6, 7, 3, 5, 22])
 
 [node name="Legend" type="HBoxContainer" parent="." unique_id=948479179]
 layout_mode = 2
@@ -82,3 +82,8 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_hwjun")
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Ship Part Buffs"
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=1698529357]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/v_separation = 4

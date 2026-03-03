@@ -45,7 +45,6 @@ ShipSprite = NodePath("ColorRect")
 Acceleration = NodePath("Aceleration")
 
 [node name="Aceleration" type="Node2D" parent="." unique_id=2079415444]
-position = Vector2(0.5, 0)
 
 [node name="ColorRect" type="Sprite2D" parent="." unique_id=1708187202]
 z_index = -2
@@ -88,8 +87,3 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Elint" unique_id=1911328555]
 visible = false
 shape = SubResource("CircleShape2D_t084r")
-
-[connection signal="area_entered" from="ShipBody" to="." method="_on_area_entered"]
-[connection signal="area_exited" from="ShipBody" to="." method="_on_area_exited"]
-[connection signal="area_entered" from="Radar" to="." method="_on_radar_2_area_entered"]
-[connection signal="area_exited" from="Radar" to="." method="_on_radar_2_area_exited"]

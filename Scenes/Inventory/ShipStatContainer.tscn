@@ -54,13 +54,13 @@ corner_radius_bottom_left = 1
 corner_detail = 1
 
 [node name="ShipStatContainer" type="VBoxContainer" unique_id=1703653256 node_paths=PackedStringArray("StatNameLabel", "StatValueLabel", "ShipStatBar", "ItemStatBar", "ItemNegativeBar")]
-custom_minimum_size = Vector2(200, 0)
-offset_right = 200.0
+offset_right = 103.0
 offset_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 0
 theme = ExtResource("1_netfp")
+theme_override_constants/separation = -10
 script = ExtResource("2_hehea")
 Tooltipscene = "uid://cqjgceykpax6c"
 StatNameLabel = NodePath("HBoxContainer/Label")

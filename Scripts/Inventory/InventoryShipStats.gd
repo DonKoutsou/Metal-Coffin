@@ -16,24 +16,24 @@ func _ready() -> void:
 
 		var statscene = ShipStatScene.instantiate() as ShipStatContainer
 		statscene.SetData(StatsShown[g])
-		add_child(statscene)
+		$GridContainer.add_child(statscene)
 		Stats.append(statscene)
 	
 	SpeedStat = ShipStatScene.instantiate() as ShipStatContainer
 	SpeedStat.SetDataCustom(1000, "km/h", "SPEED", STAT_CONST.STATS.SPEED)
-	add_child(SpeedStat)
+	$GridContainer.add_child(SpeedStat)
 	
 	Rangestat = ShipStatScene.instantiate() as ShipStatContainer
 	Rangestat.SetDataCustom(10000, "km", "RANGE", STAT_CONST.STATS.RANGE)
-	add_child(Rangestat)
+	$GridContainer.add_child(Rangestat)
 	
 	ValueStat = ShipStatScene.instantiate() as ShipStatContainer
 	ValueStat.SetDataCustom(1000000, "₯", "VALUE", STAT_CONST.STATS.VALUE)
-	add_child(ValueStat)
+	$GridContainer.add_child(ValueStat)
 	
 	NoiseStat = ShipStatScene.instantiate() as ShipStatContainer
 	NoiseStat.SetDataCustom(STAT_CONST.GetStatMaxValue(STAT_CONST.STATS.SOUND_SIGNATURE), STAT_CONST.GetStatMetric(STAT_CONST.STATS.SOUND_SIGNATURE), "SOUND SIGNATURE", STAT_CONST.STATS.SOUND_SIGNATURE)
-	add_child(NoiseStat)
+	$GridContainer.add_child(NoiseStat)
 
 func UpdateValues() -> void:
 	var FuelCap
@@ -64,7 +64,7 @@ func UpdateValues() -> void:
 	var Itvalue = CurrentShownCaptain.GetValue() - ChValue
 	ValueStat.UpdateStatCustom(ChValue, Itvalue, 0)
 	
-	var NoisedB = CurrentShownCaptain.CaptainShip.GetMaxdB()
+	var NoisedB = CurrentShownCaptain.GetMaxdB()
 	NoiseStat.UpdateStatCustom(0, NoisedB * 10, 0)
 
 func SetCaptain(Cpt : Captain) -> void:

@@ -19,7 +19,7 @@ var Friendly = false
 var Altitude : float
 var TargetAltitude : float
 var DistanceTraveled : float
-var WindEffect : float
+var WindVector : Vector2
 var Killed : bool = false
 var FiredBy : MapShip
 var VisibleBy : Array[MapShip]
@@ -64,12 +64,12 @@ func UpdateAltitude(NewAltitude) -> void:
 	AltitudeChanged.emit(NewAltitude)
 
 func UpdateShipWindManipulationModifier() -> void:
-	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * (WeatherManage.WindSpeed / WeatherManage.MAX_WIND_SPEED) * 0.2
+	#var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * (WeatherManage.WindSpeed / WeatherManage.MAX_WIND_SPEED) * 0.2
 	var StormValue = WeatherManage.Instance.StormValueInPosition(global_position)
-	var StormAffectedWind = WindVel + (WindVel * StormValue)
+	var StormAffectedWind = WeatherManage.WindDirection + (WeatherManage.WindDirection * StormValue)
 	var Height = 0.3 + 0.7 * (Altitude / 10000)
 	var WindProt = TopographyMap.GetWindProtection(global_position ,Altitude)
-	WindEffect = (StormAffectedWind * Height) * WindProt
+	WindVector = (StormAffectedWind * Height) * WindProt
 
 func _physics_process(delta: float) -> void:
 	if (SimulationManager.Paused):
@@ -286,7 +286,7 @@ func GetdB() -> float:
 
 func GetShipSpeedVec() -> Vector2:
 	var Spd = $AccelPosition.global_position - global_position
-	var AffectedSpeed = Spd + (Spd * WindEffect)
+	var AffectedSpeed = Spd + (WindVector * 0.1)
 	return AffectedSpeed
 
 func GetSaveData() -> MissileSaveData:

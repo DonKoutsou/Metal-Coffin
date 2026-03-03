@@ -15,6 +15,8 @@ static var ControlledShipVisibilityValue : float = 1
 static var ControlledShipStormValue : float = 0
 static var ControlledShipPosition : Vector2
 
+static var AutoCorrectWind : bool = true
+
 signal FleetSeperationRequested(ControlledShip : PlayerDrivenShip)
 signal LandingRequested(ControlledShip : PlayerDrivenShip)
 signal OpenHatchRequested(ControlledShip : PlayerDrivenShip)
@@ -33,6 +35,7 @@ func _ready() -> void:
 	UIEventH.AccelerationChanged.connect(SetControlledShipSpeed)
 	UIEventH.ElevationChanged.connect(SetControlledShipElevation)
 	UIEventH.SteerOffseted.connect(SteerChanged)
+	UIEventH.WindCorrectionToggled.connect(WindCorrectionToggle)
 	#UIEventH.ShipSwitchPressed.connect(ControlledShipSwitch)
 	
 	ShipControllerEventH.TargetPositionPicked.connect(OnTargetPositionChanged)
@@ -41,6 +44,9 @@ func _ready() -> void:
 
 	droneDockEventHandler.DroneDocked.connect(_onDroneAdded)
 	droneDockEventHandler.DroneUndocked.connect(_onDroneRemoved)
+
+func WindCorrectionToggle(t : bool) -> void:
+	AutoCorrectWind = t
 
 func _onDroneAdded(drone: Drone, target: MapShip) -> void:
 	if (drone == ControlledShip):

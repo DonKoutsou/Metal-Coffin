@@ -102,12 +102,18 @@ StatBase = 50.0
 script = ExtResource("2_rura2")
 StatName = 17
 
+[sub_resource type="Resource" id="Resource_qsfeq"]
+script = ExtResource("2_rura2")
+StatName = 22
+StatBase = 150.0
+metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
+
 [resource]
 script = ExtResource("2_mv381")
 CaptainName = "Dimitry"
 CaptainPortrait = ExtResource("1_0l4hh")
 ShipIcon = ExtResource("3_0gtvo")
-CaptainStats = Array[ExtResource("2_rura2")]([SubResource("Resource_5y7kc"), SubResource("Resource_v6t2m"), SubResource("Resource_g5q3n"), SubResource("Resource_qsyx2"), SubResource("Resource_1apas"), SubResource("Resource_8oau1"), SubResource("Resource_g3wpv"), SubResource("Resource_8tqmo"), SubResource("Resource_vxgw7"), SubResource("Resource_0l4hh"), SubResource("Resource_dn4w7"), SubResource("Resource_b7sqh"), SubResource("Resource_jhil0"), SubResource("Resource_qf4jf"), SubResource("Resource_3cfo8"), SubResource("Resource_04s81"), SubResource("Resource_epxoh"), SubResource("Resource_8kdp1")])
+CaptainStats = Array[ExtResource("2_rura2")]([SubResource("Resource_5y7kc"), SubResource("Resource_v6t2m"), SubResource("Resource_g5q3n"), SubResource("Resource_qsyx2"), SubResource("Resource_1apas"), SubResource("Resource_8oau1"), SubResource("Resource_g3wpv"), SubResource("Resource_8tqmo"), SubResource("Resource_vxgw7"), SubResource("Resource_0l4hh"), SubResource("Resource_dn4w7"), SubResource("Resource_b7sqh"), SubResource("Resource_jhil0"), SubResource("Resource_qf4jf"), SubResource("Resource_3cfo8"), SubResource("Resource_04s81"), SubResource("Resource_epxoh"), SubResource("Resource_8kdp1"), SubResource("Resource_qsfeq")])
 StartingItems = Array[ExtResource("3_wbv1e")]([ExtResource("5_dgj0j"), ExtResource("8_1cw16"), ExtResource("10_2dfck"), ExtResource("10_2dfck"), ExtResource("11_xyrt1"), ExtResource("11_xyrt1"), ExtResource("11_xyrt1"), ExtResource("12_vxgw7"), ExtResource("12_vxgw7"), ExtResource("12_vxgw7"), ExtResource("13_0l4hh")])
 CheckForErrors = true
 ProvidingCaptains = Array[ExtResource("2_mv381")]([ExtResource("5_0l4hh")])
