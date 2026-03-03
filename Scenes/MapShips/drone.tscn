@@ -20,6 +20,7 @@
 [ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="11_e2mx5"]
 [ext_resource type="Resource" uid="uid://f8x3cqxrqo6s" path="res://Resources/Items/Ammo/Flares.tres" id="12_kp2wg"]
 [ext_resource type="Resource" uid="uid://cnrek2mbia331" path="res://Resources/Items/Ammo/ProxyFuseAmmoMagazine100mm.tres" id="13_8huau"]
+[ext_resource type="Script" uid="uid://5xjgi2kvis2v" path="res://Scenes/MapShips/Player_Radar.gd" id="16_2ygm8"]
 
 [sub_resource type="Resource" id="Resource_jvup1"]
 script = ExtResource("3_2ygm8")
@@ -120,7 +121,7 @@ MaxStackCount = 99
 CardProviding = Array[ExtResource("4_25k7t")]([ExtResource("11_e2mx5")])
 Cost = 200
 
-[sub_resource type="Resource" id="Resource_qjc7u"]
+[sub_resource type="Resource" id="Resource_25k7t"]
 resource_local_to_scene = true
 script = ExtResource("5_vq5gh")
 CaptainName = "Tick"
@@ -131,14 +132,14 @@ ShipCallsign = "P1"
 StartingItems = Array[ExtResource("7_lb1bt")]([ExtResource("8_03i86"), ExtResource("9_06s8f"), ExtResource("9_06s8f"), ExtResource("10_o0thl"), SubResource("Resource_ep1jr"), SubResource("Resource_ep1jr"), SubResource("Resource_ep1jr"), ExtResource("12_kp2wg"), ExtResource("12_kp2wg"), ExtResource("12_kp2wg"), ExtResource("13_8huau"), ExtResource("13_8huau"), ExtResource("13_8huau")])
 ProvidingFunds = 25000
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ygm8"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vq5gh"]
 resource_local_to_scene = true
 shader = ExtResource("3_qb3w4")
 shader_parameter/ShipSize = 0.08
 shader_parameter/shadow_parallax_amount = 0.5
 shader_parameter/sprite_rotation = -1.57
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_25k7t"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_ayxxd"]
 resource_local_to_scene = true
 radius = 150.0
 
@@ -153,18 +154,21 @@ script = ExtResource("1_vfr1e")
 AccelerationAudio = NodePath("AudioStreamPlayer2D")
 L = NodePath("PointLight2D")
 MissileD = NodePath("MissileDock")
-Cpt = SubResource("Resource_qjc7u")
+Cpt = SubResource("Resource_25k7t")
 SonarShape = NodePath("Sonar")
 DroneDok = NodePath("DroneDock")
 
 [node name="ColorRect" parent="." index="1" unique_id=1708187202]
-material = SubResource("ShaderMaterial_2ygm8")
+material = SubResource("ShaderMaterial_vq5gh")
 
 [node name="TrailLine" parent="ColorRect" index="0" unique_id=994780843]
 width = 1.0
 
-[node name="CollisionShape2D" parent="Radar" parent_id_path=PackedInt32Array(1177421846) index="0" unique_id=689109080]
-shape = SubResource("CircleShape2D_25k7t")
+[node name="Radar" parent="." index="3" unique_id=1177421846]
+script = ExtResource("16_2ygm8")
+
+[node name="CollisionShape2D" parent="Radar" index="0" unique_id=689109080]
+shape = SubResource("CircleShape2D_ayxxd")
 
 [node name="ReturnSoundTrigger" type="Area2D" parent="." index="5" unique_id=1936282381]
 collision_layer = 0

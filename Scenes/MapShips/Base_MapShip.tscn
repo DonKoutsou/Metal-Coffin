@@ -4,6 +4,7 @@
 [ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyFireship1.tres" id="3_hup4s"]
 [ext_resource type="Shader" uid="uid://cqgk0egpp8vmb" path="res://Shaders/ShipVisualTest.gdshader" id="4_ql18u"]
 [ext_resource type="Texture2D" uid="uid://clst6a32c5mmn" path="res://Assets/ShipTextures/Scarab.png" id="5_oe1x5"]
+[ext_resource type="Script" uid="uid://7kme48vf7smt" path="res://Scenes/MapShips/Radar.gd" id="6_ubqfg"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scenes/MapShips/Trail_Line/trail_line.gd" id="6_wandv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7v2kq"]
@@ -74,6 +75,7 @@ shape = SubResource("CircleShape2D_jc744")
 [node name="Radar" type="Area2D" parent="." unique_id=1177421846]
 collision_layer = 2
 collision_mask = 5
+script = ExtResource("6_ubqfg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Radar" unique_id=689109080]
 visible = false

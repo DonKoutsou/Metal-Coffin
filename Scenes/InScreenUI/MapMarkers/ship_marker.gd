@@ -98,7 +98,7 @@ func Init(Ship : Node2D) -> void:
 		SetType("Missile")
 	
 	if (Ship is HostileShip):
-		Ship.VisualContactCountdownStarted.connect(VisualCountountStarted)
+		Ship.RadarShape.VisualContactCountdownStarted.connect(VisualCountountStarted)
 		ToggleVisualContactProgress(true)
 		Ship.Alarmed.connect(DoAlarm)
 	
@@ -206,9 +206,9 @@ func Update(IsControlled : bool, CamPos : Vector2, delta : float) -> void:
 		else:
 			visible = true
 		ToggleShipDetails(!CurrentShip.Docked)
-		ToggleVisualContactProgress(CurrentShip.VisualContactCountdown < 20)
-		if (CurrentShip.VisualContactCountdown < 20):
-			UpdateVisualContactProgress(CurrentShip.VisualContactCountdown)
+		ToggleVisualContactProgress(CurrentShip.RadarShape.VisualContactCountdown < 20)
+		if (CurrentShip.RadarShape.VisualContactCountdown < 20):
+			UpdateVisualContactProgress(CurrentShip.RadarShape.VisualContactCountdown)
 		#if (EnemyDebug):
 			#global_position = ship.GetShipParalaxPosition(CamPos, Zoom)
 			#UpdateSpeed(ship.GetShipSpeed())

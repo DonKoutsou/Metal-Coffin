@@ -249,8 +249,7 @@ func DockDrone(drone : Drone, playsound : bool = false):
 	if (Command.CurrentPort != null and Command.CurrentPort != drone.CurrentPort):
 		drone.SetCurrentPort(Command.CurrentPort)
 		Command.CurrentPort.OnSpotAproached(drone)
-	if (!Command.Detectable):
-		drone.ToggleRadar()
+	drone.ToggleRadar(Command.RadarShape.Working)
 
 	DroneAdded.emit()
 

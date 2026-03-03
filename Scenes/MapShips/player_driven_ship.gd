@@ -17,9 +17,6 @@ var TargetShipPos : Vector2
 
 var SonarTargets : Array[Node2D]
 
-var RadarCircle : PackedVector2Array
-var CurrentRadarPointToEvaluate : int = 0
-
 #signal SonarToggled(t : bool)
 #signal SonarDirectionChanged(NewDir : float)
 
@@ -32,111 +29,7 @@ func GetArmedMissile() -> MissileItem:
 func GetMissileAimTrajectory() -> float:
 	return MissileD.AimRot
 
-func EvaluateRadarrPoint() -> void:
-	#var PointToEvaluate : Vector2 = RadarCircle[CurrentRadarPointToEvaluate]
-	for g in 2:
-		var Dir = GetPointInCircle(CurrentRadarPointToEvaluate, CurrentVisualRange / 5.0)
-		var MaxPoint = Dir * CurrentVisualRange
-		var GlobalPoint = global_position + MaxPoint
-		var EvaluatedPoint = TopographyMap.GetCollisionPoint(global_position, Altitude, GlobalPoint, 10000)
-		RadarCircle[CurrentRadarPointToEvaluate] = EvaluatedPoint - global_position
-		CurrentRadarPointToEvaluate = wrap(CurrentRadarPointToEvaluate + 1, 0, RadarCircle.size())
-
-func UpdateVizRange(rang : float):
-	super(rang)
-	var NewRange = max(rang, 110)
-	RadarCircle = get_circle_points(NewRange, NewRange / 5.0)
-	CurrentRadarPointToEvaluate = wrap(CurrentRadarPointToEvaluate, 0, RadarCircle.size())
-
-func GetBiggestRadarCicle() -> PackedVector2Array:
-	var Biggest : float = CurrentVisualRange
-	var Circle : PackedVector2Array = GetShipRadarLine()
-	for g : PlayerDrivenShip in GetDroneDock().GetDockedShips():
-		if g.CurrentVisualRange > Biggest:
-			Biggest = g.CurrentVisualRange
-			Circle = g.GetShipRadarLine()
-	return Circle
-
-func GetBiggestVisRange() -> float:
-	var Biggest : float = CurrentVisualRange
-	for g : PlayerDrivenShip in GetDroneDock().GetDockedShips():
-		if g.CurrentVisualRange > Biggest:
-			Biggest = g.CurrentVisualRange
-	return Biggest
-
-
-func GetPointInCircle(Point : int, num_points : int = 20) -> Vector2:
-	var angle = float(Point) / float(num_points) * PI * 2.0
-	return Vector2(cos(angle), sin(angle))
-
-
-func get_circle_points(radius: float, num_points: int = 20) -> PackedVector2Array:
-	var circle_points = PackedVector2Array()
-	for i in num_points:
-		var angle = float(i) / float(num_points) * PI * 2.0
-		var pt = Vector2(cos(angle), sin(angle)) * radius
-		circle_points.append(pt)
-	# Optionally close the loop:
-	circle_points.append(circle_points[0])
-	return circle_points
-
-func GetShipRadarLine() -> PackedVector2Array:
-	var GlobalPoints : PackedVector2Array
-	for g in RadarCircle:
-		GlobalPoints.append(g + global_position)
-	return GlobalPoints
-
-func  _ready() -> void:
-	super()
-	SonarShape.connect("area_entered", BodyEnteredSonar)
-	SonarShape.connect("area_exited", BodyLeftSonar)
-	
-	Paused = SimulationManager.IsPaused()
-	WeatherManage.RegisterShip(self)
-	if (RadarCircle.size() == 0):
-		RadarCircle = get_circle_points(110)
-
-func _exit_tree() -> void:
-	WeatherManage.UnregisterShip(self)
-		
-
-func GetSonarTargets() -> Array[Node2D]:
-	var Targets : Array[Node2D]
-	Targets.append_array(SonarTargets)
-	for g : PlayerDrivenShip in GetDroneDock().GetDockedShips():
-		for targ in g.SonarTargets:
-			if (!Targets.has(targ)):
-				Targets.append(targ)
-	return Targets
-
-func EvaluateRadarTargets() -> void:
-	for g in InsideRadar:
-		if (TopographyMap.WithinLineOfSight(global_position, Altitude, g.global_position, g.Altitude)):
-			g.OnShipSeen(self)
-		else:
-			g.OnShipUnseen(self)
-
-func Update(delta: float) -> void:
-	
-	UpdateElint(delta)
-	
-	var SimulationSpeed = SimulationManager.SimSpeed()
-
-	EvaluateRadarrPoint()
-	
-	for g in TrailLines:
-		g.UpdateProjected(delta, Altitude / 10000.0)
-	
-	if (Paused):
-		return
-
-	EvaluateRadarTargets()
-	if (GetShipSpeed() == 0):
-		CurrentLandAltitude = TopographyMap.GetAltitudeAtGlobalPosition(global_position)
-	else:
-		CurrentLandAltitude = TopographyMap.GetAltitudeAtGlobalPosition(global_position) + 200
-	_HandleLanding(delta)
-	
+func _HandleAutoPilot(delta : float) -> void:
 	if (TargetShip != null):
 		TargetShipPos = IntersectShip(TargetShip)
 		if (TargetShipPos.distance_to(global_position) < 5):
@@ -160,8 +53,67 @@ func Update(delta: float) -> void:
 			var newrot = lerp_angle(rotation, directiontoDestination, delta)
 			ForceSteer(newrot)
 			SteerForced.emit(newrot)
-			
+	if (CommingBack):
+		updatedronecourse()
+
+func GetBiggestRadarCicle() -> PackedVector2Array:
+	var Biggest : float = RadarShape.CurrentVisualRange
+	var Circle : PackedVector2Array = RadarShape.GetShipRadarLine()
+	for g : PlayerDrivenShip in GetDroneDock().GetDockedShips():
+		if g.RadarShape.CurrentVisualRange > Biggest:
+			Biggest = g.RadarShape.CurrentVisualRange
+			Circle = g.RadarShape.GetShipRadarLine()
+	return Circle
+
+func GetBiggestVisRange() -> float:
+	var Biggest : float = RadarShape.CurrentVisualRange
+	for g : PlayerDrivenShip in GetDroneDock().GetDockedShips():
+		if g.RadarShape.CurrentVisualRange > Biggest:
+			Biggest = g.RadarShape.CurrentVisualRange
+	return Biggest
+
+
+func  _ready() -> void:
+	super()
+	SonarShape.connect("area_entered", BodyEnteredSonar)
+	SonarShape.connect("area_exited", BodyLeftSonar)
+
+	WeatherManage.RegisterShip(self)
 	
+
+func _exit_tree() -> void:
+	WeatherManage.UnregisterShip(self)
+		
+
+func GetSonarTargets() -> Array[Node2D]:
+	var Targets : Array[Node2D]
+	Targets.append_array(SonarTargets)
+	for g : PlayerDrivenShip in GetDroneDock().GetDockedShips():
+		for targ in g.SonarTargets:
+			if (!Targets.has(targ)):
+				Targets.append(targ)
+	return Targets
+
+func Update(delta: float) -> void:
+	
+	UpdateElint(delta)
+	RadarShape.EvaluateRadarrPoint(Altitude)
+	
+	for g in TrailLines:
+		g.UpdateProjected(delta, Altitude / 10000.0)
+	
+	if (SimulationManager.IsPaused()):
+		return
+
+	RadarShape.EvaluateRadarTargets(Altitude)
+	
+	if (Docked):
+		return
+
+	UpdateShipWindManipulationModifier()
+	_HandleLanding(delta)
+	_HandleAutoPilot(delta)
+		
 	if (StoredSteer != 0):
 		var SteertToAdd = min((delta), abs(StoredSteer)) * sign(StoredSteer)
 		StoredSteer -= SteertToAdd
@@ -170,16 +122,8 @@ func Update(delta: float) -> void:
 	if (AccelChanged):
 		_HandleAccelerationSound()
 
-	if (Docked):
-		return
-
 	if (CurrentPort != null):
 		_HandleRestock()
-	
-	UpdateShipWindManipulationModifier()
-	
-	if (CommingBack):
-		updatedronecourse()
 	
 	if (Landed()):
 		LastRecordedOffset = Vector2.ZERO
@@ -211,7 +155,7 @@ func Update(delta: float) -> void:
 	
 	#FuelConsumtion -= FuelConsumtion * WindEffect
 	
-	FuelConsumtion *= SimulationSpeed
+	FuelConsumtion *= SimulationManager.SimSpeed()
 	#Consume fuel on shif if enough
 	if (Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) >= FuelConsumtion):
 		Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, FuelConsumtion)
@@ -239,7 +183,7 @@ func Update(delta: float) -> void:
 		if (StormValue > 0.9):
 			DroneFuelConsumtion *= 1.3
 		#DroneFuelConsumtion -= DroneFuelConsumtion * WindEffect
-		DroneFuelConsumtion *= SimulationSpeed
+		DroneFuelConsumtion *= SimulationManager.SimSpeed()
 		
 		if (Cap.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) > DroneFuelConsumtion):
 			Cap.ConsumeResource(STAT_CONST.STATS.FUEL_TANK,DroneFuelConsumtion)
@@ -252,13 +196,13 @@ func Update(delta: float) -> void:
 			PopUpManager.GetInstance().DoFadeNotif("Your ships have run out of fuel.")
 	
 	LastRecordedOffset = offset
-	global_position += offset * SimulationSpeed
+	global_position += offset * SimulationManager.SimSpeed()
 
 
 func PartChanged(It : ShipPart) -> void:
 	for g in It.Upgrades:
 		if (g.UpgradeName == STAT_CONST.STATS.VISUAL_RANGE):
-			UpdateVizRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
+			RadarShape.UpdateVizRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
 		else : if (g.UpgradeName == STAT_CONST.STATS.ELINT):
 			UpdateELINTTRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT))
 		else : if (g.UpgradeName == STAT_CONST.STATS.AEROSONAR_RANGE):

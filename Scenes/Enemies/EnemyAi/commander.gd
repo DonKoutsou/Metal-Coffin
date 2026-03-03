@@ -47,20 +47,20 @@ func Update(delta: float) -> void:
 static func GetInstance() -> Commander:
 	return Instance
 
-func RegisterSelf(Ship : ) -> void:
+func RegisterSelf(Ship : HostileShip) -> void:
 	Fleet.append(Ship)
 	Ship.connect("OnShipDestroyed", OnShipDestroyed)
 	Ship.connect("OnDestinationReached", OnDestinationReached)
-	Ship.connect("OnPlayerVisualContact", OnEnemySeen)
-	Ship.connect("OnPlayerVisualLost", OnEnemyVisualLost)
+	Ship.RadarShape.OnPlayerVisualContact.connect(OnEnemySeen)
+	Ship.RadarShape.OnPlayerVisualLost.connect(OnEnemyVisualLost)
 	Ship.connect("ElintContact", OnElintHit)
 
 func UnregisterSelf(Ship : HostileShip) -> void:
 	Fleet.erase(Ship)
 	Ship.disconnect("OnShipDestroyed", OnShipDestroyed)
 	Ship.disconnect("OnDestinationReached", OnDestinationReached)
-	Ship.disconnect("OnPlayerVisualContact", OnEnemySeen)
-	Ship.disconnect("OnPlayerVisualLost", OnEnemyVisualLost)
+	Ship.RadarShape.OnPlayerVisualContact.disconnect(OnEnemySeen)
+	Ship.RadarShape.OnPlayerVisualLost.disconnect(OnEnemyVisualLost)
 	Ship.disconnect("ElintContact", OnElintHit)
 	if (ShipLodCheckList.has(Ship)):
 		ShipLodCheckList.erase(Ship)

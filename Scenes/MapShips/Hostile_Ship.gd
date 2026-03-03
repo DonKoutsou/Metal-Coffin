@@ -48,8 +48,7 @@ var Reloading : float = 0
 
 signal OnPlayerShipMet(PlayerSquad : Array[MapShip] , EnemySquad : Array[MapShip], Mis : Array[BattleShipStats])
 signal OnDestinationReached(Ship : HostileShip)
-signal OnPlayerVisualContact(Ship : MapShip, SeenBy : HostileShip)
-signal OnPlayerVisualLost(Ship : MapShip, LostBy : HostileShip)
+
 signal OnPositionInvestigated(Pos : Vector2)
 signal ElintContact(Ship : MapShip, t : bool)
 signal ShipSpawned
@@ -74,12 +73,11 @@ func  _ready() -> void:
 	#SavedParent = get_parent()
 	ElintShape.connect("area_entered", BodyEnteredElint)
 	ElintShape.connect("area_exited", BodyLeftElint)
-	RadarShape.connect("area_entered", BodyEnteredRadar)
-	RadarShape.connect("area_exited", BodyLeftRadar)
+	
 	BodyShape.connect("area_entered", BodyEnteredBody)
 	BodyShape.connect("area_exited", BodyLeftBody)
 	Cpt.connect("ShipPartChanged", PartChanged)
-	
+	RadarShape.VisStat = Cpt._GetStat(STAT_CONST.STATS.VISUAL_RANGE)
 	ToggleFuelRangeVisibility(false)
 	call_deferred("InitialiseShip")
 	
@@ -90,6 +88,7 @@ func  _ready() -> void:
 	if (!Patrol and !Convoy):
 		CurrentLandAltitude = TopographyMap.GetAltitudeAtGlobalPosition(PosToSpawn)
 		UpdateAltitude(CurrentLandAltitude)
+		RadarShape.Stationary = true
 
 func _exit_tree() -> void:
 	WeatherManage.UnregisterShip(self)
@@ -128,14 +127,14 @@ func InitialiseShip() -> void:
 		SetSpeed(0)
 		UseDefaultBehavior = true
 	
-	UpdateVizRange(VisRange)
+	RadarShape.UpdateVizRange(VisRange)
 	#TogglePause(SimulationManager.IsPaused())
 
 #Update function called by Commander class. Updating only ships that are not lodded
 func _Update(delta: float) -> void:
 		
 	UpdateElint(delta)
-	EvaluateRadarTargets()
+	RadarShape.EvaluateRadarTargets(Altitude)
 	var SimulationSpeed = SimulationManager.SimSpeed()
 	
 	if (Reloading > 0):
@@ -149,14 +148,6 @@ func _Update(delta: float) -> void:
 		ExposedValue += delta
 	
 	if (UseDefaultBehavior):
-		
-		if (GarrissonVisualContacts.size() > 0 and VisualContactCountdown > 0):
-			VisualContactCountdown -= 0.05 * SimulationSpeed
-			if (VisualContactCountdown < 0):
-				for c in GarrissonVisualContacts:
-					OnPlayerVisualContact.emit(c, self)
-
-		
 		if (!Cpt.IsResourceFull(STAT_CONST.STATS.HULL)):
 			Cpt.RefillResource(STAT_CONST.STATS.HULL ,0.02 * SimulationSpeed)
 		
@@ -533,65 +524,9 @@ func BodyLeftElint(area: Area2D) -> void:
 	ElintContacts.erase(area.get_parent())
 	ElintContact.emit(area.get_parent(), false)
 
-func EvaluateRadarTargets() -> void:
-	for g in InsideRadar:
-		if (TopographyMap.WithinLineOfSight(global_position, Altitude, g.global_position, g.Altitude)):
-			if (!Patrol and !Convoy):
-				GarissonVisualContact(g)
-			else:
-				OnPlayerVisualContact.emit(g, self)
-		else:
-			if (!Patrol and !Convoy):
-				GarissonLostVisualContact(g)
-			else:
-				OnPlayerVisualLost.emit(g, self)
 
-func BodyEnteredRadar(Body : Area2D) -> void:
-	if (Captured):
-		return
-	if (Body.get_parent() is PlayerDrivenShip):
-		InsideRadar.append(Body.get_parent())
-		
 
-var GarrissonVisualContacts : Array[MapShip]
-var VisualContactCountdown = 20
-signal VisualContactCountdownStarted(Value : float)
 
-func GarissonVisualContact(Ship : MapShip) -> void:
-	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.GARISSION_ALARM)):
-		ActionTracker.OnActionCompleted(ActionTracker.Action.GARISSION_ALARM)
-		ActionTracker.GetInstance().QueueTutorial("Surprise Atack", "When entering enemy cities you are given a small time frame where you can surprise the enemy\n That time is signified by the red bar bellow the enemie's ship marker.\nIf the bar finishes the alarm will be raised and an enemy patrol will start heading your way. Its recomended to invade cities with faster ships and initiating combat fast before getting detected", [])
-	if (GarrissonVisualContacts.has(Ship)):
-		return
-	
-	if (GarrissonVisualContacts.size() == 0):
-		#if (Patrol):
-			#VisualContactCountdown = 5
-		#else:
-		var HeatSignature = Ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST)
-		VisualContactCountdown = 20 - (20 * (HeatSignature / 100))
-		VisualContactCountdownStarted.emit(VisualContactCountdown)
-			
-	if (VisualContactCountdown < 0):
-		OnPlayerVisualContact.emit(Ship, self)
-		
-	GarrissonVisualContacts.append(Ship)
-
-func GarissonLostVisualContact(Ship : MapShip) -> void:
-	if (VisualContactCountdown <= 0):
-		OnPlayerVisualLost.emit(Ship, self)
-
-	GarrissonVisualContacts.erase(Ship)
-	if (GarrissonVisualContacts.size() == 0):
-		VisualContactCountdown = 20
-
-func BodyLeftRadar(Body : Area2D) -> void:
-	if (Body.get_parent() is PlayerDrivenShip):
-		InsideRadar.erase(Body.get_parent())
-		if (!Patrol and !Convoy):
-			GarissonLostVisualContact(Body.get_parent())
-		else:
-			OnPlayerVisualLost.emit(Body.get_parent(), self)
 
 func BodyEnteredBody(Body : Area2D) -> void:
 	if (Captured):
@@ -739,27 +674,18 @@ func Evaporate() -> void:
 		ToggleElint()
 	if (CurrentPort != null):
 		CurrentPort.OnSpotDeparture(self)
-	ToggleRadar()
+	ToggleRadar(false)
 	MapPointerManager.GetInstance().RemoveShip(self)
 	queue_free()
 	#get_parent().remove_child(self)
-
-func RephreshVisRange() -> void:
-	if (Destroyed):
-		return
-	var VisualRange : float = VisibilityValue
-	if (RadarWorking):
-		VisualRange = Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE)
-	var RadarRangeCollisionShape : CircleShape2D = RadarShape.get_node("CollisionShape2D").shape
-	RadarRangeCollisionShape.radius = max(VisualRange, VisibilityValue)
-
+	
 func Kill() -> void:
 	OnShipDestroyed.emit(self)
 	Destroyed = true
 	if (ElintShape != null):
 		ToggleElint()
 		
-	ToggleRadar()
+	ToggleRadar(false)
 	ShipWrecked.emit()
 	if (CurrentPort != null):
 		CurrentPort.OnSpotDeparture(self)

@@ -107,8 +107,8 @@ func RadarButtonPressed() -> void:
 	if (ControlledShip.Docked):
 		Instigator = ControlledShip.Command
 		
-	Instigator.ToggleRadar()
-	if (Instigator.RadarWorking):
+	Instigator.ToggleRadar(!Instigator.RadarShape.Working)
+	if (Instigator.RadarShape.Working):
 		PopUpManager.GetInstance().DoFadeNotif("Radar turned on")
 	else:
 		PopUpManager.GetInstance().DoFadeNotif("Radar turned off")
@@ -249,7 +249,7 @@ func OnShipChanged(NewShip : PlayerDrivenShip) -> void:
 
 func UpdatePlayerInfo() -> void:
 	ControlledShipPosition = ControlledShip.global_position
-	ControlledShipVisibilityValue = ControlledShip.VisibilityValue
+	ControlledShipVisibilityValue = ControlledShip.RadarShape.CurrentVisualRange
 	ControlledShipStormValue = ControlledShip.StormValue
 
 var camtw : Tween

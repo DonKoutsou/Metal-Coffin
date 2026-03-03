@@ -17,19 +17,16 @@ class_name MapShip
 
 @export var TrailLines : Array[TrailLine]
 @export_group("Nodes")
-@export var RadarShape : Area2D
+@export var RadarShape : Radar
 @export var ElintShape : Area2D
 @export var SonarShape : Area2D
 @export var BodyShape : Area2D
 @export var DroneDok : Node2D
 @export var ShipSprite : Sprite2D
 @export var Acceleration : Node2D	
-
-var Paused = true
 #var SimulationSpeed : float = 1
 var CurrentPort : MapSpot
 
-var RadarWorking = true
 var Altitude : float = 10000
 var TargetAltitude : float = 10000
 
@@ -38,7 +35,6 @@ var Command : MapShip
 
 var ShowFuelRange = true
 var Docked = false
-var CurrentVisualRange : float = 110
 
 signal ShipDeparted(DepartedFrom : MapSpot)
 signal ShipDockActions(Stats : String, t : bool, timel : float)
@@ -70,16 +66,13 @@ var LastRecordedOffset : Vector2
 
 signal PortChanged()
 
-signal VisuaLRangeChanged
+#signal VisuaLRangeChanged
 signal ElintRangeChanged
 signal AerosonarRangeChanged
 
 signal Elint(T : bool, Lvl : int, Dir : String)
 var ElintContacts : Dictionary
 
-var Detectable = true
-
-var VisibilityValue : float = 0
 var StormValue : float = 0
 var WindVector : Vector2
 var FuelWindEffect : float
@@ -87,8 +80,6 @@ var FuelWindEffect : float
 func _ready() -> void:
 	ElintShape.connect("area_entered", BodyEnteredElint)
 	ElintShape.connect("area_exited", BodyLeftElint)
-	RadarShape.connect("area_entered", BodyEnteredRadar)
-	RadarShape.connect("area_exited", BodyLeftRadar)
 	BodyShape.connect("area_entered", BodyEnteredBody)
 	BodyShape.connect("area_exited", BodyLeftBody)
 	Cpt.connect("ShipPartChanged", PartChanged)
@@ -97,6 +88,7 @@ func _ready() -> void:
 
 	#TODO probably a better way to do this
 	Cpt.CaptainShip = self
+	RadarShape.VisStat = Cpt._GetStat(STAT_CONST.STATS.VISUAL_RANGE)
 	_UpdateShipIcon(Cpt.ShipIcon)
 	for g in Cpt.CaptainStats:
 		g.ForceMaxValue()
@@ -172,7 +164,7 @@ func Repair() -> void:
 func PartChanged(It : ShipPart) -> void:
 	for g in It.Upgrades:
 		if (g.UpgradeName == STAT_CONST.STATS.VISUAL_RANGE):
-			UpdateVizRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
+			RadarShape.UpdateVizRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
 		else : if (g.UpgradeName == STAT_CONST.STATS.ELINT):
 			UpdateELINTTRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT))
 		else : if (g.UpgradeName == STAT_CONST.STATS.AEROSONAR_RANGE):
@@ -194,6 +186,11 @@ func SetSpeed(Spd : float) -> void:
 	GetShipAcelerationNode().position.x = Spd / 360
 
 func _HandleLanding(delta : float) -> void:
+	if (GetShipSpeed() == 0):
+		CurrentLandAltitude = TopographyMap.GetAltitudeAtGlobalPosition(global_position)
+	else:
+		CurrentLandAltitude = TopographyMap.GetAltitudeAtGlobalPosition(global_position) + 200
+		
 	var NewAltitude = clamp(TargetAltitude, CurrentLandAltitude, 10000)
 	#if (TargetAltitude != NewAltitude):
 		#TargetAltitude = NewAltitude
@@ -421,17 +418,10 @@ func UpdateSonarRange(rang : float):
 #██   ██ ██   ██ ██   ██ ██   ██ ██   ██  ██    ██      ██      ██ ██  ██ ██    ██    
 #██   ██ ██   ██ ██████  ██   ██ ██   ██ ██     ███████ ███████ ██ ██   ████    ██    
 
-func ToggleRadar():
-	Detectable = !Detectable
-	RadarWorking = !RadarWorking
-	if (RadarWorking):
-		#RadarShape.get_child(0).disabled = false
-		UpdateVizRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
-	else:
-		#RadarShape.get_child(0).disabled = false
-		UpdateVizRange(0)
+func ToggleRadar(t : bool):
+	RadarShape.ToggleRadar(t)
 	for g in GetDroneDock().DockedDrones:
-		g.ToggleRadar()
+		g.ToggleRadar(t)
 		
 func ToggleElint():
 	ElintShape.get_child(0).disabled = !ElintShape.get_child(0).disabled
@@ -462,21 +452,6 @@ func UpdateElint(delta: float) -> void:
 	else:
 		Elint.emit(false, -1, "")
 
-func UpdateVizRange(rang : float):
-	CurrentVisualRange = max(rang, 110)
-	#print("{0}'s radar range has been set to {1}".format([GetShipName(), rang]))
-	var RadarRangeCollisionShape = RadarShape.get_node("CollisionShape2D")
-	(RadarRangeCollisionShape.shape as CircleShape2D).radius = max(rang, 110)
-	VisuaLRangeChanged.emit()
-
-func RephreshVisRange() -> void:
-	var VisualRange = VisibilityValue
-	if (RadarWorking):
-		VisualRange = Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE)
-	var RadarRangeCollisionShape = RadarShape.get_node("CollisionShape2D")
-	(RadarRangeCollisionShape.shape as CircleShape2D).radius = max(VisualRange, VisibilityValue)
-	VisuaLRangeChanged.emit()
-
 #/////////////////////////////////////////////////////
 #██████  ██   ██ ██    ██ ███████ ██  ██████ ███████     ███████ ██    ██ ███████ ███    ██ ████████ ███████ 
 #██   ██ ██   ██  ██  ██  ██      ██ ██      ██          ██      ██    ██ ██      ████   ██    ██    ██      
@@ -495,50 +470,6 @@ func BodyLeftElint(Body: Area2D) -> void:
 		return
 	ElintContacts.erase(Body.get_parent())
 	#Elint.emit(false, 0)
-
-var InsideRadar : Array[Node2D]
-
-func EvaluateRadarTargets() -> void:
-	pass
-
-func BodyEnteredRadar(Body : Area2D) -> void:
-	var Parent = Body.get_parent()
-	if (Parent is HostileShip):
-		InsideRadar.append(Parent)
-		#Parent.OnShipSeen(self)
-		#if (Parent.Convoy and !ActionTracker.IsActionCompleted(ActionTracker.Action.CONVOY)):
-			#ActionTracker.OnActionCompleted(ActionTracker.Action.CONVOY)
-			#ActionTracker.GetInstance().QueueTutorial("Enemy Convoys", "You have located an enemy convoy. These convoys pose no risk since the have no weapons on them an are usually not escorted by any combatants. Capturing any of those convoys is dangerous since they can raise the alarm on you and signify your position to the enemy. Managing to capture on will provide a good reward once any of those is brought back to any of the cities, where the ship can be broken down and sold. Bring any captured convoy to any city and land it to receive your reward.", [], true)
-		
-	else: if (Parent is Missile):
-		if (Parent.FiredBy is HostileShip):
-			InsideRadar.append(Parent)
-			#Parent.OnShipSeen(self)
-	else : if (Parent is MapSpot):
-		if (Parent.EnemyCity):
-			if (!ActionTracker.IsActionCompleted(ActionTracker.Action.ENEMY_TOWN_APROACH)):
-				ActionTracker.OnActionCompleted(ActionTracker.Action.ENEMY_TOWN_APROACH)
-				var TutText = "You are reaching an enemy [color=#ffc315]city[/color]. Enemy cities are usual refuel spots for [color=#ffc315]patrols[/color], and always have a guarding [color=#ffc315]garrisson[/color] in their center. Entering the perimiter of a city will comence combat with all enemies that happen to be in it."
-				ActionTracker.GetInstance().QueueTutorial("Enemy Cities", TutText, [])
-		else:
-			if (!ActionTracker.IsActionCompleted(ActionTracker.Action.TOWN_APROACH)):
-				ActionTracker.OnActionCompleted(ActionTracker.Action.TOWN_APROACH)
-				var TutText = "You are reaching one of the many friendly [color=#ffc315]villages[/color] in the glacier. No enemies exist in those [color=#ffc315]villages[/color] and none of the locals wil raise the [color=#ffc315]alarm[/color] on you. You are free to use those [color=#ffc315]villages[/color] to restock/repair or even as a hideout. The location of those [color=#ffc315]villages[/color] is unknown and will need to be discovered."
-				ActionTracker.GetInstance().QueueTutorial("Friendly Villages", TutText, [])
-		if (!Parent.Seen):
-			Parent.OnSpotSeen()
-
-func BodyLeftRadar(Body : Area2D) -> void:
-	var Parent = Body.get_parent()
-	if (Parent is HostileShip):
-		InsideRadar.erase(Parent)
-		Parent.OnShipUnseen(self)
-		#Parent.OnShipUnseen(self)
-	else: if (Parent is Missile):
-		if (Parent.FiredBy is HostileShip):
-			InsideRadar.erase(Parent)
-			Parent.OnShipUnseen(self)
-			#Parent.OnShipUnseen(self)
 			
 func BodyEnteredBody(Body : Area2D) -> void:
 	if (Docked):
@@ -832,7 +763,6 @@ func GetValue() -> int:
 
 
 func TogglePause(t : bool):
-	Paused = t
 	$AudioStreamPlayer2D.playing = !t
 #/////////////////////////////////////
 
