@@ -76,7 +76,7 @@ func Init(Ship : Node2D) -> void:
 	else : if (Ship is PlayerDrivenShip):
 		Ship.ShipDockActions.connect(ToggleShowRefuel)
 		Ship.ShipDeparted.connect(OnShipDeparted)
-		Ship.Elint.connect(ToggleShowElint)
+		Ship.ElintShape.ElintTriggered.connect(ToggleShowElint)
 		Ship.Cpt.OnNameChanged.connect(OnCaptainNameChanged)
 		Ship.AltitudeChanged.connect(AltitudeChanged)
 		#Ship.SonarToggled.connect(ToggleRadarRange)
@@ -496,7 +496,7 @@ func SetSpeedUnknown() -> void:
 func UpdateSpeed(Spd : float):
 	Direction.visible = Spd > 0
 	var spd = roundi(Spd)
-	ShipSpeedText = "SPEED " + var_to_str(spd).replace(".0", "")
+	ShipSpeedText = "VELOCITY " + var_to_str(spd).replace(".0", "")
 
 func GetSaveData() -> SD_ShipMarker:
 	var Data = SD_ShipMarker.new()

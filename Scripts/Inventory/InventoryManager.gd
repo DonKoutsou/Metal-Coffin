@@ -42,6 +42,7 @@ func _ready() -> void:
 func ControllerChanged(NewController : PlayerDrivenShip) -> void:
 	controller = NewController
 	var squad : Array[Captain] = NewController.GetSquadCaptains()
+	squad.append(NewController.Cpt)
 	InspectCharacter(squad[0])
 	for g in _CharacterInventories:
 		var inv : CharacterInventory = _CharacterInventories[g]

@@ -11,7 +11,7 @@ class_name ShipContoller
 var AvailableShips : Array[PlayerDrivenShip] = []
 
 static var ControlledShip : PlayerDrivenShip
-static var ControlledShipVisibilityValue : float = 1
+static var ControlledShipVisibilityPenaltyValue : float = 1
 static var ControlledShipStormValue : float = 0
 static var ControlledShipPosition : Vector2
 
@@ -249,7 +249,7 @@ func OnShipChanged(NewShip : PlayerDrivenShip) -> void:
 
 func UpdatePlayerInfo() -> void:
 	ControlledShipPosition = ControlledShip.global_position
-	ControlledShipVisibilityValue = ControlledShip.RadarShape.CurrentVisualRange
+	ControlledShipVisibilityPenaltyValue = ControlledShip.RadarShape.VisualRangePenalty
 	ControlledShipStormValue = ControlledShip.StormValue
 
 var camtw : Tween

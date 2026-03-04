@@ -42,7 +42,7 @@ func _onControlledShipUpdated(newController: PlayerDrivenShip) -> void:
 		ThrustControl.ELEVATION:
 			forceValue(controller.TargetAltitude / 10000)  # Assume altitude scaling
 		ThrustControl.SPEED:
-			forceValue(controller.GetShipSpeed() / controller.GetShipMaxSpeed())
+			forceValue(controller.GetCurrentAcceleration() / controller.GetShipMaxSpeed())
 
 func zeroAcceleration() -> void:
 	handle.position.y = minVelocityLoc

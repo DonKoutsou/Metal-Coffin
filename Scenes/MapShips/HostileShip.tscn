@@ -17,7 +17,8 @@
 [ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="11_goor5"]
 [ext_resource type="Resource" uid="uid://f8x3cqxrqo6s" path="res://Resources/Items/Ammo/Flares.tres" id="12_lrb77"]
 [ext_resource type="Resource" uid="uid://cnrek2mbia331" path="res://Resources/Items/Ammo/ProxyFuseAmmoMagazine100mm.tres" id="13_lp55k"]
-[ext_resource type="Script" uid="uid://d2dtxxciarjwc" path="res://Scenes/MapShips/Hostile_Radar.gd" id="17_jiih6"]
+[ext_resource type="Script" uid="uid://d2dtxxciarjwc" path="res://Scenes/MapShips/DetectionInstruments/Radar/Hostile_Radar.gd" id="17_jiih6"]
+[ext_resource type="Script" uid="uid://ilv1x68y0ylu" path="res://Scenes/MapShips/DetectionInstruments/Elint/HostileElintShape.gd" id="18_hnpap"]
 
 [sub_resource type="Resource" id="Resource_jvup1"]
 script = ExtResource("3_ksaka")
@@ -118,7 +119,7 @@ MaxStackCount = 99
 CardProviding = Array[ExtResource("4_xbxhh")]([ExtResource("11_goor5")])
 Cost = 200
 
-[sub_resource type="Resource" id="Resource_t4fx1"]
+[sub_resource type="Resource" id="Resource_hnpap"]
 resource_local_to_scene = true
 script = ExtResource("5_ghxqh")
 CaptainName = "Tick"
@@ -129,14 +130,14 @@ ShipCallsign = "P1"
 StartingItems = Array[ExtResource("7_5qtwm")]([ExtResource("8_ubtua"), ExtResource("9_ixrgj"), ExtResource("9_ixrgj"), ExtResource("10_7bp8q"), SubResource("Resource_fukcl"), SubResource("Resource_fukcl"), SubResource("Resource_fukcl"), ExtResource("12_lrb77"), ExtResource("12_lrb77"), ExtResource("12_lrb77"), ExtResource("13_lp55k"), ExtResource("13_lp55k"), ExtResource("13_lp55k")])
 ProvidingFunds = 25000
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jiih6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_avs2p"]
 resource_local_to_scene = true
 shader = ExtResource("5_7v2kq")
 shader_parameter/ShipSize = 0.08
 shader_parameter/shadow_parallax_amount = 0.5
 shader_parameter/sprite_rotation = -1.57
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_hnpap"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_yjcdp"]
 resource_local_to_scene = true
 radius = 150.0
 
@@ -147,17 +148,20 @@ ShipName = ""
 Patrol = true
 Convoy = false
 BT = ExtResource("8_w8ob0")
-Cpt = SubResource("Resource_t4fx1")
+Cpt = SubResource("Resource_hnpap")
 DroneDok = NodePath("DroneDock")
 
 [node name="ColorRect" parent="." index="1" unique_id=1708187202]
-material = SubResource("ShaderMaterial_jiih6")
+material = SubResource("ShaderMaterial_avs2p")
 
 [node name="Radar" parent="." index="3" unique_id=1177421846]
 script = ExtResource("17_jiih6")
 
 [node name="CollisionShape2D" parent="Radar" index="0" unique_id=689109080]
-shape = SubResource("CircleShape2D_hnpap")
+shape = SubResource("CircleShape2D_yjcdp")
+
+[node name="Elint" parent="." index="4" unique_id=268938013]
+script = ExtResource("18_hnpap")
 
 [node name="DroneDock" parent="." index="5" unique_id=2097404777 instance=ExtResource("7_hahnw")]
 collision_layer = 8

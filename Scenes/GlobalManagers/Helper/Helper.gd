@@ -297,6 +297,15 @@ func reconstruct_path(parent: Dictionary, end_city: String) -> Array:
 func GetColorForRegion(R : MapSpotCompleteInfo.REGIONS):
 	return RegionColors[R]
 
+static func fuel_used_for_distance(dist: float, FuelNow: float, FuelEff: float, Weight: float) -> float:
+	var eff_eff = FuelEff - (Weight / 40.0)
+	var A = pow(FuelNow * eff_eff, 0.55)
+	var arg = A - dist/50.0
+	if arg <= 0:
+		return FuelNow # not enough fuel: use what's left 
+	var FuelAfter = pow(arg, 1.0/0.55) / eff_eff
+	return FuelNow - FuelAfter
+
 static func CombineNoiseAmplitude(noiseAmplitudes: Array[float]) -> float:
 	var sumSq := 0.0
 	for a in noiseAmplitudes:

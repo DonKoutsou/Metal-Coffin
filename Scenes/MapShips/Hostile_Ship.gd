@@ -35,7 +35,6 @@ var BTree : BeehaveTree
 var BBoard : Blackboard
 var UseDefaultBehavior : bool = false
 
-var PosToSpawn : Vector2
 var LoadingSave : bool = false
 var Spawned : bool = false
 
@@ -50,7 +49,7 @@ signal OnPlayerShipMet(PlayerSquad : Array[MapShip] , EnemySquad : Array[MapShip
 signal OnDestinationReached(Ship : HostileShip)
 
 signal OnPositionInvestigated(Pos : Vector2)
-signal ElintContact(Ship : MapShip, t : bool)
+
 signal ShipSpawned
 signal ShipWrecked
 signal Alarmed
@@ -64,20 +63,17 @@ func ToggleLod(t : bool) -> void:
 	Lodded = t
 	if (!t):
 		WeatherManage.RegisterShip(self)
-		#get_parent().remove_child(self)
 	else:
 		WeatherManage.UnregisterShip(self)
-		#SavedParent.add_child(self)
 	
 func  _ready() -> void:
 	#SavedParent = get_parent()
-	ElintShape.connect("area_entered", BodyEnteredElint)
-	ElintShape.connect("area_exited", BodyLeftElint)
 	
 	BodyShape.connect("area_entered", BodyEnteredBody)
 	BodyShape.connect("area_exited", BodyLeftBody)
 	Cpt.connect("ShipPartChanged", PartChanged)
 	RadarShape.VisStat = Cpt._GetStat(STAT_CONST.STATS.VISUAL_RANGE)
+	ElintShape.ElintStat = Cpt._GetStat(STAT_CONST.STATS.ELINT)
 	ToggleFuelRangeVisibility(false)
 	call_deferred("InitialiseShip")
 	
@@ -86,7 +82,7 @@ func  _ready() -> void:
 		MapPointerManager.GetInstance().AddShip(self, false)
 	
 	if (!Patrol and !Convoy):
-		CurrentLandAltitude = TopographyMap.GetAltitudeAtGlobalPosition(PosToSpawn)
+		CurrentLandAltitude = TopographyMap.GetAltitudeAtGlobalPosition(global_position)
 		UpdateAltitude(CurrentLandAltitude)
 		RadarShape.Stationary = true
 
@@ -94,7 +90,6 @@ func _exit_tree() -> void:
 	WeatherManage.UnregisterShip(self)
 
 func InitialiseShip() -> void:
-	global_position = PosToSpawn
 	Spawned = true
 	ShipSpawned.emit()
 	
@@ -109,31 +104,26 @@ func InitialiseShip() -> void:
 	
 	Commander.GetInstance().RegisterSelf(self)
 	
-	
 	_UpdateShipIcon(Cpt.ShipIcon)
 	var ElintRange = Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT)
 	if (ElintRange == 0):
-		ElintShape.queue_free()
+		ElintShape.ToggleElint(false)
 	else:
-		UpdateELINTTRange(ElintRange)
-	
-	var VisRange = Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE)
+		ElintShape.UpdateELINTTRange()
 
 	if (Patrol or Convoy):
 		if (Command == null):
 			FigureOutPath()
 	else:
-		VisRange = max(VisRange / 2, 110)
 		SetSpeed(0)
 		UseDefaultBehavior = true
 	
-	RadarShape.UpdateVizRange(VisRange)
+	RadarShape.UpdateVizRange()
 	#TogglePause(SimulationManager.IsPaused())
 
 #Update function called by Commander class. Updating only ships that are not lodded
 func _Update(delta: float) -> void:
-		
-	UpdateElint(delta)
+	ElintShape.UpdateElint(delta)
 	RadarShape.EvaluateRadarTargets(Altitude)
 	var SimulationSpeed = SimulationManager.SimSpeed()
 	
@@ -191,30 +181,6 @@ func Steer(Rotation : float) -> void:
 
 	for g in GetDroneDock().DockedDrones:
 		g.ForceSteer(rotation)
-
-func UpdateElint(delta: float) -> void:
-	d -= delta
-	if (d > 0):
-		return
-	d = 0.4
-	var BiggestLevel = -1
-	var ClosestShip : MapShip
-	for g in ElintContacts.size():
-		var ship = ElintContacts.keys()[g] as MapShip
-		if (!ship.RadarWorking):
-			continue
-		var lvl = ElintContacts.values()[g]
-		var Newlvl = GetElintLevel(global_position.distance_squared_to(ship.global_position), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
-		if (Newlvl > BiggestLevel):
-			BiggestLevel = Newlvl
-			ClosestShip = ship
-		if (Newlvl != lvl):
-			ElintContacts[ship] = Newlvl
-	if (BiggestLevel > -1):
-		if (ClosestShip.Command != null):
-			ElintContact.emit(ClosestShip.Command ,true)
-		else:
-			ElintContact.emit(ClosestShip ,true)
 
 func GetFuelRange() -> float:
 	var Weight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
@@ -508,24 +474,6 @@ func OnShipUnseen(UnSeenBy : Node2D) -> void:
 	if (VisibleBy.size() == 0):
 		ExposedValue = 0
 	#$Radar/Radar_Range.visible = VisibleBt.size() > 0
-	
-func BodyEnteredElint(area: Area2D) -> void:
-	if (Captured):
-		return
-	if (area.get_parent() is HostileShip):
-		return
-	super(area)
-	
-func BodyLeftElint(area: Area2D) -> void:
-	if (area.get_parent() is HostileShip):
-		return
-	if (area.get_parent() == self):
-		return
-	ElintContacts.erase(area.get_parent())
-	ElintContact.emit(area.get_parent(), false)
-
-
-
 
 
 func BodyEnteredBody(Body : Area2D) -> void:
@@ -671,7 +619,7 @@ func Evaporate() -> void:
 	OnShipDestroyed.emit(self)
 	Destroyed = true
 	if (ElintShape != null):
-		ToggleElint()
+		ToggleElint(false)
 	if (CurrentPort != null):
 		CurrentPort.OnSpotDeparture(self)
 	ToggleRadar(false)
@@ -683,7 +631,7 @@ func Kill() -> void:
 	OnShipDestroyed.emit(self)
 	Destroyed = true
 	if (ElintShape != null):
-		ToggleElint()
+		ToggleElint(false)
 		
 	ToggleRadar(false)
 	ShipWrecked.emit()

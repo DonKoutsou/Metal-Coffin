@@ -149,9 +149,9 @@ func DrawRuller() -> void:
 		draw_circle(ControlledShipPos, FRange, Color(0.3, 0.7, 0.915), false, LineW, false)
 		draw_line(LineOrigin, LineEnd, Color(0.3, 0.7, 0.915), LineW, false)
 	
-	if (ControlledShip.HasArmedMissile()):
-		var MisRange = ControlledShip.GetArmedMissile().Distance
-		var AimTrajectory = ControlledShip.GetMissileAimTrajectory()
+	if (ControlledShip.MissileD.ArmedMissile != null):
+		var MisRange = ControlledShip.MissileD.ArmedMissile.Distance
+		var AimTrajectory = ControlledShip.MissileD.AimRot
 		var LineOrigin = ControlledShipPos + Vector2(50, 0).rotated(AimTrajectory)
 		var LineEnd = ControlledShipPos + Vector2(MisRange, 0).rotated(AimTrajectory)
 		draw_line(LineOrigin, LineEnd, Color("e8472a"), LineW, false)

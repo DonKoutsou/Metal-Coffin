@@ -53,7 +53,7 @@ func RegisterSelf(Ship : HostileShip) -> void:
 	Ship.connect("OnDestinationReached", OnDestinationReached)
 	Ship.RadarShape.OnPlayerVisualContact.connect(OnEnemySeen)
 	Ship.RadarShape.OnPlayerVisualLost.connect(OnEnemyVisualLost)
-	Ship.connect("ElintContact", OnElintHit)
+	Ship.ElintShape.ElintContact.connect(OnElintHit)
 
 func UnregisterSelf(Ship : HostileShip) -> void:
 	Fleet.erase(Ship)
@@ -61,7 +61,7 @@ func UnregisterSelf(Ship : HostileShip) -> void:
 	Ship.disconnect("OnDestinationReached", OnDestinationReached)
 	Ship.RadarShape.OnPlayerVisualContact.disconnect(OnEnemySeen)
 	Ship.RadarShape.OnPlayerVisualLost.disconnect(OnEnemyVisualLost)
-	Ship.disconnect("ElintContact", OnElintHit)
+	Ship.ElintShape.ElintContact.disconnect(OnElintHit)
 	if (ShipLodCheckList.has(Ship)):
 		ShipLodCheckList.erase(Ship)
 

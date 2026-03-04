@@ -231,7 +231,7 @@ corner_radius_bottom_left = 1024
 corner_detail = 20
 anti_aliasing = false
 
-[node name="SpotMarker" type="Control" unique_id=1554798351 node_paths=PackedStringArray("SpotDropPosition", "Spacer", "DetailContainer", "SpotNameLabel", "FuelLabel", "Anim")]
+[node name="SpotMarker" type="Control" unique_id=1554798351 node_paths=PackedStringArray("SpotDropPosition", "DetailContainer", "SpotNameLabel", "FuelLabel", "Anim")]
 use_parent_material = true
 layout_mode = 3
 anchors_preset = 8
@@ -245,7 +245,6 @@ mouse_filter = 1
 script = ExtResource("1_5x46s")
 SpotDropPosition = NodePath("DetailContainer/HBoxContainer")
 NofiticationScene = ExtResource("2_b0564")
-Spacer = NodePath("")
 BeepSound = ExtResource("3_625fb")
 DetailContainer = NodePath("DetailContainer")
 SpotNameLabel = NodePath("DetailContainer/SotNameLabel")

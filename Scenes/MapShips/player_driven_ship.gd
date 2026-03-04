@@ -15,88 +15,15 @@ var TargetLocations : Array[Vector2]
 var TargetShip : MapShip
 var TargetShipPos : Vector2
 
-var SonarTargets : Array[Node2D]
-
-#signal SonarToggled(t : bool)
-#signal SonarDirectionChanged(NewDir : float)
-
-func HasArmedMissile() -> bool:
-	return MissileD.ArmedMissile != null
-
-func GetArmedMissile() -> MissileItem:
-	return MissileD.ArmedMissile
-
-func GetMissileAimTrajectory() -> float:
-	return MissileD.AimRot
-
-func _HandleAutoPilot(delta : float) -> void:
-	if (TargetShip != null):
-		TargetShipPos = IntersectShip(TargetShip)
-		if (TargetShipPos.distance_to(global_position) < 5):
-			ClearTargetShip()
-			HaltShip()
-		var directiontoDestination = (TargetShipPos - global_position).normalized().angle()
-		if (rotation != directiontoDestination):
-			var newrot = lerp_angle(rotation, directiontoDestination, delta)
-			ForceSteer(newrot)
-			SteerForced.emit(newrot)
-			
-	else: if (TargetLocations.size() > 0):
-		var NextLoc = TargetLocations[0]
-		if (NextLoc.distance_to(global_position) < 5):
-			TargetLocations.remove_at(0)
-			if (TargetLocations.size() == 0):
-				HaltShip()
-		
-		var directiontoDestination = (NextLoc - global_position).normalized().angle()
-		if (rotation != directiontoDestination):
-			var newrot = lerp_angle(rotation, directiontoDestination, delta)
-			ForceSteer(newrot)
-			SteerForced.emit(newrot)
-	if (CommingBack):
-		updatedronecourse()
-
-func GetBiggestRadarCicle() -> PackedVector2Array:
-	var Biggest : float = RadarShape.CurrentVisualRange
-	var Circle : PackedVector2Array = RadarShape.GetShipRadarLine()
-	for g : PlayerDrivenShip in GetDroneDock().GetDockedShips():
-		if g.RadarShape.CurrentVisualRange > Biggest:
-			Biggest = g.RadarShape.CurrentVisualRange
-			Circle = g.RadarShape.GetShipRadarLine()
-	return Circle
-
-func GetBiggestVisRange() -> float:
-	var Biggest : float = RadarShape.CurrentVisualRange
-	for g : PlayerDrivenShip in GetDroneDock().GetDockedShips():
-		if g.RadarShape.CurrentVisualRange > Biggest:
-			Biggest = g.RadarShape.CurrentVisualRange
-	return Biggest
-
-
 func  _ready() -> void:
 	super()
-	SonarShape.connect("area_entered", BodyEnteredSonar)
-	SonarShape.connect("area_exited", BodyLeftSonar)
-
 	WeatherManage.RegisterShip(self)
-	
 
 func _exit_tree() -> void:
 	WeatherManage.UnregisterShip(self)
-		
-
-func GetSonarTargets() -> Array[Node2D]:
-	var Targets : Array[Node2D]
-	Targets.append_array(SonarTargets)
-	for g : PlayerDrivenShip in GetDroneDock().GetDockedShips():
-		for targ in g.SonarTargets:
-			if (!Targets.has(targ)):
-				Targets.append(targ)
-	return Targets
 
 func Update(delta: float) -> void:
-	
-	UpdateElint(delta)
+	ElintShape.UpdateElint(delta)
 	RadarShape.EvaluateRadarrPoint(Altitude)
 	
 	for g in TrailLines:
@@ -152,9 +79,7 @@ func Update(delta: float) -> void:
 	var ShipWeight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	var ShipEfficiency = (Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) / pow(ShipWeight, 0.5)) * 10
 	var FuelConsumtion = (Acceleration.position.x + CorrectionExtra) / ShipEfficiency
-	
-	#FuelConsumtion -= FuelConsumtion * WindEffect
-	
+
 	FuelConsumtion *= SimulationManager.SimSpeed()
 	#Consume fuel on shif if enough
 	if (Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) >= FuelConsumtion):
@@ -168,7 +93,7 @@ func Update(delta: float) -> void:
 		PopUpManager.GetInstance().DoFadeNotif("Your drone has run out of fuel.")
 		return
 	
-	for g : PlayerDrivenShip in GetDroneDock().GetDockedShips():
+	for g : PlayerDrivenShip in GetSquad():
 		var Cap = g.Cpt as Captain
 		
 		var droneWeight = Cap.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
@@ -182,7 +107,7 @@ func Update(delta: float) -> void:
 		
 		if (StormValue > 0.9):
 			DroneFuelConsumtion *= 1.3
-		#DroneFuelConsumtion -= DroneFuelConsumtion * WindEffect
+
 		DroneFuelConsumtion *= SimulationManager.SimSpeed()
 		
 		if (Cap.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) > DroneFuelConsumtion):
@@ -198,33 +123,70 @@ func Update(delta: float) -> void:
 	LastRecordedOffset = offset
 	global_position += offset * SimulationManager.SimSpeed()
 
-
 func PartChanged(It : ShipPart) -> void:
 	for g in It.Upgrades:
 		if (g.UpgradeName == STAT_CONST.STATS.VISUAL_RANGE):
-			RadarShape.UpdateVizRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
+			RadarShape.UpdateVizRange()
 		else : if (g.UpgradeName == STAT_CONST.STATS.ELINT):
-			UpdateELINTTRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT))
+			ElintShape.UpdateELINTTRange()
 		else : if (g.UpgradeName == STAT_CONST.STATS.AEROSONAR_RANGE):
-			UpdateSonarRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE))
+			SonarShape.UpdateSonarRange()
 
-#func ToggleSonarVisual(t : bool) -> void:
-	#SonarToggled.emit(t)
+func IntersectShip(Target : MapShip) -> Vector2:
+	var plship = Target
 
-#func SetSonarDirection(Dir : float) -> void:
-	#SonarDirectionChanged.emit(Dir)
+	var ship_position = plship.position # Get the current position and velocity of the ship
+	var ship_velocity = plship.LastRecordedOffset
 
-func BodyEnteredSonar(Body : Area2D) -> void:
-	var Parent = Body.get_parent()
-	if (Parent is MapShip or Parent is Missile):
-		#ShipEnteredSonar.emit(Body.get_parent())
-		SonarTargets.append(Parent)
+	var time_to_interception = (position.distance_to(ship_position)) / (max(GetShipSpeed(), 0.001) / 360) # Predict where the ship will be in a future time `t`
+	var predicted_position = ship_position + ship_velocity * time_to_interception # Calculate the predicted interception point
 
-func BodyLeftSonar(Body : Area2D) -> void:
-	var Parent = Body.get_parent()
-	if (Parent is MapShip or Parent is Missile):
-		SonarTargets.erase(Parent)
+	return predicted_position
 
+func GetBiggestRadarCicle() -> PackedVector2Array:
+	var Biggest : float = RadarShape.CurrentVisualRange
+	var Circle : PackedVector2Array = RadarShape.GetShipRadarLine()
+	for g : PlayerDrivenShip in GetSquad():
+		if g.RadarShape.CurrentVisualRange > Biggest:
+			Biggest = g.RadarShape.CurrentVisualRange
+			Circle = g.RadarShape.GetShipRadarLine()
+	return Circle
+
+func GetBiggestVisRange() -> float:
+	var Biggest : float = RadarShape.CurrentVisualRange
+	for g : PlayerDrivenShip in GetSquad():
+		if g.RadarShape.CurrentVisualRange > Biggest:
+			Biggest = g.RadarShape.CurrentVisualRange
+	return Biggest
+#------------------------------------------------------------
+#Autopilot stuff
+
+func _HandleAutoPilot(delta : float) -> void:
+	if (TargetShip != null):
+		TargetShipPos = IntersectShip(TargetShip)
+		if (TargetShipPos.distance_to(global_position) < 5):
+			ClearTargetShip()
+			HaltShip()
+		var directiontoDestination = (TargetShipPos - global_position).normalized().angle()
+		if (rotation != directiontoDestination):
+			var newrot = lerp_angle(rotation, directiontoDestination, delta)
+			ForceSteer(newrot)
+			SteerForced.emit(newrot)
+			
+	else: if (TargetLocations.size() > 0):
+		var NextLoc = TargetLocations[0]
+		if (NextLoc.distance_to(global_position) < 5):
+			TargetLocations.remove_at(0)
+			if (TargetLocations.size() == 0):
+				HaltShip()
+		
+		var directiontoDestination = (NextLoc - global_position).normalized().angle()
+		if (rotation != directiontoDestination):
+			var newrot = lerp_angle(rotation, directiontoDestination, delta)
+			ForceSteer(newrot)
+			SteerForced.emit(newrot)
+	if (CommingBack):
+		updatedronecourse()
 
 func updatedronecourse():
 	var plship = RegroupTarget
@@ -259,45 +221,6 @@ func updatedronecourse():
 	var predicted_position = ship_position + ship_velocity * time_to_interception
 	ShipLookAt(predicted_position)
 
-func IntersectShip(Target : MapShip) -> Vector2:
-	var plship = Target
-	# Get the current position and velocity of the ship
-	
-	var ship_position = plship.position
-	
-	#var Distance = global_position.distance_to(ship_position)
-	
-	#NEEDS WIND
-	var ship_velocity = plship.GetShipSpeedVec()
-
-	# Predict where the ship will be in a future time `t`
-	var time_to_interception = (position.distance_to(ship_position)) / (max(GetShipSpeed(), 0.001) / 360)
-
-	# Calculate the predicted interception point
-	var predicted_position = ship_position + ship_velocity * time_to_interception
-
-	return predicted_position
-
-
-func fuel_used_for_distance(dist: float, FuelNow: float, FuelEff: float, Weight: float) -> float:
-	var eff_eff = FuelEff - (Weight / 40.0)
-	var A = pow(FuelNow * eff_eff, 0.55)
-	var arg = A - dist/50.0
-	if arg <= 0:
-		return FuelNow # not enough fuel: use what's left 
-	var FuelAfter = pow(arg, 1.0/0.55) / eff_eff
-	return FuelNow - FuelAfter
-
-func GetShipSpeedVec() -> Vector2:
-	var Spd = Acceleration.global_position - global_position
-	return Spd
-
-func GetShipAffectedSpeedVec() -> Vector2:
-	var Spd = Acceleration.global_position - global_position
-	var Windage = Cpt.GetStatFinalValue(STAT_CONST.STATS.WINDAGE) * 0.0001
-	var AffectedSpeed = Spd + (WindVector * Windage)
-	return AffectedSpeed
-
 func SetTargetLocation(pos : Vector2) -> void:
 	if (CommingBack):
 		return
@@ -330,6 +253,8 @@ func TargetShipDestroyed(Sh : MapShip) -> void:
 	TargetLocations.append(TargetShip.global_position)
 	ClearTargetShip()
 
+#------------------------------------------------------------
+
 func Steer(Rotation : float) -> void:
 	StoredSteer = wrap(StoredSteer + (Rotation / 50), -PI, PI)
 	#StoredSteer = wrap(StoredSteer, -PI, PI)
@@ -338,7 +263,7 @@ func Steer(Rotation : float) -> void:
 
 	SteerForced.emit(rotation + StoredSteer)
 
-	for g in GetDroneDock().GetDockedShips():
+	for g in GetSquad():
 		g.ForceSteer(rotation)
 	if (TargetLocations.size() > 0):
 		TargetLocations.clear()
@@ -353,11 +278,6 @@ func _HandleAccelerationSound() -> void:
 	if (!AccelerationAudio.playing):
 		AccelerationAudio.play()
 	AccelChanged = false
-
-func UpdateLight(LightAmm : float, Viz : float) -> void:
-	L.color = Color(1,1,1) * LightAmm
-	L.texture_scale = Viz
-
 
 func _HandleRestock() -> void:
 	if(!Landed()):
@@ -374,30 +294,11 @@ func _HandleRestock() -> void:
 	else:
 		ShipDockActions.emit("Upgrading", false, 0)
 
+#--------------------------------------------------------------
 
-func _UpdateShipIcon(Tex : Texture2D) -> void:
-	super(Tex)
-	
-
-func BodyEnteredElint(Body: Area2D) -> void:
-	if (Body.get_parent() is PlayerDrivenShip):
-		return
-	super(Body)
-	
-	
-func BodyLeftElint(Body: Area2D) -> void:
-	if (Body.get_parent() is PlayerShip):
-		return
-	super(Body)
-	
-	
-func AccelerationChanged(value: float, forced : bool = false) -> void:
-	super(value, forced)
-	
-	for g in GetDroneDock().GetDockedShips():
-		g.SetSpeed(max(0,min(value,1) * GetShipMaxSpeed()) )
-		g.AccelChanged = true
-		
+func UpdateLight(LightAmm : float, Viz : float) -> void:
+	L.color = Color(1,1,1) * LightAmm
+	L.texture_scale = Viz
 
 func ToggleLight(t : bool) -> void:
 	$PointLight2D.visible = t

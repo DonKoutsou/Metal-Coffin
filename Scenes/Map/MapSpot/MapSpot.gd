@@ -119,7 +119,7 @@ func SetSpotData(Type : MapSpotType, Data : MapSpotCustomData_CompleteInfo) -> v
 func SetSize() -> void:
 	var sizething = (Population / 150000.0) as float
 	var collider = $AreaNotif/CollisionShape2D.shape as CircleShape2D
-	collider.radius = lerp(30, 250, sizething) / 2
+	collider.radius = lerp(30, 250, sizething)
 
 func GetSpotName() -> String:
 	return SpotName

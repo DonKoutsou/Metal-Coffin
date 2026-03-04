@@ -6,9 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://cw6nos06km7b3" path="res://Scenes/MapShips/DroneDock/PlayerDroneDock.tscn" id="5_vcup0"]
 [ext_resource type="AudioStream" uid="uid://b5f578ok7pvtj" path="res://Assets/Sounds/turbine_01.wav" id="6_0t4kc"]
 [ext_resource type="Texture2D" uid="uid://c6efc2y6xflyc" path="res://Assets/ShipTextures/Ship3_001.png" id="6_6lhcj"]
-[ext_resource type="Script" uid="uid://5xjgi2kvis2v" path="res://Scenes/MapShips/Player_Radar.gd" id="7_7aewx"]
+[ext_resource type="Script" uid="uid://5xjgi2kvis2v" path="res://Scenes/MapShips/DetectionInstruments/Radar/Player_Radar.gd" id="7_7aewx"]
+[ext_resource type="Script" uid="uid://bwvnvc0jhwiwu" path="res://Scenes/MapShips/DetectionInstruments/Elint/PlayerElintShape.gd" id="8_vwreh"]
 [ext_resource type="Script" uid="uid://dn2ybl8146b6t" path="res://Scenes/MapShips/missile_dock.gd" id="9_dl1n1"]
 [ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/EventHandlers/MissileDockEventHandler.tres" id="9_jx5d0"]
+[ext_resource type="Script" uid="uid://bskcd0e6ljc5w" path="res://Scenes/MapShips/SonarShape.gd" id="9_phbnr"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scenes/MapShips/Trail_Line/trail_line.gd" id="9_wfgcg"]
 [ext_resource type="Shader" uid="uid://cqgk0egpp8vmb" path="res://Shaders/ShipVisualTest.gdshader" id="11_ogc8b"]
 [ext_resource type="Texture2D" uid="uid://bn3s18w1rjx3d" path="res://Assets/UIPiecies/Light.png" id="20_hn8tc"]
@@ -52,6 +54,7 @@ texture = ExtResource("6_6lhcj")
 
 [node name="TrailLine" parent="ColorRect" index="0" unique_id=994780843]
 position = Vector2(0.5, -1)
+points = PackedVector2Array(0, 0)
 
 [node name="TrailLine2" type="Line2D" parent="ColorRect" index="1" unique_id=2010097455]
 show_behind_parent = true
@@ -72,10 +75,14 @@ script = ExtResource("7_7aewx")
 [node name="CollisionShape2D" parent="Radar" index="0" unique_id=689109080]
 shape = SubResource("CircleShape2D_phbnr")
 
+[node name="Elint" parent="." index="4" unique_id=268938013]
+script = ExtResource("8_vwreh")
+
 [node name="Sonar" type="Area2D" parent="." index="5" unique_id=1115196160]
 disable_mode = 2
 collision_layer = 0
 monitorable = false
+script = ExtResource("9_phbnr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sonar" index="0" unique_id=205796897]
 visible = false

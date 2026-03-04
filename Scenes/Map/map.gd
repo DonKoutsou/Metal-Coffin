@@ -754,7 +754,7 @@ func SpawnSpotFleet(Spot : MapSpot, Patrol : bool, Convoy : bool,  Pos : Vector2
 		M.unlock()
 		#SpawnedCallsigns.append(f.ShipCallsign)
 		SpawnedFleet.append(Ship)
-		Ship.PosToSpawn = Pos
+		Ship.global_position = Pos
 		Ship.connect("OnPlayerShipMet", EnemyMet)
 		WorldParent.call_deferred("add_child", Ship)
 		#call_deferred("AddEnemyToHierarchy", Ship, Pos)
@@ -771,7 +771,7 @@ func RespawnEnemiesThreaded(EnemyData : Array[Resource]) -> void:
 		var ship = EnemyScene.instantiate() as HostileShip
 		ship.LoadSaveData(g)
 		SpawnedEnems.append(ship)
-		ship.PosToSpawn = g.Position
+		ship.global_position = g.Position
 		ship.connect("OnPlayerShipMet", EnemyMet)
 		WorldParent.call_deferred("add_child", ship)
 

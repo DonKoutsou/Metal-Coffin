@@ -56,9 +56,9 @@ func toggleElint(isOn: bool) -> void:
 
 func _onControlledShipUpdated(ship: MapShip) -> void:
 	if (controller != null):
-		controller.ElintRangeChanged.disconnect(CheckIfWorking)
+		controller.ElintShape.ElintRangeChanged.disconnect(CheckIfWorking)
 	controller = ship
-	controller.ElintRangeChanged.connect(CheckIfWorking)
+	controller.ElintShape.ElintRangeChanged.connect(CheckIfWorking)
 	CheckIfWorking()
 
 func CheckIfWorking() -> void:

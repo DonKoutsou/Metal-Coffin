@@ -10,6 +10,7 @@ var Working : bool = true
 var Detectable = true
 
 var CurrentVisualRange : float = 110
+var VisualRangePenalty : float = 0
 
 var InsideRadar : Array[Node2D]
 
@@ -22,24 +23,18 @@ func _ready() -> void:
 func ToggleRadar(t : bool):
 	Detectable = t
 	Working = t
-	if (t):
-		#RadarShape.get_child(0).disabled = false
-		UpdateVizRange(VisStat.GetFinalValue())
+	UpdateVizRange()
+
+func UpdateVizRange():
+	var NewRange : float
+	if (!Working):
+		NewRange = 110 * VisualRangePenalty
 	else:
-		#RadarShape.get_child(0).disabled = false
-		UpdateVizRange(0)
-
-func UpdateVizRange(rang : float):
-	CurrentVisualRange = max(rang, 110)
-	#print("{0}'s radar range has been set to {1}".format([GetShipName(), rang]))
-	(collision_shape_2d.shape as CircleShape2D).radius = max(rang, 110)
-	VisuaLRangeChanged.emit()
-
-func RephreshVisRange(VisibilityValue : float) -> void:
-	var VisualRange = VisibilityValue
-	if (Working):
-		VisualRange = VisStat.GetFinalValue()
-	(collision_shape_2d.shape as CircleShape2D).radius = max(VisualRange, VisibilityValue)
+		NewRange = max(110 * VisualRangePenalty, VisStat.GetFinalValue())
+	if (NewRange == CurrentVisualRange):
+		return
+	CurrentVisualRange = NewRange
+	(collision_shape_2d.shape as CircleShape2D).radius = CurrentVisualRange
 	VisuaLRangeChanged.emit()
 
 func EvaluateRadarrPoint(_Altitude : float) -> void:

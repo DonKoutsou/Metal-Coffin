@@ -18,8 +18,8 @@ class_name MapShip
 @export var TrailLines : Array[TrailLine]
 @export_group("Nodes")
 @export var RadarShape : Radar
-@export var ElintShape : Area2D
-@export var SonarShape : Area2D
+@export var ElintShape : Elint
+@export var SonarShape : Sonar
 @export var BodyShape : Area2D
 @export var DroneDok : Node2D
 @export var ShipSprite : Sprite2D
@@ -51,35 +51,16 @@ signal SteerForced(NewSteer : float)
 signal Teleported
 
 var LastRecordedOffset : Vector2
-#var IsLanded : bool = false
-#var Landing : bool = false
-#signal LandingStarted
-#signal LandingCanceled(Ship : MapShip)
-#signal LandingEnded(Ship : MapShip)
-#signal LandingEnded2
-#var TakingOff : bool = false
-#signal TakeoffStarted
-#signal TakeoffEnded(Ship : MapShip)
-#var MatchingAltitude : bool = false
-#signal MatchingAltitudeStarted
-#signal MatchingAltitudeEnded(Ship : MapShip)
 
 signal PortChanged()
 
-#signal VisuaLRangeChanged
-signal ElintRangeChanged
-signal AerosonarRangeChanged
-
-signal Elint(T : bool, Lvl : int, Dir : String)
-var ElintContacts : Dictionary
 
 var StormValue : float = 0
 var WindVector : Vector2
 var FuelWindEffect : float
 
 func _ready() -> void:
-	ElintShape.connect("area_entered", BodyEnteredElint)
-	ElintShape.connect("area_exited", BodyLeftElint)
+	
 	BodyShape.connect("area_entered", BodyEnteredBody)
 	BodyShape.connect("area_exited", BodyLeftBody)
 	Cpt.connect("ShipPartChanged", PartChanged)
@@ -89,6 +70,9 @@ func _ready() -> void:
 	#TODO probably a better way to do this
 	Cpt.CaptainShip = self
 	RadarShape.VisStat = Cpt._GetStat(STAT_CONST.STATS.VISUAL_RANGE)
+	ElintShape.ElintStat = Cpt._GetStat(STAT_CONST.STATS.ELINT)
+	if (SonarShape != null):
+		SonarShape.SonarStat = Cpt._GetStat(STAT_CONST.STATS.AEROSONAR_RANGE)
 	_UpdateShipIcon(Cpt.ShipIcon)
 	for g in Cpt.CaptainStats:
 		g.ForceMaxValue()
@@ -116,7 +100,7 @@ func Refuel() -> void:
 		var AmmountRefilled = FuelPerTic * SimulationSpeed
 		
 		var ShipsToRefuel : Array[MapShip] = [self]
-		ShipsToRefuel.append_array(GetDroneDock().GetDockedShips())
+		ShipsToRefuel.append_array(GetSquad())
 		
 		var BiggestTimeLeft : float
 		
@@ -132,7 +116,6 @@ func Refuel() -> void:
 			if (timeleft > BiggestTimeLeft):
 				BiggestTimeLeft = timeleft
 			
-		
 			#Add fule to ship and remove from city
 			Capt.RefillResource(STAT_CONST.STATS.FUEL_TANK, AmmountRefilled)
 			CurrentPort.AddToFuelReserves(-AmmountRefilled)
@@ -164,11 +147,33 @@ func Repair() -> void:
 func PartChanged(It : ShipPart) -> void:
 	for g in It.Upgrades:
 		if (g.UpgradeName == STAT_CONST.STATS.VISUAL_RANGE):
-			RadarShape.UpdateVizRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
+			RadarShape.UpdateVizRange()
 		else : if (g.UpgradeName == STAT_CONST.STATS.ELINT):
-			UpdateELINTTRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT))
-		else : if (g.UpgradeName == STAT_CONST.STATS.AEROSONAR_RANGE):
-			UpdateELINTTRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT))
+			ElintShape.UpdateELINTTRange()
+		#else : if (g.UpgradeName == STAT_CONST.STATS.AEROSONAR_RANGE):
+			#UpdateELINTTRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT))
+
+func GetSonarTargets() -> Array[Node2D]:
+	var Targets : Array[Node2D] = SonarShape.GetSonarTargets()
+	for g : PlayerDrivenShip in GetSquad():
+		Targets.append_array(g.SonarShape.GetSonarTargets())
+	return Targets
+
+func GetClosestElint() -> Vector2:
+	var closest : Vector2 = ElintShape.GetClosestElint()
+	var closestdist = global_position.distance_squared_to(closest)
+	for g:MapShip in GetSquad():
+		var DroneClosest = g.ElintShape.GetClosestElint()
+		var dist = global_position.distance_squared_to(DroneClosest)
+		if(dist < closestdist):
+			closest = DroneClosest
+	return closest
+	
+func GetClosestElintLevel() -> int:
+	var Newlvl = ElintShape.GetClosestElintLevel()
+	for g:MapShip in GetSquad():
+		Newlvl = max(Newlvl, g.ElintShape.GetClosestElintLevel())
+	return Newlvl
 
 func ToggleFuelRangeVisibility(t : bool) -> void:
 	ShowFuelRange = t
@@ -177,8 +182,7 @@ func ToggleFuelRangeVisibility(t : bool) -> void:
 func SetCurrentPort(Port : MapSpot):
 	CurrentPort = Port
 	Cpt.CurrentPort = Port.GetSpotName()
-	var dr = GetDroneDock().GetDockedShips()
-	for g in dr:
+	for g in GetSquad():
 		g.SetCurrentPort(Port)
 	PortChanged.emit(0)
 		
@@ -192,52 +196,17 @@ func _HandleLanding(delta : float) -> void:
 		CurrentLandAltitude = TopographyMap.GetAltitudeAtGlobalPosition(global_position) + 200
 		
 	var NewAltitude = clamp(TargetAltitude, CurrentLandAltitude, 10000)
-	#if (TargetAltitude != NewAltitude):
-		#TargetAltitude = NewAltitude
-		#LandingStarted.emit(
+
 	if (Altitude != NewAltitude):
 		UpdateAltitude(move_toward(Altitude, NewAltitude, delta * 1000))
-		#if (Altitude == TargetAltitude):
-			#LandingEnded.emit(self)
-			#LandingEnded2.emit()
-	#if (Landing):
-		#UpdateAltitude(max(CurrentLandAltitude, Altitude - (60 * SimulationSpeed)))
-		#if (Altitude <= CurrentLandAltitude):
-			#Altitude = CurrentLandAltitude
-			#IsLanded = true
-			#LandingEnded.emit(self)
-			#LandingEnded2.emit()
-			#Landing = false
-	#else: if (TakingOff):
-		#UpdateAltitude(min(10000, Altitude + (60 * SimulationSpeed)))
-		#if (Altitude >= 10000):
-			#Altitude = 10000
-			#TakeoffEnded.emit(self)
-			#TakingOff = false
-	#else: if (MatchingAltitude):
-		#UpdateAltitude(clamp(move_toward(Altitude, Command.Altitude, 60 * SimulationSpeed), 0, 10000))
-		#if (Altitude == Command.Altitude):
-			#MatchingAltitudeEnded.emit(self)
-			#MatchingAltitude = false
-
-#func InitialiseAltitudeMatching() -> void:
-	#MatchingAltitude = true
-	#MatchingAltitudeStarted.emit()
 
 func RemovePort():
 	ShipDeparted.emit(CurrentPort)
 	CurrentPort = null
 	InventoryManager.GetInstance().CancelUpgrades(Cpt)
 	Cpt.CurrentPort = ""
-	#if (Landing):
-		#LandingCanceled.emit(self)
-		#Landing = false
-	#if (Altitude != 10000 and !TakingOff):
-		#TakingOff = true
-		#IsLanded = false
-		#TakeoffStarted.emit()
-	var dr = GetDroneDock().GetDockedShips()
-	for g in dr:
+
+	for g in GetSquad():
 		g.RemovePort()
 	PortChanged.emit(0)
 
@@ -266,16 +235,6 @@ func HaltShip():
 var AccelChanged = false
 
 func AccelerationChanged(value: float, forced : bool = false) -> void:
-	#if (Landing):
-		#LandingCanceled.emit(self)
-		#Landing = false
-#
-	#else : if (Altitude != 10000 and !TakingOff):
-		#TakingOff = true
-		#IsLanded = false
-		#TakeoffStarted.emit()
-		#RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.LIFTOFF)
-
 	if (value > 0):
 		if (GetFuelRange() <= 0):
 			HaltShip()
@@ -291,7 +250,10 @@ func AccelerationChanged(value: float, forced : bool = false) -> void:
 		AForced.emit(NewSpeed)
 	else:
 		AChanged.emit(NewSpeed)
-	#GetShipAcelerationNode().position.x = max(0,min(value,1) * GetShipMaxSpeed()) 
+	
+	for g in GetSquad():
+		g.SetSpeed(max(0,min(value,1) * GetShipMaxSpeed()) )
+		g.AccelChanged = true
 	
 func Steer(Rotation : float) -> void:
 	rotation = wrap(rotation + (Rotation / 50), -PI, PI)
@@ -299,7 +261,7 @@ func Steer(Rotation : float) -> void:
 	var Mat = ShipSprite.material as ShaderMaterial
 	Mat.set_shader_parameter("sprite_rotation", ShipSprite.global_rotation)
 
-	for g in GetDroneDock().GetDockedShips():
+	for g in GetSquad():
 		g.ForceSteer(rotation)
 
 func ForceSteer(Rotation : float) -> void:
@@ -308,7 +270,7 @@ func ForceSteer(Rotation : float) -> void:
 	#print("{0}'s new rotation is {1}".format([Cpt.GetCaptainName(), rotation]))
 	var Mat = ShipSprite.material as ShaderMaterial
 	Mat.set_shader_parameter("sprite_rotation", ShipSprite.global_rotation)
-	for g in GetDroneDock().GetDockedShips():
+	for g in GetSquad():
 		g.ForceSteer(rotation)
 		
 func ShipLookAt(pos : Vector2) -> void:
@@ -318,7 +280,7 @@ func ShipLookAt(pos : Vector2) -> void:
 	var Mat = ShipSprite.material as ShaderMaterial
 	Mat.set_shader_parameter("sprite_rotation", ShipSprite.global_rotation)
 
-	for g in GetDroneDock().GetDockedShips():
+	for g in GetSquad():
 		g.ForceSteer(rotation)
 
 func SetShipPosition(pos : Vector2) -> void:
@@ -390,7 +352,7 @@ func UpdateAltitude(NewAlt : float) -> void:
 	Mat.set_shader_parameter("shadow_parallax_amount", lerp(0.0, ParalaxMulti, Altitude / 10000.0))
 	Mat.set_shader_parameter("ShipSize", lerp(0.001, 0.008, Altitude / 10000.0))
 
-	for g in GetDroneDock().GetDockedShips():
+	for g in GetSquad():
 		g.TargetAltitude = TargetAltitude
 		g.UpdateAltitude(NewAlt)
 
@@ -399,17 +361,9 @@ func GetShipParalaxPosition(CamPos : Vector2, Zoom : float) -> Vector2:
 	offset.x /= 1.65
 	return global_position - offset
 
-func UpdateELINTTRange(rang : float):
-	var ElintRangeCollisionShape = ElintShape.get_node("CollisionShape2D")
-	#scalling collision
-	(ElintRangeCollisionShape.shape as CircleShape2D).radius = rang
-	ElintRangeChanged.emit()
 
-func UpdateSonarRange(rang : float):
-	var SonarCollisionShape : CollisionShape2D = SonarShape.get_child(0)
-	#scalling collision
-	(SonarCollisionShape.shape as CircleShape2D).radius = rang
-	AerosonarRangeChanged.emit()
+
+
 
 #//////////////////////////////////////////////////////////
 #██████   █████  ██████   █████  ██████      ██ ███████ ██      ██ ███    ██ ████████ 
@@ -420,38 +374,14 @@ func UpdateSonarRange(rang : float):
 
 func ToggleRadar(t : bool):
 	RadarShape.ToggleRadar(t)
-	for g in GetDroneDock().DockedDrones:
+	for g in GetSquad():
 		g.ToggleRadar(t)
 		
-func ToggleElint():
-	ElintShape.get_child(0).disabled = !ElintShape.get_child(0).disabled
+func ToggleElint(t : bool):
+	ElintShape.ToggleElint(t)
+	for g in GetSquad():
+		g.ToggleElint(t)
 	
-var d = 0.4
-
-func UpdateElint(delta: float) -> void:
-	d -= delta
-	if (d > 0):
-		return
-	d = 0.4
-	var BiggestLevel = -1
-	var Dir : float
-	for g in ElintContacts.size():
-		var ship = ElintContacts.keys()[g] as MapShip
-		var lvl = ElintContacts.values()[g]
-		var Newlvl = GetElintLevel(global_position.distance_squared_to(ship.global_position), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
-		if (Newlvl > BiggestLevel):
-			BiggestLevel = Newlvl
-			Dir = global_position.angle_to_point(ship.global_position)
-		if (Newlvl != lvl):
-			ElintContacts[ship] = Newlvl
-	if (BiggestLevel > -1):
-		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.ELINT_CONTACT)):
-			ActionTracker.OnActionCompleted(ActionTracker.Action.ELINT_CONTACT)
-			ActionTracker.GetInstance().QueueTutorial("Electronic Intelligence", "The Elint sensors of one of your ships has been triggered. Elint detects enemy radar signals and provides a rough estimation on the distance and the direction of the signal. If the sensor is triggered it means you are about to enter into a radar's signal range and be detected.", [])
-		Elint.emit(true, BiggestLevel, Helper.AngleToDirection(Dir))
-	else:
-		Elint.emit(false, -1, "")
-
 #/////////////////////////////////////////////////////
 #██████  ██   ██ ██    ██ ███████ ██  ██████ ███████     ███████ ██    ██ ███████ ███    ██ ████████ ███████ 
 #██   ██ ██   ██  ██  ██  ██      ██ ██      ██          ██      ██    ██ ██      ████   ██    ██    ██      
@@ -459,17 +389,7 @@ func UpdateElint(delta: float) -> void:
 #██      ██   ██    ██         ██ ██ ██           ██     ██       ██  ██  ██      ██  ██ ██    ██         ██ 
 #██      ██   ██    ██    ███████ ██  ██████ ███████     ███████   ████   ███████ ██   ████    ██    ███████ 
 
-func BodyEnteredElint(Body: Area2D) -> void:
-	if (Body.get_parent() == self):
-		return
-	ElintContacts[Body.get_parent()] = 0
-	#Elint.emit(true, 1)
-	
-func BodyLeftElint(Body: Area2D) -> void:
-	if (Body.get_parent() == self):
-		return
-	ElintContacts.erase(Body.get_parent())
-	#Elint.emit(false, 0)
+
 			
 func BodyEnteredBody(Body : Area2D) -> void:
 	if (Docked):
@@ -481,7 +401,7 @@ func BodyEnteredBody(Body : Area2D) -> void:
 			ActionTracker.GetInstance().QueueTutorial("Landing", "You have entrered the perimiter of a [color=#ffc315]Town[/color].\nTo visit the [color=#ffc315]town[/color]'s verdors and resuply you'll need to land your fleet.\nTo do so click the [color=#ffc315]Land Button[/color] to initiate the landing procedure or lower the [color=#ffc315]Altitude Lever[/color] all the way to the bottom. Once the landing is complete press the [color=#ffc315]Open Hatch[/color] button bellow the land button to visit the town.", [Map.UI_ELEMENT.LAND_BUTTON, Map.UI_ELEMENT.ELEVATION])
 		SetCurrentPort(Parent)
 		Parent.OnSpotAproached(self)
-		for g in GetDroneDock().GetDockedShips():
+		for g in GetSquad():
 			g.SetCurrentPort(Parent)
 			Parent.OnSpotAproached(g)
 	
@@ -492,7 +412,7 @@ func BodyLeftBody(Body : Area2D) -> void:
 	if (Parent is MapSpot):
 		RemovePort()
 		Parent.OnSpotDeparture(self)
-		for g in GetDroneDock().GetDockedShips():
+		for g in GetSquad():
 			g.RemovePort()
 			Parent.OnSpotDeparture(g)
 
@@ -518,7 +438,7 @@ func GetShipIcon() -> Node2D:
 func GetFuelStats() -> Dictionary[String, float]:
 	var Stats : Dictionary[String, float]
 	
-	var Fleet = GetDroneDock().GetDockedShips()
+	var Fleet = GetSquad()
 	var fuel_ef = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
 	var Weight =  Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	
@@ -550,16 +470,16 @@ func GetFleet() -> Array[MapShip]:
 	
 	if (Command != null):
 		Fleet.append(Command)
-		Fleet.append_array(Command.GetDroneDock().DockedDrones)
+		Fleet.append_array(Command.GetSquad())
 	else:
-		Fleet.append_array(GetDroneDock().DockedDrones)
+		Fleet.append_array(GetSquad())
 	
 	return Fleet
 
 func GetFuelRange() -> float:
 	if (Command != null):
 		return Command.GetFuelRange()
-	var Fleet = GetDroneDock().GetDockedShips()
+	var Fleet = GetSquad()
 	
 	var Weight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	var fuel = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
@@ -584,7 +504,7 @@ func GetFuelRange() -> float:
 func GetFuelRangeWithExtraFuel(ExtraFuel : float) -> float:
 	if (Command != null):
 		return Command.GetFuelRange()
-	var Fleet = GetDroneDock().GetDockedShips()
+	var Fleet = GetSquad()
 	
 	var Weight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	var fuel = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
@@ -630,7 +550,7 @@ func GetShipMaxSpeed() -> float:
 		Spd = Command.GetShipMaxSpeed()
 	else:
 		Spd = (Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * 1000) / Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
-		for g in GetDroneDock().GetDockedShips():
+		for g in GetSquad():
 			var DroneSpd = (g.Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * 1000) / g.Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 			if (DroneSpd < Spd):
 				Spd = DroneSpd
@@ -639,11 +559,23 @@ func GetShipMaxSpeed() -> float:
 	
 func GetShipName() -> String:
 	return Cpt.GetCaptainName()
-	
+
+func GetCurrentAcceleration() -> float:
+	return Acceleration.position.x
+
 func GetShipSpeed() -> float:
 	if (Command != null):
 		return Command.GetShipSpeed()
 	return LastRecordedOffset.length() * 360
+
+func GetShipSpeedVec() -> Vector2:
+	return Acceleration.global_position - global_position
+
+func GetShipAffectedSpeedVec() -> Vector2:
+	var Spd = Acceleration.global_position - global_position
+	var Windage = Cpt.GetStatFinalValue(STAT_CONST.STATS.WINDAGE) * 0.0001
+	var AffectedSpeed = Spd + (WindVector * Windage)
+	return AffectedSpeed
 
 func UpdateShipWindManipulationModifier() -> void:
 	var StormAffectedWind = WeatherManage.WindDirection + (WeatherManage.WindDirection * StormValue)
@@ -659,21 +591,20 @@ func GetShipThrust() -> float:
 func GetSquaddB() -> float:
 	var sounds : Array[float]
 	sounds.append(GetdB())
-	for g:MapShip in GetDroneDock().GetDockedShips():
+	for g:MapShip in GetSquad():
 		sounds.append(g.GetdB())
 	var finaldB = Helper.CombineNoiseAmplitude(sounds)
 	return finaldB
 
 func GetSquad() -> Array[MapShip]:
 	var squad : Array[MapShip]
-	squad.append(self)
+	#squad.append(self)
 	squad.append_array(GetDroneDock().GetDockedShips())
 	return squad
 
 func GetSquadCaptains() -> Array[Captain]:
 	var squad : Array[Captain]
-	squad.append(Cpt)
-	for g : MapShip in GetDroneDock().GetDockedShips():
+	for g : MapShip in GetSquad():
 		squad.append(g.Cpt)
 	return squad
 
@@ -681,67 +612,19 @@ func GetdB() -> float:
 	if (Landed()):
 		return 0
 	var MaxdB = GetMaxdB()
-	var CurrentdB = (max(GetShipSpeed() / GetShipMaxSpeed(), 0.1)) * MaxdB
+	var CurrentdB = (max(GetCurrentAcceleration() / GetShipMaxSpeed(), 0.1)) * MaxdB
 	return CurrentdB
 
 func GetMaxdB() -> float:
 	return GetShipThrust() / 30
 
-func GetShipSpeedVec() -> Vector2:
-	return Acceleration.global_position - global_position
-	
-func GetClosestElint() -> Vector2:
-	var closest : Vector2 = Vector2.ZERO
-	var closestdist : float = 999999999999999999
-	for g in ElintContacts.size():
-		var ship = ElintContacts.keys()[g]
-		var dist = global_position.distance_squared_to(ship.global_position)
-		if (closestdist > dist):
-			closest = ship.global_position
-			closestdist = dist
-	for g:MapShip in GetDroneDock().GetDockedShips():
-		var DroneClosest = g.GetClosestElint()
-		var dist = global_position.distance_squared_to(DroneClosest)
-		if(dist < closestdist):
-			closest = DroneClosest
-	return closest
 
-func GetClosestElintLevel() -> int:
-	if (ElintContacts.size() == 0):
-		return -1
-	var closest : MapShip
-	var closestdist : float = 9999999999999999
-	for g in ElintContacts.size():
-		var ship = ElintContacts.keys()[g]
-		var dist = global_position.distance_squared_to(ship.global_position)
-		if (closestdist > dist):
-			closest = ship
-			closestdist = dist
-	
-	var Newlvl = GetElintLevel(global_position.distance_squared_to(closest.global_position), closest.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
-	for g:MapShip in GetDroneDock().GetDockedShips():
-		Newlvl = max(Newlvl, g.GetClosestElintLevel())
-	return Newlvl
-	
-func GetElintLevel(DistSq : float, RadarL : float) -> int:
-	var Lvl = -1
-	var RadarLSq = RadarL * RadarL
-	var ElintDist = Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT)
-	if (ElintDist == 0 or RadarL <= 90):
-		return Lvl
-	if (DistSq < RadarLSq):
-		Lvl = 3
-	else : if (DistSq < RadarLSq * 2):
-		Lvl = 2
-	else : if (DistSq < RadarLSq * 10):
-		Lvl = 1
-	return Lvl
 	
 func GetDroneDock():
 	return DroneDok
 	
 func IsFuelFull() -> bool:
-	for g in GetDroneDock().DockedDrones:
+	for g in GetSquad():
 		if (!g.IsFuelFull()):
 			return false
 	return Cpt.IsResourceFull(STAT_CONST.STATS.FUEL_TANK)

@@ -49,7 +49,7 @@ const StatMaxValues : Dictionary = {
 	STATS.REPAIR_PRICE : 1000,
 	STATS.AEROSONAR_RANGE : 3000,
 	STATS.SOUND_SIGNATURE : 100,
-	STATS.WINDAGE : 2000
+	STATS.WINDAGE : 1000
 }
 const StatShouldStack : Dictionary = {
 	STATS.FUEL_TANK : true,

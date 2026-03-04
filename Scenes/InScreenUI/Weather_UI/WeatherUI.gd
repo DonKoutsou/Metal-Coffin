@@ -26,7 +26,7 @@ func _physics_process(delta: float) -> void:
 	#var ws = roundi(WeatherManage.WindSpeed * CurrentShip.WindEffect)
 	WindText.text = "Wind Dir = {0}\nSPD : {1}km/h".format([wd, ws])
 	WindDirArrow.rotation = WindAngle
-	var vis = ShipContoller.ControlledShipVisibilityValue
+	var vis = ShipContoller.ControlledShipVisibilityPenaltyValue
 	VizText.text = "Visibility = {0}".format([GetTextForVis(vis), snapped(vis, 0.01)])
 	
 	if (ShipContoller.ControlledShipStormValue < 0.9):

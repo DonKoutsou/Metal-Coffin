@@ -13,18 +13,18 @@ func EvaluateRadarTargets(Altitude : float) -> void:
 			if (Stationary):
 				GarissonVisualContact(g)
 			else:
-				OnPlayerVisualContact.emit(g, self)
+				OnPlayerVisualContact.emit(g, get_parent())
 		else:
 			if (Stationary):
 				GarissonLostVisualContact(g)
 			else:
-				OnPlayerVisualLost.emit(g, self)
+				OnPlayerVisualLost.emit(g, get_parent())
 	
 	if (GarrissonVisualContacts.size() > 0 and VisualContactCountdown > 0):
 		VisualContactCountdown -= 0.05 * SimulationManager.SimulationSpeed
 		if (VisualContactCountdown < 0):
 			for c in GarrissonVisualContacts:
-				OnPlayerVisualContact.emit(c, self)
+				OnPlayerVisualContact.emit(c, get_parent())
 
 func BodyEnteredRadar(Body : Area2D) -> void:
 	if (Body.get_parent() is PlayerDrivenShip):
@@ -51,13 +51,13 @@ func GarissonVisualContact(Ship : MapShip) -> void:
 		VisualContactCountdownStarted.emit(VisualContactCountdown)
 			
 	if (VisualContactCountdown < 0):
-		OnPlayerVisualContact.emit(Ship, self)
+		OnPlayerVisualContact.emit(Ship, get_parent())
 		
 	GarrissonVisualContacts.append(Ship)
 
 func GarissonLostVisualContact(Ship : MapShip) -> void:
 	if (VisualContactCountdown <= 0):
-		OnPlayerVisualLost.emit(Ship, self)
+		OnPlayerVisualLost.emit(Ship, get_parent())
 
 	GarrissonVisualContacts.erase(Ship)
 	if (GarrissonVisualContacts.size() == 0):
@@ -69,4 +69,4 @@ func BodyLeftRadar(Body : Area2D) -> void:
 		if (Stationary):
 			GarissonLostVisualContact(Body.get_parent())
 		else:
-			OnPlayerVisualLost.emit(Body.get_parent(), self)
+			OnPlayerVisualLost.emit(Body.get_parent(), get_parent())

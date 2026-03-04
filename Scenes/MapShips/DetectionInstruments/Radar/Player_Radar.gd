@@ -10,13 +10,20 @@ func _ready() -> void:
 	if (RadarCircle.size() == 0):
 		RadarCircle = get_circle_points(110)
 
-func UpdateVizRange(rang : float):
-	super(rang)
-	var NewRange = max(rang, 110)
+func UpdateVizRange():
+	var NewRange : float
+	if (!Working):
+		NewRange = 110 * VisualRangePenalty
+	else:
+		NewRange = max(110, VisStat.GetFinalValue()) * VisualRangePenalty
+	if (NewRange == CurrentVisualRange):
+		return
+	CurrentVisualRange = NewRange
+	(collision_shape_2d.shape as CircleShape2D).radius = CurrentVisualRange
+	VisuaLRangeChanged.emit()
 	RadarCircle = get_circle_points(NewRange, NewRange / 5.0)
 	CurrentRadarPointToEvaluate = wrap(CurrentRadarPointToEvaluate, 0, RadarCircle.size())
-
-
+	
 func EvaluateRadarTargets(Altitude : float) -> void:
 	for g in InsideRadar:
 		if (TopographyMap.WithinLineOfSight(global_position, Altitude, g.global_position, g.Altitude)):

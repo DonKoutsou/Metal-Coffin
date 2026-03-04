@@ -43,9 +43,9 @@ func _onDroneRemoved(_drone: Drone, target: MapShip) -> void:
 
 func _onControlledShipUpdated(newController: PlayerDrivenShip) -> void:
 	if controller != null:
-		controller.AerosonarRangeChanged.disconnect(CheckIfWorking)
+		controller.SonarShape.AerosonarRangeChanged.disconnect(CheckIfWorking)
 	controller = newController
-	controller.AerosonarRangeChanged.connect(CheckIfWorking)
+	controller.SonarShape.AerosonarRangeChanged.connect(CheckIfWorking)
 	CheckIfWorking()
 	#if !hasSonar and enabled:
 		#toggleSonar(false)

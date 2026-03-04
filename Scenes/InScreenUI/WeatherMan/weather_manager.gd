@@ -101,7 +101,8 @@ func Update(delta: float) -> void:
 		g.StormValue = StormValueInPosition(g.global_position)
 		if (g is PlayerDrivenShip):
 			g.UpdateLight(L, viz)
-		g.RadarShape.RephreshVisRange(viz)
+		g.RadarShape.VisualRangePenalty = viz
+		g.RadarShape.UpdateVizRange()
 
 func NoiseChanged() -> void:
 	DataTexture = N.get_image()
