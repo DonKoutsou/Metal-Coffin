@@ -8,21 +8,22 @@ var CurrentRadarPointToEvaluate : int = 0
 func _ready() -> void:
 	super()
 	if (RadarCircle.size() == 0):
-		RadarCircle = get_circle_points(110)
+		RadarCircle = get_circle_points(80, 80)
 
 func UpdateVizRange():
 	var NewRange : float
 	if (!Working):
 		NewRange = 110 * VisualRangePenalty
 	else:
-		NewRange = max(110, VisStat.GetFinalValue()) * VisualRangePenalty
+		NewRange = max(110 * VisualRangePenalty, VisStat.GetFinalValue()) * StormPenalty
+	NewRange = roundi(NewRange)
 	if (NewRange == CurrentVisualRange):
 		return
 	CurrentVisualRange = NewRange
 	(collision_shape_2d.shape as CircleShape2D).radius = CurrentVisualRange
 	VisuaLRangeChanged.emit()
-	RadarCircle = get_circle_points(NewRange, NewRange / 5.0)
-	CurrentRadarPointToEvaluate = wrap(CurrentRadarPointToEvaluate, 0, RadarCircle.size())
+	#RadarCircle = get_circle_points(NewRange, NewRange / 5.0)
+	#CurrentRadarPointToEvaluate = wrap(CurrentRadarPointToEvaluate, 0, RadarCircle.size())
 	
 func EvaluateRadarTargets(Altitude : float) -> void:
 	for g in InsideRadar:
@@ -33,8 +34,8 @@ func EvaluateRadarTargets(Altitude : float) -> void:
 
 func EvaluateRadarrPoint(Altitude : float) -> void:
 	#var PointToEvaluate : Vector2 = RadarCircle[CurrentRadarPointToEvaluate]
-	for g in 2:
-		var Dir = GetPointInCircle(CurrentRadarPointToEvaluate, CurrentVisualRange / 5.0)
+	for g in 8:
+		var Dir = GetPointInCircle(CurrentRadarPointToEvaluate, 80)
 		var MaxPoint = Dir * CurrentVisualRange
 		var GlobalPoint = global_position + MaxPoint
 		var EvaluatedPoint = TopographyMap.GetCollisionPoint(global_position, Altitude, GlobalPoint, 10000)

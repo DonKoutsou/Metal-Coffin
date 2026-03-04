@@ -97,11 +97,12 @@ func Update(delta: float) -> void:
 	
 	for g in ShipsToUpdate:
 		var viz = GetVisibilityInPosition(g.global_position, L)
-		#g.VisibilityValue = viz
-		g.StormValue = StormValueInPosition(g.global_position)
+		var Storm = StormValueInPosition(g.global_position)
 		if (g is PlayerDrivenShip):
 			g.UpdateLight(L, viz)
+		g.StormValue = Storm
 		g.RadarShape.VisualRangePenalty = viz
+		g.RadarShape.StormPenalty = Helper.mapvalue(1 - Storm, 0.5, 1.0)
 		g.RadarShape.UpdateVizRange()
 
 func NoiseChanged() -> void:

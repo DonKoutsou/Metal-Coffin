@@ -191,16 +191,6 @@ func _physics_process(delta: float) -> void:
 	FixLabelClipping()
 	FixMarkerClipping()
 
-func get_circle_points(center: Vector2, radius: float, num_points: int = 10) -> PackedVector2Array:
-	var circle_points = PackedVector2Array()
-	for i in num_points:
-		var angle = float(i) / float(num_points) * PI * 2.0
-		var pt = center + Vector2(cos(angle), sin(angle)) * radius
-		circle_points.append(pt)
-	# Optionally close the loop:
-	circle_points.append(circle_points[0])
-	return circle_points
-
 func GetSaveData() -> SaveData:
 	var Dat = SaveData.new()
 	Dat.DataName = "Markers"

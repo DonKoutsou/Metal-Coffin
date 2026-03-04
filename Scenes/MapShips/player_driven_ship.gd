@@ -24,7 +24,9 @@ func _exit_tree() -> void:
 
 func Update(delta: float) -> void:
 	ElintShape.UpdateElint(delta)
-	RadarShape.EvaluateRadarrPoint(Altitude)
+	
+	if (!Docked):
+		RadarShape.EvaluateRadarrPoint(Altitude)
 	
 	for g in TrailLines:
 		g.UpdateProjected(delta, Altitude / 10000.0)
@@ -36,7 +38,7 @@ func Update(delta: float) -> void:
 	
 	if (Docked):
 		return
-
+	
 	UpdateShipWindManipulationModifier()
 	_HandleLanding(delta)
 	_HandleAutoPilot(delta)

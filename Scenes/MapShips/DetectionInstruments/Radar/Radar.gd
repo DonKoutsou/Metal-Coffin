@@ -10,7 +10,8 @@ var Working : bool = true
 var Detectable = true
 
 var CurrentVisualRange : float = 110
-var VisualRangePenalty : float = 0
+var StormPenalty : float = 1
+var VisualRangePenalty : float = 1
 
 var InsideRadar : Array[Node2D]
 
@@ -30,7 +31,8 @@ func UpdateVizRange():
 	if (!Working):
 		NewRange = 110 * VisualRangePenalty
 	else:
-		NewRange = max(110 * VisualRangePenalty, VisStat.GetFinalValue())
+		NewRange = max(110 * VisualRangePenalty, VisStat.GetFinalValue()) * StormPenalty
+	NewRange = roundi(NewRange)
 	if (NewRange == CurrentVisualRange):
 		return
 	CurrentVisualRange = NewRange
