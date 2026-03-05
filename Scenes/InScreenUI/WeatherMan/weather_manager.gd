@@ -27,6 +27,8 @@ var CurrentCamOffset : Vector2
 var LastTimeWindChanged : float
 var WindDirectionOffset : int = 1
 
+static var M : Mutex #Use mutex to allow texture to be read through thread
+
 static func RegisterShip(Ship : MapShip) -> void:
 	ShipsToUpdate.append(Ship)
 
@@ -38,7 +40,7 @@ static func GetInstance() -> WeatherManage:
 
 func _ready() -> void:
 	Mat = material
-	
+	M = Mutex.new()
 	#Init wind direction, setting it to random dir
 	WindDirection = Vector2.RIGHT.rotated(randf_range(-2 * PI, 2 * PI))
 	WindSpeed = randf_range(0, MAX_WIND_SPEED)
@@ -106,8 +108,10 @@ func Update(delta: float) -> void:
 		g.RadarShape.UpdateVizRange()
 
 func NoiseChanged() -> void:
+	M.lock()
 	DataTexture = N.get_image()
 	DataTexture.resize(TEXTURE_SIZE, TEXTURE_SIZE, Image.INTERPOLATE_NEAREST)
+	M.unlock()
 
 static func GetWindVelocity() -> Vector2:
 	return WindDirection * (WindSpeed / (MAX_WIND_SPEED / 2.0))
@@ -131,8 +135,9 @@ static func get_color_at_global_position(pos: Vector2) -> Color:
 	var Normalisedy = Helper.normalize_value(wrap(RoundedPos.y, 0, 48000), 0, 48000)
 	
 	var PixelCoords = Vector2i(Normalisedx * TEXTURE_SIZE, Normalisedy * TEXTURE_SIZE)
-		
+	M.lock()
 	var col = DataTexture.get_pixelv(PixelCoords)
+	M.unlock()
 	
 	return col
 
@@ -149,7 +154,7 @@ static func GetBiggestStormValue(
 		var t := float(i) / float(samples)
 		var pos := Origin.lerp(Target, t)
 		#DrawPos.append(pos)
-		var stormValueAtPos := StormValueInPosition(pos)  # Query your height function!
+		var stormValueAtPos := StormValueInPosition(pos)
 		if stormValueAtPos > BiggestStormValue:
 			BiggestStormValue = stormValueAtPos
 	return BiggestStormValue

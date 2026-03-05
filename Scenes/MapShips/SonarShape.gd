@@ -20,6 +20,27 @@ func _ready() -> void:
 func GetSonarTargets() -> Array[Node2D]:
 	return SonarTargets.duplicate()
 
+func GetSonarTargetInfo() -> Array[SonarTargetInfo]:
+	var TargetInfo : Array[SonarTargetInfo]
+	for g in SonarTargets:
+		if g is MapShip:
+			if (isPartOfFleet(get_parent(), g)):
+				continue
+			if (g.Command != null):
+				continue
+		var Info := SonarTargetInfo.new()
+		Info.Position = g.global_position
+		Info.Altitude = g.Altitude
+		if g is MapShip:
+			Info.Signature = g.GetSquaddB()
+		elif g is Missile:
+			Info.Signature = g.GetdB() 
+		TargetInfo.append(Info)
+	return TargetInfo
+
+func isPartOfFleet(controller : PlayerDrivenShip,target: Node2D) -> bool:
+	return target == controller or target in controller.GetDroneDock().GetDockedShips()
+
 func BodyEnteredSonar(Body : Area2D) -> void:
 	var Parent = Body.get_parent()
 	if (Parent is MapShip or Parent is Missile):

@@ -34,7 +34,7 @@ func EvaluateRadarTargets(Altitude : float) -> void:
 
 func EvaluateRadarrPoint(Altitude : float) -> void:
 	#var PointToEvaluate : Vector2 = RadarCircle[CurrentRadarPointToEvaluate]
-	for g in 8:
+	for g in 2:
 		var Dir = GetPointInCircle(CurrentRadarPointToEvaluate, 80)
 		var MaxPoint = Dir * CurrentVisualRange
 		var GlobalPoint = global_position + MaxPoint

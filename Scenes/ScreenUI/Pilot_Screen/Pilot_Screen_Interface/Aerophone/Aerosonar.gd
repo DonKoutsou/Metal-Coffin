@@ -24,7 +24,9 @@ const MAX_GAIN : int = 15
 func _ready() -> void:
 	super()
 	lineContainer.Found.connect(_onSignalFound)
-	_updateContacts()
+	lineContainer.Update(BaseGrad.get_image(), WeatherManage.StormValueInPosition(controller.global_position))
+	#BaseGrad.changed.connect(GradientUpdated)
+	#_updateContacts()
 # --- FLEET AND DRONE DOCK MANAGEMENT ---
 
 func _onDroneAdded(_drone: Drone, target: MapShip) -> void:
@@ -88,41 +90,39 @@ func isPartOfFleet(target: Node2D) -> bool:
 # --- SONAR PHYSICS AND DETECTION ---
 
 func _physics_process(delta: float) -> void:
-	_updateContacts()
+	if (_contactUpdateThread == null):
+		_contactUpdateThread = Thread.new()
+		var ControllerInfo := SonarTargetInfo.new()
+		ControllerInfo.Position = controller.global_position
+		ControllerInfo.Altitude = controller.Altitude
+		var ContactInfos = controller.GetSonarTargetInfo()
+		_contactUpdateThread.start(_updateContacts.bind(ControllerInfo, ContactInfos))
+	#_updateContacts()
 	radioSpeaker.PlaySound(RadioSpeaker.RadioSound.STATIC, volume - 15)
 
+var _contactUpdateThread : Thread
+
 #Update contacts of controller
-func _updateContacts() -> void:
+func _updateContacts(ControllerInfo : SonarTargetInfo ,ContactInfo : Array[SonarTargetInfo]) -> Image:
 	var contactList: Dictionary[float, float] = {}
 	#retrieve contacts and iterate over them
-	for target in controller.GetSonarTargets():
-		#we only want the head of a squad
-		if (target is MapShip):
-			if (target.Command != null):
-				continue
-			if (isPartOfFleet(target)):
-				continue
-			
+	for target in ContactInfo:
 		#make sure we dont register ships from the controllers fleed
 		
 		#terain collision
-		if not TopographyMap.WithinLineOfSight(controller.global_position, controller.Altitude, target.global_position, target.Altitude):
+		if not TopographyMap.WithinLineOfSight(ControllerInfo.Position, ControllerInfo.Altitude, target.Position, target.Altitude):
 			continue
 			
 		#take the direction to the target
-		var direction = controller.global_position.angle_to_point(target.global_position)
+		var direction = ControllerInfo.Position.angle_to_point(target.Position)
 		
 		#get the sound signature of the target
-		var SounddB: float = 0.0
-		if target is MapShip:
-			SounddB = target.GetSquaddB()
-		elif target is Missile:
-			SounddB = target.GetdB()
+		var SounddB: float = target.Signature
 		
 		#do raycast and find storm collision
-		var stormvalue = 1 - WeatherManage.GetBiggestStormValue(controller.global_position, target.global_position)
+		var stormvalue = 1 - WeatherManage.GetBiggestStormValue(ControllerInfo.Position, target.Position)
 		#figure out distance, at the end is normalised value. Bigger values means target is closer, means sound signature is stronger
-		var dist = 1 - (controller.global_position.distance_to(target.global_position) / CurrentSonarRange)
+		var dist = 1 - (ControllerInfo.Position.distance_to(target.Position) / CurrentSonarRange)
 		
 		#calculate final signature by applying the distance and storm to the SoundSignature
 		var finalsignature = dist * SounddB * stormvalue
@@ -136,13 +136,28 @@ func _updateContacts() -> void:
 		contactList[direction] = finalsignature
 	
 	#bake the contact list into a gradient and send it to the UI
-	var Im = ContactsToGradient(contactList)
-	lineContainer.Update(Im, WeatherManage.StormValueInPosition(controller.global_position))
+	var grad = ContactsToGradient(contactList)
+	BaseGrad.gradient = grad
+	#await BaseGrad.changed
+	var Im = BaseGrad.get_image()
+	call_deferred("ContactsUpdated")
+	return Im
 
-func ContactsToGradient(Contacts : Dictionary[float, float]) -> Image:
-	var g : GradientTexture2D = BaseGrad.duplicate()
-	g.gradient = Gradient.new()
-	g.gradient.remove_point(1)
+func ContactsUpdated() -> void:
+	var ContactGradient : Image = _contactUpdateThread.wait_to_finish()
+	#BaseGrad.gradient = ContactGradient
+	#var Im = BaseGrad.get_image()
+	_contactUpdateThread = null
+	lineContainer.Update(ContactGradient, WeatherManage.StormValueInPosition(controller.global_position))
+
+#func GradientUpdated() -> void:
+	#var Im = BaseGrad.get_image()
+	#lineContainer.Update(Im, WeatherManage.StormValueInPosition(controller.global_position))
+
+func ContactsToGradient(Contacts : Dictionary[float, float]) -> Gradient:
+	#var g : GradientTexture2D = BaseGrad.duplicate()
+	var gradient = Gradient.new()
+	gradient.remove_point(1)
 	
 	for Index in Contacts.keys().size():
 		var Angle = Contacts.keys()[Index]
@@ -151,16 +166,16 @@ func ContactsToGradient(Contacts : Dictionary[float, float]) -> Image:
 		var NormalisedAngle = Helper.normalize_value(wrap(Angle, -PI, PI), -PI, PI)
 		var BeforPoint = wrap(NormalisedAngle - ClosePointOffset, 0, 1)
 		var AferPoint = wrap(NormalisedAngle + ClosePointOffset, 0, 1)
-		var BeforValue = g.gradient.sample(BeforPoint)
-		var AfterValue = g.gradient.sample(AferPoint)
-		g.gradient.add_point(BeforPoint, BeforValue)
-		g.gradient.add_point(NormalisedAngle, Color(1,1,1) * Contacts[Angle])
-		g.gradient.add_point(AferPoint, AfterValue)
+		var BeforValue = gradient.sample(BeforPoint)
+		var AfterValue = gradient.sample(AferPoint)
+		gradient.add_point(BeforPoint, BeforValue)
+		gradient.add_point(NormalisedAngle, Color(1,1,1) * Contacts[Angle])
+		gradient.add_point(AferPoint, AfterValue)
 	
-	if (g.gradient.get_point_count() > 1):
-		g.gradient.remove_point(0)
+	if (gradient.get_point_count() > 1):
+		gradient.remove_point(0)
 		
-	return g.get_image()
+	return gradient
 
 func _onSignalFound(signalStrength: float) -> void:
 	radioSpeaker.PlaySound(RadioSpeaker.RadioSound.BEEP, signalStrength - 35)

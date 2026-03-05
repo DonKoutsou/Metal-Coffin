@@ -15,7 +15,7 @@
 [ext_resource type="Shader" uid="uid://cqgk0egpp8vmb" path="res://Shaders/ShipVisualTest.gdshader" id="11_ogc8b"]
 [ext_resource type="Texture2D" uid="uid://bn3s18w1rjx3d" path="res://Assets/UIPiecies/Light.png" id="20_hn8tc"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vwreh"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_phbnr"]
 resource_local_to_scene = true
 shader = ExtResource("11_ogc8b")
 shader_parameter/ShipSize = 0.08
@@ -31,7 +31,7 @@ interpolation_color_space = 1
 offsets = PackedFloat32Array(0, 0.715481, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.313, 0.313, 0.313, 0)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_phbnr"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_7mdyt"]
 resource_local_to_scene = true
 radius = 150.0
 
@@ -49,7 +49,7 @@ SonarShape = NodePath("Sonar")
 DroneDok = NodePath("DroneDock")
 
 [node name="ColorRect" parent="." index="1" unique_id=1708187202]
-material = SubResource("ShaderMaterial_vwreh")
+material = SubResource("ShaderMaterial_phbnr")
 texture = ExtResource("6_6lhcj")
 
 [node name="TrailLine" parent="ColorRect" index="0" unique_id=994780843]
@@ -73,7 +73,7 @@ metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 script = ExtResource("7_7aewx")
 
 [node name="CollisionShape2D" parent="Radar" index="0" unique_id=689109080]
-shape = SubResource("CircleShape2D_phbnr")
+shape = SubResource("CircleShape2D_7mdyt")
 
 [node name="Elint" parent="." index="4" unique_id=268938013]
 script = ExtResource("8_vwreh")
