@@ -69,12 +69,12 @@ func fleetHasAeroSonar() -> bool:
 	return false
 
 func GetFleetSonarRange() -> float:
-	var range : float = controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE)
+	var SonarRange : float = controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE)
 	for c: Captain in controller.GetDroneDock().GetCaptains():
 		var dronerange = c.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE)
-		if dronerange > range:
-			range = dronerange
-	return range
+		if dronerange > SonarRange:
+			SonarRange = dronerange
+	return SonarRange
 
 func getCurrentFleetAeroSonarRange() -> float:
 	var maxRange = controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE)
@@ -89,7 +89,7 @@ func isPartOfFleet(target: Node2D) -> bool:
 
 # --- SONAR PHYSICS AND DETECTION ---
 
-func _physics_process(delta: float) -> void:
+func Update(_delta: float) -> void:
 	if (_contactUpdateThread == null):
 		_contactUpdateThread = Thread.new()
 		var ControllerInfo := SonarTargetInfo.new()

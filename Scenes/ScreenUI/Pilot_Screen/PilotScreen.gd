@@ -13,6 +13,7 @@ class_name PilotScreenUI
 @export var elevationThrust: ThrustSlider
 @export var steer: SteeringWheelUI
 @export var pilotScreenSet: PilotScreenSettings
+@export var SonarUI : AeroSonar
 @export var speedSimulationButton: TextureButton
 @export var pauseSimulationButton: Button
 @export var landButton : Button
@@ -37,6 +38,9 @@ func _ready() -> void:
 	speedSimulationButton.set_pressed_no_signal(SimulationManager.SimSpeed() > 1)
 	pauseSimulationButton.set_pressed_no_signal(!SimulationManager.IsPaused())
 	_onSteerButtonToggled(pilotScreenSet.SteerState)
+
+func Update(delta : float) -> void:
+	SonarUI.Update(delta)
 
 # --- INCOMING EVENTS FROM GAME LOGIC ---
 

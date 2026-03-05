@@ -23,6 +23,9 @@ var CurrentScreenState : ScreenState
 signal FullScreenToggleStarted(NewState : ScreenState)
 signal FullScreenToggleFinished()
 
+func Update(delta : float) -> void:
+	if (PilotScreen != null):
+		PilotScreen.Update(delta)
 
 func ToggleCardFightUI(t : bool) -> void:
 	if (t):

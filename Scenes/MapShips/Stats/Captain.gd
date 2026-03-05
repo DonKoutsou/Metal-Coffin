@@ -6,7 +6,6 @@ class_name Captain
 @export var CaptainPortrait : Texture
 @export var ShipIcon : Texture
 @export var CaptainStats : Array[ShipStat]
-
 #var MappedStats : Array[STAT_CONST.STATS]
 @export var ShipCallsign : String = "P"
 @export var StartingItems : Array[Item]
@@ -50,11 +49,11 @@ func SetUpStats() -> void:
 
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
-	var Hull = _GetStat(STAT_CONST.STATS.HULL).StatBase
-	var Thrust = _GetStat(STAT_CONST.STATS.THRUST).StatBase
-	var Weight = _GetStat(STAT_CONST.STATS.WEIGHT).StatBase
-	var Fp = _GetStat(STAT_CONST.STATS.FIREPOWER).StatBase
-	var MaxShield = _GetStat(STAT_CONST.STATS.MAX_SHIELD).StatBase
+	var Hull = GetStatBaseValue(STAT_CONST.STATS.HULL)
+	var Thrust = GetStatBaseValue(STAT_CONST.STATS.THRUST)
+	var Weight = GetStatBaseValue(STAT_CONST.STATS.WEIGHT)
+	var Fp = GetStatBaseValue(STAT_CONST.STATS.FIREPOWER)
+	var MaxShield = GetStatBaseValue(STAT_CONST.STATS.MAX_SHIELD)
 	
 	stats.ShipIcon = ShipIcon
 	stats.CaptainIcon = CaptainPortrait
@@ -103,8 +102,8 @@ func GetBattleStats() -> BattleShipStats:
 
 func GetFuelStats() -> Dictionary:
 	var FuelStats = {
-		"FUEL" : _GetStat(STAT_CONST.STATS.FUEL_TANK).StatBase,
-		"F_EFF" : _GetStat(STAT_CONST.STATS.FUEL_EFFICIENCY).StatBase,
+		"FUEL" : GetStatBaseValue(STAT_CONST.STATS.FUEL_TANK),
+		"F_EFF" : GetStatBaseValue(STAT_CONST.STATS.FUEL_EFFICIENCY),
 	}
 	for g in StartingItems:
 		if (g is ShipPart):
@@ -157,11 +156,11 @@ func GetCardList() -> Array[CardStats]:
 		for z in g.CardProviding:
 			var C = z.duplicate() as CardStats
 			C.Tier = g.Tier
-
 			c.append(C)
 			
 	for g in Cards:
-		c.append(g)
+		for ammount in Cards[g]:
+			c.append(g)
 
 	return c
 

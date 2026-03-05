@@ -164,6 +164,9 @@ func _ready() -> void:
 	MapPointerMan.TargetSelected.connect(MoveTargetSelected)
 	MapPointerMan.TargetSpotSelected.connect(MoveTargetSpotSelected)
 
+func Update(delta : float) -> void:
+	_ScreenUI.Update(delta)
+
 func HideWorld(t : bool) -> void:
 	WorldParent.get_parent().get_parent().visible = t
 
@@ -717,7 +720,7 @@ func SpawnTownEnemiesThreaded(Towns : Array[Town]) -> void:
 		#var time = Time.get_ticks_msec()
 		if (T.IsEnemy()):
 			SpawnSpotFleet(Spot, false, false, T.Pos)
-		if (Spot.GetPossibleDrops().size() == 3):
+		if (Spot.GetPossibleDrops().size() == 4): #TODO find better way to define capital
 			SpawnSpotFleet(Spot, true, false, T.Pos)
 		#print("Spawning fleet took " + var_to_str(Time.get_ticks_msec() - time) + " msec")
 	

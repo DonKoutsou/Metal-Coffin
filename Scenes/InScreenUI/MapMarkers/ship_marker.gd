@@ -51,8 +51,8 @@ func _ready() -> void:
 	VisualContactCountdown.visible = false
 	#set_physics_process(false)
 	UpdateCameraZoom(Map.GetCameraZoom())
-	ShipDetailLabel.add_to_group("MapInfo")
-	ShipIcon.add_to_group("UnmovableMapInfo")
+	#ShipDetailLabel.add_to_group("MapInfo")
+	#ShipIcon.add_to_group("UnmovableMapInfo")
 	add_to_group("ZoomAffected")
 
 func Init(Ship : Node2D) -> void:
@@ -432,16 +432,16 @@ func UpdateAltitude(Alt : float):
 	LandingNotif.SetText("ALT : " + var_to_str(roundi(Alt)))
 
 
-#func EnteredScreen() -> void:
-	#ShipDetailLabel.add_to_group("MapInfo")
-	#ShipIcon.add_to_group("UnmovableMapInfo")
-	#add_to_group("ZoomAffected")
-	#UpdateCameraZoom(Map.GetCameraZoom())
-#
-#func ExitedScreen() -> void:
-	#ShipDetailLabel.remove_from_group("MapInfo")
-	#ShipIcon.remove_from_group("UnmovableMapInfo")
-	#remove_from_group("ZoomAffected")
+func EnteredScreen() -> void:
+	ShipDetailLabel.add_to_group("MapInfo")
+	ShipIcon.add_to_group("UnmovableMapInfo")
+	add_to_group("ZoomAffected")
+	UpdateCameraZoom(Map.GetCameraZoom())
+
+func ExitedScreen() -> void:
+	ShipDetailLabel.remove_from_group("MapInfo")
+	ShipIcon.remove_from_group("UnmovableMapInfo")
+	remove_from_group("ZoomAffected")
 	
 func UpdateSignRotation() -> void:
 	DetailPanel.rotation += 0.01

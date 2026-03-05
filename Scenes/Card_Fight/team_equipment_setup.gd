@@ -108,12 +108,12 @@ func OnCaptainSelected(Cpt : Captain) -> void:
 		g.free()
 	#$PanelContainer/VBoxContainer/HBoxContainer/TextureRect.texture = Cpt.ShipIcon
 	
-	var CharEngineSpace = Cpt._GetStat(STAT_CONST.STATS.ENGINES_SLOTS).StatBase
-	var CharSensorSpace = Cpt._GetStat(STAT_CONST.STATS.SENSOR_SLOTS).StatBase
-	var CharFuelTankSpace = Cpt._GetStat(STAT_CONST.STATS.FUEL_TANK_SLOTS).StatBase
-	var CharShieldSpace = Cpt._GetStat(STAT_CONST.STATS.SHIELD_SLOTS).StatBase
-	var CharWeaponSpace = Cpt._GetStat(STAT_CONST.STATS.WEAPON_SLOTS).StatBase
-	var CharInventorySpace = Cpt._GetStat(STAT_CONST.STATS.INVENTORY_SPACE).StatBase
+	var CharEngineSpace = Cpt.GetStatBaseValue(STAT_CONST.STATS.ENGINES_SLOTS)
+	var CharSensorSpace = Cpt.GetStatBaseValue(STAT_CONST.STATS.SENSOR_SLOTS)
+	var CharFuelTankSpace = Cpt.GetStatBaseValue(STAT_CONST.STATS.FUEL_TANK_SLOTS)
+	var CharShieldSpace = Cpt.GetStatBaseValue(STAT_CONST.STATS.SHIELD_SLOTS)
+	var CharWeaponSpace = Cpt.GetStatBaseValue(STAT_CONST.STATS.WEAPON_SLOTS)
+	var CharInventorySpace = Cpt.GetStatBaseValue(STAT_CONST.STATS.INVENTORY_SPACE)
 	
 	for g in CharEngineSpace:
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box

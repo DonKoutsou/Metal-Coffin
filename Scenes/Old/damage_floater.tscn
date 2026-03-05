@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://mxfnm7hywo4f"]
 
-[ext_resource type="FontFile" uid="uid://b2yy0s6fyaml0" path="res://Fonts/Play-Bold.ttf" id="1_elilk"]
 [ext_resource type="Script" uid="uid://cdwrypr6ltbch" path="res://Scripts/UI/Damage_Floater.gd" id="1_nmcop"]
 
 [node name="DamageFloater" type="Label" unique_id=1327449243]
@@ -16,9 +15,10 @@ offset_bottom = 18.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("1_elilk")
 theme_override_font_sizes/font_size = 30
 text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
 script = ExtResource("1_nmcop")
 GoodColor = Color(0.483, 100, 0.381, 1)
 BadColor = Color(100, 0, 0.163, 1)

@@ -154,6 +154,9 @@ DroneDok = NodePath("DroneDock")
 [node name="ColorRect" parent="." index="1" unique_id=1708187202]
 material = SubResource("ShaderMaterial_avs2p")
 
+[node name="TrailLine" parent="ColorRect" index="0" unique_id=994780843]
+points = PackedVector2Array(0, 0)
+
 [node name="Radar" parent="." index="3" unique_id=1177421846]
 script = ExtResource("17_jiih6")
 

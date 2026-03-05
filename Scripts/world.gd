@@ -173,7 +173,8 @@ func _process(delta: float) -> void:
 	
 	if get_tree().paused:
 		return
-		
+	
+	
 	Controller.Update()
 	
 	var CurrentDelta = delta * SimulationManager.SimSpeed()
@@ -181,7 +182,7 @@ func _process(delta: float) -> void:
 	UpdatePlayerShips(CurrentDelta)
 	
 	if (!SimulationManager.Paused):
-		
+		_Map.Update(delta)
 		WeatherManagerUpdate -= CurrentDelta
 		if (WeatherManagerUpdate <= 0):
 			WeatherManagerUpdate = WeatherManagerUpdateRate

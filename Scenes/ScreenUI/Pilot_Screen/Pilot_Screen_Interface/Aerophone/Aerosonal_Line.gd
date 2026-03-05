@@ -23,11 +23,11 @@ func NoiseChanged() -> void:
 
 func _physics_process(delta: float) -> void:
 	Offset = wrap(Offset + (delta * 10), 0, 2)
+	queue_redraw()
 
 func Update(Gr : Image, StormValue : float) -> void:
 	CurrentStormValue = StormValue
 	ContactGr = Gr
-	queue_redraw()
 
 func GetPointInCircle(Point : int, num_points : int = 20) -> Vector2:
 	var angle = float(Point) / float(num_points) * PI * 2.0
