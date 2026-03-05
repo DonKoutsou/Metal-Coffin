@@ -68,9 +68,9 @@ func DoFadeInAnim() -> void:
 	var Tw = create_tween()
 	Tw.set_ease(Tween.EASE_OUT)
 	Tw.set_trans(Tween.TRANS_BACK)
-	Tw.tween_method(UpdateSize, Vector2.ZERO, OriginalSize, 1)
+	Tw.tween_method(UpdateSize, Vector2.ZERO, OriginalSize, 0.5)
 	Tw.set_parallel(true)
-	Tw.tween_method(UpdateDarkness, 0.0, 0.8, 1)
+	Tw.tween_method(UpdateDarkness, 0.0, 0.8, 0.5)
 	
 	var S = DeletableSoundGlobal.new()
 	S.stream = InSound
@@ -134,9 +134,9 @@ func _on_button_pressed() -> void:
 	var Tw = create_tween()
 	Tw.set_ease(Tween.EASE_IN)
 	Tw.set_trans(Tween.TRANS_QUAD)
-	Tw.tween_method(UpdateSize, OriginalSize, Vector2.ZERO, 1)
+	Tw.tween_method(UpdateSize, OriginalSize, Vector2.ZERO, 0.5)
 	Tw.set_parallel(true)
-	Tw.tween_method(UpdateDarkness, 0.8, 0.0, 1)
+	Tw.tween_method(UpdateDarkness, 0.8, 0.0, 0.5)
 	$VBoxContainer/PanelContainer/VBoxContainer2.visible = false
 	$VBoxContainer/Button.visible = false
 	

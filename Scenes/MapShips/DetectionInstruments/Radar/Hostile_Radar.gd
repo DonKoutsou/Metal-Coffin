@@ -38,7 +38,7 @@ signal VisualContactCountdownStarted(Value : float)
 func GarissonVisualContact(Ship : MapShip) -> void:
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.GARISSION_ALARM)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.GARISSION_ALARM)
-		ActionTracker.GetInstance().QueueTutorial("Surprise Atack", "When entering enemy cities you are given a small time frame where you can surprise the enemy\n That time is signified by the red bar bellow the enemie's ship marker.\nIf the bar finishes the alarm will be raised and an enemy patrol will start heading your way. Its recomended to invade cities with faster ships and initiating combat fast before getting detected", [])
+		ActionTracker.QueueTutorial("Surprise Atack", "When entering enemy cities you are given a small time frame where you can surprise the enemy\n That time is signified by the red bar bellow the enemie's ship marker.\nIf the bar finishes the alarm will be raised and an enemy patrol will start heading your way. Its recomended to invade cities with faster ships and initiating combat fast before getting detected", [])
 	if (GarrissonVisualContacts.has(Ship)):
 		return
 	

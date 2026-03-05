@@ -17,6 +17,13 @@ size_flags_vertical = 3
 theme = ExtResource("1_5owba")
 script = ExtResource("2_3camo")
 Text = NodePath("VBoxContainer/TextEdit")
+CommandListConfiguration = Dictionary[PackedStringArray, String]({
+PackedStringArray("Inventory", "Add"): "InventoryAdd",
+PackedStringArray("prologue"): "Prologue",
+PackedStringArray("Inventory", "Upgrade"): "InventoryUpgrade",
+PackedStringArray("Teleport"): "Teleport",
+PackedStringArray("Enemy", "Debug"): "EnemyDebug"
+})
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=259234709]
 layout_mode = 2

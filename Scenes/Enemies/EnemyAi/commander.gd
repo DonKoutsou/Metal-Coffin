@@ -17,7 +17,7 @@ class_name Commander
 @export_flags_2d_physics var layers_2d_physics
 
 static var Instance : Commander
-const ENEMY_DEBUG : bool = false
+static var ENEMY_DEBUG : bool = false
 
 var Fleet : Array[HostileShip] = []
 
@@ -32,6 +32,15 @@ var Alarmed : bool = false
 
 func _ready() -> void:
 	Instance = self
+
+func ToggleEnemyDebug(t : bool) -> void:
+	ENEMY_DEBUG = t
+	for g : HostileShip in get_tree().get_nodes_in_group("Enemy"):
+		if (t):
+			MapPointerManager.GetInstance().AddShip(g, false)
+		else:
+			if (g.VisibleBy.size() == 0):
+				MapPointerManager.GetInstance().RemoveShip(g)
 
 func Update(delta: float) -> void:
 	
@@ -267,7 +276,7 @@ func OnEnemyVisualLost(Ship : MapShip, LostBy : HostileShip) -> void:
 func SetShipUnderInvestigation(Ship : MapShip) -> void:
 	var Info = VisualLostInfo.new()
 	Info.Position = Ship.global_position
-	Info.Speed = Ship.GetAffectedSpeed()
+	Info.Speed = Ship.GetShipSpeed()
 	Info.Direction = Ship.global_rotation
 	EnemyPositionsToInvestigate[Ship] = Info
 	Ship.OnShipDestroyed.connect(CancelInvestigation)

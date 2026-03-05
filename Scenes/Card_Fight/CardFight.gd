@@ -173,7 +173,7 @@ func IntroDeclarationFinished() -> void:
 	ActionDeclaration.ActionDeclarationFinished.disconnect(IntroDeclarationFinished)
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT)
-		ActionTracker.GetInstance().QueueTutorial("TUT_CardfightTitle", "TUT_CardfightText", [])
+		ActionTracker.QueueTutorial("TUT_CardfightTitle", "TUT_CardfightText", [])
 	
 	call_deferred("RunTurn")
 
@@ -347,7 +347,7 @@ func PickPhaseStart() -> void:
 	
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_ACTION_PICK)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ACTION_PICK)
-		ActionTracker.GetInstance().QueueTutorial("TUT_Cardfight_ActionPickingTitle", "TUT_Cardfight_ActionPickingText", [])
+		ActionTracker.QueueTutorial("TUT_Cardfight_ActionPickingTitle", "TUT_Cardfight_ActionPickingText", [])
 
 	CurrentPlayerLabel.visible = true
 	
@@ -377,7 +377,7 @@ func RunShipsTurn(Ship : BattleShipStats) -> void:
 	viz.Enable()
 	#if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_SPEED_EXPLENATION)):
 		#ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_SPEED_EXPLENATION)
-		#ActionTracker.GetInstance().QueueTutorial("Ship Speed", "Each ships has a speed stat. Faster ships get to choose and also get to perform their moves first.", [],)
+		#ActionTracker.QueueTutorial("Ship Speed", "Each ships has a speed stat. Faster ships get to choose and also get to perform their moves first.", [],)
 
 	ActionList.AddShip(Ship)
 	if (IsShipFriendly(Ship)):
@@ -388,11 +388,11 @@ func RunShipsTurn(Ship : BattleShipStats) -> void:
 		#ExternalUI.ToggleEnergyVisibility(true)
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_ENERGY)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ENERGY)
-			ActionTracker.GetInstance().QueueTutorial("TUT_Cardfight_EnergyTitle", "TUT_Cardfight_EnergyText", [Map.UI_ELEMENT.CARD_FIGHT_ENERGY_BAR])
+			ActionTracker.QueueTutorial("TUT_Cardfight_EnergyTitle", "TUT_Cardfight_EnergyText", [Map.UI_ELEMENT.CARD_FIGHT_ENERGY_BAR])
 
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_RESERVES)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_RESERVES)
-			ActionTracker.GetInstance().QueueTutorial("TUT_Cardfight_EnergyReserveTitle", "TUT_Cardfight_EnergyReserveText", [Map.UI_ELEMENT.CARD_FIGHT_RESERVE_BAR])
+			ActionTracker.QueueTutorial("TUT_Cardfight_EnergyReserveTitle", "TUT_Cardfight_EnergyReserveText", [Map.UI_ELEMENT.CARD_FIGHT_RESERVE_BAR])
 		
 		RestartCards()
 		
@@ -749,7 +749,7 @@ func ActionPerformPhase() -> void:
 
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_ACTION_PERFORM)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ACTION_PERFORM)
-		ActionTracker.GetInstance().QueueTutorial("TUT_Cardfight_ActionPTitle", "TUT_Cardfight_ActionPText", [])
+		ActionTracker.QueueTutorial("TUT_Cardfight_ActionPTitle", "TUT_Cardfight_ActionPText", [])
 	
 	CurrentPlayerLabel.visible = true
 	CurrentTurn = 0
@@ -1731,12 +1731,10 @@ func HandleDeBuff(Performer : BattleShipStats, Action : CardStats, Mod : CardMod
 
 
 func HandleTargets(Mod : CardModule, User : BattleShipStats) -> Array[BattleShipStats]:
-	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_TARGET_PICKING)):
-		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_TARGET_PICKING)
-		ActionTracker.GetInstance().QueueTutorial("TUT_Cardfight_TargetTitle", "TUT_Cardfight_TargetText", [])
-	
 	var Friendly = IsShipFriendly(User)
-	
+	if (Friendly and !ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_TARGET_PICKING)):
+		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_TARGET_PICKING)
+		ActionTracker.QueueTutorial("TUT_Cardfight_TargetTitle", "TUT_Cardfight_TargetText", [])
 	var Targets : Array[BattleShipStats]
 	# we handle deffensive target picking a bit differently
 	if (Mod is DeffenceCardModule):
@@ -2223,7 +2221,7 @@ func DamageShip(Ship : BattleShipStats, Amm : float, ShouldCauseFire : bool = fa
 		
 		if (Ship.CurrentHull < 40 and !ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_SHIPLOSS)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_SHIPLOSS)
-			ActionTracker.GetInstance().QueueTutorial("TUT_Cardfight_ShipLossTitle", "TUT_Cardfight_ShipLossText", [])
+			ActionTracker.QueueTutorial("TUT_Cardfight_ShipLossTitle", "TUT_Cardfight_ShipLossText", [])
 	
 		DamageGot += Dmg
 		if (Dmg > 0):
@@ -2626,7 +2624,7 @@ func PlaceCardInPlayerHand(Performer : BattleShipStats,C : Card) -> bool:
 		SelectingTarget = true
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_HAND_LIMIT)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_HAND_LIMIT)
-			ActionTracker.GetInstance().QueueTutorial("TUT_Cardfight_HandLimitTitle", "TUT_Cardfight_HandLimitText".format([MaxCardsInHand]), [])
+			ActionTracker.QueueTutorial("TUT_Cardfight_HandLimitTitle", TranslationServer.translate("TUT_Cardfight_HandLimitText").format([MaxCardsInHand]), [])
 		
 		var ToDiscard : int = await CardSelect.CardSelected
 		SelectingTarget = false

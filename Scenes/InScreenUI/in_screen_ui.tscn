@@ -218,11 +218,13 @@ offset_right = -20.0
 offset_bottom = 60.0
 
 [node name="CommandLine" parent="." unique_id=969171667 instance=ExtResource("17_aessx")]
-visible = false
-offset_left = 222.0
-offset_top = -173.5
-offset_right = -222.0
-offset_bottom = -81.5
+anchors_preset = 8
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -263.0
+offset_top = -142.0
+offset_right = 263.0
+offset_bottom = -50.0
 
 [node name="OverStatUI" type="Control" parent="." unique_id=2088496302]
 layout_mode = 3

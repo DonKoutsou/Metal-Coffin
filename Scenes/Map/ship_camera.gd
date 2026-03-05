@@ -242,6 +242,8 @@ func _physics_process(delta: float) -> void:
 		UpdateCameraPos((global_position - FocusedShip.global_position) * delta, false, true)
 		#ForceCamPosition(FocusedShip.global_position)
 	
+	
+	
 	var rel : Vector2
 	if (Input.is_action_pressed("MapDown")):
 		rel.y -= 10
@@ -251,19 +253,24 @@ func _physics_process(delta: float) -> void:
 		rel.x -= 10
 	if (Input.is_action_pressed("MapLeft")):
 		rel.x += 10
-		
-	if (Input.is_action_pressed("ZoomIn")):
-		_HANDLE_ZOOM(0.1)
-	else: if (Input.is_action_pressed("ZoomOut")):
-		_HANDLE_ZOOM(-0.1)
-	
-	if (rel != Vector2.ZERO):
-		UpdateCameraPos(rel)
-	
+
 	if (!GridShowing):
 		var light = WeatherManage.GetLightAmm()
 		CloudMat.set_shader_parameter("Light", light)
 		GroundMat.set_shader_parameter("Light", light)
+	
+	if (CommandLine.Typing):
+		return
+	
+	if (Input.is_action_pressed("ZoomIn")):
+		_HANDLE_ZOOM(0.1)
+	else: if (Input.is_action_pressed("ZoomOut")):
+		_HANDLE_ZOOM(-0.1)
+		
+	if (rel != Vector2.ZERO):
+		UpdateCameraPos(rel)
+	
+	
 
 var FrameTween : Tween
 

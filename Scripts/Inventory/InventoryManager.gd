@@ -426,4 +426,4 @@ func ToggleInventory() -> void:
 
 func InventoryTutorial() -> void:
 	var TutorialText = "The [color=#ffc315]Cargo Panel[/color] is where the details for each ship in your fleet can be found. From their stats to their inventory contents."
-	ActionTracker.GetInstance().QueueTutorial("Cargo", TutorialText, [])
+	ActionTracker.QueueTutorial("Cargo", TutorialText, [])

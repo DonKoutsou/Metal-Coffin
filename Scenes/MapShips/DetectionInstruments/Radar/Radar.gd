@@ -52,7 +52,7 @@ func BodyEnteredRadar(Body : Area2D) -> void:
 		#Parent.OnShipSeen(self)
 		#if (Parent.Convoy and !ActionTracker.IsActionCompleted(ActionTracker.Action.CONVOY)):
 			#ActionTracker.OnActionCompleted(ActionTracker.Action.CONVOY)
-			#ActionTracker.GetInstance().QueueTutorial("Enemy Convoys", "You have located an enemy convoy. These convoys pose no risk since the have no weapons on them an are usually not escorted by any combatants. Capturing any of those convoys is dangerous since they can raise the alarm on you and signify your position to the enemy. Managing to capture on will provide a good reward once any of those is brought back to any of the cities, where the ship can be broken down and sold. Bring any captured convoy to any city and land it to receive your reward.", [], true)
+			#ActionTracker.QueueTutorial("Enemy Convoys", "You have located an enemy convoy. These convoys pose no risk since the have no weapons on them an are usually not escorted by any combatants. Capturing any of those convoys is dangerous since they can raise the alarm on you and signify your position to the enemy. Managing to capture on will provide a good reward once any of those is brought back to any of the cities, where the ship can be broken down and sold. Bring any captured convoy to any city and land it to receive your reward.", [], true)
 		
 	else: if (Parent is Missile):
 		if (Parent.FiredBy is HostileShip):
@@ -63,12 +63,12 @@ func BodyEnteredRadar(Body : Area2D) -> void:
 			if (!ActionTracker.IsActionCompleted(ActionTracker.Action.ENEMY_TOWN_APROACH)):
 				ActionTracker.OnActionCompleted(ActionTracker.Action.ENEMY_TOWN_APROACH)
 				var TutText = "You are reaching an enemy [color=#ffc315]city[/color]. Enemy cities are usual refuel spots for [color=#ffc315]patrols[/color], and always have a guarding [color=#ffc315]garrisson[/color] in their center. Entering the perimiter of a city will comence combat with all enemies that happen to be in it."
-				ActionTracker.GetInstance().QueueTutorial("Enemy Cities", TutText, [])
+				ActionTracker.QueueTutorial("Enemy Cities", TutText, [])
 		else:
 			if (!ActionTracker.IsActionCompleted(ActionTracker.Action.TOWN_APROACH)):
 				ActionTracker.OnActionCompleted(ActionTracker.Action.TOWN_APROACH)
 				var TutText = "You are reaching one of the many friendly [color=#ffc315]villages[/color] in the glacier. No enemies exist in those [color=#ffc315]villages[/color] and none of the locals wil raise the [color=#ffc315]alarm[/color] on you. You are free to use those [color=#ffc315]villages[/color] to restock/repair or even as a hideout. The location of those [color=#ffc315]villages[/color] is unknown and will need to be discovered."
-				ActionTracker.GetInstance().QueueTutorial("Friendly Villages", TutText, [])
+				ActionTracker.QueueTutorial("Friendly Villages", TutText, [])
 		if (!Parent.Seen):
 			Parent.OnSpotSeen()
 

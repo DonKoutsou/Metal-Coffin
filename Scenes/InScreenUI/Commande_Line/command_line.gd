@@ -5,18 +5,23 @@ class_name CommandLine
 @export var Text : TextEdit
 @export var StartingMen : bool
 
+@export var CommandListConfiguration : Dictionary[PackedStringArray, String]
+
 var Items : Array[Item]
 
 signal StartPrologue(SkipStory : bool)
 signal StartCampaign(SkipStory : bool)
 
+static var Typing : bool = false
+
 func _ready() -> void:
 	#if (!OS.is_debug_build() or OS.get_name() != "Windows"):
 		#queue_free()
 		#return
+	Typing = false
 	visible = false
 	set_physics_process(false)
-	#RefrshExistingItems()
+	RefrshExistingItems()
 
 func OnCommandEntered() -> void:
 	var Command = Text.text
@@ -45,21 +50,50 @@ func HandleCommand(Command : String) -> String:
 	if (CommandList.size() == 0):
 		return "Error"
 	
-	var firstword = CommandList[0].to_lower()
+	for command in CommandListConfiguration:
+		var Match : bool = false
+		var commandToExecute : String = ""
+		var currentCheckedWord = 0
+		while currentCheckedWord < command.size():
+			var typedWord = CommandList[currentCheckedWord]
+			var currentCommandWord = command[currentCheckedWord]
+			if (typedWord.to_lower() == currentCommandWord.to_lower()):
+				currentCheckedWord += 1
+				if (currentCheckedWord == command.size()):
+					Match = true
+			else:
+				break
+		
+		if (!Match):
+			continue
+		
+		commandToExecute = CommandListConfiguration[command]
+		
+		
+		if (commandToExecute != ""):
+			if (!has_method(commandToExecute)):
+				continue
+			
+			var args : Array = []
+			for g in range(currentCheckedWord, CommandList.size()):
+				args.append(CommandList[g])
+			if (get_method_argument_count(commandToExecute) != args.size()):
+				return "Missing arguments.\nFailed to call command"
+			
+			return callv(commandToExecute, args)
+			#call(commandToExecute, args)
 	
-	match firstword:
-		"prologue":
-			return HandlePrologueCommand(CommandList)
-		"inv":
-			return HandleInventoryCommand(CommandList)
-		"stat":
-			return HandleStatCommand(CommandList)
-		"loc":
-			return HandleLocationCommand(CommandList)
+	#match firstword:
+		#"prologue":
+			#return HandlePrologueCommand(CommandList)
+		#"inv":
+			#return HandleInventoryCommand(CommandList)
+		#"stat":
+			#return HandleStatCommand(CommandList)
+		#"loc":
+			#return HandleLocationCommand(CommandList)
 	
 	return "Couldnt match command"
-
-
 
 func HandlePrologueCommand(Command) -> String:
 	if (Command.size() == 1):
@@ -73,42 +107,60 @@ func HandlePrologueCommand(Command) -> String:
 	
 	return "Error Handling Location Command"
 
-func HandleCampaignCommand(Command) -> String:
-	if (Command.size() == 1):
-		return "Prologue What?"
-	
-	match (Command[1].to_lower()):
-		"print":
-			return PrintLocations(Command[1])
-		"tp":
-			return HandleTeleport(Command[1], str_to_var(Command[3]) , str_to_var(Command[4]))
-	
-	return "Error Handling Location Command"
+func Prologue(skip : String) -> String:
+	var sk : bool = str_to_var(skip)
+	if (sk == null):
+		return "Wrong argument"
+	StartPrologue.emit(sk)
+	return "Starting Prologue"
 
-func HandleLocationCommand(Command) -> String:
-	
-	if (Command.size() == 1):
-		return "forgot to add captain name"
-	
-	if (Command.size() == 2):
-		return "Missing Command After Captain Name"
-	
-	match (Command[2].to_lower()):
-		"print":
-			return PrintLocations(Command[1])
-		"tp":
-			return HandleTeleport(Command[1], str_to_var(Command[3]) , str_to_var(Command[4]))
-	
-	return "Error Handling Location Command"
+#func HandleCampaignCommand(Command) -> String:
+	#if (Command.size() == 1):
+		#return "Prologue What?"
+	#
+	#match (Command[1].to_lower()):
+		#"print":
+			#return PrintLocations(Command[1])
+		#"tp":
+			#return HandleTeleport(Command[1], str_to_var(Command[3]) , str_to_var(Command[4]))
+	#
+	#return "Error Handling Location Command"
 
-func HandleTeleport(CharName : String, Locx : float, Locy : float) -> String:
+#func HandleLocationCommand(Command) -> String:
+	#
+	#if (Command.size() == 1):
+		#return "forgot to add captain name"
+	#
+	#if (Command.size() == 2):
+		#return "Missing Command After Captain Name"
+	#
+	#match (Command[2].to_lower()):
+		#"print":
+			#return PrintLocations(Command[1])
+		#"tp":
+			#return HandleTeleport(Command[1], str_to_var(Command[3]) , str_to_var(Command[4]))
+	#
+	#return "Error Handling Location Command"
+
+func Teleport(CharName : String, Locx : String, Locy : String) -> String:
+	var xpos : int = str_to_var(Locx)
+	var ypos : int = str_to_var(Locy)
+	if (xpos == null or ypos == null):
+		return "Misstyped location"
 	for g in get_tree().get_nodes_in_group("PlayerShips"):
 		var ship = g as MapShip
 		if ship.Cpt.GetCaptainName().to_lower() == CharName.to_lower():
-			ship.global_position = Vector2(Locx, Locy)
-			return "Successfully teleported {0} to pos |{1}|".format([CharName, ship.global_position])
+			ship.global_position = Vector2(xpos, ypos) * 10
+			return "Successfully teleported\n{0} to pos\n|{1}|".format([CharName, ship.global_position])
 	
 	return "Teleport failed"
+
+func EnemyDebug(t : String) -> String:
+	var toggle : bool = str_to_var(t)
+	if (toggle == null):
+		return "Wrong Argument"
+	Commander.GetInstance().ToggleEnemyDebug(toggle)
+	return "Enemy debug toggled"
 
 func PrintLocations(CharName : String) -> String:
 	for g in get_tree().get_nodes_in_group("PlayerShips"):
@@ -118,33 +170,22 @@ func PrintLocations(CharName : String) -> String:
 	
 	return "Location Print Failed"
 
-func HandleInventoryCommand(Command) -> String:
-	
+func InventoryAdd(CapName : String, ItemName : String, ItemAmmount : String = "1") -> String:
 	var Inv = InventoryManager.GetInstance()
-	if (Command.size() == 1):
-		return "forgot to add captain name"
-	
-	
-	var CharInv = Inv.GetCharacterInventoryByName(Command[1])
-	if (CharInv == null):
-		return "Could Not Find Character"
-	
-	if (Command.size() == 2):
-		return "Missing Command After Captain Name"
-	
-	if (Command.size() == 3):
-		return "Missing Item Name After Command"
-	
-	match (Command[2].to_lower()):
-		"add":
-			var Amm = 1
-			if (Command.size() == 5):
-				Amm = str_to_var(Command[4])
-			return HandleInventoryItemAddCommand(CharInv, Command[1], Command[3], Amm)
-		"upgrade":
-			return HandleItemUpgrade(CharInv, Command[3])
-			
-	return "Error Handling Inventory Command"
+	var inv = Inv.GetCharacterInventoryByName(CapName)
+	if (inv == null):
+		return "Couldn't find captain name"
+	var Amm = str_to_var(ItemAmmount)
+	if (Amm == null):
+		return "Ammount typed wrong"
+	return HandleInventoryItemAddCommand(inv, CapName, ItemName, Amm)
+
+func InventoryUpgrade(CapName : String, ItemName : String) -> String:
+	var Inv = InventoryManager.GetInstance()
+	var inv = Inv.GetCharacterInventoryByName(CapName)
+	if (inv == null):
+		return "Couldn't find captain name"
+	return HandleItemUpgrade(inv, ItemName)
 
 func HandleInventoryItemAddCommand(Inv : CharacterInventory, InventoryOwnerName : String, ItemName : String, ItAmm : int) -> String:
 
@@ -222,6 +263,7 @@ func _physics_process(_delta: float) -> void:
 	global_position = get_global_mouse_position() - offset
 
 func OnCloseButtonPressed() -> void:
+	Typing = false
 	visible = false
 
 #func UpdateRecomendations() -> void:
@@ -260,6 +302,7 @@ func ClearRecomendations() -> void:
 		g.queue_free()
 	
 func _input(event: InputEvent) -> void:
-	if (event.is_action_pressed("CommandLine") and OS.is_debug_build()):
+	if (event.is_action_pressed("CommandLine")):
 		visible = !visible
+		Typing = visible
 		call_deferred("Focus")

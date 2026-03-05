@@ -50,7 +50,7 @@ stretch_mode = 3
 
 [node name="InventoryShipStats" parent="PanelContainer" unique_id=1343149227 instance=ExtResource("3_qyvw6")]
 layout_mode = 2
-StatsShown = Array[int]([4, 16, 15, 6, 7, 17, 3, 0, 1, 2, 9])
+StatsShown = Array[int]([4, 16, 15, 6, 7, 17, 3, 0, 1, 2, 9, 22])
 
 [node name="ShipDeck" type="VBoxContainer" parent="PanelContainer" unique_id=1467780086 node_paths=PackedStringArray("CharPortrait", "OffensiveCardPosition", "DeffencsiveCardPosition", "UtilityCardPosition")]
 layout_mode = 2

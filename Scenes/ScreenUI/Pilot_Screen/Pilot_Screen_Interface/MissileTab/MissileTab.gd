@@ -36,21 +36,21 @@ var steeringDir: float = 0.0
 # --- TUTORIALS ---
 
 func doIntroductionTutorial() -> void:
-	ActionTracker.GetInstance().QueueTutorial("TUT_MissileToggleTitle", 
+	ActionTracker.QueueTutorial("TUT_MissileToggleTitle", 
 		"TUT_MissileToggleText", [Map.UI_ELEMENT.MISSILE_TOGGLE])
 
 func doMissileArmTutorial() -> void:
-	ActionTracker.GetInstance().QueueTutorial("TUT_MissileArmTitle",
+	ActionTracker.QueueTutorial("TUT_MissileArmTitle",
 		"TUT_MissileArmText", 
 		[Map.UI_ELEMENT.MISSILE_ARM, Map.UI_ELEMENT.MISSILE_DIAL])
 	
 func doMissileAmountTutorial() -> void:
-	ActionTracker.GetInstance().QueueTutorial("TUT_MissileAmmountTitle",
+	ActionTracker.QueueTutorial("TUT_MissileAmmountTitle",
 		"TUT_MissileAmmountText",
 		[Map.UI_ELEMENT.MISSILE_ARM, Map.UI_ELEMENT.MISSILE_DIAL])
 
 func doMissileLaunchTutorial() -> void:
-	ActionTracker.GetInstance().QueueTutorial("Missile Launch",
+	ActionTracker.QueueTutorial("Missile Launch",
 		"Finally turn the dial to aim, then press Launch to send it away.",
 		[Map.UI_ELEMENT.MISSILE_LAUNCH, Map.UI_ELEMENT.MISSILE_DIAL])
 
@@ -59,8 +59,8 @@ func doMissileLaunchTutorial() -> void:
 func fleetHasMissileLauncher() -> bool:
 	if controller.Cpt.GetCharacterInventory().HasWeapon(CardStats.WeaponType.ML):
 		return true
-	for cap: Captain in controller.GetDroneDock().GetCaptains():
-		if cap.GetCharacterInventory().HasWeapon(CardStats.WeaponType.ML):
+	for cp: Captain in controller.GetSquadCaptains():
+		if cp.GetCharacterInventory().HasWeapon(CardStats.WeaponType.ML):
 			return true
 	return false
 
@@ -94,7 +94,7 @@ func _onControlledShipUpdated(ship: PlayerDrivenShip) -> void:
 			ActionTracker.OnActionCompleted(ActionTracker.Action.MISSILE_TOGGLE)
 			doIntroductionTutorial()
 
-func _onDroneAdded(drone: Drone, target: MapShip) -> void:
+func _onDroneAdded(_drone: Drone, target: MapShip) -> void:
 	if target == controller:
 		if armed:
 			dissarmMiss()
@@ -104,7 +104,7 @@ func _onDroneAdded(drone: Drone, target: MapShip) -> void:
 		if not hasLauncher:
 			_on_turn_off_toggled(false)
 
-func _onDroneRemoved(drone: Drone, target: MapShip) -> void:
+func _onDroneRemoved(_drone: Drone, target: MapShip) -> void:
 	if target == controller:
 		if armed:
 			dissarmMiss()

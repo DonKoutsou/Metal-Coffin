@@ -61,7 +61,7 @@ func PlayIntroAnim() -> void:
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.ITEM_INSPECTION)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.ITEM_INSPECTION)
 		var tuttext = "When selecting an [color=#ffc315]Item[/color] you can check the items details that apear on the panel to the right. There you can choose to [color=#ffc315]Upgrade[/color] it if its a ship part, [color=#ffc315]Transfer[/color] it to another ship if its allowed and check any [color=#ffc315]Cards[/color] it provides in close quarters combat."
-		ActionTracker.GetInstance().QueueTutorial("Item Inspection", tuttext, [])
+		ActionTracker.QueueTutorial("Item Inspection", tuttext, [])
 
 func SetWorkShopData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) -> void:
 	var scroll = get_child(0) as Control

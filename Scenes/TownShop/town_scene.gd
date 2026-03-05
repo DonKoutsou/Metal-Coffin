@@ -81,7 +81,7 @@ func OnRefuelShopPressed() -> void:
 	Scene.FuelTransactionFinished.connect(FuelExchangeFinished)
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.FUEL_SHOP)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.FUEL_SHOP)
-		ActionTracker.GetInstance().QueueTutorial("Fuel Storage", "In the Fuel Storage you can buy fuel for your fleet.\nYou can see the full ammount of [color=#ffc315]FUEL[/color] of you landed ships.\nEnsure your fleet is fully refueled before embarking on your next mission!", [])
+		ActionTracker.QueueTutorial("Fuel Storage", "In the Fuel Storage you can buy fuel for your fleet.\nYou can see the full ammount of [color=#ffc315]FUEL[/color] of you landed ships.\nEnsure your fleet is fully refueled before embarking on your next mission!", [])
 
 func OnRepairStationPressed() -> void:
 	var Scene = RepairStationScene.instantiate() as RepairStation
@@ -91,7 +91,7 @@ func OnRepairStationPressed() -> void:
 	#Scene.FuelTransactionFinished.connect(FuelExchangeFinished)
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.REPAIR_SHOP)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.REPAIR_SHOP)
-		ActionTracker.GetInstance().QueueTutorial("Repair Bay", "In the Repair Bay you can buy repair parts for your fleet.\nYou can see the hull condition of each of your ships and also their repair price. Buying all the nececary repair parts will allow the ship to slowly repair itself.\nAfter buying the parts the fleet can depart and keep repairing on another port, bought ship parts stay with the ship.", [])
+		ActionTracker.QueueTutorial("Repair Bay", "In the Repair Bay you can buy repair parts for your fleet.\nYou can see the hull condition of each of your ships and also their repair price. Buying all the nececary repair parts will allow the ship to slowly repair itself.\nAfter buying the parts the fleet can depart and keep repairing on another port, bought ship parts stay with the ship.", [])
 
 
 func FuelExchangeFinished(Fuel : float) -> void:
@@ -110,7 +110,7 @@ func OnUpgradeShopPressed() -> void:
 	WShop.Init(LandedShips, TownSpot.HasUpgrade(), TownSpot.WorkShopMerch)
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.UPGRADE_SHOP)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.UPGRADE_SHOP)
-		ActionTracker.GetInstance().QueueTutorial("Workshop", "In the workshop you can inspect your fleet and choose parts to [color=#ffc315]Upgrade[/color] or [color=#ffc315]Install[/color].\nUpgraded parts provide better stats and also extra [color=#ffc315]Cards[/color] for the ship's [color=#ffc315]deck[/color].\nEach ship can have only one of their parts being upgraded at each time.\n[color=#ffc315]Upgrade[/color] progress updates only while the simulation is running.", [])
+		ActionTracker.QueueTutorial("Workshop", "In the workshop you can inspect your fleet and choose parts to [color=#ffc315]Upgrade[/color] or [color=#ffc315]Install[/color].\nUpgraded parts provide better stats and also extra [color=#ffc315]Cards[/color] for the ship's [color=#ffc315]deck[/color].\nEach ship can have only one of their parts being upgraded at each time.\n[color=#ffc315]Upgrade[/color] progress updates only while the simulation is running.", [])
 
 func OnMunitionShopToggled() -> void:
 	var Scene = MerchShopScene.instantiate() as MerchShop
@@ -120,7 +120,7 @@ func OnMunitionShopToggled() -> void:
 	Scene.Init(LandedShips, TownSpot.Merch)
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.MERCH_SHOP)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.MERCH_SHOP)
-		ActionTracker.GetInstance().QueueTutorial("Munition Shop", "In the munition shop you can supply your ships with various single use items, from [color=#ffc315]Missiles[/color] to [color=#ffc315]Fire Suppression Units[/color].\nSome of those [color=#ffc315]Items[/color] are ment to be used in the overworld while others will provide you with extra [color=#ffc315]Cards[/color] for your [color=#ffc315]Deck[/color].", [])
+		ActionTracker.QueueTutorial("Munition Shop", "In the munition shop you can supply your ships with various single use items, from [color=#ffc315]Missiles[/color] to [color=#ffc315]Fire Suppression Units[/color].\nSome of those [color=#ffc315]Items[/color] are ment to be used in the overworld while others will provide you with extra [color=#ffc315]Cards[/color] for your [color=#ffc315]Deck[/color].", [])
 
 func OnShipBought(Cap : Captain) -> void:
 	var NewCommander : MapShip

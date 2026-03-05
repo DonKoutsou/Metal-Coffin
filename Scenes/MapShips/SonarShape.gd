@@ -10,7 +10,9 @@ var SonarTargets : Array[Node2D]
 signal AerosonarRangeChanged
 
 func UpdateSonarRange():
-	(collision_shape_2d.shape as CircleShape2D).radius = SonarStat.GetFinalValue()
+	var sonarValue = SonarStat.GetFinalValue()
+	(collision_shape_2d.shape as CircleShape2D).radius = sonarValue
+	collision_shape_2d.disabled = sonarValue == 0
 	AerosonarRangeChanged.emit()
 
 func _ready() -> void:
@@ -34,7 +36,7 @@ func GetSonarTargetInfo() -> Array[SonarTargetInfo]:
 		if g is MapShip:
 			Info.Signature = g.GetSquaddB()
 		elif g is Missile:
-			Info.Signature = g.GetdB() 
+			Info.Signature = g.GetdB()
 		TargetInfo.append(Info)
 	return TargetInfo
 

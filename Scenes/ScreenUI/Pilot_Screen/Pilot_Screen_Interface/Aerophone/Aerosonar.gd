@@ -126,6 +126,8 @@ func _updateContacts(ControllerInfo : SonarTargetInfo ,ContactInfo : Array[Sonar
 		
 		#calculate final signature by applying the distance and storm to the SoundSignature
 		var finalsignature = dist * SounddB * stormvalue
+		if (finalsignature == 0):
+			continue
 		#if contact exists, add to it.
 		if (contactList.has(direction)):
 			var sounds : Array[float]
@@ -203,6 +205,9 @@ func toggleSonar(enable: bool) -> void:
 	set_physics_process(enable)
 	enabled = enable
 	if enable:
+		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.AEROSONAR)):
+			ActionTracker.OnActionCompleted(ActionTracker.Action.AEROSONAR)
+			ActionTracker.QueueTutorial("TUT_Aerosonar_Title", "TUT_Aerosonar_Text", [Map.UI_ELEMENT.AEROSONAR])
 		working = fleetHasAeroSonar()
 		#controller.ToggleSonarVisual(working)
 		lineContainer.OffsetAmmount = currentOffset

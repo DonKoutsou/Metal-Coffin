@@ -35,7 +35,7 @@ func PortUpdated(NewAlt : float) -> void:
 	else: if (CurrentShip.Landed()):
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.HATCH)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.HATCH)
-			ActionTracker.GetInstance().QueueTutorial("Disembarkation", "You've landed in a town. To disembark and visit it press the [color=#ffc315]Open Hatch[/color] button.", [Map.UI_ELEMENT.HATCH_BUTTON])
+			ActionTracker.QueueTutorial("Disembarkation", "You've landed in a town. To disembark and visit it press the [color=#ffc315]Open Hatch[/color] button.", [Map.UI_ELEMENT.HATCH_BUTTON])
 		
 		LandingText.text = "Landed on {0}".format([CurrentShip.CurrentPort.GetSpotName()])
 	else:

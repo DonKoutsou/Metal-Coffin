@@ -13,7 +13,7 @@ static var ShowTutorials : bool = false
 
 var ShowingTutorial : bool = false
 
-var QueuedTutorials : Array[TutorialData]
+static var QueuedTutorials : Array[TutorialData]
 
 func _ready() -> void:
 	Instance = self
@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 				ShowTutorial(nexttut.TutorialTitle, nexttut.TutorialText, nexttut.Target)
 				QueuedTutorials.pop_front()
 
-func QueueTutorial(TurotialTitle : String, TutorialText : String, ElementsToFocusOn : Array[Map.UI_ELEMENT]) -> void:
+static func QueueTutorial(TurotialTitle : String, TutorialText : String, ElementsToFocusOn : Array[Map.UI_ELEMENT]) -> void:
 	if (!ShowTutorials):
 		return
 
@@ -197,4 +197,5 @@ enum Action{
 	MISSILE_SELECT_NUM,
 	HATCH,
 	ELEVATION,
+	AEROSONAR,
 }

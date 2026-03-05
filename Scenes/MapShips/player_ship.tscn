@@ -36,7 +36,7 @@ resource_local_to_scene = true
 radius = 150.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ogc8b"]
-radius = 1000.0
+radius = 0.01
 
 [node name="PlayerShip" unique_id=974765209 node_paths=PackedStringArray("AccelerationAudio", "L", "MissileD", "TrailLines", "SonarShape", "DroneDok") groups=["PlayerShips"] instance=ExtResource("1_phbnr")]
 script = ExtResource("1_ekbhy")
@@ -87,6 +87,7 @@ script = ExtResource("9_phbnr")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sonar" index="0" unique_id=205796897]
 visible = false
 shape = SubResource("CircleShape2D_ogc8b")
+disabled = true
 debug_color = Color(0.60916656, 0.32999998, 1, 1)
 
 [node name="MissileDock" type="Node2D" parent="." index="6" unique_id=912565508]

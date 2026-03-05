@@ -149,7 +149,7 @@ radius = 150.0
 radius = 258.136
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d15o2"]
-radius = 1000.0
+radius = 0.01
 
 [node name="Drone" unique_id=974765209 node_paths=PackedStringArray("AccelerationAudio", "L", "MissileD", "SonarShape", "DroneDok") groups=["PlayerShips"] instance=ExtResource("1_airq3")]
 script = ExtResource("1_vfr1e")
@@ -201,6 +201,7 @@ script = ExtResource("20_vq5gh")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sonar" index="0" unique_id=1661441691]
 visible = false
 shape = SubResource("CircleShape2D_d15o2")
+disabled = true
 debug_color = Color(0, 0.650296, 0.101282, 0.42)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="8" unique_id=1893749532]
