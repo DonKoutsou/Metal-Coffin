@@ -10,7 +10,6 @@ class_name ScreenCamera
 @export var ShakeSound : AudioStreamPlayer
 @export var BoomSound : AudioStreamPlayer
 
-
 #Starting Position of camera
 var OriginalPos : Vector2
 #Position shake sound currently at
@@ -148,13 +147,29 @@ func _physics_process(delta: float) -> void:
 		var of = RandomOffset()
 		offset += of
 
-#func _input(event: InputEvent) -> void:
-	#if (event is InputEventMouseMotion):
-		#var r = get_global_mouse_position()
-		#var newx = clamp(r.x, OriginalPos.x / zoom.x, OriginalPos.x * zoom.x)
-		#var newy = clamp(r.y, OriginalPos.y / zoom.y, OriginalPos.y * zoom.y)
-		#position = Vector2(newx, newy)
-		
+func _input(event: InputEvent) -> void:
+	if (World.WORLDST == World.WORLDSTATE.NORMAL):
+		if (event is InputEventMouseMotion):
+			if (get_global_mouse_position().x < 10 and position.x != 370):
+				LightPivot1.ApplyShake(1)
+				position.x = 370
+			else: if (get_global_mouse_position().x > 900 and position.x != OriginalPos.x):
+				LightPivot1.ApplyShake(1)
+				position.x = OriginalPos.x
+	else: if (position.x != OriginalPos.x):
+		LightPivot1.ApplyShake(1)
+		position.x = OriginalPos.x
+			#var r = get_global_mouse_position()
+			#var newx = clamp(r.x, OriginalPos.x / zoom.x, OriginalPos.x * zoom.x)
+			#var newy = clamp(r.y, OriginalPos.y / zoom.y, OriginalPos.y * zoom.y)
+			#position = Vector2(newx, newy)
+
+func FrameCam(FrameTrarget : Control) -> void:
+	if (FrameTrarget.global_position.x < 10):
+		position.x = 370
+	else: if (FrameTrarget.global_position.x > 900):
+		position.x = OriginalPos.x
+
 func RandomOffset2(Last : Vector2) -> Vector2:
 	var x = clamp(randf_range(Last.x - 0.1, Last.x + 0.1), -1, 1)
 	var y = get_breath_offset()

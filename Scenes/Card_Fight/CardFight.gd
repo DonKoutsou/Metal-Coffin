@@ -1732,9 +1732,7 @@ func HandleDeBuff(Performer : BattleShipStats, Action : CardStats, Mod : CardMod
 
 func HandleTargets(Mod : CardModule, User : BattleShipStats) -> Array[BattleShipStats]:
 	var Friendly = IsShipFriendly(User)
-	if (Friendly and !ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_TARGET_PICKING)):
-		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_TARGET_PICKING)
-		ActionTracker.QueueTutorial("TUT_Cardfight_TargetTitle", "TUT_Cardfight_TargetText", [])
+	
 	var Targets : Array[BattleShipStats]
 	# we handle deffensive target picking a bit differently
 	if (Mod is DeffenceCardModule):
@@ -1750,6 +1748,9 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats) -> Array[BattleShip
 		#If can be used on others prompt player to choose, or if enemy pick randomly
 		else: if Mod.CanBeUsedOnOther:
 			if (Friendly):
+				if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_TARGET_PICKING) and Team.size() > 0):
+					ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_TARGET_PICKING)
+					ActionTracker.QueueTutorial("TUT_Cardfight_TargetTitle", "TUT_Cardfight_TargetText", [])
 				TargetSelect.SetEnemies(Team)
 				SelectingTarget = true
 				var Target = await TargetSelect.EnemySelected
@@ -1775,6 +1776,9 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats) -> Array[BattleShip
 			Targets.append(EnemyTeam[0])
 		else:
 			if (Friendly):
+				if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_TARGET_PICKING) and EnemyTeam.size() > 0):
+					ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_TARGET_PICKING)
+					ActionTracker.QueueTutorial("TUT_Cardfight_TargetTitle", "TUT_Cardfight_TargetText", [])
 				TargetSelect.SetEnemies(EnemyTeam)
 				SelectingTarget = true
 				var Target = await TargetSelect.EnemySelected

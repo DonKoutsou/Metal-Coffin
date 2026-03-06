@@ -26,7 +26,7 @@ func SetData(Title : String, Text : String, TutorialSubjects : Array[Map.UI_ELEM
 	TextLabel.text = Text
 	if (TutorialSubjects.size() > 0):
 		Target = Map.GetInstance().GetUIElement(TutorialSubjects[0])
-		
+		Map.GetInstance()._ScreenUI.Cam.FrameCam(Target)
 		
 		
 	if (TutorialSubjects.size() > 1):
@@ -38,8 +38,8 @@ func _ready() -> void:
 	UISoundMan.GetInstance().AddSelf($VBoxContainer/Button)
 	call_deferred("DoFadeInAnim")
 	
-	var R1 = Rect2(0,0,0,0)
-	var R2 = Rect2(0,0,0,0)
+	var R1 = Rect2(-999,-999,0,0)
+	var R2 = Rect2(-999,-999,0,0)
 	
 	if (Target2 != null):
 		R2 = Target2.get_global_rect()
@@ -57,7 +57,7 @@ func DoFadeInAnim() -> void:
 	OriginalSize = Pan.size
 	
 	$VBoxContainer/PanelContainer/VBoxContainer2.visible = false
-	$VBoxContainer/Button.visible = false
+	$VBoxContainer/Button.modulate.a = 0
 	
 	Pan.size = Vector2.ZERO
 	Pan.position = size/2 - Pan.size/2
@@ -89,15 +89,21 @@ func DoFadeInAnim() -> void:
 	
 	set_physics_process(true)
 	$VBoxContainer/PanelContainer/VBoxContainer2.visible = true
-	$VBoxContainer/Button.visible = true
+	$VBoxContainer/Button.modulate.a = 1
 	
 func SetTargetRect(r : Rect2 = Rect2(0,0,0,0), r2 : Rect2 = Rect2(0,0,0,0)) -> void:
 	var mat =  $ColorRect.material as ShaderMaterial
-	mat.set_shader_parameter("rect1_pos", r.position / get_viewport_rect().size)
-	mat.set_shader_parameter("rect1_size", r.size / get_viewport_rect().size)
+	var vpRectSize = get_viewport_rect().size
+	var camoffset = Map.GetInstance()._ScreenUI.Cam.position.x - (vpRectSize.x / 2)
 	
-	mat.set_shader_parameter("rect2_pos", r2.position / get_viewport_rect().size)
-	mat.set_shader_parameter("rect2_size", r2.size / get_viewport_rect().size)
+	#Devide by VP rect to normalise it
+	var r1pos = (r.position + Vector2(-camoffset, 0))/ vpRectSize
+	var r2pos = (r2.position + Vector2(-camoffset, 0)) / vpRectSize
+	mat.set_shader_parameter("rect1_pos", r1pos)
+	mat.set_shader_parameter("rect1_size", r.size / vpRectSize)
+	
+	mat.set_shader_parameter("rect2_pos", r2pos) 
+	mat.set_shader_parameter("rect2_size", r2.size / vpRectSize)
 
 func UpdateSize(NewSize : Vector2) -> void:
 	Pan.size = NewSize
@@ -118,7 +124,16 @@ func UpdateDarkness(Darkness : float) -> void:
 
 func _physics_process(delta: float) -> void:
 	
+	var R1 = Rect2(-999,-999,0,0)
+	var R2 = Rect2(-999,-999,0,0)
 	
+	if (Target2 != null):
+		R2 = Target2.get_global_rect()
+			
+	if (Target != null):
+		R1 = Target.get_global_rect()
+	
+	SetTargetRect(R1, R2)
 	#if (Target != null):
 		#Line.set_point_position(1, Line.to_local(Line1Target))
 	#if (Target2 != null):
@@ -138,7 +153,7 @@ func _on_button_pressed() -> void:
 	Tw.set_parallel(true)
 	Tw.tween_method(UpdateDarkness, 0.8, 0.0, 0.5)
 	$VBoxContainer/PanelContainer/VBoxContainer2.visible = false
-	$VBoxContainer/Button.visible = false
+	$VBoxContainer/Button.modulate.a = 0
 	
 	var S = DeletableSoundGlobal.new()
 	S.stream = OutSound

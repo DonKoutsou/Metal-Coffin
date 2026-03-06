@@ -136,7 +136,7 @@ func _ready() -> void:
 			
 			if (!SkipStory):
 				var Questionair = load(WorldViewQuestionairScene).instantiate() as WorldViewQuestionair
-				Ingame_UIManager.GetInstance().AddUI(Questionair, false, true)
+				Ingame_UIManager.GetInstance().AddUI(Questionair, true, false)
 				Questionair.Init()
 				await GetMap().GetScreenUi().FullScreenToggleFinished
 				#await Loadingscr.LoadingDestroyed

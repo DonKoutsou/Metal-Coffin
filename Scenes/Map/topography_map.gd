@@ -4,7 +4,7 @@ class_name TopographyMap
 
 	
 const GROUND_TEXTURE_RESOLUTION : int = 256
-const SIZE : Vector2 = Vector2(6000,6000)
+const SIZE : Vector2 = Vector2(9000,9000)
 
 @export_file("*.tres") var DataTextureFile : String
 
@@ -44,13 +44,13 @@ static func GetTurbelance(Pos : Vector2) -> float:
 	return Turbelance
 	
 static func GetGradientAtGlobalPosition(pos : Vector2) -> Vector2:
-	var RoundedPos = Vector2i(pos + Vector2(3000, 3000))
+	var RoundedPos = Vector2i(pos + Vector2(4500, 4500))
 	
 	var Offsets : PackedVector2Array = [Vector2(-2, 0), Vector2(2, 0), Vector2(0, -2), Vector2(0,2)]
 	var Altitudes : PackedFloat64Array
 	for g in Offsets:
-		var Normalisedx = Helper.normalize_value(wrap(RoundedPos.x, 0, 24000), 0, 24000)
-		var Normalisedy = Helper.normalize_value(wrap(RoundedPos.y, 0, 24000), 0, 24000)
+		var Normalisedx = Helper.normalize_value(wrap(RoundedPos.x, 0, 36000), 0, 36000)
+		var Normalisedy = Helper.normalize_value(wrap(RoundedPos.y, 0, 36000), 0, 36000)
 		var WrapedX = wrap((Normalisedx * GROUND_TEXTURE_RESOLUTION) + g.x, 0, GROUND_TEXTURE_RESOLUTION)
 		var WrapedY = wrap((Normalisedy * GROUND_TEXTURE_RESOLUTION) + g.y, 0, GROUND_TEXTURE_RESOLUTION)
 		var PixelCoords = Vector2i(WrapedX, WrapedY)
@@ -66,8 +66,8 @@ static func GetGradientAtGlobalPosition(pos : Vector2) -> Vector2:
 static func GetAltitudeAtGlobalPosition(pos: Vector2) -> float:
 	var RoundedPos = Vector2i(pos + (SIZE / 2))
 
-	var Normalisedx = Helper.normalize_value(wrap(RoundedPos.x, 0, 24000), 0, 24000)
-	var Normalisedy = Helper.normalize_value(wrap(RoundedPos.y, 0, 24000), 0, 24000)
+	var Normalisedx = Helper.normalize_value(wrap(RoundedPos.x, 0, 36000), 0, 36000)
+	var Normalisedy = Helper.normalize_value(wrap(RoundedPos.y, 0, 36000), 0, 36000)
 
 	var PixelCoords = Vector2i(Normalisedx * GROUND_TEXTURE_RESOLUTION, Normalisedy * GROUND_TEXTURE_RESOLUTION)
 		

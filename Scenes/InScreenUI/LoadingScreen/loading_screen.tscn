@@ -156,6 +156,22 @@ t"
 horizontal_alignment = 1
 autowrap_mode = 2
 
+[node name="PanelContainer2" type="PanelContainer" parent="." unique_id=1409835604]
+visible = false
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 232.0
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("5_p0tw4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer2" unique_id=2142132163]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="PanelContainer2/VBoxContainer" unique_id=1894369781]
+layout_mode = 2
+
 [node name="ProgressBar" type="ProgressBar" parent="." unique_id=1393083391]
 layout_mode = 1
 anchors_preset = 12

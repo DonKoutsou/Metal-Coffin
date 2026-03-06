@@ -22,6 +22,7 @@ var CircleSize : float
 var CurrentZoom : float
 
 func _draw() -> void:
+	draw_circle(Vector2(1,1), CircleSize, Color(0,0,0, C.a), false, (6 / CurrentZoom))
 	draw_circle(Vector2.ZERO, CircleSize, C, false, 3 / CurrentZoom)
 
 func SetMarkerDetails(Spot : MapSpot, PlayAnim : bool):
@@ -41,9 +42,9 @@ func SetMarkerDetails(Spot : MapSpot, PlayAnim : bool):
 		text.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		text.custom_minimum_size = Vector2(18,18)
 		text.texture = g.ItemIcon
-		text.modulate.a = 0.3
+		#text.modulate.a = 0.3
 		text.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		SpotNameLabel.modulate.a = 0.3
+		#SpotNameLabel.modulate.a = 0.3
 		#if (g is UsableItem):
 			#text.self_modulate = g.ItecColor
 		text.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
@@ -57,10 +58,11 @@ func SetMarkerDetails(Spot : MapSpot, PlayAnim : bool):
 	
 	if (!Spot.Visited):
 		C.a = 0.3
-		SpotNameLabel.modulate.a = 0.3
+		DetailContainer.modulate.a = 0.3
+		#SpotNameLabel.modulate.a = 0.3
 	else:
 		C.a = 1
-		SpotNameLabel.modulate.a = 1
+		#SpotNameLabel.modulate.a = 1
 	
 func SetSize(Spot : MapSpot) -> void:
 	var sizething = (Spot.Population / 150000.0) as float
@@ -93,7 +95,8 @@ func OnAlarmRaised(Notify : bool) -> void:
 
 func OnVisited(_Type : MapSpot) -> void:
 	C.a = 1
-	SpotNameLabel.modulate.a = 1
+	DetailContainer.modulate.a = 1
+	#SpotNameLabel.modulate.a = 1
 
 func UpdateCameraZoom(NewZoom : float) -> void:
 	queue_redraw()

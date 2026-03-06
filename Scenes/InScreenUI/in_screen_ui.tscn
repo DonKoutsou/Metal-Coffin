@@ -112,11 +112,13 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Line2D" type="Line2D" parent="HBoxContainer/PanelContainer/Control" unique_id=1364758694]
+visible = false
 points = PackedVector2Array(0, 0, 0, 133.285)
 width = 1.0
 default_color = Color(1, 0.7647059, 0.08235294, 1)
 
 [node name="AltitudeText" type="Label" parent="HBoxContainer/PanelContainer/Control" unique_id=1510011798]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

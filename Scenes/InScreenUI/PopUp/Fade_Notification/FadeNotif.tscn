@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://1vnrpn8q4byq"]
 
 [ext_resource type="Script" uid="uid://clk1tqw1y8r5" path="res://Scenes/InScreenUI/PopUp/Fade_Notification/fade_notif.gd" id="1_sjfyc"]
-[ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="2_p75xj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xxwjh"]
 content_margin_top = 5.0
@@ -46,9 +45,12 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_3j3ox")
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 0
-theme_override_fonts/font = ExtResource("2_p75xj")
+theme_override_constants/shadow_outline_size = 2
 theme_override_font_sizes/font_size = 28
+text = "wafwaffwa"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true

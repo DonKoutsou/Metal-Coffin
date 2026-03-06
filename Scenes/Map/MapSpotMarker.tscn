@@ -300,13 +300,15 @@ mouse_filter = 2
 alignment = 1
 
 [node name="SotNameLabel" type="Label" parent="DetailContainer" unique_id=1665220381]
-modulate = Color(1, 1, 1, 0.3)
 use_parent_material = true
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 2
 theme_override_font_sizes/font_size = 20
 text = "Cwad"
 horizontal_alignment = 1

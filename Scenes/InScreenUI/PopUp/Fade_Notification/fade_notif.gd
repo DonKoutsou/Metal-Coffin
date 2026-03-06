@@ -3,7 +3,7 @@ class_name FadeNotif
 
 @export var T : Label
 
-var alph = 4
+var alph = 8
 
 var txt : String
 

@@ -24,12 +24,12 @@ func Toggle(isOpen: bool) -> void:
 		moveTween = create_tween()
 		moveTween.set_ease(Tween.EASE_IN)
 		moveTween.set_trans(Tween.TRANS_BACK)
-		moveTween.tween_property(self, "position", Vector2(-size.x, position.y), 0.5)
+		moveTween.tween_property(self, "position", Vector2(get_viewport_rect().size.x - ( size.x / 2), get_viewport_rect().size.y + (size.y / 2)), 0.5)
 	else:
 		moveTween = create_tween()
 		moveTween.set_ease(Tween.EASE_OUT)
 		moveTween.set_trans(Tween.TRANS_BACK)
-		moveTween.tween_property(self, "position", Vector2(-size.x / 2, position.y), 0.5)
+		moveTween.tween_property(self, "position", Vector2(get_viewport_rect().size.x - (size.x / 2), get_viewport_rect().size.y - (size.y / 2)), 0.5)
 
 # --- INITIALIZATION AND SIGNALS ---
 
@@ -55,12 +55,12 @@ func shipSteerForced(newValue: float) -> void:
 # --- INPUT/STEERING LOGIC ---
 
 func UpdateSteer(relativeRot: Vector2, eventPos: Vector2) -> void:
-	var rel = clamp(relativeRot / 10, Vector2(-0.3, -0.3), Vector2(0.3, 0.3))
+	var rel = (relativeRot).clamp(Vector2(-0.5, -0.5), Vector2(0.5, 0.5))
 	set_physics_process(true)
-	if eventPos.x < position.x:
+	if eventPos.x > position.x:
 		steeringDir += rel.x - rel.y
 	else:
-		steeringDir += rel.x + rel.y
+		steeringDir += rel.x - rel.y
 
 func UpdateSteerFloat(dir: float) -> void:
 	set_physics_process(true)
@@ -129,7 +129,7 @@ func _on_texture_rect_gui_input(event: InputEvent) -> void:
 	elif event is InputEventMouseMotion and Input.is_action_pressed("Click"):
 		UpdateSteer(event.relative, event.position)
 
-	var axis = Input.get_axis("ZoomIn", "ZoomOut")
+	var axis = Input.get_axis("ZoomOut", "ZoomIn")
 	if axis != 0:
 		UpdateSteerFloat(axis * 0.4)
 

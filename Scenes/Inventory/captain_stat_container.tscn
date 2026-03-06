@@ -89,10 +89,10 @@ uppercase = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/h_separation = -45
-theme_override_constants/v_separation = -166
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = -131
 alignment = 1
-last_wrap_alignment = 1
+last_wrap_alignment = 2
 
 [node name="Label2" type="Label" parent="PanelContainer/ShipDeck/ScrollContainer/VBoxContainer" unique_id=696564241]
 layout_mode = 2
@@ -106,10 +106,10 @@ uppercase = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/h_separation = -45
-theme_override_constants/v_separation = -166
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = -131
 alignment = 1
-last_wrap_alignment = 1
+last_wrap_alignment = 2
 
 [node name="Label3" type="Label" parent="PanelContainer/ShipDeck/ScrollContainer/VBoxContainer" unique_id=1242653377]
 layout_mode = 2
@@ -123,7 +123,7 @@ uppercase = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/h_separation = -45
-theme_override_constants/v_separation = -166
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = -131
 alignment = 1
-last_wrap_alignment = 1
+last_wrap_alignment = 2

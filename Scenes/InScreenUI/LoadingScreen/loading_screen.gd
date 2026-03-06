@@ -28,8 +28,6 @@ func _ready() -> void:
 	$SubViewportContainer/SubViewport/TownBackground.Dissable()
 	TextLabel.text = Text
 	Helper.Instance.CallLater(StartTextScroll, 0.5)
-	#call_deferred("StartTextScroll")
-	#queue_free()
 
 func StartTextScroll() -> void:
 	Tw = create_tween()
@@ -43,16 +41,18 @@ func StartTextScroll() -> void:
 func DissableText() -> void:
 	TextPar.visible = false
 
-func ProcessStarted(_ProcessName : String) -> void:
-	#var l = Label.new()
-	#l.text += "\n{0} {1} : Process Started...".format([Time.get_time_string_from_system(),ProcessName])
-	#$VBoxContainer.add_child(l)
-	pass
-func ProcesFinished(_ProcessName : String) -> void:
-	#var l = Label.new()
-	#l.text += "\n{0} {1} : Process Finished".format([Time.get_time_string_from_system(),ProcessName])
-	#$VBoxContainer.add_child(l)
-	pass
+func ProcessStarted(ProcessName : String) -> void:
+	var l = Label.new()
+	l.autowrap_mode = TextServer.AUTOWRAP_WORD
+	l.text += "\n{0} {1} : Process Started...".format([Time.get_time_string_from_system(),ProcessName])
+	$PanelContainer2/VBoxContainer.add_child(l)
+
+func ProcesFinished(ProcessName : String) -> void:
+	var l = Label.new()
+	l.autowrap_mode = TextServer.AUTOWRAP_WORD
+	l.text += "\n{0} {1} : Process Finished".format([Time.get_time_string_from_system(),ProcessName])
+	$PanelContainer2/VBoxContainer.add_child(l)
+
 func UpdateProgress(Precent : float) -> void:
 	var tw = create_tween()
 	tw.tween_property($ProgressBar, "value", Precent, 1)

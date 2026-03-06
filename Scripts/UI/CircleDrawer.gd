@@ -182,15 +182,17 @@ func DrawRuller() -> void:
 		
 		#if (vizrange > 110):
 		var Text = var_to_str(Num)
-		var TextSize = min(8/CamZoom, vizrange / 10)
+		var TextSize = min(10/CamZoom, vizrange / 10)
 		var StringSize = ThemeDB.fallback_font.get_string_size(Text, HORIZONTAL_ALIGNMENT_CENTER, -1, TextSize) / 2
 		StringSize.y *= -0.5
 		var StringOffset = LineStartPos.direction_to(LineEndPos) * TextSize
+		#draw_string(ThemeDB.fallback_font, LineEndPos - StringSize + StringOffset + Vector2(5,5), Text, HORIZONTAL_ALIGNMENT_CENTER, -1, TextSize, Color(0,0,0))
 		draw_string(ThemeDB.fallback_font, LineEndPos - StringSize + StringOffset, Text, HORIZONTAL_ALIGNMENT_CENTER, -1, TextSize)
+		
 		Next -= 30
-		Num -= 30
-		if Num == 0:
-			Num = 360
+		Num = wrap(Num - 30, 0, 360)
+		#if Num == 0:
+			#Num = 360
 
 	draw_multiline(Lines, Color(100, 100, 100, 0.3), LineW, false)
 

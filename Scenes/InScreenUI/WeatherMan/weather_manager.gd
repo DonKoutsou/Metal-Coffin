@@ -12,7 +12,7 @@ static var DataTexture : Image
 var N : NoiseTexture2D
 
 const TEXTURE_SIZE : int = 256
-const SIZE : Vector2 = Vector2(6000,6000)
+const SIZE : Vector2 = Vector2(9000,9000)
 const MAX_WIND_SPEED : int = 200
 
 static var Instance : WeatherManage
@@ -131,8 +131,8 @@ static func GetLightAmm() -> float:
 static func get_color_at_global_position(pos: Vector2) -> Color:
 	var RoundedPos = Vector2i(pos + (SIZE / 2))
 
-	var Normalisedx = Helper.normalize_value(wrap(RoundedPos.x, 0, 48000), 0, 48000)
-	var Normalisedy = Helper.normalize_value(wrap(RoundedPos.y, 0, 48000), 0, 48000)
+	var Normalisedx = Helper.normalize_value(wrap(RoundedPos.x, 0, 72000), 0, 72000)
+	var Normalisedy = Helper.normalize_value(wrap(RoundedPos.y, 0, 72000), 0, 72000)
 	
 	var PixelCoords = Vector2i(Normalisedx * TEXTURE_SIZE, Normalisedy * TEXTURE_SIZE)
 	M.lock()

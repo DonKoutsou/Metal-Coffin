@@ -8,7 +8,6 @@
 [ext_resource type="Material" uid="uid://2l428k4wukko" path="res://Shaders/Ground/StartingMenu_ground.tres" id="4_t54ed"]
 [ext_resource type="Script" uid="uid://dnjdy3xj0atfy" path="res://Scripts/intro_menu_ships.gd" id="6_yrlew"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scenes/MapShips/Trail_Line/trail_line.gd" id="8_eb1s8"]
-[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="9_3vvgq"]
 [ext_resource type="Texture2D" uid="uid://qi37jxow82md" path="res://Assets/ShipTextures/Ship4_001.png" id="9_j43p8"]
 [ext_resource type="Texture2D" uid="uid://dapth5q2elnm6" path="res://Assets/ShipTextures/Tanker.png" id="11_23r0g"]
 [ext_resource type="Texture2D" uid="uid://clj76ltt2catq" path="res://Assets/ShipTextures/Tanker2.png" id="12_23r0g"]
@@ -382,7 +381,6 @@ offset_right = 189.0
 offset_bottom = 94.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("9_3vvgq")
 
 [node name="Cancel" type="Button" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer" unique_id=2087269759 groups=["DigitalBouncingButton"]]
 use_parent_material = true

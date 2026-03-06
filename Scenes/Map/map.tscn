@@ -57,9 +57,9 @@ texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 342.0
+offset_left = 149.0
 offset_top = 62.0
-offset_right = -343.0
+offset_right = -346.0
 offset_bottom = -63.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -75,7 +75,7 @@ handle_input_locally = false
 canvas_item_default_texture_filter = 0
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 512
-size = Vector2i(595, 595)
+size = Vector2i(785, 595)
 render_target_update_mode = 4
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="SubViewportContainer/ViewPort" unique_id=177781806]
@@ -96,7 +96,7 @@ canvas_item_default_texture_filter = 0
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 0
 positional_shadow_atlas_16_bits = false
-size = Vector2i(595, 595)
+size = Vector2i(785, 595)
 render_target_update_mode = 4
 
 [node name="Darkness" type="CanvasModulate" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" unique_id=2089661940]
@@ -143,17 +143,17 @@ use_parent_material = true
 modulate = Color(1, 1, 1, 0.2)
 ResizeLinesWithZoom = true
 
-[node name="CircleDrawer" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" unique_id=1002635144 groups=["ZoomAffected"]]
-use_parent_material = true
-script = ExtResource("22_fa7wu")
-ShipControllerEvent = ExtResource("22_n73so")
-Col = Color(100, 0.395, 0.144, 1)
-
 [node name="MapSpotMarkers" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" unique_id=532983612]
 use_parent_material = true
 
 [node name="ShipMarkerks" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" unique_id=1575678772]
 use_parent_material = true
+
+[node name="CircleDrawer" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" unique_id=1002635144 groups=["ZoomAffected"]]
+use_parent_material = true
+script = ExtResource("22_fa7wu")
+ShipControllerEvent = ExtResource("22_n73so")
+Col = Color(100, 0.395, 0.144, 1)
 
 [node name="InScreenUI" parent="SubViewportContainer/ViewPort" unique_id=391064499 instance=ExtResource("23_53oad")]
 layer = 3

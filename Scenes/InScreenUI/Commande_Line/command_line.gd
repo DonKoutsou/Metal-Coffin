@@ -108,6 +108,8 @@ func HandlePrologueCommand(Command) -> String:
 	return "Error Handling Location Command"
 
 func Prologue(skip : String) -> String:
+	if (World.Instance != null):
+		return "Can only apply while in main menu"
 	var sk : bool = str_to_var(skip)
 	if (sk == null):
 		return "Wrong argument"
@@ -143,6 +145,8 @@ func Prologue(skip : String) -> String:
 	#return "Error Handling Location Command"
 
 func Teleport(CharName : String, Locx : String, Locy : String) -> String:
+	if (World.Instance == null or World.WORLDST != World.WORLDSTATE.NORMAL):
+		return "Can only apply while in map"
 	var xpos : int = str_to_var(Locx)
 	var ypos : int = str_to_var(Locy)
 	if (xpos == null or ypos == null):
@@ -171,6 +175,8 @@ func PrintLocations(CharName : String) -> String:
 	return "Location Print Failed"
 
 func InventoryAdd(CapName : String, ItemName : String, ItemAmmount : String = "1") -> String:
+	if (World.Instance == null or World.WORLDST != World.WORLDSTATE.NORMAL):
+		return "Can only apply while in map"
 	var Inv = InventoryManager.GetInstance()
 	var inv = Inv.GetCharacterInventoryByName(CapName)
 	if (inv == null):
@@ -181,6 +187,8 @@ func InventoryAdd(CapName : String, ItemName : String, ItemAmmount : String = "1
 	return HandleInventoryItemAddCommand(inv, CapName, ItemName, Amm)
 
 func InventoryUpgrade(CapName : String, ItemName : String) -> String:
+	if (World.Instance == null or World.WORLDST != World.WORLDSTATE.NORMAL):
+		return "Can only apply while in map"
 	var Inv = InventoryManager.GetInstance()
 	var inv = Inv.GetCharacterInventoryByName(CapName)
 	if (inv == null):

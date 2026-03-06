@@ -62,23 +62,31 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -15000.0
-offset_top = -15000.0
-offset_right = 15000.0
-offset_bottom = 15000.0
+offset_left = -4500.0
+offset_top = -4500.0
+offset_right = 4500.0
+offset_bottom = 4500.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0.16862746, 0.28627452, 0.29411766, 1)
 
 [node name="TopographyMap" parent="." unique_id=472618370 instance=ExtResource("16_w5jc1")]
-offset_left = -3000.0
-offset_top = -3000.0
-offset_right = 3000.0
-offset_bottom = 3000.0
+offset_left = -4500.0
+offset_top = -4500.0
+offset_right = 4500.0
+offset_bottom = 4500.0
 
 [node name="WeatherManager" parent="." unique_id=2099502434 instance=ExtResource("7_ph7p1")]
-visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4500.0
+offset_top = -4500.0
+offset_right = 4500.0
+offset_bottom = 4500.0
 
 [node name="Grid" parent="." unique_id=1684704099 instance=ExtResource("22_5m85t")]
 visible = false

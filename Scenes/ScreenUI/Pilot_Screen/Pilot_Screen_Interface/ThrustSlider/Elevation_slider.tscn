@@ -37,7 +37,6 @@ offset_bottom = 335.0
 mouse_filter = 0
 texture = ExtResource("2_clt26")
 expand_mode = 1
-flip_h = true
 
 [node name="Handle2" type="TextureRect" parent="Handle" unique_id=1270334709]
 modulate = Color(1, 1, 1, 0.654)
@@ -57,7 +56,6 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("3_borvm")
 expand_mode = 1
-flip_v = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1516683677]
 stream = ExtResource("4_08ohp")
