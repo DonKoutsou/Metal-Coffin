@@ -22,10 +22,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -131.0
-offset_top = -55.0
-offset_right = 143.0
-offset_bottom = 73.0
+offset_left = -137.0
+offset_top = -101.0
+offset_right = 137.0
+offset_bottom = 101.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5p1jf")
@@ -134,6 +134,7 @@ size_flags_vertical = 8
 theme_override_styles/panel = ExtResource("7_h1y7v")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2" unique_id=831716785]
+custom_minimum_size = Vector2(0, 64.575)
 layout_mode = 2
 
 [node name="BeforeCaptain" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2/HBoxContainer" unique_id=1609678090 groups=["Buttons"]]

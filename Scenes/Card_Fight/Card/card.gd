@@ -27,12 +27,23 @@ var TargetLocs : Array[Vector2]
 
 var InterpolationValue : float
 
+var TrackMouse : bool = false
+
 func _physics_process(delta: float) -> void:
 	InterpolationValue = min(InterpolationValue + delta * 2, 1)
 	UpdateLine()
+	
 	#$SubViewportContainer/SubViewport.visible = false
 	#$SubViewportContainer/SubViewport.render_target_update_mode =  SubViewport.UPDATE_ONCE
+
+func _process(delta: float) -> void:
 	
+	if (TrackMouse):
+		var pos = global_position + (size/2)
+		var offset = get_global_mouse_position() - pos
+		var mat = FrontSide.material as ShaderMaterial
+		mat.set_shader_parameter("y_rot", -offset.x / 10)
+		mat.set_shader_parameter("x_rot", offset.y / 10)
 
 func UpdateLine() -> void:
 	for g in TargetLocs.size():
@@ -231,7 +242,7 @@ func _on_button_mouse_entered() -> void:
 	
 	TweenHover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC).set_parallel(true)
 	TweenHover.tween_property(self,"scale", Vector2(1.1, 1.1), 0.55)
-
+	TrackMouse = true
 
 func _on_button_mouse_exited() -> void:
 	z_index = 0
@@ -240,3 +251,7 @@ func _on_button_mouse_exited() -> void:
 
 	TweenHover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
 	TweenHover.tween_property(self,"scale", Vector2.ONE, 0.55)
+	TrackMouse = false
+	var mat = FrontSide.material as ShaderMaterial
+	mat.set_shader_parameter("y_rot", 0)
+	mat.set_shader_parameter("x_rot", 0)

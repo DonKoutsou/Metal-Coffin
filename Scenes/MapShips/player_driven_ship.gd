@@ -162,6 +162,7 @@ func GetBiggestVisRange() -> float:
 #Autopilot stuff
 
 func _HandleAutoPilot(delta : float) -> void:
+	#
 	if (TargetShip != null):
 		TargetShipPos = IntersectShip(TargetShip)
 		if (TargetShipPos.distance_to(global_position) < 5):

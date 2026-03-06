@@ -184,7 +184,6 @@ func GetClosestElintLevel() -> int:
 func ToggleFuelRangeVisibility(t : bool) -> void:
 	ShowFuelRange = t
 
-
 func SetCurrentPort(Port : MapSpot):
 	CurrentPort = Port
 	Cpt.CurrentPort = Port.GetSpotName()
@@ -623,8 +622,6 @@ func GetdB() -> float:
 
 func GetMaxdB() -> float:
 	return GetShipThrust() / 30
-
-
 	
 func GetDroneDock():
 	return DroneDok

@@ -36,7 +36,7 @@ bus = &"Sounds"
 position = Vector2(640, 360)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=652607718]
-layer = 4
+layer = 3
 follow_viewport_enabled = true
 
 [node name="Cables" type="Control" parent="CanvasLayer" unique_id=726149118]
@@ -92,10 +92,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 107.0
-offset_top = -312.0
-offset_right = -691.0
-offset_bottom = -529.0
+offset_left = -141.0
+offset_top = -315.0
+offset_right = -908.0
+offset_bottom = -499.64935
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(178, 0)
@@ -115,10 +115,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 12.0
-offset_top = 19.0
-offset_right = 12.0
-offset_bottom = 19.0
+offset_left = 16.0
+offset_top = 26.0
+offset_right = 16.0
+offset_bottom = 26.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2

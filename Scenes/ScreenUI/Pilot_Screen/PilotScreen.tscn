@@ -95,17 +95,6 @@ scale = Vector2(1.64062, 1.64062)
 frame_progress = 0.96041
 frequency = 40.0
 
-[node name="MapMarkerControls" parent="." unique_id=329577773 instance=ExtResource("9_yjfdw")]
-layout_mode = 1
-anchors_preset = 4
-anchor_left = 0.0
-anchor_right = 0.0
-offset_left = -183.0
-offset_top = 228.0
-offset_right = -143.0
-offset_bottom = 268.0
-grow_horizontal = 1
-
 [node name="ControledShipSelector" parent="." unique_id=397832360 instance=ExtResource("28_hc833")]
 custom_minimum_size = Vector2(273, 128)
 layout_mode = 1
@@ -114,10 +103,10 @@ anchor_left = 0.0
 anchor_top = 1.0
 anchor_right = 0.0
 anchor_bottom = 1.0
-offset_left = -274.0
-offset_top = -363.0
-offset_right = -1.0
-offset_bottom = -222.0
+offset_left = -273.0
+offset_top = -202.0
+offset_right = 0.0
+offset_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 0
 
@@ -132,9 +121,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = -274.0
+offset_left = -273.0
 offset_top = 0.0
-offset_right = -1.0
+offset_right = 0.0
 offset_bottom = 176.0
 grow_horizontal = 1
 grow_vertical = 1
@@ -144,10 +133,21 @@ layout_mode = 1
 anchors_preset = 4
 anchor_left = 0.0
 anchor_right = 0.0
-offset_left = -249.0
-offset_top = -59.0
-offset_right = -209.0
-offset_bottom = -19.0
+offset_left = -248.0
+offset_top = -60.0
+offset_right = -208.0
+offset_bottom = -20.0
+grow_horizontal = 1
+
+[node name="MapMarkerControls" parent="." unique_id=329577773 instance=ExtResource("9_yjfdw")]
+layout_mode = 1
+anchors_preset = 4
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = -182.0
+offset_top = 84.0
+offset_right = -142.0
+offset_bottom = 124.0
 grow_horizontal = 1
 
 [node name="SpeedSimulation" type="TextureButton" parent="." unique_id=559113668 groups=["Buttons"]]

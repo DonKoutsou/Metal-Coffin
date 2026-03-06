@@ -28,14 +28,14 @@ static func GetInstance() -> Ingame_UIManager:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Instance = self
-	EventHandler.connect("PausePressed", Pause)
-	EventHandler.connect("InventoryPressed", GetInventory().ToggleInventory)
-	GetInventory().connect("InventoryToggled", EventHandler.OnScreenUIToggled)
-	EventHandler.connect("DrawLinePressed", _MapMarkerEditor._on_drone_button_pressed)
-	EventHandler.connect("DrawTextPressed", _MapMarkerEditor._OnTextButtonPressed)
-	EventHandler.connect("MarkerEditorYRangeChanged", _MapMarkerEditor._on_y_gas_range_changed)
-	EventHandler.connect("MarkerEditorXRangeChanged", _MapMarkerEditor._on_x_gas_range_changed)
-	EventHandler.connect("MarkerEditorToggled", _MapMarkerEditor.ToggleVisibilidy)
+	EventHandler.PausePressed.connect(Pause)
+	EventHandler.InventoryPressed.connect(GetInventory().ToggleInventory)
+	GetInventory().InventoryToggled.connect(EventHandler.OnScreenUIToggled)
+	EventHandler.DrawLinePressed.connect(_MapMarkerEditor._on_drone_button_pressed)
+	EventHandler.DrawTextPressed.connect(_MapMarkerEditor._OnTextButtonPressed)
+	EventHandler.MarkerEditorYRangeChanged.connect(_MapMarkerEditor._on_y_gas_range_changed)
+	EventHandler.MarkerEditorXRangeChanged.connect(_MapMarkerEditor._on_x_gas_range_changed)
+	EventHandler.MarkerEditorToggled.connect(_MapMarkerEditor.ToggleVisibilidy)
 	EventHandler.TopoPressed.connect(TopologyTriggered)
 	EventHandler.ZoomToggled.connect(ToggleZoomUI)
 	EventHandler.AltToggled.connect(ToggleAltitudeUI)

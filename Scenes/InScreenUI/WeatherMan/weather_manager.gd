@@ -51,20 +51,13 @@ func _ready() -> void:
 	
 	#Prepare noise
 	N = ResourceLoader.load(NoiseFile)
-
-	#CurrentOffset = Vector2(randf_range(-10000, 10000), randf_range(-10000, 10000))
-	N.noise.offset = Vector3(randf_range(-10000, 10000), randf_range(-10000, 10000), 0)
 	
-	#Mat.set_shader_parameter("offset", CurrentOffset)
+	N.noise.offset = Vector3(randf_range(-10000, 10000), randf_range(-10000, 10000), 0)
+
 	DataTexture = N.get_image()
 	N.changed.connect(NoiseChanged)
 	
-	#tx = N.get_image()
-	
-	
-	
 	await N.changed
-	#Update(0)
 
 func UpdateCameraOffset(CamOffset : Vector2) -> void:
 	CurrentCamOffset = CamOffset

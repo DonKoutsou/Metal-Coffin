@@ -72,6 +72,9 @@ enum UI_ELEMENT{
 	HATCH_BUTTON,
 	TOPOLOGY_TOGGLE,
 	AEROSONAR,
+	REGROUP_BUTTON,
+	SHIP_DOCK_BUTTON,
+	
 }
 
 func GetUIElement(Element : UI_ELEMENT) -> Node:
@@ -110,6 +113,10 @@ func GetUIElement(Element : UI_ELEMENT) -> Node:
 			return _ScreenUI.PilotScreen.pilotScreenSet.TopoButton
 		UI_ELEMENT.AEROSONAR:
 			return _ScreenUI.PilotScreen.SonarUI
+		UI_ELEMENT.REGROUP_BUTTON:
+			return _ScreenUI.PilotScreen.regroupButton
+		UI_ELEMENT.SHIP_DOCK_BUTTON:
+			return _ScreenUI.PilotScreen.shipDockButton
 	return null
 
 func UIElementExists(Element : UI_ELEMENT) -> bool:
@@ -147,6 +154,10 @@ func UIElementExists(Element : UI_ELEMENT) -> bool:
 		UI_ELEMENT.TOPOLOGY_TOGGLE:
 			return _ScreenUI.PilotScreen != null
 		UI_ELEMENT.AEROSONAR:
+			return _ScreenUI.PilotScreen != null
+		UI_ELEMENT.REGROUP_BUTTON:
+			return _ScreenUI.PilotScreen != null
+		UI_ELEMENT.SHIP_DOCK_BUTTON:
 			return _ScreenUI.PilotScreen != null
 	return false
 
