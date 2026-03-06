@@ -342,13 +342,15 @@ func IntersectPusruing() -> Vector2:
 	var pursuing_ship_velocity = PursuingShips[0].GetShipSpeedVec()
 	var pursuing_ship_speed = PursuingShips[0].GetShipSpeed() / 360
 	
-	if (pursuing_ship_speed == 0):
-		return pursuing_ship_position
-	
 	var Distance = global_position.distance_to(pursuing_ship_position)
 	
 	if (Distance < 10):
 		OnReachedPursuing()
+	
+	if (pursuing_ship_speed == 0):
+		return pursuing_ship_position
+	
+	
 	
 	var DirToPrey = global_position.direction_to(pursuing_ship_position)
 	var speed = GetShipMaxSpeed() / 360
@@ -409,8 +411,10 @@ func OnReachedPursuing() -> void:
 				hostships.append(g)
 			else:
 				plships.append(g)
-				
-	OnPlayerShipMet.emit(plships, hostships, [])
+	
+	var Mis : Array[BattleShipStats] = []
+	
+	OnPlayerShipMet.emit(plships, hostships, Mis)
 
 func GetCurrentDestination() -> Vector2:
 	var destination : Vector2

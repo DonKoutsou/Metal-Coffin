@@ -43,14 +43,17 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.13319641, 0.13319641, 0.13319638, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("3_85bjj")
 text = "FC"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ForecastButton" type="Button" parent="HBoxContainer/VBoxContainer" unique_id=875609619 groups=["Buttons"]]
-custom_minimum_size = Vector2(20, 54)
+custom_minimum_size = Vector2(24, 54)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -72,14 +75,17 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.13319641, 0.13319641, 0.13319638, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("3_85bjj")
 text = "Grid"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="GridButton" type="Button" parent="HBoxContainer/VBoxContainer2" unique_id=2036452793 groups=["Buttons"]]
-custom_minimum_size = Vector2(20, 54)
+custom_minimum_size = Vector2(24, 54)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -102,14 +108,17 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.13319641, 0.13319641, 0.13319638, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("3_85bjj")
 text = "Topo"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TopoButton" type="Button" parent="HBoxContainer/VBoxContainer8" unique_id=729791604 groups=["Buttons"]]
-custom_minimum_size = Vector2(20, 54)
+custom_minimum_size = Vector2(24, 54)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -132,14 +141,17 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.13319641, 0.13319641, 0.13319638, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("3_85bjj")
 text = "UI"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ZoomLevelButton" type="Button" parent="HBoxContainer/VBoxContainer4" unique_id=910295466 groups=["Buttons"]]
-custom_minimum_size = Vector2(20, 54)
+custom_minimum_size = Vector2(24, 54)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
@@ -163,14 +175,17 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.13319641, 0.13319641, 0.13319638, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("3_85bjj")
 text = "Steer"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="SteerButton" type="Button" parent="HBoxContainer/VBoxContainer3" unique_id=471496945 groups=["Buttons"]]
-custom_minimum_size = Vector2(20, 54)
+custom_minimum_size = Vector2(24, 54)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -193,14 +208,17 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.13319641, 0.13319641, 0.13319638, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("3_85bjj")
 text = "WC"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="WindCorrection" type="Button" parent="HBoxContainer/VBoxContainer9" unique_id=1891356261 groups=["Buttons"]]
-custom_minimum_size = Vector2(20, 54)
+custom_minimum_size = Vector2(24, 54)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -224,14 +242,17 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.13319641, 0.13319641, 0.13319638, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("3_85bjj")
 text = "Alt"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Altitude" type="Button" parent="HBoxContainer/VBoxContainer7" unique_id=1236519682 groups=["Buttons"]]
-custom_minimum_size = Vector2(26, 64)
+custom_minimum_size = Vector2(24, 64)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
