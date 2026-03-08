@@ -171,7 +171,7 @@ func GetSpawnsForLocation(YPos : float, Patrol : bool, Convoy : bool) -> Array[C
 	return Fleet
 
 func GetPointsForPosition(YPos : float) -> int:
-	return roundi(max(50, YPos / 100.0))
+	return roundi(max(100, YPos / 50.0))
 
 func GetMerchPointsForPosition(YPos : float) -> int:
 	return roundi(max(20, YPos / 500.0))
@@ -223,6 +223,12 @@ func generate_fleet(points: int, Patrol : bool, Convoy : bool, stage : Happening
 			if (FleetRange < MinimumRange):
 				continue
 			
+			#if we will only have enough for one ship, dont take it.
+			if (!Convoy and fleet.size() == 0 and points - ship.Cost < LowestPrice):
+				continue
+			
+			if points < ship.Cost:
+				continue
 			# Calculate how many we can afford and consider its strategic value
 			var max_ships = min(points / ship.Cost, ship.MaxAmmInFleet - fleet.count(ship))
 			if max_ships > 0:
@@ -230,12 +236,9 @@ func generate_fleet(points: int, Patrol : bool, Convoy : bool, stage : Happening
 				break
 
 		if selected_ship:
-			if points >= selected_ship.Cost:
-				fleet.append(selected_ship)
-				fleetFuelStats.append(selected_ship.Cpt.GetFuelStats())
-				points -= selected_ship.Cost
-			#else:
-				#break
+			fleet.append(selected_ship)
+			fleetFuelStats.append(selected_ship.Cpt.GetFuelStats())
+			points -= selected_ship.Cost
 
 	return fleet
 

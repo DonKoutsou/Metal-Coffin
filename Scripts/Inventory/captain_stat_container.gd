@@ -18,6 +18,9 @@ func ShowStats() -> void:
 	ShipStats.visible = true
 	ShipDeck.visible = false
 
+func ShowOnlyStats(stats : Array[STAT_CONST.STATS]) -> void:
+	ShipStats.ShowStats(stats)
+
 func ShowDeck() -> void:
 	ShipStats.visible = false
 	ShipDeck.visible = true

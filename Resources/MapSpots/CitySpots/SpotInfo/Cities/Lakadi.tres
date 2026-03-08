@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MapSpotCompleteInfo" format=3 uid="uid://ddadwp5b87jh5"]
 
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="1_72r43"]
-[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="2_04fsk"]
+[ext_resource type="Resource" uid="uid://dpab8g30sclyx" path="res://Resources/Items/Recruit.tres" id="2_fnhcf"]
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scenes/Map/MapSpot/MapSpotCompleteInfo.gd" id="3_cpbew"]
 
 [resource]
@@ -9,4 +9,4 @@ script = ExtResource("3_cpbew")
 SpotName = "Lakadi"
 Region = 1
 EnemyCity = true
-PossibleDrops = Array[ExtResource("1_72r43")]([ExtResource("2_04fsk")])
+PossibleDrops = Array[ExtResource("1_72r43")]([ExtResource("2_fnhcf")])

@@ -12,6 +12,18 @@ func SetCaptainsToCompare(CapBefore : Captain, CapAfter : Captain) -> void:
 	ContainerAfter.SetCaptain(CapAfter)
 	ContainerBefore.ShowStats()
 	ContainerAfter.ShowStats()
+	
+	call_deferred("ShowDif", CapBefore, CapAfter)
+
+func ShowDif(CapBefore : Captain, CapAfter : Captain) -> void:
+	var difstats : Array[STAT_CONST.STATS] = []
+	for g in CapBefore.CaptainStats:
+		var beforeStat = g.GetFinalValue()
+		var afterStat = CapAfter.GetStatFinalValue(g.StatName)
+		if (beforeStat != afterStat):
+			difstats.append(g.StatName)
+	ContainerBefore.ShowOnlyStats(difstats)
+	ContainerAfter.ShowOnlyStats(difstats)
 
 
 func _on_show_stats_pressed() -> void:

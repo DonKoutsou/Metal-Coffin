@@ -84,6 +84,7 @@ func UpdateFuelAmm(Amm : float) -> void:
 	FuelLabel.text = "Fuel {0}".format([roundi(Amm)])
 	FuelLabel.visible = Amm > 0
 	FuelLabel.pivot_offset = Vector2(FuelLabel.size.x /2, 0)
+	FuelLabel.position.x = FuelLabel.size.x /2
 
 func OnAlarmRaised(Notify : bool) -> void:
 	SpotNameLabel.self_modulate = Color(1, 0.1, 0)

@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="1_ilmb3"]
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scenes/Map/MapSpot/MapSpotCompleteInfo.gd" id="1_w1eu0"]
-[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="2_jr6d1"]
+[ext_resource type="Resource" uid="uid://dpab8g30sclyx" path="res://Resources/Items/Recruit.tres" id="2_vmvcf"]
 
 [resource]
 script = ExtResource("1_w1eu0")
 SpotName = "Tauza"
 Region = 2
 EnemyCity = true
-PossibleDrops = Array[ExtResource("1_ilmb3")]([ExtResource("2_jr6d1")])
+PossibleDrops = Array[ExtResource("1_ilmb3")]([ExtResource("2_vmvcf")])

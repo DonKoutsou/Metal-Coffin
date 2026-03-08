@@ -11,7 +11,6 @@ class_name InventoryManager
 @export var CharacterPlace : Control
 @export var DescriptorPlace : Control
 @export var CaptainStats : CaptainStatContainer
-@export var InvScrol : ScrollContainer
 @export_group("Event Handlers")
 @export var MissileDockEventH : MissileDockEventHandler
 @export var DroneDockEventH : DroneDockEventHandler

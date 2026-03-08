@@ -35,7 +35,6 @@ corner_detail = 1
 shadow_size = 4
 
 [node name="Inventory" type="Control" unique_id=319130794 node_paths=PackedStringArray("CharacterPlace", "DescriptorPlace", "CaptainStats")]
-texture_filter = 1
 clip_contents = true
 layout_mode = 3
 anchors_preset = 15

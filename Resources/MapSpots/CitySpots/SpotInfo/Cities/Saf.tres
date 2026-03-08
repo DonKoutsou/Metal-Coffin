@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="MapSpotCompleteInfo" format=3 uid="uid://bgjt5dxvletq4"]
 
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scenes/Map/MapSpot/MapSpotCompleteInfo.gd" id="2_5vm73"]
+[ext_resource type="Resource" uid="uid://dpab8g30sclyx" path="res://Resources/Items/Recruit.tres" id="2_ea755"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="2_ykq1u"]
-[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="3_ykq1u"]
 
 [resource]
 script = ExtResource("2_5vm73")
 SpotName = "Saf"
 Region = 1
 EnemyCity = true
-PossibleDrops = Array[ExtResource("2_ykq1u")]([ExtResource("3_ykq1u")])
+PossibleDrops = Array[ExtResource("2_ykq1u")]([ExtResource("2_ea755")])

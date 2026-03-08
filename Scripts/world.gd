@@ -167,7 +167,7 @@ func _ready() -> void:
 	
 var WeatherManagerUpdate : float
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if (World.WORLDST != World.WORLDSTATE.NORMAL):
 		return
 	

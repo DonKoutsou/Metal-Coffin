@@ -121,7 +121,7 @@ func _HANDLE_DRAG(event: InputEventScreenDrag):
 		var touch_point_positions = touch_points.values()
 		var current_dist = touch_point_positions[0].distance_squared_to(touch_point_positions[1])
 		var zoom_factor = (start_dist / current_dist)
-		UpdateZoom(clamp(start_zoom / zoom_factor, Vector2(0.045,0.045), Vector2(2.1,2.1)))
+		UpdateZoom(clamp(start_zoom / zoom_factor, Vector2(MinZoom,MinZoom), Vector2(MaxZoom,MaxZoom)))
 		if (!ClickSound.playing):
 			ClickSound.play()
 	else:

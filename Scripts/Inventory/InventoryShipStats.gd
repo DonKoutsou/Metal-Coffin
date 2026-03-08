@@ -35,6 +35,14 @@ func _ready() -> void:
 	NoiseStat.SetDataCustom(STAT_CONST.GetStatMaxValue(STAT_CONST.STATS.SOUND_SIGNATURE), STAT_CONST.GetStatMetric(STAT_CONST.STATS.SOUND_SIGNATURE), "SOUND SIGNATURE", STAT_CONST.STATS.SOUND_SIGNATURE)
 	$GridContainer.add_child(NoiseStat)
 
+func ShowStats(stats : Array[STAT_CONST.STATS]) -> void:
+	for g in Stats:
+		g.visible = g.STName in stats
+	#SpeedStat.visible = SpeedStat.STName in stats
+	#Rangestat.visible = Rangestat in stats
+	#ValueStat.visible = Rangestat.STName in stats
+	#NoiseStat.visible = Rangestat.STName in stats
+
 func UpdateValues() -> void:
 	var FuelCap
 	var FuelEf
