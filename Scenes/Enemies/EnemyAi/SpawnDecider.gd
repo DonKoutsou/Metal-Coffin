@@ -203,15 +203,17 @@ func generate_fleet(points: int, Patrol : bool, Convoy : bool, stage : Happening
 	
 	# While there's space in the fleet, try to maximize the points usage
 	# with a dynamic strategy.
-	while fleet.size() < 7 and points >= LowestPrice:
+	while fleet.size() < 7 and points >= LowestPrice and available_ships.size() > 0:
 		available_ships.shuffle()
 		
 		var selected_ship: CaptainSpawnInfo = null
 		#var best_value = 0
 
 		# Consider each ship for inclusion
-		for ship : CaptainSpawnInfo in available_ships:
+		for shipIndex in range(available_ships.size() -1 , -1, -1):
+			var ship : CaptainSpawnInfo = available_ships[shipIndex]
 			if (ship.DontGenerateBefore > stage):
+				available_ships.erase(ship)
 				continue
 			#if (fleet.size() == 0 and !ship.SpawnAlone):
 				#continue
@@ -221,13 +223,16 @@ func generate_fleet(points: int, Patrol : bool, Convoy : bool, stage : Happening
 			var FleetRange = GetFleetRange(fleetFuelStats, ShipRange)
 			
 			if (FleetRange < MinimumRange):
+				available_ships.erase(ship)
 				continue
 			
 			#if we will only have enough for one ship, dont take it.
 			if (!Convoy and fleet.size() == 0 and points - ship.Cost < LowestPrice):
+				available_ships.erase(ship)
 				continue
 			
 			if points < ship.Cost:
+				available_ships.erase(ship)
 				continue
 			# Calculate how many we can afford and consider its strategic value
 			var max_ships = min(points / ship.Cost, ship.MaxAmmInFleet - fleet.count(ship))
@@ -239,6 +244,9 @@ func generate_fleet(points: int, Patrol : bool, Convoy : bool, stage : Happening
 			fleet.append(selected_ship)
 			fleetFuelStats.append(selected_ship.Cpt.GetFuelStats())
 			points -= selected_ship.Cost
+			if (selected_ship.MaxAmmInFleet == fleet.count(selected_ship)):
+				available_ships.erase(selected_ship)
+			
 
 	return fleet
 

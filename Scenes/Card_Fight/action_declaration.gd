@@ -66,3 +66,4 @@ func ActionDeclarationStage4(CustomTime : float) -> void:
 func FinishActionDeclaration() -> void:
 	visible = false
 	ActionDeclarationFinished.emit()
+	queue_free()

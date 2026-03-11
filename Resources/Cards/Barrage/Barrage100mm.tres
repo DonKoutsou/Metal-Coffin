@@ -25,4 +25,6 @@ CardName = "Barragge"
 Energy = 1
 AllowDuplicates = true
 OnPerformModule = SubResource("Resource_tpj2d")
+PutOnTop = true
+Burned = true
 WeapT = 1

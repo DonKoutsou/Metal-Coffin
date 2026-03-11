@@ -262,8 +262,9 @@ Anim = NodePath("AnimationPlayer")
 LightPivot1 = NodePath("LightPivot1")
 ShakeSound = NodePath("Shake")
 BoomSound = NodePath("Boom")
-breath_amplitude = 2.0
-breath_duration = 5.0
+breath_amplitude = 0.0
+breath_duration = 0.0
+curve_power = 0.0
 
 [node name="LightPivot1" type="Node2D" parent="." unique_id=1542435243 node_paths=PackedStringArray("SoundPlayer", "LightPivot")]
 position = Vector2(6.99998, -1550)

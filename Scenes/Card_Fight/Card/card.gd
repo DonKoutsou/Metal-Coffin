@@ -2,7 +2,7 @@ extends Control
 
 class_name Card
 
-@export var CardName : Label
+@export var CardName : RichTextLabel
 @export var CardDesc : RichTextLabel
 @export var CardCost : Label
 @export var CardTex : TextureRect
@@ -29,6 +29,8 @@ var InterpolationValue : float
 
 var TrackMouse : bool = false
 
+var mat : ShaderMaterial
+
 func _physics_process(delta: float) -> void:
 	InterpolationValue = min(InterpolationValue + delta * 2, 1)
 	UpdateLine()
@@ -41,9 +43,12 @@ func _process(delta: float) -> void:
 	if (TrackMouse):
 		var pos = global_position + (size/2)
 		var offset = get_global_mouse_position() - pos
-		var mat = FrontSide.material as ShaderMaterial
-		mat.set_shader_parameter("y_rot", -offset.x / 10)
-		mat.set_shader_parameter("x_rot", offset.y / 10)
+		var currenty = mat.get_shader_parameter("y_rot")
+		var currentx = mat.get_shader_parameter("x_rot")
+		var Newy = lerpf(currenty, -offset.x / 8, delta * 6.0)
+		var Newx = lerpf(currentx, offset.y / 8, delta * 6.0)
+		mat.set_shader_parameter("y_rot", Newy)
+		mat.set_shader_parameter("x_rot", Newx)
 
 func UpdateLine() -> void:
 	for g in TargetLocs.size():
@@ -55,7 +60,7 @@ func KillCard(CustomTime : float = 1.0, Free : bool = true) -> void:
 	var KillTw = create_tween()
 	KillTw.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	#var mat = material as ShaderMaterial
-	KillTw.tween_method(UpdateBurnShader, 1.0, 0.0,CustomTime)
+	KillTw.tween_method(UpdateBurnShader, 1.0, 0.0 ,CustomTime)
 	#KillTw.tween_property(mat, "dissolve_value", 0, 0.2)
 	await KillTw.finished
 	if (Free):
@@ -63,12 +68,10 @@ func KillCard(CustomTime : float = 1.0, Free : bool = true) -> void:
 
 
 func UpdateBurnShader(Value : float) -> void:
-	var mat = FrontSide.material as ShaderMaterial
-	mat.set_shader_parameter("dissolve_value", Value)
+	FrontSide.material.set_shader_parameter("dissolve_value", Value)
 
 
 func ForcePersp(t : bool) -> void:
-	var mat = FrontSide.material as ShaderMaterial
 	var Value : float
 	if (t):
 		Value = 25
@@ -78,7 +81,6 @@ func ForcePersp(t : bool) -> void:
 
 
 func TogglePerspective(t : bool, tOverride : float = 0.75) -> void:
-	var mat = FrontSide.material as ShaderMaterial
 	var Value : float
 	if (t):
 		Value = 25
@@ -92,11 +94,12 @@ func TogglePerspective(t : bool, tOverride : float = 0.75) -> void:
 
 
 func UpdatePersp(v : float) -> void:
-	var mat = FrontSide.material as ShaderMaterial
 	mat.set_shader_parameter("x_rot", v)
 
 
 func _ready() -> void:
+	mat = FrontSide.material as ShaderMaterial
+	
 	var SoundMan = UISoundMan.GetInstance()
 	if (is_instance_valid(SoundMan)):
 		SoundMan.AddSelf(But)
@@ -137,10 +140,15 @@ func SetCardStats(Stats : CardStats, Amm : int = 0) -> void:
 
 
 func UpdateBattleStats(User : BattleShipStats) -> void:
-	var DescText =  "[center] {0}".format([CStats.GetBattleDescription(User)])
-	CardDesc.text = DescText
-	ShownCost = GetBattleCost(User, CStats)
-	CardCost.text = "{0}".format([ShownCost])
+	if (CStats.Burned):
+		CardDesc.text = ""
+		CardCost.text = "0"
+	else:
+		var DescText =  "[center] {0}".format([CStats.GetBattleDescription(User)])
+		CardDesc.text = DescText
+		ShownCost = GetBattleCost(User, CStats)
+		CardCost.text = "{0}".format([ShownCost])
+	
 	$SubViewportContainer/SubViewport.set_deferred("render_target_update_mode",  SubViewport.UPDATE_ONCE)
 
 func Flip() -> void:
@@ -151,21 +159,24 @@ func Flip() -> void:
 
 func SetCardBattleStats(User : BattleShipStats, Stats : CardStats, Amm : int = 0) -> void:
 	CStats = Stats
-
 	Cost = Stats.Energy
 	ShownCost = GetBattleCost(User, Stats)
-	var DescText =  "[center] {0}".format([Stats.GetBattleDescription(User)])
-
-	CardName.text = Stats.GetCardName()
-	CardTex.texture = Stats.Icon
+	if (Stats.Burned):
+		CardName.text = "Burned"
+		CardDesc.text = ""
+		CardCost.text = "0"
+		UpdateBurnShader(0.75)
+		CardTex.texture = null
+	else:
+		var DescText =  "[center] {0}".format([Stats.GetBattleDescription(User)])
+		CardName.text = Stats.GetCardName()
+		CardDesc.text = DescText
+		CardCost.text = "{0}".format([ShownCost])
+		CardTex.texture = Stats.Icon
 	
 	$Amm.visible = Amm > 1
 	AmmountLabel.text = "{0}x".format([Amm])
-	
-	CardDesc.text = DescText
-	
-	CardCost.text = "{0}".format([ShownCost])
-	
+
 	if (Stats.Type == CardStats.CardType.OFFENSIVE):
 		CardTypeEmblem.modulate = Color("ff3c22")
 	else : if (Stats.Type == CardStats.CardType.DEFFENSIVE):
@@ -173,8 +184,9 @@ func SetCardBattleStats(User : BattleShipStats, Stats : CardStats, Amm : int = 0
 	else:
 		CardTypeEmblem.modulate = Color("8db354")
 
-
 func GetBattleCost(User : BattleShipStats, Stats : CardStats) -> int:
+	if (Stats.Burned):
+		return 0
 	var CCost : int = 0
 	if (Stats.OnPerformModule is EnergyOffensiveCardModule):
 		if (Stats.OnPerformModule.StoredEnergy > 0):
@@ -198,7 +210,7 @@ func SetRealistic() -> void:
 	$SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer/CardCost/TextureRect.visible = false
 	$SubViewportContainer/SubViewport.set_deferred("render_target_update_mode",  SubViewport.UPDATE_ONCE)
 	
-	CardName.add_theme_font_override("font", RealisticFont)
+	CardName.add_theme_font_override("normal_font", RealisticFont)
 	CardCost.add_theme_font_override("font", RealisticFont)
 	CardDesc.add_theme_font_override("normal_font", RealisticFont)
 	CardCost.get_child(0).visible = false
@@ -235,6 +247,10 @@ var RotTweenHover : Tween
 
 
 func _on_button_mouse_entered() -> void:
+	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.SWIFT_CARDS)):
+		ActionTracker.OnActionCompleted(ActionTracker.Action.SWIFT_CARDS)
+		ActionTracker.QueueTutorial("Swift Cards", "Some cards are marked witn [color=#ffc315]SW[/color] in their name. Those cards will be placed at the top of the pile at the start of every card fight. Usefull for starting a fight prepared.", [])
+	
 	z_index = 1
 	
 	if (TweenHover and TweenHover.is_running()):
@@ -242,7 +258,7 @@ func _on_button_mouse_entered() -> void:
 	
 	TweenHover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC).set_parallel(true)
 	TweenHover.tween_property(self,"scale", Vector2(1.1, 1.1), 0.55)
-	TrackMouse = true
+	#TrackMouse = true
 
 func _on_button_mouse_exited() -> void:
 	z_index = 0
@@ -251,7 +267,37 @@ func _on_button_mouse_exited() -> void:
 
 	TweenHover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
 	TweenHover.tween_property(self,"scale", Vector2.ONE, 0.55)
-	TrackMouse = false
-	var mat = FrontSide.material as ShaderMaterial
-	mat.set_shader_parameter("y_rot", 0)
-	mat.set_shader_parameter("x_rot", 0)
+	#TrackMouse = false
+	if (dirTw != null):
+		dirTw.kill()
+	dirTw = create_tween()
+	dirTw.set_ease(Tween.EASE_OUT)
+	dirTw.set_trans(Tween.TRANS_BACK)
+	var currenty = mat.get_shader_parameter("y_rot")
+	var currentx = mat.get_shader_parameter("x_rot")
+	dirTw.tween_method(SetCardDiretion, Vector2(currentx, currenty), Vector2(0, 0), 0.25)
+
+func SetCardDiretion(dir : Vector2) -> void:
+	mat.set_shader_parameter("y_rot", dir.y)
+	mat.set_shader_parameter("x_rot", dir.x)
+	
+var dirTw : Tween
+
+func _on_button_gui_input(_event: InputEvent) -> void:
+	if (dirTw != null):
+		dirTw.kill()
+	dirTw = create_tween()
+	dirTw.set_ease(Tween.EASE_OUT)
+	dirTw.set_trans(Tween.TRANS_BACK)
+	
+	var pos = global_position + (size/2)
+	var offset = get_global_mouse_position() - pos
+	var currenty = mat.get_shader_parameter("y_rot")
+	var currentx = mat.get_shader_parameter("x_rot")
+	var Newy = -offset.x / 8
+	var Newx = offset.y / 8
+	#mat.set_shader_parameter("y_rot", Newy)
+	#mat.set_shader_parameter("x_rot", Newx)
+	
+	dirTw.tween_method(SetCardDiretion, Vector2(currentx, currenty), Vector2(Newx, Newy), 0.25)
+	

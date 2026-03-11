@@ -8,12 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://mxfnm7hywo4f" path="res://Scenes/Old/damage_floater.tscn" id="8_yl0qx"]
 [ext_resource type="StyleBox" uid="uid://cbl88p1pms3gq" path="res://Theme/YellowBorderPanel.tres" id="9_umcqi"]
 [ext_resource type="AudioStream" uid="uid://bj4o8xjushlvn" path="res://Assets/Sounds/CardSound.mp3" id="12_xtulq"]
-[ext_resource type="AudioStream" uid="uid://b6f41xjveqo8b" path="res://Assets/Sounds/UI_in.mp3" id="13_boko4"]
-[ext_resource type="AudioStream" uid="uid://7glxd52yi0hv" path="res://Assets/Sounds/UI_out.mp3" id="14_vn53x"]
 [ext_resource type="AudioStream" uid="uid://dgx7q2i37ubea" path="res://Assets/Sounds/BurnSound.mp3" id="15_8bqim"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="16_734e5"]
 [ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scenes/Card_Fight/External_UI/CardHandContainer.gd" id="24_d8sco"]
-[ext_resource type="Script" uid="uid://1ywm6fsk6k6u" path="res://Scenes/Card_Fight/action_declaration.gd" id="24_pw20f"]
 [ext_resource type="Script" uid="uid://c1adplamkw577" path="res://Scenes/Card_Fight/CardFightTargetSelection.gd" id="26_712dp"]
 [ext_resource type="Script" uid="uid://bfjh8yj7umbiw" path="res://Scenes/Card_Fight/CardFightDiscardSelection.gd" id="27_rbthh"]
 [ext_resource type="Texture2D" uid="uid://cxurnij711kgj" path="res://Assets/MapElements/plane_γροθνδτεχτ_BaseColor.png" id="32_1im06"]
@@ -24,7 +21,7 @@ content_margin_top = 10.0
 content_margin_right = 10.0
 content_margin_bottom = 10.0
 
-[node name="CardFight" type="SubViewportContainer" unique_id=1710302720 node_paths=PackedStringArray("SelectedCardPlecement", "AnimationPlecement", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect", "CardSelect", "ActionDeclaration", "Cloud", "PlayerFleetSizeLabel", "EnemyFleetSizeLabel", "CurrentPlayerLabel") groups=["CardFight"]]
+[node name="CardFight" type="SubViewportContainer" unique_id=1710302720 node_paths=PackedStringArray("SelectedCardPlecement", "AnimationPlecement", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect", "CardSelect", "ActionDeclarationPlacement", "Cloud", "PlayerFleetSizeLabel", "EnemyFleetSizeLabel", "CurrentPlayerLabel") groups=["CardFight"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -46,7 +43,8 @@ EnemyShipVisualPlecement = NodePath("SubViewport/Control2/VBoxContainer4/VBoxCon
 PlayerShipVisualPlecement = NodePath("SubViewport/Control2/VBoxContainer4/VBoxContainer2/PlayerShipPlecement")
 TargetSelect = NodePath("SubViewport/Control2/TargetSelect")
 CardSelect = NodePath("SubViewport/Control2/CardSelect")
-ActionDeclaration = NodePath("SubViewport/Control2/Action Declaration")
+AcrionDeclarationScene = "uid://bfrogxgpdtepd"
+ActionDeclarationPlacement = NodePath("SubViewport/Control2")
 Cloud = NodePath("SubViewport/Control2/Clouds")
 PlayerFleetSizeLabel = NodePath("SubViewport/Control2/Label2")
 EnemyFleetSizeLabel = NodePath("SubViewport/Control2/Label3")
@@ -113,35 +111,6 @@ offset_right = 640.0
 offset_bottom = 640.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Action Declaration" type="PanelContainer" parent="SubViewport/Control2" unique_id=1853583110]
-z_index = 1
-custom_minimum_size = Vector2(0, 80)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -8.5
-offset_top = -40.0
-offset_right = 8.5
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = ExtResource("9_umcqi")
-script = ExtResource("24_pw20f")
-UIInSound = ExtResource("13_boko4")
-UIOutSound = ExtResource("14_vn53x")
-
-[node name="Label" type="Label" parent="SubViewport/Control2/Action Declaration" unique_id=28578033]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-horizontal_alignment = 1
-vertical_alignment = 1
-uppercase = true
 
 [node name="Label2" type="Label" parent="SubViewport/Control2" unique_id=612841877]
 visible = false

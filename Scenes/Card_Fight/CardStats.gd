@@ -14,16 +14,23 @@ class_name CardStats
 @export var OnUseModules : Array[CardModule]
 @export var OnPerformModule : CardModule
 @export var Type : CardType
+@export var PutOnTop : bool = false
+@export var Burned : bool = false
 @export var WeapT : WeaponType
 @export var UseConditions : Array[CardUseCondition]
 @export var AllowTier : bool = true
+
 var Tier : int = 0
 
 func GetCardName() ->String:
+	var n : String = ""
 	if (Tier > 0 and AllowTier):
-		return CardName + " +{0}".format([Tier])
-	
-	return CardName
+		n = CardName + " +{0}".format([Tier])
+	else:
+		n = CardName
+	if (PutOnTop):
+		n = "[color=#ffc315]SW[/color] " + n
+	return n
 
 func ShouldConsume() -> bool:
 	#if is_instance_valid(SelectedOption):
@@ -44,7 +51,7 @@ func GetDescription() -> String:
 		Desc += "[color=#ffc315]On Use[/color] : "
 		for g in OnUseModules:
 			Desc += g.GetDesc(RealTier) + "\n"
-
+	
 	return Desc
 
 func GetBattleDescription(User : BattleShipStats) -> String:

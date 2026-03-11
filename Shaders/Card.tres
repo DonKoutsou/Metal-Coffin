@@ -5,6 +5,8 @@
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_7mr5f"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3yyhe"]
+width = 256
+height = 256
 noise = SubResource("FastNoiseLite_7mr5f")
 
 [resource]
@@ -13,6 +15,8 @@ shader = ExtResource("1_ndm65")
 shader_parameter/y_rot = 0.0
 shader_parameter/x_rot = 0.0
 shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_3yyhe")
-shader_parameter/dissolve_value = 1.0
-shader_parameter/burn_size = 0.1
-shader_parameter/burn_color = Color(0.367687, 0.470357, 0.267188, 1)
+shader_parameter/dissolve_value = 0.5390000256025
+shader_parameter/burn_size = 0.1499999966472
+shader_parameter/ash_color = Color(0, 0, 0, 1)
+shader_parameter/burn_color = Color(0.6761459, 0.11062584, 1.92523e-07, 1)
+shader_parameter/proburn_color = Color(0.7442524, 0.2918268, 0.08096173, 1)

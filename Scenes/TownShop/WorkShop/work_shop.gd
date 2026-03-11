@@ -253,7 +253,6 @@ func ItemSelected(Box : Inventory_Box) -> void:
 			ShipStats.get_parent().visible = true
 			return
 	
-			
 	WorkshopDescriptor= ItemDescriptorScene.instantiate() as ItemDescriptor
 	WorkshopDescriptor.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	ShipStats.get_parent().visible = false

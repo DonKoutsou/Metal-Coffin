@@ -215,13 +215,13 @@ func OnCardDrawn(C : Card) -> void:
 	PlayCardInsertSound(CardSoundType.EXIT)
 	await Helper.GetInstance().wait(0.1)
 	C.rotation = 0
-	C.ForcePersp(true)
-	C.TogglePerspective(false, 1)
 	var Cont = Control.new()
 	C.SetRealistic()
 	#C.get_parent().remove_child(C)
 	DrawCardInsert.add_child(Cont)
 	Cont.add_child(C)
+	C.ForcePersp(true)
+	C.TogglePerspective(false, 1)
 	Cont.size = DrawCardInsert.size
 	C.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
 	C.position = Vector2(15, -5)

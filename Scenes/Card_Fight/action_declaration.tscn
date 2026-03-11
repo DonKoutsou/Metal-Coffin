@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://bfrogxgpdtepd"]
+
+[ext_resource type="StyleBox" uid="uid://cbl88p1pms3gq" path="res://Theme/YellowBorderPanel.tres" id="1_1bi2b"]
+[ext_resource type="Script" uid="uid://1ywm6fsk6k6u" path="res://Scenes/Card_Fight/action_declaration.gd" id="2_wov6i"]
+[ext_resource type="AudioStream" uid="uid://b6f41xjveqo8b" path="res://Assets/Sounds/UI_in.mp3" id="3_dlnjb"]
+[ext_resource type="AudioStream" uid="uid://7glxd52yi0hv" path="res://Assets/Sounds/UI_out.mp3" id="4_l1nw6"]
+
+[node name="Action Declaration" type="PanelContainer" unique_id=243662110]
+z_index = 1
+custom_minimum_size = Vector2(0, 80)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.5
+offset_top = -40.0
+offset_right = 8.5
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("1_1bi2b")
+script = ExtResource("2_wov6i")
+UIInSound = ExtResource("3_dlnjb")
+UIOutSound = ExtResource("4_l1nw6")
+
+[node name="Label" type="Label" parent="." unique_id=516594582]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true

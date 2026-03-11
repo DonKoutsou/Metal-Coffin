@@ -166,7 +166,6 @@ transparent_bg = true
 handle_input_locally = false
 oversampling = false
 size = Vector2i(186, 256)
-render_target_update_mode = 0
 
 [node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport" unique_id=1329688651]
 anchors_preset = 15
@@ -261,7 +260,7 @@ theme_override_constants/separation = 0
 [node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport/VBoxContainer" unique_id=388063333]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/separation = -3
+theme_override_constants/separation = -5
 
 [node name="CardCost" type="Label" parent="SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer" unique_id=1986374705]
 custom_minimum_size = Vector2(30.26, 27.33)
@@ -299,19 +298,24 @@ texture = ExtResource("4_5n23x")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer" unique_id=29740889]
+[node name="Label" type="RichTextLabel" parent="SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer" unique_id=641413289]
+clip_contents = false
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.21176471, 0.14901961, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_separation = 3
+theme_override_constants/shadow_outline_size = 2
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 6
-theme_override_constants/shadow_outline_size = 2
-theme_override_font_sizes/font_size = 16
+bbcode_enabled = true
 text = "Incindiary Barrage"
-vertical_alignment = 1
+fit_content = true
+scroll_active = false
 autowrap_mode = 2
+vertical_alignment = 1
 
 [node name="CardText" type="TextureRect" parent="SubViewportContainer/SubViewport/VBoxContainer" unique_id=403974655]
 custom_minimum_size = Vector2(0, 80)
@@ -399,9 +403,11 @@ text = "11x"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[connection signal="gui_input" from="SubViewportContainer/SubViewport/Button" to="." method="_on_button_gui_input"]
 [connection signal="mouse_entered" from="SubViewportContainer/SubViewport/Button" to="." method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="SubViewportContainer/SubViewport/Button" to="." method="_on_button_mouse_exited"]
 [connection signal="pressed" from="SubViewportContainer/SubViewport/Button" to="." method="OnButtonPressed"]
+[connection signal="gui_input" from="TextureButton" to="." method="_on_button_gui_input"]
 [connection signal="mouse_entered" from="TextureButton" to="." method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="TextureButton" to="." method="_on_button_mouse_exited"]
 [connection signal="pressed" from="TextureButton" to="." method="OnButtonPressed"]
