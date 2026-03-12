@@ -17,6 +17,7 @@ class_name Card
 @export var RealisticFont : Font
 
 signal OnCardPressed(C : Card)
+signal CardKilled
 
 var CStats : CardStats
 
@@ -63,6 +64,7 @@ func KillCard(CustomTime : float = 1.0, Free : bool = true) -> void:
 	KillTw.tween_method(UpdateBurnShader, 1.0, 0.0 ,CustomTime)
 	#KillTw.tween_property(mat, "dissolve_value", 0, 0.2)
 	await KillTw.finished
+	CardKilled.emit()
 	if (Free):
 		queue_free()
 

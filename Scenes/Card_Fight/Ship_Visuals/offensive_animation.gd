@@ -37,103 +37,121 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 	var DefCardTween = create_tween()
 	DefCardTween.tween_property(card, "modulate", Color(1,1,1,1), 0.4)
 	
-	for AnimData in Data:
-		var Mod = AnimData.Mod
-		if (AnimData is OffensiveAnimationData):
-			var DeffenceList = AnimData.DeffenceList
-			for g in DeffenceList.values().size():
-				var Def = DeffenceList.values()[g]["Def"] as CardStats
-				var Viz = DeffenceList.values()[g]["Viz"] as Control
-				var DefC
-				if (Def != null):
+	var Null : bool = false
+	
+	if (!AnimationCard.Burned):
+		for AnimData in Data:
+			var Mod = AnimData.Mod
+			if (AnimData is OffensiveAnimationData):
+				var DeffenceList = AnimData.DeffenceList
+				for g in DeffenceList.values().size():
+					var Def = DeffenceList.values()[g]["Def"] as CardStats
+					var Viz = DeffenceList.values()[g]["Viz"] as Control
+					var DefC
+					if (Def != null):
+						
+						var DefCard = CardScene.instantiate() as Card
+						DefCard.Dissable(true)
+						#var Opts2 : Array[CardOption] = []
+						
+						DefCard.SetCardBattleStats(DeffenceList.keys()[g], Def)
+						add_child(DefCard)
+						if (!FriendShip):
+							var pos = Vector2(Viz.global_position.x + 200, Viz.global_position.y - (Viz.size.y / 2))
+							DefCard.global_position = pos
+						else:
+							var pos = Vector2(Viz.global_position.x - 200, Viz.global_position.y - (Viz.size.y / 2))
+							DefCard.global_position = pos
+						#DefC.size_flags_horizontal = Control.SIZE_EXPAND
+						DefCard.show_behind_parent = true
+						DefCard.modulate = Color(1,1,1,0)
+						
+						var tw2 = create_tween()
+						tw2.tween_property(DefCard, "modulate", Color(1,1,1,1), 0.2)
+						
+						var DefMod = Def.OnPerformModule
+						if (DefMod is CounterCardModule):
+							DefC = DefCard
+						else:
+							DamageReductionCard = DefCard
 					
-					var DefCard = CardScene.instantiate() as Card
-					DefCard.Dissable(true)
-					#var Opts2 : Array[CardOption] = []
+					if (Mod is OffensiveCardModule):
+						call_deferred("SpawnVisual", Viz, card, DefC, "Hit")
+					else : if (Mod is RecoilDamageModule):
+						call_deferred("SpawnVisual", Viz, card, DefC, "Recoil")
 					
-					DefCard.SetCardBattleStats(DeffenceList.keys()[g], Def)
-					add_child(DefCard)
-					if (!FriendShip):
-						var pos = Vector2(Viz.global_position.x + 200, Viz.global_position.y - (Viz.size.y / 2))
-						DefCard.global_position = pos
-					else:
-						var pos = Vector2(Viz.global_position.x - 200, Viz.global_position.y - (Viz.size.y / 2))
-						DefCard.global_position = pos
-					#DefC.size_flags_horizontal = Control.SIZE_EXPAND
-					DefCard.show_behind_parent = true
-					DefCard.modulate = Color(1,1,1,0)
-					
-					var tw2 = create_tween()
-					tw2.tween_property(DefCard, "modulate", Color(1,1,1,1), 0.2)
-					
-					var DefMod = Def.OnPerformModule
-					if (DefMod is CounterCardModule):
-						DefC = DefCard
-					else:
-						DamageReductionCard = DefCard
+			if (AnimData is DeffensiveAnimationData):
+
+				var TargetShips = AnimData.Targets
 				
-				if (Mod is OffensiveCardModule):
-					call_deferred("SpawnVisual", Viz, card, DefC, "Hit")
-				else : if (Mod is RecoilDamageModule):
-					call_deferred("SpawnVisual", Viz, card, DefC, "Recoil")
+				if (Mod is BuffModule):
+					var BuffText = "{0} +".format([CardModule.Stat.keys()[Mod.StatToBuff]])
+					for Ship in TargetShips:
+						call_deferred("SpawnUpVisual", Ship, card, BuffText)
 				
-		if (AnimData is DeffensiveAnimationData):
+				else: if (Mod is NullCardModule):
+					Null = true
+				
+				else: if (Mod is ShieldCardModule or Mod is MaxShieldCardModule):
+					for Ship in TargetShips:
+						call_deferred("SpawnShieldVisual", Ship, card, "Shield +")
+						
+				else : if (Mod is FireExtinguishModule):
+					for Ship in TargetShips:
+						call_deferred("SpawnShieldVisual", Ship, card, "Fire\nExtinguished")
+						
+				else : if (Mod is CleanseDebuffModule):
+					for Ship in TargetShips:
+						call_deferred("SpawnShieldVisual", Ship, card, "Debuffs\nCleansed")
+				
+				else : if (Mod is LoseBuffSelfModule):
+					var BuffText = "{0}\nRemoved".format([CardModule.Stat.keys()[Mod.StatToStrip]])
+					for Ship in TargetShips:
+						call_deferred("SpawnDownVisual", Ship, card, BuffText)
+				
+				else : if (Mod is CauseFireModule):
+					for Ship in TargetShips:
+						call_deferred("SpawnUpVisual", Ship, card, "Fire")
+				
+				else : if (Mod is ResupplyModule or Mod is ReserveConversionModule):
+					for Ship in TargetShips:
+						call_deferred("SpawnEnergyVisual", Ship, card, "Energy +")
 
-			var TargetShips = AnimData.Targets
+				else : if (Mod is ReserveModule or Mod is MaxReserveModule):
+					for Ship in TargetShips:
+						call_deferred("SpawnEnergyVisual", Ship, card, "Energy\nReserve +")
+				else : if (Mod is InterceptModule):
+					for Ship in TargetShips:
+						call_deferred("SpawnShieldVisual", Ship, card, "Interceptor")
+						
+				else : if (Mod is DeBuffEnemyModule or Mod is DeBuffSelfModule):
+					var BuffText = "{0} -".format([CardModule.Stat.keys()[Mod.StatToDeBuff]])
+					for Ship in TargetShips:
+						call_deferred("SpawnDownVisual", Ship, card, BuffText)
+						
+				else : if (Mod is BurnEnemyCardModule):
+					var BuffText = "Cards Burned"
+					for Ship in TargetShips:
+						call_deferred("SpawnBurnVisual", Ship, card, BuffText)
+				
+				else : if (Mod is CardInjectCardModule):
+					var BuffText = "Cards Injected"
+					for Ship in TargetShips:
+						call_deferred("SpawnBurnVisual", Ship, card, BuffText)
+				
+				else : if (Mod is StackDamageCardModule):
+					call_deferred("SpawnUpDamageVisual", card, card, "Damage +")
+				
+			if (Data.size() > 1):
+				await wait(0.2)
 			
-			if (Mod is BuffModule):
-				var BuffText = "{0} +".format([CardModule.Stat.keys()[Mod.StatToBuff]])
-				for Ship in TargetShips:
-					call_deferred("SpawnUpVisual", Ship, card, BuffText)
-					
-			else: if (Mod is ShieldCardModule or Mod is MaxShieldCardModule):
-				for Ship in TargetShips:
-					call_deferred("SpawnShieldVisual", Ship, card, "Shield +")
-					
-			else : if (Mod is FireExtinguishModule):
-				for Ship in TargetShips:
-					call_deferred("SpawnShieldVisual", Ship, card, "Fire\nExtinguished")
-					
-			else : if (Mod is CleanseDebuffModule):
-				for Ship in TargetShips:
-					call_deferred("SpawnShieldVisual", Ship, card, "Debuffs\nCleansed")
-			
-			else : if (Mod is LoseBuffSelfModule):
-				var BuffText = "{0}\nRemoved".format([CardModule.Stat.keys()[Mod.StatToStrip]])
-				for Ship in TargetShips:
-					call_deferred("SpawnDownVisual", Ship, card, BuffText)
-			
-			else : if (Mod is CauseFireModule):
-				for Ship in TargetShips:
-					call_deferred("SpawnUpVisual", Ship, card, "Fire")
-			
-			else : if (Mod is ResupplyModule or Mod is ReserveConversionModule):
-				for Ship in TargetShips:
-					call_deferred("SpawnEnergyVisual", Ship, card, "Energy +")
-
-			else : if (Mod is ReserveModule or Mod is MaxReserveModule):
-				for Ship in TargetShips:
-					call_deferred("SpawnEnergyVisual", Ship, card, "Energy\nReserve +")
-			else : if (Mod is InterceptModule):
-				for Ship in TargetShips:
-					call_deferred("SpawnShieldVisual", Ship, card, "Interceptor")
-					
-			else : if (Mod is DeBuffEnemyModule or Mod is DeBuffSelfModule):
-				var BuffText = "{0} -".format([CardModule.Stat.keys()[Mod.StatToDeBuff]])
-				for Ship in TargetShips:
-					call_deferred("SpawnDownVisual", Ship, card, BuffText)
-
-			else : if (Mod is StackDamageCardModule):
-				call_deferred("SpawnUpDamageVisual", card, card, "Damage +")
-			
-		if (Data.size() > 1):
-			await wait(0.2)
-			
-	card.KillCard(0.5, false)
-	if (Data.size() == 0):
-		await wait(0.2)
-		AnimEnded()
-
+		card.KillCard(0.5, false)
+		if (Data.size() == 0 or Null):
+			card.CardKilled.connect(AnimEnded)
+	else:
+		card.KillCard(0.5, false)
+		card.CardKilled.connect(AnimEnded)
+		#AnimEnded()
 
 func SpawnVisual(Target : Control, AtackCard : Card, DeffenceCard : Card, FloaterText : String) -> void:
 	#await wait (0.15)
@@ -191,6 +209,16 @@ func SpawnUpVisual(Target : Control, DefCard : Card, FloaterText : String) -> vo
 func SpawnDownVisual(Target : Control, DefCard : Card, FloaterText : String) -> void:
 	#await wait (0.4)
 	
+	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
+	var DeBuffVisual : PackedScene = ResourceLoader.load(DebuffVisualFile)
+	var Visual = DeBuffVisual.instantiate() as MissileViz
+	Visual.Target = Target
+	Visual.SpawnPos = DefCard.global_position + (DefCard.size / 2)
+	add_child(Visual)
+
+	Visual.connect("Reached", BuffTweenEnded.bind(Target, FloaterText))
+
+func SpawnBurnVisual(Target : Control, DefCard : Card, FloaterText : String) -> void:
 	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
 	var DeBuffVisual : PackedScene = ResourceLoader.load(DebuffVisualFile)
 	var Visual = DeBuffVisual.instantiate() as MissileViz
@@ -355,5 +383,5 @@ func AnimEnded() -> void:
 	Fin = true
 	AnimationFinished.emit()
 	queue_free()
-	#print("Animation Finised Emitted")
+	print("Animation Finised Emitted")
 	

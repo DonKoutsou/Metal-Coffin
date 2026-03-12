@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="1_7gwi0"]
 [ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Resources/Cards/Barrage/Barrage100mm.tres" id="2_4vvqw"]
 [ext_resource type="Resource" uid="uid://bl7mvgrw6tyes" path="res://Resources/Cards/Barrage/DrawRandomBarrage.tres" id="3_6b3vn"]
+[ext_resource type="Resource" uid="uid://cfcixcsymvkwg" path="res://Resources/Cards/CardInject.tres" id="4_4vvqw"]
 [ext_resource type="Resource" uid="uid://hncmt3swcqbu" path="res://Resources/Items/ShipParts/MG/MediumMachinegun100mm.tres" id="4_o0tk6"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="5_sqkwa"]
 [ext_resource type="Script" uid="uid://dx8pydv0k6k3t" path="res://Scripts/Inventory/WeaponShipPartItem.gd" id="6_1ught"]
@@ -33,6 +34,6 @@ UpgradeTime = 600.0
 PartType = 4
 ItemName = "MG-10 \"Squall\" 100mm"
 ItemDesc = "a basic machine gun turret designed for straightforward, high-rate-of-fire engagements. It offers standard round delivery with fundamental targeting precision, providing ships with an entry-level solution for close-range defense and suppression."
-CardProviding = Array[ExtResource("1_7gwi0")]([ExtResource("2_4vvqw"), ExtResource("2_4vvqw"), ExtResource("2_4vvqw"), ExtResource("2_4vvqw"), ExtResource("2_4vvqw"), ExtResource("3_6b3vn"), ExtResource("3_6b3vn")])
+CardProviding = Array[ExtResource("1_7gwi0")]([ExtResource("2_4vvqw"), ExtResource("2_4vvqw"), ExtResource("2_4vvqw"), ExtResource("2_4vvqw"), ExtResource("2_4vvqw"), ExtResource("3_6b3vn"), ExtResource("3_6b3vn"), ExtResource("4_4vvqw"), ExtResource("4_4vvqw")])
 CanTransfer = false
 Cost = 50000
