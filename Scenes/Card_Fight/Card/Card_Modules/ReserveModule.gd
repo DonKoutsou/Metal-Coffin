@@ -14,4 +14,20 @@ func GetEnergy(Tier : int) -> int:
 	return roundi(ReserveAmmount * max((Tier * TierUpgrade), 1))
 
 func NeedsTargetSelect() -> bool:
-	return false
+	return true
+
+func HandleReserveSupply(_Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
+	var resupplyamm = GetEnergy(Action.Tier)
+
+	var TargetViz : Array[Control]
+	
+	for g in Targets:
+		if (g == null):
+			continue
+		TargetViz.append(g.ShipViz)
+		g.SetReserves(g.EnergyReserves + resupplyamm)
+			
+	var Data = DeffensiveAnimationData.new()
+	Data.Mod = self
+	Data.Targets = TargetViz
+	return Data

@@ -12,4 +12,22 @@ func GetBattleDesc(User : BattleShipStats, _Tier : int) -> String:
 	return "Converts {0} [color=#ffc315]Energy[/color] as [color=#ffc315]Reserve[/color] to self".format([User.Energy])
 
 func NeedsTargetSelect() -> bool:
-	return false
+	return true
+
+func HandleMaxReserveSupply(Performer : BattleShipStats, _Action : CardStats, Targets : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
+	var resupplyamm = Performer.Energy
+			
+	var TargetViz : Array[Control]
+	
+	for g in Targets:
+		if (g == null):
+			continue
+		TargetViz.append(g.ShipViz)
+		g.SetReserves(g.EnergyReserves + resupplyamm)
+	
+	Performer.SetEnergy(0)
+	
+	var Data = DeffensiveAnimationData.new()
+	Data.Mod = self
+	Data.Targets = TargetViz
+	return Data

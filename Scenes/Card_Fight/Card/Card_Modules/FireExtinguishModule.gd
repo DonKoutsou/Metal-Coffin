@@ -7,3 +7,13 @@ func GetDesc(_Tier : int) -> String:
 
 func NeedsTargetSelect() -> bool:
 	return true
+
+func HandleFireExtinguish(Performer : BattleShipStats, _Action : CardStats) -> DeffensiveAnimationData:
+	
+	var Callables : Array[Callable] = [Performer.CombustFire]
+	
+	var Data = DeffensiveAnimationData.new()
+	Data.Mod = self
+	Data.Targets.append(Performer.ShipViz)
+	Data.Callables = Callables
+	return Data

@@ -6,7 +6,7 @@ class_name DeBuffSelfModule
 @export var DeBuffAmmount : float
 
 func NeedsTargetSelect() -> bool:
-	return false
+	return true
 
 func GetDesc(Tier : int) -> String:
 	var TextColor : String
@@ -45,3 +45,29 @@ func GetDebuffAmmount(Tier : int) -> float:
 	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):
 		return snapped(DeBuffAmmount + (TierUpgrade * Tier), 0.1)
 	return snapped(DeBuffAmmount *  max(pow(TierUpgrade, Tier), 1), 0.01)
+
+func HandleDeBuff(_Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> DeffensiveAnimationData:		
+	var TargetViz : Array[Control]
+	
+	var Callables : Array[Callable]
+	
+	var DebuffAmmount = GetDebuffAmmount(Action.Tier)
+	var DebuffDurration = GetDebuffDuration(Action.Tier)
+	
+	for g in Targets:
+		if (g == null):
+			continue
+		TargetViz.append(g.ShipViz)
+
+		if (StatToDeBuff == CardModule.Stat.FIREPOWER):
+			Callables.append(g.DeBuffSpeed.bind(DebuffAmmount, DebuffDurration))
+		else : if (StatToDeBuff == CardModule.Stat.SPEED):
+			Callables.append(g.DeBuffSpeed.bind(DebuffAmmount, DebuffDurration))
+		else : if (StatToDeBuff == CardModule.Stat.DEFENCE):
+			Callables.append(g.DeBuffDefence.bind(DebuffAmmount, DebuffDurration))
+			
+	var Data = DeffensiveAnimationData.new()
+	Data.Mod = self
+	Data.Targets = TargetViz
+	Data.Callables = Callables
+	return Data

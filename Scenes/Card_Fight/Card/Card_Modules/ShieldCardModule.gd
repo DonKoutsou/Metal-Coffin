@@ -15,4 +15,21 @@ func GetShieldAmm(Tier : float) -> float:
 	return ShieldAmm * max((TierUpgrade * Tier), 1)
 
 func NeedsTargetSelect() -> bool:
-	return false
+	return true
+
+func HandleShield(Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
+	var TargetViz : Array[Control]
+	
+	var Callables : Array[Callable]
+	
+	for g in Targets:
+		if (g == null):
+			continue
+		TargetViz.append(g.ShipViz)
+		Callables.append(g.ShieldShip.bind(GetShieldAmm(Action.Tier)))
+	
+	var Data = DeffensiveAnimationData.new()
+	Data.Mod = self
+	Data.Targets = TargetViz
+	Data.Callables = Callables
+	return Data

@@ -211,6 +211,18 @@ func OnNewTurnStarted() -> void:
 func OnActionsPerformed() -> void:
 	HasMovePanel.visible = false
 
+func Refresh() -> void:
+	UpdateStats(Ship)
+	ToggleDmgBuff(Ship.FirePowerBuff > 1, Ship.FirePowerBuff)
+	ToggleSpeedBuff(Ship.SpeedBuff > 1, Ship.SpeedBuff)
+	ToggleDefBuff(Ship.DefBuff > 0, Ship.DefBuff)
+	
+	ToggleDmgDebuff(Ship.FirePowerDeBuff > 0)
+	ToggleSpeedDebuff(Ship.SpeedDeBuff > 0)
+	ToggleDefDeBuff(Ship.DefDebuff > 0)
+	ToggleFire(Ship.IsOnFire)
+
+
 func UpdateStats(S : BattleShipStats) -> void:
 	var HullTween = create_tween()
 	HullTween.set_ease(Tween.EASE_OUT)
@@ -227,6 +239,7 @@ func UpdateStats(S : BattleShipStats) -> void:
 	SPDLabel.text = "[color=#308a4d]SPD[/color] {0}".format([roundi(S.GetSpeed())])
 	WeightLabel.text = "[color=#828dff]WGHT[/color] {0}".format([S.GetWeight()]).replace(".0", "")
 	DefenceLabel.text = "[color=#7bb0b4]DEF[/color] {0}".format([S.GetDef()]).replace(".0", "")
+
 
 func SetStatsAnimation(S : BattleShipStats, Friendly : bool) -> void:
 	ShipNameLabel.text = S.Name

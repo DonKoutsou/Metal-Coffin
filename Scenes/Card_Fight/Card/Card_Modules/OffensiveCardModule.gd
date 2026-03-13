@@ -1,4 +1,3 @@
-@abstract
 extends CardModule
 
 class_name OffensiveCardModule
@@ -11,8 +10,8 @@ class_name OffensiveCardModule
 @export var OnSuccesfullAtackModules : Array[CardModule]
 @export var SkipShield : bool
 
-@abstract
-func NeedsTargetSelect() -> bool
+func NeedsTargetSelect() -> bool:
+	return true
 
 func GetFinalDamage(Performer : BattleShipStats, Tier : int) -> float:
 	var Dmg = 0.0

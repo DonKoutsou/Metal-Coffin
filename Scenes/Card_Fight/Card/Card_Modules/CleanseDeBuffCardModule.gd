@@ -11,8 +11,22 @@ func GetDesc(_Tier : int) -> String:
 	return "Cleanse all debuffs on self."
 
 func NeedsTargetSelect() -> bool:
-	if (AOE):
-		return true
-	else : if (CanBeUsedOnOther):
-		return true
-	return false
+	return true
+
+func HandleDebuffCleanse(Performer : BattleShipStats, Targets : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
+	var TargetViz : Array[Control]
+	
+	var Callables : Array[Callable]
+	
+	for g in Targets:
+		if (g == null):
+			continue
+		TargetViz.append(g.ShipViz)
+
+		Callables.append(g.CleanseDebuffs)
+	
+	var Data = DeffensiveAnimationData.new()
+	Data.Mod = self
+	Data.Targets = TargetViz
+	Data.Callables = Callables
+	return Data

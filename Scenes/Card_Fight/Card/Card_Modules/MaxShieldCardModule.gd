@@ -5,7 +5,7 @@ class_name MaxShieldCardModule
 @export var ShieldPerEnergy : int = 10
 
 func NeedsTargetSelect() -> bool:
-	return false
+	return true
 
 func GetDesc(Tier : int) -> String:
 	if (AOE):
@@ -22,3 +22,24 @@ func GetShieldPerEnergy(Tier : int) -> int:
 	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):
 		return roundi(ShieldPerEnergy + (TierUpgrade * Tier))
 	return roundi(ShieldPerEnergy * max((TierUpgrade * Tier), 1))
+
+func HandleMaxShield(Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
+	var ShieldAmm = Performer.Energy * GetShieldPerEnergy(Action.Tier)
+
+	var TargetViz : Array[Control]
+	
+	var Callables : Array[Callable]
+	
+	for g in Targets:
+		if (g == null):
+			continue
+		TargetViz.append(g.ShipViz)
+		Callables.append(g.ShieldShip.bind(ShieldAmm))
+
+	Performer.SetEnergy(0)
+	
+	var Data = DeffensiveAnimationData.new()
+	Data.Mod = self
+	Data.Targets = TargetViz
+	Data.Callables = Callables
+	return Data

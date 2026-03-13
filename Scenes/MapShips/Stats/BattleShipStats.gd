@@ -63,6 +63,36 @@ var DefDeBuffTime : int = 0
 
 signal EnergyChanged(energyAdded : int)
 signal ReservesChanged(reservesAdded : int)
+signal StatsBuffed
+
+func ShieldShip(Amm : float) -> void:
+	Shield = min(Shield + Amm, MaxShield)
+	StatsBuffed.emit()
+
+func StripBuff(Stat : CardModule.Stat) -> void:
+	if (Stat == CardModule.Stat.FIREPOWER):
+		FirePowerBuff = 1
+		FirePowerBuffTime = 0
+	if (Stat == CardModule.Stat.SPEED):
+		SpeedBuff = 1
+		SpeedBuffTime = 0
+	if (Stat == CardModule.Stat.DEFENCE):
+		DefBuff = 0
+		DefBuffTime = 0
+	StatsBuffed.emit()
+
+func CauseFire() -> void:
+	if (IsOnFire):
+		TurnsOnFire += 1
+	else:
+		IsOnFire = true
+		TurnsOnFire = 0
+	StatsBuffed.emit()
+
+func CombustFire() -> void:
+	IsOnFire = false
+	TurnsOnFire = 0
+	StatsBuffed.emit()
 
 func SetEnergy(newEnergy : int) -> void:
 	var dif = newEnergy - Energy
@@ -73,6 +103,47 @@ func SetReserves(newReserves : int) -> void:
 	var dif = newReserves - EnergyReserves
 	EnergyReserves = newReserves
 	ReservesChanged.emit(self, dif)
+
+func BuffFirePower(Amm : float, Turns : int = 2) -> void:
+	#buffs are usually 1.2 or 1.3 so we keep the 0.2 and add it
+	FirePowerBuff += Amm - 1
+	FirePowerBuffTime = Turns
+	StatsBuffed.emit()
+
+func DeBuffFirePower(Amm : float, Turns : int = 2) -> void:
+	#buffs are usually 1.2 or 1.3 so we keep the 0.2 and add it
+	FirePowerDeBuff += Amm - 1
+	FirePowerDeBuffTime = Turns
+	StatsBuffed.emit()
+
+func BuffSpeed(Amm : float, Turns : int = 2) -> void:
+	SpeedBuff += Amm - 1
+	SpeedBuffTime = Turns
+	StatsBuffed.emit()
+
+func CleanseDebuffs() -> void:
+	FirePowerDeBuff = 0
+	SpeedDeBuff = 0
+	DefDebuff = 0
+	StatsBuffed.emit()
+
+func DeBuffSpeed(Amm : float, Turns : int = 2) -> void:
+	#buffs are usually 1.2 or 1.3 so we keep the 0.2 and add it
+	SpeedDeBuff += Amm
+	SpeedDeBuffTime = Turns
+	StatsBuffed.emit()
+
+func BuffDefence(Amm : float, Turns : int = 2) -> void:
+	#buffs are usually 1.2 or 1.3 so we keep the 0.2 and add it
+	DefBuff += Amm
+	DefBuffTime = Turns
+	StatsBuffed.emit()
+
+func DeBuffDefence(Amm : float, Turns : int = 2) -> void:
+	#buffs are usually 1.2 or 1.3 so we keep the 0.2 and add it
+	DefDebuff += Amm
+	DefDeBuffTime = Turns
+	StatsBuffed.emit()
 
 func UpdateBuffs() -> Array[String]:
 	var ExpiredBuffs : Array[String]

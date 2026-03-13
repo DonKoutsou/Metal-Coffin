@@ -35,3 +35,29 @@ func GetBuffAmmount(Tier : int) -> float:
 	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):
 		return BuffAmmount +(TierUpgrade * Tier)
 	return BuffAmmount * max((TierUpgrade * Tier), 1)
+
+func HandleBuff(_Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
+	var TargetViz : Array[Control]
+	
+	var Callables : Array[Callable]
+	
+	var DebuffAmmount = GetBuffAmmount(Action.Tier)
+	var DebuffDurration = GetBuffDuration(Action.Tier)
+	
+	for g in Targets:
+		if (g == null):
+			continue
+		TargetViz.append(g.ShipViz)
+		
+		if (StatToBuff == CardModule.Stat.FIREPOWER):
+			Callables.append(g.BuffFirePower.bind(DebuffAmmount, DebuffDurration))
+		else : if (StatToBuff == CardModule.Stat.SPEED):
+			Callables.append(g.BuffSpeed.bind(DebuffAmmount, DebuffDurration))
+		else : if (StatToBuff == CardModule.Stat.DEFENCE):
+			Callables.append(g.BuffDefence.bind(DebuffAmmount, DebuffDurration))
+		
+	var Data = DeffensiveAnimationData.new()
+	Data.Mod = self
+	Data.Targets = TargetViz
+	Data.Callables = Callables
+	return Data

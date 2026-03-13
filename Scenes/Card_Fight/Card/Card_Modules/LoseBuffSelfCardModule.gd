@@ -18,4 +18,22 @@ func GetDesc(_Tier : int) -> String:
 	return "Strip [{1}]{0}[/color] buffs from self".format([Stat.keys()[StatToStrip], TextColor])
 
 func NeedsTargetSelect() -> bool:
-	return false
+	return true
+
+func HandleBuffStrip(Performer : BattleShipStats, Targets : Array[BattleShipStats]) -> DeffensiveAnimationData:
+	var TargetViz : Array[Control]
+	
+	var Callables : Array[Callable]
+
+	for g in Targets:
+		if (g == null):
+			continue
+		TargetViz.append(g.ShipViz)
+		Callables.append(g.StripBuffFromShip.bind(StatToStrip))
+
+		
+	var Data = DeffensiveAnimationData.new()
+	Data.Mod = self
+	Data.Targets = TargetViz
+	Data.Callables = Callables
+	return Data
