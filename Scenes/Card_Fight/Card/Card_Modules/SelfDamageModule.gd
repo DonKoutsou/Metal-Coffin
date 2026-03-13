@@ -14,8 +14,9 @@ func GetFinalDamage(Tier : int) -> float:
 func NeedsTargetSelect() -> bool:
 	return false
 
-func HandleSelfDamage(Performer : BattleShipStats, Action : CardStats) -> OffensiveAnimationData:
-
+func Handle(Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> AnimationData:
+	if (Action.Burned):
+		return DeffensiveAnimationData.new()
 	var Callables : Array[Callable]
 	Callables.append(Performer.DamageShip.bind(GetFinalDamage(Action.Tier)))
 	

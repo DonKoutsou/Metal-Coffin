@@ -20,7 +20,9 @@ func GetConversionAmmount(ReserveAmm : int, Tier : int) -> int:
 func NeedsTargetSelect() -> bool:
 	return false
 
-func HandleReserveConversion(Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
+func Handle(Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> AnimationData:
+	if (Action.Burned):
+		return DeffensiveAnimationData.new()
 	var resupplyamm = GetConversionAmmount(Performer.EnergyReserves, Action.Tier)
 	
 	Performer.SetReserves(0)

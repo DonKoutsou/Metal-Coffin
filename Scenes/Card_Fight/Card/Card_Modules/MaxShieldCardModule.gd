@@ -23,7 +23,9 @@ func GetShieldPerEnergy(Tier : int) -> int:
 		return roundi(ShieldPerEnergy + (TierUpgrade * Tier))
 	return roundi(ShieldPerEnergy * max((TierUpgrade * Tier), 1))
 
-func HandleMaxShield(Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
+func Handle(Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> AnimationData:
+	if (Action.Burned):
+		return DeffensiveAnimationData.new()
 	var ShieldAmm = Performer.Energy * GetShieldPerEnergy(Action.Tier)
 
 	var TargetViz : Array[Control]

@@ -14,3 +14,10 @@ func GetDrawAmmount(Tier : int) -> int:
 
 func NeedsTargetSelect() -> bool:
 	return false
+
+func Handle(Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> AnimationData:
+	if (Action.Burned):
+		return DeffensiveAnimationData.new()
+	var drawAmm = GetDrawAmmount(Action.Tier)
+	Performer.deck.DrawMulti(drawAmm, DiscardAmmount)
+	return null

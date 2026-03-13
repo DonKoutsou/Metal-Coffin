@@ -11,7 +11,9 @@ func GetBattleDesc(_User : BattleShipStats, Tier : int) -> String:
 func NeedsTargetSelect() -> bool:
 	return false
 
-func HandleNull() -> DeffensiveAnimationData:
+func Handle(_Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> AnimationData:
+	if (Action.Burned):
+		return DeffensiveAnimationData.new()
 	var Data = DeffensiveAnimationData.new()
 	Data.Mod = self
 	return Data

@@ -167,6 +167,11 @@ func GetBattleDesc(User : BattleShipStats, Tier : int) -> String:
 	
 	return Desc
 
+func Handle(_Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> AnimationData:
+	if (Action.Burned):
+		return DeffensiveAnimationData.new()
+	return null
+
 enum AtackTypes{
 	DIRECT_ATACK,
 	HOMING_ATACK,

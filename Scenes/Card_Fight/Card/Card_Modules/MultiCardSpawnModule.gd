@@ -20,3 +20,9 @@ enum CardType {
 	OFFENSIVE,
 	DEFENSIVE
 }
+
+func Handle(Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> AnimationData:
+	if (Action.Burned):
+		return DeffensiveAnimationData.new()
+	Performer.deck.DrawSingleOfType(CardToSpawn)
+	return null

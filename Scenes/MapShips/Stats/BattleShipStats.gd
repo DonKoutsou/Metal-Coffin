@@ -12,6 +12,8 @@ var Convoy : bool
 
 var Energy : int
 var EnergyReserves : int
+
+var deck : Deck
 var Cards : Array[CardStats]
 
 var ShipViz : CardFightShipViz2

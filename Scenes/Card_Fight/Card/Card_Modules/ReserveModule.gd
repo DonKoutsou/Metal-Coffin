@@ -16,7 +16,9 @@ func GetEnergy(Tier : int) -> int:
 func NeedsTargetSelect() -> bool:
 	return true
 
-func HandleReserveSupply(_Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
+func Handle(_Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> AnimationData:
+	if (Action.Burned):
+		return DeffensiveAnimationData.new()
 	var resupplyamm = GetEnergy(Action.Tier)
 
 	var TargetViz : Array[Control]

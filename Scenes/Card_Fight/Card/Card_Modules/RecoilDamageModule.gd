@@ -13,9 +13,15 @@ func GetRecoilAmmount(DamageDone : float) -> float:
 func NeedsTargetSelect() -> bool:
 	return false
 
-func HandleRecoil(Performer : BattleShipStats, _Action : CardStats, DamageAmm : float) -> OffensiveAnimationData:
+func Handle(Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> AnimationData:
+	if (Action.Burned):
+		return DeffensiveAnimationData.new()
+	
+	var AtackMod = Action.OnPerformModule as OffensiveCardModule
+	var finalDmg = AtackMod.GetFinalDamage(Performer, Action.Tier)
+	
 	var Callables : Array[Callable]
-	var Recoil = GetRecoilAmmount(DamageAmm)
+	var Recoil = GetRecoilAmmount(finalDmg)
 	Callables.append(Performer.DamageShip.bind(Recoil))
 	
 	var AnimData = OffensiveAnimationData.new()

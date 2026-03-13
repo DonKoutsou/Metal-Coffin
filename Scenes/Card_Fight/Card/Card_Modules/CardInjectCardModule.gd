@@ -21,3 +21,26 @@ func GetCardAmmount(Tier : int) -> int:
 	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):
 		return roundi(amm + (TierUpgrade * Tier))
 	return roundi(amm * max((TierUpgrade * Tier), 1))
+
+func HandleCardInject(_Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
+	if (Action.Burned):
+		return DeffensiveAnimationData.new()
+	var TargetViz : Array[Control]
+	
+	#var Callables : Array[Callable]
+	var injectAmm : int = GetCardAmmount(Action.Tier)
+	
+	for g in Targets:
+		if (g == null):
+			continue
+		TargetViz.append(g.ShipViz)
+		for injection in injectAmm:
+			var c = CardToInject.duplicate()
+			var randomIndex = randf_range(0, g.deck.DeckPile.size())
+			g.deck.DeckPile.insert(randomIndex ,c)
+
+	var Data = DeffensiveAnimationData.new()
+	Data.Mod = self
+	Data.Targets = TargetViz
+	#Data.Callables = Callables
+	return Data

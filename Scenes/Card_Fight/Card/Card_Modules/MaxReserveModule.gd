@@ -14,7 +14,9 @@ func GetBattleDesc(User : BattleShipStats, _Tier : int) -> String:
 func NeedsTargetSelect() -> bool:
 	return true
 
-func HandleMaxReserveSupply(Performer : BattleShipStats, _Action : CardStats, Targets : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
+func Handle(Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> AnimationData:
+	if (Action.Burned):
+		return DeffensiveAnimationData.new()
 	var resupplyamm = Performer.Energy
 			
 	var TargetViz : Array[Control]

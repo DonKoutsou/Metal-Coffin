@@ -20,3 +20,26 @@ func GetBurnAmmount(Tier : int) -> int:
 	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):
 		return roundi(ammToBurn + (TierUpgrade * Tier))
 	return roundi(ammToBurn * max((TierUpgrade * Tier), 1))
+
+func Handle(_Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> AnimationData:
+	if (Action.Burned):
+		return DeffensiveAnimationData.new()
+	var TargetViz : Array[Control]
+	
+	#var Callables : Array[Callable]
+	var burnAmm : int = GetBurnAmmount(Action.Tier)
+	
+	for g in Targets:
+		if (g == null):
+			continue
+		TargetViz.append(g.ShipViz)
+		if (g.deck.DeckPile.is_empty()):
+			continue
+		for toBurn in burnAmm:
+			g.deck.DeckPile.pick_random().Burned = true
+
+	var Data = DeffensiveAnimationData.new()
+	Data.Mod = self
+	Data.Targets = TargetViz
+	#Data.Callables = Callables
+	return Data

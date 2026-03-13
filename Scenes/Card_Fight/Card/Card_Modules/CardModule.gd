@@ -15,6 +15,9 @@ func GetDesc(_Tier : int) -> String:
 @abstract
 func NeedsTargetSelect() -> bool
 
+@abstract
+func Handle(Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> AnimationData
+
 func GetBattleDesc(_User : BattleShipStats, Tier : int) -> String:
 	return GetDesc(Tier)
 

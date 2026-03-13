@@ -14,13 +14,14 @@ func GetStackDamage(Tier : int) -> float:
 func NeedsTargetSelect() -> bool:
 	return false
 
-func HandleDamageStack(_Performer : BattleShipStats, Action : CardStats) -> DeffensiveAnimationData:
+func Handle(_Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> AnimationData:
+	if (Action.Burned):
+		return DeffensiveAnimationData.new()
 	var OffensiveModule = Action.OnPerformModule.duplicate() as OffensiveCardModule
 	var NewAction = Action.duplicate()
 	NewAction.OnPerformModule = OffensiveModule
 	Action = NewAction
 	OffensiveModule.Damage += OffensiveModule.Damage * GetStackDamage(Action.Tier)
-	var Targets : Array[Control]
 	var Data = DeffensiveAnimationData.new()
 	Data.Mod = self
 	Data.Targets = Targets

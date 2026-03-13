@@ -17,7 +17,9 @@ func GetShieldAmm(Tier : float) -> float:
 func NeedsTargetSelect() -> bool:
 	return true
 
-func HandleShield(Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
+func Handle(_Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> AnimationData:
+	if (Action.Burned):
+		return DeffensiveAnimationData.new()
 	var TargetViz : Array[Control]
 	
 	var Callables : Array[Callable]
