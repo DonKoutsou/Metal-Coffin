@@ -33,7 +33,7 @@ var TrackMouse : bool = false
 var mat : ShaderMaterial
 
 func _physics_process(delta: float) -> void:
-	InterpolationValue = min(InterpolationValue + delta * 2, 1)
+	InterpolationValue = min(InterpolationValue + delta *5, 1)
 	UpdateLine()
 	
 	#$SubViewportContainer/SubViewport.visible = false
@@ -105,6 +105,8 @@ func _ready() -> void:
 	var SoundMan = UISoundMan.GetInstance()
 	if (is_instance_valid(SoundMan)):
 		SoundMan.AddSelf(But)
+	
+	Lines.append(Line)
 	for g in TargetLocs.size() - 1:
 		var NewLine = Line.duplicate()
 		add_child(NewLine)

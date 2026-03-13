@@ -103,7 +103,7 @@ enum CardFightPhase{
 
 signal CardFightEnded(Survivors : Array[BattleShipStats], won : bool)
 signal CardFightDestroyed()
-
+##----------------------------------------------------------------------##
 func _ready() -> void:
 	
 	CurrentPlayerLabel.visible = false
@@ -135,42 +135,34 @@ func _ready() -> void:
 		PlayerCombatants.append(NewCombatant)
 		PlayerReserves.erase(NewCombatant)
 		CreateShipVisuals(NewCombatant, true)
-	#Add all ships to turn array and sort them
-	
+
 	ShipTurns.append_array(EnemyCombatants)
 	ShipTurns.append_array(PlayerCombatants)
-	
-	#ShipTurns.sort_custom(speed_comparator)
-	
+
 	UpdateFleetSizeAmmount()
-	#Create the visualisation for each ship, basicly their stat holder
-	#ExternalUI.ToggleEnergyVisibility(false)
 	ExternalUI.HideInfo()
 
 	Helper.GetInstance().CallLater(StartFight, 2)
 	
 	var Mat = $SubViewport/Control2/Ground.material as ShaderMaterial
 	Mat.set_shader_parameter("offset", Vector2(randf_range(-100, 100), randf_range(-100, 100)))
-
-
+##----------------------------------------------------------------------##
 func _exit_tree() -> void:
 	MusicManager.GetInstance().SwitchMusic(false)
-
+##----------------------------------------------------------------------##
 var CloudOffset = Vector2.ZERO
 
 func _physics_process(_delta: float) -> void:
 	CloudOffset += Vector2(-0.0001, 0.0001)
 	Cloud.material.set_shader_parameter("Offset", CloudOffset)
-
-
+##----------------------------------------------------------------------##
 func StartFight() -> void:
 	var declaration : PackedScene = ResourceLoader.load(AcrionDeclarationScene)
 	var act : ActionDeclarationUI = declaration.instantiate()
 	ActionDeclarationPlacement.add_child(act)
 	act.DoActionDeclaration("Fight Start", 1.5)
 	act.ActionDeclarationFinished.connect(IntroDeclarationFinished)
-
-
+##----------------------------------------------------------------------##
 func IntroDeclarationFinished() -> void:
 	#ActionDeclaration.ActionDeclarationFinished.disconnect(IntroDeclarationFinished)
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT)):
@@ -178,8 +170,7 @@ func IntroDeclarationFinished() -> void:
 		ActionTracker.QueueTutorial("TUT_CardfightTitle", "TUT_CardfightText", [])
 	
 	call_deferred("RunTurn")
-
-
+##----------------------------------------------------------------------##
 func ReplaceShip(Ship : BattleShipStats, TurnPosition : int, Friendly : bool) -> void:
 	ActionList.RemoveShip(Ship)
 	#Save the ships index in the turns array so that we can add this ship on same position
@@ -191,9 +182,8 @@ func ReplaceShip(Ship : BattleShipStats, TurnPosition : int, Friendly : bool) ->
 		NewCombatant = PlayerReserves.pop_front()
 		PlayerCombatants.append(NewCombatant)
 		PlayerReserves.erase(NewCombatant)
-		
+
 		ShipTurns.insert(TurnPosition, NewCombatant)
-		#ShipTurns.sort_custom(speed_comparator)
 
 	else: if (EnemyReserves.size() > 0):
 		
@@ -209,12 +199,12 @@ func ReplaceShip(Ship : BattleShipStats, TurnPosition : int, Friendly : bool) ->
 		NewVisuals.visible = false
 	else: if (CurrentTurn > Position):
 		CurrentTurn -= 1
+		
 	#Play the dead animation on the ShipViz
-	
 	var Viz = Ship.ShipViz
 	
 	ShipBeingReplaced.append(Viz)
-	await Viz.Destroy()
+	Viz.Destroy()
 	ShipReplecementFinished.emit()
 	ShipBeingReplaced.erase(Viz)
 	var Pos = Viz.global_position
@@ -227,8 +217,7 @@ func ReplaceShip(Ship : BattleShipStats, TurnPosition : int, Friendly : bool) ->
 		NewVisuals.visible = true
 			
 	UpdateFleetSizeAmmount()
-
-
+##----------------------------------------------------------------------##
 func CreateDecks() -> void:
 	#Create the deck
 	var Ships : Array[BattleShipStats]
@@ -258,7 +247,7 @@ func CreateDecks() -> void:
 		D.OnCardDrawn.connect(CardDrawn)
 		D.MultiCardDrawn.connect(MultiCardDrawn)
 		D.MultiSpecificDrawn.connect(MultiSpcificCardDrawn)
-
+##----------------------------------------------------------------------##
 func CardDrawn(C : CardStats) -> void:
 	var Performer = GetCurrentShip()
 	var c = CardScene.instantiate() as Card
@@ -270,25 +259,25 @@ func CardDrawn(C : CardStats) -> void:
 		
 		if (!Placed):
 			c.queue_free()
-
+##----------------------------------------------------------------------##
 func MultiSpcificCardDrawn(DrawnCards : Array[CardStats]) -> void:
 	var Performer = GetCurrentShip()
-	CardSelect.SetCardsPick(Performer, DrawnCards)
 	if (IsShipFriendly(Performer)):
+		CardSelect.SetCardsPick(Performer, DrawnCards)
 		SelectingTarget = true
 		var Picked = await CardSelect.CardSelected
 		SelectingTarget = false
 		Performer.deck.DrawSpecific(DrawnCards[Picked])
 	else:
 		Performer.deck.DrawSpecific(DrawnCards.pick_random())
-	
+##----------------------------------------------------------------------##
 func MultiCardDrawn(DrawnCards : Array[CardStats], discardAmm : int) -> void:
 	var CardsToDiscard : Array[CardStats] = []
 	var Performer = GetCurrentShip()
 	
 	if (IsShipFriendly(Performer)):
 		while CardsToDiscard.size() < discardAmm:
-			CardSelect.SetCardsPick(Performer, DrawnCards)
+			CardSelect.SetCardsDiscard(Performer, DrawnCards)
 			SelectingTarget = true
 			var ToDiscard : int = await CardSelect.CardSelected
 			SelectingTarget = false
@@ -307,7 +296,7 @@ func MultiCardDrawn(DrawnCards : Array[CardStats], discardAmm : int) -> void:
 			ExternalUI.DeckUI.OnCardDrawn()
 			
 			if (!Placed):
-				g.queue_free()
+				c.queue_free()
 	else:
 		while CardsToDiscard.size() < discardAmm:
 			var ToDiscard = DrawnCards.pick_random()
@@ -317,37 +306,35 @@ func MultiCardDrawn(DrawnCards : Array[CardStats], discardAmm : int) -> void:
 		
 		for g in DrawnCards:
 			PlaceCardInEnemyHand(Performer, g)
-
+##----------------------------------------------------------------------##
 func OnShuffling(t : bool) -> void:
 	Shuffling = t
-
+##----------------------------------------------------------------------##
 func DiscardPileChanged(t : bool) -> void:
 	if (t):
 		ExternalUI.DiscardPile.OnCardDiscarded()
 	else:
 		ExternalUI.DiscardPile.OnCardRemoved()
-
+##----------------------------------------------------------------------##
 func DeckPileChanged(t : bool) -> void:
 	if (t):
 		ExternalUI.DeckUI.OnCardAdded(ExternalUI.DiscardPile.global_position)
 	else:
 		ExternalUI.DeckUI.OnCardDrawn()
-#function to sort battle ships based on their speed
+##----------------------------------------------------------------------##
 static func speed_comparator(a, b):
 	if a.GetSpeed() > b.GetSpeed():
 		return true  # -1 means 'a' should appear before 'b'
 	elif a.GetSpeed()< b.GetSpeed():
 		return false  # 1 means 'b' should appear before 'a'
 	return true
-
-
+##----------------------------------------------------------------------##
 func ShipVizPressed(Ship : BattleShipStats) -> void:
 	var CardFightShipInfoScene : PackedScene = ResourceLoader.load(ShipInfoSceneFile)
 	var Scene = CardFightShipInfoScene.instantiate() as CardFightShipInfo
 	Scene.SetUpShip(Ship)
 	add_child(Scene)
-
-
+##----------------------------------------------------------------------##
 #/////////////////////////////////////////////////
 #██████  ██   ██  █████  ███████ ███████ ███████ 
 #██   ██ ██   ██ ██   ██ ██      ██      ██      
@@ -355,24 +342,13 @@ func ShipVizPressed(Ship : BattleShipStats) -> void:
 #██      ██   ██ ██   ██      ██ ██           ██ 
 #██      ██   ██ ██   ██ ███████ ███████ ███████ 
 #/////////////////////////////////////////////////
-#1
-#First phase is action pick phase. Each ship based on their speed picks their actions based on how much energy they have
-#If its player ship, the atacks/deffences the ship has apear so player can choose.
-#If its enemy ship it is determined randomly what atacks they will do in EnemyActionSelection function
-#2
-#Second phase is actions perform phase. Each ship based on their speed do the actions they chose durring previus phase
-#An animation is played for each atacking action.
-#3
-#Third phase is DOT aplication phase. If any ship has a DOT on them (fire etc...) the damage of that dot is applied
-#4
-#Forth phase is cleanup phase, all unused card are refunded (an atack that was destined for a target that got killed) and the turn is reastarted
-#/////////////////////////////////////////////////
+
 var GameOver : bool = false
 
 signal NewTurnStarted
 signal PlayerActionPickingEnded
 signal EnemyActionPickedEnded
-
+##----------------------------------------------------------------------##
 func RunTurn() -> void:
 	if (GameOver):
 		return
@@ -381,20 +357,17 @@ func RunTurn() -> void:
 	ActionDeclarationPlacement.add_child(act)
 	act.DoActionDeclaration("Enemy Pick Phase", 1.5)
 	act.ActionDeclarationFinished.connect(PickPhase)
-
-
+##----------------------------------------------------------------------##
 func PickPhase() -> void:
 	if (GameOver):
 		return
-	#ActionDeclaration.ActionDeclarationFinished.disconnect(PickPhase)
 	CurrentPhase = CardFightPhase.ACTION_PICK
 	CurrentTurn = 0
 	
 	NewTurnStarted.emit()
 	
 	ProgressBuffsForCurrentShip()
-	
-
+##----------------------------------------------------------------------##
 func ProgressBuffsForCurrentShip() -> void:
 	if (GameOver):
 		return
@@ -402,8 +375,6 @@ func ProgressBuffsForCurrentShip() -> void:
 		var CurrentShip = GetCurrentShip()
 		var viz = CurrentShip.ShipViz
 		var ExpiredBuffs = CurrentShip.UpdateBuffs()
-		
-		UpdateShipStats(CurrentShip)
 		CurrentTurn = CurrentTurn + 1
 		
 		if (ExpiredBuffs.size() > 0):
@@ -418,17 +389,15 @@ func ProgressBuffsForCurrentShip() -> void:
 		else:
 			ProgressBuffsForCurrentShip()
 		
+		UpdateShipStats(CurrentShip)
 	else:
 		PickPhaseStart()
-	
-	
+##----------------------------------------------------------------------##
 func PickPhaseStart() -> void:
 	if (GameOver):
 		return
 	CurrentTurn = 0
-	
-	#ShipTurns.sort_custom(speed_comparator)
-	
+
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_ACTION_PICK)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ACTION_PICK)
 		ActionTracker.QueueTutorial("TUT_Cardfight_ActionPickingTitle", "TUT_Cardfight_ActionPickingText", [])
@@ -436,8 +405,7 @@ func PickPhaseStart() -> void:
 	CurrentPlayerLabel.visible = true
 	
 	StartCurrentShipsPickTurn()
-
-
+##----------------------------------------------------------------------##
 func StartCurrentShipsPickTurn() -> void:
 	if (GameOver):
 		return
@@ -452,18 +420,13 @@ func StartCurrentShipsPickTurn() -> void:
 		EnemyPickingMove = !IsShipFriendly(Ship)
 	else:
 		StartActionPerform()
-
-
+##----------------------------------------------------------------------##
 func RunShipsTurn(Ship : BattleShipStats) -> void:
 	if (GameOver):
 		return
-	#ActionDeclaration.ActionDeclarationFinished.disconnect(RunShipsTurn)
-	
+
 	var viz = Ship.ShipViz
 	viz.Enable()
-	#if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_SPEED_EXPLENATION)):
-		#ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_SPEED_EXPLENATION)
-		#ActionTracker.QueueTutorial("Ship Speed", "Each ships has a speed stat. Faster ships get to choose and also get to perform their moves first.", [],)
 
 	ActionList.AddShip(Ship)
 	if (IsShipFriendly(Ship)):
@@ -491,8 +454,7 @@ func RunShipsTurn(Ship : BattleShipStats) -> void:
 		EnemyPickingMove = true
 		await Ship.deck.DrawCard()
 		EnemyActionSelection(Ship)
-	
-	
+##----------------------------------------------------------------------##
 func OnCardSelected(C : Card) -> bool:
 	if (GameOver):
 		return false
@@ -519,7 +481,6 @@ func OnCardSelected(C : Card) -> bool:
 	PlayerPerformingMove = true
 	
 	Ship.SetEnergy(Ship.Energy - Cost)
-	#UpdateEnergy(Ship, Ship.Energy - Cost, true)
 	print("{0} has been removed from {1}'s hand.".format([C.CStats.GetCardName(), Ship.Name]))
 	Ship.deck.Hand.erase(C.CStats)
 	
@@ -527,31 +488,23 @@ func OnCardSelected(C : Card) -> bool:
 		if (C.CStats.OnPerformModule != null):
 			if (C.CStats.OnPerformModule is not OffensiveCardModule):
 				var Action : CardStats
-
 				Action = C.CStats
-				
-				var c = CardScene.instantiate() as Card
-				
+
 				var ShipAction = CardFightAction.new()
 				ShipAction.Action = Action
 				
-				#var Mod = Action.OnPerformModule
-				
 				var CardPosition = C.global_position
 				
+				var c = CardScene.instantiate() as Card
 				c.SetCardBattleStats(Ship, Action)
-				
 				c.connect("OnCardPressed", RemoveCard)
-				
+			
 				SelectedCardPlecement.add_child(c)
-
 				Ship.ShipViz.ActionPicked(Action)
 				ActionList.AddAction(Ship, ShipAction)
 				
 				await DoCardPlecementAnimation(Ship, c, CardPosition)
-			#call_deferred("DoCardPlecementAnimation", Ship, c, CardPosition)
 			C.get_parent().queue_free()
-
 		else:
 			var pos = C.global_position
 			var parent = C.get_parent()
@@ -590,8 +543,7 @@ func OnCardSelected(C : Card) -> bool:
 		PlayerActionSelectionEnded()
 	
 	return true
-
-
+##----------------------------------------------------------------------##
 func RemoveCard(C : Card) -> void:
 	if (SelectingTarget):
 		PopUpManager.GetInstance().DoFadeNotif("Finish selecting target")
@@ -602,7 +554,7 @@ func RemoveCard(C : Card) -> void:
 
 	var CurrentShip = GetCurrentShip()
 	
-	if (CurrentShip.Deck.Hand.size() == MaxCardsInHand):
+	if (CurrentShip.deck.Hand.size() == MaxCardsInHand):
 		NotifyFullHand()
 		return
 	
@@ -628,8 +580,8 @@ func RemoveCard(C : Card) -> void:
 		CurrentShip.SetEnergy(CurrentShip.Energy + C.GetCost())
 	
 	
-	CurrentShip.Deck.Hand.append(Stats)
-	ExternalUI.UpdateCardsInHandAmm(CurrentShip.Deck.Hand.size(), MaxCardsInHand)
+	CurrentShip.deck.Hand.append(Stats)
+	ExternalUI.UpdateCardsInHandAmm(CurrentShip.deck.Hand.size(), MaxCardsInHand)
 	
 	var c = CardScene.instantiate() as Card
 	c.SetCardBattleStats(CurrentShip, Stats)
@@ -637,7 +589,7 @@ func RemoveCard(C : Card) -> void:
 	ExternalUI.OnCardDrawn(c)
 	
 	C.queue_free()
-
+##----------------------------------------------------------------------##
 #Function used by enemies to pick moves
 func EnemyActionSelection(Ship : BattleShipStats) -> void:
 	#Add the energy to the current ship
@@ -757,7 +709,7 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 				ShipAction.Action = SelectedAction
 
 				ShipAction.Targets = await HandleTargets(Action.OnPerformModule, Ship)
-				Ship.ShipViz.ActionPicked(SelectedAction)
+				Ship.ShipViz.ActionPicked(SelectedAction, ShipAction.Targets)
 				ActionList.AddAction(Ship, ShipAction)
 
 			AvailableActions = await t.call(AvailableActions)
@@ -767,9 +719,7 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 		
 	print("{0} ended their turn with {1} exess energy".format([Ship.Name, Ship.Energy]))
 	EnemyActionPickedEnded.emit()
-
-
-
+##----------------------------------------------------------------------##
 func PlayerActionSelectionEnded() -> void:
 	if (GameOver):
 		return
@@ -786,8 +736,7 @@ func PlayerActionSelectionEnded() -> void:
 		return
 	#GetShipViz(ShipTurns[CurrentTurn]).Dissable()
 	PlayerActionPickingEnded.emit()
-
-
+##----------------------------------------------------------------------##
 func CurrentEnemyTurnEnded() -> void:
 	var Ship = GetCurrentShip()
 	var viz = Ship.ShipViz
@@ -805,7 +754,7 @@ func CurrentEnemyTurnEnded() -> void:
 		act.ActionDeclarationFinished.connect(StartCurrentShipsPickTurn)
 	else:
 		StartCurrentShipsPickTurn()
-	
+##----------------------------------------------------------------------##
 func CurrentPlayerTurnEnded() -> void:
 	PickingMoves = false
 	ClearCards()
@@ -819,16 +768,10 @@ func CurrentPlayerTurnEnded() -> void:
 	CurrentTurn = CurrentTurn + 1
 	
 	StartCurrentShipsPickTurn()
-
-
+##----------------------------------------------------------------------##
 func StartActionPerform() -> void:
-	
 	CurrentPlayerLabel.visible = false
 	ClearCards()
-	
-	#Sort ships again to make sure speed buffs are taken into account
-	#ShipTurns.sort_custom(speed_comparator)
-
 	ExternalUI.HideInfo()
 	CurrentPhase = CardFightPhase.ACTION_PERFORM
 	var declaration : PackedScene = ResourceLoader.load(AcrionDeclarationScene)
@@ -836,12 +779,8 @@ func StartActionPerform() -> void:
 	ActionDeclarationPlacement.add_child(act)
 	act.DoActionDeclaration("Enemy Perform Phase", 1.5)
 	act.ActionDeclarationFinished.connect(ActionPerformPhase)
-
-
+##----------------------------------------------------------------------##
 func ActionPerformPhase() -> void:
-	
-	#ActionDeclaration.ActionDeclarationFinished.disconnect(ActionPerformPhase)
-
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_ENEMY_ACTION_PERFORM)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ENEMY_ACTION_PERFORM)
 		ActionTracker.QueueTutorial("TUT_Cardfight_ActionPTitle", "TUT_Cardfight_ActionPText", [])
@@ -850,13 +789,10 @@ func ActionPerformPhase() -> void:
 	CurrentTurn = 0
 	
 	StartCurrentShipsPerformTurn()
-
-
+##----------------------------------------------------------------------##
 func StartCurrentShipsPerformTurn() -> void:
 	if (GameOver):
 		return
-	
-	
 	
 	if (CurrentTurn < ShipTurns.size()):
 		var Ship = GetCurrentShip()
@@ -874,8 +810,7 @@ func StartCurrentShipsPerformTurn() -> void:
 	CurrentTurn = 0
 	
 	DoShipFireDamage()
-
-
+##----------------------------------------------------------------------##
 func DoShipFireDamage() -> void:
 	#Itterate through all ships
 	for Ship in ShipTurns:
@@ -906,8 +841,7 @@ func DoShipFireDamage() -> void:
 			Ship.TurnsOnFire += 1
 
 	FireDamageFinished()
-
-
+##----------------------------------------------------------------------##
 func FireDamageFinished() -> void:
 	if (GameOver):
 		return
@@ -915,13 +849,13 @@ func FireDamageFinished() -> void:
 	ActionList.Clear()
 	
 	call_deferred("RunTurn")
-
+##----------------------------------------------------------------------##
 func PerformActions(Ship : BattleShipStats) -> void:
 	#var ActionsToBurn : Array[CardFightAction]
 	await Ship.ShipViz.Pop(true)
 	#viz.Enable()
 	PerformNextActionForShip(Ship, 0)
-
+##----------------------------------------------------------------------##
 func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void:
 	if (GameOver):
 		return
@@ -937,119 +871,123 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 	var Action = ShipAction.Action
 
 	var Targets = ShipAction.Targets
-	
 	var TargetShips : Array[BattleShipStats]
-	
+	#Skip turn if targets not available
 	for g in Targets:
 		if (g != null and ShipTurns.has(g)):
 			TargetShips.append(g)
-	
 	if (TargetShips.size() == 0):
 		ActionIndex += 1
 		PerformNextActionForShip(Ship, ActionIndex)
-	else:
-		var Mod = Action.OnPerformModule
+		return
+		
+	var Mod = Action.OnPerformModule
 
-		if (Mod is OffensiveCardModule):
-			ActionList.RemoveActionFromShip(Ship, Action)
-			var Counter : CardStats
-			var AtackType = Mod.AtackType
-
-
-			#List containing targets and a bool saying if target has def
-			var TargetList : Dictionary[BattleShipStats, Dictionary]
-			
-			for g in TargetShips:
-				for Act : CardFightAction in ActionList.GetShipsActions(g):
+	if (Mod is OffensiveCardModule):
+		ActionList.RemoveActionFromShip(Ship, Action)
+		
+		var AtackType = Mod.AtackType
+		
+		if (!Mod.AOE):
+			var EnemyTeam = GetShipEnemyTeam(Ship)
+			for enemy in EnemyTeam:
+				if enemy in TargetShips: #we dont want to intercept atack that already is comming to us
+					continue
+				for Act : CardFightAction in ActionList.GetShipsActions(enemy):
 					var mod = Act.Action.OnPerformModule
-					if (mod is CounterCardModule or mod is DamageReductionCardModule):
-						if (mod.CounterType == AtackType or mod.CounterType == OffensiveCardModule.AtackTypes.ANY_ATACK):
-							Counter = Act.Action
-							break
-					
-				var Data : Dictionary
-				Data["Def"] = Counter
-				Data["Viz"] = g.ShipViz
-				TargetList[g] = Data
+					if (mod is InterceptModule):
+						TargetShips.clear()
+						TargetShips.append(enemy)
+						var TargetViz = enemy.ShipViz
+						TargetViz.ActionRemoved(Act.Action.Icon)
+						ActionList.RemoveActionFromShip(enemy, Act.Action)
+						PopUpManager.GetInstance().DoFadeNotif("Attack Intercepted")
+						break
+		#List containing targets and a bool saying if target has def
+		var TargetList : Dictionary[BattleShipStats, Dictionary]
+		var Counter : CardStats
+		for g in TargetShips:
+			for Act : CardFightAction in ActionList.GetShipsActions(g):
+				var mod = Act.Action.OnPerformModule
+				if (mod is CounterCardModule or mod is DamageReductionCardModule):
+					if (mod.CounterType == AtackType or mod.CounterType == OffensiveCardModule.AtackTypes.ANY_ATACK):
+						Counter = Act.Action
+						break
+				
+			var Data : Dictionary
+			Data["Def"] = Counter
+			Data["Viz"] = g.ShipViz
+			TargetList[g] = Data
 
-			Ship.ShipViz.ActionRemoved(Action.Icon)
+		Ship.ShipViz.ActionRemoved(Action.Icon)
+		
+		var AtackData = OffensiveAnimationData.new()
+		
+		AtackData.Mod = Mod
+		AtackData.DeffenceList = TargetList
+		
+		var AnimData : Array[AnimationData]
+		AnimData.append(AtackData)
+		
+		var DamageCallables : Array[Callable]
+		
+		var AtackConnected = false
+		var AtackReduction : float = 1
+		
+		for g in TargetList:
 			
-			var AtackData = OffensiveAnimationData.new()
+			var Def = TargetList[g]["Def"] as CardStats
 			
-			AtackData.Mod = Mod
-			AtackData.DeffenceList = TargetList
-			
-			var AnimData : Array[AnimationData]
-			AnimData.append(AtackData)
-			
-			var DamageCallables : Array[Callable]
-			
-			var AtackConnected = false
-			var AtackReduction : float = 1
-			
-			for g in TargetList:
+			if (TargetList[g]["Def"] != null):
 				
-				var Def = TargetList[g]["Def"] as CardStats
+				var TargetViz = TargetList[g]["Viz"]
+				TargetViz.ActionRemoved(Counter.Icon)
+				ActionList.RemoveActionFromShip(g, Counter)
+				if (!Counter.ShouldConsume()):
+					g.deck.DiscardCard(Counter)
+						
+				if (!Friendly):
+					DamageNeg += Mod.GetFinalDamage(Ship, Action.Tier)
+					
+				var CounterMod = Def.OnPerformModule
 				
-				if (TargetList[g]["Def"] != null):
-					
-					var TargetViz = TargetList[g]["Viz"]
-					TargetViz.ActionRemoved(Counter.Icon)
-					ActionList.RemoveActionFromShip(g, Counter)
-					if (!Counter.ShouldConsume()):
-						PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
-						print("{0} has been added to {1}'s discard pile.".format([Counter.GetCardName(), g.Name]))
-						g.deck.DiscardPile.append(Counter)
-							
-					if (!Friendly):
-						DamageNeg += Mod.GetFinalDamage(Ship, Action.Tier)
-						
-					var CounterMod = Def.OnPerformModule
-					
-					if (CounterMod is DamageReductionCardModule):
-						AtackReduction = CounterMod.GetReductionPercent(Def.Tier)
-						for SDefMod in CounterMod.OnSuccesfullDeffenceModules:
-							AnimData.append(HandleModule(Ship, Def, SDefMod))
-						AtackConnected = true
-						
-					if (CounterMod is CounterCardModule):
-						for SDefMod in CounterMod.OnSuccesfullDeffenceModules:
-							AnimData.append(HandleModule(Ship, Def, SDefMod))
-				else:
+				if (CounterMod is DamageReductionCardModule):
+					AtackReduction = CounterMod.GetReductionPercent(Def.Tier)
+					for SDefMod in CounterMod.OnSuccesfullDeffenceModules:
+						AnimData.append(HandleModule(Ship, Def, SDefMod))
 					AtackConnected = true
-				
-				if (AtackConnected):
-					for SAtMod in Mod.OnSuccesfullAtackModules:
-						AnimData.append(HandleModule(Ship, Action, SAtMod, TargetList.keys()))
-						
-					var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Ship,Action.Tier) * AtackReduction, Mod.CauseFile, Mod.SkipShield)
-					DamageCallables.append(c)
+					
+				if (CounterMod is CounterCardModule):
+					for SDefMod in CounterMod.OnSuccesfullDeffenceModules:
+						AnimData.append(HandleModule(Ship, Def, SDefMod))
+			else:
+				AtackConnected = true
 			
-			for SAtMod in Mod.OnAtackModules:
-				AnimData.append(HandleModule(Ship, Action, SAtMod, TargetList.keys()))
+			if (AtackConnected):
+				for SAtMod in Mod.OnSuccesfullAtackModules:
+					AnimData.append(HandleModule(Ship, Action, SAtMod, TargetList.keys()))
+					
+				var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Ship,Action.Tier) * AtackReduction, Mod.CauseFile, Mod.SkipShield)
+				DamageCallables.append(c)
+		
+		for SAtMod in Mod.OnAtackModules:
+			AnimData.append(HandleModule(Ship, Action, SAtMod, TargetList.keys()))
 
-			AtackData.Callables = DamageCallables
-			
-			if (!Action.ShouldConsume()):
-				PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
-				print("{0} has been added to {1}'s discard pile.".format([Action.GetCardName(), Ship.Name]))
-				Ship.deck.DiscardPile.append(Action)
-			
-			await DoCardAnim(Action, AnimData, Ship, Friendly)
-			PerformAnimationFinished(Ship, ActionIndex)
-		else:
-			ActionIndex += 1
-			PerformNextActionForShip(Ship, ActionIndex)
-
+		AtackData.Callables = DamageCallables
+		
+		if (!Action.ShouldConsume()):
+			Ship.deck.DiscardCard(Action)
+		
+		await DoCardAnim(Action, AnimData, Ship, Friendly)
+	else:
+		ActionIndex += 1
+		
+	PerformNextActionForShip(Ship, ActionIndex)
+##----------------------------------------------------------------------##
 func ConnectMoves(C : Array[Callable]) -> void:
 	var c = C.pop_front() as Callable
 	c.call()
-	
-
-func PerformAnimationFinished(Ship : BattleShipStats, ActionIndex : int) -> void:
-	PerformNextActionForShip(Ship, ActionIndex)
-
-
+##----------------------------------------------------------------------##
 func PerformTurnFinished(Ship : BattleShipStats) -> void:
 	var ReplacingAmm = ShipBeingReplaced.size()
 	for g in ReplacingAmm:
@@ -1059,8 +997,7 @@ func PerformTurnFinished(Ship : BattleShipStats) -> void:
 		await Ship.ShipViz.Pop(false)
 	CurrentTurn = CurrentTurn + 1
 	StartCurrentShipsPerformTurn()
-
-
+##----------------------------------------------------------------------##
 #Refunds cards that consume inventory items if the card wasnt used in the end
 func RefundUnusedCards() -> void:
 	for Ship in PlayerCombatants:
@@ -1081,15 +1018,11 @@ func RefundUnusedCards() -> void:
 				#continue
 			RefundCardToShip(ShipAction.Action, Ship)
 			Ship.ShipViz.ActionRemoved(ShipAction.Action.Icon)
-
-
+##----------------------------------------------------------------------##
 func RefundCardToShip(C : CardStats, Ship : BattleShipStats):
 	print("{0} got refunded a {1} card for not using it.".format([Ship.Name, C.GetCardName()]))
-	PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
-	print("{0} has been added to {1}'s discard pile.".format([C.GetCardName(), Ship.Name]))
-	Ship.deck.DiscardPile.append(C)
-
-
+	Ship.deck.DiscardCard(C)
+##----------------------------------------------------------------------##
 func RestartCards() -> void:
 	ClearCards()
 	
@@ -1107,7 +1040,7 @@ func RestartCards() -> void:
 	#GetShipViz(ShipTurns[CurrentTurn]).Enable()
 	
 	HandleDrawCard(currentship)
-
+##----------------------------------------------------------------------##
 # CALLED AT THE END. SHOWS ENDSCREEN WITH DATA COLLECTED AND WAITS FOR PLAYER 
 func OnFightEnded(Won : bool) -> void:
 	var EndScene : PackedScene = ResourceLoader.load(EndSceneFile)
@@ -1128,7 +1061,6 @@ func OnFightEnded(Won : bool) -> void:
 	End.SetData(Data)
 	add_child(End)
 
-	
 	var Survivors : Array[BattleShipStats]
 	RefundUnusedCards()
 	for g in PlayerCombatants:
@@ -1153,8 +1085,7 @@ func OnFightEnded(Won : bool) -> void:
 	
 	CardFightDestroyed.emit()
 	#queue_free()
-	
-	
+##----------------------------------------------------------------------##
 #/////////////////////////////////////////////////////////////////////
 #██   ██  █████  ███    ██ ██████  ██      ███████ ██████  ███████ 
 #██   ██ ██   ██ ████   ██ ██   ██ ██      ██      ██   ██ ██      
@@ -1162,12 +1093,10 @@ func OnFightEnded(Won : bool) -> void:
 #██   ██ ██   ██ ██  ██ ██ ██   ██ ██      ██      ██   ██      ██ 
 #██   ██ ██   ██ ██   ████ ██████  ███████ ███████ ██   ██ ███████ 
 #/////////////////////////////////////////////////////////////////////
-
+##----------------------------------------------------------------------##
 func HandleModules(Performer : BattleShipStats, C : CardStats) -> void:
 	if (C.Burned):
-		PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
-		print("{0} has been added to {1}'s discard pile.".format([C.GetCardName(), Performer.Name]))
-		Performer.deck.DiscardPile.append(C)
+		Performer.deck.DiscardCard(C)
 	else:
 		if (C.OnPerformModule):
 			pass
@@ -1177,14 +1106,9 @@ func HandleModules(Performer : BattleShipStats, C : CardStats) -> void:
 					Performer.Cards.erase(g)
 					break
 		else:
-			PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
-			print("{0} has been added to {1}'s discard pile.".format([C.GetCardName(), Performer.Name]))
-			Performer.deck.DiscardPile.append(C)
+			Performer.deck.DiscardCard(C)
 
 	var AnimData : Array[AnimationData]
-	if (C.Burned):
-		AnimData.append(HandleBurned(C))
-	else:
 	for Mod in C.OnUseModules.size():
 		var Data : AnimationData
 		
@@ -1199,65 +1123,77 @@ func HandleModules(Performer : BattleShipStats, C : CardStats) -> void:
 		
 	if (AnimData.size() > 0):
 		await DoCardAnim(C, AnimData, Performer, true)
-
+##----------------------------------------------------------------------##
 func HandleModulesPl(Performer : BattleShipStats, C : CardStats) -> void:
 	var AnimData : Array[AnimationData]
 	if (C.Burned):
-		PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
-		print("{0} has been added to {1}'s discard pile.".format([C.GetCardName(), Performer.Name]))
-		Performer.deck.DiscardPile.append(C)
-		ExternalUI.DiscardPile.OnCardDiscarded()
+		Performer.deck.DiscardCard(C)
 	else:
-		if (C.OnPerformModule is not CounterCardModule):
-			if (C.ShouldConsume()):
-				for g in Performer.Cards:
-					if (g.IsSame(C)):
-						Performer.Cards.erase(g)
-						break
-			else:
-				PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
-				print("{0} has been added to {1}'s discard pile.".format([C.GetCardName(), Performer.Name]))
-				Performer.deck.DiscardPile.append(C)
-				ExternalUI.DiscardPile.OnCardDiscarded()
-			
-	
-	if (C.Burned):
-		AnimData.append(HandleBurned(C))
-	else:
+		if (C.OnPerformModule):
+			if (C.OnPerformModule is OffensiveCardModule):
+				if (C.ShouldConsume()):
+					for g in Performer.Cards:
+						if (g.IsSame(C)):
+							Performer.Cards.erase(g)
+							break
+				else:
+					Performer.deck.DiscardCard(C)
+		else: if (C.ShouldConsume()):
+			for g in Performer.Cards:
+				if (g.IsSame(C)):
+					Performer.Cards.erase(g)
+					break
+		else:
+			Performer.deck.DiscardCard(C)
 		
+	for Mod in C.OnUseModules.size():
+		var targets = await HandleTargets(C.OnUseModules[Mod], Performer)
 		
-		for Mod in C.OnUseModules.size():
-			var targets = await HandleTargets(C.OnUseModules[Mod], Performer)
+		var Data : AnimationData
+		
+		Data = HandleModule(Performer, C ,C.OnUseModules[Mod], targets)
+		
+		if (Mod < C.OnUseModules.size() - 1):
+			await Helper.GetInstance().wait(0.2)
 			
-			var Data : AnimationData
-			
-			Data = HandleModule(Performer, C ,C.OnUseModules[Mod], targets)
-			
-			if (Mod < C.OnUseModules.size() - 1):
-				await Helper.GetInstance().wait(0.2)
-				
-			if (Data != null):
-				AnimData.append(Data)
-		if (C.OnPerformModule != null and C.OnPerformModule is OffensiveCardModule):
-			if (C.OnPerformModule is EnergyOffensiveCardModule):
-				var NewMod = C.OnPerformModule.duplicate()
-				NewMod.StoredEnergy = Performer.Energy
-				Performer.SetEnergy(0)
-				C.OnPerformModule = NewMod
+		if (Data != null):
+			AnimData.append(Data)
+	if (C.OnPerformModule != null and C.OnPerformModule is OffensiveCardModule):
+		if (C.OnPerformModule is EnergyOffensiveCardModule):
+			var NewMod = C.OnPerformModule.duplicate()
+			NewMod.StoredEnergy = Performer.Energy
+			Performer.SetEnergy(0)
+			C.OnPerformModule = NewMod
 
-			var targets = await HandleTargets(C.OnPerformModule, Performer)
-			await HandleOffensiveModule(Performer, C ,C.OnPerformModule, targets)
+		var targets = await HandleTargets(C.OnPerformModule, Performer)
+		await HandleOffensiveModule(Performer, C ,C.OnPerformModule, targets)
 
 		
 	if (AnimData.size() > 0):
 		await DoCardAnim(C, AnimData, Performer, true)
-
+##----------------------------------------------------------------------##
 func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod : OffensiveCardModule, TargetShips : Array[BattleShipStats]) -> void:
 	var AnimData : Array[AnimationData]
 	var Friendly = IsShipFriendly(Performer)
 
 	var AtackType = Mod.AtackType
 	var Counter : CardStats
+	
+	if (!Mod.AOE):
+		var EnemyTeam = GetShipEnemyTeam(Performer)
+		for enemy in EnemyTeam:
+			if enemy in TargetShips: #we dont want to intercept atack that already is comming to us
+				continue
+			for Act : CardFightAction in ActionList.GetShipsActions(enemy):
+				var mod = Act.Action.OnPerformModule
+				if (mod is InterceptModule):
+					TargetShips.clear()
+					TargetShips.append(enemy)
+					var TargetViz = enemy.ShipViz
+					TargetViz.ActionRemoved(Act.Action.Icon)
+					ActionList.RemoveActionFromShip(enemy, Act.Action)
+					PopUpManager.GetInstance().DoFadeNotif("Attack Intercepted")
+					break
 	
 	#List containing targets and a bool saying if target has def
 	var TargetList : Dictionary[BattleShipStats, Dictionary]
@@ -1299,10 +1235,7 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 			TargetViz.ActionRemoved(Counter.Icon)
 			ActionList.RemoveActionFromShip(g, Counter)
 			if (!Counter.ShouldConsume()):
-				PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
-				print("{0} has been added to {1}'s discard pile.".format([Counter.GetCardName(), g.Name]))
-				g.deck.DiscardPile.append(Counter)
-					
+				g.deck.DiscardCard(Counter)
 			if (!Friendly):
 				DamageNeg += Mod.GetFinalDamage(Performer, Action.Tier)
 				
@@ -1334,16 +1267,12 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 	AtackData.Callables = DamageCallables
 
 	await DoCardAnim(Action, AnimData, Performer, Friendly)
-
+##----------------------------------------------------------------------##
 func HandleModule(Performer : BattleShipStats, C : CardStats, Mod : CardModule, Targets : Array[BattleShipStats] = []) -> AnimationData:
 	var AnimData : AnimationData = Mod.Handle(Performer, C, Targets)
-	
-	if (Mod is InterceptModule):
-		AnimData = HandleIntercept(Performer, Mod)
-		
+
 	return AnimData
-
-
+##----------------------------------------------------------------------##
 func HandleIntercept(Performer : BattleShipStats, Mod : InterceptModule) -> DeffensiveAnimationData:
 	var TargetViz : Array[Control]
 	TargetViz.append(Performer.ShipViz)
@@ -1355,17 +1284,11 @@ func HandleIntercept(Performer : BattleShipStats, Mod : InterceptModule) -> Deff
 				Act.Targets.clear()
 				Act.Targets.append(Performer)
 		
-	
 	var Data = DeffensiveAnimationData.new()
 	Data.Mod = Mod
 	Data.Targets = TargetViz
 	return Data
-
-
-func HandleBurned(Action : CardStats) -> DeffensiveAnimationData:
-	var Data = DeffensiveAnimationData.new()
-	return Data
-
+##----------------------------------------------------------------------##
 func HandleTargets(Mod : CardModule, User : BattleShipStats) -> Array[BattleShipStats]:
 	var Targets : Array[BattleShipStats]
 	if (!Mod.NeedsTargetSelect()):
@@ -1429,19 +1352,7 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats) -> Array[BattleShip
 				Targets.append(GetBestTargetForAtack(EnemyTeam))
 	
 	return Targets
-
-#func GetBestTargetForAtack(Candidates : Array[BattleShipStats]) -> BattleShipStats:
-	#var CurrentBiggestPoints : float = 999999999999
-	#var CurrentTarget : BattleShipStats
-	#
-	#for g in Candidates:
-		#var Points = g.CurrentHull + (g.DefDebuff * 1000) + (g.GetFirePower() * 500)
-		#if (CurrentBiggestPoints > Points):
-			#CurrentTarget = g
-			#CurrentBiggestPoints = Points
-	#
-	#return CurrentTarget
-
+##----------------------------------------------------------------------##
 func GetBestTargetForAtack(Candidates : Array) -> BattleShipStats:
 	var points_list = []
 	for g in Candidates:
@@ -1462,7 +1373,7 @@ func GetBestTargetForAtack(Candidates : Array) -> BattleShipStats:
 
 	# As fallback (should not happen), return a random one
 	return Candidates[randi() % Candidates.size()]
-
+##----------------------------------------------------------------------##
 func GetTargetWithBiggestStat(Candidates : Array[BattleShipStats], St : CardModule.Stat) -> BattleShipStats:
 	var CurrentBiggestStat: float = 0
 	var CurrentTarget : BattleShipStats
@@ -1481,7 +1392,7 @@ func GetTargetWithBiggestStat(Candidates : Array[BattleShipStats], St : CardModu
 			CurrentBiggestStat = Stat
 	
 	return CurrentTarget
-
+##----------------------------------------------------------------------##
 func HandleDrawCard(Performer : BattleShipStats, ConsumeEnergy : bool = false) -> bool:
 	if (Performer.deck.isShuffling):
 		PopUpManager.GetInstance().DoFadeNotif("Shuffling in progress")
@@ -1494,14 +1405,14 @@ func HandleDrawCard(Performer : BattleShipStats, ConsumeEnergy : bool = false) -
 		Performer.SetEnergy(Performer.Energy - 1)
 		
 	return true
-
+##----------------------------------------------------------------------##
 #//////////////////////////////////////////////////////////////////////
 #██   ██ ████   ██ ██ ████  ████ ██   ██    ██    ██ ██    ██ ████   ██ 
 #███████ ██ ██  ██ ██ ██ ████ ██ ███████    ██    ██ ██    ██ ██ ██  ██ 
 #██   ██ ██  ██ ██ ██ ██  ██  ██ ██   ██    ██    ██ ██    ██ ██  ██ ██ 
 #██   ██ ██   ████ ██ ██      ██ ██   ██    ██    ██  ██████  ██   ████
 #//////////////////////////////////////////////////////////////////////
-
+##----------------------------------------------------------------------##
 func DoCardAnim(Action : CardStats, Data : Array[AnimationData], Performer : BattleShipStats, _FriendShip : bool) -> void:
 	print("Starting Def Anim")
 	var ActionAnim : PackedScene = ResourceLoader.load(ActionAnimFile)
@@ -1524,7 +1435,7 @@ func DoCardAnim(Action : CardStats, Data : Array[AnimationData], Performer : Bat
 	print("finished anim")
 	anim.visible = false
 	anim.queue_free()
-
+##----------------------------------------------------------------------##
 func DoCardSelectAnimation(Action : CardStats, Performer : BattleShipStats, User : Control) -> void:
 	var ActionAnim : PackedScene = ResourceLoader.load(ActionAnimFile)
 	var anim = ActionAnim.instantiate() as CardOffensiveAnimation
@@ -1541,7 +1452,7 @@ func DoCardSelectAnimation(Action : CardStats, Performer : BattleShipStats, User
 	S.volume_db = - 20
 	
 	await(anim.AnimationFinished)
-
+##----------------------------------------------------------------------##
 func DoCardDrawAnimation(User : Control) -> void:
 	var ActionAnim : PackedScene = ResourceLoader.load(ActionAnimFile)
 	var anim = ActionAnim.instantiate() as CardOffensiveAnimation
@@ -1558,44 +1469,32 @@ func DoCardDrawAnimation(User : Control) -> void:
 	S.volume_db = - 20
 	
 	await(anim.AnimationFinished)
-
+##----------------------------------------------------------------------##
 func DoCardPlecementAnimation(User : BattleShipStats, C : Card, OriginalPos : Vector2) -> void:
 	var c = CardScene.instantiate() as Card
-	
+
 	c.SetCardBattleStats(User, C.CStats)
-	#c.TargetLocs = C.TargetLocs
 	$SubViewport/Control2.add_child(c)
 	c.global_position = OriginalPos
-	#c.CompactCard()
-	#C.CompactCard()
 	var S = DeletableSoundGlobal.new()
 	S.stream = CardPlecementSound
 	S.autoplay = true
 	S.pitch_scale = randf_range(0.8, 1.2)
-	#S.bus = "MapSounds"
 	add_child(S)
 	S.volume_db = - 20
 	var PlecementTw = create_tween()
-	#var RotationTw = create_tween()
 	PlecementTw.set_ease(Tween.EASE_OUT)
 	PlecementTw.set_trans(Tween.TRANS_QUAD)
-	#RotationTw.set_ease(Tween.EASE_OUT)
-	#RotationTw.set_trans(Tween.TRANS_QUAD)
 	var pos = C.global_position
 	PlecementTw.tween_property(c, "global_position", C.global_position, 0.4)
-	#.tween_property(c, "rotation", C.rotation, 0.4)
 	var parent = C.get_parent()
 	parent.remove_child(C)
-	
-	#C.visible = false
 	await PlecementTw.finished
 	c.queue_free()
 	
 	parent.add_child(C)
 	C.global_position = pos
-	#if (C != null):
-		#C.visible = true
-
+##----------------------------------------------------------------------##
 #////////////////////////////////////////////////////////////////////////////
  #██████  ███████ ████████ ████████ ███████ ██████  ███████ 
 #██       ██         ██       ██    ██      ██   ██ ██      
@@ -1604,12 +1503,12 @@ func DoCardPlecementAnimation(User : BattleShipStats, C : Card, OriginalPos : Ve
  #██████  ███████    ██       ██    ███████ ██   ██ ███████ 
 #////////////////////////////////////////////////////////////////////////////
 #Usefull getters
-
+##----------------------------------------------------------------------##
 func GetCurrentShip() -> BattleShipStats:
 	if (ShipTurns.size() - 1 < CurrentTurn):
 		return null
 	return ShipTurns[CurrentTurn]
-
+##----------------------------------------------------------------------##
 func GetShipsTeam(Ship : BattleShipStats) -> Array[BattleShipStats]:
 	var Team : Array[BattleShipStats]
 	if (IsShipFriendly(Ship)):
@@ -1619,8 +1518,7 @@ func GetShipsTeam(Ship : BattleShipStats) -> Array[BattleShipStats]:
 		for g in EnemyCombatants:
 			Team.append(g)
 	return Team
-
-
+##----------------------------------------------------------------------##
 func GetShipEnemyTeam(Ship : BattleShipStats) -> Array[BattleShipStats]:
 	var Team : Array[BattleShipStats]
 	if (IsShipFriendly(Ship)):
@@ -1630,8 +1528,7 @@ func GetShipEnemyTeam(Ship : BattleShipStats) -> Array[BattleShipStats]:
 		for g in PlayerCombatants:
 			Team.append(g)
 	return Team
-
-
+##----------------------------------------------------------------------##
 func GetFightingUnitAmmount(Ships : Array[BattleShipStats]) -> int:
 	var CombatantAmmount = 0
 	for g in Ships:
@@ -1640,12 +1537,10 @@ func GetFightingUnitAmmount(Ships : Array[BattleShipStats]) -> int:
 		if (!g.Convoy):
 			CombatantAmmount += 1
 	return CombatantAmmount
-
-
+##----------------------------------------------------------------------##
 func IsShipFriendly(Ship : BattleShipStats) -> bool:
 	return Ship.Friendly
-
-
+##----------------------------------------------------------------------##
 #////////////////////////////////////////////////////////////////////////////
 #███████ ████████  █████  ████████     ███    ███  █████  ███    ██ ██ ██████  ██    ██ ██       █████  ████████ ██  ██████  ███    ██ 
 #██         ██    ██   ██    ██        ████  ████ ██   ██ ████   ██ ██ ██   ██ ██    ██ ██      ██   ██    ██    ██ ██    ██ ████   ██ 
@@ -1653,7 +1548,7 @@ func IsShipFriendly(Ship : BattleShipStats) -> bool:
 	 #██    ██    ██   ██    ██        ██  ██  ██ ██   ██ ██  ██ ██ ██ ██      ██    ██ ██      ██   ██    ██    ██ ██    ██ ██  ██ ██ 
 #███████    ██    ██   ██    ██        ██      ██ ██   ██ ██   ████ ██ ██       ██████  ███████ ██   ██    ██    ██  ██████  ██   ████ 
 #////////////////////////////////////////////////////////////////////////////
-
+##----------------------------------------------------------------------##
 func ShipDamaged(amm : float, Ship : BattleShipStats) -> void:
 	if (IsShipFriendly(Ship)):
 		
@@ -1667,8 +1562,8 @@ func ShipDamaged(amm : float, Ship : BattleShipStats) -> void:
 	else:
 		DamageDone += amm
 	if (Ship.CurrentHull <= 0):
-		await ShipDestroyed(Ship)
-
+		ShipDestroyed(Ship)
+##----------------------------------------------------------------------##
 # RETURN TRUE IF FIGHT IS OVER
 func ShipDestroyed(Ship : BattleShipStats) -> bool:
 	var Friendly = IsShipFriendly(Ship)
@@ -1691,7 +1586,7 @@ func ShipDestroyed(Ship : BattleShipStats) -> bool:
 	
 	GameOver = !EnemiesAlive or !PlayerAlive
 	
-	await ReplaceShip(Ship, TurnPosition, Friendly)
+	ReplaceShip(Ship, TurnPosition, Friendly)
 	
 	if (GameOver):
 		await Helper.GetInstance().wait(3)
@@ -1699,10 +1594,7 @@ func ShipDestroyed(Ship : BattleShipStats) -> bool:
 		return true
 		
 	return false
-
-
-
-
+##----------------------------------------------------------------------##
 func RemoveShip(Ship : BattleShipStats) -> void:
 	var ShipViz = Ship.ShipViz
 	ShipViz.ShipDestroyed()
@@ -1712,6 +1604,7 @@ func RemoveShip(Ship : BattleShipStats) -> void:
 	ShipTurns.erase(Ship)
 	PlayerCombatants.erase(Ship)
 	EnemyCombatants.erase(Ship)
+##----------------------------------------------------------------------##
 #////////////////////////////////////////////////////////////////////////////
 #██    ██ ██ 
 #██    ██ ██ 
@@ -1719,7 +1612,7 @@ func RemoveShip(Ship : BattleShipStats) -> void:
 #██    ██ ██ 
  #██████  ██ 
 #////////////////////////////////////////////////////////////////////////////
-
+##----------------------------------------------------------------------##
 func CreateShipVisuals(BattleS : BattleShipStats, Friendly : bool) -> CardFightShipViz2:
 	var VizScene : PackedScene = ResourceLoader.load(ShipVizScene)
 	var ShipVisuals = VizScene.instantiate() as CardFightShipViz2
@@ -1740,7 +1633,7 @@ func CreateShipVisuals(BattleS : BattleShipStats, Friendly : bool) -> CardFightS
 	NewTurnStarted.connect(ShipVisuals.OnNewTurnStarted)
 	
 	return ShipVisuals
-	
+##----------------------------------------------------------------------##
 func UpdateHandCards() -> void:
 	
 	ExternalUI.ClearHand()
@@ -1755,18 +1648,16 @@ func UpdateHandCards() -> void:
 		#call_deferred("DoCardPlecementAnimation", c, ExternalUI.GetDeckkPile().global_position)
 	
 	ExternalUI.UpdateCardsInHandAmm(CurrentShip.deck.Hand.size(), MaxCardsInHand)
-
+##----------------------------------------------------------------------##
 func UpdateCardDescriptions(User : BattleShipStats):
 	var Cards = get_tree().get_nodes_in_group("Card")
 	for g : Card in Cards:
 		g.UpdateBattleStats(User)
-		
+##----------------------------------------------------------------------##
 func UpdateShipStats(BattleS : BattleShipStats) -> void:
-	var viz = BattleS.ShipViz
-	viz.Refresh()
 	if (ShipTurns.find(BattleS) == CurrentTurn):
 		UpdateCardDescriptions(BattleS)
-
+##----------------------------------------------------------------------##
 func EnergyUpdated(Ship : BattleShipStats, energyAdded : int) -> void:
 	var OldEnergy = Ship.Energy - energyAdded
 	#var RoundedEnergy = roundi(NewEnergy)
@@ -1777,7 +1668,7 @@ func EnergyUpdated(Ship : BattleShipStats, energyAdded : int) -> void:
 			ExternalUI.GetEnergyBar().ChangeSegmentAmm(Ship.Energy)
 	
 		UpdateCardDescriptions(Ship)
-
+##----------------------------------------------------------------------##
 func ReservesUpdated(Ship : BattleShipStats, reservesAdded : int) -> void:
 	var OldEnergy = Ship.EnergyReserves - reservesAdded
 	if (GetCurrentShip() == Ship):
@@ -1786,19 +1677,17 @@ func ReservesUpdated(Ship : BattleShipStats, reservesAdded : int) -> void:
 			ExternalUI.GetReserveBar().ChangeSegmentAmm(Ship.EnergyReserves)
 	
 		UpdateCardDescriptions(Ship)
-
+##----------------------------------------------------------------------##
 func UpdateFleetSizeAmmount() -> void:
 	PlayerFleetSizeLabel.text = "Fleet Size\n{0}".format([PlayerReserves.size() + PlayerCombatants.size()])
 	EnemyFleetSizeLabel.text = "Fleet Size\n{0}".format([EnemyReserves.size() + EnemyCombatants.size()])
-	
-
+##----------------------------------------------------------------------##
 func ClearCards() -> void:
 	ExternalUI.ClearHand()
 	for g in SelectedCardPlecement.get_children():
 		g.free()
-
+##----------------------------------------------------------------------##
 var HandCountTween : Tween
-
 func NotifyFullHand() -> void:
 	PopUpManager.GetInstance().DoFadeNotif("Hand is full")
 	if (HandCountTween and HandCountTween.is_running()):
@@ -1808,14 +1697,12 @@ func NotifyFullHand() -> void:
 	#HandCountTween.tween_property(HandAmmountLabel,"scale", Vector2(1.2, 1.2), 0.55)
 	
 	HandCountTween.finished.connect(NotifyFullHandStage2)
-	
+##----------------------------------------------------------------------##
 func NotifyFullHandStage2() -> void:
 	HandCountTween.kill()
 	
 	HandCountTween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
-	#HandCountTween.tween_property(HandAmmountLabel,"scale", Vector2.ONE, 0.55)
-
-
+##----------------------------------------------------------------------##
 func _on_deck_button_pressed() -> void:
 	if (GameOver):
 		ExternalUI.CardDrawFail()
@@ -1845,11 +1732,9 @@ func _on_deck_button_pressed() -> void:
 		ExternalUI.CardDrawFail()
 		PopUpManager.GetInstance().DoFadeNotif("Not enough energy")
 		return
-	
-	
+
 	await HandleDrawCard(Ship, true)
-
-
+##----------------------------------------------------------------------##
 func _on_pull_reserves_pressed() -> void:
 	if (GameOver):
 		return
@@ -1870,8 +1755,7 @@ func _on_pull_reserves_pressed() -> void:
 	currentship.EnergyReserves = 0
 	currentship.SetEnergy(currentship.Energy + Reserv)
 	currentship.SetReserves(0)
-	
-
+##----------------------------------------------------------------------##
 func _on_switch_ship_pressed() -> void:
 	if (GameOver):
 		return
@@ -1921,9 +1805,7 @@ func _on_switch_ship_pressed() -> void:
 	#CreateDecks()
 	
 	PlayerActionSelectionEnded()
-
-#////////////////////////////////////////////////////////////////////////////
-
+##----------------------------------------------------------------------##
 func PlaceCardInPlayerHand(Performer : BattleShipStats,C : Card) -> bool:
 	var CanPlace : bool = false
 
@@ -1941,15 +1823,12 @@ func PlaceCardInPlayerHand(Performer : BattleShipStats,C : Card) -> bool:
 	else:
 		ExternalUI.ToggleHandInput(false)
 		
-		var Hand : Array[Card]
-		Hand = ExternalUI.GetCardsInHand()
-		#for g in SelectedCardPlecement.get_children():
-			#if (g.get_child_count() > 0):
-				#Hand.append(g.get_child(0))
+		var Hand : Array[CardStats]
+		Hand = Performer.deck.Hand.duplicate()
 		
-		Hand.append(C)
+		Hand.append(C.CStats)
 		
-		CardSelect.SetCards(Performer, Hand)
+		CardSelect.SetCardsDiscard(Performer, Hand)
 		SelectingTarget = true
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_HAND_LIMIT)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_HAND_LIMIT)
@@ -1959,10 +1838,7 @@ func PlaceCardInPlayerHand(Performer : BattleShipStats,C : Card) -> bool:
 		SelectingTarget = false
 
 		if (ToDiscard == MaxCardsInHand):
-			PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
-			print("{0} has been added to {1}'s discard pile.".format([C.CStats.GetCardName(), Performer.Name]))
-			Performer.deck.DiscardPile.append(C.CStats)
-			ExternalUI.DiscardPile.OnCardDiscarded()
+			Performer.deck.DiscardCard(C.CStats)
 			ExternalUI.ToggleHandInput(true)
 			return false
 		
@@ -1971,10 +1847,7 @@ func PlaceCardInPlayerHand(Performer : BattleShipStats,C : Card) -> bool:
 		#var Plecement = PlayerCardPlecement.get_child(ToDiscard)
 		var Discarded : Card = ExternalUI.GetPlayerCardPlecement().get_child(ToDiscard)
 		await ExternalUI.InsertCardToDiscard(Discarded)
-		PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
-		print("{0} has been added to {1}'s discard pile.".format([Discarded.CStats.GetCardName(), Performer.Name]))
-		Performer.deck.DiscardPile.append(Discarded.CStats)
-		ExternalUI.DiscardPile.OnCardDiscarded()
+		Performer.deck.DiscardCard(Discarded.CStats)
 		Discarded.get_parent().queue_free()
 		ExternalUI.OnCardDrawn(C)
 		Performer.deck.Hand.erase(Discarded.CStats)
@@ -1984,8 +1857,7 @@ func PlaceCardInPlayerHand(Performer : BattleShipStats,C : Card) -> bool:
 	C.call_deferred("UpdateBattleStats", Performer)
 	ExternalUI.UpdateCardsInHandAmm(Performer.deck.Hand.size(), MaxCardsInHand)
 	return true
-
-
+##----------------------------------------------------------------------##
 func PlaceCardInEnemyHand(Performer : BattleShipStats, C : CardStats) -> bool:
 	var CanPlace : bool = false
 
@@ -2007,7 +1879,7 @@ func PlaceCardInEnemyHand(Performer : BattleShipStats, C : CardStats) -> bool:
 		Performer.deck.DiscardPile.append(ToDiscard)
 
 	return true
-
+##----------------------------------------------------------------------##
 #////////////////////////////////////////////////////////////////////////////////////////////////
 #██████   █████  ███    ██ ██████   ██████  ███    ███     ███████ ██  ██████  ██   ██ ████████ 
 #██   ██ ██   ██ ████   ██ ██   ██ ██    ██ ████  ████     ██      ██ ██       ██   ██    ██    
@@ -2015,6 +1887,7 @@ func PlaceCardInEnemyHand(Performer : BattleShipStats, C : CardStats) -> bool:
 #██   ██ ██   ██ ██  ██ ██ ██   ██ ██    ██ ██  ██  ██     ██      ██ ██    ██ ██   ██    ██    
 #██   ██ ██   ██ ██   ████ ██████   ██████  ██      ██     ██      ██  ██████  ██   ██    ██    
 #////////////////////////////////////////////////////////////////////////////////////////////////
+##----------------------------------------------------------------------##
 func InitRandomFight(ShipAmm : int) -> void:
 	if (EnemyReserves.size() == 0):
 		for g in ShipAmm:
@@ -2022,7 +1895,7 @@ func InitRandomFight(ShipAmm : int) -> void:
 	if (PlayerReserves.size() == 0):
 		for g in ShipAmm:
 			PlayerReserves.append(load(GetRandomCaptain(false)).GetBattleStats())
-
+##----------------------------------------------------------------------##
 func GenerateRandomisedShip(Name : String, enemy : bool) -> BattleShipStats:
 	var Stats = BattleShipStats.new()
 	Stats.Name = Name
@@ -2058,7 +1931,7 @@ func GenerateRandomisedShip(Name : String, enemy : bool) -> BattleShipStats:
 	
 		
 	return Stats
-
+##----------------------------------------------------------------------##
 func GetRandomCaptain(Enemy : bool) -> String:
 	var Cpts
 	if (!Enemy):
@@ -2066,9 +1939,9 @@ func GetRandomCaptain(Enemy : bool) -> String:
 	else:
 		Cpts = ["res://Resources/Captains/EnemyCaptains/EnemyFireship1.tres", "res://Resources/Captains/EnemyCaptains/EnemyFireship2.tres", "res://Resources/Captains/EnemyCaptains/EnemyFireship3.tres", "res://Resources/Captains/EnemyCaptains/EnemyFireship4.tres", "res://Resources/Captains/EnemyCaptains/EnemyMissileCarrier1.tres", "res://Resources/Captains/EnemyCaptains/EnemyMissileCarrier2.tres", "res://Resources/Captains/EnemyCaptains/EnemyMissileCarrier3.tres", "res://Resources/Captains/EnemyCaptains/EnemyMissileCarrier4.tres", "res://Resources/Captains/EnemyCaptains/EnemyRadarShip1.tres", "res://Resources/Captains/EnemyCaptains/EnemyRadarShip2.tres", "res://Resources/Captains/EnemyCaptains/EnemyRadarShip3.tres", "res://Resources/Captains/EnemyCaptains/EnemyRadarShip4.tres", "res://Resources/Captains/EnemyCaptains/EnemyTanker1.tres", "res://Resources/Captains/EnemyCaptains/EnemyTanker2.tres", "res://Resources/Captains/EnemyCaptains/EnemyTanker3.tres", "res://Resources/Captains/EnemyCaptains/EnemyTanker4.tres", "res://Resources/Captains/EnemyCaptains/LandEnemyFireship1.tres", "res://Resources/Captains/EnemyCaptains/LandEnemyFireship2.tres"]
 	return Cpts.pick_random()
-	
+##----------------------------------------------------------------------##
 func GetRandomShipIcon() -> String:
 	var Icons = ["res://Assets/Spaceship/Spaceship_top_2_Main Camera.png", "res://Assets/Spaceship/Spaceship_top_Main Camera.png", "res://Assets/Spaceship/Tanker2.png", "res://Assets/Spaceship/Tanker.png", "res://Assets/Spaceship/Convoy.png", "res://Assets/Spaceship/Scarab.png", "res://Assets/Spaceship/Ship3_001.png", "res://Assets/Spaceship/Ship4_001.png", "res://Assets/Spaceship/ShipElena2.png", "res://Assets/Spaceship/ShipElena.png"]
 	return Icons.pick_random()
-
+##----------------------------------------------------------------------##
 #////////////////////////////////////////////////////////////////////////////////////////////////

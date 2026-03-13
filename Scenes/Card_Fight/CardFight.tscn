@@ -52,7 +52,6 @@ CurrentPlayerLabel = NodePath("SubViewport/Control2/CurrentPlayerLabel")
 StartingCardAmm = 3
 MaxCardsInHand = 8
 MaxCombatants = 3
-TurnEnergy = null
 UIEventH = ExtResource("16_734e5")
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=1458276238]

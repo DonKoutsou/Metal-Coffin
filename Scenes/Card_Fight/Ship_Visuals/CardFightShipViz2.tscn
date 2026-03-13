@@ -10,34 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://bwif8u3gyantu" path="res://Assets/smoke_09.png" id="7_cmntb"]
 [ext_resource type="AudioStream" uid="uid://x36530wvqdba" path="res://Assets/Sounds/Explosion.wav" id="8_r755l"]
 
-[sub_resource type="Gradient" id="Gradient_avrvh"]
-offsets = PackedFloat32Array(0, 0.763085, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_mg5jy"]
-gradient = SubResource("Gradient_avrvh")
-
-[sub_resource type="Curve" id="Curve_avrvh"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1e-05, 0), 0.0, 0.0, 0, 0, Vector2(0.538653, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.917993), 0.0, 0.0, 0, 0]
-point_count = 4
-
-[sub_resource type="CurveTexture" id="CurveTexture_mg5jy"]
-curve = SubResource("Curve_avrvh")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mg5jy"]
-particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(80, 50, 50)
-direction = Vector3(0, -1, 0)
-spread = 0.0
-initial_velocity_min = 10.0
-initial_velocity_max = 10.0
-gravity = Vector3(0, 0, 0)
-scale_min = 0.05
-scale_max = 0.05
-scale_curve = SubResource("CurveTexture_mg5jy")
-color_ramp = SubResource("GradientTexture1D_mg5jy")
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0orxy"]
 content_margin_left = 5.0
 content_margin_top = 5.0
@@ -92,6 +64,34 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
 border_blend = true
+
+[sub_resource type="Gradient" id="Gradient_avrvh"]
+offsets = PackedFloat32Array(0, 0.763085, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mg5jy"]
+gradient = SubResource("Gradient_avrvh")
+
+[sub_resource type="Curve" id="Curve_avrvh"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1e-05, 0), 0.0, 0.0, 0, 0, Vector2(0.538653, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.917993), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_mg5jy"]
+curve = SubResource("Curve_avrvh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mg5jy"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(80, 50, 50)
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.05
+scale_max = 0.05
+scale_curve = SubResource("CurveTexture_mg5jy")
+color_ramp = SubResource("GradientTexture1D_mg5jy")
 
 [sub_resource type="Gradient" id="Gradient_iq4iy"]
 offsets = PackedFloat32Array(0, 0.998609)
@@ -198,10 +198,10 @@ HullBar = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/Pa
 HullLabel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer/Hull")
 ShieldBar = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/ProgressBar/ProgressBar2")
 TurnPanel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3")
-SpeedBuff = NodePath("SpeedBuff")
-SpeedDeBuff = NodePath("SpeedDeBuff")
-FPBuff = NodePath("FirepowerBuff")
-FPDeBuff = NodePath("FirepowerDeBuff")
+SpeedBuff = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/SpeedBuff")
+SpeedDeBuff = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/SpeedDeBuff")
+FPBuff = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/FirepowerBuff")
+FPDeBuff = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/FirepowerDeBuff")
 FirePart = NodePath("HBoxContainer/Control/TextureRect/GPUParticles2D")
 ExplosionPart = NodePath("HBoxContainer/Control/TextureRect/Explosion")
 SmokePart = NodePath("HBoxContainer/Control/TextureRect/Smoke")
@@ -210,73 +210,10 @@ SPDLabel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/H
 HasMovePanel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/Panel")
 ActionParent = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer")
 ShadowPivot = NodePath("HBoxContainer/Control/TextureRect/ShadowPivot")
-DefBuff = NodePath("DefBuff")
-DefDeBuff = NodePath("DefDeBuff")
+DefBuff = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/DefBuff")
+DefDeBuff = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/DefDeBuff")
 WeightLabel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3/Label")
 DefenceLabel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3/Label2")
-
-[node name="SpeedBuff" type="GPUParticles2D" parent="." unique_id=1835526654]
-visible = false
-modulate = Color(0.311061, 0.899, 0.506367, 1)
-position = Vector2(93, 42)
-amount = 5
-texture = ExtResource("3_avrvh")
-lifetime = 3.0
-local_coords = true
-process_material = SubResource("ParticleProcessMaterial_mg5jy")
-
-[node name="SpeedDeBuff" type="GPUParticles2D" parent="." unique_id=2050612577]
-visible = false
-modulate = Color(0.311061, 0.899, 0.506367, 1)
-position = Vector2(93, 42)
-rotation = 3.14159
-amount = 5
-texture = ExtResource("3_avrvh")
-lifetime = 3.0
-local_coords = true
-process_material = SubResource("ParticleProcessMaterial_mg5jy")
-
-[node name="FirepowerBuff" type="GPUParticles2D" parent="." unique_id=69346679]
-visible = false
-modulate = Color(0.952941, 0.313726, 0.2, 1)
-position = Vector2(93, 42)
-amount = 5
-texture = ExtResource("3_avrvh")
-lifetime = 3.0
-local_coords = true
-process_material = SubResource("ParticleProcessMaterial_mg5jy")
-
-[node name="FirepowerDeBuff" type="GPUParticles2D" parent="." unique_id=1448523240]
-visible = false
-modulate = Color(0.952941, 0.313726, 0.2, 1)
-position = Vector2(93, 42)
-rotation = 3.14159
-amount = 5
-texture = ExtResource("3_avrvh")
-lifetime = 3.0
-local_coords = true
-process_material = SubResource("ParticleProcessMaterial_mg5jy")
-
-[node name="DefBuff" type="GPUParticles2D" parent="." unique_id=1266347205]
-visible = false
-modulate = Color(0.482353, 0.690196, 0.705882, 1)
-position = Vector2(93, 42)
-amount = 5
-texture = ExtResource("3_avrvh")
-lifetime = 3.0
-local_coords = true
-process_material = SubResource("ParticleProcessMaterial_mg5jy")
-
-[node name="DefDeBuff" type="GPUParticles2D" parent="." unique_id=145479719]
-visible = false
-modulate = Color(0.482353, 0.690196, 0.705882, 1)
-position = Vector2(93, 42)
-rotation = 3.14159
-amount = 5
-texture = ExtResource("3_avrvh")
-lifetime = 3.0
-local_coords = true
-process_material = SubResource("ParticleProcessMaterial_mg5jy")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=977037210]
 layout_mode = 1
@@ -438,6 +375,75 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
+
+[node name="SpeedBuff" type="GPUParticles2D" parent="HBoxContainer/VBoxContainer/PanelContainer2" unique_id=1835526654]
+visible = false
+modulate = Color(0.311061, 0.899, 0.506367, 1)
+show_behind_parent = true
+position = Vector2(93, 41)
+amount = 5
+texture = ExtResource("3_avrvh")
+lifetime = 3.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_mg5jy")
+
+[node name="SpeedDeBuff" type="GPUParticles2D" parent="HBoxContainer/VBoxContainer/PanelContainer2" unique_id=2050612577]
+visible = false
+modulate = Color(0.311061, 0.899, 0.506367, 1)
+show_behind_parent = true
+position = Vector2(93, 41)
+rotation = 3.14159
+amount = 5
+texture = ExtResource("3_avrvh")
+lifetime = 3.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_mg5jy")
+
+[node name="FirepowerBuff" type="GPUParticles2D" parent="HBoxContainer/VBoxContainer/PanelContainer2" unique_id=69346679]
+visible = false
+modulate = Color(0.952941, 0.313726, 0.2, 1)
+show_behind_parent = true
+position = Vector2(93, 41)
+amount = 5
+texture = ExtResource("3_avrvh")
+lifetime = 3.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_mg5jy")
+
+[node name="FirepowerDeBuff" type="GPUParticles2D" parent="HBoxContainer/VBoxContainer/PanelContainer2" unique_id=1448523240]
+visible = false
+modulate = Color(0.952941, 0.313726, 0.2, 1)
+show_behind_parent = true
+position = Vector2(93, 41)
+rotation = 3.14159
+amount = 5
+texture = ExtResource("3_avrvh")
+lifetime = 3.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_mg5jy")
+
+[node name="DefBuff" type="GPUParticles2D" parent="HBoxContainer/VBoxContainer/PanelContainer2" unique_id=1266347205]
+visible = false
+modulate = Color(0.482353, 0.690196, 0.705882, 1)
+show_behind_parent = true
+position = Vector2(93, 41)
+amount = 5
+texture = ExtResource("3_avrvh")
+lifetime = 3.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_mg5jy")
+
+[node name="DefDeBuff" type="GPUParticles2D" parent="HBoxContainer/VBoxContainer/PanelContainer2" unique_id=145479719]
+visible = false
+modulate = Color(0.482353, 0.690196, 0.705882, 1)
+show_behind_parent = true
+position = Vector2(93, 41)
+rotation = 3.14159
+amount = 5
+texture = ExtResource("3_avrvh")
+lifetime = 3.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_mg5jy")
 
 [node name="Control" type="Control" parent="HBoxContainer" unique_id=1092352506]
 show_behind_parent = true

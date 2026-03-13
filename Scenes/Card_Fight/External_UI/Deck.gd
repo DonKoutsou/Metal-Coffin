@@ -100,6 +100,7 @@ func TestCard(Mod : CardModule, testType : MultiCardSpawnModule.CardType) -> boo
 	return false
 
 func DiscardCard(C : CardStats) -> void:
+	#PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
 	DiscardPile.append(C)
 	DiscardChanged.emit(true)
 

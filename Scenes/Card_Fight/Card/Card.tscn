@@ -375,6 +375,7 @@ expand_mode = 1
 z_index = 2
 position = Vector2(100, 125)
 points = PackedVector2Array(0, 0, 0, 0)
+width = 20.0
 width_curve = SubResource("Curve_58ae4")
 gradient = SubResource("Gradient_rd7hj")
 begin_cap_mode = 2

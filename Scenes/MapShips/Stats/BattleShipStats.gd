@@ -70,6 +70,7 @@ signal ShipDamaged(amm : float)
 
 func ShieldShip(Amm : float) -> void:
 	Shield = min(Shield + Amm, MaxShield)
+	ShipViz.Refresh()
 	StatsBuffed.emit()
 
 func StripBuff(Stat : CardModule.Stat) -> void:
@@ -82,6 +83,7 @@ func StripBuff(Stat : CardModule.Stat) -> void:
 	if (Stat == CardModule.Stat.DEFENCE):
 		DefBuff = 0
 		DefBuffTime = 0
+	ShipViz.Refresh()
 	StatsBuffed.emit()
 
 func CauseFire() -> void:
@@ -90,11 +92,13 @@ func CauseFire() -> void:
 	else:
 		IsOnFire = true
 		TurnsOnFire = 0
+	ShipViz.Refresh()
 	StatsBuffed.emit()
 
 func CombustFire() -> void:
 	IsOnFire = false
 	TurnsOnFire = 0
+	ShipViz.Refresh()
 	StatsBuffed.emit()
 
 func SetEnergy(newEnergy : int) -> void:
@@ -111,41 +115,48 @@ func BuffFirePower(Amm : float, Turns : int = 2) -> void:
 	#buffs are usually 1.2 or 1.3 so we keep the 0.2 and add it
 	FirePowerBuff += Amm - 1
 	FirePowerBuffTime = Turns
+	ShipViz.Refresh()
 	StatsBuffed.emit()
 
 func DeBuffFirePower(Amm : float, Turns : int = 2) -> void:
 	#buffs are usually 1.2 or 1.3 so we keep the 0.2 and add it
 	FirePowerDeBuff += Amm - 1
 	FirePowerDeBuffTime = Turns
+	ShipViz.Refresh()
 	StatsBuffed.emit()
 
 func BuffSpeed(Amm : float, Turns : int = 2) -> void:
 	SpeedBuff += Amm - 1
 	SpeedBuffTime = Turns
+	ShipViz.Refresh()
 	StatsBuffed.emit()
 
 func CleanseDebuffs() -> void:
 	FirePowerDeBuff = 0
 	SpeedDeBuff = 0
 	DefDebuff = 0
+	ShipViz.Refresh()
 	StatsBuffed.emit()
 
 func DeBuffSpeed(Amm : float, Turns : int = 2) -> void:
 	#buffs are usually 1.2 or 1.3 so we keep the 0.2 and add it
 	SpeedDeBuff += Amm
 	SpeedDeBuffTime = Turns
+	ShipViz.Refresh()
 	StatsBuffed.emit()
 
 func BuffDefence(Amm : float, Turns : int = 2) -> void:
 	#buffs are usually 1.2 or 1.3 so we keep the 0.2 and add it
 	DefBuff += Amm
 	DefBuffTime = Turns
+	ShipViz.Refresh()
 	StatsBuffed.emit()
 
 func DeBuffDefence(Amm : float, Turns : int = 2) -> void:
 	#buffs are usually 1.2 or 1.3 so we keep the 0.2 and add it
 	DefDebuff += Amm
 	DefDeBuffTime = Turns
+	ShipViz.Refresh()
 	StatsBuffed.emit()
 
 func DamageShip(Amm : float, ShouldCauseFire : bool = false, SkipShield : bool = false) -> void:
@@ -172,7 +183,7 @@ func DamageShip(Amm : float, ShouldCauseFire : bool = false, SkipShield : bool =
 		
 	ShipDamaged.emit(Dmg)
 	
-	
+	ShipViz.Refresh()
 	StatsBuffed.emit()
 
 func UpdateBuffs() -> Array[String]:
@@ -202,6 +213,9 @@ func UpdateBuffs() -> Array[String]:
 	if (DefDeBuffTime == 0 and DefDebuff > 0):
 		DefDebuff = 0
 		ExpiredBuffs.append("DeDef")
+		
+	ShipViz.Refresh()
+	StatsBuffed.emit()
 	return ExpiredBuffs
 
 func GetFirePower() -> float:

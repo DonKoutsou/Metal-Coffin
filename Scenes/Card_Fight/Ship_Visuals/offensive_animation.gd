@@ -113,7 +113,7 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 				
 				else : if (Mod is CauseFireModule):
 					for Ship in TargetShips:
-						call_deferred("SpawnUpVisual", Ship, card, "Fire")
+						call_deferred("SpawnFlameVisual", Ship, card, "Fire")
 				
 				else : if (Mod is ResupplyModule or Mod is ReserveConversionModule):
 					for Ship in TargetShips:

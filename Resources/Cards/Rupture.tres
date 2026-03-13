@@ -32,5 +32,4 @@ CardName = "Rupture"
 Energy = 2
 AllowDuplicates = true
 OnPerformModule = SubResource("Resource_4hsju")
-Type = 1
 UseConditions = Array[int]([5])

@@ -10,4 +10,5 @@ func NeedsTargetSelect() -> bool:
 func Handle(_Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> AnimationData:
 	if (Action.Burned):
 		return DeffensiveAnimationData.new()
-	return null
+	
+	return DeffensiveAnimationData.new()

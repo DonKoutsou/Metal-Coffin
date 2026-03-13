@@ -4,16 +4,15 @@
 [ext_resource type="Script" uid="uid://c72jhtq31f4w3" path="res://Scenes/Card_Fight/External_UI/card_fight_ui.gd" id="1_u6pkr"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_lf8xs"]
 [ext_resource type="PackedScene" uid="uid://cy1ohrkbe4n1e" path="res://Scenes/Card_Fight/SegmentedBar/segmented_hp.tscn" id="4_fje4l"]
-[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="5_lleca"]
 [ext_resource type="Texture2D" uid="uid://vejt8vmsfnfl" path="res://Assets/UIPiecies/Screen/ScreenFrames/CardFightScreen.png" id="9_lf8xs"]
 [ext_resource type="PackedScene" uid="uid://dp1kurhtal0no" path="res://Scenes/Card_Fight/External_UI/discard_pile.tscn" id="11_omcrt"]
+[ext_resource type="StyleBox" uid="uid://c5x3vcw8x46rj" path="res://Theme/Buttons/ButtonRed.tres" id="12_yd4o7"]
+[ext_resource type="StyleBox" uid="uid://bvwu33dvi8506" path="res://Theme/Buttons/ButtonRed_Pressed.tres" id="13_ibt5m"]
 [ext_resource type="StyleBox" uid="uid://bog4o82ggjqwb" path="res://Theme/Buttons/ButtonOrange.tres" id="14_80dwx"]
 [ext_resource type="StyleBox" uid="uid://bxfwfq0uxu1w1" path="res://Theme/Buttons/ButtonOrange_Pressed.tres" id="15_lf8xs"]
 [ext_resource type="StyleBox" uid="uid://bj8tmjsnlmj0" path="res://Theme/Buttons/ButtonBlack.tres" id="16_ksx0p"]
 [ext_resource type="StyleBox" uid="uid://g2ic8um6hit" path="res://Theme/Buttons/ButtonBlack_Pressed.tres" id="17_w6rgp"]
 [ext_resource type="PackedScene" uid="uid://buuo261afg6tg" path="res://Scenes/Card_Fight/External_UI/Deck.tscn" id="19_1bbav"]
-[ext_resource type="StyleBox" uid="uid://b7suo0ob4kefv" path="res://Theme/Buttons/ButtonYellowStripe.tres" id="19_ksx0p"]
-[ext_resource type="StyleBox" uid="uid://ttlagq0nmcyb" path="res://Theme/Buttons/ButtonYellowStripe_Pressed.tres" id="20_w6rgp"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="22_lf8xs"]
 [ext_resource type="FontFile" uid="uid://cg8x1e6y1264l" path="res://Fonts/Bank Gothic Light Regular.otf" id="23_ksx0p"]
 
@@ -200,15 +199,14 @@ action_mode = 0
 
 [node name="Button" type="Button" parent="." unique_id=565274018 groups=["Buttons"]]
 layout_mode = 0
-offset_left = 1070.0
-offset_top = 322.0
-offset_right = 1097.0
-offset_bottom = 366.0
+offset_left = 1068.0
+offset_top = 321.0
+offset_right = 1098.0
+offset_bottom = 368.0
 size_flags_vertical = 4
-theme = ExtResource("5_lleca")
-theme_override_styles/normal = ExtResource("19_ksx0p")
-theme_override_styles/pressed = ExtResource("20_w6rgp")
-theme_override_styles/hover = ExtResource("19_ksx0p")
+theme_override_styles/normal = ExtResource("12_yd4o7")
+theme_override_styles/pressed = ExtResource("13_ibt5m")
+theme_override_styles/hover = ExtResource("12_yd4o7")
 action_mode = 0
 
 [node name="SwitchShip" type="Button" parent="." unique_id=1588933994 groups=["Buttons"]]

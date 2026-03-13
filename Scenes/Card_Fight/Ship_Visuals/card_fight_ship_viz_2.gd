@@ -175,26 +175,32 @@ func SetStats(S : BattleShipStats, Friendly : bool) -> void:
 func GetShipPos() -> Vector2:
 	return ShipIcon.global_position
 
-func ActionPicked(C : CardStats) -> void:
+func ActionPicked(C : CardStats, Targets : Array[BattleShipStats] = []) -> void:
 	var TexNode = TextureRect.new()
 	TexNode.texture = C.Icon
 	TexNode.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	TexNode.custom_minimum_size = Vector2(38,22)
 	TexNode.mouse_filter = Control.MOUSE_FILTER_PASS
-	TexNode.mouse_entered.connect(ActionHovered.bind(C))
-	TexNode.mouse_exited.connect(ActionUnhovered.bind(C))
+	TexNode.mouse_entered.connect(ActionHovered.bind(C, Targets))
+	TexNode.mouse_exited.connect(ActionUnhovered.bind())
 	ActionParent.add_child(TexNode)
 
-func ActionHovered(C : CardStats) -> void:
+func ActionHovered(C : CardStats, Targets : Array[BattleShipStats]) -> void:
+	
+	var targetlocs : Array[Vector2] = []
+	for g in Targets:
+		targetlocs.append(g.ShipViz.global_position + (g.ShipViz.size / 2))
+	
 	CurrentCardShown = ResourceLoader.load(CardScene).instantiate()
 	CurrentCardShown.SetCardBattleStats(Ship ,C)
 	CurrentCardShown.Dissable(true)
+	CurrentCardShown.TargetLocs = targetlocs
 	Ingame_UIManager.GetInstance().add_child(CurrentCardShown)
 	set_physics_process(true)
 	PositionCard()
 	print("Action hovered")
 
-func ActionUnhovered(C : CardStats) -> void:
+func ActionUnhovered() -> void:
 	CurrentCardShown.queue_free()
 	set_physics_process(false)
 	print("Action unhovered")
