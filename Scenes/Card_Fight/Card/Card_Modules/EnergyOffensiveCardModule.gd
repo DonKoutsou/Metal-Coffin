@@ -4,6 +4,9 @@ class_name EnergyOffensiveCardModule
 
 var StoredEnergy : int = 0
 
+func NeedsTargetSelect() -> bool:
+	return true
+
 func GetFinalDamage(Performer : BattleShipStats, Tier : int) -> float:
 	var Dmg : float
 	

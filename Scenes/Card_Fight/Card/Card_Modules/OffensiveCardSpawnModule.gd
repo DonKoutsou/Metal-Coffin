@@ -5,3 +5,6 @@ class_name OffensiveCardSpawnModule
 
 func GetDesc(Tier : int) -> String:
 	return "Draw a {0} from the deck".format([CardToSpawn.GetCardName()])
+
+func NeedsTargetSelect() -> bool:
+	return false

@@ -30,3 +30,6 @@ func GetReductionPercent(Tier : int) -> float:
 	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):
 		return (ReductionPercent as float + (TierUpgrade * Tier)) / 100
 	return (ReductionPercent as float * max((TierUpgrade * Tier), 1)) / 100
+
+func NeedsTargetSelect() -> bool:
+	return false

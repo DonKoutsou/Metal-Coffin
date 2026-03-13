@@ -546,6 +546,7 @@ func GetBattleStats() -> BattleShipStats:
 	stats.MaxShield =  Cpt.GetStatFinalValue(STAT_CONST.STATS.MAX_SHIELD)
 	stats.Convoy = Convoy
 	stats.Cards = Cpt.GetCardList()
+	stats.Friendly = false
 	return stats
 	
 func GetShipName() -> String:

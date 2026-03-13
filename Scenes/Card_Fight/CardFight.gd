@@ -183,13 +183,12 @@ func IntroDeclarationFinished() -> void:
 	call_deferred("RunTurn")
 
 
-func ReplaceShip(Ship : BattleShipStats, TurnPosition : int) -> void:
+func ReplaceShip(Ship : BattleShipStats, TurnPosition : int, Friendly : bool) -> void:
 	ActionList.RemoveShip(Ship)
 	#Save the ships index in the turns array so that we can add this ship on same position
 	var Position = ShipTurns.find(Ship)
 	
 	var NewCombatant : BattleShipStats
-	var Friendly = IsShipFriendly(Ship)
 	
 	if (Friendly and PlayerReserves.size() > 0):
 		NewCombatant = PlayerReserves.pop_front()
@@ -450,7 +449,8 @@ func OnCardSelected(C : Card) -> bool:
 	
 	PlayerPerformingMove = true
 	
-	UpdateEnergy(Ship, Ship.Energy - Cost, true)
+	Ship.SetEnergy(Ship.Energy - Cost)
+	#UpdateEnergy(Ship, Ship.Energy - Cost, true)
 	print("{0} has been removed from {1}'s hand.".format([C.CStats.GetCardName(), Ship.Name]))
 	deck.Hand.erase(C.CStats)
 	
@@ -573,10 +573,10 @@ func RemoveCard(C : Card) -> void:
 	
 	var PerformModule = Stats.OnPerformModule
 	if (PerformModule is EnergyOffensiveCardModule):
-		UpdateEnergy(CurrentShip, CurrentShip.Energy + PerformModule.StoredEnergy, true)
+		CurrentShip.SetEnergy(CurrentShip.Energy + PerformModule.StoredEnergy)
 		PerformModule.StoredEnergy = 0
 	else:
-		UpdateEnergy(CurrentShip, CurrentShip.Energy + C.GetCost(), true)
+		CurrentShip.SetEnergy(CurrentShip.Energy + C.GetCost())
 	
 	
 	D.Hand.append(Stats)
@@ -709,7 +709,7 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 				if (SelectedAction.OnPerformModule is EnergyOffensiveCardModule):
 					var NewMod = SelectedAction.OnPerformModule.duplicate()
 					NewMod.StoredEnergy = Ship.Energy
-					UpdateEnergy(Ship, 0, false)
+					Ship.SetEnergy(0)
 					SelectedAction.OnPerformModule = NewMod
 					
 				DoCardSelectAnimation(SelectedAction, Ship, Ship.ShipViz)
@@ -1063,8 +1063,8 @@ func RestartCards() -> void:
 	ExternalUI.GetEnergyBar().ChangeSegmentAmm(TurnEnergy)
 	ExternalUI.GetReserveBar().ChangeSegmentAmm(currentship.EnergyReserves)
 	
-	UpdateEnergy(currentship, TurnEnergy, true)
-	UpdateReserves(currentship, currentship.EnergyReserves, true)
+	currentship.SetEnergy(TurnEnergy)
+	currentship.SetReserves(currentship.EnergyReserves)
 	UpdateHandCards()
 	
 	ExternalUI.DiscardPile.UpdateDiscardPileAmmount(D.DiscardPile.size())
@@ -1153,7 +1153,11 @@ func HandleModulesPl(Performer : BattleShipStats, C : CardStats, Targets : Array
 	if (C.Burned):
 		AnimData.append(HandleBurned(C))
 	else:
+		
+		
 		for Mod in C.OnUseModules.size():
+			var targets = await HandleTargets(C.OnUseModules[Mod], Performer)
+			
 			var Data : AnimationData
 			
 			Data = await HandleModule(Performer, C ,C.OnUseModules[Mod], Targets)
@@ -1169,7 +1173,7 @@ func HandleModulesPl(Performer : BattleShipStats, C : CardStats, Targets : Array
 			if (C.OnPerformModule is EnergyOffensiveCardModule):
 				var NewMod = C.OnPerformModule.duplicate()
 				NewMod.StoredEnergy = Performer.Energy
-				UpdateEnergy(Performer, 0, true)
+				Performer.SetEnergy(0)
 				C.OnPerformModule = NewMod
 
 			var targets = await HandleTargets(C.OnPerformModule, Performer)
@@ -1267,14 +1271,8 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 		AnimData.append(await HandleModule(Performer, Action, SAtMod, TargetList.keys()))
 
 	AtackData.Callables = DamageCallables
-	
-	#if (!Action.ShouldConsume()):
-		#PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
-		#print("{0} has been added to {1}'s discard pile.".format([Action.GetCardName(), Performer.Name]))
-		#Dec.DiscardPile.append(Action)
-	
+
 	await DoCardAnim(Action, AnimData, Performer, Friendly)
-	#PerformAnimationFinished(Performer, ActionIndex)
 
 func HandleModule(Performer : BattleShipStats, C : CardStats, Mod : CardModule, Targets : Array[BattleShipStats] = []) -> AnimationData:
 	var AnimData :AnimationData
@@ -1465,8 +1463,8 @@ func HandleResupply(Performer : BattleShipStats, Action : CardStats, Mod : Resup
 		if (g == null):
 			continue
 		TargetViz.append(g.ShipViz)
-
-		UpdateEnergy(g, g.Energy + resupplyamm, g == Performer and Friendly)
+		
+		g.SetEnergy(g.Energy + resupplyamm)
 	
 	var Data = DeffensiveAnimationData.new()
 	Data.Mod = Mod
@@ -1493,7 +1491,7 @@ func HandleReserveSupply(Performer : BattleShipStats, Action : CardStats, Mod : 
 		if (g == null):
 			continue
 		TargetViz.append(g.ShipViz)
-		UpdateReserves(g, g.EnergyReserves + resupplyamm, g == Performer and Friendly)
+		g.SetReserves(g.EnergyReserves + resupplyamm)
 			
 	var Data = DeffensiveAnimationData.new()
 	Data.Mod = Mod
@@ -1505,9 +1503,9 @@ func HandleReserveConversion(Performer : BattleShipStats, Action : CardStats, Mo
 	
 	var Friendly = IsShipFriendly(Performer)
 	
-	UpdateReserves(Performer, 0, Friendly)
+	Performer.SetReserves(0)
+	Performer.SetEnergy(Performer.Energy + resupplyamm)
 
-	UpdateEnergy(Performer, Performer.Energy + resupplyamm, Friendly)
 	var TargetViz : Array[Control]
 	TargetViz.append(Performer.ShipViz)
 	var Data = DeffensiveAnimationData.new()
@@ -1534,9 +1532,9 @@ func HandleMaxReserveSupply(Performer : BattleShipStats, _Action : CardStats, Mo
 		if (g == null):
 			continue
 		TargetViz.append(g.ShipViz)
-		UpdateReserves(g, g.EnergyReserves + resupplyamm, g == Performer and Friendly)
+		g.SetReserves(g.EnergyReserves + resupplyamm)
 	
-	UpdateEnergy(Performer, 0, Friendly)
+	Performer.SetEnergy(0)
 	
 	var Data = DeffensiveAnimationData.new()
 	Data.Mod = Mod
@@ -1642,7 +1640,7 @@ func HandleMaxShield(Performer : BattleShipStats, Action : CardStats, Mod : MaxS
 	
 	var Friendly = IsShipFriendly(Performer)
 	
-	UpdateEnergy(Performer, 0, Friendly)
+	Performer.SetEnergy(0)
 	
 	var Data = DeffensiveAnimationData.new()
 	Data.Mod = Mod
@@ -1875,9 +1873,12 @@ func HandleCardBurn(Performer : BattleShipStats, Action : CardStats, Mod : CardM
 	return Data
 
 func HandleTargets(Mod : CardModule, User : BattleShipStats) -> Array[BattleShipStats]:
+	var Targets : Array[BattleShipStats]
+	if (!Mod.NeedsTargetSelect()):
+		return Targets
+		
 	var Friendly = IsShipFriendly(User)
 	
-	var Targets : Array[BattleShipStats]
 	# we handle deffensive target picking a bit differently
 	if (Mod is DeffenceCardModule):
 		var Team = GetShipsTeam(User)
@@ -2000,7 +2001,7 @@ func HandleDrawCard(Performer : BattleShipStats, ConsumeEnergy : bool = false) -
 		return false
 		
 	if (ConsumeEnergy):
-		UpdateEnergy(Performer, Performer.Energy - 1, true)
+		Performer.SetEnergy(Performer.Energy - 1)
 	
 	
 	var C = D.DeckPile.pop_front()
@@ -2337,7 +2338,7 @@ func GetFightingUnitAmmount(Ships : Array[BattleShipStats]) -> int:
 
 
 func IsShipFriendly(Ship : BattleShipStats) -> bool:
-	return PlayerCombatants.has(Ship) or PlayerReserves.has(Ship)
+	return Ship.Friendly
 
 
 #////////////////////////////////////////////////////////////////////////////
@@ -2477,7 +2478,7 @@ func ShipDestroyed(Ship : BattleShipStats) -> bool:
 	
 	GameOver = !EnemiesAlive or !PlayerAlive
 	
-	await ReplaceShip(Ship, TurnPosition)
+	await ReplaceShip(Ship, TurnPosition, Friendly)
 	
 	if (GameOver):
 		await Helper.GetInstance().wait(3)
@@ -2531,6 +2532,8 @@ func CreateShipVisuals(BattleS : BattleShipStats, Friendly : bool) -> CardFightS
 	
 	if (Friendly):
 		PlayerShipVisualPlecement.add_child(ShipVisuals)
+		BattleS.EnergyChanged.connect(EnergyUpdated)
+		BattleS.ReservesChanged.connect(ReservesUpdated)
 	else :
 		EnemyShipVisualPlecement.add_child(ShipVisuals)
 	
@@ -2580,24 +2583,22 @@ func UpdateShipStats(BattleS : BattleShipStats) -> void:
 	viz.ToggleFire(BattleS.IsOnFire)
 
 
-func UpdateEnergy(Ship : BattleShipStats, NewEnergy : float, UpdateUI : bool) -> void:
-	var OldEnergy = Ship.Energy
-	var RoundedEnergy = roundi(NewEnergy)
-	Ship.Energy = RoundedEnergy
-	if (UpdateUI):
-		ExternalUI.GetEnergyBar().UpdateAmmount(OldEnergy, RoundedEnergy)
-		if (NewEnergy > ExternalUI.GetEnergyBar().GetSegmentAmm()):
+func EnergyUpdated(Ship : BattleShipStats, energyAdded : int) -> void:
+	var OldEnergy = Ship.Energy - energyAdded
+	#var RoundedEnergy = roundi(NewEnergy)
+	#Ship.Energy = RoundedEnergy
+	if (GetCurrentShip() == Ship):
+		ExternalUI.GetEnergyBar().UpdateAmmount(OldEnergy, Ship.Energy)
+		if (Ship.Energy > ExternalUI.GetEnergyBar().GetSegmentAmm()):
 			ExternalUI.GetEnergyBar().ChangeSegmentAmm(Ship.Energy)
 	
 		UpdateCardDescriptions(Ship)
 
-func UpdateReserves(Ship : BattleShipStats, NewEnergy : float, UpdateUI : bool) -> void:
-	var OldEnergy = Ship.EnergyReserves
-	var RoundedEnergy = roundi(NewEnergy)
-	Ship.EnergyReserves = RoundedEnergy
-	if (UpdateUI):
-		ExternalUI.GetReserveBar().UpdateAmmount(OldEnergy, RoundedEnergy)
-		if (NewEnergy > ExternalUI.GetReserveBar().GetSegmentAmm()):
+func ReservesUpdated(Ship : BattleShipStats, reservesAdded : int) -> void:
+	var OldEnergy = Ship.EnergyReserves - reservesAdded
+	if (GetCurrentShip() == Ship):
+		ExternalUI.GetReserveBar().UpdateAmmount(OldEnergy, Ship.EnergyReserves)
+		if (Ship.EnergyReserves > ExternalUI.GetReserveBar().GetSegmentAmm()):
 			ExternalUI.GetReserveBar().ChangeSegmentAmm(Ship.EnergyReserves)
 	
 		UpdateCardDescriptions(Ship)
@@ -2683,8 +2684,8 @@ func _on_pull_reserves_pressed() -> void:
 	var currentship = GetCurrentShip()
 	var Reserv = currentship.EnergyReserves
 	currentship.EnergyReserves = 0
-	UpdateEnergy(currentship, currentship.Energy + Reserv, true)
-	UpdateReserves(currentship, 0, true)
+	currentship.SetEnergy(currentship.Energy + Reserv)
+	currentship.SetReserves(0)
 	
 
 func _on_switch_ship_pressed() -> void:

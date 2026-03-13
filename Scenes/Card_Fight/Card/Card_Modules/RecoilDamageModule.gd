@@ -9,3 +9,6 @@ func GetDesc(_Tier : int) -> String:
 
 func GetRecoilAmmount(DamageDone : float) -> float:
 	return DamageDone * (RecoilPercent as float / 100)
+
+func NeedsTargetSelect() -> bool:
+	return false

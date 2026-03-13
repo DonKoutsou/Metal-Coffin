@@ -3,6 +3,9 @@ class_name BurnEnemyCardModule
 
 @export var ammToBurn : int
 
+func NeedsTargetSelect() -> bool:
+	return true
+
 func GetDesc(Tier : int) -> String:
 	if (AOE):
 		return "Burn {0} cards on each enemy ship's deck".format([GetBurnAmmount(Tier)])

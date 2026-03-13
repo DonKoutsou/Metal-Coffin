@@ -4,6 +4,9 @@ class_name CardInjectCardModule
 @export var CardToInject : CardStats
 @export var amm : int
 
+func NeedsTargetSelect() -> bool:
+	return true
+
 func GetDesc(Tier : int) -> String:
 	if (AOE):
 		return "Add {0} {1} on each enemy ship's deck".format([GetCardAmmount(Tier), CardToInject.GetCardName()])

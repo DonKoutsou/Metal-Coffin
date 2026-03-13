@@ -11,3 +11,6 @@ func GetDrawAmmount(Tier : int) -> int:
 	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):
 		return roundi(DrawAmmount + roundi((TierUpgrade * Tier)))
 	return roundi(DrawAmmount * roundi(max((TierUpgrade * Tier), 1)))
+
+func NeedsTargetSelect() -> bool:
+	return false

@@ -7,6 +7,9 @@ class_name BuffModule
 
 const StatText = "[color=#ffc315]HULL[/color][p][color=#6be2e9]SHIELD[/color][p][color=#308a4d]SPEED[/color][p][color=#f35033]FPWR[/color]"
 
+func NeedsTargetSelect() -> bool:
+	return true
+
 func GetDesc(Tier : int) -> String:
 	var TextColor : String
 	if (StatToBuff == Stat.FIREPOWER):

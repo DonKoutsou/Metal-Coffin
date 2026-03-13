@@ -16,3 +16,6 @@ func GetDesc(_Tier : int) -> String:
 	if (AOE):
 		return "Strip enemy team [{1}]{0}[/color] buffs".format([Stat.keys()[StatToStrip], TextColor])
 	return "Strip [{1}]{0}[/color] buffs from self".format([Stat.keys()[StatToStrip], TextColor])
+
+func NeedsTargetSelect() -> bool:
+	return false

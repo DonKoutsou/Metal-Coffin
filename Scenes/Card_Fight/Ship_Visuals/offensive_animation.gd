@@ -14,7 +14,9 @@ signal AnimationFinished
 @export_file("*.tscn") var ShipVizFile : String
 @export_file("*.tscn") var AtackVisualFile : String
 @export_file("*.tscn") var DefVisualFile : String
+@export_file("*.tscn") var CardVisualFile : String
 @export_file("*.tscn") var ShieldVisualFile : String
+@export_file("*.tscn") var FlameVisualFile : String
 @export_file("*.tscn") var EnergyVisualFile : String
 @export_file("*.tscn") var BuffVisualFile : String
 @export_file("*.tscn") var DebuffVisualFile : String
@@ -132,12 +134,12 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 				else : if (Mod is BurnEnemyCardModule):
 					var BuffText = "Cards Burned"
 					for Ship in TargetShips:
-						call_deferred("SpawnBurnVisual", Ship, card, BuffText)
+						call_deferred("SpawnFlameVisual", Ship, card, BuffText)
 				
 				else : if (Mod is CardInjectCardModule):
-					var BuffText = "Cards Injected"
+					var BuffText = "Cards\nInjected"
 					for Ship in TargetShips:
-						call_deferred("SpawnBurnVisual", Ship, card, BuffText)
+						call_deferred("SpawnCardVisual", Ship, card, BuffText)
 				
 				else : if (Mod is StackDamageCardModule):
 					call_deferred("SpawnUpDamageVisual", card, card, "Damage +")
@@ -175,6 +177,33 @@ func SpawnShieldVisual(Target : Control, DefCard : Card, FloaterText : String) -
 	
 	var ShieldVisual : PackedScene = ResourceLoader.load(ShieldVisualFile)
 	var Visual = ShieldVisual.instantiate() as MissileViz
+	Visual.Target = Target
+	Visual.SpawnPos = DefCard.global_position + (DefCard.size / 2)
+	add_child(Visual)
+
+	Visual.connect("Reached", ShieldTweenEnded.bind(Target, FloaterText))
+
+func SpawnFlameVisual(Target : Control, DefCard : Card, FloaterText : String) -> void:
+	#await wait (0.15)
+
+	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
+	
+	var ShieldVisual : PackedScene = ResourceLoader.load(FlameVisualFile)
+	var Visual = ShieldVisual.instantiate() as MissileViz
+	Visual.Target = Target
+	Visual.SpawnPos = DefCard.global_position + (DefCard.size / 2)
+	add_child(Visual)
+
+	Visual.connect("Reached", ShieldTweenEnded.bind(Target, FloaterText))
+
+
+func SpawnCardVisual(Target : Control, DefCard : Card, FloaterText : String) -> void:
+	#await wait (0.15)
+
+	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
+	
+	var ShieldVisual : PackedScene = ResourceLoader.load(CardVisualFile)
+	var Visual = ShieldVisual.instantiate() as CardViz
 	Visual.Target = Target
 	Visual.SpawnPos = DefCard.global_position + (DefCard.size / 2)
 	add_child(Visual)

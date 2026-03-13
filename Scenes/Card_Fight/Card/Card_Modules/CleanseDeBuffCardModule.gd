@@ -9,3 +9,10 @@ func GetDesc(_Tier : int) -> String:
 	else : if (CanBeUsedOnOther):
 		return "Cleanse all of a ship's debuffs."
 	return "Cleanse all debuffs on self."
+
+func NeedsTargetSelect() -> bool:
+	if (AOE):
+		return true
+	else : if (CanBeUsedOnOther):
+		return true
+	return false

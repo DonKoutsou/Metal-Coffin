@@ -21,3 +21,6 @@ func GetBattleDesc(User : BattleShipStats, Tier : int) -> String:
 		for g in OnSuccesfullDeffenceModules:
 			Desc += g.GetBattleDesc(User, Tier)
 	return Desc
+
+func NeedsTargetSelect() -> bool:
+	return false

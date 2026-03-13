@@ -5,6 +5,9 @@ class_name DeBuffSelfModule
 @export var DeBuffDuration : int
 @export var DeBuffAmmount : float
 
+func NeedsTargetSelect() -> bool:
+	return false
+
 func GetDesc(Tier : int) -> String:
 	var TextColor : String
 	if (StatToDeBuff == Stat.FIREPOWER):

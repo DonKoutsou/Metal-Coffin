@@ -7,3 +7,6 @@ func GetDesc(Tier : int) -> String:
 	
 func GetBattleDesc(_User : BattleShipStats, Tier : int) -> String:
 	return "Null"
+
+func NeedsTargetSelect() -> bool:
+	return false

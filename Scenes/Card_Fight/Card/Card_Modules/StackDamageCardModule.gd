@@ -10,3 +10,6 @@ func GetStackDamage(Tier : int) -> float:
 	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):
 		return roundi(BuffAmmount + (TierUpgrade * Tier) * 100)
 	return roundi(BuffAmmount * max((TierUpgrade * Tier), 1) * 100)
+
+func NeedsTargetSelect() -> bool:
+	return false

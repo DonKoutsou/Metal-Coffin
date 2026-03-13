@@ -10,3 +10,6 @@ func GetBattleDesc(User : BattleShipStats, _Tier : int) -> String:
 	if (AOE):
 		return "Converts {0} [color=#ffc315]Energy[/color] as [color=#ffc315]Reserve[/color] to team".format([User.Energy])
 	return "Converts {0} [color=#ffc315]Energy[/color] as [color=#ffc315]Reserve[/color] to self".format([User.Energy])
+
+func NeedsTargetSelect() -> bool:
+	return false

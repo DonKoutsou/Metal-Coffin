@@ -41,6 +41,8 @@ var DefDebuff : float = 0
 var IsOnFire : bool
 var TurnsOnFire : int
 
+var Friendly : bool
+
 func IsSeverelyBurnt() -> bool:
 	return TurnsOnFire > 3
 
@@ -58,6 +60,19 @@ var SpeedBuffTime : int = 0
 var SpeedDeBuffTime : int = 0
 var DefBuffTime : int = 0
 var DefDeBuffTime : int = 0
+
+signal EnergyChanged(energyAdded : int)
+signal ReservesChanged(reservesAdded : int)
+
+func SetEnergy(newEnergy : int) -> void:
+	var dif = newEnergy - Energy
+	Energy = newEnergy
+	EnergyChanged.emit(self, dif)
+
+func SetReserves(newReserves : int) -> void:
+	var dif = newReserves - EnergyReserves
+	EnergyReserves = newReserves
+	ReservesChanged.emit(self, dif)
 
 func UpdateBuffs() -> Array[String]:
 	var ExpiredBuffs : Array[String]

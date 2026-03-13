@@ -10,3 +10,6 @@ func GetFinalDamage(Tier : int) -> float:
 	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):
 		return Damage + (TierUpgrade * Tier)
 	return Damage * max((TierUpgrade * Tier), 1)
+
+func NeedsTargetSelect() -> bool:
+	return false

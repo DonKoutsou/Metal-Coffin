@@ -337,6 +337,7 @@ func GetBattleStats() -> BattleShipStats:
 	#stats.Ammo = Cpt.GetCharacterInventory().GetCardAmmo()
 	stats.Funds = 0
 	stats.Convoy = false
+	stats.Friendly = Friendly
 	return stats
 
 func UpdateCameraZoom(NewZoom : float) -> void:

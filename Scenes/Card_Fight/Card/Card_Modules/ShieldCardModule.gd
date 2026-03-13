@@ -13,3 +13,6 @@ func GetShieldAmm(Tier : float) -> float:
 	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):
 		return ShieldAmm + (TierUpgrade * Tier)
 	return ShieldAmm * max((TierUpgrade * Tier), 1)
+
+func NeedsTargetSelect() -> bool:
+	return false

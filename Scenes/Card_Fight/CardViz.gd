@@ -4,7 +4,7 @@ class_name CardViz
 # Speed of the missile
 @export var CardPlecementSound : AudioStream
 
-
+@export var InitialParticle : BurstParticleGroup2D
 @export var speed = 200
 
 # Adjust this value for more or less curvature
@@ -18,7 +18,7 @@ var SpawnPos : Vector2 = Vector2.ZERO
 # Wiggle amplitude and speed
 @export var wiggle_amplitude = 5.0
 @export var wiggle_frequency = 3.0
-
+@export var FireSound : AudioStream
 signal Finished
 signal Reached
 
@@ -28,6 +28,20 @@ func _ready() -> void:
 	$Sprite2D.rotation_degrees = randf_range(0, 360)
 	
 	call_deferred("Init")
+	
+	var S = DeletableSoundGlobal.new()
+	S.stream = FireSound
+	get_parent().get_parent().add_child(S)
+	S.volume_db = - 20
+	S.play()
+	S.pitch_scale = randf_range(0.8, 1.2)
+	
+	$Sprite2D.visible = false
+	set_physics_process(false)
+	InitialParticle.burst()
+	await InitialParticle.Finished
+	set_physics_process(true)
+	$Sprite2D.visible = true
 
 func Init() -> void:
 	$TrailLine.Init()
@@ -41,7 +55,7 @@ func _physics_process(delta: float) -> void:
 	var direction = (Target.global_position + (Target.size / 2)) - global_position
 	var distance = direction.length()
 	
-	$Sprite2D.rotation_degrees += 15
+	$Sprite2D.rotation_degrees += 30
 	
 	# Only adjust if the missile is more than a tiny distance from the target
 	if distance > 1:

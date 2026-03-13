@@ -2,8 +2,10 @@
 
 [ext_resource type="Script" uid="uid://cmtemjrp17cgm" path="res://Scenes/Card_Fight/CardViz.gd" id="1_pjehg"]
 [ext_resource type="AudioStream" uid="uid://bj4o8xjushlvn" path="res://Assets/Sounds/CardSound.mp3" id="2_0lrke"]
+[ext_resource type="AudioStream" uid="uid://dnwyg3sfnsrux" path="res://Assets/Sounds/BeamRev.mp3" id="3_8jpsx"]
 [ext_resource type="Texture2D" uid="uid://b0pqpqkcdgign" path="res://Assets/Cards/CardBack.png" id="3_dw01p"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scenes/MapShips/Trail_Line/trail_line.gd" id="5_4eeik"]
+[ext_resource type="PackedScene" uid="uid://dlkjo56vcapoo" path="res://Scenes/Card_Fight/AtackEffects/RevEf.tscn" id="5_fbrvt"]
 
 [sub_resource type="Curve" id="Curve_5lbu3"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -14,15 +16,17 @@ interpolation_color_space = 1
 offsets = PackedFloat32Array(0, 0.71, 1)
 colors = PackedColorArray(0.482095, 0.689901, 0.704644, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="CardThing" type="Node2D" unique_id=1082876190]
+[node name="CardThing" type="Node2D" unique_id=1082876190 node_paths=PackedStringArray("InitialParticle")]
 z_index = 10
 rotation = -1.5708
 script = ExtResource("1_pjehg")
 CardPlecementSound = ExtResource("2_0lrke")
+InitialParticle = NodePath("MultiParticleExample1")
 speed = 30
 base_curve_intensity = 0.25
 wiggle_amplitude = 0.0
 wiggle_frequency = 0.0
+FireSound = ExtResource("3_8jpsx")
 
 [node name="TrailLine" type="Line2D" parent="." unique_id=1935572844]
 width_curve = SubResource("Curve_5lbu3")
@@ -39,3 +43,5 @@ metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=979617739]
 scale = Vector2(0.216511, 0.216511)
 texture = ExtResource("3_dw01p")
+
+[node name="MultiParticleExample1" parent="." unique_id=840921557 instance=ExtResource("5_fbrvt")]

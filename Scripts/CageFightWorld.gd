@@ -56,9 +56,13 @@ func StartDogFight(PlTeam : Array[Captain], EnTeam : Array[Captain]):
 	CardF.CardFightDestroyed.connect(CardFightDestroyed)
 	
 	for g in PlTeam:
-		CardF.PlayerReserves.append(g.GetBattleStats())
+		var bt : BattleShipStats = g.GetBattleStats()
+		bt.Friendly = true
+		CardF.PlayerReserves.append(bt)
 	for g in EnTeam:
-		CardF.EnemyReserves.append(g.GetBattleStats())
+		var bt : BattleShipStats = g.GetBattleStats()
+		bt.Friendly = false
+		CardF.EnemyReserves.append(bt)
 
 	CardF.InitRandomFight(5)
 	

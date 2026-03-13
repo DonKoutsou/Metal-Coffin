@@ -12,3 +12,6 @@ func GetEnergy(Tier : int) -> int:
 	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):
 		return roundi(ReserveAmmount + (Tier * TierUpgrade))
 	return roundi(ReserveAmmount * max((Tier * TierUpgrade), 1))
+
+func NeedsTargetSelect() -> bool:
+	return false
