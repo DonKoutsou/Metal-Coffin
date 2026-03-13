@@ -294,6 +294,11 @@ func reconstruct_path(parent: Dictionary, end_city: String) -> Array:
 	path.reverse()  # Reverse the path to get it from start to end
 	return path
 
+static func TrySetFire() -> bool:
+	randomize()
+	var random_value = randf()
+	return random_value < 0.2
+
 func GetColorForRegion(R : MapSpotCompleteInfo.REGIONS):
 	return RegionColors[R]
 

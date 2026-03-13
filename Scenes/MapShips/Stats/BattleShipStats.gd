@@ -64,6 +64,7 @@ var DefDeBuffTime : int = 0
 signal EnergyChanged(energyAdded : int)
 signal ReservesChanged(reservesAdded : int)
 signal StatsBuffed
+signal ShipDamaged(amm : float)
 
 func ShieldShip(Amm : float) -> void:
 	Shield = min(Shield + Amm, MaxShield)
@@ -143,6 +144,33 @@ func DeBuffDefence(Amm : float, Turns : int = 2) -> void:
 	#buffs are usually 1.2 or 1.3 so we keep the 0.2 and add it
 	DefDebuff += Amm
 	DefDeBuffTime = Turns
+	StatsBuffed.emit()
+
+func DamageShip(Amm : float, ShouldCauseFire : bool = false, SkipShield : bool = false) -> void:
+	var Dmg = Amm - min(1, (Amm * GetDef()))
+	if (!SkipShield):
+		if Shield > 0:
+			var origshield = Shield
+			Shield = max(0,origshield - Amm)
+			Dmg -= origshield - Shield
+	
+	#only do fire roll when shield didt absorb all the damage
+	if (Dmg > 0 and Helper.TrySetFire()):
+		CauseFire()
+	
+	CurrentHull -= Dmg
+	
+	if (ShouldCauseFire):
+		CauseFire()
+	
+	if (Friendly):
+		if (CurrentHull < 40 and !ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_SHIPLOSS)):
+			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_SHIPLOSS)
+			ActionTracker.QueueTutorial("TUT_Cardfight_ShipLossTitle", "TUT_Cardfight_ShipLossText", [])
+		
+	ShipDamaged.emit(Dmg)
+	
+	
 	StatsBuffed.emit()
 
 func UpdateBuffs() -> Array[String]:

@@ -13,3 +13,22 @@ func GetFinalDamage(Tier : int) -> float:
 
 func NeedsTargetSelect() -> bool:
 	return false
+
+func HandleSelfDamage(Performer : BattleShipStats, Action : CardStats) -> OffensiveAnimationData:
+
+	var Callables : Array[Callable]
+	Callables.append(Performer.DamageShip.bind(GetFinalDamage(Action.Tier)))
+	
+	var AnimData = OffensiveAnimationData.new()
+	AnimData.Mod = self
+	
+	var Data : Dictionary
+	Data["Def"] = null
+	Data["Viz"] = Performer.ShipViz
+	var DefList : Dictionary[BattleShipStats, Dictionary]
+	DefList[Performer] = Data
+	AnimData.DeffenceList = DefList
+	
+	AnimData.Callables = Callables
+	
+	return AnimData

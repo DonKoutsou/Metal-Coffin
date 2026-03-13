@@ -830,7 +830,7 @@ func DoShipFireDamage() -> void:
 			d.global_position = (viz.global_position + (viz.size / 2)) - d.size / 2
 			
 			#Make sure that the game is not over, if it is, break out of the loop
-			if (await DamageShip(Ship, Ship.GetFireDamage(), false, true)):
+			if (await Ship.DamageShip(Ship.GetFireDamage(), false, true)):
 				break
 			
 			#Wait for damage floaer if not finished
@@ -960,7 +960,7 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 					for SAtMod in Mod.OnSuccesfullAtackModules:
 						AnimData.append(HandleModule(Ship, Action, SAtMod, TargetList.keys()))
 						
-					var c = Callable.create(self, "DamageShip").bind(g, Mod.GetFinalDamage(Ship,Action.Tier) * AtackReduction, Mod.CauseFile, Mod.SkipShield)
+					var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Ship,Action.Tier) * AtackReduction, Mod.CauseFile, Mod.SkipShield)
 					DamageCallables.append(c)
 			
 			for SAtMod in Mod.OnAtackModules:
@@ -1254,7 +1254,7 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 			var CounterMod = Def.OnPerformModule
 			
 			if (CounterMod is DamageReductionCardModule):
-				var c = Callable.create(self, "DamageShip").bind(g, Mod.GetFinalDamage(Performer,Action.Tier) * CounterMod.GetReductionPercent(Def.Tier), Mod.CauseFile, Mod.SkipShield)
+				var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Performer,Action.Tier) * CounterMod.GetReductionPercent(Def.Tier), Mod.CauseFile, Mod.SkipShield)
 				DamageCallables.append(c)
 				for SDefMod in CounterMod.OnSuccesfullDeffenceModules:
 					AnimData.append(HandleModule(Performer, Def, SDefMod))
@@ -1270,7 +1270,7 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 			for SAtMod in Mod.OnSuccesfullAtackModules:
 				AnimData.append(HandleModule(Performer, Action, SAtMod, TargetList.keys()))
 				
-			var c = Callable.create(self, "DamageShip").bind(g, Mod.GetFinalDamage(Performer,Action.Tier), Mod.CauseFile, Mod.SkipShield)
+			var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Performer,Action.Tier), Mod.CauseFile, Mod.SkipShield)
 			DamageCallables.append(c)
 	
 	for SAtMod in Mod.OnAtackModules:
@@ -1344,12 +1344,10 @@ func HandleModule(Performer : BattleShipStats, C : CardStats, Mod : CardModule, 
 	else : if (Mod is MaxShieldCardModule):
 		AnimData = Mod.HandleMaxShield(Performer, C, Targets)
 	else : if (Mod is SelfDamageModule):
-		#TODO uncouple damage logic from card fight class
-		AnimData = HandleSelfDamage(Performer, C, Mod)
+		AnimData = Mod.HandleSelfDamage(Performer, C)
 	else : if (Mod is RecoilDamageModule):
 		var AtackMod = C.OnPerformModule as OffensiveCardModule
-		#TODO uncouple damage logic from card fight class
-		AnimData = HandleRecoil(Performer, C, AtackMod.GetFinalDamage(Performer, C.Tier), Mod)
+		AnimData = Mod.HandleRecoil(Performer, C, AtackMod.GetFinalDamage(Performer, C.Tier))
 	else : if (Mod is StackDamageCardModule):
 		AnimData = Mod.HandleDamageStack(Performer, C)
 	else : if (Mod is CleanseDebuffModule):
@@ -1450,44 +1448,6 @@ func HandleIntercept(Performer : BattleShipStats, Mod : InterceptModule) -> Deff
 	Data.Mod = Mod
 	Data.Targets = TargetViz
 	return Data
-	
-func HandleSelfDamage(Performer : BattleShipStats, Action : CardStats, Mod : SelfDamageModule) -> OffensiveAnimationData:
-
-	var Callables : Array[Callable]
-	Callables.append(DamageShip.bind(Performer, Mod.GetFinalDamage(Action.Tier)))
-	
-	var AnimData = OffensiveAnimationData.new()
-	AnimData.Mod = Mod
-	
-	var Data : Dictionary
-	Data["Def"] = null
-	Data["Viz"] = Performer.ShipViz
-	var DefList : Dictionary[BattleShipStats, Dictionary]
-	DefList[Performer] = Data
-	AnimData.DeffenceList = DefList
-	
-	AnimData.Callables = Callables
-	
-	return AnimData
-
-
-func HandleRecoil(Performer : BattleShipStats, _Action : CardStats, DamageAmm : float, Mod : RecoilDamageModule) -> OffensiveAnimationData:
-	var Callables : Array[Callable]
-	var Recoil = Mod.GetRecoilAmmount(DamageAmm)
-	Callables.append(DamageShip.bind(Performer, Recoil))
-	
-	var AnimData = OffensiveAnimationData.new()
-	AnimData.Mod = Mod
-	
-	var Data : Dictionary
-	Data["Def"] = null
-	Data["Viz"] = Performer.ShipViz
-	var DefList : Dictionary[BattleShipStats, Dictionary]
-	DefList[Performer] = Data
-	AnimData.DeffenceList = DefList
-	AnimData.Callables = Callables
-	
-	return AnimData
 
 
 func HandleBurned(Action : CardStats) -> DeffensiveAnimationData:
@@ -2017,44 +1977,20 @@ func IsShipFriendly(Ship : BattleShipStats) -> bool:
 #███████    ██    ██   ██    ██        ██      ██ ██   ██ ██   ████ ██ ██       ██████  ███████ ██   ██    ██    ██  ██████  ██   ████ 
 #////////////////////////////////////////////////////////////////////////////
 
-# RETURNΣ TRUE IF FIGHT IS OVER
-func DamageShip(Ship : BattleShipStats, Amm : float, ShouldCauseFire : bool = false, SkipShield : bool = false) -> bool:
-	var Dmg = Amm - min(1, (Amm * Ship.GetDef()))
-	if (!SkipShield):
-		if Ship.Shield > 0:
-			var origshield = Ship.Shield
-			Ship.Shield = max(0,origshield - Amm)
-			Dmg -= origshield - Ship.Shield
-	
-	#only do fire roll when shield didt absorb all the damage
-	if (Dmg > 0 and TrySetFire()):
-		Ship.CauseFire()
-	
-	Ship.CurrentHull -= Dmg
-	
-	if (ShouldCauseFire):
-		Ship.CauseFire()
-	
+func ShipDamaged(amm : float, Ship : BattleShipStats) -> void:
 	if (IsShipFriendly(Ship)):
 		
 		if (Ship.CurrentHull < 40 and !ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_SHIPLOSS)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_SHIPLOSS)
 			ActionTracker.QueueTutorial("TUT_Cardfight_ShipLossTitle", "TUT_Cardfight_ShipLossText", [])
 	
-		DamageGot += Dmg
-		if (Dmg > 0):
-			UIEventH.OnControlledShipDamaged(Dmg)
+		DamageGot += amm
+		if (amm > 0):
+			UIEventH.OnControlledShipDamaged(amm)
 	else:
-		DamageDone += Dmg
-	
+		DamageDone += amm
 	if (Ship.CurrentHull <= 0):
-		if (await ShipDestroyed(Ship)):
-			return true
-		#else:
-			#CheckForReserves()
-	else:
-		UpdateShipStats(Ship)
-	return false
+		await ShipDestroyed(Ship)
 
 # RETURN TRUE IF FIGHT IS OVER
 func ShipDestroyed(Ship : BattleShipStats) -> bool:
@@ -2065,8 +2001,6 @@ func ShipDestroyed(Ship : BattleShipStats) -> bool:
 	
 	var TurnPosition = ShipTurns.find(Ship)
 	ShipTurns.erase(Ship)
-	
-	
 	
 	if (Friendly):
 		PlayerCombatants.erase(Ship)
@@ -2090,10 +2024,7 @@ func ShipDestroyed(Ship : BattleShipStats) -> bool:
 	return false
 
 
-func TrySetFire() -> bool:
-	randomize()
-	var random_value = randf()
-	return random_value < 0.2
+
 
 func RemoveShip(Ship : BattleShipStats) -> void:
 	var ShipViz = Ship.ShipViz
@@ -2125,6 +2056,7 @@ func CreateShipVisuals(BattleS : BattleShipStats, Friendly : bool) -> CardFightS
 	else :
 		EnemyShipVisualPlecement.add_child(ShipVisuals)
 	
+	BattleS.ShipDamaged.connect(ShipDamaged.bind(BattleS))
 	BattleS.StatsBuffed.connect(UpdateShipStats.bind(BattleS))
 	BattleS.ShipViz = ShipVisuals
 
