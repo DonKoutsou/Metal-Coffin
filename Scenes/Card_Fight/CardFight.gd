@@ -1193,22 +1193,6 @@ func HandleModule(Performer : BattleShipStats, C : CardStats, Mod : CardModule, 
 
 	return AnimData
 ##----------------------------------------------------------------------##
-func HandleIntercept(Performer : BattleShipStats, Mod : InterceptModule) -> DeffensiveAnimationData:
-	var TargetViz : Array[Control]
-	TargetViz.append(Performer.ShipViz)
-	
-	for g in GetShipEnemyTeam(Performer):
-		var Actions = ActionList.GetShipsActions(g)
-		for Act : CardFightAction in Actions:
-			if (Act.Targets.size() == 1 and !Act.Targets.has(Performer)):
-				Act.Targets.clear()
-				Act.Targets.append(Performer)
-		
-	var Data = DeffensiveAnimationData.new()
-	Data.Mod = Mod
-	Data.Targets = TargetViz
-	return Data
-##----------------------------------------------------------------------##
 func HandleTargets(Mod : CardModule, User : BattleShipStats) -> Array[BattleShipStats]:
 	var Targets : Array[BattleShipStats]
 	if (!Mod.NeedsTargetSelect()):

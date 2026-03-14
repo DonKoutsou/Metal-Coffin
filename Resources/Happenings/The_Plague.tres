@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Happening" format=3 uid="uid://dr3ro5kl2ebvq"]
+
+[ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scenes/Map/MapSpot/Happenings/HappeningStage.gd" id="1_c5ku4"]
+[ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scenes/Map/MapSpot/Happenings/Happening.gd" id="2_0p4e3"]
+[ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scenes/Map/MapSpot/Happenings/HappeningOption.gd" id="2_wdshu"]
+
+[sub_resource type="Resource" id="Resource_ctqyn"]
+script = ExtResource("1_c5ku4")
+HappeningTexts = Array[String](["Setting foot on the port fills you with a weird unease.", "The usual crowd that you find in the ports is missing and the a deffening silence floods the perimeter."])
+metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
+
+[resource]
+script = ExtResource("2_0p4e3")
+HappeningName = "The Plague"
+Stages = Array[ExtResource("1_c5ku4")]([SubResource("Resource_ctqyn")])
+HappeningAppearance = 1
+Special = true
+metadata/_custom_type_script = "uid://dje5vrjyps8mt"

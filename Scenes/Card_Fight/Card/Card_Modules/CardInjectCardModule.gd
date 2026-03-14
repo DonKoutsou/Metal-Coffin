@@ -22,7 +22,7 @@ func GetCardAmmount(Tier : int) -> int:
 		return roundi(amm + (TierUpgrade * Tier))
 	return roundi(amm * max((TierUpgrade * Tier), 1))
 
-func HandleCardInject(_Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
+func Handle(_Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
 	if (Action.Burned):
 		return DeffensiveAnimationData.new()
 	var TargetViz : Array[Control]
