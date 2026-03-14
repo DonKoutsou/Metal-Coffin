@@ -193,9 +193,11 @@ func OnSpotAproached(AproachedBy : MapShip) -> void:
 	if (AproachedBy is HostileShip):
 		VisitingHostiles.append(AproachedBy)
 		return
-	#make sure to store all curreny visiting ships
-	VisitingShips.append(AproachedBy)
-	
+	if (!VisitingShips.has(AproachedBy)):
+		#make sure to store all curreny visiting ships
+		VisitingShips.append(AproachedBy)
+	else:
+		push_warning("Trying to add already existing ship")
 	# check if apreaching ship is commander of fleet, if ship has no commander it means they are a commander
 	if (AproachedBy.Command == null):
 		# stop simulation speeding and frame camera to player to let them know

@@ -190,6 +190,8 @@ func _HandleAutoPilot(delta : float) -> void:
 		updatedronecourse()
 
 func updatedronecourse():
+	if (!Moving()):
+		return
 	var plship = RegroupTarget
 	# Get the current position and velocity of the ship
 	
@@ -216,8 +218,7 @@ func updatedronecourse():
 	var ship_velocity = plship.GetShipSpeedVec()
 
 	# Predict where the ship will be in a future time `t`
-	var time_to_interception = (position.distance_to(ship_position)) / (GetShipSpeed() / 360)
-
+	var time_to_interception = min((position.distance_to(ship_position)) / (GetShipSpeed() / 360), 9999999)
 	# Calculate the predicted interception point
 	var predicted_position = ship_position + ship_velocity * time_to_interception
 	ShipLookAt(predicted_position)

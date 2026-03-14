@@ -180,11 +180,13 @@ func OnShipDestroyed(Sh : PlayerDrivenShip):
 		World.GetInstance().call_deferred("GameLost", "Flagship destroyed")
 		Sh.GetDroneDock().ClearAllDrones()
 		return
-	var NewCommander
+	var NewCommander : PlayerDrivenShip
 	if (Sh.GetDroneDock().DockedDrones.size() > 0):
 		NewCommander = Sh.GetDroneDock().DockedDrones[0]
 		Sh.GetDroneDock().UndockDrone(NewCommander)
 		NewCommander.Command = null
+		NewCommander.TargetLocations = Sh.TargetLocations
+		NewCommander.TargetShip = Sh.TargetShip
 
 	for DockedShip in range(Sh.GetDroneDock().DockedDrones.size() - 1, -1, -1):
 		Sh.GetDroneDock().UndockDrone(Sh.GetDroneDock().DockedDrones[DockedShip])

@@ -48,6 +48,8 @@ func Init(LandedShips : Array[MapShip], Merch : Array[Merchandise]) -> void:
 	for it : Item in Itms:
 		if (it is ShipPart):
 			continue
+		if (it is PlaceHolderItem):
+			continue
 		#If neither player or shop has any of selected Merch dont add the UI for it
 		
 		var ItScene = ItemScene.instantiate() as TownShopItem
