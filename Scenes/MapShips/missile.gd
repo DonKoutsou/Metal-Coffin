@@ -34,7 +34,7 @@ var activationdistance : float = 0
 
 func SetData(Dat :Array[MissileItem]) -> void:
 	Speed = Dat[0].Speed
-	MissileName = Dat[0].ItemName
+	MissileName = Dat[0].GetItemName()
 	Damage = Dat[0].Damage
 	Distance = Dat[0].Distance
 	Amm = Dat.size()

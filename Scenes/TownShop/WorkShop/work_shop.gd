@@ -144,7 +144,12 @@ func OnShipSelected(Ship : MapShip) -> void:
 					box.RegisterItem(g)
 					box.UpdateAmm(1)
 					break
-
+		else: if (g is PlaceHolderItem):
+			for box : Inventory_Box in GetBoxParentForType(g.ContainedItem.PartType).get_children():
+				if box.IsEmpty():
+					box.RegisterItem(g)
+					box.UpdateAmm(1)
+					break
 func RefreshInventory() -> void:
 	for g in EngineInventoryBoxParent.get_children():
 		g.free()
@@ -214,6 +219,12 @@ func RefreshInventory() -> void:
 						box.RegisterItem(g)
 						box.UpdateAmm(1)
 						break
+		else: if (g is PlaceHolderItem):
+			for box : Inventory_Box in GetBoxParentForType(g.ContainedItem.PartType).get_children():
+				if box.IsEmpty():
+					box.RegisterItem(g)
+					box.UpdateAmm(1)
+					break
 
 func GetBoxParentForType(PartType : ShipPart.ShipPartType) -> Control:
 	var BoxParent : Control
@@ -259,12 +270,14 @@ func ItemSelected(Box : Inventory_Box) -> void:
 	WorkshopDescriptor.DescribedContainer = Box
 	if (Box.IsEmpty()):
 		WorkshopDescriptor.SetEmptyShopData(GetTypeOfBox(Box))
-		WorkshopDescriptor.connect("ItemAdd", AddItem)
+		WorkshopDescriptor.ItemAdd.connect(AddItem)
 	else:
 		WorkshopDescriptor.SetWorkShopData(Box, HasUpgradeBuff, CurrentShip.Cpt)
-		WorkshopDescriptor.connect("ItemAdd", AddItem)
-		WorkshopDescriptor.connect("ItemRemove", RemoveItem)
-		WorkshopDescriptor.connect("ItemUpgraded", UpgradeItem)
+		WorkshopDescriptor.ItemAdd.connect(AddItem)
+		WorkshopDescriptor.ItemRemove.connect(RemoveItem)
+		WorkshopDescriptor.ItemUpgraded.connect(UpgradeItem)
+		WorkshopDescriptor.ItemUpgradeCancel.connect(CancelUpgrade)
+		WorkshopDescriptor.ItemInstallCanceled.connect(CancelInstall)
 		
 		#Descriptor.connect("ItemDropped", OwnerInventory.RemoveItemFromBox)
 		#Descriptor.connect("ItemTransf", ItemTranfer)
@@ -272,7 +285,6 @@ func ItemSelected(Box : Inventory_Box) -> void:
 	WorkshopDescriptor.set_physics_process(false)
 
 func UpdateDescriptor(Box : Inventory_Box) -> void:
-
 	if (WorkshopDescriptor != null):
 		WorkshopDescriptor.SetWorkShopData(Box, HasUpgradeBuff, CurrentShip.Cpt)
 
@@ -318,7 +330,7 @@ func AddItem(Box : Inventory_Box) -> void:
 		if (Type == It.PartType):
 			var B = WorkshopItemUI.instantiate() as WorkShopItem
 			B.Init(g)
-			B.OnItemBought.connect(ItemToAddSelected.bind(g))
+			B.OnItemBought.connect(ItemToAddSelected.bind(g, Box))
 			ItemParent.add_child(B)
 			Amm += 1
 	
@@ -334,7 +346,7 @@ func AddItem(Box : Inventory_Box) -> void:
 	ItemParent.add_child(c2)
 	c2.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
-func ItemToAddSelected(M : Merchandise) -> void:
+func ItemToAddSelected(M : Merchandise, Box : Inventory_Box) -> void:
 	var OriginalItem : ShipPart = M.It
 
 	
@@ -349,7 +361,6 @@ func ItemToAddSelected(M : Merchandise) -> void:
 	if (PLWallet.Funds < Cost):
 		PopUpManager.GetInstance().DoFadeNotif("Cant pay for item")
 		return
-	
 	
 	var NewCap = OriginalCap.duplicate(true) as Captain
 	var NewInv = OriginalInv.duplicate(4) as CharacterInventory
@@ -374,9 +385,7 @@ func ItemToAddSelected(M : Merchandise) -> void:
 	if (!Resault):
 		
 		return
-			
-	
-	
+
 	M.Amm -= 1
 	
 	PLWallet.AddFunds(-Cost)
@@ -385,11 +394,55 @@ func ItemToAddSelected(M : Merchandise) -> void:
 	ItemCat.visible = false
 	for g in ItemParent.get_children():
 		g.queue_free()
-	CurrentShip.Cpt.GetCharacterInventory().AddItem(M.It)
-	PopUpManager.GetInstance().DoFadeNotif("{0} Added".format([M.It.ItemName]))
-	RefreshInventory()
-	CloseDescriptor()
 	
+	var box = CurrentShip.Cpt.GetCharacterInventory().StartEquip(Box, M.It)
+	var placeholder = PlaceHolderItem.new()
+	placeholder.ContainedItem = M.It
+	CurrentShip.Cpt.GetCharacterInventory().AddItemToBox(placeholder, box)
+	Box.RegisterItem(placeholder)
+	Box.UpdateAmm(1)
+	#CurrentShip.Cpt.GetCharacterInventory().AddItem(M.It)
+	PopUpManager.GetInstance().DoFadeNotif("{0} Added".format([M.It.GetItemName()]))
+	CloseDescriptor()
+	RefreshInventory()
+
+func CancelInstall(Box : Inventory_Box) -> void:
+	var Inv = CurrentShip.Cpt.GetCharacterInventory()
+	Inv.CancelInstall()
+	var placeholderItem : PlaceHolderItem = Box._ContainedItem
+	var Cost = placeholderItem.ContainedItem.Cost
+	
+	Map.GetInstance().GetScreenUi().TownUi.CoinsReceived(roundi(Cost / 1000.0))
+	var PLWallet = World.GetInstance().PlayerWallet
+	PLWallet.AddFunds(Cost)
+	PopUpManager.GetInstance().DoFadeNotif("{0} removed from {1}'s ship")
+	Inv.RemoveItem(placeholderItem)
+
+	CloseDescriptor()
+	RefreshInventory()
+	
+	for g in WorkShopMerch:
+		if (g.It.IsSame(placeholderItem.ContainedItem)):
+			g.Amm += 1
+			return
+	
+	var NewMerch = Merchandise.new()
+	NewMerch.It = placeholderItem.ContainedItem
+	NewMerch.Amm = 1
+	WorkShopMerch.append(NewMerch)
+
+func CancelUpgrade(Box : Inventory_Box) -> void:
+	var Inv = CurrentShip.Cpt.GetCharacterInventory()
+	Inv.CancelUpgrade()
+	
+	var OriginalItem : ShipPart = Box.GetContainedItem()
+	var UpgradedItem : ShipPart = OriginalItem.UpgradeVersion
+	var Cost = UpgradedItem.Cost
+	var PLWallet = World.GetInstance().PlayerWallet
+	PLWallet.AddFunds(Cost / 2.0)
+	Map.GetInstance().GetScreenUi().TownUi.CoinsReceived(roundi(Cost / 100))
+	PopUpManager.GetInstance().DoFadeNotif("Upgrade canceled\nPartial Refund Of Cost")
+	UpdateDescriptor(Box)
 
 func UpgradeItem(Box : Inventory_Box) -> void:
 	
@@ -448,13 +501,12 @@ func UpgradeItem(Box : Inventory_Box) -> void:
 	PLWallet.AddFunds(-Cost)
 	Map.GetInstance().GetScreenUi().TownUi.DropCoins(roundi(Cost / 100))
 	
-	PopUpManager.GetInstance().DoFadeNotif("{0} upgrade initiated".format([OriginalItem.ItemName]))
+	PopUpManager.GetInstance().DoFadeNotif("{0} upgrade initiated".format([OriginalItem.GetItemName()]))
 	
 	var Inv = CurrentShip.Cpt.GetCharacterInventory()
 	
 	var box = Inv.GetBoxContainingItem(Box._ContainedItem)
-	
-	InventoryManager.GetInstance().ItemUpdgrade(box, Inv)
+	CurrentShip.Cpt.GetCharacterInventory().StartUpgrade(box)
 	UpdateDescriptor(Box)
 
 func _on_button_pressed() -> void:

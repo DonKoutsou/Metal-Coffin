@@ -342,6 +342,7 @@ func OnShipDeparted(DepartedFrom : MapSpot) -> void:
 	ToggleShowRefuel("Refueling", false, 0)
 	ToggleShowRefuel("Repairing", false, 0)
 	ToggleShowRefuel("Upgrading", false, 0)
+	ToggleShowRefuel("Installing", false, 0)
 
 func UpdateTrajectory(Dir : float) -> void:
 	Direction.rotation = Dir

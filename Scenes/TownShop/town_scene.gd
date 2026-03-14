@@ -141,7 +141,7 @@ func OnShipSold(Ship : MapShip) -> void:
 
 
 func OnItemSold(It : Item) -> void:
-	PopupManager.GetInstance().DoFadeNotif("{0} has been sold".format([It.ItemName]))
+	PopupManager.GetInstance().DoFadeNotif("{0} has been sold".format([It.GetItemName()]))
 	
 	for g in LandedShips:
 		var inv = g.Cpt.GetCharacterInventory()
@@ -158,7 +158,7 @@ func OnItemSold(It : Item) -> void:
 	TownSpot.Merch.append(Merch)
 	
 func OnItemBought(It : Item) -> void:
-	PopupManager.GetInstance().DoFadeNotif("{0} bought".format([It.ItemName]))
+	PopupManager.GetInstance().DoFadeNotif("{0} bought".format([It.GetItemName()]))
 	
 	var Added = false
 	

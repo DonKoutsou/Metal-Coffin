@@ -303,5 +303,5 @@ func _on_button_gui_input(_event: InputEvent) -> void:
 	#mat.set_shader_parameter("y_rot", Newy)
 	#mat.set_shader_parameter("x_rot", Newx)
 	
-	dirTw.tween_method(SetCardDiretion, Vector2(currentx, currenty), Vector2(Newx, Newy), 0.25)
+	dirTw.tween_method(SetCardDiretion, Vector2(currentx, currenty), Vector2(Newx, Newy), 1)
 	

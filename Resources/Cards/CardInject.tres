@@ -21,4 +21,3 @@ CardName = "Card Inject"
 Energy = 2
 AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_ybrsn")]([SubResource("Resource_h6qxb")])
-PutOnTop = true

@@ -33,7 +33,7 @@ func _ready() -> void:
 	GroundMat = Ground.material
 
 	CloudMat.set_shader_parameter("Camera_Offset", global_position / 1500)
-	GroundMat.set_shader_parameter("offset",( global_position / 1500) + Vector2(1.5, 1.5))
+	GroundMat.set_shader_parameter("offset",( global_position / 9000))
 	GroundMap.ChangeOffset((global_position / 9000))
 	WeatherMan.UpdateCameraOffset((global_position / 9000))
 	UIEventHandle.ZoomDialMoved.connect(_HANDLE_ZOOM.bind(false))
@@ -218,7 +218,7 @@ func UpdateCameraPos(relativeMovement : Vector2, Unfocus : bool = true, FromSelf
 	position = newpos
 	
 	CloudMat.set_shader_parameter("Camera_Offset", global_position / 1500)
-	GroundMat.set_shader_parameter("offset", (global_position / 1500) + Vector2(1.5, 1.5))
+	GroundMat.set_shader_parameter("offset", (global_position / 9000))
 	GroundMap.ChangeOffset((global_position / 9000))
 	WeatherMan.UpdateCameraOffset((global_position / 9000))
 	
@@ -310,7 +310,7 @@ func ForceCamPosition(Pos : Vector2) -> void:
 	UIEventHandle.OnXchangedFromScreen(relativeMovement.x / 100)
 	position = newpos
 	CloudMat.set_shader_parameter("Camera_Offset", newpos / 1500)
-	GroundMat.set_shader_parameter("offset", (newpos / 1500) + Vector2(1.5, 1.5))
+	GroundMat.set_shader_parameter("offset", (newpos / 9000))
 	GroundMap.ChangeOffset((newpos / 9000))
 	WeatherMan.UpdateCameraOffset((newpos / 9000))
 	Grid.UpdateOffset(newpos)

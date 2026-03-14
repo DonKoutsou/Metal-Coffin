@@ -22,7 +22,7 @@ var PlAmm : int = 4
 var BoughtAmm : int = 0
 
 func _ready() -> void:
-	ItemName.text = It.ItemName
+	ItemName.text = It.GetItemName()
 	ItPriceT.text = var_to_str(ItPrice).replace(".0", "")
 	ShopOwnedT.text = var_to_str(ShopAmm)
 	PlOwnedT.text = var_to_str(PlAmm)

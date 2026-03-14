@@ -147,7 +147,7 @@ func onLaunchPressed() -> void:
 	if not amountArmed:
 		PopUpManager.GetInstance().DoFadeNotif("Missile amount hasn't been chosen.")
 		return
-	PopUpManager.GetInstance().DoFadeNotif("{0} Launched".format([currentlySelectedMissile.ItemName]))
+	PopUpManager.GetInstance().DoFadeNotif("{0} Launched".format([currentlySelectedMissile.GetItemName()]))
 	
 	var missilesToLaunch: Array[MissileItem]
 	for _i in amount:
@@ -183,12 +183,12 @@ func onArmPressed() -> void:
 	armed = true
 	amount = 1
 	rangeText.text = "Amount : %s" % var_to_str(amount)
-	PopUpManager.GetInstance().DoFadeNotif("{0} Armed".format([currentlySelectedMissile.ItemName]))
+	PopUpManager.GetInstance().DoFadeNotif("{0} Armed".format([currentlySelectedMissile.GetItemName()]))
 
 func onDissarmPressed() -> void:
 	if not showing:
 		return
-	PopUpManager.GetInstance().DoFadeNotif("{0} Dissarmed".format([currentlySelectedMissile.ItemName]))
+	PopUpManager.GetInstance().DoFadeNotif("{0} Dissarmed".format([currentlySelectedMissile.GetItemName()]))
 	dissarmMiss()
 
 func dissarmMiss() -> void:
@@ -220,7 +220,7 @@ func updateMissileSelect(select: int = 0) -> void:
 	if availableMissiles.size() > select:
 		selectedIndex = select
 		currentlySelectedMissile = availableMissiles[select]
-		selectedMissileText.text = currentlySelectedMissile.ItemName
+		selectedMissileText.text = currentlySelectedMissile.GetItemName()
 		rangeText.text = "Range : %s km" % var_to_str(currentlySelectedMissile.Distance)
 	else:
 		selectedMissileText.text = "No Missiles"
@@ -245,7 +245,7 @@ func progressMissileSelect(front: bool = true) -> void:
 			selectedIndex = availableMissiles.size() - 1
 		currentlySelectedMissile = availableMissiles[selectedIndex]
 	
-	selectedMissileText.text = currentlySelectedMissile.ItemName
+	selectedMissileText.text = currentlySelectedMissile.GetItemName()
 	rangeText.text = "Range : %s km" % var_to_str(currentlySelectedMissile.Distance)
 
 func turnOff() -> void:

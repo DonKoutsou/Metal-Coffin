@@ -31,6 +31,7 @@ vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="VBoxContainer" unique_id=414188162]
 layout_mode = 2
+theme_override_constants/outline_size = 6
 text = "Thanks for enduring through this demo. You have my eternal gratitude.
 If you want to see the full game please head over to steam and wishlist it.
 It helps alot."

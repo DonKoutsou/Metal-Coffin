@@ -19,7 +19,7 @@ uniform vec2 Scale1;
 uniform vec2 Scale2;
 //uniform float z = 0.5;
 
-const float z = 0.0625;
+const float z = 0.25;
 
 void fragment() {
 	vec2 uv = (UV + offset) * z;

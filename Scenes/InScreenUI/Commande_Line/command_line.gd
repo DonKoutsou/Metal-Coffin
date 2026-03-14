@@ -198,10 +198,10 @@ func InventoryUpgrade(CapName : String, ItemName : String) -> String:
 func HandleInventoryItemAddCommand(Inv : CharacterInventory, InventoryOwnerName : String, ItemName : String, ItAmm : int) -> String:
 
 	for g in Items:
-		if (g.ItemName.to_lower() == ItemName.replace("_", " ").to_lower()):
+		if (g.GetItemName().to_lower() == ItemName.replace("_", " ").to_lower()):
 			for a in ItAmm:
 				Inv.AddItem(g)
-			return "Added {0}X of {1} to {2}'s inventory".format([ItAmm, g.ItemName, InventoryOwnerName])
+			return "Added {0}X of {1} to {2}'s inventory".format([ItAmm, g.GetItemName(), InventoryOwnerName])
 	
 	return "Error Adding Item"
 	
@@ -209,7 +209,7 @@ func HandleItemUpgrade(Inv : CharacterInventory, ItemName : String) -> String:
 	for It in Inv._GetInventoryBoxes():
 		if It.IsEmpty():
 			continue
-		if It._ContainedItem.ItemName.to_lower() == ItemName.to_lower():
+		if It._ContainedItem.GetItemName().to_lower() == ItemName.to_lower():
 			var success = Inv.ForceUpgradeItem(It)
 			if (success):
 				return "{0} upgraded succesfully".format([ItemName])

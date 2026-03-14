@@ -22,6 +22,8 @@ var _CharacterInventories : Dictionary
 var SimPaused : bool = false
 #var SimSpeed : float = 1
 
+var CurrentDesc : ItemDescriptor
+
 signal InventoryToggled(t : bool)
 
 static var Instance : InventoryManager
@@ -147,20 +149,21 @@ func BoxSelected(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> vo
 			CaptainStats.visible = true
 			return
 	
-	var Descriptor = ItemDescriptorScene.instantiate() as ItemDescriptor
+	CurrentDesc = ItemDescriptorScene.instantiate() as ItemDescriptor
 	
-	DescriptorPlace.add_child(Descriptor)
+	DescriptorPlace.add_child(CurrentDesc)
 	CaptainStats.visible = false
 	#var cpt = GetBoxOwner(Box)
 	#var HasUp = false
 	#if (cpt.CurrentPort != ""):
 		#var cit = GetCity(cpt.CurrentPort)
 		#HasUp = cit.HasUpgrade()
-	Descriptor.SetData(Box, false, Box.GetContainedItem().CanTransfer, false, false, true)
+	CurrentDesc.SetData(Box, false, Box.GetContainedItem().CanTransfer, false, false, true)
 	#Descriptor.connect("ItemUsed", UseItem)
-	Descriptor.connect("ItemUpgraded", OwnerInventory.UpgradeItem)
-	Descriptor.connect("ItemDropped", OwnerInventory.RemoveItemFromBox)
-	Descriptor.connect("ItemTransf", ItemTranfer)
+	CurrentDesc.ItemUpgraded.connect(OwnerInventory.UpgradeItem)
+	CurrentDesc.ItemDropped.connect(OwnerInventory.RemoveItemFromBox)
+	CurrentDesc.ItemTransf.connect(ItemTranfer)
+	CurrentDesc.ItemUpgradeCancel.connect(CancelUpgrade.bind(OwnerInventory))
 	#Descriptor.connect("ItemRepaired", RepairPart)
 
 func GetCity(CityName : String) -> MapSpot:
@@ -175,12 +178,21 @@ func GetCity(CityName : String) -> MapSpot:
 
 func ItemUpdgrade(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> void:
 
-	var Cpt = GetBoxOwner(Box)
-	var cit = GetCity(Cpt.CurrentPort)
-	var HasUpgrade = cit.HasUpgrade()
+	#var Cpt = GetBoxOwner(Box)
+	#var cit = GetCity(Cpt.CurrentPort)
+	#var HasUpgrade = cit.HasUpgrade()
 
-	OwnerInventory.StartUpgrade(Box, cit.HasUpgrade())
+	OwnerInventory.StartUpgrade(Box)
 	
+func CancelUpgrade(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> void:
+	OwnerInventory.CancelUpgrade()
+	var OriginalItem : ShipPart = Box.GetContainedItem()
+	var UpgradedItem : ShipPart = OriginalItem.UpgradeVersion
+	var Cost = UpgradedItem.Cost
+	var PLWallet = World.GetInstance().PlayerWallet
+	PLWallet.AddFunds(Cost / 2.0)
+	PopUpManager.GetInstance().DoFadeNotif("Upgrade canceled\nPartial Refund Of Cost")
+	CurrentDesc.SetData(Box, false, Box.GetContainedItem().CanTransfer, false, false, true)
 
 func CancelUpgrades(Cha : Captain) -> void:
 	if (_CharacterInventories.has(Cha)):
@@ -317,7 +329,9 @@ func LoadCharacter(Data : SD_CharacterInventory) -> void:
 	
 	if (Data.ItemBeingUpgraded != null):
 		CharInv.ReStartUpgrade(CharInv.GetBoxContainingItem(Data.ItemBeingUpgraded), Data.UpgradeTime)
-
+	
+	if (Data.ItemBeingEquipped != null):
+		CharInv.ReStartEquip(Data.ItemBeingEquipped, Data.EquipTime)
 
 func OnItemAdded(It : Item, Owner : Captain) -> void:
 	if (It is MissileItem):
@@ -364,6 +378,9 @@ func GenerateCaptainSaveData(Cpt: Captain, Inv : CharacterInventory) -> SD_Chara
 	if (Inv._ItemBeingUpgraded != null):
 		Data.ItemBeingUpgraded = Inv._ItemBeingUpgraded.GetContainedItem()
 		Data.UpgradeTime = Inv._UpgradeTime
+	if (Inv._ItemBeingEquipped != null):
+		Data._ItemBeingEquipped = Inv._ItemBeingEquipped
+		Data.EquipTime = Inv._EquipTime
 	var Contents = Inv.GetInventoryContents()
 	for g in Contents.keys():
 		var Ic = ItemContainer.new()

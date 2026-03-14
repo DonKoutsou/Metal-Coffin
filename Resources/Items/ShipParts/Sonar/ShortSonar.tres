@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://cykf6xqhg77rm"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="1_w3nu2"]
+[ext_resource type="Resource" uid="uid://cfcixcsymvkwg" path="res://Resources/Cards/CardInject.tres" id="2_2q01h"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="7_k2ima"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="8_n3yeh"]
 
@@ -28,4 +29,5 @@ UpgradeTime = 1200.0
 PartType = 2
 ItemName = "AIRH-66"
 ItemDesc = "A fundamental radar system offering basic detection capabilities. Ideal for identifying nearby low-profile threats in standard operational conditions."
+CardProviding = Array[ExtResource("1_w3nu2")]([ExtResource("2_2q01h"), ExtResource("2_2q01h")])
 Cost = 120000

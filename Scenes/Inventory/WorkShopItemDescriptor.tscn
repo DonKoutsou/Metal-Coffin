@@ -14,7 +14,7 @@ border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 border_blend = true
 
-[node name="ItemDesc" type="PanelContainer" unique_id=516117052 node_paths=PackedStringArray("ItemName", "TransferButton", "UpgradeButton", "AddItemButton", "IncreaseItemButton", "RemoveItemButton", "UpgradeLabel", "CardSection", "CardPlecement") groups=["ItemDescriptor"]]
+[node name="ItemDesc" type="PanelContainer" unique_id=516117052 node_paths=PackedStringArray("ItemName", "TransferButton", "UpgradeButton", "CancelUpgradeButton", "CancelInstallButton", "AddItemButton", "IncreaseItemButton", "RemoveItemButton", "UpgradeLabel", "CardSection", "CardPlecement") groups=["ItemDescriptor"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -28,6 +28,8 @@ CardScene = ExtResource("3_q7hfh")
 ItemName = NodePath("Control/HBoxContainer/HBoxContainer/ItemName")
 TransferButton = NodePath("Control/HBoxContainer/HBoxContainer/ShipPartActions/Transfer")
 UpgradeButton = NodePath("Control/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade")
+CancelUpgradeButton = NodePath("Control/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade2")
+CancelInstallButton = NodePath("Control/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade3")
 AddItemButton = NodePath("Control/HBoxContainer/HBoxContainer/ShipPartActions/AddItem")
 IncreaseItemButton = NodePath("Control/HBoxContainer/HBoxContainer/ShipPartActions/AddMore")
 RemoveItemButton = NodePath("Control/HBoxContainer/HBoxContainer/ShipPartActions/RemoveItem")
@@ -87,6 +89,20 @@ size_flags_horizontal = 3
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("4_r68kf")
 text = "Upgrade"
+
+[node name="Upgrade2" type="Button" parent="Control/HBoxContainer/HBoxContainer/ShipPartActions" unique_id=1956063630 groups=["DigitalBouncingButton"]]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+text = "Cancel Upgrade"
+
+[node name="Upgrade3" type="Button" parent="Control/HBoxContainer/HBoxContainer/ShipPartActions" unique_id=1198813113 groups=["DigitalBouncingButton"]]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+text = "Cancel Install"
 
 [node name="AddItem" type="Button" parent="Control/HBoxContainer/HBoxContainer/ShipPartActions" unique_id=847643303 groups=["DigitalBouncingButton"]]
 layout_mode = 2
@@ -168,6 +184,8 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0fjjd")
 
 [connection signal="pressed" from="Control/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade" to="." method="_on_upgrade_pressed"]
+[connection signal="pressed" from="Control/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade2" to="." method="_on_cancel_upgrade_pressed"]
+[connection signal="pressed" from="Control/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade3" to="." method="_on_cancel_install_pressed"]
 [connection signal="pressed" from="Control/HBoxContainer/HBoxContainer/ShipPartActions/AddItem" to="." method="_on_add_item_pressed"]
 [connection signal="pressed" from="Control/HBoxContainer/HBoxContainer/ShipPartActions/AddMore" to="." method="_on_add_more_pressed"]
 [connection signal="pressed" from="Control/HBoxContainer/HBoxContainer/ShipPartActions/RemoveItem" to="." method="_on_remove_item_pressed"]

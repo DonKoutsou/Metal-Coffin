@@ -8,10 +8,10 @@ func OptionResault(EventOrigin : MapSpot) -> String:
 	var returnString = "You have found \n"
 	var Items : Dictionary
 	for g in HapItems.size():
-		if (Items.keys().has(HapItems[g].ItemName)):
-			Items[HapItems[g].ItemName] += 1
+		if (Items.keys().has(HapItems[g].GetItemName())):
+			Items[HapItems[g].GetItemName()] += 1
 		else:
-			Items[HapItems[g].ItemName] = 1
+			Items[HapItems[g].GetItemName()] = 1
 	
 	for g in Items.keys():
 		returnString += var_to_str(Items[g]) + " " + g + "\n"

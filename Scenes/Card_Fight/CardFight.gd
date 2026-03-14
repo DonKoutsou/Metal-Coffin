@@ -631,19 +631,19 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 			AvailableActions.erase(Action)
 			AvailableActions = await t.call(AvailableActions)
 			
-		else : if (Action.CardName == "Extinguish fires" and !Ship.IsOnFire):
-			print("{0} cant use {1}, not on fire".format([Ship.Name, Action.GetCardName()]))
-			AvailableActions.erase(Action)
-			AvailableActions = await t.call(AvailableActions)
-			
-		else : if (Action.CardName == "Extinguish fires" and Ship.IsOnFire):
-			Ship.Energy -= ActionCost
-			FireExtinguishToUse = Action
-			Ship.deck.Hand.erase(Action)
-			print("{0} has been added to {1}'s discard pile.".format([Action.GetCardName(), Ship.Name]))
-			Ship.deck.DiscardPile.append(Action)
-			AvailableActions.erase(Action)
-			AvailableActions = await t.call(AvailableActions)
+		else : if (Action.UseConditions.has(CardStats.CardUseCondition.ON_FIRE)):
+			if (Ship.IsOnFire):
+				Ship.Energy -= ActionCost
+				FireExtinguishToUse = Action
+				Ship.deck.Hand.erase(Action)
+				print("{0} has been added to {1}'s discard pile.".format([Action.GetCardName(), Ship.Name]))
+				Ship.deck.DiscardPile.append(Action)
+				AvailableActions.erase(Action)
+				AvailableActions = await t.call(AvailableActions)
+			else:
+				print("{0} cant use {1}, not on fire".format([Ship.Name, Action.GetCardName()]))
+				AvailableActions.erase(Action)
+				AvailableActions = await t.call(AvailableActions)
 			
 		else: if (Action.UseConditions.has(CardStats.CardUseCondition.NO_SOLO) and EnemyCombatants.size() == 1):
 			print("{0} cant use {1}, team too small".format([Ship.Name, Action.GetCardName()]))
@@ -690,7 +690,6 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 			var SelectedAction : CardStats = Action.duplicate()
 			
 			Ship.Energy -= ActionCost
-			
 			Ship.deck.Hand.erase(Action)
 			#EnemyDeck.DiscardPile.append(Action)
 			AvailableActions.erase(Action)
@@ -884,101 +883,8 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 	var Mod = Action.OnPerformModule
 
 	if (Mod is OffensiveCardModule):
+		await HandleOffensiveModule(Ship, Action, Mod, TargetShips)
 		ActionList.RemoveActionFromShip(Ship, Action)
-		
-		var AtackType = Mod.AtackType
-		
-		if (!Mod.AOE):
-			var EnemyTeam = GetShipEnemyTeam(Ship)
-			for enemy in EnemyTeam:
-				if enemy in TargetShips: #we dont want to intercept atack that already is comming to us
-					continue
-				for Act : CardFightAction in ActionList.GetShipsActions(enemy):
-					var mod = Act.Action.OnPerformModule
-					if (mod is InterceptModule):
-						TargetShips.clear()
-						TargetShips.append(enemy)
-						var TargetViz = enemy.ShipViz
-						TargetViz.ActionRemoved(Act.Action.Icon)
-						ActionList.RemoveActionFromShip(enemy, Act.Action)
-						PopUpManager.GetInstance().DoFadeNotif("Attack Intercepted")
-						break
-		#List containing targets and a bool saying if target has def
-		var TargetList : Dictionary[BattleShipStats, Dictionary]
-		var Counter : CardStats
-		for g in TargetShips:
-			for Act : CardFightAction in ActionList.GetShipsActions(g):
-				var mod = Act.Action.OnPerformModule
-				if (mod is CounterCardModule or mod is DamageReductionCardModule):
-					if (mod.CounterType == AtackType or mod.CounterType == OffensiveCardModule.AtackTypes.ANY_ATACK):
-						Counter = Act.Action
-						break
-				
-			var Data : Dictionary
-			Data["Def"] = Counter
-			Data["Viz"] = g.ShipViz
-			TargetList[g] = Data
-
-		Ship.ShipViz.ActionRemoved(Action.Icon)
-		
-		var AtackData = OffensiveAnimationData.new()
-		
-		AtackData.Mod = Mod
-		AtackData.DeffenceList = TargetList
-		
-		var AnimData : Array[AnimationData]
-		AnimData.append(AtackData)
-		
-		var DamageCallables : Array[Callable]
-		
-		var AtackConnected = false
-		var AtackReduction : float = 1
-		
-		for g in TargetList:
-			
-			var Def = TargetList[g]["Def"] as CardStats
-			
-			if (TargetList[g]["Def"] != null):
-				
-				var TargetViz = TargetList[g]["Viz"]
-				TargetViz.ActionRemoved(Counter.Icon)
-				ActionList.RemoveActionFromShip(g, Counter)
-				if (!Counter.ShouldConsume()):
-					g.deck.DiscardCard(Counter)
-						
-				if (!Friendly):
-					DamageNeg += Mod.GetFinalDamage(Ship, Action.Tier)
-					
-				var CounterMod = Def.OnPerformModule
-				
-				if (CounterMod is DamageReductionCardModule):
-					AtackReduction = CounterMod.GetReductionPercent(Def.Tier)
-					for SDefMod in CounterMod.OnSuccesfullDeffenceModules:
-						AnimData.append(HandleModule(Ship, Def, SDefMod))
-					AtackConnected = true
-					
-				if (CounterMod is CounterCardModule):
-					for SDefMod in CounterMod.OnSuccesfullDeffenceModules:
-						AnimData.append(HandleModule(Ship, Def, SDefMod))
-			else:
-				AtackConnected = true
-			
-			if (AtackConnected):
-				for SAtMod in Mod.OnSuccesfullAtackModules:
-					AnimData.append(HandleModule(Ship, Action, SAtMod, TargetList.keys()))
-					
-				var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Ship,Action.Tier) * AtackReduction, Mod.CauseFile, Mod.SkipShield)
-				DamageCallables.append(c)
-		
-		for SAtMod in Mod.OnAtackModules:
-			AnimData.append(HandleModule(Ship, Action, SAtMod, TargetList.keys()))
-
-		AtackData.Callables = DamageCallables
-		
-		if (!Action.ShouldConsume()):
-			Ship.deck.DiscardCard(Action)
-		
-		await DoCardAnim(Action, AnimData, Ship, Friendly)
 	else:
 		ActionIndex += 1
 		
@@ -1224,6 +1130,7 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 	var DamageCallables : Array[Callable]
 	
 	var AtackConnected = false
+	var DamageReduced = false
 	
 	for g in TargetList:
 		
@@ -1242,24 +1149,37 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 			var CounterMod = Def.OnPerformModule
 			
 			if (CounterMod is DamageReductionCardModule):
-				var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Performer,Action.Tier) * CounterMod.GetReductionPercent(Def.Tier), Mod.CauseFile, Mod.SkipShield)
+				var tar : Array[BattleShipStats]
+				if (CounterMod.OnSuccesfullDeffenceModulesUseSelf):
+					tar.append(g)
+				else:
+					tar.append(Performer)
+				var DamageReduction = Mod.GetFinalDamage(Performer,Action.Tier) * CounterMod.GetReductionPercent(Def.Tier)
+				var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Performer,Action.Tier) - DamageReduction, Mod.CauseFile, Mod.SkipShield)
 				DamageCallables.append(c)
 				for SDefMod in CounterMod.OnSuccesfullDeffenceModules:
-					AnimData.append(HandleModule(Performer, Def, SDefMod))
+					AnimData.append(HandleModule(g, Def, SDefMod, tar))
 				AtackConnected = true
+				DamageReduced = true
 				
 			if (CounterMod is CounterCardModule):
+				var tar : Array[BattleShipStats]
+				if (CounterMod.OnSuccesfullDeffenceModulesUseSelf):
+					tar.append(g)
+				else:
+					tar.append(Performer)
 				for SDefMod in CounterMod.OnSuccesfullDeffenceModules:
-					AnimData.append(HandleModule(Performer, Def, SDefMod))
+					AnimData.append(HandleModule(g, Def, SDefMod, tar))
 		else:
 			AtackConnected = true
 		
 		if (AtackConnected):
 			for SAtMod in Mod.OnSuccesfullAtackModules:
 				AnimData.append(HandleModule(Performer, Action, SAtMod, TargetList.keys()))
-				
-			var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Performer,Action.Tier), Mod.CauseFile, Mod.SkipShield)
-			DamageCallables.append(c)
+			
+			if (!DamageReduced):
+				var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Performer,Action.Tier), Mod.CauseFile, Mod.SkipShield)
+				DamageCallables.append(c)
 	
 	for SAtMod in Mod.OnAtackModules:
 		AnimData.append(HandleModule(Performer, Action, SAtMod, TargetList.keys()))
@@ -1422,14 +1342,9 @@ func DoCardAnim(Action : CardStats, Data : Array[AnimationData], Performer : Bat
 	anim.DoAnimation(Action, Data, Performer, _FriendShip)
 	if (!Action.Burned):
 		for g in Data:
-			if (g is OffensiveAnimationData):
-				for C in g.Callables:
-					await anim.AtackConnected
-					C.call()
-			else : if (g is DeffensiveAnimationData):
-				for C in g.Callables:
-					await anim.DeffenceConnected
-					C.call()
+			for C in g.Callables:
+				await anim.Connected
+				C.call()
 	
 	await anim.AnimationFinished
 	print("finished anim")

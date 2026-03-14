@@ -11,6 +11,8 @@ class_name ItemDescriptor
 
 @export var TransferButton : Button
 @export var UpgradeButton : Button
+@export var CancelUpgradeButton : Button
+@export var CancelInstallButton : Button
 @export var AddItemButton : Button
 @export var IncreaseItemButton : Button
 @export var RemoveItemButton : Button
@@ -19,6 +21,8 @@ class_name ItemDescriptor
 @export var CardPlecement : Control
 
 signal ItemUpgraded(Box : Inventory_Box)
+signal ItemUpgradeCancel(Box : Inventory_Box)
+signal ItemInstallCanceled(Box : Inventory_Box)
 signal ItemDropped(Box : Inventory_Box)
 #signal ItemRepaired(Box : Inventory_Box)
 signal ItemTransf(Box : Inventory_Box)
@@ -75,7 +79,8 @@ func SetWorkShopData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) ->
 	TransferButton.visible = false
 	AddItemButton.visible = false
 	UpgradeButton.visible = true
-	ItemName.text = It.ItemName
+	CancelUpgradeButton.visible = false
+	ItemName.text = It.GetItemName()
 	RemoveItemButton.visible = true
 	#Ship Parts
 	if (It is ShipPart):
@@ -92,6 +97,7 @@ func SetWorkShopData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) ->
 			if (inv.GetItemBeingUpgraded() != null and inv.GetItemBeingUpgraded().GetContainedItem() == It):
 				#set_physics_process(true)
 				UpgradeButton.visible = false
+				CancelUpgradeButton.visible = true
 				var TimeLeft = var_to_str(roundi(inv.GetUpgradeTimeLeft()))
 				UpgradeLabel.text = "Upgrade time left : {0} minutes".format([TimeLeft])
 			else:
@@ -102,7 +108,14 @@ func SetWorkShopData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) ->
 					UpTime *= 0.75
 					UpCost *= 0.75
 				UpgradeLabel.text = "[color=#ffc315]Upgrade Time[/color] : {0}\n[color=#ffc315]Upgrade Cost[/color] : {1}".format([roundi(UpTime), roundi(UpCost)])
-		
+	else : if (It is  PlaceHolderItem):
+		var inv = Owner.GetCharacterInventory()
+		var TimeLeft = var_to_str(roundi(inv.GetEquipTimeLeft()))
+		UpgradeLabel.text = "Install time left : {0} minutes".format([TimeLeft])
+		UpgradeLabel.visible = true
+		CancelInstallButton.visible = true
+		UpgradeButton.visible = false
+		RemoveItemButton.visible = false
 	else :
 		
 		UpgradeButton.visible = false
@@ -142,10 +155,11 @@ func SetMerchData(Itm : Item, Ships : Array[MapShip], ShowDesc : bool = false) -
 		ItemDesc.text = Itm.GetMerchItemDesc(Ships)
 	else:
 		ItemDesc.text = Itm.GetWorkshopItemDesc()
-	ItemName.text = Itm.ItemName
+	ItemName.text = Itm.GetItemName()
 	#Ship Parts
 	#if (Itm is ShipPart):
 	UpgradeButton.visible = false
+	CancelUpgradeButton.visible = false
 	UpgradeLabel.visible = false
 		#UpgradeLabel.visible = true
 	#else: if (Itm is AmmoItem):
@@ -186,12 +200,13 @@ func SetData(Box : Inventory_Box, CanUpgrade : bool, CanTransfer : bool, CanAdd 
 	DescribedContainer = Box
 	var It = DescribedContainer.GetContainedItem()
 	
-	ItemName.text = It.ItemName
+	ItemName.text = It.GetItemName()
 	ItemDesc.text = It.GetItemDesc()
 	ItemDesc.visible = ShowDescription
 	
-	TransferButton.visible = CanTransfer and !DescribedContainer.IsEmpty()
+	TransferButton.visible = CanTransfer and !DescribedContainer.IsEmpty() and It is not PlaceHolderItem
 	UpgradeButton.visible = CanUpgrade
+	CancelUpgradeButton.visible = false
 	AddItemButton.visible = CanAdd and DescribedContainer.IsEmpty()
 	RemoveItemButton.visible = CanRemove
 	#Ship Parts
@@ -206,6 +221,10 @@ func SetData(Box : Inventory_Box, CanUpgrade : bool, CanTransfer : bool, CanAdd 
 			if (inv != null and inv.GetItemBeingUpgraded() == Box):
 				#set_physics_process(true)
 				UpgradeButton.visible = CanUpgrade
+				CancelUpgradeButton.visible = true
+				var TimeLeft = var_to_str(roundi(inv.GetUpgradeTimeLeft()))
+				UpgradeLabel.text = "Upgrade time left : {0} minutes".format([TimeLeft])
+				UpgradeLabel.visible = true
 			else:
 				UpgradeButton.visible = CanUpgrade
 				var UpTime = It.UpgradeTime
@@ -214,6 +233,12 @@ func SetData(Box : Inventory_Box, CanUpgrade : bool, CanTransfer : bool, CanAdd 
 					UpTime /= 2
 					UpCost /= 2
 				UpgradeLabel.text = "[color=#ffc315]Upgrade Time[/color] : {0}\n[color=#ffc315]Upgrade Cost[/color] : {1}\n[color=#ffc315]-------------".format([UpTime, UpCost])
+	else : if (It is  PlaceHolderItem):
+		var inv = Box.GetParentInventory()
+		var TimeLeft = var_to_str(roundi(inv.GetEquipTimeLeft()))
+		UpgradeLabel.text = "Install time left : {0} minutes".format([TimeLeft])
+		UpgradeLabel.visible = true
+		CancelInstallButton.visible = false
 	else :
 		IncreaseItemButton.visible = CanAdd
 		UpgradeButton.visible = false
@@ -242,6 +267,7 @@ func SetData(Box : Inventory_Box, CanUpgrade : bool, CanTransfer : bool, CanAdd 
 
 func SetEmptyShopData(Type : ShipPart.ShipPartType) -> void:
 	UpgradeButton.visible = false
+	CancelUpgradeButton.visible = false
 	AddItemButton.visible = true
 	TransferButton.visible = false
 	UpgradeLabel.visible = false
@@ -255,6 +281,11 @@ func _on_upgrade_pressed() -> void:
 	ItemUpgraded.emit(DescribedContainer)
 	#PopUpManager.GetInstance().DoConfirm("", "Are you sure you want to upgrade this item ?", "Upgrade", ConfirmUpgrade, Ingame_UIManager.GetInstance().PopupPlecement)
 
+func _on_cancel_upgrade_pressed() -> void:
+	ItemUpgradeCancel.emit(DescribedContainer)
+
+func _on_cancel_install_pressed() -> void:
+	ItemInstallCanceled.emit(DescribedContainer)
 
 func _on_drop_pressed() -> void:
 	pass

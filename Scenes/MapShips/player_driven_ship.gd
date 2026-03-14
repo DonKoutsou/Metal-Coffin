@@ -285,6 +285,7 @@ func _HandleRestock() -> void:
 		ShipDockActions.emit("Refueling", false, 0)
 		ShipDockActions.emit("Repairing", false, 0)
 		ShipDockActions.emit("Upgrading", false, 0)
+		ShipDockActions.emit("Installing", false, 0)
 		return
 	Refuel()
 	Repair()
@@ -294,6 +295,11 @@ func _HandleRestock() -> void:
 		ShipDockActions.emit("Upgrading", true, roundi(inv.GetUpgradeTimeLeft()))
 	else:
 		ShipDockActions.emit("Upgrading", false, 0)
+	
+	if (inv != null and inv._ItemBeingEquipped != null):
+		ShipDockActions.emit("Installing", true, roundi(inv.GetEquipTimeLeft()))
+	else:
+		ShipDockActions.emit("Installing", false, 0)
 
 #--------------------------------------------------------------
 

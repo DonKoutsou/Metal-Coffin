@@ -250,7 +250,7 @@ func UpgradeItem(Box : Inventory_Box) -> void:
 	#Box.UpdateAmm(1)
 	DeckUI.SetDeck2(CurrentCpt)
 	UpdateDescriptor(Box)
-	PopUpManager.GetInstance().DoFadeNotif("{0} Upgraded".format([OriginalItem.ItemName]))
+	PopUpManager.GetInstance().DoFadeNotif("{0} Upgraded".format([OriginalItem.GetItemName()]))
 
 var SelectedContainer : Inventory_Box
 func AddItem(Box : Inventory_Box) -> void:
@@ -288,7 +288,7 @@ func AddItem(Box : Inventory_Box) -> void:
 	
 
 func IncreaseItem(Box : Inventory_Box) -> void:
-	PopUpManager.GetInstance().DoFadeNotif("{0} Added".format([Box.GetContainedItem().ItemName]))
+	PopUpManager.GetInstance().DoFadeNotif("{0} Added".format([Box.GetContainedItem().GetItemName()]))
 	Box.UpdateAmm(1)
 	CurrentCpt.StartingItems.append(Box.GetContainedItem())
 	DeckUI.SetDeck2(CurrentCpt)
@@ -303,10 +303,10 @@ func OnItemSelected(It : Item) -> void:
 	SelectedContainer.UpdateAmm(1)
 	DeckUI.SetDeck2(CurrentCpt)
 	UpdateDescriptor(SelectedContainer)
-	PopUpManager.GetInstance().DoFadeNotif("{0} Added".format([It.ItemName]))
+	PopUpManager.GetInstance().DoFadeNotif("{0} Added".format([It.GetItemName()]))
 
 func RemoveItem(Box : Inventory_Box) -> void:
-	PopUpManager.GetInstance().DoFadeNotif("{0} Removed".format([Box.GetContainedItem().ItemName]))
+	PopUpManager.GetInstance().DoFadeNotif("{0} Removed".format([Box.GetContainedItem().GetItemName()]))
 	var OriginalItem = Box.GetContainedItem()
 	CurrentCpt.StartingItems.erase(OriginalItem)
 	Box.UpdateAmmNoDissable(-1)

@@ -19,4 +19,3 @@ CardName = "Burn"
 Energy = 2
 AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_fqnt1")]([SubResource("Resource_lftj1")])
-PutOnTop = true

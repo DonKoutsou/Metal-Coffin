@@ -13,6 +13,9 @@ class_name Item
 @export var CanTransfer : bool = true
 @export var Cost : int = 0
 
+func GetItemName() -> String:
+	return ItemName
+
 func GetItemDesc() -> String:
 	return ItemDesc
 

@@ -147,7 +147,7 @@ func HasRepair() -> bool:
 func HasUpgrade() -> bool:
 	var hasu = false
 	for g in PossibleDrops:
-		if g.ItemName == "Material":
+		if g.GetItemName() == "Material":
 			hasu = true
 			break
 	return hasu
@@ -155,7 +155,7 @@ func HasUpgrade() -> bool:
 func HasRecruit() -> bool:
 	var hasr = false
 	for g in PossibleDrops:
-		if g.ItemName == "Recruitment":
+		if g.GetItemName() == "Recruitment":
 			hasr = true
 			break
 	return hasr

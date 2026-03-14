@@ -16,4 +16,5 @@ CardName = "Extinguish fires"
 Energy = 1
 OnUseModules = Array[ExtResource("2_0cpai")]([SubResource("Resource_gl0km")])
 Type = 1
+UseConditions = Array[int]([10])
 AllowTier = false

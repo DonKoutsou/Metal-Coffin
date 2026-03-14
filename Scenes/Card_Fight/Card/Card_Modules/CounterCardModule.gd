@@ -5,7 +5,7 @@ class_name CounterCardModule
 @export var CounterType : OffensiveCardModule.AtackTypes
 
 @export var OnSuccesfullDeffenceModules : Array[CardModule]
-
+@export var OnSuccesfullDeffenceModulesUseSelf : bool = false
 func GetDesc(Tier : int) -> String:
 	var Desc = "Avoid an incomming\n[color=#ffc315]{0}[/color]".format([OffensiveCardModule.AtackTypes.keys()[CounterType].replace("_", " ")])
 	if (OnSuccesfullDeffenceModules.size() > 0):

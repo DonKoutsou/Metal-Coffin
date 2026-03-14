@@ -34,11 +34,12 @@ UIEventHandle = ExtResource("2_pbaxl")
 NoiseNormalTexture = ExtResource("3_1djom")
 
 [node name="Ground" parent="." unique_id=1453279039 instance=ExtResource("4_dlxj6")]
-offset_right = 750.0
-offset_bottom = 750.0
+offset_left = -4500.0
+offset_top = -4500.0
+offset_right = 4500.0
+offset_bottom = 4500.0
 
 [node name="Clouds" type="ColorRect" parent="." unique_id=367161667]
-visible = false
 texture_filter = 1
 material = ExtResource("5_5ixku")
 anchors_preset = 8

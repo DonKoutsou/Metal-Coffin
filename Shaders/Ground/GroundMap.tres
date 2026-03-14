@@ -7,7 +7,7 @@
 [resource]
 shader = ExtResource("1_66mk7")
 shader_parameter/NoiseTexture2 = ExtResource("2_s0sa5")
-shader_parameter/offset = Vector2(-0.25, 0)
+shader_parameter/offset = Vector2(0, 0)
 shader_parameter/col = 0.15
 shader_parameter/z = 0.25
 shader_parameter/levels = 8

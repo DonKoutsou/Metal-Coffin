@@ -5,6 +5,7 @@ class_name DamageReductionCardModule
 @export var CounterType : OffensiveCardModule.AtackTypes
 @export var ReductionPercent : int
 @export var OnSuccesfullDeffenceModules : Array[CardModule]
+@export var OnSuccesfullDeffenceModulesUseSelf : bool = false
 
 func GetDesc(Tier : int) -> String:
 	var Desc = ""

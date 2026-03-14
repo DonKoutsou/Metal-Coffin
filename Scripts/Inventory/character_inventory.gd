@@ -35,8 +35,10 @@ var SimPaused : bool = false
 var _ItemBeingUpgraded : Inventory_Box
 var _UpgradeTime : float
 var _ItemBeingEquipped : ShipPart
+var _EquipLocation : Inventory_Box
 var _EquipTime : float
 
+var CurrentPort : MapSpot
 
 func _ready() -> void:
 	if (HideOnStart):
@@ -270,6 +272,27 @@ func InitialiseStarting(Cha : Captain) -> void:
 func ItemSelected(Box : Inventory_Box) -> void:
 	BoxSelected.emit(Box, self)
 
+func FindBox(It : Item) -> Inventory_Box:
+	var boxes
+	if (It is ShipPart):
+		boxes = GetBoxParentForType(It.PartType).get_children()
+	else:
+		boxes = InventoryBoxParent.get_children()
+	var Empty : Inventory_Box = null
+	#try to find matching box for it and if not put it on any empty ones we found
+	for g in boxes:
+		if (g.IsEmpty()):
+			if (Empty == null):
+				Empty = g
+			continue
+		if (g.GetContainedItemName() == It.ItemName and g.HasSpace()):
+			return g
+	#try to find empty box
+	if (Empty != null):
+		return Empty
+
+	return null
+
 func AddItem(It : Item) -> void:
 	var boxes
 	if (It is ShipPart):
@@ -317,6 +340,28 @@ func AddItem(It : Item) -> void:
 		return
 	ItemPlecementFailed.emit(It)
 	return
+
+func AddItemToBox(It : Item, destination : Inventory_Box) -> void:
+	if (destination.IsEmpty()):
+		destination.RegisterItem(It)
+		destination.UpdateAmm(1)
+		if (_InventoryContents.has(It)):
+			_InventoryContents[It] += 1
+		else:
+			_InventoryContents[It] = 1
+
+			
+		if (It is ShipPart):
+			OnShipPartAdded.emit(It)
+
+		OnItemAdded.emit(It)
+		InventoryUpdated.emit()
+	else:
+		destination.UpdateAmm(1)
+		_InventoryContents[It] += 1
+
+		OnItemAdded.emit(It)
+		InventoryUpdated.emit()
 
 #func HasItem(It : Item) -> bool:
 	#return _InventoryContents.has(It)
@@ -386,7 +431,7 @@ func RemoveItem(It : Item) -> void:
 		var box = g as Inventory_Box
 		if (box.IsEmpty()):
 			continue
-		if (box.GetContainedItemName() == It.ItemName):
+		if (box._ContainedItem.ItemName == It.ItemName):
 			RemoveItemFromBox(box)
 			
 			return
@@ -412,12 +457,23 @@ func UpgradeItem(Box : Inventory_Box) -> void:
 func TransferItem(Box : Inventory_Box) -> void:
 	ItemTransf.emit(Box, self)
 
-func StartUpgrade(Box : Inventory_Box, UpgradeBuff : bool) -> void:
+func StartUpgrade(Box : Inventory_Box) -> void:
 	var Part = Box.GetContainedItem() as ShipPart
-	_UpgradeTime = Part.UpgradeTime
-	if (UpgradeBuff):
-		_UpgradeTime /= 2
+	_UpgradeTime = Part.UpgradeVersion.UpgradeTime
 	_ItemBeingUpgraded = Box
+	set_physics_process(true)
+
+func StartEquip(Box : Inventory_Box, It : ShipPart) -> Inventory_Box:
+	_ItemBeingEquipped = It
+	_EquipLocation = FindBox(It)
+	_EquipTime = It.UpgradeTime
+	set_physics_process(true)
+	return _EquipLocation
+
+func ReStartEquip(It : ShipPart, EquipTime : float) -> void:
+	_ItemBeingEquipped = It
+	_EquipLocation = FindBox(It)
+	_EquipTime = EquipTime
 	set_physics_process(true)
 
 func ReStartUpgrade(Box : Inventory_Box, UpTime : float) -> void:
@@ -427,22 +483,38 @@ func ReStartUpgrade(Box : Inventory_Box, UpTime : float) -> void:
 	set_physics_process(true)
 	
 func _physics_process(delta: float) -> void:
-	if (SimPaused):
+	if (SimPaused or CurrentPort == null):
 		return
-	_UpgradeTime -= (delta * 10) * SimulationManager.SimSpeed()
-	_EquipTime -= (delta * 10) * SimulationManager.SimSpeed()
+
 	#_UpgradeTime -= (delta * 10)
-	if (_ItemBeingUpgraded != null and _UpgradeTime <= 0):
-		ItemUpgradeFinished()
+	if (_ItemBeingUpgraded != null):
+		var upgradeProgress = (delta * 10) * SimulationManager.SimSpeed()
+		if (CurrentPort.HasUpgrade()):
+			upgradeProgress *= 2
+		_UpgradeTime -= upgradeProgress
+		if (_UpgradeTime <= 0):
+			ItemUpgradeFinished()
 	
-	if (_ItemBeingEquipped != null and _EquipTime <= 0):
-		ItemEquipFinished()
+	if (_ItemBeingEquipped != null):
+		var equipProgress = (delta * 10) * SimulationManager.SimSpeed()
+		if (CurrentPort.HasUpgrade()):
+			equipProgress *= 2
+		_EquipTime -= equipProgress
+		if (_EquipTime <= 0):
+			ItemEquipFinished()
 	
 	set_physics_process(_UpgradeTime > 0 or _EquipTime > 0)
 
 func CancelUpgrade() -> void:
 	_ItemBeingUpgraded = null
-	set_physics_process(false)
+	_UpgradeTime = 0
+	set_physics_process(_UpgradeTime > 0 or _EquipTime > 0)
+
+func CancelInstall() -> void:
+	_ItemBeingEquipped = null
+	_EquipLocation = null
+	_EquipTime = 0
+	set_physics_process(_UpgradeTime > 0 or _EquipTime > 0)
 
 func ItemUpgradeFinished() -> void:
 	var Part = _ItemBeingUpgraded.GetContainedItem() as ShipPart
@@ -455,8 +527,13 @@ func ItemUpgradeFinished() -> void:
 	PopUpManager.GetInstance().DoFadeNotif("{0}'s {1}\nhas succsfully been upgraded to\n{2}".format([CaptainNameLabel.text, Part.ItemName, UpgradedItem.ItemName]), null, 8)
 
 func ItemEquipFinished() -> void:
-	AddItem(_ItemBeingEquipped)
-	_ItemBeingUpgraded = null
+	RemoveItemFromBox(_EquipLocation)
+	AddItemToBox(_ItemBeingEquipped, _EquipLocation)
+	PopUpManager.GetInstance().DoFadeNotif("{0}'s {1}\nhas succsfully been Installed".format([CaptainNameLabel.text, _ItemBeingEquipped.GetItemName()]), null, 8)
+
+	_EquipLocation = null
+	_ItemBeingEquipped = null
+	
 
 func ForceUpgradeItem(Box : Inventory_Box) -> bool:
 	var Part = Box.GetContainedItem() as ShipPart
@@ -477,7 +554,14 @@ func ForceUpgradeItem(Box : Inventory_Box) -> bool:
 	return true
 
 func GetUpgradeTimeLeft() -> float:
+	if (CurrentPort.HasUpgrade()):
+		return _UpgradeTime / 2.0
 	return _UpgradeTime
+
+func GetEquipTimeLeft() -> float:
+	if (CurrentPort.HasUpgrade()):
+		return _EquipTime / 2.0
+	return _EquipTime
 
 func GetItemBeingUpgraded() -> Inventory_Box:
 	return _ItemBeingUpgraded

@@ -8,3 +8,5 @@ class_name SD_CharacterInventory
 @export var Hull : float
 @export var ItemBeingUpgraded : Item
 @export var UpgradeTime : float
+@export var ItemBeingEquipped : Item
+@export var EquipTime : float

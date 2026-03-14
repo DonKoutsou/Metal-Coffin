@@ -13,7 +13,7 @@ var It : Item
 var ShopAmm : int = 10
 
 func _ready() -> void:
-	ItemName.text = It.ItemName
+	ItemName.text = It.GetItemName()
 	ItPriceT.text = var_to_str(ItPrice).replace(".0", "")
 	ShopOwnedT.text = var_to_str(ShopAmm)
 

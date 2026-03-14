@@ -4,8 +4,7 @@ class_name CardOffensiveAnimation
 
 signal AtackCardDestroyed(CardPos : Vector2)
 signal DeffenceCardDestroyed(CardPos : Vector2)
-signal AtackConnected
-signal DeffenceConnected
+signal Connected
 signal AnimationFinished
 
 @export var CardScene : PackedScene
@@ -274,7 +273,7 @@ func wait(secs : float) -> Signal:
 
 
 func TweenEnded(Target : Control, DeffenceCard : Card, FloaterText : String) -> void:
-	AtackConnected.emit()
+	Connected.emit()
 	if (DeffenceCard == null):
 		
 		#print("Damage Floater")
@@ -305,7 +304,7 @@ func TweenEnded(Target : Control, DeffenceCard : Card, FloaterText : String) -> 
 		ShieldEff.burst()
 
 func ShieldTweenEnded(target : Control, FloaterText : String) -> void:
-	DeffenceConnected.emit()
+	Connected.emit()
 	var DFloater = DamageFloater.instantiate() as Floater
 	DFloater.text = FloaterText
 	DFloater.modulate = Color(1,1,1,1)
@@ -314,7 +313,7 @@ func ShieldTweenEnded(target : Control, FloaterText : String) -> void:
 	DFloater.Ended.connect(AnimEnded)
 
 func BuffTweenEnded(target : Control, FloaterText : String) -> void:
-	DeffenceConnected.emit()
+	Connected.emit()
 	var DFloater = DamageFloater.instantiate() as Floater
 	DFloater.text = FloaterText
 	DFloater.modulate = Color(1,1,1,1)

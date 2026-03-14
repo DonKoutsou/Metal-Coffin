@@ -96,7 +96,8 @@ static func GetInstance() -> Helper:
 
 func CallLater(Call : Callable, t : float = 1) -> void:
 	await get_tree().create_timer(t).timeout
-	Call.call()
+	if (Call.is_valid()):
+		Call.call()
 
 func wait(secs : float) -> Signal:
 	return get_tree().create_timer(secs).timeout

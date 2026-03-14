@@ -187,9 +187,11 @@ func ToggleFuelRangeVisibility(t : bool) -> void:
 func SetCurrentPort(Port : MapSpot):
 	CurrentPort = Port
 	Cpt.CurrentPort = Port.GetSpotName()
+	Cpt.GetCharacterInventory().CurrentPort = CurrentPort
 	for g in GetSquad():
 		g.SetCurrentPort(Port)
 	PortChanged.emit(0)
+	
 		
 func SetSpeed(Spd : float) -> void:
 	GetShipAcelerationNode().position.x = Spd / 360
@@ -208,7 +210,8 @@ func _HandleLanding(delta : float) -> void:
 func RemovePort():
 	ShipDeparted.emit(CurrentPort)
 	CurrentPort = null
-	InventoryManager.GetInstance().CancelUpgrades(Cpt)
+	Cpt.GetCharacterInventory().CurrentPort = null
+	#InventoryManager.GetInstance().CancelUpgrades(Cpt)
 	Cpt.CurrentPort = ""
 
 	for g in GetSquad():

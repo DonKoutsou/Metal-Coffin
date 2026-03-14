@@ -7,6 +7,8 @@ class_name Inventory_Box
 var _ParentInventory : CharacterInventory
 var _ContainedItem : Item
 var _ContentAmmout : int
+var _PlaceholderItem : Item
+var _PlaceholderAmm : int
 
 signal ItemSelected(Box : Inventory_Box)
 
@@ -58,7 +60,7 @@ func GetContainedItem() -> Item:
 
 
 func GetContainedItemName() -> String:
-	return _ContainedItem.ItemName
+	return _ContainedItem.GetItemName()
 
 func IsEmpty() -> bool:
 	return _ContentAmmout == 0
@@ -76,7 +78,7 @@ func Enable() -> void:
 	Butto.mouse_filter = Control.MOUSE_FILTER_PASS
 func _UpdateItemIcon() -> void:
 	if (_ContainedItem):
-		$ItemButton.text = _ContainedItem.ItemName
+		$ItemButton.text = _ContainedItem.GetItemName()
 		#$ItemButton/ItemName.text = _ContainedItem.ItemName
 		#$ItemButton/TextureRect.texture = _ContainedItem.ItemIconSmol
 		#if (_ContainedItem is UsableItem):
