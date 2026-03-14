@@ -188,16 +188,16 @@ func OnShipDestroyed(Sh : PlayerDrivenShip):
 		NewCommander.TargetLocations = Sh.TargetLocations
 		NewCommander.TargetShip = Sh.TargetShip
 
-	for DockedShip in range(Sh.GetDroneDock().DockedDrones.size() - 1, -1, -1):
-		Sh.GetDroneDock().UndockDrone(Sh.GetDroneDock().DockedDrones[DockedShip])
-		NewCommander.GetDroneDock().DockDrone(Sh.GetDroneDock().DockedDrones[DockedShip])
+		for DockedShip in range(Sh.GetDroneDock().DockedDrones.size() - 1, -1, -1):
+			Sh.GetDroneDock().UndockDrone(Sh.GetDroneDock().DockedDrones[DockedShip])
+			NewCommander.GetDroneDock().DockDrone(Sh.GetDroneDock().DockedDrones[DockedShip])
 
-	for Captive in range(Sh.GetDroneDock().Captives.size() - 1, -1, -1):
-		if (NewCommander != null):
-			Sh.GetDroneDock().UndockCaptive(Sh.GetDroneDock().Captives[Captive])
-			NewCommander.GetDroneDock().DockCaptive(Sh.GetDroneDock().Captives[Captive])
-		else:
-			Sh.GetDroneDock().ReleaseCaptive(Captive)
+		for Captive in range(Sh.GetDroneDock().Captives.size() - 1, -1, -1):
+			if (NewCommander != null):
+				Sh.GetDroneDock().UndockCaptive(Sh.GetDroneDock().Captives[Captive])
+				NewCommander.GetDroneDock().DockCaptive(Sh.GetDroneDock().Captives[Captive])
+			else:
+				Sh.GetDroneDock().ReleaseCaptive(Captive)
 
 	AvailableShips.erase(Sh)
 	

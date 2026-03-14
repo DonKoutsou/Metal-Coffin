@@ -24,5 +24,5 @@ func Handle(_Performer : BattleShipStats, Action : CardStats, Targets : Array[Ba
 	OffensiveModule.Damage += OffensiveModule.Damage * GetStackDamage(Action.Tier)
 	var Data = DeffensiveAnimationData.new()
 	Data.Mod = self
-	Data.Targets = Targets
+	#Data.Targets = Targets
 	return Data

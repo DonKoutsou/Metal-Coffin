@@ -7,7 +7,6 @@ class_name PlayerDrivenShip
 
 @export var MissileD : MissileDock
 var CommingBack = false
-var RegroupTarget : MapShip
 
 var StoredSteer : float = 0.0
 
@@ -138,7 +137,7 @@ func IntersectShip(Target : MapShip) -> Vector2:
 	var ship_position = plship.position # Get the current position and velocity of the ship
 	var ship_velocity = plship.LastRecordedOffset
 
-	var time_to_interception = (position.distance_to(ship_position)) / (max(GetShipSpeed(), 0.001) / 360) # Predict where the ship will be in a future time `t`
+	var time_to_interception = min((position.distance_to(ship_position)) / (max(GetShipSpeed(), 0.001) / 360), 999999) # Predict where the ship will be in a future time `t`
 	var predicted_position = ship_position + ship_velocity * time_to_interception # Calculate the predicted interception point
 
 	return predicted_position
@@ -173,7 +172,23 @@ func _HandleAutoPilot(delta : float) -> void:
 			var newrot = lerp_angle(rotation, directiontoDestination, delta)
 			ForceSteer(newrot)
 			SteerForced.emit(newrot)
-			
+		
+		if (CommingBack):
+			var Distance = global_position.distance_to(TargetShip.global_position)
+		
+			if (Distance < 30):
+				TargetShip.GetDroneDock().DockDrone(self, true)
+				var MyDroneDock = GetDroneDock()
+				for g in MyDroneDock.DockedDrones:
+					MyDroneDock.UndockDrone(g)
+					TargetShip.GetDroneDock().DockDrone(g, false)
+				for g in MyDroneDock.Captives:
+					MyDroneDock.UndockCaptive(g)
+					TargetShip.GetDroneDock().DockCaptive(g)
+
+				CommingBack = false
+				return
+		
 	else: if (TargetLocations.size() > 0):
 		var NextLoc = TargetLocations[0]
 		if (NextLoc.distance_to(global_position) < 5):
@@ -186,46 +201,11 @@ func _HandleAutoPilot(delta : float) -> void:
 			var newrot = lerp_angle(rotation, directiontoDestination, delta)
 			ForceSteer(newrot)
 			SteerForced.emit(newrot)
-	if (CommingBack):
-		updatedronecourse()
-
-func updatedronecourse():
-	if (!Moving()):
-		return
-	var plship = RegroupTarget
-	# Get the current position and velocity of the ship
 	
-	var ship_position = plship.position
-	
-	var Distance = global_position.distance_to(ship_position)
-	
-	if (Distance < 30):
-		plship.GetDroneDock().DockDrone(self, true)
-		var MyDroneDock = GetDroneDock()
-		for g in MyDroneDock.DockedDrones:
-			MyDroneDock.UndockDrone(g)
-			plship.GetDroneDock().DockDrone(g, false)
-		for g in MyDroneDock.Captives:
-			MyDroneDock.UndockCaptive(g)
-			plship.GetDroneDock().DockCaptive(g)
-		#for g in MyDroneDock.FlyingDrones:
-			#g.Command = plship
-		
-		CommingBack = false
-		return
-	
-	#NEEDS WIND
-	var ship_velocity = plship.GetShipSpeedVec()
-
-	# Predict where the ship will be in a future time `t`
-	var time_to_interception = min((position.distance_to(ship_position)) / (GetShipSpeed() / 360), 9999999)
-	# Calculate the predicted interception point
-	var predicted_position = ship_position + ship_velocity * time_to_interception
-	ShipLookAt(predicted_position)
 
 func SetTargetLocation(pos : Vector2) -> void:
 	if (CommingBack):
-		return
+		CommingBack = false
 	ClearTargetShip()
 	AccelerationChanged(GetShipMaxSpeed(), true)
 	TargetLocations.clear()
@@ -233,13 +213,14 @@ func SetTargetLocation(pos : Vector2) -> void:
 
 func AddTargetLocation(pos : Vector2) -> void:
 	if (CommingBack):
-		return
+		CommingBack = false
+
 	AccelerationChanged(GetShipMaxSpeed(), true)
 	TargetLocations.append(pos)
 
 func AddTargetShip(Target : MapShip) -> void:
 	if (CommingBack):
-		return
+		CommingBack = false
 	AccelerationChanged(GetShipMaxSpeed(), true)
 	TargetLocations.clear()
 	TargetShip = Target

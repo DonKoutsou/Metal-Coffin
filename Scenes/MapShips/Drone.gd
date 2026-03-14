@@ -35,7 +35,7 @@ func EnableDrone():
 
 
 func Regroup(NewCommander : MapShip):
-	RegroupTarget = NewCommander
+	AddTargetShip(NewCommander)
 	SetSpeed(GetShipMaxSpeed())
 	#rotation = 0.0
 	CommingBack = true
@@ -45,7 +45,7 @@ func Regroup(NewCommander : MapShip):
 
 
 func _on_return_sound_trigger_area_entered(area: Area2D) -> void:
-	if (area.get_parent() == RegroupTarget and CommingBack):
+	if (area.get_parent() == TargetShip and CommingBack):
 		RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.APROACHING)
 		
 func BodyEnteredBody(Body: Area2D) -> void:
@@ -56,8 +56,8 @@ func BodyEnteredBody(Body: Area2D) -> void:
 func GetSaveData() -> DroneSaveData:
 	var dat = DroneSaveData.new()
 	dat.CommingBack = CommingBack
-	if (RegroupTarget != null):
-		dat.RegroupTargetName = RegroupTarget.GetShipName()
+	if (TargetShip != null):
+		dat.RegroupTargetName = TargetShip.GetShipName()
 	dat.Cpt = Cpt
 	dat.Docked = Docked
 	dat.Pos = global_position
