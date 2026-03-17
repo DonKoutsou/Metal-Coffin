@@ -5,10 +5,16 @@
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="3_l4eym"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="3_wy8f1"]
 [ext_resource type="Script" uid="uid://ceqe8h8b7lrlm" path="res://Scenes/Card_Fight/Card/Card_Modules/CardSpawnModule.gd" id="4_phqjh"]
+[ext_resource type="Resource" uid="uid://bblpmt5iq264c" path="res://Resources/Cards/Barrage/APBarrage100mm.tres" id="5_e2oaq"]
+[ext_resource type="Resource" uid="uid://44kuvcefuj6x" path="res://Resources/Cards/Barrage/HollowBarrage100mm.tres" id="6_djuq1"]
+[ext_resource type="Resource" uid="uid://dxmkl7xkl3qho" path="res://Resources/Cards/Barrage/ProxFuseBarrage100mm.tres" id="7_1yprs"]
+[ext_resource type="Resource" uid="uid://1n0lmrvfvrd2" path="res://Resources/Cards/Barrage/StackingBarrage100mm.tres" id="8_v4nfc"]
+[ext_resource type="Resource" uid="uid://doj6225gf2ja0" path="res://Resources/Cards/Barrage/IncendiaryBarrage100mm.tres" id="9_njdms"]
+[ext_resource type="Resource" uid="uid://nq8mf6tl53fc" path="res://Resources/Cards/Barrage/LaserGuidedBarrage100mm.tres" id="10_jfaf0"]
 
 [sub_resource type="Resource" id="Resource_e2oaq"]
 script = ExtResource("4_phqjh")
-CardToSpawn = ExtResource("3_00mwm")
+CardsToSpawn = Array[ExtResource("3_wy8f1")]([ExtResource("3_00mwm"), ExtResource("5_e2oaq"), ExtResource("6_djuq1"), ExtResource("7_1yprs"), ExtResource("8_v4nfc"), ExtResource("9_njdms"), ExtResource("10_jfaf0")])
 metadata/_custom_type_script = "uid://ceqe8h8b7lrlm"
 
 [resource]

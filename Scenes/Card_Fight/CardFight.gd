@@ -858,8 +858,7 @@ func PerformActions(Ship : BattleShipStats) -> void:
 func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void:
 	if (GameOver):
 		return
-	var Friendly = IsShipFriendly(Ship)
-	
+
 	var ShipActions = ActionList.GetShipsActions(Ship)
 	
 	if (ShipActions.size() - 1 < ActionIndex):
@@ -889,10 +888,6 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 		ActionIndex += 1
 		
 	PerformNextActionForShip(Ship, ActionIndex)
-##----------------------------------------------------------------------##
-func ConnectMoves(C : Array[Callable]) -> void:
-	var c = C.pop_front() as Callable
-	c.call()
 ##----------------------------------------------------------------------##
 func PerformTurnFinished(Ship : BattleShipStats) -> void:
 	var ReplacingAmm = ShipBeingReplaced.size()
@@ -1551,6 +1546,8 @@ func UpdateHandCards() -> void:
 func UpdateCardDescriptions(User : BattleShipStats):
 	var Cards = get_tree().get_nodes_in_group("Card")
 	for g : Card in Cards:
+		if (g.isStatic):
+			continue
 		g.UpdateBattleStats(User)
 ##----------------------------------------------------------------------##
 func UpdateShipStats(BattleS : BattleShipStats) -> void:
@@ -1765,8 +1762,6 @@ func PlaceCardInEnemyHand(Performer : BattleShipStats, C : CardStats) -> bool:
 	if (CardsInHand < MaxCardsInHand):
 		CanPlace = true
 
-	#EnemyDeck.DeckPile.erase(C)
-	
 	if (CanPlace):
 		Performer.deck.Hand.append(C)
 		print("{0} has been added to {1}'s hand pile.".format([C.GetCardName(), Performer.Name]))
@@ -1794,42 +1789,6 @@ func InitRandomFight(ShipAmm : int) -> void:
 	if (PlayerReserves.size() == 0):
 		for g in ShipAmm:
 			PlayerReserves.append(load(GetRandomCaptain(false)).GetBattleStats())
-##----------------------------------------------------------------------##
-func GenerateRandomisedShip(Name : String, enemy : bool) -> BattleShipStats:
-	var Stats = BattleShipStats.new()
-	Stats.Name = Name
-	Stats.FirePower = randf_range(0.5, 3)
-	Stats.Hull = randf_range(10, 800)
-	Stats.Speed = randf_range(0.5, 3)
-
-	Stats.ShipIcon = load(GetRandomShipIcon())
-		
-	if (!enemy):
-		Stats.CaptainIcon = load("res://Assets/CaptainPortraits/Captain1.png")
-	else:
-		Stats.CaptainIcon = load("res://Assets/CaptainPortraits/Captain9.png")
-	#
-	Stats.Cards[load("res://Resources/Cards/Barrage/Barrage.tres")] = 8
-	Stats.Cards[load("res://Resources/Cards/Evasive.tres")] = 4
-	Stats.Cards[load("res://Resources/Cards/Missile/Missile.tres")] = 10
-	Stats.Cards[load("res://Resources/Cards/Flares.tres")] = 3
-	Stats.Cards[load("res://Resources/Cards/ShieldOverChargeTeam.tres")] = 2
-	Stats.Cards[load("res://Resources/Cards/RadarBuff.tres")] = 1
-	Stats.Cards[load("res://Resources/Cards/RadarBuffSingle.tres")] = 2
-	Stats.Cards[load("res://Resources/Cards/SpeedBuff.tres")] = 2
-	Stats.Cards[load("res://Resources/Cards/Barrage/DrawRandomBarrage.tres")] = 3
-	Stats.Cards[load("res://Resources/Cards/Extringuish.tres")] = 4
-	Stats.Cards[load("res://Resources/Cards/Energy.tres")] = 4
-	Stats.Cards[load("res://Resources/Cards/EnergyReserve.tres")] = 3
-	Stats.Cards[load("res://Resources/Cards/DrawDiscard.tres")] = 2
-	
-	Stats.Cards[load("res://Resources/Cards/Barrage/APBarrage.tres")] = 2
-	Stats.Cards[load("res://Resources/Cards/Barrage/IncendiaryBarrage.tres")] = 2
-	Stats.Cards[load("res://Resources/Cards/Barrage/ProxFuseBarrage.tres")] = 2
-	Stats.Cards[load("res://Resources/Cards/Missile/ClusterMissile.tres")] = 2
-	
-		
-	return Stats
 ##----------------------------------------------------------------------##
 func GetRandomCaptain(Enemy : bool) -> String:
 	var Cpts

@@ -8,7 +8,7 @@ class_name ShipStat
 @export var StatShipPartBuff : PackedFloat32Array
 @export var StatShipPartPenalty : float
 @export var CurrentValue : float
-	
+
 func GetStatName() -> STAT_CONST.STATS:
 	return StatName
 

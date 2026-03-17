@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="MerchandiseInfo" format=3 uid="uid://dmn0k3yxa4l05"]
+
+[ext_resource type="Resource" uid="uid://i52x8yv8dm3i" path="res://Resources/Items/Ammo/HollowAmmoMagazine180mm.tres" id="1_8lv4x"]
+[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scenes/TownShop/merchandise.gd" id="2_k2eks"]
+[ext_resource type="Script" uid="uid://bpenulp2lk361" path="res://Scenes/TownShop/merchandise_info.gd" id="3_nsta0"]
+
+[sub_resource type="Resource" id="Resource_k2eks"]
+script = ExtResource("2_k2eks")
+It = ExtResource("1_8lv4x")
+metadata/_custom_type_script = "uid://ymki3tqy3opd"
+
+[resource]
+script = ExtResource("3_nsta0")
+Merch = SubResource("Resource_k2eks")
+Cost = 1
+MaxAmmPerStage = 4
+DontGenerateBefore = 1

@@ -16,6 +16,6 @@ CardName = "Intercept"
 Energy = 1
 AllowDuplicates = true
 OnPerformModule = SubResource("Resource_etj3k")
-Type = 2
+Type = 1
 UseConditions = Array[int]([1])
 AllowTier = false

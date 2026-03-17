@@ -174,7 +174,6 @@ func _physics_process(delta: float) -> void:
 	if get_tree().paused:
 		return
 	
-	
 	Controller.Update()
 	
 	var CurrentDelta = delta * SimulationManager.SimSpeed()
@@ -371,9 +370,6 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip], Missil
 	GetMap().GetScreenUi().OpenScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	UISoundMan.GetInstance().Refresh()
 
-func StartMissileFight() -> void:
-	pass
-
 func CardFightEnded(Survivors : Array[BattleShipStats], won : bool) -> void:
 	var AllUnits : Array[MapShip]
 	AllUnits.append_array(FighingFriendlyUnits)
@@ -393,7 +389,7 @@ func CardFightEnded(Survivors : Array[BattleShipStats], won : bool) -> void:
 				Survived = true
 				break
 		if (!Survived):
-			Unit.Damage(99999999999, false)
+			Unit.Damage(9999999, false)
 			if (Unit is HostileShip):
 				Unit.DestroyEnemyDebry()
 				WonFunds += Unit.Cpt.ProvidingFunds

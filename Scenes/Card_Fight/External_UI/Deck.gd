@@ -71,7 +71,29 @@ func DrawSpecific(C : CardStats) -> void:
 	PileChanged.emit(false)
 	OnCardDrawn.emit(C)
 
-func DrawSingleOfType(type : MultiCardSpawnModule.CardType) -> void:
+func DrawSpecificFromList(list : Array[CardStats]) -> void:
+	if (DeckPile.size() <= 0):
+		await ShuffleDiscardedIntoDeck()
+	if (DeckPile.size() <= 0):
+		return
+	#collect all cards that exist in both the list provided and the deckpile
+	var PossibleDraws : Array[CardStats]
+	for specified : CardStats in list:
+		#Itterate though deckpile and look for it
+		for c in DeckPile:
+			if (c.IsSame(specified)):
+				PossibleDraws.append(c)
+				break
+
+	if (PossibleDraws.size() == 0):
+		return
+	
+	var cardToDraw = PossibleDraws.pick_random()
+	DeckPile.erase(cardToDraw)
+	PileChanged.emit(false)
+	OnCardDrawn.emit(cardToDraw)
+
+func DrawSingleOfType(type : CardStats.CardType) -> void:
 	var PossibleCards : Array[CardStats]
 	
 	for g : CardStats in DeckPile:
@@ -82,22 +104,13 @@ func DrawSingleOfType(type : MultiCardSpawnModule.CardType) -> void:
 				break
 		if (Exists):
 			continue
-		if (TestCard(g.OnPerformModule, type)):
+		if (TestCard(g, type)):
 			PossibleCards.append(g)
-			continue
-		for m in g.OnUseModules:
-			if (TestCard(m, type)):
-				PossibleCards.append(g)
-				break
 	
 	MultiSpecificDrawn.emit(PossibleCards)
 
-func TestCard(Mod : CardModule, testType : MultiCardSpawnModule.CardType) -> bool:
-	if (testType == MultiCardSpawnModule.CardType.OFFENSIVE and Mod is OffensiveCardModule):
-		return true
-	if (testType == MultiCardSpawnModule.CardType.DEFENSIVE and Mod is DeffenceCardModule):
-		return true
-	return false
+func TestCard(Mod : CardStats, testType : CardStats.CardType) -> bool:
+	return Mod.Type == testType
 
 func DiscardCard(C : CardStats) -> void:
 	#PopUpManager.GetInstance().DoFadeNotif("Card Discarded")

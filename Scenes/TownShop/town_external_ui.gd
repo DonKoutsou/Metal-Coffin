@@ -17,9 +17,7 @@ var CoinsGot : int = 0
 func _ready() -> void:
 	Coin.visible = false
 	UISoundMan.GetInstance().Refresh()
-	#CoinsReceived(10)
-	#Power = 1
-	#Anim2()
+	set_physics_process(false)
 
 func DropCoins(Amm : int) -> void:
 	
@@ -36,13 +34,18 @@ func DropCoins(Amm : int) -> void:
 
 func CoinsReceived(Amm : int)-> void:
 	CoinsGot = min(20, CoinsGot + Amm)
+	set_physics_process(CoinsGot > 0)
 
-func _physics_process(_delta: float) -> void:
-	var offset = 0
-	for g in CoinsGot:
-		Helper.GetInstance().CallLater(OnCoinsGot, offset)
-		offset += randf_range(0.2, 0.3)
-		CoinsGot = 0
+var coinOffset : float = 0.0
+
+func _physics_process(delta: float) -> void:
+	coinOffset -= delta
+	if (coinOffset > 0):
+		return
+	CoinsGot -= 1
+	OnCoinsGot()
+	coinOffset = randf_range(0.2, 0.3)
+	set_physics_process(CoinsGot > 0)
 
 func OnCoinsGot() -> void:
 	var Delsound = DeletableSoundGlobal.new()
@@ -66,7 +69,6 @@ func OnCoinsGot() -> void:
 	tw.set_ease(Tween.EASE_OUT)
 	tw.set_trans(Tween.TRANS_BOUNCE)
 	tw.tween_property(text, "position", Vector2(selectedx, 102),randf_range(0.45, 0.55))
-	#tw.finished.connect(OnCoinsGot)
 	tw.finished.connect(text.queue_free)
 
 var TimesToPlay: int = 0

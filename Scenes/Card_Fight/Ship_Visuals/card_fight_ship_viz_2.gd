@@ -196,6 +196,7 @@ func ActionHovered(C : CardStats, Targets : Array[BattleShipStats]) -> void:
 	CurrentCardShown.Dissable(true)
 	CurrentCardShown.TargetLocs = targetlocs
 	Ingame_UIManager.GetInstance().add_child(CurrentCardShown)
+	CurrentCardShown.isStatic = true
 	set_physics_process(true)
 	PositionCard()
 	print("Action hovered")

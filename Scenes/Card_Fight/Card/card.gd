@@ -32,6 +32,8 @@ var TrackMouse : bool = false
 
 var mat : ShaderMaterial
 
+var isStatic : bool = false
+
 func _physics_process(delta: float) -> void:
 	InterpolationValue = min(InterpolationValue + delta *5, 1)
 	UpdateLine()

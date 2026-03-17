@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AmmoItem" format=3 uid="uid://i52x8yv8dm3i"]
+
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="1_css3b"]
+[ext_resource type="Resource" uid="uid://burrn73775vpk" path="res://Resources/Cards/Barrage/HollowBarrage180mm.tres" id="2_css3b"]
+[ext_resource type="Script" uid="uid://b01o81rjpfdvw" path="res://Scripts/Inventory/AmmoItem.gd" id="3_itrs3"]
+
+[resource]
+script = ExtResource("3_itrs3")
+WType = 4
+ItemName = "Hollow Ammo Magazine 180mm"
+MaxStackCount = 99
+CardProviding = Array[ExtResource("1_css3b")]([ExtResource("2_css3b")])
+Cost = 150

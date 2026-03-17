@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://c651pkjsqhl35"]
+
+[ext_resource type="Texture2D" uid="uid://bdkhr0sdf64jo" path="res://Assets/artificial-hive.png" id="1_2wxfg"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="2_i8wa6"]
+[ext_resource type="Script" uid="uid://cla6ql5jn6sy5" path="res://Scenes/Card_Fight/Card/Card_Modules/MultiCardSpawnModule.gd" id="3_u77os"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="4_ax23s"]
+
+[sub_resource type="Resource" id="Resource_gb7g0"]
+script = ExtResource("3_u77os")
+CardToSpawn = 2
+metadata/_custom_type_script = "uid://cla6ql5jn6sy5"
+
+[resource]
+script = ExtResource("4_ax23s")
+Icon = ExtResource("1_2wxfg")
+CardName = "Utility Cache"
+Energy = 1
+AllowDuplicates = true
+OnUseModules = Array[ExtResource("2_i8wa6")]([SubResource("Resource_gb7g0")])
+Type = 2
