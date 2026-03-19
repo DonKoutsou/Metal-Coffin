@@ -39,6 +39,6 @@ UpgradeTime = 1000.0
 PartType = 1
 ItemName = "EN-100"
 ItemDesc = "A dependable propulsion unit, optimized for low-maintenance operation. Suitable for basic fleet configurations, it ensures reliable function under standard conditions."
-CardProviding = Array[ExtResource("2_trv85")]([ExtResource("1_bifgn"), ExtResource("1_bifgn"), ExtResource("1_bifgn"), ExtResource("3_413pk"), ExtResource("3_413pk"), ExtResource("4_ugp5x"), ExtResource("4_ugp5x"), ExtResource("5_p1uix")])
+CardProviding = Array[ExtResource("2_trv85")]([ExtResource("1_bifgn"), ExtResource("1_bifgn"), ExtResource("3_413pk"), ExtResource("4_ugp5x"), ExtResource("4_ugp5x"), ExtResource("5_p1uix")])
 CanTransfer = false
 Cost = 120000

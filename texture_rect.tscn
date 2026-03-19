@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://blt8tc5jqmxea"]
+
+[ext_resource type="Material" uid="uid://lm8ajdrv60kh" path="res://Scenes/Map/topo_Mat.tres" id="1_s0p3g"]
+[ext_resource type="Texture2D" uid="uid://btlu085d2rk0u" path="res://Noises/Ground/TEX_GroundVisualNoise.png" id="2_ek34n"]
+
+[node name="TextureRect" type="TextureRect" unique_id=1378481747]
+texture_repeat = 2
+material = ExtResource("1_s0p3g")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -149.0
+offset_right = -1.0
+offset_bottom = 155.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ek34n")

@@ -4,10 +4,8 @@
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_pbaxl"]
 [ext_resource type="Texture2D" uid="uid://bj3kjbbgtmxh8" path="res://Shaders/Clouds/CloudMaskTexture.tres" id="3_1djom"]
 [ext_resource type="PackedScene" uid="uid://delo4ch0hmnr6" path="res://Scenes/Map/ground.tscn" id="4_dlxj6"]
-[ext_resource type="Material" uid="uid://jnxte4c68wyq" path="res://Shaders/Clouds/CloudMap.tres" id="5_5ixku"]
+[ext_resource type="PackedScene" uid="uid://bgtbe464jbb7e" path="res://Scenes/Map/clouds.tscn" id="5_ph7p1"]
 [ext_resource type="PackedScene" uid="uid://ch28kdo2pv6ta" path="res://Scenes/Map/weather_manager.tscn" id="7_ph7p1"]
-[ext_resource type="Script" uid="uid://cmiywlc06uva1" path="res://Scenes/Map/clouds.gd" id="14_sfqvw"]
-[ext_resource type="Gradient" uid="uid://wj66sajtr3qj" path="res://Shaders/Clouds/CloudGradient.tres" id="15_twifd"]
 [ext_resource type="PackedScene" uid="uid://caawadxe1hjwo" path="res://Scenes/Map/topography_map.tscn" id="16_w5jc1"]
 [ext_resource type="PackedScene" uid="uid://boe0re3ai5qdj" path="res://Scenes/Map/dark_blue_background.tscn" id="22_5m85t"]
 [ext_resource type="AudioStream" uid="uid://bq5ennd48voeu" path="res://Assets/Sounds/MetalClick.mp3" id="23_aktxw"]
@@ -39,22 +37,7 @@ offset_top = -4500.0
 offset_right = 4500.0
 offset_bottom = 4500.0
 
-[node name="Clouds" type="ColorRect" parent="." unique_id=367161667]
-texture_filter = 1
-material = ExtResource("5_5ixku")
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -750.0
-offset_top = -750.0
-offset_right = 750.0
-offset_bottom = 750.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("14_sfqvw")
-CloudGradient = ExtResource("15_twifd")
+[node name="Clouds" parent="." unique_id=1737849489 instance=ExtResource("5_ph7p1")]
 
 [node name="DarkBlueBackground" type="ColorRect" parent="." unique_id=776411773]
 material = SubResource("CanvasItemMaterial_tk0jd")

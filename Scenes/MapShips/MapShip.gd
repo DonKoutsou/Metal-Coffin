@@ -206,6 +206,9 @@ func _HandleLanding(delta : float) -> void:
 
 	if (Altitude != NewAltitude):
 		UpdateAltitude(move_toward(Altitude, NewAltitude, delta * 1000))
+		if (Landed()):
+			PopUpManager.GetInstance().DoFadeNotif("{0} has landed".format([Cpt.GetCaptainName()]))
+			RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.LANDING_END)
 
 func RemovePort():
 	ShipDeparted.emit(CurrentPort)
@@ -625,7 +628,7 @@ func GetdB() -> float:
 	return CurrentdB
 
 func GetMaxdB() -> float:
-	return GetShipThrust() / 30
+	return GetShipThrust() / 10
 	
 func GetDroneDock():
 	return DroneDok

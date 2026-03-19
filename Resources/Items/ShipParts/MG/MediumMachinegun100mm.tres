@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://bl7mvgrw6tyes" path="res://Resources/Cards/Barrage/DrawRandomBarrage.tres" id="4_sygso"]
 [ext_resource type="Resource" uid="uid://1n0lmrvfvrd2" path="res://Resources/Cards/Barrage/StackingBarrage100mm.tres" id="5_sygso"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_gbk8t"]
+[ext_resource type="Resource" uid="uid://ts2dsdg3gbw8" path="res://Resources/Cards/Barrage/EngineShot.tres" id="6_odqxh"]
 
 [sub_resource type="Resource" id="Resource_fmxhr"]
 script = ExtResource("6_gbk8t")
@@ -35,7 +36,7 @@ UpgradeTime = 800.0
 PartType = 4
 ItemName = "MG-20 \"Fury\" 100mm"
 ItemDesc = "Fury builds upon its predecessor with enhanced rate of fire and targeting accuracy. Its reinforced stabilization system supports more prolonged engagements, delivering sustained barrages that can repel determined attacks or suppress enemy positions with greater efficacy."
-CardProviding = Array[ExtResource("2_1qqs8")]([ExtResource("2_q5ys8"), ExtResource("2_q5ys8"), ExtResource("2_q5ys8"), ExtResource("2_q5ys8"), ExtResource("2_q5ys8"), ExtResource("2_q5ys8"), ExtResource("2_q5ys8"), ExtResource("2_q5ys8"), ExtResource("3_acqvg"), ExtResource("3_acqvg"), ExtResource("4_sygso"), ExtResource("4_sygso"), ExtResource("4_sygso"), ExtResource("5_sygso"), ExtResource("5_sygso")])
+CardProviding = Array[ExtResource("2_1qqs8")]([ExtResource("2_q5ys8"), ExtResource("2_q5ys8"), ExtResource("2_q5ys8"), ExtResource("3_acqvg"), ExtResource("4_sygso"), ExtResource("4_sygso"), ExtResource("5_sygso"), ExtResource("6_odqxh")])
 Tier = 1
 CanTransfer = false
 Cost = 80000

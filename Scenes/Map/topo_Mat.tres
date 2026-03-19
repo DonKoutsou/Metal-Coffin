@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://lm8ajdrv60kh"]
+
+[ext_resource type="Shader" uid="uid://mwyc08pgqsiw" path="res://testlines.gdshader" id="1_vy4qr"]
+[ext_resource type="Texture2D" uid="uid://btlu085d2rk0u" path="res://Noises/Ground/TEX_GroundVisualNoise.png" id="2_uroiy"]
+
+[resource]
+shader = ExtResource("1_vy4qr")
+shader_parameter/t = ExtResource("2_uroiy")
+shader_parameter/line_step = 0.07300000276898
+shader_parameter/low_color = Color(0.16862746, 0.28627452, 0.29411766, 1)
+shader_parameter/high_color = Color(0.88892233, 0.9326842, 0.9545786, 1)
+shader_parameter/line_width = 1.0
+shader_parameter/line_color = Color(1, 1, 1, 1)

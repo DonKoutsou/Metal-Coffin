@@ -11,6 +11,7 @@ RainMat = ExtResource("2_psq1t")
 RainSound = NodePath("AudioStreamPlayer2D")
 
 [node name="RainEffect" type="ColorRect" parent="." unique_id=997444341]
+visible = false
 z_index = 1
 material = ExtResource("2_psq1t")
 anchors_preset = 15

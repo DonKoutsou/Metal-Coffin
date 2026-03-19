@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bgtbe464jbb7e"]
+
+[ext_resource type="Material" uid="uid://jnxte4c68wyq" path="res://Shaders/Clouds/CloudMap.tres" id="1_amfm3"]
+[ext_resource type="Script" uid="uid://cmiywlc06uva1" path="res://Scenes/Map/clouds.gd" id="2_q4ig3"]
+[ext_resource type="Gradient" uid="uid://wj66sajtr3qj" path="res://Shaders/Clouds/CloudGradient.tres" id="3_7rhj2"]
+
+[node name="Clouds" type="ColorRect" unique_id=1737849489]
+texture_filter = 1
+material = ExtResource("1_amfm3")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -750.0
+offset_top = -750.0
+offset_right = 750.0
+offset_bottom = 750.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_q4ig3")
+CloudGradient = ExtResource("3_7rhj2")

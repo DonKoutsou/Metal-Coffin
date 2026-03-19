@@ -181,7 +181,9 @@ func DrawRuller() -> void:
 		Lines.append(LineEndPos)
 		
 		#if (vizrange > 110):
-		var Text = var_to_str(Num)
+		var Text = "{0}".format([Num])
+		if (Text.length() == 0):
+			continue
 		var TextSize = min(10/CamZoom, vizrange / 10)
 		var StringSize = ThemeDB.fallback_font.get_string_size(Text, HORIZONTAL_ALIGNMENT_CENTER, -1, TextSize) / 2
 		StringSize.y *= -0.5

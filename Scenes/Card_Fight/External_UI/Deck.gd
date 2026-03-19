@@ -113,7 +113,7 @@ func TestCard(Mod : CardStats, testType : CardStats.CardType) -> bool:
 	return Mod.Type == testType
 
 func DiscardCard(C : CardStats) -> void:
-	#PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
+	PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
 	DiscardPile.append(C)
 	DiscardChanged.emit(true)
 

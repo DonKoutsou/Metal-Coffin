@@ -5,10 +5,6 @@
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="4_ytvfy"]
 [ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scenes/Card_Fight/External_UI/CardHandContainer.gd" id="5_si1ht"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jut7c"]
-content_margin_left = 4.0
-content_margin_right = 4.0
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jut7c"]
 bg_color = Color(1, 0.763983, 0.0812772, 1)
 border_width_left = 2
@@ -28,39 +24,26 @@ size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("1_2v1h2")
 CardScene = ExtResource("3_40o7a")
-ItemName = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ItemName")
-ItemDesc = NodePath("VBoxContainer/HBoxContainer/ItemDesc")
-TransferButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Transfer")
-UpgradeButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade")
-CancelUpgradeButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade2")
-CancelInstallButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade3")
-AddItemButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/AddItem")
-IncreaseItemButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/AddMore")
-RemoveItemButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/RemoveItem")
-UpgradeLabel = NodePath("VBoxContainer/HBoxContainer/Label")
-CardSection = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/CardsSection")
-CardPlecement = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/CardsSection/CardPlecement")
+ItemName = NodePath("HBoxContainer/ItemName")
+ItemDesc = NodePath("HBoxContainer/InputScroll/VBoxContainer/ItemDesc")
+TransferButton = NodePath("HBoxContainer/ShipPartActions/Transfer")
+UpgradeButton = NodePath("HBoxContainer/ShipPartActions/Upgrade")
+CancelUpgradeButton = NodePath("HBoxContainer/ShipPartActions/Upgrade2")
+CancelInstallButton = NodePath("HBoxContainer/ShipPartActions/Upgrade3")
+AddItemButton = NodePath("HBoxContainer/ShipPartActions/AddItem")
+IncreaseItemButton = NodePath("HBoxContainer/ShipPartActions/AddMore")
+RemoveItemButton = NodePath("HBoxContainer/ShipPartActions/RemoveItem")
+UpgradeLabel = NodePath("HBoxContainer/InputScroll/VBoxContainer/Label")
+CardSection = NodePath("HBoxContainer/InputScroll/VBoxContainer/VBoxContainer/CardsSection")
+CardPlecement = NodePath("HBoxContainer/InputScroll/VBoxContainer/VBoxContainer/CardsSection/CardPlecement")
 
-[node name="VBoxContainer" type="ScrollContainer" parent="." unique_id=966295129]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_jut7c")
-horizontal_scroll_mode = 3
-vertical_scroll_mode = 3
-script = ExtResource("4_ytvfy")
-metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
-
-[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=295165886]
+[node name="HBoxContainer" type="VBoxContainer" parent="." unique_id=295165886]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=1664219088]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="ItemName" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer" unique_id=1666121310]
-custom_minimum_size = Vector2(0, 70)
+[node name="ItemName" type="Label" parent="HBoxContainer" unique_id=1666121310]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -71,106 +54,71 @@ vertical_alignment = 1
 autowrap_mode = 2
 uppercase = true
 
-[node name="ShipPartActions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/HBoxContainer" unique_id=596959331]
+[node name="InputScroll" type="ScrollContainer" parent="HBoxContainer" unique_id=1269929323]
 layout_mode = 2
-mouse_filter = 2
-alignment = 1
+size_flags_vertical = 3
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+script = ExtResource("4_ytvfy")
+metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
-[node name="Upgrade" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" unique_id=1997235462 groups=["DigitalBouncingButton"]]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-text = "Upgrade"
-
-[node name="Upgrade2" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" unique_id=876276675 groups=["DigitalBouncingButton"]]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/InputScroll" unique_id=480395351]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 8
-text = "Cancel Upgrade"
+size_flags_vertical = 3
 
-[node name="Upgrade3" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" unique_id=702001987 groups=["DigitalBouncingButton"]]
+[node name="Panel" type="Panel" parent="HBoxContainer/InputScroll/VBoxContainer" unique_id=569619456]
 visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-text = "Cancel Install"
-
-[node name="AddItem" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" unique_id=1141385224 groups=["DigitalBouncingButton"]]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-text = "Install Part"
-
-[node name="AddMore" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" unique_id=2070343834 groups=["DigitalBouncingButton"]]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-text = "Add More"
-
-[node name="RemoveItem" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" unique_id=1922293720 groups=["DigitalBouncingButton"]]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-text = "Remove Item"
-
-[node name="Transfer" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions" unique_id=1150997006 groups=["DigitalBouncingButton"]]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-text = "Transfer"
-
-[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer" unique_id=569619456]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jut7c")
 
-[node name="Label" type="RichTextLabel" parent="VBoxContainer/HBoxContainer" unique_id=1157459895]
+[node name="Label" type="RichTextLabel" parent="HBoxContainer/InputScroll/VBoxContainer" unique_id=1157459895]
 clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "[color=#c19200]Upgrade Time[/color] : 4x
 "
 fit_content = true
 autowrap_mode = 2
 
-[node name="ItemDesc" type="RichTextLabel" parent="VBoxContainer/HBoxContainer" unique_id=1248046445]
+[node name="ItemDesc" type="RichTextLabel" parent="HBoxContainer/InputScroll/VBoxContainer" unique_id=1248046445]
 clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 mouse_filter = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "fwafawf affwfafwafwafwaf awfwafwafw awfwafwaf"
 fit_content = true
 autowrap_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=66956775]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/InputScroll/VBoxContainer" unique_id=66956775]
 layout_mode = 2
 
-[node name="Panel2" type="Panel" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=167877657]
+[node name="Panel2" type="Panel" parent="HBoxContainer/InputScroll/VBoxContainer/VBoxContainer" unique_id=167877657]
+visible = false
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jut7c")
 
-[node name="CardsSection" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=861473671]
+[node name="CardsSection" type="VBoxContainer" parent="HBoxContainer/InputScroll/VBoxContainer/VBoxContainer" unique_id=861473671]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/CardsSection" unique_id=1357927910]
+[node name="Label" type="Label" parent="HBoxContainer/InputScroll/VBoxContainer/VBoxContainer/CardsSection" unique_id=1357927910]
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 text = "Providing Cards"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="CardPlecement" type="Container" parent="VBoxContainer/HBoxContainer/VBoxContainer/CardsSection" unique_id=1037286587]
+[node name="CardPlecement" type="Container" parent="HBoxContainer/InputScroll/VBoxContainer/VBoxContainer/CardsSection" unique_id=1037286587]
 custom_minimum_size = Vector2(325, 270)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -178,15 +126,67 @@ size_flags_vertical = 3
 script = ExtResource("5_si1ht")
 metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 
-[node name="Panel4" type="Panel" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1832707288]
+[node name="Panel4" type="Panel" parent="HBoxContainer/InputScroll/VBoxContainer/VBoxContainer" unique_id=1832707288]
+visible = false
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jut7c")
 
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade" to="." method="_on_upgrade_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade2" to="." method="_on_cancel_upgrade_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade3" to="." method="_on_cancel_install_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/AddItem" to="." method="_on_add_item_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/AddMore" to="." method="_on_add_more_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/RemoveItem" to="." method="_on_remove_item_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Transfer" to="." method="_on_transfer_pressed"]
+[node name="ShipPartActions" type="HBoxContainer" parent="HBoxContainer" unique_id=596959331]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Upgrade" type="Button" parent="HBoxContainer/ShipPartActions" unique_id=1997235462 groups=["DigitalBouncingButton"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+text = "Upgrade"
+
+[node name="Upgrade2" type="Button" parent="HBoxContainer/ShipPartActions" unique_id=876276675 groups=["DigitalBouncingButton"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+text = "Cancel Upgrade"
+
+[node name="Upgrade3" type="Button" parent="HBoxContainer/ShipPartActions" unique_id=702001987 groups=["DigitalBouncingButton"]]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+text = "Cancel Install"
+
+[node name="AddItem" type="Button" parent="HBoxContainer/ShipPartActions" unique_id=1141385224 groups=["DigitalBouncingButton"]]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+text = "Install Part"
+
+[node name="AddMore" type="Button" parent="HBoxContainer/ShipPartActions" unique_id=2070343834 groups=["DigitalBouncingButton"]]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+text = "Add More"
+
+[node name="RemoveItem" type="Button" parent="HBoxContainer/ShipPartActions" unique_id=1922293720 groups=["DigitalBouncingButton"]]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+text = "Remove Item"
+
+[node name="Transfer" type="Button" parent="HBoxContainer/ShipPartActions" unique_id=1150997006 groups=["DigitalBouncingButton"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+text = "Transfer"
+
+[connection signal="pressed" from="HBoxContainer/ShipPartActions/Upgrade" to="." method="_on_upgrade_pressed"]
+[connection signal="pressed" from="HBoxContainer/ShipPartActions/Upgrade2" to="." method="_on_cancel_upgrade_pressed"]
+[connection signal="pressed" from="HBoxContainer/ShipPartActions/Upgrade3" to="." method="_on_cancel_install_pressed"]
+[connection signal="pressed" from="HBoxContainer/ShipPartActions/AddItem" to="." method="_on_add_item_pressed"]
+[connection signal="pressed" from="HBoxContainer/ShipPartActions/AddMore" to="." method="_on_add_more_pressed"]
+[connection signal="pressed" from="HBoxContainer/ShipPartActions/RemoveItem" to="." method="_on_remove_item_pressed"]
+[connection signal="pressed" from="HBoxContainer/ShipPartActions/Transfer" to="." method="_on_transfer_pressed"]

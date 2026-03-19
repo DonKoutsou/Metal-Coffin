@@ -3,6 +3,7 @@
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_2vnos"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="2_cueu2"]
 [ext_resource type="Resource" uid="uid://bhlucco4xwaob" path="res://Resources/Cards/RevUp.tres" id="3_mybqa"]
+[ext_resource type="Resource" uid="uid://x7tg2mqpgqxm" path="res://Resources/Cards/Bash.tres" id="4_lv2ox"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="4_vcqkx"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="5_kft5x"]
 
@@ -35,7 +36,7 @@ UpgradeTime = 2000.0
 PartType = 1
 ItemName = "EcoDrive-500 \"Preserve\""
 ItemDesc = "Preserve is the pinnacle of efficient propulsion technology, boasting exceptional fuel conservation for prolonged deployments. While it forgoes high-velocity capabilities, Preserve provides unparalleled range and endurance, making it the engine of choice for missions where resource management is critical."
-CardProviding = Array[ExtResource("2_cueu2")]([ExtResource("1_2vnos"), ExtResource("1_2vnos"), ExtResource("1_2vnos"), ExtResource("1_2vnos"), ExtResource("1_2vnos"), ExtResource("3_mybqa"), ExtResource("3_mybqa")])
+CardProviding = Array[ExtResource("2_cueu2")]([ExtResource("1_2vnos"), ExtResource("1_2vnos"), ExtResource("3_mybqa"), ExtResource("4_lv2ox"), ExtResource("4_lv2ox")])
 Tier = 2
 CanTransfer = false
 Cost = 200000
