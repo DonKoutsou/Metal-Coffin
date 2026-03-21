@@ -1,10 +1,8 @@
 [gd_resource type="World3D" format=3 uid="uid://bt2lx0rufeimw"]
 
 [sub_resource type="Gradient" id="Gradient_a2ujk"]
-interpolation_mode = 2
-interpolation_color_space = 2
-offsets = PackedFloat32Array(0, 0.747449, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.509698, 0.524902, 0.54199, 1, 1, 1, 1, 1)
+offsets = PackedFloat32Array(0, 0.25531915, 0.73170733, 0.9574468)
+colors = PackedColorArray(0, 0, 0, 1, 0.080783375, 0.08078333, 0.080783345, 1, 0.509698, 0.524902, 0.54199, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_7mma4"]
 gradient = SubResource("Gradient_a2ujk")
@@ -26,7 +24,6 @@ glow_mix = 0.825
 glow_hdr_threshold = 1.25
 adjustment_enabled = true
 adjustment_brightness = 1.1
-adjustment_saturation = 0.9
 adjustment_color_correction = SubResource("GradientTexture1D_7mma4")
 
 [resource]

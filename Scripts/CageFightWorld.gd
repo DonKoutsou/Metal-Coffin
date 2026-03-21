@@ -64,7 +64,7 @@ func StartDogFight(PlTeam : Array[Captain], EnTeam : Array[Captain]):
 		bt.Friendly = false
 		CardF.EnemyReserves.append(bt)
 
-	CardF.InitRandomFight(5)
+	#CardF.InitRandomFight(5)
 	
 	#SimulationManager.GetInstance().TogglePause(true)
 	#CardF.SetBattleData(FBattleStats, EBattleStats)

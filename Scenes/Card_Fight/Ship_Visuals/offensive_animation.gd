@@ -90,6 +90,11 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 					for Ship in TargetShips:
 						call_deferred("SpawnUpVisual", Ship, card, BuffText)
 				
+				if (Mod is BuffNextAttackModule):
+					var BuffText = "Firepower +"
+					for Ship in TargetShips:
+						call_deferred("SpawnUpVisual", Ship, card, BuffText)
+				
 				else: if (Mod is NullCardModule):
 					Null = true
 				
@@ -121,6 +126,9 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 				else : if (Mod is ReserveModule or Mod is MaxReserveModule):
 					for Ship in TargetShips:
 						call_deferred("SpawnEnergyVisual", Ship, card, "Energy\nReserve +")
+				else : if (Mod is HandCardEnergyReduceModule):
+					for Ship in TargetShips:
+						call_deferred("SpawnEnergyVisual", Ship, card, "Cost -")
 				else : if (Mod is InterceptModule):
 					for Ship in TargetShips:
 						call_deferred("SpawnShieldVisual", Ship, card, "Interceptor")

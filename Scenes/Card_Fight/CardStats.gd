@@ -20,7 +20,11 @@ class_name CardStats
 @export var UseConditions : Array[CardUseCondition]
 @export var AllowTier : bool = true
 
+var EnergyReduction : int = 0
 var Tier : int = 0
+
+func GetCost() -> int:
+	return max(0, Energy - EnergyReduction)
 
 func GetCardName() ->String:
 	var n : String = ""

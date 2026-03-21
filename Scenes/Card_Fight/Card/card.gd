@@ -21,7 +21,6 @@ signal CardKilled
 
 var CStats : CardStats
 
-var Cost : int
 var ShownCost : int
 
 var TargetLocs : Array[Vector2]
@@ -122,7 +121,7 @@ func _enter_tree() -> void:
 
 func SetCardStats(Stats : CardStats, Amm : int = 0) -> void:
 	CStats = Stats
-	Cost = Stats.Energy
+	var Cost = Stats.GetCost()
 	var DescText =  "[center] {0}".format([Stats.GetDescription()])
 
 	CardName.text = Stats.GetCardName()
@@ -153,6 +152,10 @@ func UpdateBattleStats(User : BattleShipStats) -> void:
 		var DescText =  "[center] {0}".format([CStats.GetBattleDescription(User)])
 		CardDesc.text = DescText
 		ShownCost = GetBattleCost(User, CStats)
+		if (CStats.EnergyReduction > 0):
+			CardCost.modulate = Color(0,1,0)
+		else:
+			CardCost.modulate = Color(1,1,1)
 		CardCost.text = "{0}".format([ShownCost])
 	
 	$SubViewportContainer/SubViewport.set_deferred("render_target_update_mode",  SubViewport.UPDATE_ONCE)
@@ -165,7 +168,7 @@ func Flip() -> void:
 
 func SetCardBattleStats(User : BattleShipStats, Stats : CardStats, Amm : int = 0) -> void:
 	CStats = Stats
-	Cost = Stats.Energy
+	#var Cost = Stats.GetCost()
 	ShownCost = GetBattleCost(User, Stats)
 	if (Stats.Burned):
 		CardName.text = "Burned"
@@ -205,7 +208,7 @@ func GetBattleCost(User : BattleShipStats, Stats : CardStats) -> int:
 			CCost = User.Energy
 			
 	if (CCost == 0):
-		CCost = Stats.Energy
+		CCost = Stats.GetCost()
 	
 	return CCost
 
@@ -245,7 +248,7 @@ func Enable() -> void:
 	
 	
 func GetCost() -> int:
-	return Cost
+	return CStats.GetCost()
 
 var OriginalRot : float
 var TweenHover : Tween

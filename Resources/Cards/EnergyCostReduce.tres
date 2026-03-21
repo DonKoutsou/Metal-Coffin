@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://bth0ox71vtjue"]
+
+[ext_resource type="Texture2D" uid="uid://1e1qey6yj7v6" path="res://Assets/Cards/Energy.png" id="1_g3iv2"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="2_m4vyh"]
+[ext_resource type="Script" uid="uid://d36arye2wc33j" path="res://Scenes/Card_Fight/Card/Card_Modules/EnergyReduceCardModule.gd" id="3_g3iv2"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="4_nyyc5"]
+
+[sub_resource type="Resource" id="Resource_m4vyh"]
+script = ExtResource("3_g3iv2")
+metadata/_custom_type_script = "uid://d36arye2wc33j"
+
+[resource]
+script = ExtResource("4_nyyc5")
+Icon = ExtResource("1_g3iv2")
+CardName = "Energy Cost Reduce"
+Energy = 2
+AllowDuplicates = true
+OnUseModules = Array[ExtResource("2_m4vyh")]([SubResource("Resource_m4vyh")])
+Type = 2
+PutOnTop = true

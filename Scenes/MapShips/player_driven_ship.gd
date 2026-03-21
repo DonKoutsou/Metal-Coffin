@@ -164,9 +164,7 @@ func _HandleAutoPilot(delta : float) -> void:
 	#
 	if (TargetShip != null):
 		TargetShipPos = IntersectShip(TargetShip)
-		if (TargetShipPos.distance_to(global_position) < 5):
-			ClearTargetShip()
-			HaltShip()
+		
 		var directiontoDestination = (TargetShipPos - global_position).normalized().angle()
 		if (rotation != directiontoDestination):
 			var newrot = lerp_angle(rotation, directiontoDestination, delta)
@@ -187,8 +185,11 @@ func _HandleAutoPilot(delta : float) -> void:
 					TargetShip.GetDroneDock().DockCaptive(g)
 
 				CommingBack = false
+				ClearTargetShip()
 				return
-		
+		if (TargetShipPos.distance_to(global_position) < 5):
+			ClearTargetShip()
+			HaltShip()
 	else: if (TargetLocations.size() > 0):
 		var NextLoc = TargetLocations[0]
 		if (NextLoc.distance_to(global_position) < 5):

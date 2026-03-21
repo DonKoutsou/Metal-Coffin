@@ -533,7 +533,7 @@ func OnCardSelected(C : Card) -> bool:
 		S.autoplay = true
 		add_child(S)
 		S.volume_db = -10
-		
+	
 	ExternalUI.UpdateCardsInHandAmm(Ship.deck.Hand.size(), MaxCardsInHand)
 
 	await HandleModulesPl(Ship, C.CStats)
@@ -1068,7 +1068,6 @@ func HandleModulesPl(Performer : BattleShipStats, C : CardStats) -> void:
 
 		var targets = await HandleTargets(C.OnPerformModule, Performer)
 		await HandleOffensiveModule(Performer, C ,C.OnPerformModule, targets)
-
 		
 	if (AnimData.size() > 0):
 		await DoCardAnim(C, AnimData, Performer, true)
@@ -1181,6 +1180,17 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 
 	AtackData.Callables = DamageCallables
 
+	var ExpiredBuffs = Performer.UpdateAttackBuffs()
+	var viz = Performer.ShipViz
+	if (ExpiredBuffs.size() > 0):
+		var d : Floater
+		for g in ExpiredBuffs:
+			d = DamageFloater.instantiate()
+			d.modulate = Color(1,0,0,1)
+			d.text = g + " +\nExpired"
+			add_child(d)
+			d.global_position = (viz.global_position + (viz.size / 2)) - d.size / 2
+	
 	await DoCardAnim(Action, AnimData, Performer, Friendly)
 ##----------------------------------------------------------------------##
 func HandleModule(Performer : BattleShipStats, C : CardStats, Mod : CardModule, Targets : Array[BattleShipStats] = []) -> AnimationData:
@@ -1522,6 +1532,7 @@ func CreateShipVisuals(BattleS : BattleShipStats, Friendly : bool) -> CardFightS
 	
 	BattleS.ShipDamaged.connect(ShipDamaged.bind(BattleS))
 	BattleS.StatsBuffed.connect(UpdateShipStats.bind(BattleS))
+	BattleS.CardsBuffed.connect(UpdateShipStats.bind(BattleS))
 	BattleS.ShipViz = ShipVisuals
 
 	NewTurnStarted.connect(ShipVisuals.OnNewTurnStarted)

@@ -115,6 +115,7 @@ func TestCard(Mod : CardStats, testType : CardStats.CardType) -> bool:
 func DiscardCard(C : CardStats) -> void:
 	PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
 	DiscardPile.append(C)
+	C.EnergyReduction = 0
 	DiscardChanged.emit(true)
 
 func ShuffleDiscardedIntoDeck(DoAnim : bool = true) -> void:

@@ -192,14 +192,10 @@ func MoveCameraX(value : float) -> void:
 	UpdateCameraPos(Vector2(value, 0), true, false)
 
 func UpdateCameraPos(relativeMovement : Vector2, Unfocus : bool = true, FromSelf : bool = true):
-	
-	
 	if (Unfocus):
 		FocusedShip = null
 	
-	if (FromSelf):
-		UIEventHandle.OnYChangedFromScreen(relativeMovement.y / 100)
-		UIEventHandle.OnXchangedFromScreen(relativeMovement.x / 100)
+	Grid.UpdateOffset(position)
 	
 	var extent = get_viewport_rect().size / 2 / zoom.x
 	
@@ -209,10 +205,17 @@ func UpdateCameraPos(relativeMovement : Vector2, Unfocus : bool = true, FromSelf
 	var rel = relativeMovement / zoom
 	var newpos = Vector2(clamp(position.x - rel.x, maxposX.x, maxposX.y) ,clamp(position.y - rel.y, maxposY.y, maxposY.x) )
 	
-	Grid.UpdateOffset(position)
-	
 	if (newpos == position):
 		return
+	
+	var actualmovement = newpos - position
+	
+	
+	
+	if (FromSelf):
+		UIEventHandle.OnYChangedFromScreen(actualmovement.y / 100)
+		UIEventHandle.OnXchangedFromScreen(actualmovement.x / 100)
+	
 	if (FrameTween != null):
 		FrameTween.kill()
 	position = newpos

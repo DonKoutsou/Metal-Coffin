@@ -30,6 +30,8 @@ var MaxShield : float
 var FirePower : float
 var FirePowerBuff : float = 1
 var FirePowerDeBuff : float = 0
+var FirePowerAttackBuff : float = 1
+var FirePowerAttackDebuff : float = 0
 
 var Speed : float
 var SpeedBuff : float = 1
@@ -58,6 +60,8 @@ func GetFireDamage() -> float:
 
 var FirePowerBuffTime : int = 0
 var FirePowerDeBuffTime : int = 0
+var FirePowerAttackBuffTime : int = 0
+var FirePowerAttackDeBuffTime : int = 0
 var SpeedBuffTime : int = 0
 var SpeedDeBuffTime : int = 0
 var DefBuffTime : int = 0
@@ -66,6 +70,7 @@ var DefDeBuffTime : int = 0
 signal EnergyChanged(energyAdded : int)
 signal ReservesChanged(reservesAdded : int)
 signal StatsBuffed
+signal CardsBuffed
 signal ShipDamaged(amm : float)
 
 func ShieldShip(Amm : float) -> void:
@@ -77,6 +82,8 @@ func StripBuff(Stat : CardModule.Stat) -> void:
 	if (Stat == CardModule.Stat.FIREPOWER):
 		FirePowerBuff = 1
 		FirePowerBuffTime = 0
+		FirePowerAttackBuff = 1
+		FirePowerAttackBuffTime = 0
 	if (Stat == CardModule.Stat.SPEED):
 		SpeedBuff = 1
 		SpeedBuffTime = 0
@@ -115,6 +122,12 @@ func BuffFirePower(Amm : float, Turns : int = 2) -> void:
 	#buffs are usually 1.2 or 1.3 so we keep the 0.2 and add it
 	FirePowerBuff += Amm - 1
 	FirePowerBuffTime = Turns
+	ShipViz.Refresh()
+	StatsBuffed.emit()
+
+func BuffNextAttack(Amm : float, AttackAmm : int = 1) -> void:
+	FirePowerAttackBuff += Amm - 1
+	FirePowerAttackBuffTime = AttackAmm
 	ShipViz.Refresh()
 	StatsBuffed.emit()
 
@@ -218,8 +231,22 @@ func UpdateBuffs() -> Array[String]:
 	StatsBuffed.emit()
 	return ExpiredBuffs
 
+func UpdateAttackBuffs() -> Array[String]:
+	var ExpiredBuffs : Array[String]
+	FirePowerAttackBuffTime = max(0, FirePowerAttackBuffTime - 1)
+	FirePowerAttackDeBuffTime = max(0, FirePowerAttackDeBuffTime - 1)
+	if (FirePowerAttackBuffTime == 0 and FirePowerAttackBuff > 1):
+		FirePowerAttackBuff = 1
+		ExpiredBuffs.append("FirePower")
+	if (FirePowerAttackDeBuffTime == 0 and FirePowerAttackDebuff > 1):
+		FirePowerAttackDebuff = 1
+		ExpiredBuffs.append("DeFirePower")
+	ShipViz.Refresh()
+	StatsBuffed.emit()
+	return ExpiredBuffs
+
 func GetFirePower() -> float:
-	return FirePower * (FirePowerBuff - FirePowerDeBuff)
+	return FirePower * (FirePowerBuff - FirePowerDeBuff) * (FirePowerAttackBuff - FirePowerAttackDebuff)
 
 func GetSpeed() -> float:
 	return Speed * (SpeedBuff - SpeedDeBuff)
