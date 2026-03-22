@@ -294,7 +294,7 @@ func FrameCamToPos(pos : Vector2, OverrideTime : float = 1, Unzoom : bool = true
 	if (Unzoom):
 		ForceZoomOut()
 
-func FrameCamToShip(Ship : PlayerDrivenShip, OverrideTime : float = 1, Unzoom : bool = true) -> void:
+func FrameCamToShip(Ship : PlayerDrivenShip, _OverrideTime : float = 1, _Unzoom : bool = true) -> void:
 	if (FrameTween != null):
 		FrameTween.kill()
 	FocusedShip = Ship

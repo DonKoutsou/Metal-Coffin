@@ -17,4 +17,3 @@ Energy = 2
 AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_m4vyh")]([SubResource("Resource_m4vyh")])
 Type = 2
-PutOnTop = true

@@ -49,11 +49,11 @@ func ControllerChanged(NewController : PlayerDrivenShip) -> void:
 		var inv : CharacterInventory = _CharacterInventories[g]
 		inv.visible = g in squad
 	
-func OnDroneDocked(Dr : Drone, Target : MapShip) -> void:
+func OnDroneDocked(_Dr : Drone, Target : MapShip) -> void:
 	if (Target == controller):
 		ControllerChanged(Target)
 	
-func OnDroneUnDocked(Dr : Drone, Target : MapShip) -> void:
+func OnDroneUnDocked(_Dr : Drone, Target : MapShip) -> void:
 	if (Target == controller):
 		ControllerChanged(Target)
 
@@ -74,7 +74,7 @@ func GetCharacterByName(CharName : String) -> Captain:
 			return g
 	return null
 	
-func OnMissileLaunched(Mis : Array[MissileItem], Target : Captain, _User : Captain):
+func OnMissileLaunched(Mis : Array[MissileItem], _Target : Captain, _User : Captain):
 	for g in Mis:
 		RemoveItemFromFleet(g, _User.CaptainShip)
 	#var CharacterInv = _CharacterInventories[Target] as CharacterInventory

@@ -463,7 +463,7 @@ func StartUpgrade(Box : Inventory_Box) -> void:
 	_ItemBeingUpgraded = Box
 	set_physics_process(true)
 
-func StartEquip(Box : Inventory_Box, It : ShipPart) -> Inventory_Box:
+func StartEquip(_Box : Inventory_Box, It : ShipPart) -> Inventory_Box:
 	_ItemBeingEquipped = It
 	_EquipLocation = FindBox(It)
 	_EquipTime = It.UpgradeTime

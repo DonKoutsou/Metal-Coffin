@@ -164,7 +164,7 @@ func DrawRuller() -> void:
 	var vizrange = ControlledShip.GetBiggestVisRange()
 	if !ControlledShip.RadarShape.Working:
 		vizrange = 110
-		vizrange *= WeatherManage.GetInstance().GetVisibilityInPosition(ControlledShipPos, WeatherManage.GetLightAmm())
+		vizrange *= WeatherManage.GetVisibilityInPosition(ControlledShipPos, WeatherManage.GetLightAmm())
 
 	for g in 3:
 		draw_circle(ControlledShipPos, vizrange / 3 * (g + 1), Color(100, 100, 100, 0.3), false, LineW, false)

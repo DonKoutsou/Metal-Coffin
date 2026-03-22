@@ -17,6 +17,7 @@ uniform float Light = 1.0;
 uniform vec2 offset;
 uniform vec2 Scale1;
 uniform vec2 Scale2;
+uniform vec2 Scale3;
 //uniform float z = 0.5;
 
 const float z = 0.25;
@@ -26,6 +27,7 @@ void fragment() {
     // Scale the UVs for the main textures
     vec2 uv1 = uv * Scale1;
 	vec2 uv2 = uv * Scale2;
+	vec2 uv3 = uv * Scale3;
 	vec2 uvnoise = uv;
     // Sample noise texture
 	//float t = abs(1.0 - texture(GroundTextureMask, uv).r) * 5.0;
@@ -39,12 +41,12 @@ void fragment() {
     // Sample colors from the textures
     vec4 texColor1 = texture(GroundTexture, uv1);
     vec4 texColor2 = texture(GroundTexture2, uv2);
-	vec4 texColor3 = texture(GroundTexture3, uv2);
+	vec4 texColor3 = texture(GroundTexture3, uv3);
 
 	vec3 texNormal1 = texture(GroundNormalTexture, uv1).rgb;
 	//texNormal1 /= vec3(1, 1, n.b * 10.0);
 	vec3 texNormal2 = texture(GroundNormal2Texture, uv2).rgb;
-	vec3 texNormal3 = texture(GroundNormal3Texture, uv2).rgb;
+	vec3 texNormal3 = texture(GroundNormal3Texture, uv3).rgb;
 	//texNormal1.b = clamp(texNormal1.b + patternNoise, 0, 1);
 	//texNormal2.b = clamp(texNormal2.b + patternNoise, 0, 1);
     // Blend colors based on sampled noise

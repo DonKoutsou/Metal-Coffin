@@ -103,7 +103,7 @@ func _ready() -> void:
 	ToggleFire(false)
 	set_physics_process(false)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	PositionCard()
 	#CurrentCardShown.global_position = get_global_mouse_position() - CurrentCardShown.size
 
@@ -189,7 +189,8 @@ func ActionHovered(C : CardStats, Targets : Array[BattleShipStats]) -> void:
 	
 	var targetlocs : Array[Vector2] = []
 	for g in Targets:
-		targetlocs.append(g.ShipViz.global_position + (g.ShipViz.size / 2))
+		var pos = g.ShipViz.ShipIcon.global_position + Vector2(0, g.ShipViz.size.y / 2)
+		targetlocs.append(pos)
 	
 	CurrentCardShown = ResourceLoader.load(CardScene).instantiate()
 	CurrentCardShown.SetCardBattleStats(Ship ,C)
@@ -310,9 +311,9 @@ func ToggleSpeedDebuff(t : bool) -> void:
 
 func ShipDestroyed() -> void:
 	#Destroy()
-	var tw = create_tween()
-	tw.tween_property(self, "modulate", Color(1,1,1,0), 1)
-	await tw.finished
+	var desttw = create_tween()
+	desttw.tween_property(self, "modulate", Color(1,1,1,0), 1)
+	await desttw.finished
 	queue_free()
 
 func _on_button_pressed() -> void:

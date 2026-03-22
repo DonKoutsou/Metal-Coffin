@@ -32,7 +32,7 @@ func ToggleMouse(t : bool) -> void:
 	set_physics_process(t)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 
 	var mousepos = get_viewport().get_mouse_position()
 	var Local = mousepos - get_viewport().canvas_transform.origin

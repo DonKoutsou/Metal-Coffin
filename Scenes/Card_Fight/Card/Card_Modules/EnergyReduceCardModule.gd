@@ -10,7 +10,7 @@ func NeedsTargetSelect() -> bool:
 	return true
 
 func GetDesc(Tier : int) -> String:
-	return "Reduce the energy cost of {0} cards in hand by {1}".format([GetCardAmm(Tier), GetReductionAmm(Tier)])
+	return "Reduce the energy cost of [color=#ffc315]{0}[/color] cards in hand by [color=#ffc315]{1}[/color]".format([GetCardAmm(Tier), GetReductionAmm(Tier)])
 
 func GetCardAmm(Tier : int) -> int:
 	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):

@@ -2,7 +2,7 @@ extends Node
 
 class_name PopUpManager
 @export var CustomPop : PackedScene
-@export var CustomConfirm : PackedScene
+@export var customConfirm : PackedScene
 @export var FadNot : PackedScene
 static var Instance : PopUpManager
 # Called when the node enters the scene tree for the first time.
@@ -20,7 +20,7 @@ func DoPopUp(Text : String, Parent : Node):
 	dig.popup_centered()
 	
 func DoConfirm(Text : String, ConfirmText : String, Parent : Node) -> SignalObject:
-	var dig = CustomConfirm.instantiate() as CustomConfirm
+	var dig = customConfirm.instantiate() as CustomConfirm
 	var signa = dig.DoChoice(ConfirmText, "No", Text)
 	if (is_instance_valid(Parent)):
 		Parent.add_child(dig)

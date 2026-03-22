@@ -112,6 +112,7 @@ func _ready() -> void:
 		var NewLine = Line.duplicate()
 		add_child(NewLine)
 		Lines.append(NewLine)
+		NewLine.position = size/2
 	set_physics_process(TargetLocs.size() > 0)
 	Line.visible = TargetLocs.size() > 0
 

@@ -76,10 +76,11 @@ func HandleCommand(Command : String) -> String:
 			
 			var args : Array = []
 			for g in range(currentCheckedWord, CommandList.size()):
-				args.append(CommandList[g])
+				args.append(str_to_var(CommandList[g]))
 			if (get_method_argument_count(commandToExecute) != args.size()):
 				return "Missing arguments.\nFailed to call command"
-			
+			if (!DoArgumentMatch(commandToExecute, args)):
+				return "Error matching arguments"
 			return callv(commandToExecute, args)
 			#call(commandToExecute, args)
 	
@@ -95,6 +96,24 @@ func HandleCommand(Command : String) -> String:
 	
 	return "Couldnt match command"
 
+func DoArgumentMatch(methodName : String, methodArgs : Array[Variant]) -> bool:
+	var m = get_method_list()
+	var matchingArguments : int = 0
+	for method in m:
+		var n = method["name"]
+		var args = method["args"]
+		if (n != methodName):
+			continue
+		for argumentIndex in args.size():
+			var methodArgument = args[argumentIndex]
+			var incommingArgument = methodArgs[argumentIndex]
+			var methodArgumentType = methodArgument["type"]
+			var incommingArgumentType = typeof(incommingArgument)
+			if (methodArgumentType == incommingArgumentType):
+				matchingArguments += 1
+		break
+	return matchingArguments == methodArgs.size()
+
 func HandlePrologueCommand(Command) -> String:
 	if (Command.size() == 1):
 		StartPrologue.emit(false)
@@ -107,14 +126,13 @@ func HandlePrologueCommand(Command) -> String:
 	
 	return "Error Handling Location Command"
 
-func Prologue(skip : String) -> String:
+func Prologue(skip : bool) -> String:
 	if (World.Instance != null):
 		return "Can only apply while in main menu"
-	var sk : bool = str_to_var(skip)
-	if (sk == null):
-		return "Wrong argument"
-	StartPrologue.emit(sk)
+
+	StartPrologue.emit(skip)
 	return "Starting Prologue"
+
 
 #func HandleCampaignCommand(Command) -> String:
 	#if (Command.size() == 1):
@@ -144,26 +162,20 @@ func Prologue(skip : String) -> String:
 	#
 	#return "Error Handling Location Command"
 
-func Teleport(CharName : String, Locx : String, Locy : String) -> String:
+func Teleport(CharName : String, Locx : int, Locy : int) -> String:
 	if (World.Instance == null or World.WORLDST != World.WORLDSTATE.NORMAL):
 		return "Can only apply while in map"
-	var xpos : int = str_to_var(Locx)
-	var ypos : int = str_to_var(Locy)
-	if (xpos == null or ypos == null):
-		return "Misstyped location"
+
 	for g in get_tree().get_nodes_in_group("PlayerShips"):
 		var ship = g as MapShip
 		if ship.Cpt.GetCaptainName().to_lower() == CharName.to_lower():
-			ship.global_position = Vector2(xpos, ypos) * 10
+			ship.global_position = Vector2(Locx, Locy) * 10
 			return "Successfully teleported\n{0} to pos\n|{1}|".format([CharName, ship.global_position])
 	
 	return "Teleport failed"
 
-func EnemyDebug(t : String) -> String:
-	var toggle : bool = str_to_var(t)
-	if (toggle == null):
-		return "Wrong Argument"
-	Commander.GetInstance().ToggleEnemyDebug(toggle)
+func EnemyDebug(t : bool) -> String:
+	Commander.GetInstance().ToggleEnemyDebug(t)
 	return "Enemy debug toggled"
 
 func PrintLocations(CharName : String) -> String:
@@ -174,17 +186,15 @@ func PrintLocations(CharName : String) -> String:
 	
 	return "Location Print Failed"
 
-func InventoryAdd(CapName : String, ItemName : String, ItemAmmount : String = "1") -> String:
+func InventoryAdd(CapName : String, ItemName : String, ItemAmmount : int = 1) -> String:
 	if (World.Instance == null or World.WORLDST != World.WORLDSTATE.NORMAL):
 		return "Can only apply while in map"
 	var Inv = InventoryManager.GetInstance()
 	var inv = Inv.GetCharacterInventoryByName(CapName)
 	if (inv == null):
 		return "Couldn't find captain name"
-	var Amm = str_to_var(ItemAmmount)
-	if (Amm == null):
-		return "Ammount typed wrong"
-	return HandleInventoryItemAddCommand(inv, CapName, ItemName, Amm)
+
+	return HandleInventoryItemAddCommand(inv, CapName, ItemName, ItemAmmount)
 
 func InventoryUpgrade(CapName : String, ItemName : String) -> String:
 	if (World.Instance == null or World.WORLDST != World.WORLDSTATE.NORMAL):

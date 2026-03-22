@@ -8,5 +8,5 @@
 [node name="Node" type="Node" unique_id=1183035406]
 script = ExtResource("1_v0b27")
 CustomPop = ExtResource("2_o7wd2")
-CustomConfirm = ExtResource("3_jm1ja")
+customConfirm = ExtResource("3_jm1ja")
 FadNot = ExtResource("4_5ql82")

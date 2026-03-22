@@ -36,6 +36,6 @@ UpgradeTime = 600.0
 PartType = 4
 ItemName = "MG-10 \"Squall\" 100mm"
 ItemDesc = "a basic machine gun turret designed for straightforward, high-rate-of-fire engagements. It offers standard round delivery with fundamental targeting precision, providing ships with an entry-level solution for close-range defense and suppression."
-CardProviding = Array[ExtResource("1_7gwi0")]([ExtResource("2_4vvqw"), ExtResource("2_4vvqw"), ExtResource("2_4vvqw"), ExtResource("3_6b3vn"), ExtResource("3_6b3vn"), ExtResource("4_4vvqw"), ExtResource("5_6b3vn"), ExtResource("6_o0tk6")])
+CardProviding = Array[ExtResource("1_7gwi0")]([ExtResource("2_4vvqw"), ExtResource("2_4vvqw"), ExtResource("3_6b3vn"), ExtResource("4_4vvqw"), ExtResource("5_6b3vn"), ExtResource("6_o0tk6")])
 CanTransfer = false
 Cost = 50000

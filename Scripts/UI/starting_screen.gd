@@ -22,6 +22,7 @@ const APPID = "3679120"
 
 
 func _ready() -> void:
+	get_viewport().disable_3d = true
 	TranslationServer.set_locale("english")
 	#var siz =  DisplayServer.screen_get_size()
 	#siz.x = min(siz.x, 1920)

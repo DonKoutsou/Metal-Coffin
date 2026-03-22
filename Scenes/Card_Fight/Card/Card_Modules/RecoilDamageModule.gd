@@ -13,7 +13,7 @@ func GetRecoilAmmount(DamageDone : float) -> float:
 func NeedsTargetSelect() -> bool:
 	return false
 
-func Handle(Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> AnimationData:
+func Handle(Performer : BattleShipStats, Action : CardStats, _Targets : Array[BattleShipStats] = []) -> AnimationData:
 	if (Action.Burned):
 		return DeffensiveAnimationData.new()
 	

@@ -15,10 +15,10 @@ func _ready() -> void:
 	_onControlledShipUpdated(controllerEventHandler.CurrentControlled)
 	print("{0} initialised.".format([_getInterfaceName()]))
 
-func _onDroneAdded(drone: Drone, target: MapShip) -> void:
+func _onDroneAdded(_drone: Drone, _target: MapShip) -> void:
 	pass
 
-func _onDroneRemoved(drone: Drone, target: MapShip) -> void:
+func _onDroneRemoved(_drone: Drone, _target: MapShip) -> void:
 	pass
 
 func _onControlledShipUpdated(newController: PlayerDrivenShip) -> void:

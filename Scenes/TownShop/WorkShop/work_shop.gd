@@ -440,7 +440,7 @@ func CancelUpgrade(Box : Inventory_Box) -> void:
 	var Cost = UpgradedItem.Cost
 	var PLWallet = World.GetInstance().PlayerWallet
 	PLWallet.AddFunds(Cost / 2.0)
-	Map.GetInstance().GetScreenUi().TownUi.CoinsReceived(roundi(Cost / 100))
+	Map.GetInstance().GetScreenUi().TownUi.CoinsReceived(roundi(Cost / 100.0))
 	PopUpManager.GetInstance().DoFadeNotif("Upgrade canceled\nPartial Refund Of Cost")
 	UpdateDescriptor(Box)
 

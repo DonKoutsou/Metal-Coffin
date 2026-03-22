@@ -65,7 +65,7 @@ func UpdateAltitude(NewAltitude) -> void:
 
 func UpdateShipWindManipulationModifier() -> void:
 	#var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * (WeatherManage.WindSpeed / WeatherManage.MAX_WIND_SPEED) * 0.2
-	var StormValue = WeatherManage.Instance.StormValueInPosition(global_position)
+	var StormValue = WeatherManage.StormValueInPosition(global_position)
 	var StormAffectedWind = WeatherManage.WindDirection + (WeatherManage.WindDirection * StormValue)
 	var Height = 0.3 + 0.7 * (Altitude / 10000)
 	var WindProt = TopographyMap.GetWindProtection(global_position ,Altitude)

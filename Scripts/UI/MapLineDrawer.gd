@@ -174,11 +174,11 @@ func DrawLines() -> void:
 		#L.use_parent_material = true
 
 #NEW MUCH SIMPLER ALGORITH FOR LINES
-func AddExtraLines(cities : Array, Lines : Array) -> Array:
+func AddExtraLines(cities : Array, L : Array) -> Array:
 	for g in cities:
 		var ConnectionAmmount : int = 0
 		for z in cities:
-			if (Lines.has([g, z])):
+			if (L.has([g, z])):
 				ConnectionAmmount += 1
 		var Dist = 2000
 		while (ConnectionAmmount < 3):
@@ -188,12 +188,12 @@ func AddExtraLines(cities : Array, Lines : Array) -> Array:
 			for z in cities:
 				if (ConnectionAmmount > 2):
 					break
-				if (Lines.has([g, z]) or Lines.has([z, g])):
+				if (L.has([g, z]) or L.has([z, g])):
 					continue
 				if (z.distance_to(g) < Dist):
-					Lines.append([g, z])
+					L.append([g, z])
 					ConnectionAmmount += 1
-	return Lines
+	return L
 	
 #OLD ALGORITH FOR LINES
 # Helper function: Push an element to the heap

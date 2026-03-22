@@ -7,7 +7,7 @@ var CloudMad : ShaderMaterial
 
 func _physics_process(_delta: float) -> void:
 	var pos = global_position + size/2
-	AdjustCloudCoverage(WeatherManage.GetInstance().StormValueInPosition(pos))
+	AdjustCloudCoverage(WeatherManage.StormValueInPosition(pos))
 
 #coverage is normalised float from 0 to 1
 func AdjustCloudCoverage(Coverage : float) -> void:

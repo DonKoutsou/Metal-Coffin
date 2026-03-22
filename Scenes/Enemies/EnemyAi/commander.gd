@@ -263,7 +263,7 @@ func OnEnemySeen(Ship : MapShip, SeenBy : HostileShip) -> void:
 			SeenBy.DoAlarmVisual()
 		KnownEnemies[Ship] = [SeenBy]
 
-func OnEnemyVisualLost(Ship : MapShip, LostBy : HostileShip) -> void:
+func OnEnemyVisualLost(Ship : MapShip, _LostBy : HostileShip) -> void:
 	if (KnownEnemies.has(Ship)):
 		KnownEnemies.erase(Ship)
 		if (IsShipBeingPursued(Ship)):

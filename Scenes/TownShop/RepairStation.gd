@@ -6,7 +6,7 @@ class_name RepairStation
 @export var RepairUIPlacement : Node
 @export var PlayerWallet : Wallet
 
-signal FuelTransactionFinished(BoughtFuel : float)
+#signal FuelTransactionFinished(BoughtFuel : float)
 
 func Init(HasRepair : bool, LandedShips : Array[MapShip]) -> void:
 	for g in LandedShips:

@@ -233,7 +233,7 @@ func ClearTargetShip() -> void:
 	TargetShip = null
 	TargetShipPos = Vector2.ZERO
 
-func TargetShipDestroyed(Sh : MapShip) -> void:
+func TargetShipDestroyed(_Sh : MapShip) -> void:
 	TargetLocations.append(TargetShip.global_position)
 	ClearTargetShip()
 

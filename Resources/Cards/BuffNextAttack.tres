@@ -20,5 +20,4 @@ Energy = 1
 AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_wcq8q")]([SubResource("Resource_wcq8q")])
 Type = 2
-PutOnTop = true
 UseConditions = Array[int]([1])

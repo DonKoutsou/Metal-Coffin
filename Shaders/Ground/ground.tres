@@ -23,3 +23,4 @@ shader_parameter/Light = 1.0
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/Scale1 = Vector2(250, 250)
 shader_parameter/Scale2 = Vector2(600, 600)
+shader_parameter/Scale3 = Vector2(125, 125)
