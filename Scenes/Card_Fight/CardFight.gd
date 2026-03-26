@@ -105,7 +105,6 @@ signal CardFightEnded(Survivors : Array[BattleShipStats], won : bool)
 signal CardFightDestroyed()
 ##----------------------------------------------------------------------##
 func _ready() -> void:
-	
 	CurrentPlayerLabel.visible = false
 	
 	ExternalUI = ExternalCardFightUI.GetInstacne()
@@ -114,9 +113,10 @@ func _ready() -> void:
 	ExternalUI.OnEndTurnPressed.connect(PlayerActionSelectionEnded)
 	ExternalUI.OnShipFallbackPressed.connect(_on_switch_ship_pressed)
 	ExternalUI.OnPullReserves.connect(_on_pull_reserves_pressed)
-	MusicManager.GetInstance().SwitchMusic(true)
 	ExternalUI.GetEnergyBar().Init(TurnEnergy)
 	ExternalUI.GetReserveBar().Init(0)
+	
+	MusicManager.GetInstance().SwitchMusic(true)
 	
 	PlayerActionPickingEnded.connect(CurrentPlayerTurnEnded)
 	EnemyActionPickedEnded.connect(CurrentEnemyTurnEnded)
@@ -593,8 +593,15 @@ func RemoveCard(C : Card) -> void:
 #Function used by enemies to pick moves
 func EnemyActionSelection(Ship : BattleShipStats) -> void:
 	#Add the energy to the current ship
+	
+	var outNumberedBonus : float = Helper.normalize_value(max(0, PlayerCombatants.size() - EnemyCombatants.size()), 0, 2)
+	if (outNumberedBonus > 0):
+		PopUpManager.GetInstance().DoFadeNotif("Ship outnumbered\nBonus Energy Provided")
+	#since max fleet ammount is 3 this number can't be more than 2, and since we normalise it we
+	var finalTurnEnergy : int = TurnEnergy + roundi(TurnEnergy * outNumberedBonus)
+	
 	#TODO maybe find a better way to use reserves for enemies instead of using them at the start
-	Ship.Energy = TurnEnergy + Ship.EnergyReserves
+	Ship.Energy = finalTurnEnergy + Ship.EnergyReserves
 	Ship.EnergyReserves = 0
 	#Store the fire extinguish to always use it at the end. We want to avoid having enemy extinguish fires and then start them again
 	var FireExtinguishToUse : CardStats
@@ -928,11 +935,24 @@ func RestartCards() -> void:
 	ClearCards()
 	
 	var currentship = GetCurrentShip()
-
-	ExternalUI.GetEnergyBar().ChangeSegmentAmm(TurnEnergy)
+	
+	#for each outnumbered ammount we add energy
+	#this function is used only for player so we dont need to check if friendly
+	#cap it at 0 so that we don't remove energy when you are part of bigger fleet
+	var outNumberedBonus : float = Helper.normalize_value(max(0, EnemyCombatants.size() - PlayerCombatants.size()), 0, 2)
+	if (outNumberedBonus > 0):
+		PopUpManager.GetInstance().DoFadeNotif("Ship outnumbered\nBonus Energy Provided")
+		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_OUTNUMER_BONUS)):
+			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_OUTNUMER_BONUS)
+			ActionTracker.QueueTutorial("Outnumber Energy Bonus", "When outnumbered ships are provided an energy boost, giving them a fighting chance.", [Map.UI_ELEMENT.CARD_FIGHT_ENERGY_BAR])
+		
+	#since max fleet ammount is 3 this number can't be more than 2, and since we normalise it we
+	var finalTurnEnergy = TurnEnergy + roundi(TurnEnergy * outNumberedBonus)
+	
+	ExternalUI.GetEnergyBar().ChangeSegmentAmm(finalTurnEnergy)
 	ExternalUI.GetReserveBar().ChangeSegmentAmm(currentship.EnergyReserves)
 	
-	currentship.SetEnergy(TurnEnergy)
+	currentship.SetEnergy(finalTurnEnergy)
 	currentship.SetReserves(currentship.EnergyReserves)
 	UpdateHandCards()
 	
@@ -1262,26 +1282,36 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats) -> Array[BattleShip
 	
 	return Targets
 ##----------------------------------------------------------------------##
-func GetBestTargetForAtack(Candidates : Array) -> BattleShipStats:
-	var points_list = []
+func GetBestTargetForAtack(Candidates : Array[BattleShipStats]) -> BattleShipStats:
+	var biggestAttack : float = 0
 	for g in Candidates:
-		var points = (g.DefDebuff * 1000) + (g.GetFirePower() * 500) - g.CurrentHull
-		points_list.append(points)
+		var fp = g.GetFirePower()
+		if (biggestAttack < fp):
+			biggestAttack = fp
 	
-	var total_points = 0.0
-	for p in points_list:
-		total_points += max(0, p) # avoid negatives
+	var points_list : PackedFloat32Array
+	for g in Candidates:
+		var remainingHealthNormalised = (g.	Hull - g.CurrentHull) / g.Hull
+		var threatLevel = g.GetFirePower() / biggestAttack
+		var points = (g.DefDebuff * 10) + threatLevel + remainingHealthNormalised
+		points_list.append(max(0.2, points))
 	
+	#var total_points = 0.0
+	#for p in points_list:
+		#total_points += max(0, p) # avoid negatives
+	
+	var r = RandomNumberGenerator.new()
+	var pickedIndex = r.rand_weighted(points_list)
 	# Pick based on weighted chance
-	var rand = randf() * total_points
-	var cumulative = 0.0
-	for i in range(Candidates.size()):
-		cumulative += max(0, points_list[i])
-		if rand <= cumulative:
-			return Candidates[i]
+	#var rand = randf() * total_points
+	#var cumulative = 0.0
+	#for i in range(Candidates.size()):
+		#cumulative += max(0, points_list[i])
+		#if rand <= cumulative:
+			#return Candidates[i]
 
 	# As fallback (should not happen), return a random one
-	return Candidates[randi() % Candidates.size()]
+	return Candidates[pickedIndex]
 ##----------------------------------------------------------------------##
 func GetTargetWithBiggestStat(Candidates : Array[BattleShipStats], St : CardModule.Stat) -> BattleShipStats:
 	var CurrentBiggestStat: float = 0
