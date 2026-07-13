@@ -26,9 +26,9 @@ func GetSonarTargetInfo() -> Array[SonarTargetInfo]:
 	var TargetInfo : Array[SonarTargetInfo]
 	for g in SonarTargets:
 		if g is MapShip:
-			if (isPartOfFleet(get_parent(), g)):
+			if (!g.IsCommander()):
 				continue
-			if (g.Command != null):
+			if (isPartOfFleet(get_parent(), g)):
 				continue
 		var Info := SonarTargetInfo.new()
 		Info.Position = g.global_position
@@ -41,15 +41,19 @@ func GetSonarTargetInfo() -> Array[SonarTargetInfo]:
 	return TargetInfo
 
 func isPartOfFleet(controller : PlayerDrivenShip,target: Node2D) -> bool:
-	return target == controller or target in controller.GetDroneDock().GetDockedShips()
+	return target == controller or target in controller.GetDroneDock().GetDockedShips() or target == controller.Command
 
 func BodyEnteredSonar(Body : Area2D) -> void:
 	var Parent = Body.get_parent()
+	if (Parent == get_parent()):
+		return
 	if (Parent is MapShip or Parent is Missile):
 		#ShipEnteredSonar.emit(Body.get_parent())
 		SonarTargets.append(Parent)
 
 func BodyLeftSonar(Body : Area2D) -> void:
 	var Parent = Body.get_parent()
+	if (Parent == get_parent()):
+		return
 	if (Parent is MapShip or Parent is Missile):
 		SonarTargets.erase(Parent)

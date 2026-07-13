@@ -135,10 +135,7 @@ static func get_color_at_global_position(pos: Vector2) -> Color:
 	return col
 
 #raycast finding storm interception value between 2 points
-static func GetBiggestStormValue(
-		Origin: Vector2,       # Global position
-		Target: Vector2,        # Global position
-	) -> float:
+static func GetBiggestStormValue(Origin: Vector2, Target: Vector2) -> float:
 
 	var samples : int = roundi(Vector2(Origin.x, Origin.y).distance_to(Vector2(Target.x, Target.y)) / 20)
 	var BiggestStormValue : float = 0.0

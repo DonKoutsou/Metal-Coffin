@@ -117,13 +117,13 @@ func _updateContacts(ControllerInfo : SonarTargetInfo ,ContactInfo : Array[Sonar
 		var direction = ControllerInfo.Position.angle_to_point(target.Position)
 		
 		#get the sound signature of the target
-		var SounddB: float = target.Signature
+		var SounddB: float = target.Signature * 2
 		
 		#do raycast and find storm collision
-		var stormvalue = 1 - WeatherManage.GetBiggestStormValue(ControllerInfo.Position, target.Position)
-		#figure out distance, at the end is normalised value. Bigger values means target is closer, means sound signature is stronger
-		var dist = 1 - (ControllerInfo.Position.distance_to(target.Position) / CurrentSonarRange)
 		
+		var stormvalue = 1 - ease(WeatherManage.GetBiggestStormValue(ControllerInfo.Position, target.Position), 4)
+		#figure out distance, at the end is normalised value. Bigger values means target is closer, means sound signature is stronger
+		var dist = 1 - (ControllerInfo.Position.distance_to(target.Position) / (CurrentSonarRange))
 		#calculate final signature by applying the distance and storm to the SoundSignature
 		var finalsignature = dist * SounddB * stormvalue
 		if (finalsignature == 0):
@@ -180,7 +180,8 @@ func ContactsToGradient(Contacts : Dictionary[float, float]) -> Gradient:
 	return gradient
 
 func _onSignalFound(signalStrength: float) -> void:
-	radioSpeaker.PlaySound(RadioSpeaker.RadioSound.BEEP, signalStrength - 35)
+	pass
+	#radioSpeaker.PlaySound(RadioSpeaker.RadioSound.BEEP, signalStrength - 35)
 
 # --- SONAR CONTROLS AND TOGGLING ---
 

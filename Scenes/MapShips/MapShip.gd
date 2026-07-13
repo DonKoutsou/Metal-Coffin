@@ -77,6 +77,9 @@ func _ready() -> void:
 	for g in Cpt.CaptainStats:
 		g.ForceMaxValue()
 
+func IsCommander() -> bool:
+	return Command == null
+	
 #Refuel logic
 func Refuel() -> void:
 	#Make sure that the ship is landed

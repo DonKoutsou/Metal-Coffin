@@ -46,12 +46,22 @@ func _draw() -> void:
 	
 	#stored lines that will be drawn all together in the end
 	var lines : PackedVector2Array
-
+	
+	
 	for g in range(0, PointAmm):
 		#we normalise the current point
 		var m = Helper.normalize_value(g, 0, PointAmm)
-		var NoiseUvX = wrap((m * NoiseImage.get_width()) + NoiseOffset, 0 , NoiseImage.get_width())
-		var NoiseValue = NoiseImage.get_pixelv(Vector2i(NoiseUvX, 0)).r
+		
+		var pointX = cos(m * (PI * 2)) * Radius
+		var pointY = sin(m * (PI * 2)) * Radius
+		var dir = Vector2(pointX, pointY).normalized()
+		#sample a noise value
+		var x = wrap(pointX + 0.5 + NoiseOffset, 0, NoiseImage.get_width())
+		var y = wrap(pointY + 0.5 + NoiseOffset, 0, NoiseImage.get_height())
+		var NoiseValue = NoiseImage.get_pixelv(Vector2i(x, y)).r
+		
+		#var NoiseUvX = wrap((m * NoiseImage.get_width()) + NoiseOffset, 0 , NoiseImage.get_width())
+		#var NoiseValue = NoiseImage.get_pixelv(Vector2i(NoiseUvX, 0)).r
 		
 		#add 0.5 to it to reverse it, for some reason angles are opposite
 		var samplepos = wrap(m + 0.5, 0, 1)
@@ -59,7 +69,6 @@ func _draw() -> void:
 		var MappedSamplePos = Helper.mapvalue(samplepos, 0.3, 0.7)
 		#Sample texture, multiply normalised value with texture width to get pixel
 		var amm : float = ContactGr.get_pixelv(Vector2i(roundi(MappedSamplePos * ContactGr.get_width()), 0)).r * 2
-
 		var mapped_value = 1 + ((g - 1) / (PointAmm)) / PointAmm
 		var roundedmapped = roundi(mapped_value)
 		
@@ -79,8 +88,8 @@ func _draw() -> void:
 		if (Dif > BiggestFind and amm > 0):
 			BiggestFind = Dif
 
-		var NewPoint = GetPointInCircle(g, PointAmm - 1) + (size / 2)
-		var offset = MidPoint.direction_to(NewPoint) * Height
+		var NewPoint = Vector2(pointX, pointY) + MidPoint
+		var offset = dir * Height
 		#NewPoint += offset
 		if (g > 0):
 			lines.append(LastPoint)
@@ -88,21 +97,20 @@ func _draw() -> void:
 		LastPoint = NewPoint + offset
 		CurrentOffset = wrap(CurrentOffset + 1, 0, 3)
 		
-		var v = roundi(wrap(samplepos - 0.25, 0, 1) * 100)
-		#var sampledin = roundi(samplepos * 100.0)
+		var angle = roundi(rad_to_deg(dir.angle()))
 		
-		if (!v % 10):
-			var t = "{0}".format([snapped(v * 3.6, 10)])
+		if (angle % 45 == 0):
+			var t = var_to_str(angle)
 			var stringsize = get_theme_default_font().get_string_size(t,HORIZONTAL_ALIGNMENT_FILL, -1, 7)
-			var PointP = NewPoint - (NewPoint.direction_to(MidPoint) * (Radius / 2 + 9)) - Vector2(stringsize.x / 2, -3)
+			var PointP = NewPoint - -dir * Radius / 3 - Vector2(stringsize.x / 2, -3)
 			draw_string(get_theme_default_font(), PointP, t, HORIZONTAL_ALIGNMENT_FILL, -1, 7, Color(1,0,0))
 
 	for g in range(1, CircleDivisions + 1):
-		var r = Radius / CircleDivisions
+		var r = Radius * 2 / CircleDivisions
 		r *= g
 		draw_circle(MidPoint, r + 10, Color(1,0,0), false)
 	
-	NoiseOffset = randf_range(-100, 100)
+	NoiseOffset = wrap(NoiseOffset + 0.5, -100, 100)
 	
 	draw_multiline(lines, Color(1,0,0))
 	

@@ -25,9 +25,7 @@ func _ready() -> void:
 
 func OnCommandEntered() -> void:
 	var Command = Text.text
-	
-	#UpdateRecomendations()
-	
+
 	if (Command.substr(Command.length() - 1, Command.length()) == "\n"):
 		Command = Command.replace("\n", "")
 		var response = HandleCommand(Command)
@@ -37,6 +35,7 @@ func OnCommandEntered() -> void:
 			PopUpManager.GetInstance().DoFadeNotif(response, null)
 		
 		Text.text = ""
+	UpdateRecomendations()
 	Text.set_caret_column(Text.text.length())
 
 func Focus() -> void:
@@ -284,36 +283,73 @@ func OnCloseButtonPressed() -> void:
 	Typing = false
 	visible = false
 
-#func UpdateRecomendations() -> void:
-	#ClearRecomendations()
-	#if (Text.text.length() == 0):
-		#AddRecomendation("inv")
-		#AddRecomendation("loc")
-		#AddRecomendation("stat")
-	#else:
-		#var text = Text.text.split(" ")
-		#if (text[0] == "inv"):
-			#AddRecomendation("add")
-			#AddRecomendation("upgrade")
-		#if (text[0] == "stat"):
-			#AddRecomendation("add")
-			#AddRecomendation("upgrade")
-		#if (text[0] == "loc"):
-			#AddRecomendation("add")
-			#AddRecomendation("upgrade")
-		
-#func RecomendationPressed(text : String) -> void:
-	#Text.text += text + " "
-	#UpdateRecomendations()
+func UpdateRecomendations() -> void:
+	ClearRecomendations()
+	if (Text.text.length() == 0):
+		return
+		for g in CommandListConfiguration:
+			var commandText = ListToString(g)
+			var args = GetMethodArguments(CommandListConfiguration[g])
+			AddRecomendation(commandText + ListToString(args))
+	else:
+		var text = Text.text.to_lower().split(" ")
+		var matchingCommandIndexes : Array[int] = []
+		for textIndex in text.size():
+			if (text[textIndex] == ""):
+				continue
+			var length = text[textIndex].length()
+			for wordListIndex : int in CommandListConfiguration.size():
+				var wordList = CommandListConfiguration.keys()[wordListIndex]
+				if (wordList.size() - 1 < textIndex):
+					continue
+				var word = wordList[textIndex].to_lower().substr(0, length)
+				if (word == text[textIndex]):
+					if (!matchingCommandIndexes.has(wordListIndex)):
+						matchingCommandIndexes.append(wordListIndex)
+				else:
+					matchingCommandIndexes.erase(wordListIndex)
+		for command in matchingCommandIndexes:
+			var list = CommandListConfiguration.keys()[command]
+			var commandText = ListToString(list)
+			var args = GetMethodArguments(CommandListConfiguration[list])
+			AddRecomendation(commandText + ListToString(args))
+				
+					
+
+func GetMethodArguments(methodName : String) -> PackedStringArray:
+	var methods = get_method_list()
+	var argList : PackedStringArray = []
 	
-#func OnCommandLineFocused() -> void:
-	#UpdateRecomendations()
+	for g in methods:
+		if (g["name"] == methodName):
+			var args = g["args"]
+			for argumentIndex in args.size():
+				var ArgumentName : String = args[argumentIndex]["name"]
+				var ArgumentType = args[argumentIndex]["type"]
+				argList.append("({0}:{1})".format([ArgumentName, type_string(ArgumentType)]))
+	return argList
+
+func ListToString(list : PackedStringArray) -> String:
+	var finalString : String = ""
+	for g in list:
+		finalString += g + " "
+	return finalString
+
+func RecomendationPressed(text : String) -> void:
+	Text.text = text + " "
+	UpdateRecomendations()
+	
+func OnCommandLineFocused() -> void:
+	UpdateRecomendations()
 		
-#func AddRecomendation(RecText : String) -> void:
-	#var butn = Button.new()
-	#butn.connect("pressed", RecomendationPressed.bind(RecText))
-	#$VBoxContainer/TextEdit/VBoxContainer.add_child(butn)
-	#butn.text = RecText
+func AddRecomendation(RecText : String) -> void:
+	var butn = Button.new()
+	butn.alignment = HORIZONTAL_ALIGNMENT_LEFT
+	butn.autowrap_mode = TextServer.AUTOWRAP_WORD
+	butn.custom_minimum_size.x = size.x - 20
+	butn.connect("pressed", RecomendationPressed.bind(RecText))
+	$VBoxContainer/TextEdit/VBoxContainer.add_child(butn)
+	butn.text = RecText
 
 func ClearRecomendations() -> void:
 	for g in $VBoxContainer/TextEdit/VBoxContainer.get_children():
