@@ -217,11 +217,11 @@ func _HandleAutoPilot(delta : float) -> void:
 			var Distance = global_position.distance_to(TargetShip.global_position)
 		
 			if (Distance < 30):
-				TargetShip.GetDock().DockDrone(self, true)
+				TargetShip.GetDock().DockShip(self)
 				var MyDock = GetDock()
 				for g in MyDock.DockedShips:
-					MyDock.UndockDrone(g)
-					TargetShip.GetDock().DockDrone(g, false)
+					MyDock.UndockShip(g)
+					TargetShip.GetDock().DockShip(g)
 				for g in MyDock.Captives:
 					MyDock.UndockCaptive(g)
 					TargetShip.GetDock().DockCaptive(g)

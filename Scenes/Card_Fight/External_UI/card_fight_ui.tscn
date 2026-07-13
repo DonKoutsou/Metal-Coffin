@@ -47,13 +47,13 @@ PlayerCardPlacementInputBlocker = NodePath("PlayerCardPlacementInputBlocker")
 HardCardLabel = NodePath("Label")
 DeckUI = NodePath("DeckButton")
 DiscardPile = NodePath("DiscardPile")
-CardInsertSound = "uid://bkvuy1fav1gyx"
-CardOutSound = "uid://demm6a82oqqil"
-CardDiscardSound = "uid://demm6a82oqqil"
-CardSound = "uid://bj4o8xjushlvn"
-BeepSound = "uid://bp73cekansu4g"
-BeepNoSound = "uid://dsflespepg17h"
-BeepLong = "uid://qbcciug7j8jy"
+CardInsertSound = "uid://bj6ftgg07o4t0"
+CardOutSound = "uid://8pdqtyhjkcvr"
+CardDiscardSound = "uid://ccyskr8jt1vq6"
+CardSound = "uid://i74iqvk0qddm"
+BeepSound = "uid://81kxs8jf66hv"
+BeepNoSound = "uid://c43kn36ymgltb"
+BeepLong = "uid://djpdmpewc6sg"
 
 [node name="ScreenFrame2" type="TextureRect" parent="." unique_id=1893763889]
 custom_minimum_size = Vector2(0, 38.045)

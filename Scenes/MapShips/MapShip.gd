@@ -381,7 +381,8 @@ func GetShipParalaxPosition(CamPos : Vector2, Zoom : float) -> Vector2:
 
 
 
-
+func ToggleDocked(t : bool) -> void:
+	Docked = t
 
 #//////////////////////////////////////////////////////////
 #██████   █████  ██████   █████  ██████      ██ ███████ ██      ██ ███    ██ ████████ 

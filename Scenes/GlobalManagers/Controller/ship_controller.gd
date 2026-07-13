@@ -71,8 +71,9 @@ func InitiateFleetSeparation() -> void:
 	if (ControlledShip.Docked):
 		Instigator = ControlledShip.Command
 	FleetSeperationRequested.emit(Instigator)
-	
+
 func SetInitialShip() -> void:
+	
 	ControlledShip = get_tree().get_nodes_in_group("PlayerShips")[0]
 	ControlledShip.Teleported.connect(UpdatePlayerInfo)
 	InventoryManager.GetInstance().AddCharacter(ControlledShip.Cpt)
@@ -185,14 +186,14 @@ func OnShipDestroyed(Sh : PlayerDrivenShip):
 		var NewCommander : PlayerDrivenShip
 		if (Sh.GetDock().GetDockedShips().size() > 0):
 			NewCommander = Sh.GetDock().GetDockedShips()[0]
-			Sh.GetDock().UndockDrone(NewCommander)
+			Sh.GetDock().UndockShip(NewCommander)
 			NewCommander.Command = null
 			NewCommander.TargetLocations = Sh.TargetLocations
 			NewCommander.TargetShip = Sh.TargetShip
 
 			for DockedShip in range(Sh.GetDock().GetDockedShips().size() - 1, -1, -1):
-				Sh.GetDock().UndockDrone(Sh.GetDock().GetDockedShips()[DockedShip])
-				NewCommander.GetDock().DockDrone(Sh.GetDock().GetDockedShips()[DockedShip])
+				Sh.GetDock().UndockShip(Sh.GetDock().GetDockedShips()[DockedShip])
+				NewCommander.GetDock().DockShip(Sh.GetDock().GetDockedShips()[DockedShip])
 
 			for Captive in range(Sh.GetDock().Captives.size() - 1, -1, -1):
 				if (NewCommander != null):
@@ -341,7 +342,7 @@ func LoadSaveData(Data : PlayerSaveData) -> void:
 		DockedShip.Cpt = Ship.Cpt
 		DockedShip.Cpt.Repair_Parts = Ship.RepairParts
 		DockedShip.Cpt.OnCharacterNameChanged(Ship.TempName)
-		Player.GetDock().AddDrone(DockedShip)
+		Player.GetDock().AddShip(DockedShip)
 	Player.SetSpeed(Data.Speed)
 	Player.UpdateAltitude(Data.Altitude)
 	
@@ -370,7 +371,7 @@ func LoadSaveData(Data : PlayerSaveData) -> void:
 			DockedShip.Cpt = Ship.Cpt
 			DockedShip.Cpt.Repair_Parts = Ship.RepairParts
 			DockedShip.Cpt.OnCharacterNameChanged(Ship.TempName)
-			CommanderShip.GetDock().AddDrone(DockedShip)
+			CommanderShip.GetDock().AddShip(DockedShip)
 	
 	var AllShips = get_tree().get_nodes_in_group("PlayerShips")
 	for ToRegoup in RegroupingShips:

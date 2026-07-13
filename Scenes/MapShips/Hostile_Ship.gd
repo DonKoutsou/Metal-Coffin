@@ -227,7 +227,7 @@ func TogglePause(_t : bool):
 		#BTree.process_mode = Node.PROCESS_MODE_PAUSABLE
 
 func ToggleDocked(t : bool) -> void:
-	Docked = t
+	super(t)
 	if (BTree != null):
 		BTree.enabled = !t
 		BTree.set_physics_process(!t)

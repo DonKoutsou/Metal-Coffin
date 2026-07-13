@@ -51,18 +51,18 @@ func OnShipContainerSelecter(Cont : CaptainButton) -> void:
 			#Find the old commander and remove this ship from the dock
 			var OldCommander = CurrentFleet[0]
 			var Dock = OldCommander.GetDock()
-			Dock.UndockDrone(Ship)
+			Dock.UndockShip(Ship)
 			#Ship.EnableDrone()
 		#if not then find the new commander and replace his
 		else:
 			NewFleetShipPlecement.add_child(Cont)
 			var OldCommander = CurrentFleet[0]
 			var Dock = OldCommander.GetDock()
-			Dock.UndockDrone(Ship)
+			Dock.UndockShip(Ship)
 			
 			var NewCommander = NewFleet[0]
 			var NewDock = NewCommander.GetDock()
-			NewDock.DockDrone(Ship)
+			NewDock.DockShip(Ship)
 			#Ship.DissableDrone()
 		#Add ship to new fleet array
 		NewFleet.append(Ship)
@@ -82,11 +82,11 @@ func OnShipContainerSelecter(Cont : CaptainButton) -> void:
 
 			var OldCommander = NewFleet[0]
 			var Dock = OldCommander.GetDock()
-			Dock.UndockDrone(Ship)
+			Dock.UndockShip(Ship)
 			
 		var NewCommander = CurrentFleet[0]
 		var NewDock = NewCommander.GetDock()
-		NewDock.DockDrone(Ship)
+		NewDock.DockShip(Ship)
 		#Ship.DissableDrone()
 		
 		CurrentFleetShipPlecement.add_child(Cont)

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cw6nos06km7b3"]
 
-[ext_resource type="Script" uid="uid://bororrr45wonv" path="res://Scenes/MapShips/DroneDock/DroneDock.gd" id="1_3c3y5"]
-[ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="2_e05ln"]
-[ext_resource type="PackedScene" uid="uid://c8mhqxasgvcaw" path="res://Scenes/Old/NewCaptainNotif.tscn" id="3_gdpph"]
+[ext_resource type="Script" uid="uid://bororrr45wonv" path="res://Scenes/MapShips/DroneDock/PlayerDock.gd" id="1_mj8po"]
+[ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="2_qj1dj"]
+[ext_resource type="PackedScene" uid="uid://c8mhqxasgvcaw" path="res://Scenes/Old/NewCaptainNotif.tscn" id="3_lpo83"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oemyy"]
 radius = 5.0
@@ -10,14 +10,14 @@ radius = 5.0
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vppi8"]
 light_mode = 1
 
-[node name="DroneDock" type="Area2D" unique_id=71181084]
+[node name="Dock" type="Area2D" unique_id=71181084]
 collision_layer = 8
 collision_mask = 0
 monitoring = false
-script = ExtResource("1_3c3y5")
-DroneDockEventH = ExtResource("2_e05ln")
+script = ExtResource("1_mj8po")
+DroneDockEventH = ExtResource("2_qj1dj")
+CaptainNotif = ExtResource("3_lpo83")
 Ship_Scene = "uid://4pq5t6l3c55k"
-CaptainNotif = ExtResource("3_gdpph")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=163156309]
 visible = false

@@ -204,7 +204,7 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	PlShip.Cpt._GetStat(STAT_CONST.STATS.FUEL_TANK).ConsumeResource(PlShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK) - StartingFuel)
 	if (IsPrologue):
 		for g in PlShip.Cpt.ProvidingCaptains:
-			PlShip.GetDock().AddRecruit(g, false)
+			PlShip.GetDock().AddCaptain(g, false)
 			g._GetStat(STAT_CONST.STATS.FUEL_TANK).ConsumeResource(g.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK) - StartingFuel)
 	
 		var SimulationTrigger = TutorialTrigger.instantiate() as TutTrigger

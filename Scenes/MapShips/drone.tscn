@@ -13,7 +13,7 @@
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="7_lb1bt"]
 [ext_resource type="Resource" uid="uid://c8wthdbwacfhe" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/Engine2.tres" id="8_03i86"]
 [ext_resource type="Resource" uid="uid://css6e78uhfsfa" path="res://Resources/Items/ShipParts/MG/ShortMachinegun100mm.tres" id="9_06s8f"]
-[ext_resource type="PackedScene" uid="uid://cw6nos06km7b3" path="res://Scenes/MapShips/DroneDock/PlayerDroneDock.tscn" id="9_82ju4"]
+[ext_resource type="PackedScene" uid="uid://cw6nos06km7b3" path="res://Scenes/MapShips/DroneDock/PlayerDock.tscn" id="9_82ju4"]
 [ext_resource type="Script" uid="uid://dn2ybl8146b6t" path="res://Scenes/MapShips/missile_dock.gd" id="9_f4h60"]
 [ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/EventHandlers/MissileDockEventHandler.tres" id="10_ilnq0"]
 [ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FuelTank.tres" id="10_o0thl"]
