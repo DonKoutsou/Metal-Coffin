@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://jgplvqx2dscs" path="res://Scripts/Inventory/character_inventory.gd" id="1_i6whi"]
 [ext_resource type="PackedScene" uid="uid://b1k2h35khc40y" path="res://Scenes/Inventory/InventoryBox.tscn" id="2_e1s57"]
-[ext_resource type="Texture2D" uid="uid://smcigb5qkren" path="res://Assets/CaptainPortraits/Captain7.png" id="3_1f7qw"]
-[ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="5_c3lfk"]
-[ext_resource type="Texture2D" uid="uid://c2pd7if1463aa" path="res://Assets/UIPiecies/network-bars.png" id="6_j2tgv"]
+[ext_resource type="Texture2D" uid="uid://bkya84hu7h3c4" path="res://Assets/CaptainPortraits/Captain7.png" id="3_1f7qw"]
+[ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="5_c3lfk"]
+[ext_resource type="Texture2D" uid="uid://bk3hmnxkvr5ab" path="res://Assets/UIPiecies/network-bars.png" id="6_j2tgv"]
 [ext_resource type="StyleBox" uid="uid://cbl88p1pms3gq" path="res://Theme/YellowBorderPanel.tres" id="6_tv6q8"]
-[ext_resource type="Texture2D" uid="uid://bfc67e5o0peow" path="res://Assets/UIPiecies/Card.png" id="6_w6jla"]
+[ext_resource type="Texture2D" uid="uid://dw7al4e4pdao4" path="res://Assets/UIPiecies/Card.png" id="6_w6jla"]
 [ext_resource type="Texture2D" uid="uid://c7wkqvg4osdjt" path="res://Assets/UIPiecies/cardboard-box.png" id="8_8t562"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c3lfk"]

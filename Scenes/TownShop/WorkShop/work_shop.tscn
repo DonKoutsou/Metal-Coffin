@@ -9,7 +9,7 @@
 [ext_resource type="StyleBox" uid="uid://cbl88p1pms3gq" path="res://Theme/YellowBorderPanel.tres" id="8_gy23n"]
 [ext_resource type="PackedScene" uid="uid://bnonfp8ywr3vl" path="res://Scenes/Inventory/captain_stat_container.tscn" id="9_gy23n"]
 [ext_resource type="PackedScene" uid="uid://blgxtaj45pjfs" path="res://Scenes/Inventory/MerchShopDescription.tscn" id="9_itsvt"]
-[ext_resource type="AudioStream" uid="uid://c866lg2xo47bl" path="res://Assets/Sounds/workshop.mp3" id="10_itsvt"]
+[ext_resource type="AudioStream" uid="uid://tc32omtm74y7" path="res://Assets/Sounds/workshop.mp3" id="10_itsvt"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rs5of"]
 content_margin_left = 5.0

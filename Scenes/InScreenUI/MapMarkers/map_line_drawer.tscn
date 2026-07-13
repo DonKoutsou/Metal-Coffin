@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cja47tyjnyae"]
 
 [ext_resource type="Script" uid="uid://cgykoovvy3ify" path="res://Scripts/UI/MapLineDrawer.gd" id="1_3qvpb"]
-[ext_resource type="Texture2D" uid="uid://drplg6svidd0x" path="res://Assets/Sand/path.png" id="2_st37g"]
+[ext_resource type="Texture2D" uid="uid://ck4gicxcw5yg7" path="res://Assets/Sand/path.png" id="2_st37g"]
 
 [node name="MapLineDrawer" type="Node2D" unique_id=466239839]
 use_parent_material = true

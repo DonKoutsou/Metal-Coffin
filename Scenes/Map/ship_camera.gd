@@ -18,8 +18,8 @@ static var MaxZoom = 15.0
 static var Instance : ShipCamera
 static var WorldBounds : Vector2
 
-signal ZoomChanged(NewVal : float)
-signal PositionChanged(NewVal : Vector2)
+#signal ZoomChanged(NewVal : float)
+#signal PositionChanged(NewVal : Vector2)
 
 var CloudMat : ShaderMaterial
 var GroundMat : ShaderMaterial
@@ -84,7 +84,7 @@ func UpdateZoom(Zoom : Vector2) -> void:
 	for g in get_tree().get_nodes_in_group("MapLines"):
 		g.material.set_shader_parameter("line_width", lerp(0.01, 0.001, Zoom.x / 2))
 	get_tree().call_group("ZoomAffected", "UpdateCameraZoom", Zoom.x)
-	ZoomChanged.emit(Zoom.x)
+	#ZoomChanged.emit(Zoom.x)
 	_UpdateMapGridVisibility()
 	UpdateCameraPos(Vector2.ZERO, false)
 	#UpdateCameraPos(Vector2.ZERO)
@@ -95,7 +95,7 @@ func ForceZoom(Zoom : Vector2) -> void:
 	for g in get_tree().get_nodes_in_group("MapLines"):
 		g.material.set_shader_parameter("line_width", lerp(0.01, 0.001, Zoom.x / 2))
 	get_tree().call_group("ZoomAffected", "UpdateCameraZoom", Zoom.x)
-	ZoomChanged.emit(Zoom.x)
+	#ZoomChanged.emit(Zoom.x)
 	_UpdateMapGridVisibility()
 	
 #////////////////////////////
@@ -225,7 +225,7 @@ func UpdateCameraPos(relativeMovement : Vector2, Unfocus : bool = true, FromSelf
 	GroundMap.ChangeOffset((global_position / 9000))
 	WeatherMan.UpdateCameraOffset((global_position / 9000))
 	
-	PositionChanged.emit(position)
+	get_tree().call_group("CameraPositionAffected", "UpdateCameraPosition", position)
 
 #var CloudTime = 0.0
 var CloudOffset = Vector2.ZERO
@@ -317,4 +317,5 @@ func ForceCamPosition(Pos : Vector2) -> void:
 	GroundMap.ChangeOffset((newpos / 9000))
 	WeatherMan.UpdateCameraOffset((newpos / 9000))
 	Grid.UpdateOffset(newpos)
-	PositionChanged.emit(newpos)
+	
+	get_tree().call_group("CameraPositionAffected", "UpdateCameraPosition", newpos)

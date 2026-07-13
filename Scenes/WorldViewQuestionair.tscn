@@ -26,7 +26,7 @@
 [ext_resource type="Resource" uid="uid://dmfaobxfl2bks" path="res://Resources/Worldview/Questions/LogivBelief/Question14.tres" id="26_vfqru"]
 [ext_resource type="Resource" uid="uid://dnuaid5mx6umc" path="res://Resources/Worldview/Questions/LogivBelief/Question15.tres" id="27_fl7up"]
 [ext_resource type="PackedScene" uid="uid://dp5ghsxs3xitl" path="res://Scenes/Dialogue/linetest.tscn" id="28_0jjjo"]
-[ext_resource type="AudioStream" uid="uid://b5e6m5xcjj8wb" path="res://Assets/Sounds/TextSound.mp3" id="29_0ey4p"]
+[ext_resource type="AudioStream" uid="uid://bmcuncv0xwe2k" path="res://Assets/Sounds/TextSound.mp3" id="29_0ey4p"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0ey4p"]
 

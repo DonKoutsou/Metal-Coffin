@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d2vlvv0emlupr"]
 
 [ext_resource type="Script" uid="uid://lmbe765mf315" path="res://Scenes/InScreenUI/MapMarkers/ShipMarkerNotif.gd" id="1_yijdn"]
-[ext_resource type="AudioStream" uid="uid://bt1nyguladffd" path="res://Assets/Sounds/beep.mp3" id="3_q2wir"]
+[ext_resource type="AudioStream" uid="uid://bkr27tiu43se4" path="res://Assets/Sounds/beep.mp3" id="3_q2wir"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k1nir"]
 light_mode = 1

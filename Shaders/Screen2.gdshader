@@ -2,7 +2,7 @@ shader_type canvas_item;
 render_mode unshaded;
 uniform vec2 res = vec2(864, 486);
 //uniform float Scanres = 500;
-uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear;
 uniform int mask_type : hint_range(0, 2) = 0;
 
 group_uniforms Vignette;

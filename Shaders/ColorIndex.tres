@@ -9,4 +9,4 @@ shader_parameter/ColorAmm = 64.0
 shader_parameter/levels = 16
 shader_parameter/dither_texture = ExtResource("2_l2bqx")
 shader_parameter/DitherRes = Vector2(720, 408)
-shader_parameter/threshold = 1.0
+shader_parameter/threshold = 0.0

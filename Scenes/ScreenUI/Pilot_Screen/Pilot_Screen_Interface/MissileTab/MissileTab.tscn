@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="3_fka4o"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="4_2m6j3"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="4_fka4o"]
-[ext_resource type="Texture2D" uid="uid://dete7kwckvyap" path="res://Assets/UIPiecies/Screen/SidePanels/MissileTab_FullQuality.png" id="4_nth3v"]
+[ext_resource type="Texture2D" uid="uid://7ukbsw5o0nhs" path="res://Assets/UIPiecies/Screen/SidePanels/MissileTab_FullQuality.png" id="4_nth3v"]
 [ext_resource type="StyleBox" uid="uid://d0w8t1031og62" path="res://Theme/Buttons/ButtonGreen.tres" id="5_fka4o"]
 [ext_resource type="StyleBox" uid="uid://cim71fta6nvsv" path="res://Theme/Buttons/ButtonGreen_Pressed.tres" id="6_2m6j3"]
 [ext_resource type="StyleBox" uid="uid://bog4o82ggjqwb" path="res://Theme/Buttons/ButtonOrange.tres" id="7_fka4o"]
@@ -15,7 +15,7 @@
 [ext_resource type="StyleBox" uid="uid://bc1y4hhkl7ce6" path="res://Theme/Buttons/NobButton.tres" id="11_2m6j3"]
 [ext_resource type="StyleBox" uid="uid://21mi6l2i2tkk" path="res://Theme/Buttons/NobButton_Pressed.tres" id="12_fka4o"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="15_pknbg"]
-[ext_resource type="FontFile" uid="uid://c6hwlc2fgceix" path="res://Fonts/digital-7.ttf" id="16_6ithd"]
+[ext_resource type="FontFile" uid="uid://ble63qtuapau3" path="res://Fonts/digital-7.ttf" id="16_6ithd"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/Dial/Dial.tscn" id="17_ptq1t"]
 [ext_resource type="StyleBox" uid="uid://cicae3yqgxkcm" path="res://Theme/MetalPanel.tres" id="18_uy6ab"]
 

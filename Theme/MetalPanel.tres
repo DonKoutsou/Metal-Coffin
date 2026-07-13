@@ -1,6 +1,6 @@
 [gd_resource type="StyleBoxTexture" format=3 uid="uid://cicae3yqgxkcm"]
 
-[ext_resource type="Texture2D" uid="uid://ebrqin4q01s6" path="res://Assets/UIPiecies/Screen/ButtonCover2.png" id="1_6gvtm"]
+[ext_resource type="Texture2D" uid="uid://gdgyf5a5c6rq" path="res://Assets/UIPiecies/Screen/ButtonCover2.png" id="1_6gvtm"]
 
 [resource]
 content_margin_left = 0.0

@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://buq0xxelj3jfe" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Steer/steering_wheelUI.gd" id="1_akv35"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_bbu0y"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="3_8lfa1"]
-[ext_resource type="Texture2D" uid="uid://rxtmxyrt7f07" path="res://Assets/UIPiecies/Screen/SidePanels/Steer_FullQuality.png" id="3_dkc7s"]
+[ext_resource type="Texture2D" uid="uid://dekdqwypsxis1" path="res://Assets/UIPiecies/Screen/SidePanels/Steer_FullQuality.png" id="3_dkc7s"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="4_plcts"]
-[ext_resource type="AudioStream" uid="uid://ciqrupf71u8wm" path="res://Assets/Sounds/Steer-003.wav" id="4_w1h5k"]
+[ext_resource type="AudioStream" uid="uid://csg6r42tebwqi" path="res://Assets/Sounds/Steer-003.wav" id="4_w1h5k"]
 
 [node name="SteeringWheel" type="Control" unique_id=760456773]
 layout_mode = 3

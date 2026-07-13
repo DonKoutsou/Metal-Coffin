@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://du63r6okycjs6" path="res://Scripts/UI/new_captain_notif.gd" id="1_0w8d6"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_16lxh"]
-[ext_resource type="Texture2D" uid="uid://cyxv2ne386pu5" path="res://Assets/CaptainPortraits/Captain8.png" id="1_61vqk"]
+[ext_resource type="Texture2D" uid="uid://i5etyaevvg3k" path="res://Assets/CaptainPortraits/Captain8.png" id="1_61vqk"]
 [ext_resource type="StyleBox" uid="uid://cqvxsqe7hceth" path="res://Theme/Darkblue_Circle.tres" id="2_edtct"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ve8i"]

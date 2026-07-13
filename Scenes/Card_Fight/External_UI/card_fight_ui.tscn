@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://c72jhtq31f4w3" path="res://Scenes/Card_Fight/External_UI/card_fight_ui.gd" id="1_u6pkr"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_lf8xs"]
 [ext_resource type="PackedScene" uid="uid://cy1ohrkbe4n1e" path="res://Scenes/Card_Fight/SegmentedBar/segmented_hp.tscn" id="4_fje4l"]
-[ext_resource type="Texture2D" uid="uid://vejt8vmsfnfl" path="res://Assets/UIPiecies/Screen/ScreenFrames/CardFightScreen.png" id="9_lf8xs"]
+[ext_resource type="Texture2D" uid="uid://d04j07eutct4g" path="res://Assets/UIPiecies/Screen/ScreenFrames/CardFightScreen.png" id="9_lf8xs"]
 [ext_resource type="PackedScene" uid="uid://dp1kurhtal0no" path="res://Scenes/Card_Fight/External_UI/discard_pile.tscn" id="11_omcrt"]
 [ext_resource type="StyleBox" uid="uid://c5x3vcw8x46rj" path="res://Theme/Buttons/ButtonRed.tres" id="12_yd4o7"]
 [ext_resource type="StyleBox" uid="uid://bvwu33dvi8506" path="res://Theme/Buttons/ButtonRed_Pressed.tres" id="13_ibt5m"]
@@ -14,7 +14,7 @@
 [ext_resource type="StyleBox" uid="uid://g2ic8um6hit" path="res://Theme/Buttons/ButtonBlack_Pressed.tres" id="17_w6rgp"]
 [ext_resource type="PackedScene" uid="uid://buuo261afg6tg" path="res://Scenes/Card_Fight/External_UI/Deck.tscn" id="19_1bbav"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="22_lf8xs"]
-[ext_resource type="FontFile" uid="uid://cg8x1e6y1264l" path="res://Fonts/Bank Gothic Light Regular.otf" id="23_ksx0p"]
+[ext_resource type="FontFile" uid="uid://mwyuu26jo0fk" path="res://Fonts/Bank Gothic Light Regular.otf" id="23_ksx0p"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vuvmf"]
 

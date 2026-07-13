@@ -1,6 +1,6 @@
 [gd_resource type="StyleBoxTexture" format=3 uid="uid://b8db6jeknj6qf"]
 
-[ext_resource type="Texture2D" uid="uid://cpafcfc34nmst" path="res://Assets/UIPiecies/Elint/elintClosed_Camera 1_FullQuality.png" id="1_jdk0h"]
+[ext_resource type="Texture2D" uid="uid://u6qd6o0jhpg4" path="res://Assets/UIPiecies/Elint/elintClosed_Camera 1_FullQuality.png" id="1_jdk0h"]
 
 [resource]
 content_margin_left = 0.0

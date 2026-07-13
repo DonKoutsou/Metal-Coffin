@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://jnfgjdqcwc7o"]
 
-[ext_resource type="Texture2D" uid="uid://dj4gkvroi7pn5" path="res://Assets/Cards/Intercept.png" id="1_etj3k"]
+[ext_resource type="Texture2D" uid="uid://dbabt7i4fy214" path="res://Assets/Cards/Intercept.png" id="1_etj3k"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="2_4gkjb"]
 [ext_resource type="Script" uid="uid://dxsdvi8qjwybr" path="res://Scenes/Card_Fight/Card/Card_Modules/InterceptModule.gd" id="2_vgyhb"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="4_xdvqe"]

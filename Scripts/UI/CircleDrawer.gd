@@ -6,6 +6,7 @@ class_name CircleDrawer
 @export var Col : Color
 
 var circles : Array[PackedVector2Array] = []   # Now each is a polygon (radar hull)
+var lines : Array[PackedVector2Array]
 var intersections = {}
 
 var ControlledShip : PlayerDrivenShip
@@ -67,12 +68,19 @@ func ThreadProcessIntersections() -> Dictionary:
 	return intersects
 
 func ClusterCalcFinished() -> void:
-	if ClusterTH:
-		intersections = ClusterTH.wait_to_finish()
-		ClusterTH = null
 	if ControlledShip:
 		ControlledShipPos = ControlledShip.global_position
+	if ClusterTH:
+		var newintersections = ClusterTH.wait_to_finish()
+		ClusterTH = null
+		if (intersections != newintersections):
+			intersections = newintersections
+		else:
+			return
+			
 	queue_redraw()
+	
+	
 
 # Merge all polygons in a cluster into a single polygon (for outline drawing)
 func merge_cluster_polygons(cluster: Array) -> Array[PackedVector2Array]:
@@ -174,14 +182,20 @@ func DrawRuller() -> void:
 
 	var Lines : PackedVector2Array
 
-	for g in 12:
+	for g in 12: 
 		var LineStartPos = Vector2(vizrange / 3,0).rotated(deg_to_rad(Next)) + ControlledShipPos
 		Lines.append(LineStartPos)
 		var LineEndPos = Vector2(vizrange,0).rotated(deg_to_rad(Next)) + ControlledShipPos
 		Lines.append(LineEndPos)
 		
-		#if (vizrange > 110):
+		Next -= 30
 		var Text = "{0}".format([Num])
+		Num = wrap(Num - 30, 0, 360)
+		if (10/CamZoom > vizrange / 5):
+			continue 
+		#if (vizrange > 110):
+
+		
 		if (Text.length() == 0):
 			continue
 		var TextSize = min(10/CamZoom, vizrange / 10)
@@ -191,8 +205,7 @@ func DrawRuller() -> void:
 		#draw_string(ThemeDB.fallback_font, LineEndPos - StringSize + StringOffset + Vector2(5,5), Text, HORIZONTAL_ALIGNMENT_CENTER, -1, TextSize, Color(0,0,0))
 		draw_string(ThemeDB.fallback_font, LineEndPos - StringSize + StringOffset, Text, HORIZONTAL_ALIGNMENT_CENTER, -1, TextSize)
 		
-		Next -= 30
-		Num = wrap(Num - 30, 0, 360)
+		
 		#if Num == 0:
 			#Num = 360
 

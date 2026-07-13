@@ -22,15 +22,12 @@ func SetCamera() -> void:
 	var map = Map.GetInstance()
 	if (!is_instance_valid(map)):
 		return
-	ship_camera = map.GetCamera()
-	ship_camera.ZoomChanged.connect(ZoomChanged)
-	ship_camera.PositionChanged.connect(CamMoved)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
-func ZoomChanged(_NewZoom : float) -> void:
+func UpdateCameraZoom(_NewZoom : float) -> void:
 	update()
 
-func CamMoved(_NewPos : Vector2) -> void:
+func UpdateCameraPosition(_NewPos : Vector2) -> void:
 	update()
 
 func update() -> void:

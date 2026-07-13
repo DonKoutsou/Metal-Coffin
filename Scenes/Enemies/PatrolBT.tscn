@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://b0gylky44tnsw"]
 
-[ext_resource type="Script" uid="uid://by87skfk300cb" path="res://addons/beehave/nodes/beehave_tree.gd" id="1_vo0jh"]
-[ext_resource type="Script" uid="uid://cl2xhuxlthbjw" path="res://addons/beehave/nodes/composites/sequence.gd" id="3_ovbxk"]
+[ext_resource type="Script" uid="uid://b2gyfw6gh37hb" path="res://addons/beehave/nodes/beehave_tree.gd" id="1_vo0jh"]
+[ext_resource type="Script" uid="uid://duypquk8en6g3" path="res://addons/beehave/nodes/composites/sequence.gd" id="3_ovbxk"]
 [ext_resource type="Script" uid="uid://r532wmd5ansi" path="res://Scripts/BeehaveNodes/NeedsStop.gd" id="4_jdy2q"]
-[ext_resource type="Script" uid="uid://cmocj1bpphkfi" path="res://addons/beehave/nodes/composites/selector.gd" id="4_mvm57"]
+[ext_resource type="Script" uid="uid://c8jxlsxyeh3y" path="res://addons/beehave/nodes/composites/selector.gd" id="4_mvm57"]
 [ext_resource type="Script" uid="uid://c5o5dema4c2sm" path="res://Scripts/BeehaveNodes/FindRefuelSpot_Action.gd" id="9_r0x3t"]
 [ext_resource type="Script" uid="uid://ybncdxyaxqt2" path="res://Scripts/BeehaveNodes/AproachRefuelSpot_Action.gd" id="10_wywiw"]
 [ext_resource type="Script" uid="uid://dr6ay8yryfcr5" path="res://Scripts/BeehaveNodes/Refuel_Action.gd" id="11_lt8fk"]
@@ -13,7 +13,7 @@
 process_mode = 1
 script = ExtResource("1_vo0jh")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@19408")
+blackboard = NodePath("@Node@32539")
 custom_monitor = true
 actor = NodePath("..")
 

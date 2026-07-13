@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dncqbpsg58qgq"]
 
-[ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="1_fim28"]
+[ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="1_fim28"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="2_fim28"]
 [ext_resource type="Script" uid="uid://dr3s8ms8g256f" path="res://Scenes/InScreenUI/Weather_UI/WeatherUI.gd" id="2_s1gtg"]
 

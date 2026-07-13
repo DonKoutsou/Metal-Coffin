@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://7oa67waokaj0"]
 
-[ext_resource type="Script" uid="uid://dsoavxwjjlytc" path="res://addons/BurstParticles2D/BurstParticleGroup2D.gd" id="1_imln2"]
-[ext_resource type="Script" uid="uid://d2bgkrovxloh1" path="res://addons/BurstParticles2D/BurstParticles2D.gd" id="2_vb57p"]
+[ext_resource type="Script" uid="uid://7udmjg5dc1n8" path="res://addons/BurstParticles2D/BurstParticleGroup2D.gd" id="1_imln2"]
+[ext_resource type="Script" uid="uid://dda30cxipibam" path="res://addons/BurstParticles2D/BurstParticles2D.gd" id="2_vb57p"]
 [ext_resource type="Texture2D" uid="uid://vwe34itxqa37" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb_soft.png" id="3_4ips0"]
 [ext_resource type="Texture2D" uid="uid://ovw18l4dc1fv" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb.png" id="4_bjha8"]
-[ext_resource type="Texture2D" uid="uid://bpaqpfwi60rbb" path="res://Assets/UIPiecies/Bolt.png" id="5_imln2"]
+[ext_resource type="Texture2D" uid="uid://bf3p61os8mhr7" path="res://Assets/UIPiecies/Bolt.png" id="5_imln2"]
 
 [sub_resource type="Gradient" id="Gradient_bclkm"]
 interpolation_mode = 2

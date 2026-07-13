@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://b7vls3p4lfb5v" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/ThrustSlider/thrust_slider.gd" id="1_vkcln"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="2_08ohp"]
-[ext_resource type="Texture2D" uid="uid://xhd53g36p6gd" path="res://Assets/UIPiecies/Screen/SidePanels/handle_Camera 3.png" id="2_clt26"]
-[ext_resource type="Texture2D" uid="uid://p3h2a0mgmb12" path="res://Assets/UIPiecies/Screen/SidePanels/handleshadow_Camera 3.png" id="3_borvm"]
+[ext_resource type="Texture2D" uid="uid://cppak6y6wit6" path="res://Assets/UIPiecies/Screen/SidePanels/handle_Camera 3.png" id="2_clt26"]
+[ext_resource type="Texture2D" uid="uid://c2f4quec7hbw0" path="res://Assets/UIPiecies/Screen/SidePanels/handleshadow_Camera 3.png" id="3_borvm"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="3_d14qy"]
-[ext_resource type="AudioStream" uid="uid://bq5ennd48voeu" path="res://Assets/Sounds/MetalClick.mp3" id="4_08ohp"]
+[ext_resource type="AudioStream" uid="uid://bw32ea80qadx8" path="res://Assets/Sounds/MetalClick.mp3" id="4_08ohp"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="4_losf5"]
 
 [node name="ThrustSlider" type="Control" unique_id=1806408407 node_paths=PackedStringArray("handle")]

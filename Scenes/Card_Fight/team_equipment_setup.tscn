@@ -3,7 +3,7 @@
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_p5w00"]
 [ext_resource type="Script" uid="uid://bn6vwqvcv5ebb" path="res://Scenes/Card_Fight/team_equipment_setup.gd" id="1_xpgoa"]
 [ext_resource type="PackedScene" uid="uid://b1k2h35khc40y" path="res://Scenes/Inventory/InventoryBox.tscn" id="2_72sdo"]
-[ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="2_xpgoa"]
+[ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="2_xpgoa"]
 [ext_resource type="Script" uid="uid://c407gsr2ima44" path="res://Scripts/Inventory/ship_deck.gd" id="3_72sdo"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="4_c6o7f"]
 [ext_resource type="PackedScene" uid="uid://dci144io03ffa" path="res://Scenes/CaptainButton.tscn" id="4_em7yw"]

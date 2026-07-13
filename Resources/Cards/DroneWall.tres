@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://c46f6ph2spg1r"]
 
-[ext_resource type="Texture2D" uid="uid://boj58ktakmajr" path="res://Assets/Cards/DroneWall.png" id="1_yi4ne"]
+[ext_resource type="Texture2D" uid="uid://d2n56kikurw0r" path="res://Assets/Cards/DroneWall.png" id="1_yi4ne"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="2_wgxcq"]
 [ext_resource type="Script" uid="uid://ckmhix4w7rxv5" path="res://Scenes/Card_Fight/Card/Card_Modules/BuffCardModule.gd" id="3_diejq"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="5_pcr61"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_olgxh"]
 [ext_resource type="Script" uid="uid://dpnur6jb3ppgl" path="res://Scenes/InScreenUI/Simulation_Info/Simulation_Notification.gd" id="2_nf2y7"]
-[ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="4_mcsd0"]
+[ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="4_mcsd0"]
 
 [node name="SimulationNotification" type="Control" unique_id=735458710 node_paths=PackedStringArray("SimText")]
 texture_filter = 1

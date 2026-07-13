@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://miwqhx371w2u" path="res://Resources/Cards/MissileBash.tres" id="4_brtn2"]
 [ext_resource type="AudioStream" uid="uid://cdltvihh7rmac" path="res://Assets/Sounds/missile_launch_02.mp3" id="4_d3kn2"]
 [ext_resource type="Shader" uid="uid://cqgk0egpp8vmb" path="res://Shaders/ShipVisualTest.gdshader" id="7_0pbpk"]
-[ext_resource type="Texture2D" uid="uid://i2b3j51ebdwu" path="res://Assets/ShipTextures/Missile.png" id="8_opb0f"]
+[ext_resource type="Texture2D" uid="uid://dpw80tqr6qfng" path="res://Assets/ShipTextures/Missile.png" id="8_opb0f"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_brtn2"]
 streams_count = 2

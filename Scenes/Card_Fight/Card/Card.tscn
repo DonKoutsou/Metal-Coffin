@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://b4yumrb4c0xyd"]
 
 [ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scenes/Card_Fight/Card/card.gd" id="1_utwiq"]
-[ext_resource type="FontFile" uid="uid://m8psk06kkwa4" path="res://Fonts/P22 Typewriter Regular.ttf" id="2_g808j"]
-[ext_resource type="Texture2D" uid="uid://bocf54aohej8x" path="res://Assets/Cards/card.png" id="3_wohcr"]
-[ext_resource type="Texture2D" uid="uid://bpaqpfwi60rbb" path="res://Assets/UIPiecies/Bolt.png" id="4_5n23x"]
-[ext_resource type="Texture2D" uid="uid://jiray4gr382m" path="res://Assets/Cards/BarraceIncendiery.png" id="5_p48hs"]
+[ext_resource type="FontFile" uid="uid://dpimg5va4xy40" path="res://Fonts/P22 Typewriter Regular.ttf" id="2_g808j"]
+[ext_resource type="Texture2D" uid="uid://buffodrv1xn4a" path="res://Assets/Cards/card.png" id="3_wohcr"]
+[ext_resource type="Texture2D" uid="uid://bf3p61os8mhr7" path="res://Assets/UIPiecies/Bolt.png" id="4_5n23x"]
+[ext_resource type="Texture2D" uid="uid://c1d4jybs1oolg" path="res://Assets/Cards/BarraceIncendiery.png" id="5_p48hs"]
 [ext_resource type="Material" uid="uid://dwvsafe1eaxbk" path="res://Shaders/Card.tres" id="6_btfbu"]
-[ext_resource type="Texture2D" uid="uid://b0pqpqkcdgign" path="res://Assets/Cards/CardBack.png" id="7_ucyjg"]
+[ext_resource type="Texture2D" uid="uid://cwbo84yj0q3om" path="res://Assets/Cards/CardBack.png" id="7_ucyjg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4v2x1"]
 bg_color = Color(1, 1, 1, 1)
@@ -301,8 +301,8 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Label" type="RichTextLabel" parent="SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer" unique_id=641413289]
-clip_contents = false
 custom_minimum_size = Vector2(0, 42)
+clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0.21176471, 0.14901961, 0, 1)

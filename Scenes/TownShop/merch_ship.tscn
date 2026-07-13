@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://bhpyiqwlbnmad"]
 
 [ext_resource type="Script" uid="uid://lq5jxesgjrsy" path="res://Scenes/TownShop/merch_ship.gd" id="2_4302v"]
-[ext_resource type="Texture2D" uid="uid://bk14vgvib8rqq" path="res://Assets/TownBackgrounds/TownBg_001.png" id="2_u711y"]
+[ext_resource type="Texture2D" uid="uid://cqbpsmr8b12de" path="res://Assets/TownBackgrounds/TownBg_001.png" id="2_u711y"]
 [ext_resource type="PackedScene" uid="uid://bt2v8s1av0q6i" path="res://Scenes/TownShop/TownShopItem.tscn" id="3_4302v"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="4_5ggyd"]
 [ext_resource type="PackedScene" uid="uid://blgxtaj45pjfs" path="res://Scenes/Inventory/MerchShopDescription.tscn" id="5_5ggyd"]
-[ext_resource type="AudioStream" uid="uid://c866lg2xo47bl" path="res://Assets/Sounds/workshop.mp3" id="5_ahaja"]
+[ext_resource type="AudioStream" uid="uid://tc32omtm74y7" path="res://Assets/Sounds/workshop.mp3" id="5_ahaja"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="6_w8i83"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ayl0t"]

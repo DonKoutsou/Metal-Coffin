@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c7ojj8un8chim" path="res://Scenes/TownShop/ShipRepairUI.tscn" id="3_272ke"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="4_xts26"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="5_0bh7o"]
-[ext_resource type="FontFile" uid="uid://enrneuriayy2" path="res://Fonts/DOTMBold.TTF" id="5_5dv8f"]
+[ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="5_5dv8f"]
 
 [node name="Fuel Storages" type="PanelContainer" unique_id=2004608452 node_paths=PackedStringArray("RepairUIPlacement")]
 anchors_preset = 15

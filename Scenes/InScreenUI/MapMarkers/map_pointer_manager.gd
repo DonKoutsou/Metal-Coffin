@@ -41,6 +41,13 @@ func _ready() -> void:
 	ControllerEventHandler.connect("OnControlledShipChanged", OnControlledShipChanged)
 	ControlledShip = ControllerEventHandler.CurrentControlled
 
+
+func UpdateCameraZoom(_NewZoom : float) -> void:
+	CircleDr.queue_redraw()
+
+func UpdateCameraPosition(_NewPos : Vector2) -> void:
+	CircleDr.queue_redraw()
+
 func OnControlledShipChanged(Ship : PlayerDrivenShip) -> void:
 	ControlledShip = Ship
 
@@ -163,9 +170,6 @@ func FixLabelClipping() -> void:
 var hulls: Array[PackedVector2Array] = []
 
 func _physics_process(delta: float) -> void:
-	
-	
-
 	hulls.clear()
 	
 	var CamPos = ShipCamera.GetInstance().get_screen_center_position()

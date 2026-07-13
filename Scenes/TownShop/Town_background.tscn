@@ -1,24 +1,24 @@
 [gd_scene format=3 uid="uid://bbfxceg5vwl1x"]
 
 [ext_resource type="Script" uid="uid://h6l78xy6duvo" path="res://Scripts/parallax_background.gd" id="1_0rigd"]
-[ext_resource type="AudioStream" uid="uid://ufp2v886p70v" path="res://Assets/Sounds/Towns/WindSound.mp3" id="2_0rigd"]
-[ext_resource type="Texture2D" uid="uid://dgutk8ry2sqqp" path="res://Assets/smoke_02.png" id="3_81jbw"]
-[ext_resource type="Texture2D" uid="uid://dxromrurusrnr" path="res://Assets/TownBackgrounds/TownLayer-1.png" id="3_ly0hr"]
+[ext_resource type="AudioStream" uid="uid://btfo5jthupm03" path="res://Assets/Sounds/Towns/WindSound.mp3" id="2_0rigd"]
+[ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="3_81jbw"]
+[ext_resource type="Texture2D" uid="uid://cca0r7n4ybrnx" path="res://Assets/TownBackgrounds/TownLayer-1.png" id="3_ly0hr"]
 [ext_resource type="Material" uid="uid://bsqawqp83u5sx" path="res://Shaders/Blur14.tres" id="4_s8jj8"]
-[ext_resource type="Texture2D" uid="uid://bpiy4qlsidlxu" path="res://Assets/TownBackgrounds/TownLayer0.png" id="5_0rigd"]
-[ext_resource type="Texture2D" uid="uid://b2ueuob1cu4cd" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame2.5.png" id="5_7gruq"]
-[ext_resource type="Texture2D" uid="uid://c3f6vbaefuesr" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame2.png" id="5_23crs"]
-[ext_resource type="Texture2D" uid="uid://bwif8u3gyantu" path="res://Assets/smoke_09.png" id="5_u7aao"]
-[ext_resource type="Texture2D" uid="uid://xtijyop2vfnx" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame3.png" id="6_eh2cq"]
-[ext_resource type="Texture2D" uid="uid://blpneaj52suny" path="res://Assets/TownBackgrounds/TownLayer1.png" id="6_ly0hr"]
-[ext_resource type="Texture2D" uid="uid://d3ieoecc7ejrg" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame4.png" id="7_8gplc"]
-[ext_resource type="Texture2D" uid="uid://cte4smp7xi68r" path="res://Assets/TownBackgrounds/TownLayer2.png" id="7_ly0hr"]
-[ext_resource type="Texture2D" uid="uid://bni8k7k7tp3ul" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame3.5.png" id="7_rq3u2"]
-[ext_resource type="Texture2D" uid="uid://deeqf8dsa64w4" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame5.png" id="8_kcqko"]
-[ext_resource type="Texture2D" uid="uid://nycv382q8o3t" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame4.5.png" id="9_aokwu"]
-[ext_resource type="Texture2D" uid="uid://brtwmug0fxgd3" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame6.png" id="9_gl47p"]
-[ext_resource type="Texture2D" uid="uid://b7rc0fafi1bsj" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame5.5.png" id="11_s8jj8"]
-[ext_resource type="Texture2D" uid="uid://q4id364s5cur" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame6.5.png" id="13_x3e2u"]
+[ext_resource type="Texture2D" uid="uid://cmx4d3kw0bqo5" path="res://Assets/TownBackgrounds/TownLayer0.png" id="5_0rigd"]
+[ext_resource type="Texture2D" uid="uid://bxlu7qfr0nme1" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame2.5.png" id="5_7gruq"]
+[ext_resource type="Texture2D" uid="uid://daxjodai3thnm" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame2.png" id="5_23crs"]
+[ext_resource type="Texture2D" uid="uid://de1cx0wwuxx0x" path="res://Assets/smoke_09.png" id="5_u7aao"]
+[ext_resource type="Texture2D" uid="uid://chem806g1ncdt" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame3.png" id="6_eh2cq"]
+[ext_resource type="Texture2D" uid="uid://b6grma87uw02i" path="res://Assets/TownBackgrounds/TownLayer1.png" id="6_ly0hr"]
+[ext_resource type="Texture2D" uid="uid://ciibrgvvuerjb" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame4.png" id="7_8gplc"]
+[ext_resource type="Texture2D" uid="uid://lpw5d8jw6pil" path="res://Assets/TownBackgrounds/TownLayer2.png" id="7_ly0hr"]
+[ext_resource type="Texture2D" uid="uid://bq4mulj40ff0q" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame3.5.png" id="7_rq3u2"]
+[ext_resource type="Texture2D" uid="uid://cys3dsxco0b4o" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame5.png" id="8_kcqko"]
+[ext_resource type="Texture2D" uid="uid://qtxmsr27pjtl" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame4.5.png" id="9_aokwu"]
+[ext_resource type="Texture2D" uid="uid://cqsitb0msodg2" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame6.png" id="9_gl47p"]
+[ext_resource type="Texture2D" uid="uid://cqcdrkg1buq35" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame5.5.png" id="11_s8jj8"]
+[ext_resource type="Texture2D" uid="uid://cro2ryppy8tge" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame6.5.png" id="13_x3e2u"]
 [ext_resource type="Material" uid="uid://d2ewn5jt0b25e" path="res://Shaders/Blur10.tres" id="17_x3e2u"]
 [ext_resource type="Material" uid="uid://0u7e70ufido3" path="res://Shaders/Blur8.tres" id="19_p78ya"]
 
@@ -96,7 +96,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("9_gl47p")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 8.0
 }]

@@ -22,7 +22,7 @@
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w8yg2"]
 light_mode = 1
 
-[node name="Map" type="CanvasLayer" unique_id=584405440 node_paths=PackedStringArray("_InScreenUI", "_ScreenUI", "_Camera", "MapLines", "MapSpots", "Region", "Road", "MapLine", "WorldParent", "MapPointerMan")]
+[node name="Map" type="CanvasLayer" unique_id=584405440 node_paths=PackedStringArray("_InScreenUI", "_ScreenUI", "_Camera", "MapLines", "MapSpots", "Region", "Road", "MapLine", "WorldParent", "MapPointerMan") groups=["CameraPositionAffected", "ZoomAffected"]]
 process_mode = 3
 layer = 0
 follow_viewport_enabled = true
@@ -71,6 +71,9 @@ disable_3d = true
 own_world_3d = true
 world_3d = ExtResource("10_28wu2")
 handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+snap_2d_vertices_to_pixel = true
+canvas_item_default_texture_filter = 0
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 512
 size = Vector2i(785, 595)
@@ -89,6 +92,7 @@ stretch = true
 disable_3d = true
 own_world_3d = true
 handle_input_locally = false
+canvas_item_default_texture_filter = 0
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 0
 positional_shadow_atlas_16_bits = false
@@ -111,7 +115,7 @@ position = Vector2(126.5, 154.5)
 
 [node name="ShipCamera" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" unique_id=1015760443 instance=ExtResource("17_6an1p")]
 
-[node name="MapPointerManager" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" unique_id=67114702 node_paths=PackedStringArray("CircleDr", "MapLonePos", "MapSpotMarkerParent", "ShipMarkerParent")]
+[node name="MapPointerManager" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" unique_id=67114702 node_paths=PackedStringArray("CircleDr", "MapLonePos", "MapSpotMarkerParent", "ShipMarkerParent") groups=["CameraPositionAffected", "ZoomAffected"]]
 z_index = 1025
 material = SubResource("CanvasItemMaterial_w8yg2")
 script = ExtResource("19_ccpfd")

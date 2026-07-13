@@ -37,6 +37,7 @@ func Update(delta: float) -> void:
 		return
 	
 	UpdateShipWindManipulationModifier()
+	
 	_HandleLanding(delta)
 	_HandleAutoPilot(delta)
 		
@@ -57,7 +58,7 @@ func Update(delta: float) -> void:
 	
 	var CorrectionExtra : float = 0.0
 	var offset : Vector2
-	if (ShipContoller.AutoCorrectWind):
+	if (ShipContoller.AutoCorrectWind and Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) > 0):
 		offset = GetShipSpeedVec()
 		
 		var Windage = Cpt.GetStatFinalValue(STAT_CONST.STATS.WINDAGE) * 0.0001

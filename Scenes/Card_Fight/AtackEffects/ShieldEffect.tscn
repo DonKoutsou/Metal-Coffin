@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://5ubeqcn5eqt5"]
 
-[ext_resource type="Script" uid="uid://dsoavxwjjlytc" path="res://addons/BurstParticles2D/BurstParticleGroup2D.gd" id="1_8p2dm"]
-[ext_resource type="Script" uid="uid://d2bgkrovxloh1" path="res://addons/BurstParticles2D/BurstParticles2D.gd" id="2_6ixy4"]
+[ext_resource type="Script" uid="uid://7udmjg5dc1n8" path="res://addons/BurstParticles2D/BurstParticleGroup2D.gd" id="1_8p2dm"]
+[ext_resource type="Script" uid="uid://dda30cxipibam" path="res://addons/BurstParticles2D/BurstParticles2D.gd" id="2_6ixy4"]
 [ext_resource type="Texture2D" uid="uid://vwe34itxqa37" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb_soft.png" id="3_l7ile"]
 [ext_resource type="Texture2D" uid="uid://ovw18l4dc1fv" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb.png" id="4_w1pge"]
-[ext_resource type="Texture2D" uid="uid://ccjvcv0w1rqnd" path="res://Assets/Cards/shield.svg" id="5_8p2dm"]
+[ext_resource type="Texture2D" uid="uid://c7fenkw1dbam" path="res://Assets/Cards/shield.svg" id="5_8p2dm"]
 
 [sub_resource type="Gradient" id="Gradient_bclkm"]
 interpolation_mode = 2

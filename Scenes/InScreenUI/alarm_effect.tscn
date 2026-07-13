@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://buaaiy1bjp87q"]
 
 [ext_resource type="Script" uid="uid://b2ogrmsyy136g" path="res://Scripts/alarm_effect.gd" id="1_bronl"]
-[ext_resource type="AudioStream" uid="uid://cbiytlyhkkavg" path="res://Assets/Sounds/beep-beep-beep-beep-80262.mp3" id="2_jjfkd"]
+[ext_resource type="AudioStream" uid="uid://cgv5pjrrq85xp" path="res://Assets/Sounds/beep-beep-beep-beep-80262.mp3" id="2_jjfkd"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bronl"]
 light_mode = 1

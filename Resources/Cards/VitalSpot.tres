@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://cnet3bjwptmp7"]
 
-[ext_resource type="Texture2D" uid="uid://dutasyqrlajyw" path="res://Assets/Cards/VitalSpot.png" id="1_8d88m"]
+[ext_resource type="Texture2D" uid="uid://d3mqr34v3ispw" path="res://Assets/Cards/VitalSpot.png" id="1_8d88m"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="2_612g0"]
 [ext_resource type="Script" uid="uid://bu2ciutqs3t1b" path="res://Scenes/Card_Fight/Card/Card_Modules/DeBuffEnemyCardModule.gd" id="3_8d88m"]
 [ext_resource type="Script" uid="uid://c4p5ur132vdkj" path="res://Scenes/Card_Fight/DamageInfo.gd" id="3_612g0"]

@@ -2,11 +2,11 @@
 
 [ext_resource type="StyleBox" uid="uid://cicae3yqgxkcm" path="res://Theme/MetalPanel.tres" id="1_ga27b"]
 [ext_resource type="Script" uid="uid://b8qcw65lt8fkh" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Pilot_Screen_Settings/PilotScreenSettings.gd" id="2_06giw"]
-[ext_resource type="FontFile" uid="uid://m8psk06kkwa4" path="res://Fonts/P22 Typewriter Regular.ttf" id="3_85bjj"]
+[ext_resource type="FontFile" uid="uid://dpimg5va4xy40" path="res://Fonts/P22 Typewriter Regular.ttf" id="3_85bjj"]
 [ext_resource type="StyleBox" uid="uid://bc1y4hhkl7ce6" path="res://Theme/Buttons/NobButton.tres" id="4_oe1k3"]
 [ext_resource type="StyleBox" uid="uid://21mi6l2i2tkk" path="res://Theme/Buttons/NobButton_Pressed.tres" id="5_dkh8b"]
-[ext_resource type="Texture2D" uid="uid://bvk1d6i2dr1sf" path="res://Assets/UIPiecies/Screen/Buttons/Switch2.png" id="6_amrhd"]
-[ext_resource type="Texture2D" uid="uid://bi5udi6g78ajr" path="res://Assets/UIPiecies/Screen/Buttons/Switch.png" id="7_b4q5k"]
+[ext_resource type="Texture2D" uid="uid://6h6f55b8cda3" path="res://Assets/UIPiecies/Screen/Buttons/Switch2.png" id="6_amrhd"]
+[ext_resource type="Texture2D" uid="uid://b13t2vkapums2" path="res://Assets/UIPiecies/Screen/Buttons/Switch.png" id="7_b4q5k"]
 
 [node name="PanelContainer" type="PanelContainer" unique_id=1173233523 node_paths=PackedStringArray("ForecastButton", "GridButton", "SteerButton", "ZoomButton", "TopoButton", "WindCorrectionButton")]
 anchors_preset = 2

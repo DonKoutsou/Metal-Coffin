@@ -351,6 +351,8 @@ func SetTargetAltitude(NewTarget : float) -> void:
 	TargetAltitude = NewTarget
 
 func Landed() -> bool:
+	if (!IsCommander()):
+		return Command.Landed()
 	return Altitude == CurrentLandAltitude and !Moving()
 
 func Moving() -> bool:

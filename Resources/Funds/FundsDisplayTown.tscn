@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://brbba7olbisek" path="res://Resources/Funds/Funds_Stat_container.gd" id="1_vcr36"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="2_lq3s3"]
-[ext_resource type="AudioStream" uid="uid://b6f41xjveqo8b" path="res://Assets/Sounds/UI_in.mp3" id="3_jxphn"]
+[ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="3_jxphn"]
 
 [node name="Fund_Container" type="Control" unique_id=1670082304 node_paths=PackedStringArray("Sound", "Text")]
 layout_mode = 3

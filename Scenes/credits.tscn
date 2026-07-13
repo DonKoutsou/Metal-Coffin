@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://dxkoglcdnoen2"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_gryuy"]
-[ext_resource type="Texture2D" uid="uid://cbr3doqbirgp5" path="res://Assets/Creds/Beehave.svg" id="1_r18jl"]
+[ext_resource type="Texture2D" uid="uid://8wnfauuuwprh" path="res://Assets/Creds/Beehave.svg" id="1_r18jl"]
 [ext_resource type="Script" uid="uid://be7e88egssi03" path="res://Scripts/credits.gd" id="2_xelri"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="4_1wbrc"]
-[ext_resource type="Texture2D" uid="uid://cs1i38munqjqo" path="res://Assets/Logos/ΜΧΨLogoTrans.png" id="4_803yc"]
-[ext_resource type="Texture2D" uid="uid://c4ajuc5oggttd" path="res://Assets/Creds/burstpart.svg" id="6_7emq5"]
-[ext_resource type="Texture2D" uid="uid://614an3fvuyhc" path="res://Assets/Creds/AmbientCGLOGO.png" id="6_uah1q"]
-[ext_resource type="FontFile" uid="uid://b2yy0s6fyaml0" path="res://Fonts/Play-Bold.ttf" id="7_803yc"]
+[ext_resource type="Texture2D" uid="uid://cfhxio5jbr8r1" path="res://Assets/Logos/ΜΧΨLogoTrans.png" id="4_803yc"]
+[ext_resource type="Texture2D" uid="uid://i0ngh8uftjja" path="res://Assets/Creds/burstpart.svg" id="6_7emq5"]
+[ext_resource type="Texture2D" uid="uid://3ry1vwlq8lr7" path="res://Assets/Creds/AmbientCGLOGO.png" id="6_uah1q"]
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="7_803yc"]
 
 [node name="Credits" type="Control" unique_id=392640743]
 layout_mode = 3

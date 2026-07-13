@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Captain" format=3 uid="uid://b1e5ovklwmp7v"]
 
-[ext_resource type="Texture2D" uid="uid://q6mvdsxwii4x" path="res://Assets/CaptainPortraits/Captain1.png" id="1_jwmx4"]
+[ext_resource type="Texture2D" uid="uid://cabyq8qd4qe5y" path="res://Assets/CaptainPortraits/Captain1.png" id="1_jwmx4"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scenes/MapShips/Stats/Captain.gd" id="1_phe2p"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scenes/MapShips/Stats/ShipStat.gd" id="2_7h107"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_q3468"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="3_x13ps"]
-[ext_resource type="Texture2D" uid="uid://clj76ltt2catq" path="res://Assets/ShipTextures/Tanker2.png" id="5_w5the"]
+[ext_resource type="Texture2D" uid="uid://b7dafanmawwi0" path="res://Assets/ShipTextures/Tanker2.png" id="5_w5the"]
 [ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/Engine.tres" id="8_0otar"]
 [ext_resource type="Resource" uid="uid://22w1h832bsxa" path="res://Resources/Items/ShipParts/ELINT/LargeElint.tres" id="8_w5the"]
 [ext_resource type="Resource" uid="uid://b5mce733abxqu" path="res://Resources/Items/Ammo/FireSuppressionUnit.tres" id="11_cqbt2"]
@@ -108,11 +108,27 @@ StatName = 22
 StatBase = 500.0
 metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
 
+[sub_resource type="Resource" id="Resource_w7d4t"]
+script = ExtResource("2_7h107")
+StatName = 18
+
+[sub_resource type="Resource" id="Resource_gnrd8"]
+script = ExtResource("2_7h107")
+StatName = 19
+
+[sub_resource type="Resource" id="Resource_kwi8o"]
+script = ExtResource("2_7h107")
+StatName = 20
+
+[sub_resource type="Resource" id="Resource_ejmyw"]
+script = ExtResource("2_7h107")
+StatName = 21
+
 [resource]
 script = ExtResource("1_phe2p")
 CaptainName = "Amol"
 CaptainPortrait = ExtResource("1_jwmx4")
 ShipIcon = ExtResource("5_w5the")
-CaptainStats = Array[ExtResource("2_7h107")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_k3tdg"), SubResource("Resource_mcdo0"), SubResource("Resource_yl52l"), SubResource("Resource_jnwut"), SubResource("Resource_dp1cv"), SubResource("Resource_raq0k"), SubResource("Resource_w5the"), SubResource("Resource_cqbt2"), SubResource("Resource_rqvt2"), SubResource("Resource_hn7lv"), SubResource("Resource_b5a3k"), SubResource("Resource_kn8fl"), SubResource("Resource_sbjrh"), SubResource("Resource_a17r0"), SubResource("Resource_m2dsq"), SubResource("Resource_smyis"), SubResource("Resource_dwmn7")])
+CaptainStats = Array[ExtResource("2_7h107")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_k3tdg"), SubResource("Resource_mcdo0"), SubResource("Resource_yl52l"), SubResource("Resource_jnwut"), SubResource("Resource_dp1cv"), SubResource("Resource_raq0k"), SubResource("Resource_w5the"), SubResource("Resource_cqbt2"), SubResource("Resource_rqvt2"), SubResource("Resource_hn7lv"), SubResource("Resource_b5a3k"), SubResource("Resource_kn8fl"), SubResource("Resource_sbjrh"), SubResource("Resource_a17r0"), SubResource("Resource_m2dsq"), SubResource("Resource_smyis"), SubResource("Resource_dwmn7"), SubResource("Resource_w7d4t"), SubResource("Resource_gnrd8"), SubResource("Resource_kwi8o"), SubResource("Resource_ejmyw")])
 StartingItems = Array[ExtResource("3_q3468")]([ExtResource("11_i43ge"), ExtResource("8_w5the"), ExtResource("11_cqbt2"), ExtResource("11_cqbt2"), ExtResource("11_cqbt2"), ExtResource("12_cqbt2"), ExtResource("12_cqbt2"), ExtResource("12_cqbt2"), ExtResource("11_i43ge"), ExtResource("12_w5the"), ExtResource("8_0otar"), ExtResource("8_0otar"), ExtResource("13_w5the")])
 CheckForErrors = true

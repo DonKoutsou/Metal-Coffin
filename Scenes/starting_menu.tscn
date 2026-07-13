@@ -2,23 +2,23 @@
 
 [ext_resource type="Script" uid="uid://dwk0yagfurdqj" path="res://Scripts/UI/starting_menu.gd" id="1_y40tw"]
 [ext_resource type="PackedScene" uid="uid://dxkoglcdnoen2" path="res://Scenes/credits.tscn" id="2_0pu32"]
-[ext_resource type="Texture2D" uid="uid://cs1i38munqjqo" path="res://Assets/Logos/ΜΧΨLogoTrans.png" id="2_q14vk"]
+[ext_resource type="Texture2D" uid="uid://cfhxio5jbr8r1" path="res://Assets/Logos/ΜΧΨLogoTrans.png" id="2_q14vk"]
 [ext_resource type="World3D" uid="uid://bt2lx0rufeimw" path="res://Enviroments/WorldEnv.tres" id="3_rh5bc"]
-[ext_resource type="Texture2D" uid="uid://k821yd6qs51r" path="res://Assets/Logos/icon_monochrome_light.png" id="3_s86m3"]
+[ext_resource type="Texture2D" uid="uid://bgvp50nvwckpp" path="res://Assets/Logos/icon_monochrome_light.png" id="3_s86m3"]
 [ext_resource type="Material" uid="uid://2l428k4wukko" path="res://Shaders/Ground/StartingMenu_ground.tres" id="4_t54ed"]
 [ext_resource type="Script" uid="uid://dnjdy3xj0atfy" path="res://Scripts/intro_menu_ships.gd" id="6_yrlew"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scenes/MapShips/Trail_Line/trail_line.gd" id="8_eb1s8"]
-[ext_resource type="Texture2D" uid="uid://qi37jxow82md" path="res://Assets/ShipTextures/Ship4_001.png" id="9_j43p8"]
-[ext_resource type="Texture2D" uid="uid://dapth5q2elnm6" path="res://Assets/ShipTextures/Tanker.png" id="11_23r0g"]
-[ext_resource type="Texture2D" uid="uid://clj76ltt2catq" path="res://Assets/ShipTextures/Tanker2.png" id="12_23r0g"]
+[ext_resource type="Texture2D" uid="uid://ev8n5tjqls2e" path="res://Assets/ShipTextures/Ship4_001.png" id="9_j43p8"]
+[ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/ShipTextures/Tanker.png" id="11_23r0g"]
+[ext_resource type="Texture2D" uid="uid://b7dafanmawwi0" path="res://Assets/ShipTextures/Tanker2.png" id="12_23r0g"]
 [ext_resource type="Material" uid="uid://c43qdgvsab5kq" path="res://Shaders/Clouds/CloudsStartingMenu.tres" id="12_t54ed"]
-[ext_resource type="Texture2D" uid="uid://cdjyh4jw770am" path="res://Assets/Logos/tbrender.png" id="14_61hxs"]
-[ext_resource type="Texture2D" uid="uid://bn3s18w1rjx3d" path="res://Assets/UIPiecies/Light.png" id="15_7x35f"]
+[ext_resource type="Texture2D" uid="uid://f727c3anmat7" path="res://Assets/Logos/tbrender.png" id="14_61hxs"]
+[ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/UIPiecies/Light.png" id="15_7x35f"]
 [ext_resource type="PackedScene" uid="uid://bagsk7yyq8sv1" path="res://Scenes/WishlistButton.tscn" id="21_srpg8"]
-[ext_resource type="Texture2D" uid="uid://cjguecyn4l2m7" path="res://Assets/Logos/Discord-Symbol-White.png" id="21_xqmn8"]
+[ext_resource type="Texture2D" uid="uid://tklv7f2e06gq" path="res://Assets/Logos/Discord-Symbol-White.png" id="21_xqmn8"]
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="22_jns0o"]
 [ext_resource type="PackedScene" uid="uid://d0iiqaijsg1y1" path="res://Scenes/InScreenUI/Commande_Line/command_line.tscn" id="23_t54ed"]
-[ext_resource type="Texture2D" uid="uid://c0ekv76h4ymbt" path="res://Assets/UIPiecies/Screen/ScreenFrames/StartMenu_Screen.png" id="24_nthvp"]
+[ext_resource type="Texture2D" uid="uid://dum1h361hyptq" path="res://Assets/UIPiecies/Screen/ScreenFrames/StartMenu_Screen.png" id="24_nthvp"]
 [ext_resource type="PackedScene" uid="uid://bq1ns0us14bn3" path="res://Scenes/InScreenUI/Cursor/Cursor.tscn" id="24_rh5bc"]
 [ext_resource type="StyleBox" uid="uid://bj8tmjsnlmj0" path="res://Theme/Buttons/ButtonBlack.tres" id="26_67h1o"]
 [ext_resource type="StyleBox" uid="uid://g2ic8um6hit" path="res://Theme/Buttons/ButtonBlack_Pressed.tres" id="27_pmm2a"]
@@ -28,15 +28,15 @@
 [ext_resource type="StyleBox" uid="uid://bog4o82ggjqwb" path="res://Theme/Buttons/ButtonOrange.tres" id="32_xqmn8"]
 [ext_resource type="StyleBox" uid="uid://bxfwfq0uxu1w1" path="res://Theme/Buttons/ButtonOrange_Pressed.tres" id="33_sjyyd"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="34_aa43b"]
-[ext_resource type="Texture2D" uid="uid://26rhnah0tact" path="res://Assets/UIPiecies/Screen/Buttons/Button10_Camera 1_FullQuality.png" id="35_xqmn8"]
-[ext_resource type="Texture2D" uid="uid://yfbhxkpe3ani" path="res://Assets/UIPiecies/LightCone.png" id="36_j43p8"]
-[ext_resource type="Texture2D" uid="uid://bdwuh13c5yg07" path="res://Assets/UIPiecies/Screen/Buttons/Button10_Camera 1_FullQuality_pressed.png" id="36_sjyyd"]
+[ext_resource type="Texture2D" uid="uid://ben2ixlvxo42b" path="res://Assets/UIPiecies/Screen/Buttons/Button10_Camera 1_FullQuality.png" id="35_xqmn8"]
+[ext_resource type="Texture2D" uid="uid://cbkii1pjnwxww" path="res://Assets/UIPiecies/LightCone.png" id="36_j43p8"]
+[ext_resource type="Texture2D" uid="uid://cfwm15q52gd55" path="res://Assets/UIPiecies/Screen/Buttons/Button10_Camera 1_FullQuality_pressed.png" id="36_sjyyd"]
 [ext_resource type="StyleBox" uid="uid://c5x3vcw8x46rj" path="res://Theme/Buttons/ButtonRed.tres" id="37_xqmn8"]
 [ext_resource type="StyleBox" uid="uid://bvwu33dvi8506" path="res://Theme/Buttons/ButtonRed_Pressed.tres" id="38_sjyyd"]
 [ext_resource type="PackedScene" uid="uid://dwhre3xvmvjwf" path="res://Scenes/ScreenUI/Fan.tscn" id="39_nthvp"]
-[ext_resource type="Texture2D" uid="uid://co2070b5ddh8o" path="res://Assets/UIPiecies/cables2_Camera 1.png" id="40_xqmn8"]
+[ext_resource type="Texture2D" uid="uid://jo4d26lfwv65" path="res://Assets/UIPiecies/cables2_Camera 1.png" id="40_xqmn8"]
 [ext_resource type="Script" uid="uid://c11sqafe6873w" path="res://Scripts/Cables.gd" id="41_sjyyd"]
-[ext_resource type="Texture2D" uid="uid://pbq8ib83s6uw" path="res://Assets/UIPiecies/cables_Camera 1.png" id="42_67h1o"]
+[ext_resource type="Texture2D" uid="uid://b2mw4mnl7ag4s" path="res://Assets/UIPiecies/cables_Camera 1.png" id="42_67h1o"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yrlew"]
 light_mode = 1
@@ -173,7 +173,6 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect3" unique_id=971039501]
 show_behind_parent = true
 position = Vector2(15, 7)
-points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -219,7 +218,6 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4" unique_id=620173937]
 show_behind_parent = true
 position = Vector2(30, 9.00005)
-points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -265,7 +263,6 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5" unique_id=1499058002]
 show_behind_parent = true
 position = Vector2(30, 9.00005)
-points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -481,10 +478,9 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="CommandLine" parent="SubViewportContainer/SubViewport" unique_id=277886953 instance=ExtResource("23_t54ed")]
-visible = false
-offset_left = 222.0
+offset_left = 70.0
 offset_top = -173.5
-offset_right = -222.0
+offset_right = -70.0
 offset_bottom = -81.5
 StartingMen = true
 

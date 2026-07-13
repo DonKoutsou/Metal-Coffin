@@ -11,7 +11,7 @@
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="8_n1gkd"]
 [ext_resource type="PackedScene" uid="uid://bnonfp8ywr3vl" path="res://Scenes/Inventory/captain_stat_container.tscn" id="9_o4jeo"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="9_ubet6"]
-[ext_resource type="AudioStream" uid="uid://bj4aju35pe32d" path="res://Assets/Sounds/ScreenZap.wav" id="13_jjw7x"]
+[ext_resource type="AudioStream" uid="uid://d4k7al36dc8er" path="res://Assets/Sounds/ScreenZap.wav" id="13_jjw7x"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n1gkd"]
 content_margin_left = 0.0

@@ -14,6 +14,7 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_8d64h"]
 gradient = SubResource("Gradient_ioad0")
+width = 128
 height = 1
 fill_from = Vector2(0.3, 0)
 fill_to = Vector2(0.7, 0)
@@ -27,7 +28,7 @@ frequency = 1.0
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kirju"]
 width = 128
-height = 1
+height = 128
 noise = SubResource("FastNoiseLite_8d64h")
 seamless = true
 seamless_blend_skirt = 1.0
@@ -91,7 +92,7 @@ layout_mode = 2
 mouse_filter = 2
 script = ExtResource("1_u0q8c")
 OffsetAmmount = 2.0
-Radius = 65.0
+Radius = 30.0
 N = SubResource("NoiseTexture2D_kirju")
 
 [node name="Label" type="Label" parent="TextureRect2/PanelContainer" unique_id=733326543]
@@ -103,6 +104,7 @@ theme_override_font_sizes/font_size = 14
 text = "GAIN:10"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="PanelContainer2" type="Panel" parent="TextureRect2" unique_id=1893570508]
 visible = false

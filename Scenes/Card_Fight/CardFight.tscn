@@ -7,13 +7,13 @@
 [ext_resource type="Material" uid="uid://c43qdgvsab5kq" path="res://Shaders/Clouds/CloudsStartingMenu.tres" id="8_hm5ka"]
 [ext_resource type="PackedScene" uid="uid://mxfnm7hywo4f" path="res://Scenes/Old/damage_floater.tscn" id="8_yl0qx"]
 [ext_resource type="StyleBox" uid="uid://cbl88p1pms3gq" path="res://Theme/YellowBorderPanel.tres" id="9_umcqi"]
-[ext_resource type="AudioStream" uid="uid://bj4o8xjushlvn" path="res://Assets/Sounds/CardSound.mp3" id="12_xtulq"]
-[ext_resource type="AudioStream" uid="uid://dgx7q2i37ubea" path="res://Assets/Sounds/BurnSound.mp3" id="15_8bqim"]
+[ext_resource type="AudioStream" uid="uid://i74iqvk0qddm" path="res://Assets/Sounds/CardSound.mp3" id="12_xtulq"]
+[ext_resource type="AudioStream" uid="uid://cn48skwuytprm" path="res://Assets/Sounds/BurnSound.mp3" id="15_8bqim"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="16_734e5"]
 [ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scenes/Card_Fight/External_UI/CardHandContainer.gd" id="24_d8sco"]
 [ext_resource type="Script" uid="uid://c1adplamkw577" path="res://Scenes/Card_Fight/CardFightTargetSelection.gd" id="26_712dp"]
 [ext_resource type="Script" uid="uid://bfjh8yj7umbiw" path="res://Scenes/Card_Fight/CardFightDiscardSelection.gd" id="27_rbthh"]
-[ext_resource type="Texture2D" uid="uid://cxurnij711kgj" path="res://Assets/MapElements/plane_γροθνδτεχτ_BaseColor.png" id="32_1im06"]
+[ext_resource type="Texture2D" uid="uid://b3ph2qb17s1h2" path="res://Assets/MapElements/plane_γροθνδτεχτ_BaseColor.png" id="32_1im06"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f2au4"]
 content_margin_left = 10.0

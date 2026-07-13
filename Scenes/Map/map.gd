@@ -173,8 +173,6 @@ func _ready() -> void:
 	set_physics_process(false)
 	$SubViewportContainer.visible = false
 	_ScreenUI.FullScreenToggleStarted.connect(ToggleFullScreen)
-	_Camera.connect("PositionChanged", CamPosChanged)
-	_Camera.connect("ZoomChanged", CamZoomChanged)
 	_InScreenUI.GetInventory().InventoryToggled.connect(HideWorld)
 	MapPointerMan.TargetSelected.connect(MoveTargetSelected)
 	MapPointerMan.TargetSpotSelected.connect(MoveTargetSpotSelected)
@@ -268,10 +266,10 @@ func GetCamera() -> ShipCamera:
 static var CamZoom : float = 1
 static var CamPos : Vector2 = Vector2.ZERO
 
-func CamPosChanged(NewPos : Vector2) -> void:
+func UpdateCameraPosition(NewPos : Vector2) -> void:
 	CamPos = NewPos
 
-func CamZoomChanged(NewZoom : float) -> void:
+func UpdateCameraZoom(NewZoom : float) -> void:
 	CamZoom = NewZoom
 	WorldParent.visible = NewZoom > 0.5
 

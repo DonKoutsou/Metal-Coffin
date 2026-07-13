@@ -2,8 +2,8 @@
 
 [ext_resource type="StyleBox" uid="uid://cbl88p1pms3gq" path="res://Theme/YellowBorderPanel.tres" id="1_1bi2b"]
 [ext_resource type="Script" uid="uid://1ywm6fsk6k6u" path="res://Scenes/Card_Fight/action_declaration.gd" id="2_wov6i"]
-[ext_resource type="AudioStream" uid="uid://b6f41xjveqo8b" path="res://Assets/Sounds/UI_in.mp3" id="3_dlnjb"]
-[ext_resource type="AudioStream" uid="uid://7glxd52yi0hv" path="res://Assets/Sounds/UI_out.mp3" id="4_l1nw6"]
+[ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="3_dlnjb"]
+[ext_resource type="AudioStream" uid="uid://cmalipflqp1uv" path="res://Assets/Sounds/UI_out.mp3" id="4_l1nw6"]
 
 [node name="Action Declaration" type="PanelContainer" unique_id=243662110]
 z_index = 1

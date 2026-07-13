@@ -1,25 +1,25 @@
 [gd_scene format=3 uid="uid://d0ujbu68jgisw"]
 
 [ext_resource type="Script" uid="uid://h6l78xy6duvo" path="res://Scripts/parallax_background.gd" id="1_y52c6"]
-[ext_resource type="Texture2D" uid="uid://daiqqrmr82num" path="res://Assets/TownBackgrounds/IndustrialLayer-2.png" id="2_eg41f"]
-[ext_resource type="Texture2D" uid="uid://dgutk8ry2sqqp" path="res://Assets/smoke_02.png" id="3_kl0cj"]
+[ext_resource type="Texture2D" uid="uid://bvxgotu4e723h" path="res://Assets/TownBackgrounds/IndustrialLayer-2.png" id="2_eg41f"]
+[ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="3_kl0cj"]
 [ext_resource type="Shader" uid="uid://luuysqiab62e" path="res://Scenes/TownShop/Blur.gdshader" id="3_s3kbl"]
-[ext_resource type="Texture2D" uid="uid://6x5a6qg1tf01" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame2.png" id="4_cjb24"]
-[ext_resource type="Texture2D" uid="uid://d341y1ia5ms2h" path="res://Assets/TownBackgrounds/IndustrialLayer-1.png" id="4_coxqh"]
-[ext_resource type="Texture2D" uid="uid://bwif8u3gyantu" path="res://Assets/smoke_09.png" id="5_6jamx"]
-[ext_resource type="Texture2D" uid="uid://c3wlbqusi7y3k" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame3.png" id="5_s3kbl"]
-[ext_resource type="Texture2D" uid="uid://cme53v0ooefwa" path="res://Assets/TownBackgrounds/IndustrialLayer0.png" id="6_iecnu"]
-[ext_resource type="Texture2D" uid="uid://b1v5wi2uqg3d1" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame4.png" id="6_qnoug"]
-[ext_resource type="Texture2D" uid="uid://61y40b6fj4m4" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame5.png" id="7_633vk"]
-[ext_resource type="Texture2D" uid="uid://yxk64ola1nhk" path="res://Assets/TownBackgrounds/IndustrialLayer1.png" id="7_p3jms"]
-[ext_resource type="Texture2D" uid="uid://bbphcu8j0hnrc" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame6.png" id="8_hxouk"]
-[ext_resource type="Texture2D" uid="uid://dj7pjvptun2iq" path="res://Assets/TownBackgrounds/IndustrialLayer2.png" id="8_woovf"]
-[ext_resource type="AudioStream" uid="uid://ufp2v886p70v" path="res://Assets/Sounds/Towns/WindSound.mp3" id="9_eg41f"]
-[ext_resource type="Texture2D" uid="uid://dxvvx3iwfny14" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame7.png" id="9_rn35e"]
-[ext_resource type="Texture2D" uid="uid://ds3wouwsccnqy" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame8.png" id="10_plr8s"]
-[ext_resource type="Texture2D" uid="uid://bf060wydpafym" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame9.png" id="11_xlvej"]
-[ext_resource type="Texture2D" uid="uid://d15th0qd1kpuh" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame10.png" id="12_aelfl"]
-[ext_resource type="Texture2D" uid="uid://gvowmoav76n6" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame11.png" id="13_pee3d"]
+[ext_resource type="Texture2D" uid="uid://d1p7ntae2wlxa" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame2.png" id="4_cjb24"]
+[ext_resource type="Texture2D" uid="uid://dsgqqj48iwm8p" path="res://Assets/TownBackgrounds/IndustrialLayer-1.png" id="4_coxqh"]
+[ext_resource type="Texture2D" uid="uid://de1cx0wwuxx0x" path="res://Assets/smoke_09.png" id="5_6jamx"]
+[ext_resource type="Texture2D" uid="uid://84c6n4dbdx5h" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame3.png" id="5_s3kbl"]
+[ext_resource type="Texture2D" uid="uid://dflyqldu2cv8n" path="res://Assets/TownBackgrounds/IndustrialLayer0.png" id="6_iecnu"]
+[ext_resource type="Texture2D" uid="uid://mkxoebe40ppx" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame4.png" id="6_qnoug"]
+[ext_resource type="Texture2D" uid="uid://s0b48mnwlo4s" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame5.png" id="7_633vk"]
+[ext_resource type="Texture2D" uid="uid://cs0gydlqe7kpf" path="res://Assets/TownBackgrounds/IndustrialLayer1.png" id="7_p3jms"]
+[ext_resource type="Texture2D" uid="uid://urrhkq4j2n8a" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame6.png" id="8_hxouk"]
+[ext_resource type="Texture2D" uid="uid://dss36iha586s1" path="res://Assets/TownBackgrounds/IndustrialLayer2.png" id="8_woovf"]
+[ext_resource type="AudioStream" uid="uid://btfo5jthupm03" path="res://Assets/Sounds/Towns/WindSound.mp3" id="9_eg41f"]
+[ext_resource type="Texture2D" uid="uid://cn7d7fvgc38af" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame7.png" id="9_rn35e"]
+[ext_resource type="Texture2D" uid="uid://cb8bwhtvlo6ig" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame8.png" id="10_plr8s"]
+[ext_resource type="Texture2D" uid="uid://b25b3kqpagiyd" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame9.png" id="11_xlvej"]
+[ext_resource type="Texture2D" uid="uid://chjjt4cq58jan" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame10.png" id="12_aelfl"]
+[ext_resource type="Texture2D" uid="uid://c6q2y8r7ojth2" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame11.png" id="13_pee3d"]
 [ext_resource type="Material" uid="uid://bsqawqp83u5sx" path="res://Shaders/Blur14.tres" id="16_qnoug"]
 [ext_resource type="Material" uid="uid://d2ewn5jt0b25e" path="res://Shaders/Blur10.tres" id="19_633vk"]
 [ext_resource type="Material" uid="uid://0u7e70ufido3" path="res://Shaders/Blur8.tres" id="21_hxouk"]
@@ -69,7 +69,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("13_pee3d")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 8.0
 }]

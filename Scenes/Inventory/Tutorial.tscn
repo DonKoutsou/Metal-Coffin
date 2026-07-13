@@ -1,19 +1,21 @@
 [gd_scene format=3 uid="uid://b8oenywljdoe2"]
 
 [ext_resource type="Script" uid="uid://b3kpitqta8cq6" path="res://Scenes/Inventory/tutorial.gd" id="1_uf1g7"]
-[ext_resource type="AudioStream" uid="uid://b6f41xjveqo8b" path="res://Assets/Sounds/UI_in.mp3" id="2_k6wjy"]
+[ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="2_k6wjy"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="2_xacro"]
-[ext_resource type="AudioStream" uid="uid://7glxd52yi0hv" path="res://Assets/Sounds/UI_out.mp3" id="3_xy5n5"]
+[ext_resource type="AudioStream" uid="uid://cmalipflqp1uv" path="res://Assets/Sounds/UI_out.mp3" id="3_xy5n5"]
 [ext_resource type="Shader" uid="uid://bnlp28msbn21o" path="res://Scenes/GlobalManagers/Tutorial/TutorialFocusArea.gdshader" id="4_0al8q"]
-[ext_resource type="FontFile" uid="uid://cbf5rlpa38bj3" path="res://Fonts/DINEngschriftStd.otf" id="5_xy5n5"]
+[ext_resource type="FontFile" uid="uid://crgk2e3gswnr3" path="res://Fonts/DINEngschriftStd.otf" id="5_xy5n5"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k6wjy"]
 light_mode = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ygs4n"]
 shader = ExtResource("4_0al8q")
-shader_parameter/rect_pos = Vector2(0.475, 0.4)
-shader_parameter/rect_size = Vector2(0, 0)
+shader_parameter/rect1_pos = Vector2(0.25, 0.25)
+shader_parameter/rect1_size = Vector2(0.3, 0.4)
+shader_parameter/rect2_pos = Vector2(0.55, 0.5)
+shader_parameter/rect2_size = Vector2(0.3, 0.3)
 shader_parameter/darkness = 0.50000002375
 shader_parameter/feather = 0.010000000475
 

@@ -7,7 +7,7 @@
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="6_xjf37"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="7_ensoj"]
 [ext_resource type="PackedScene" uid="uid://bnonfp8ywr3vl" path="res://Scenes/Inventory/captain_stat_container.tscn" id="9_n5htp"]
-[ext_resource type="AudioStream" uid="uid://c866lg2xo47bl" path="res://Assets/Sounds/workshop.mp3" id="10_s2njy"]
+[ext_resource type="AudioStream" uid="uid://tc32omtm74y7" path="res://Assets/Sounds/workshop.mp3" id="10_s2njy"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rs5of"]
 content_margin_left = 5.0

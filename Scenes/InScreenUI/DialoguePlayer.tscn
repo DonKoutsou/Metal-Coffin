@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://bn0w6hkd0jgv6" path="res://Scripts/UI/Dialogue_Player.gd" id="1_xcud3"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="2_rodwx"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="3_h75l1"]
-[ext_resource type="Texture2D" uid="uid://bdkhr0sdf64jo" path="res://Assets/artificial-hive.png" id="4_kc08c"]
+[ext_resource type="Texture2D" uid="uid://d2m66tlt5cl4b" path="res://Assets/artificial-hive.png" id="4_kc08c"]
 [ext_resource type="PackedScene" uid="uid://dp5ghsxs3xitl" path="res://Scenes/Dialogue/linetest.tscn" id="5_j0ljn"]
-[ext_resource type="AudioStream" uid="uid://b5e6m5xcjj8wb" path="res://Assets/Sounds/TextSound.mp3" id="5_p12ba"]
+[ext_resource type="AudioStream" uid="uid://bmcuncv0xwe2k" path="res://Assets/Sounds/TextSound.mp3" id="5_p12ba"]
 
 [node name="PanelContainer" type="Control" unique_id=968936853]
 layout_mode = 3

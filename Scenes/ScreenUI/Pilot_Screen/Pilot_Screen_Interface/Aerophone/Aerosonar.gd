@@ -123,7 +123,7 @@ func _updateContacts(ControllerInfo : SonarTargetInfo ,ContactInfo : Array[Sonar
 		
 		var stormvalue = 1 - ease(WeatherManage.GetBiggestStormValue(ControllerInfo.Position, target.Position), 4)
 		#figure out distance, at the end is normalised value. Bigger values means target is closer, means sound signature is stronger
-		var dist = 1 - (ControllerInfo.Position.distance_to(target.Position) / (CurrentSonarRange))
+		var dist = 1 -  ease((ControllerInfo.Position.distance_to(target.Position) / (CurrentSonarRange)), 4)
 		#calculate final signature by applying the distance and storm to the SoundSignature
 		var finalsignature = dist * SounddB * stormvalue
 		if (finalsignature == 0):
@@ -147,6 +147,7 @@ func _updateContacts(ControllerInfo : SonarTargetInfo ,ContactInfo : Array[Sonar
 
 func ContactsUpdated() -> void:
 	var ContactGradient : Image = _contactUpdateThread.wait_to_finish()
+	#print(ContactGradient.get_size())
 	#BaseGrad.gradient = ContactGradient
 	#var Im = BaseGrad.get_image()
 	_contactUpdateThread = null
@@ -159,6 +160,7 @@ func ContactsUpdated() -> void:
 func ContactsToGradient(Contacts : Dictionary[float, float]) -> Gradient:
 	#var g : GradientTexture2D = BaseGrad.duplicate()
 	var gradient = Gradient.new()
+	
 	gradient.remove_point(1)
 	
 	for Index in Contacts.keys().size():

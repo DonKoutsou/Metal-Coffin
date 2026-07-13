@@ -2,13 +2,13 @@
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_ydw5a"]
 [ext_resource type="Script" uid="uid://cgsbkqrd6pbkq" path="res://Scenes/Card_Fight/Ship_Visuals/card_fight_ship_viz_2.gd" id="2_ydw5a"]
-[ext_resource type="Texture2D" uid="uid://bqqxi5kpkvdb5" path="res://Assets/Cards/Arrow.png" id="3_avrvh"]
-[ext_resource type="Texture2D" uid="uid://c6efc2y6xflyc" path="res://Assets/ShipTextures/Ship3_001.png" id="3_mg5jy"]
+[ext_resource type="Texture2D" uid="uid://b870cywtujqjn" path="res://Assets/Cards/Arrow.png" id="3_avrvh"]
+[ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/ShipTextures/Ship3_001.png" id="3_mg5jy"]
 [ext_resource type="StyleBox" uid="uid://cq66xt1psso06" path="res://Theme/GreyPanel.tres" id="4_0orxy"]
 [ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scenes/Card_Fight/External_UI/CardHandContainer.gd" id="4_cmntb"]
-[ext_resource type="Texture2D" uid="uid://dgutk8ry2sqqp" path="res://Assets/smoke_02.png" id="6_wmwbv"]
-[ext_resource type="Texture2D" uid="uid://bwif8u3gyantu" path="res://Assets/smoke_09.png" id="7_cmntb"]
-[ext_resource type="AudioStream" uid="uid://x36530wvqdba" path="res://Assets/Sounds/Explosion.wav" id="8_r755l"]
+[ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="6_wmwbv"]
+[ext_resource type="Texture2D" uid="uid://de1cx0wwuxx0x" path="res://Assets/smoke_09.png" id="7_cmntb"]
+[ext_resource type="AudioStream" uid="uid://iiqji6xlmffd" path="res://Assets/Sounds/Explosion.wav" id="8_r755l"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0orxy"]
 content_margin_left = 5.0

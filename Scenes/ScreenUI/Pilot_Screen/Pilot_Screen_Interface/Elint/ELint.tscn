@@ -3,13 +3,13 @@
 [ext_resource type="Script" uid="uid://fn1kaffx2hk3" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Elint/e_lint.gd" id="1_n0goy"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="2_ca4np"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="3_oilva"]
-[ext_resource type="Texture2D" uid="uid://dmch6syuq4dtd" path="res://Assets/UIPiecies/Elint/transparent/Opacity4.png" id="5_2ueie"]
-[ext_resource type="Texture2D" uid="uid://b4u2mrkevjlxt" path="res://Assets/UIPiecies/Elint/transparent/Opacity17.png" id="5_fn607"]
-[ext_resource type="Texture2D" uid="uid://bg7v7oxyuv58x" path="res://Assets/UIPiecies/Elint/transparent/Opacity16.png" id="6_heli2"]
-[ext_resource type="Texture2D" uid="uid://c5hol5t0a73p3" path="res://Assets/UIPiecies/Elint/transparent/Opacity3.png" id="6_xuume"]
-[ext_resource type="Texture2D" uid="uid://c4mbjo352ubgo" path="res://Assets/UIPiecies/Elint/elintMarkers_Camera 1_FullQuality.png" id="17_bii6e"]
-[ext_resource type="AudioStream" uid="uid://baeo387gdnixa" path="res://Assets/Sounds/beepNoLoop.mp3" id="20_7y4w8"]
-[ext_resource type="AudioStream" uid="uid://cu2vd0ho6rwfm" path="res://Assets/Sounds/alarm_01.wav" id="21_w3va6"]
+[ext_resource type="Texture2D" uid="uid://bbq0mj44rwwoi" path="res://Assets/UIPiecies/Elint/transparent/Opacity4.png" id="5_2ueie"]
+[ext_resource type="Texture2D" uid="uid://bg3txpouwra6w" path="res://Assets/UIPiecies/Elint/transparent/Opacity17.png" id="5_fn607"]
+[ext_resource type="Texture2D" uid="uid://bltupetrpqvj6" path="res://Assets/UIPiecies/Elint/transparent/Opacity16.png" id="6_heli2"]
+[ext_resource type="Texture2D" uid="uid://bup8en533m0y3" path="res://Assets/UIPiecies/Elint/transparent/Opacity3.png" id="6_xuume"]
+[ext_resource type="Texture2D" uid="uid://caq853r3telqr" path="res://Assets/UIPiecies/Elint/elintMarkers_Camera 1_FullQuality.png" id="17_bii6e"]
+[ext_resource type="AudioStream" uid="uid://7crsokjngvxo" path="res://Assets/Sounds/beepNoLoop.mp3" id="20_7y4w8"]
+[ext_resource type="AudioStream" uid="uid://bfi3w55ap7hs7" path="res://Assets/Sounds/alarm_01.wav" id="21_w3va6"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ilvog"]
 light_mode = 1
@@ -29,9 +29,9 @@ offset_bottom = 84.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_n0goy")
-directionMaskFiles = Array[String](["uid://dowcqyn6iow3x", "uid://d30qxxj4xlary", "uid://ctwsbm2u6d6ll", "uid://dmch6syuq4dtd", "uid://c8gnd6jqgk74r", "uid://dttfd7x7b0vx8", "uid://inxbuomyat5c", "uid://dygexoaacwvpg", "uid://dulcbyi3eiu3l", "uid://dxp0wi8qyxog2", "uid://cw1pap746hyo2", "uid://ninlhvpib1o5"])
-distanceMasks = Array[String](["uid://34ji62wwy8yq", "uid://dsmban541ughh", "uid://c5hol5t0a73p3"])
-onOffTextures = Array[String](["uid://c4mbjo352ubgo", "uid://ebrqin4q01s6"])
+directionMaskFiles = Array[String](["uid://bbq0mj44rwwoi", "uid://cb14164lv0llj", "uid://dkcij7ny4cu7b", "uid://dxcvcpth4mg0a", "uid://clxcchncooddj", "uid://ciwckxd5dtjjf", "uid://btqsxpt5xj7wp", "uid://dcjmtvcx08q8m", "uid://bty7v8rw58vvr", "uid://diood1a6g4jfl", "uid://dnk3n5kdplvhn", "uid://dt2affdst26uo"])
+distanceMasks = Array[String](["uid://c0cpyej1sex21", "uid://cxhs4w0i7xmty", "uid://bup8en533m0y3"])
+onOffTextures = Array[String](["uid://caq853r3telqr", "uid://u6qd6o0jhpg4"])
 rangeIndicator = NodePath("RangeIndicator")
 alertLight = NodePath("AlertLight")
 dangerCloseLight = NodePath("DangerCloseLight")

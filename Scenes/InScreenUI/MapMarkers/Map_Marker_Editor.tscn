@@ -22,7 +22,7 @@ corner_radius_bottom_right = 13
 corner_radius_bottom_left = 13
 corner_detail = 6
 
-[node name="MapMarkerEditor" type="Control" unique_id=1132314757]
+[node name="MapMarkerEditor" type="Control" unique_id=1132314757 groups=["CameraPositionAffected", "ZoomAffected"]]
 material = SubResource("CanvasItemMaterial_0ok87")
 layout_mode = 3
 anchors_preset = 15

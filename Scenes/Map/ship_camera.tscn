@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://ch28kdo2pv6ta" path="res://Scenes/Map/weather_manager.tscn" id="7_ph7p1"]
 [ext_resource type="PackedScene" uid="uid://caawadxe1hjwo" path="res://Scenes/Map/topography_map.tscn" id="16_w5jc1"]
 [ext_resource type="PackedScene" uid="uid://boe0re3ai5qdj" path="res://Scenes/Map/dark_blue_background.tscn" id="22_5m85t"]
-[ext_resource type="AudioStream" uid="uid://bq5ennd48voeu" path="res://Assets/Sounds/MetalClick.mp3" id="23_aktxw"]
+[ext_resource type="AudioStream" uid="uid://bw32ea80qadx8" path="res://Assets/Sounds/MetalClick.mp3" id="23_aktxw"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tk0jd"]
 light_mode = 1

@@ -33,13 +33,12 @@ func GetPointInCircle(Point : int, num_points : int = 20) -> Vector2:
 	var angle = float(Point) / float(num_points) * PI * 2.0
 	return Vector2(cos(angle), sin(angle))
 
+var LastPoint : Vector2
 
 func _draw() -> void:
 	var PointAmm = size.x
 	var MidPoint = size / 2
-	
-	var LastPoint : Vector2
-	
+
 	var CurrentOffset = roundi(Offset)
 	
 	var BiggestFind : float = 0
@@ -58,7 +57,7 @@ func _draw() -> void:
 		#sample a noise value
 		var x = wrap(pointX + 0.5 + NoiseOffset, 0, NoiseImage.get_width())
 		var y = wrap(pointY + 0.5 + NoiseOffset, 0, NoiseImage.get_height())
-		var NoiseValue = NoiseImage.get_pixelv(Vector2i(x, y)).r
+		var NoiseValue = Helper.mapvalue(NoiseImage.get_pixelv(Vector2i(x, y)).r, -1 , 1)
 		
 		#var NoiseUvX = wrap((m * NoiseImage.get_width()) + NoiseOffset, 0 , NoiseImage.get_width())
 		#var NoiseValue = NoiseImage.get_pixelv(Vector2i(NoiseUvX, 0)).r
@@ -68,11 +67,11 @@ func _draw() -> void:
 		#Map is  within the gradient range, gradient is from 0.3, to 0.7
 		var MappedSamplePos = Helper.mapvalue(samplepos, 0.3, 0.7)
 		#Sample texture, multiply normalised value with texture width to get pixel
-		var amm : float = ContactGr.get_pixelv(Vector2i(roundi(MappedSamplePos * ContactGr.get_width()), 0)).r * 2
+		var amm : float = ContactGr.get_pixelv(Vector2i(MappedSamplePos * ContactGr.get_width(), 0)).r * 4
 		var mapped_value = 1 + ((g - 1) / (PointAmm)) / PointAmm
 		var roundedmapped = roundi(mapped_value)
 		
-		var stormnoiseValue = (1- CurrentStormValue) * NoiseValue
+		var stormnoiseValue = (1- CurrentStormValue) * NoiseValue 
 		var magnitude = amm - (mapped_value - roundedmapped + NoiseValue + stormnoiseValue)
 
 		var Dif : float = 0
@@ -90,11 +89,11 @@ func _draw() -> void:
 
 		var NewPoint = Vector2(pointX, pointY) + MidPoint
 		var offset = dir * Height
-		#NewPoint += offset
-		if (g > 0):
-			lines.append(LastPoint)
-			lines.append(NewPoint + offset)
+
+		lines.append(LastPoint)
+		lines.append(NewPoint + offset)
 		LastPoint = NewPoint + offset
+		
 		CurrentOffset = wrap(CurrentOffset + 1, 0, 3)
 		
 		var angle = roundi(rad_to_deg(dir.angle()))

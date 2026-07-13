@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://bvqg5vwgfx247"]
 
-[ext_resource type="Texture2D" uid="uid://ofq3c4j8tdes" path="res://Assets/Cards/BarrageReload.png" id="1_p10u3"]
+[ext_resource type="Texture2D" uid="uid://bv3vkwi5obsul" path="res://Assets/Cards/BarrageReload.png" id="1_p10u3"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="2_57tt1"]
 [ext_resource type="Resource" uid="uid://dynb44dpvv7bf" path="res://Resources/Cards/Barrage/Barrage180mm.tres" id="3_p10u3"]
 [ext_resource type="Script" uid="uid://ceqe8h8b7lrlm" path="res://Scenes/Card_Fight/Card/Card_Modules/CardSpawnModule.gd" id="4_dahqf"]

@@ -1,12 +1,12 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://cahnh8igxy48i"]
 
 [ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="1_bwem4"]
-[ext_resource type="Texture2D" uid="uid://0o8p7b3b8vyl" path="res://Assets/Sand/Ground055S_1K-PNG_NormalGL.png" id="2_2m2um"]
-[ext_resource type="Texture2D" uid="uid://bd38upwrq6cdy" path="res://Assets/Sand/Rock062_1K-PNG_NormalGL.png" id="2_bwem4"]
-[ext_resource type="Texture2D" uid="uid://oviytxhbkdkv" path="res://Assets/Sand/Rock062_1K-PNG_Color.png" id="2_h2gtt"]
-[ext_resource type="Texture2D" uid="uid://dwkm7bjn0sv1p" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="3_3o2xh"]
-[ext_resource type="Texture2D" uid="uid://bc5mvcfngqtha" path="res://Assets/Sand/Ice002_1K-PNG_NormalGL.png" id="3_qsscu"]
-[ext_resource type="Texture2D" uid="uid://djfgqyck6mnie" path="res://Assets/Sand/Ice002_1K-PNG_Color.png" id="4_lwqhr"]
+[ext_resource type="Texture2D" uid="uid://bibx4kf5ern4i" path="res://Assets/Sand/Ground055S_1K-PNG_NormalGL.png" id="2_2m2um"]
+[ext_resource type="Texture2D" uid="uid://cuyopb6vo0rnu" path="res://Assets/Sand/Rock062_1K-PNG_NormalGL.png" id="2_bwem4"]
+[ext_resource type="Texture2D" uid="uid://cw03v1o7v0lpp" path="res://Assets/Sand/Rock062_1K-PNG_Color.png" id="2_h2gtt"]
+[ext_resource type="Texture2D" uid="uid://4g7x31f80h3k" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="3_3o2xh"]
+[ext_resource type="Texture2D" uid="uid://blyc50aydat54" path="res://Assets/Sand/Ice002_1K-PNG_NormalGL.png" id="3_qsscu"]
+[ext_resource type="Texture2D" uid="uid://da35h3bxjt6kx" path="res://Assets/Sand/Ice002_1K-PNG_Color.png" id="4_lwqhr"]
 [ext_resource type="Texture2D" uid="uid://bih6x8swa3dhe" path="res://Noises/Ground/TEX_GroundVisualNoiseMask.png" id="5_x3ycm"]
 
 [resource]

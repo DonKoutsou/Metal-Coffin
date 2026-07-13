@@ -17,4 +17,4 @@ shader_parameter/scanlines_opacity = 0.04
 shader_parameter/scanlines_speed = 0.43
 shader_parameter/scanline_thickness = 0.58
 shader_parameter/scanlines_spacing = 0.5
-shader_parameter/static_chromatic_aberration = 0.002000000095
+shader_parameter/static_chromatic_aberration = 0.0010000000475

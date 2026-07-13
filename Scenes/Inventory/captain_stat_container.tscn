@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bnonfp8ywr3vl"]
 
 [ext_resource type="Script" uid="uid://v1gumu5fm5sd" path="res://Scripts/Inventory/captain_stat_container.gd" id="1_gx6im"]
-[ext_resource type="Texture2D" uid="uid://q6mvdsxwii4x" path="res://Assets/CaptainPortraits/Captain1.png" id="2_uviis"]
+[ext_resource type="Texture2D" uid="uid://cabyq8qd4qe5y" path="res://Assets/CaptainPortraits/Captain1.png" id="2_uviis"]
 [ext_resource type="PackedScene" uid="uid://cr6qn30drails" path="res://Scenes/Inventory/inventory_ship_stats.tscn" id="3_qyvw6"]
 [ext_resource type="Script" uid="uid://c407gsr2ima44" path="res://Scripts/Inventory/ship_deck.gd" id="4_7pj6b"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Card_Fight/Card/Card.tscn" id="5_gxgtf"]

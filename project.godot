@@ -88,6 +88,7 @@ DiscardPile=""
 Card=""
 DigitalBouncingButton=""
 Shakable=""
+CameraPositionAffected=""
 
 [gui]
 

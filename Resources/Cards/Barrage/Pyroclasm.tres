@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://by26q40v5vobx"]
 
-[ext_resource type="Texture2D" uid="uid://733n4t3xkns7" path="res://Assets/Cards/Pyroclasm.png" id="1_0qodf"]
+[ext_resource type="Texture2D" uid="uid://cnxsee5g6ie7q" path="res://Assets/Cards/Pyroclasm.png" id="1_0qodf"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="2_jjf80"]
 [ext_resource type="Script" uid="uid://c4p5ur132vdkj" path="res://Scenes/Card_Fight/DamageInfo.gd" id="3_ov2ke"]
 [ext_resource type="Script" uid="uid://kct7kkjke6ao" path="res://Scenes/Card_Fight/Card/Card_Modules/EnergyOffensiveCardModule.gd" id="4_qwt67"]

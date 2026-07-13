@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c2hy2hwaqy0vp" path="res://Scripts/Inventory/UsableItem.gd" id="1_n7ex3"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="1_scnuy"]
-[ext_resource type="Texture2D" uid="uid://b0ocbyaj6shjo" path="res://Assets/Items/Fuel.png" id="1_y6j4i"]
+[ext_resource type="Texture2D" uid="uid://d1yk65ppopgv7" path="res://Assets/Items/Fuel.png" id="1_y6j4i"]
 
 [resource]
 script = ExtResource("1_n7ex3")

@@ -70,7 +70,11 @@ const StatShouldStack : Dictionary = {
 	STATS.MAX_SHIELD : true,
 	STATS.REPAIR_PRICE : true,
 	STATS.AEROSONAR_RANGE : false,
-	STATS.WINDAGE : false
+	STATS.WINDAGE : false,
+	STATS.SOUND_SIGNATURE : true,
+	STATS.SPEED : true,
+	STATS.RANGE : true,
+	STATS.VALUE : true,
 }
 
 static func GetTooltip(Stat : STATS) -> String:

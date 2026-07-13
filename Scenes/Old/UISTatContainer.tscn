@@ -1,15 +1,15 @@
 [gd_scene format=3 uid="uid://carxyijo0mekn"]
 
 [ext_resource type="Script" uid="uid://ba3q2fke1xixb" path="res://Scripts/ui_Stat_container.gd" id="2_yw81g"]
-[ext_resource type="Texture2D" uid="uid://v144frp4htt0" path="res://Assets/UIPiecies/Display_Camera 1.png" id="3_5vvs3"]
-[ext_resource type="Texture2D" uid="uid://cmpboia6us52v" path="res://Assets/UIPiecies/Displayhull_Camera 1.png" id="3_qtl3w"]
-[ext_resource type="Texture2D" uid="uid://drv3dq5g8m3b2" path="res://Assets/UIPiecies/CrewDisplay_Camera 1.png" id="4_5u7pc"]
+[ext_resource type="Texture2D" uid="uid://dmmqxl5mf2mjn" path="res://Assets/UIPiecies/Display_Camera 1.png" id="3_5vvs3"]
+[ext_resource type="Texture2D" uid="uid://dbbyrubuyg3dd" path="res://Assets/UIPiecies/Displayhull_Camera 1.png" id="3_qtl3w"]
+[ext_resource type="Texture2D" uid="uid://dift04metc6c5" path="res://Assets/UIPiecies/CrewDisplay_Camera 1.png" id="4_5u7pc"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="4_ooo48"]
-[ext_resource type="AudioStream" uid="uid://hdu8e3g4yqxo" path="res://Assets/Sounds/Alarm.mp3" id="5_sh16h"]
-[ext_resource type="FontFile" uid="uid://c6hwlc2fgceix" path="res://Fonts/digital-7.ttf" id="7_voacc"]
+[ext_resource type="AudioStream" uid="uid://1m0dd6hxjs7v" path="res://Assets/Sounds/Alarm.mp3" id="5_sh16h"]
+[ext_resource type="FontFile" uid="uid://ble63qtuapau3" path="res://Fonts/digital-7.ttf" id="7_voacc"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="8_6hshm"]
-[ext_resource type="Texture2D" uid="uid://dj37lplomxc8f" path="res://Assets/UIPiecies/Screen/Buttons/Autofill_button_Camera 1.png" id="9_644ma"]
-[ext_resource type="Texture2D" uid="uid://buc3w0byhr5s8" path="res://Assets/UIPiecies/Screen/Buttons/Autofill_button_on_Camera 1.png" id="10_u6875"]
+[ext_resource type="Texture2D" uid="uid://da27xfif878pc" path="res://Assets/UIPiecies/Screen/Buttons/Autofill_button_Camera 1.png" id="9_644ma"]
+[ext_resource type="Texture2D" uid="uid://cxmiuhrg1etpr" path="res://Assets/UIPiecies/Screen/Buttons/Autofill_button_on_Camera 1.png" id="10_u6875"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_75nru"]
 draw_center = false

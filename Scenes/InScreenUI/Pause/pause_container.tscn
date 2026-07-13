@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ciisw7s8eeoi2" path="res://Scenes/InScreenUI/Pause/PauseMenu.gd" id="1_etjji"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="2_wl1jv"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="3_m40rn"]
-[ext_resource type="FontFile" uid="uid://b2yy0s6fyaml0" path="res://Fonts/Play-Bold.ttf" id="4_kqklq"]
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="4_kqklq"]
 [ext_resource type="PackedScene" uid="uid://bb2xsv1qpwei" path="res://Scenes/InScreenUI/Settings/setting_panel.tscn" id="5_qcvvw"]
 [ext_resource type="PackedScene" uid="uid://db0e2caembxle" path="res://Scenes/FlightManual/flight_manual.tscn" id="6_1ia1i"]
 
