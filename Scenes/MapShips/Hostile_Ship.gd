@@ -179,19 +179,22 @@ func Steer(Rotation : float) -> void:
 	var Mat = ShipSprite.material as ShaderMaterial
 	Mat.set_shader_parameter("sprite_rotation", ShipSprite.global_rotation)
 
-	for g in GetDroneDock().DockedDrones:
+	for g in GetDock().GetDockedShips():
 		g.ForceSteer(rotation)
 
 func GetFuelRange() -> float:
 	var Weight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	var fuel = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 	var fuel_ef = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
-	var fleetsize = 1 + GetDroneDock().DockedDrones.size()
+	
+	var docked := GetDock().GetDockedShips()
+	
+	var fleetsize = 1 + docked.size()
 	var total_fuel = fuel
 	var inverse_ef_sum = 1.0 / ((fuel_ef / pow(Weight, 0.5)) * 10)
 	
 	# Group ships fuel and efficiency calculations
-	for g in GetDroneDock().DockedDrones:
+	for g in docked:
 		var ship_fuel = g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 		var ship_efficiency = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
 		var ship_weight = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
@@ -203,13 +206,13 @@ func GetFuelRange() -> float:
 	return total_fuel * effective_efficiency / fleetsize
 
 func IsFuelFull() -> bool:
-	for g in GetDroneDock().DockedDrones:
+	for g in GetDock().GetDockedShips():
 		if (!g.IsFuelFull()):
 			return false
 	return Cpt.IsResourceFull(STAT_CONST.STATS.FUEL_TANK)
 
 func NeedsReload() -> bool:
-	for g in GetDroneDock().DockedDrones:
+	for g in GetDock().GetDockedShips():
 		if (g.NeedsReload()):
 			return true
 	return !Cpt.IsResourceFull(STAT_CONST.STATS.MISSILE_SPACE)
@@ -325,7 +328,7 @@ func FindPursuitPath(Pos : Vector2) -> void:
 
 func SetCurrentPort(P : MapSpot) -> void:
 	CurrentPort = P
-	for g in GetDroneDock().DockedDrones:
+	for g in GetDock().GetDockedShips():
 		g.SetCurrentPort(P)
 
 func RemovePort():
@@ -334,7 +337,7 @@ func RemovePort():
 	#if (CurrentPort == RefuelSpot):
 		#RefuelSpot = null
 	CurrentPort = null
-	for g in GetDroneDock().DockedDrones:
+	for g in GetDock().GetDockedShips():
 		g.CurrentPort = null
 
 func IntersectPusruing() -> Vector2:
@@ -390,15 +393,15 @@ func OnReachedPursuing() -> void:
 	var hostships : Array[MapShip] = []
 	if (Docked):
 		hostships.append(Command)
-		hostships.append_array(Command.GetDroneDock().DockedDrones)
+		hostships.append_array(Command.GetDock().GetDockedShips())
 	else:
 		hostships.append(self)
-		hostships.append_array(GetDroneDock().DockedDrones)
+		hostships.append_array(GetDock().GetDockedShips())
 
 	var Ship : MapShip = PursuingShips[0]
 	if (Ship.Command == null):
 		plships.append(Ship)
-		for g in Ship.GetDroneDock().GetDockedShips():
+		for g in Ship.GetDock().GetDockedShips():
 			if (g is HostileShip):
 				hostships.append(g)
 			else:
@@ -406,7 +409,7 @@ func OnReachedPursuing() -> void:
 	else:
 		var FleetCommander = Ship.Command
 		plships.append(FleetCommander)
-		for g in FleetCommander.GetDroneDock().GetDockedShips():
+		for g in FleetCommander.GetDock().GetDockedShips():
 			if (g is HostileShip):
 				hostships.append(g)
 			else:
@@ -455,7 +458,7 @@ func OnShipSeen(SeenBy : Node2D) -> void:
 		return
 	
 	MapPointerManager.GetInstance().AddShip(self, false, true)
-	for g : HostileShip in GetDroneDock().DockedDrones:
+	for g : HostileShip in GetDock().GetDockedShips():
 		g.VisibleBy.append(SeenBy)
 		MapPointerManager.GetInstance().AddShip(g, false)
 		
@@ -472,7 +475,7 @@ func OnShipUnseen(UnSeenBy : Node2D) -> void:
 		return
 		
 	VisibleBy.erase(UnSeenBy)
-	for g : HostileShip in GetDroneDock().DockedDrones:
+	for g : HostileShip in GetDock().GetDockedShips():
 		g.VisibleBy.erase(UnSeenBy)
 		
 	if (VisibleBy.size() == 0):
@@ -489,7 +492,7 @@ func BodyEnteredBody(Body : Area2D) -> void:
 		var spot = Body.get_parent() as MapSpot
 		SetCurrentPort(spot)
 		spot.OnSpotAproached(self)
-		for g in GetDroneDock().GetDockedShips():
+		for g in GetDock().GetDockedShips():
 			SetCurrentPort(spot)
 			spot.OnSpotAproached(g)
 		if (Path.has(spot.GetSpotName())):
@@ -518,7 +521,7 @@ func BodyLeftBody(Body : Area2D) -> void:
 	if (Body.get_parent() == CurrentPort):
 		if (!Docked):
 			CurrentPort.OnSpotDeparture(self)
-			for g in GetDroneDock().GetDockedShips():
+			for g in GetDock().GetDockedShips():
 				CurrentPort.OnSpotDeparture(g)
 			RemovePort()
 			
@@ -603,7 +606,7 @@ func LoadSaveData(Dat : SD_HostileShip) -> void:
 var Destroyed : bool
 
 func IsDamaged() -> bool:
-	for g in GetDroneDock().DockedDrones:
+	for g in GetDock().GetDockedShips():
 		if (g.IsDamaged()):
 			return true
 	return !Cpt.IsResourceFull(STAT_CONST.STATS.HULL)

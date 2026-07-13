@@ -14,9 +14,43 @@ var TargetLocations : Array[Vector2]
 var TargetShip : MapShip
 var TargetShipPos : Vector2
 
+signal DroneReturning
+
 func  _ready() -> void:
 	super()
+	ShipContoller.GetInstance().RegisterSelf(self)
 	WeatherManage.RegisterShip(self)
+
+func _on_return_sound_trigger_area_entered(area: Area2D) -> void:
+	if (area.get_parent() == TargetShip and CommingBack):
+		RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.APROACHING)
+
+func Regroup(NewCommander : MapShip):
+	AddTargetShip(NewCommander)
+	SetSpeed(GetShipMaxSpeed())
+	#rotation = 0.0
+	CommingBack = true
+	DroneReturning.emit()
+	TargetLocations.clear()
+	#Docked = false
+
+func GetSaveData() -> DroneSaveData:
+	var dat = DroneSaveData.new()
+	dat.CommingBack = CommingBack
+	if (TargetShip != null):
+		dat.RegroupTargetName = TargetShip.GetShipName()
+	dat.Cpt = Cpt
+	dat.Docked = Docked
+	dat.Pos = global_position
+	dat.Rot = global_rotation
+	dat.Speed = GetShipSpeed()
+	dat.RepairParts = Cpt.Repair_Parts
+	dat.TempName = Cpt.TempName
+	dat.Altitude = Altitude
+	for g in GetDock().GetDockedShips():
+		dat.DockedDrones.append(g.GetSaveData())
+
+	return dat
 
 func _exit_tree() -> void:
 	WeatherManage.UnregisterShip(self)
@@ -58,20 +92,27 @@ func Update(delta: float) -> void:
 	
 	var CorrectionExtra : float = 0.0
 	var offset : Vector2
-	if (ShipContoller.AutoCorrectWind and Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) > 0):
+	if (ShipContoller.AutoCorrectWind):
 		offset = GetShipSpeedVec()
 		
 		var Windage = Cpt.GetStatFinalValue(STAT_CONST.STATS.WINDAGE) * 0.0001
 		var SideWindage = Windage * 0.1
 		
+		var neededFuel : float = 0
 		if (offset.length() < WindVector.length() * Windage):
-			CorrectionExtra = (WindVector.length() * Windage) - offset.length()
+			neededFuel = (WindVector.length() * Windage) - offset.length()
+		
+		if (Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) > neededFuel):
 			
-		var sidecorrection = abs(offset.rotated(PI/2).normalized().dot(WindVector.normalized())) * WindVector.length() * SideWindage
-		
-		var frontcorrection = offset.normalized().dot(WindVector.normalized()) * WindVector.length() * Windage
-		
-		offset -= (offset.normalized() * sidecorrection) - (offset.normalized() * frontcorrection)
+			CorrectionExtra = neededFuel
+			
+			var sidecorrection = abs(offset.rotated(PI/2).normalized().dot(WindVector.normalized())) * WindVector.length() * SideWindage
+			
+			var frontcorrection = offset.normalized().dot(WindVector.normalized()) * WindVector.length() * Windage
+			
+			offset -= (offset.normalized() * sidecorrection) - (offset.normalized() * frontcorrection)
+		else:
+			offset = GetShipAffectedSpeedVec()
 		#print("Head wind penalty : {0} - Side wind penalty : {1}".format([snapped(frontcorrection * 10, 0.1), snapped(sidecorrection * 100, 0.1)]))
 	else:
 		offset = GetShipAffectedSpeedVec()
@@ -85,8 +126,8 @@ func Update(delta: float) -> void:
 	if (Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) >= FuelConsumtion):
 		Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, FuelConsumtion)
 	# If not enough on ship syphoon some from drones in dock
-	else: if (GetDroneDock().DronesHaveFuel(FuelConsumtion)):
-		GetDroneDock().SyphonFuelFromDrones(FuelConsumtion)
+	else: if (GetDock().DronesHaveFuel(FuelConsumtion)):
+		GetDock().SyphonFuelFromDrones(FuelConsumtion)
 		#SetFuelShaderRange(GetFuelRange())
 	else:
 		HaltShip()
@@ -114,8 +155,8 @@ func Update(delta: float) -> void:
 			Cap.ConsumeResource(STAT_CONST.STATS.FUEL_TANK,DroneFuelConsumtion)
 		else : if (Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) >= DroneFuelConsumtion):
 			Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, DroneFuelConsumtion)
-		else: if (GetDroneDock().DronesHaveFuel(DroneFuelConsumtion)):
-			GetDroneDock().SyphonFuelFromDrones(DroneFuelConsumtion)
+		else: if (GetDock().DronesHaveFuel(DroneFuelConsumtion)):
+			GetDock().SyphonFuelFromDrones(DroneFuelConsumtion)
 		else:
 			HaltShip()
 			PopUpManager.GetInstance().DoFadeNotif("Your ships have run out of fuel.")
@@ -176,14 +217,14 @@ func _HandleAutoPilot(delta : float) -> void:
 			var Distance = global_position.distance_to(TargetShip.global_position)
 		
 			if (Distance < 30):
-				TargetShip.GetDroneDock().DockDrone(self, true)
-				var MyDroneDock = GetDroneDock()
-				for g in MyDroneDock.DockedDrones:
-					MyDroneDock.UndockDrone(g)
-					TargetShip.GetDroneDock().DockDrone(g, false)
-				for g in MyDroneDock.Captives:
-					MyDroneDock.UndockCaptive(g)
-					TargetShip.GetDroneDock().DockCaptive(g)
+				TargetShip.GetDock().DockDrone(self, true)
+				var MyDock = GetDock()
+				for g in MyDock.DockedShips:
+					MyDock.UndockDrone(g)
+					TargetShip.GetDock().DockDrone(g, false)
+				for g in MyDock.Captives:
+					MyDock.UndockCaptive(g)
+					TargetShip.GetDock().DockCaptive(g)
 
 				CommingBack = false
 				ClearTargetShip()
@@ -241,6 +282,8 @@ func TargetShipDestroyed(_Sh : MapShip) -> void:
 #------------------------------------------------------------
 
 func Steer(Rotation : float) -> void:
+	if (CommingBack or Docked):
+		return
 	StoredSteer = wrap(StoredSteer + (Rotation / 50), -PI, PI)
 	#StoredSteer = wrap(StoredSteer, -PI, PI)
 	var Mat = ShipSprite.material as ShaderMaterial

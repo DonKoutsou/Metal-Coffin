@@ -5,11 +5,11 @@ class_name DroneDockEventHandler
 signal OnDroneArmed(Target : MapShip)
 signal OnDroneDissarmed(Target : MapShip)
 signal OnDroneDirectionChanged(NewDir : float, Target : MapShip)
-signal DroneLaunched(Dr : Drone, Target : MapShip)
-signal DroneAdded(Dr : Drone, Target : MapShip)
-signal DroneDischarged(Dr : Drone)
-signal DroneDocked(Dr : Drone, Target : MapShip)
-signal DroneUndocked(Dr : Drone)
+signal DroneLaunched(Dr : PlayerDrivenShip, Target : MapShip)
+signal DroneAdded(Dr : PlayerDrivenShip, Target : MapShip)
+signal DroneDischarged(Dr : PlayerDrivenShip)
+signal DroneDocked(Dr : PlayerDrivenShip, Target : MapShip)
+signal DroneUndocked(Dr : PlayerDrivenShip)
 signal DroneRangeChanged(NewRange : float, Target : MapShip)
 signal OnDroneDockInstantiated(Target : MapShip)
 
@@ -19,17 +19,17 @@ func DroneArmed(Target : MapShip) -> void:
 	OnDroneArmed.emit(Target)
 func DroneDissarmed(Target : MapShip) -> void:
 	OnDroneDissarmed.emit(Target)
-func OnDroneLaunched(Dr : Drone, Target : MapShip) -> void:
+func OnDroneLaunched(Dr : PlayerDrivenShip, Target : MapShip) -> void:
 	DroneLaunched.emit(Dr, Target)
-func OnDroneAdded(Dr : Drone, Target : MapShip) -> void:
+func OnDroneAdded(Dr : PlayerDrivenShip, Target : MapShip) -> void:
 	DroneAdded.emit(Dr, Target)
-func OnDroneDischarged(Dr : Drone) -> void:
+func OnDroneDischarged(Dr : PlayerDrivenShip) -> void:
 	DroneDischarged.emit(Dr)
 func OnDronRangeChanged(NewRange : float,Target : MapShip) -> void:
 	DroneRangeChanged.emit(NewRange, Target)
-func OnDroneDocked(Dr : Drone, Target : MapShip) -> void:
+func OnDroneDocked(Dr : PlayerDrivenShip, Target : MapShip) -> void:
 	DroneDocked.emit(Dr, Target)
-func OnDroneUnDocked(Dr : Drone, Target : MapShip) -> void:
+func OnDroneUnDocked(Dr : PlayerDrivenShip, Target : MapShip) -> void:
 	DroneUndocked.emit(Dr, Target)
 func OnDockInstanced(Target : MapShip) -> void:
 	OnDroneDockInstantiated.emit(Target)

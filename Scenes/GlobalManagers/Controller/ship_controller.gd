@@ -48,11 +48,11 @@ func _ready() -> void:
 func WindCorrectionToggle(t : bool) -> void:
 	AutoCorrectWind = t
 
-func _onDroneAdded(drone: Drone, target: MapShip) -> void:
+func _onDroneAdded(drone: PlayerDrivenShip, target: MapShip) -> void:
 	if (drone == ControlledShip):
 		ShipControllerEventH.ShipChanged(target)
 
-func _onDroneRemoved(drone: Drone, target: MapShip) -> void:
+func _onDroneRemoved(drone: PlayerDrivenShip, target: MapShip) -> void:
 	if (drone == ControlledShip):
 		ShipControllerEventH.ShipChanged(target)
 
@@ -80,7 +80,7 @@ func SetInitialShip() -> void:
 	ControlledShip.connect("OnShipDestroyed", OnShipDestroyed)
 	ControlledShip.connect("OnShipDamaged", OnShipDamaged)
 	
-	var dock = ControlledShip.GetDroneDock() as DroneDock
+	var dock = ControlledShip.GetDock() as PlayerDock
 	
 	dock.DroneAdded.connect(RefreshUI)
 	dock.DroneRemoved.connect(RefreshUI)
@@ -176,36 +176,45 @@ func RefreshUI() -> void:
 	UIEventH.call_deferred("OnShipUpdated",ControlledShip)
 
 func OnShipDestroyed(Sh : PlayerDrivenShip):
-	if (Sh is PlayerShip):
-		World.GetInstance().call_deferred("GameLost", "Flagship destroyed")
-		Sh.GetDroneDock().ClearAllDrones()
-		return
-	var NewCommander : PlayerDrivenShip
-	if (Sh.GetDroneDock().DockedDrones.size() > 0):
-		NewCommander = Sh.GetDroneDock().DockedDrones[0]
-		Sh.GetDroneDock().UndockDrone(NewCommander)
-		NewCommander.Command = null
-		NewCommander.TargetLocations = Sh.TargetLocations
-		NewCommander.TargetShip = Sh.TargetShip
+	#if (Sh is PlayerShip):
+		#World.GetInstance().call_deferred("GameLost", "Flagship destroyed")
+		#Sh.GetDock().ClearAllDrones()
+		#return
+	#Repartent ships commanded by defeated ship
+	if (Sh.IsCommander()):
+		var NewCommander : PlayerDrivenShip
+		if (Sh.GetDock().GetDockedShips().size() > 0):
+			NewCommander = Sh.GetDock().GetDockedShips()[0]
+			Sh.GetDock().UndockDrone(NewCommander)
+			NewCommander.Command = null
+			NewCommander.TargetLocations = Sh.TargetLocations
+			NewCommander.TargetShip = Sh.TargetShip
 
-		for DockedShip in range(Sh.GetDroneDock().DockedDrones.size() - 1, -1, -1):
-			Sh.GetDroneDock().UndockDrone(Sh.GetDroneDock().DockedDrones[DockedShip])
-			NewCommander.GetDroneDock().DockDrone(Sh.GetDroneDock().DockedDrones[DockedShip])
+			for DockedShip in range(Sh.GetDock().GetDockedShips().size() - 1, -1, -1):
+				Sh.GetDock().UndockDrone(Sh.GetDock().GetDockedShips()[DockedShip])
+				NewCommander.GetDock().DockDrone(Sh.GetDock().GetDockedShips()[DockedShip])
 
-		for Captive in range(Sh.GetDroneDock().Captives.size() - 1, -1, -1):
-			if (NewCommander != null):
-				Sh.GetDroneDock().UndockCaptive(Sh.GetDroneDock().Captives[Captive])
-				NewCommander.GetDroneDock().DockCaptive(Sh.GetDroneDock().Captives[Captive])
-			else:
-				Sh.GetDroneDock().ReleaseCaptive(Captive)
+			for Captive in range(Sh.GetDock().Captives.size() - 1, -1, -1):
+				if (NewCommander != null):
+					Sh.GetDock().UndockCaptive(Sh.GetDock().Captives[Captive])
+					NewCommander.GetDock().DockCaptive(Sh.GetDock().Captives[Captive])
+				else:
+					Sh.GetDock().ReleaseCaptive(Captive)
 
 	AvailableShips.erase(Sh)
+	#Game End condition
+	if (AvailableShips.size() == 0):
+		World.GetInstance().call_deferred("GameLost", "Flagship destroyed")
+		Sh.GetDock().ClearAllDrones()
+		return
 	
+	#If ship was being controlled, change control to new ship
 	if (Sh == ControlledShip):
 		if (Sh.Command != null):
 			ShipControllerEventH.ShipChanged(Sh.Command)
 		else:
 			ShipControllerEventH.ShipChanged(AvailableShips[0])
+
 
 func OnTargetPositionChanged(Pos : Vector2, Add : bool) -> void:
 	if (ControlledShip.Command != null):
@@ -265,10 +274,9 @@ func FrameCamToShip():
 	Map.GetInstance().GetCamera().FrameCamToShip(ControlledShip, 1, false)
 	
 func RegroupPressed() -> void:
-	
-	if (ControlledShip is PlayerShip):
-		PopupManager.GetInstance().DoFadeNotif("Can't merge flagship\nwith other fleets")
-		return
+	#if (ControlledShip is PlayerShip):
+		#PopupManager.GetInstance().DoFadeNotif("Can't merge flagship\nwith other fleets")
+		#return
 	
 	var ShipList = get_tree().get_nodes_in_group("PlayerShips")
 	var CapList : Array[Captain]
@@ -305,43 +313,46 @@ func GetSaveData() -> PlayerSaveData:
 			if g is PlayerShip:
 				pldata.Pos = g.global_position
 				pldata.Rot = g.global_rotation
-				pldata.PlayerFleet = g.GetDroneDock().GetSaveData()
+				pldata.PlayerFleet = g.GetDock().GetSaveData()
 				pldata.Speed = g.GetShipSpeed()
 				pldata.Altitude = g.Altitude
 				pldata.RepairParts = g.Cpt.Repair_Parts
 				pldata.TempName = g.Cpt.TempName
 			else :
 				var FleetData = FleetSaveData.new()
-				if (g is Drone):
-					FleetData.CommanderData = g.GetSaveData()
-				FleetData.DockedShips.append_array(g.GetDroneDock().GetSaveData())
+				FleetData.CommanderData = g.GetSaveData()
+				FleetData.DockedShips.append_array(g.GetDock().GetSaveData())
 				pldata.FleetData.append(FleetData)
 	
 	return pldata
 
 func LoadSaveData(Data : PlayerSaveData) -> void:
+	#Player data
 	var Player = get_tree().get_nodes_in_group("PlayerShips")[0] as PlayerShip
 	Player.SetShipPosition(Data.Pos)
 	Player.ForceSteer(Data.Rot)
 	Player.Cpt.Repair_Parts = Data.RepairParts
 	Player.Cpt.OnCharacterNameChanged(Data.TempName)
-	#WorldView.GetInstance().LoadData(Data.Worldview)
+	
+	#Fleet Data
 	for Ship in Data.PlayerFleet:
 		var DroneScene : PackedScene = ResourceLoader.load(DroneSceneFile)
-		var DockedShip = DroneScene.instantiate() as Drone
+		var DockedShip = DroneScene.instantiate() as PlayerDrivenShip
 		DockedShip.Cpt = Ship.Cpt
 		DockedShip.Cpt.Repair_Parts = Ship.RepairParts
 		DockedShip.Cpt.OnCharacterNameChanged(Ship.TempName)
-		Player.GetDroneDock().AddDrone(DockedShip)
+		Player.GetDock().AddDrone(DockedShip)
 	Player.SetSpeed(Data.Speed)
 	Player.UpdateAltitude(Data.Altitude)
+	
 	var ShipPlecement = Player.get_parent()
 	
-	var RegroupingShips : Dictionary[Drone, String]
+	
+	var RegroupingShips : Dictionary[PlayerDrivenShip, String]
 	
 	for Command in Data.FleetData:
 		var DroneScene : PackedScene = ResourceLoader.load(DroneSceneFile)
-		var CommanderShip = DroneScene.instantiate() as Drone
+		var CommanderShip = DroneScene.instantiate() as PlayerDrivenShip
 		
 		if (Command.CommanderData.CommingBack):
 			RegroupingShips[CommanderShip] = Command.CommanderData.RegroupTargetName
@@ -355,11 +366,11 @@ func LoadSaveData(Data : PlayerSaveData) -> void:
 		CommanderShip.SetSpeed(Command.CommanderData.Speed)
 		CommanderShip.UpdateAltitude(Command.CommanderData.Altitude)
 		for Ship in Command.DockedShips:
-			var DockedShip = DroneScene.instantiate() as Drone
+			var DockedShip = DroneScene.instantiate() as PlayerDrivenShip
 			DockedShip.Cpt = Ship.Cpt
 			DockedShip.Cpt.Repair_Parts = Ship.RepairParts
 			DockedShip.Cpt.OnCharacterNameChanged(Ship.TempName)
-			CommanderShip.GetDroneDock().AddDrone(DockedShip)
+			CommanderShip.GetDock().AddDrone(DockedShip)
 	
 	var AllShips = get_tree().get_nodes_in_group("PlayerShips")
 	for ToRegoup in RegroupingShips:

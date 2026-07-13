@@ -149,7 +149,7 @@ use_parent_material = true
 [node name="ShipMarkerks" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" unique_id=1575678772]
 use_parent_material = true
 
-[node name="CircleDrawer" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" unique_id=1002635144 groups=["ZoomAffected"]]
+[node name="CircleDrawer" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" unique_id=1002635144]
 use_parent_material = true
 script = ExtResource("22_fa7wu")
 ShipControllerEvent = ExtResource("22_n73so")

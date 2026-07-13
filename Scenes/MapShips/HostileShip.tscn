@@ -141,7 +141,7 @@ shader_parameter/sprite_rotation = -1.57
 resource_local_to_scene = true
 radius = 150.0
 
-[node name="HostileShip" unique_id=974765209 node_paths=PackedStringArray("DroneDok") groups=["Enemy"] instance=ExtResource("1_8a48r")]
+[node name="HostileShip" unique_id=974765209 node_paths=PackedStringArray("Dock") groups=["Enemy"] instance=ExtResource("1_8a48r")]
 script = ExtResource("1_dinuw")
 Direction = -1
 ShipName = ""
@@ -149,7 +149,7 @@ Patrol = true
 Convoy = false
 BT = ExtResource("8_w8ob0")
 Cpt = SubResource("Resource_hnpap")
-DroneDok = NodePath("DroneDock")
+Dock = NodePath("DroneDock")
 
 [node name="ColorRect" parent="." index="1" unique_id=1708187202]
 material = SubResource("ShaderMaterial_avs2p")

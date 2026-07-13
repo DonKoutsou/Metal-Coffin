@@ -68,7 +68,7 @@ func CheckIfWorking() -> void:
 		for l in lights:
 			l.visible = false
 
-func _onDroneAdded(_dr : Drone, target : MapShip) -> void:
+func _onDroneAdded(_dr : PlayerDrivenShip, target : MapShip) -> void:
 	if (target == controller):
 		var hasElint = fleetHasElint()
 		toggleElint(hasElint)
@@ -76,7 +76,7 @@ func _onDroneAdded(_dr : Drone, target : MapShip) -> void:
 			for l in lights:
 				l.visible = false
 
-func _onDroneRemoved(_dr : Drone, target : MapShip) -> void:
+func _onDroneRemoved(_dr : PlayerDrivenShip, target : MapShip) -> void:
 	if (target == controller):
 		var hasElint = fleetHasElint()
 		toggleElint(hasElint)
@@ -88,7 +88,7 @@ func fleetHasElint() -> bool:
 	# Check if the currently controlled ship or its docked drones have ELINT
 	if controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT) > 0:
 		return true
-	for c: Captain in controller.GetDroneDock().GetCaptains():
+	for c: Captain in controller.GetDock().GetCaptains():
 		if c.GetStatFinalValue(STAT_CONST.STATS.ELINT) > 0:
 			return true
 	return false

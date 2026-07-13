@@ -205,7 +205,7 @@ func OnSpotAproached(AproachedBy : MapShip) -> void:
 		Map.GetInstance().GetCamera().FrameCamToPos(global_position, 1, false)
 		SpotAproached.emit(self)
 	else:
-		AproachedBy.GetDroneDock()
+		AproachedBy.GetDock()
 	
 	#if haven't arrived before, mark as visited
 	if (!Seen):

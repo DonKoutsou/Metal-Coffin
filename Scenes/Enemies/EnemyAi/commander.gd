@@ -195,8 +195,8 @@ func OnShipDestroyed(Ship : HostileShip) -> void:
 	if (ShipLodCheckList.has(Ship)):
 		ShipLodCheckList.erase(Ship)
 		
-	if (Ship.GetDroneDock().DockedDrones.size() > 0):
-		var NewCommander = Ship.GetDroneDock().DockedDrones[0] as HostileShip
+	if (Ship.GetDock().GetDockedShips().size() > 0):
+		var NewCommander = Ship.GetDock().GetDockedShips()[0] as HostileShip
 		NewCommander.Command = null
 		var BT = Ship.BTree
 		if (BT != null):
@@ -213,11 +213,11 @@ func OnShipDestroyed(Ship : HostileShip) -> void:
 			NewCommander.Path = Ship.Path
 			NewCommander.PathPart = Ship.PathPart
 		var DockedDrones = []
-		DockedDrones.append_array(Ship.GetDroneDock().DockedDrones)
+		DockedDrones.append_array(Ship.GetDock().GetDockedShips())
 		for g in DockedDrones:
-			Ship.GetDroneDock().UndockShip(g)
+			Ship.GetDock().UndockShip(g)
 			if (g != NewCommander):
-				NewCommander.GetDroneDock().DockShip(g)
+				NewCommander.GetDock().DockShip(g)
 
 	var POrdersToErase : Array[PursuitOrder] = []
 	for g in PursuitOrders:

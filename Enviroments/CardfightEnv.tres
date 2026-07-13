@@ -25,6 +25,7 @@ glow_hdr_scale = 4.0
 glow_hdr_luminance_cap = 1.0
 glow_map_strength = 0.0
 adjustment_enabled = true
+adjustment_saturation = 1.1
 adjustment_color_correction = SubResource("GradientTexture1D_uk868")
 
 [resource]

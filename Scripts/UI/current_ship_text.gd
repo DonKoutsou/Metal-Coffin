@@ -62,7 +62,7 @@ func _physics_process(delta: float) -> void:
 		CommanderPanel.ConnectedShip = CurrentCommand
 		Index += 1
 		
-		var DockedShips = CurrentCommand.GetDroneDock().DockedDrones
+		var DockedShips = CurrentCommand.GetDock().GetDockedShips()
 		
 		for Docked in DockedShips:
 			var DockedPanel = PanelLocation.get_child(Index) as CurrentShipPanel

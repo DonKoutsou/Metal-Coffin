@@ -374,7 +374,7 @@ expand_mode = 1
 
 [node name="Line2D" type="Line2D" parent="." unique_id=798469361]
 z_index = 2
-position = Vector2(100, 125)
+position = Vector2(80, 110)
 points = PackedVector2Array(0, 0, 0, 0)
 width = 20.0
 width_curve = SubResource("Curve_58ae4")

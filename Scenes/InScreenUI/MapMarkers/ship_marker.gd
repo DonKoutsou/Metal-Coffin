@@ -81,9 +81,7 @@ func Init(Ship : Node2D) -> void:
 		Ship.AltitudeChanged.connect(AltitudeChanged)
 		#Ship.SonarToggled.connect(ToggleRadarRange)
 		#Ship.SonarDirectionChanged.connect(UpdateRadarDir)
-		
-		if (Ship is Drone):
-			Ship.DroneReturning.connect(DroneReturning)
+		Ship.DroneReturning.connect(DroneReturning)
 		
 		call_deferred("ToggleShipDetails", true)
 		SetMarkerDetails(Ship.Cpt.GetCaptainName(), "F",Ship.GetShipSpeed())

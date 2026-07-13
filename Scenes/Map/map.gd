@@ -204,7 +204,7 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	PlShip.Cpt._GetStat(STAT_CONST.STATS.FUEL_TANK).ConsumeResource(PlShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK) - StartingFuel)
 	if (IsPrologue):
 		for g in PlShip.Cpt.ProvidingCaptains:
-			PlShip.GetDroneDock().AddRecruit(g, false)
+			PlShip.GetDock().AddRecruit(g, false)
 			g._GetStat(STAT_CONST.STATS.FUEL_TANK).ConsumeResource(g.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK) - StartingFuel)
 	
 		var SimulationTrigger = TutorialTrigger.instantiate() as TutTrigger
@@ -290,7 +290,7 @@ func Arrival(Spot : MapSpot) -> void:
 		if (!PlayerShips.has(Ship)):
 			PlayerShips.append(Ship)
 			if (Ship.Command == null):
-				for Docked in Ship.GetDroneDock().GetDockedShips():
+				for Docked in Ship.GetDock().GetDockedShips():
 					if (Docked is MapShip and !PlayerShips.has(Docked)):
 						PlayerShips.append(Docked)
 					else: if (Docked is HostileShip and !HostileShips.has(Docked)):
@@ -302,7 +302,7 @@ func Arrival(Spot : MapSpot) -> void:
 			if (Ship.Convoy):
 				Convoys.append(Ship)
 			if (Ship.Command == null):
-				for Docked in Ship.GetDroneDock().GetDockedShips():
+				for Docked in Ship.GetDock().GetDockedShips():
 					if (!HostileShips.has(Docked)):
 						HostileShips.append(Docked)
 					if (Docked.Convoy):
@@ -320,31 +320,31 @@ func Arrival(Spot : MapSpot) -> void:
 		EnemyMet(PlayerShips, HostileShips, [])
 	#else:
 		#for g in Convoys:
-			#g.Command.GetDroneDock().UndockCaptive(g)
+			#g.Command.GetDock().UndockCaptive(g)
 			#World.GetInstance().PlayerWallet.AddFunds(g.Cpt.ProvidingFunds * 2)
 			#g.Evaporate()
 	#var plships : Array[Node2D] = []
 	#var hostships : Array[Node2D] = []
 	#if (Docked):
 		#hostships.append(Command)
-		#hostships.append_array(Command.GetDroneDock().DockedDrones)
+		#hostships.append_array(Command.GetDock().DockedDrones)
 	#else:
 		#hostships.append(self)
-		#hostships.append_array(GetDroneDock().DockedDrones)
+		#hostships.append_array(GetDock().DockedDrones)
 		#
 	#if (Body.get_parent() is PlayerShip):
 		#var player = Body.get_parent() as PlayerShip
 		#plships.append(player)
-		#plships.append_array(player.GetDroneDock().DockedDrones)
+		#plships.append_array(player.GetDock().DockedDrones)
 	#else:
 		#var drn = Body.get_parent() as Drone
 		#if (drn.Docked):
 			#var player = drn.Command
 			#plships.append(player)
-			#plships.append_array(player.GetDroneDock().DockedDrones)
+			#plships.append_array(player.GetDock().DockedDrones)
 		#else:
 			#plships.append(drn)
-			#plships.append_array(drn.GetDroneDock().DockedDrones)
+			#plships.append_array(drn.GetDock().DockedDrones)
 	#if (ShowingTutorial):
 		#SimulationManager.GetInstance().TogglePause(true)
 		#var DiagText : Array[String] = ["You have reached a place you can land, make sure you stop in time so you can land.", "Landing on different prots allows you to refuel, repair and upgrade you ship and also fine possible recruits"]
@@ -777,7 +777,7 @@ func SpawnSpotFleet(Spot : MapSpot, Patrol : bool, Convoy : bool,  Pos : Vector2
 		if (Fleet.find(f) != 0):
 			Ship.ToggleDocked(true)
 			Ship.Command = SpawnedFleet[0]
-			SpawnedFleet[0].GetDroneDock().call_deferred("DockShip", Ship)
+			SpawnedFleet[0].GetDock().call_deferred("DockShip", Ship)
 	#print("A fleet consisting of {0} was spawned at the port of {1}. Patrol = {2}".format([var_to_str(SpawnedCallsigns), Spot.GetSpotName(), Patrol]))
 	#TempEnemyNames.clear()
 
@@ -799,7 +799,7 @@ func RespawnEnemiesThreaded(EnemyData : Array[Resource]) -> void:
 					com = z
 			ship.ToggleDocked(true)
 			ship.Command = com
-			com.GetDroneDock().call_deferred("DockShip", ship)
+			com.GetDock().call_deferred("DockShip", ship)
 			
 		
 	#call_deferred("FGenerationFinished")

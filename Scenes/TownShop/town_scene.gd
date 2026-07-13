@@ -130,7 +130,7 @@ func OnShipBought(Cap : Captain) -> void:
 			NewCommander = g
 			break
 			
-	var newship = NewCommander.GetDroneDock().AddRecruit(Cap)
+	var newship = NewCommander.GetDock().AddRecruit(Cap)
 	TownSpot.Recruits.erase(Cap)
 	LandedShips.append(newship)
 

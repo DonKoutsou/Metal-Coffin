@@ -1,13 +1,10 @@
-extends Area2D
-class_name DroneDock
+extends BaseDock
+class_name PlayerDock
 #@export var DroneScene : PackedScene
 
 @export var DroneDockEventH : DroneDockEventHandler
 @export_file("*.tscn") var Ship_Scene : String
 @export var CaptainNotif : PackedScene
-
-var DockedDrones : Array[Drone]
-var Captives : Array[HostileShip]
 
 signal DroneAdded
 signal DroneRemoved
@@ -24,44 +21,22 @@ func _ready() -> void:
 	DroneDockEventH.connect("DroneDischarged", DroneDisharged)
 
 func AnyDroneNeedsFuel() -> bool:
-	for g in DockedDrones:
+	for g in DockedShips:
 		if (g.Fuel < 50):
 			return true
 	return false
 
-func DronesHaveFuel(f : float) -> bool:
-	var fuelneeded = f
-	for g in GetDockedShips():
-		fuelneeded -= g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
-		if (fuelneeded <= 0):
-			return true
-	return false
 
-func SyphonFuelFromDrones(amm : float) -> void:
-	for g in GetDockedShips():
-		if (g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) > amm):
-			g.Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, amm)
-			return
-		else:
-			var FuelAmm = g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
-			amm -= FuelAmm
-			g.Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, FuelAmm)
-
-func GetDroneFuel() -> float:
-	var fuel : float = 0
-	for g in DockedDrones:
-		fuel += g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
-	return fuel
 
 func RemoveCaptain(Cap : Captain) -> void:
-	for g in DockedDrones:
+	for g in DockedShips:
 		if (g.Cpt == Cap):
 			UndockDrone(g)
 			g.Kill()
 			return
 
 func ClearAllDrones() -> void:
-	var Drones = DockedDrones.duplicate()
+	var Drones = DockedShips.duplicate()
 	for g in Drones:
 		DroneDisharged(g)
 		g.Kill()
@@ -71,19 +46,11 @@ func ClearAllDrones() -> void:
 
 func GetSaveData() -> Array[DroneSaveData]:
 	var saved : Array[DroneSaveData]
-	for g in DockedDrones:
+	for g in DockedShips:
 		saved.append(g.GetSaveData())
 	#for g in FlyingDrones:
 		#saved.append(g.GetSaveData())
 	return saved
-
-func GetCaptains() -> Array[Captain]:
-	var cptns : Array[Captain]
-	for g in DockedDrones:
-		cptns.append(g.Cpt)
-	#for g in FlyingDrones:
-		#cptns.append(g.Cpt)
-	return cptns
 
 func DroneDisharged(Dr : MapShip):
 
@@ -102,11 +69,11 @@ func AddRecruit(Cpt : Captain, _Notify : bool = true) -> MapShip:
 		#Ingame_UIManager.GetInstance().PlayDiag(["I will be providing my sum of {0} drahma towards the cause captain. Hope it provides a small help in these dire circumstanses".format([Cpt.ProvidingFunds])], Cpt.CaptainPortrait, Cpt.CaptainName)
 	#
 	World.GetInstance().PlayerWallet.AddFunds(Cpt.ProvidingFunds)
-	var ship = (load(Ship_Scene) as PackedScene).instantiate() as Drone
+	var ship = (load(Ship_Scene) as PackedScene).instantiate() as PlayerDrivenShip
 	ship.Cpt = Cpt
 	AddDrone(ship, false)
 	for Crew in Cpt.ProvidingCaptains:
-		var NewShip = (load(Ship_Scene) as PackedScene).instantiate() as Drone
+		var NewShip = (load(Ship_Scene) as PackedScene).instantiate() as PlayerDrivenShip
 		NewShip.Cpt = Crew
 		AddDrone(NewShip, false)
 	return ship
@@ -131,11 +98,7 @@ func ReleaseCaptive(Captive : HostileShip) -> void:
 	Captive.Captured = false
 	Commander.GetInstance().RegisterSelf(Captive)
 
-func GetDockedShips() -> Array[MapShip]:
-	var Ships : Array[MapShip]
-	Ships.append_array(DockedDrones)
-	Ships.append_array(Captives)
-	return Ships
+
 
 func DoCaptiveThing(Captive : HostileShip) -> void:
 	var CaptiveParent = Captive.get_parent()
@@ -147,7 +110,7 @@ func DoCaptiveThing(Captive : HostileShip) -> void:
 
 
 
-func AddDrone(Drne : Drone, Notify : bool = true) -> void:
+func AddDrone(Drne : PlayerDrivenShip, Notify : bool = true) -> void:
 	#var drone = DroneScene.instantiate()
 	if (Notify):
 		var notif = CaptainNotif.instantiate() as CaptainNotification
@@ -182,7 +145,7 @@ func DroneRangeChanged(NewRange : float, Target : MapShip) -> void:
 	if (Target == get_parent()):
 		$Line2D.set_point_position(1, Vector2(NewRange, 0))
 
-func LaunchDrone(Dr : Drone, Target : MapShip) -> void:
+func LaunchDrone(Dr : PlayerDrivenShip, Target : MapShip) -> void:
 	if (Target == get_parent()):
 		var fueltoconsume = $Line2D.get_point_position(1).x / 10 / Dr.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
 		var neededfuel = fueltoconsume - Dr.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
@@ -201,16 +164,16 @@ func LaunchDrone(Dr : Drone, Target : MapShip) -> void:
 		Dr.Cpt.RefillResource(STAT_CONST.STATS.FUEL_TANK, abs(RefilAmm))
 		Dr.EnableDrone()
 
-func AddDroneToHierarchy(drone : Drone):
+func AddDroneToHierarchy(drone : PlayerDrivenShip):
 	get_parent().get_parent().add_child(drone)
 	DockDrone(drone)
 	DroneDockEventH.OnDroneAdded(drone, get_parent())
 
-func DockDrone(drone : Drone, playsound : bool = false):
+func DockDrone(drone : PlayerDrivenShip, playsound : bool = false):
 	if (playsound):
 		RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.LANDING_END)
 	#FlyingDrones.erase(drone)
-	DockedDrones.append(drone)
+	DockedShips.append(drone)
 	#drone.DissableDrone()
 
 	var Command = get_parent() as MapShip
@@ -295,8 +258,8 @@ func UndockCaptive(Captive : HostileShip):
 
 	DroneRemoved.emit()
 
-func UndockDrone(drone : Drone):
-	DockedDrones.erase(drone)
+func UndockDrone(drone : PlayerDrivenShip):
+	DockedShips.erase(drone)
 
 	drone.Command = null
 	drone.ToggleLight(true)

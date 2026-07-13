@@ -36,7 +36,7 @@ func _updateUI() -> void:
 	captainHullLabel.text = "H:%d%%" % roundi(percentHull)
 
 	var droneText := ""
-	for droneCap: Captain in currentShip.GetDroneDock().GetCaptains():
+	for droneCap: Captain in currentShip.GetDock().GetCaptains():
 		var droneHull = droneCap.GetStatCurrentValue(STAT_CONST.STATS.HULL) \
 			/ droneCap.GetStatFinalValue(STAT_CONST.STATS.HULL) * 100
 		var droneFuel = droneCap.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) \
@@ -53,11 +53,11 @@ func _onControlledShipUpdated(newShip: PlayerDrivenShip) -> void:
 
 # --- EVENT HOOKS (CALLBACKS) ---
 
-func _onDroneAdded(_dr: Drone, target: MapShip) -> void:
+func _onDroneAdded(_dr: PlayerDrivenShip, target: MapShip) -> void:
 	if target == controller:
 		_onControlledShipUpdated(controller)
 
-func _onDroneRemoved(_dr: Drone, target: MapShip) -> void:
+func _onDroneRemoved(_dr: PlayerDrivenShip, target: MapShip) -> void:
 	if target == controller:
 		_onControlledShipUpdated(controller)
 

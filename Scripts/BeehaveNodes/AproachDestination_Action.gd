@@ -17,8 +17,8 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 		var MainShipFuelReserves = Cap.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 		var FuelToConsume = 0
 		
-		var DroneD = MainShip.GetDroneDock() as HostileDroneDock
-		for g in DroneD.DockedDrones:
+		var DroneD = MainShip.GetDock() as HostileDroneDock
+		for g in DroneD.GetDockedShips():
 			var Ship = g as HostileShip
 			var DroneCap = Ship.Cpt
 			var droneWeight = DroneCap.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)

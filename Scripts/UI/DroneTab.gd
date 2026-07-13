@@ -10,7 +10,7 @@ var ConnectedShip : MapShip
 
 var DockedDrones : Dictionary
 
-var CurrentlySelectedDrone : Drone
+var CurrentlySelectedDrone : PlayerDrivenShip
 
 var Showing = false
 
@@ -34,21 +34,21 @@ func UpdateConnectedShip(Ship : MapShip) -> void:
 	ConnectedShip = Ship
 	call_deferred("UpdateCrewSelect")
 
-func DroneDisharged(Dr : Drone):
+func DroneDisharged(Dr : PlayerDrivenShip):
 	if (DockedDrones.has(Dr)):
 		DockedDrones.erase(Dr)
 	if (Dr == CurrentlySelectedDrone and Showing):
 		CurrentlySelectedDrone = null
 		call_deferred("UpdateCrewSelect")
 
-func DroneDocked(Dr : Drone, Target : MapShip) -> void:
+func DroneDocked(Dr : PlayerDrivenShip, Target : MapShip) -> void:
 	DockedDrones[Target].append(Dr)
 	#DockedDrones.append(Dr)
 	#visible = DockedDrones.size() > 0
 	if (CurrentlySelectedDrone == null and Showing):
 		call_deferred("UpdateCrewSelect")
 
-func DroneUnDocked(Dr : Drone, Target : MapShip) -> void:
+func DroneUnDocked(Dr : PlayerDrivenShip, Target : MapShip) -> void:
 	DockedDrones[Target].erase(Dr)
 	#visible = DockedDrones.size() > 0
 	

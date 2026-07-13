@@ -29,14 +29,14 @@ func _ready() -> void:
 	#_updateContacts()
 # --- FLEET AND DRONE DOCK MANAGEMENT ---
 
-func _onDroneAdded(_drone: Drone, target: MapShip) -> void:
+func _onDroneAdded(_drone: PlayerDrivenShip, target: MapShip) -> void:
 	if target == controller:
 		CurrentSonarRange = GetFleetSonarRange()
 		var hasSonar = CurrentSonarRange > 0
 		cap.visible = !hasSonar
 		toggleSonar(hasSonar)
 
-func _onDroneRemoved(_drone: Drone, target: MapShip) -> void:
+func _onDroneRemoved(_drone: PlayerDrivenShip, target: MapShip) -> void:
 	if target == controller:
 		CurrentSonarRange = GetFleetSonarRange()
 		var hasSonar = CurrentSonarRange > 0
@@ -63,14 +63,14 @@ func CheckIfWorking() -> void:
 func fleetHasAeroSonar() -> bool:
 	if controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE) > 0:
 		return true
-	for c: Captain in controller.GetDroneDock().GetCaptains():
+	for c: Captain in controller.GetDock().GetCaptains():
 		if c.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE) > 0:
 			return true
 	return false
 
 func GetFleetSonarRange() -> float:
 	var SonarRange : float = controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE)
-	for c: Captain in controller.GetDroneDock().GetCaptains():
+	for c: Captain in controller.GetDock().GetCaptains():
 		var dronerange = c.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE)
 		if dronerange > SonarRange:
 			SonarRange = dronerange
@@ -78,14 +78,14 @@ func GetFleetSonarRange() -> float:
 
 func getCurrentFleetAeroSonarRange() -> float:
 	var maxRange = controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE)
-	for c: Captain in controller.GetDroneDock().GetCaptains():
+	for c: Captain in controller.GetDock().GetCaptains():
 		var testRange = c.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE)
 		if testRange > maxRange:
 			maxRange = testRange
 	return maxRange
 
 func isPartOfFleet(target: Node2D) -> bool:
-	return target == controller or target in controller.GetDroneDock().GetDockedShips()
+	return target == controller or target in controller.GetDock().GetDockedShips()
 
 # --- SONAR PHYSICS AND DETECTION ---
 

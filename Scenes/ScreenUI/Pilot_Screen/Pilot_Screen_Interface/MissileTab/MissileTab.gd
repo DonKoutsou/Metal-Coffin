@@ -94,7 +94,7 @@ func _onControlledShipUpdated(ship: PlayerDrivenShip) -> void:
 			ActionTracker.OnActionCompleted(ActionTracker.Action.MISSILE_TOGGLE)
 			doIntroductionTutorial()
 
-func _onDroneAdded(_drone: Drone, target: MapShip) -> void:
+func _onDroneAdded(_drone: PlayerDrivenShip, target: MapShip) -> void:
 	if target == controller:
 		if armed:
 			dissarmMiss()
@@ -104,7 +104,7 @@ func _onDroneAdded(_drone: Drone, target: MapShip) -> void:
 		if not hasLauncher:
 			_on_turn_off_toggled(false)
 
-func _onDroneRemoved(_drone: Drone, target: MapShip) -> void:
+func _onDroneRemoved(_drone: PlayerDrivenShip, target: MapShip) -> void:
 	if target == controller:
 		if armed:
 			dissarmMiss()
@@ -120,7 +120,7 @@ func updateAvailableMissiles() -> void:
 	var sizeBefore = availableMissiles.size()
 	var missiles: Array[MissileItem] = []
 	missiles.append_array(controller.Cpt.GetCharacterInventory().GetMissile())
-	for ship: PlayerDrivenShip in controller.GetDroneDock().GetDockedShips():
+	for ship: PlayerDrivenShip in controller.GetDock().GetDockedShips():
 		missiles.append_array(ship.Cpt.GetCharacterInventory().GetMissile())
 	availableMissiles = missiles
 	if sizeBefore != availableMissiles.size():

@@ -42,11 +42,12 @@ func _ready() -> void:
 	ControlledShip = ControllerEventHandler.CurrentControlled
 
 
-func UpdateCameraZoom(_NewZoom : float) -> void:
-	CircleDr.queue_redraw()
+func UpdateCameraZoom(NewZoom : float) -> void:
+	CircleDr.UpdateCameraZoom(NewZoom)
 
 func UpdateCameraPosition(_NewPos : Vector2) -> void:
-	CircleDr.queue_redraw()
+	pass
+	#CircleDr.queue_redraw()
 
 func OnControlledShipChanged(Ship : PlayerDrivenShip) -> void:
 	ControlledShip = Ship

@@ -331,6 +331,7 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
 text = "[color=#f35033]FRPW[/color] 1.2"
 fit_content = true
@@ -342,6 +343,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
 text = "[color=#308a4d]SPD[/color] 123"
 fit_content = true
@@ -358,6 +360,7 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
 text = "[color=#6364ff]WGHT[/color] 300"
 fit_content = true
@@ -369,6 +372,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
 text = "[color=#7bb0b4]DEF[/color] 123"
 fit_content = true

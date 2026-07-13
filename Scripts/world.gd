@@ -147,7 +147,7 @@ func _ready() -> void:
 				PlayPrologue()
 			else:
 				var Cardi = Helper.GetInstance().GetSpotByName("Cardi")
-				var Pl = get_tree().get_nodes_in_group("PlayerShips")[0] as PlayerShip
+				var Pl = get_tree().get_nodes_in_group("PlayerShips")[0]
 				Pl.SetShipPosition(Cardi.global_position)
 				Cardi.Event.SkipStory(Pl)
 				Cardi.OnSpotVisited(false)
@@ -260,10 +260,7 @@ func TerminateWorld() -> void:
 	#GetMap().GetInScreenUI().GetInventory().FlushInventory()
 	var PlShips = get_tree().get_nodes_in_group("PlayerShips")
 	for g : MapShip in PlShips:
-		if (g is PlayerShip):
-			InventoryManager.GetInstance().OnCharacterRemoved(g.Cpt)
-		else:
-			g.Kill()
+		g.Kill()
 			
 func GetDialogueProgress() -> DialogueProgressHolder:
 	return $DialogueProgressHolder
@@ -277,9 +274,12 @@ func GetCommander() -> Commander:
 
 #ShipTrade
 func StartShipTrade(ControlledShip : PlayerDrivenShip) -> void:
+	if (get_tree().get_nodes_in_group("FleetSep").size() > 0):
+		ShipSeparationFinished()
+		return
 	SimulationManager.GetInstance().TogglePause(true)
 	var CurrentFleet : Array[PlayerDrivenShip] = [ControlledShip]
-	for S in ControlledShip.GetDroneDock().DockedDrones:
+	for S in ControlledShip.GetDock().DockedShips:
 		CurrentFleet.append(S)
 	
 	if (CurrentFleet.size() == 1):

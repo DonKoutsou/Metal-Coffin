@@ -13,5 +13,5 @@ func OptionResault(_EventOrigin : MapSpot) -> String:
 func OptionOutCome(Instigator : MapShip) -> bool:
 	super(Instigator)
 	if (CheckResault):
-		Instigator.GetDroneDock().AddRecruit(Cpt)
+		Instigator.GetDock().AddRecruit(Cpt)
 	return CheckResault

@@ -12,13 +12,13 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 		print(MainShip.ShipName + " needs repairs")
 		return SUCCESS
 	#var DistanceToDestination = global_position.distance_to(GetCurrentDestination())
-	for g in MainShip.GetDroneDock().DockedDrones:
+	for g in MainShip.GetDock().GetDockedShips():
 		var Ship = g as HostileShip
 		MaxHull += Ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL)
 		Hull += Ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
 	
 	#take the average of to see if condition of all fleet is bad
-	var FleetSize = MainShip.GetDroneDock().DockedDrones.size() + 1
+	var FleetSize = MainShip.GetDock().GetDockedShips().size() + 1
 	MaxHull /= FleetSize
 	Hull /= FleetSize
 	if (MaxHull/3 > Hull):

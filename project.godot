@@ -221,7 +221,6 @@ locale/locale_filter_mode=1
 [rendering]
 
 occlusion_culling/bvh_build_quality=0
-renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
 2d/shadow_atlas/size=128
 textures/default_filters/use_nearest_mipmap_filter=true

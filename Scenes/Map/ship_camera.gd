@@ -26,6 +26,8 @@ var GroundMat : ShaderMaterial
 
 var FocusedShip : PlayerDrivenShip
 # Called when the node enters the scene tree for the first time.
+
+#----------------------------------------------------
 func _ready() -> void:
 	Instance = self
 	
@@ -34,6 +36,7 @@ func _ready() -> void:
 
 	CloudMat.set_shader_parameter("Camera_Offset", global_position / 1500)
 	GroundMat.set_shader_parameter("offset",( global_position / 9000))
+	
 	GroundMap.ChangeOffset((global_position / 9000))
 	WeatherMan.UpdateCameraOffset((global_position / 9000))
 	UIEventHandle.ZoomDialMoved.connect(_HANDLE_ZOOM.bind(false))
@@ -41,6 +44,7 @@ func _ready() -> void:
 	UIEventHandle.XDialMoved.connect(MoveCameraX)
 	UIEventHandle.TopoPressed.connect(ToggleTopo)
 
+#---------------------------------------
 func ToggleTopo(t : bool) -> void:
 	GroundMap.visible = t
 

@@ -15,7 +15,7 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 	MainShip.Cpt.RefillResource(STAT_CONST.STATS.FUEL_TANK, RefuelSpeed)
 	MainShip.Cpt.RefillResource(STAT_CONST.STATS.HULL, RepairSpeed)
 	MainShip.Cpt.RefillResource(STAT_CONST.STATS.MISSILE_SPACE, ReloadSpeed)
-	for g in MainShip.GetDroneDock().DockedDrones:
+	for g in MainShip.GetDock().GetDockedShips():
 		g.Cpt.RefillResource(STAT_CONST.STATS.FUEL_TANK, RefuelSpeed)
 		g.Cpt.RefillResource(STAT_CONST.STATS.HULL, RepairSpeed)
 		g.Cpt.RefillResource(STAT_CONST.STATS.MISSILE_SPACE, ReloadSpeed)

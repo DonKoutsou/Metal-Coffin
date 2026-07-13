@@ -48,7 +48,7 @@ func SetFuelData():
 	PlFuel = LandedShip.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 	PlMaxFuel = LandedShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
 	#var plship = LandedShip as MapShip
-	#var dd = plship.GetDroneDock()
+	#var dd = plship.GetDock()
 	#for g in dd.DockedDrones:
 		#PlMaxFuel += g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
 		#PlFuel += g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
@@ -56,7 +56,7 @@ func SetHullData():
 	PlHull = LandedShip.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
 	PlMaxHull = LandedShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL)
 	#var plship = LandedShip as MapShip
-	#var dd = plship.GetDroneDock()
+	#var dd = plship.GetDock()
 	#for g in dd.DockedDrones:
 		#PlMaxHull += g.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL)
 		#PlHull += g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)

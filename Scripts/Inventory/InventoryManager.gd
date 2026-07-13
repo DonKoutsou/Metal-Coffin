@@ -49,11 +49,11 @@ func ControllerChanged(NewController : PlayerDrivenShip) -> void:
 		var inv : CharacterInventory = _CharacterInventories[g]
 		inv.visible = g in squad
 	
-func OnDroneDocked(_Dr : Drone, Target : MapShip) -> void:
+func OnDroneDocked(_Dr : PlayerDrivenShip, Target : MapShip) -> void:
 	if (Target == controller):
 		ControllerChanged(Target)
 	
-func OnDroneUnDocked(_Dr : Drone, Target : MapShip) -> void:
+func OnDroneUnDocked(_Dr : PlayerDrivenShip, Target : MapShip) -> void:
 	if (Target == controller):
 		ControllerChanged(Target)
 
@@ -83,7 +83,7 @@ func OnMissileLaunched(Mis : Array[MissileItem], _Target : Captain, _User : Capt
 func RemoveItemFromFleet(It : Item, Command : MapShip) -> void:
 	var Captains : Array[Captain] = []
 	Captains.append(Command.Cpt)
-	for g in Command.GetDroneDock().DockedDrones:
+	for g in Command.GetDock().GetDockedShips():
 		Captains.append(g.Cpt)
 	
 	for g in Captains:
@@ -95,7 +95,7 @@ func RemoveItemFromFleet(It : Item, Command : MapShip) -> void:
 func FleetHasSpace(It : Item, Command : MapShip) -> bool:
 	var Captains : Array[Captain] = []
 	Captains.append(Command.Cpt)
-	for g in Command.GetDroneDock().DockedDrones:
+	for g in Command.GetDock().GetDockedShips():
 		Captains.append(g.Cpt)
 	for g in Captains:
 		var Inv = GetCharacterInventory(g)
@@ -106,7 +106,7 @@ func FleetHasSpace(It : Item, Command : MapShip) -> bool:
 func AddItemToFleet(It : Item, Command : MapShip) -> void:
 	var Captains : Array[Captain] = []
 	Captains.append(Command.Cpt)
-	for g in Command.GetDroneDock().DockedDrones:
+	for g in Command.GetDock().GetDockedShips():
 		Captains.append(g.Cpt)
 	
 	for g in Captains:
@@ -118,7 +118,7 @@ func AddItemToFleet(It : Item, Command : MapShip) -> void:
 func GetAllItemsInFleet(Command : MapShip) -> Array[Item]:
 	var Captains : Array[Captain] = []
 	Captains.append(Command.Cpt)
-	for g in Command.GetDroneDock().DockedDrones:
+	for g in Command.GetDock().GetDockedShips():
 		Captains.append(g.Cpt)
 	
 	var Items : Array[Item] = []
@@ -253,7 +253,7 @@ func GetBoxOwner(Box : Inventory_Box) -> Captain:
 				return g
 	return null
 
-func DroneAdded(Dr : Drone, _Target : MapShip):
+func DroneAdded(Dr : PlayerDrivenShip, _Target : MapShip):
 	AddCharacter(Dr.Cpt)
 
 func AddCharacter(Cha : Captain) -> void:

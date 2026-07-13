@@ -73,10 +73,7 @@ func ClusterCalcFinished() -> void:
 	if ClusterTH:
 		var newintersections = ClusterTH.wait_to_finish()
 		ClusterTH = null
-		if (intersections != newintersections):
-			intersections = newintersections
-		else:
-			return
+		intersections = newintersections
 			
 	queue_redraw()
 	

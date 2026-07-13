@@ -38,7 +38,7 @@ radius = 150.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_ogc8b"]
 radius = 0.01
 
-[node name="PlayerShip" unique_id=974765209 node_paths=PackedStringArray("AccelerationAudio", "L", "MissileD", "TrailLines", "SonarShape", "DroneDok") groups=["PlayerShips"] instance=ExtResource("1_phbnr")]
+[node name="PlayerShip" unique_id=974765209 node_paths=PackedStringArray("AccelerationAudio", "L", "MissileD", "TrailLines", "SonarShape", "Dock") groups=["PlayerShips"] instance=ExtResource("1_phbnr")]
 script = ExtResource("1_ekbhy")
 AccelerationAudio = NodePath("AudioStreamPlayer2D")
 L = NodePath("PointLight2D")
@@ -46,7 +46,7 @@ MissileD = NodePath("MissileDock")
 Cpt = ExtResource("3_ogc8b")
 TrailLines = [NodePath("ColorRect/TrailLine"), NodePath("ColorRect/TrailLine2")]
 SonarShape = NodePath("Sonar")
-DroneDok = NodePath("DroneDock")
+Dock = NodePath("DroneDock")
 
 [node name="ColorRect" parent="." index="1" unique_id=1708187202]
 material = SubResource("ShaderMaterial_phbnr")

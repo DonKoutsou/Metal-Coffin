@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://4pq5t6l3c55k"]
 
 [ext_resource type="PackedScene" uid="uid://wtmojbpjfelb" path="res://Scenes/MapShips/Base_MapShip.tscn" id="1_airq3"]
-[ext_resource type="Script" uid="uid://crsatqn78m71w" path="res://Scenes/MapShips/Drone.gd" id="1_vfr1e"]
 [ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/CaptainPortraits/plane_Wheel_BaseColor.png" id="2_qjc7u"]
+[ext_resource type="Script" uid="uid://cj1p2x5gvfvgf" path="res://Scenes/MapShips/player_driven_ship.gd" id="2_vq5gh"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scenes/MapShips/Stats/ShipStat.gd" id="3_2ygm8"]
 [ext_resource type="Shader" uid="uid://cqgk0egpp8vmb" path="res://Shaders/ShipVisualTest.gdshader" id="3_qb3w4"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="4_25k7t"]
@@ -151,14 +151,14 @@ radius = 258.136
 [sub_resource type="CircleShape2D" id="CircleShape2D_d15o2"]
 radius = 0.01
 
-[node name="Drone" unique_id=974765209 node_paths=PackedStringArray("AccelerationAudio", "L", "MissileD", "SonarShape", "DroneDok") groups=["PlayerShips"] instance=ExtResource("1_airq3")]
-script = ExtResource("1_vfr1e")
+[node name="Drone" unique_id=974765209 node_paths=PackedStringArray("AccelerationAudio", "L", "MissileD", "SonarShape", "Dock") groups=["PlayerShips"] instance=ExtResource("1_airq3")]
+script = ExtResource("2_vq5gh")
 AccelerationAudio = NodePath("AudioStreamPlayer2D")
 L = NodePath("PointLight2D")
 MissileD = NodePath("MissileDock")
 Cpt = SubResource("Resource_vq5gh")
 SonarShape = NodePath("Sonar")
-DroneDok = NodePath("DroneDock")
+Dock = NodePath("DroneDock")
 
 [node name="ColorRect" parent="." index="1" unique_id=1708187202]
 material = SubResource("ShaderMaterial_ayxxd")

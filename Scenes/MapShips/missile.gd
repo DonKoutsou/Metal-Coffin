@@ -230,7 +230,7 @@ func _on_missile_body_area_entered(area: Area2D) -> void:
 	var Squad : Array[MapShip]
 	
 	Squad.append(Command)
-	Squad.append_array(Command.GetDroneDock().GetDockedShips())
+	Squad.append_array(Command.GetDock().GetDockedShips())
 	
 	var PlSquad : Array[MapShip]
 	var HostileSquad : Array[MapShip]

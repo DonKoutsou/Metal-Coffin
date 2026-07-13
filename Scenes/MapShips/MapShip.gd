@@ -21,7 +21,7 @@ class_name MapShip
 @export var ElintShape : Elint
 @export var SonarShape : Sonar
 @export var BodyShape : Area2D
-@export var DroneDok : Node2D
+@export var Dock : Node2D
 @export var ShipSprite : Sprite2D
 @export var Acceleration : Node2D	
 #var SimulationSpeed : float = 1
@@ -200,7 +200,7 @@ func SetSpeed(Spd : float) -> void:
 	GetShipAcelerationNode().position.x = Spd / 360
 
 func _HandleLanding(delta : float) -> void:
-	if (GetShipSpeed() == 0):
+	if (GetShipSpeedVec().length() > 0):
 		CurrentLandAltitude = TopographyMap.GetAltitudeAtGlobalPosition(global_position)
 	else:
 		CurrentLandAltitude = TopographyMap.GetAltitudeAtGlobalPosition(global_position) + 200
@@ -249,6 +249,8 @@ func HaltShip():
 var AccelChanged = false
 
 func AccelerationChanged(value: float, forced : bool = false) -> void:
+	if (Docked):
+		return
 	if (value > 0):
 		if (GetFuelRange() <= 0):
 			HaltShip()
@@ -616,7 +618,7 @@ func GetSquaddB() -> float:
 func GetSquad() -> Array[MapShip]:
 	var squad : Array[MapShip]
 	#squad.append(self)
-	squad.append_array(GetDroneDock().GetDockedShips())
+	squad.append_array(GetDock().GetDockedShips())
 	return squad
 
 func GetSquadCaptains() -> Array[Captain]:
@@ -635,8 +637,8 @@ func GetdB() -> float:
 func GetMaxdB() -> float:
 	return GetShipThrust() / 10
 	
-func GetDroneDock():
-	return DroneDok
+func GetDock() -> BaseDock:
+	return Dock
 	
 func IsFuelFull() -> bool:
 	for g in GetSquad():

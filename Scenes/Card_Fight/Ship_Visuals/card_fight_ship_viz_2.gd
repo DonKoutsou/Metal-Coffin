@@ -108,20 +108,8 @@ func _physics_process(_delta: float) -> void:
 	#CurrentCardShown.global_position = get_global_mouse_position() - CurrentCardShown.size
 
 func PositionCard() -> void:
-	var Mpos = get_global_mouse_position() + Vector2(0,50)
-	var VPRect =  get_viewport().get_visible_rect()
-	var DistanceFromDown = VPRect.size.y - get_global_mouse_position().y
-	var DistFromRight = VPRect.size.x - get_global_mouse_position().x
-	var Diff = CurrentCardShown.size.y - DistanceFromDown
-	var Diff2 = CurrentCardShown.size.x - DistFromRight
 	
-	var FinalPos = Mpos
-	if (Diff > 0):
-		FinalPos -= Vector2(0,Diff)
-	if (Diff2 > 0):
-		FinalPos -= Vector2(Diff2,0)
-	
-	CurrentCardShown.global_position = FinalPos
+	CurrentCardShown.global_position = get_viewport_rect().size / 2.0 - CurrentCardShown.size / 2
 
 func Pop(t : bool):
 	var PopTween = create_tween()
@@ -189,13 +177,14 @@ func ActionHovered(C : CardStats, Targets : Array[BattleShipStats]) -> void:
 	
 	var targetlocs : Array[Vector2] = []
 	for g in Targets:
-		var pos = g.ShipViz.ShipIcon.global_position
+		var pos = g.ShipViz.ShipIcon.get_parent().global_position
 		targetlocs.append(pos)
 	
 	CurrentCardShown = ResourceLoader.load(CardScene).instantiate()
 	CurrentCardShown.SetCardBattleStats(Ship ,C)
 	CurrentCardShown.Dissable(true)
 	CurrentCardShown.TargetLocs = targetlocs
+	
 	Ingame_UIManager.GetInstance().add_child(CurrentCardShown)
 	CurrentCardShown.isStatic = true
 	set_physics_process(true)
