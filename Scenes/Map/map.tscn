@@ -8,7 +8,6 @@
 [ext_resource type="Resource" uid="uid://c1buiwym6qkh8" path="res://Resources/Merch/1.EnemySpawnDecider.tres" id="12_m1k6s"]
 [ext_resource type="PackedScene" uid="uid://cja47tyjnyae" path="res://Scenes/InScreenUI/MapMarkers/map_line_drawer.tscn" id="16_sp82o"]
 [ext_resource type="PackedScene" uid="uid://dnjccg1nj4bm6" path="res://Scenes/Map/ship_camera.tscn" id="17_6an1p"]
-[ext_resource type="PackedScene" uid="uid://dhr5epkvjl588" path="res://Scenes/MapShips/player_ship.tscn" id="17_21a23"]
 [ext_resource type="Script" uid="uid://c1kbreeob7tf2" path="res://Scenes/InScreenUI/MapMarkers/map_pointer_manager.gd" id="19_ccpfd"]
 [ext_resource type="PackedScene" uid="uid://c3l8v8l2e2pkt" path="res://Scenes/InScreenUI/MapMarkers/ShipMarker.tscn" id="20_anlpp"]
 [ext_resource type="PackedScene" uid="uid://bgsgcnyyv1gxm" path="res://Scenes/Map/MapSpotMarker.tscn" id="21_oyi6l"]
@@ -109,9 +108,6 @@ z_index = -1
 RoadLines = true
 
 [node name="MapSpots" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/WorldNodes" unique_id=1291599953]
-
-[node name="PlayerShip" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/WorldNodes" unique_id=1170772852 instance=ExtResource("17_21a23")]
-position = Vector2(126.5, 154.5)
 
 [node name="ShipCamera" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" unique_id=1015760443 instance=ExtResource("17_6an1p")]
 

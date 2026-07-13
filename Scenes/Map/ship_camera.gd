@@ -282,7 +282,8 @@ func _physics_process(delta: float) -> void:
 var FrameTween : Tween
 
 func FrameCamToPlayer():
-	var plpos = $"../WorldNodes/PlayerShip".global_position
+	var plShip = get_tree().get_nodes_in_group("PlayerShips")[0]
+	var plpos = plShip.global_position
 	FrameCamToPos(plpos, 6, false)
 
 func FrameCamToPos(pos : Vector2, OverrideTime : float = 1, Unzoom : bool = true) -> void:

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bjsxahv83w2pm" path="res://Scripts/world.gd" id="1_sc0wx"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="3_inc6i"]
 [ext_resource type="PackedScene" uid="uid://o2g164rxtchr" path="res://Scenes/GlobalManagers/Controller/ship_controller.tscn" id="3_w0bku"]
+[ext_resource type="Resource" uid="uid://caroffy3ubxip" path="res://Resources/Captains/PlayerCaptains/Craden.tres" id="4_lqys3"]
 [ext_resource type="Script" uid="uid://db4epchvprg0h" path="res://Scripts/DialogueProgressHolder.gd" id="8_6vv6u"]
 [ext_resource type="PackedScene" uid="uid://ccmwul4ncd4dx" path="res://Scenes/Enemies/commander.tscn" id="10_15dwo"]
 [ext_resource type="PackedScene" uid="uid://cyujmksfffet" path="res://Scenes/Map/map.tscn" id="12_11aq8"]
@@ -49,6 +50,7 @@ PrologueDialgues = Array[String](["Operator we are almost at Cardi.", "Thankfull
 PrologueDialogues2 = Array[String](["Armak is a few days away. Lets be cautious and slowly make our way there.", "Multiple cities exist on the way. Most of them occupied by the regime. We need to make sure not to raise any alarms. Doing so will atract the regime's patrols.", "Lets take it slow and study our every move. One slip and we fall."])
 
 [node name="ShipController" parent="." unique_id=1833243847 instance=ExtResource("3_w0bku")]
+PlayerCaptain = ExtResource("4_lqys3")
 
 [node name="Commander" parent="." unique_id=505803959 instance=ExtResource("10_15dwo")]
 

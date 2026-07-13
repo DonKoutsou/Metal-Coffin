@@ -197,7 +197,8 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	#place player close to first village
 	var pos = firstvilage.global_position
 	pos.y += 500
-	var PlShip = $SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/WorldNodes/PlayerShip as MapShip
+	var PlShip = get_tree().get_nodes_in_group("PlayerShips")[0] as PlayerDrivenShip
+	
 	PlShip.SetShipPosition(pos)
 	#_Camera.FrameCamToPlayer()
 	PlShip.ShipLookAt(firstvilage.global_position)

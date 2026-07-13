@@ -195,7 +195,9 @@ func DrawRuller() -> void:
 		
 		if (Text.length() == 0):
 			continue
-		var TextSize = min(10/CamZoom, vizrange / 10)
+		var TextSize = roundi(min(10/CamZoom, vizrange / 10))
+		if (TextSize <= 0):
+			continue
 		var StringSize = ThemeDB.fallback_font.get_string_size(Text, HORIZONTAL_ALIGNMENT_CENTER, -1, TextSize) / 2
 		StringSize.y *= -0.5
 		var StringOffset = LineStartPos.direction_to(LineEndPos) * TextSize

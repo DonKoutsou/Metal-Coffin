@@ -113,7 +113,7 @@ func _ready() -> void:
 		await wait(1)
 	Loadingscr.UpdateProgress(100)
 	
-	Controller.SetInitialShip()
+	Controller.SpawnInitialShip()
 	UISoundMan.GetInstance().Refresh()
 	await wait(1)
 	WRLD_WorldReady.emit()

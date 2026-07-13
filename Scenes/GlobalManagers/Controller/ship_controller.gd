@@ -7,6 +7,7 @@ class_name ShipContoller
 @export var droneDockEventHandler: DroneDockEventHandler
 @export_file("*.tscn") var CptSelectSceneFile : String
 @export_file("*.tscn") var DroneSceneFile : String
+@export var PlayerCaptain : Captain
 
 var AvailableShips : Array[PlayerDrivenShip] = []
 
@@ -72,9 +73,12 @@ func InitiateFleetSeparation() -> void:
 		Instigator = ControlledShip.Command
 	FleetSeperationRequested.emit(Instigator)
 
-func SetInitialShip() -> void:
-	
-	ControlledShip = get_tree().get_nodes_in_group("PlayerShips")[0]
+func SpawnInitialShip() -> void:
+	var shipScene : PackedScene = ResourceLoader.load(DroneSceneFile)
+	ControlledShip = shipScene.instantiate() as PlayerDrivenShip
+	ControlledShip.Cpt = PlayerCaptain
+	World.GetInstance().GetMap().WorldParent.add_child(ControlledShip)
+
 	ControlledShip.Teleported.connect(UpdatePlayerInfo)
 	InventoryManager.GetInstance().AddCharacter(ControlledShip.Cpt)
 	
