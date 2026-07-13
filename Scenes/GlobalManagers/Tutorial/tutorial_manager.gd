@@ -102,8 +102,6 @@ func OnPrologueFinished() -> void:
 	var C : Array[String]
 	
 	for Ship : PlayerDrivenShip in get_tree().get_nodes_in_group("PlayerShips"):
-		if (Ship is PlayerShip):
-			continue
 		C.append(Ship.Cpt.resource_path)
 	
 	sav.CaptainsInPrologue = C

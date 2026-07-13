@@ -156,7 +156,7 @@ func GetSaveData() -> SaveData:
 	var Data = SD_WeatherMan.new()
 	Data.WindDirection = WindDirection
 	Data.WindSpeed = WindSpeed
-	Data.Offset = N.noise.offset
+	#Data.Offset = N.noise.offset
 	Data.WindDirectionOffset = WindDirectionOffset
 	Data.LastTimeWindChanged = LastTimeWindChanged
 	Sav.Datas.append(Data)
@@ -167,5 +167,5 @@ func LoadSaveData(Data : SD_WeatherMan) -> void:
 	WindSpeed = Data.WindSpeed
 	WindDirectionOffset = Data.WindDirectionOffset
 	LastTimeWindChanged = Data.LastTimeWindChanged
-	N.noise.offset = Data.Offset
+	#N.noise.offset = Data.Offset
 	#tx = texture.get_image()

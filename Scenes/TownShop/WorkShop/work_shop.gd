@@ -520,9 +520,9 @@ func _on_cancel_button_pressed() -> void:
 		g.queue_free()
 
 func _on_sell_pressed() -> void:
-	if (CurrentShip is PlayerShip):
-		PopUpManager.GetInstance().DoFadeNotif("Flagship can't be sold")
-		return
+	#if (CurrentShip is PlayerShip):
+		#PopUpManager.GetInstance().DoFadeNotif("Flagship can't be sold")
+		#return
 	var s = PopUpManager.GetInstance().DoConfirm("Sell ship?", "Yes", null)
 	s.Sign.connect(SellConfirmed)
 

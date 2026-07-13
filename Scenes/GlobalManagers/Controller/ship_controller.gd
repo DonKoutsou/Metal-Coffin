@@ -315,57 +315,44 @@ func GetSaveData() -> PlayerSaveData:
 	#pldata.Worldview = WorldView.GetInstance().GetSaveData()
 	for g : PlayerDrivenShip in Ships:
 		if (g.Command == null):
-			if g is PlayerShip:
-				pldata.Pos = g.global_position
-				pldata.Rot = g.global_rotation
-				pldata.PlayerFleet = g.GetDock().GetSaveData()
-				pldata.Speed = g.GetShipSpeed()
-				pldata.Altitude = g.Altitude
-				pldata.RepairParts = g.Cpt.Repair_Parts
-				pldata.TempName = g.Cpt.TempName
-			else :
-				var FleetData = FleetSaveData.new()
-				FleetData.CommanderData = g.GetSaveData()
-				FleetData.DockedShips.append_array(g.GetDock().GetSaveData())
-				pldata.FleetData.append(FleetData)
+			#if g is PlayerShip:
+				#pldata.Pos = g.global_position
+				#pldata.Rot = g.global_rotation
+				#pldata.PlayerFleet = g.GetDock().GetSaveData()
+				#pldata.Speed = g.GetShipSpeed()
+				#pldata.Altitude = g.Altitude
+				#pldata.RepairParts = g.Cpt.Repair_Parts
+				#pldata.TempName = g.Cpt.TempName
+			#else :
+			var FleetData = FleetSaveData.new()
+			FleetData.CommanderData = g.GetSaveData()
+			FleetData.DockedShips.append_array(g.GetDock().GetSaveData())
+			pldata.FleetData.append(FleetData)
 	
 	return pldata
 
 func LoadSaveData(Data : PlayerSaveData) -> void:
-	#Player data
-	var Player = get_tree().get_nodes_in_group("PlayerShips")[0] as PlayerShip
-	Player.SetShipPosition(Data.Pos)
-	Player.ForceSteer(Data.Rot)
-	Player.Cpt.Repair_Parts = Data.RepairParts
-	Player.Cpt.OnCharacterNameChanged(Data.TempName)
-	
-	#Fleet Data
-	for Ship in Data.PlayerFleet:
-		var DroneScene : PackedScene = ResourceLoader.load(DroneSceneFile)
-		var DockedShip = DroneScene.instantiate() as PlayerDrivenShip
-		DockedShip.Cpt = Ship.Cpt
-		DockedShip.Cpt.Repair_Parts = Ship.RepairParts
-		DockedShip.Cpt.OnCharacterNameChanged(Ship.TempName)
-		Player.GetDock().AddShip(DockedShip)
-	Player.SetSpeed(Data.Speed)
-	Player.UpdateAltitude(Data.Altitude)
-	
-	var ShipPlecement = Player.get_parent()
-	
-	
 	var RegroupingShips : Dictionary[PlayerDrivenShip, String]
+	var ShipPlecement = World.GetInstance().GetMap().WorldParent
 	
-	for Command in Data.FleetData:
-		var DroneScene : PackedScene = ResourceLoader.load(DroneSceneFile)
-		var CommanderShip = DroneScene.instantiate() as PlayerDrivenShip
+	var DroneScene : PackedScene = ResourceLoader.load(DroneSceneFile)
+	
+	for CommandIndex in Data.FleetData.size():
+		var Command = Data.FleetData[CommandIndex]
+		var CommanderShip : PlayerDrivenShip
+		if (CommandIndex == 0):
+			CommanderShip = get_tree().get_nodes_in_group("PlayerShips")[0]
+		else:
+			CommanderShip = DroneScene.instantiate() as PlayerDrivenShip
+			CommanderShip.Cpt = Command.CommanderData.Cpt
+			ShipPlecement.add_child(CommanderShip)
 		
 		if (Command.CommanderData.CommingBack):
 			RegroupingShips[CommanderShip] = Command.CommanderData.RegroupTargetName
 
-		CommanderShip.Cpt = Command.CommanderData.Cpt
 		CommanderShip.Cpt.Repair_Parts = Command.CommanderData.RepairParts
 		CommanderShip.Cpt.OnCharacterNameChanged(Command.CommanderData.TempName)
-		ShipPlecement.add_child(CommanderShip)
+		
 		CommanderShip.SetShipPosition(Command.CommanderData.Pos)
 		CommanderShip.ForceSteer(Command.CommanderData.Rot)
 		CommanderShip.SetSpeed(Command.CommanderData.Speed)

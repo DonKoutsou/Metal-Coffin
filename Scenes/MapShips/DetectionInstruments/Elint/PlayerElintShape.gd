@@ -9,6 +9,6 @@ func BodyEnteredElint(Body: Area2D) -> void:
 	
 	
 func BodyLeftElint(Body: Area2D) -> void:
-	if (Body.get_parent() is PlayerShip):
+	if (Body.get_parent() is PlayerDrivenShip):
 		return
 	super(Body)
