@@ -85,6 +85,7 @@ func Update(delta: float) -> void:
 	#CurrentOffset -= Vector2(WindDirection.x, WindDirection.y) * (delta * 0.01) * (WindSpeed * 0.005)
 	#Mat.set_shader_parameter("offset", CurrentOffset + CurrentCamOffset)
 	N.noise.offset -= Vector3(WindDirection.x, WindDirection.y, 0) * delta * (WindSpeed * 0.005)
+	N.noise.offset += Vector3(0,0,0.5) * delta
 	N.noise.fractal_gain = clamp(N.noise.fractal_gain + randf_range(-0.02, 0.02) * (delta * 0.1), -10, 10)
 	N.noise.fractal_lacunarity = clamp(N.noise.fractal_gain + randf_range(-0.02, 0.02) * (delta * 0.1), 2, 4)
 	
@@ -156,7 +157,7 @@ func GetSaveData() -> SaveData:
 	var Data = SD_WeatherMan.new()
 	Data.WindDirection = WindDirection
 	Data.WindSpeed = WindSpeed
-	#Data.Offset = N.noise.offset
+	Data.Offset = N.noise.offset
 	Data.WindDirectionOffset = WindDirectionOffset
 	Data.LastTimeWindChanged = LastTimeWindChanged
 	Sav.Datas.append(Data)
@@ -167,5 +168,5 @@ func LoadSaveData(Data : SD_WeatherMan) -> void:
 	WindSpeed = Data.WindSpeed
 	WindDirectionOffset = Data.WindDirectionOffset
 	LastTimeWindChanged = Data.LastTimeWindChanged
-	#N.noise.offset = Data.Offset
+	N.noise.offset = Data.Offset
 	#tx = texture.get_image()
