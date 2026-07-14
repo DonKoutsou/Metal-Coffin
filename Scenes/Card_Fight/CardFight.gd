@@ -225,7 +225,7 @@ func CreateDecks() -> void:
 	Ships.append_array(EnemyReserves)
 	for g in Ships:
 		var D = Deck.new()
-
+		
 		D.DeckPile.append_array(g.Cards)
 		#Create Hand
 		D.DeckPile.shuffle()
@@ -242,8 +242,10 @@ func CreateDecks() -> void:
 		
 		g.deck = D
 		D.Shuffling.connect(OnShuffling)
-		D.DiscardChanged.connect(DiscardPileChanged)
-		D.PileChanged.connect(DeckPileChanged)
+		if (IsShipFriendly(g)):
+			D.friendly = true
+			D.DiscardChanged.connect(DiscardPileChanged)
+			D.PileChanged.connect(DeckPileChanged)
 		D.OnCardDrawn.connect(CardDrawn)
 		D.MultiCardDrawn.connect(MultiCardDrawn)
 		D.MultiSpecificDrawn.connect(MultiSpcificCardDrawn)
@@ -858,6 +860,12 @@ func FireDamageFinished() -> void:
 ##----------------------------------------------------------------------##
 func PerformActions(Ship : BattleShipStats) -> void:
 	#var ActionsToBurn : Array[CardFightAction]
+	var ShipActions = ActionList.GetShipsActions(Ship)
+	
+	if (ShipActions.size() == 0):
+		PerformTurnFinished(Ship)
+		return
+		
 	await Ship.ShipViz.Pop(true)
 	#viz.Enable()
 	PerformNextActionForShip(Ship, 0)

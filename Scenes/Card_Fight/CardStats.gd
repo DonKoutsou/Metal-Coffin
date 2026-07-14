@@ -79,6 +79,37 @@ func GetBattleDescription(User : BattleShipStats) -> String:
 func IsSame(C : CardStats) -> bool:
 	return C.GetCardName() == GetCardName()
 
+static func FindTooltips(card : CardStats) -> PackedStringArray:
+	var desc = card.GetDescription()
+	var words = strip_bbcode(desc.remove_chars("\n")).split(" ")
+	var tips : PackedStringArray = []
+	
+	for g in words:
+		if (ToolTips.has(g)):
+			tips.append(ToolTips[g])
+			
+	if (desc.find("On Use") > 0):
+		tips.append(ToolTips["ONUSE"])
+	if (desc.find("On Counter") > 0):
+		tips.append(ToolTips["ONCOUNTER"])
+	if (desc.find("On Hit") > 0):
+		tips.append(ToolTips["ONHIT"])
+		
+	return tips
+
+static func strip_bbcode(source:String) -> String:
+	var regex = RegEx.new()
+	regex.compile("\\[.+?\\]")
+	return regex.sub(source, "", true)
+
+const ToolTips : Dictionary[String, String] = {
+	"fire" : "[color=#ff3c22]Fire[/color] damages the ship one per turn until extinguished",
+	"fires" : "[color=#ff3c22]Fire[/color] damages the ship one per turn until extinguished",
+	"ONUSE" : "[color=#ffc315]On Use[/color] effects are performed the moment the card is played",
+	"ONCOUNTER" : "[color=#ffc315]On Counter[/color] effects are applied on successfull counters",
+	"ONHIT" : "[color=#ffc315]On Hit[/color] effects are applied once the atack lands"
+}
+
 enum WeaponType{
 	NONE,
 	MG_100mm,

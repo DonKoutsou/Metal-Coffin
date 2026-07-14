@@ -112,7 +112,7 @@ func ProcessLODList() -> void:
 		
 		for Pl in PlayerShips:
 			var distSq = ShipPos.distance_squared_to(Pl.global_position)
-			if (distSq < (SimulationRange * SimulationRange) / 2.0):
+			if (distSq < (SimulationRange * SimulationRange) / 4.0):
 				lod = 0
 				break
 			else: if (distSq < SimulationRange * SimulationRange):

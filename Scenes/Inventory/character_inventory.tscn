@@ -74,6 +74,7 @@ theme_override_fonts/font = ExtResource("5_c3lfk")
 theme_override_font_sizes/font_size = 22
 icon = ExtResource("6_j2tgv")
 icon_alignment = 1
+expand_icon = true
 
 [node name="Deck" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=755038022 groups=["DigitalBouncingButton"]]
 layout_mode = 2
@@ -82,6 +83,7 @@ theme_override_fonts/font = ExtResource("5_c3lfk")
 theme_override_font_sizes/font_size = 22
 icon = ExtResource("6_w6jla")
 icon_alignment = 1
+expand_icon = true
 
 [node name="InventoryVisToggle" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=2138011353 groups=["DigitalBouncingButton"]]
 layout_mode = 2

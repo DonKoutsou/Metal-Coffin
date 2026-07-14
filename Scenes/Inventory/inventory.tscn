@@ -85,6 +85,7 @@ layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer" unique_id=85486460]
 custom_minimum_size = Vector2(300, 0)
+clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_n1gkd")

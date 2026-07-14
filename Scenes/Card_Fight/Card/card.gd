@@ -13,6 +13,8 @@ class_name Card
 @export var BackSide : Control
 @export var Line : Line2D
 @export var AmmountLabel : Label
+@export var TooltipPos : Control
+@export var TooltipScene : PackedScene
 
 @export var RealisticFont : Font
 
@@ -268,13 +270,22 @@ func _on_button_mouse_entered() -> void:
 	
 	TweenHover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC).set_parallel(true)
 	TweenHover.tween_property(self,"scale", Vector2(1.1, 1.1), 0.55)
+	
+	#TooltipPos.rotation = -rotation
+	var tips = CardStats.FindTooltips(CStats)
+	for g in tips:
+		var tip : Control = TooltipScene.instantiate()
+		tip.get_child(0).text = g
+		TooltipPos.add_child(tip)
+		tip.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		
 	#TrackMouse = true
 
 func _on_button_mouse_exited() -> void:
 	z_index = 0
 	if (TweenHover and TweenHover.is_running()):
 		TweenHover.kill()
-
+	
 	TweenHover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
 	TweenHover.tween_property(self,"scale", Vector2.ONE, 0.55)
 	#TrackMouse = false
@@ -286,6 +297,9 @@ func _on_button_mouse_exited() -> void:
 	var currenty = mat.get_shader_parameter("y_rot")
 	var currentx = mat.get_shader_parameter("x_rot")
 	dirTw.tween_method(SetCardDiretion, Vector2(currentx, currenty), Vector2(0, 0), 0.25)
+	
+	for g in TooltipPos.get_children():
+		g.queue_free()
 
 func SetCardDiretion(dir : Vector2) -> void:
 	mat.set_shader_parameter("y_rot", dir.y)

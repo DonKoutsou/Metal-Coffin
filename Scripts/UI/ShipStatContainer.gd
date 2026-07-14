@@ -18,9 +18,9 @@ var Metric = ""
 var Tooltip : Control
 
 func _ready() -> void:
-	set_physics_process(false)
+	set_process(false)
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	PositionTooltip()
 
 func PositionTooltip() -> void:
@@ -103,8 +103,8 @@ func _on_mouse_entered() -> void:
 	Tooltip.get_child(0).text = "[color=#ffc315][font_size=22]{0}[/font_size][/color]\n{1}".format([STAT_CONST.STATS.keys()[STName].replace("_", " ") ,STAT_CONST.GetTooltip(STName)])
 	
 	PositionTooltip()
-	set_physics_process(true)
+	set_process(true)
 
 func _on_mouse_exited() -> void:
 	Tooltip.queue_free()
-	set_physics_process(false)
+	set_process(false)

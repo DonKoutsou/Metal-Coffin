@@ -7,6 +7,7 @@ var Hand : Array[CardStats]
 var DiscardPile : Array[CardStats]
 
 var isShuffling : bool = false
+var friendly : bool = false
 
 signal Shuffling(t : bool)
 signal PileChanged(t : bool)
@@ -113,15 +114,18 @@ func TestCard(Mod : CardStats, testType : CardStats.CardType) -> bool:
 	return Mod.Type == testType
 
 func DiscardCard(C : CardStats) -> void:
-	PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
+	if (friendly):
+		PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
 	DiscardPile.append(C)
 	C.EnergyReduction = 0
 	DiscardChanged.emit(true)
 
 func ShuffleDiscardedIntoDeck(DoAnim : bool = true) -> void:
+	if (friendly):
+		PopUpManager.GetInstance().DoFadeNotif("Shuffling Deck")
 	isShuffling = true
 	Shuffling.emit(true)
-	PopUpManager.GetInstance().DoFadeNotif("Shuffling Deck")
+	
 	if (DoAnim):
 		for g in DiscardPile.size():
 			await Helper.GetInstance().wait(0.05)
