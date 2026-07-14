@@ -167,6 +167,7 @@ void fragment(){
 	vec2 pos = Warp(FRAGCOORD.xy / (1.0 / SCREEN_PIXEL_SIZE).xy);
 
 	COLOR.rgb = texture(SCREEN_TEXTURE, pos).rgb * Mask(FRAGCOORD.xy);
+	//COLOR.rgb = texture(SCREEN_TEXTURE, pos).rgb;
 	//COLOR.rgb = Tri(pos, SCREEN_TEXTURE) * Mask(FRAGCOORD.xy);
 	vec2 look = pos;
 	float window = 1.0 / (1.0 + 20.0 * pow(look.y - mod(TIME / 4.0, 1.0), 2.0)) * image_flicker;

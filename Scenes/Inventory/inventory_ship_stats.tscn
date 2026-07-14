@@ -32,7 +32,7 @@ corner_radius_bottom_left = 6
 corner_detail = 1
 
 [node name="InventoryShipStats" type="VBoxContainer" unique_id=826388942]
-offset_right = 299.0
+offset_right = 303.0
 offset_bottom = 20.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -55,6 +55,7 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
 theme_override_constants/separation = 20
+alignment = 1
 
 [node name="Panel2" type="Panel" parent="Legend/VBoxContainer/HBoxContainer" unique_id=1456020470]
 custom_minimum_size = Vector2(15, 15)
@@ -67,12 +68,15 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 16
 text = "Base Stats"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Legend/VBoxContainer" unique_id=54657979]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
 theme_override_constants/separation = 20
+alignment = 1
 
 [node name="Panel" type="Panel" parent="Legend/VBoxContainer/HBoxContainer2" unique_id=815045265]
 custom_minimum_size = Vector2(15, 15)
@@ -84,6 +88,8 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_hwjun")
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Ship Part Buffs"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="GridContainer" type="GridContainer" parent="." unique_id=1698529357]
 layout_mode = 2

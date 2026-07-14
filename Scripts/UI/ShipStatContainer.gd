@@ -26,13 +26,14 @@ func _physics_process(_delta: float) -> void:
 func PositionTooltip() -> void:
 	var Mpos = get_global_mouse_position() 
 	var VPRect =  get_viewport().get_visible_rect()
-	var DistanceFromDown = VPRect.size.y - get_global_mouse_position().y
-	var DistFromRight = VPRect.size.x - get_global_mouse_position().x
-	var Diff = Tooltip.size.y - DistanceFromDown
+	Mpos -= Vector2(0, Tooltip.size.y)
+	var DistanceFromTop = Mpos.y
+	var DistFromRight = VPRect.size.x - Mpos.x
+	var Diff = DistanceFromTop
 	var Diff2 = Tooltip.size.x - DistFromRight
 	
 	var FinalPos = Mpos
-	if (Diff > 0):
+	if (Diff < 0):
 		FinalPos -= Vector2(0,Diff)
 	if (Diff2 > 0):
 		FinalPos -= Vector2(Diff2,0)
@@ -96,11 +97,10 @@ func _on_mouse_entered() -> void:
 	var tipscene : PackedScene = ResourceLoader.load(Tooltipscene)
 	Tooltip = tipscene.instantiate()
 	
+	Tooltip.global_position = get_global_mouse_position() - Vector2(0, Tooltip.size.y)
 	Ingame_UIManager.GetInstance().add_child(Tooltip)
 	Tooltip.set_deferred("size", Vector2(Tooltip.size.x,0))
-	Tooltip.get_child(0).text = STAT_CONST.GetTooltip(STName)
-	
-	Tooltip.global_position = get_global_mouse_position()
+	Tooltip.get_child(0).text = "[color=#ffc315][font_size=22]{0}[/font_size][/color]\n{1}".format([STAT_CONST.STATS.keys()[STName].replace("_", " ") ,STAT_CONST.GetTooltip(STName)])
 	
 	PositionTooltip()
 	set_physics_process(true)

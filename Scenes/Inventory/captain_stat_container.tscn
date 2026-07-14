@@ -34,7 +34,6 @@ ShipDeck = NodePath("PanelContainer/ShipDeck")
 CaptainIcon = NodePath("PanelContainer/CaptainIcon")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=383408915]
-clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_12j2j")

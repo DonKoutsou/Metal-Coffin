@@ -42,6 +42,8 @@ func ToggleEnemyDebug(t : bool) -> void:
 			if (g.VisibleBy.size() == 0):
 				MapPointerManager.GetInstance().RemoveShip(g)
 
+var lastdelta : float
+var secondLodProcessing : bool = false
 func Update(delta: float) -> void:
 	
 	CheckAlarm()
@@ -51,8 +53,18 @@ func Update(delta: float) -> void:
 	$BeehaveTree.Process_Tree()
 	for g in Fleet:
 		if (!g.Lodded):
-			g._Update(delta)
+			if (g.currentLOD == 0):
+				g._Update(delta)
+			else: if (g.currentLOD == 1 and secondLodProcessing):
+				g._Update(delta + lastdelta)
 
+	if (secondLodProcessing):
+		secondLodProcessing = false
+	else:
+		secondLodProcessing = true
+	
+	lastdelta = delta
+	
 static func GetInstance() -> Commander:
 	return Instance
 
@@ -91,16 +103,25 @@ func ProcessLODList() -> void:
 			ShipLodCheckList.append_array(Fleet)
 
 		var Ship : HostileShip = ShipLodCheckList.pop_back()
+		if (!Ship.IsCommander()):
+			continue
+			
 		var ShipPos : Vector2 = Ship.global_position
 		
-		var ShouldRun = false
+		var lod : int = 2
 		
 		for Pl in PlayerShips:
-			if (ShipPos.distance_squared_to(Pl.global_position) < SimulationRange * SimulationRange):
-				ShouldRun = true
+			var distSq = ShipPos.distance_squared_to(Pl.global_position)
+			if (distSq < (SimulationRange * SimulationRange) / 2.0):
+				lod = 0
 				break
+			else: if (distSq < SimulationRange * SimulationRange):
+				lod = 1
 		
-		Ship.ToggleLod(!ShouldRun)
+		Ship.SetLOD(lod)
+		for docked in Ship.GetDock().GetDockedShips():
+			ShipLodCheckList.erase(docked)
+			docked.SetLOD(lod)
 
 #/////////////////////////////////////////////////////////////
  #██████  ██████  ██████  ███████ ██████      ███    ███  █████  ███    ██  █████   ██████  ███████ ███    ███ ███████ ███    ██ ████████ 

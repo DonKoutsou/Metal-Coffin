@@ -68,8 +68,10 @@ func Init(Ship : Node2D) -> void:
 		if (Ship.Destroyed):
 			OnHostileShipDestroyed()
 		else:
-			SetMarkerDetails(Ship.ShipName, Ship.Cpt.ShipCallsign ,Ship.GetShipSpeed())
-
+			if (Commander.ENEMY_DEBUG):
+				SetMarkerDetails(Ship.ShipName + " LOD : {0}".format([Ship.currentLOD]), Ship.Cpt.ShipCallsign ,Ship.GetShipSpeed())
+			else:
+				SetMarkerDetails(Ship.ShipName, Ship.Cpt.ShipCallsign ,Ship.GetShipSpeed())
 			SetType("Ship")
 			Ship.connect("ShipWrecked", OnHostileShipDestroyed)
 		

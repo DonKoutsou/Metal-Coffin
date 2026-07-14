@@ -174,7 +174,6 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect3" unique_id=971039501]
 show_behind_parent = true
 position = Vector2(15, 7)
-points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -220,7 +219,6 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4" unique_id=620173937]
 show_behind_parent = true
 position = Vector2(30, 9.00005)
-points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -266,7 +264,6 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5" unique_id=1499058002]
 show_behind_parent = true
 position = Vector2(30, 9.00005)
-points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -502,10 +499,11 @@ texture = ExtResource("24_nthvp")
 expand_mode = 1
 
 [node name="Prologue" type="Button" parent="." unique_id=1915175625 groups=["Buttons"]]
-offset_left = 1052.0
-offset_top = 113.0
-offset_right = 1076.0
-offset_bottom = 157.0
+texture_filter = 1
+offset_left = 1054.0
+offset_top = 116.0
+offset_right = 1074.0
+offset_bottom = 155.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/normal = ExtResource("26_67h1o")
@@ -514,10 +512,11 @@ theme_override_styles/hover = ExtResource("26_67h1o")
 action_mode = 0
 
 [node name="LoadPrologue" type="Button" parent="." unique_id=1420192485 groups=["Buttons"]]
-offset_left = 1052.0
-offset_top = 166.0
-offset_right = 1076.0
-offset_bottom = 209.0
+texture_filter = 1
+offset_left = 1053.0
+offset_top = 168.0
+offset_right = 1073.0
+offset_bottom = 207.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/normal = ExtResource("26_67h1o")
@@ -532,10 +531,11 @@ offset_right = 1185.0
 offset_bottom = 211.0
 
 [node name="Play2" type="Button" parent="." unique_id=1317648141 groups=["Buttons"]]
-offset_left = 1052.0
-offset_top = 244.0
-offset_right = 1076.0
-offset_bottom = 287.0
+texture_filter = 1
+offset_left = 1054.0
+offset_top = 246.0
+offset_right = 1074.0
+offset_bottom = 285.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/normal = ExtResource("26_67h1o")
@@ -544,10 +544,11 @@ theme_override_styles/hover = ExtResource("26_67h1o")
 action_mode = 0
 
 [node name="Load" type="Button" parent="." unique_id=813462728 groups=["Buttons"]]
-offset_left = 1051.0
-offset_top = 297.0
-offset_right = 1075.0
-offset_bottom = 341.0
+texture_filter = 1
+offset_left = 1053.0
+offset_top = 299.0
+offset_right = 1073.0
+offset_bottom = 339.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/normal = ExtResource("26_67h1o")
@@ -562,9 +563,10 @@ offset_right = 1185.0
 offset_bottom = 337.0
 
 [node name="Fight" type="Button" parent="." unique_id=174179254 groups=["Buttons"]]
-offset_left = 1172.0
-offset_top = 364.0
-offset_right = 1226.0
+texture_filter = 1
+offset_left = 1173.0
+offset_top = 366.0
+offset_right = 1225.0
 offset_bottom = 390.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -574,10 +576,11 @@ theme_override_styles/hover = ExtResource("29_rh5bc")
 action_mode = 0
 
 [node name="Credits" type="Button" parent="." unique_id=524956029 groups=["Buttons"]]
-offset_left = 1199.0
-offset_top = 600.0
-offset_right = 1228.0
-offset_bottom = 651.0
+texture_filter = 1
+offset_left = 1200.0
+offset_top = 603.0
+offset_right = 1227.0
+offset_bottom = 653.0
 size_flags_vertical = 3
 theme_override_styles/normal = ExtResource("32_xqmn8")
 theme_override_styles/pressed = ExtResource("33_sjyyd")
@@ -601,15 +604,15 @@ mouse_filter = 2
 mouse_filter = 2
 
 [node name="FullScreenCheckBox" parent="SettingPanel2/Control" index="0" unique_id=1652792594]
-offset_left = 33.0
+offset_left = 32.0
 offset_top = 382.0
-offset_right = 50.0
+offset_right = 49.0
 offset_bottom = 421.0
 
 [node name="SoundCheckBox" parent="SettingPanel2/Control" index="1" unique_id=1813530860]
-offset_left = 33.0
+offset_left = 32.0
 offset_top = 422.0
-offset_right = 50.0
+offset_right = 49.0
 offset_bottom = 461.0
 
 [node name="SoundCheckBox2" parent="SettingPanel2/Control" index="2" unique_id=278533649]
@@ -619,9 +622,9 @@ offset_right = 224.0
 offset_bottom = 464.0
 
 [node name="GlitchesCheckBox" parent="SettingPanel2/Control" index="3" unique_id=1603069750]
-offset_left = 34.0
+offset_left = 33.0
 offset_top = 462.0
-offset_right = 51.0
+offset_right = 50.0
 offset_bottom = 501.0
 
 [node name="ShakeEffectsBox" parent="SettingPanel2/Control" index="4" unique_id=1138728248]
@@ -631,10 +634,11 @@ offset_right = 204.0
 offset_bottom = 425.0
 
 [node name="Button" type="TextureButton" parent="." unique_id=449412107 groups=["Buttons"]]
-offset_left = 1053.0
-offset_top = 527.0
-offset_right = 1077.0
-offset_bottom = 586.0
+texture_filter = 1
+offset_left = 1054.0
+offset_top = 530.0
+offset_right = 1076.0
+offset_bottom = 587.0
 size_flags_horizontal = 3
 texture_normal = ExtResource("35_xqmn8")
 texture_pressed = ExtResource("36_sjyyd")
@@ -642,10 +646,11 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="Exit" type="Button" parent="." unique_id=2017627404 groups=["Buttons"]]
-offset_left = 1055.0
-offset_top = 599.0
-offset_right = 1085.0
-offset_bottom = 651.0
+texture_filter = 1
+offset_left = 1056.0
+offset_top = 602.0
+offset_right = 1084.0
+offset_bottom = 652.0
 size_flags_vertical = 3
 theme_override_styles/normal = ExtResource("37_xqmn8")
 theme_override_styles/pressed = ExtResource("38_sjyyd")

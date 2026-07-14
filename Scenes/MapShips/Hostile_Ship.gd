@@ -39,6 +39,7 @@ var LoadingSave : bool = false
 var Spawned : bool = false
 
 #if lodded it means it should not process
+var currentLOD : int = 0
 var Lodded : bool = true
 #Until this value reaches a certain threashold ships speed or trajectory are not known
 var ExposedValue : float = 0.0
@@ -56,6 +57,13 @@ signal Alarmed
 
 
 #var SavedParent : Node
+
+func SetLOD(lod : int) -> void:
+	currentLOD = lod
+	if (lod < 2):
+		ToggleLod(false)
+	else:
+		ToggleLod(true)
 
 func ToggleLod(t : bool) -> void:
 	if (Lodded == t):

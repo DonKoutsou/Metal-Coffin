@@ -286,7 +286,6 @@ func OnCloseButtonPressed() -> void:
 func UpdateRecomendations() -> void:
 	ClearRecomendations()
 	if (Text.text.length() == 0):
-		return
 		for g in CommandListConfiguration:
 			var commandText = ListToString(g)
 			var args = GetMethodArguments(CommandListConfiguration[g])

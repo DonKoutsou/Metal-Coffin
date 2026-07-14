@@ -80,12 +80,12 @@ layout_mode = 2
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2" unique_id=498202856]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 25
-text = "Docked 
-Ships"
+theme_override_font_sizes/font_size = 32
+text = "Docked Ships"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+uppercase = true
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1379977091]
 layout_mode = 2
@@ -127,11 +127,11 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/PanelContainer" unique_id=1867703182]
 layout_mode = 2
-theme_override_font_sizes/font_size = 25
-text = "Ship
-Parts"
+theme_override_font_sizes/font_size = 32
+text = "Ship Parts"
 horizontal_alignment = 1
 vertical_alignment = 1
+uppercase = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3" unique_id=1592551215]
 custom_minimum_size = Vector2(270, 0)
