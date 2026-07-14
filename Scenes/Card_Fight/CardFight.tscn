@@ -218,6 +218,75 @@ metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 
+[node name="Control" type="Control" parent="SubViewport/Control2" unique_id=412634086]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CurrentPlayerLabel" type="Label" parent="SubViewport/Control2" unique_id=1697104601]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -198.0
+offset_top = 27.0
+offset_right = 198.0
+offset_bottom = 64.0
+grow_horizontal = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_font_sizes/font_size = 36
+text = "Amol Picking Moves"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="CardSelect" type="PanelContainer" parent="SubViewport/Control2" unique_id=647099741 node_paths=PackedStringArray("Title", "CardContainer")]
+visible = false
+z_index = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -372.0
+offset_top = -198.0
+offset_right = 372.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("9_umcqi")
+script = ExtResource("27_rbthh")
+CardScene = ExtResource("2_yc7d8")
+Title = NodePath("VBoxContainer/Label")
+CardContainer = NodePath("VBoxContainer/HBoxContainer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/CardSelect" unique_id=1940505378]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SubViewport/Control2/CardSelect/VBoxContainer" unique_id=94989821]
+layout_mode = 2
+text = "Discard one"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="HBoxContainer" type="Container" parent="SubViewport/Control2/CardSelect/VBoxContainer" unique_id=2113163757]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("24_d8sco")
+metadata/_custom_type_script = "uid://bm68ow8pgjukx"
+
 [node name="TargetSelect" type="PanelContainer" parent="SubViewport/Control2" unique_id=1032550551 node_paths=PackedStringArray("ShipVizContainer")]
 visible = false
 z_index = 2
@@ -260,75 +329,6 @@ size_flags_vertical = 3
 visible = false
 layout_mode = 2
 text = "Cancel"
-
-[node name="CardSelect" type="PanelContainer" parent="SubViewport/Control2" unique_id=647099741 node_paths=PackedStringArray("Title", "CardContainer")]
-visible = false
-z_index = 2
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -372.0
-offset_top = -198.0
-offset_right = 372.0
-offset_bottom = 100.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-mouse_filter = 2
-theme_override_styles/panel = ExtResource("9_umcqi")
-script = ExtResource("27_rbthh")
-CardScene = ExtResource("2_yc7d8")
-Title = NodePath("VBoxContainer/Label")
-CardContainer = NodePath("VBoxContainer/HBoxContainer")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Control2/CardSelect" unique_id=1940505378]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="SubViewport/Control2/CardSelect/VBoxContainer" unique_id=94989821]
-layout_mode = 2
-text = "Discard one"
-horizontal_alignment = 1
-vertical_alignment = 1
-uppercase = true
-
-[node name="HBoxContainer" type="Container" parent="SubViewport/Control2/CardSelect/VBoxContainer" unique_id=2113163757]
-layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("24_d8sco")
-metadata/_custom_type_script = "uid://bm68ow8pgjukx"
-
-[node name="Control" type="Control" parent="SubViewport/Control2" unique_id=412634086]
-z_index = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="CurrentPlayerLabel" type="Label" parent="SubViewport/Control2" unique_id=1697104601]
-visible = false
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -198.0
-offset_top = 27.0
-offset_right = 198.0
-offset_bottom = 64.0
-grow_horizontal = 2
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
-theme_override_constants/shadow_outline_size = 2
-theme_override_font_sizes/font_size = 36
-text = "Amol Picking Moves"
-horizontal_alignment = 1
-uppercase = true
 
 [node name="PointLight2D" type="PointLight2D" parent="SubViewport" unique_id=212615134]
 position = Vector2(445, 311)

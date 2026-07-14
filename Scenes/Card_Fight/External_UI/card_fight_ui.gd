@@ -84,7 +84,7 @@ func ClearHand() -> void:
 
 func UpdateCardDesc(User : BattleShipStats) -> void:
 	for g : Card in PlayerCardPlecement.get_children():
-		g.UpdateBattleStats(User)
+		g.UpdateBattleStats()
 
 func AddCardToHand(C : Card) -> void:
 	C.SetRealistic()

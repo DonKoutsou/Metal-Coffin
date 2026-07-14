@@ -89,6 +89,7 @@ Card=""
 DigitalBouncingButton=""
 Shakable=""
 CameraPositionAffected=""
+BattleCards=""
 
 [gui]
 

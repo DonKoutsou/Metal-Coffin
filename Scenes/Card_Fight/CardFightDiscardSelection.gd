@@ -11,33 +11,33 @@ signal CardSelected( Index : int )
 func _ready() -> void:
 	visible = false
 
-func SetCards(User : BattleShipStats, Cards : Array[Card]) -> void:
+func SetCards( Cards : Array[Card]) -> void:
 	Title.text = "DISCARD ONE"
 	for g in Cards.size():
 		var b = CardScene.instantiate() as Card
-		b.SetCardBattleStats(User, Cards[g].CStats)
+		b.SetCardBattleStats(Cards[g].CStats)
 		
 		b.OnCardPressed.connect(TargetSelected.bind(g))
 		CardContainer.call_deferred("add_child", b)
 		
 	visible = true
 
-func SetCardsDiscard(User : BattleShipStats, Cards : Array[CardStats]) -> void:
+func SetCardsDiscard(Cards : Array[CardStats]) -> void:
 	Title.text = "DISCARD ONE"
 	for g in Cards.size():
 		var b = CardScene.instantiate() as Card
-		b.SetCardBattleStats(User, Cards[g])
+		b.SetCardBattleStats(Cards[g])
 		
 		b.OnCardPressed.connect(TargetSelected.bind(g))
 		CardContainer.call_deferred("add_child", b)
 		
 	visible = true
 
-func SetCardsPick(User : BattleShipStats, Cards : Array[CardStats]) -> void:
+func SetCardsPick(Cards : Array[CardStats]) -> void:
 	Title.text = "PICK ONE"
 	for g in Cards.size():
 		var b = CardScene.instantiate() as Card
-		b.SetCardBattleStats(User, Cards[g])
+		b.SetCardBattleStats(Cards[g])
 		
 		b.OnCardPressed.connect(TargetSelected.bind(g))
 		CardContainer.call_deferred("add_child", b)

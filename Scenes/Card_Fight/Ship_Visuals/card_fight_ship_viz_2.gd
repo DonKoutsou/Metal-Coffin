@@ -34,13 +34,14 @@ const StatText = "[color=#ffc315]HULL[/color][p][color=#6be2e9]SHIELD[/color][p]
 
 signal OnFallbackPressed()
 
-
+var Destroyed : bool
 var Ship : BattleShipStats
 var Fr : bool
 
 var CurrentCardShown : Card
 
 func Destroy() -> void:
+	Destroyed = true
 	var mat = ExplosionPart.process_material as ParticleProcessMaterial
 	mat.scale_max = 0.6
 	ExplosionPart.emitting = true
@@ -182,7 +183,7 @@ func ActionHovered(C : CardStats, Targets : Array[BattleShipStats]) -> void:
 		targetlocs.append(pos)
 	
 	CurrentCardShown = ResourceLoader.load(CardScene).instantiate()
-	CurrentCardShown.SetCardBattleStats(Ship ,C)
+	CurrentCardShown.SetCardBattleStats(C)
 	CurrentCardShown.Dissable(true)
 	CurrentCardShown.TargetLocs = targetlocs
 	
@@ -210,6 +211,8 @@ func OnActionsPerformed() -> void:
 	HasMovePanel.visible = false
 
 func Refresh() -> void:
+	if (Destroyed):
+		return
 	UpdateStats(Ship)
 	ToggleDmgBuff(Ship.FirePowerBuff > 1, Ship.FirePowerBuff)
 	ToggleSpeedBuff(Ship.SpeedBuff > 1, Ship.SpeedBuff)
@@ -222,6 +225,8 @@ func Refresh() -> void:
 
 
 func UpdateStats(S : BattleShipStats) -> void:
+	if (Destroyed):
+		return
 	var HullTween = create_tween()
 	HullTween.set_ease(Tween.EASE_OUT)
 	HullTween.set_trans(Tween.TRANS_QUAD)

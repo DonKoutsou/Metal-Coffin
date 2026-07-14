@@ -145,14 +145,16 @@ func SetCardStats(Stats : CardStats, Amm : int = 0) -> void:
 		#CardTex.modulate = Color(1.0, 0.235, 0.132)
 
 
-func UpdateBattleStats(User : BattleShipStats) -> void:
+func UpdateBattleStats() -> void:
+	if (CStats == null):
+		return
 	if (CStats.Burned):
 		CardDesc.text = ""
 		CardCost.text = "0"
 	else:
-		var DescText =  "[center] {0}".format([CStats.GetBattleDescription(User)])
+		var DescText =  "[center] {0}".format([CStats.GetBattleDescription()])
 		CardDesc.text = DescText
-		ShownCost = GetBattleCost(User, CStats)
+		ShownCost = GetBattleCost(CStats)
 		if (CStats.EnergyReduction > 0):
 			CardCost.modulate = Color(0,1,0)
 		else:
@@ -167,10 +169,11 @@ func Flip() -> void:
 	$Amm.visible = false
 
 
-func SetCardBattleStats(User : BattleShipStats, Stats : CardStats, Amm : int = 0) -> void:
+func SetCardBattleStats(Stats : CardStats, Amm : int = 0) -> void:
 	CStats = Stats
+	CStats.Owner.Destroyed.connect(KillCard)
 	#var Cost = Stats.GetCost()
-	ShownCost = GetBattleCost(User, Stats)
+	ShownCost = GetBattleCost(Stats)
 	if (Stats.Burned):
 		CardName.text = "Burned"
 		CardDesc.text = ""
@@ -178,7 +181,7 @@ func SetCardBattleStats(User : BattleShipStats, Stats : CardStats, Amm : int = 0
 		UpdateBurnShader(0.75)
 		CardTex.texture = null
 	else:
-		var DescText =  "[center] {0}".format([Stats.GetBattleDescription(User)])
+		var DescText =  "[center] {0}".format([Stats.GetBattleDescription()])
 		CardName.text = Stats.GetCardName()
 		CardDesc.text = DescText
 		CardCost.text = "{0}".format([ShownCost])
@@ -194,7 +197,7 @@ func SetCardBattleStats(User : BattleShipStats, Stats : CardStats, Amm : int = 0
 	else:
 		CardTypeEmblem.modulate = Color("8db354")
 
-func GetBattleCost(User : BattleShipStats, Stats : CardStats) -> int:
+func GetBattleCost(Stats : CardStats) -> int:
 	if (Stats.Burned):
 		return 0
 	var CCost : int = 0
@@ -202,11 +205,11 @@ func GetBattleCost(User : BattleShipStats, Stats : CardStats) -> int:
 		if (Stats.OnPerformModule.StoredEnergy > 0):
 			CCost = Stats.OnPerformModule.StoredEnergy
 		else:
-			CCost = User.Energy
+			CCost = Stats.Owner.Energy
 			
 	for St in Stats.OnUseModules:
 		if (St is MaxReserveModule or St is MaxShieldCardModule):
-			CCost = User.Energy
+			CCost = Stats.Owner.Energy
 			
 	if (CCost == 0):
 		CCost = Stats.GetCost()
@@ -260,6 +263,8 @@ func _on_button_mouse_entered() -> void:
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.SWIFT_CARDS)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.SWIFT_CARDS)
 		ActionTracker.QueueTutorial("Swift Cards", "Some cards are marked witn [color=#ffc315]SW[/color] in their name. Those cards will be placed at the top of the pile at the start of every card fight. Usefull for starting a fight prepared.", [])
+	
+	
 	
 	z_index = 1
 	

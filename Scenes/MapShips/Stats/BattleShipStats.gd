@@ -72,6 +72,7 @@ signal ReservesChanged(reservesAdded : int)
 signal StatsBuffed
 signal CardsBuffed
 signal ShipDamaged(amm : float)
+signal Destroyed
 
 func ShieldShip(Amm : float) -> void:
 	Shield = min(Shield + Amm, MaxShield)
@@ -195,7 +196,9 @@ func DamageShip(Amm : float, ShouldCauseFire : bool = false, SkipShield : bool =
 			ActionTracker.QueueTutorial("TUT_Cardfight_ShipLossTitle", "TUT_Cardfight_ShipLossText", [])
 		
 	ShipDamaged.emit(Dmg)
-	
+	if (CurrentHull <= 0):
+		Destroyed.emit()
+		
 	ShipViz.Refresh()
 	StatsBuffed.emit()
 

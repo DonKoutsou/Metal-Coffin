@@ -25,6 +25,7 @@ signal Reached
 var Target : Control
 var Going = false
 var SpawnPos : Vector2 = Vector2.ZERO
+var lifeTime : float = 0
 
 func _ready() -> void:
 	global_position = SpawnPos
@@ -54,37 +55,42 @@ func _physics_process(delta: float) -> void:
 	if (!Going or Target == null):
 		return
 	
+	lifeTime += delta
+	
 	var direction = (Target.global_position + (Target.size / 2)) - global_position
 	var distance = direction.length()
 	
 	# Only adjust if the missile is more than a tiny distance from the target
 	if distance > 1:
-		# Normalize the direction
-		direction = direction.normalized()
+		if lifeTime > 2:
+			look_at(Target.global_position)
+		else:
+			# Normalize the direction
+			direction = direction.normalized()
+			
+			# Compute the angle towards the mouse
+			var target_angle = direction.angle()
+			
+			# Get the current angle of the missile
+			var current_angle = rotation
 
-		# Compute the angle towards the mouse
-		var target_angle = direction.angle()
-		
-		# Get the current angle of the missile
-		var current_angle = rotation
+			# Reduce curve intensity as the missile gets closer
+			var curve_intensity = base_curve_intensity
+			if distance < 100:
+				curve_intensity = base_curve_intensity * (distance / 100)
+			
+			# Interpolate angle for smooth turning
+			current_angle = lerp_angle(current_angle, target_angle, curve_intensity)
 
-		# Reduce curve intensity as the missile gets closer
-		var curve_intensity = base_curve_intensity
-		if distance < 100:
-			curve_intensity = base_curve_intensity * (distance / 100)
-		
-		# Interpolate angle for smooth turning
-		current_angle = lerp_angle(current_angle, target_angle, curve_intensity)
+			# Add wiggling effect
+			current_angle += sin(Time.get_ticks_msec() * wiggle_frequency) * deg_to_rad(wiggle_amplitude)
+			
+			# Update rotation
+			rotation = current_angle
 
-		# Add wiggling effect
-		current_angle += sin(Time.get_ticks_msec() * wiggle_frequency) * deg_to_rad(wiggle_amplitude)
-
-		# Update rotation
-		rotation = current_angle
-
-		# Move the missile forward
-		
-		position += Vector2(cos(rotation), sin(rotation)) * speed
+			# Move the missile forward
+			
+			position += Vector2(cos(rotation), sin(rotation)) * speed
 	
 	if (global_position.distance_squared_to(Target.global_position + (Target.size / 2)) < 500):
 		global_position = Target.global_position + (Target.size / 2)

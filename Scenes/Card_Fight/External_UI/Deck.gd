@@ -15,6 +15,8 @@ signal OnCardDrawn(C : CardStats)
 signal MultiCardDrawn(DrawnCards : Array[CardStats], discardAmm : int)
 signal MultiSpecificDrawn(DrawnCards : Array[CardStats])
 
+var friendly : bool = false
+
 func GetCardList() -> Array[CardStats]:
 	var List : Array[CardStats]
 	
@@ -113,15 +115,25 @@ func TestCard(Mod : CardStats, testType : CardStats.CardType) -> bool:
 	return Mod.Type == testType
 
 func DiscardCard(C : CardStats) -> void:
-	PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
+	if (friendly):
+		PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
 	DiscardPile.append(C)
 	C.EnergyReduction = 0
 	DiscardChanged.emit(true)
 
+func AddCardToDeck(c : CardStats, pos : int = -1) -> void:
+	if (pos == -1):
+		DeckPile.append(c)
+	else:
+		DeckPile.insert(pos, c)
+	PileChanged.emit(true)
+
 func ShuffleDiscardedIntoDeck(DoAnim : bool = true) -> void:
 	isShuffling = true
 	Shuffling.emit(true)
-	PopUpManager.GetInstance().DoFadeNotif("Shuffling Deck")
+	if (friendly):
+		PopUpManager.GetInstance().DoFadeNotif("Shuffling Deck")
+		
 	if (DoAnim):
 		for g in DiscardPile.size():
 			await Helper.GetInstance().wait(0.05)

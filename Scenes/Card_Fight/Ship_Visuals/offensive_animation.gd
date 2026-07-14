@@ -29,7 +29,7 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 
 	var card = CardScene.instantiate() as Card
 	card.Dissable(true)
-	card.SetCardBattleStats(Performer, AnimationCard)
+	card.SetCardBattleStats(AnimationCard)
 	$HBoxContainer.add_child(card)
 
 	card.show_behind_parent = true
@@ -55,7 +55,7 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 						DefCard.Dissable(true)
 						#var Opts2 : Array[CardOption] = []
 						
-						DefCard.SetCardBattleStats(DeffenceList.keys()[g], Def)
+						DefCard.SetCardBattleStats(Def)
 						add_child(DefCard)
 						if (!FriendShip):
 							var pos = Vector2(Viz.global_position.x + 200, Viz.global_position.y - (Viz.size.y / 2))
@@ -335,7 +335,7 @@ func DoSelection(C : CardStats, Performer : BattleShipStats, User : Control) -> 
 	var DeffenceCard = CardScene.instantiate() as Card
 	DeffenceCard.Dissable(true)
 	
-	DeffenceCard.SetCardBattleStats(Performer, C)
+	DeffenceCard.SetCardBattleStats(C)
 	add_child(DeffenceCard)
 	
 	var pos = Vector2(User.global_position.x - 200, User.global_position.y - (User.size.y / 2))

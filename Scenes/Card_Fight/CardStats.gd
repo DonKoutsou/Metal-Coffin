@@ -20,6 +20,7 @@ class_name CardStats
 @export var UseConditions : Array[CardUseCondition]
 @export var AllowTier : bool = true
 
+var Owner : BattleShipStats
 var EnergyReduction : int = 0
 var Tier : int = 0
 
@@ -58,7 +59,7 @@ func GetDescription() -> String:
 	
 	return Desc
 
-func GetBattleDescription(User : BattleShipStats) -> String:
+func GetBattleDescription() -> String:
 	if (CardDescriptionOverride != ""):
 		return CardDescriptionOverride
 	
@@ -68,16 +69,17 @@ func GetBattleDescription(User : BattleShipStats) -> String:
 	
 	var Desc = ""
 	if is_instance_valid(OnPerformModule):
-		Desc += OnPerformModule.GetBattleDesc(User, RealTier)
+		Desc += OnPerformModule.GetBattleDesc(Owner, RealTier)
 	if (OnUseModules.size() > 0):
 		Desc += "[color=#ffc315]On Use[/color] : "
 		for g in OnUseModules:
-			Desc += g.GetBattleDesc(User, RealTier) + "\n"
+			Desc += g.GetBattleDesc(Owner, RealTier) + "\n"
 
 	return Desc
 
 func IsSame(C : CardStats) -> bool:
 	return C.GetCardName() == GetCardName()
+
 
 enum WeaponType{
 	NONE,

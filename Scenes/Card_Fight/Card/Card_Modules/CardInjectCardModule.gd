@@ -37,7 +37,8 @@ func Handle(_Performer : BattleShipStats, Action : CardStats, Targets : Array[Ba
 		for injection in injectAmm:
 			var c = CardToInject.duplicate()
 			var randomIndex = randf_range(0, g.deck.DeckPile.size())
-			g.deck.DeckPile.insert(randomIndex ,c)
+			c.Owner = g
+			g.deck.AddCardToDeck(c, randomIndex)
 
 	var Data = DeffensiveAnimationData.new()
 	Data.Mod = self
