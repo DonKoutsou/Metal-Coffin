@@ -130,7 +130,7 @@ offset_right = 80.0
 offset_bottom = 110.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(80, 110)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
@@ -145,7 +145,7 @@ FrontSide = NodePath("TextureButton")
 BackSide = NodePath("TextureRect")
 Line = NodePath("Line2D")
 AmmountLabel = NodePath("Amm/Label")
-TooltipPos = NodePath("VBoxContainer")
+TooltipPos = NodePath("Control/VBoxContainer")
 TooltipScene = ExtResource("8_paso5")
 RealisticFont = ExtResource("2_g808j")
 
@@ -409,16 +409,28 @@ text = "11x"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=823324047]
+[node name="Control" type="Control" parent="." unique_id=1949510751]
+top_level = true
+z_index = 1
 layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 6.0
-offset_right = 148.0
-grow_horizontal = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
 grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=823324047]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 96.0
+offset_top = -119.0
+offset_right = 238.0
+offset_bottom = -75.0
+grow_horizontal = 2
 mouse_filter = 2
 
 [connection signal="gui_input" from="SubViewportContainer/SubViewport/Button" to="." method="_on_button_gui_input"]

@@ -43,6 +43,8 @@ func _physics_process(delta: float) -> void:
 	#$SubViewportContainer/SubViewport.render_target_update_mode =  SubViewport.UPDATE_ONCE
 
 func _process(delta: float) -> void:
+	TooltipPos.get_parent().global_position = Line.global_position
+	TooltipPos.get_parent().rotation = rotation
 	
 	if (TrackMouse):
 		var pos = global_position + (size/2)
@@ -270,6 +272,8 @@ func _on_button_mouse_entered() -> void:
 	
 	TweenHover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC).set_parallel(true)
 	TweenHover.tween_property(self,"scale", Vector2(1.1, 1.1), 0.55)
+	TweenHover.set_parallel(true)
+	TweenHover.tween_property(TooltipPos,"scale", Vector2(1.1, 1.1), 0.55)
 	
 	#TooltipPos.rotation = -rotation
 	var tips = CardStats.FindTooltips(CStats)
@@ -278,7 +282,7 @@ func _on_button_mouse_entered() -> void:
 		tip.get_child(0).text = g
 		TooltipPos.add_child(tip)
 		tip.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		
+	
 	#TrackMouse = true
 
 func _on_button_mouse_exited() -> void:
@@ -288,6 +292,8 @@ func _on_button_mouse_exited() -> void:
 	
 	TweenHover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
 	TweenHover.tween_property(self,"scale", Vector2.ONE, 0.55)
+	TweenHover.set_parallel(true)
+	TweenHover.tween_property(TooltipPos,"scale", Vector2.ONE, 0.55)
 	#TrackMouse = false
 	if (dirTw != null):
 		dirTw.kill()

@@ -103,11 +103,12 @@ static func strip_bbcode(source:String) -> String:
 	return regex.sub(source, "", true)
 
 const ToolTips : Dictionary[String, String] = {
-	"fire" : "[color=#ff3c22]Fire[/color] damages the ship one per turn until extinguished",
-	"fires" : "[color=#ff3c22]Fire[/color] damages the ship one per turn until extinguished",
+	"fire" : "[color=#ff3c22]Fire[/color] damages the ship onec per turn until extinguished",
+	"fires" : "[color=#ff3c22]Fire[/color] damages the ship onec per turn until extinguished",
 	"ONUSE" : "[color=#ffc315]On Use[/color] effects are performed the moment the card is played",
 	"ONCOUNTER" : "[color=#ffc315]On Counter[/color] effects are applied on successfull counters",
-	"ONHIT" : "[color=#ffc315]On Hit[/color] effects are applied once the atack lands"
+	"ONHIT" : "[color=#ffc315]On Hit[/color] effects are applied once the atack lands",
+	"Shield" : "[color=#6be2e9]Shield[/color] protects the ship from direct damage"
 }
 
 enum WeaponType{

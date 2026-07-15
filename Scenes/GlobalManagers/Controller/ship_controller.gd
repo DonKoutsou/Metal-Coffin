@@ -196,13 +196,15 @@ func OnShipDestroyed(Sh : PlayerDrivenShip):
 			NewCommander.TargetShip = Sh.TargetShip
 
 			for DockedShip in range(Sh.GetDock().GetDockedShips().size() - 1, -1, -1):
-				Sh.GetDock().UndockShip(Sh.GetDock().GetDockedShips()[DockedShip])
-				NewCommander.GetDock().DockShip(Sh.GetDock().GetDockedShips()[DockedShip])
+				var ship = Sh.GetDock().GetDockedShips()[DockedShip]
+				Sh.GetDock().UndockShip(ship)
+				NewCommander.GetDock().DockShip(ship)
 
 			for Captive in range(Sh.GetDock().Captives.size() - 1, -1, -1):
 				if (NewCommander != null):
-					Sh.GetDock().UndockCaptive(Sh.GetDock().Captives[Captive])
-					NewCommander.GetDock().DockCaptive(Sh.GetDock().Captives[Captive])
+					var capt = Sh.GetDock().Captives[Captive]
+					Sh.GetDock().UndockCaptive(capt)
+					NewCommander.GetDock().DockCaptive(capt)
 				else:
 					Sh.GetDock().ReleaseCaptive(Captive)
 
