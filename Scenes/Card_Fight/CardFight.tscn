@@ -21,7 +21,7 @@ content_margin_top = 10.0
 content_margin_right = 10.0
 content_margin_bottom = 10.0
 
-[node name="CardFight" type="SubViewportContainer" unique_id=1710302720 node_paths=PackedStringArray("SelectedCardPlecement", "AnimationPlecement", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect", "CardSelect", "ActionDeclarationPlacement", "Cloud", "PlayerFleetSizeLabel", "EnemyFleetSizeLabel", "CurrentPlayerLabel") groups=["CardFight"]]
+[node name="CardFight" type="SubViewportContainer" unique_id=1710302720 node_paths=PackedStringArray("SelectedCardPlecement", "AnimationPlecement", "EnemyShipVisualPlecement", "PlayerShipVisualPlecement", "TargetSelect", "CardSelect", "ActionDeclarationPlacement", "PlayerFleetSizeLabel", "EnemyFleetSizeLabel", "CurrentPlayerLabel") groups=["CardFight"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -45,7 +45,6 @@ TargetSelect = NodePath("SubViewport/Control2/TargetSelect")
 CardSelect = NodePath("SubViewport/Control2/CardSelect")
 AcrionDeclarationScene = "uid://bfrogxgpdtepd"
 ActionDeclarationPlacement = NodePath("SubViewport/Control2")
-Cloud = NodePath("SubViewport/Control2/Clouds")
 PlayerFleetSizeLabel = NodePath("SubViewport/Control2/Label2")
 EnemyFleetSizeLabel = NodePath("SubViewport/Control2/Label3")
 CurrentPlayerLabel = NodePath("SubViewport/Control2/CurrentPlayerLabel")

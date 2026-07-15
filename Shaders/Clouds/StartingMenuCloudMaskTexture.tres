@@ -1,22 +1,13 @@
 [gd_resource type="NoiseTexture2D" format=3 uid="uid://bltj8hktgnom6"]
 
 [ext_resource type="Gradient" uid="uid://bq6yjb35h1he3" path="res://Shaders/Clouds/CloudStartingMenuGradient.tres" id="1_m08v7"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_n7y6y"]
-noise_type = 3
-seed = 4
-frequency = 0.0163
-fractal_octaves = 4
-fractal_lacunarity = 2.2
-fractal_gain = 0.57
-domain_warp_frequency = 0.095
-domain_warp_fractal_type = 0
-domain_warp_fractal_octaves = 1
+[ext_resource type="FastNoiseLite" uid="uid://djv3ki2j68hy4" path="res://Shaders/Clouds/CloudStartingMenuNoise.tres" id="2_61haq"]
 
 [resource]
 width = 1024
-noise = SubResource("FastNoiseLite_n7y6y")
+noise = ExtResource("2_61haq")
 color_ramp = ExtResource("1_m08v7")
 seamless = true
+in_3d_space = true
 normalize = false
 seamless_blend_skirt = 1.0

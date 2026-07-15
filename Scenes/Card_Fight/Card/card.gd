@@ -43,6 +43,14 @@ func _physics_process(delta: float) -> void:
 	#$SubViewportContainer/SubViewport.render_target_update_mode =  SubViewport.UPDATE_ONCE
 
 func _process(delta: float) -> void:
+	var endPos = global_position.x + size.x + TooltipPos.size.x + 20
+	if (get_viewport_rect().size.x < endPos):
+		TooltipPos.get_parent().scale.x = -1
+		TooltipPos.offset_transform_scale.x = -1
+	else:
+		TooltipPos.get_parent().scale.x = 1
+		TooltipPos.offset_transform_scale.x = 1
+		
 	TooltipPos.get_parent().global_position = Line.global_position
 	TooltipPos.get_parent().rotation = rotation
 	

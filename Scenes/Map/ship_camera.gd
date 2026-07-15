@@ -5,6 +5,7 @@ class_name ShipCamera
 @export var Background : Control
 @export var Grid : MapGrid
 @export var C : Cloud
+@export var cloudNoise : FastNoiseLite
 @export var Ground : Control
 @export var GroundMap : TopographyMap
 @export var WeatherMan : WeatherManage
@@ -241,6 +242,7 @@ func _physics_process(delta: float) -> void:
 		#CloudTime += delta * SimulationManager.SimSpeed()
 		#CloudMat.set_shader_parameter("custom_time", CloudTime)
 		CloudOffset += WeatherMan.WindDirection * (SimulationManager.SimSpeed() / 10000)
+		cloudNoise.offset.z += delta * SimulationManager.SimSpeed() / 10
 		CloudMat.set_shader_parameter("Offset", CloudOffset)
 		#NoiseNormalTexture.noise.fractal_lacunarity = clamp(NoiseNormalTexture.noise.fractal_lacunarity + (randf_range(-0.001,0.001) * SimulationManager.SimSpeed()), 1, 2)
 		#CloudMat.set_shader_parameter("fractal_lacunarity", clamp(l + randf_range(-0.01,0.01), 1,2))

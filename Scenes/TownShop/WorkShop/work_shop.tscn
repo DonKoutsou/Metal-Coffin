@@ -119,6 +119,7 @@ layout_mode = 2
 text = "Close"
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=118096959]
+custom_minimum_size = Vector2(270, 0)
 layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3" unique_id=1300108703]
@@ -133,7 +134,6 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3" unique_id=1592551215]
-custom_minimum_size = Vector2(270, 0)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_bpcd3")

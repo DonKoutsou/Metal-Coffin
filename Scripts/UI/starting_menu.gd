@@ -10,6 +10,7 @@ class_name StartingMenu
 @export var Credits : Control
 @export var NormalUI : Control
 @export var VersionLabel : Label
+@export var cloudNoise : FastNoiseLite
 
 var SpawnedCredits : Control
 
@@ -41,6 +42,7 @@ var CloudOffset = Vector2.ZERO
 func _physics_process(_delta: float) -> void:
 	var cloudmat = $SubViewportContainer/SubViewport/Clouds.material as ShaderMaterial
 	CloudOffset += Vector2(-0.0001, 0.0001)
+	cloudNoise.offset.z += 0.01
 	cloudmat.set_shader_parameter("Offset", CloudOffset)
 
 func DoLights() -> void:

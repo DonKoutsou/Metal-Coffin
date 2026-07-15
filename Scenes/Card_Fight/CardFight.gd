@@ -41,7 +41,8 @@ class_name Card_Fight
 #@export var ActionDeclaration : ActionDeclarationUI
 @export_file("*.tscn") var AcrionDeclarationScene : String
 @export var ActionDeclarationPlacement : Control
-@export var Cloud : ColorRect
+@export var cloudRect : ColorRect
+@export var CloudNoise : FastNoiseLite
 #Showing size of player fleet
 @export var PlayerFleetSizeLabel : Label
 #Showing size of enemy fleet
@@ -154,7 +155,8 @@ var CloudOffset = Vector2.ZERO
 
 func _physics_process(_delta: float) -> void:
 	CloudOffset += Vector2(-0.0001, 0.0001)
-	Cloud.material.set_shader_parameter("Offset", CloudOffset)
+	cloudRect.material.set_shader_parameter("Offset", CloudOffset)
+	CloudNoise.offset.z += 0.01
 ##----------------------------------------------------------------------##
 func StartFight() -> void:
 	var declaration : PackedScene = ResourceLoader.load(AcrionDeclarationScene)
