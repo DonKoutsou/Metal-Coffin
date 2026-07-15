@@ -166,7 +166,7 @@ vec3 yuv_to_rgb(vec3 yuv) {
 void fragment(){
 	vec2 pos = Warp(FRAGCOORD.xy / (1.0 / SCREEN_PIXEL_SIZE).xy);
 
-	COLOR.rgb = texture(SCREEN_TEXTURE, pos).rgb * Mask(FRAGCOORD.xy);
+	COLOR.rgb = texture(SCREEN_TEXTURE, pos).rgb;
 	//COLOR.rgb = texture(SCREEN_TEXTURE, pos).rgb;
 	//COLOR.rgb = Tri(pos, SCREEN_TEXTURE) * Mask(FRAGCOORD.xy);
 	vec2 look = pos;
@@ -199,8 +199,7 @@ void fragment(){
 	COLOR.g = mix(COLOR.g, texture(SCREEN_TEXTURE, look + x_offset).g, 0.5);
 	COLOR.b = mix(COLOR.b, texture(SCREEN_TEXTURE, look + x_offset + blue_offset + static_chromatic_aberration).b, 0.5);
 
-	float vigAmt = (3.3) * vignette_strength;
-	float vignette = (1.0 - vigAmt * pow(pos.y - 0.5, 4.0)) * (1.0 - vigAmt * pow(pos.x - 0.5, 4.0));
+	
 
 
 	
@@ -222,7 +221,17 @@ void fragment(){
 	//vec3 yuv2 = rgb_to_yuv(COLOR.rgb);
 	//COLOR.rgb = yuv_to_rgb(yuv2);
 	//COLOR.rgb = color2.rgb;
-	
+	float vigAmt = (3.3) * vignette_strength;
+	vec2 d = pos - vec2(0.5);
+
+	float x = d.x * d.x;
+	x *= x;
+
+	float y = d.y * d.y;
+	y *= y;
+
+	float vignette = (1.0 - vigAmt * x) * (1.0 - vigAmt * y);
 	COLOR.rgb *= vignette;
+	
 	COLOR.rgb = ToSrgb(COLOR.rgb);
 }
