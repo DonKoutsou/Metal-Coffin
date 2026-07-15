@@ -94,6 +94,9 @@ static func FindTooltips(card : CardStats) -> PackedStringArray:
 		tips.append(ToolTips["ONCOUNTER"])
 	if (desc.find("On Hit") > 0):
 		tips.append(ToolTips["ONHIT"])
+
+	if (card.UseConditions.has(CardStats.CardUseCondition.ENERGY_DEPENDANT)):
+		tips.append(ToolTips["ENDEP"])
 		
 	return tips
 
@@ -103,12 +106,13 @@ static func strip_bbcode(source:String) -> String:
 	return regex.sub(source, "", true)
 
 const ToolTips : Dictionary[String, String] = {
-	"fire" : "[color=#ff3c22]Fire[/color] damages the ship onec per turn until extinguished",
-	"fires" : "[color=#ff3c22]Fire[/color] damages the ship onec per turn until extinguished",
-	"ONUSE" : "[color=#ffc315]On Use[/color] effects are performed the moment the card is played",
-	"ONCOUNTER" : "[color=#ffc315]On Counter[/color] effects are applied on successfull counters",
-	"ONHIT" : "[color=#ffc315]On Hit[/color] effects are applied once the atack lands",
-	"Shield" : "[color=#6be2e9]Shield[/color] protects the ship from direct damage"
+	"fire" : "[color=#ff3c22]Fire[/color] damages the ship once per turn until extinguished",
+	"fires" : "[color=#ff3c22]Fire[/color] damages the ship once per turn until extinguished",
+	"ONUSE" : "[color=#ffc315]ON USE[/color] effects are performed the moment the card is played",
+	"ONCOUNTER" : "[color=#ffc315]ON COUNTER[/color] effects are applied on successfull counters",
+	"ONHIT" : "[color=#ffc315]ON HIT[/color] effects are applied once the atack lands",
+	"Shield" : "[color=#6be2e9]SHIELD[/color] protects the ship from direct damage",
+	"ENDEP" : "[color=#ffc315]ENERGY DEPENDANT[/color] cards will uses all of the user's energy to improve its stats"
 }
 
 enum WeaponType{

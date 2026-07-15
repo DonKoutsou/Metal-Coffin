@@ -22,6 +22,7 @@ func SetCamera() -> void:
 	var map = Map.GetInstance()
 	if (!is_instance_valid(map)):
 		return
+	ship_camera = map.GetCamera()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func UpdateCameraZoom(_NewZoom : float) -> void:

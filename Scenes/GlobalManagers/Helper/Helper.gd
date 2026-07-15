@@ -22,10 +22,11 @@ func LoadThreaded(File : String) -> SignalObject:
 	var Sign = SignalObject.new()
 	
 	#var t = Thread.new()
-	ResourceLoader.load_threaded_request(File)
+	ResourceLoader.load_threaded_request(File, "", true, ResourceLoader.CACHE_MODE_REUSE)
 	
 	#t.start(LoadSceneTh.bind(Sign, File))
-	call_deferred("_CheckForFinishedLoad", Sign, File)
+	CallLater(_CheckForFinishedLoad.bind(Sign, File), 0.01)
+	#call_deferred("_CheckForFinishedLoad", Sign, File)
 	
 	$CanvasLayer.visible = true
 	set_physics_process(true)

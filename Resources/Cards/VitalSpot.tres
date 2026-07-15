@@ -20,6 +20,6 @@ metadata/_custom_type_script = "uid://bu2ciutqs3t1b"
 script = ExtResource("5_j0buw")
 Icon = ExtResource("1_8d88m")
 CardName = "Weak Point Id"
-Energy = 3
+Energy = 1
 AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_612g0")]([SubResource("Resource_612g0")])

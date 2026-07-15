@@ -925,8 +925,10 @@ func GeneratePathsFromLines(Lines : Array):
 #/////////////////////////////////////////////////////////////
 #SCREEN RESIZING
 const ScreenPos = Vector2(67.0,62.0)
+const PilotPos = Vector2(132.0,62.0)
 const NormalPos = Vector2(342, 62)
 const OriginalSize = Vector2(869, 595.0)
+const PilotSize = Vector2(812.0, 590.0)
 const NormalSize = Vector2(595, 595)
 const FullSize = Vector2(1148.0, 595.0)
 
@@ -941,11 +943,17 @@ func ToggleFullScreen(NewState : ScreenUI.ScreenState) -> void:
 		$SubViewportContainer.size = FullSize
 		_InScreenUI.ToggleCrtEffect(true)
 		_InScreenUI.SetScreenRes(FullSize)
+	
 	else: if (NewState == ScreenUI.ScreenState.HALF_SCREEN):
 		$SubViewportContainer.position = ScreenPos
 		$SubViewportContainer.size = OriginalSize
 		_InScreenUI.ToggleCrtEffect(true)
 		_InScreenUI.SetScreenRes(OriginalSize)
+	else: if (NewState == ScreenUI.ScreenState.PILOT_SCREEN):
+		$SubViewportContainer.position = PilotPos
+		$SubViewportContainer.size = PilotSize
+		_InScreenUI.ToggleCrtEffect(true)
+		_InScreenUI.SetScreenRes(PilotSize)
 	else: if (NewState == ScreenUI.ScreenState.NORMAL_SCREEN):
 		$SubViewportContainer.position = ScreenPos
 		$SubViewportContainer.size = OriginalSize

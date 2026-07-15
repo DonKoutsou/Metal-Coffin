@@ -52,7 +52,7 @@ func Start() -> void:
 	await vidpl.Finished
 	
 	vidpl.queue_free()
-	SpawnMenu()
+	await SpawnMenu()
 
 func SpawnMenu() -> void:
 	var Menu = await Helper.GetInstance().LoadThreaded(StartingMenuScene).Sign
@@ -128,10 +128,10 @@ func DelSave() -> void:
 func FightEnded(Fight : CageFightWorld) -> void:
 	get_tree().paused = false
 	Fight.queue_free()
-	SpawnMenu()
+	await SpawnMenu()
 
 func OnGameEnded() -> void:
 	get_tree().paused = false
 	Wor.TerminateWorld()
 	Wor.queue_free()
-	SpawnMenu()
+	await SpawnMenu()

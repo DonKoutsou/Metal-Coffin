@@ -25,6 +25,7 @@ stretch = true
 disable_3d = true
 world_3d = ExtResource("4_62h02")
 handle_input_locally = false
+msaa_2d = 1
 audio_listener_enable_2d = true
 audio_listener_enable_3d = true
 oversampling = false

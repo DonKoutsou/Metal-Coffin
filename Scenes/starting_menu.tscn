@@ -86,6 +86,7 @@ own_world_3d = true
 world_3d = ExtResource("3_rh5bc")
 handle_input_locally = false
 snap_2d_vertices_to_pixel = true
+anisotropic_filtering_level = 0
 canvas_item_default_texture_filter = 2
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 0
@@ -174,6 +175,7 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect3" unique_id=971039501]
 show_behind_parent = true
 position = Vector2(15, 7)
+points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -219,6 +221,7 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4" unique_id=620173937]
 show_behind_parent = true
 position = Vector2(30, 9.00005)
+points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -264,6 +267,7 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5" unique_id=1499058002]
 show_behind_parent = true
 position = Vector2(30, 9.00005)
+points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")

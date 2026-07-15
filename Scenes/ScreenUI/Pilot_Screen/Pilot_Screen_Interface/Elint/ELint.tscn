@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bbq0mj44rwwoi" path="res://Assets/UIPiecies/Elint/transparent/Opacity4.png" id="5_2ueie"]
 [ext_resource type="Texture2D" uid="uid://bg3txpouwra6w" path="res://Assets/UIPiecies/Elint/transparent/Opacity17.png" id="5_fn607"]
 [ext_resource type="Texture2D" uid="uid://bltupetrpqvj6" path="res://Assets/UIPiecies/Elint/transparent/Opacity16.png" id="6_heli2"]
+[ext_resource type="StyleBox" uid="uid://cicae3yqgxkcm" path="res://Theme/MetalPanel.tres" id="6_piamo"]
 [ext_resource type="Texture2D" uid="uid://bup8en533m0y3" path="res://Assets/UIPiecies/Elint/transparent/Opacity3.png" id="6_xuume"]
 [ext_resource type="Texture2D" uid="uid://caq853r3telqr" path="res://Assets/UIPiecies/Elint/elintMarkers_Camera 1_FullQuality.png" id="17_bii6e"]
 [ext_resource type="AudioStream" uid="uid://7crsokjngvxo" path="res://Assets/Sounds/beepNoLoop.mp3" id="20_7y4w8"]
@@ -22,9 +23,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -84.0
+offset_left = -129.0
 offset_top = -84.0
-offset_right = 84.0
+offset_right = 129.0
 offset_bottom = 84.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -32,10 +33,10 @@ script = ExtResource("1_n0goy")
 directionMaskFiles = Array[String](["uid://bbq0mj44rwwoi", "uid://cb14164lv0llj", "uid://dkcij7ny4cu7b", "uid://dxcvcpth4mg0a", "uid://clxcchncooddj", "uid://ciwckxd5dtjjf", "uid://btqsxpt5xj7wp", "uid://dcjmtvcx08q8m", "uid://bty7v8rw58vvr", "uid://diood1a6g4jfl", "uid://dnk3n5kdplvhn", "uid://dt2affdst26uo"])
 distanceMasks = Array[String](["uid://c0cpyej1sex21", "uid://cxhs4w0i7xmty", "uid://bup8en533m0y3"])
 onOffTextures = Array[String](["uid://caq853r3telqr", "uid://u6qd6o0jhpg4"])
-rangeIndicator = NodePath("RangeIndicator")
-alertLight = NodePath("AlertLight")
-dangerCloseLight = NodePath("DangerCloseLight")
-directionLight = NodePath("DirectionLight")
+rangeIndicator = NodePath("TextureRect/RangeIndicator")
+alertLight = NodePath("TextureRect/AlertLight")
+dangerCloseLight = NodePath("TextureRect/DangerCloseLight")
+directionLight = NodePath("TextureRect/DirectionLight")
 elintText = NodePath("TextureRect")
 beepSound = NodePath("AudioStreamPlayer")
 alarm = ExtResource("21_w3va6")
@@ -43,43 +44,54 @@ beep = ExtResource("20_7y4w8")
 controllerEventHandler = ExtResource("2_ca4np")
 droneDockEventHandler = ExtResource("3_oilva")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1238868271]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1832260214]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = ExtResource("6_piamo")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1238868271]
+layout_mode = 1
+offset_left = 6.0
+offset_right = 174.0
+offset_bottom = 168.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("17_bii6e")
 expand_mode = 1
 
-[node name="RangeIndicator" type="PointLight2D" parent="." unique_id=504806615]
-position = Vector2(83.8, 83.8)
+[node name="RangeIndicator" type="PointLight2D" parent="TextureRect" unique_id=504806615]
+visible = false
+position = Vector2(84.20001, 83.79999)
 color = Color(0.811384, 0.567062, 0.119301, 1)
 energy = 16.0
 range_layer_max = 2
 texture = ExtResource("6_xuume")
 texture_scale = 0.65
 
-[node name="AlertLight" type="PointLight2D" parent="." unique_id=1900549746]
-position = Vector2(83.8, 83.8)
+[node name="AlertLight" type="PointLight2D" parent="TextureRect" unique_id=1900549746]
+visible = false
+position = Vector2(84.20001, 83.79999)
 color = Color(0.979746, 0.18299, 7.70092e-07, 1)
 energy = 16.0
 range_layer_max = 2
 texture = ExtResource("5_fn607")
 texture_scale = 0.65
 
-[node name="DangerCloseLight" type="PointLight2D" parent="." unique_id=539837348]
+[node name="DangerCloseLight" type="PointLight2D" parent="TextureRect" unique_id=539837348]
 visible = false
-position = Vector2(83.8, 83.8)
+position = Vector2(84.20001, 83.79999)
 color = Color(0.855231, 0.38363, 0, 1)
 energy = 16.0
 range_layer_max = 2
 texture = ExtResource("6_heli2")
 texture_scale = 0.65
 
-[node name="DirectionLight" type="PointLight2D" parent="." unique_id=2093360211]
-position = Vector2(83.8, 83.8)
+[node name="DirectionLight" type="PointLight2D" parent="TextureRect" unique_id=2093360211]
+visible = false
+position = Vector2(84.20001, 83.79999)
 color = Color(0.811384, 0.567062, 0.119301, 1)
 energy = 16.0
 range_layer_max = 2

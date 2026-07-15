@@ -34,7 +34,6 @@ func _ready() -> void:
 	tw.tween_property(Black, "color", Color(0,0,0,0), 2)
 	
 	call_deferred("DoLights")
-	
 	VersionLabel.text = "Demo Version v{0}".format([ProjectSettings.get_setting("application/config/version")])
 	#LoopAmp()
 

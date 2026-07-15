@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bwb4h83od4vgp" path="res://Scenes/ScreenUI/Pilot_Screen/PilotScreen.gd" id="1_fq67n"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_ecvfe"]
+[ext_resource type="Texture2D" uid="uid://d3y0sfux3mpf6" path="res://Assets/UIPiecies/Screen/SidePanels/PilotPanel.png" id="3_8mt3t"]
 [ext_resource type="Texture2D" uid="uid://d1y68mia7jlgh" path="res://Assets/UIPiecies/Screen/Screen4_FullQuality.png" id="3_188si"]
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/ThrustSlider/thrust_slider.tscn" id="3_ecvfe"]
 [ext_resource type="Texture2D" uid="uid://6h6f55b8cda3" path="res://Assets/UIPiecies/Screen/Buttons/Switch2.png" id="5_hc833"]
@@ -43,12 +44,12 @@ mouse_filter = 2
 script = ExtResource("1_fq67n")
 uiEventHandler = ExtResource("2_ecvfe")
 elint = NodePath("Elint")
-mapMarkerControls = NodePath("MapMarkerControls")
+mapMarkerControls = NodePath("VBoxContainer/MapMarkerControls")
 thrust = NodePath("ThrustLever")
 elevationThrust = NodePath("ElevationLever")
 steer = NodePath("SteeringWheel")
-pilotScreenSet = NodePath("Pilot_Screen_Settings")
-SonarUI = NodePath("Sonar")
+pilotScreenSet = NodePath("VBoxContainer/Pilot_Screen_Settings")
+SonarUI = NodePath("VBoxContainer/Sonar")
 speedSimulationButton = NodePath("SpeedSimulation")
 pauseSimulationButton = NodePath("SimulationButton")
 landButton = NodePath("LandButton")
@@ -59,7 +60,20 @@ radarButton = NodePath("RadarButton")
 zoomDial = NodePath("ZoomDial")
 yDial = NodePath("YDial")
 xDial = NodePath("XDial")
-missileUI = NodePath("Missile Tab")
+missileUI = NodePath("VBoxContainer/Missile Tab")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=659012758]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 72.0
+offset_right = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_188si")
+expand_mode = 1
 
 [node name="ScreenBackground" type="TextureRect" parent="." unique_id=776636619]
 custom_minimum_size = Vector2(0, 38.045)
@@ -67,29 +81,27 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 1005.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("3_188si")
+texture = ExtResource("3_8mt3t")
 expand_mode = 1
 
-[node name="Pilot_Screen_Settings" parent="." unique_id=1173233523 instance=ExtResource("5_ojc6g")]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -364.0
-offset_top = -58.0
-offset_right = 124.0
-offset_bottom = 0.0
-grow_horizontal = 2
-
 [node name="Elint" parent="." unique_id=502600520 instance=ExtResource("27_uojtp")]
-layout_mode = 1
-offset_left = 385.0
-offset_top = -269.0
-offset_right = 553.0
-offset_bottom = -101.0
+custom_minimum_size = Vector2(0, 166.125)
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 1016.0
+offset_top = 92.0
+offset_right = 1196.0
+offset_bottom = 259.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="Fan" parent="." unique_id=159958918 instance=ExtResource("8_bpouu")]
 position = Vector2(1002, -125.00001)
@@ -97,60 +109,37 @@ scale = Vector2(1.64062, 1.64062)
 frame_progress = 0.96041
 frequency = 40.0
 
-[node name="ControledShipSelector" parent="." unique_id=397832360 instance=ExtResource("28_hc833")]
-custom_minimum_size = Vector2(273, 128)
-layout_mode = 1
-anchors_preset = 2
-anchor_left = 0.0
-anchor_top = 1.0
-anchor_right = 0.0
-anchor_bottom = 1.0
-offset_left = -273.0
-offset_top = -202.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 0
-
 [node name="SteeringWheel" parent="." unique_id=760456773 instance=ExtResource("10_w258d")]
 layout_mode = 1
 scale = Vector2(0.5, 0.5)
 
-[node name="Sonar" parent="." unique_id=1555836270 instance=ExtResource("11_jqinv")]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=986818194]
 layout_mode = 1
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+anchors_preset = 9
+anchor_bottom = 1.0
 offset_left = -273.0
-offset_top = 0.0
-offset_right = 0.0
-offset_bottom = 176.0
-grow_horizontal = 1
-grow_vertical = 1
+grow_vertical = 2
+theme_override_constants/separation = 0
 
-[node name="Missile Tab" parent="." unique_id=1968593876 instance=ExtResource("7_ojc6g")]
-layout_mode = 1
-anchors_preset = 4
-anchor_left = 0.0
-anchor_right = 0.0
-offset_left = -248.0
-offset_top = -60.0
-offset_right = -208.0
-offset_bottom = -20.0
-grow_horizontal = 1
+[node name="Sonar" parent="VBoxContainer" unique_id=1555836270 instance=ExtResource("11_jqinv")]
+custom_minimum_size = Vector2(0, 175)
+layout_mode = 2
+size_flags_vertical = 3
 
-[node name="MapMarkerControls" parent="." unique_id=329577773 instance=ExtResource("9_yjfdw")]
-layout_mode = 1
-anchors_preset = 4
-anchor_left = 0.0
-anchor_right = 0.0
-offset_left = -182.0
-offset_top = 84.0
-offset_right = -142.0
-offset_bottom = 124.0
-grow_horizontal = 1
+[node name="Missile Tab" parent="VBoxContainer" unique_id=1968593876 instance=ExtResource("7_ojc6g")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MapMarkerControls" parent="VBoxContainer" unique_id=329577773 instance=ExtResource("9_yjfdw")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ControledShipSelector" parent="VBoxContainer" unique_id=397832360 instance=ExtResource("28_hc833")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Pilot_Screen_Settings" parent="VBoxContainer" unique_id=1173233523 instance=ExtResource("5_ojc6g")]
+layout_mode = 2
 
 [node name="SpeedSimulation" type="TextureButton" parent="." unique_id=559113668 groups=["Buttons"]]
 layout_mode = 1
@@ -416,28 +405,28 @@ grow_horizontal = 0
 grow_vertical = 1
 
 [node name="ZoomDial" parent="." unique_id=456827188 instance=ExtResource("26_ecvfe")]
-position = Vector2(32.00003, 350.99997)
+position = Vector2(35, 121.64)
 rotation = 1.5707964
-scale = Vector2(0.8, 0.8)
+scale = Vector2(0.88, 0.978)
 frame = 4
 frame_progress = 0.3159618
 
 [node name="YDial" parent="." unique_id=1133286453 instance=ExtResource("26_ecvfe")]
-position = Vector2(976, 348.00003)
-rotation = -1.5707964
-scale = Vector2(0.8, 0.8)
+position = Vector2(35, 363)
+rotation = 1.5707964
+scale = Vector2(0.88, 0.978)
 
 [node name="XDial" parent="." unique_id=884440325 instance=ExtResource("26_ecvfe")]
-position = Vector2(885.00006, 688)
-rotation = -3.1415927
-scale = Vector2(0.8, 0.8)
+position = Vector2(35, 604)
+rotation = -4.712389
+scale = Vector2(0.88, 0.978)
 
-[connection signal="ForecastToggled" from="Pilot_Screen_Settings" to="." method="_on_forecast_button_toggled"]
-[connection signal="GridToggled" from="Pilot_Screen_Settings" to="." method="_on_grid_button_toggled"]
-[connection signal="SteerToggled" from="Pilot_Screen_Settings" to="." method="_onSteerButtonToggled"]
-[connection signal="TopologyTogled" from="Pilot_Screen_Settings" to="." method="_on_topo_button_toggled"]
-[connection signal="WindCorrectionToggled" from="Pilot_Screen_Settings" to="." method="_on_wind_correction_toggled"]
-[connection signal="ZoomToggled" from="Pilot_Screen_Settings" to="." method="_on_zoom_level_button_toggled"]
+[connection signal="ForecastToggled" from="VBoxContainer/Pilot_Screen_Settings" to="." method="_on_forecast_button_toggled"]
+[connection signal="GridToggled" from="VBoxContainer/Pilot_Screen_Settings" to="." method="_on_grid_button_toggled"]
+[connection signal="SteerToggled" from="VBoxContainer/Pilot_Screen_Settings" to="." method="_onSteerButtonToggled"]
+[connection signal="TopologyTogled" from="VBoxContainer/Pilot_Screen_Settings" to="." method="_on_topo_button_toggled"]
+[connection signal="WindCorrectionToggled" from="VBoxContainer/Pilot_Screen_Settings" to="." method="_on_wind_correction_toggled"]
+[connection signal="ZoomToggled" from="VBoxContainer/Pilot_Screen_Settings" to="." method="_on_zoom_level_button_toggled"]
 [connection signal="toggled" from="SpeedSimulation" to="." method="_on_speed_simulation_toggled"]
 [connection signal="toggled" from="SimulationButton" to="." method="simPauseToggled"]
 [connection signal="pressed" from="InventoryButton" to="." method="inventoryPressed"]

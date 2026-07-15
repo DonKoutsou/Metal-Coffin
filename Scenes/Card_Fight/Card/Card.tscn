@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scenes/Card_Fight/Card/card.gd" id="1_utwiq"]
 [ext_resource type="FontFile" uid="uid://dpimg5va4xy40" path="res://Fonts/P22 Typewriter Regular.ttf" id="2_g808j"]
+[ext_resource type="PackedScene" uid="uid://xuequw4xcwgf" path="res://Scenes/Inventory/CardTooltip.tscn" id="2_paso5"]
 [ext_resource type="Texture2D" uid="uid://buffodrv1xn4a" path="res://Assets/Cards/card.png" id="3_wohcr"]
 [ext_resource type="Texture2D" uid="uid://bf3p61os8mhr7" path="res://Assets/UIPiecies/Bolt.png" id="4_5n23x"]
 [ext_resource type="Texture2D" uid="uid://c1d4jybs1oolg" path="res://Assets/Cards/BarraceIncendiery.png" id="5_p48hs"]
 [ext_resource type="Material" uid="uid://dwvsafe1eaxbk" path="res://Shaders/Card.tres" id="6_btfbu"]
 [ext_resource type="Texture2D" uid="uid://cwbo84yj0q3om" path="res://Assets/Cards/CardBack.png" id="7_ucyjg"]
-[ext_resource type="PackedScene" uid="uid://cqjgceykpax6c" path="res://Scenes/Inventory/Tooltip.tscn" id="8_paso5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4v2x1"]
 bg_color = Color(1, 1, 1, 1)
@@ -146,7 +146,7 @@ BackSide = NodePath("TextureRect")
 Line = NodePath("Line2D")
 AmmountLabel = NodePath("Amm/Label")
 TooltipPos = NodePath("Control/VBoxContainer")
-TooltipScene = ExtResource("8_paso5")
+TooltipScene = ExtResource("2_paso5")
 RealisticFont = ExtResource("2_g808j")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=2087537965]
@@ -428,7 +428,7 @@ anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 96.0
 offset_top = -119.0
-offset_right = 238.0
+offset_right = 266.0
 offset_bottom = -75.0
 grow_horizontal = 2
 mouse_filter = 2

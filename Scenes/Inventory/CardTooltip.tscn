@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://xuequw4xcwgf"]
+
+[ext_resource type="StyleBox" uid="uid://0yw364ackqb" path="res://Theme/CardTooltipPanel.tres" id="1_vr8gp"]
+
+[node name="PanelContainer" type="PanelContainer" unique_id=861191945]
+z_index = 1
+offset_right = 318.0
+offset_bottom = 8.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("1_vr8gp")
+
+[node name="Label" type="RichTextLabel" parent="." unique_id=442661117]
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+fit_content = true
+scroll_active = false

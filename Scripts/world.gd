@@ -125,7 +125,7 @@ func _ready() -> void:
 		if (IsPrologue and !SkipStory):
 			GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
 		else:
-			GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.NORMAL_SCREEN)
+			GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.PILOT_SCREEN)
 		await GetMap().GetScreenUi().FullScreenToggleStarted
 		Loadingscr.queue_free()
 		
@@ -141,7 +141,7 @@ func _ready() -> void:
 				await GetMap().GetScreenUi().FullScreenToggleFinished
 				#await Loadingscr.LoadingDestroyed
 				await Questionair.Ended
-				GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.NORMAL_SCREEN)
+				GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.PILOT_SCREEN)
 				await GetMap().GetScreenUi().FullScreenToggleStarted
 				Questionair.queue_free()
 				PlayPrologue()
@@ -159,7 +159,7 @@ func _ready() -> void:
 	else:
 		WorldView.GetInstance().Load()
 		
-		GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.NORMAL_SCREEN)
+		GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.PILOT_SCREEN)
 		await GetMap().GetScreenUi().FullScreenToggleStarted
 		Loadingscr.queue_free()
 	WORLDST = WORLDSTATE.NORMAL
@@ -404,7 +404,7 @@ func CardFightEnded(Survivors : Array[BattleShipStats], won : bool) -> void:
 func CardFightDestroyed() -> void:
 	#GetMap().GetScreenUi().ToggleControllCover(false)
 	GetMap().HideWorld(true)
-	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.NORMAL_SCREEN)
+	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.PILOT_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	#GetMap().GetScreenUi().ToggleScreenUI(true)
 	GetMap().GetScreenUi().ToggleCardFightUI(false)
@@ -506,7 +506,7 @@ func FuelTransactionFinished(BFuel : float, Ships : Array[MapShip], Scene : Town
 	
 	spot.SetFuelReserves(BFuel)
 	
-	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.NORMAL_SCREEN)
+	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.PILOT_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	Scene.queue_free()
 	#GetMap().GetScreenUi().TownVisited(false)

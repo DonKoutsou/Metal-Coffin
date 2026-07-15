@@ -28,7 +28,7 @@ follow_viewport_enabled = true
 script = ExtResource("1_vpest")
 _InScreenUI = NodePath("SubViewportContainer/ViewPort/InScreenUI")
 _ScreenUI = NodePath("ScreenUI")
-_Camera = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/ShipCamera")
+_Camera = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager/ShipCamera")
 MapLines = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager/MapLines")
 MapSpots = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/WorldNodes/MapSpots")
 Region = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager/RegionMapDrawer")
@@ -55,10 +55,10 @@ UIEventH = ExtResource("25_8mjbw")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 149.0
+offset_left = 132.0
 offset_top = 62.0
-offset_right = -346.0
-offset_bottom = -63.0
+offset_right = -336.0
+offset_bottom = -68.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -74,7 +74,7 @@ snap_2d_transforms_to_pixel = true
 snap_2d_vertices_to_pixel = true
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 512
-size = Vector2i(785, 595)
+size = Vector2i(812, 590)
 render_target_update_mode = 4
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="SubViewportContainer/ViewPort" unique_id=177781806]
@@ -94,7 +94,7 @@ canvas_item_default_texture_filter = 0
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 0
 positional_shadow_atlas_16_bits = false
-size = Vector2i(785, 595)
+size = Vector2i(812, 590)
 render_target_update_mode = 4
 
 [node name="Darkness" type="CanvasModulate" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" unique_id=2089661940]
@@ -108,10 +108,7 @@ RoadLines = true
 
 [node name="MapSpots" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/WorldNodes" unique_id=1291599953]
 
-[node name="ShipCamera" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" unique_id=1015760443 instance=ExtResource("17_6an1p")]
-
 [node name="MapPointerManager" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" unique_id=67114702 node_paths=PackedStringArray("CircleDr", "MapLonePos", "MapSpotMarkerParent", "ShipMarkerParent") groups=["CameraPositionAffected", "ZoomAffected"]]
-z_index = 1025
 material = SubResource("CanvasItemMaterial_w8yg2")
 script = ExtResource("19_ccpfd")
 CircleDr = NodePath("CircleDrawer")
@@ -126,7 +123,10 @@ ControllerEventHandler = ExtResource("22_n73so")
 MapSpotMarkerParent = NodePath("MapSpotMarkers")
 ShipMarkerParent = NodePath("ShipMarkerks")
 
+[node name="ShipCamera" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" unique_id=1015760443 instance=ExtResource("17_6an1p")]
+
 [node name="RegionMapDrawer" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" unique_id=890045518 instance=ExtResource("16_sp82o")]
+modulate = Color(0.107999995, 0.19233333, 0.2, 1)
 script = ExtResource("27_445lv")
 RegionTrans = 0.2
 ResizeLinesWithZoom = true
@@ -135,7 +135,7 @@ ResizeLinesWithZoom = true
 use_parent_material = true
 
 [node name="MapLineDrawer" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" unique_id=560404792 instance=ExtResource("16_sp82o")]
-modulate = Color(1, 1, 1, 0.2)
+modulate = Color(0.43159688, 0.43159688, 0.43159676, 1)
 ResizeLinesWithZoom = true
 
 [node name="MapSpotMarkers" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" unique_id=532983612]

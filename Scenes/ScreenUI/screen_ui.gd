@@ -75,7 +75,8 @@ enum ScreenState{
 	FULL_SCREEN,
 	HALF_SCREEN,
 	NORMAL_SCREEN,
-	NO_SCREEN
+	NO_SCREEN,
+	PILOT_SCREEN,
 }
 
 func CloseScreen() -> void:
@@ -95,6 +96,8 @@ func OpenScreen(NewStat : ScreenState) -> void:
 			ToggleForegroundUI(false)
 		ScreenState.FULL_SCREEN:
 			ToggleFullScreenUI(false)
+		ScreenState.PILOT_SCREEN:
+			ToggleForegroundUI(false)
 			
 	CurrentScreenState = NewStat
 	
@@ -102,6 +105,8 @@ func OpenScreen(NewStat : ScreenState) -> void:
 		ScreenState.FULL_SCREEN:
 			ToggleFullScreenUI(true)
 		ScreenState.NORMAL_SCREEN:
+			ToggleForegroundUI(true)
+		ScreenState.PILOT_SCREEN:
 			ToggleForegroundUI(true)
 	
 	Transition.Open()
@@ -155,6 +160,8 @@ func ToggleFullScreen(NewStat : ScreenState) -> void:
 	match(CurrentScreenState):
 		ScreenState.NORMAL_SCREEN:
 			ToggleForegroundUI(false)
+		ScreenState.PILOT_SCREEN:
+			ToggleForegroundUI(false)
 		ScreenState.FULL_SCREEN:
 			ToggleFullScreenUI(false)
 		
@@ -164,6 +171,8 @@ func ToggleFullScreen(NewStat : ScreenState) -> void:
 		ScreenState.FULL_SCREEN:
 			ToggleFullScreenUI(true)
 		ScreenState.NORMAL_SCREEN:
+			ToggleForegroundUI(true)
+		ScreenState.PILOT_SCREEN:
 			ToggleForegroundUI(true)
 
 	Transition.Open()

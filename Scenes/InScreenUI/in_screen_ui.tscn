@@ -193,6 +193,7 @@ mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer" unique_id=562179179]
+z_index = 1
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 mouse_filter = 2
@@ -210,8 +211,10 @@ layout_mode = 1
 mouse_force_pass_scroll_events = false
 
 [node name="PortNotification" parent="." unique_id=755876837 instance=ExtResource("7_4bt5v")]
+z_index = 1
 
 [node name="Clock" parent="." unique_id=104315517 instance=ExtResource("18_adjny")]
+z_index = 1
 offset_left = 20.0
 offset_right = -20.0
 offset_bottom = 60.0

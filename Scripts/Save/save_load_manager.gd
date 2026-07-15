@@ -15,16 +15,15 @@ func DeleteSave() -> void:
 	TutorialManager.GetInstance().DeleteSave()
 
 static func SaveExists(Sav : String) -> bool:
-	var CurrentVersion = ProjectSettings.get_setting("application/config/version")
-		
 	if (!FileAccess.file_exists(Sav)):
 		return false
 	
-	var sav = ResourceLoader.load(Sav)
-	
+	var sav = await Helper.Instance.LoadThreaded(Sav).Sign
 	
 	if (sav == null):
 		return false
+	
+	var CurrentVersion = ProjectSettings.get_setting("application/config/version")
 	
 	if (sav.GameVersion != CurrentVersion):
 		return false

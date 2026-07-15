@@ -36,9 +36,11 @@ func Handle(Performer : BattleShipStats, Action : CardStats, Targets : Array[Bat
 		var hand = g.deck.Hand.duplicate()
 		hand.shuffle()
 		for i in GetCardAmm(Action.Tier):
-			var c = hand.pop_back()
+			var c : CardStats = hand.pop_back()
 			if (c == null):
 				continue
+			while (c.UseConditions.has(CardStats.CardUseCondition.ENERGY_DEPENDANT) and hand.size() > 0):
+				c = hand.pop_back()
 			c.EnergyReduction += GetReductionAmm(Action.Tier)
 			
 	Performer.CardsBuffed.emit()

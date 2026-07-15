@@ -12,7 +12,7 @@ var Labels : Array[Label]
 @export var ResizeLinesWithZoom : bool = false
 
 func UpdateCameraZoom(NewZoom : float) -> void:
-	visible = NewZoom < 1.5
+	visible = NewZoom < 0.5
 	for g in BLines:
 		g.width = 10 / NewZoom
 	#for g in Labels:
@@ -84,18 +84,23 @@ func _DrawingEnded() -> void:
 		l.add_theme_font_override("font", load("res://Fonts/Caudex-Bold.ttf"))
 		Labels.append(l)
 		add_child(l)
+		l.use_parent_material = true
 		l.set("theme_override_font_sizes/font_size", 1200)
 		var ypos = points[0] + points[0].direction_to(points[points.size() - 1]) * (points[0].distance_to(points[points.size() - 1]) / 2)
 		call_deferred("PositionLabel", l, Vector2(0, ypos.y))
 		l.rotation = randf_range(-0.1, 0.1)
-		l.modulate.a = RegionTrans
+		l.add_theme_constant_override("shadow_outline_size", 0)
+		l.add_theme_constant_override("shadow_offset_x", 0)
+		l.add_theme_constant_override("shadow_offset_y", 0)
+		l.add_theme_color_override("font_color", Color(1,1,1))
+		#l.modulate.a = RegionTrans
 	
 	for g in BorderLines:
 		var l = Line2D.new()
 		add_child(l)
 		l.use_parent_material = true
 		l.joint_mode = Line2D.LINE_JOINT_ROUND
-		l.default_color = Color(0,0,0,RegionTrans)
+		#l.default_color = Color(0,0,0,RegionTrans)
 		for p in g:
 			l.add_point(p)
 		BLines.append(l)
