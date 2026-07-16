@@ -94,6 +94,9 @@ var PickingMoves : bool = false
 var CurrentPhase : CardFightPhase
 var Shuffling : bool = false
 
+##Energy stored when player manually discards card.
+var StoredEnergy : int = 0
+
 var ShipBeingReplaced : Array[CardFightShipViz2]
 signal ShipReplecementFinished
 
@@ -460,7 +463,7 @@ func RunShipsTurn(Ship : BattleShipStats) -> void:
 		await Ship.deck.DrawCard()
 		EnemyActionSelection(Ship)
 	
-func OnCardDiscarded(C : Card) -> bool:
+func OnCardDiscarded(C : Card, manually : bool = false) -> bool:
 	if (GameOver):
 		return false
 	if (SelectingTarget):
@@ -474,6 +477,13 @@ func OnCardDiscarded(C : Card) -> bool:
 		return false
 	
 	var Ship = GetCurrentShip()
+	
+	if (manually):
+		StoredEnergy += 1
+		if (StoredEnergy == 2):
+			StoredEnergy = 0
+			Ship.SetEnergy(Ship.Energy + 1)
+			PopUpManager.GetInstance().DoFadeNotif("Card recycled")
 	
 	Ship.deck.Hand.erase(C.CStats)
 	Ship.deck.DiscardCard(C.CStats)
@@ -781,6 +791,7 @@ func CurrentEnemyTurnEnded() -> void:
 	viz.Dissable()
 	viz.OnActionsPerformed()
 	EnemyPickingMove = false
+	StoredEnergy = 0
 	CurrentTurn = CurrentTurn + 1
 	
 	var playerNext = IsShipFriendly(ShipTurns[CurrentTurn])

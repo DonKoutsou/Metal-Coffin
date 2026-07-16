@@ -143,7 +143,7 @@ func ChooseTutorial() -> bool:
 	
 	return true
 
-func GetVp() -> Control:
+func GetVp() -> SubViewport:
 	return $SubViewportContainer/SubViewport
 
 func _on_dont_show_tutorial_pressed() -> void:

@@ -161,7 +161,7 @@ func ReleaseCard() -> void:
 	else: if (HeldCard.get_parent() == DiscardInsert):
 		##IMPLEMENT DISCARD LOGIC
 		InsertCardToDiscard(HeldCard, true)
-		FightScene.OnCardDiscarded(HeldCard)
+		FightScene.OnCardDiscarded(HeldCard, true)
 		HeldCard = null
 	else: if (HeldCard.get_parent() == PlayCardInsert):
 		InserCardtoPlay(HeldCard, true)
