@@ -32,9 +32,10 @@ signal OnEndTurnPressed
 #signal CardPlayed(C : CardStats)
 
 var FightScene : Card_Fight
+var HoveredShip : BattleShipStats
 
 static var Instance : ExternalCardFightUI
-
+static var HOLDING_CARD : bool = false
 var AllowEnd : bool = true
 var HeldCard : Card
 
@@ -52,13 +53,23 @@ func _ready() -> void:
 	PlayerCardPlacementInputBlocker.visible = false
 	UISoundMan.GetInstance().Refresh()
 
+func _exit_tree() -> void:
+	HOLDING_CARD = false
+
+func ShipHovered(ship : BattleShipStats) -> void:
+	HoveredShip = ship
+
+func ShipUnhovered(ship : BattleShipStats) -> void:
+	if (ship == HoveredShip):
+		HoveredShip = null
+
 func _process(delta: float) -> void:
 	if (HeldCard != null):
 		if (HeldCard.get_parent() == self):
-			var PrevPos = HeldCard.Line.global_position
+			var PrevPos = HeldCard.global_position + Vector2(HeldCard.size.x / 2.0, 0)
 			var d = PrevPos.distance_squared_to(get_global_mouse_position())
-			HeldCard.global_position = HeldCard.global_position.move_toward(get_global_mouse_position() - HeldCard.size / 2.0, d / 1000)
-			var vel = PrevPos - HeldCard.Line.global_position
+			HeldCard.global_position = HeldCard.global_position.move_toward(get_global_mouse_position() - Vector2(HeldCard.size.x / 2.0, 0), d / 1000)
+			var vel = PrevPos - (HeldCard.global_position + Vector2(HeldCard.size.x /2.0, 0))
 			HeldCard.rotation = -vel.x / 250
 			
 		if (!Input.is_action_pressed("Click")):
@@ -120,7 +131,10 @@ func _on_deck_button_pressed() -> void:
 	OnDeckPressed.emit()
 
 func HoldCard(C : Card) -> void:
-	mouse_filter = Control.MOUSE_FILTER_STOP
+	HOLDING_CARD = true
+	#mouse_filter = Control.MOUSE_FILTER_STOP
+	ToggleHandInput(false)
+	InScreenCursor.Instance.ToggleMouse(false)
 	C.Dissable(true)
 	C.reparent(self)
 	HeldCard = C
@@ -130,10 +144,16 @@ func HoldCard(C : Card) -> void:
 	#C.SetPressed()
 
 func ReleaseCard() -> void:
-	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	HOLDING_CARD = false
+	#mouse_filter = Control.MOUSE_FILTER_IGNORE
+	ToggleHandInput(true)
 	InScreenCursor.Instance.ToggleMouse(true)
 	PlayCardSound()
 	HeldCard.Enable()
+	if (HoveredShip != null):
+		InserCardtoPlay(HeldCard, false)
+		HeldCard = null
+		return
 	
 	if (HeldCard.get_parent() == self):
 		HeldCard.reparent(PlayerCardPlecement, false)
@@ -149,6 +169,7 @@ func ReleaseCard() -> void:
 
 func InserCardtoPlay(C : Card, skipTransition : bool = false) -> void:
 	AllowEnd = false
+	var target = HoveredShip
 	C.Dissable(true)
 	PlayerCardPlecement.Blocked = true
 	if (!skipTransition):
@@ -158,19 +179,21 @@ func InserCardtoPlay(C : Card, skipTransition : bool = false) -> void:
 		#add_child(C)
 		
 		C.rotation = 0
-		C.global_position = pos
+		#C.global_position = pos
 		var Movetw = create_tween()
 		Movetw.set_ease(Tween.EASE_OUT)
 		Movetw.set_trans(Tween.TRANS_QUAD)
-		Movetw.tween_property(C, "global_position", PlayCardInsert.global_position + Vector2(0, -15), 0.25)
+		Movetw.tween_property(C, "global_position", PlayCardInsert.global_position + Vector2(10, 15), 0.25)
 		
+		#var ScaleTw = create_tween()
+		#ScaleTw.tween_property(C, "scale", Vector2(0.85, 0.85), 0.25)
 		PlayCardSound()
 		
 		await Movetw.finished
-	#var ScaleTw = create_tween()
+	
 	#ScaleTw.set_ease(Tween.EASE_IN)
 	#ScaleTw.set_trans(Tween.TRANS_CUBIC)
-	#ScaleTw.tween_property(C, "scale", Vector2(0.85, 0.85), 0.25)
+	
 	
 	PlayerCardPlecement.Blocked = false
 	C.TogglePerspective(true)
@@ -192,7 +215,7 @@ func InserCardtoPlay(C : Card, skipTransition : bool = false) -> void:
 	await tw.finished
 	PlayCardInsertSound(CardSoundType.BEEP)
 	
-	if (!await FightScene.OnCardSelected(C)):
+	if (!await FightScene.OnCardSelected(C, target)):
 		PlayCardInsertSound(CardSoundType.BEEPNO)
 		var tw2 = create_tween()
 		tw.set_ease(Tween.EASE_OUT)
@@ -215,6 +238,10 @@ func PausePressed() -> void:
 	PlayerCardPlecement.visible = !get_tree().paused
 
 func ToggleHandInput(t : bool) -> void:
+	if (t):
+		PlayerCardPlecement.mouse_filter = Control.MOUSE_FILTER_PASS
+	else:
+		PlayerCardPlecement.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	PlayerCardPlacementInputBlocker.visible = !t
 
 func InsertCardToDiscard(C : Card, skipTransition : bool = false) -> void:
@@ -364,7 +391,7 @@ func MouseOut() -> void:
 
 func _on_card_discard_input_mouse_entered() -> void:
 	if (HeldCard != null):
-		HeldCard.reparent(DiscardInsert, false)
+		HeldCard.reparent(DiscardInsert, true)
 		HeldCard.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
 		HeldCard.rotation = 0
 		HeldCard.position = Vector2(15, -5)

@@ -25,8 +25,8 @@ const StatToolTips : Dictionary = {
 	STATS.SPEED : "Derived stat calculated from other attributes:[p][color=#ffc315]SPEED[/color] = ([color=#ffc315]THRUST[/color] × 1000) / [color=#ffc315]WEIGHT[/color]",
 	STATS.RANGE : "Derived stat calculated from other attributes:[p][color=#ffc315]RANGE[/color] = [color=#ffc315]FUEL TANK[/color] * (([color=#ffc315]FUEL EFFICIENCY[/color] / pow([color=#ffc315]WEIGHT[/color], 0.5)) * 10)",
 	STATS.VALUE : "Value of ship derived from original ship price and all items on it.",
-	STATS.SOUND_SIGNATURE : "Value of ship derived from original ship price and all items on it.",
-	STATS.WINDAGE : ""
+	STATS.SOUND_SIGNATURE : "The ammount of sound this vessel emits at max thrust, this value is the stronger the thrust of the vessel the lowder it will be.",
+	STATS.WINDAGE : "Air resistance of the vesel. The higher this value the less the vessel will be affected by wind forces."
 }
 
 const StatMaxValues : Dictionary = {
@@ -48,7 +48,7 @@ const StatMaxValues : Dictionary = {
 	STATS.MAX_SHIELD : 1000,
 	STATS.REPAIR_PRICE : 1000,
 	STATS.AEROSONAR_RANGE : 3000,
-	STATS.SOUND_SIGNATURE : 100,
+	STATS.SOUND_SIGNATURE : 194,
 	STATS.WINDAGE : 1000
 }
 const StatShouldStack : Dictionary = {

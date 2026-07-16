@@ -72,8 +72,9 @@ func UpdateValues() -> void:
 	var Itvalue = CurrentShownCaptain.GetValue() - ChValue
 	ValueStat.UpdateStatCustom(ChValue, Itvalue, 0)
 	
-	var NoisedB = CurrentShownCaptain.GetMaxdB()
-	NoiseStat.UpdateStatCustom(0, NoisedB * 10, 0)
+	var NormalisedThrust = Helper.normalize_value(CurrentShownCaptain.GetShipThrust(), 0, STAT_CONST.GetStatMaxValue(STAT_CONST.STATS.THRUST))
+	
+	NoiseStat.UpdateStatCustom(0, roundi(Helper.mapvalue(NormalisedThrust, 50, STAT_CONST.GetStatMaxValue(STAT_CONST.STATS.SOUND_SIGNATURE))), 0)
 
 func SetCaptain(Cpt : Captain) -> void:
 	CurrentShownCaptain = Cpt

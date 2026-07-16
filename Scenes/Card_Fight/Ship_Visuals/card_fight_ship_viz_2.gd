@@ -33,7 +33,8 @@ class_name CardFightShipViz2
 const StatText = "[color=#ffc315]HULL[/color][p][color=#6be2e9]SHIELD[/color][p][color=#308a4d]SPEED[/color][p][color=#f35033]FPWR[/color]"
 
 signal OnFallbackPressed()
-
+signal Hovered()
+signal Unhovered()
 
 var Ship : BattleShipStats
 var Fr : bool
@@ -174,7 +175,8 @@ func ActionPicked(C : CardStats, Targets : Array[BattleShipStats] = []) -> void:
 	ActionParent.add_child(TexNode)
 
 func ActionHovered(C : CardStats, Targets : Array[BattleShipStats]) -> void:
-	
+	if (ExternalCardFightUI.HOLDING_CARD):
+		return
 	var targetlocs : Array[Vector2] = []
 	for g in Targets:
 		var n = g.ShipViz.ShipIcon.get_parent().get_parent()
@@ -194,6 +196,8 @@ func ActionHovered(C : CardStats, Targets : Array[BattleShipStats]) -> void:
 	print("Action hovered")
 
 func ActionUnhovered() -> void:
+	if (CurrentCardShown == null):
+		return
 	CurrentCardShown.queue_free()
 	set_physics_process(false)
 	print("Action unhovered")
@@ -320,6 +324,7 @@ func _on_panel_container_2_mouse_entered() -> void:
 	tw.set_trans(Tween.TRANS_BACK)
 	tw.tween_property($HBoxContainer/VBoxContainer/PanelContainer2, "custom_minimum_size", Vector2(0,97), 0.15)
 	tw.finished.connect(ToggleStatVisibility.bind(true))
+	Hovered.emit()
 
 func ToggleStatVisibility(t : bool) -> void:
 	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2.visible = t
@@ -334,3 +339,4 @@ func _on_panel_container_2_mouse_exited() -> void:
 	tw.set_trans(Tween.TRANS_BACK)
 	tw.tween_property($HBoxContainer/VBoxContainer/PanelContainer2, "custom_minimum_size", Vector2.ZERO, 0.15)
 	ToggleStatVisibility(false)
+	Unhovered.emit()

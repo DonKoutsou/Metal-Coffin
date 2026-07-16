@@ -15,6 +15,7 @@
 [ext_resource type="Material" uid="uid://c43qdgvsab5kq" path="res://Shaders/Clouds/CloudsStartingMenu.tres" id="12_t54ed"]
 [ext_resource type="Texture2D" uid="uid://f727c3anmat7" path="res://Assets/Logos/tbrender.png" id="14_61hxs"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/UIPiecies/Light.png" id="15_7x35f"]
+[ext_resource type="Texture2D" uid="uid://cbdd8djvya36r" path="res://Assets/Logos/tbrender2.png" id="16_qskuh"]
 [ext_resource type="PackedScene" uid="uid://bagsk7yyq8sv1" path="res://Scenes/WishlistButton.tscn" id="21_srpg8"]
 [ext_resource type="Texture2D" uid="uid://tklv7f2e06gq" path="res://Assets/Logos/Discord-Symbol-White.png" id="21_xqmn8"]
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="22_jns0o"]
@@ -337,6 +338,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextureRect3" type="TextureRect" parent="SubViewportContainer/SubViewport/NormalUI" unique_id=1004158259]
+z_index = -1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -370,6 +372,41 @@ size_flags_vertical = 6
 texture = ExtResource("14_61hxs")
 expand_mode = 1
 
+[node name="TextureRect4" type="TextureRect" parent="SubViewportContainer/SubViewport/NormalUI" unique_id=596748291]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 10.0
+offset_right = -3.0
+offset_bottom = -98.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 6
+texture = ExtResource("16_qskuh")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="SubViewportContainer/SubViewport/NormalUI/TextureRect4" unique_id=2026854312]
+self_modulate = Color(0, 0, 0, 0.6)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 6
+texture = ExtResource("16_qskuh")
+expand_mode = 1
+
 [node name="Button" parent="SubViewportContainer/SubViewport/NormalUI" unique_id=755058510 instance=ExtResource("21_srpg8")]
 layout_mode = 1
 offset_left = -293.0
@@ -378,6 +415,7 @@ offset_right = -25.0
 offset_bottom = -27.0
 
 [node name="HintDialogue" type="Control" parent="SubViewportContainer/SubViewport/NormalUI" unique_id=1587002589]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -484,6 +522,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="CommandLine" parent="SubViewportContainer/SubViewport" unique_id=277886953 instance=ExtResource("23_t54ed")]
+visible = false
 offset_left = 70.0
 offset_top = -173.5
 offset_right = -70.0
@@ -759,6 +798,7 @@ color = Color(0.5, 0.5, 0.5, 1)
 [node name="AlarmLight2" type="PointLight2D" parent="." unique_id=368259133]
 texture_filter = 2
 position = Vector2(597, -710)
+blend_mode = 2
 texture = ExtResource("36_j43p8")
 offset = Vector2(0, 1000)
 texture_scale = 7.0

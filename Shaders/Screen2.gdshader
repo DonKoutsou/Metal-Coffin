@@ -20,8 +20,8 @@ uniform float color_offset_multiplier: hint_range(0.0, 0.1) =  0.004;
 
 uniform vec2 warp = vec2(64.0, 24.0);
 
-uniform float maskDark : hint_range(0.0, 1.0) = 0.5;
-uniform float maskLight : hint_range(1.0, 2.0) = 1.5;
+//uniform float maskDark : hint_range(0.0, 1.0) = 0.5;
+//uniform float maskLight : hint_range(1.0, 2.0) = 1.5;
 
 uniform float scanlines_opacity: hint_range(0., 2., .01) = 1.;
 uniform float scanlines_speed: hint_range(0., 5., .01) = 1.;
@@ -112,21 +112,21 @@ vec2 warp2(vec2 uv){
 	return uv + delta * delta_offset;
 }
 
-vec3 Mask(vec2 pos){
-	if(mask_type == 0){
-		float line = maskLight, odd = fract(pos.x / 6.0) < 0.5 ? 1.0 : 0.0;
-		if (fract((pos.y + odd) / 2.0) < 0.5) line = maskDark;
-		pos.x = fract(pos.x / 3.0);
-		return vec3(pos.x < 0.333 ? maskLight : pos.x < 0.666 ? maskDark : maskDark) * line;
-	} else if(mask_type == 1) {
-		pos.x += pos.y * 3.0; pos.x = fract(pos.x / 6.0);
-		return vec3(pos.x < 0.333 ? maskLight : pos.x < 0.666 ? maskDark : maskDark);
-	} else {
-		pos.xy = floor(pos.xy * vec2(1.0, 0.5));
-		pos.x += pos.y * 3.0; pos.x = fract(pos.x / 6.0);
-		return vec3(pos.x < 0.333 ? maskLight : pos.x < 0.666 ? maskDark : maskDark);
-	}
-}
+//vec3 Mask(vec2 pos){
+	//if(mask_type == 0){
+		//float line = maskLight, odd = fract(pos.x / 6.0) < 0.5 ? 1.0 : 0.0;
+		//if (fract((pos.y + odd) / 2.0) < 0.5) line = maskDark;
+		//pos.x = fract(pos.x / 3.0);
+		//return vec3(pos.x < 0.333 ? maskLight : pos.x < 0.666 ? maskDark : maskDark) * line;
+	//} else if(mask_type == 1) {
+		//pos.x += pos.y * 3.0; pos.x = fract(pos.x / 6.0);
+		//return vec3(pos.x < 0.333 ? maskLight : pos.x < 0.666 ? maskDark : maskDark);
+	//} else {
+		//pos.xy = floor(pos.xy * vec2(1.0, 0.5));
+		//pos.x += pos.y * 3.0; pos.x = fract(pos.x / 6.0);
+		//return vec3(pos.x < 0.333 ? maskLight : pos.x < 0.666 ? maskDark : maskDark);
+	//}
+//}
 
 float onOff(float a, float b, float c){
     return step(c, sin(TIME + a * cos(TIME * b)));

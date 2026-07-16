@@ -481,7 +481,7 @@ func OnCardDiscarded(C : Card) -> bool:
 	HandleDiscardModules(Ship, C.CStats)
 	return true
 ##----------------------------------------------------------------------##
-func OnCardSelected(C : Card) -> bool:
+func OnCardSelected(C : Card, target : BattleShipStats = null) -> bool:
 	if (GameOver):
 		return false
 	if (SelectingTarget):
@@ -503,6 +503,11 @@ func OnCardSelected(C : Card) -> bool:
 		ExternalUI.GetEnergyBar().NotifyNotEnough()
 		PopUpManager.GetInstance().DoFadeNotif("Not enough energy")
 		return false
+	
+	if (target != null and !IsTargetValid(C.CStats, Ship, target)):
+		PopUpManager.GetInstance().DoFadeNotif("Invalid Target")
+		return false
+	
 	
 	PlayerPerformingMove = true
 	
@@ -562,7 +567,8 @@ func OnCardSelected(C : Card) -> bool:
 	
 	ExternalUI.UpdateCardsInHandAmm(Ship.deck.Hand.size(), MaxCardsInHand)
 
-	await HandleModulesPl(Ship, C.CStats)
+	if (!await HandleModulesPl(Ship, C.CStats, target)):
+		return false
 	
 	PlayerPerformingMove = false
 	if (Ship.deck.Hand.size() == 0 and Ship.Energy == 0 and Ship.EnergyReserves == 0):
@@ -1096,7 +1102,7 @@ func HandleModules(Performer : BattleShipStats, C : CardStats) -> void:
 	if (AnimData.size() > 0):
 		await DoCardAnim(C, AnimData, Performer, true)
 ##----------------------------------------------------------------------##
-func HandleModulesPl(Performer : BattleShipStats, C : CardStats) -> void:
+func HandleModulesPl(Performer : BattleShipStats, C : CardStats, targetOverride : BattleShipStats = null) -> bool:
 	var AnimData : Array[AnimationData]
 	if (C.Burned):
 		Performer.deck.DiscardCard(C)
@@ -1119,15 +1125,20 @@ func HandleModulesPl(Performer : BattleShipStats, C : CardStats) -> void:
 		else:
 			Performer.deck.DiscardCard(C)
 			HandleDiscardModules(Performer, C)
-		
-	for Mod in C.OnUseModules.size():
-		var targets = await HandleTargets(C.OnUseModules[Mod], Performer)
+	
+	for ModIndex in C.OnUseModules.size():
+		var Mod = C.OnUseModules[ModIndex]
+		var targets : Array[BattleShipStats] = [] 
+		if (targetOverride != null and !Mod.AOE):
+			targets.append(targetOverride)
+		else:
+			targets = await HandleTargets(Mod, Performer)
 		
 		var Data : AnimationData
 		
-		Data = HandleModule(Performer, C ,C.OnUseModules[Mod], targets)
+		Data = HandleModule(Performer, C ,Mod, targets)
 		
-		if (Mod < C.OnUseModules.size() - 1):
+		if (ModIndex < C.OnUseModules.size() - 1):
 			await Helper.GetInstance().wait(0.2)
 			
 		if (Data != null):
@@ -1138,12 +1149,17 @@ func HandleModulesPl(Performer : BattleShipStats, C : CardStats) -> void:
 			NewMod.StoredEnergy = Performer.Energy
 			Performer.SetEnergy(0)
 			C.OnPerformModule = NewMod
-
-		var targets = await HandleTargets(C.OnPerformModule, Performer)
+		
+		var targets : Array[BattleShipStats] = [] 
+		if (targetOverride != null and !C.OnPerformModule.AOE):
+			targets.append(targetOverride)
+		else:
+			targets = await HandleTargets(C.OnPerformModule, Performer)
 		await HandleOffensiveModule(Performer, C ,C.OnPerformModule, targets)
 		
 	if (AnimData.size() > 0):
 		await DoCardAnim(C, AnimData, Performer, true)
+	return true
 ##----------------------------------------------------------------------##
 func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod : OffensiveCardModule, TargetShips : Array[BattleShipStats]) -> void:
 	var AnimData : Array[AnimationData]
@@ -1272,10 +1288,39 @@ func HandleModule(Performer : BattleShipStats, C : CardStats, Mod : CardModule, 
 
 	return AnimData
 ##----------------------------------------------------------------------##
-func HandleTargets(Mod : CardModule, User : BattleShipStats) -> Array[BattleShipStats]:
+func IsTargetValid(card : CardStats, User : BattleShipStats, target : BattleShipStats = null) -> bool:
+	var frUser = IsShipFriendly(User)
+	
+	for Mod in card.OnUseModules:
+		
+		if (Mod is DeffenceCardModule):
+			if (!Mod.SelfUse and target == User):
+				return false
+			if (Mod.SelfUse and target != User and !Mod.CanBeUsedOnOther and !Mod.AOE):
+				return false
+			if (!IsShipFriendly(target)):
+				return false
+		else: if (Mod is OffensiveCardModule):
+			if (IsShipFriendly(target)):
+				return false
+	
+	if (card.OnPerformModule != null):
+		if (card.OnPerformModule is DeffenceCardModule):
+			if (!card.OnPerformModule.SelfUse and target == User):
+				return false
+			if (card.OnPerformModule.SelfUse and target != User and !card.OnPerformModule.CanBeUsedOnOther and !card.OnPerformModule.AOE):
+				return false
+			if (!IsShipFriendly(target)):
+				return false
+		else: if (card.OnPerformModule is OffensiveCardModule):
+			if (IsShipFriendly(target)):
+				return false
+	
+	return true
+
+func HandleTargets(Mod : CardModule, User : BattleShipStats, targetOverride : BattleShipStats = null) -> Array[BattleShipStats]:
 	var Targets : Array[BattleShipStats]
 	if (!Mod.NeedsTargetSelect()):
-		
 		return Targets
 		
 	var Friendly = IsShipFriendly(User)
@@ -1600,11 +1645,13 @@ func RemoveShip(Ship : BattleShipStats) -> void:
 #██    ██ ██ 
  #██████  ██ 
 #////////////////////////////////////////////////////////////////////////////
+
 ##----------------------------------------------------------------------##
 func CreateShipVisuals(BattleS : BattleShipStats, Friendly : bool) -> CardFightShipViz2:
 	var VizScene : PackedScene = ResourceLoader.load(ShipVizScene)
 	var ShipVisuals = VizScene.instantiate() as CardFightShipViz2
-
+	ShipVisuals.Hovered.connect(ShipVisualHovered.bind(BattleS))
+	ShipVisuals.Unhovered.connect(ShipVisualUnHovered.bind(BattleS))
 	ShipVisuals.SetStats(BattleS, Friendly)
 	
 	if (Friendly):
@@ -1622,6 +1669,12 @@ func CreateShipVisuals(BattleS : BattleShipStats, Friendly : bool) -> CardFightS
 	NewTurnStarted.connect(ShipVisuals.OnNewTurnStarted)
 	
 	return ShipVisuals
+
+func ShipVisualHovered(ship : BattleShipStats) -> void:
+	ExternalUI.ShipHovered(ship)
+
+func ShipVisualUnHovered(ship : BattleShipStats) -> void:
+	ExternalUI.ShipUnhovered(ship)
 ##----------------------------------------------------------------------##
 func UpdateHandCards() -> void:
 	
