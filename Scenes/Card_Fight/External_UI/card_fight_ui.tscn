@@ -243,6 +243,19 @@ show_behind_parent = true
 layout_mode = 2
 mouse_filter = 2
 
+[node name="CardDiscardInput" type="Control" parent="DiscardInsert/Control" unique_id=1934749882]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -75.05884
+offset_top = -67.99997
+offset_right = 75.05884
+offset_bottom = -212.58823
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
 [node name="DrawInsert" type="PanelContainer" parent="." unique_id=900541418]
 clip_contents = true
 layout_mode = 0
@@ -274,6 +287,14 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_lbx4b")
 show_behind_parent = true
 layout_mode = 2
 mouse_filter = 2
+
+[node name="CardInsertInput" type="Control" parent="PlayInsert/Control" unique_id=1729056273]
+anchors_preset = 0
+offset_left = -92.70593
+offset_top = -62.117653
+offset_right = 284.70593
+offset_bottom = 47.294113
+mouse_filter = 1
 
 [node name="Pause" type="Button" parent="." unique_id=974089572 groups=["Buttons"]]
 process_mode = 3
@@ -322,4 +343,8 @@ vertical_alignment = 1
 [connection signal="pressed" from="DrawCard" to="." method="_on_deck_button_pressed"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="SwitchShip" to="." method="_on_switch_ship_pressed"]
+[connection signal="mouse_entered" from="DiscardInsert/Control/CardDiscardInput" to="." method="_on_card_discard_input_mouse_entered"]
+[connection signal="mouse_exited" from="DiscardInsert/Control/CardDiscardInput" to="." method="_on_card_discard_input_mouse_exited"]
+[connection signal="mouse_entered" from="PlayInsert/Control/CardInsertInput" to="." method="_on_card_insert_input_mouse_entered"]
+[connection signal="mouse_exited" from="PlayInsert/Control/CardInsertInput" to="." method="_on_card_insert_input_mouse_exited"]
 [connection signal="pressed" from="Pause" to="." method="_on_pause_pressed"]

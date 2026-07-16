@@ -173,8 +173,8 @@ func Handle(_Performer : BattleShipStats, Action : CardStats, _Targets : Array[B
 	return null
 
 enum AtackTypes{
-	DIRECT_ATACK,
-	HOMING_ATACK,
+	DIRECT_ATTACK,
+	HOMING_ATTACK,
 	UNAVOIDABLE,
 	ANY_ATACK
 }

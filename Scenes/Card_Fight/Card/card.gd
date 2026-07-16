@@ -19,6 +19,7 @@ class_name Card
 @export var RealisticFont : Font
 
 signal OnCardPressed(C : Card)
+signal OnCardReleased
 signal CardKilled
 
 var CStats : CardStats
@@ -44,14 +45,19 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	var endPos = global_position.x + size.x + TooltipPos.size.x + 20
+	var endPosy = global_position.y + TooltipPos.size.y + 30
+	var off : float = 0
 	if (get_viewport_rect().size.x < endPos):
 		TooltipPos.get_parent().scale.x = -1
 		TooltipPos.offset_transform_scale.x = -1
 	else:
 		TooltipPos.get_parent().scale.x = 1
 		TooltipPos.offset_transform_scale.x = 1
-		
-	TooltipPos.get_parent().global_position = Line.global_position
+	if (get_viewport_rect().size.y < endPosy):
+		var dif = endPosy - get_viewport_rect().size.y
+		off = dif
+	
+	TooltipPos.get_parent().global_position = Line.global_position - Vector2(0, off)
 	TooltipPos.get_parent().rotation = rotation
 	
 	if (TrackMouse):
@@ -237,14 +243,19 @@ func SetRealistic() -> void:
 	CardDesc.add_theme_font_override("normal_font", RealisticFont)
 	CardCost.get_child(0).visible = false
 
+func SetPressed() -> void:
+	FrontSide.set_pressed_no_signal(true)
+	But.set_pressed_no_signal(true)
 
 func OnButtonPressed() -> void:
-
 	OnCardPressed.emit(self)
 
+func OnButtonReleased() -> void:
+	OnCardReleased.emit()
 
 func Dissable(Filter : bool = false) -> void:
 	FrontSide.disabled = true
+	#But.disabled = true
 	var SoundMan = UISoundMan.GetInstance()
 	if (is_instance_valid(SoundMan)):
 		SoundMan.RemoveSelf(FrontSide)
@@ -253,6 +264,7 @@ func Dissable(Filter : bool = false) -> void:
 		FrontSide.set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
 func Enable() -> void:
 	FrontSide.disabled = false
+	#But.disabled = false
 	var SoundMan = UISoundMan.GetInstance()
 	if (is_instance_valid(SoundMan)):
 		SoundMan.AddSelf(FrontSide)
@@ -282,12 +294,14 @@ func _on_button_mouse_entered() -> void:
 	TweenHover.tween_property(self,"scale", Vector2(1.1, 1.1), 0.55)
 	TweenHover.set_parallel(true)
 	TweenHover.tween_property(TooltipPos,"scale", Vector2(1.1, 1.1), 0.55)
-	
+	ShowToolTip()
+
+func ShowToolTip() -> void:
 	#TooltipPos.rotation = -rotation
 	var tips = CardStats.FindTooltips(CStats)
-	for g in tips:
+	for g in range(tips.size() - 1, -1, -1):
 		var tip : Control = TooltipScene.instantiate()
-		tip.get_child(0).text = g
+		tip.get_child(0).text = tips[g]
 		TooltipPos.add_child(tip)
 		tip.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	
@@ -322,6 +336,9 @@ func SetCardDiretion(dir : Vector2) -> void:
 var dirTw : Tween
 
 func _on_button_gui_input(_event: InputEvent) -> void:
+
+	
+	
 	if (dirTw != null):
 		dirTw.kill()
 	dirTw = create_tween()

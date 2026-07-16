@@ -289,7 +289,7 @@ func MultiCardDrawn(DrawnCards : Array[CardStats], discardAmm : int) -> void:
 			DrawnCards.erase(Ca)
 			CardsToDiscard.append(Ca)
 			Performer.deck.DiscardCard(Ca)
-			
+			HandleDiscardModules(Performer, Ca)
 		for g in DrawnCards:
 			var c = CardScene.instantiate() as Card
 			c.SetCardBattleStats(Performer, g)
@@ -307,6 +307,7 @@ func MultiCardDrawn(DrawnCards : Array[CardStats], discardAmm : int) -> void:
 			DrawnCards.erase(ToDiscard)
 			CardsToDiscard.append(ToDiscard)
 			Performer.deck.DiscardCard(ToDiscard)
+			HandleDiscardModules(Performer, ToDiscard)
 		
 		for g in DrawnCards:
 			PlaceCardInEnemyHand(Performer, g)
@@ -458,6 +459,27 @@ func RunShipsTurn(Ship : BattleShipStats) -> void:
 		EnemyPickingMove = true
 		await Ship.deck.DrawCard()
 		EnemyActionSelection(Ship)
+	
+func OnCardDiscarded(C : Card) -> bool:
+	if (GameOver):
+		return false
+	if (SelectingTarget):
+		PopUpManager.GetInstance().DoFadeNotif("Finish selecting target")
+		return false
+	if (EnemyPickingMove):
+		PopUpManager.GetInstance().DoFadeNotif("Enemy is selecting their moves")
+		return false
+	if (Shuffling):
+		PopUpManager.GetInstance().DoFadeNotif("Shuffling in progress")
+		return false
+	
+	var Ship = GetCurrentShip()
+	
+	Ship.deck.Hand.erase(C.CStats)
+	Ship.deck.DiscardCard(C.CStats)
+	ExternalUI.UpdateCardsInHandAmm(Ship.deck.Hand.size(), MaxCardsInHand)
+	HandleDiscardModules(Ship, C.CStats)
+	return true
 ##----------------------------------------------------------------------##
 func OnCardSelected(C : Card) -> bool:
 	if (GameOver):
@@ -940,6 +962,7 @@ func RefundUnusedCards() -> void:
 func RefundCardToShip(C : CardStats, Ship : BattleShipStats):
 	print("{0} got refunded a {1} card for not using it.".format([Ship.Name, C.GetCardName()]))
 	Ship.deck.DiscardCard(C)
+	HandleDiscardModules(Ship, C)
 ##----------------------------------------------------------------------##
 func RestartCards() -> void:
 	ClearCards()
@@ -1025,6 +1048,23 @@ func OnFightEnded(Won : bool) -> void:
 #██   ██ ██   ██ ██   ████ ██████  ███████ ███████ ██   ██ ███████ 
 #/////////////////////////////////////////////////////////////////////
 ##----------------------------------------------------------------------##
+func HandleDiscardModules(Performer : BattleShipStats, C : CardStats) -> void:
+	var AnimData : Array[AnimationData]
+	for Mod in C.OnDiscardModules.size():
+		var Data : AnimationData
+		
+		var targets = await HandleTargets(C.OnDiscardModules[Mod], Performer)
+		Data = HandleModule(Performer, C ,C.OnDiscardModules[Mod], targets)
+		
+		if (Mod < C.OnDiscardModules.size() - 1):
+			await Helper.GetInstance().wait(0.2)
+			
+		if (Data != null):
+			AnimData.append(Data)
+		
+	if (AnimData.size() > 0):
+		await DoCardAnim(C, AnimData, Performer, true)
+	
 func HandleModules(Performer : BattleShipStats, C : CardStats) -> void:
 	if (C.Burned):
 		Performer.deck.DiscardCard(C)
@@ -1038,6 +1078,7 @@ func HandleModules(Performer : BattleShipStats, C : CardStats) -> void:
 					break
 		else:
 			Performer.deck.DiscardCard(C)
+			HandleDiscardModules(Performer, C)
 
 	var AnimData : Array[AnimationData]
 	for Mod in C.OnUseModules.size():
@@ -1069,6 +1110,7 @@ func HandleModulesPl(Performer : BattleShipStats, C : CardStats) -> void:
 							break
 				else:
 					Performer.deck.DiscardCard(C)
+					HandleDiscardModules(Performer, C)
 		else: if (C.ShouldConsume()):
 			for g in Performer.Cards:
 				if (g.IsSame(C)):
@@ -1076,6 +1118,7 @@ func HandleModulesPl(Performer : BattleShipStats, C : CardStats) -> void:
 					break
 		else:
 			Performer.deck.DiscardCard(C)
+			HandleDiscardModules(Performer, C)
 		
 	for Mod in C.OnUseModules.size():
 		var targets = await HandleTargets(C.OnUseModules[Mod], Performer)
@@ -1167,6 +1210,7 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 			ActionList.RemoveActionFromShip(g, Counter)
 			if (!Counter.ShouldConsume()):
 				g.deck.DiscardCard(Counter)
+				HandleDiscardModules(Performer, Counter)
 			if (!Friendly):
 				DamageNeg += Mod.GetFinalDamage(Performer, Action.Tier)
 				
@@ -1786,6 +1830,7 @@ func PlaceCardInPlayerHand(Performer : BattleShipStats,C : Card) -> bool:
 
 		if (ToDiscard == MaxCardsInHand):
 			Performer.deck.DiscardCard(C.CStats)
+			HandleDiscardModules(Performer, C.CStats)
 			ExternalUI.ToggleHandInput(true)
 			return false
 		
@@ -1795,7 +1840,8 @@ func PlaceCardInPlayerHand(Performer : BattleShipStats,C : Card) -> bool:
 		var Discarded : Card = ExternalUI.GetPlayerCardPlecement().get_child(ToDiscard)
 		await ExternalUI.InsertCardToDiscard(Discarded)
 		Performer.deck.DiscardCard(Discarded.CStats)
-		Discarded.get_parent().queue_free()
+		HandleDiscardModules(Performer, Discarded.CStats)
+		#Discarded.get_parent().queue_free()
 		ExternalUI.OnCardDrawn(C)
 		Performer.deck.Hand.erase(Discarded.CStats)
 		

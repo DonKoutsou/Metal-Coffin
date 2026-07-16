@@ -185,6 +185,7 @@ func ActionHovered(C : CardStats, Targets : Array[BattleShipStats]) -> void:
 	CurrentCardShown.SetCardBattleStats(Ship ,C)
 	CurrentCardShown.Dissable(true)
 	CurrentCardShown.TargetLocs = targetlocs
+	CurrentCardShown.ShowToolTip()
 	
 	Ingame_UIManager.GetInstance().add_child(CurrentCardShown)
 	CurrentCardShown.isStatic = true

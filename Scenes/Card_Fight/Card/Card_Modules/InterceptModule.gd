@@ -2,7 +2,7 @@ extends CardModule
 class_name InterceptModule
 
 func GetDesc(_Tier : int) -> String:
-	return "Intercept all currently planned atacks."
+	return "Intercept an atack aimed at a different ship."
 
 func NeedsTargetSelect() -> bool:
 	return false

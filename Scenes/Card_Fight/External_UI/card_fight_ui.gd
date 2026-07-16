@@ -36,6 +36,7 @@ var FightScene : Card_Fight
 static var Instance : ExternalCardFightUI
 
 var AllowEnd : bool = true
+var HeldCard : Card
 
 func HideInfo() -> void:
 	HardCardLabel.text = "X"
@@ -50,6 +51,18 @@ func _ready() -> void:
 	PlayerCardPlecement.visible = true
 	PlayerCardPlacementInputBlocker.visible = false
 	UISoundMan.GetInstance().Refresh()
+
+func _process(delta: float) -> void:
+	if (HeldCard != null):
+		if (HeldCard.get_parent() == self):
+			var PrevPos = HeldCard.Line.global_position
+			var d = PrevPos.distance_squared_to(get_global_mouse_position())
+			HeldCard.global_position = HeldCard.global_position.move_toward(get_global_mouse_position() - HeldCard.size / 2.0, d / 1000)
+			var vel = PrevPos - HeldCard.Line.global_position
+			HeldCard.rotation = -vel.x / 250
+			
+		if (!Input.is_action_pressed("Click")):
+			ReleaseCard()
 
 func TogglePlayerCardPlacement(t : bool) -> void:
 	PlayerCardPlecement.visible = t
@@ -89,7 +102,8 @@ func UpdateCardDesc(User : BattleShipStats) -> void:
 func AddCardToHand(C : Card) -> void:
 	C.SetRealistic()
 	PlayerCardPlecement.add_child(C)
-	C.OnCardPressed.connect(InserCardtoPlay)
+	C.OnCardPressed.connect(HoldCard)
+	#C.OnCardReleased.connect(ReleaseCard)
 	PlayCardSound()
 
 func GetEnergyBar() -> SegmentedBar:
@@ -105,39 +119,71 @@ func GetReserveBar() -> SegmentedBar:
 func _on_deck_button_pressed() -> void:
 	OnDeckPressed.emit()
 
-func InserCardtoPlay(C : Card) -> void:
+func HoldCard(C : Card) -> void:
+	mouse_filter = Control.MOUSE_FILTER_STOP
+	C.Dissable(true)
+	C.reparent(self)
+	HeldCard = C
+	C.rotation = 0
+	PlayCardSound()
+	
+	#C.SetPressed()
+
+func ReleaseCard() -> void:
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	InScreenCursor.Instance.ToggleMouse(true)
+	PlayCardSound()
+	HeldCard.Enable()
+	
+	if (HeldCard.get_parent() == self):
+		HeldCard.reparent(PlayerCardPlecement, false)
+		HeldCard = null
+	else: if (HeldCard.get_parent() == DiscardInsert):
+		##IMPLEMENT DISCARD LOGIC
+		InsertCardToDiscard(HeldCard, true)
+		FightScene.OnCardDiscarded(HeldCard)
+		HeldCard = null
+	else: if (HeldCard.get_parent() == PlayCardInsert):
+		InserCardtoPlay(HeldCard, true)
+		HeldCard = null
+
+func InserCardtoPlay(C : Card, skipTransition : bool = false) -> void:
 	AllowEnd = false
 	C.Dissable(true)
 	PlayerCardPlecement.Blocked = true
-	var pos = C.global_position
-	C.get_parent().remove_child(C)
-	add_child(C)
-	
-	C.rotation = 0
-	C.global_position = pos
-	var Movetw = create_tween()
-	Movetw.set_ease(Tween.EASE_OUT)
-	Movetw.set_trans(Tween.TRANS_QUAD)
-	Movetw.tween_property(C, "global_position", PlayCardInsert.global_position + Vector2(0, -15), 0.25)
-	
-	var ScaleTw = create_tween()
+	if (!skipTransition):
+		var pos = C.global_position
+		C.reparent(self)
+		#C.get_parent().remove_child(C)
+		#add_child(C)
+		
+		C.rotation = 0
+		C.global_position = pos
+		var Movetw = create_tween()
+		Movetw.set_ease(Tween.EASE_OUT)
+		Movetw.set_trans(Tween.TRANS_QUAD)
+		Movetw.tween_property(C, "global_position", PlayCardInsert.global_position + Vector2(0, -15), 0.25)
+		
+		PlayCardSound()
+		
+		await Movetw.finished
+	#var ScaleTw = create_tween()
 	#ScaleTw.set_ease(Tween.EASE_IN)
 	#ScaleTw.set_trans(Tween.TRANS_CUBIC)
-	ScaleTw.tween_property(C, "scale", Vector2(0.85, 0.85), 0.25)
+	#ScaleTw.tween_property(C, "scale", Vector2(0.85, 0.85), 0.25)
 	
-	PlayCardSound()
 	PlayerCardPlecement.Blocked = false
-	await Movetw.finished
 	C.TogglePerspective(true)
 	var Cont = Control.new()
 	
 	Cont.size = PlayCardInsert.size
 	#Cont.scale.y = 0.8
-	C.get_parent().remove_child(C)
+	#C.get_parent().remove_child(C)
 	PlayCardInsert.add_child(Cont)
-	Cont.add_child(C)
+	C.reparent(Cont)
+	#Cont.add_child(C)
 	C.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
-	C.position = Vector2(15, -5)
+	#C.position = Vector2(15, -5)
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_IN)
 	tw.set_trans(Tween.TRANS_QUAD)
@@ -145,7 +191,7 @@ func InserCardtoPlay(C : Card) -> void:
 	PlayCardInsertSound(CardSoundType.INSERT)
 	await tw.finished
 	PlayCardInsertSound(CardSoundType.BEEP)
-	C.Enable()
+	
 	if (!await FightScene.OnCardSelected(C)):
 		PlayCardInsertSound(CardSoundType.BEEPNO)
 		var tw2 = create_tween()
@@ -154,11 +200,14 @@ func InserCardtoPlay(C : Card) -> void:
 		tw2.tween_property(Cont, "size", Vector2(PlayCardInsert.size), 0.55)
 		PlayCardInsertSound(CardSoundType.EXIT)
 		C.TogglePerspective(false, 1)
+		C.scale = Vector2(1,1)
 		await tw2.finished
 		Cont.remove_child(C)
 		Cont.queue_free()
 		PlayerCardPlecement.add_child(C)
 		PlayCardSound()
+	if (C != null):
+		C.Enable()
 	AllowEnd = true
 		
 
@@ -168,22 +217,23 @@ func PausePressed() -> void:
 func ToggleHandInput(t : bool) -> void:
 	PlayerCardPlacementInputBlocker.visible = !t
 
-func InsertCardToDiscard(C : Card) -> void:
+func InsertCardToDiscard(C : Card, skipTransition : bool = false) -> void:
 	AllowEnd = false
 	C.Dissable(true)
-	var pos = C.global_position
-	C.get_parent().remove_child(C)
-	add_child(C)
-	
-	C.rotation = 0
-	C.global_position = pos
-	var Movetw = create_tween()
-	Movetw.set_ease(Tween.EASE_OUT)
-	Movetw.set_trans(Tween.TRANS_QUAD)
-	Movetw.tween_property(C, "global_position", DiscardInsert.global_position + Vector2(15, 5), 0.25)
-	
-	PlayCardSound()
-	await Movetw.finished
+	if (!skipTransition):
+		var pos = C.global_position
+		C.get_parent().remove_child(C)
+		add_child(C)
+		
+		C.rotation = 0
+		C.global_position = pos
+		var Movetw = create_tween()
+		Movetw.set_ease(Tween.EASE_OUT)
+		Movetw.set_trans(Tween.TRANS_QUAD)
+		Movetw.tween_property(C, "global_position", DiscardInsert.global_position + Vector2(15, 5), 0.25)
+		
+		PlayCardSound()
+		await Movetw.finished
 	
 	var Cont = Control.new()
 	C.TogglePerspective(true)
@@ -202,6 +252,7 @@ func InsertCardToDiscard(C : Card) -> void:
 	await tw.finished
 	PlayCardInsertSound(CardSoundType.BEEP)
 	C.Enable()
+	Cont.queue_free()
 	AllowEnd = true
 
 func CardDrawFail() -> void:
@@ -248,7 +299,7 @@ func _on_switch_ship_pressed() -> void:
 
 
 func _on_button_pressed() -> void:
-	if (PlayCardInsert.get_child_count() > 0 or DrawCardInsert.get_child_count() > 0 or DiscardInsert.get_child_count()):
+	if (PlayCardInsert.get_child_count() > 1 or DrawCardInsert.get_child_count() > 1 or DiscardInsert.get_child_count() > 1):
 		PopUpManager.GetInstance().DoFadeNotif("Can't End Turn while playing a card")
 		return
 	OnEndTurnPressed.emit()
@@ -287,7 +338,9 @@ func GetSoundSample(type : CardSoundType) -> AudioStream:
 	else : if (type == CardSoundType.BEEPLONG):
 		Sample = ResourceLoader.load(BeepLong)
 	return Sample
-	
+
+
+
 enum CardSoundType{
 	DISCARD,
 	INSERT,
@@ -297,7 +350,6 @@ enum CardSoundType{
 	BEEPLONG,
 }
 
-
 func _on_pause_pressed() -> void:
 	EventH.OnPausePressed()
 
@@ -306,4 +358,31 @@ func MouseIn() -> void:
 	Input.mouse_mode =  Input.MOUSE_MODE_VISIBLE
 
 func MouseOut() -> void:
-	InScreenCursor.Instance.ToggleMouse(true)
+	if (HeldCard == null):
+		InScreenCursor.Instance.ToggleMouse(true)
+
+
+func _on_card_discard_input_mouse_entered() -> void:
+	if (HeldCard != null):
+		HeldCard.reparent(DiscardInsert, false)
+		HeldCard.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
+		HeldCard.rotation = 0
+		HeldCard.position = Vector2(15, -5)
+
+
+func _on_card_discard_input_mouse_exited() -> void:
+	if (HeldCard != null):
+		HeldCard.reparent(self)
+
+
+func _on_card_insert_input_mouse_entered() -> void:
+	if (HeldCard != null):
+		HeldCard.reparent(PlayCardInsert, false)
+		HeldCard.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
+		HeldCard.rotation = 0
+		HeldCard.position = Vector2(15, -5)
+
+
+func _on_card_insert_input_mouse_exited() -> void:
+	if (HeldCard != null):
+		HeldCard.reparent(self)
