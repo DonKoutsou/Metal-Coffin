@@ -190,7 +190,7 @@ func ToggleFuelRangeVisibility(t : bool) -> void:
 func SetCurrentPort(Port : MapSpot):
 	CurrentPort = Port
 	Cpt.CurrentPort = Port.GetSpotName()
-	Cpt.GetCharacterInventory().CurrentPort = CurrentPort
+	#Cpt.GetCharacterInventory().CurrentPort = CurrentPort
 	for g in GetSquad():
 		g.SetCurrentPort(Port)
 	PortChanged.emit(0)
@@ -216,7 +216,7 @@ func _HandleLanding(delta : float) -> void:
 func RemovePort():
 	ShipDeparted.emit(CurrentPort)
 	CurrentPort = null
-	Cpt.GetCharacterInventory().CurrentPort = null
+	#Cpt.GetCharacterInventory().CurrentPort = null
 	#InventoryManager.GetInstance().CancelUpgrades(Cpt)
 	Cpt.CurrentPort = ""
 

@@ -61,6 +61,15 @@ static var Instance : World
 static func GetInstance() -> World:
 	return Instance
 
+func GetDialogueProgress() -> DialogueProgressHolder:
+	return $DialogueProgressHolder
+
+func GetMap() -> Map:
+	return _Map
+	
+func GetCommander() -> Commander:
+	return _Command
+
 func _ready() -> void:
 	WORLDST = WORLDSTATE.INITIAL
 	SimulationManager.GetInstance().TogglePause(true)
@@ -80,12 +89,12 @@ func _ready() -> void:
 		await GetMap().GenerationFinished
 		Loadingscr.ProcesFinished("Generating Map Spot Plecement")
 		Loadingscr.UpdateProgress(10)
-		await wait(1)
+		await Helper.Instance.wait(1)
 		Loadingscr.ProcessStarted("Generating Events")
 		GetMap().GenerateEvents()
 		await GetMap().GenerationFinished
 		Loadingscr.ProcesFinished("Generating Events")
-		await wait(1)
+		await Helper.Instance.wait(1)
 	else:
 		Loadingscr.DissableText()
 	Loadingscr.UpdateProgress(20)
@@ -98,24 +107,24 @@ func _ready() -> void:
 	await GetMap().GenerationFinished
 	Loadingscr.ProcesFinished("Generating Spot Connections")
 	Loadingscr.UpdateProgress(60)
-	await wait(1)
+	await Helper.Instance.wait(1)
 	if (!Loading):
 		Loadingscr.ProcessStarted("Spawning Enemy Fleets")
 		GetMap().SpawnTownEnemies()
 		await GetMap().GenerationFinished
 		Loadingscr.ProcesFinished("Creating Enemy Fleets")
-		await wait(1)
+		await Helper.Instance.wait(1)
 		GetMap().EnemySpawnFinished()
 		Loadingscr.ProcessStarted("Placing Fleets In World")
 		Loadingscr.UpdateProgress(80)
 		#await GetMap().GenerationFinished
 		Loadingscr.ProcesFinished("Placing Fleets In World")
-		await wait(1)
+		await Helper.Instance.wait(1)
 	Loadingscr.UpdateProgress(100)
 	
 	Controller.SpawnInitialShip()
 	UISoundMan.GetInstance().Refresh()
-	await wait(1)
+	await Helper.Instance.wait(1)
 	WRLD_WorldReady.emit()
 	if (!Loading):
 		Loadingscr.StartDest()
@@ -196,17 +205,7 @@ func UpdatePlayerShips(delta : float) -> void:
 func UpdateCities(delta : float) -> void:
 	get_tree().call_group("City", "Update", delta)
 
-func wait(secs : float) -> Signal:
-	return get_tree().create_timer(secs).timeout
 
-func GetSaveData() -> SaveData:
-	var Data = SaveData.new()
-	Data.DataName = "Wallet"
-	Data.Datas.append(PlayerWallet.duplicate())
-	return Data
-
-func LoadSaveData(PlWallet : Wallet) -> void:
-	PlayerWallet.SetFunds(PlWallet.Funds)
 
 func PlayPrologue():
 	Ingame_UIManager.GetInstance().CallbackDiag(PrologueDialgues, null, "Seg", SteerTut, true)
@@ -235,11 +234,11 @@ func ShowStation():
 	Ingame_UIManager.GetInstance().CallbackDiag(IntroDialogue2, load("res://Assets/artificial-hive.png"), "Seg", ReturnCamToPlayer, true)
 	GetMap().GetCamera().FrameCamToPos(Helper.GetInstance().GetCityByName("Dormak").global_position, 6)
 
+
 func ReturnCamToPlayer():
 	#EnableBackUI()
 	
 	GetMap().GetCamera().FrameCamToPlayer()
-	
 	
 
 func _enter_tree() -> void:
@@ -256,21 +255,16 @@ func _enter_tree() -> void:
 	#GetMap().GetPlayerShip().SetShipType(StartingShip)
 	#CurrentShip = StartingShip
 
+func _exit_tree() -> void:
+	WORLDST = WORLDSTATE.INITIAL
+
 func TerminateWorld() -> void:
 	#GetMap().GetInScreenUI().GetInventory().FlushInventory()
 	var PlShips = get_tree().get_nodes_in_group("PlayerShips")
 	for g : MapShip in PlShips:
 		g.Kill()
 			
-func GetDialogueProgress() -> DialogueProgressHolder:
-	return $DialogueProgressHolder
 
-func GetMap() -> Map:
-	return _Map
-func GetCommander() -> Commander:
-	return _Command
-#func GetStatPanel() -> StatPanel:
-	#return GetMap()._StatPanel
 
 #ShipTrade
 func StartShipTrade(ControlledShip : PlayerDrivenShip) -> void:
@@ -288,11 +282,8 @@ func StartShipTrade(ControlledShip : PlayerDrivenShip) -> void:
 	GetMap().HideWorld(false)
 	var sc = load(FleetSeparationScene).instantiate() as FleetSeparation
 	sc.CurrentFleet = CurrentFleet
-	#GetMap().GetScreenUi().ToggleScreenUI(false)
 	
 	WORLDST = WORLDSTATE.TRADE
-	#await GetMap().GetScreenUi().FullScreenToggleStarted
-	#GetMap().GetInScreenUI()
 	Ingame_UIManager.GetInstance().AddUI(sc)
 	
 	sc.connect("SeperationFinished", ShipSeparationFinished)
@@ -301,9 +292,8 @@ func StartShipTrade(ControlledShip : PlayerDrivenShip) -> void:
 		var text = "In the ship dock screen, you can effectively organize your current fleet. To create a new fleet, simply select the ships you wish to move from your existing fleet.\nDon't forget to allocate fuel appropriately! Use the sliders at the bottom of the screen to ensure each fleet has enough fuel to operate efficiently."
 		ActionTracker.QueueTutorial("Ship Dock", text, [])
 	
-		
+#-----------------------------------------------------------
 func ShipSeparationFinished() -> void:
-	get_tree().get_nodes_in_group("FleetSep")[0].queue_free()
 	GetMap().HideWorld(true)
 	WORLDST = WORLDSTATE.NORMAL
 
@@ -313,22 +303,18 @@ var FighingEnemyUnits : Array[MapShip] = []
 func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip], Missiles : Array[BattleShipStats]):
 	if (WORLDST == WORLDSTATE.FIGHT):
 		return
+		
 	#Temp solution to stop fight starting twice
-	####
 	WORLDST = WORLDSTATE.FIGHT
-	
 	SimulationManager.GetInstance().TogglePause(true)
-
-	await GetMap().GetScreenUi().CloseScreen()
 	
+	#Screen transition
+	await GetMap().GetScreenUi().CloseScreen()
 	GetMap().HideWorld(false)
 	
+	#spawn fight
 	var FightScene = await Helper.GetInstance().LoadThreaded(CardFightScene).Sign
 	var CardF = FightScene.instantiate() as Card_Fight
-	#CardF.gui_input.connect(GetMap()._MAP_INPUT)
-	#CardF.mouse_entered.connect(GetMap().MouseIn)
-	#CardF.mouse_exited.connect(GetMap().MouseOut)
-	
 	CardF.CardFightEnded.connect(CardFightEnded)
 	CardF.CardFightDestroyed.connect(CardFightDestroyed)
 	
@@ -370,6 +356,7 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip], Missil
 	GetMap().GetScreenUi().OpenScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	UISoundMan.GetInstance().Refresh()
 
+#------------------------------------------------------------------
 func CardFightEnded(Survivors : Array[BattleShipStats], won : bool) -> void:
 	var AllUnits : Array[MapShip]
 	AllUnits.append_array(FighingFriendlyUnits)
@@ -401,6 +388,7 @@ func CardFightEnded(Survivors : Array[BattleShipStats], won : bool) -> void:
 	FighingEnemyUnits.clear()
 	FighingFriendlyUnits.clear()
 
+#------------------------------------------------------------------
 func CardFightDestroyed() -> void:
 	#GetMap().GetScreenUi().ToggleControllCover(false)
 	GetMap().HideWorld(true)
@@ -412,12 +400,14 @@ func CardFightDestroyed() -> void:
 	
 	WORLDST = WORLDSTATE.NORMAL
 
+#------------------------------------------------------------------
 ##LANDING
 func OnLandRequested(ControlledShip : MapShip) -> void:
 	RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.LANDING_START)
 	PopUpManager.GetInstance().DoFadeNotif("Landing sequence initiated")
 	ControlledShip.UpdateTargetAltitude(-1000)
 
+#------------------------------------------------------------------
 func OnOpenHatchRequested(ControlledShip : MapShip) -> void:
 	var Instigator = ControlledShip
 	if (ControlledShip.Docked):
@@ -429,11 +419,13 @@ func OnOpenHatchRequested(ControlledShip : MapShip) -> void:
 	
 	OnShipLanded(Instigator)
 
+#------------------------------------------------------------------
 func OnLandingCanceled(Ship : MapShip) -> void:
 	PopUpManager.GetInstance().DoFadeNotif("Landing sequence canceled")
 	Ship.disconnect("LandingEnded", OnLandingFinished)
 	Ship.disconnect("LandingCanceled", OnLandingCanceled)
 
+#------------------------------------------------------------------
 func OnLandingFinished(Ship : MapShip) -> void:
 	RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.LANDING_END)
 	if (Ship.is_connected("LandingEnded", OnLandingFinished)):
@@ -441,6 +433,7 @@ func OnLandingFinished(Ship : MapShip) -> void:
 	if (Ship.is_connected("LandingCanceled", OnLandingCanceled)):
 		Ship.disconnect("LandingCanceled", OnLandingCanceled)
 
+#------------------------------------------------------------------
 func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 	var Inventory = InventoryManager.GetInstance()
 	if (Inventory.visible):
@@ -481,6 +474,8 @@ func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 		ActionTracker.QueueTutorial("Towns", text, [])
 	#UIEventH.OnScreenUIToggled(false)
 	#UIEventH.OnButtonCoverToggled(true)
+	
+#----------------------------------------------------------------------
 func FuelTransactionFinished(BFuel : float, Ships : Array[MapShip], Scene : TownScene):
 	var spot = Ships[0].CurrentPort as MapSpot
 	if (BFuel < 0):
@@ -531,6 +526,7 @@ func FuelTransactionFinished(BFuel : float, Ships : Array[MapShip], Scene : Town
 	
 	WORLDST = WORLDSTATE.NORMAL
 
+#-------------------------------------------------------
 func Land(Spot : MapSpot, ControlledShip : MapShip) -> bool:
 	var Instigator = ControlledShip
 	if (ControlledShip.Docked):
@@ -552,6 +548,7 @@ func Land(Spot : MapSpot, ControlledShip : MapShip) -> bool:
 	Spot.OnSpotVisited()
 	return PlayedEvent
 
+#--------------------------------------------------------
 func HappeningFinished(Recruited : bool, CapmaignFin : bool, Events : Array[OverworldEventData], Ship : MapShip) -> void:
 	
 	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
@@ -570,7 +567,7 @@ func HappeningFinished(Recruited : bool, CapmaignFin : bool, Events : Array[Over
 		
 	OnShipLanded(Ship, true)
 
-
+#--------------------------------------------------------
 #Make sure to remove all items that their cards have been used
 func FigureOutInventory(CharInv : CharacterInventory, Cards : Array[CardStats]):
 	#get inventory contents, make sure to duplicate so that removing elements doesent fuck with this
@@ -599,6 +596,18 @@ func FigureOutInventory(CharInv : CharacterInventory, Cards : Array[CardStats]):
 					else:
 						CharInv.RemoveItem(It)
 
+#---------------------------------------------------
+#Save data
+func GetSaveData() -> SaveData:
+	var Data = SaveData.new()
+	Data.DataName = "Wallet"
+	Data.Datas.append(PlayerWallet.duplicate())
+	return Data
+
+#---------------------------------------------------
+func LoadSaveData(PlWallet : Wallet) -> void:
+	PlayerWallet.SetFunds(PlWallet.Funds)
+
 #--------------------------------------------------------
 func GameLost(reason : String):
 	World.WORLDST = World.WORLDSTATE.FINISHED
@@ -606,11 +615,13 @@ func GameLost(reason : String):
 	$Map/SubViewportContainer/ViewPort/InScreenUI/PanelContainer.visible = true
 	$Map/SubViewportContainer/ViewPort/InScreenUI/PanelContainer/VBoxContainer/Label.text = reason
 
+#--------------------------------------------------------
 func EndGame() -> void:
 	#GetMap().GetScreenUi().CloseScreen()
 	#await GetMap().GetScreenUi().FullScreenToggleStarted
 	WRLD_OnGameEnded.emit()
 
+#--------------------------------------------------------
 func EndPrologue() -> void:
 	ActionTracker.GetInstance().OnPrologueFinished()
 	GetMap().GetScreenUi().CloseScreen()

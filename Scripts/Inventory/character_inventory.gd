@@ -38,7 +38,8 @@ var _ItemBeingEquipped : ShipPart
 var _EquipLocation : Inventory_Box
 var _EquipTime : float
 
-var CurrentPort : MapSpot
+var inventoryOwner : MapShip
+#var CurrentPort : MapSpot
 
 func _ready() -> void:
 	if (HideOnStart):
@@ -483,13 +484,13 @@ func ReStartUpgrade(Box : Inventory_Box, UpTime : float) -> void:
 	set_physics_process(true)
 	
 func _physics_process(delta: float) -> void:
-	if (SimPaused or CurrentPort == null):
+	if (SimPaused or inventoryOwner.CurrentPort == null):
 		return
 
 	#_UpgradeTime -= (delta * 10)
 	if (_ItemBeingUpgraded != null):
 		var upgradeProgress = (delta * 10) * SimulationManager.SimSpeed()
-		if (CurrentPort.HasUpgrade()):
+		if (inventoryOwner.CurrentPort.HasUpgrade()):
 			upgradeProgress *= 2
 		_UpgradeTime -= upgradeProgress
 		if (_UpgradeTime <= 0):
@@ -497,7 +498,7 @@ func _physics_process(delta: float) -> void:
 	
 	if (_ItemBeingEquipped != null):
 		var equipProgress = (delta * 10) * SimulationManager.SimSpeed()
-		if (CurrentPort.HasUpgrade()):
+		if (inventoryOwner.CurrentPort.HasUpgrade()):
 			equipProgress *= 2
 		_EquipTime -= equipProgress
 		if (_EquipTime <= 0):
@@ -554,12 +555,12 @@ func ForceUpgradeItem(Box : Inventory_Box) -> bool:
 	return true
 
 func GetUpgradeTimeLeft() -> float:
-	if (CurrentPort.HasUpgrade()):
+	if (inventoryOwner.CurrentPort.HasUpgrade()):
 		return _UpgradeTime / 2.0
 	return _UpgradeTime
 
 func GetEquipTimeLeft() -> float:
-	if (CurrentPort.HasUpgrade()):
+	if (inventoryOwner.CurrentPort.HasUpgrade()):
 		return _EquipTime / 2.0
 	return _EquipTime
 

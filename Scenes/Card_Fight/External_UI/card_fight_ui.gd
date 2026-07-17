@@ -389,16 +389,25 @@ func MouseOut() -> void:
 		InScreenCursor.Instance.ToggleMouse(true)
 
 
+var InsertTween : Tween
+
 func _on_card_discard_input_mouse_entered() -> void:
 	if (HeldCard != null):
 		HeldCard.reparent(DiscardInsert, true)
 		HeldCard.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
 		HeldCard.rotation = 0
-		HeldCard.position = Vector2(15, -5)
+		
+		HeldCard.position = Vector2(15, 55)
+		InsertTween = create_tween()
+		InsertTween.set_ease(Tween.EASE_OUT)
+		InsertTween.set_trans(Tween.TRANS_BACK)
+		InsertTween.tween_property(HeldCard, "position", Vector2(15, -5), 0.25)
 
 
 func _on_card_discard_input_mouse_exited() -> void:
 	if (HeldCard != null):
+		if (InsertTween != null):
+			InsertTween.kill()
 		HeldCard.reparent(self)
 
 
@@ -407,9 +416,15 @@ func _on_card_insert_input_mouse_entered() -> void:
 		HeldCard.reparent(PlayCardInsert, false)
 		HeldCard.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
 		HeldCard.rotation = 0
-		HeldCard.position = Vector2(15, -5)
+		HeldCard.position = Vector2(15, 55)
+		InsertTween = create_tween()
+		InsertTween.set_ease(Tween.EASE_OUT)
+		InsertTween.set_trans(Tween.TRANS_BACK)
+		InsertTween.tween_property(HeldCard, "position", Vector2(15, -5), 0.25)
 
 
 func _on_card_insert_input_mouse_exited() -> void:
 	if (HeldCard != null):
+		if (InsertTween != null):
+			InsertTween.kill()
 		HeldCard.reparent(self)

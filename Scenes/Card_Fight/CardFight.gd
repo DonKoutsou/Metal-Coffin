@@ -1275,6 +1275,9 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 			if (!DamageReduced):
 				var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Performer,Action.Tier), Mod.CauseFile, Mod.SkipShield)
 				DamageCallables.append(c)
+		else:
+			for SAtMod in Mod.OnUnSuccesfullAtackModules:
+				AnimData.append(HandleModule(Performer, Action, SAtMod, TargetList.keys()))
 	
 	for SAtMod in Mod.OnAtackModules:
 		AnimData.append(HandleModule(Performer, Action, SAtMod, TargetList.keys()))

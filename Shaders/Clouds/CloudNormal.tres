@@ -16,8 +16,6 @@ domain_warp_fractal_type = 0
 domain_warp_fractal_octaves = 1
 
 [resource]
-width = 1024
-height = 1024
 noise = SubResource("FastNoiseLite_i6krx")
 color_ramp = SubResource("Gradient_ioe4c")
 seamless = true

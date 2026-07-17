@@ -115,7 +115,8 @@ static func FindTooltips(card : CardStats) -> PackedStringArray:
 		tips.append(ToolTips["ONCOUNTER"])
 	if (desc.find("On Hit") > 0):
 		tips.append(ToolTips["ONHIT"])
-
+	if (desc.find("On Miss") > 0):
+		tips.append(ToolTips["ONMISS"])
 	if (card.UseConditions.has(CardStats.CardUseCondition.ENERGY_DEPENDANT)):
 		tips.append(ToolTips["ENDEP"])
 	
@@ -147,7 +148,8 @@ const ToolTips : Dictionary[String, String] = {
 	"ONUSE" : "[color=#ffc315]ON USE[/color] effects are performed the moment the card is played",
 	"ONDISC" : "[color=#ffc315]ON DISCARD[/color] effects are performed the moment the card is discarded",
 	"ONCOUNTER" : "[color=#ffc315]ON COUNTER[/color] effects are applied on successfull counters",
-	"ONHIT" : "[color=#ffc315]ON HIT[/color] effects are applied once the atack lands",
+	"ONHIT" : "[color=#ffc315]ON HIT[/color] effects are applied once the attack lands",
+	"ONMISS" : "[color=#ffc315]ON MISS[/color] effects are applied if the attack fails to land",
 	"Shield" : "[color=#6be2e9]SHIELD[/color] protects the ship from direct damage",
 	"ENDEP" : "[color=#ffc315]ENERGY DEPENDANT[/color] cards will use all of the user's energy to improve its stats",
 	"UNAVOIDABLE" : "[color=#ffc315]UNAVOIDABLE[/color]\ncan't be avoided using a defence card",

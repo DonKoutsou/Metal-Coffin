@@ -258,6 +258,7 @@ func DroneAdded(Dr : PlayerDrivenShip, _Target : MapShip):
 
 func AddCharacter(Cha : Captain) -> void:
 	var CharInv = CharInvScene.instantiate() as CharacterInventory
+	CharInv.inventoryOwner = Cha.CaptainShip
 	Cha._CharInv = CharInv
 	CharInv.InitialiseInventory(Cha)
 	_CharacterInventories[Cha] = CharInv

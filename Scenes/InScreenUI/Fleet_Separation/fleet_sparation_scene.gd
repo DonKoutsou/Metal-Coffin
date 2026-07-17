@@ -168,3 +168,4 @@ func RemoveFuelFromFleet(Fleet : Array[PlayerDrivenShip], Fuel : float):
 
 func _on_button_pressed() -> void:
 	SeperationFinished.emit()
+	queue_free()
