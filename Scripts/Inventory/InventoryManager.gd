@@ -150,7 +150,8 @@ func BoxSelected(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> vo
 			return
 	
 	CurrentDesc = ItemDescriptorScene.instantiate() as ItemDescriptor
-	
+	CurrentDesc.ToggleClosable(true)
+	CurrentDesc.Closed.connect(RemoveDescriptor)
 	DescriptorPlace.add_child(CurrentDesc)
 	CaptainStats.visible = false
 	#var cpt = GetBoxOwner(Box)
@@ -165,6 +166,11 @@ func BoxSelected(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> vo
 	CurrentDesc.ItemTransf.connect(ItemTranfer)
 	CurrentDesc.ItemUpgradeCancel.connect(CancelUpgrade.bind(OwnerInventory))
 	#Descriptor.connect("ItemRepaired", RepairPart)
+
+func RemoveDescriptor() -> void:
+	CaptainStats.visible = true
+	CurrentDesc.queue_free()
+
 
 func GetCity(CityName : String) -> MapSpot:
 	var cities = get_tree().get_nodes_in_group("City")

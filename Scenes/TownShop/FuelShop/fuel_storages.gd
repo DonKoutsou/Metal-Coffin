@@ -141,3 +141,21 @@ func FuelBar_gui_input(event: InputEvent) -> void:
 func _on_leave_fuel_storage_pressed() -> void:
 	FuelTransactionFinished.emit(PlayerBoughtFuel)
 	queue_free()
+
+var sizeTw : Tween
+func _on_progress_bar_mouse_entered() -> void:
+	if (sizeTw != null):
+		sizeTw.kill()
+	sizeTw = create_tween()
+	sizeTw.set_ease(Tween.EASE_OUT)
+	sizeTw.set_trans(Tween.TRANS_BACK)
+	sizeTw.tween_property(FuelBar, "offset_transform_scale", Vector2(1.05, 1.05), 0.15)
+
+
+func _on_progress_bar_mouse_exited() -> void:
+	if (sizeTw != null):
+		sizeTw.kill()
+	sizeTw = create_tween()
+	sizeTw.set_ease(Tween.EASE_OUT)
+	sizeTw.set_trans(Tween.TRANS_BACK)
+	sizeTw.tween_property(FuelBar, "offset_transform_scale", Vector2.ONE, 0.15)

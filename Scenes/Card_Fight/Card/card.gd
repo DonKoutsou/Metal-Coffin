@@ -150,6 +150,7 @@ func SetCardStats(Stats : CardStats, Amm : int = 0) -> void:
 	AmmountLabel.text = "{0}x".format([Amm])
 	
 	CardDesc.text = DescText
+	UpdateText()
 	
 	CardCost.text = "{0}".format([Cost])
 	
@@ -161,6 +162,14 @@ func SetCardStats(Stats : CardStats, Amm : int = 0) -> void:
 		CardTypeEmblem.modulate = Color("8db354")
 	#if (Stats.OnPerformModule is OffensiveCardModule):
 		#CardTex.modulate = Color(1.0, 0.235, 0.132)
+
+func UpdateText() -> void:
+	var fontSize = 16
+	#return
+
+	while(CardDesc.get_content_height() > 280 and fontSize > 12):
+		fontSize -= 1
+		CardDesc.add_theme_font_size_override("normal_font_size", fontSize)
 
 
 func UpdateBattleStats(User : BattleShipStats) -> void:
@@ -202,6 +211,8 @@ func SetCardBattleStats(User : BattleShipStats, Stats : CardStats, Amm : int = 0
 		CardCost.text = "{0}".format([ShownCost])
 		CardTex.texture = Stats.Icon
 	
+	UpdateText()
+
 	$Amm.visible = Amm > 1
 	AmmountLabel.text = "{0}x".format([Amm])
 

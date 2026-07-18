@@ -30,13 +30,6 @@ size_flags_vertical = 3
 theme_override_constants/separation = 10
 alignment = 2
 
-[node name="Label2" type="Label" parent="VBoxContainer/VBoxContainer" unique_id=929873773]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_tywce")
-text = "Fleet Range : 1000"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Label" type="Label" parent="VBoxContainer/VBoxContainer" unique_id=2031232489]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_tywce")
@@ -46,6 +39,13 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
+[node name="Label2" type="Label" parent="VBoxContainer/VBoxContainer" unique_id=929873773]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_tywce")
+text = "Fleet Range : 1000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer" unique_id=1788291104]
 layout_mode = 2
 size_flags_vertical = 4
@@ -54,6 +54,7 @@ alignment = 1
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/HBoxContainer" unique_id=1429329643]
 layout_mode = 2
 size_flags_horizontal = 3
+alignment = 1
 
 [node name="FuelAmm" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=2091006548]
 layout_mode = 2
@@ -72,7 +73,6 @@ text = "tons"
 horizontal_alignment = 2
 
 [node name="Panel" type="Panel" parent="VBoxContainer/VBoxContainer/HBoxContainer" unique_id=695241479]
-custom_minimum_size = Vector2(6.86, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_jvdwb")
@@ -80,7 +80,7 @@ theme = ExtResource("4_jvdwb")
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/HBoxContainer" unique_id=2138823263]
 layout_mode = 2
 size_flags_horizontal = 3
-alignment = 2
+alignment = 1
 
 [node name="Label3" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer2" unique_id=2101969590]
 layout_mode = 2
@@ -101,6 +101,7 @@ text = "202139"
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 size_flags_vertical = 4
+offset_transform_enabled = true
 value = 27.12
 show_percentage = false
 
@@ -114,9 +115,11 @@ text = "Leave"
 
 [node name="Label" type="Label" parent="." unique_id=1873188116]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "Wind Direction : SW"
 
 [connection signal="gui_input" from="VBoxContainer/VBoxContainer/ProgressBar" to="." method="FuelBar_gui_input"]
+[connection signal="mouse_entered" from="VBoxContainer/VBoxContainer/ProgressBar" to="." method="_on_progress_bar_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/VBoxContainer/ProgressBar" to="." method="_on_progress_bar_mouse_exited"]
 [connection signal="pressed" from="VBoxContainer/LeaveFuelStorage" to="." method="_on_leave_fuel_storage_pressed"]

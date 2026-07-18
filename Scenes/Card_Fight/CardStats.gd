@@ -52,14 +52,17 @@ func GetDescription() -> String:
 	var Desc = ""
 	if is_instance_valid(OnPerformModule):
 		Desc += OnPerformModule.GetDesc(RealTier)
+		Desc += "\n"
 	if (OnUseModules.size() > 0):
-		Desc += "[color=#ffc315]\nOn Use[/color] : "
+		Desc += "[color=#ffc315]On Use[/color] : "
 		for g in OnUseModules:
-			Desc += "\n" + g.GetDesc(RealTier)
+			Desc += g.GetDesc(RealTier)
 	if (OnDiscardModules.size() > 0):
-		Desc += "[color=#ffc315]\nOn Discard[/color] : "
+		if (Desc.length() > 0):
+			Desc += "\n"
+		Desc += "[color=#ffc315]On Discard[/color] : "
 		for g in OnDiscardModules:
-			Desc += "\n" + g.GetDesc(RealTier)
+			Desc += g.GetDesc(RealTier)
 	
 	return Desc
 
@@ -74,18 +77,18 @@ func GetBattleDescription(User : BattleShipStats) -> String:
 	var Desc = ""
 	if is_instance_valid(OnPerformModule):
 		Desc += OnPerformModule.GetBattleDesc(User, RealTier)
+		Desc += "\n"
 	if (OnUseModules.size() > 0):
-		if (Desc.length() > 0):
-			Desc += "\n"
 		Desc += "[color=#ffc315]On Use[/color] : "
 		for g in OnUseModules:
-			Desc +=  "\n" + g.GetBattleDesc(User, RealTier)
+			Desc +=  g.GetBattleDesc(User, RealTier)
 	if (OnDiscardModules.size() > 0):
 		if (Desc.length() > 0):
 			Desc += "\n"
 		Desc += "[color=#ffc315]On Discard[/color] : "
+		Desc += "\n"
 		for g in OnDiscardModules:
-			Desc += "\n" + g.GetBattleDesc(User, RealTier)
+			Desc += g.GetBattleDesc(User, RealTier)
 	return Desc
 
 func IsSame(C : CardStats) -> bool:

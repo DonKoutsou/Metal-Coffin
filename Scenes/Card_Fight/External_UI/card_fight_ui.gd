@@ -68,7 +68,7 @@ func _process(delta: float) -> void:
 		if (HeldCard.get_parent() == self):
 			var PrevPos = HeldCard.global_position + Vector2(HeldCard.size.x / 2.0, 0)
 			var d = PrevPos.distance_squared_to(get_global_mouse_position())
-			HeldCard.global_position = HeldCard.global_position.move_toward(get_global_mouse_position() - Vector2(HeldCard.size.x / 2.0, 0), d / 1000)
+			HeldCard.global_position = HeldCard.global_position.move_toward(get_global_mouse_position() - Vector2(HeldCard.size.x / 2.0, 0), d / 500)
 			var vel = PrevPos - (HeldCard.global_position + Vector2(HeldCard.size.x /2.0, 0))
 			HeldCard.rotation = -vel.x / 250
 			

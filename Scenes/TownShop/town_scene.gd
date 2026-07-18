@@ -50,13 +50,13 @@ func SetTownBuffs() -> void:
 	
 	var Text : String = ""
 	if (TownSpot.HasFuel()):
-		Text += "[p][img={32}x{32}]res://Assets/Items/Fuel.png[/img] REFUEL TIME/COST -[p]"
+		Text += "[p][img={32}x{32}]res://Assets/Items/Fuel.png[/img] REDUCED REFUEL TIME/COST"
 	if (TownSpot.HasRepair()):
-		Text += "[img={32}x{32}]res://Assets/Items/Wrench.png[/img] REPAIR TIME/COST -[p]"
+		Text += "[p][img={32}x{32}]res://Assets/Items/Wrench.png[/img] REDUCED REPAIR TIME/COST"
 	if (TownSpot.HasUpgrade()):
-		Text += "[img={32}x{32}]res://Assets/Items/cubeforcesmol.png[/img] UPGRADE TIME/COST -[p][p]"
+		Text += "[p][img={32}x{32}]res://Assets/Items/cubeforcesmol.png[/img] REDUCED UPGRADE TIME/COST"
 	if (TownSpot.HasRecruit()):
-		Text += "[img={32}x{32}]res://Assets/Items/upgrade.png[/img] Available Recruits[p][p]"
+		Text += "[p][img={32}x{32}]res://Assets/Items/upgrade.png[/img] AVAILABLE RECRUITS"
 	PortBuffText.text = Text
 
 func On_MunitionShop_pressed() -> void:
@@ -81,7 +81,7 @@ func OnRefuelShopPressed() -> void:
 	Scene.FuelTransactionFinished.connect(FuelExchangeFinished)
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.FUEL_SHOP)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.FUEL_SHOP)
-		ActionTracker.QueueTutorial("Fuel Storage", "In the Fuel Storage you can buy fuel for your fleet.\nYou can see the full ammount of [color=#ffc315]FUEL[/color] of you landed ships.\nEnsure your fleet is fully refueled before embarking on your next mission!", [])
+		ActionTracker.QueueTutorial("Fuel Storage", "In the Fuel Storage you can buy fuel for your fleet.\nYou can see the full ammount of [color=#ffc315]FUEL[/color] of you landed ships on the left, and their range in the middle. \nDag the slider to the right to buy more fuel or to the left to sell it, adding fuel to your fleet takes time.\nEnsure your fleet is fully refueled before embarking on your next mission!", [])
 
 func OnRepairStationPressed() -> void:
 	var Scene = RepairStationScene.instantiate() as RepairStation

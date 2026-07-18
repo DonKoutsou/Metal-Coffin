@@ -14,7 +14,7 @@ border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 border_blend = true
 
-[node name="ItemDesc" type="PanelContainer" unique_id=784805534 node_paths=PackedStringArray("ItemName", "ItemDesc", "TransferButton", "UpgradeButton", "CancelUpgradeButton", "CancelInstallButton", "AddItemButton", "IncreaseItemButton", "RemoveItemButton", "UpgradeLabel", "CardSection", "CardPlecement") groups=["ItemDescriptor"]]
+[node name="ItemDesc" type="PanelContainer" unique_id=784805534 node_paths=PackedStringArray("ItemName", "ItemDesc", "TransferButton", "UpgradeButton", "CancelUpgradeButton", "CancelInstallButton", "AddItemButton", "IncreaseItemButton", "RemoveItemButton", "UpgradeLabel", "CardSection", "CardPlecement", "CloseButton") groups=["ItemDescriptor"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -24,7 +24,7 @@ size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("1_2v1h2")
 CardScene = ExtResource("3_40o7a")
-ItemName = NodePath("HBoxContainer/ItemName")
+ItemName = NodePath("HBoxContainer/HBoxContainer/ItemName")
 ItemDesc = NodePath("HBoxContainer/InputScroll/VBoxContainer/ItemDesc")
 TransferButton = NodePath("HBoxContainer/ShipPartActions/Transfer")
 UpgradeButton = NodePath("HBoxContainer/ShipPartActions/Upgrade")
@@ -36,6 +36,7 @@ RemoveItemButton = NodePath("HBoxContainer/ShipPartActions/RemoveItem")
 UpgradeLabel = NodePath("HBoxContainer/InputScroll/VBoxContainer/Label")
 CardSection = NodePath("HBoxContainer/InputScroll/VBoxContainer/VBoxContainer/CardsSection")
 CardPlecement = NodePath("HBoxContainer/InputScroll/VBoxContainer/VBoxContainer/CardsSection/CardPlecement")
+CloseButton = NodePath("HBoxContainer/HBoxContainer/Button")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="." unique_id=295165886]
 layout_mode = 2
@@ -43,7 +44,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="ItemName" type="Label" parent="HBoxContainer" unique_id=1666121310]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer" unique_id=1322815201]
+layout_mode = 2
+
+[node name="ItemName" type="Label" parent="HBoxContainer/HBoxContainer" unique_id=1666121310]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -53,6 +57,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 uppercase = true
+
+[node name="Button" type="Button" parent="HBoxContainer/HBoxContainer" unique_id=928602682]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "X"
 
 [node name="InputScroll" type="ScrollContainer" parent="HBoxContainer" unique_id=1269929323]
 layout_mode = 2
@@ -183,6 +193,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 8
 text = "Transfer"
 
+[connection signal="pressed" from="HBoxContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/ShipPartActions/Upgrade" to="." method="_on_upgrade_pressed"]
 [connection signal="pressed" from="HBoxContainer/ShipPartActions/Upgrade2" to="." method="_on_cancel_upgrade_pressed"]
 [connection signal="pressed" from="HBoxContainer/ShipPartActions/Upgrade3" to="." method="_on_cancel_install_pressed"]

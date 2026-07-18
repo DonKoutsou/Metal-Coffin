@@ -1,3 +1,4 @@
+@abstract
 extends Area2D
 
 class_name BaseDock
@@ -6,6 +7,9 @@ class_name BaseDock
 
 var DockedShips : Array[MapShip]
 var Captives : Array[MapShip]
+
+signal DroneAdded
+signal DroneRemoved
 
 #----------------------------------------
 func AddCaptain(Cpt : Captain, _Notify : bool = true) -> MapShip:
@@ -20,12 +24,6 @@ func AddCaptain(Cpt : Captain, _Notify : bool = true) -> MapShip:
 		AddShip(NewShip, false)
 	return ship
 
-func AnyShipNeedsFuel() -> bool:
-	for g in DockedShips:
-		if (g.Fuel < 50):
-			return true
-	return false
-
 #----------------------------------------
 func AddShip(Ship : MapShip, _Notify : bool = true) -> void:
 	AddShipToHierarchy(Ship)
@@ -34,6 +32,25 @@ func AddShip(Ship : MapShip, _Notify : bool = true) -> void:
 func AddShipToHierarchy(Ship : MapShip):
 	get_parent().get_parent().add_child(Ship)
 	DockShip(Ship)
+
+#----------------------------------------
+func AnyShipNeedsFuel() -> bool:
+	for g in DockedShips:
+		if (g.Fuel < 50):
+			return true
+	return false
+
+#----------------------------------------
+func ClearAllDrones() -> void:
+	var Drones = DockedShips.duplicate()
+	for g in Drones:
+		DroneDischarged(g)
+		g.Kill()
+
+#----------------------------------------
+func DroneDischarged(Dr : MapShip):
+	DroneRemoved.emit()
+	UndockShip(Dr)
 
 #----------------------------------------
 func DockShip(ship : MapShip):
@@ -66,7 +83,7 @@ func DockShip(ship : MapShip):
 	else:
 		call_deferred("TrySetDockPath", trans, ship)
 
-	ship.Docked = true
+	ship.ToggleDocked(true)
 
 	if (ship.Altitude != Command.Altitude):
 		ship.TargetAltitude = Command.Altitude
@@ -94,7 +111,6 @@ func UndockShip(Ship : MapShip):
 
 #----------------------------------------
 func RepositionDocks() -> void:
-
 	for DockSpot in $DroneSpots.get_children().size():
 		var pos : Vector2
 		var Offset = 10
@@ -113,15 +129,6 @@ func TrySetDockPath(RemoteT : RemoteTransform2D, ship : MapShip):
 	RemoteT.remote_path = ship.get_path()
 
 #----------------------------------------
-func DronesHaveFuel(f : float) -> bool:
-	var fuelneeded = f
-	for g in GetDockedShips():
-		fuelneeded -= g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
-		if (fuelneeded <= 0):
-			return true
-	return false
-
-#----------------------------------------
 func SyphonFuelFromDrones(amm : float) -> void:
 	for g in GetDockedShips():
 		var Cap = g.Cpt as Captain
@@ -133,6 +140,26 @@ func SyphonFuelFromDrones(amm : float) -> void:
 			var FuelAmm = Cap.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 			amm -= FuelAmm
 			Cap.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, FuelAmm)
+
+#----------------------------------------
+func DronesHaveFuel(f : float) -> bool:
+	var fuelneeded = f
+	for g in GetDockedShips():
+		fuelneeded -= g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
+		if (fuelneeded <= 0):
+			return true
+	return false
+
+#----------------------------------------
+func GetShipWithBiggerRange() -> MapShip:
+	var Ship : MapShip
+	var Rang = 0
+	for g in DockedShips:
+		var R = g.GetFuelRange()
+		if (R > Rang):
+			Ship = g
+			Rang = R
+	return Ship
 
 #----------------------------------------
 func GetDockedShips() -> Array[MapShip]:

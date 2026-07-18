@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://d0iiqaijsg1y1" path="res://Scenes/InScreenUI/Commande_Line/command_line.tscn" id="23_t54ed"]
 [ext_resource type="Texture2D" uid="uid://dum1h361hyptq" path="res://Assets/UIPiecies/Screen/ScreenFrames/StartMenu_Screen.png" id="24_nthvp"]
 [ext_resource type="PackedScene" uid="uid://bq1ns0us14bn3" path="res://Scenes/InScreenUI/Cursor/Cursor.tscn" id="24_rh5bc"]
+[ext_resource type="FontFile" uid="uid://dwcd7oqxtoees" path="res://Fonts/cambria-bold-italic.ttf" id="25_qskuh"]
 [ext_resource type="StyleBox" uid="uid://bj8tmjsnlmj0" path="res://Theme/Buttons/ButtonBlack.tres" id="26_67h1o"]
 [ext_resource type="StyleBox" uid="uid://g2ic8um6hit" path="res://Theme/Buttons/ButtonBlack_Pressed.tres" id="27_pmm2a"]
 [ext_resource type="StyleBox" uid="uid://bblal3stslrb1" path="res://Theme/Buttons/ButtonWhite.tres" id="29_rh5bc"]
@@ -509,27 +510,27 @@ expand_mode = 1
 [node name="Prologue" type="Button" parent="." unique_id=1915175625 groups=["Buttons"]]
 texture_filter = 1
 offset_left = 1054.0
-offset_top = 116.0
+offset_top = 115.0
 offset_right = 1074.0
-offset_bottom = 155.0
+offset_bottom = 156.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_styles/normal = ExtResource("26_67h1o")
-theme_override_styles/pressed = ExtResource("27_pmm2a")
-theme_override_styles/hover = ExtResource("26_67h1o")
+theme_override_styles/normal = ExtResource("29_rh5bc")
+theme_override_styles/pressed = ExtResource("30_xqmn8")
+theme_override_styles/hover = ExtResource("29_rh5bc")
 action_mode = 0
 
 [node name="LoadPrologue" type="Button" parent="." unique_id=1420192485 groups=["Buttons"]]
 texture_filter = 1
-offset_left = 1053.0
+offset_left = 1054.0
 offset_top = 168.0
 offset_right = 1073.0
 offset_bottom = 207.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_styles/normal = ExtResource("26_67h1o")
-theme_override_styles/pressed = ExtResource("27_pmm2a")
-theme_override_styles/hover = ExtResource("26_67h1o")
+theme_override_styles/normal = ExtResource("29_rh5bc")
+theme_override_styles/pressed = ExtResource("30_xqmn8")
+theme_override_styles/hover = ExtResource("29_rh5bc")
 action_mode = 0
 
 [node name="PrologueLight" parent="." unique_id=2000029858 instance=ExtResource("34_aa43b")]
@@ -546,23 +547,36 @@ offset_right = 1074.0
 offset_bottom = 285.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_styles/normal = ExtResource("26_67h1o")
-theme_override_styles/pressed = ExtResource("27_pmm2a")
-theme_override_styles/hover = ExtResource("26_67h1o")
+theme_override_styles/normal = ExtResource("29_rh5bc")
+theme_override_styles/pressed = ExtResource("30_xqmn8")
+theme_override_styles/hover = ExtResource("29_rh5bc")
 action_mode = 0
 
 [node name="Load" type="Button" parent="." unique_id=813462728 groups=["Buttons"]]
 texture_filter = 1
-offset_left = 1053.0
-offset_top = 299.0
+offset_left = 1054.0
+offset_top = 298.0
 offset_right = 1073.0
-offset_bottom = 339.0
+offset_bottom = 338.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_styles/normal = ExtResource("26_67h1o")
-theme_override_styles/pressed = ExtResource("27_pmm2a")
-theme_override_styles/hover = ExtResource("26_67h1o")
+theme_override_styles/normal = ExtResource("29_rh5bc")
+theme_override_styles/pressed = ExtResource("30_xqmn8")
+theme_override_styles/hover = ExtResource("29_rh5bc")
 action_mode = 0
+
+[node name="Label" type="Label" parent="." unique_id=942614722]
+offset_left = 1128.0
+offset_top = 278.0
+offset_right = 1162.0
+offset_bottom = 293.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("25_qskuh")
+theme_override_font_sizes/font_size = 10
+text = "START"
 
 [node name="CampaignLight" parent="." unique_id=871809701 instance=ExtResource("34_aa43b")]
 offset_left = 1163.0
@@ -573,22 +587,22 @@ offset_bottom = 337.0
 [node name="Fight" type="Button" parent="." unique_id=174179254 groups=["Buttons"]]
 texture_filter = 1
 offset_left = 1173.0
-offset_top = 366.0
+offset_top = 365.0
 offset_right = 1225.0
 offset_bottom = 390.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_styles/normal = ExtResource("29_rh5bc")
-theme_override_styles/pressed = ExtResource("30_xqmn8")
-theme_override_styles/hover = ExtResource("29_rh5bc")
+theme_override_styles/normal = ExtResource("26_67h1o")
+theme_override_styles/pressed = ExtResource("27_pmm2a")
+theme_override_styles/hover = ExtResource("26_67h1o")
 action_mode = 0
 
 [node name="Credits" type="Button" parent="." unique_id=524956029 groups=["Buttons"]]
 texture_filter = 1
 offset_left = 1200.0
-offset_top = 603.0
+offset_top = 601.0
 offset_right = 1227.0
-offset_bottom = 653.0
+offset_bottom = 652.0
 size_flags_vertical = 3
 theme_override_styles/normal = ExtResource("32_xqmn8")
 theme_override_styles/pressed = ExtResource("33_sjyyd")
@@ -643,10 +657,10 @@ offset_bottom = 425.0
 
 [node name="Button" type="TextureButton" parent="." unique_id=449412107 groups=["Buttons"]]
 texture_filter = 1
-offset_left = 1054.0
-offset_top = 530.0
-offset_right = 1076.0
-offset_bottom = 587.0
+offset_left = 1053.0
+offset_top = 528.0
+offset_right = 1077.0
+offset_bottom = 586.0
 size_flags_horizontal = 3
 texture_normal = ExtResource("35_xqmn8")
 texture_pressed = ExtResource("36_sjyyd")
@@ -656,7 +670,7 @@ stretch_mode = 0
 [node name="Exit" type="Button" parent="." unique_id=2017627404 groups=["Buttons"]]
 texture_filter = 1
 offset_left = 1056.0
-offset_top = 602.0
+offset_top = 599.0
 offset_right = 1084.0
 offset_bottom = 652.0
 size_flags_vertical = 3

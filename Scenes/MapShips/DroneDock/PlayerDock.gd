@@ -1,13 +1,9 @@
 extends BaseDock
 class_name PlayerDock
-#@export var DroneScene : PackedScene
 
 @export var DroneDockEventH : DroneDockEventHandler
 @export var CaptainNotif : PackedScene
 
-signal DroneAdded
-signal DroneRemoved
-#var FlyingDrones : Array[Drone]
 
 func _ready() -> void:
 	$Line2D.visible = false
@@ -17,7 +13,7 @@ func _ready() -> void:
 	DroneDockEventH.connect("OnDroneDissarmed", DroneDissarmed)
 	DroneDockEventH.connect("DroneLaunched", LaunchDrone)
 	DroneDockEventH.connect("DroneRangeChanged", DroneRangeChanged)
-	DroneDockEventH.connect("DroneDischarged", DroneDisharged)
+	DroneDockEventH.connect("DroneDischarged", DroneDischarged)
 
 
 func RemoveCaptain(Cap : Captain) -> void:
@@ -27,15 +23,6 @@ func RemoveCaptain(Cap : Captain) -> void:
 			g.Kill()
 			return
 
-func ClearAllDrones() -> void:
-	var Drones = DockedShips.duplicate()
-	for g in Drones:
-		DroneDisharged(g)
-		g.Kill()
-	#for g in FlyingDrones:
-		#DroneDisharged(g)
-		#g.Kill()
-
 func GetSaveData() -> Array[DroneSaveData]:
 	var saved : Array[DroneSaveData]
 	for g in DockedShips:
@@ -44,18 +31,10 @@ func GetSaveData() -> Array[DroneSaveData]:
 		#saved.append(g.GetSaveData())
 	return saved
 
-func DroneDisharged(Dr : MapShip):
-
-	DroneRemoved.emit()
-	UndockShip(Dr)
-	#if (FlyingDrones.has(Dr)):
-		#FlyingDrones.erase(Dr)
 
 func CaptiveDischarged(C : HostileShip) -> void:
 	DroneRemoved.emit()
 	UndockCaptive(C)
-
-
 
 
 func AddCaptive(Captive : HostileShip) -> void:
@@ -91,7 +70,7 @@ func AddShip(Ship : MapShip, Notify : bool = true) -> void:
 		var notif = CaptainNotif.instantiate() as CaptainNotification
 		notif.SetCaptain(Ship.Cpt)
 		Ingame_UIManager.GetInstance().AddUI(notif, true)
-	Ship.connect("OnShipDestroyed", DroneDisharged)
+	Ship.connect("OnShipDestroyed", DroneDischarged)
 	super(Ship, Notify)
 
 func SoundEnded() -> void:

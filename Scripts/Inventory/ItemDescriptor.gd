@@ -19,6 +19,7 @@ class_name ItemDescriptor
 @export var UpgradeLabel : RichTextLabel
 @export var CardSection : Control
 @export var CardPlecement : Control
+@export var CloseButton : Button
 
 signal ItemUpgraded(Box : Inventory_Box)
 signal ItemUpgradeCancel(Box : Inventory_Box)
@@ -29,7 +30,7 @@ signal ItemTransf(Box : Inventory_Box)
 signal ItemRemove(Box : Inventory_Box)
 signal ItemAdd(Box : Inventory_Box)
 signal ItemIncrease(Box : Inventory_Box)
-
+signal Closed()
 var DescribedContainer : Inventory_Box
 var DescribedItem : Item
 var UsingAmm : int = 1
@@ -42,6 +43,8 @@ func _ready() -> void:
 	UISoundMan.GetInstance().AddSelf(IncreaseItemButton)
 	UISoundMan.GetInstance().AddSelf(RemoveItemButton)
 
+func ToggleClosable(t : bool) -> void:
+	CloseButton.visible = t
 
 func DescriptorTutorial() -> void:
 	pass
@@ -321,3 +324,7 @@ func _on_remove_item_pressed() -> void:
 
 func _on_add_more_pressed() -> void:
 	ItemIncrease.emit(DescribedContainer)
+
+
+func _on_button_pressed() -> void:
+	Closed.emit()
