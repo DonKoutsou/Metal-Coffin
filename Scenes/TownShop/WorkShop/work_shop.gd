@@ -327,7 +327,7 @@ func UpgradeItem(Box : Inventory_Box_Res) -> void:
 	var Resault = await StatC.TradeFinished
 	
 	StatC.queue_free()
-	
+	NewInv.queue_free()
 	if (!Resault):
 		
 		return

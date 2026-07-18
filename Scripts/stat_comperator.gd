@@ -34,6 +34,9 @@ func _on_show_deck_pressed() -> void:
 	ContainerBefore.ShowDeck()
 	ContainerAfter.ShowDeck()
 
+func _on_show_cargo_pressed() -> void:
+	ContainerBefore.ShowInvetory()
+	ContainerAfter.ShowInvetory()
 
 func _on_accept_pressed() -> void:
 	TradeFinished.emit(true)

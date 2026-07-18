@@ -89,7 +89,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "DECK"
 
+[node name="ShowCargo" type="Button" parent="VBoxContainer/HBoxContainer2" unique_id=1031726466]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "CARGO"
+
 [connection signal="pressed" from="VBoxContainer/HBoxContainer3/Accept" to="." method="_on_accept_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer3/Decline" to="." method="_on_decline_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/ShowStats" to="." method="_on_show_stats_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/ShowDeck" to="." method="_on_show_deck_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/ShowCargo" to="." method="_on_show_cargo_pressed"]
