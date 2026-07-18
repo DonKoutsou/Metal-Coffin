@@ -12,6 +12,7 @@ class_name Item
 #@export var CardOptionProviding : CardOption
 @export var CanTransfer : bool = true
 @export var Cost : int = 0
+@export var PartType : ShipPart.ShipPartType = ShipPart.ShipPartType.INVENTORY
 
 func GetItemName() -> String:
 	return ItemName

@@ -3,47 +3,49 @@ extends PanelContainer
 class_name CharacterInventory
 
 @export_group("Nodes")
-@export var InventoryBoxScene : PackedScene
-@export var EngineInventoryBoxParent : VBoxContainer
-@export var SensorInventoryBoxParent : VBoxContainer
-@export var FuelTankInventoryBoxParent : VBoxContainer
-@export var WeaponInventoryBoxParent : VBoxContainer
-@export var ShieldInventoryBoxParent : VBoxContainer
-@export var InventoryBoxParent : VBoxContainer
 @export var CaptainNameLabel : LineEdit
 @export var HideOnStart : bool = true
-
+@export var interface : CharacterInventoryInterface
 signal InventoryUpdated
 signal OnItemAdded(it : Item)
 signal OnItemRemoved(it : Item)
 signal OnShipPartAdded(it : ShipPart)
 signal OnShipPartRemoved(it : ShipPart)
 signal ItemPlecementFailed(it : Item)
-signal BoxSelected(Box : Inventory_Box, OwnerInventory : CharacterInventory)
-signal ItemUpgrade(Box : Inventory_Box, OwnerInventory : CharacterInventory)
-signal ItemTransf(Box : Inventory_Box, OwnerInventory : CharacterInventory)
+signal BoxSelected(Box : Inventory_Box_Res, OwnerInventory : CharacterInventory)
+signal ItemUpgrade(Box : Inventory_Box_Res, OwnerInventory : CharacterInventory)
+signal ItemTransf(Box : Inventory_Box_Res, OwnerInventory : CharacterInventory)
 signal OnCharacterInspectionPressed
 signal OnCharacterDeckInspectionPressed
+signal OnCharacterInventoryInspectionPressed
 
 var _InventoryContents : Dictionary[Item, int]
+var boxes : Dictionary[ShipPart.ShipPartType, Array] = {
+	ShipPart.ShipPartType.INVENTORY : [],
+	ShipPart.ShipPartType.ENGINE : [],
+	ShipPart.ShipPartType.SENSOR : [],
+	ShipPart.ShipPartType.FUEL_TANK : [],
+	ShipPart.ShipPartType.WEAPON : [],
+	ShipPart.ShipPartType.SHIELD : [],
+}
+
 signal CharNameChanged(NewName : String)
 #var _CardInventory : Dictionary
 #var _CardAmmo : Dictionary
 
 var SimPaused : bool = false
 #var SimSpeed : int = 1
-var _ItemBeingUpgraded : Inventory_Box
+var _ItemBeingUpgraded : Inventory_Box_Res
 var _UpgradeTime : float
 var _ItemBeingEquipped : ShipPart
-var _EquipLocation : Inventory_Box
+var _EquipLocation : Inventory_Box_Res
 var _EquipTime : float
 
 var inventoryOwner : MapShip
 #var CurrentPort : MapSpot
 
 func _ready() -> void:
-	if (HideOnStart):
-		InventoryBoxParent.get_parent().get_parent().get_parent().visible = false
+	
 	#MissileDockEventH.connect("MissileLaunched", RemoveItem)
 	set_physics_process(_ItemBeingUpgraded != null)
 
@@ -128,64 +130,58 @@ func InitialiseInventory(Cha : Captain) -> void:
 	
 	var CharName = Cha.GetCaptainName()
 	for g in CharInvSpace:
-		var Box = InventoryBoxScene.instantiate() as Inventory_Box
-		Box.Initialise(self)
-		InventoryBoxParent.add_child(Box)
-		Box.connect("ItemSelected", ItemSelected)
+		var boxRes = Inventory_Box_Res.new()
+		boxes[ShipPart.ShipPartType.INVENTORY].append(boxRes)
+		boxRes.Initialise(self)
+
 		#InventoryBoxParent.columns = min(2, CharInvSpace)
 	
 	for g in CharEngineSpace:
-		var Box = InventoryBoxScene.instantiate() as Inventory_Box
-		Box.Initialise(self)
-		EngineInventoryBoxParent.add_child(Box)
-		Box.connect("ItemSelected", ItemSelected)
+		var boxRes = Inventory_Box_Res.new()
+		boxes[ShipPart.ShipPartType.ENGINE].append(boxRes)
+		boxRes.Initialise(self)
+
 		#EngineInventoryBoxParent.columns = min(2, CharEngineSpace)
 	
 	for g in CharSensorSpace:
-		var Box = InventoryBoxScene.instantiate() as Inventory_Box
-		Box.Initialise(self)
-		SensorInventoryBoxParent.add_child(Box)
-		Box.connect("ItemSelected", ItemSelected)
+		var boxRes = Inventory_Box_Res.new()
+		boxes[ShipPart.ShipPartType.SENSOR].append(boxRes)
+		boxRes.Initialise(self)
+
 		#SensorInventoryBoxParent.columns = min(2, CharSensorSpace)
 	
 	for g in CharFuelTankSpace:
-		var Box = InventoryBoxScene.instantiate() as Inventory_Box
-		Box.Initialise(self)
-		FuelTankInventoryBoxParent.add_child(Box)
-		Box.connect("ItemSelected", ItemSelected)
+		var boxRes = Inventory_Box_Res.new()
+		boxes[ShipPart.ShipPartType.FUEL_TANK].append(boxRes)
+		boxRes.Initialise(self)
+
 		#FuelTankInventoryBoxParent.columns = min(2, CharFuelTankSpace)
 	
 	for g in CharShieldSpace:
-		var Box = InventoryBoxScene.instantiate() as Inventory_Box
-		Box.Initialise(self)
-		ShieldInventoryBoxParent.add_child(Box)
-		Box.connect("ItemSelected", ItemSelected)
+		var boxRes = Inventory_Box_Res.new()
+		boxes[ShipPart.ShipPartType.SHIELD].append(boxRes)
+		boxRes.Initialise(self)
+
 		#ShieldInventoryBoxParent.columns = min(2, CharShieldSpace)
 	
 	for g in CharWeaponSpace:
-		var Box = InventoryBoxScene.instantiate() as Inventory_Box
-		Box.Initialise(self)
-		WeaponInventoryBoxParent.add_child(Box)
-		Box.connect("ItemSelected", ItemSelected)
+		var boxRes = Inventory_Box_Res.new()
+		boxes[ShipPart.ShipPartType.WEAPON].append(boxRes)
+		boxRes.Initialise(self)
+		
 		#WeaponInventoryBoxParent.columns = min(2, CharWeaponSpace)
 		
 	CaptainNameLabel.text = CharName
+	if (interface != null):
+		interface.InitialiseInventory(self)
+
+static func newInv(Cha : Captain) -> CharacterInventory:
+	var inv = CharacterInventory.new()
+	inv.InitialiseStarting(Cha)
+	return inv
 
 func InitialiseStarting(Cha : Captain) -> void:
-	for g in InventoryBoxParent.get_children():
-		g.queue_free()
-	for g in EngineInventoryBoxParent.get_children():
-		g.queue_free()
-	for g in SensorInventoryBoxParent.get_children():
-		g.queue_free()
-	for g in FuelTankInventoryBoxParent.get_children():
-		g.queue_free()
-	for g in ShieldInventoryBoxParent.get_children():
-		g.queue_free()
-	for g in WeaponInventoryBoxParent.get_children():
-		g.queue_free()
-	
-	
+
 	var CharInvSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.INVENTORY_SPACE)
 	var CharEngineSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.ENGINES_SLOTS)
 	var CharSensorSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.SENSOR_SLOTS)
@@ -194,55 +190,46 @@ func InitialiseStarting(Cha : Captain) -> void:
 	var CharWeaponSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.WEAPON_SLOTS)
 	
 	for g in CharInvSpace:
-		var Box = InventoryBoxScene.instantiate() as Inventory_Box
-		Box.Initialise(self)
-		InventoryBoxParent.add_child(Box)
-		Box.connect("ItemSelected", ItemSelected)
-		#InventoryBoxParent.columns = min(2, CharInvSpace)
+		var boxRes = Inventory_Box_Res.new()
+		boxes[ShipPart.ShipPartType.INVENTORY].append(boxRes)
+		boxRes.Initialise(self)
+
 	
 	for g in CharEngineSpace:
-		var Box = InventoryBoxScene.instantiate() as Inventory_Box
-		Box.Initialise(self)
-		EngineInventoryBoxParent.add_child(Box)
-		Box.connect("ItemSelected", ItemSelected)
-		#EngineInventoryBoxParent.columns = min(2, CharEngineSpace)
+		var boxRes = Inventory_Box_Res.new()
+		boxes[ShipPart.ShipPartType.ENGINE].append(boxRes)
+		boxRes.Initialise(self)
+
 	
 	for g in CharSensorSpace:
-		var Box = InventoryBoxScene.instantiate() as Inventory_Box
-		Box.Initialise(self)
-		SensorInventoryBoxParent.add_child(Box)
-		Box.connect("ItemSelected", ItemSelected)
-		#SensorInventoryBoxParent.columns = min(2, CharSensorSpace)
+		var boxRes = Inventory_Box_Res.new()
+		boxes[ShipPart.ShipPartType.SENSOR].append(boxRes)
+		boxRes.Initialise(self)
+
 	
 	for g in CharFuelTankSpace:
-		var Box = InventoryBoxScene.instantiate() as Inventory_Box
-		Box.Initialise(self)
-		FuelTankInventoryBoxParent.add_child(Box)
-		Box.connect("ItemSelected", ItemSelected)
-		#FuelTankInventoryBoxParent.columns = min(2, CharFuelTankSpace)
+		var boxRes = Inventory_Box_Res.new()
+		boxes[ShipPart.ShipPartType.FUEL_TANK].append(boxRes)
+		boxRes.Initialise(self)
+
 	
 	for g in CharShieldSpace:
-		var Box = InventoryBoxScene.instantiate() as Inventory_Box
-		Box.Initialise(self)
-		ShieldInventoryBoxParent.add_child(Box)
-		Box.connect("ItemSelected", ItemSelected)
-		#ShieldInventoryBoxParent.columns = min(2, CharShieldSpace)
+		var boxRes = Inventory_Box_Res.new()
+		boxes[ShipPart.ShipPartType.SHIELD].append(boxRes)
+		boxRes.Initialise(self)
+
 	
 	for g in CharWeaponSpace:
-		var Box = InventoryBoxScene.instantiate() as Inventory_Box
-		Box.Initialise(self)
-		WeaponInventoryBoxParent.add_child(Box)
-		Box.connect("ItemSelected", ItemSelected)
-		#WeaponInventoryBoxParent.columns = min(2, CharWeaponSpace)
+		var boxRes = Inventory_Box_Res.new()
+		boxes[ShipPart.ShipPartType.WEAPON].append(boxRes)
+		boxRes.Initialise(self)
+
 	
 	for It in Cha.StartingItems:
-		var boxes
-		if (It is ShipPart):
-			boxes = GetBoxParentForType(It.PartType).get_children()
-		else:
-			boxes = InventoryBoxParent.get_children()
-		var Empty : Inventory_Box = null
-		for g in boxes:
+		var boxeList = boxes[It.PartType]
+
+		var Empty : Inventory_Box_Res = null
+		for g : Inventory_Box_Res in boxeList:
 			if (g.IsEmpty()):
 				if (Empty == null):
 					Empty = g
@@ -261,27 +248,27 @@ func InitialiseStarting(Cha : Captain) -> void:
 			else:
 				_InventoryContents[It] = 1
 
-				
-			if (It is not ShipPart):
-				var BoxParent = InventoryBoxParent
-				if (Empty.get_parent() != BoxParent):
-					Empty.get_parent().remove_child(Empty)
-					BoxParent.add_child(Empty)
-			
+			#if (It is not ShipPart):
+				#
+				#var BoxParent = InventoryBoxParent
+				#if (Empty.get_parent() != BoxParent):
+					#Empty.get_parent().remove_child(Empty)
+					#BoxParent.add_child(Empty)
+			#
 			continue
+	if (interface != null):
+		interface.InitialiseInventory(self)
 
-func ItemSelected(Box : Inventory_Box) -> void:
+
+func ItemSelected(Box : Inventory_Box_Res) -> void:
 	BoxSelected.emit(Box, self)
 
-func FindBox(It : Item) -> Inventory_Box:
-	var boxes
-	if (It is ShipPart):
-		boxes = GetBoxParentForType(It.PartType).get_children()
-	else:
-		boxes = InventoryBoxParent.get_children()
-	var Empty : Inventory_Box = null
+func FindBox(It : Item) -> Inventory_Box_Res:
+	var boxeList = boxes[It.PartType]
+
+	var Empty : Inventory_Box_Res = null
 	#try to find matching box for it and if not put it on any empty ones we found
-	for g in boxes:
+	for g : Inventory_Box_Res in boxeList:
 		if (g.IsEmpty()):
 			if (Empty == null):
 				Empty = g
@@ -295,15 +282,12 @@ func FindBox(It : Item) -> Inventory_Box:
 	return null
 
 func AddItem(It : Item) -> void:
-	var boxes
-	if (It is ShipPart):
-		boxes = GetBoxParentForType(It.PartType).get_children()
-	else:
-		boxes = InventoryBoxParent.get_children()
-	var Empty : Inventory_Box = null
+	var boxeList = boxes[It.PartType]
+
+	var Empty : Inventory_Box_Res = null
 
 	#try to find matching box for it and if not put it on any empty ones we found
-	for g in boxes:
+	for g : Inventory_Box_Res in boxeList:
 		if (g.IsEmpty()):
 			if (Empty == null):
 				Empty = g
@@ -330,11 +314,11 @@ func AddItem(It : Item) -> void:
 			#var BoxParent = GetBoxParentForType(It.PartType)
 
 			OnShipPartAdded.emit(It)
-		else:
-			var BoxParent = InventoryBoxParent
-			if (Empty.get_parent() != BoxParent):
-				Empty.get_parent().remove_child(Empty)
-				BoxParent.add_child(Empty)
+		#else:
+			#var BoxParent = InventoryBoxParent
+			#if (Empty.get_parent() != BoxParent):
+				#Empty.get_parent().remove_child(Empty)
+				#BoxParent.add_child(Empty)
 		OnItemAdded.emit(It)
 		InventoryUpdated.emit()
 		
@@ -342,7 +326,7 @@ func AddItem(It : Item) -> void:
 	ItemPlecementFailed.emit(It)
 	return
 
-func AddItemToBox(It : Item, destination : Inventory_Box) -> void:
+func AddItemToBox(It : Item, destination : Inventory_Box_Res) -> void:
 	if (destination.IsEmpty()):
 		destination.RegisterItem(It)
 		destination.UpdateAmm(1)
@@ -364,49 +348,24 @@ func AddItemToBox(It : Item, destination : Inventory_Box) -> void:
 		OnItemAdded.emit(It)
 		InventoryUpdated.emit()
 
-#func HasItem(It : Item) -> bool:
-	#return _InventoryContents.has(It)
-
-func GetBoxParentForType(PartType : ShipPart.ShipPartType) -> Control:
-	var BoxParent : Control
-	if (PartType == ShipPart.ShipPartType.ENGINE):
-		BoxParent = EngineInventoryBoxParent
-	else : if (PartType == ShipPart.ShipPartType.SENSOR):
-		BoxParent = SensorInventoryBoxParent
-	else : if (PartType == ShipPart.ShipPartType.FUEL_TANK):
-		BoxParent = FuelTankInventoryBoxParent
-	else : if (PartType == ShipPart.ShipPartType.WEAPON):
-		BoxParent = WeaponInventoryBoxParent
-	else : if (PartType == ShipPart.ShipPartType.SHIELD):
-		BoxParent = ShieldInventoryBoxParent
-	else : if (PartType == ShipPart.ShipPartType.INVENTORY):
-		BoxParent = InventoryBoxParent
-	return BoxParent
 	
 func HasSpaceForItem(It : Item) -> bool:
-	var boxes
-	if (It is ShipPart):
-		boxes = GetBoxParentForType(It.PartType).get_children()
-	else:
-		boxes = InventoryBoxParent.get_children()
+	var boxeList = boxes[It.PartType]
+
 	#try to find matching box for it and if not put it on any empty ones we found
-	for g in boxes:
+	for g : Inventory_Box_Res in boxeList:
 		if (g.IsEmpty()):
 			return true
 		if (g.GetContainedItemName() == It.ItemName and g.HasSpace()):
 			return true
 	return false
 
-func GetBoxContainingItem(It : Item) -> Inventory_Box:
-	var boxes
-	if (It is ShipPart):
-		boxes = GetBoxParentForType(It.PartType).get_children()
-	else:
-		boxes = InventoryBoxParent.get_children()
+func GetBoxContainingItem(It : Item) -> Inventory_Box_Res:
+	var boxeList = boxes[It.PartType]
 	
-	var Box : Inventory_Box
+	var Box : Inventory_Box_Res
 	
-	for g : Inventory_Box in boxes:
+	for g : Inventory_Box_Res in boxeList:
 		if (g.IsEmpty()):
 			continue
 		if (g.GetContainedItem().IsSame(It)):
@@ -414,7 +373,7 @@ func GetBoxContainingItem(It : Item) -> Inventory_Box:
 			
 	return Box
 #called for Item Descriptor once the Drop button is pressed. Signal is connected through Inventory manager when descriptor is created.
-func RemoveItemFromBox(Box : Inventory_Box) -> void:
+func RemoveItemFromBox(Box : Inventory_Box_Res) -> void:
 	var It = Box.GetContainedItem()
 	
 	Box.UpdateAmm(-1)
@@ -428,26 +387,17 @@ func RemoveItemFromBox(Box : Inventory_Box) -> void:
 	InventoryUpdated.emit()
 	
 func RemoveItem(It : Item) -> void:
-	for g in _GetInventoryBoxes():
-		var box = g as Inventory_Box
-		if (box.IsEmpty()):
-			continue
-		if (box._ContainedItem.ItemName == It.ItemName):
-			RemoveItemFromBox(box)
-			
-			return
+	for boxList : Array in boxes.values():
+		for g : Inventory_Box_Res in boxList:
+			if (g.IsEmpty()):
+				continue
+			if (g._ContainedItem.ItemName == It.ItemName):
+				RemoveItemFromBox(g)
+				
+				return
 
-func _GetInventoryBoxes() -> Array:
-	var Boxes : Array
-	Boxes.append_array(EngineInventoryBoxParent.get_children())
-	Boxes.append_array(SensorInventoryBoxParent.get_children())
-	Boxes.append_array(FuelTankInventoryBoxParent.get_children())
-	Boxes.append_array(WeaponInventoryBoxParent.get_children())
-	Boxes.append_array(ShieldInventoryBoxParent.get_children())
-	Boxes.append_array(InventoryBoxParent.get_children())
-	return Boxes
 
-func UpgradeItem(Box : Inventory_Box) -> void:
+func UpgradeItem(Box : Inventory_Box_Res) -> void:
 	
 	#else :if (!Player.cu):
 		#PopUpManager.GetInstance().DoFadeNotif("Cant upgrade ship in current port.")
@@ -455,16 +405,16 @@ func UpgradeItem(Box : Inventory_Box) -> void:
 	ItemUpgrade.emit(Box, self)
 
 
-func TransferItem(Box : Inventory_Box) -> void:
+func TransferItem(Box : Inventory_Box_Res) -> void:
 	ItemTransf.emit(Box, self)
 
-func StartUpgrade(Box : Inventory_Box) -> void:
+func StartUpgrade(Box : Inventory_Box_Res) -> void:
 	var Part = Box.GetContainedItem() as ShipPart
 	_UpgradeTime = Part.UpgradeVersion.UpgradeTime
 	_ItemBeingUpgraded = Box
 	set_physics_process(true)
 
-func StartEquip(_Box : Inventory_Box, It : ShipPart) -> Inventory_Box:
+func StartEquip(_Box : Inventory_Box_Res, It : ShipPart) -> Inventory_Box_Res:
 	_ItemBeingEquipped = It
 	_EquipLocation = FindBox(It)
 	_EquipTime = It.UpgradeTime
@@ -477,7 +427,7 @@ func ReStartEquip(It : ShipPart, EquipTime : float) -> void:
 	_EquipTime = EquipTime
 	set_physics_process(true)
 
-func ReStartUpgrade(Box : Inventory_Box, UpTime : float) -> void:
+func ReStartUpgrade(Box : Inventory_Box_Res, UpTime : float) -> void:
 	#var Part = Box.GetContainedItem() as ShipPart
 	_UpgradeTime = UpTime
 	_ItemBeingUpgraded = Box
@@ -536,7 +486,7 @@ func ItemEquipFinished() -> void:
 	_ItemBeingEquipped = null
 	
 
-func ForceUpgradeItem(Box : Inventory_Box) -> bool:
+func ForceUpgradeItem(Box : Inventory_Box_Res) -> bool:
 	var Part = Box.GetContainedItem() as ShipPart
 	
 	if (Part == null):
@@ -564,7 +514,7 @@ func GetEquipTimeLeft() -> float:
 		return _EquipTime / 2.0
 	return _EquipTime
 
-func GetItemBeingUpgraded() -> Inventory_Box:
+func GetItemBeingUpgraded() -> Inventory_Box_Res:
 	return _ItemBeingUpgraded
 
 
@@ -575,27 +525,31 @@ func _on_deck_pressed() -> void:
 	OnCharacterDeckInspectionPressed.emit()
 
 func _on_inventory_vis_toggle_pressed() -> void:
-	$VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/InventoryVisToggle.disabled = true
-	var prevc = custom_minimum_size.y
-	custom_minimum_size.y = 0
-	var Show = !InventoryBoxParent.get_parent().get_parent().get_parent().visible
-	InventoryBoxParent.get_parent().get_parent().get_parent().visible = !InventoryBoxParent.get_parent().get_parent().get_parent().visible
-	var TargetSize
-	if (Show):
-		TargetSize = 500
-		InventoryBoxParent.get_parent().get_parent().get_parent().visible = !InventoryBoxParent.get_parent().get_parent().get_parent().visible
-	else:
-		TargetSize = 0
-		custom_minimum_size.y = prevc
-		
-	var Tw = create_tween()
-	Tw.set_ease(Tween.EASE_OUT)
-	Tw.set_trans(Tween.TRANS_QUAD)
-	Tw.tween_property(self, "custom_minimum_size", Vector2(0,TargetSize), 0.5)
-	
-	await Tw.finished
-	if (Show):
-		InventoryBoxParent.get_parent().get_parent().get_parent().visible = !InventoryBoxParent.get_parent().get_parent().get_parent().visible
+	OnCharacterInventoryInspectionPressed.emit()
+
+	#$VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/InventoryVisToggle.disabled = true
+	#var prevc = custom_minimum_size.y
+	#custom_minimum_size.y = 0
+#
+	#var Show = !interface.visible
+	#interface.visible = !interface.visible
+#
+	#var TargetSize
+	#if (Show):
+		#TargetSize = 500
+		#interface.visible = !interface.visible
+	#else:
+		#TargetSize = 0
+		#custom_minimum_size.y = prevc
+		#
+	#var Tw = create_tween()
+	#Tw.set_ease(Tween.EASE_OUT)
+	#Tw.set_trans(Tween.TRANS_QUAD)
+	#Tw.tween_property(self, "custom_minimum_size", Vector2(0,TargetSize), 0.5)
+	#
+	#await Tw.finished
+	#if (Show):
+		#interface.visible = !interface.visible
 
 	#if (InventoryBoxParent.get_parent().get_parent().visible):
 		#$VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/InventoryVisToggle.text = "Hide Inventory"

@@ -4,16 +4,19 @@ class_name Inventory_Box
 
 @export var Butto : Button
 
-var _ParentInventory : CharacterInventory
-var _ContainedItem : Item
-var _ContentAmmout : int
-var _PlaceholderItem : Item
-var _PlaceholderAmm : int
+var box : Inventory_Box_Res
 
-signal ItemSelected(Box : Inventory_Box)
+signal ItemSelected(Box : Inventory_Box_Res)
 
-func Initialise(Parent : CharacterInventory):
-	_ParentInventory = Parent
+
+func Initialise(boxRes : Inventory_Box_Res):
+	box = boxRes
+	box.AmmChanged.connect(UpdateAmm)
+	box.ItemChanged.connect(_UpdateItemIcon)
+	
+	if (box._ContentAmmout > 0):
+		_UpdateItemIcon(box._ContainedItem)
+		UpdateAmm(box._ContentAmmout)
 
 func _ready() -> void:
 	if (Engine.is_editor_hint()):
@@ -23,72 +26,32 @@ func _ready() -> void:
 func _exit_tree() -> void:
 	UISoundMan.GetInstance().RemoveSelf(Butto)
 
-func GetParentInventory() -> CharacterInventory:
-	return _ParentInventory
-
-
-func RegisterItem(It : Item) -> void:
-	_ContainedItem = It
-	_UpdateItemIcon()
-	Butto.disabled = false
-
-
-func UpdateAmm(Amm : int) -> void:
-	_ContentAmmout = max(_ContentAmmout + Amm, 0)
-	if (_ContentAmmout <= 0):
-		_ContainedItem = null
+func UpdateAmm(newAmm : int) -> void:
+	if (newAmm <= 0):
 		Butto.disabled = true
-		_UpdateItemIcon()
 		Butto.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	else:
 		Butto.mouse_filter = Control.MOUSE_FILTER_PASS
-	_UpdateAmmountLabel()
+	_UpdateAmmountLabel(newAmm)
 
-func UpdateAmmNoDissable(Amm : int) -> void:
-	_ContentAmmout = max(_ContentAmmout + Amm, 0)
-	if (_ContentAmmout <= 0):
-		_ContainedItem = null
-		#Butto.disabled = true
-		_UpdateItemIcon()
-		#Butto.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	#else:
-		#Butto.mouse_filter = Control.MOUSE_FILTER_PASS
-	_UpdateAmmountLabel()
-	
-func GetContainedItem() -> Item:
-	return _ContainedItem
+func UpdateAmmNoDissable(newAmm : int) -> void:
+	_UpdateAmmountLabel(newAmm)
 
-
-func GetContainedItemName() -> String:
-	return _ContainedItem.GetItemName()
-
-func IsEmpty() -> bool:
-	return _ContentAmmout == 0
-
-func HasSpace() -> bool:
-	return _ContentAmmout < _ContainedItem.MaxStackCount
-
-func _UpdateAmmountLabel() -> void:
+func _UpdateAmmountLabel(newAmm : int) -> void:
 	var Text = $ItemButton/PanelContainer/Label
-	Text.text = var_to_str(_ContentAmmout)
-	$ItemButton/PanelContainer.visible = _ContentAmmout > 1
+	Text.text = var_to_str(newAmm)
+	$ItemButton/PanelContainer.visible = newAmm > 1
 
 func Enable() -> void:
 	Butto.disabled = false
 	Butto.mouse_filter = Control.MOUSE_FILTER_PASS
-func _UpdateItemIcon() -> void:
-	if (_ContainedItem):
-		$ItemButton.text = _ContainedItem.GetItemName()
-		#$ItemButton/ItemName.text = _ContainedItem.ItemName
-		#$ItemButton/TextureRect.texture = _ContainedItem.ItemIconSmol
-		#if (_ContainedItem is UsableItem):
-			#$TextureRect/TextureRect.modulate = _ContainedItem.ItecColor
-		#else:
-			#$TextureRect/TextureRect.modulate = Color.WHITE
+	
+func _UpdateItemIcon(it : Item) -> void:
+	if (it):
+		$ItemButton.text = it.GetItemName()
+		Butto.disabled = false
 	else:
 		$ItemButton.text = ""
 
 func _On_Item_Pressed() -> void:
-	#if (_ContentAmmout == 0):
-		#return
-	ItemSelected.emit(self)
+	ItemSelected.emit(box)

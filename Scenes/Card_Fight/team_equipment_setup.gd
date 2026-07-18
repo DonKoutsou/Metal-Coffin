@@ -194,24 +194,11 @@ func GetBoxParentForType(PartType : ShipPart.ShipPartType) -> Control:
 		BoxParent = InventoryBoxParent
 	return BoxParent
 
-func GetTypeOfBox(Box : Inventory_Box) -> ShipPart.ShipPartType:
-	var BoxParent = Box.get_parent()
-	var Type : ShipPart.ShipPartType
-	if (BoxParent == EngineInventoryBoxParent):
-		Type = ShipPart.ShipPartType.ENGINE
-	else : if (BoxParent == SensorInventoryBoxParent):
-		Type = ShipPart.ShipPartType.SENSOR
-	else : if (BoxParent == FuelTankInventoryBoxParent):
-		Type = ShipPart.ShipPartType.FUEL_TANK
-	else : if (BoxParent == WeaponInventoryBoxParent):
-		Type = ShipPart.ShipPartType.WEAPON
-	else : if (BoxParent == ShieldInventoryBoxParent):
-		Type = ShipPart.ShipPartType.SHIELD
-	else: 
-		Type = ShipPart.ShipPartType.INVENTORY
+func GetTypeOfBox(Box : Inventory_Box_Res) -> ShipPart.ShipPartType:
+	var Type : ShipPart.ShipPartType = Box._ParentInventory.boxes.find_key(Box)
 	return Type
 
-func ItemSelected(Box : Inventory_Box) -> void:
+func ItemSelected(Box : Inventory_Box_Res) -> void:
 	if (CurrentDescriptor != null):
 		#var desc = descriptors[0] as ItemDescriptor
 		DescriptorPlace.remove_child(CurrentDescriptor)
@@ -237,11 +224,11 @@ func ItemSelected(Box : Inventory_Box) -> void:
 	CurrentDescriptor.set_physics_process(false)
 	CurrentDescriptor.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
-func UpdateDescriptor(Box : Inventory_Box) -> void:
+func UpdateDescriptor(Box : Inventory_Box_Res) -> void:
 	if (CurrentDescriptor != null):
 		CurrentDescriptor.SetData(Box, true, false, true, true, true)
 
-func UpgradeItem(Box : Inventory_Box) -> void:
+func UpgradeItem(Box : Inventory_Box_Res) -> void:
 	var OriginalItem = Box.GetContainedItem() as ShipPart
 	CurrentCpt.StartingItems.erase(OriginalItem)
 	var UpgradedItem = OriginalItem.UpgradeVersion
@@ -252,8 +239,8 @@ func UpgradeItem(Box : Inventory_Box) -> void:
 	UpdateDescriptor(Box)
 	PopUpManager.GetInstance().DoFadeNotif("{0} Upgraded".format([OriginalItem.GetItemName()]))
 
-var SelectedContainer : Inventory_Box
-func AddItem(Box : Inventory_Box) -> void:
+var SelectedContainer : Inventory_Box_Res
+func AddItem(Box : Inventory_Box_Res) -> void:
 	SelectedContainer = Box
 	var Type = GetTypeOfBox(Box)
 	
@@ -305,7 +292,7 @@ func OnItemSelected(It : Item) -> void:
 	UpdateDescriptor(SelectedContainer)
 	PopUpManager.GetInstance().DoFadeNotif("{0} Added".format([It.GetItemName()]))
 
-func RemoveItem(Box : Inventory_Box) -> void:
+func RemoveItem(Box : Inventory_Box_Res) -> void:
 	PopUpManager.GetInstance().DoFadeNotif("{0} Removed".format([Box.GetContainedItem().GetItemName()]))
 	var OriginalItem = Box.GetContainedItem()
 	CurrentCpt.StartingItems.erase(OriginalItem)

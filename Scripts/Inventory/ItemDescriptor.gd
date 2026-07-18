@@ -21,17 +21,17 @@ class_name ItemDescriptor
 @export var CardPlecement : Control
 @export var CloseButton : Button
 
-signal ItemUpgraded(Box : Inventory_Box)
-signal ItemUpgradeCancel(Box : Inventory_Box)
-signal ItemInstallCanceled(Box : Inventory_Box)
-signal ItemDropped(Box : Inventory_Box)
+signal ItemUpgraded(Box : Inventory_Box_Res)
+signal ItemUpgradeCancel(Box : Inventory_Box_Res)
+signal ItemInstallCanceled(Box : Inventory_Box_Res)
+signal ItemDropped(Box : Inventory_Box_Res)
 #signal ItemRepaired(Box : Inventory_Box)
-signal ItemTransf(Box : Inventory_Box)
-signal ItemRemove(Box : Inventory_Box)
-signal ItemAdd(Box : Inventory_Box)
-signal ItemIncrease(Box : Inventory_Box)
+signal ItemTransf(Box : Inventory_Box_Res)
+signal ItemRemove(Box : Inventory_Box_Res)
+signal ItemAdd(Box : Inventory_Box_Res)
+signal ItemIncrease(Box : Inventory_Box_Res)
 signal Closed()
-var DescribedContainer : Inventory_Box
+var DescribedContainer : Inventory_Box_Res
 var DescribedItem : Item
 var UsingAmm : int = 1
 
@@ -70,7 +70,7 @@ func PlayIntroAnim() -> void:
 		var tuttext = "When selecting an [color=#ffc315]Item[/color] you can check the items details that apear on the panel to the right. There you can choose to [color=#ffc315]Upgrade[/color] it if its a ship part, [color=#ffc315]Transfer[/color] it to another ship if its allowed and check any [color=#ffc315]Cards[/color] it provides in close quarters combat."
 		ActionTracker.QueueTutorial("Item Inspection", tuttext, [])
 
-func SetWorkShopData(Box : Inventory_Box, CanUpgrade : bool, Owner : Captain) -> void:
+func SetWorkShopData(Box : Inventory_Box_Res, CanUpgrade : bool, Owner : Captain) -> void:
 	var scroll = get_child(0) as Control
 	scroll.clip_contents = false
 	DescribedContainer = Box
@@ -196,7 +196,7 @@ func SetMerchData(Itm : Item, Ships : Array[MapShip], ShowDesc : bool = false) -
 	else:
 		CardSection.visible = false
 
-func SetData(Box : Inventory_Box, CanUpgrade : bool, CanTransfer : bool, CanAdd : bool, CanRemove : bool, ShowDescription : bool) -> void:
+func SetData(Box : Inventory_Box_Res, CanUpgrade : bool, CanTransfer : bool, CanAdd : bool, CanRemove : bool, ShowDescription : bool) -> void:
 	#set_physics_process(false)
 	
 	

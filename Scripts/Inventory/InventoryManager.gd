@@ -139,21 +139,21 @@ func OnSimulationPaused(t : bool) -> void:
 	#SimSpeed = i
 	#for g in _CharacterInventories.values():
 		#g.SimSpeed = i
-func BoxSelected(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> void:
+func BoxSelected(Box : Inventory_Box_Res, OwnerInventory : CharacterInventory) -> void:
 	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
 	if (descriptors.size() > 0):
 		var desc = descriptors[0] as ItemDescriptor
 		DescriptorPlace.remove_child(desc)
 		desc.queue_free()
 		if (desc.DescribedContainer == Box):
-			CaptainStats.visible = true
+			CharacterPlace.get_parent().visible = true
 			return
 	
 	CurrentDesc = ItemDescriptorScene.instantiate() as ItemDescriptor
 	CurrentDesc.ToggleClosable(true)
 	CurrentDesc.Closed.connect(RemoveDescriptor)
 	DescriptorPlace.add_child(CurrentDesc)
-	CaptainStats.visible = false
+	CharacterPlace.get_parent().visible = false
 	#var cpt = GetBoxOwner(Box)
 	#var HasUp = false
 	#if (cpt.CurrentPort != ""):
@@ -168,7 +168,7 @@ func BoxSelected(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> vo
 	#Descriptor.connect("ItemRepaired", RepairPart)
 
 func RemoveDescriptor() -> void:
-	CaptainStats.visible = true
+	CharacterPlace.get_parent().visible = true
 	CurrentDesc.queue_free()
 
 
@@ -182,7 +182,7 @@ func GetCity(CityName : String) -> MapSpot:
 			break
 	return CorrectCity
 
-func ItemUpdgrade(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> void:
+func ItemUpdgrade(Box : Inventory_Box_Res, OwnerInventory : CharacterInventory) -> void:
 
 	#var Cpt = GetBoxOwner(Box)
 	#var cit = GetCity(Cpt.CurrentPort)
@@ -190,7 +190,7 @@ func ItemUpdgrade(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> v
 
 	OwnerInventory.StartUpgrade(Box)
 	
-func CancelUpgrade(Box : Inventory_Box, OwnerInventory : CharacterInventory) -> void:
+func CancelUpgrade(Box : Inventory_Box_Res, OwnerInventory : CharacterInventory) -> void:
 	OwnerInventory.CancelUpgrade()
 	var OriginalItem : ShipPart = Box.GetContainedItem()
 	var UpgradedItem : ShipPart = OriginalItem.UpgradeVersion
@@ -215,7 +215,7 @@ func FlushInventory() -> void:
 		Inv.queue_free()
 	_CharacterInventories.clear()
 
-func ItemTranfer(Box : Inventory_Box) -> void:
+func ItemTranfer(Box : Inventory_Box_Res) -> void:
 	var Cpt = GetBoxOwner(Box)
 	var OwnerInventory = _CharacterInventories[Cpt] as CharacterInventory
 	
@@ -252,11 +252,10 @@ func ItemTranfer(Box : Inventory_Box) -> void:
 		OwnerInventory.RemoveItemFromBox(Box)
 	PopUpManager.GetInstance().DoFadeNotif("Transfered {2}x of {0} to {1}'s inventory".format([It.ItemName, SelectedChar.GetCaptainName(), amm]))
 	
-func GetBoxOwner(Box : Inventory_Box) -> Captain:
+func GetBoxOwner(Box : Inventory_Box_Res) -> Captain:
 	for g in _CharacterInventories.keys():
-		for z in _CharacterInventories[g]._GetInventoryBoxes():
-			if (z == Box):
-				return g
+		if (_CharacterInventories[g] == Box.GetParentInventory()):
+			return g
 	return null
 
 func DroneAdded(Dr : PlayerDrivenShip, _Target : MapShip):
@@ -270,6 +269,7 @@ func AddCharacter(Cha : Captain) -> void:
 	_CharacterInventories[Cha] = CharInv
 	CharacterPlace.add_child(CharInv)
 	
+	
 	CharInv.BoxSelected.connect(BoxSelected)
 	CharInv.ItemUpgrade.connect(ItemUpdgrade)
 	CharInv.OnItemAdded.connect(OnItemAdded.bind(Cha))
@@ -278,6 +278,7 @@ func AddCharacter(Cha : Captain) -> void:
 	CharInv.OnShipPartRemoved.connect(Cha.OnShipPartRemovedFromInventory)
 	CharInv.OnCharacterInspectionPressed.connect(InspectCharacter.bind(Cha))
 	CharInv.OnCharacterDeckInspectionPressed.connect(InspectCharacterDeck.bind(Cha))
+	CharInv.OnCharacterInventoryInspectionPressed.connect(InspectCharacterInventory.bind(Cha))
 	
 	for g in Cha.StartingItems:
 		if (g is ShipPart):
@@ -368,13 +369,17 @@ func InspectCharacterDeck(Cha : Captain) -> void:
 	CaptainStats.SetCaptain(Cha)
 	CaptainStats.ShowDeck()
 
+func InspectCharacterInventory(Cha : Captain) -> void:
+	CloseDescriptor()
+	CaptainStats.SetCaptain(Cha)
+	CaptainStats.ShowInvetory()
 
 func CloseDescriptor() -> void:
 	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
 	if (descriptors.size() > 0):
 		DescriptorPlace.remove_child(descriptors[0])
 		descriptors[0].queue_free()
-	CaptainStats.visible = true
+	CharacterPlace.get_parent().visible = true
 
 
 func GenerateCaptainSaveData(Cpt: Captain, Inv : CharacterInventory) -> SD_CharacterInventory:

@@ -5,7 +5,7 @@ class_name RecruitShop
 @export var Stats : CaptainStatContainer
 @export var ShipButtonsParent : Control
 @export var PlWaller : Wallet
-@export var Inv : CharacterInventory
+#@export var Inv : CharacterInventory
 
 var CurrentShip : Captain
 
@@ -14,6 +14,10 @@ signal RecruitClosed
 signal OnCaptainBought(Cpt : Captain)
 
 var AvailableCaptains : Array[Captain]
+
+func _exit_tree() -> void:
+	if (CurrentShip != null):
+		CurrentShip._CharInv.queue_free()
 
 func Init(Ships : Array[Captain]) -> void:
 	
@@ -41,10 +45,14 @@ func RefreshCaptains() -> void:
 func OnShipSelected(Ship : Captain) -> void:
 	if (Ship == CurrentShip):
 		return
+	if (CurrentShip != null):
+		CurrentShip._CharInv.queue_free()
 	CurrentShip = Ship
-	Stats.SetCaptain(Ship.GetDuplicate())
+	CurrentShip = Ship.GetDuplicate()
+	CurrentShip._CharInv = CharacterInventory.newInv(CurrentShip)
+	Stats.SetCaptain(CurrentShip)
 	Stats.ShowStats()
-	Inv.InitialiseStarting(Ship)
+	#Inv.InitialiseStarting(Ship)
 
 func _on_buy_pressed() -> void:
 	if (PlWaller.Funds > CurrentShip.GetValue()):
@@ -62,6 +70,8 @@ func _on_close_pressed() -> void:
 func _on_button_pressed() -> void:
 	Stats.ShowStats()
 
-
 func _on_button_2_pressed() -> void:
 	Stats.ShowDeck()
+
+func _on_button_3_pressed() -> void:
+	Stats.ShowInvetory()

@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://c407gsr2ima44" path="res://Scripts/Inventory/ship_deck.gd" id="4_7pj6b"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Card_Fight/Card/Card.tscn" id="5_gxgtf"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="6_uviis"]
+[ext_resource type="PackedScene" uid="uid://dk1p1g38kvyjb" path="res://Scenes/Inventory/InventoryInterface.tscn" id="7_qyvw6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_12j2j"]
 content_margin_left = 8.0
@@ -20,7 +21,7 @@ corner_detail = 1
 content_margin_top = 20.0
 content_margin_bottom = 50.0
 
-[node name="CaptainStatContainer" type="PanelContainer" unique_id=1727051882 node_paths=PackedStringArray("ShipStats", "ShipDeck", "CaptainIcon")]
+[node name="CaptainStatContainer" type="PanelContainer" unique_id=1727051882 node_paths=PackedStringArray("ShipStats", "ShipDeck", "ShipInventory", "CaptainIcon")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -30,6 +31,7 @@ size_flags_vertical = 3
 script = ExtResource("1_gx6im")
 ShipStats = NodePath("PanelContainer/InventoryShipStats")
 ShipDeck = NodePath("PanelContainer/ShipDeck")
+ShipInventory = NodePath("PanelContainer/InputScroll/InventoryInterface")
 CaptainIcon = NodePath("PanelContainer/CaptainIcon")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=383408915]
@@ -44,6 +46,19 @@ size_flags_vertical = 3
 texture = ExtResource("2_uviis")
 expand_mode = 1
 stretch_mode = 3
+
+[node name="InputScroll" type="ScrollContainer" parent="PanelContainer" unique_id=548614632]
+layout_mode = 2
+mouse_filter = 0
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+script = ExtResource("6_uviis")
+metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
+
+[node name="InventoryInterface" parent="PanelContainer/InputScroll" unique_id=399381214 instance=ExtResource("7_qyvw6")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="InventoryShipStats" parent="PanelContainer" unique_id=1343149227 instance=ExtResource("3_qyvw6")]
 layout_mode = 2
@@ -123,3 +138,5 @@ theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = -131
 alignment = 1
 last_wrap_alignment = 2
+
+[connection signal="BoxSelected" from="PanelContainer/InputScroll/InventoryInterface" to="." method="_on_inventory_interface_box_selected"]

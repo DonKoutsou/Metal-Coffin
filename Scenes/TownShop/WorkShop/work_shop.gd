@@ -3,12 +3,7 @@ extends Control
 class_name WorkShop
 
 @export var ShipButtonsParent : Control
-
-@export var EngineInventoryBoxParent : Control
-@export var SensorInventoryBoxParent : Control
-@export var FuelTankInventoryBoxParent : Control
-@export var WeaponInventoryBoxParent : Control
-@export var ShieldInventoryBoxParent : Control
+@export var interface : CharacterInventoryInterface
 @export var DescriptorPlace : Control
 @export var WorkshopItemUI : PackedScene
 @export var ItemDescriptorScene : PackedScene
@@ -77,185 +72,24 @@ func OnShipSelected(Ship : MapShip) -> void:
 	
 	CurrentShip = Ship
 	
-	for g in EngineInventoryBoxParent.get_children():
-		g.free()
-	for g in SensorInventoryBoxParent.get_children():
-		g.free()
-	for g in FuelTankInventoryBoxParent.get_children():
-		g.free()
-	for g in WeaponInventoryBoxParent.get_children():
-		g.free()
-	for g in ShieldInventoryBoxParent.get_children():
-		g.free()
-	
 	ShipStats.SetCaptain(Ship.Cpt)
 	ShipStats.ShowStats()
 	#ShipIcons.texture = Ship.Cpt.ShipIcon
 	
 	var Cha = Ship.Cpt
 	
-	var CharEngineSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.ENGINES_SLOTS)
-	var CharSensorSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.SENSOR_SLOTS)
-	var CharFuelTankSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK_SLOTS)
-	var CharShieldSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.SHIELD_SLOTS)
-	var CharWeaponSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.WEAPON_SLOTS)
 	
-	for g in CharEngineSpace:
-		var Box = InventoryBoxScene.instantiate() as Inventory_Box
-		EngineInventoryBoxParent.add_child(Box)
-		Box.connect("ItemSelected", ItemSelected)
-		Box.Enable()
-		#EngineInventoryBoxParent.columns = min(2, CharEngineSpace)
+	interface.InitialiseInventory(Cha.GetCharacterInventory())
 	
-	for g in CharSensorSpace:
-		var Box = InventoryBoxScene.instantiate() as Inventory_Box
-		SensorInventoryBoxParent.add_child(Box)
-		Box.connect("ItemSelected", ItemSelected)
-		Box.Enable()
-		#SensorInventoryBoxParent.columns = min(2, CharSensorSpace)
-	
-	for g in CharFuelTankSpace:
-		var Box = InventoryBoxScene.instantiate() as Inventory_Box
-		FuelTankInventoryBoxParent.add_child(Box)
-		Box.connect("ItemSelected", ItemSelected)
-		Box.Enable()
-		#FuelTankInventoryBoxParent.columns = min(2, CharFuelTankSpace)
-	
-	for g in CharShieldSpace:
-		var Box = InventoryBoxScene.instantiate() as Inventory_Box
-		ShieldInventoryBoxParent.add_child(Box)
-		Box.connect("ItemSelected", ItemSelected)
-		Box.Enable()
-		#ShieldInventoryBoxParent.columns = min(2, CharShieldSpace)
-	
-	for g in CharWeaponSpace:
-		var Box = InventoryBoxScene.instantiate() as Inventory_Box
-		WeaponInventoryBoxParent.add_child(Box)
-		Box.connect("ItemSelected", ItemSelected)
-		Box.Enable()
-		#WeaponInventoryBoxParent.columns = min(2, CharWeaponSpace)
-	
-	var inv = Cha.GetCharacterInventory()
-	
-	for g in inv.GetInventoryContents():
-		if (g is ShipPart):
-			for box : Inventory_Box in GetBoxParentForType(g.PartType).get_children():
-				if box.IsEmpty():
-					box.RegisterItem(g)
-					box.UpdateAmm(1)
-					break
-		else: if (g is PlaceHolderItem):
-			for box : Inventory_Box in GetBoxParentForType(g.ContainedItem.PartType).get_children():
-				if box.IsEmpty():
-					box.RegisterItem(g)
-					box.UpdateAmm(1)
-					break
 func RefreshInventory() -> void:
-	for g in EngineInventoryBoxParent.get_children():
-		g.free()
-	for g in SensorInventoryBoxParent.get_children():
-		g.free()
-	for g in FuelTankInventoryBoxParent.get_children():
-		g.free()
-	for g in WeaponInventoryBoxParent.get_children():
-		g.free()
-	for g in ShieldInventoryBoxParent.get_children():
-		g.free()
-	
-	ShipStats.SetCaptain(CurrentShip.Cpt)
-	ShipStats.ShowStats()
-	#ShipIcons.texture = CurrentShip.Cpt.ShipIcon
-	
-	var Cha = CurrentShip.Cpt
-	
-	var CharEngineSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.ENGINES_SLOTS)
-	var CharSensorSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.SENSOR_SLOTS)
-	var CharFuelTankSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK_SLOTS)
-	var CharShieldSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.SHIELD_SLOTS)
-	var CharWeaponSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.WEAPON_SLOTS)
-	
-	for g in CharEngineSpace:
-		var Box = InventoryBoxScene.instantiate() as Inventory_Box
-		EngineInventoryBoxParent.add_child(Box)
-		Box.connect("ItemSelected", ItemSelected)
-		Box.Enable()
-		#EngineInventoryBoxParent.columns = min(2, CharEngineSpace)
-	
-	for g in CharSensorSpace:
-		var Box = InventoryBoxScene.instantiate() as Inventory_Box
-		SensorInventoryBoxParent.add_child(Box)
-		Box.connect("ItemSelected", ItemSelected)
-		Box.Enable()
-		#SensorInventoryBoxParent.columns = min(2, CharSensorSpace)
-	
-	for g in CharFuelTankSpace:
-		var Box = InventoryBoxScene.instantiate() as Inventory_Box
-		FuelTankInventoryBoxParent.add_child(Box)
-		Box.connect("ItemSelected", ItemSelected)
-		Box.Enable()
-		#FuelTankInventoryBoxParent.columns = min(2, CharFuelTankSpace)
-	
-	for g in CharShieldSpace:
-		var Box = InventoryBoxScene.instantiate() as Inventory_Box
-		ShieldInventoryBoxParent.add_child(Box)
-		Box.connect("ItemSelected", ItemSelected)
-		Box.Enable()
-		#ShieldInventoryBoxParent.columns = min(2, CharShieldSpace)
-	
-	for g in CharWeaponSpace:
-		var Box = InventoryBoxScene.instantiate() as Inventory_Box
-		WeaponInventoryBoxParent.add_child(Box)
-		Box.connect("ItemSelected", ItemSelected)
-		Box.Enable()
-		#WeaponInventoryBoxParent.columns = min(2, CharWeaponSpace)
-	
-	var inv = Cha.GetCharacterInventory()
-	var Contents = inv.GetInventoryContents()
-	for g in Contents:
-		if (g is ShipPart):
-			for z in Contents[g]:
-				for box : Inventory_Box in GetBoxParentForType(g.PartType).get_children():
-					if box.IsEmpty():
-						box.RegisterItem(g)
-						box.UpdateAmm(1)
-						break
-		else: if (g is PlaceHolderItem):
-			for box : Inventory_Box in GetBoxParentForType(g.ContainedItem.PartType).get_children():
-				if box.IsEmpty():
-					box.RegisterItem(g)
-					box.UpdateAmm(1)
-					break
+	interface.InitialiseInventory(CurrentShip.Cpt.GetCharacterInventory())
 
-func GetBoxParentForType(PartType : ShipPart.ShipPartType) -> Control:
-	var BoxParent : Control
-	if (PartType == ShipPart.ShipPartType.ENGINE):
-		BoxParent = EngineInventoryBoxParent
-	else : if (PartType == ShipPart.ShipPartType.SENSOR):
-		BoxParent = SensorInventoryBoxParent
-	else : if (PartType == ShipPart.ShipPartType.FUEL_TANK):
-		BoxParent = FuelTankInventoryBoxParent
-	else : if (PartType == ShipPart.ShipPartType.WEAPON):
-		BoxParent = WeaponInventoryBoxParent
-	else : if (PartType == ShipPart.ShipPartType.SHIELD):
-		BoxParent = ShieldInventoryBoxParent
-	return BoxParent
 
-func GetTypeOfBox(Box : Inventory_Box) -> ShipPart.ShipPartType:
-	var BoxParent = Box.get_parent()
-	var Type : ShipPart.ShipPartType
-	if (BoxParent == EngineInventoryBoxParent):
-		Type = ShipPart.ShipPartType.ENGINE
-	else : if (BoxParent == SensorInventoryBoxParent):
-		Type = ShipPart.ShipPartType.SENSOR
-	else : if (BoxParent == FuelTankInventoryBoxParent):
-		Type = ShipPart.ShipPartType.FUEL_TANK
-	else : if (BoxParent == WeaponInventoryBoxParent):
-		Type = ShipPart.ShipPartType.WEAPON
-	else : if (BoxParent == ShieldInventoryBoxParent):
-		Type = ShipPart.ShipPartType.SHIELD
+func GetTypeOfBox(Box : Inventory_Box_Res) -> ShipPart.ShipPartType:
+	var Type : ShipPart.ShipPartType = Box._ParentInventory.boxes.find_key(Box)
 	return Type
 
-func ItemSelected(Box : Inventory_Box) -> void:
+func ItemSelected(Box : Inventory_Box_Res) -> void:
 	
 	if (WorkshopDescriptor != null):
 		DescriptorPlace.remove_child(WorkshopDescriptor)
@@ -284,7 +118,7 @@ func ItemSelected(Box : Inventory_Box) -> void:
 	DescriptorPlace.add_child(WorkshopDescriptor)
 	WorkshopDescriptor.set_physics_process(false)
 
-func UpdateDescriptor(Box : Inventory_Box) -> void:
+func UpdateDescriptor(Box : Inventory_Box_Res) -> void:
 	if (WorkshopDescriptor != null):
 		WorkshopDescriptor.SetWorkShopData(Box, HasUpgradeBuff, CurrentShip.Cpt)
 
@@ -314,7 +148,7 @@ func RemoveItem(Box : Inventory_Box) -> void:
 	NewMerch.Amm = 1
 	WorkShopMerch.append(NewMerch)
 
-func AddItem(Box : Inventory_Box) -> void:
+func AddItem(Box : Inventory_Box_Res) -> void:
 	var Type = GetTypeOfBox(Box)
 	
 	var c1 = Control.new()
@@ -346,7 +180,7 @@ func AddItem(Box : Inventory_Box) -> void:
 	ItemParent.add_child(c2)
 	c2.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
-func ItemToAddSelected(M : Merchandise, Box : Inventory_Box) -> void:
+func ItemToAddSelected(M : Merchandise, Box : Inventory_Box_Res) -> void:
 	var OriginalItem : ShipPart = M.It
 
 	
@@ -431,7 +265,7 @@ func CancelInstall(Box : Inventory_Box) -> void:
 	NewMerch.Amm = 1
 	WorkShopMerch.append(NewMerch)
 
-func CancelUpgrade(Box : Inventory_Box) -> void:
+func CancelUpgrade(Box : Inventory_Box_Res) -> void:
 	var Inv = CurrentShip.Cpt.GetCharacterInventory()
 	Inv.CancelUpgrade()
 	
@@ -444,7 +278,7 @@ func CancelUpgrade(Box : Inventory_Box) -> void:
 	PopUpManager.GetInstance().DoFadeNotif("Upgrade canceled\nPartial Refund Of Cost")
 	UpdateDescriptor(Box)
 
-func UpgradeItem(Box : Inventory_Box) -> void:
+func UpgradeItem(Box : Inventory_Box_Res) -> void:
 	
 	var OriginalItem : ShipPart = Box.GetContainedItem()
 	var UpgradedItem : ShipPart = OriginalItem.UpgradeVersion

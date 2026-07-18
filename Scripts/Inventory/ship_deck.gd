@@ -11,13 +11,13 @@ class_name ShipDeckViz
 var CurrentlyShownCharacter : Captain
 
 func InventoryUpdated() -> void:
+	if (!visible):
+		return
 	SetDeck(CurrentlyShownCharacter)
 
 func SetDeck(Ch : Captain) -> void:
 	var Inv = Ch.GetCharacterInventory()
-	
-	
-	
+
 	var deck : Dictionary[CardStats, int]
 	
 	if (Inv != null):
