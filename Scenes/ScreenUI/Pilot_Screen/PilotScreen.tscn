@@ -2,13 +2,11 @@
 
 [ext_resource type="Script" uid="uid://bwb4h83od4vgp" path="res://Scenes/ScreenUI/Pilot_Screen/PilotScreen.gd" id="1_fq67n"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_ecvfe"]
-[ext_resource type="Texture2D" uid="uid://d3y0sfux3mpf6" path="res://Assets/UIPiecies/Screen/SidePanels/PilotPanel.png" id="3_8mt3t"]
 [ext_resource type="Texture2D" uid="uid://d1y68mia7jlgh" path="res://Assets/UIPiecies/Screen/Screen4_FullQuality.png" id="3_188si"]
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/ThrustSlider/thrust_slider.tscn" id="3_ecvfe"]
-[ext_resource type="Texture2D" uid="uid://6h6f55b8cda3" path="res://Assets/UIPiecies/Screen/Buttons/Switch2.png" id="5_hc833"]
+[ext_resource type="Texture2D" uid="uid://dxr40jficax1" path="res://Assets/UIPiecies/Screen/ButtonCover3_FullQuality.png" id="4_8mt3t"]
 [ext_resource type="PackedScene" uid="uid://cy532oaym6ul7" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Pilot_Screen_Settings/Pilot_Screen_Settings.tscn" id="5_ojc6g"]
 [ext_resource type="StyleBox" uid="uid://bc1y4hhkl7ce6" path="res://Theme/Buttons/NobButton.tres" id="6_bpouu"]
-[ext_resource type="Texture2D" uid="uid://b13t2vkapums2" path="res://Assets/UIPiecies/Screen/Buttons/Switch.png" id="6_gmup4"]
 [ext_resource type="PackedScene" uid="uid://k7pqywm80h3m" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/ThrustSlider/Elevation_slider.tscn" id="6_jqinv"]
 [ext_resource type="PackedScene" uid="uid://cwnxxystgxrjm" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/MissileTab/MissileTab.tscn" id="7_ojc6g"]
 [ext_resource type="StyleBox" uid="uid://21mi6l2i2tkk" path="res://Theme/Buttons/NobButton_Pressed.tres" id="7_yjfdw"]
@@ -24,10 +22,9 @@
 [ext_resource type="StyleBox" uid="uid://bj8tmjsnlmj0" path="res://Theme/Buttons/ButtonBlack.tres" id="20_uojtp"]
 [ext_resource type="StyleBox" uid="uid://bxfwfq0uxu1w1" path="res://Theme/Buttons/ButtonOrange_Pressed.tres" id="21_ecvfe"]
 [ext_resource type="StyleBox" uid="uid://g2ic8um6hit" path="res://Theme/Buttons/ButtonBlack_Pressed.tres" id="21_hc833"]
-[ext_resource type="StyleBox" uid="uid://b7suo0ob4kefv" path="res://Theme/Buttons/ButtonYellowStripe.tres" id="22_fq67n"]
-[ext_resource type="StyleBox" uid="uid://ttlagq0nmcyb" path="res://Theme/Buttons/ButtonYellowStripe_Pressed.tres" id="23_eeg0m"]
 [ext_resource type="FontFile" uid="uid://mwyuu26jo0fk" path="res://Fonts/Bank Gothic Light Regular.otf" id="23_j5ioc"]
-[ext_resource type="PackedScene" uid="uid://djgy3lp61vapo" path="res://Resources/Funds/FundsDisplay.tscn" id="24_hpjxi"]
+[ext_resource type="StyleBox" uid="uid://bblal3stslrb1" path="res://Theme/Buttons/ButtonWhite.tres" id="24_8mt3t"]
+[ext_resource type="StyleBox" uid="uid://cwsk20kaf6n22" path="res://Theme/Buttons/ButtonWhite_Pressed.tres" id="25_q2jn7"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/Dial/Dial.tscn" id="26_ecvfe"]
 [ext_resource type="PackedScene" uid="uid://c2tp3xgyap8ar" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Elint/ELint.tscn" id="27_uojtp"]
 [ext_resource type="PackedScene" uid="uid://dmmhk1exrryca" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/ControlledShipUI/ControlledShipSelection.tscn" id="28_hc833"]
@@ -85,7 +82,7 @@ offset_left = 1005.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("3_8mt3t")
+texture = ExtResource("4_8mt3t")
 expand_mode = 1
 
 [node name="Elint" parent="." unique_id=502600520 instance=ExtResource("27_uojtp")]
@@ -96,10 +93,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 1016.0
-offset_top = 92.0
-offset_right = 1196.0
-offset_bottom = 259.0
+offset_left = 1008.0
+offset_top = 139.0
+offset_right = 1188.0
+offset_bottom = 306.0
 grow_horizontal = 1
 grow_vertical = 1
 
@@ -108,10 +105,6 @@ position = Vector2(1002, -125.00001)
 scale = Vector2(1.64062, 1.64062)
 frame_progress = 0.96041
 frequency = 40.0
-
-[node name="SteeringWheel" parent="." unique_id=760456773 instance=ExtResource("10_w258d")]
-layout_mode = 1
-scale = Vector2(0.5, 0.5)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=986818194]
 layout_mode = 1
@@ -141,7 +134,7 @@ size_flags_vertical = 3
 [node name="Pilot_Screen_Settings" parent="VBoxContainer" unique_id=1173233523 instance=ExtResource("5_ojc6g")]
 layout_mode = 2
 
-[node name="SpeedSimulation" type="TextureButton" parent="." unique_id=559113668 groups=["Buttons"]]
+[node name="SpeedSimulation" type="Button" parent="." unique_id=314067477 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -149,18 +142,17 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -51.0
-offset_top = -606.0
+offset_top = -532.0
 offset_right = -25.0
-offset_bottom = -546.0
+offset_bottom = -472.0
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
+theme_override_styles/normal = ExtResource("6_bpouu")
+theme_override_styles/pressed = ExtResource("7_yjfdw")
+theme_override_styles/hover = ExtResource("6_bpouu")
 toggle_mode = true
 action_mode = 0
-texture_normal = ExtResource("5_hc833")
-texture_pressed = ExtResource("6_gmup4")
-ignore_texture_size = true
-stretch_mode = 0
 
 [node name="SimulationButton" type="Button" parent="." unique_id=1114359656 groups=["Buttons"]]
 layout_mode = 1
@@ -169,10 +161,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -54.0
-offset_top = -538.72
-offset_right = -25.0
-offset_bottom = -470.27997
+offset_left = -53.0
+offset_top = -480.0
+offset_right = -24.0
+offset_bottom = -411.56
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
@@ -188,10 +180,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -77.0
-offset_top = -52.0
-offset_right = -27.0
-offset_bottom = -27.5
+offset_left = -101.0
+offset_top = -13.0
+offset_right = -64.0
+offset_bottom = 29.0
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 0
@@ -209,10 +201,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -246.0
-offset_top = -52.0
-offset_right = -198.0
-offset_bottom = -29.0
+offset_left = -217.0
+offset_top = 4.0
+offset_right = -178.0
+offset_bottom = 28.0
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 0
@@ -249,10 +241,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -164.0
-offset_top = -413.0
-offset_right = -113.0
-offset_bottom = -388.0
+offset_left = -165.0
+offset_top = -355.0
+offset_right = -127.0
+offset_bottom = -332.0
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
@@ -286,12 +278,13 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 1060.0
-offset_top = 319.0
-offset_right = 1108.0
-offset_bottom = 425.85715
+offset_left = 1043.0
+offset_top = 601.0
+offset_right = 1089.0
+offset_bottom = 703.40466
 grow_horizontal = 1
 grow_vertical = 1
+disabled = true
 
 [node name="RadarButton" type="Button" parent="." unique_id=1811648738 groups=["Buttons"]]
 layout_mode = 1
@@ -300,10 +293,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -170.0
-offset_top = -368.0
-offset_right = -145.0
-offset_bottom = -317.0
+offset_left = -45.0
+offset_top = -596.0
+offset_right = -26.0
+offset_bottom = -559.0
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
@@ -318,30 +311,34 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -247.0
-offset_top = -368.0
-offset_right = -223.0
-offset_bottom = -320.0
+offset_left = -185.0
+offset_top = -56.0
+offset_right = -167.0
+offset_bottom = -19.0
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
-theme_override_styles/normal = ExtResource("22_fq67n")
-theme_override_styles/pressed = ExtResource("23_eeg0m")
-theme_override_styles/hover = ExtResource("22_fq67n")
+theme_override_styles/normal = ExtResource("24_8mt3t")
+theme_override_styles/pressed = ExtResource("25_q2jn7")
+theme_override_styles/hover = ExtResource("24_8mt3t")
 
 [node name="ThrustLever" parent="." unique_id=1806408407 instance=ExtResource("3_ecvfe")]
 layout_mode = 1
-offset_left = -244.0
-offset_top = -323.0
-offset_right = -143.0
-offset_bottom = -51.0
+offset_left = -261.0
+offset_top = -338.0
+offset_right = -160.0
+offset_bottom = -148.00049
 
 [node name="ElevationLever" parent="." unique_id=833959843 instance=ExtResource("6_jqinv")]
 layout_mode = 1
-offset_left = -113.0
-offset_top = -376.0
-offset_right = -12.0
-offset_bottom = -183.0
+offset_left = -110.0
+offset_top = -338.0
+offset_right = -9.0
+offset_bottom = -147.99976
+
+[node name="SteeringWheel" parent="." unique_id=760456773 instance=ExtResource("10_w258d")]
+layout_mode = 1
+scale = Vector2(0.5, 0.5)
 
 [node name="Pause" type="Button" parent="." unique_id=12124813 groups=["Buttons"]]
 process_mode = 3
@@ -349,10 +346,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -89.0
-offset_top = 38.0
-offset_right = -29.0
-offset_bottom = 85.0
+offset_left = -107.0
+offset_top = 20.0
+offset_right = -40.0
+offset_bottom = 58.0
 grow_horizontal = 0
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -389,20 +386,6 @@ theme_override_font_sizes/font_size = 40
 text = "II"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Fund_Container" parent="." unique_id=1956462459 instance=ExtResource("24_hpjxi")]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 0.0
-offset_left = -179.0
-offset_top = 9.0
-offset_right = -179.0
-offset_bottom = 96.0
-grow_horizontal = 0
-grow_vertical = 1
 
 [node name="ZoomDial" parent="." unique_id=456827188 instance=ExtResource("26_ecvfe")]
 position = Vector2(35, 121.64)

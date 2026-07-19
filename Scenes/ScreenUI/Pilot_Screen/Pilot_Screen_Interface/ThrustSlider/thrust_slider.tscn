@@ -32,13 +32,14 @@ uiEventHandler = ExtResource("4_yx2h4")
 [node name="Handle" type="TextureRect" parent="." unique_id=821941112]
 layout_mode = 0
 offset_left = -14.0
-offset_top = 215.0
-offset_right = 106.0
-offset_bottom = 335.0
+offset_top = 102.0
+offset_right = 107.0
+offset_bottom = 180.0
 mouse_filter = 0
 texture = ExtResource("2_l8mv8")
 expand_mode = 1
 flip_h = true
+flip_v = true
 
 [node name="Handle2" type="TextureRect" parent="Handle" unique_id=1270334709]
 modulate = Color(1, 1, 1, 0.654)
@@ -59,6 +60,7 @@ mouse_filter = 2
 texture = ExtResource("3_wavdi")
 expand_mode = 1
 flip_h = true
+flip_v = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1516683677]
 stream = ExtResource("4_150ym")

@@ -45,6 +45,7 @@ controllerEventHandler = ExtResource("2_ca4np")
 droneDockEventHandler = ExtResource("3_oilva")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1832260214]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

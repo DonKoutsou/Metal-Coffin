@@ -167,7 +167,6 @@ void fragment(){
 	vec2 pos = Warp(FRAGCOORD.xy / (1.0 / SCREEN_PIXEL_SIZE).xy);
 	if (border(pos) <= 0.0){
 		COLOR = vec4(0,0,0,1.0);
-
 	}
 	else{
 		COLOR.rgb = texture(SCREEN_TEXTURE, pos).rgb;

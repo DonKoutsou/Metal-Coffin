@@ -19,7 +19,7 @@ border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 border_blend = true
 
-[node name="ItemDesc" type="PanelContainer" unique_id=249389669 node_paths=PackedStringArray("ItemName", "ItemDesc", "TransferButton", "UpgradeButton", "CancelUpgradeButton", "CancelInstallButton", "AddItemButton", "IncreaseItemButton", "RemoveItemButton", "UpgradeLabel", "CardSection", "CardPlecement")]
+[node name="ItemDesc" type="PanelContainer" unique_id=249389669 node_paths=PackedStringArray("ItemName", "ItemDesc", "TransferButton", "UpgradeButton", "CancelUpgradeButton", "CancelInstallButton", "AddItemButton", "IncreaseItemButton", "RemoveItemButton", "UpgradeLabel", "CardSection", "CardPlecement", "CloseButton")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -29,7 +29,7 @@ size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("2_1gff0")
 CardScene = ExtResource("3_c5c2l")
-ItemName = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ItemName")
+ItemName = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/HBoxContainer/ItemName")
 ItemDesc = NodePath("VBoxContainer/HBoxContainer/ItemDesc")
 TransferButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Transfer")
 UpgradeButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade")
@@ -41,8 +41,10 @@ RemoveItemButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/ShipPartA
 UpgradeLabel = NodePath("VBoxContainer/HBoxContainer/Label")
 CardSection = NodePath("VBoxContainer/HBoxContainer/CardsSection")
 CardPlecement = NodePath("VBoxContainer/HBoxContainer/CardsSection/CardPlecement")
+CloseButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/HBoxContainer/Button")
 
 [node name="VBoxContainer" type="ScrollContainer" parent="." unique_id=698832375]
+clip_contents = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_jut7c")
 horizontal_scroll_mode = 3
@@ -65,7 +67,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_uhv8j")
 layout_mode = 2
 mouse_filter = 2
 
-[node name="ItemName" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer" unique_id=1643909624]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/HBoxContainer" unique_id=657461311]
+layout_mode = 2
+
+[node name="ItemName" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer/HBoxContainer" unique_id=1643909624]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -76,6 +81,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 uppercase = true
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/HBoxContainer" unique_id=884044005]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "X"
 
 [node name="ShipPartActions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/HBoxContainer" unique_id=688445503]
 layout_mode = 2
@@ -189,6 +200,7 @@ custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_uhv8j")
 
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade" to="." method="_on_upgrade_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade2" to="." method="_on_cancel_upgrade_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade3" to="." method="_on_cancel_install_pressed"]

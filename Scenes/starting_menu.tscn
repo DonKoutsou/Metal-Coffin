@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://bagsk7yyq8sv1" path="res://Scenes/WishlistButton.tscn" id="21_srpg8"]
 [ext_resource type="Texture2D" uid="uid://tklv7f2e06gq" path="res://Assets/Logos/Discord-Symbol-White.png" id="21_xqmn8"]
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="22_jns0o"]
+[ext_resource type="Texture2D" uid="uid://cidal6q7hj1qj" path="res://Assets/UIPiecies/Screen/SidePanels/ButtonCover2_FullQuality.png" id="22_xop3l"]
 [ext_resource type="PackedScene" uid="uid://d0iiqaijsg1y1" path="res://Scenes/InScreenUI/Commande_Line/command_line.tscn" id="23_t54ed"]
 [ext_resource type="Texture2D" uid="uid://dum1h361hyptq" path="res://Assets/UIPiecies/Screen/ScreenFrames/StartMenu_Screen.png" id="24_nthvp"]
 [ext_resource type="PackedScene" uid="uid://bq1ns0us14bn3" path="res://Scenes/InScreenUI/Cursor/Cursor.tscn" id="24_rh5bc"]
@@ -507,12 +508,24 @@ mouse_filter = 2
 texture = ExtResource("24_nthvp")
 expand_mode = 1
 
+[node name="ScreenFrame2" type="TextureRect" parent="." unique_id=750980056]
+custom_minimum_size = Vector2(0, 38.045)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1007.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("22_xop3l")
+expand_mode = 1
+
 [node name="Prologue" type="Button" parent="." unique_id=1915175625 groups=["Buttons"]]
 texture_filter = 1
-offset_left = 1054.0
-offset_top = 115.0
+offset_left = 1046.0
+offset_top = 109.0
 offset_right = 1074.0
-offset_bottom = 156.0
+offset_bottom = 149.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/normal = ExtResource("29_rh5bc")
@@ -522,10 +535,10 @@ action_mode = 0
 
 [node name="LoadPrologue" type="Button" parent="." unique_id=1420192485 groups=["Buttons"]]
 texture_filter = 1
-offset_left = 1054.0
-offset_top = 168.0
-offset_right = 1073.0
-offset_bottom = 207.0
+offset_left = 1045.0
+offset_top = 163.0
+offset_right = 1074.0
+offset_bottom = 203.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/normal = ExtResource("29_rh5bc")
@@ -534,17 +547,17 @@ theme_override_styles/hover = ExtResource("29_rh5bc")
 action_mode = 0
 
 [node name="PrologueLight" parent="." unique_id=2000029858 instance=ExtResource("34_aa43b")]
-offset_left = 1163.0
-offset_top = 189.0
-offset_right = 1185.0
-offset_bottom = 211.0
+offset_left = 1165.0
+offset_top = 182.0
+offset_right = 1187.0
+offset_bottom = 204.0
 
 [node name="Play2" type="Button" parent="." unique_id=1317648141 groups=["Buttons"]]
 texture_filter = 1
-offset_left = 1054.0
-offset_top = 246.0
-offset_right = 1074.0
-offset_bottom = 285.0
+offset_left = 1046.0
+offset_top = 244.0
+offset_right = 1073.0
+offset_bottom = 283.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/normal = ExtResource("29_rh5bc")
@@ -554,7 +567,7 @@ action_mode = 0
 
 [node name="Load" type="Button" parent="." unique_id=813462728 groups=["Buttons"]]
 texture_filter = 1
-offset_left = 1054.0
+offset_left = 1046.0
 offset_top = 298.0
 offset_right = 1073.0
 offset_bottom = 338.0
@@ -579,17 +592,17 @@ theme_override_font_sizes/font_size = 10
 text = "START"
 
 [node name="CampaignLight" parent="." unique_id=871809701 instance=ExtResource("34_aa43b")]
-offset_left = 1163.0
-offset_top = 315.0
-offset_right = 1185.0
-offset_bottom = 337.0
+offset_left = 1166.0
+offset_top = 316.0
+offset_right = 1188.0
+offset_bottom = 338.0
 
 [node name="Fight" type="Button" parent="." unique_id=174179254 groups=["Buttons"]]
 texture_filter = 1
-offset_left = 1173.0
-offset_top = 365.0
-offset_right = 1225.0
-offset_bottom = 390.0
+offset_left = 1176.0
+offset_top = 367.0
+offset_right = 1233.0
+offset_bottom = 393.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/normal = ExtResource("26_67h1o")
@@ -599,10 +612,10 @@ action_mode = 0
 
 [node name="Credits" type="Button" parent="." unique_id=524956029 groups=["Buttons"]]
 texture_filter = 1
-offset_left = 1200.0
-offset_top = 601.0
-offset_right = 1227.0
-offset_bottom = 652.0
+offset_left = 1206.0
+offset_top = 611.0
+offset_right = 1236.0
+offset_bottom = 664.0
 size_flags_vertical = 3
 theme_override_styles/normal = ExtResource("32_xqmn8")
 theme_override_styles/pressed = ExtResource("33_sjyyd")
@@ -614,10 +627,10 @@ use_parent_material = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1016.0
-offset_top = 13.0
-offset_right = -14.0
-offset_bottom = 13.0
+offset_left = 1012.0
+offset_top = 16.0
+offset_right = -18.0
+offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -657,10 +670,10 @@ offset_bottom = 425.0
 
 [node name="Button" type="TextureButton" parent="." unique_id=449412107 groups=["Buttons"]]
 texture_filter = 1
-offset_left = 1053.0
-offset_top = 528.0
-offset_right = 1077.0
-offset_bottom = 586.0
+offset_left = 1048.0
+offset_top = 536.0
+offset_right = 1074.0
+offset_bottom = 597.0
 size_flags_horizontal = 3
 texture_normal = ExtResource("35_xqmn8")
 texture_pressed = ExtResource("36_sjyyd")
@@ -669,10 +682,10 @@ stretch_mode = 0
 
 [node name="Exit" type="Button" parent="." unique_id=2017627404 groups=["Buttons"]]
 texture_filter = 1
-offset_left = 1056.0
-offset_top = 599.0
-offset_right = 1084.0
-offset_bottom = 652.0
+offset_left = 1052.0
+offset_top = 610.0
+offset_right = 1081.0
+offset_bottom = 664.0
 size_flags_vertical = 3
 theme_override_styles/normal = ExtResource("37_xqmn8")
 theme_override_styles/pressed = ExtResource("38_sjyyd")

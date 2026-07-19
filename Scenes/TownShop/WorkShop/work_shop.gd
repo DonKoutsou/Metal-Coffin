@@ -99,6 +99,8 @@ func ItemSelected(Box : Inventory_Box_Res) -> void:
 			return
 	
 	WorkshopDescriptor= ItemDescriptorScene.instantiate() as ItemDescriptor
+	WorkshopDescriptor.ToggleClosable(true)
+	WorkshopDescriptor.Closed.connect(CloseDescriptor)
 	WorkshopDescriptor.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	ShipStats.get_parent().visible = false
 	WorkshopDescriptor.DescribedContainer = Box

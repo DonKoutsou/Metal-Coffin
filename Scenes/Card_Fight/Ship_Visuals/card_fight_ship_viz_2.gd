@@ -179,8 +179,8 @@ func ActionHovered(C : CardStats, Targets : Array[BattleShipStats]) -> void:
 		return
 	var targetlocs : Array[Vector2] = []
 	for g in Targets:
-		var n = g.ShipViz.ShipIcon
-		var pos = n.global_position
+		var n = g.ShipViz
+		var pos = n.global_position + Vector2(n.size.x, n.size.y / 2)
 		targetlocs.append(pos)
 	
 	CurrentCardShown = ResourceLoader.load(CardScene).instantiate()

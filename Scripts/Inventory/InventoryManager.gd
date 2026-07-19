@@ -146,14 +146,14 @@ func BoxSelected(Box : Inventory_Box_Res, OwnerInventory : CharacterInventory) -
 		DescriptorPlace.remove_child(desc)
 		desc.queue_free()
 		if (desc.DescribedContainer == Box):
-			CharacterPlace.get_parent().visible = true
+			CharacterPlace.get_parent().get_parent().visible = true
 			return
 	
 	CurrentDesc = ItemDescriptorScene.instantiate() as ItemDescriptor
 	CurrentDesc.ToggleClosable(true)
 	CurrentDesc.Closed.connect(RemoveDescriptor)
 	DescriptorPlace.add_child(CurrentDesc)
-	CharacterPlace.get_parent().visible = false
+	CharacterPlace.get_parent().get_parent().visible = false
 	#var cpt = GetBoxOwner(Box)
 	#var HasUp = false
 	#if (cpt.CurrentPort != ""):
@@ -168,7 +168,7 @@ func BoxSelected(Box : Inventory_Box_Res, OwnerInventory : CharacterInventory) -
 	#Descriptor.connect("ItemRepaired", RepairPart)
 
 func RemoveDescriptor() -> void:
-	CharacterPlace.get_parent().visible = true
+	CharacterPlace.get_parent().get_parent().visible = true
 	CurrentDesc.queue_free()
 
 
@@ -295,9 +295,9 @@ func OnCharacterRemoved(Cha : Captain) -> void:
 	Cha.Repair_Parts = 0
 	Cha.TempName = ""
 	var Inv = _CharacterInventories[Cha] as CharacterInventory
-	for z in Inv._GetInventoryBoxes():
-		for i in z._ContentAmmout:
-			Inv.RemoveItemFromBox(z)
+	#for z in Inv._GetInventoryBoxes():
+		#for i in z._ContentAmmout:
+			#Inv.RemoveItemFromBox(z)
 	Inv.queue_free()
 	_CharacterInventories.erase(Cha)
 	
@@ -379,7 +379,7 @@ func CloseDescriptor() -> void:
 	if (descriptors.size() > 0):
 		DescriptorPlace.remove_child(descriptors[0])
 		descriptors[0].queue_free()
-	CharacterPlace.get_parent().visible = true
+	CharacterPlace.get_parent().get_parent().visible = true
 
 
 func GenerateCaptainSaveData(Cpt: Captain, Inv : CharacterInventory) -> SD_CharacterInventory:

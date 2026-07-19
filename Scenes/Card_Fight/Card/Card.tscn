@@ -95,12 +95,11 @@ corner_radius_bottom_left = 10
 viewport_path = NodePath("SubViewportContainer/SubViewport")
 
 [sub_resource type="Curve" id="Curve_58ae4"]
-_limits = [0.0, 2.0, 0.0, 1.0]
-_data = [Vector2(0, 0.2), 0.0, 0.0, 0, 0, Vector2(0.1, 2), 0.0, 0.0, 0, 0, Vector2(0.90000004, 2), 0.0, 0.0, 0, 0, Vector2(1, 0.2), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2, 1), 0.0, 0.0, 0, 0, Vector2(0.8, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
 [sub_resource type="Gradient" id="Gradient_rd7hj"]
-colors = PackedColorArray(1, 1, 1, 1, 0.421311, 0.88706, 0.915024, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.421311, 0.88706, 0.915024, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4r8q"]
 content_margin_top = 6.0
@@ -380,15 +379,10 @@ texture = ExtResource("7_ucyjg")
 expand_mode = 1
 
 [node name="Line2D" type="Line2D" parent="." unique_id=798469361]
-z_index = 2
 position = Vector2(80, 110)
-points = PackedVector2Array(0, 0, 0, 0)
-width = 20.0
+points = PackedVector2Array(0, 0, 0, 0, 0, 0)
 width_curve = SubResource("Curve_58ae4")
 gradient = SubResource("Gradient_rd7hj")
-begin_cap_mode = 2
-end_cap_mode = 2
-round_precision = 2
 
 [node name="Amm" type="PanelContainer" parent="." unique_id=949896521]
 use_parent_material = true

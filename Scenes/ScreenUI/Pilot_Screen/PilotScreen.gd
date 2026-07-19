@@ -14,7 +14,7 @@ class_name PilotScreenUI
 @export var steer: SteeringWheelUI
 @export var pilotScreenSet: PilotScreenSettings
 @export var SonarUI : AeroSonar
-@export var speedSimulationButton: TextureButton
+@export var speedSimulationButton: Button
 @export var pauseSimulationButton: Button
 @export var landButton : Button
 @export var hatchButton : Button

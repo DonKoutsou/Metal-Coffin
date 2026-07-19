@@ -71,8 +71,10 @@ func _process(delta: float) -> void:
 		mat.set_shader_parameter("x_rot", Newx)
 
 func UpdateLine() -> void:
+	Line.gradient.set_offset(1, wrap(Line.gradient.get_offset(1) + 0.05, 0, 1))
 	for g in TargetLocs.size():
-		Lines[g].set_point_position(1, lerp(Vector2.ZERO ,Line.to_local(TargetLocs[g]),InterpolationValue))
+		Lines[g].set_point_position(1, lerp(Vector2.ZERO ,Line.to_local(TargetLocs[g]),InterpolationValue) / 2)
+		Lines[g].set_point_position(2, lerp(Vector2.ZERO ,Line.to_local(TargetLocs[g]),InterpolationValue))
 
 
 func KillCard(CustomTime : float = 1.0, Free : bool = true) -> void:
