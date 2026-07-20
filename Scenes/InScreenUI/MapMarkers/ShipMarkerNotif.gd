@@ -14,13 +14,14 @@ var Fast : bool = false
 var CurrentZoom : float
 
 func ToggleSimulation(t : bool) -> void:
-	if (Blink):
-		if (!t):
-			anim.play()
-		else:
-			anim.pause()
-			blinkSound.stop()
-			$Control/PanelContainer.visible = true
+	return
+	#if (Blink):
+		#if (!t):
+			#anim.play()
+		#else:
+			#anim.pause()
+			#blinkSound.stop()
+			#$Control/PanelContainer.visible = true
 			
 			
 func _ready() -> void:

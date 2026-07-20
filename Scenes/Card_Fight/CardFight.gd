@@ -157,6 +157,7 @@ func _exit_tree() -> void:
 var CloudOffset = Vector2.ZERO
 
 func _physics_process(_delta: float) -> void:
+	#print_orphan_nodes()
 	CloudOffset += Vector2(-0.0001, 0.0001)
 	cloudRect.material.set_shader_parameter("Offset", CloudOffset)
 	CloudNoise.offset.z += 0.01
@@ -257,11 +258,14 @@ func CreateDecks() -> void:
 ##----------------------------------------------------------------------##
 func CardDrawn(C : CardStats) -> void:
 	var Performer = GetCurrentShip()
-	var c = CardScene.instantiate() as Card
-	c.SetCardBattleStats(Performer, C)
+	
 	if (!Performer.Friendly):
 		PlaceCardInEnemyHand(Performer, C)
+
 	else:
+		var c = CardScene.instantiate() as Card
+		c.SetCardBattleStats(Performer, C)
+		
 		var Placed = await PlaceCardInPlayerHand(Performer, c)
 		
 		if (!Placed):
@@ -752,7 +756,7 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 					SelectedAction.OnPerformModule = NewMod
 					
 				DoCardSelectAnimation(SelectedAction, Ship, Ship.ShipViz)
-				await Helper.Instance.wait(0.4)
+				await Helper.Instance.wait(0.6)
 				var ShipAction = CardFightAction.new()
 				ShipAction.Action = SelectedAction
 
@@ -1303,7 +1307,7 @@ func HandleModule(Performer : BattleShipStats, C : CardStats, Mod : CardModule, 
 	return AnimData
 ##----------------------------------------------------------------------##
 func IsTargetValid(card : CardStats, User : BattleShipStats, target : BattleShipStats = null) -> bool:
-	var frUser = IsShipFriendly(User)
+	#var frUser = IsShipFriendly(User)
 	
 	for Mod in card.OnUseModules:
 		
@@ -1499,6 +1503,7 @@ func DoCardSelectAnimation(Action : CardStats, Performer : BattleShipStats, User
 	S.volume_db = - 20
 	
 	await(anim.AnimationFinished)
+	anim.queue_free()
 ##----------------------------------------------------------------------##
 func DoCardDrawAnimation(User : Control) -> void:
 	var ActionAnim : PackedScene = ResourceLoader.load(ActionAnimFile)
@@ -1541,6 +1546,7 @@ func DoCardPlecementAnimation(User : BattleShipStats, C : Card, OriginalPos : Ve
 	
 	parent.add_child(C)
 	C.global_position = pos
+	
 ##----------------------------------------------------------------------##
 #////////////////////////////////////////////////////////////////////////////
  #██████  ███████ ████████ ████████ ███████ ██████  ███████ 

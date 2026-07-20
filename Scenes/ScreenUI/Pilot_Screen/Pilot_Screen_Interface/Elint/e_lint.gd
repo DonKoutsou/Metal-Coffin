@@ -41,7 +41,7 @@ enum ElintState {
 func _ready() -> void:
 	super()
 	# Gather Light2Ds under this node and hide
-	for node in get_children():
+	for node in $TextureRect.get_children():
 		if node is Light2D:
 			lights.append(node)
 			node.visible = false
@@ -106,6 +106,7 @@ func _physics_process(delta: float) -> void:
 	if elintLevel < 0:
 		currentState = ElintState.NONE
 		foundContact = false
+		beepSound.stop()
 		for l in lights:
 			l.visible = false
 		return
@@ -114,7 +115,8 @@ func _physics_process(delta: float) -> void:
 		RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.ELINT_DETECTED)
 
 	foundContact = true
-	setDirection(rad_to_deg(controller.global_position.angle_to_point(controller.GetClosestElint())) + 180)
+	var closest = controller.GetClosestElint()
+	setDirection(rad_to_deg(controller.global_position.angle_to_point(closest)))
 	setElintLevel(elintLevel)
 
 	for l in lights:
@@ -122,9 +124,10 @@ func _physics_process(delta: float) -> void:
 
 	if currentState != ElintState.NONE:
 		beepSound.play()
+	else:
+		beepSound.stop()
 
 ##    --- UI/LOGIC HELPERS ---
-
 func setDirection(dir: float) -> void:
 	# Selects correct direction texture for indicator according to angle
 	for i in directionMaskFiles.size():

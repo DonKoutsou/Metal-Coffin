@@ -36,7 +36,7 @@ func UpdateElint(delta: float) -> void:
 	var Dir : float
 	for g in ElintContacts.size():
 		var ship = ElintContacts.keys()[g] as MapShip
-		var lvl = ElintContacts.values()[g]
+		var lvl = ElintContacts[ship]
 		var Newlvl = GetElintLevel(global_position.distance_squared_to(ship.global_position), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
 		if (Newlvl > BiggestLevel):
 			BiggestLevel = Newlvl
@@ -54,7 +54,7 @@ func UpdateElint(delta: float) -> void:
 func GetClosestElint() -> Vector2:
 	
 	var closest : Vector2 = Vector2.ZERO
-	var closestdist : float = 999999999999999999
+	var closestdist : float = INF
 	
 	for g in ElintContacts.size():
 		var ship = ElintContacts.keys()[g]

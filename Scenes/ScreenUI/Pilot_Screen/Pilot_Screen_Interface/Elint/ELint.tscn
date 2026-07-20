@@ -30,7 +30,7 @@ offset_bottom = 84.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_n0goy")
-directionMaskFiles = Array[String](["uid://bbq0mj44rwwoi", "uid://cb14164lv0llj", "uid://dkcij7ny4cu7b", "uid://dxcvcpth4mg0a", "uid://clxcchncooddj", "uid://ciwckxd5dtjjf", "uid://btqsxpt5xj7wp", "uid://dcjmtvcx08q8m", "uid://bty7v8rw58vvr", "uid://diood1a6g4jfl", "uid://dnk3n5kdplvhn", "uid://dt2affdst26uo"])
+directionMaskFiles = Array[String](["uid://dxcvcpth4mg0a", "uid://clxcchncooddj", "uid://ciwckxd5dtjjf", "uid://btqsxpt5xj7wp", "uid://dcjmtvcx08q8m", "uid://bty7v8rw58vvr", "uid://diood1a6g4jfl", "uid://dnk3n5kdplvhn", "uid://dt2affdst26uo", "uid://bbq0mj44rwwoi", "uid://cb14164lv0llj", "uid://dkcij7ny4cu7b"])
 distanceMasks = Array[String](["uid://c0cpyej1sex21", "uid://cxhs4w0i7xmty", "uid://bup8en533m0y3"])
 onOffTextures = Array[String](["uid://caq853r3telqr", "uid://u6qd6o0jhpg4"])
 rangeIndicator = NodePath("TextureRect/RangeIndicator")
@@ -64,7 +64,6 @@ texture = ExtResource("17_bii6e")
 expand_mode = 1
 
 [node name="RangeIndicator" type="PointLight2D" parent="TextureRect" unique_id=504806615]
-visible = false
 position = Vector2(84.20001, 83.79999)
 color = Color(0.811384, 0.567062, 0.119301, 1)
 energy = 16.0
@@ -73,7 +72,6 @@ texture = ExtResource("6_xuume")
 texture_scale = 0.65
 
 [node name="AlertLight" type="PointLight2D" parent="TextureRect" unique_id=1900549746]
-visible = false
 position = Vector2(84.20001, 83.79999)
 color = Color(0.979746, 0.18299, 7.70092e-07, 1)
 energy = 16.0
@@ -82,7 +80,6 @@ texture = ExtResource("5_fn607")
 texture_scale = 0.65
 
 [node name="DangerCloseLight" type="PointLight2D" parent="TextureRect" unique_id=539837348]
-visible = false
 position = Vector2(84.20001, 83.79999)
 color = Color(0.855231, 0.38363, 0, 1)
 energy = 16.0
@@ -91,7 +88,6 @@ texture = ExtResource("6_heli2")
 texture_scale = 0.65
 
 [node name="DirectionLight" type="PointLight2D" parent="TextureRect" unique_id=2093360211]
-visible = false
 position = Vector2(84.20001, 83.79999)
 color = Color(0.811384, 0.567062, 0.119301, 1)
 energy = 16.0

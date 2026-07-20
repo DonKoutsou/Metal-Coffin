@@ -143,7 +143,9 @@ func Repair() -> void:
 		Cpt.Repair_Parts -= TimeMulti * SimulationSpeed
 	else:
 		ShipDockActions.emit("Repairing", false, 0)
-
+	
+	for g in GetSquad():
+		g.Repair()
 
 
 #CALLED WHEN A SHIP PART IS REMOVED OR ADDED TO INVENTORY TO UPDATE VISUAL RANGE AND ELINT RANGE

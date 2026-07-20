@@ -20,6 +20,7 @@ border_color = Color(0, 0, 0, 1)
 border_blend = true
 
 [node name="ItemDesc" type="PanelContainer" unique_id=249389669 node_paths=PackedStringArray("ItemName", "ItemDesc", "TransferButton", "UpgradeButton", "CancelUpgradeButton", "CancelInstallButton", "AddItemButton", "IncreaseItemButton", "RemoveItemButton", "UpgradeLabel", "CardSection", "CardPlecement", "CloseButton")]
+clip_contents = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -83,6 +84,7 @@ autowrap_mode = 2
 uppercase = true
 
 [node name="Button" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer/HBoxContainer" unique_id=884044005]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0

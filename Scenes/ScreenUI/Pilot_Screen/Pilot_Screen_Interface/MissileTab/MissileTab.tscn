@@ -167,6 +167,7 @@ theme_override_styles/pressed = ExtResource("10_2m6j3")
 theme_override_styles/hover = ExtResource("9_fka4o")
 
 [node name="PanelContainer" type="Panel" parent="." unique_id=1109730313]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
