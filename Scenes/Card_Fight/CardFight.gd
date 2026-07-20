@@ -1176,12 +1176,12 @@ func HandleModulesPl(Performer : BattleShipStats, C : CardStats, targetOverride 
 		await DoCardAnim(C, AnimData, Performer, true)
 	return true
 ##----------------------------------------------------------------------##
+##Handles offensive logic, checks for enemy counter cards and plays offensive animation
 func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod : OffensiveCardModule, TargetShips : Array[BattleShipStats]) -> void:
 	var AnimData : Array[AnimationData]
 	var Friendly = IsShipFriendly(Performer)
 
 	var AtackType = Mod.AtackType
-	var Counter : CardStats
 	
 	if (!Mod.AOE):
 		var EnemyTeam = GetShipEnemyTeam(Performer)
@@ -1203,45 +1203,43 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 	var TargetList : Dictionary[BattleShipStats, Dictionary]
 	
 	for g in TargetShips:
+		var Counter : CardStats
 		for Act : CardFightAction in ActionList.GetShipsActions(g):
 			var mod = Act.Action.OnPerformModule
 			if (mod is CounterCardModule or mod is DamageReductionCardModule):
+				#check if this card can counter the current attack
 				if (mod.CounterType == AtackType or mod.CounterType == OffensiveCardModule.AtackTypes.ANY_ATACK):
 					Counter = Act.Action
 					break
 			
-		var Data : Dictionary
-		Data["Def"] = Counter
-		Data["Viz"] = g.ShipViz
+		var Data : Dictionary = {
+			"Def" : Counter,
+			"Viz" : g.ShipViz
+		}
 		TargetList[g] = Data
-
+	
+	#remove attack action from UI, only relevany for enemies
 	Performer.ShipViz.ActionRemoved(Action.Icon)
 	
-	var AtackData = OffensiveAnimationData.new()
-	
-	AtackData.Mod = Mod
-	AtackData.DeffenceList = TargetList
-	
-	
+	var AtackData = OffensiveAnimationData.NewData(Mod, TargetList)
 	AnimData.append(AtackData)
 	
 	var DamageCallables : Array[Callable]
 	
 	var AtackConnected = false
-	var DamageReduced = false
 	
 	for g in TargetList:
-		
+		var currentConnected : bool = false
 		var Def = TargetList[g]["Def"] as CardStats
 		
 		if (TargetList[g]["Def"] != null):
 			
 			var TargetViz = TargetList[g]["Viz"]
-			TargetViz.ActionRemoved(Counter.Icon)
-			ActionList.RemoveActionFromShip(g, Counter)
-			if (!Counter.ShouldConsume()):
-				g.deck.DiscardCard(Counter)
-				HandleDiscardModules(Performer, Counter)
+			TargetViz.ActionRemoved(Def.Icon)
+			ActionList.RemoveActionFromShip(g, Def)
+			if (!Def.ShouldConsume()):
+				g.deck.DiscardCard(Def)
+				HandleDiscardModules(Performer, Def)
 			if (!Friendly):
 				DamageNeg += Mod.GetFinalDamage(Performer, Action.Tier)
 				
@@ -1259,9 +1257,9 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 				for SDefMod in CounterMod.OnSuccesfullDeffenceModules:
 					AnimData.append(HandleModule(g, Def, SDefMod, tar))
 				AtackConnected = true
-				DamageReduced = true
-				
-			if (CounterMod is CounterCardModule):
+				currentConnected = true
+	
+			else: if (CounterMod is CounterCardModule):
 				var tar : Array[BattleShipStats]
 				if (CounterMod.OnSuccesfullDeffenceModulesUseSelf):
 					tar.append(g)
@@ -1269,20 +1267,32 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 					tar.append(Performer)
 				for SDefMod in CounterMod.OnSuccesfullDeffenceModules:
 					AnimData.append(HandleModule(g, Def, SDefMod, tar))
-		else:
-			AtackConnected = true
-		
-		if (AtackConnected):
-			for SAtMod in Mod.OnSuccesfullAtackModules:
-				AnimData.append(HandleModule(Performer, Action, SAtMod, TargetList.keys()))
-			
-			if (!DamageReduced):
+					
+			else:
 				var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Performer,Action.Tier), Mod.CauseFile, Mod.SkipShield)
 				DamageCallables.append(c)
 		else:
+			AtackConnected = true
+			currentConnected = true
+			var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Performer,Action.Tier), Mod.CauseFile, Mod.SkipShield)
+			DamageCallables.append(c)
+		
+		#Apply effects based on if card was connected or not
+		if (currentConnected and Mod.forEachHit):
+			for SAtMod in Mod.OnSuccesfullAtackModules:
+				AnimData.append(HandleModule(Performer, Action, SAtMod, TargetList.keys()))
+		else: if (!currentConnected and Mod.forEachMis):
 			for SAtMod in Mod.OnUnSuccesfullAtackModules:
 				AnimData.append(HandleModule(Performer, Action, SAtMod, TargetList.keys()))
 	
+	#Apply effects based on if card was connected or not
+	if (!Mod.forEachHit and AtackConnected):
+		for SAtMod in Mod.OnSuccesfullAtackModules:
+			AnimData.append(HandleModule(Performer, Action, SAtMod, TargetList.keys()))
+	else: if (!Mod.forEachMis and !AtackConnected):
+		for SAtMod in Mod.OnUnSuccesfullAtackModules:
+			AnimData.append(HandleModule(Performer, Action, SAtMod, TargetList.keys()))
+		
 	for SAtMod in Mod.OnAtackModules:
 		AnimData.append(HandleModule(Performer, Action, SAtMod, TargetList.keys()))
 

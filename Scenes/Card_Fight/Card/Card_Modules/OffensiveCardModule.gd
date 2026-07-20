@@ -7,7 +7,9 @@ class_name OffensiveCardModule
 @export var ScaleStat : Array[DamageInfo]
 @export var CauseFile : bool
 @export var OnAtackModules : Array[CardModule]
+@export var forEachHit : bool = false
 @export var OnSuccesfullAtackModules : Array[CardModule]
+@export var forEachMis : bool = false
 @export var OnUnSuccesfullAtackModules : Array[CardModule]
 @export var SkipShield : bool
 
@@ -76,11 +78,17 @@ func GetDesc(Tier : int) -> String:
 	Desc += " for {0}".format([DamageString])
 	
 	if (OnSuccesfullAtackModules.size() > 0):
-		Desc += "\n[color=#ffc315]On Hit[/color] : "
+		if (forEachHit):
+			Desc += "\n[color=#ffc315]Per Hit[/color] : "
+		else:
+			Desc += "\n[color=#ffc315]On Hit[/color] : "
 		for g in OnSuccesfullAtackModules:
 			Desc += g.GetDesc(Tier)
 	if (OnUnSuccesfullAtackModules.size() > 0):
-		Desc += "\n[color=#ffc315]On Miss[/color] : "
+		if (forEachMis):
+			Desc += "\n[color=#ffc315]Per Miss[/color] : "
+		else:
+			Desc += "\n[color=#ffc315]On Miss[/color] : "
 		for g in OnUnSuccesfullAtackModules:
 			Desc += g.GetDesc(Tier)
 	if (OnAtackModules.size() > 0):
@@ -158,11 +166,17 @@ func GetBattleDesc(User : BattleShipStats, Tier : int) -> String:
 	Desc += " for \n{0} damage".format([DamageString])
 	
 	if (OnSuccesfullAtackModules.size() > 0):
-		Desc += "\n[color=#ffc315]On Hit [/color]: "
+		if (forEachHit):
+			Desc += "\n[color=#ffc315]Per Hit[/color] : "
+		else:
+			Desc += "\n[color=#ffc315]On Hit[/color] : "
 		for g in OnSuccesfullAtackModules:
 			Desc += g.GetBattleDesc(User, Tier)
 	if (OnUnSuccesfullAtackModules.size() > 0):
-		Desc += "\n[color=#ffc315]On Miss [/color]: "
+		if (forEachMis):
+			Desc += "\n[color=#ffc315]Per Miss[/color] : "
+		else:
+			Desc += "\n[color=#ffc315]On Miss[/color] : "
 		for g in OnUnSuccesfullAtackModules:
 			Desc += g.GetBattleDesc(User, Tier)
 	if (OnAtackModules.size() > 0):
