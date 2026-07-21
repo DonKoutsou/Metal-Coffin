@@ -33,10 +33,10 @@ func RefrshExistingItems() -> void:
 			var file_name = dir.get_next()
 			while file_name != "":
 				if dir.current_is_dir():
-					print("Found directory: " + file_name)
+					#print("Found directory: " + file_name)
 					DirsToExplore.append(g + "/" + file_name)
 				else:
-					print("Found file: " + file_name)
+					#print("Found file: " + file_name)
 					var It = load(g + "/" + file_name)
 					AddMerchToLists(It, file_name)
 					

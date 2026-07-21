@@ -15,6 +15,8 @@
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="12_h5vnd"]
 
 [node name="ControledShipSelector" type="Control" unique_id=397832360 node_paths=PackedStringArray("captainLabel", "captainHullLabel", "captainFuelLabel", "droneLabel")]
+custom_minimum_size = Vector2(274, 157)
+custom_maximum_size = Vector2(274, 157)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -115,10 +117,10 @@ autowrap_mode = 2
 
 [node name="BeforeCaptain" type="Button" parent="." unique_id=1609678090 groups=["Buttons"]]
 layout_mode = 0
-offset_left = 25.0
+offset_left = 26.0
 offset_top = 113.0
 offset_right = 57.0
-offset_bottom = 142.0
+offset_bottom = 141.0
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.08480086, 0.08981366, 0.08981418, 1)
 theme_override_constants/outline_size = 0
@@ -131,7 +133,7 @@ theme_override_styles/hover = ExtResource("6_8snke")
 [node name="AfterCaptain" type="Button" parent="." unique_id=1530118204 groups=["Buttons"]]
 layout_mode = 0
 offset_left = 67.0
-offset_top = 114.0
+offset_top = 113.0
 offset_right = 98.0
 offset_bottom = 142.0
 size_flags_horizontal = 3
@@ -145,7 +147,7 @@ theme_override_styles/hover = ExtResource("8_qn08q")
 
 [node name="Button" type="Button" parent="." unique_id=1540363474 groups=["Buttons"]]
 layout_mode = 0
-offset_left = 107.0
+offset_left = 106.0
 offset_top = 114.0
 offset_right = 137.0
 offset_bottom = 142.0

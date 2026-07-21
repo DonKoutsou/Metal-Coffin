@@ -115,7 +115,6 @@ grow_vertical = 2
 theme_override_constants/separation = 0
 
 [node name="Sonar" parent="VBoxContainer" unique_id=1555836270 instance=ExtResource("11_jqinv")]
-custom_minimum_size = Vector2(0, 175)
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -133,6 +132,7 @@ size_flags_vertical = 3
 
 [node name="Pilot_Screen_Settings" parent="VBoxContainer" unique_id=1173233523 instance=ExtResource("5_ojc6g")]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="SpeedSimulation" type="Button" parent="." unique_id=314067477 groups=["Buttons"]]
 layout_mode = 1

@@ -12,6 +12,8 @@
 [ext_resource type="StyleBox" uid="uid://g2ic8um6hit" path="res://Theme/Buttons/ButtonBlack_Pressed.tres" id="10_ukqae"]
 
 [node name="MapMarkerControls" type="Control" unique_id=329577773 node_paths=PackedStringArray("ToggleButton")]
+custom_minimum_size = Vector2(274, 157)
+custom_maximum_size = Vector2(274, 157)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -65,9 +67,9 @@ toggle_mode = true
 [node name="DrawLine" type="Button" parent="." unique_id=1318466251 groups=["Buttons"]]
 layout_mode = 0
 offset_left = 82.0
-offset_top = 108.0
-offset_right = 132.0
-offset_bottom = 144.0
+offset_top = 109.0
+offset_right = 131.0
+offset_bottom = 143.0
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
@@ -81,7 +83,7 @@ layout_mode = 0
 offset_left = 145.0
 offset_top = 109.0
 offset_right = 194.0
-offset_bottom = 144.0
+offset_bottom = 143.0
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
@@ -94,8 +96,8 @@ theme_override_styles/hover = ExtResource("9_gq5gp")
 layout_mode = 0
 offset_left = 219.0
 offset_top = 109.0
-offset_right = 249.0
-offset_bottom = 143.0
+offset_right = 247.0
+offset_bottom = 142.0
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0

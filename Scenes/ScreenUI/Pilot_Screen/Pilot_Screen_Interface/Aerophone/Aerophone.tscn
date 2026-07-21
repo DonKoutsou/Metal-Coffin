@@ -37,6 +37,8 @@ seamless_blend_skirt = 1.0
 light_mode = 1
 
 [node name="Aerophone" type="Control" unique_id=1555836270 node_paths=PackedStringArray("lineContainer", "gainLabel", "radioSpeaker", "cap")]
+custom_minimum_size = Vector2(274, 157)
+custom_maximum_size = Vector2(274, 157)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -68,11 +70,12 @@ grow_vertical = 2
 theme_override_styles/panel = ExtResource("9_fw736")
 
 [node name="GeinControl" parent="TextureRect2" unique_id=1393905736 instance=ExtResource("2_6guy7")]
-position = Vector2(75.5, 88.76887)
+position = Vector2(75.5, 79.387314)
 rotation = 1.5707964
-scale = Vector2(0.6427263, 0.60451305)
+scale = Vector2(0.5694329, 0.60451305)
 
 [node name="PanelContainer" type="PanelContainer" parent="TextureRect2" unique_id=841349730]
+clip_contents = true
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -80,8 +83,8 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -176.0
-offset_top = -88.0
-offset_bottom = 88.0
+offset_top = -79.0
+offset_bottom = 79.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("8_8d64h")
@@ -92,7 +95,7 @@ layout_mode = 2
 mouse_filter = 2
 script = ExtResource("1_u0q8c")
 OffsetAmmount = 2.0
-Radius = 30.0
+Radius = 27.0
 N = SubResource("NoiseTexture2D_kirju")
 
 [node name="Label" type="Label" parent="TextureRect2/PanelContainer" unique_id=733326543]

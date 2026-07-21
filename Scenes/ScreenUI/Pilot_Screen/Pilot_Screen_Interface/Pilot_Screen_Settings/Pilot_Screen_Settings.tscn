@@ -12,9 +12,9 @@
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 274.0
-offset_top = -53.0
-offset_right = 548.0
+offset_left = 377.0
+offset_top = -73.0
+offset_right = 581.0
 offset_bottom = -1.0
 grow_vertical = 0
 mouse_filter = 2
@@ -27,7 +27,7 @@ ZoomButton = NodePath("HBoxContainer/VBoxContainer4/ZoomLevelButton")
 TopoButton = NodePath("HBoxContainer/VBoxContainer8/TopoButton")
 WindCorrectionButton = NodePath("HBoxContainer/VBoxContainer9/WindCorrection")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1292644406]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=327610331]
 layout_mode = 2
 mouse_filter = 2
 
@@ -42,6 +42,7 @@ alignment = 1
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=842363251]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 6
 theme_override_colors/font_color = Color(0.13319641, 0.13319641, 0.13319638, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
@@ -56,7 +57,7 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(24, 54)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 6
 focus_mode = 0
 theme_override_styles/normal = ExtResource("4_oe1k3")
 theme_override_styles/pressed = ExtResource("5_dkh8b")
@@ -74,6 +75,7 @@ alignment = 1
 [node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer2" unique_id=2053534997]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.13319641, 0.13319641, 0.13319638, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
@@ -88,7 +90,7 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(24, 54)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 3
 focus_mode = 0
 theme_override_styles/normal = ExtResource("4_oe1k3")
 theme_override_styles/pressed = ExtResource("5_dkh8b")
@@ -107,6 +109,7 @@ alignment = 1
 [node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer8" unique_id=1343482083]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.13319641, 0.13319641, 0.13319638, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
@@ -121,7 +124,7 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(24, 54)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 3
 focus_mode = 0
 theme_override_styles/normal = ExtResource("4_oe1k3")
 theme_override_styles/pressed = ExtResource("5_dkh8b")
@@ -140,6 +143,7 @@ alignment = 1
 [node name="Label3" type="Label" parent="HBoxContainer/VBoxContainer4" unique_id=1069436407]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.13319641, 0.13319641, 0.13319638, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
@@ -154,7 +158,7 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(24, 54)
 layout_mode = 2
 size_flags_horizontal = 6
-size_flags_vertical = 4
+size_flags_vertical = 3
 focus_mode = 0
 theme_override_styles/normal = ExtResource("4_oe1k3")
 theme_override_styles/pressed = ExtResource("5_dkh8b")
@@ -207,6 +211,7 @@ alignment = 1
 [node name="Label3" type="Label" parent="HBoxContainer/VBoxContainer9" unique_id=1765147685]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.13319641, 0.13319641, 0.13319638, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
@@ -221,7 +226,7 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(24, 54)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 3
 focus_mode = 0
 theme_override_styles/normal = ExtResource("4_oe1k3")
 theme_override_styles/pressed = ExtResource("5_dkh8b")

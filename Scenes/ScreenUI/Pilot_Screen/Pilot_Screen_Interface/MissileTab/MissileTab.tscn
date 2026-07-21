@@ -19,7 +19,9 @@
 [ext_resource type="FontFile" uid="uid://ble63qtuapau3" path="res://Fonts/digital-7.ttf" id="16_6ithd"]
 [ext_resource type="StyleBox" uid="uid://cicae3yqgxkcm" path="res://Theme/MetalPanel.tres" id="18_uy6ab"]
 
-[node name="Missile Tab" type="Control" unique_id=1968593876 node_paths=PackedStringArray("missileSelectLight", "angleSelectLight", "rangeText", "selectedMissileText", "turnOffButton", "armButton", "dissarmButton", "launchButton", "cap", "missileDial")]
+[node name="Missile Tab" type="Control" unique_id=1968593876 node_paths=PackedStringArray("missileSelectLight", "angleSelectLight", "rangeText", "selectedMissileText", "turnOffButton", "armButton", "dissarmButton", "launchButton", "cap")]
+custom_minimum_size = Vector2(274, 157)
+custom_maximum_size = Vector2(274, 157)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -45,7 +47,6 @@ armButton = NodePath("ArmButton")
 dissarmButton = NodePath("DissarmButton")
 launchButton = NodePath("LaunchButton")
 cap = NodePath("PanelContainer")
-missileDial = NodePath("")
 controllerEventHandler = ExtResource("3_fka4o")
 droneDockEventHandler = ExtResource("4_2m6j3")
 
@@ -99,6 +100,7 @@ rotation = -3.1415927
 scale = Vector2(0.49190933, 0.58001953)
 
 [node name="RangeText" type="Label" parent="." unique_id=1306899280]
+visible = false
 texture_filter = 6
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 0
@@ -117,6 +119,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="SelectedMissileText" type="Label" parent="." unique_id=1069982182]
+visible = false
 texture_filter = 6
 layout_mode = 0
 offset_left = 22.0
@@ -136,7 +139,7 @@ autowrap_mode = 2
 layout_mode = 0
 offset_left = 162.0
 offset_top = 26.0
-offset_right = 212.0
+offset_right = 211.0
 offset_bottom = 51.0
 size_flags_horizontal = 3
 theme_override_styles/normal = ExtResource("5_fka4o")
@@ -147,7 +150,7 @@ theme_override_styles/hover = ExtResource("5_fka4o")
 layout_mode = 0
 offset_left = 162.0
 offset_top = 72.0
-offset_right = 212.0
+offset_right = 211.0
 offset_bottom = 96.0
 size_flags_horizontal = 3
 theme_override_styles/normal = ExtResource("7_fka4o")
@@ -158,8 +161,8 @@ theme_override_styles/hover = ExtResource("7_fka4o")
 layout_mode = 0
 offset_left = 162.0
 offset_top = 119.0
-offset_right = 212.0
-offset_bottom = 143.0
+offset_right = 211.0
+offset_bottom = 142.0
 size_flags_horizontal = 3
 theme_override_styles/normal = ExtResource("9_fka4o")
 theme_override_styles/pressed = ExtResource("10_2m6j3")
