@@ -6,7 +6,7 @@ class_name Elint
 
 var ElintStat : ShipStat
 
-signal ElintTriggered(T : bool, Lvl : int, Dir : String)
+signal ElintTriggered(T : bool, Lvl : int, Dir : float)
 signal ElintRangeChanged
 
 
@@ -47,9 +47,9 @@ func UpdateElint(delta: float) -> void:
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.ELINT_CONTACT)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.ELINT_CONTACT)
 			ActionTracker.QueueTutorial("Electronic Intelligence", "The Elint sensors of one of your ships has been triggered. Elint detects enemy radar signals and provides a rough estimation on the distance and the direction of the signal. If the sensor is triggered it means you are about to enter into a radar's signal range and be detected.", [])
-		ElintTriggered.emit(true, BiggestLevel, Helper.AngleToDirection(Dir))
+		ElintTriggered.emit(true, BiggestLevel, Dir)
 	else:
-		ElintTriggered.emit(false, -1, "")
+		ElintTriggered.emit(false, -1, 0)
 
 func GetClosestElint() -> Vector2:
 	
@@ -72,12 +72,14 @@ func GetClosestElintLevel() -> int:
 	var closestdist : float = 9999999999999999
 	for g in ElintContacts.size():
 		var ship = ElintContacts.keys()[g]
+		if (ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE) <= 90):
+			continue
 		var dist = global_position.distance_squared_to(ship.global_position)
 		if (closestdist > dist):
 			closest = ship
 			closestdist = dist
 	
-	var Newlvl = GetElintLevel(global_position.distance_squared_to(closest.global_position), closest.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
+	var Newlvl = GetElintLevel(closestdist, closest.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
 	
 	return Newlvl
 	

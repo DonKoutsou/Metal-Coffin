@@ -28,9 +28,9 @@ func UpdateVizRange():
 func EvaluateRadarTargets(Altitude : float) -> void:
 	for g in InsideRadar:
 		if (TopographyMap.WithinLineOfSight(global_position, Altitude, g.global_position, g.Altitude)):
-			g.OnShipSeen(self)
+			g.OnShipSeen(get_parent())
 		else:
-			g.OnShipUnseen(self)
+			g.OnShipUnseen(get_parent())
 
 func EvaluateRadarrPoint(Altitude : float) -> void:
 	#var PointToEvaluate : Vector2 = RadarCircle[CurrentRadarPointToEvaluate]

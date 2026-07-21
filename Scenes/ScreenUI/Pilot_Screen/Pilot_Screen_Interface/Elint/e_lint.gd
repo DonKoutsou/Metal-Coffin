@@ -24,7 +24,7 @@ class_name ElingUI
 var lights: Array[Light2D] = []         # All Light2D children to be toggled.
 var foundContact: bool = false          # Is a contact found currently?
 var currentState: ElintState            # Current detection state
-
+var biggestElint : MapShip
 # Time accumulator for physics polling
 var pollDelay: float = 0.4
 
@@ -54,12 +54,42 @@ func toggleElint(isOn: bool) -> void:
 	elintText.texture = ResourceLoader.load(texPath)
 	set_physics_process(isOn)
 
+func UpdateBiggestElint() -> void:
+	var newBiggest = biggestElint
+	var currentBiggestRange = biggestElint.Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT)
+	if (controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT) > currentBiggestRange):
+		newBiggest = controller
+		currentBiggestRange = controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT)
+	for g in controller.GetSquad():
+		if (g.Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT) > currentBiggestRange):
+			currentBiggestRange = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT)
+			newBiggest = g
+	if (biggestElint != newBiggest):
+		biggestElint.ElintShape.ElintRangeChanged.disconnect(CheckIfWorking)
+		biggestElint.ElintShape.ElintTriggered.disconnect(TargetFound)
+		newBiggest.ElintShape.ElintRangeChanged.connect(CheckIfWorking)
+		newBiggest.ElintShape.ElintTriggered.connect(TargetFound)
+		biggestElint = newBiggest
+
 func _onControlledShipUpdated(ship: MapShip) -> void:
-	if (controller != null):
-		controller.ElintShape.ElintRangeChanged.disconnect(CheckIfWorking)
+	
 	controller = ship
-	controller.ElintShape.ElintRangeChanged.connect(CheckIfWorking)
+	if (biggestElint != null):
+		biggestElint.ElintShape.ElintRangeChanged.disconnect(CheckIfWorking)
+		biggestElint.ElintShape.ElintTriggered.disconnect(TargetFound)
+	biggestElint = controller
+	biggestElint.ElintShape.ElintRangeChanged.connect(CheckIfWorking)
+	biggestElint.ElintShape.ElintTriggered.connect(TargetFound)
+	#controller.ElintShape.ElintRangeChanged.connect(CheckIfWorking)
+	#controller.ElintShape.ElintTriggered.connect(TargetFound)
+	#for g in controller.GetSquad():
+	#	g.ElintShape.ElintRangeChanged.connect(CheckIfWorking)
+	#	g.ElintShape.ElintTriggered.connect(TargetFound)
+	
+	UpdateBiggestElint()
 	CheckIfWorking()
+
+
 
 func CheckIfWorking() -> void:
 	var hasElint = fleetHasElint()
@@ -75,6 +105,7 @@ func _onDroneAdded(_dr : PlayerDrivenShip, target : MapShip) -> void:
 		if not hasElint:
 			for l in lights:
 				l.visible = false
+		UpdateBiggestElint()
 
 func _onDroneRemoved(_dr : PlayerDrivenShip, target : MapShip) -> void:
 	if (target == controller):
@@ -83,6 +114,7 @@ func _onDroneRemoved(_dr : PlayerDrivenShip, target : MapShip) -> void:
 		if not hasElint:
 			for l in lights:
 				l.visible = false
+		UpdateBiggestElint()
 
 func fleetHasElint() -> bool:
 	# Check if the currently controlled ship or its docked drones have ELINT
@@ -100,41 +132,42 @@ func _physics_process(delta: float) -> void:
 	if pollDelay > 0:
 		return
 	pollDelay = 0.4
-
-	var elintLevel = controller.GetClosestElintLevel()
-
-	if elintLevel < 0:
-		currentState = ElintState.NONE
-		foundContact = false
-		beepSound.stop()
+	
+	if foundContact:
 		for l in lights:
-			l.visible = false
-		return
-
-	if not foundContact:
-		RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.ELINT_DETECTED)
-
-	foundContact = true
-	var closest = controller.GetClosestElint()
-	setDirection(rad_to_deg(controller.global_position.angle_to_point(closest)))
-	setElintLevel(elintLevel)
-
-	for l in lights:
-		l.visible = not l.visible
-
+			l.visible = not l.visible
+			
 	if currentState != ElintState.NONE:
 		beepSound.play()
 	else:
 		beepSound.stop()
 
+func TargetFound(T : bool, Lvl : int, Dir : float) -> void:
+	if Lvl < 0:
+		currentState = ElintState.NONE
+		foundContact = false
+		for l in lights:
+			l.visible = false
+		return
+	
+	if not foundContact:
+		RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.ELINT_DETECTED)
+	
+	foundContact = true
+	#var closest = controller.GetClosestElint()
+	setDirection(Dir)
+	setElintLevel(Lvl)
+
 ##    --- UI/LOGIC HELPERS ---
 func setDirection(dir: float) -> void:
 	# Selects correct direction texture for indicator according to angle
-	for i in directionMaskFiles.size():
-		if abs((i * 30) - dir) > 15:
-			continue
-		directionLight.texture = ResourceLoader.load(directionMaskFiles[roundi(i)])
-		break
+	var deg = rad_to_deg(dir) + 180
+	
+	var divisions = directionMaskFiles.size() - 1
+	var normalised = deg / 360
+	var index = roundi(normalised * divisions)
+	
+	directionLight.texture = ResourceLoader.load(directionMaskFiles[index])
 
 static func degreesToElintAngle(degrees: float) -> int:
 	# Maps a degree to the nearest elint direction (0, 30, ..., 330)

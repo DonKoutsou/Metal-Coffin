@@ -81,5 +81,5 @@ func BodyLeftRadar(Body : Area2D) -> void:
 	else: if (Parent is Missile):
 		if (Parent.FiredBy is HostileShip):
 			InsideRadar.erase(Parent)
-			Parent.OnShipUnseen(self)
+			Parent.OnShipUnseen(get_parent())
 			#Parent.OnShipUnseen(self)

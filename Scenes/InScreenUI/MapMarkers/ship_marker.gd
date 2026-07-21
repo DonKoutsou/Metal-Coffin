@@ -365,10 +365,10 @@ func ToggleShowRefuel(Stats : String, t : bool, timel : float = 0):
 		#connect("ShipDeparted", ResuplyNotif.OnShipDeparted)
 		add_child(ResuplyNotif)
 
-func ToggleShowElint( t : bool, ElingLevel : int, ElintDirection : String):
+func ToggleShowElint( t : bool, ElingLevel : int, ElintDirection : float):
 	if ElintNotif != null:
 		if (t):
-			ElintNotif.SetText("ELINT : Lvl {0} \nDirection : {1}".format([var_to_str(ElingLevel), ElintDirection]))
+			ElintNotif.SetText("ELINT : Lvl {0} \nDirection : {1}".format([var_to_str(ElingLevel), Helper.AngleToDirection(ElintDirection)]))
 			return
 		else :
 			ElintNotif.queue_free()
@@ -376,7 +376,7 @@ func ToggleShowElint( t : bool, ElingLevel : int, ElintDirection : String):
 			return
 	if (t):
 		ElintNotif = NotificationScene.instantiate() as ShipMarkerNotif
-		ElintNotif.SetText("ELINT : {0} \nDirection : {1}".format([var_to_str(ElingLevel), ElintDirection]))
+		ElintNotif.SetText("ELINT : {0} \nDirection : {1}".format([var_to_str(ElingLevel), Helper.AngleToDirection(ElintDirection)]))
 		ElintNotif.Blink = true
 		ElintNotif.Fast = true
 		#connect("ShipDeparted", notif.OnShipDeparted)

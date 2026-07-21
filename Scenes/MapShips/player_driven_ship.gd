@@ -102,7 +102,7 @@ func Update(delta: float) -> void:
 		if (offset.length() < WindVector.length() * Windage):
 			neededFuel = (WindVector.length() * Windage) - offset.length()
 		
-		if (Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) > neededFuel):
+		if (ShipHasFuel(neededFuel)):
 			
 			CorrectionExtra = neededFuel
 			
@@ -163,6 +163,21 @@ func Update(delta: float) -> void:
 	
 	LastRecordedOffset = offset
 	global_position += offset * SimulationManager.SimSpeed()
+
+func ShipHasFuel(neededFuel : float) -> bool:
+	var ownedFuel : float = 0
+	if (Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) > neededFuel):
+		return true
+	else:
+		ownedFuel += Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
+	
+	for g in GetSquad():
+		ownedFuel += g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
+	
+	if (ownedFuel > neededFuel):
+		return true
+	
+	return false
 
 func PartChanged(It : ShipPart) -> void:
 	for g in It.Upgrades:

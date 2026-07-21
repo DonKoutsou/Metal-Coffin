@@ -195,6 +195,16 @@ func InventoryAdd(CapName : String, ItemName : String, ItemAmmount : int = 1) ->
 
 	return HandleInventoryItemAddCommand(inv, CapName, ItemName, ItemAmmount)
 
+func StatRefill(CapName : String, StatName : String) -> String:
+	if (World.Instance == null or World.WORLDST != World.WORLDSTATE.NORMAL):
+		return "Can only apply while in map"
+	for g in get_tree().get_nodes_in_group("PlayerShips"):
+		var ship = g as MapShip
+		if ship.Cpt.GetCaptainName().to_lower() == CapName.to_lower():
+			return HandleStatCommand(ship.Cpt, StatName)
+
+	return "Couldn't find captain name"
+
 func InventoryUpgrade(CapName : String, ItemName : String) -> String:
 	if (World.Instance == null or World.WORLDST != World.WORLDSTATE.NORMAL):
 		return "Can only apply while in map"
@@ -227,26 +237,13 @@ func HandleItemUpgrade(Inv : CharacterInventory, ItemName : String) -> String:
 			
 	return "Error Upgrading Item"
 	
-func HandleStatCommand(Command) -> String:
-	var Inv = InventoryManager.GetInstance()
-	if (Command.size() == 1):
-		return "forgot to add captain name"
-		
-	var Char = Inv.GetCharacterByName(Command[1])
-	if (Char == null):
-		return "Could Not Find Character"
+func HandleStatCommand(Char : Captain, statName : String) -> String:
+	var key = STAT_CONST.STATS.keys().find(statName.to_upper())
+	if (key == -1):
+		return "Invalid stat name"
+	Char.FullyRefilStat(key)
 	
-	if (Command.size() == 2):
-		return "No Stat Found"
-	
-	var statName = STAT_CONST.StringToEnum(Command[2])
-	
-	if (statName == -1):
-		return "Wrong stat name"
-
-	Char.FullyRefilStat(statName)
-	
-	return "{0} was refilled".format([Command[2]])
+	return "{0}'s {1} was refilled".format([Char.CaptainName, statName])
 
 func RefrshExistingItems() -> void:
 	var DirsToExplore :Array[String] = ["res://Resources/Items"]
