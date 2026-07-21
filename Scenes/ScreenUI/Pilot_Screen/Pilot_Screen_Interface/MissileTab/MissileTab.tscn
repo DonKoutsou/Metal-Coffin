@@ -7,16 +7,16 @@
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="4_fka4o"]
 [ext_resource type="StyleBox" uid="uid://d0w8t1031og62" path="res://Theme/Buttons/ButtonGreen.tres" id="5_fka4o"]
 [ext_resource type="StyleBox" uid="uid://cim71fta6nvsv" path="res://Theme/Buttons/ButtonGreen_Pressed.tres" id="6_2m6j3"]
+[ext_resource type="Texture2D" uid="uid://di7wfri7kixee" path="res://Assets/UIPiecies/Screen/MissileCover_FullQuality.png" id="6_ntf1p"]
 [ext_resource type="StyleBox" uid="uid://bog4o82ggjqwb" path="res://Theme/Buttons/ButtonOrange.tres" id="7_fka4o"]
 [ext_resource type="StyleBox" uid="uid://bxfwfq0uxu1w1" path="res://Theme/Buttons/ButtonOrange_Pressed.tres" id="8_2m6j3"]
 [ext_resource type="StyleBox" uid="uid://c5x3vcw8x46rj" path="res://Theme/Buttons/ButtonRed.tres" id="9_fka4o"]
 [ext_resource type="StyleBox" uid="uid://bvwu33dvi8506" path="res://Theme/Buttons/ButtonRed_Pressed.tres" id="10_2m6j3"]
+[ext_resource type="PackedScene" uid="uid://ox4pbwakfxs1" path="res://Scenes/ScreenUI/Dial/Dial_NoPanel.tscn" id="10_ntf1p"]
 [ext_resource type="StyleBox" uid="uid://bc1y4hhkl7ce6" path="res://Theme/Buttons/NobButton.tres" id="11_2m6j3"]
 [ext_resource type="StyleBox" uid="uid://21mi6l2i2tkk" path="res://Theme/Buttons/NobButton_Pressed.tres" id="12_fka4o"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="15_pknbg"]
 [ext_resource type="FontFile" uid="uid://ble63qtuapau3" path="res://Fonts/digital-7.ttf" id="16_6ithd"]
-[ext_resource type="StyleBox" uid="uid://qpvte6fabtg4" path="res://Theme/Monitor_Panel.tres" id="17_a1eqg"]
-[ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/Dial/Dial.tscn" id="17_ptq1t"]
 [ext_resource type="StyleBox" uid="uid://cicae3yqgxkcm" path="res://Theme/MetalPanel.tres" id="18_uy6ab"]
 
 [node name="Missile Tab" type="Control" unique_id=1968593876 node_paths=PackedStringArray("missileSelectLight", "angleSelectLight", "rangeText", "selectedMissileText", "turnOffButton", "armButton", "dissarmButton", "launchButton", "cap", "missileDial")]
@@ -29,7 +29,7 @@ anchor_bottom = 0.5
 offset_left = -137.0
 offset_top = -80.0
 offset_right = 137.0
-offset_bottom = 80.0
+offset_bottom = 77.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -38,25 +38,26 @@ missileDockEventH = ExtResource("2_uy6ab")
 uiEventH = ExtResource("4_fka4o")
 missileSelectLight = NodePath("MissileSelectLight")
 angleSelectLight = NodePath("AngleSelectLight")
-rangeText = NodePath("PanelContainer3/RangeText")
-selectedMissileText = NodePath("PanelContainer4/SelectedMissileText")
+rangeText = NodePath("RangeText")
+selectedMissileText = NodePath("SelectedMissileText")
 turnOffButton = NodePath("TurnOff")
-armButton = NodePath("VBoxContainer/ArmButton")
-dissarmButton = NodePath("VBoxContainer/DissarmButton")
-launchButton = NodePath("VBoxContainer/LaunchButton")
+armButton = NodePath("ArmButton")
+dissarmButton = NodePath("DissarmButton")
+launchButton = NodePath("LaunchButton")
 cap = NodePath("PanelContainer")
-missileDial = NodePath("DroneGas")
+missileDial = NodePath("")
 controllerEventHandler = ExtResource("3_fka4o")
 droneDockEventHandler = ExtResource("4_2m6j3")
 
-[node name="PanelContainer2" type="PanelContainer" parent="." unique_id=1782629225]
+[node name="PanelContainer2" type="TextureRect" parent="." unique_id=1853760784]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("18_uy6ab")
+texture = ExtResource("6_ntf1p")
+expand_mode = 1
 
 [node name="TurnOff" type="Button" parent="." unique_id=1602153045 groups=["Buttons"]]
 layout_mode = 1
@@ -65,10 +66,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -43.0
-offset_top = -115.62098
-offset_right = -10.0
-offset_bottom = -37.113388
+offset_left = -44.0
+offset_top = -111.00001
+offset_right = -17.0
+offset_bottom = -46.766525
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_styles/normal = ExtResource("11_2m6j3")
@@ -80,34 +81,31 @@ expand_icon = true
 
 [node name="MissileSelectLight" parent="." unique_id=1859413600 instance=ExtResource("15_pknbg")]
 layout_mode = 0
-offset_left = 237.0
-offset_top = 20.0
-offset_right = 257.0
+offset_left = 234.0
+offset_top = 24.0
+offset_right = 254.0
+offset_bottom = 44.0
 
 [node name="AngleSelectLight" parent="." unique_id=705276192 instance=ExtResource("15_pknbg")]
 layout_mode = 0
-offset_left = 237.0
-offset_top = 124.0
-offset_right = 257.0
-offset_bottom = 144.0
+offset_left = 233.0
+offset_top = 115.0
+offset_right = 253.0
+offset_bottom = 135.0
 
-[node name="DroneGas" parent="." unique_id=1046752902 instance=ExtResource("17_ptq1t")]
-position = Vector2(199, 79)
-rotation = 1.57079
-scale = Vector2(0.529254, 0.61353016)
+[node name="DroneGas2" parent="." unique_id=456827188 instance=ExtResource("10_ntf1p")]
+position = Vector2(82.381584, 79)
+rotation = -3.1415927
+scale = Vector2(0.49190933, 0.58001953)
 
-[node name="PanelContainer3" type="PanelContainer" parent="." unique_id=724965288]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 2.0
-offset_right = 161.0
-offset_bottom = 54.0
-theme_override_styles/panel = ExtResource("17_a1eqg")
-
-[node name="RangeText" type="Label" parent="PanelContainer3" unique_id=1306899280]
+[node name="RangeText" type="Label" parent="." unique_id=1306899280]
 texture_filter = 6
 custom_minimum_size = Vector2(10, 10)
-layout_mode = 2
+layout_mode = 0
+offset_left = 22.0
+offset_top = 12.0
+offset_right = 144.0
+offset_bottom = 49.0
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.483194, 0.71686, 0.381202, 1)
 theme_override_constants/outline_size = 0
@@ -118,17 +116,13 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="PanelContainer4" type="PanelContainer" parent="." unique_id=740302308]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 106.0
-offset_right = 161.0
-offset_bottom = 158.0
-theme_override_styles/panel = ExtResource("17_a1eqg")
-
-[node name="SelectedMissileText" type="Label" parent="PanelContainer4" unique_id=1069982182]
+[node name="SelectedMissileText" type="Label" parent="." unique_id=1069982182]
 texture_filter = 6
-layout_mode = 2
+layout_mode = 0
+offset_left = 22.0
+offset_top = 109.0
+offset_right = 143.0
+offset_bottom = 145.0
 theme_override_colors/font_color = Color(0.483194, 0.71686, 0.381202, 1)
 theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("16_6ithd")
@@ -138,29 +132,34 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="VBoxContainer" type="HBoxContainer" parent="." unique_id=1369649821]
-layout_mode = 1
-offset_left = 11.0
-offset_top = 60.0
-offset_right = 159.0
-offset_bottom = 101.0
-
-[node name="LaunchButton" type="Button" parent="VBoxContainer" unique_id=1478424702 groups=["Buttons"]]
-layout_mode = 2
+[node name="LaunchButton" type="Button" parent="." unique_id=1478424702 groups=["Buttons"]]
+layout_mode = 0
+offset_left = 162.0
+offset_top = 26.0
+offset_right = 212.0
+offset_bottom = 51.0
 size_flags_horizontal = 3
 theme_override_styles/normal = ExtResource("5_fka4o")
 theme_override_styles/pressed = ExtResource("6_2m6j3")
 theme_override_styles/hover = ExtResource("5_fka4o")
 
-[node name="DissarmButton" type="Button" parent="VBoxContainer" unique_id=1326463356 groups=["Buttons"]]
-layout_mode = 2
+[node name="DissarmButton" type="Button" parent="." unique_id=1326463356 groups=["Buttons"]]
+layout_mode = 0
+offset_left = 162.0
+offset_top = 72.0
+offset_right = 212.0
+offset_bottom = 96.0
 size_flags_horizontal = 3
 theme_override_styles/normal = ExtResource("7_fka4o")
 theme_override_styles/pressed = ExtResource("8_2m6j3")
 theme_override_styles/hover = ExtResource("7_fka4o")
 
-[node name="ArmButton" type="Button" parent="VBoxContainer" unique_id=1285015393 groups=["Buttons"]]
-layout_mode = 2
+[node name="ArmButton" type="Button" parent="." unique_id=1285015393 groups=["Buttons"]]
+layout_mode = 0
+offset_left = 162.0
+offset_top = 119.0
+offset_right = 212.0
+offset_bottom = 143.0
 size_flags_horizontal = 3
 theme_override_styles/normal = ExtResource("9_fka4o")
 theme_override_styles/pressed = ExtResource("10_2m6j3")
@@ -177,8 +176,8 @@ grow_vertical = 2
 theme_override_styles/panel = ExtResource("18_uy6ab")
 
 [connection signal="toggled" from="TurnOff" to="." method="_on_turn_off_toggled"]
-[connection signal="RangeChanged" from="DroneGas" to="." method="updateSteer"]
-[connection signal="RangeSnappedChanged" from="DroneGas" to="." method="updateSelected"]
-[connection signal="pressed" from="VBoxContainer/LaunchButton" to="." method="onLaunchPressed"]
-[connection signal="pressed" from="VBoxContainer/DissarmButton" to="." method="onDissarmPressed"]
-[connection signal="pressed" from="VBoxContainer/ArmButton" to="." method="onArmPressed"]
+[connection signal="RangeChanged" from="DroneGas2" to="." method="updateSteer"]
+[connection signal="RangeSnappedChanged" from="DroneGas2" to="." method="updateSelected"]
+[connection signal="pressed" from="LaunchButton" to="." method="onLaunchPressed"]
+[connection signal="pressed" from="DissarmButton" to="." method="onDissarmPressed"]
+[connection signal="pressed" from="ArmButton" to="." method="onArmPressed"]

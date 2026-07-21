@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cugmsxkuwcfc4"]
 
 [ext_resource type="Script" uid="uid://bdyul5l380bmt" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Map_Marker_Controls/map_marker_controls.gd" id="1_67mm3"]
-[ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/Dial/Dial.tscn" id="2_67mm3"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_djntk"]
-[ext_resource type="StyleBox" uid="uid://cicae3yqgxkcm" path="res://Theme/MetalPanel.tres" id="4_eviu5"]
+[ext_resource type="Texture2D" uid="uid://ckbklcaxep2gf" path="res://Assets/UIPiecies/Screen/Marker_FullQuality.png" id="3_eviu5"]
+[ext_resource type="PackedScene" uid="uid://ox4pbwakfxs1" path="res://Scenes/ScreenUI/Dial/Dial_NoPanel.tscn" id="4_eviu5"]
 [ext_resource type="StyleBox" uid="uid://bc1y4hhkl7ce6" path="res://Theme/Buttons/NobButton.tres" id="5_67mm3"]
 [ext_resource type="StyleBox" uid="uid://21mi6l2i2tkk" path="res://Theme/Buttons/NobButton_Pressed.tres" id="6_djntk"]
 [ext_resource type="StyleBox" uid="uid://bog4o82ggjqwb" path="res://Theme/Buttons/ButtonOrange.tres" id="7_67mm3"]
@@ -20,8 +20,8 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -146.0
 offset_top = -71.0
-offset_right = 127.0
-offset_bottom = 91.0
+offset_right = 128.0
+offset_bottom = 87.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -29,23 +29,20 @@ script = ExtResource("1_67mm3")
 ToggleButton = NodePath("ExitMapMarker")
 EventHandler = ExtResource("2_djntk")
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=240504643]
+[node name="PanelContainer" type="TextureRect" parent="." unique_id=250094317]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("4_eviu5")
+texture = ExtResource("3_eviu5")
+expand_mode = 1
 
-[node name="YGas" parent="." unique_id=1853660991 instance=ExtResource("2_67mm3")]
-position = Vector2(23.000008, 80.11284)
-rotation = -1.5707964
-scale = Vector2(0.5013781, 0.520363)
-
-[node name="XGas" parent="." unique_id=1191937950 instance=ExtResource("2_67mm3")]
-position = Vector2(152.87025, 32)
-scale = Vector2(0.8114861, 0.787035)
+[node name="DroneGas" parent="." unique_id=456827188 instance=ExtResource("4_eviu5")]
+position = Vector2(47.055187, 92.42397)
+rotation = 1.5707964
+scale = Vector2(0.4010628, 0.60450935)
 
 [node name="ExitMapMarker" type="Button" parent="." unique_id=1966900206 groups=["Buttons"]]
 layout_mode = 1
@@ -54,10 +51,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 102.5
-offset_top = -11.5
-offset_right = 132.5
-offset_bottom = 66.5
+offset_left = 89.0
+offset_top = -74.0
+offset_right = 119.0
+offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/normal = ExtResource("5_67mm3")
@@ -65,19 +62,12 @@ theme_override_styles/pressed = ExtResource("6_djntk")
 theme_override_styles/hover = ExtResource("5_67mm3")
 toggle_mode = true
 
-[node name="PanelContainer2" type="PanelContainer" parent="." unique_id=398002903]
+[node name="DrawLine" type="Button" parent="." unique_id=1318466251 groups=["Buttons"]]
 layout_mode = 0
-offset_left = 41.0
-offset_top = 59.0
-offset_right = 237.0
-offset_bottom = 161.0
-theme_override_styles/panel = ExtResource("4_eviu5")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer2" unique_id=1255882624]
-layout_mode = 2
-
-[node name="DrawLine" type="Button" parent="PanelContainer2/HBoxContainer" unique_id=1318466251 groups=["Buttons"]]
-layout_mode = 2
+offset_left = 82.0
+offset_top = 108.0
+offset_right = 132.0
+offset_bottom = 144.0
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
@@ -85,10 +75,13 @@ theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = ExtResource("9_gq5gp")
 theme_override_styles/pressed = ExtResource("10_ukqae")
 theme_override_styles/hover = ExtResource("9_gq5gp")
-text = "LINE"
 
-[node name="DrawText" type="Button" parent="PanelContainer2/HBoxContainer" unique_id=107084690 groups=["Buttons"]]
-layout_mode = 2
+[node name="DrawText" type="Button" parent="." unique_id=107084690 groups=["Buttons"]]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 109.0
+offset_right = 194.0
+offset_bottom = 144.0
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
@@ -96,10 +89,13 @@ theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = ExtResource("9_gq5gp")
 theme_override_styles/pressed = ExtResource("10_ukqae")
 theme_override_styles/hover = ExtResource("9_gq5gp")
-text = "TEXT"
 
-[node name="ClearLines" type="Button" parent="PanelContainer2/HBoxContainer" unique_id=1847480924 groups=["Buttons"]]
-layout_mode = 2
+[node name="ClearLines" type="Button" parent="." unique_id=1847480924 groups=["Buttons"]]
+layout_mode = 0
+offset_left = 219.0
+offset_top = 109.0
+offset_right = 249.0
+offset_bottom = 143.0
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
@@ -107,11 +103,14 @@ theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = ExtResource("7_67mm3")
 theme_override_styles/pressed = ExtResource("8_djntk")
 theme_override_styles/hover = ExtResource("7_67mm3")
-text = "CLEAR"
 
-[connection signal="RangeChanged" from="YGas" to="." method="_on_y_gas_range_changed"]
-[connection signal="RangeChanged" from="XGas" to="." method="_on_x_gas_range_changed"]
+[node name="DroneGas2" parent="." unique_id=1551212243 instance=ExtResource("4_eviu5")]
+position = Vector2(136.00002, 44)
+scale = Vector2(0.46093777, 0.5999996)
+
+[connection signal="RangeChanged" from="DroneGas" to="." method="_on_y_gas_range_changed"]
 [connection signal="toggled" from="ExitMapMarker" to="." method="_on_exit_map_marker_toggled"]
-[connection signal="pressed" from="PanelContainer2/HBoxContainer/DrawLine" to="." method="_on_draw_line_pressed"]
-[connection signal="pressed" from="PanelContainer2/HBoxContainer/DrawText" to="." method="_on_draw_text_pressed"]
-[connection signal="pressed" from="PanelContainer2/HBoxContainer/ClearLines" to="." method="_on_clear_lines_pressed"]
+[connection signal="pressed" from="DrawLine" to="." method="_on_draw_line_pressed"]
+[connection signal="pressed" from="DrawText" to="." method="_on_draw_text_pressed"]
+[connection signal="pressed" from="ClearLines" to="." method="_on_clear_lines_pressed"]
+[connection signal="RangeChanged" from="DroneGas2" to="." method="_on_x_gas_range_changed"]

@@ -4,11 +4,10 @@
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="2_1kjib"]
 [ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="3_cgsst"]
 [ext_resource type="FontFile" uid="uid://ble63qtuapau3" path="res://Fonts/digital-7.ttf" id="3_qsb3g"]
+[ext_resource type="Texture2D" uid="uid://bny1oykcpqi13" path="res://Assets/UIPiecies/Screen/selector_FullQuality.png" id="4_v8l7p"]
 [ext_resource type="FontFile" uid="uid://dpimg5va4xy40" path="res://Fonts/P22 Typewriter Regular.ttf" id="6_6xqx0"]
 [ext_resource type="StyleBox" uid="uid://c5x3vcw8x46rj" path="res://Theme/Buttons/ButtonRed.tres" id="6_8snke"]
-[ext_resource type="StyleBox" uid="uid://cicae3yqgxkcm" path="res://Theme/MetalPanel.tres" id="6_q82w3"]
 [ext_resource type="StyleBox" uid="uid://bj8tmjsnlmj0" path="res://Theme/Buttons/ButtonBlack.tres" id="7_8snke"]
-[ext_resource type="StyleBox" uid="uid://qpvte6fabtg4" path="res://Theme/Monitor_Panel.tres" id="7_h1y7v"]
 [ext_resource type="StyleBox" uid="uid://g2ic8um6hit" path="res://Theme/Buttons/ButtonBlack_Pressed.tres" id="8_knyjj"]
 [ext_resource type="StyleBox" uid="uid://d0w8t1031og62" path="res://Theme/Buttons/ButtonGreen.tres" id="8_qn08q"]
 [ext_resource type="StyleBox" uid="uid://cim71fta6nvsv" path="res://Theme/Buttons/ButtonGreen_Pressed.tres" id="9_6xqx0"]
@@ -16,7 +15,6 @@
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="12_h5vnd"]
 
 [node name="ControledShipSelector" type="Control" unique_id=397832360 node_paths=PackedStringArray("captainLabel", "captainHullLabel", "captainFuelLabel", "droneLabel")]
-custom_minimum_size = Vector2(274, 128)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -26,61 +24,47 @@ anchor_bottom = 0.5
 offset_left = -137.0
 offset_top = -101.0
 offset_right = 137.0
-offset_bottom = 101.0
+offset_bottom = 57.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5p1jf")
-captainLabel = NodePath("PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/CaptainName")
-captainHullLabel = NodePath("PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2/CaptainHull")
-captainFuelLabel = NodePath("PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2/CaptainFuel")
-droneLabel = NodePath("PanelContainer/HBoxContainer/VBoxContainer2/PanelContainer/InputScroll/Captains")
+captainLabel = NodePath("VBoxContainer/HBoxContainer/CaptainName")
+captainHullLabel = NodePath("VBoxContainer/HBoxContainer2/CaptainHull")
+captainFuelLabel = NodePath("VBoxContainer/HBoxContainer2/CaptainFuel")
+droneLabel = NodePath("InputScroll/Captains")
 controllerEventHandler = ExtResource("2_1kjib")
 droneDockEventHandler = ExtResource("3_cgsst")
 
-[node name="PanelContainer" type="Panel" parent="." unique_id=1460591157]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1397458096]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("6_q82w3")
+texture = ExtResource("4_v8l7p")
+expand_mode = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" unique_id=576182926]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.5625
-offset_top = 8.0
-offset_right = -8.5625
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=248542822]
+layout_mode = 0
+offset_left = 28.5625
+offset_top = 24.5
+offset_right = 116.5625
+offset_bottom = 63.5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2102311220]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 12.0
+offset_right = 139.0
+offset_bottom = 75.0
 theme_override_constants/separation = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer" unique_id=842711180]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 0
-
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/HBoxContainer/VBoxContainer" unique_id=1978145618]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("7_h1y7v")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer" unique_id=248542822]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer" unique_id=2102311220]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=8610857]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=8610857]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="CaptainName" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1035186908]
+[node name="CaptainName" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=1035186908]
 texture_filter = 6
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
@@ -95,11 +79,11 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=761251778]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=761251778]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="CaptainHull" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=2059426061]
+[node name="CaptainHull" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=2059426061]
 texture_filter = 6
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
@@ -114,7 +98,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="CaptainFuel" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=213874189]
+[node name="CaptainFuel" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=213874189]
 texture_filter = 6
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
@@ -129,17 +113,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/HBoxContainer/VBoxContainer" unique_id=1998071945]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("6_q82w3")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2" unique_id=831716785]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-
-[node name="BeforeCaptain" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2/HBoxContainer" unique_id=1609678090 groups=["Buttons"]]
-layout_mode = 2
+[node name="BeforeCaptain" type="Button" parent="." unique_id=1609678090 groups=["Buttons"]]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 113.0
+offset_right = 57.0
+offset_bottom = 142.0
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.08480086, 0.08981366, 0.08981418, 1)
 theme_override_constants/outline_size = 0
@@ -149,8 +128,12 @@ theme_override_styles/normal = ExtResource("6_8snke")
 theme_override_styles/pressed = ExtResource("9_hcfy2")
 theme_override_styles/hover = ExtResource("6_8snke")
 
-[node name="AfterCaptain" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2/HBoxContainer" unique_id=1530118204 groups=["Buttons"]]
-layout_mode = 2
+[node name="AfterCaptain" type="Button" parent="." unique_id=1530118204 groups=["Buttons"]]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 114.0
+offset_right = 98.0
+offset_bottom = 142.0
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 0
@@ -160,8 +143,12 @@ theme_override_styles/normal = ExtResource("8_qn08q")
 theme_override_styles/pressed = ExtResource("9_6xqx0")
 theme_override_styles/hover = ExtResource("8_qn08q")
 
-[node name="Button" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2/HBoxContainer" unique_id=1540363474 groups=["Buttons"]]
-layout_mode = 2
+[node name="Button" type="Button" parent="." unique_id=1540363474 groups=["Buttons"]]
+layout_mode = 0
+offset_left = 107.0
+offset_top = 114.0
+offset_right = 137.0
+offset_bottom = 142.0
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("6_6xqx0")
 theme_override_font_sizes/font_size = 12
@@ -169,25 +156,18 @@ theme_override_styles/normal = ExtResource("7_8snke")
 theme_override_styles/pressed = ExtResource("8_knyjj")
 theme_override_styles/hover = ExtResource("7_8snke")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/HBoxContainer" unique_id=960965048]
-custom_minimum_size = Vector2(80, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 0
-
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/HBoxContainer/VBoxContainer2" unique_id=205222257]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("7_h1y7v")
-
-[node name="InputScroll" type="ScrollContainer" parent="PanelContainer/HBoxContainer/VBoxContainer2/PanelContainer" unique_id=1726121509]
-layout_mode = 2
+[node name="InputScroll" type="ScrollContainer" parent="." unique_id=1726121509]
+layout_mode = 0
+offset_left = 159.0
+offset_top = 15.0
+offset_right = 250.0
+offset_bottom = 142.0
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
 script = ExtResource("12_h5vnd")
 metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
-[node name="Captains" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer2/PanelContainer/InputScroll" unique_id=1455978573]
+[node name="Captains" type="Label" parent="InputScroll" unique_id=1455978573]
 texture_filter = 6
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
@@ -200,6 +180,6 @@ theme_override_font_sizes/font_size = 16
 text = "Craden"
 autowrap_mode = 2
 
-[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2/HBoxContainer/BeforeCaptain" to="." method="_on_before_captain_pressed"]
-[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2/HBoxContainer/AfterCaptain" to="." method="_on_after_captain_pressed"]
-[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer2/HBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="BeforeCaptain" to="." method="_on_before_captain_pressed"]
+[connection signal="pressed" from="AfterCaptain" to="." method="_on_after_captain_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

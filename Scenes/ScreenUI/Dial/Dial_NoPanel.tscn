@@ -1,0 +1,123 @@
+[gd_scene format=3 uid="uid://ox4pbwakfxs1"]
+
+[ext_resource type="Texture2D" uid="uid://csx7t2eglno2i" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1.png" id="1_sf5mw"]
+[ext_resource type="Texture2D" uid="uid://dpdtscernry21" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_001.png" id="2_oj13w"]
+[ext_resource type="Texture2D" uid="uid://j23s8g4wpxb0" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_002.png" id="3_3krtt"]
+[ext_resource type="Texture2D" uid="uid://dh1irjtwh0n57" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_003.png" id="4_dn83f"]
+[ext_resource type="Texture2D" uid="uid://b646gx2bnq4wo" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_004.png" id="5_tg3je"]
+[ext_resource type="Texture2D" uid="uid://dm3srayb8uh2w" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_005.png" id="6_p0udl"]
+[ext_resource type="Texture2D" uid="uid://chsf28sr6fngb" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_006.png" id="7_3vm03"]
+[ext_resource type="Texture2D" uid="uid://ch4vsxlpuj52n" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_007.png" id="8_c8tbg"]
+[ext_resource type="Texture2D" uid="uid://b4dfnhkljhnpc" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_008.png" id="9_yvw8g"]
+[ext_resource type="Texture2D" uid="uid://brgtutcdnl6t" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_009.png" id="10_y0edl"]
+[ext_resource type="Texture2D" uid="uid://x23so8eplxlg" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_010.png" id="11_gvkn3"]
+[ext_resource type="Texture2D" uid="uid://c448sbpj5ay2p" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_011.png" id="12_t6u2w"]
+[ext_resource type="Texture2D" uid="uid://d1lfdg1txa058" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_012.png" id="13_pjxvj"]
+[ext_resource type="Texture2D" uid="uid://c0j4pdmjl38kq" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_013.png" id="14_rtjpe"]
+[ext_resource type="Texture2D" uid="uid://dt2ub46gvcwfp" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_014.png" id="15_hgxwn"]
+[ext_resource type="Texture2D" uid="uid://domexrkjnb6ye" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_015.png" id="16_n02y2"]
+[ext_resource type="Texture2D" uid="uid://bu3h5wfwo8iqu" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_016.png" id="17_o0hs3"]
+[ext_resource type="Texture2D" uid="uid://di7s7gbaldbrb" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_017.png" id="18_a2jc1"]
+[ext_resource type="Texture2D" uid="uid://bayeskgot2rr1" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_018.png" id="19_0tnjm"]
+[ext_resource type="Texture2D" uid="uid://b1uos50fmh2da" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_019.png" id="20_u8l32"]
+[ext_resource type="Script" uid="uid://byieey8mlbces" path="res://Scenes/ScreenUI/Dial/Dial.gd" id="21_yhjew"]
+[ext_resource type="AudioStream" uid="uid://bw32ea80qadx8" path="res://Assets/Sounds/MetalClick.mp3" id="22_kor77"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8cr6m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_sf5mw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_oj13w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_3krtt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_dn83f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_tg3je")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_p0udl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_3vm03")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_c8tbg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_yvw8g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_y0edl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_gvkn3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_t6u2w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_pjxvj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_rtjpe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_hgxwn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_n02y2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_o0hs3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_a2jc1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_0tnjm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_u8l32")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="DroneGas" type="AnimatedSprite2D" unique_id=456827188 node_paths=PackedStringArray("Sound")]
+position = Vector2(567, 332)
+scale = Vector2(0.42, 0.42)
+sprite_frames = SubResource("SpriteFrames_8cr6m")
+frame = 3
+frame_progress = 0.736569
+script = ExtResource("21_yhjew")
+Sound = NodePath("AudioStreamPlayer")
+
+[node name="Control" type="Control" parent="." unique_id=1083185122]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -249.0
+offset_top = -63.0
+offset_right = -6.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1757883521]
+stream = ExtResource("22_kor77")
+volume_db = -15.0
+pitch_scale = 0.8
+bus = &"MapSounds"
+
+[connection signal="gui_input" from="Control" to="." method="_on_Control_gui_input"]
