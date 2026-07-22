@@ -37,22 +37,22 @@ var steeringDir: float = 0.0
 
 func doIntroductionTutorial() -> void:
 	ActionTracker.QueueTutorial("TUT_MissileToggleTitle", 
-		"TUT_MissileToggleText", [Map.UI_ELEMENT.MISSILE_TOGGLE])
+		"TUT_MissileToggleText", [ScreenUI.UI_ELEMENT.MISSILE_TOGGLE])
 
 func doMissileArmTutorial() -> void:
 	ActionTracker.QueueTutorial("TUT_MissileArmTitle",
 		"TUT_MissileArmText", 
-		[Map.UI_ELEMENT.MISSILE_ARM, Map.UI_ELEMENT.MISSILE_DIAL])
+		[ScreenUI.UI_ELEMENT.MISSILE_ARM, ScreenUI.UI_ELEMENT.MISSILE_DIAL])
 	
 func doMissileAmountTutorial() -> void:
 	ActionTracker.QueueTutorial("TUT_MissileAmmountTitle",
 		"TUT_MissileAmmountText",
-		[Map.UI_ELEMENT.MISSILE_ARM, Map.UI_ELEMENT.MISSILE_DIAL])
+		[ScreenUI.UI_ELEMENT.MISSILE_ARM, ScreenUI.UI_ELEMENT.MISSILE_DIAL])
 
 func doMissileLaunchTutorial() -> void:
 	ActionTracker.QueueTutorial("Missile Launch",
 		"Finally turn the dial to aim, then press Launch to send it away.",
-		[Map.UI_ELEMENT.MISSILE_LAUNCH, Map.UI_ELEMENT.MISSILE_DIAL])
+		[ScreenUI.UI_ELEMENT.MISSILE_LAUNCH, ScreenUI.UI_ELEMENT.MISSILE_DIAL])
 
 # --- MISSILE/FLEET LOGIC ---
 

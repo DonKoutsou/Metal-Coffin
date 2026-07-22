@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 				ShowTutorial(nexttut.TutorialTitle, nexttut.TutorialText, nexttut.Target)
 				QueuedTutorials.pop_front()
 
-static func QueueTutorial(TurotialTitle : String, TutorialText : String, ElementsToFocusOn : Array[Map.UI_ELEMENT]) -> void:
+static func QueueTutorial(TurotialTitle : String, TutorialText : String, ElementsToFocusOn : Array[ScreenUI.UI_ELEMENT]) -> void:
 	if (!ShowTutorials):
 		return
 
@@ -46,7 +46,7 @@ static func QueueTutorial(TurotialTitle : String, TutorialText : String, Element
 	SavedData.Target = ElementsToFocusOn
 	QueuedTutorials.append(SavedData)
 
-func ShowTutorial(TurotialTitle : String, TutorialText : String, ElementsToFocusOn : Array[Map.UI_ELEMENT]) -> void:
+func ShowTutorial(TurotialTitle : String, TutorialText : String, ElementsToFocusOn : Array[ScreenUI.UI_ELEMENT]) -> void:
 	get_tree().paused = true
 	
 	ShowingTutorial = true
@@ -73,9 +73,9 @@ func ShowTutorial(TurotialTitle : String, TutorialText : String, ElementsToFocus
 	
 	
 
-func TargetsExists(Elements : Array[Map.UI_ELEMENT]) -> bool:
+func TargetsExists(Elements : Array[ScreenUI.UI_ELEMENT]) -> bool:
 	for g in Elements:
-		if (!Map.GetInstance().UIElementExists(g)):
+		if (!ScreenUI.Instance.UIElementExists(g)):
 			return false
 	return true
 
@@ -197,5 +197,6 @@ enum Action{
 	ELEVATION,
 	AEROSONAR,
 	SWIFT_CARDS,
-	CARD_FIGHT_OUTNUMER_BONUS
+	CARD_FIGHT_OUTNUMER_BONUS,
+	CARD_FIGHT_CARD_RECYCLE,
 }

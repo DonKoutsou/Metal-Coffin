@@ -54,112 +54,7 @@ var TempEnemyNames: PackedStringArray
 var SpotList : Array[Town]
 var ShowingTutorial = false
 
-enum UI_ELEMENT{
-	PILOT_SIMULATION_BUTTON,
-	PILOT_SIMULATION_SPEED_BUTTON,
-	PILOT_MAP_MARKER_TOGGLE,
-	CARD_FIGHT_ENERGY_BAR,
-	CARD_FIGHT_RESERVE_BAR,
-	STEER,
-	THRUST,
-	MISSILE_TOGGLE,
-	MISSILE_ARM,
-	MISSILE_DISSARM,
-	MISSILE_LAUNCH,
-	MISSILE_DIAL,
-	ELEVATION,
-	LAND_BUTTON,
-	HATCH_BUTTON,
-	TOPOLOGY_TOGGLE,
-	AEROSONAR,
-	REGROUP_BUTTON,
-	SHIP_DOCK_BUTTON,
-	
-}
 
-func GetUIElement(Element : UI_ELEMENT) -> Node:
-	match(Element):
-		UI_ELEMENT.PILOT_SIMULATION_BUTTON:
-			return _ScreenUI.PilotScreen.pauseSimulationButton
-		UI_ELEMENT.PILOT_SIMULATION_SPEED_BUTTON:
-			return _ScreenUI.PilotScreen.speedSimulationButton
-		UI_ELEMENT.PILOT_MAP_MARKER_TOGGLE:
-			return _ScreenUI.PilotScreen.mapMarkerControls.ToggleButton
-		UI_ELEMENT.CARD_FIGHT_ENERGY_BAR:
-			return _ScreenUI.CardFightUI.GetEnergyBar()
-		UI_ELEMENT.CARD_FIGHT_RESERVE_BAR:
-			return _ScreenUI.CardFightUI.GetReserveBar()
-		UI_ELEMENT.STEER:
-			return _ScreenUI.PilotScreen.steer
-		UI_ELEMENT.THRUST:
-			return _ScreenUI.PilotScreen.thrust
-		UI_ELEMENT.MISSILE_TOGGLE:
-			return _ScreenUI.PilotScreen.missileUI.turnOffButton
-		UI_ELEMENT.MISSILE_ARM:
-			return _ScreenUI.PilotScreen.missileUI.armButton
-		UI_ELEMENT.MISSILE_DISSARM:
-			return _ScreenUI.PilotScreen.missileUI.dissarmButton
-		UI_ELEMENT.MISSILE_LAUNCH:
-			return _ScreenUI.PilotScreen.missileUI.launchButton
-		UI_ELEMENT.MISSILE_DIAL:
-			return _ScreenUI.PilotScreen.missileUI.missileDial
-		UI_ELEMENT.ELEVATION:
-			return _ScreenUI.PilotScreen.elevationThrust
-		UI_ELEMENT.LAND_BUTTON:
-			return _ScreenUI.PilotScreen.landButton
-		UI_ELEMENT.HATCH_BUTTON:
-			return _ScreenUI.PilotScreen.hatchButton
-		UI_ELEMENT.TOPOLOGY_TOGGLE:
-			return _ScreenUI.PilotScreen.pilotScreenSet.TopoButton
-		UI_ELEMENT.AEROSONAR:
-			return _ScreenUI.PilotScreen.SonarUI
-		UI_ELEMENT.REGROUP_BUTTON:
-			return _ScreenUI.PilotScreen.regroupButton
-		UI_ELEMENT.SHIP_DOCK_BUTTON:
-			return _ScreenUI.PilotScreen.shipDockButton
-	return null
-
-func UIElementExists(Element : UI_ELEMENT) -> bool:
-	match(Element):
-		UI_ELEMENT.PILOT_SIMULATION_BUTTON:
-			return _ScreenUI.PilotScreen != null
-		UI_ELEMENT.PILOT_SIMULATION_SPEED_BUTTON:
-			return _ScreenUI.PilotScreen != null
-		UI_ELEMENT.PILOT_MAP_MARKER_TOGGLE:
-			return _ScreenUI.PilotScreen != null
-		UI_ELEMENT.CARD_FIGHT_ENERGY_BAR:
-			return _ScreenUI.CardFightUI != null
-		UI_ELEMENT.CARD_FIGHT_RESERVE_BAR:
-			return _ScreenUI.CardFightUI != null
-		UI_ELEMENT.STEER:
-			return _ScreenUI.PilotScreen != null
-		UI_ELEMENT.THRUST:
-			return _ScreenUI.PilotScreen != null
-		UI_ELEMENT.MISSILE_TOGGLE:
-			return _ScreenUI.PilotScreen != null
-		UI_ELEMENT.MISSILE_ARM:
-			return _ScreenUI.PilotScreen != null
-		UI_ELEMENT.MISSILE_DISSARM:
-			return _ScreenUI.PilotScreen != null
-		UI_ELEMENT.MISSILE_LAUNCH:
-			return _ScreenUI.PilotScreen != null
-		UI_ELEMENT.MISSILE_DIAL:
-			return _ScreenUI.PilotScreen != null
-		UI_ELEMENT.ELEVATION:
-			return _ScreenUI.PilotScreen != null
-		UI_ELEMENT.LAND_BUTTON:
-			return _ScreenUI.PilotScreen != null
-		UI_ELEMENT.HATCH_BUTTON:
-			return _ScreenUI.PilotScreen != null
-		UI_ELEMENT.TOPOLOGY_TOGGLE:
-			return _ScreenUI.PilotScreen != null
-		UI_ELEMENT.AEROSONAR:
-			return _ScreenUI.PilotScreen != null
-		UI_ELEMENT.REGROUP_BUTTON:
-			return _ScreenUI.PilotScreen != null
-		UI_ELEMENT.SHIP_DOCK_BUTTON:
-			return _ScreenUI.PilotScreen != null
-	return false
 
 static var Instance : Map
 
@@ -213,8 +108,8 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 		SimulationTrigger.TutorialToShow = ActionTracker.Action.SIMULATION
 		SimulationTrigger.TutorialTitle = "Simulation Management"
 		SimulationTrigger.TutorialText = "A successfull campaign requires proper planning.\nUse the [color=#ffc315]Simulation Buttons[/color] to either [color=#f35033]Stop[/color] the simulation and think over your plans or speed up the simulations to [color=#308a4d]speed[/color] through big protions of your voyage."
-		SimulationTrigger.TutorialElement.append(Map.UI_ELEMENT.PILOT_SIMULATION_BUTTON)
-		SimulationTrigger.TutorialElement.append(Map.UI_ELEMENT.PILOT_SIMULATION_SPEED_BUTTON)
+		SimulationTrigger.TutorialElement.append(ScreenUI.UI_ELEMENT.PILOT_SIMULATION_BUTTON)
+		SimulationTrigger.TutorialElement.append(ScreenUI.UI_ELEMENT.PILOT_SIMULATION_SPEED_BUTTON)
 		WorldParent.add_child(SimulationTrigger)
 		var triggerpos = pos
 		triggerpos.y -= 100
@@ -225,8 +120,8 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 		ElevationTrigger.TutorialToShow = ActionTracker.Action.ELEVATION
 		ElevationTrigger.TutorialTitle = "Altitude"
 		ElevationTrigger.TutorialText = "Managing altitude is one of your fleets strongest weapons. Radar signals, noise and wind are obstucted by the terains. Use this to your advantage to stay undetected or hide from strong head winds. Use the [color=#ffc315]Elevation Lever[/color] to manage your altitude and the [color=#ffc315]Topography Visualisation[/color] for view a topographic map of the area. The ship will increase it's altitude when an imminent collision is detected."
-		ElevationTrigger.TutorialElement.append(Map.UI_ELEMENT.ELEVATION)
-		ElevationTrigger.TutorialElement.append(Map.UI_ELEMENT.TOPOLOGY_TOGGLE)
+		ElevationTrigger.TutorialElement.append(ScreenUI.UI_ELEMENT.ELEVATION)
+		ElevationTrigger.TutorialElement.append(ScreenUI.UI_ELEMENT.TOPOLOGY_TOGGLE)
 		WorldParent.add_child(ElevationTrigger)
 		var Elevationtriggerpos = pos
 		Elevationtriggerpos.y -= 350
@@ -237,7 +132,7 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 		MapMarkerTrigger.TutorialToShow = ActionTracker.Action.MAP_MARKER
 		MapMarkerTrigger.TutorialTitle = "Map Markers"
 		MapMarkerTrigger.TutorialText = "Marking vital information on the map is usefull for making edjucated decisions in the future. Use the [color=#ffc315]Map Marker Editor[/color] to place text markers and measure distances. Toggle the [color=#ffc315]Map Marker Editor[/color] using the dediacted button on the [color=#ffc315]Ship Controller[/color]."
-		MapMarkerTrigger.TutorialElement.append(Map.UI_ELEMENT.PILOT_MAP_MARKER_TOGGLE)
+		MapMarkerTrigger.TutorialElement.append(ScreenUI.UI_ELEMENT.PILOT_MAP_MARKER_TOGGLE)
 		WorldParent.add_child(MapMarkerTrigger)
 		var MapMarkerTriggerpos = pos
 		MapMarkerTriggerpos.y -= 750

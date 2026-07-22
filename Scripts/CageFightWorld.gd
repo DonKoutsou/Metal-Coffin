@@ -27,6 +27,10 @@ func _ready() -> void:
 	Ingame_UIManager.GetInstance().AddUI(TCompUI, true, false)
 	TCompUI.TeamReady.connect(TeamsPicked)
 	
+	World.WORLDST = World.WORLDSTATE.FIGHT
+
+func _exit_tree() -> void:
+	World.WORLDST = World.WORLDSTATE.INITIAL
 
 func TeamsPicked(PlTeam : Array[Captain], EnTeam : Array[Captain]) -> void:
 	await ScrUI.CloseScreen()

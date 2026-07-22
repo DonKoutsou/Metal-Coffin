@@ -270,6 +270,8 @@ func CardDrawn(C : CardStats) -> void:
 		
 		if (!Placed):
 			c.queue_free()
+		
+		
 ##----------------------------------------------------------------------##
 func MultiSpcificCardDrawn(DrawnCards : Array[CardStats]) -> void:
 	var Performer = GetCurrentShip()
@@ -449,11 +451,11 @@ func RunShipsTurn(Ship : BattleShipStats) -> void:
 		#ExternalUI.ToggleEnergyVisibility(true)
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_ENERGY)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ENERGY)
-			ActionTracker.QueueTutorial("TUT_Cardfight_EnergyTitle", "TUT_Cardfight_EnergyText", [Map.UI_ELEMENT.CARD_FIGHT_ENERGY_BAR])
+			ActionTracker.QueueTutorial("TUT_Cardfight_EnergyTitle", "TUT_Cardfight_EnergyText", [ScreenUI.UI_ELEMENT.CARD_FIGHT_ENERGY_BAR])
 
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_RESERVES)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_RESERVES)
-			ActionTracker.QueueTutorial("TUT_Cardfight_EnergyReserveTitle", "TUT_Cardfight_EnergyReserveText", [Map.UI_ELEMENT.CARD_FIGHT_RESERVE_BAR])
+			ActionTracker.QueueTutorial("TUT_Cardfight_EnergyReserveTitle", "TUT_Cardfight_EnergyReserveText", [ScreenUI.UI_ELEMENT.CARD_FIGHT_RESERVE_BAR])
 		
 		RestartCards()
 		
@@ -587,6 +589,13 @@ func OnCardSelected(C : Card, target : BattleShipStats = null) -> bool:
 	PlayerPerformingMove = false
 	if (Ship.deck.Hand.size() == 0 and Ship.Energy == 0 and Ship.EnergyReserves == 0):
 		PlayerActionSelectionEnded()
+	
+	else: if (Ship.deck.Hand.size() > 0 and Ship.Energy == 0):
+		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_CARD_RECYCLE)):
+			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_CARD_RECYCLE)
+			ActionTracker.QueueTutorial("Card recycling", "In situations where the ships energy has been depleted but it still has cards in its hand it is possible to manually discard these cards in exchange for some energy.\nFor every 2 cards discarded the ship is awarded 1 energy.", [ScreenUI.UI_ELEMENT.CARD_FIGHT_DISCARD])
+		#TODO add tutorial for discarding cards
+
 	
 	return true
 ##----------------------------------------------------------------------##
@@ -998,7 +1007,7 @@ func RestartCards() -> void:
 		PopUpManager.GetInstance().DoFadeNotif("Ship outnumbered\nBonus Energy Provided")
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_OUTNUMER_BONUS)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_OUTNUMER_BONUS)
-			ActionTracker.QueueTutorial("Outnumber Energy Bonus", "When outnumbered ships are provided an energy boost, giving them a fighting chance.", [Map.UI_ELEMENT.CARD_FIGHT_ENERGY_BAR])
+			ActionTracker.QueueTutorial("Outnumber Energy Bonus", "When outnumbered ships are provided an energy boost, giving them a fighting chance.", [ScreenUI.UI_ELEMENT.CARD_FIGHT_ENERGY_BAR])
 		
 	#since max fleet ammount is 3 this number can't be more than 2, and since we normalise it we
 	var finalTurnEnergy = TurnEnergy + roundi(TurnEnergy * outNumberedBonus)
@@ -1469,7 +1478,13 @@ func HandleDrawCard(Performer : BattleShipStats, ConsumeEnergy : bool = false) -
 	
 	if (ConsumeEnergy):
 		Performer.SetEnergy(Performer.Energy - 1)
-		
+	
+	if (Performer.Energy == 0):
+		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_CARD_RECYCLE)):
+			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_CARD_RECYCLE)
+			ActionTracker.QueueTutorial("Card recycling", "In situations where the ships energy has been depleted but it still has cards in its hand it is possible to manually discard these cards in exchange for some energy.\n\nFor every 2 cards discarded the ship is awarded 1 energy.\n\nDrag and drop any card on the discard pile to discard it.", [ScreenUI.UI_ELEMENT.CARD_FIGHT_DISCARD])
+		#TODO add tutorial for discarding cards
+
 	return true
 ##----------------------------------------------------------------------##
 #//////////////////////////////////////////////////////////////////////

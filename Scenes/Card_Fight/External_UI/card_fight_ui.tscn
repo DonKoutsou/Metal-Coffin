@@ -27,7 +27,7 @@ border_color = Color(0, 0, 0, 1)
 border_blend = true
 corner_detail = 1
 
-[node name="CardFightExternalUI" type="Control" unique_id=1976581219 node_paths=PackedStringArray("PlayerCardPlecement", "EnergyBar", "ReservesBar", "PlayCardInsert", "DrawCardInsert", "DiscardInsert", "PlayerCardPlacementInputBlocker", "HardCardLabel", "DeckUI", "DiscardPile")]
+[node name="CardFightExternalUI" type="Control" unique_id=1976581219 node_paths=PackedStringArray("PlayerCardPlecement", "EnergyBar", "ReservesBar", "PlayCardInsert", "DrawCardInsert", "DiscardInsert", "PlayerCardPlacementInputBlocker", "HardCardLabel", "DeckUI", "DiscardPile", "DiscardInsertInput")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,6 +47,7 @@ PlayerCardPlacementInputBlocker = NodePath("PlayerCardPlacementInputBlocker")
 HardCardLabel = NodePath("Label")
 DeckUI = NodePath("DeckButton")
 DiscardPile = NodePath("DiscardPile")
+DiscardInsertInput = NodePath("CardDiscardInput")
 CardInsertSound = "uid://bj6ftgg07o4t0"
 CardOutSound = "uid://8pdqtyhjkcvr"
 CardDiscardSound = "uid://ccyskr8jt1vq6"

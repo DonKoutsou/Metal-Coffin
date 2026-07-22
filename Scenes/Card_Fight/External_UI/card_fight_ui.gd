@@ -14,6 +14,7 @@ class_name ExternalCardFightUI
 @export var HardCardLabel : Label
 @export var DeckUI : DeckPileUI
 @export var DiscardPile : DiscardPileUI
+@export var DiscardInsertInput : Control
 @export_group("Sound Files")
 @export_file("*.mp3") var CardInsertSound : String
 @export_file("*.mp3") var CardOutSound : String

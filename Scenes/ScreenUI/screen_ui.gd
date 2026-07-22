@@ -12,16 +12,18 @@ class_name ScreenUI
 @export_file("*.tscn") var FullScreenScene : String
 
 var Transition : TransitionPanel
-
 var CardFightUI : ExternalCardFightUI
 var TownUi : TownExternalUI
 var PilotScreen : PilotScreenUI
 var FullScreen : Control
-
+static var Instance : ScreenUI
 var CurrentScreenState : ScreenState
 
 signal FullScreenToggleStarted(NewState : ScreenState)
 signal FullScreenToggleFinished()
+
+func _ready() -> void:
+	Instance = self
 
 func Update(delta : float) -> void:
 	if (PilotScreen != null):
@@ -181,3 +183,115 @@ func ToggleFullScreen(NewStat : ScreenState) -> void:
 	
 	FullScreenToggleFinished.emit()
 	Cam.EnableFullScreenShake()
+
+
+enum UI_ELEMENT{
+	PILOT_SIMULATION_BUTTON,
+	PILOT_SIMULATION_SPEED_BUTTON,
+	PILOT_MAP_MARKER_TOGGLE,
+	CARD_FIGHT_ENERGY_BAR,
+	CARD_FIGHT_RESERVE_BAR,
+	STEER,
+	THRUST,
+	MISSILE_TOGGLE,
+	MISSILE_ARM,
+	MISSILE_DISSARM,
+	MISSILE_LAUNCH,
+	MISSILE_DIAL,
+	ELEVATION,
+	LAND_BUTTON,
+	HATCH_BUTTON,
+	TOPOLOGY_TOGGLE,
+	AEROSONAR,
+	REGROUP_BUTTON,
+	SHIP_DOCK_BUTTON,
+	CARD_FIGHT_DISCARD,
+}
+
+func GetUIElement(Element : UI_ELEMENT) -> Node:
+	match(Element):
+		UI_ELEMENT.PILOT_SIMULATION_BUTTON:
+			return PilotScreen.pauseSimulationButton
+		UI_ELEMENT.PILOT_SIMULATION_SPEED_BUTTON:
+			return PilotScreen.speedSimulationButton
+		UI_ELEMENT.PILOT_MAP_MARKER_TOGGLE:
+			return PilotScreen.mapMarkerControls.ToggleButton
+		UI_ELEMENT.CARD_FIGHT_ENERGY_BAR:
+			return CardFightUI.GetEnergyBar()
+		UI_ELEMENT.CARD_FIGHT_DISCARD:
+			return CardFightUI.DiscardInsertInput
+		UI_ELEMENT.CARD_FIGHT_RESERVE_BAR:
+			return CardFightUI.GetReserveBar()
+		UI_ELEMENT.STEER:
+			return PilotScreen.steer
+		UI_ELEMENT.THRUST:
+			return PilotScreen.thrust
+		UI_ELEMENT.MISSILE_TOGGLE:
+			return PilotScreen.missileUI.turnOffButton
+		UI_ELEMENT.MISSILE_ARM:
+			return PilotScreen.missileUI.armButton
+		UI_ELEMENT.MISSILE_DISSARM:
+			return PilotScreen.missileUI.dissarmButton
+		UI_ELEMENT.MISSILE_LAUNCH:
+			return PilotScreen.missileUI.launchButton
+		UI_ELEMENT.MISSILE_DIAL:
+			return PilotScreen.missileUI.missileDial
+		UI_ELEMENT.ELEVATION:
+			return PilotScreen.elevationThrust
+		UI_ELEMENT.LAND_BUTTON:
+			return PilotScreen.landButton
+		UI_ELEMENT.HATCH_BUTTON:
+			return PilotScreen.hatchButton
+		UI_ELEMENT.TOPOLOGY_TOGGLE:
+			return PilotScreen.pilotScreenSet.TopoButton
+		UI_ELEMENT.AEROSONAR:
+			return PilotScreen.SonarUI
+		UI_ELEMENT.REGROUP_BUTTON:
+			return PilotScreen.regroupButton
+		UI_ELEMENT.SHIP_DOCK_BUTTON:
+			return PilotScreen.shipDockButton
+	return null
+
+func UIElementExists(Element : UI_ELEMENT) -> bool:
+	match(Element):
+		UI_ELEMENT.PILOT_SIMULATION_BUTTON:
+			return PilotScreen != null
+		UI_ELEMENT.PILOT_SIMULATION_SPEED_BUTTON:
+			return PilotScreen != null
+		UI_ELEMENT.PILOT_MAP_MARKER_TOGGLE:
+			return PilotScreen != null
+		UI_ELEMENT.CARD_FIGHT_ENERGY_BAR:
+			return CardFightUI != null
+		UI_ELEMENT.CARD_FIGHT_RESERVE_BAR:
+			return CardFightUI != null
+		UI_ELEMENT.CARD_FIGHT_DISCARD:
+			return CardFightUI != null
+		UI_ELEMENT.STEER:
+			return PilotScreen != null
+		UI_ELEMENT.THRUST:
+			return PilotScreen != null
+		UI_ELEMENT.MISSILE_TOGGLE:
+			return PilotScreen != null
+		UI_ELEMENT.MISSILE_ARM:
+			return PilotScreen != null
+		UI_ELEMENT.MISSILE_DISSARM:
+			return PilotScreen != null
+		UI_ELEMENT.MISSILE_LAUNCH:
+			return PilotScreen != null
+		UI_ELEMENT.MISSILE_DIAL:
+			return PilotScreen != null
+		UI_ELEMENT.ELEVATION:
+			return PilotScreen != null
+		UI_ELEMENT.LAND_BUTTON:
+			return PilotScreen != null
+		UI_ELEMENT.HATCH_BUTTON:
+			return PilotScreen != null
+		UI_ELEMENT.TOPOLOGY_TOGGLE:
+			return PilotScreen != null
+		UI_ELEMENT.AEROSONAR:
+			return PilotScreen != null
+		UI_ELEMENT.REGROUP_BUTTON:
+			return PilotScreen != null
+		UI_ELEMENT.SHIP_DOCK_BUTTON:
+			return PilotScreen != null
+	return false

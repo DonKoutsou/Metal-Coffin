@@ -21,16 +21,17 @@ var OriginalSize : Vector2
 
 signal Completed
 
-func SetData(Title : String, Text : String, TutorialSubjects : Array[Map.UI_ELEMENT]) -> void:
+func SetData(Title : String, Text : String, TutorialSubjects : Array[ScreenUI.UI_ELEMENT]) -> void:
 	TitleLabel.text = Title
 	TextLabel.text = Text
 	if (TutorialSubjects.size() > 0):
-		Target = Map.GetInstance().GetUIElement(TutorialSubjects[0])
-		Map.GetInstance()._ScreenUI.Cam.FrameCam(Target)
+		Target = ScreenUI.Instance.GetUIElement(TutorialSubjects[0])
+		if (Map.GetInstance() != null):
+			Map.GetInstance()._ScreenUI.Cam.FrameCam(Target)
 		
 		
 	if (TutorialSubjects.size() > 1):
-		Target2 = Map.GetInstance().GetUIElement(TutorialSubjects[1])
+		Target2 = ScreenUI.Instance.GetUIElement(TutorialSubjects[1])
 	
 
 func _ready() -> void:
@@ -94,8 +95,8 @@ func DoFadeInAnim() -> void:
 func SetTargetRect(r : Rect2 = Rect2(0,0,0,0), r2 : Rect2 = Rect2(0,0,0,0)) -> void:
 	var mat =  $ColorRect.material as ShaderMaterial
 	var vpRectSize = get_viewport_rect().size
-	var camoffset = Map.GetInstance()._ScreenUI.Cam.position.x - (vpRectSize.x / 2)
-	
+	#var camoffset = Map.GetInstance()._ScreenUI.Cam.position.x - (vpRectSize.x / 2)
+	var camoffset = 0
 	#Devide by VP rect to normalise it
 	var r1pos = (r.position + Vector2(-camoffset, 0))/ vpRectSize
 	var r2pos = (r2.position + Vector2(-camoffset, 0)) / vpRectSize
