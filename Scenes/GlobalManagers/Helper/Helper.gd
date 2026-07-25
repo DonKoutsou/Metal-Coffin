@@ -128,6 +128,12 @@ static func AngleToDirectionShort(angle: float) -> String:
 static func is_even(number: int) -> bool:
 	return number % 2 == 0
 
+static func mapf(value: float, in_min: float, in_max: float, out_min: float, out_max: float) -> float:
+	return (value - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
+
+static func mapv2(value: Vector2,in_min: Vector2,in_max: Vector2,out_min: Vector2, out_max: Vector2) -> Vector2:
+	return Vector2(mapf(value.x, in_min.x, in_max.x, out_min.x, out_max.x),mapf(value.y, in_min.y, in_max.y, out_min.y, out_max.y))
+
 static func angle_difference_radians(angle1: float, angle2: float) -> float:
 
 	# Calculate the difference

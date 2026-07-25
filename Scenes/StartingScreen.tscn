@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://8du0534sf0gr" path="res://Scripts/UI/starting_screen.gd" id="1_kry56"]
 [ext_resource type="Material" uid="uid://ivgnk2dd66ef" path="res://Shaders/Dither.tres" id="2_7bhdu"]
 [ext_resource type="Material" uid="uid://dxt6oe4rhk3du" path="res://Shaders/ColorIndex.tres" id="3_62h02"]
-[ext_resource type="World3D" uid="uid://dq7c8xt1p3wb5" path="res://Enviroments/MainEnv.tres" id="4_62h02"]
 
 [node name="StartingScreen" type="Node" unique_id=64991473]
 process_mode = 3
@@ -14,21 +13,15 @@ GameScene = "uid://cbhf8nh85npqq"
 IntroGameScene = "uid://cid0s6uni7fky"
 CageFightGameScene = "uid://b575fi0e44gkg"
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1758213328]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=102283905]
+layer = 999
+follow_viewport_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1748445160]
 material = ExtResource("3_62h02")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=2015624308]
-disable_3d = true
-world_3d = ExtResource("4_62h02")
-handle_input_locally = false
-audio_listener_enable_2d = true
-audio_listener_enable_3d = true
-oversampling = false
-size = Vector2i(1280, 720)
-render_target_update_mode = 4
+mouse_filter = 2

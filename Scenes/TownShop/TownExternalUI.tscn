@@ -4,8 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://djgy3lp61vapo" path="res://Resources/Funds/FundsDisplay.tscn" id="2_u4bsh"]
 [ext_resource type="AudioStream" uid="uid://dnly626tg06nb" path="res://Assets/Sounds/CoinSlide22.mp3" id="3_3jwvr"]
 [ext_resource type="Texture2D" uid="uid://dcagjig448xtx" path="res://Assets/UIPiecies/Screen/Coin2_FullQuality.png" id="4_acv7r"]
-[ext_resource type="Texture2D" uid="uid://jy2dq24qxn2h" path="res://Assets/UIPiecies/Screen/ScreenFrames/Town_Screen.png" id="5_3jwvr"]
+[ext_resource type="Texture2D" uid="uid://dum1h361hyptq" path="res://Assets/UIPiecies/Screen/ScreenFrames/StartMenu_Screen.png" id="5_ahhdo"]
 [ext_resource type="AudioStream" uid="uid://iilvk0u0kfff" path="res://Assets/Sounds/CoinSlide.mp3" id="5_yen4x"]
+[ext_resource type="Texture2D" uid="uid://dffx8j71s8nk4" path="res://Assets/UIPiecies/Screen/SidePanels/Town_Cover.png" id="6_ahhdo"]
 [ext_resource type="Texture2D" uid="uid://cghnkjw6wxy7c" path="res://Assets/UIPiecies/Screen/Coin_FullQuality.png" id="6_j05jt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_acv7r"]
@@ -103,32 +104,42 @@ CoinPlecement = NodePath("DiscardInsert2/Control")
 CoinSlideInSound = ExtResource("5_yen4x")
 CoinSlideSound = ExtResource("3_3jwvr")
 
-[node name="ScreenFrame2" type="TextureRect" parent="." unique_id=19489388]
-custom_minimum_size = Vector2(0, 38.045)
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=2005844711]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = -276
+
+[node name="ScreenFrame2" type="TextureRect" parent="HBoxContainer" unique_id=19489388]
+custom_minimum_size = Vector2(0, 38.045)
+layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 2
-texture = ExtResource("5_3jwvr")
+texture = ExtResource("5_ahhdo")
 expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=719449670]
+layout_mode = 2
+texture = ExtResource("6_ahhdo")
+expand_mode = 3
 
 [node name="Fund_Container" parent="." unique_id=164260139 instance=ExtResource("2_u4bsh")]
 layout_mode = 1
-offset_left = 401.0
-offset_top = -289.0
-offset_right = 497.0
-offset_bottom = -243.0
+offset_left = 393.0
+offset_top = -297.0
+offset_right = 499.0
+offset_bottom = -248.0
 
 [node name="DiscardInsert" type="PanelContainer" parent="." unique_id=297766887]
 clip_contents = true
 layout_mode = 0
-offset_left = 1061.0
-offset_top = 226.0
-offset_right = 1093.0
-offset_bottom = 268.0
+offset_left = 1058.0
+offset_top = 223.0
+offset_right = 1090.0
+offset_bottom = 265.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_acv7r")
 
@@ -154,10 +165,10 @@ speed_scale = 0.6
 [node name="DiscardInsert2" type="PanelContainer" parent="." unique_id=1209302865]
 clip_contents = true
 layout_mode = 0
-offset_left = 1059.0
-offset_top = 532.0
+offset_left = 1056.0
+offset_top = 540.0
 offset_right = 1123.0
-offset_bottom = 647.0
+offset_bottom = 658.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yen4x")
 

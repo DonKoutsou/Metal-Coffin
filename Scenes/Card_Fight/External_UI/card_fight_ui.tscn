@@ -3,8 +3,9 @@
 [ext_resource type="Script" uid="uid://bl8iy8s43qakx" path="res://Scenes/Card_Fight/External_UI/FanCardHandContainer.gd" id="1_8e13a"]
 [ext_resource type="Script" uid="uid://c72jhtq31f4w3" path="res://Scenes/Card_Fight/External_UI/card_fight_ui.gd" id="1_u6pkr"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_lf8xs"]
+[ext_resource type="Texture2D" uid="uid://dum1h361hyptq" path="res://Assets/UIPiecies/Screen/ScreenFrames/StartMenu_Screen.png" id="3_ibt5m"]
 [ext_resource type="PackedScene" uid="uid://cy1ohrkbe4n1e" path="res://Scenes/Card_Fight/SegmentedBar/segmented_hp.tscn" id="4_fje4l"]
-[ext_resource type="Texture2D" uid="uid://d04j07eutct4g" path="res://Assets/UIPiecies/Screen/ScreenFrames/CardFightScreen.png" id="9_lf8xs"]
+[ext_resource type="Texture2D" uid="uid://ci6jggfuspccp" path="res://Assets/UIPiecies/Screen/SidePanels/CardFight_Cover.png" id="4_ibt5m"]
 [ext_resource type="PackedScene" uid="uid://dp1kurhtal0no" path="res://Scenes/Card_Fight/External_UI/discard_pile.tscn" id="11_omcrt"]
 [ext_resource type="StyleBox" uid="uid://c5x3vcw8x46rj" path="res://Theme/Buttons/ButtonRed.tres" id="12_yd4o7"]
 [ext_resource type="StyleBox" uid="uid://bvwu33dvi8506" path="res://Theme/Buttons/ButtonRed_Pressed.tres" id="13_ibt5m"]
@@ -56,17 +57,28 @@ BeepSound = "uid://81kxs8jf66hv"
 BeepNoSound = "uid://c43kn36ymgltb"
 BeepLong = "uid://djpdmpewc6sg"
 
-[node name="ScreenFrame2" type="TextureRect" parent="." unique_id=1893763889]
-custom_minimum_size = Vector2(0, 38.045)
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=462058612]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = -276
+
+[node name="ScreenFrame2" type="TextureRect" parent="HBoxContainer" unique_id=1893763889]
+custom_minimum_size = Vector2(0, 38.045)
+layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 2
-texture = ExtResource("9_lf8xs")
+texture = ExtResource("3_ibt5m")
 expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=1112117608]
+layout_mode = 2
+texture = ExtResource("4_ibt5m")
+expand_mode = 3
+stretch_mode = 6
 
 [node name="DeckButton" parent="." unique_id=997840762 instance=ExtResource("19_1bbav")]
 layout_mode = 1
@@ -75,29 +87,29 @@ anchor_left = 0.0
 anchor_top = 1.0
 anchor_right = 0.0
 anchor_bottom = 1.0
-offset_left = 1233.0
-offset_top = -592.0
-offset_right = 1233.0
-offset_bottom = -592.0
+offset_left = 1242.0
+offset_top = -599.0
+offset_right = 1242.0
+offset_bottom = -599.0
 grow_horizontal = 1
 grow_vertical = 0
 
 [node name="DiscardPile" parent="." unique_id=521369081 instance=ExtResource("11_omcrt")]
 layout_mode = 1
-offset_left = 592.0
-offset_top = -87.0
-offset_right = 592.0
-offset_bottom = -87.0
+offset_left = 603.0
+offset_top = -89.0
+offset_right = 603.0
+offset_bottom = -89.0
 
 [node name="Label" type="Label" parent="." unique_id=955071202]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 573.0
-offset_top = 187.0
-offset_right = 610.0
-offset_bottom = 209.0
+offset_left = 581.0
+offset_top = 182.0
+offset_right = 620.0
+offset_bottom = 204.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 18
 text = "?"
@@ -148,10 +160,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 1066.0
-offset_top = 514.0
-offset_right = 1106.0
-offset_bottom = 670.0
+offset_left = 1062.0
+offset_top = 521.0
+offset_right = 1105.0
+offset_bottom = 683.0
 grow_horizontal = 1
 grow_vertical = 1
 size_flags_horizontal = 4
@@ -166,10 +178,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 1175.0
-offset_top = 515.0
-offset_right = 1216.0
-offset_bottom = 608.0
+offset_left = 1181.0
+offset_top = 521.0
+offset_right = 1224.0
+offset_bottom = 617.0
 grow_horizontal = 1
 grow_vertical = 1
 size_flags_vertical = 3
@@ -177,10 +189,10 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_iexgv")
 
 [node name="PullReserves" type="Button" parent="." unique_id=2065884608 groups=["Buttons"]]
 layout_mode = 0
-offset_left = 1217.2615
-offset_top = 644.6692
-offset_right = 1244.02
-offset_bottom = 686.0348
+offset_left = 1225.2374
+offset_top = 655.0
+offset_right = 1253.6747
+offset_bottom = 699.603
 rotation = 1.57079
 theme_override_styles/normal = ExtResource("14_80dwx")
 theme_override_styles/pressed = ExtResource("15_lf8xs")
@@ -189,10 +201,10 @@ action_mode = 0
 
 [node name="DrawCard" type="Button" parent="." unique_id=1230920392 groups=["Buttons"]]
 layout_mode = 0
-offset_left = 1034.0
-offset_top = 182.0
-offset_right = 1079.0
-offset_bottom = 204.0
+offset_left = 1028.0
+offset_top = 177.0
+offset_right = 1074.0
+offset_bottom = 199.0
 theme_override_styles/normal = ExtResource("16_ksx0p")
 theme_override_styles/pressed = ExtResource("17_w6rgp")
 theme_override_styles/hover = ExtResource("16_ksx0p")
@@ -200,10 +212,10 @@ action_mode = 0
 
 [node name="Button" type="Button" parent="." unique_id=565274018 groups=["Buttons"]]
 layout_mode = 0
-offset_left = 1068.0
+offset_left = 1064.0
 offset_top = 321.0
-offset_right = 1098.0
-offset_bottom = 368.0
+offset_right = 1095.0
+offset_bottom = 370.0
 size_flags_vertical = 4
 theme_override_styles/normal = ExtResource("12_yd4o7")
 theme_override_styles/pressed = ExtResource("13_ibt5m")
@@ -217,9 +229,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -94.0
+offset_left = -88.0
 offset_top = -399.0
-offset_right = -64.0
+offset_right = -58.0
 offset_bottom = -353.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -231,10 +243,10 @@ action_mode = 0
 [node name="DiscardInsert" type="PanelContainer" parent="." unique_id=1911246089]
 clip_contents = true
 layout_mode = 0
-offset_left = 1034.0
-offset_top = 269.0
-offset_right = 1226.0
-offset_bottom = 531.0
+offset_left = 1026.9999
+offset_top = 267.0
+offset_right = 1235.2354
+offset_bottom = 529.0
 scale = Vector2(0.85, 0.85)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lbx4b")
@@ -247,10 +259,10 @@ mouse_filter = 2
 [node name="DrawInsert" type="PanelContainer" parent="." unique_id=900541418]
 clip_contents = true
 layout_mode = 0
-offset_left = 1034.0
-offset_top = 209.99998
-offset_right = 1227.0
-offset_bottom = 472.0
+offset_left = 1026.9999
+offset_top = 205.99998
+offset_right = 1235.2354
+offset_bottom = 468.0
 scale = Vector2(0.85, 0.85)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lbx4b")
@@ -263,10 +275,10 @@ mouse_filter = 2
 [node name="PlayInsert" type="PanelContainer" parent="." unique_id=1352502981]
 clip_contents = true
 layout_mode = 0
-offset_left = 1034.0
-offset_top = 125.0
-offset_right = 1226.0
-offset_bottom = 387.0
+offset_left = 1025.9999
+offset_top = 117.99999
+offset_right = 1235.4119
+offset_bottom = 380.0
 scale = Vector2(0.85, 0.85)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lbx4b")
@@ -282,10 +294,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -106.0
-offset_top = 24.0
-offset_right = -44.0
-offset_bottom = 59.0
+offset_left = -101.0
+offset_top = 12.0
+offset_right = -35.0
+offset_bottom = 48.0
 grow_horizontal = 0
 size_flags_horizontal = 0
 size_flags_vertical = 4

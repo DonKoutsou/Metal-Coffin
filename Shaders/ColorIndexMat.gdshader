@@ -2,7 +2,7 @@ shader_type canvas_item;
 
 uniform float ColorAmm: hint_range(8, 256, 1.0) = 1.;
 uniform int levels : hint_range(1, 16);
-uniform sampler2D dither_texture : filter_linear_mipmap;
+uniform sampler2D dither_texture : filter_nearest;
 uniform vec2 DitherRes;
 uniform float threshold : hint_range(0.0, 1.0);
 
