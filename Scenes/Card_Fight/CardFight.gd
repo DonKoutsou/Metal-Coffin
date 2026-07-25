@@ -765,7 +765,7 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 					SelectedAction.OnPerformModule = NewMod
 					
 				DoCardSelectAnimation(SelectedAction, Ship, Ship.ShipViz)
-				await Helper.Instance.wait(0.6)
+				await Helper.wait(0.6)
 				var ShipAction = CardFightAction.new()
 				ShipAction.Action = SelectedAction
 
@@ -1355,7 +1355,7 @@ func IsTargetValid(card : CardStats, User : BattleShipStats, target : BattleShip
 	
 	return true
 
-func HandleTargets(Mod : CardModule, User : BattleShipStats, targetOverride : BattleShipStats = null) -> Array[BattleShipStats]:
+func HandleTargets(Mod : CardModule, User : BattleShipStats, _targetOverride : BattleShipStats = null) -> Array[BattleShipStats]:
 	var Targets : Array[BattleShipStats]
 	if (!Mod.NeedsTargetSelect()):
 		return Targets

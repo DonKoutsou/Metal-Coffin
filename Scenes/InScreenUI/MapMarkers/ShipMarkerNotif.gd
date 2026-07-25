@@ -13,7 +13,7 @@ var Fast : bool = false
 
 var CurrentZoom : float
 
-func ToggleSimulation(t : bool) -> void:
+func ToggleSimulation(_t : bool) -> void:
 	return
 	#if (Blink):
 		#if (!t):

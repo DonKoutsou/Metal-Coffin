@@ -78,6 +78,9 @@ func ShieldShip(Amm : float) -> void:
 	ShipViz.Refresh()
 	StatsBuffed.emit()
 
+func OnCardsBuffed() -> void:
+	CardsBuffed.emit()
+
 func StripBuff(Stat : CardModule.Stat) -> void:
 	if (Stat == CardModule.Stat.FIREPOWER):
 		FirePowerBuff = 1

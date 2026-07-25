@@ -43,7 +43,7 @@ func Handle(Performer : BattleShipStats, Action : CardStats, Targets : Array[Bat
 				c = hand.pop_back()
 			c.EnergyReduction += GetReductionAmm(Action.Tier)
 			
-	Performer.CardsBuffed.emit()
+	Performer.OnCardsBuffed()
 	var Data = DeffensiveAnimationData.new()
 	Data.Mod = self
 	Data.Targets = TargetViz

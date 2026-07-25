@@ -181,7 +181,7 @@ func ContactsToGradient(Contacts : Dictionary[float, float]) -> Gradient:
 		
 	return gradient
 
-func _onSignalFound(signalStrength: float) -> void:
+func _onSignalFound(_signalStrength: float) -> void:
 	pass
 	#radioSpeaker.PlaySound(RadioSpeaker.RadioSound.BEEP, signalStrength - 35)
 

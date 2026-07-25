@@ -111,6 +111,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/separation = -276
 
 [node name="ScreenFrame2" type="TextureRect" parent="HBoxContainer" unique_id=19489388]
@@ -128,9 +129,9 @@ expand_mode = 3
 
 [node name="Fund_Container" parent="." unique_id=164260139 instance=ExtResource("2_u4bsh")]
 layout_mode = 1
-offset_left = 393.0
+offset_left = 401.0
 offset_top = -297.0
-offset_right = 499.0
+offset_right = 491.0
 offset_bottom = -248.0
 
 [node name="DiscardInsert" type="PanelContainer" parent="." unique_id=297766887]

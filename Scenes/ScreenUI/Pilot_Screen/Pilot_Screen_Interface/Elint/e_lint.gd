@@ -135,7 +135,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		beepSound.stop()
 
-func TargetFound(T : bool, Lvl : int, Dir : float) -> void:
+func TargetFound(_T : bool, Lvl : int, Dir : float) -> void:
 	if Lvl < 0:
 		currentState = ElintState.NONE
 		foundContact = false

@@ -2,7 +2,7 @@ extends Label
 
 class_name AltitudeText
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var pos = ShipCamera.Instance.get_screen_center_position()
 	var alt = TopographyMap.GetAltitudeAtGlobalPosition(pos)
 	#var Storm = WeatherManage.Instance.StormValueInPosition(pos)

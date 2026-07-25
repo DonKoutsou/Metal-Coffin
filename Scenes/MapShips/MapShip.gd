@@ -650,7 +650,7 @@ func IsFuelFull() -> bool:
 	return Cpt.IsResourceFull(STAT_CONST.STATS.FUEL_TANK)
 
 func GetValue() -> int:
-	var Value : int = Cpt.ProvidingFunds / 2.0
+	var Value : int = roundi(Cpt.ProvidingFunds / 2.0)
 	var InvContents : Dictionary[Item, int] = Cpt.GetCharacterInventory().GetInventoryContents()
 	for g : Item in InvContents.keys():
 		for z in InvContents[g]:

@@ -19,7 +19,7 @@ func ControlledShipChanged(NewShip : PlayerDrivenShip) -> void:
 	NewShip.connect("AltitudeChanged", PortUpdated)
 	PortUpdated(0)
 
-func PortUpdated(NewAlt : float) -> void:
+func PortUpdated(_NewAlt : float) -> void:
 	if (CurrentShip.CurrentPort != null and CurrentShip.Landed()):
 		disabled = false
 	else:

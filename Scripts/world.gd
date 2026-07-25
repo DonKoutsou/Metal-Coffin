@@ -89,12 +89,12 @@ func _ready() -> void:
 		await GetMap().GenerationFinished
 		Loadingscr.ProcesFinished("Generating Map Spot Plecement")
 		Loadingscr.UpdateProgress(10)
-		await Helper.Instance.wait(1)
+		await Helper.wait(1)
 		Loadingscr.ProcessStarted("Generating Events")
 		GetMap().GenerateEvents()
 		await GetMap().GenerationFinished
 		Loadingscr.ProcesFinished("Generating Events")
-		await Helper.Instance.wait(1)
+		await Helper.wait(1)
 	else:
 		Loadingscr.DissableText()
 	Loadingscr.UpdateProgress(20)
@@ -107,24 +107,24 @@ func _ready() -> void:
 	await GetMap().GenerationFinished
 	Loadingscr.ProcesFinished("Generating Spot Connections")
 	Loadingscr.UpdateProgress(60)
-	await Helper.Instance.wait(1)
+	await Helper.wait(1)
 	if (!Loading):
 		Loadingscr.ProcessStarted("Spawning Enemy Fleets")
 		GetMap().SpawnTownEnemies()
 		await GetMap().GenerationFinished
 		Loadingscr.ProcesFinished("Creating Enemy Fleets")
-		await Helper.Instance.wait(1)
+		await Helper.wait(1)
 		GetMap().EnemySpawnFinished()
 		Loadingscr.ProcessStarted("Placing Fleets In World")
 		Loadingscr.UpdateProgress(80)
 		#await GetMap().GenerationFinished
 		Loadingscr.ProcesFinished("Placing Fleets In World")
-		await Helper.Instance.wait(1)
+		await Helper.wait(1)
 	Loadingscr.UpdateProgress(100)
 	
 	Controller.SpawnInitialShip()
 	UISoundMan.GetInstance().Refresh()
-	await Helper.Instance.wait(1)
+	await Helper.wait(1)
 	WRLD_WorldReady.emit()
 	if (!Loading):
 		Loadingscr.StartDest()

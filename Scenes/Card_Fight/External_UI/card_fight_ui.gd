@@ -64,7 +64,7 @@ func ShipUnhovered(ship : BattleShipStats) -> void:
 	if (ship == HoveredShip):
 		HoveredShip = null
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if (HeldCard != null):
 		if (HeldCard.get_parent() == self):
 			var PrevPos = HeldCard.global_position + Vector2(HeldCard.size.x / 2.0, 0)
@@ -174,7 +174,7 @@ func InserCardtoPlay(C : Card, skipTransition : bool = false) -> void:
 	C.Dissable(true)
 	PlayerCardPlecement.Blocked = true
 	if (!skipTransition):
-		var pos = C.global_position
+		#var pos = C.global_position
 		C.reparent(self)
 		#C.get_parent().remove_child(C)
 		#add_child(C)

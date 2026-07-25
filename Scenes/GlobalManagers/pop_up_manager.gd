@@ -15,7 +15,7 @@ func _ready() -> void:
 static func GetInstance() -> PopUpManager:
 	return Instance
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if (playing or CurrentlyShownFade.size() == 0):
 		return
 	DoNext()

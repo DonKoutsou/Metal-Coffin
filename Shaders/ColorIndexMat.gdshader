@@ -7,7 +7,7 @@ uniform vec2 DitherRes;
 uniform float threshold : hint_range(0.0, 1.0);
 
 //uniform float vignette_strength: hint_range(0., 3., 0.01) = 1.;
-uniform sampler2D SCREEN_TEXTURE : hint_screen_texture;
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 
 float dither(float raw, float dither, int depth) {
 	

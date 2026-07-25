@@ -20,7 +20,7 @@ func _exit_tree() -> void:
 	fileQueue.clear()
 
 #we chack every frame if any of the files has been loaded and remove it from the queue
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var keys = fileQueue.keys()
 	for fileIndex in range(fileQueue.size() - 1, -1, -1):
 		var file : String = keys[fileIndex]

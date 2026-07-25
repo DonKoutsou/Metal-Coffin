@@ -116,7 +116,7 @@ func StartGame(Load : bool, _SkipStory : bool = false) -> void:
 	StMenu.queue_free()
 	#$ColorRect.visible = false
 	#$PanelContainer.visible = false
-	Wor.connect("WRLD_OnGameEnded", OnGameEnded)
+	Wor.WRLD_OnGameEnded.connect(OnGameEnded)
 
 func DelSave() -> void:
 	

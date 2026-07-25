@@ -28,7 +28,7 @@ static func IsActionCompleted(Act : Action) -> bool:
 static func OnActionCompleted(Act : Action) -> void:
 	CompletedActions.append(Act)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if (World.WORLDST != World.WORLDSTATE.INITIAL and !ShowingTutorial and !TransitionPanel.Transitioning):
 		if QueuedTutorials.size() > 0:
 			var nexttut = QueuedTutorials[0]
