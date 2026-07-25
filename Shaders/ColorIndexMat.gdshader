@@ -2,12 +2,12 @@ shader_type canvas_item;
 
 uniform float ColorAmm: hint_range(8, 256, 1.0) = 1.;
 uniform int levels : hint_range(1, 16);
-uniform sampler2D dither_texture : filter_nearest;
+uniform sampler2D dither_texture : filter_linear_mipmap;
 uniform vec2 DitherRes;
 uniform float threshold : hint_range(0.0, 1.0);
 
 //uniform float vignette_strength: hint_range(0., 3., 0.01) = 1.;
-
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture;
 
 float dither(float raw, float dither, int depth) {
 	
@@ -38,10 +38,10 @@ vec3 to_indexed_palette(vec3 color) {
 void fragment(){
 	// Map the dither texture onto the screen pixels with tiling and repeating
 	vec2 dither_size = vec2(textureSize(dither_texture, 0));
-	vec2 dither_uv = mod(UV * DitherRes, dither_size) / dither_size;
+	vec2 dither_uv = mod(SCREEN_UV * DitherRes, dither_size) / dither_size;
 	
 	// Sample the screen pixel
-	vec3 screen_col = texture(TEXTURE, UV).rgb;
+	vec3 screen_col = texture(SCREEN_TEXTURE, SCREEN_UV).rgb;
 
 	// Sample the corresponding dither pixel luminance
 	float dither_luminance = texture(dither_texture, dither_uv).r;

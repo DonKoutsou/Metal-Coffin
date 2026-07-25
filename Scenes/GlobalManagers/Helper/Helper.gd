@@ -5,6 +5,9 @@ class_name Helper
 @export var RegionColors : Dictionary[MapSpotCompleteInfo.REGIONS, Color]
 @export var Cog : TextureRect
 
+##Queue of files being loaded, we store them so we can signal those waiting for them that they are loaded
+static var fileQueue : Dictionary[String, SignalObject]
+
 static var Instance : Helper
 
 func _ready() -> void:
@@ -13,23 +16,35 @@ func _ready() -> void:
 	$CanvasLayer.visible = false
 	Cog.pivot_offset = Cog.size / 2
 
-func _physics_process(delta: float) -> void:
-	
-	Cog.rotation = wrap(Cog.rotation + delta, 0, PI * 4)
-	
+func _exit_tree() -> void:
+	fileQueue.clear()
 
-func LoadThreaded(File : String) -> SignalObject:
+#we chack every frame if any of the files has been loaded and remove it from the queue
+func _process(delta: float) -> void:
+	var keys = fileQueue.keys()
+	for fileIndex in range(fileQueue.size() - 1, -1, -1):
+		var file : String = keys[fileIndex]
+		var Status = ResourceLoader.load_threaded_get_status(file)
+		if (Status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED):
+			_LoadFinished(fileQueue[file], ResourceLoader.load_threaded_get(file))
+			fileQueue.erase(file)
+
+func _physics_process(delta: float) -> void:
+	Cog.rotation = wrap(Cog.rotation + delta, 0, PI * 4)
+
+static func LoadThreaded(File : String) -> SignalObject:
+	#In case we are already loading file, return that
+	if (fileQueue.has(File)):
+		return fileQueue[File]
+		
 	var Sign = SignalObject.new()
 	
-	#var t = Thread.new()
 	ResourceLoader.load_threaded_request(File, "", true, ResourceLoader.CACHE_MODE_REUSE)
 	
-	#t.start(LoadSceneTh.bind(Sign, File))
-	CallLater(_CheckForFinishedLoad.bind(Sign, File), 0.01)
-	#call_deferred("_CheckForFinishedLoad", Sign, File)
+	fileQueue[File] = Sign
 	
-	$CanvasLayer.visible = true
-	set_physics_process(true)
+	Instance.get_node("CanvasLayer").visible = true
+	Instance.set_physics_process(true)
 	
 	return Sign
 
@@ -80,28 +95,19 @@ static func array_to_curve(input : Array, dist : float) -> Curve2D:
 	curve.bake_interval = 1
 	return curve
 
-func _CheckForFinishedLoad(Sign : SignalObject, File : String) -> void:
-	var Status = ResourceLoader.load_threaded_get_status(File)
-	if (Status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED):
-		_LoadFinished(Sign, ResourceLoader.load_threaded_get(File))
-	else:
-		CallLater(_CheckForFinishedLoad.bind(Sign, File), 0.1)
-
+#called internally to notify of loading ending
 func _LoadFinished(Sign : SignalObject, File : Object) -> void:
 	Sign.Sign.emit(File)
 	$CanvasLayer.visible = false
 	set_physics_process(false)
-	
-static func GetInstance() -> Helper:
-	return Instance
 
-func CallLater(Call : Callable, t : float = 1) -> void:
-	await get_tree().create_timer(t).timeout
+static func CallLater(Call : Callable, t : float = 1) -> void:
+	await Instance.get_tree().create_timer(t).timeout
 	if (Call.is_valid()):
 		Call.call()
 
-func wait(secs : float) -> Signal:
-	return get_tree().create_timer(secs).timeout
+static func wait(secs : float) -> Signal:
+	return Instance.get_tree().create_timer(secs).timeout
 
 static func mapvalue(val : float, minimum : float, maximum : float) -> float:
 	return minimum + (maximum - minimum) * val
@@ -209,11 +215,11 @@ static func DistanceToDistance(Dist: float) -> String:
 	else:
 		return "very close"
 		
-func GetCityByName(CityName : String) -> MapSpot:
+static func GetCityByName(CityName : String) -> MapSpot:
 	var SpotGroups = ["CAPITAL", "CITY_CENTER", "VILLAGE"]
 	var cities = []
 	for g in SpotGroups:
-		cities.append_array( get_tree().get_nodes_in_group(g))
+		cities.append_array(Instance.get_tree().get_nodes_in_group(g))
 	var CorrectCity : MapSpot
 	for g in cities:
 		var cit = g as MapSpot
@@ -222,10 +228,10 @@ func GetCityByName(CityName : String) -> MapSpot:
 			break
 	return CorrectCity
 
-func GetClosestSpot(Pos : Vector2) -> MapSpot:
+static func GetClosestSpot(Pos : Vector2) -> MapSpot:
 	var Closest : MapSpot
 	var Dist = 99999999999999999
-	for g in get_tree().get_nodes_in_group("City"):
+	for g in Instance.get_tree().get_nodes_in_group("City"):
 		var Dist2 = Pos.distance_squared_to(g.global_position)
 		if (Dist2 < Dist):
 			Dist = Dist2
@@ -235,25 +241,25 @@ func GetClosestSpot(Pos : Vector2) -> MapSpot:
 
 	return Closest
 
-func GetSpotsCloserThan(Pos : Vector2, DistSquared : float) -> Array[MapSpot]:
+static func GetSpotsCloserThan(Pos : Vector2, DistSquared : float) -> Array[MapSpot]:
 	var Spots : Array[MapSpot]
-	for g in get_tree().get_nodes_in_group("City"):
+	for g in Instance.get_tree().get_nodes_in_group("City"):
 		var Dist2 = Pos.distance_squared_to(g.global_position)
 		if (Dist2 < DistSquared):
 			Spots.append(g)
 
 	return Spots
 
-func GetSpotByName(CityName : String) -> MapSpot:
+static func GetSpotByName(CityName : String) -> MapSpot:
 	var CorrectCity : MapSpot
-	for g in get_tree().get_nodes_in_group("City"):
+	for g in Instance.get_tree().get_nodes_in_group("City"):
 		var cit = g as MapSpot
 		if (cit.GetSpotName() == CityName):
 			CorrectCity = cit
 			break
 	return CorrectCity
 
-func FindPath(start_city: String, end_city: String) -> Array:
+static func FindPath(start_city: String, end_city: String) -> Array:
 	#var cities = get_tree().get_nodes_in_group("EnemyDestinations")
 	var queue = []
 	var visited = {}
@@ -286,7 +292,7 @@ func FindPath(start_city: String, end_city: String) -> Array:
 	print("Failed to find a path from " + start_city + " to " + end_city)
 	return []
 
-func reconstruct_path(parent: Dictionary, end_city: String) -> Array:
+static func reconstruct_path(parent: Dictionary, end_city: String) -> Array:
 	var path = []
 	var current_city = end_city
 	while current_city != null:
@@ -301,8 +307,8 @@ static func TrySetFire() -> bool:
 	var random_value = randf()
 	return random_value < 0.2
 
-func GetColorForRegion(R : MapSpotCompleteInfo.REGIONS):
-	return RegionColors[R]
+static func GetColorForRegion(R : MapSpotCompleteInfo.REGIONS):
+	return Instance.RegionColors[R]
 
 static func fuel_used_for_distance(dist: float, FuelNow: float, FuelEff: float, Weight: float) -> float:
 	var eff_eff = FuelEff - (Weight / 40.0)

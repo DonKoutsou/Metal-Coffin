@@ -27,7 +27,7 @@ func _ready() -> void:
 	$SubViewportContainer/SubViewport/TownBackground.set_physics_process(false)
 	$SubViewportContainer/SubViewport/TownBackground.Dissable()
 	TextLabel.text = Text
-	Helper.Instance.CallLater(StartTextScroll, 0.5)
+	Helper.CallLater(StartTextScroll, 0.5)
 
 func StartTextScroll() -> void:
 	Tw = create_tween()

@@ -36,7 +36,7 @@ func SetData(Win : bool, DateString : String, Funds : int, DoneDmg : float, GotD
 	Date = DateString
 	
 	
-	var closest = Helper.GetInstance().GetClosestSpot(Loc)
+	var closest = Helper.GetClosestSpot(Loc)
 	if (closest == null):
 		Location = "Custom Match"
 	else: if (closest.global_position.distance_squared_to(Loc) < 1000000):

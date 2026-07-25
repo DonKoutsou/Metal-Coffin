@@ -37,7 +37,7 @@ func ActionDeclarationStage1(CustomTime : float) -> void:
 	Tw2.finished.connect(ActionDeclarationStage2.bind(CustomTime))
 
 func ActionDeclarationStage2(CustomTime : float) -> void:
-	Helper.GetInstance().wait((CustomTime/6) *2).connect(ActionDeclarationStage3.bind(CustomTime))
+	Helper.wait((CustomTime/6) *2).connect(ActionDeclarationStage3.bind(CustomTime))
 	
 func ActionDeclarationStage3(CustomTime : float) -> void:
 	var Tw3 = create_tween()

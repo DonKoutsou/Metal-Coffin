@@ -140,7 +140,7 @@ func _ready() -> void:
 		
 		if (IsPrologue):
 			var Trigger = PrologueTrigger.instantiate() as PrologueEnd_Trigger
-			var Armak = Helper.GetInstance().GetSpotByName("Armak")
+			var Armak = Helper.GetSpotByName("Armak")
 			Armak.add_child(Trigger)
 			
 			if (!SkipStory):
@@ -155,7 +155,7 @@ func _ready() -> void:
 				Questionair.queue_free()
 				PlayPrologue()
 			else:
-				var Cardi = Helper.GetInstance().GetSpotByName("Cardi")
+				var Cardi = Helper.GetSpotByName("Cardi")
 				var Pl = get_tree().get_nodes_in_group("PlayerShips")[0]
 				Pl.SetShipPosition(Cardi.global_position)
 				Cardi.Event.SkipStory(Pl)
@@ -212,7 +212,7 @@ func PlayPrologue():
 
 func ShowArmak():
 	Ingame_UIManager.GetInstance().CallbackDiag(PrologueDialogues2, null, "Seg", ReturnCamToPlayer, true)
-	GetMap().GetCamera().FrameCamToPos(Helper.GetInstance().GetCityByName("Armak").global_position, 6)
+	GetMap().GetCamera().FrameCamToPos(Helper.GetCityByName("Armak").global_position, 6)
 
 func SteerTut() -> void:
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CAMERA_CONTROL)):
@@ -232,7 +232,7 @@ func PlayIntro():
 
 func ShowStation():
 	Ingame_UIManager.GetInstance().CallbackDiag(IntroDialogue2, load("res://Assets/artificial-hive.png"), "Seg", ReturnCamToPlayer, true)
-	GetMap().GetCamera().FrameCamToPos(Helper.GetInstance().GetCityByName("Dormak").global_position, 6)
+	GetMap().GetCamera().FrameCamToPos(Helper.GetCityByName("Dormak").global_position, 6)
 
 
 func ReturnCamToPlayer():
@@ -313,7 +313,7 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip], Missil
 	GetMap().HideWorld(false)
 	
 	#spawn fight
-	var FightScene = await Helper.GetInstance().LoadThreaded(CardFightScene).Sign
+	var FightScene = await Helper.LoadThreaded(CardFightScene).Sign
 	var CardF = FightScene.instantiate() as Card_Fight
 	CardF.CardFightEnded.connect(CardFightEnded)
 	CardF.CardFightDestroyed.connect(CardFightDestroyed)
@@ -447,7 +447,7 @@ func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 	if (PlayedEvent):
 		return
 	
-	var TownSc = await Helper.GetInstance().LoadThreaded(TownSceneFile).Sign
+	var TownSc = await Helper.LoadThreaded(TownSceneFile).Sign
 	var sc = TownSc as PackedScene
 	var fuel = sc.instantiate() as TownScene
 	#fuel.TownMerch = spot.SpotInfo.Merchendise

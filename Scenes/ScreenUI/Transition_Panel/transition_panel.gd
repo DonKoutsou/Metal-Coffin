@@ -22,7 +22,7 @@ func Open() -> void:
 func _Close() -> void:
 	Transitioning = true
 	PlaySound(DoorCloseSound)
-	await Helper.GetInstance().wait(0.5)
+	await Helper.wait(0.5)
 	var CloseTw = create_tween()
 	CloseTw.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	CloseTw.set_ease(Tween.EASE_OUT)

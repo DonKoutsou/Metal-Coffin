@@ -609,7 +609,7 @@ func SpawnTownEnemies() -> void:
 	M = Mutex.new()
 	EnSpawner.Init()
 	TempEnemyNames.clear()
-	var List : StringList = await Helper.GetInstance().LoadThreaded(EnemyShipNameList).Sign
+	var List : StringList = await Helper.LoadThreaded(EnemyShipNameList).Sign
 	TempEnemyNames.append_array(List.Texts)
 	EnemySpawnTh = Thread.new()
 	EnemySpawnTh.start(SpawnTownEnemiesThreaded.bind(SpotList))

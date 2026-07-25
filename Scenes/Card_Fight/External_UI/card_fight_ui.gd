@@ -290,9 +290,9 @@ func OnCardDrawn(C : Card) -> void:
 	AllowEnd = false
 	C.Dissable(true)
 	PlayCardInsertSound(CardSoundType.BEEPLONG)
-	await Helper.GetInstance().wait(0.1)
+	await Helper.wait(0.1)
 	PlayCardInsertSound(CardSoundType.EXIT)
-	await Helper.GetInstance().wait(0.1)
+	await Helper.wait(0.1)
 	C.rotation = 0
 	var Cont = Control.new()
 	C.SetRealistic()

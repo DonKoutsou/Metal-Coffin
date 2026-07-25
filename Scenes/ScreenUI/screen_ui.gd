@@ -31,7 +31,7 @@ func Update(delta : float) -> void:
 
 func ToggleCardFightUI(t : bool) -> void:
 	if (t):
-		var Sc : PackedScene = await Helper.GetInstance().LoadThreaded(CardFightUIScene).Sign
+		var Sc : PackedScene = await Helper.LoadThreaded(CardFightUIScene).Sign
 		CardFightUI = Sc.instantiate()
 		add_child(CardFightUI)
 		move_child(CardFightUI,0)
@@ -40,7 +40,7 @@ func ToggleCardFightUI(t : bool) -> void:
 
 func ToggleTownUI(t : bool) -> void:
 	if (t):
-		var Sc : PackedScene = await Helper.GetInstance().LoadThreaded(TownUIScene).Sign
+		var Sc : PackedScene = await Helper.LoadThreaded(TownUIScene).Sign
 		TownUi = Sc.instantiate()
 		add_child(TownUi)
 		move_child(TownUi,0)
@@ -49,7 +49,7 @@ func ToggleTownUI(t : bool) -> void:
 
 func ToggleFullScreenUI(t : bool) -> void:
 	if (t):
-		var SC : PackedScene = await Helper.GetInstance().LoadThreaded(FullScreenScene).Sign
+		var SC : PackedScene = await Helper.LoadThreaded(FullScreenScene).Sign
 		FullScreen = SC.instantiate()
 		add_child(FullScreen)
 		move_child(FullScreen, 0)
@@ -58,7 +58,7 @@ func ToggleFullScreenUI(t : bool) -> void:
 
 func ToggleForegroundUI(t : bool) -> void:
 	if (t):
-		var Sc : PackedScene = await Helper.GetInstance().LoadThreaded(PilotScreenScene).Sign
+		var Sc : PackedScene = await Helper.LoadThreaded(PilotScreenScene).Sign
 		PilotScreen = Sc.instantiate()
 		add_child(PilotScreen)
 		move_child(PilotScreen,0)

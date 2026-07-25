@@ -57,7 +57,7 @@ func OnMusicFinished() -> void:
 		Stream.play()
 	else:
 		Stream.stream = null
-		Helper.GetInstance().CallLater(OnMusicFinished, 90)
+		Helper.CallLater(OnMusicFinished, 90)
 		
 func OnFightMusicFinished() -> void:
 	FightStream.play()

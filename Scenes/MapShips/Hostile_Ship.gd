@@ -283,9 +283,9 @@ func FigureOutPath() -> void:
 		if (CurrentPort.NeighboringCities.size() == 0):
 			await Map.GetInstance().MAP_NeighborsSet
 			
-		Path = Helper.GetInstance().FindPath(port.GetSpotName(), cities[nextcity].GetSpotName())
+		Path = Helper.FindPath(port.GetSpotName(), cities[nextcity].GetSpotName())
 		if (Path.size() == 0):
-			Path = Helper.GetInstance().FindPath(port.GetSpotName(), cities[nextcity].GetSpotName())
+			Path = Helper.FindPath(port.GetSpotName(), cities[nextcity].GetSpotName())
 		PathPart = 1
 	
 	BTree = BT.instantiate() as BeehaveTree
@@ -320,17 +320,17 @@ func ToFarFromRefuel() -> bool:
 	return true
 
 func SetNewDestination(DistName : String) -> void:
-	Path = Helper.GetInstance().FindPath(CurrentPort.GetSpotName(), DistName)
+	Path = Helper.FindPath(CurrentPort.GetSpotName(), DistName)
 	PathPart = 1
 
 func FindPursuitPath(Pos : Vector2) -> void:
-	var ClosestToPosition = Helper.GetInstance().GetClosestSpot(Pos)
+	var ClosestToPosition = Helper.GetClosestSpot(Pos)
 	var Closest : MapSpot
 	if (CurrentPort != null):
 		Closest = CurrentPort
 	else:
-		Closest = Helper.GetInstance().GetClosestSpot(global_position)
-	Path = Helper.GetInstance().FindPath(Closest.GetSpotName(), ClosestToPosition.GetSpotName())
+		Closest = Helper.GetClosestSpot(global_position)
+	Path = Helper.FindPath(Closest.GetSpotName(), ClosestToPosition.GetSpotName())
 	print("{0} has created a pursuit path from {1} to {2}".format([GetShipName(), Closest.GetSpotName(), ClosestToPosition.GetSpotName()]))
 	PathPart = 1
 
@@ -435,7 +435,7 @@ func GetCurrentDestination() -> Vector2:
 		destination = IntersectPusruing()
 	else : if(PositionToInvestigate != Vector2.ZERO):
 		if (PursuitPath.size() - 1 > PursuitPathPart):
-			destination = Helper.GetInstance().GetCityByName(PursuitPath[PursuitPathPart]).global_position
+			destination = Helper.GetCityByName(PursuitPath[PursuitPathPart]).global_position
 		else:
 			destination = PositionToInvestigate
 			if (PositionToInvestigate.distance_squared_to(global_position) <= 20):
@@ -443,7 +443,7 @@ func GetCurrentDestination() -> Vector2:
 	else: if(RefugeSpot != null) :
 		destination = RefugeSpot.global_position
 	else : if (Path.size() > 0):
-		destination = Helper.GetInstance().GetCityByName(Path[PathPart]).global_position
+		destination = Helper.GetCityByName(Path[PathPart]).global_position
 	else : 
 		destination = global_position
 	return destination

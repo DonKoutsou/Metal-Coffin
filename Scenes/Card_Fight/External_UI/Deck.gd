@@ -128,7 +128,7 @@ func ShuffleDiscardedIntoDeck(DoAnim : bool = true) -> void:
 	
 	if (DoAnim):
 		for g in DiscardPile.size():
-			await Helper.GetInstance().wait(0.05)
+			await Helper.wait(0.05)
 			DiscardChanged.emit(false)
 			#ExternalUI.DiscardPile.OnCardRemoved()
 			PileChanged.emit(true)

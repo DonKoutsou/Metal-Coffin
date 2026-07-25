@@ -15,7 +15,6 @@ class_name Card
 @export var AmmountLabel : Label
 @export var TooltipPos : Control
 @export var TooltipScene : PackedScene
-
 @export var RealisticFont : Font
 
 signal OnCardPressed(C : Card)
@@ -36,12 +35,11 @@ var mat : ShaderMaterial
 
 var isStatic : bool = false
 
+
 func _physics_process(delta: float) -> void:
 	InterpolationValue = min(InterpolationValue + delta *5, 1)
 	UpdateLine()
-	
-	#$SubViewportContainer/SubViewport.visible = false
-	#$SubViewportContainer/SubViewport.render_target_update_mode =  SubViewport.UPDATE_ONCE
+
 
 func _process(delta: float) -> void:
 	var endPos = global_position.x + size.x + TooltipPos.size.x + 20
@@ -69,6 +67,7 @@ func _process(delta: float) -> void:
 		var Newx = lerpf(currentx, offset.y / 8, delta * 6.0)
 		mat.set_shader_parameter("y_rot", Newy)
 		mat.set_shader_parameter("x_rot", Newx)
+
 
 func UpdateLine() -> void:
 	Line.gradient.set_offset(1, wrap(Line.gradient.get_offset(1) + 0.05, 0, 1))

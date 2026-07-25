@@ -47,7 +47,7 @@ func _ready() -> void:
 func Start() -> void:
 	var StudioAnimScene = ResourceLoader.load(StudioAnim)
 	var vidpl = StudioAnimScene.instantiate() as StudioAnimation
-	$SubViewportContainer/SubViewport.add_child(vidpl)
+	add_child(vidpl)
 	
 	await vidpl.Finished
 	
@@ -55,9 +55,9 @@ func Start() -> void:
 	await SpawnMenu()
 
 func SpawnMenu() -> void:
-	var Menu = await Helper.GetInstance().LoadThreaded(StartingMenuScene).Sign
+	var Menu = await Helper.LoadThreaded(StartingMenuScene).Sign
 	StMenu = Menu.instantiate() as StartingMenu
-	$SubViewportContainer/SubViewport.add_child(StMenu)
+	add_child(StMenu)
 	StMenu.connect("GameStart", StartGame)
 	StMenu.connect("PrologueStart", StartPrologue)
 	StMenu.connect("DelSave", DelSave)
@@ -65,7 +65,7 @@ func SpawnMenu() -> void:
 	UISoundMan.GetInstance().Refresh()
 
 func StartPrologue(Load : bool, SkipStory : bool = false) -> void:
-	var IntroScene = await Helper.GetInstance().LoadThreaded(IntroGameScene).Sign
+	var IntroScene = await Helper.LoadThreaded(IntroGameScene).Sign
 	Wor = IntroScene.instantiate() as World
 	if (Load):
 		var LoadResault = SaveLoadManager.GetInstance().Load(Wor)
@@ -73,7 +73,7 @@ func StartPrologue(Load : bool, SkipStory : bool = false) -> void:
 			PopupManager.DoFadeNotif(LoadResault["Reason"], StMenu.GetVp())
 			return
 	
-	$SubViewportContainer/SubViewport.add_child(Wor)
+	add_child(Wor)
 	Wor.SkipStory = SkipStory
 	await Wor.WorldSpawnTransitionFinished
 	StMenu.queue_free()
@@ -82,10 +82,10 @@ func StartPrologue(Load : bool, SkipStory : bool = false) -> void:
 	Wor.connect("WRLD_OnGameEnded", OnGameEnded)
 
 func StartCageFight() -> void:
-	var FightScene = await Helper.GetInstance().LoadThreaded(CageFightGameScene).Sign
+	var FightScene = await Helper.LoadThreaded(CageFightGameScene).Sign
 	var fight = FightScene.instantiate() as CageFightWorld
 
-	$SubViewportContainer/SubViewport.add_child(fight)
+	add_child(fight)
 	await fight.FightTransitionFinished
 	StMenu.queue_free()
 	#$ColorRect.visible = false
@@ -102,7 +102,7 @@ func StartGame(Load : bool, _SkipStory : bool = false) -> void:
 		PopupManager.DoFadeNotif("Not available on Demo", StMenu.GetVp())
 		return
 	
-	var WorldScene = await Helper.GetInstance().LoadThreaded(GameScene).Sign
+	var WorldScene = await Helper.LoadThreaded(GameScene).Sign
 	Wor = WorldScene.instantiate() as World
 
 	if (Load):
@@ -111,7 +111,7 @@ func StartGame(Load : bool, _SkipStory : bool = false) -> void:
 			PopupManager.DoFadeNotif(LoadResault["Reason"], StMenu.GetVp())
 			return
 	
-	$SubViewportContainer/SubViewport.add_child(Wor)
+	add_child(Wor)
 	await Wor.WorldSpawnTransitionFinished
 	StMenu.queue_free()
 	#$ColorRect.visible = false

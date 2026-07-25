@@ -146,7 +146,7 @@ func _ready() -> void:
 	UpdateFleetSizeAmmount()
 	ExternalUI.HideInfo()
 
-	Helper.GetInstance().CallLater(StartFight, 2)
+	Helper.CallLater(StartFight, 2)
 	
 	var Mat = $SubViewport/Control2/Ground.material as ShaderMaterial
 	Mat.set_shader_parameter("offset", Vector2(randf_range(-100, 100), randf_range(-100, 100)))
@@ -305,7 +305,7 @@ func MultiCardDrawn(DrawnCards : Array[CardStats], discardAmm : int) -> void:
 			
 			var Placed = await PlaceCardInPlayerHand(Performer, c)
 			
-			await Helper.GetInstance().wait(0.2)
+			await Helper.wait(0.2)
 			ExternalUI.DeckUI.OnCardDrawn()
 			
 			if (!Placed):
@@ -1087,7 +1087,7 @@ func HandleDiscardModules(Performer : BattleShipStats, C : CardStats) -> void:
 		Data = HandleModule(Performer, C ,C.OnDiscardModules[Mod], targets)
 		
 		if (Mod < C.OnDiscardModules.size() - 1):
-			await Helper.GetInstance().wait(0.2)
+			await Helper.wait(0.2)
 			
 		if (Data != null):
 			AnimData.append(Data)
@@ -1118,7 +1118,7 @@ func HandleModules(Performer : BattleShipStats, C : CardStats) -> void:
 		Data = HandleModule(Performer, C ,C.OnUseModules[Mod], targets)
 		
 		if (Mod < C.OnUseModules.size() - 1):
-			await Helper.GetInstance().wait(0.2)
+			await Helper.wait(0.2)
 			
 		if (Data != null):
 			AnimData.append(Data)
@@ -1163,7 +1163,7 @@ func HandleModulesPl(Performer : BattleShipStats, C : CardStats, targetOverride 
 		Data = HandleModule(Performer, C ,Mod, targets)
 		
 		if (ModIndex < C.OnUseModules.size() - 1):
-			await Helper.GetInstance().wait(0.2)
+			await Helper.wait(0.2)
 			
 		if (Data != null):
 			AnimData.append(Data)
@@ -1667,7 +1667,7 @@ func ShipDestroyed(Ship : BattleShipStats) -> bool:
 	ReplaceShip(Ship, TurnPosition, Friendly)
 	
 	if (GameOver):
-		await Helper.GetInstance().wait(3)
+		await Helper.wait(3)
 		call_deferred("OnFightEnded", PlayerAlive)
 		return true
 		

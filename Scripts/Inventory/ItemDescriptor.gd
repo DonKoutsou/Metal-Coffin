@@ -36,7 +36,7 @@ var DescribedItem : Item
 var UsingAmm : int = 1
 
 func _ready() -> void:
-	Helper.GetInstance().CallLater(PlayIntroAnim, 0.01)
+	Helper.CallLater(PlayIntroAnim, 0.01)
 	UISoundMan.GetInstance().AddSelf(TransferButton)
 	UISoundMan.GetInstance().AddSelf(UpgradeButton)
 	UISoundMan.GetInstance().AddSelf(AddItemButton)

@@ -23,7 +23,7 @@ static func GetInstance() -> ActionTracker:
 	return Instance
 
 static func IsActionCompleted(Act : Action) -> bool:
-	return CompletedActions.has(Act)
+	return Act in CompletedActions
 
 static func OnActionCompleted(Act : Action) -> void:
 	CompletedActions.append(Act)
