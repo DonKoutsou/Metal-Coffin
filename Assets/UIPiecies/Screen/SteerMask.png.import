@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://hh1s8ljn345"
+path="res://.godot/imported/SteerMask.png-04c6fbfb2ced0c352164a943ea6efbc4.res"
+
+[deps]
+
+source_file="res://Assets/UIPiecies/Screen/SteerMask.png"
+dest_files=["res://.godot/imported/SteerMask.png-04c6fbfb2ced0c352164a943ea6efbc4.res"]
+
+[params]
+
+create_from=1
+threshold=0.5

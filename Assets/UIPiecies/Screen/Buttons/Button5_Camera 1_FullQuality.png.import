@@ -1,0 +1,20 @@
+[remap]
+
+importer="texture_atlas"
+type="Texture2D"
+uid="uid://bxkdjy0yeuig4"
+path="res://.godot/imported/Button5_Camera 1_FullQuality.png-d94eb4420c1b849529852c3f72cd6ca7.res"
+group_file="uid://ndvfncvh8vq8"
+valid=true
+[deps]
+
+
+source_file="res://Assets/UIPiecies/Screen/Buttons/Button5_Camera 1_FullQuality.png"
+dest_files=["res://.godot/imported/Button5_Camera 1_FullQuality.png-d94eb4420c1b849529852c3f72cd6ca7.res"]
+
+[params]
+
+atlas_file="uid://ndvfncvh8vq8"
+import_mode=0
+crop_to_region=false
+trim_alpha_border_from_region=true

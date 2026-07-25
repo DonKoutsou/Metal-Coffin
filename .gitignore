@@ -42,8 +42,6 @@
 .godot/imported/hazard-sign.png-44824cdaf5fb40545219daf89fe3530f.md5
 .godot/scene_groups_cache.cfg
 .godot/uid_cache.bin
-Assets/hazard-sign.png
-Assets/hazard-sign.png.import
 .godot/editor/map_spot.tscn-editstate-86f0460dced1c305e2f364d8c6e81077.cfg
 /.godot
 /.godot
@@ -54,7 +52,6 @@ Assets/hazard-sign.png.import
 /android/build/.gradle
 /android/build
 /.godot/editor
-*.import
 /addons
 /data_test_linuxbsd_x86_64
 /.idea
