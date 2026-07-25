@@ -331,9 +331,9 @@ offset_bottom = -148.00049
 
 [node name="ElevationLever" parent="." unique_id=833959843 instance=ExtResource("6_jqinv")]
 layout_mode = 1
-offset_left = -110.0
+offset_left = -109.0
 offset_top = -338.0
-offset_right = -9.0
+offset_right = -8.0
 offset_bottom = -147.99976
 
 [node name="SteeringWheel" parent="." unique_id=760456773 instance=ExtResource("10_w258d")]

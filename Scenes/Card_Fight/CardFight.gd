@@ -445,9 +445,12 @@ func RunShipsTurn(Ship : BattleShipStats) -> void:
 	ActionList.AddShip(Ship)
 	if (IsShipFriendly(Ship)):
 		if (Ship.deck.GetCardAmm() == 0):
-			PopUpManager.GetInstance().DoFadeNotif("{0}'s deck is empty. Turn skipped".format([Ship.Name]))
-			PlayerActionPickingEnded.emit()
-			return
+			Ship.deck.ShuffleDiscardedIntoDeck();
+			if (Ship.deck.GetCardAmm() == 0):
+				PopUpManager.GetInstance().DoFadeNotif("{0}'s deck is empty. Turn skipped".format([Ship.Name]))
+				PickingMoves = false
+				PlayerActionPickingEnded.emit()
+				return
 		#ExternalUI.ToggleEnergyVisibility(true)
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_ENERGY)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ENERGY)
@@ -795,6 +798,16 @@ func PlayerActionSelectionEnded() -> void:
 		return
 	if (!PickingMoves):
 		return
+	
+	PickingMoves = false
+	var ship = GetCurrentShip()
+	
+	for g : Card in ExternalUI.GetPlayerCardPlecement().get_children():
+		await ExternalUI.InsertCardToDiscard(g, true)
+		ship.deck.DiscardCard(g.CStats)
+
+		
+	ship.deck.Hand.clear()
 	#GetShipViz(ShipTurns[CurrentTurn]).Dissable()
 	PlayerActionPickingEnded.emit()
 ##----------------------------------------------------------------------##
@@ -818,7 +831,6 @@ func CurrentEnemyTurnEnded() -> void:
 		StartCurrentShipsPickTurn()
 ##----------------------------------------------------------------------##
 func CurrentPlayerTurnEnded() -> void:
-	PickingMoves = false
 	ClearCards()
 
 	ExternalUI.HideInfo()
@@ -841,6 +853,7 @@ func StartActionPerform() -> void:
 	ActionDeclarationPlacement.add_child(act)
 	act.DoActionDeclaration("Enemy Perform Phase", 1.5)
 	act.ActionDeclarationFinished.connect(ActionPerformPhase)
+	
 ##----------------------------------------------------------------------##
 func ActionPerformPhase() -> void:
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_ENEMY_ACTION_PERFORM)):
@@ -1023,6 +1036,10 @@ func RestartCards() -> void:
 	ExternalUI.DeckUI.UpdateDeckPileAmmount(currentship.deck.DeckPile.size())
 	#GetShipViz(ShipTurns[CurrentTurn]).Enable()
 	
+	HandleDrawCard(currentship)
+	await Helper.wait(0.1)
+	HandleDrawCard(currentship)
+	await Helper.wait(0.1)
 	HandleDrawCard(currentship)
 ##----------------------------------------------------------------------##
 # CALLED AT THE END. SHOWS ENDSCREEN WITH DATA COLLECTED AND WAITS FOR PLAYER 

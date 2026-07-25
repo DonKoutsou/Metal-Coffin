@@ -1,13 +1,12 @@
 [gd_scene format=3 uid="uid://cqxnjihcai1kd"]
 
 [ext_resource type="Script" uid="uid://8du0534sf0gr" path="res://Scripts/UI/starting_screen.gd" id="1_kry56"]
-[ext_resource type="Material" uid="uid://ivgnk2dd66ef" path="res://Shaders/Dither.tres" id="2_7bhdu"]
 [ext_resource type="Material" uid="uid://dxt6oe4rhk3du" path="res://Shaders/ColorIndex.tres" id="3_62h02"]
 
 [node name="StartingScreen" type="Node" unique_id=64991473]
 process_mode = 3
 script = ExtResource("1_kry56")
-DitherShader = ExtResource("2_7bhdu")
+DitherShader = ExtResource("3_62h02")
 StudioAnim = "uid://cmdvuq7n6nncl"
 GameScene = "uid://cbhf8nh85npqq"
 IntroGameScene = "uid://cid0s6uni7fky"
@@ -15,6 +14,7 @@ CageFightGameScene = "uid://b575fi0e44gkg"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=102283905]
 layer = 999
+visible = false
 follow_viewport_enabled = true
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1748445160]

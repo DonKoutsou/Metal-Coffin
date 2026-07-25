@@ -231,4 +231,5 @@ environment/ssil/quality=0
 environment/glow/upscale_mode=0
 environment/volumetric_fog/use_filter=0
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)
+environment/defaults/default_environment="uid://bkmqb06466wvr"
 driver/default_filters/anisotropic_filtering_level=2

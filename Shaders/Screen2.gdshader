@@ -15,13 +15,13 @@ uniform float color_offset_multiplier: hint_range(0.0, 0.1) =  0.004;
 //uniform float color_offset: hint_range(-0.1, 0.1) = 0.005;
 //uniform float blur_amount: hint_range(0.0, 3.0, 0.1);
 
-//uniform float hardScan : hint_range(-12.0, -1.0) = -8.0;
-//uniform float hardPix : hint_range(-4.0, 0.0) = -2.0;
+uniform float hardScan : hint_range(-12.0, -1.0) = -8.0;
+uniform float hardPix : hint_range(-4.0, 0.0) = -2.0;
 
 uniform vec2 warp = vec2(64.0, 24.0);
 
-//uniform float maskDark : hint_range(0.0, 1.0) = 0.5;
-//uniform float maskLight : hint_range(1.0, 2.0) = 1.5;
+uniform float maskDark : hint_range(0.0, 1.0) = 0.5;
+uniform float maskLight : hint_range(1.0, 2.0) = 1.5;
 
 uniform float scanlines_opacity: hint_range(0., 2., .01) = 1.;
 uniform float scanlines_speed: hint_range(0., 5., .01) = 1.;
@@ -65,36 +65,36 @@ vec3 Fetch(vec2 pos, vec2 off, sampler2D iChannel0){
 	return ToLinear(texture(iChannel0, pos.xy, -16.0).rgb);
 }
 
-//vec2 Dist(vec2 pos){
-	//pos *= res;
-	//return (vec2(0.5) - (pos - floor(pos)));
-//}
-//
-//float Gaus(float pos, float scale){ return exp2(scale * pos * pos); }
-//
-//vec3 Horz3(vec2 pos, float off, sampler2D iChannel0){
-	//vec3 b = Fetch(pos, vec2(-1.0, off), iChannel0);
-	//vec3 c = Fetch(pos, vec2(0.0, off), iChannel0);
-	//vec3 d = Fetch(pos, vec2(1.0, off), iChannel0);
-	//float dst = Dist(pos).x;
-	//float scale = hardPix;
-//
-	//float wb = Gaus(dst - 1.0, scale);
-	//float wc = Gaus(dst, scale);
-	//float wd = Gaus(dst + 1.0, scale);
-//
-	//return (b * wb + c * wc + d * wd) / (wb + wc + wd);
-//}
+vec2 Dist(vec2 pos){
+	pos *= res;
+	return (vec2(0.5) - (pos - floor(pos)));
+}
 
-//vec3 Tri(vec2 pos, sampler2D iChannel0){
-	//vec3 a = Horz3(pos, -1.0, iChannel0);
-	//vec3 b = Horz3(pos, 0.0, iChannel0);
-	//vec3 c = Horz3(pos, 1.0, iChannel0);
-	//float wa = Gaus(Dist(pos).y - 1.0, hardScan);
-	//float wb = Gaus(Dist(pos).y, hardScan);
-	//float wc = Gaus(Dist(pos).y + 1.0, hardScan);
-	//return a * wa + b * wb + c * wc;
-//}
+float Gaus(float pos, float scale){ return exp2(scale * pos * pos); }
+
+vec3 Horz3(vec2 pos, float off, sampler2D iChannel0){
+	vec3 b = Fetch(pos, vec2(-1.0, off), iChannel0);
+	vec3 c = Fetch(pos, vec2(0.0, off), iChannel0);
+	vec3 d = Fetch(pos, vec2(1.0, off), iChannel0);
+	float dst = Dist(pos).x;
+	float scale = hardPix;
+
+	float wb = Gaus(dst - 1.0, scale);
+	float wc = Gaus(dst, scale);
+	float wd = Gaus(dst + 1.0, scale);
+
+	return (b * wb + c * wc + d * wd) / (wb + wc + wd);
+}
+
+vec3 Tri(vec2 pos, sampler2D iChannel0){
+	vec3 a = Horz3(pos, -1.0, iChannel0);
+	vec3 b = Horz3(pos, 0.0, iChannel0);
+	vec3 c = Horz3(pos, 1.0, iChannel0);
+	float wa = Gaus(Dist(pos).y - 1.0, hardScan);
+	float wb = Gaus(Dist(pos).y, hardScan);
+	float wc = Gaus(Dist(pos).y + 1.0, hardScan);
+	return a * wa + b * wb + c * wc;
+}
 
 vec2 Warp(vec2 pos){
 pos = pos * 2.0 - 1.0;
@@ -112,21 +112,21 @@ vec2 warp2(vec2 uv){
 	return uv + delta * delta_offset;
 }
 
-//vec3 Mask(vec2 pos){
-	//if(mask_type == 0){
-		//float line = maskLight, odd = fract(pos.x / 6.0) < 0.5 ? 1.0 : 0.0;
-		//if (fract((pos.y + odd) / 2.0) < 0.5) line = maskDark;
-		//pos.x = fract(pos.x / 3.0);
-		//return vec3(pos.x < 0.333 ? maskLight : pos.x < 0.666 ? maskDark : maskDark) * line;
-	//} else if(mask_type == 1) {
-		//pos.x += pos.y * 3.0; pos.x = fract(pos.x / 6.0);
-		//return vec3(pos.x < 0.333 ? maskLight : pos.x < 0.666 ? maskDark : maskDark);
-	//} else {
-		//pos.xy = floor(pos.xy * vec2(1.0, 0.5));
-		//pos.x += pos.y * 3.0; pos.x = fract(pos.x / 6.0);
-		//return vec3(pos.x < 0.333 ? maskLight : pos.x < 0.666 ? maskDark : maskDark);
-	//}
-//}
+vec3 Mask(vec2 pos){
+	if(mask_type == 0){
+		float line = maskLight, odd = fract(pos.x / 6.0) < 0.5 ? 1.0 : 0.0;
+		if (fract((pos.y + odd) / 2.0) < 0.5) line = maskDark;
+		pos.x = fract(pos.x / 3.0);
+		return vec3(pos.x < 0.333 ? maskLight : pos.x < 0.666 ? maskDark : maskDark) * line;
+	} else if(mask_type == 1) {
+		pos.x += pos.y * 3.0; pos.x = fract(pos.x / 6.0);
+		return vec3(pos.x < 0.333 ? maskLight : pos.x < 0.666 ? maskDark : maskDark);
+	} else {
+		pos.xy = floor(pos.xy * vec2(1.0, 0.5));
+		pos.x += pos.y * 3.0; pos.x = fract(pos.x / 6.0);
+		return vec3(pos.x < 0.333 ? maskLight : pos.x < 0.666 ? maskDark : maskDark);
+	}
+}
 
 float onOff(float a, float b, float c){
     return step(c, sin(TIME + a * cos(TIME * b)));
@@ -169,9 +169,9 @@ void fragment(){
 		COLOR = vec4(0,0,0,1.0);
 	}
 	else{
-		COLOR.rgb = texture(SCREEN_TEXTURE, pos).rgb;
 		//COLOR.rgb = texture(SCREEN_TEXTURE, pos).rgb;
-		//COLOR.rgb = Tri(pos, SCREEN_TEXTURE) * Mask(FRAGCOORD.xy);
+		//COLOR.rgb = texture(SCREEN_TEXTURE, pos).rgb;
+		COLOR.rgb = Tri(pos, SCREEN_TEXTURE) * Mask(FRAGCOORD.xy);
 		vec2 look = pos;
 		float window = 1.0 / (1.0 + 20.0 * pow(look.y - mod(TIME / 4.0, 1.0), 2.0)) * image_flicker;
 		look.x += sin(look.y * 10.0 + TIME) / 50.0 * onOff(4.0, 4.0, 0.3) * (1.0 + cos(TIME * 80.0)) * window;

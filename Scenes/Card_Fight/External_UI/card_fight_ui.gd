@@ -248,12 +248,13 @@ func ToggleHandInput(t : bool) -> void:
 func InsertCardToDiscard(C : Card, skipTransition : bool = false) -> void:
 	AllowEnd = false
 	C.Dissable(true)
+	C.rotation = 0
 	if (!skipTransition):
 		var pos = C.global_position
 		C.get_parent().remove_child(C)
 		add_child(C)
 		
-		C.rotation = 0
+		
 		C.global_position = pos
 		var Movetw = create_tween()
 		Movetw.set_ease(Tween.EASE_OUT)
