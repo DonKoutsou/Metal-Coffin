@@ -101,8 +101,8 @@ grow_horizontal = 1
 grow_vertical = 1
 
 [node name="Fan" parent="." unique_id=159958918 instance=ExtResource("8_bpouu")]
-position = Vector2(1002, -160)
-scale = Vector2(1.64062, 1.64062)
+position = Vector2(992, -20.000002)
+scale = Vector2(0.757, 0.8)
 frame_progress = 0.96041
 frequency = 40.0
 

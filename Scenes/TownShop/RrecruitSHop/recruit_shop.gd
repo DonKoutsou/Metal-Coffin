@@ -49,7 +49,7 @@ func OnShipSelected(Ship : Captain) -> void:
 		CurrentShip._CharInv.queue_free()
 	CurrentShip = Ship
 	CurrentShip = Ship.GetDuplicate()
-	CurrentShip._CharInv = CharacterInventory.newInv(CurrentShip)
+	CurrentShip.RegisterInventory(CharacterInventory.newInv(CurrentShip))
 	Stats.SetCaptain(CurrentShip)
 	Stats.ShowStats()
 	#Inv.InitialiseStarting(Ship)

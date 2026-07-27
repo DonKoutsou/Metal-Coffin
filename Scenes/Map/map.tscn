@@ -124,7 +124,7 @@ ShipMarkerParent = NodePath("ShipMarkerks")
 [node name="ShipCamera" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" unique_id=1015760443 instance=ExtResource("17_6an1p")]
 
 [node name="RegionMapDrawer" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" unique_id=890045518 instance=ExtResource("16_sp82o")]
-modulate = Color(0.107999995, 0.19233333, 0.2, 1)
+modulate = Color(0, 0, 0, 0.2)
 script = ExtResource("27_445lv")
 RegionTrans = 0.2
 ResizeLinesWithZoom = true

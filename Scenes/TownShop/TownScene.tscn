@@ -35,7 +35,7 @@ theme = ExtResource("1_ca22g")
 script = ExtResource("2_epy1b")
 PortName = NodePath("HBoxContainer2/PanelContainer2/HBoxContainer/CityName")
 Population = NodePath("HBoxContainer2/PanelContainer2/HBoxContainer/CityName2")
-PortBuffText = NodePath("HBoxContainer2/PanelContainer2/HBoxContainer/HBoxContainer/CityBuffs")
+PortBuffText = NodePath("HBoxContainer2/PanelContainer2/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/CityBuffs")
 MerchendiseButton = NodePath("Button2")
 WorkshopButton = NodePath("Button3")
 FuelButton = NodePath("Button4")
@@ -188,6 +188,7 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 50
 text = "Alivia City Port"
 autowrap_mode = 2
+uppercase = true
 
 [node name="CityName2" type="Label" parent="HBoxContainer2/PanelContainer2/HBoxContainer" unique_id=1443290232]
 layout_mode = 2
@@ -198,11 +199,21 @@ theme_override_font_sizes/font_size = 16
 text = "Pupulation : 140000"
 autowrap_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer2/PanelContainer2/HBoxContainer" unique_id=526375243]
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer2/PanelContainer2/HBoxContainer" unique_id=738458802]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer2/PanelContainer2/HBoxContainer/PanelContainer" unique_id=698283753]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer2/PanelContainer2/HBoxContainer/PanelContainer/VBoxContainer" unique_id=598894570]
+layout_mode = 2
+text = "CITY BUFFS"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer2/PanelContainer2/HBoxContainer/PanelContainer/VBoxContainer" unique_id=526375243]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="CityBuffs" type="RichTextLabel" parent="HBoxContainer2/PanelContainer2/HBoxContainer/HBoxContainer" unique_id=40630570]
+[node name="CityBuffs" type="RichTextLabel" parent="HBoxContainer2/PanelContainer2/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=40630570]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2

@@ -81,12 +81,13 @@ layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 20
 text = "Owned:"
 
 [node name="PlAmm" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer" unique_id=669844078]
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("5_y3v6e")
 theme_override_font_sizes/font_size = 26
 text = "1"
@@ -121,12 +122,12 @@ size_flags_vertical = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("5_y3v6e")
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 18
 text = "Price:"
 
 [node name="Price" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=967828033]
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 10
 size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("5_y3v6e")
 theme_override_font_sizes/font_size = 26
@@ -143,12 +144,12 @@ size_flags_vertical = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("5_y3v6e")
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 18
 text = "Shop Inventory:"
 
 [node name="ShopAmm" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3" unique_id=1944206039]
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 10
 theme_override_fonts/font = ExtResource("5_y3v6e")
 theme_override_font_sizes/font_size = 26
 text = "1"

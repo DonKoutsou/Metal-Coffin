@@ -95,21 +95,21 @@ func CloseScreen() -> void:
 func OpenScreen(NewStat : ScreenState) -> void:
 	match(CurrentScreenState):
 		ScreenState.NORMAL_SCREEN:
-			ToggleForegroundUI(false)
+			await ToggleForegroundUI(false)
 		ScreenState.FULL_SCREEN:
-			ToggleFullScreenUI(false)
+			await ToggleFullScreenUI(false)
 		ScreenState.PILOT_SCREEN:
-			ToggleForegroundUI(false)
+			await ToggleForegroundUI(false)
 			
 	CurrentScreenState = NewStat
 	
 	match (NewStat):
 		ScreenState.FULL_SCREEN:
-			ToggleFullScreenUI(true)
+			await ToggleFullScreenUI(true)
 		ScreenState.NORMAL_SCREEN:
-			ToggleForegroundUI(true)
+			await ToggleForegroundUI(true)
 		ScreenState.PILOT_SCREEN:
-			ToggleForegroundUI(true)
+			await ToggleForegroundUI(true)
 	
 	Transition.Open()
 	await Transition.PanelOpened

@@ -11,17 +11,3 @@ StudioAnim = "uid://cmdvuq7n6nncl"
 GameScene = "uid://cbhf8nh85npqq"
 IntroGameScene = "uid://cid0s6uni7fky"
 CageFightGameScene = "uid://b575fi0e44gkg"
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=102283905]
-layer = 999
-visible = false
-follow_viewport_enabled = true
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1748445160]
-material = ExtResource("3_62h02")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2

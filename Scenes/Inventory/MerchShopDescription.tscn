@@ -45,7 +45,6 @@ CardPlecement = NodePath("VBoxContainer/HBoxContainer/CardsSection/CardPlecement
 CloseButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/HBoxContainer/Button")
 
 [node name="VBoxContainer" type="ScrollContainer" parent="." unique_id=698832375]
-clip_contents = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_jut7c")
 horizontal_scroll_mode = 3

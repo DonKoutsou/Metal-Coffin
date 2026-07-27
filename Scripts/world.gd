@@ -122,55 +122,58 @@ func _ready() -> void:
 		await Helper.wait(1)
 	Loadingscr.UpdateProgress(100)
 	
+	Loadingscr.StartDest()
+	await Loadingscr.IntroFinished
+	GetMap().GetScreenUi().CloseScreen()
+	await GetMap().GetScreenUi().FullScreenToggleStarted
+	Loadingscr.queue_free()
+	
 	Controller.SpawnInitialShip()
 	UISoundMan.GetInstance().Refresh()
 	await Helper.wait(1)
 	WRLD_WorldReady.emit()
+	
 	if (!Loading):
-		Loadingscr.StartDest()
-		await Loadingscr.IntroFinished
+		
 		GetMap()._InitialPlayerPlacament(StartingFuel, IsPrologue)
 		GetMap().GetCamera().FrameCamToPlayer()
-		if (IsPrologue and !SkipStory):
-			GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
-		else:
-			GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.PILOT_SCREEN)
-		await GetMap().GetScreenUi().FullScreenToggleStarted
-		Loadingscr.queue_free()
+
 		
 		if (IsPrologue):
 			var Trigger = PrologueTrigger.instantiate() as PrologueEnd_Trigger
 			var Armak = Helper.GetSpotByName("Armak")
 			Armak.add_child(Trigger)
 			
-			if (!SkipStory):
+			if (!SkipStory): #First we need the questionair
 				var Questionair = load(WorldViewQuestionairScene).instantiate() as WorldViewQuestionair
 				Ingame_UIManager.GetInstance().AddUI(Questionair, true, false)
 				Questionair.Init()
-				await GetMap().GetScreenUi().FullScreenToggleFinished
-				#await Loadingscr.LoadingDestroyed
-				await Questionair.Ended
-				GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.PILOT_SCREEN)
+				GetMap().GetScreenUi().OpenScreen(ScreenUI.ScreenState.FULL_SCREEN)
+
+				await Questionair.Ended #wait for player to end it
+				
+				GetMap().GetScreenUi().CloseScreen()
 				await GetMap().GetScreenUi().FullScreenToggleStarted
 				Questionair.queue_free()
 				PlayPrologue()
+
 			else:
 				var Cardi = Helper.GetSpotByName("Cardi")
 				var Pl = get_tree().get_nodes_in_group("PlayerShips")[0]
 				Pl.SetShipPosition(Cardi.global_position)
 				Cardi.Event.SkipStory(Pl)
 				Cardi.OnSpotVisited(false)
+				
 		else:
 			#Load worldview from prologue
 			WorldView.GetInstance().Load()
 			PlayIntro()
+
 		PlayerWallet.SetFunds( StartingFunds)
 	else:
 		WorldView.GetInstance().Load()
 		
-		GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.PILOT_SCREEN)
-		await GetMap().GetScreenUi().FullScreenToggleStarted
-		Loadingscr.queue_free()
+	GetMap().GetScreenUi().OpenScreen(ScreenUI.ScreenState.PILOT_SCREEN)
 	WORLDST = WORLDSTATE.NORMAL
 	WeatherManage.Instance.Update(0)
 	
@@ -204,8 +207,6 @@ func UpdatePlayerShips(delta : float) -> void:
 
 func UpdateCities(delta : float) -> void:
 	get_tree().call_group("City", "Update", delta)
-
-
 
 func PlayPrologue():
 	Ingame_UIManager.GetInstance().CallbackDiag(PrologueDialgues, null, "Seg", SteerTut, true)

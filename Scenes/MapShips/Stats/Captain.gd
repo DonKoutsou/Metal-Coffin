@@ -32,7 +32,12 @@ func GetCaptainName() -> String:
 	if (TempName != ""):
 		return TempName
 	return CaptainName
-	
+
+func RegisterInventory(inv : CharacterInventory) -> void:
+	_CharInv = inv
+	inv.OnShipPartAdded.connect(OnShipPartAddedToInventory)
+	inv.OnShipPartRemoved.connect(OnShipPartRemovedFromInventory)
+
 func _init() -> void:
 	#call_deferred("MapStats")
 	if (OS.is_debug_build() and CheckForErrors):

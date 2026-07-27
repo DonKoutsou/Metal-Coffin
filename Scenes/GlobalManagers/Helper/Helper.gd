@@ -28,6 +28,7 @@ func _process(_delta: float) -> void:
 		if (Status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED):
 			_LoadFinished(fileQueue[file], ResourceLoader.load_threaded_get(file))
 			fileQueue.erase(file)
+			
 
 func _physics_process(delta: float) -> void:
 	Cog.rotation = wrap(Cog.rotation + delta, 0, PI * 4)
@@ -39,7 +40,7 @@ static func LoadThreaded(File : String) -> SignalObject:
 		
 	var Sign = SignalObject.new()
 	
-	ResourceLoader.load_threaded_request(File, "", true, ResourceLoader.CACHE_MODE_REUSE)
+	ResourceLoader.load_threaded_request(File, "", false, ResourceLoader.CACHE_MODE_REUSE)
 	
 	fileQueue[File] = Sign
 	
@@ -100,6 +101,7 @@ func _LoadFinished(Sign : SignalObject, File : Object) -> void:
 	Sign.Sign.emit(File)
 	$CanvasLayer.visible = false
 	set_physics_process(false)
+	Sign.unreference()
 
 static func CallLater(Call : Callable, t : float = 1) -> void:
 	await Instance.get_tree().create_timer(t).timeout

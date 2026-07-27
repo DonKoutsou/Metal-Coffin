@@ -31,6 +31,7 @@ static var Instance : InventoryManager
 static func GetInstance() -> InventoryManager:
 	return Instance
 
+#-------------------------------------------------------
 func _ready() -> void:
 	MissileDockEventH.connect("MissileLaunched", OnMissileLaunched)
 	DroneDockEventH.connect("DroneAdded", DroneAdded)
@@ -40,6 +41,7 @@ func _ready() -> void:
 	controller = ControlledEventH.CurrentControlled
 	Instance = self
 
+#-------------------------------------------------------
 func ControllerChanged(NewController : PlayerDrivenShip) -> void:
 	controller = NewController
 	var squad : Array[Captain] = NewController.GetSquadCaptains()
@@ -48,38 +50,45 @@ func ControllerChanged(NewController : PlayerDrivenShip) -> void:
 	for g in _CharacterInventories:
 		var inv : CharacterInventory = _CharacterInventories[g]
 		inv.visible = g in squad
-	
+
+#-------------------------------------------------------
 func OnDroneDocked(_Dr : PlayerDrivenShip, Target : MapShip) -> void:
 	if (Target == controller):
 		ControllerChanged(Target)
-	
+
+#-------------------------------------------------------
 func OnDroneUnDocked(_Dr : PlayerDrivenShip, Target : MapShip) -> void:
 	if (Target == controller):
 		ControllerChanged(Target)
 
+#-------------------------------------------------------
 func GetCharacterInventory(Cha : Captain) -> CharacterInventory:
 	if (_CharacterInventories.has(Cha)):
 		return _CharacterInventories[Cha]
 	return null
 
+#-------------------------------------------------------
 func GetCharacterInventoryByName(CharName : String) -> CharacterInventory:
 	for g in _CharacterInventories:
 		if (g.GetCaptainName().to_lower() == CharName.to_lower()):
 			return _CharacterInventories[g]
 	return null
 
+#-------------------------------------------------------
 func GetCharacterByName(CharName : String) -> Captain:
 	for g in _CharacterInventories:
 		if (g.GetCaptainName().to_lower() == CharName.to_lower()):
 			return g
 	return null
-	
+
+#-------------------------------------------------------
 func OnMissileLaunched(Mis : Array[MissileItem], _Target : Captain, _User : Captain):
 	for g in Mis:
 		RemoveItemFromFleet(g, _User.CaptainShip)
 	#var CharacterInv = _CharacterInventories[Target] as CharacterInventory
 	#CharacterInv.RemoveItem(Mis)
 
+#-------------------------------------------------------
 func RemoveItemFromFleet(It : Item, Command : MapShip) -> void:
 	var Captains : Array[Captain] = []
 	Captains.append(Command.Cpt)
@@ -92,6 +101,7 @@ func RemoveItemFromFleet(It : Item, Command : MapShip) -> void:
 			Inv.RemoveItem(It)
 			return
 
+#-------------------------------------------------------
 func FleetHasSpace(It : Item, Command : MapShip) -> bool:
 	var Captains : Array[Captain] = []
 	Captains.append(Command.Cpt)
@@ -103,6 +113,7 @@ func FleetHasSpace(It : Item, Command : MapShip) -> bool:
 			return true
 	return false
 
+#-------------------------------------------------------
 func AddItemToFleet(It : Item, Command : MapShip) -> void:
 	var Captains : Array[Captain] = []
 	Captains.append(Command.Cpt)
@@ -115,6 +126,7 @@ func AddItemToFleet(It : Item, Command : MapShip) -> void:
 			Inv.AddItem(It)
 			return
 
+#-------------------------------------------------------
 func GetAllItemsInFleet(Command : MapShip) -> Array[Item]:
 	var Captains : Array[Captain] = []
 	Captains.append(Command.Cpt)
@@ -131,14 +143,13 @@ func GetAllItemsInFleet(Command : MapShip) -> Array[Item]:
 	
 	return Items
 
+#-------------------------------------------------------
 func OnSimulationPaused(t : bool) -> void:
 	SimPaused = t
 	for g in _CharacterInventories.values():
 		g.SimPaused = t
-#func OnSimulationSpeedChanged(i : float) -> void:
-	#SimSpeed = i
-	#for g in _CharacterInventories.values():
-		#g.SimSpeed = i
+	
+#-------------------------------------------------------
 func BoxSelected(Box : Inventory_Box_Res, OwnerInventory : CharacterInventory) -> void:
 	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
 	if (descriptors.size() > 0):
@@ -167,11 +178,12 @@ func BoxSelected(Box : Inventory_Box_Res, OwnerInventory : CharacterInventory) -
 	CurrentDesc.ItemUpgradeCancel.connect(CancelUpgrade.bind(OwnerInventory))
 	#Descriptor.connect("ItemRepaired", RepairPart)
 
+#-------------------------------------------------------
 func RemoveDescriptor() -> void:
 	CharacterPlace.get_parent().get_parent().visible = true
 	CurrentDesc.queue_free()
 
-
+#-------------------------------------------------------
 func GetCity(CityName : String) -> MapSpot:
 	var cities = get_tree().get_nodes_in_group("City")
 	var CorrectCity : MapSpot
@@ -182,14 +194,11 @@ func GetCity(CityName : String) -> MapSpot:
 			break
 	return CorrectCity
 
+#-------------------------------------------------------
 func ItemUpdgrade(Box : Inventory_Box_Res, OwnerInventory : CharacterInventory) -> void:
-
-	#var Cpt = GetBoxOwner(Box)
-	#var cit = GetCity(Cpt.CurrentPort)
-	#var HasUpgrade = cit.HasUpgrade()
-
 	OwnerInventory.StartUpgrade(Box)
-	
+
+#-------------------------------------------------------
 func CancelUpgrade(Box : Inventory_Box_Res, OwnerInventory : CharacterInventory) -> void:
 	OwnerInventory.CancelUpgrade()
 	var OriginalItem : ShipPart = Box.GetContainedItem()
@@ -200,12 +209,13 @@ func CancelUpgrade(Box : Inventory_Box_Res, OwnerInventory : CharacterInventory)
 	PopUpManager.GetInstance().DoFadeNotif("Upgrade canceled\nPartial Refund Of Cost")
 	CurrentDesc.SetData(Box, false, Box.GetContainedItem().CanTransfer, false, false, true)
 
+#-------------------------------------------------------
 func CancelUpgrades(Cha : Captain) -> void:
 	if (_CharacterInventories.has(Cha)):
 		var CharInv = _CharacterInventories[Cha] as CharacterInventory
 		CharInv.CancelUpgrade()
 	
-
+#-------------------------------------------------------
 func FlushInventory() -> void:
 	for g in _CharacterInventories.values():
 		var Inv = g as CharacterInventory
@@ -215,6 +225,7 @@ func FlushInventory() -> void:
 		Inv.queue_free()
 	_CharacterInventories.clear()
 
+#-------------------------------------------------------
 func ItemTranfer(Box : Inventory_Box_Res) -> void:
 	var Cpt = GetBoxOwner(Box)
 	var OwnerInventory = _CharacterInventories[Cpt] as CharacterInventory
@@ -251,20 +262,23 @@ func ItemTranfer(Box : Inventory_Box_Res) -> void:
 		SelectedCharInventory.AddItem(It)
 		OwnerInventory.RemoveItemFromBox(Box)
 	PopUpManager.GetInstance().DoFadeNotif("Transfered {2}x of {0} to {1}'s inventory".format([It.ItemName, SelectedChar.GetCaptainName(), amm]))
-	
+
+#-------------------------------------------------------
 func GetBoxOwner(Box : Inventory_Box_Res) -> Captain:
 	for g in _CharacterInventories.keys():
 		if (_CharacterInventories[g] == Box.GetParentInventory()):
 			return g
 	return null
 
+#-------------------------------------------------------
 func DroneAdded(Dr : PlayerDrivenShip, _Target : MapShip):
 	AddCharacter(Dr.Cpt)
 
+#-------------------------------------------------------
 func AddCharacter(Cha : Captain) -> void:
 	var CharInv = CharInvScene.instantiate() as CharacterInventory
 	CharInv.inventoryOwner = Cha.CaptainShip
-	Cha._CharInv = CharInv
+	Cha.RegisterInventory(CharInv)
 	CharInv.InitialiseInventory(Cha)
 	_CharacterInventories[Cha] = CharInv
 	CharacterPlace.add_child(CharInv)
@@ -274,8 +288,7 @@ func AddCharacter(Cha : Captain) -> void:
 	CharInv.ItemUpgrade.connect(ItemUpdgrade)
 	CharInv.OnItemAdded.connect(OnItemAdded.bind(Cha))
 	CharInv.OnItemRemoved.connect(OnItemRemoved.bind(Cha))
-	CharInv.OnShipPartAdded.connect(Cha.OnShipPartAddedToInventory)
-	CharInv.OnShipPartRemoved.connect(Cha.OnShipPartRemovedFromInventory)
+	
 	CharInv.OnCharacterInspectionPressed.connect(InspectCharacter.bind(Cha))
 	CharInv.OnCharacterDeckInspectionPressed.connect(InspectCharacterDeck.bind(Cha))
 	CharInv.OnCharacterInventoryInspectionPressed.connect(InspectCharacterInventory.bind(Cha))
@@ -291,16 +304,15 @@ func AddCharacter(Cha : Captain) -> void:
 			
 	UISoundMan.GetInstance().Refresh()
 
+#-------------------------------------------------------
 func OnCharacterRemoved(Cha : Captain) -> void:
 	Cha.Repair_Parts = 0
 	Cha.TempName = ""
 	var Inv = _CharacterInventories[Cha] as CharacterInventory
-	#for z in Inv._GetInventoryBoxes():
-		#for i in z._ContentAmmout:
-			#Inv.RemoveItemFromBox(z)
 	Inv.queue_free()
 	_CharacterInventories.erase(Cha)
-	
+
+#-------------------------------------------------------
 func LoadCharacter(Data : SD_CharacterInventory) -> void:
 	var CharInv : CharacterInventory
 	
@@ -318,12 +330,10 @@ func LoadCharacter(Data : SD_CharacterInventory) -> void:
 		CharInv.ItemUpgrade.connect(ItemUpdgrade)
 		CharInv.OnItemAdded.connect(OnItemAdded.bind(Cha))
 		CharInv.OnItemRemoved.connect(OnItemRemoved.bind(Cha))
-		CharInv.OnShipPartAdded.connect(Cha.OnShipPartAddedToInventory)
-		CharInv.OnShipPartRemoved.connect(Cha.OnShipPartRemovedFromInventory)
 		CharInv.OnCharacterInspectionPressed.connect(InspectCharacter.bind(Cha))
 		CharInv.OnCharacterDeckInspectionPressed.connect(InspectCharacterDeck.bind(Cha))
 		
-	Cha._CharInv = CharInv
+	Cha.RegisterInventory(CharInv)
 	
 	for g in CharInv._GetInventoryBoxes():
 		for z in g._ContentAmmout:
@@ -341,13 +351,14 @@ func LoadCharacter(Data : SD_CharacterInventory) -> void:
 	if (Data.ItemBeingEquipped != null):
 		CharInv.ReStartEquip(Data.ItemBeingEquipped, Data.EquipTime)
 
+#-------------------------------------------------------
 func OnItemAdded(It : Item, Owner : Captain) -> void:
 	if (It is MissileItem):
 		MissileDockEventH.OnMissileAdded(It, Owner)
 	if (visible):
 		CaptainStats.UpdateValues()
 	
-	
+#-------------------------------------------------------
 func OnItemRemoved(It : Item, Owner : Captain) -> void:
 	if (It is MissileItem):
 		MissileDockEventH.OnMissileRemoved(It, Owner)
@@ -355,7 +366,7 @@ func OnItemRemoved(It : Item, Owner : Captain) -> void:
 	if (visible):
 		CaptainStats.UpdateValues()
 
-
+#-------------------------------------------------------
 func InspectCharacter(Cha : Captain) -> void:
 	CloseDescriptor()
 	CaptainStats.SetCaptain(Cha)
@@ -363,17 +374,19 @@ func InspectCharacter(Cha : Captain) -> void:
 	#ShipStats.visible = true
 	#ShipDeck.visible = false
 
-
+#-------------------------------------------------------
 func InspectCharacterDeck(Cha : Captain) -> void:
 	CloseDescriptor()
 	CaptainStats.SetCaptain(Cha)
 	CaptainStats.ShowDeck()
 
+#-------------------------------------------------------
 func InspectCharacterInventory(Cha : Captain) -> void:
 	CloseDescriptor()
 	CaptainStats.SetCaptain(Cha)
 	CaptainStats.ShowInvetory()
 
+#-------------------------------------------------------
 func CloseDescriptor() -> void:
 	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
 	if (descriptors.size() > 0):
@@ -381,7 +394,7 @@ func CloseDescriptor() -> void:
 		descriptors[0].queue_free()
 	CharacterPlace.get_parent().get_parent().visible = true
 
-
+#-------------------------------------------------------
 func GenerateCaptainSaveData(Cpt: Captain, Inv : CharacterInventory) -> SD_CharacterInventory:
 	var Data = SD_CharacterInventory.new()
 	Data.Cpt = Cpt
@@ -401,7 +414,7 @@ func GenerateCaptainSaveData(Cpt: Captain, Inv : CharacterInventory) -> SD_Chara
 		Data.Items.append(Ic)
 	return Data
 	
-	
+#-------------------------------------------------------
 func GetSaveData() ->SaveData:
 	var dat = SaveData.new()
 	dat.DataName = "InventoryContents"
@@ -411,7 +424,7 @@ func GetSaveData() ->SaveData:
 	dat.Datas = Datas
 	return dat
 	
-	
+#-------------------------------------------------------
 func LoadSaveData(Data : SaveData) -> void:
 	#FlushInventory()
 	for g in Data.Datas:
@@ -420,7 +433,7 @@ func LoadSaveData(Data : SaveData) -> void:
 		LoadCharacter(dat)
 		dat.Cpt.LoadStats(dat.Fuel, dat.Hull)
 
-
+#-------------------------------------------------------
 var ToggleTween : Tween
 
 func ToggleInventory() -> void:
@@ -452,6 +465,7 @@ func ToggleInventory() -> void:
 		await ToggleTween.finished
 		visible = !visible
 
+#-------------------------------------------------------
 func InventoryTutorial() -> void:
 	var TutorialText = "The [color=#ffc315]Cargo Panel[/color] is where the details for each ship in your fleet can be found. From their stats to their inventory contents."
 	ActionTracker.QueueTutorial("Cargo", TutorialText, [])

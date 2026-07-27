@@ -164,6 +164,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1413988983]
 disable_3d = true
+own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 4

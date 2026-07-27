@@ -30,7 +30,10 @@ func _ready() -> void:
 
 func OnCptButtonPressed(Cpt : Captain) -> void:
 	FloatingButton = CharButton.instantiate() as CaptainButton
-	FloatingButton.SetCpt(Cpt)
+	
+	var NewCpt = Cpt.duplicate(true)
+	NewCpt.SetUpStats()
+	FloatingButton.SetCpt(NewCpt)
 	add_child(FloatingButton)
 	FloatingButton.Dissable()
 
@@ -38,35 +41,38 @@ func OnCptReleased(Cpt : Captain) -> void:
 	FloatingButton.queue_free()
 	FloatingButton = null
 	
-	var NewCpt = Cpt.duplicate()
+	
 	
 	var CharB = CharButton.instantiate() as CaptainButton
-	CharB.SetCpt(NewCpt)
+	CharB.SetCpt(Cpt)
 	CharB.OnShipSelected.connect(RemoveFromTeam.bind(CharB))
 	if (OverPlayerTeam):
 		#PopupManager.GetInstance().DoFadeNotif("{0} added to Player's team".format([Cpt.CaptainName]))
 		PlayerTeamPlacement.add_child(CharB)
-		PlayerTeam.append(NewCpt)
+		PlayerTeam.append(Cpt)
 	else : if (OverEnemyTeam):
 		#PopupManager.GetInstance().DoFadeNotif("{0} added to Enemy's team".format([Cpt.CaptainName]))
 		EnemyTeamPlacement.add_child(CharB)
-		EnemyTeam.append(NewCpt)
+		EnemyTeam.append(Cpt)
 	else:
 		CharB.queue_free()
+		Cpt._CharInv.queue_free()
 
 func RemoveFromTeam(B : CaptainButton) -> void:
-	B.queue_free()
+	
 	if (PlayerTeam.has(B.ContainedCaptain)):
 		#PopupManager.GetInstance().DoFadeNotif("{0} removed from Player's team".format([B.ContainedCaptain.CaptainName]))
 		PlayerTeam.erase(B.ContainedCaptain)
 	else:
 		#PopupManager.GetInstance().DoFadeNotif("{0} removed from Enemy's team".format([B.ContainedCaptain.CaptainName]))
 		EnemyTeam.erase(B.ContainedCaptain)
-		
-	FloatingButton = CharButton.instantiate() as CaptainButton
-	FloatingButton.SetCpt(B.ContainedCaptain)
-	add_child(FloatingButton)
-	FloatingButton.Dissable()
+	B.reparent(self, true)
+	FloatingButton = B
+	#B.queue_free()
+	#FloatingButton = CharButton.instantiate() as CaptainButton
+	#FloatingButton.SetCpt(B.ContainedCaptain)
+	#add_child(FloatingButton)
+	B.Dissable()
 
 func _process(_delta: float) -> void:
 	if (FloatingButton != null):

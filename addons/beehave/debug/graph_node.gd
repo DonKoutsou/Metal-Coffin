@@ -47,6 +47,7 @@ var horizontal: bool = false
 
 
 func _init(frames:RefCounted, horizontal: bool = false) -> void:
+	return
 	self.frames = frames
 	self.horizontal = horizontal
 
@@ -54,7 +55,7 @@ func _init(frames:RefCounted, horizontal: bool = false) -> void:
 func _ready() -> void:
 	custom_minimum_size = Vector2(50, 50) * BeehaveUtils.get_editor_scale()
 	draggable = false
-
+	return
 	add_theme_stylebox_override("frame", frames.empty if frames != null else null)
 	add_theme_stylebox_override("selected_frame", frames.empty if frames != null else null)
 	add_theme_color_override("close_color", Color.TRANSPARENT)

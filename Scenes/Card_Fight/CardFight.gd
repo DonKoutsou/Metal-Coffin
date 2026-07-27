@@ -241,10 +241,10 @@ func CreateDecks() -> void:
 				D.DeckPile.erase(card)
 				D.DeckPile.push_front(card)
 			
-		for Hand in StartingCardAmm:
-			var C = D.DeckPile.pop_front()
-			if (C != null):
-				D.Hand.append(C)
+		#for Hand in StartingCardAmm:
+			#var C = D.DeckPile.pop_front()
+			#if (C != null):
+				#D.Hand.append(C)
 		
 		g.deck = D
 		D.Shuffling.connect(OnShuffling)
@@ -1036,11 +1036,10 @@ func RestartCards() -> void:
 	ExternalUI.DeckUI.UpdateDeckPileAmmount(currentship.deck.DeckPile.size())
 	#GetShipViz(ShipTurns[CurrentTurn]).Enable()
 	
-	HandleDrawCard(currentship)
-	await Helper.wait(0.1)
-	HandleDrawCard(currentship)
-	await Helper.wait(0.1)
-	HandleDrawCard(currentship)
+	for g in StartingCardAmm:
+		HandleDrawCard(currentship)
+		await Helper.wait(0.1)
+
 ##----------------------------------------------------------------------##
 # CALLED AT THE END. SHOWS ENDSCREEN WITH DATA COLLECTED AND WAITS FOR PLAYER 
 func OnFightEnded(Won : bool) -> void:

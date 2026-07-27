@@ -173,7 +173,7 @@ func InitialiseInventory(Cha : Captain) -> void:
 		
 	CaptainNameLabel.text = CharName
 	if (interface != null):
-		interface.InitialiseInventory(self)
+		interface.InitialiseInventory(Cha)
 
 static func newInv(Cha : Captain) -> CharacterInventory:
 	var inv = CharacterInventory.new()
@@ -248,20 +248,19 @@ func InitialiseStarting(Cha : Captain) -> void:
 			else:
 				_InventoryContents[It] = 1
 
-			#if (It is not ShipPart):
-				#
-				#var BoxParent = InventoryBoxParent
-				#if (Empty.get_parent() != BoxParent):
-					#Empty.get_parent().remove_child(Empty)
-					#BoxParent.add_child(Empty)
-			#
 			continue
 	if (interface != null):
-		interface.InitialiseInventory(self)
+		interface.InitialiseInventory(Cha)
 
 
 func ItemSelected(Box : Inventory_Box_Res) -> void:
 	BoxSelected.emit(Box, self)
+
+func GetBoxType(Box : Inventory_Box_Res) -> ShipPart.ShipPartType:
+	for g : ShipPart.ShipPartType in boxes:
+		if (boxes[g].has(Box)):
+			return g
+	return ShipPart.ShipPartType.INVENTORY
 
 func FindBox(It : Item) -> Inventory_Box_Res:
 	var boxeList = boxes[It.PartType]

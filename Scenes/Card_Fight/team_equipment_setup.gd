@@ -2,15 +2,8 @@ extends Control
 
 class_name TeamEquipmentSetup
 
-@export var InventoryBoxScene : PackedScene
-@export var EngineInventoryBoxParent : GridContainer
-@export var SensorInventoryBoxParent : GridContainer
-@export var FuelTankInventoryBoxParent : GridContainer
-@export var WeaponInventoryBoxParent : GridContainer
-@export var ShieldInventoryBoxParent : GridContainer
-@export var InventoryBoxParent : GridContainer
+@export var CaptainStatCont : CaptainStatContainer
 @export var DescriptorPlace : Control
-@export var DeckUI : ShipDeckViz
 @export var ItemDescriptorScene : PackedScene
 @export var PlayerCaptainLocation : Control
 @export var EnemyCaptainLocation : Control
@@ -26,7 +19,9 @@ class_name TeamEquipmentSetup
 var CurrentCpt : Captain
 var CurrentDescriptor : ItemDescriptor
 
-#func _ready() -> void:
+func _ready() -> void:
+	CaptainStatCont.InventoryBoxSelected.connect(ItemSelected) 
+	CaptainStatCont.ShipInventory.KeepBoxesActive = true
 	#var b = CaptainB.instantiate() as CaptainButton
 	#var Cpt = load("res://Resources/Captains/PlayerCaptains/Craden.tres") as Captain
 	#b.SetCpt(Cpt)
@@ -34,10 +29,13 @@ var CurrentDescriptor : ItemDescriptor
 	#PlayerCaptainLocation.add_child(b)
 	#OnCaptainSelected()
 
+func _exit_tree() -> void:
+	Clear()
+
 func Clear() -> void:
-	for g in PlayerCaptainLocation.get_children():
+	for g : CaptainButton in PlayerCaptainLocation.get_children():
 		g.queue_free()
-	for g in EnemyCaptainLocation.get_children():
+	for g : CaptainButton in EnemyCaptainLocation.get_children():
 		g.queue_free()
 	
 	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
@@ -46,21 +44,10 @@ func Clear() -> void:
 		DescriptorPlace.remove_child(desc)
 		desc.queue_free()
 	
-	for g in EngineInventoryBoxParent.get_children():
-		g.free()
-	for g in SensorInventoryBoxParent.get_children():
-		g.free()
-	for g in FuelTankInventoryBoxParent.get_children():
-		g.free()
-	for g in WeaponInventoryBoxParent.get_children():
-		g.free()
-	for g in ShieldInventoryBoxParent.get_children():
-		g.free()
-	for g in InventoryBoxParent.get_children():
-		g.free()
-	
-	DeckUI.Clear()
+	if (CurrentCpt != null):
+		CurrentCpt._CharInv.queue_free()
 	CurrentCpt = null
+	CaptainStatCont.visible = false
 	
 	ItemCatalogue.visible = false
 	for g in ItemParent.get_children():
@@ -83,127 +70,33 @@ func Init(PlayerCaptains : Array[Captain], EnemyCaptains : Array[Captain]) -> vo
 func OnCaptainSelected(Cpt : Captain) -> void:
 	if (Cpt == CurrentCpt):
 		return
-	
-	CaptainName.text = Cpt.GetCaptainName()
+	if (CurrentCpt != null):
+		CurrentCpt._CharInv.queue_free()
+	#CaptainName.text = Cpt.GetCaptainName()
 	var descriptors = get_tree().get_nodes_in_group("ItemDescriptor")
 	if (descriptors.size() > 0):
 		var desc = descriptors[0] as ItemDescriptor
 		DescriptorPlace.remove_child(desc)
 		desc.queue_free()
-		
-	DeckUI.get_parent().visible = true
+	
+	Cpt.RegisterInventory(CharacterInventory.newInv(Cpt))
+	
+	CaptainStatCont.visible = true
+	CaptainStatCont.SetCaptain(Cpt)
+	CaptainStatCont.ShowStats()
 	CurrentCpt = Cpt
-	
-	for g in EngineInventoryBoxParent.get_children():
-		g.free()
-	for g in SensorInventoryBoxParent.get_children():
-		g.free()
-	for g in FuelTankInventoryBoxParent.get_children():
-		g.free()
-	for g in WeaponInventoryBoxParent.get_children():
-		g.free()
-	for g in ShieldInventoryBoxParent.get_children():
-		g.free()
-	for g in InventoryBoxParent.get_children():
-		g.free()
-	#$PanelContainer/VBoxContainer/HBoxContainer/TextureRect.texture = Cpt.ShipIcon
-	
-	var CharEngineSpace = Cpt.GetStatBaseValue(STAT_CONST.STATS.ENGINES_SLOTS)
-	var CharSensorSpace = Cpt.GetStatBaseValue(STAT_CONST.STATS.SENSOR_SLOTS)
-	var CharFuelTankSpace = Cpt.GetStatBaseValue(STAT_CONST.STATS.FUEL_TANK_SLOTS)
-	var CharShieldSpace = Cpt.GetStatBaseValue(STAT_CONST.STATS.SHIELD_SLOTS)
-	var CharWeaponSpace = Cpt.GetStatBaseValue(STAT_CONST.STATS.WEAPON_SLOTS)
-	var CharInventorySpace = Cpt.GetStatBaseValue(STAT_CONST.STATS.INVENTORY_SPACE)
-	
-	for g in CharEngineSpace:
-		var Box = InventoryBoxScene.instantiate() as Inventory_Box
-		EngineInventoryBoxParent.add_child(Box)
-		Box.connect("ItemSelected", ItemSelected)
-		Box.Enable()
-		EngineInventoryBoxParent.columns = min(2, CharEngineSpace)
-	
-	for g in CharSensorSpace:
-		var Box = InventoryBoxScene.instantiate() as Inventory_Box
-		SensorInventoryBoxParent.add_child(Box)
-		Box.connect("ItemSelected", ItemSelected)
-		Box.Enable()
-		SensorInventoryBoxParent.columns = min(2, CharSensorSpace)
-	
-	for g in CharFuelTankSpace:
-		var Box = InventoryBoxScene.instantiate() as Inventory_Box
-		FuelTankInventoryBoxParent.add_child(Box)
-		Box.connect("ItemSelected", ItemSelected)
-		Box.Enable()
-		FuelTankInventoryBoxParent.columns = min(2, CharFuelTankSpace)
-	
-	for g in CharShieldSpace:
-		var Box = InventoryBoxScene.instantiate() as Inventory_Box
-		ShieldInventoryBoxParent.add_child(Box)
-		Box.connect("ItemSelected", ItemSelected)
-		Box.Enable()
-		ShieldInventoryBoxParent.columns = min(2, CharShieldSpace)
-	
-	for g in CharWeaponSpace:
-		var Box = InventoryBoxScene.instantiate() as Inventory_Box
-		WeaponInventoryBoxParent.add_child(Box)
-		Box.connect("ItemSelected", ItemSelected)
-		Box.Enable()
-		WeaponInventoryBoxParent.columns = min(2, CharWeaponSpace)
-	
-	for g in CharInventorySpace:
-		var Box = InventoryBoxScene.instantiate() as Inventory_Box
-		InventoryBoxParent.add_child(Box)
-		Box.connect("ItemSelected", ItemSelected)
-		Box.Enable()
-		InventoryBoxParent.columns = min(2, CharInventorySpace)
-	
-	var itms = Cpt.StartingItems
-	
-	for g in itms:
-		if (g is ShipPart):
-			for box : Inventory_Box in GetBoxParentForType(g.PartType).get_children():
-				if box.IsEmpty():
-					box.RegisterItem(g)
-					box.UpdateAmm(1)
-					break
-		else:
-			for box : Inventory_Box in InventoryBoxParent.get_children():
-				if box.IsEmpty():
-					box.RegisterItem(g)
-					box.UpdateAmm(1)
-					break
-				else : if (box.GetContainedItem() == g):
-					box.UpdateAmm(1)
-					break
-	
-	DeckUI.SetDeck2(Cpt)
 
-func GetBoxParentForType(PartType : ShipPart.ShipPartType) -> Control:
-	var BoxParent : Control
-	if (PartType == ShipPart.ShipPartType.ENGINE):
-		BoxParent = EngineInventoryBoxParent
-	else : if (PartType == ShipPart.ShipPartType.SENSOR):
-		BoxParent = SensorInventoryBoxParent
-	else : if (PartType == ShipPart.ShipPartType.FUEL_TANK):
-		BoxParent = FuelTankInventoryBoxParent
-	else : if (PartType == ShipPart.ShipPartType.WEAPON):
-		BoxParent = WeaponInventoryBoxParent
-	else : if (PartType == ShipPart.ShipPartType.SHIELD):
-		BoxParent = ShieldInventoryBoxParent
-	else:
-		BoxParent = InventoryBoxParent
-	return BoxParent
 
 func GetTypeOfBox(Box : Inventory_Box_Res) -> ShipPart.ShipPartType:
-	var Type : ShipPart.ShipPartType = Box._ParentInventory.boxes.find_key(Box)
+	var Type : ShipPart.ShipPartType = CurrentCpt.GetCharacterInventory().GetBoxType(Box)
 	return Type
 
-func ItemSelected(Box : Inventory_Box_Res) -> void:
+func ItemSelected(Box : Inventory_Box_Res, inv : CharacterInventory) -> void:
 	if (CurrentDescriptor != null):
 		#var desc = descriptors[0] as ItemDescriptor
 		DescriptorPlace.remove_child(CurrentDescriptor)
 		CurrentDescriptor.queue_free()
-		DeckUI.get_parent().visible = true
+		
 		if (CurrentDescriptor.DescribedContainer == Box):
 			return
 	
@@ -220,7 +113,7 @@ func ItemSelected(Box : Inventory_Box_Res) -> void:
 	CurrentDescriptor.ItemIncrease.connect(IncreaseItem)
 	
 	DescriptorPlace.add_child(CurrentDescriptor)
-	DeckUI.get_parent().visible = false
+
 	CurrentDescriptor.set_physics_process(false)
 	CurrentDescriptor.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
@@ -231,11 +124,15 @@ func UpdateDescriptor(Box : Inventory_Box_Res) -> void:
 func UpgradeItem(Box : Inventory_Box_Res) -> void:
 	var OriginalItem = Box.GetContainedItem() as ShipPart
 	CurrentCpt.StartingItems.erase(OriginalItem)
+	CurrentCpt.GetCharacterInventory().RemoveItemFromBox(Box)
+	
 	var UpgradedItem = OriginalItem.UpgradeVersion
 	CurrentCpt.StartingItems.append(UpgradedItem)
+	CurrentCpt.GetCharacterInventory().AddItemToBox(UpgradedItem, Box)
+
+	CaptainStatCont.UpdateValues()
+	
 	Box.RegisterItem(UpgradedItem)
-	#Box.UpdateAmm(1)
-	DeckUI.SetDeck2(CurrentCpt)
 	UpdateDescriptor(Box)
 	PopUpManager.GetInstance().DoFadeNotif("{0} Upgraded".format([OriginalItem.GetItemName()]))
 
@@ -248,13 +145,15 @@ func AddItem(Box : Inventory_Box_Res) -> void:
 	c1.custom_minimum_size.y = 200
 	ItemParent.add_child(c1)
 	c1.mouse_filter = Control.MOUSE_FILTER_IGNORE
-
+	
+	
 	var Amm : int = 0
 	for g in Equipment:
 		if (g is ShipPart and Type != g.PartType):
 			continue
 		if (g is not ShipPart and Type != ShipPart.ShipPartType.INVENTORY):
 			continue
+		
 		var B = CagefightItemUI.instantiate() as CageFightItem
 		B.Init(g)
 		B.OnItemBought.connect(OnItemSelected.bind(g))
@@ -266,40 +165,45 @@ func AddItem(Box : Inventory_Box_Res) -> void:
 		for g in ItemParent.get_children():
 			g.queue_free()
 		return
+		
 	PopUpManager.GetInstance().DoFadeNotif("{0} combatible parts found".format([Amm]))
 	ItemCatalogue.visible = true
 	var c2 = Control.new()
 	c2.custom_minimum_size.y = 200
 	ItemParent.add_child(c2)
 	c2.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	
 
-func IncreaseItem(Box : Inventory_Box) -> void:
+func IncreaseItem(Box : Inventory_Box_Res) -> void:
 	PopUpManager.GetInstance().DoFadeNotif("{0} Added".format([Box.GetContainedItem().GetItemName()]))
-	Box.UpdateAmm(1)
 	CurrentCpt.StartingItems.append(Box.GetContainedItem())
-	DeckUI.SetDeck2(CurrentCpt)
+	CurrentCpt.GetCharacterInventory().AddItem(Box.GetContainedItem())
+	#DeckUI.SetDeck2(CurrentCpt)
 	
 
 func OnItemSelected(It : Item) -> void:
 	ItemCatalogue.visible = false
 	for g in ItemParent.get_children():
 		g.queue_free()
+		
 	CurrentCpt.StartingItems.append(It)
-	SelectedContainer.RegisterItem(It)
-	SelectedContainer.UpdateAmm(1)
-	DeckUI.SetDeck2(CurrentCpt)
+	CurrentCpt.GetCharacterInventory().AddItemToBox(It, SelectedContainer)
+	CaptainStatCont.UpdateValues()
+
 	UpdateDescriptor(SelectedContainer)
 	PopUpManager.GetInstance().DoFadeNotif("{0} Added".format([It.GetItemName()]))
 
 func RemoveItem(Box : Inventory_Box_Res) -> void:
 	PopUpManager.GetInstance().DoFadeNotif("{0} Removed".format([Box.GetContainedItem().GetItemName()]))
 	var OriginalItem = Box.GetContainedItem()
+		
 	CurrentCpt.StartingItems.erase(OriginalItem)
-	Box.UpdateAmmNoDissable(-1)
-	DeckUI.SetDeck2(CurrentCpt)
+	CurrentCpt.GetCharacterInventory().RemoveItem(OriginalItem)
+	CaptainStatCont.UpdateValues()
+	
+	
+	#DeckUI.SetDeck2(CurrentCpt)
 	if (Box.IsEmpty()):
-		ItemSelected(Box)
+		ItemSelected(Box, null)
 
 func _physics_process(_delta: float) -> void:
 	#Going through and seeing wich Merch is closer to middle of screen and connect UI Descriptor to it
@@ -322,3 +226,15 @@ func _on_cancel_button_pressed() -> void:
 	ItemCatalogue.visible = false
 	for g in ItemParent.get_children():
 		g.queue_free()
+
+
+func _on_stats_pressed() -> void:
+	CaptainStatCont.ShowStats()
+
+
+func _on_deck_pressed() -> void:
+	CaptainStatCont.ShowDeck()
+
+
+func _on_inventory_pressed() -> void:
+	CaptainStatCont.ShowInvetory()

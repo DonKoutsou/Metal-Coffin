@@ -5,9 +5,9 @@ class_name Inventory_Box
 @export var Butto : Button
 
 var box : Inventory_Box_Res
+var allowDissable : bool = true
 
 signal ItemSelected(Box : Inventory_Box_Res)
-
 
 func Initialise(boxRes : Inventory_Box_Res):
 	box = boxRes
@@ -22,16 +22,19 @@ func _ready() -> void:
 	if (Engine.is_editor_hint()):
 		return
 	UISoundMan.GetInstance().AddSelf(Butto)
+	if (!allowDissable):
+		Enable()
 
 func _exit_tree() -> void:
 	UISoundMan.GetInstance().RemoveSelf(Butto)
 
 func UpdateAmm(newAmm : int) -> void:
-	if (newAmm <= 0):
-		Butto.disabled = true
-		Butto.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	else:
-		Butto.mouse_filter = Control.MOUSE_FILTER_PASS
+	if (allowDissable):
+		if (newAmm <= 0):
+			Butto.disabled = true
+			Butto.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		else:
+			Butto.mouse_filter = Control.MOUSE_FILTER_PASS
 	_UpdateAmmountLabel(newAmm)
 
 func UpdateAmmNoDissable(newAmm : int) -> void:

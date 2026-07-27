@@ -1,5 +1,5 @@
 class_name TreeNode
-extends RefCounted
+extends Resource
 
 # Based on https://rachel53461.wordpress.com/2014/04/20/algorithm-for-drawing-trees/
 

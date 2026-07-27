@@ -15,7 +15,7 @@ func SetCaptain(Cha : Captain) -> void:
 	CurrentlyShownCaptain = Cha
 	ShipStats.SetCaptain(Cha)
 	ShipDeck.SetDeck(Cha)
-	ShipInventory.InitialiseInventory(Cha.GetCharacterInventory())
+	ShipInventory.InitialiseInventory(Cha)
 	CaptainIcon.texture = Cha.ShipIcon
 
 func ShowStats() -> void:

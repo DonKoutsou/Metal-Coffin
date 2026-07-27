@@ -22,6 +22,7 @@ func _init() -> void:
 
 
 func _ready() -> void:
+	
 	get_viewport().disable_3d = true
 	TranslationServer.set_locale("english")
 	#var siz =  DisplayServer.screen_get_size()
@@ -43,7 +44,7 @@ func _ready() -> void:
 			AchievementManager.GetInstance().SteamRunning = true
 			print("Achievement Tracking Enabled")
 			
-	call_deferred("Start")
+	await Start()
 
 func Start() -> void:
 	var StudioAnimScene = ResourceLoader.load(StudioAnim)

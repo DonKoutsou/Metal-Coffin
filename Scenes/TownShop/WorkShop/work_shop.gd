@@ -79,10 +79,10 @@ func OnShipSelected(Ship : MapShip) -> void:
 	var Cha = Ship.Cpt
 	
 	
-	interface.InitialiseInventory(Cha.GetCharacterInventory())
+	interface.InitialiseInventory(Cha)
 	
 func RefreshInventory() -> void:
-	interface.InitialiseInventory(CurrentShip.Cpt.GetCharacterInventory())
+	interface.InitialiseInventory(CurrentShip.Cpt)
 
 
 func GetTypeOfBox(Box : Inventory_Box_Res) -> ShipPart.ShipPartType:
@@ -130,13 +130,13 @@ func CloseDescriptor() -> void:
 		WorkshopDescriptor.queue_free()
 	ShipStats.get_parent().visible = true
 
-func RemoveItem(Box : Inventory_Box) -> void:
+func RemoveItem(Box : Inventory_Box_Res) -> void:
 	var Cost = Box.GetContainedItem().Cost
 	var It = Box.GetContainedItem()
 	Map.GetInstance().GetScreenUi().TownUi.CoinsReceived(roundi(Cost / 1000.0))
 	var PLWallet = World.GetInstance().PlayerWallet
 	PLWallet.AddFunds(Cost)
-	PopUpManager.GetInstance().DoFadeNotif("{0} removed from {1}'s ship")
+	PopUpManager.GetInstance().DoFadeNotif("{0} removed from\n{1}'s ship".format([It.GetItemName(), CurrentShip.Cpt.GetCaptainName()]))
 	CurrentShip.Cpt.GetCharacterInventory().RemoveItem(It)
 	RefreshInventory()
 	CloseDescriptor()
@@ -200,7 +200,7 @@ func ItemToAddSelected(M : Merchandise, Box : Inventory_Box_Res) -> void:
 	
 	var NewCap = OriginalCap.duplicate(true) as Captain
 	var NewInv = OriginalInv.duplicate(4) as CharacterInventory
-	NewCap._CharInv = NewInv
+	NewCap.RegisterInventory(NewInv)
 	var NewStats : Array[ShipStat]
 	for g :ShipStat in OriginalCap.CaptainStats:
 		NewStats.append(g.duplicate(true))
@@ -308,7 +308,7 @@ func UpgradeItem(Box : Inventory_Box_Res) -> void:
 	
 	var NewCap = OriginalCap.duplicate(true) as Captain
 	var NewInv = OriginalInv.duplicate(4) as CharacterInventory
-	NewCap._CharInv = NewInv
+	NewCap.RegisterInventory(NewInv)
 	var NewStats : Array[ShipStat]
 	for g :ShipStat in OriginalCap.CaptainStats:
 		NewStats.append(g.duplicate(true))
