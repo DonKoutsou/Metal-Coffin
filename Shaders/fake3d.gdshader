@@ -41,17 +41,14 @@ void vertex(){
 	p.xy *= v * inv_rot_mat[2].z;
 	o = v * inv_rot_mat[2].xy;
 
-	// to (rect_size is a uniform):
-	//VERTEX += (UV - 0.5) * t;
-
-	VERTEX += (UV - 0.5) / TEXTURE_PIXEL_SIZE * t;
+	VERTEX += (UV - 0.5);
 }
 
 void fragment(){
 	vec2 uv = (p.xy / p.z).xy - o;
 
-	vec4 main_texture = texture(TEXTURE, uv + 0.5);
-    vec4 noise_texture = texture(dissolve_texture, uv + 0.5);
+	vec4 main_texture = texture(TEXTURE, (uv / 1.2) + 0.5);
+	vec4 noise_texture = texture(dissolve_texture, uv + 0.5);
 	
 	COLOR = main_texture;
 	//COLOR.a *= step(max(abs(uv.x), abs(uv.y)), 0.5);

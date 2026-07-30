@@ -19,6 +19,7 @@ dest_files=["res://.godot/imported/cables2_Camera 1.png-0b96a8a62b31821b2666fab5
 
 compress/mode=2
 compress/high_quality=true
+compress/high_quality_mode=0
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

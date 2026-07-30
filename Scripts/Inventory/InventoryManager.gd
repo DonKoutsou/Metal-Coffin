@@ -33,6 +33,7 @@ static func GetInstance() -> InventoryManager:
 
 #-------------------------------------------------------
 func _ready() -> void:
+	
 	MissileDockEventH.connect("MissileLaunched", OnMissileLaunched)
 	DroneDockEventH.connect("DroneAdded", DroneAdded)
 	DroneDockEventH.DroneDocked.connect(OnDroneDocked)
@@ -452,12 +453,15 @@ func ToggleInventory() -> void:
 		size = Vector2(size.x, 0)
 		ToggleTween.set_ease(Tween.EASE_OUT)
 		ToggleTween.set_trans(Tween.TRANS_QUAD)
-		ToggleTween.tween_property(self, "size", Vector2(size.x, get_viewport_rect().size.y - global_position.y), 0.15)
+		var s = get_viewport_rect().size.y
+		#print(global_position.y)
+		ToggleTween.tween_property(self, "size", Vector2(size.x, s - get_parent().global_position.y), 0.15)
 		await ToggleTween.finished
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.INVENTORY_OPEN)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.INVENTORY_OPEN)
 			InventoryTutorial()
 	else:
+		#print(global_position.y)
 		visible = !visible
 		ToggleTween.set_ease(Tween.EASE_OUT)
 		ToggleTween.set_trans(Tween.TRANS_QUAD)

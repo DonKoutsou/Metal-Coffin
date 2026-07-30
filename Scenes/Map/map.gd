@@ -67,7 +67,7 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	set_physics_process(false)
 	$SubViewportContainer.visible = false
-	_ScreenUI.FullScreenToggleStarted.connect(ToggleFullScreen)
+	_ScreenUI.StateSwitched.connect(ToggleFullScreen)
 	_InScreenUI.GetInventory().InventoryToggled.connect(HideWorld)
 	MapPointerMan.TargetSelected.connect(MoveTargetSelected)
 	MapPointerMan.TargetSpotSelected.connect(MoveTargetSpotSelected)
@@ -834,28 +834,37 @@ func ToggleFullScreen(NewState : ScreenUI.ScreenState) -> void:
 	#var toggle = await _ScreenUI.FullScreenToggleStarted
 	
 	if (NewState == ScreenUI.ScreenState.FULL_SCREEN):
-		$SubViewportContainer.position = ScreenPos
 		$SubViewportContainer.size = FullSize
+		$SubViewportContainer.global_position = ScreenPos
+		
+		#$SubViewportContainer._queue_recalc_force_viewport_sizes()
 		_InScreenUI.ToggleCrtEffect(true)
 		_InScreenUI.SetScreenRes(FullSize)
 	
 	else: if (NewState == ScreenUI.ScreenState.HALF_SCREEN):
-		$SubViewportContainer.position = ScreenPos
 		$SubViewportContainer.size = OriginalSize
+		$SubViewportContainer.global_position = ScreenPos
+		
+		#$SubViewportContainer._queue_recalc_force_viewport_sizes()
 		_InScreenUI.ToggleCrtEffect(true)
 		_InScreenUI.SetScreenRes(OriginalSize)
 	else: if (NewState == ScreenUI.ScreenState.PILOT_SCREEN):
-		$SubViewportContainer.position = PilotPos
 		$SubViewportContainer.size = PilotSize
+		$SubViewportContainer.global_position = PilotPos
+		
+		#$SubViewportContainer._queue_recalc_force_viewport_sizes()
 		_InScreenUI.ToggleCrtEffect(true)
 		_InScreenUI.SetScreenRes(PilotSize)
 	else: if (NewState == ScreenUI.ScreenState.NORMAL_SCREEN):
-		$SubViewportContainer.position = ScreenPos
 		$SubViewportContainer.size = OriginalSize
+		$SubViewportContainer.global_position = ScreenPos
+		
+		#$SubViewportContainer._queue_recalc_force_viewport_sizes()
 		_InScreenUI.ToggleCrtEffect(true)
 		_InScreenUI.SetScreenRes(OriginalSize)
 	else:
-		$SubViewportContainer.position = Vector2.ZERO
 		$SubViewportContainer.size = get_viewport().get_visible_rect().size
+		$SubViewportContainer.global_position = Vector2.ZERO
+		
 		_InScreenUI.ToggleCrtEffect(false)
 	$SubViewportContainer.visible = true

@@ -17,6 +17,7 @@ dest_files=["res://.godot/imported/PriestHood.png-243e1f91bea8f8e406333ad6c1c520
 
 compress/mode=0
 compress/high_quality=false
+compress/high_quality_mode=0
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

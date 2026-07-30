@@ -19,6 +19,7 @@ dest_files=["res://.godot/imported/Ship4_001.png-f7298aed77a1b64e579f85d017dc0b8
 
 compress/mode=2
 compress/high_quality=true
+compress/high_quality_mode=0
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

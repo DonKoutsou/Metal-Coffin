@@ -19,6 +19,7 @@ dest_files=["res://.godot/imported/ShipElena.png-22d4d98e1d136ad4c348a38e680a17c
 
 compress/mode=2
 compress/high_quality=true
+compress/high_quality_mode=0
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

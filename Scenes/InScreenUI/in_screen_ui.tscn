@@ -204,6 +204,11 @@ mouse_filter = 2
 [node name="Inventory" parent="VBoxContainer/UnderStatUI" unique_id=431787009 instance=ExtResource("6_u1p46")]
 visible = false
 layout_mode = 1
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_top = -3.0517578e-05
+offset_bottom = 680.0
+grow_vertical = 1
 mouse_force_pass_scroll_events = false
 
 [node name="PortNotification" parent="." unique_id=755876837 instance=ExtResource("7_4bt5v")]

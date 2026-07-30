@@ -17,6 +17,7 @@ dest_files=["res://.godot/imported/Captain7.png-7c95e096c54b8f1d7d02ca5db736de5e
 
 compress/mode=0
 compress/high_quality=false
+compress/high_quality_mode=0
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

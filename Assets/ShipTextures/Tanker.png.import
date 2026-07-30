@@ -19,6 +19,7 @@ dest_files=["res://.godot/imported/Tanker.png-7cc4f98d631cde9b7b3b7b5d3b6b02c6.b
 
 compress/mode=2
 compress/high_quality=true
+compress/high_quality_mode=0
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

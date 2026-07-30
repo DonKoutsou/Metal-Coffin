@@ -1,6 +1,0 @@
-[gd_resource type="World3D" format=3 uid="uid://bt2lx0rufeimw"]
-
-[ext_resource type="Environment" uid="uid://bkmqb06466wvr" path="res://Enviroments/Env.tres" id="1_q1lvt"]
-
-[resource]
-environment = ExtResource("1_q1lvt")

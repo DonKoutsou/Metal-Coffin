@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bybwi8eqnkihq" path="res://Scripts/CageFightWorld.gd" id="1_ruv4p"]
 [ext_resource type="PackedScene" uid="uid://bg4oh7r4qnxy8" path="res://Scenes/Card_Fight/CardFight.tscn" id="2_hv6vs"]
 [ext_resource type="PackedScene" uid="uid://dc1y0qs5n466n" path="res://Scenes/Card_Fight/CagefightTeamSetup.tscn" id="3_fhjeu"]
-[ext_resource type="World3D" uid="uid://bt2lx0rufeimw" path="res://Enviroments/WorldEnv.tres" id="4_fhjeu"]
+[ext_resource type="Environment" uid="uid://bkmqb06466wvr" path="res://Enviroments/Env.tres" id="5_7lsfd"]
 [ext_resource type="PackedScene" uid="uid://ijv7nlfv5kot" path="res://Scenes/InScreenUI/Cagefight_in_screen_ui.tscn" id="5_fhjeu"]
 [ext_resource type="PackedScene" uid="uid://biel8sjt8vy5t" path="res://Scenes/ScreenUI/screen_ui.tscn" id="8_6fcln"]
 
@@ -40,7 +40,6 @@ stretch = true
 process_mode = 1
 disable_3d = true
 own_world_3d = true
-world_3d = ExtResource("4_fhjeu")
 handle_input_locally = false
 snap_2d_vertices_to_pixel = true
 audio_listener_enable_2d = true
@@ -49,5 +48,8 @@ size = Vector2i(869, 595)
 render_target_update_mode = 4
 
 [node name="InScreenUI" parent="SubViewportContainer/ViewPort" unique_id=1660404704 instance=ExtResource("5_fhjeu")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/ViewPort" unique_id=2057153252]
+environment = ExtResource("5_7lsfd")
 
 [node name="ScreenUI" parent="." unique_id=1869325632 instance=ExtResource("8_6fcln")]

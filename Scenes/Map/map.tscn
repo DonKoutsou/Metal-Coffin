@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://kwr75a1p3qrm" path="res://Scenes/MapShips/HostileShip.tscn" id="3_4a6f5"]
 [ext_resource type="PackedScene" uid="uid://dgf0r7r507qef" path="res://Scenes/Towns/Town.tscn" id="7_0ker0"]
 [ext_resource type="PackedScene" uid="uid://dp3qdp4mcnmly" path="res://Scenes/GlobalManagers/Tutorial/tutorial_trigger.tscn" id="9_6an1p"]
-[ext_resource type="World3D" uid="uid://bt2lx0rufeimw" path="res://Enviroments/WorldEnv.tres" id="10_28wu2"]
 [ext_resource type="Resource" uid="uid://c1buiwym6qkh8" path="res://Resources/Merch/1.EnemySpawnDecider.tres" id="12_m1k6s"]
+[ext_resource type="Environment" uid="uid://bkmqb06466wvr" path="res://Enviroments/Env.tres" id="16_8uruf"]
 [ext_resource type="PackedScene" uid="uid://cja47tyjnyae" path="res://Scenes/InScreenUI/MapMarkers/map_line_drawer.tscn" id="16_sp82o"]
 [ext_resource type="PackedScene" uid="uid://dnjccg1nj4bm6" path="res://Scenes/Map/ship_camera.tscn" id="17_6an1p"]
 [ext_resource type="Script" uid="uid://c1kbreeob7tf2" path="res://Scenes/InScreenUI/MapMarkers/map_pointer_manager.gd" id="19_ccpfd"]
@@ -55,7 +55,7 @@ UIEventH = ExtResource("25_8mjbw")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 132.0
+offset_left = 132.00003
 offset_top = 62.0
 offset_right = -336.0
 offset_bottom = -68.0
@@ -68,7 +68,6 @@ stretch = true
 [node name="ViewPort" type="SubViewport" parent="SubViewportContainer" unique_id=580875506]
 disable_3d = true
 own_world_3d = true
-world_3d = ExtResource("10_28wu2")
 handle_input_locally = false
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 512
@@ -80,6 +79,8 @@ process_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -3.0517578e-05
+offset_top = -3.0517578e-05
 grow_horizontal = 2
 grow_vertical = 2
 stretch = true
@@ -150,6 +151,9 @@ Col = Color(100, 0.395, 0.144, 1)
 
 [node name="InScreenUI" parent="SubViewportContainer/ViewPort" unique_id=391064499 instance=ExtResource("23_53oad")]
 layer = 3
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/ViewPort" unique_id=718275547]
+environment = ExtResource("16_8uruf")
 
 [node name="ScreenUI" parent="." unique_id=1211286395 instance=ExtResource("24_e5um8")]
 

@@ -17,7 +17,7 @@ static func GetInstance() -> CageFightWorld:
 	return Instance
 
 func _ready() -> void:
-	ScrUI.connect("FullScreenToggleStarted", ToggleFullScreen)
+	ScrUI.StateSwitched.connect(ToggleFullScreen)
 	Instance = self
 	ScrUI.DoIntroFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
 	await ScrUI.FullScreenToggleStarted
@@ -39,6 +39,7 @@ func TeamsPicked(PlTeam : Array[Captain], EnTeam : Array[Captain]) -> void:
 	
 	#ScrUI.ToggleScreenUI(false)
 	await ScrUI.ToggleCardFightUI(true)
+	ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	await ScrUI.OpenScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	StartDogFight(PlTeam, EnTeam)
 	
@@ -105,18 +106,24 @@ func ToggleFullScreen(NewState : ScreenUI.ScreenState) -> void:
 	#var toggle = await _ScreenUI.FullScreenToggleStarted
 	
 	if (NewState == ScreenUI.ScreenState.FULL_SCREEN):
-		$SubViewportContainer.position = ScreenPos
 		$SubViewportContainer.size = FullSize
+		$SubViewportContainer.position = ScreenPos
+		
+		#$SubViewportContainer._queue_recalc_force_viewport_sizes()
 		$SubViewportContainer/ViewPort/InScreenUI.ToggleCrtEffect(true)
 		$SubViewportContainer/ViewPort/InScreenUI.SetScreenRes(FullSize)
 		
 	else: if (NewState == ScreenUI.ScreenState.HALF_SCREEN):
-		$SubViewportContainer.position = ScreenPos
 		$SubViewportContainer.size = OriginalSize
+		$SubViewportContainer.position = ScreenPos
+		
+		#$SubViewportContainer._queue_recalc_force_viewport_sizes()
 		$SubViewportContainer/ViewPort/InScreenUI.ToggleCrtEffect(true)
 		$SubViewportContainer/ViewPort/InScreenUI.SetScreenRes(OriginalSize)
 	else:
-		$SubViewportContainer.position = Vector2.ZERO
 		$SubViewportContainer.size = get_viewport().get_visible_rect().size
+		$SubViewportContainer.position = Vector2.ZERO
+		
+		#$SubViewportContainer._queue_recalc_force_viewport_sizes()
 		$SubViewportContainer/ViewPort/InScreenUI.ToggleCrtEffect(false)
 	$SubViewportContainer.visible = true

@@ -19,8 +19,9 @@ var FullScreen : Control
 static var Instance : ScreenUI
 var CurrentScreenState : ScreenState
 
-signal FullScreenToggleStarted(NewState : ScreenState)
+signal FullScreenToggleStarted()
 signal FullScreenToggleFinished()
+signal StateSwitched(newState : ScreenState)
 
 func _ready() -> void:
 	Instance = self
@@ -90,7 +91,7 @@ func CloseScreen() -> void:
 	Cam.EnableFullScreenShake()
 
 	await Transition.PanelClosed
-	FullScreenToggleStarted.emit(ScreenState.HALF_SCREEN)
+	FullScreenToggleStarted.emit()
 
 func OpenScreen(NewStat : ScreenState) -> void:
 	match(CurrentScreenState):
@@ -111,6 +112,7 @@ func OpenScreen(NewStat : ScreenState) -> void:
 		ScreenState.PILOT_SCREEN:
 			await ToggleForegroundUI(true)
 	
+	StateSwitched.emit(CurrentScreenState)
 	Transition.Open()
 	await Transition.PanelOpened
 	Transition.queue_free()
@@ -129,7 +131,10 @@ func DoIntroFullScreen(NewStat : ScreenState) -> void:
 	Cam.EnableFullScreenShake()
 	
 	await Transition.PanelClosed
-	FullScreenToggleStarted.emit(NewStat)
+	CurrentScreenState = NewStat
+	StateSwitched.emit(CurrentScreenState)
+	
+	FullScreenToggleStarted.emit()
 	
 	#await Helper.GetInstance().wait(0.2)
 	Cables.visible = true
@@ -138,6 +143,7 @@ func DoIntroFullScreen(NewStat : ScreenState) -> void:
 			ToggleFullScreenUI(true)
 		ScreenState.NORMAL_SCREEN:
 			ToggleForegroundUI(true)
+	
 	
 	Transition.Open()
 	await Transition.PanelOpened
@@ -157,7 +163,9 @@ func ToggleFullScreen(NewStat : ScreenState) -> void:
 
 	await Transition.PanelClosed
 	
-	FullScreenToggleStarted.emit(NewStat)
+	
+	StateSwitched.emit(NewStat)
+	FullScreenToggleStarted.emit()
 	
 	match(CurrentScreenState):
 		ScreenState.NORMAL_SCREEN:

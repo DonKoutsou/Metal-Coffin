@@ -11,3 +11,23 @@ StudioAnim = "uid://cmdvuq7n6nncl"
 GameScene = "uid://cbhf8nh85npqq"
 IntroGameScene = "uid://cid0s6uni7fky"
 CageFightGameScene = "uid://b575fi0e44gkg"
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=905685013]
+material = ExtResource("3_62h02")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+mouse_target = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1724850211]
+disable_3d = true
+own_world_3d = true
+handle_input_locally = false
+canvas_item_default_texture_filter = 2
+size = Vector2i(986, 555)
+size_2d_override = Vector2i(1280, 720)
+size_2d_override_stretch = true
+render_target_update_mode = 4

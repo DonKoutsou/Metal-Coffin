@@ -17,6 +17,7 @@ dest_files=["res://.godot/imported/GassFrame1_Camera 1_008.png-0add4336d4e9a50c3
 
 compress/mode=0
 compress/high_quality=true
+compress/high_quality_mode=0
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

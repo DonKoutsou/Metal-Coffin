@@ -33,25 +33,31 @@ uniform float static_chromatic_aberration : hint_range(0.0, 1.0) = 0.1;
 
 float ToLinear1(float c){ return (c <= 0.04045) ? c / 12.92 : pow((c + 0.055) / 1.055, 2.4); }
 vec3 ToLinear(vec3 c){ return vec3(ToLinear1(c.r), ToLinear1(c.g), ToLinear1(c.b)); }
-float ToSrgb1(float c){ return (c < 0.0031308) ? c * 12.92 : 1.055 * pow(c, 0.41666) - 0.055; }
-vec3 ToSrgb(vec3 c){ return vec3(ToSrgb1(c.r), ToSrgb1(c.g), ToSrgb1(c.b)); }
+vec3 ToSrgb(vec3 c) {
+	c = max(c, vec3(0.0));
+	return mix(
+		c * 12.92,
+		1.055 * pow(c, vec3(1.0 / 2.4)) - 0.055,
+		greaterThanEqual(c, vec3(0.0031308))
+	);
+}
 
 float ramp(float y, float start, float end)
 {
-    float inside = step(start, y) - step(end, y);
-    float fact = (y-start)/(end-start) * inside;
-    return (1.-fact) * inside;
+	float inside = step(start, y) - step(end, y);
+	float fact = (y-start)/(end-start) * inside;
+	return (1.-fact) * inside;
 }
 
 float stripes(vec2 uv)
 {
-    float noi = scanlines_opacity;
-    return ramp(mod(uv.y * 4. * scanlines_spacing + TIME * scanlines_speed / (2. * scanlines_spacing) + sin(TIME * scanlines_speed + sin(TIME * scanlines_speed * 0.63 * scanlines_spacing)), 1.), scanline_thickness, .6) * noi;
+	float noi = scanlines_opacity;
+	return ramp(mod(uv.y * 4. * scanlines_spacing + TIME * scanlines_speed / (2. * scanlines_spacing) + sin(TIME * scanlines_speed + sin(TIME * scanlines_speed * 0.63 * scanlines_spacing)), 1.), scanline_thickness, .6) * noi;
 }
 
 //vec3 to_indexed_palette(vec3 color) {
-    //vec3 quant = floor(color * ColorAmm + 0.5) / ColorAmm;
-    //return quant;
+	//vec3 quant = floor(color * ColorAmm + 0.5) / ColorAmm;
+	//return quant;
 //}
 
 vec3 Fetch(vec2 pos, vec2 off, sampler2D iChannel0){
@@ -129,7 +135,7 @@ vec3 Mask(vec2 pos){
 }
 
 float onOff(float a, float b, float c){
-    return step(c, sin(TIME + a * cos(TIME * b)));
+	return step(c, sin(TIME + a * cos(TIME * b)));
 }
 
 float border (vec2 uv){
@@ -171,7 +177,9 @@ void fragment(){
 	else{
 		//COLOR.rgb = texture(SCREEN_TEXTURE, pos).rgb;
 		//COLOR.rgb = texture(SCREEN_TEXTURE, pos).rgb;
-		COLOR.rgb = Tri(pos, SCREEN_TEXTURE) * Mask(FRAGCOORD.xy);
+		//vec2 mask_pos = UV * res;
+		COLOR.rgb = Tri(pos, SCREEN_TEXTURE);
+		//COLOR.rgb = Tri(pos, SCREEN_TEXTURE) * Mask(FRAGCOORD.xy);
 		vec2 look = pos;
 		float window = 1.0 / (1.0 + 20.0 * pow(look.y - mod(TIME / 4.0, 1.0), 2.0)) * image_flicker;
 		look.x += sin(look.y * 10.0 + TIME) / 50.0 * onOff(4.0, 4.0, 0.3) * (1.0 + cos(TIME * 80.0)) * window;

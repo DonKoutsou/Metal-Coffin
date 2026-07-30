@@ -3,22 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dapmqanc8kif"
-path.bptc="res://.godot/imported/CardIcons.png-0693a8d55bce5892e7059660233d6dec.bptc.ctex"
-path.astc="res://.godot/imported/CardIcons.png-0693a8d55bce5892e7059660233d6dec.astc.ctex"
+path="res://.godot/imported/CardIcons.png-0693a8d55bce5892e7059660233d6dec.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc", "etc2_astc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Assets/Cards/CardIcons.png"
-dest_files=["res://.godot/imported/CardIcons.png-0693a8d55bce5892e7059660233d6dec.bptc.ctex", "res://.godot/imported/CardIcons.png-0693a8d55bce5892e7059660233d6dec.astc.ctex"]
+dest_files=["res://.godot/imported/CardIcons.png-0693a8d55bce5892e7059660233d6dec.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=true
+compress/high_quality_mode=0
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

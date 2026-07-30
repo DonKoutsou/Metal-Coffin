@@ -23,7 +23,7 @@ func _init() -> void:
 
 func _ready() -> void:
 	
-	get_viewport().disable_3d = true
+	#get_viewport().disable_3d = true
 	TranslationServer.set_locale("english")
 	#var siz =  DisplayServer.screen_get_size()
 	#siz.x = min(siz.x, 1920)
@@ -49,7 +49,7 @@ func _ready() -> void:
 func Start() -> void:
 	var StudioAnimScene = ResourceLoader.load(StudioAnim)
 	var vidpl = StudioAnimScene.instantiate() as StudioAnimation
-	add_child(vidpl)
+	$SubViewportContainer/SubViewport.add_child(vidpl)
 	
 	await vidpl.Finished
 	
@@ -59,7 +59,7 @@ func Start() -> void:
 func SpawnMenu() -> void:
 	var Menu = await Helper.LoadThreaded(StartingMenuScene).Sign
 	StMenu = Menu.instantiate() as StartingMenu
-	add_child(StMenu)
+	$SubViewportContainer/SubViewport.add_child(StMenu)
 	StMenu.connect("GameStart", StartGame)
 	StMenu.connect("PrologueStart", StartPrologue)
 	StMenu.connect("DelSave", DelSave)
@@ -75,7 +75,7 @@ func StartPrologue(Load : bool, SkipStory : bool = false) -> void:
 			PopupManager.DoFadeNotif(LoadResault["Reason"], StMenu.GetVp())
 			return
 	
-	add_child(Wor)
+	$SubViewportContainer/SubViewport.add_child(Wor)
 	Wor.SkipStory = SkipStory
 	await Wor.WorldSpawnTransitionFinished
 	StMenu.queue_free()
@@ -87,7 +87,7 @@ func StartCageFight() -> void:
 	var FightScene = await Helper.LoadThreaded(CageFightGameScene).Sign
 	var fight = FightScene.instantiate() as CageFightWorld
 
-	add_child(fight)
+	$SubViewportContainer/SubViewport.add_child(fight)
 	await fight.FightTransitionFinished
 	StMenu.queue_free()
 	#$ColorRect.visible = false
@@ -113,7 +113,7 @@ func StartGame(Load : bool, _SkipStory : bool = false) -> void:
 			PopupManager.DoFadeNotif(LoadResault["Reason"], StMenu.GetVp())
 			return
 	
-	add_child(Wor)
+	$SubViewportContainer/SubViewport.add_child(Wor)
 	await Wor.WorldSpawnTransitionFinished
 	StMenu.queue_free()
 	#$ColorRect.visible = false

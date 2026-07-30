@@ -7,7 +7,7 @@ uniform vec2 DitherRes;
 uniform float threshold : hint_range(0.0, 1.0);
 
 //uniform float vignette_strength: hint_range(0., 3., 0.01) = 1.;
-uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+//uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 
 float dither(float raw, float dither, int depth) {
 	
@@ -31,8 +31,8 @@ float dither(float raw, float dither, int depth) {
 }
 
 vec3 to_indexed_palette(vec3 color) {
-    vec3 quant = floor(color * ColorAmm + 0.5) / ColorAmm;
-    return quant;
+	vec3 quant = floor(color * ColorAmm + 0.5) / ColorAmm;
+	return quant;
 }
 
 void fragment(){
@@ -41,19 +41,19 @@ void fragment(){
 	vec2 dither_uv = mod(SCREEN_UV * DitherRes, dither_size) / dither_size;
 	
 	// Sample the screen pixel
-	vec3 screen_col = texture(SCREEN_TEXTURE, SCREEN_UV).rgb;
+	vec3 screen_col = texture(TEXTURE, SCREEN_UV).rgb;
 
 	// Sample the corresponding dither pixel luminance
 	float dither_luminance = texture(dither_texture, dither_uv).r;
 	
 	// Dither each channel (r, g, and b) to the number of color quantizations via dither value
 	vec3 quantized_col;
-    for (int i = 0; i < 3; i++) {
-        float raw_channel = screen_col[i];
-        float dither_amount = threshold * dither_luminance;
-        float quantized_channel = dither(raw_channel, dither_amount, levels);
-        quantized_col[i] = floor(quantized_channel * ColorAmm) / (ColorAmm - 1.0);
-    }
+	for (int i = 0; i < 3; i++) {
+		float raw_channel = screen_col[i];
+		float dither_amount = threshold * dither_luminance;
+		float quantized_channel = dither(raw_channel, dither_amount, levels);
+		quantized_col[i] = floor(quantized_channel * ColorAmm) / (ColorAmm - 1.0);
+	}
 	COLOR.rgb = quantized_col;
 	//COLOR.rgb = texture(TEXTURE, UV).rgb;
 	//COLOR.rgb *= vignette;

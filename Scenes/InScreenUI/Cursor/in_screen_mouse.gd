@@ -33,12 +33,20 @@ func ToggleMouse(t : bool) -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
-
-	var mousepos = get_viewport().get_mouse_position()
-	var Local = mousepos - get_viewport().canvas_transform.origin
+	#var vp = get_tree().root.size
+	#var dif = vp - get_window().size
+	#var mPos = get_global_mouse_position() * (Vector2(get_window().size) / Vector2(1280.0, 720.0))
+	#
+	#var mPos2 = get_global_mouse_position() * (Vector2(vp) / Vector2(1280, 720))
+	
+	
+	
+	#var Local = Helper.mapv2(get_global_mouse_position(), Vector2.ZERO, get_window().size, Vector2.ZERO, Vector2(1280, 720))
+	var Local = get_global_mouse_position() - get_viewport().canvas_transform.origin
+	#print(vp)
 	var MouseInScreen = Local.x > 0 and Local.y > 0 and Local.x < get_viewport_rect().size.x and Local.y < get_viewport_rect().size.y
 	if (MouseInScreen):
-		global_position = mousepos
+		global_position = get_global_mouse_position()
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		#print("mouse hidden " + var_to_str(Time.get_ticks_msec()))
 	else:
