@@ -26,10 +26,6 @@
 [ext_resource type="PackedScene" uid="uid://bq1ns0us14bn3" path="res://Scenes/InScreenUI/Cursor/Cursor.tscn" id="24_rh5bc"]
 [ext_resource type="StyleBox" uid="uid://bj8tmjsnlmj0" path="res://Theme/Buttons/ButtonBlack.tres" id="26_67h1o"]
 [ext_resource type="StyleBox" uid="uid://g2ic8um6hit" path="res://Theme/Buttons/ButtonBlack_Pressed.tres" id="27_pmm2a"]
-[ext_resource type="StyleBox" uid="uid://bblal3stslrb1" path="res://Theme/Buttons/ButtonWhite.tres" id="29_rh5bc"]
-[ext_resource type="StyleBox" uid="uid://cwsk20kaf6n22" path="res://Theme/Buttons/ButtonWhite_Pressed.tres" id="30_xqmn8"]
-[ext_resource type="StyleBox" uid="uid://bog4o82ggjqwb" path="res://Theme/Buttons/ButtonOrange.tres" id="32_xqmn8"]
-[ext_resource type="StyleBox" uid="uid://bxfwfq0uxu1w1" path="res://Theme/Buttons/ButtonOrange_Pressed.tres" id="33_sjyyd"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="34_aa43b"]
 [ext_resource type="Texture2D" uid="uid://ben2ixlvxo42b" path="res://Assets/UIPiecies/Screen/Buttons/Button10_Camera 1_FullQuality.png" id="35_xqmn8"]
 [ext_resource type="Texture2D" uid="uid://cbkii1pjnwxww" path="res://Assets/UIPiecies/LightCone.png" id="36_j43p8"]
@@ -41,9 +37,6 @@
 [ext_resource type="Script" uid="uid://c11sqafe6873w" path="res://Scripts/Cables.gd" id="41_sjyyd"]
 [ext_resource type="Texture2D" uid="uid://b2mw4mnl7ag4s" path="res://Assets/UIPiecies/cables_Camera 1.png" id="42_67h1o"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yrlew"]
-light_mode = 1
-
 [sub_resource type="Curve" id="Curve_1p5b6"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.997413, 0.585293), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -52,6 +45,9 @@ point_count = 2
 interpolation_color_space = 1
 offsets = PackedFloat32Array(0, 0.719685, 1)
 colors = PackedColorArray(1, 1, 1, 0.5, 1, 1, 1, 0.5, 0.313, 0.313, 0.313, 0)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yrlew"]
+light_mode = 1
 
 [node name="StartingMenu" type="CanvasLayer" unique_id=2007448128 node_paths=PackedStringArray("LoadPrologueLight", "LoadLight", "HintDialogue", "Credits", "Settings", "NormalUI", "VersionLabel")]
 process_mode = 3
@@ -87,7 +83,7 @@ canvas_item_default_texture_filter = 2
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 0
 positional_shadow_atlas_16_bits = false
-size = Vector2i(1433, 981)
+size = Vector2i(979, 670)
 size_2d_override = Vector2i(868, 594)
 size_2d_override_stretch = true
 render_target_update_mode = 4
@@ -105,62 +101,6 @@ offset_right = 378.0
 offset_bottom = 648.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="TextureRect3" type="TextureRect" parent="SubViewportContainer/SubViewport" unique_id=1004158259]
-z_index = -1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = 10.0
-offset_right = -3.0
-offset_bottom = -98.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 8
-size_flags_vertical = 6
-texture = ExtResource("14_61hxs")
-expand_mode = 1
-
-[node name="TextureRect3" type="TextureRect" parent="SubViewportContainer/SubViewport/TextureRect3" unique_id=1889635855]
-self_modulate = Color(0, 0, 0, 0.6)
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 8
-size_flags_vertical = 6
-texture = ExtResource("14_61hxs")
-expand_mode = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport" unique_id=965143308]
-material = SubResource("CanvasItemMaterial_yrlew")
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 7.0
-offset_top = -79.0
-offset_right = 139.0
-offset_bottom = -15.0
-grow_vertical = 0
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport/HBoxContainer" unique_id=1471011218]
-use_parent_material = true
-layout_mode = 2
-texture = ExtResource("2_q14vk")
-
-[node name="TextureRect2" type="TextureRect" parent="SubViewportContainer/SubViewport/HBoxContainer" unique_id=985508431]
-use_parent_material = true
-layout_mode = 2
-texture = ExtResource("3_s86m3")
 
 [node name="IntroMenuShips" type="Control" parent="SubViewportContainer/SubViewport" unique_id=2129188864]
 layout_mode = 3
@@ -327,6 +267,39 @@ offset_bottom = 725.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="TextureRect3" type="TextureRect" parent="SubViewportContainer/SubViewport" unique_id=1004158259]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 10.0
+offset_right = -3.0
+offset_bottom = -98.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 6
+texture = ExtResource("14_61hxs")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="SubViewportContainer/SubViewport/TextureRect3" unique_id=1889635855]
+self_modulate = Color(0, 0, 0, 0.6)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 6
+texture = ExtResource("14_61hxs")
+expand_mode = 1
+
 [node name="VBoxContainer" type="VBoxContainer" parent="SubViewportContainer/SubViewport" unique_id=1381371197]
 anchors_preset = 15
 anchor_right = 1.0
@@ -473,6 +446,29 @@ texture = ExtResource("21_xqmn8")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport/NormalUI" unique_id=965143308]
+material = SubResource("CanvasItemMaterial_yrlew")
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -79.0
+offset_right = 139.0
+offset_bottom = -15.0
+grow_vertical = 0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport/NormalUI/HBoxContainer" unique_id=1471011218]
+use_parent_material = true
+layout_mode = 2
+texture = ExtResource("2_q14vk")
+
+[node name="TextureRect2" type="TextureRect" parent="SubViewportContainer/SubViewport/NormalUI/HBoxContainer" unique_id=985508431]
+use_parent_material = true
+layout_mode = 2
+texture = ExtResource("3_s86m3")
+
 [node name="SettingPanel" parent="SubViewportContainer/SubViewport" unique_id=1258850840 instance=ExtResource("22_nthvp")]
 anchors_preset = 8
 anchor_left = 0.5
@@ -535,74 +531,74 @@ expand_mode = 1
 
 [node name="Prologue" type="Button" parent="." unique_id=1915175625 groups=["Buttons"]]
 texture_filter = 1
-offset_left = 1046.0
-offset_top = 109.0
-offset_right = 1074.0
-offset_bottom = 149.0
+offset_left = 1030.0
+offset_top = 106.0
+offset_right = 1070.0
+offset_bottom = 151.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_styles/normal = ExtResource("29_rh5bc")
-theme_override_styles/pressed = ExtResource("30_xqmn8")
-theme_override_styles/hover = ExtResource("29_rh5bc")
+theme_override_styles/normal = ExtResource("26_67h1o")
+theme_override_styles/pressed = ExtResource("27_pmm2a")
+theme_override_styles/hover = ExtResource("26_67h1o")
 action_mode = 0
 
 [node name="LoadPrologue" type="Button" parent="." unique_id=1420192485 groups=["Buttons"]]
 texture_filter = 1
-offset_left = 1045.0
-offset_top = 163.0
-offset_right = 1074.0
-offset_bottom = 203.0
+offset_left = 1031.0
+offset_top = 160.0
+offset_right = 1070.0
+offset_bottom = 207.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_styles/normal = ExtResource("29_rh5bc")
-theme_override_styles/pressed = ExtResource("30_xqmn8")
-theme_override_styles/hover = ExtResource("29_rh5bc")
+theme_override_styles/normal = ExtResource("26_67h1o")
+theme_override_styles/pressed = ExtResource("27_pmm2a")
+theme_override_styles/hover = ExtResource("26_67h1o")
 action_mode = 0
 
 [node name="PrologueLight" parent="." unique_id=2000029858 instance=ExtResource("34_aa43b")]
-offset_left = 1165.0
+offset_left = 1168.0
 offset_top = 182.0
-offset_right = 1187.0
+offset_right = 1190.0
 offset_bottom = 204.0
 
 [node name="Play2" type="Button" parent="." unique_id=1317648141 groups=["Buttons"]]
 texture_filter = 1
-offset_left = 1046.0
-offset_top = 244.0
-offset_right = 1073.0
-offset_bottom = 283.0
+offset_left = 1031.0
+offset_top = 237.0
+offset_right = 1071.0
+offset_bottom = 279.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_styles/normal = ExtResource("29_rh5bc")
-theme_override_styles/pressed = ExtResource("30_xqmn8")
-theme_override_styles/hover = ExtResource("29_rh5bc")
+theme_override_styles/normal = ExtResource("26_67h1o")
+theme_override_styles/pressed = ExtResource("27_pmm2a")
+theme_override_styles/hover = ExtResource("26_67h1o")
 action_mode = 0
 
 [node name="Load" type="Button" parent="." unique_id=813462728 groups=["Buttons"]]
 texture_filter = 1
-offset_left = 1046.0
-offset_top = 298.0
-offset_right = 1073.0
-offset_bottom = 338.0
+offset_left = 1031.0
+offset_top = 290.0
+offset_right = 1071.0
+offset_bottom = 336.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_styles/normal = ExtResource("29_rh5bc")
-theme_override_styles/pressed = ExtResource("30_xqmn8")
-theme_override_styles/hover = ExtResource("29_rh5bc")
+theme_override_styles/normal = ExtResource("26_67h1o")
+theme_override_styles/pressed = ExtResource("27_pmm2a")
+theme_override_styles/hover = ExtResource("26_67h1o")
 action_mode = 0
 
 [node name="CampaignLight" parent="." unique_id=871809701 instance=ExtResource("34_aa43b")]
-offset_left = 1166.0
-offset_top = 316.0
-offset_right = 1188.0
-offset_bottom = 338.0
+offset_left = 1168.0
+offset_top = 315.0
+offset_right = 1190.0
+offset_bottom = 337.0
 
 [node name="Fight" type="Button" parent="." unique_id=174179254 groups=["Buttons"]]
 texture_filter = 1
-offset_left = 1176.0
-offset_top = 367.0
-offset_right = 1233.0
-offset_bottom = 393.0
+offset_left = 1178.0
+offset_top = 365.0
+offset_right = 1235.0
+offset_bottom = 389.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/normal = ExtResource("26_67h1o")
@@ -612,33 +608,33 @@ action_mode = 0
 
 [node name="Credits" type="Button" parent="." unique_id=524956029 groups=["Buttons"]]
 texture_filter = 1
-offset_left = 1206.0
-offset_top = 611.0
-offset_right = 1236.0
-offset_bottom = 664.0
+offset_left = 1039.0
+offset_top = 614.0
+offset_right = 1123.0
+offset_bottom = 666.0
 size_flags_vertical = 3
-theme_override_styles/normal = ExtResource("32_xqmn8")
-theme_override_styles/pressed = ExtResource("33_sjyyd")
-theme_override_styles/hover = ExtResource("32_xqmn8")
+theme_override_styles/normal = ExtResource("26_67h1o")
+theme_override_styles/pressed = ExtResource("27_pmm2a")
+theme_override_styles/hover = ExtResource("26_67h1o")
 action_mode = 0
 
 [node name="Settings" type="Button" parent="." unique_id=1816309281 groups=["Buttons"]]
 texture_filter = 1
-offset_left = 1137.0
-offset_top = 447.0
-offset_right = 1167.0
-offset_bottom = 500.0
+offset_left = 1035.0
+offset_top = 425.0
+offset_right = 1075.0
+offset_bottom = 506.0
 size_flags_vertical = 3
-theme_override_styles/normal = ExtResource("32_xqmn8")
-theme_override_styles/pressed = ExtResource("33_sjyyd")
-theme_override_styles/hover = ExtResource("32_xqmn8")
+theme_override_styles/normal = ExtResource("26_67h1o")
+theme_override_styles/pressed = ExtResource("27_pmm2a")
+theme_override_styles/hover = ExtResource("26_67h1o")
 action_mode = 0
 
 [node name="Button" type="TextureButton" parent="." unique_id=449412107 groups=["Buttons"]]
-offset_left = 1048.0
-offset_top = 536.0
-offset_right = 1074.0
-offset_bottom = 597.0
+offset_left = 1212.0
+offset_top = 425.0
+offset_right = 1253.0
+offset_bottom = 505.0
 size_flags_horizontal = 3
 texture_normal = ExtResource("35_xqmn8")
 texture_pressed = ExtResource("36_sjyyd")
@@ -647,10 +643,10 @@ stretch_mode = 0
 
 [node name="Exit" type="Button" parent="." unique_id=2017627404 groups=["Buttons"]]
 texture_filter = 1
-offset_left = 1052.0
-offset_top = 610.0
-offset_right = 1081.0
-offset_bottom = 664.0
+offset_left = 1172.0
+offset_top = 614.0
+offset_right = 1245.0
+offset_bottom = 666.0
 size_flags_vertical = 3
 theme_override_styles/normal = ExtResource("37_xqmn8")
 theme_override_styles/pressed = ExtResource("38_sjyyd")
@@ -658,7 +654,7 @@ theme_override_styles/hover = ExtResource("37_xqmn8")
 action_mode = 0
 
 [node name="Fan" parent="." unique_id=238039746 instance=ExtResource("39_nthvp")]
-position = Vector2(957.00006, -14)
+position = Vector2(915, -14)
 scale = Vector2(0.8749995, 0.8749995)
 frame_progress = 0.96041
 frequency = 40.0
@@ -753,7 +749,7 @@ color = Color(0.5019608, 0.5019608, 0.5019608, 1)
 
 [node name="AlarmLight2" type="PointLight2D" parent="." unique_id=368259133]
 texture_filter = 2
-position = Vector2(597, -710)
+position = Vector2(598, -710)
 blend_mode = 2
 texture = ExtResource("36_j43p8")
 offset = Vector2(0, 1000)

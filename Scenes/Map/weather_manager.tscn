@@ -2,7 +2,6 @@
 
 [ext_resource type="Shader" uid="uid://yrc40y0r8y6y" path="res://Scenes/Map/StormShader.gdshader" id="1_8ickh"]
 [ext_resource type="Texture2D" uid="uid://bpghre0s4hi8" path="res://Noises/Weather/weathernoise.tres" id="2_8ickh"]
-[ext_resource type="Texture2D" uid="uid://chlkwju4hw0lw" path="res://Assets/DitherTexture.png" id="3_tye8x"]
 [ext_resource type="Script" uid="uid://bdn5v3wan8hys" path="res://Scenes/InScreenUI/WeatherMan/weather_manager.gd" id="4_3wj3p"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="5_0w5h3"]
 
@@ -12,11 +11,7 @@ shader_parameter/NoiseTexture2 = ExtResource("2_8ickh")
 shader_parameter/C = 0.60000000894072
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/z = 0.125
-shader_parameter/levels = 8
-shader_parameter/threshold = 0.6030000286425
 shader_parameter/colors = 8
-shader_parameter/dither_texture = ExtResource("3_tye8x")
-shader_parameter/DitherRes = Vector2(1500, 1500)
 
 [node name="WeatherManager" type="ColorRect" unique_id=2099502434]
 texture_filter = 3

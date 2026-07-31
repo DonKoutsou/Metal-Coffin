@@ -66,7 +66,7 @@ func UpdateBar(Added : int):
 			return
 			
 		OnItemBought.emit(It)
-	else : if(BoughtAmm > 0):
+	else : if(Added < 0 and BoughtAmm + PlAmm > 0):
 		OnItemSold.emit(It)
 	else:
 		return
