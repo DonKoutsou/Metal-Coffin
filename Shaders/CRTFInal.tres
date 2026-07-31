@@ -6,7 +6,10 @@
 shader = ExtResource("1_wo0vq")
 shader_parameter/res = Vector2(1280, 720)
 shader_parameter/mask_type = 2
-shader_parameter/vignette_strength = 2.999999932944
+shader_parameter/vignette_strength = 1.5799999646838399
+shader_parameter/vignette_spread = 0.27999999374144
+shader_parameter/vignette_harshness = 50.0
+shader_parameter/vignette_roundness = 0.21999999508256
 shader_parameter/image_flicker = 0.0499999988824
 shader_parameter/skip = 0.01
 shader_parameter/color_offset_multiplier = 0.0010000000475

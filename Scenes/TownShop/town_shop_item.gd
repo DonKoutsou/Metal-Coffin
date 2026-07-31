@@ -54,7 +54,7 @@ func UpdateBar(Added : int):
 	OnThingExchanged()
 	
 	$AudioStreamPlayer.play()
-	if (Added > 0):
+	if (Added > 0 and ShopAmm > 0):
 		var HasSpace : bool
 		
 		for g in LandedShips:
@@ -66,8 +66,10 @@ func UpdateBar(Added : int):
 			return
 			
 		OnItemBought.emit(It)
-	else :
+	else : if(BoughtAmm > 0):
 		OnItemSold.emit(It)
+	else:
+		return
 		
 	if (Added * ItPrice > PlWallet.Funds):
 		Added = roundi(PlWallet.Funds / ItPrice)
@@ -99,13 +101,21 @@ func OnThingExchanged() -> void:
 	if (TweenHover and TweenHover.is_running()):
 		TweenHover.kill()
 	z_index = 1
-	TweenHover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC).set_parallel(true)
-	TweenHover.tween_property(self,"scale", Vector2(1.1, 1.1), 0.25)
+	TweenHover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
+	TweenHover.tween_property(self,"scale", Vector2(1.05, 1.05), 0.15)
 	await TweenHover.finished
 	TweenHover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
-	TweenHover.tween_property(self,"scale", Vector2.ONE, 0.25)
+	TweenHover.tween_property(self,"scale", Vector2.ONE, 0.15)
 	z_index = 0
 
 
 func _on_inspect_button_pressed() -> void:
 	OnItemInspected.emit(It)
+
+
+func _on_sell_pressed() -> void:
+	UpdateBar(-1)
+
+
+func _on_buy_pressed() -> void:
+	UpdateBar(1)

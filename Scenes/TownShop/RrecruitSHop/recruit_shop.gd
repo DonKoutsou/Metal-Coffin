@@ -8,6 +8,7 @@ class_name RecruitShop
 #@export var Inv : CharacterInventory
 
 var CurrentShip : Captain
+var currentIndex : int = 0
 
 signal RecruitClosed
 
@@ -49,6 +50,7 @@ func OnShipSelected(Ship : Captain) -> void:
 		CurrentShip._CharInv.queue_free()
 	CurrentShip = Ship
 	CurrentShip = Ship.GetDuplicate()
+	currentIndex = AvailableCaptains.find(Ship)
 	CurrentShip.RegisterInventory(CharacterInventory.newInv(CurrentShip))
 	Stats.SetCaptain(CurrentShip)
 	Stats.ShowStats()
@@ -57,7 +59,10 @@ func OnShipSelected(Ship : Captain) -> void:
 func _on_buy_pressed() -> void:
 	if (PlWaller.Funds > CurrentShip.GetValue()):
 		PlWaller.AddFunds(-CurrentShip.GetValue())
-		OnCaptainBought.emit(CurrentShip)
+		OnCaptainBought.emit(CurrentShip.duplicate(true))
+		
+		CurrentShip._CharInv.queue_free()
+		AvailableCaptains.remove_at(currentIndex)
 		RefreshCaptains()
 	else:
 		PopUpManager.GetInstance().DoFadeNotif("Not enough funds")

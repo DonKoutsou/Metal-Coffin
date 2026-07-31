@@ -91,7 +91,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_t4r8q"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_7lp2o"]
 viewport_path = NodePath("SubViewportContainer/SubViewport")
 
 [sub_resource type="Curve" id="Curve_58ae4"]
@@ -169,8 +169,9 @@ transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 4
 oversampling = false
-size = Vector2i(186, 256)
-render_target_update_mode = 0
+size = Vector2i(191, 263)
+size_2d_override = Vector2i(186, 256)
+render_target_update_mode = 1
 
 [node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport" unique_id=1329688651]
 anchors_preset = 15
@@ -368,7 +369,9 @@ offset_bottom = 239.0
 mouse_filter = 1
 action_mode = 0
 keep_pressed_outside = true
-texture_normal = SubResource("ViewportTexture_t4r8q")
+texture_normal = SubResource("ViewportTexture_7lp2o")
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1274712658]
 visible = false

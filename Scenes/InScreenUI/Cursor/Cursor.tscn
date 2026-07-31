@@ -5,6 +5,7 @@
 
 [node name="InScreenMouse" type="TextureRect" unique_id=804818995]
 process_mode = 3
+texture_filter = 3
 offset_left = 677.0
 offset_top = 331.0
 offset_right = 709.0

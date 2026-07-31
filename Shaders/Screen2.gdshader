@@ -7,6 +7,10 @@ uniform int mask_type : hint_range(0, 2) = 0;
 
 group_uniforms Vignette;
 uniform float vignette_strength : hint_range(0., 10., 0.01) = 1.;
+uniform float vignette_spread : hint_range(0.0, 1.0, 0.01) = 0.45;
+uniform float vignette_harshness : hint_range(0.1, 50.0, 0.01) = 2.0;
+uniform float vignette_roundness : hint_range(0.0, 0.5, 0.01) = 0.08;
+
 uniform float image_flicker : hint_range(0., 1., .01) = 1.;
 uniform float skip : hint_range(0., 1., .01) = 1.;
 
@@ -59,6 +63,36 @@ float stripes(vec2 uv)
 	//vec3 quant = floor(color * ColorAmm + 0.5) / ColorAmm;
 	//return quant;
 //}
+
+float rounded_rect_sdf_aspect(vec2 uv, float radius) {
+	float aspect = res.x / res.y;
+
+	// Center UV around 0 and scale X by aspect.
+	vec2 p = uv * 2.0 - 1.0;
+	p.x *= aspect;
+
+	// The screen is now a wide rounded rectangle in corrected space.
+	vec2 half_size = vec2(aspect, 1.0);
+
+	vec2 q = abs(p) - (half_size - vec2(radius));
+
+	return length(max(q, vec2(0.0))) + min(max(q.x, q.y), 0.0) - radius;
+}
+
+float ScreenShapeVignette(vec2 uv) {
+	float sdf = rounded_rect_sdf_aspect(uv, vignette_roundness);
+
+	// Distance from the inside of the screen edge.
+	float edge_dist = max(-sdf, 0.0);
+
+	float spread = mix(0.001, 1.0, vignette_spread);
+
+	float vig = 1.0 - smoothstep(0.0, spread, edge_dist);
+
+	vig = pow(vig, vignette_harshness);
+
+	return exp(-vignette_strength * 2.0 * vig);
+}
 
 vec3 Fetch(vec2 pos, vec2 off, sampler2D iChannel0){
 	pos = floor(pos * res + off) / res;
@@ -178,8 +212,8 @@ void fragment(){
 		//COLOR.rgb = texture(SCREEN_TEXTURE, pos).rgb;
 		//COLOR.rgb = texture(SCREEN_TEXTURE, pos).rgb;
 		//vec2 mask_pos = UV * res;
-		COLOR.rgb = Tri(pos, SCREEN_TEXTURE);
-		//COLOR.rgb = Tri(pos, SCREEN_TEXTURE) * Mask(FRAGCOORD.xy);
+		//COLOR.rgb = Tri(pos, SCREEN_TEXTURE);
+		COLOR.rgb = Tri(pos, SCREEN_TEXTURE) * Mask(FRAGCOORD.xy);
 		vec2 look = pos;
 		float window = 1.0 / (1.0 + 20.0 * pow(look.y - mod(TIME / 4.0, 1.0), 2.0)) * image_flicker;
 		look.x += sin(look.y * 10.0 + TIME) / 50.0 * onOff(4.0, 4.0, 0.3) * (1.0 + cos(TIME * 80.0)) * window;
@@ -242,7 +276,8 @@ void fragment(){
 		y *= y;
 
 		float vignette = (1.0 - vigAmt * x) * (1.0 - vigAmt * y);
-		COLOR.rgb *= vignette;
+		//COLOR.rgb *= vignette;
+		COLOR.rgb *= ScreenShapeVignette(pos);
 		
 		COLOR.rgb = ToSrgb(COLOR.rgb);
 	}

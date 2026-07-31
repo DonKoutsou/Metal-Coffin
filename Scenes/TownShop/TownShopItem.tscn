@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bxpxh7q0trjjy" path="res://Scenes/TownShop/town_shop_item.gd" id="1_0hew0"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_vpph7"]
-[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_y3v6e"]
+[ext_resource type="StyleBox" uid="uid://elj4u7a13oc1" path="res://Theme/YellowTopPanel.tres" id="1_y3v6e"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="2_7jnpa"]
 [ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="5_0ij4u"]
 [ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="5_y3v6e"]
@@ -161,6 +161,19 @@ size_flags_vertical = 2
 value = 27.12
 show_percentage = false
 
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=2095270771]
+layout_mode = 2
+
+[node name="Sell" type="Button" parent="VBoxContainer/HBoxContainer2" unique_id=1255503376]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SELL"
+
+[node name="Buy" type="Button" parent="VBoxContainer/HBoxContainer2" unique_id=296726835]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "BUY"
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1837225259]
 stream = ExtResource("5_0ij4u")
 volume_db = -10.0
@@ -168,3 +181,5 @@ pitch_scale = 3.06
 bus = &"MapSounds"
 
 [connection signal="gui_input" from="VBoxContainer/ProgressBar" to="." method="ItemBar_gui_input"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Sell" to="." method="_on_sell_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Buy" to="." method="_on_buy_pressed"]
