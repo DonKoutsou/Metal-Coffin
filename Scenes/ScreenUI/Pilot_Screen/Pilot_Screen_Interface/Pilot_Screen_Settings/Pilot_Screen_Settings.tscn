@@ -4,7 +4,9 @@
 [ext_resource type="Script" uid="uid://b8qcw65lt8fkh" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Pilot_Screen_Settings/PilotScreenSettings.gd" id="2_06giw"]
 [ext_resource type="FontFile" uid="uid://dpimg5va4xy40" path="res://Fonts/P22 Typewriter Regular.ttf" id="3_85bjj"]
 [ext_resource type="StyleBox" uid="uid://bc1y4hhkl7ce6" path="res://Theme/Buttons/NobButton.tres" id="4_oe1k3"]
+[ext_resource type="StyleBox" uid="uid://b132qs50nums8" path="res://Theme/Buttons/NobButtonL.tres" id="4_x5rud"]
 [ext_resource type="StyleBox" uid="uid://21mi6l2i2tkk" path="res://Theme/Buttons/NobButton_Pressed.tres" id="5_dkh8b"]
+[ext_resource type="StyleBox" uid="uid://86sw4qe8p8b5" path="res://Theme/Buttons/NobButtonL_Pressed.tres" id="5_u3jdw"]
 [ext_resource type="Texture2D" uid="uid://6h6f55b8cda3" path="res://Assets/UIPiecies/Screen/Buttons/Switch2.png" id="6_amrhd"]
 [ext_resource type="Texture2D" uid="uid://b13t2vkapums2" path="res://Assets/UIPiecies/Screen/Buttons/Switch.png" id="7_b4q5k"]
 
@@ -42,7 +44,7 @@ alignment = 1
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=842363251]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 6
+size_flags_vertical = 2
 theme_override_colors/font_color = Color(0.13319641, 0.13319641, 0.13319638, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
@@ -51,18 +53,17 @@ theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("3_85bjj")
 text = "FC"
 horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="ForecastButton" type="Button" parent="HBoxContainer/VBoxContainer" unique_id=875609619 groups=["Buttons"]]
-custom_minimum_size = Vector2(24, 54)
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
+size_flags_vertical = 3
 focus_mode = 0
-theme_override_styles/normal = ExtResource("4_oe1k3")
-theme_override_styles/pressed = ExtResource("5_dkh8b")
-theme_override_styles/hover = ExtResource("4_oe1k3")
+theme_override_styles/normal = ExtResource("4_x5rud")
+theme_override_styles/pressed = ExtResource("5_u3jdw")
+theme_override_styles/hover = ExtResource("4_x5rud")
 toggle_mode = true
+expand_icon = true
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer" unique_id=64391831]
 layout_mode = 2
@@ -84,17 +85,15 @@ theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("3_85bjj")
 text = "Grid"
 horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="GridButton" type="Button" parent="HBoxContainer/VBoxContainer2" unique_id=2036452793 groups=["Buttons"]]
-custom_minimum_size = Vector2(24, 54)
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 3
 focus_mode = 0
-theme_override_styles/normal = ExtResource("4_oe1k3")
-theme_override_styles/pressed = ExtResource("5_dkh8b")
-theme_override_styles/hover = ExtResource("4_oe1k3")
+theme_override_styles/normal = ExtResource("4_x5rud")
+theme_override_styles/pressed = ExtResource("5_u3jdw")
+theme_override_styles/hover = ExtResource("4_x5rud")
 toggle_mode = true
 button_pressed = true
 
@@ -118,17 +117,16 @@ theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("3_85bjj")
 text = "Topo"
 horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="TopoButton" type="Button" parent="HBoxContainer/VBoxContainer8" unique_id=729791604 groups=["Buttons"]]
-custom_minimum_size = Vector2(24, 54)
+custom_minimum_size = Vector2(48, 48)
+custom_maximum_size = Vector2(48, 48)
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 3
 focus_mode = 0
-theme_override_styles/normal = ExtResource("4_oe1k3")
-theme_override_styles/pressed = ExtResource("5_dkh8b")
-theme_override_styles/hover = ExtResource("4_oe1k3")
+theme_override_styles/normal = ExtResource("4_x5rud")
+theme_override_styles/pressed = ExtResource("5_u3jdw")
+theme_override_styles/hover = ExtResource("4_x5rud")
 toggle_mode = true
 button_pressed = true
 
@@ -152,19 +150,19 @@ theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("3_85bjj")
 text = "UI"
 horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="ZoomLevelButton" type="Button" parent="HBoxContainer/VBoxContainer4" unique_id=910295466 groups=["Buttons"]]
-custom_minimum_size = Vector2(24, 54)
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 3
 size_flags_vertical = 3
 focus_mode = 0
-theme_override_styles/normal = ExtResource("4_oe1k3")
-theme_override_styles/pressed = ExtResource("5_dkh8b")
-theme_override_styles/hover = ExtResource("4_oe1k3")
+theme_override_styles/normal = ExtResource("4_x5rud")
+theme_override_styles/pressed = ExtResource("5_u3jdw")
+theme_override_styles/hover = ExtResource("4_x5rud")
 toggle_mode = true
 button_pressed = true
+expand_icon = true
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer" unique_id=742083166]
 visible = false
@@ -211,7 +209,7 @@ alignment = 1
 [node name="Label3" type="Label" parent="HBoxContainer/VBoxContainer9" unique_id=1765147685]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 2
 theme_override_colors/font_color = Color(0.13319641, 0.13319641, 0.13319638, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
@@ -220,17 +218,15 @@ theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("3_85bjj")
 text = "WC"
 horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="WindCorrection" type="Button" parent="HBoxContainer/VBoxContainer9" unique_id=1891356261 groups=["Buttons"]]
-custom_minimum_size = Vector2(24, 54)
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 3
 focus_mode = 0
-theme_override_styles/normal = ExtResource("4_oe1k3")
-theme_override_styles/pressed = ExtResource("5_dkh8b")
-theme_override_styles/hover = ExtResource("4_oe1k3")
+theme_override_styles/normal = ExtResource("4_x5rud")
+theme_override_styles/pressed = ExtResource("5_u3jdw")
+theme_override_styles/hover = ExtResource("4_x5rud")
 toggle_mode = true
 button_pressed = true
 

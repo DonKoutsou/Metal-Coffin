@@ -4,8 +4,8 @@
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_djntk"]
 [ext_resource type="Texture2D" uid="uid://ckbklcaxep2gf" path="res://Assets/UIPiecies/Screen/Marker_FullQuality.png" id="3_eviu5"]
 [ext_resource type="PackedScene" uid="uid://ox4pbwakfxs1" path="res://Scenes/ScreenUI/Dial/Dial_NoPanel.tscn" id="4_eviu5"]
-[ext_resource type="StyleBox" uid="uid://bc1y4hhkl7ce6" path="res://Theme/Buttons/NobButton.tres" id="5_67mm3"]
-[ext_resource type="StyleBox" uid="uid://21mi6l2i2tkk" path="res://Theme/Buttons/NobButton_Pressed.tres" id="6_djntk"]
+[ext_resource type="StyleBox" uid="uid://b132qs50nums8" path="res://Theme/Buttons/NobButtonL.tres" id="5_v7o4i"]
+[ext_resource type="StyleBox" uid="uid://86sw4qe8p8b5" path="res://Theme/Buttons/NobButtonL_Pressed.tres" id="6_v7o4i"]
 [ext_resource type="StyleBox" uid="uid://bog4o82ggjqwb" path="res://Theme/Buttons/ButtonOrange.tres" id="7_67mm3"]
 [ext_resource type="StyleBox" uid="uid://bxfwfq0uxu1w1" path="res://Theme/Buttons/ButtonOrange_Pressed.tres" id="8_djntk"]
 [ext_resource type="StyleBox" uid="uid://bj8tmjsnlmj0" path="res://Theme/Buttons/ButtonBlack.tres" id="9_gq5gp"]
@@ -53,15 +53,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 89.0
-offset_top = -74.0
-offset_right = 119.0
-offset_bottom = 4.0
+offset_left = 83.84616
+offset_top = -73.00001
+offset_right = 123.99997
+offset_bottom = 5.0000076
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/normal = ExtResource("5_67mm3")
-theme_override_styles/pressed = ExtResource("6_djntk")
-theme_override_styles/hover = ExtResource("5_67mm3")
+theme_override_styles/normal = ExtResource("5_v7o4i")
+theme_override_styles/pressed = ExtResource("6_v7o4i")
+theme_override_styles/hover = ExtResource("5_v7o4i")
 toggle_mode = true
 
 [node name="DrawLine" type="Button" parent="." unique_id=1318466251 groups=["Buttons"]]
@@ -95,8 +95,8 @@ theme_override_styles/hover = ExtResource("9_gq5gp")
 [node name="ClearLines" type="Button" parent="." unique_id=1847480924 groups=["Buttons"]]
 layout_mode = 0
 offset_left = 219.0
-offset_top = 109.0
-offset_right = 247.0
+offset_top = 108.5
+offset_right = 249.0
 offset_bottom = 142.0
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)

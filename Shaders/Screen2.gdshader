@@ -31,9 +31,8 @@ uniform float scanlines_opacity: hint_range(0., 2., .01) = 1.;
 uniform float scanlines_speed: hint_range(0., 5., .01) = 1.;
 uniform float scanline_thickness: hint_range(0., .6, .01) = 0.5;
 uniform float scanlines_spacing: hint_range(0.3, 3., .01) = 1.;
-//uniform float scanline_intensity : hint_range(0.0, 10.0) = 0;
 uniform float static_chromatic_aberration : hint_range(0.0, 1.0) = 0.1;
-//uniform float ColorAmm: hint_range(16, 256, 1.0) = 1.;
+
 
 float ToLinear1(float c){ return (c <= 0.04045) ? c / 12.92 : pow((c + 0.055) / 1.055, 2.4); }
 vec3 ToLinear(vec3 c){ return vec3(ToLinear1(c.r), ToLinear1(c.g), ToLinear1(c.b)); }
@@ -209,76 +208,25 @@ void fragment(){
 		COLOR = vec4(0,0,0,1.0);
 	}
 	else{
-		//COLOR.rgb = texture(SCREEN_TEXTURE, pos).rgb;
-		//COLOR.rgb = texture(SCREEN_TEXTURE, pos).rgb;
-		//vec2 mask_pos = UV * res;
-		//COLOR.rgb = Tri(pos, SCREEN_TEXTURE);
 		COLOR.rgb = Tri(pos, SCREEN_TEXTURE) * Mask(FRAGCOORD.xy);
 		vec2 look = pos;
 		float window = 1.0 / (1.0 + 20.0 * pow(look.y - mod(TIME / 4.0, 1.0), 2.0)) * image_flicker;
 		look.x += sin(look.y * 10.0 + TIME) / 50.0 * onOff(4.0, 4.0, 0.3) * (1.0 + cos(TIME * 80.0)) * window;
 		float vShift = 0.4 * onOff(2.0, 3.0, 0.9) * (pow(sin(TIME) * sin(TIME * 20.0) + (0.5 + 0.1 * sin(TIME * 200.0) * cos(TIME)), 2.0)) * skip;
 		look.y = mod(look.y + vShift, 1.0);
-		
-		//float g_r = smoothstep(0.85, 0.95, abs(sin(look.x * (res.x * 3.14159265))));
-		//COLOR.r = mix(COLOR.r, COLOR.r * g_r, 0.5);
-		//
-		//float g_g = smoothstep(0.85, 0.95, abs(sin(1.05 + look.x * (res.x * 3.14159265))));
-		//COLOR.g = mix(COLOR.g, COLOR.g * g_g, 0.5);
-		//
-		//float b_b = smoothstep(0.85, 0.95, abs(sin(2.1 + look.x * (res.x * 3.14159265))));
-		//COLOR.b = mix(COLOR.b, COLOR.b * b_b, 0.5);
-		//float scanlines = 0.5;
-		//scanlines = mod(sin(pos.y + (res.y * 3.14159265)), 2.0);
-		//COLOR.rgb = mix(COLOR.rgb, COLOR.rgb * vec3(scanlines), scanlines_opacity);
 
 		float aberration_amount = 0.005 * window * 5.0;
 		vec2 red_offset = vec2(-aberration_amount, 0.0);
 		vec2 blue_offset = vec2(aberration_amount, 0.0);
 		
 		COLOR.rgb += stripes(pos);
-		//COLOR.rgb = to_indexed_palette(COLOR.rgb);
-		//COLOR.a = border(look);
+
 		float x_offset = noise(vec2(floor(UV.y * 487.0), fract(UV.y * 487.0)), TIME) * color_offset_multiplier;
 		COLOR.r = mix(COLOR.r, texture(SCREEN_TEXTURE, look + x_offset + red_offset - static_chromatic_aberration).r, 0.5);
 		COLOR.g = mix(COLOR.g, texture(SCREEN_TEXTURE, look + x_offset).g, 0.5);
 		COLOR.b = mix(COLOR.b, texture(SCREEN_TEXTURE, look + x_offset + blue_offset + static_chromatic_aberration).b, 0.5);
 
-		
-
-
-		
-		//float color_dark_offset = 0.0;
-		//int y_pos = int(floor(SCREEN_UV.y * Scanres * 2.0));
-		//if (int(floor((float(y_pos) / 2.0))) * 2 == y_pos)
-			//color_dark_offset = scanline_intensity;
-
-		//COLOR.rgb += mix(Tint, vec3(color_dark_offset), 0.5);
-		
-		
-		
-		//float black_offset = noise(vec2(floor(UV.y * 487.0), fract(UV.y * 487.0)), TIME + 69.420) * (black_offset_multiplier * 0.01);
-
-		//COLOR = textureLod(SCREEN_TEXTURE, look + vec2(black_offset,0.0), 0.0);
-
-		//vec4 color2 = textureLod(SCREEN_TEXTURE, look + vec2(x_offset,0.0), blur_amount);
-		//vec3 yuv1 = rgb_to_yuv(color2.rgb);
-		//vec3 yuv2 = rgb_to_yuv(COLOR.rgb);
-		//COLOR.rgb = yuv_to_rgb(yuv2);
-		//COLOR.rgb = color2.rgb;
-		float vigAmt = (3.3) * vignette_strength;
-		vec2 d = pos - vec2(0.5);
-
-		float x = d.x * d.x;
-		x *= x;
-
-		float y = d.y * d.y;
-		y *= y;
-
-		float vignette = (1.0 - vigAmt * x) * (1.0 - vigAmt * y);
-		//COLOR.rgb *= vignette;
 		COLOR.rgb *= ScreenShapeVignette(pos);
-		
 		COLOR.rgb = ToSrgb(COLOR.rgb);
 	}
 }

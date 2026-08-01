@@ -26,6 +26,8 @@
 [ext_resource type="PackedScene" uid="uid://bq1ns0us14bn3" path="res://Scenes/InScreenUI/Cursor/Cursor.tscn" id="24_rh5bc"]
 [ext_resource type="StyleBox" uid="uid://bj8tmjsnlmj0" path="res://Theme/Buttons/ButtonBlack.tres" id="26_67h1o"]
 [ext_resource type="StyleBox" uid="uid://g2ic8um6hit" path="res://Theme/Buttons/ButtonBlack_Pressed.tres" id="27_pmm2a"]
+[ext_resource type="StyleBox" uid="uid://cpq6h2wwtgr07" path="res://Theme/Buttons/ButtonBlue.tres" id="28_23r0g"]
+[ext_resource type="StyleBox" uid="uid://chq4sdt1mihdh" path="res://Theme/Buttons/ButtonBlue_Pressed.tres" id="29_t54ed"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="34_aa43b"]
 [ext_resource type="Texture2D" uid="uid://ben2ixlvxo42b" path="res://Assets/UIPiecies/Screen/Buttons/Button10_Camera 1_FullQuality.png" id="35_xqmn8"]
 [ext_resource type="Texture2D" uid="uid://cbkii1pjnwxww" path="res://Assets/UIPiecies/LightCone.png" id="36_j43p8"]
@@ -83,7 +85,7 @@ canvas_item_default_texture_filter = 2
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 0
 positional_shadow_atlas_16_bits = false
-size = Vector2i(979, 670)
+size = Vector2i(868, 594)
 size_2d_override = Vector2i(868, 594)
 size_2d_override_stretch = true
 render_target_update_mode = 4
@@ -531,10 +533,10 @@ expand_mode = 1
 
 [node name="Prologue" type="Button" parent="." unique_id=1915175625 groups=["Buttons"]]
 texture_filter = 1
-offset_left = 1030.0
-offset_top = 106.0
+offset_left = 1029.0
+offset_top = 104.89744
 offset_right = 1070.0
-offset_bottom = 151.0
+offset_bottom = 150.10257
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/normal = ExtResource("26_67h1o")
@@ -544,7 +546,7 @@ action_mode = 0
 
 [node name="LoadPrologue" type="Button" parent="." unique_id=1420192485 groups=["Buttons"]]
 texture_filter = 1
-offset_left = 1031.0
+offset_left = 1030.0
 offset_top = 160.0
 offset_right = 1070.0
 offset_bottom = 207.0
@@ -557,13 +559,13 @@ action_mode = 0
 
 [node name="PrologueLight" parent="." unique_id=2000029858 instance=ExtResource("34_aa43b")]
 offset_left = 1168.0
-offset_top = 182.0
+offset_top = 181.0
 offset_right = 1190.0
-offset_bottom = 204.0
+offset_bottom = 203.0
 
 [node name="Play2" type="Button" parent="." unique_id=1317648141 groups=["Buttons"]]
 texture_filter = 1
-offset_left = 1031.0
+offset_left = 1030.0
 offset_top = 237.0
 offset_right = 1071.0
 offset_bottom = 279.0
@@ -576,7 +578,7 @@ action_mode = 0
 
 [node name="Load" type="Button" parent="." unique_id=813462728 groups=["Buttons"]]
 texture_filter = 1
-offset_left = 1031.0
+offset_left = 1030.0
 offset_top = 290.0
 offset_right = 1071.0
 offset_bottom = 336.0
@@ -608,10 +610,10 @@ action_mode = 0
 
 [node name="Credits" type="Button" parent="." unique_id=524956029 groups=["Buttons"]]
 texture_filter = 1
-offset_left = 1039.0
-offset_top = 614.0
-offset_right = 1123.0
-offset_bottom = 666.0
+offset_left = 1043.0
+offset_top = 626.0
+offset_right = 1119.0
+offset_bottom = 662.0
 size_flags_vertical = 3
 theme_override_styles/normal = ExtResource("26_67h1o")
 theme_override_styles/pressed = ExtResource("27_pmm2a")
@@ -625,9 +627,9 @@ offset_top = 425.0
 offset_right = 1075.0
 offset_bottom = 506.0
 size_flags_vertical = 3
-theme_override_styles/normal = ExtResource("26_67h1o")
-theme_override_styles/pressed = ExtResource("27_pmm2a")
-theme_override_styles/hover = ExtResource("26_67h1o")
+theme_override_styles/normal = ExtResource("28_23r0g")
+theme_override_styles/pressed = ExtResource("29_t54ed")
+theme_override_styles/hover = ExtResource("28_23r0g")
 action_mode = 0
 
 [node name="Button" type="TextureButton" parent="." unique_id=449412107 groups=["Buttons"]]
@@ -643,10 +645,10 @@ stretch_mode = 0
 
 [node name="Exit" type="Button" parent="." unique_id=2017627404 groups=["Buttons"]]
 texture_filter = 1
-offset_left = 1172.0
-offset_top = 614.0
+offset_left = 1167.0
+offset_top = 626.0
 offset_right = 1245.0
-offset_bottom = 666.0
+offset_bottom = 662.0
 size_flags_vertical = 3
 theme_override_styles/normal = ExtResource("37_xqmn8")
 theme_override_styles/pressed = ExtResource("38_sjyyd")
@@ -749,7 +751,7 @@ color = Color(0.5019608, 0.5019608, 0.5019608, 1)
 
 [node name="AlarmLight2" type="PointLight2D" parent="." unique_id=368259133]
 texture_filter = 2
-position = Vector2(598, -710)
+position = Vector2(657, -700)
 blend_mode = 2
 texture = ExtResource("36_j43p8")
 offset = Vector2(0, 1000)

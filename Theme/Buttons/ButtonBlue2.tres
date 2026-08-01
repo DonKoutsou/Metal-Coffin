@@ -1,0 +1,12 @@
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://dlx7e3kuk5uhf"]
+
+[ext_resource type="Texture2D" uid="uid://cjikrrpjhmdnl" path="res://Assets/UIPiecies/Screen/Buttons/Button11_Camera 1_FullQuality.png" id="1_qadiw"]
+
+[resource]
+texture = ExtResource("1_qadiw")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1

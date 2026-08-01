@@ -15,8 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://hiw68h8srifm" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Steer/SteeringWheelUI.tscn" id="10_w258d"]
 [ext_resource type="PackedScene" uid="uid://cvhgybnbwc0e4" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Aerophone/Aerophone.tscn" id="11_jqinv"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="14_ce8jv"]
-[ext_resource type="StyleBox" uid="uid://cpq6h2wwtgr07" path="res://Theme/Buttons/ButtonBlue.tres" id="18_eeg0m"]
-[ext_resource type="StyleBox" uid="uid://chq4sdt1mihdh" path="res://Theme/Buttons/ButtonBlue_Pressed.tres" id="19_ecvfe"]
+[ext_resource type="StyleBox" uid="uid://dlx7e3kuk5uhf" path="res://Theme/Buttons/ButtonBlue2.tres" id="16_qqfhp"]
 [ext_resource type="PackedScene" uid="uid://dj4mdtpd50mk1" path="res://Scenes/ScreenUI/Pilot_Screen/open_hatch_button.tscn" id="20_8mt3t"]
 [ext_resource type="StyleBox" uid="uid://bog4o82ggjqwb" path="res://Theme/Buttons/ButtonOrange.tres" id="20_eeg0m"]
 [ext_resource type="StyleBox" uid="uid://bj8tmjsnlmj0" path="res://Theme/Buttons/ButtonBlack.tres" id="20_uojtp"]
@@ -141,10 +140,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -51.0
-offset_top = -532.0
-offset_right = -25.0
-offset_bottom = -472.0
+offset_left = -58.0
+offset_top = -547.7586
+offset_right = -15.0
+offset_bottom = -463.2414
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
@@ -161,10 +160,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -53.0
-offset_top = -480.0
-offset_right = -24.0
-offset_bottom = -411.56
+offset_left = -57.0
+offset_top = -485.7931
+offset_right = -16.0
+offset_bottom = -405.2069
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
@@ -180,9 +179,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -101.0
-offset_top = -13.0
-offset_right = -64.0
+offset_left = -100.0
+offset_top = -12.0
+offset_right = -63.0
 offset_bottom = 29.0
 grow_horizontal = 0
 grow_vertical = 2
@@ -210,9 +209,9 @@ grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 focus_mode = 0
-theme_override_styles/normal = ExtResource("18_eeg0m")
-theme_override_styles/pressed = ExtResource("19_ecvfe")
-theme_override_styles/hover = ExtResource("18_eeg0m")
+theme_override_styles/normal = ExtResource("16_qqfhp")
+theme_override_styles/pressed = ExtResource("21_hc833")
+theme_override_styles/hover = ExtResource("16_qqfhp")
 
 [node name="MarkerEditorButton" type="Button" parent="." unique_id=1617237938 groups=["Buttons"]]
 visible = false
@@ -293,10 +292,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -83.0
+offset_left = -81.0
 offset_top = -596.0
-offset_right = -26.0
-offset_bottom = -560.0
+offset_right = -25.0
+offset_bottom = -561.0
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
