@@ -14,8 +14,8 @@ class_name PilotScreenUI
 @export var steer: SteeringWheelUI
 @export var pilotScreenSet: PilotScreenSettings
 @export var SonarUI : AeroSonar
-@export var speedSimulationButton: Button
-@export var pauseSimulationButton: Button
+@export var speedSimulationButton: BaseButton
+@export var pauseSimulationButton: BaseButton
 @export var landButton : Button
 @export var hatchButton : Button
 @export var regroupButton: Button
@@ -32,12 +32,14 @@ func _ready() -> void:
 	uiEventHandler.ZoomChangedFromScreen.connect(zoomDial.addCustomMovement)
 	uiEventHandler.YChangedFromScreen.connect(yDial.addCustomMovement)
 	uiEventHandler.XChangedFromScreen.connect(xDial.addCustomMovement)
+	uiEventHandler.RadarUpdated.connect(radarToggled)
 	
 	UISoundMan.GetInstance().Refresh()
 	
 	speedSimulationButton.set_pressed_no_signal(SimulationManager.SimSpeed() > 1)
 	pauseSimulationButton.set_pressed_no_signal(!SimulationManager.IsPaused())
-	_onSteerButtonToggled(pilotScreenSet.SteerState)
+	#_onSteerButtonToggled(pilotScreenSet.SteerState)
+	
 
 func Update(delta : float) -> void:
 	SonarUI.Update(delta)
@@ -51,7 +53,10 @@ func speedUpdated(enabled: bool) -> void:
 func simulationToggled(paused: bool) -> void:
 	pauseSimulationButton.set_pressed_no_signal(!paused)
 	pauseSimulationButton.button_down.emit()
-	
+
+func radarToggled(t : bool) -> void:
+	radarButton.set_pressed_no_signal(t)
+
 # --- OUTGOING EVENTS TO GAME LOGIC/UI DISPATCH ---
 
 #func _on_altitude_dial_range_changed(newVal: float) -> void:
@@ -65,6 +70,9 @@ func _on_speed_simulation_toggled(toggledOn: bool) -> void:
 
 func simPauseToggled(toggledOn: bool) -> void:
 	SimulationManager.GetInstance().TogglePause(!toggledOn)
+
+func radarButtonToggled(t : bool) -> void:
+	uiEventHandler.OnRadarButtonPressed(t)
 
 func accelerationEnded(valueChanged: float) -> void:
 	uiEventHandler.OnAccelerationEnded(valueChanged)
@@ -88,8 +96,7 @@ func regroupPressed() -> void:
 func openHatchButtonPressed() -> void:
 	uiEventHandler.OnOpenHatchPressed()
 
-func radarButtonPressed() -> void:
-	uiEventHandler.OnRadarButtonPressed()
+	
 
 func landPressed() -> void:
 	uiEventHandler.OnLandPressed()

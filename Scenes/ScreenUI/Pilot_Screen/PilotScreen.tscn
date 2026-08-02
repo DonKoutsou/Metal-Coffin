@@ -5,9 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/ThrustSlider/thrust_slider.tscn" id="3_ecvfe"]
 [ext_resource type="Texture2D" uid="uid://dum1h361hyptq" path="res://Assets/UIPiecies/Screen/ScreenFrames/StartMenu_Screen.png" id="3_h6xln"]
 [ext_resource type="Texture2D" uid="uid://dxr40jficax1" path="res://Assets/UIPiecies/Screen/SidePanels/Pilot_Cover.png" id="4_8mt3t"]
-[ext_resource type="PackedScene" uid="uid://cy532oaym6ul7" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Pilot_Screen_Settings/Pilot_Screen_Settings.tscn" id="5_ojc6g"]
 [ext_resource type="StyleBox" uid="uid://bc1y4hhkl7ce6" path="res://Theme/Buttons/NobButton.tres" id="6_bpouu"]
 [ext_resource type="PackedScene" uid="uid://k7pqywm80h3m" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/ThrustSlider/Elevation_slider.tscn" id="6_jqinv"]
+[ext_resource type="Script" uid="uid://b8qcw65lt8fkh" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Pilot_Screen_Settings/PilotScreenSettings.gd" id="7_h6xln"]
 [ext_resource type="PackedScene" uid="uid://cwnxxystgxrjm" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/MissileTab/MissileTab.tscn" id="7_ojc6g"]
 [ext_resource type="StyleBox" uid="uid://21mi6l2i2tkk" path="res://Theme/Buttons/NobButton_Pressed.tres" id="7_yjfdw"]
 [ext_resource type="PackedScene" uid="uid://dwhre3xvmvjwf" path="res://Scenes/ScreenUI/Fan.tscn" id="8_bpouu"]
@@ -17,14 +17,15 @@
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="14_ce8jv"]
 [ext_resource type="StyleBox" uid="uid://dlx7e3kuk5uhf" path="res://Theme/Buttons/ButtonBlue2.tres" id="16_qqfhp"]
 [ext_resource type="PackedScene" uid="uid://dj4mdtpd50mk1" path="res://Scenes/ScreenUI/Pilot_Screen/open_hatch_button.tscn" id="20_8mt3t"]
-[ext_resource type="StyleBox" uid="uid://bog4o82ggjqwb" path="res://Theme/Buttons/ButtonOrange.tres" id="20_eeg0m"]
+[ext_resource type="BitMap" uid="uid://c2ivt2vwjpttm" path="res://Assets/UIPiecies/Screen/Buttons/NobMask2.png" id="20_h6xln"]
 [ext_resource type="StyleBox" uid="uid://bj8tmjsnlmj0" path="res://Theme/Buttons/ButtonBlack.tres" id="20_uojtp"]
-[ext_resource type="StyleBox" uid="uid://bxfwfq0uxu1w1" path="res://Theme/Buttons/ButtonOrange_Pressed.tres" id="21_ecvfe"]
 [ext_resource type="StyleBox" uid="uid://g2ic8um6hit" path="res://Theme/Buttons/ButtonBlack_Pressed.tres" id="21_hc833"]
 [ext_resource type="FontFile" uid="uid://mwyuu26jo0fk" path="res://Fonts/Bank Gothic Light Regular.otf" id="23_j5ioc"]
 [ext_resource type="StyleBox" uid="uid://bblal3stslrb1" path="res://Theme/Buttons/ButtonWhite.tres" id="24_8mt3t"]
 [ext_resource type="StyleBox" uid="uid://cwsk20kaf6n22" path="res://Theme/Buttons/ButtonWhite_Pressed.tres" id="25_q2jn7"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/Dial/Dial.tscn" id="26_ecvfe"]
+[ext_resource type="Texture2D" uid="uid://c7sjnn0llsgx6" path="res://Assets/UIPiecies/Screen/Buttons/Nob2.png" id="26_qqfhp"]
+[ext_resource type="Texture2D" uid="uid://b5847pm3qa860" path="res://Assets/UIPiecies/Screen/Buttons/Nob.png" id="27_h6xln"]
 [ext_resource type="PackedScene" uid="uid://c2tp3xgyap8ar" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Elint/ELint.tscn" id="27_uojtp"]
 [ext_resource type="PackedScene" uid="uid://dmmhk1exrryca" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/ControlledShipUI/ControlledShipSelection.tscn" id="28_hc833"]
 
@@ -44,7 +45,7 @@ mapMarkerControls = NodePath("VBoxContainer/MapMarkerControls")
 thrust = NodePath("ThrustLever")
 elevationThrust = NodePath("ElevationLever")
 steer = NodePath("SteeringWheel")
-pilotScreenSet = NodePath("VBoxContainer/Pilot_Screen_Settings")
+pilotScreenSet = NodePath("")
 SonarUI = NodePath("VBoxContainer/Sonar")
 speedSimulationButton = NodePath("SpeedSimulation")
 pauseSimulationButton = NodePath("SimulationButton")
@@ -85,6 +86,7 @@ texture = ExtResource("4_8mt3t")
 expand_mode = 1
 
 [node name="Elint" parent="." unique_id=502600520 instance=ExtResource("27_uojtp")]
+visible = false
 custom_minimum_size = Vector2(0, 166.125)
 layout_mode = 0
 anchors_preset = 0
@@ -100,7 +102,7 @@ grow_horizontal = 1
 grow_vertical = 1
 
 [node name="Fan" parent="." unique_id=159958918 instance=ExtResource("8_bpouu")]
-position = Vector2(992, -20.000002)
+position = Vector2(993, -35)
 scale = Vector2(0.757, 0.8)
 frame_progress = 0.96041
 frequency = 40.0
@@ -129,48 +131,48 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Pilot_Screen_Settings" parent="VBoxContainer" unique_id=1173233523 instance=ExtResource("5_ojc6g")]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="SpeedSimulation" type="Button" parent="." unique_id=314067477 groups=["Buttons"]]
+[node name="SpeedSimulation" type="TextureButton" parent="." unique_id=1938511727 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -58.0
-offset_top = -547.7586
-offset_right = -15.0
-offset_bottom = -463.2414
+offset_left = -60.0
+offset_top = -543.069
+offset_right = -21.0
+offset_bottom = -466.41382
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
-theme_override_styles/normal = ExtResource("6_bpouu")
-theme_override_styles/pressed = ExtResource("7_yjfdw")
-theme_override_styles/hover = ExtResource("6_bpouu")
 toggle_mode = true
 action_mode = 0
+texture_normal = ExtResource("26_qqfhp")
+texture_pressed = ExtResource("27_h6xln")
+texture_click_mask = ExtResource("20_h6xln")
+ignore_texture_size = true
+stretch_mode = 5
 
-[node name="SimulationButton" type="Button" parent="." unique_id=1114359656 groups=["Buttons"]]
+[node name="SimulationButton" type="TextureButton" parent="." unique_id=1481011792 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -57.0
-offset_top = -485.7931
-offset_right = -16.0
-offset_bottom = -405.2069
+offset_left = -60.0
+offset_top = -486.93103
+offset_right = -21.0
+offset_bottom = -410.27588
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
-theme_override_styles/normal = ExtResource("6_bpouu")
-theme_override_styles/pressed = ExtResource("7_yjfdw")
-theme_override_styles/hover = ExtResource("6_bpouu")
 toggle_mode = true
+texture_normal = ExtResource("26_qqfhp")
+texture_pressed = ExtResource("27_h6xln")
+texture_click_mask = ExtResource("20_h6xln")
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="InventoryButton" type="Button" parent="." unique_id=1655197087 groups=["Buttons"]]
 layout_mode = 1
@@ -278,12 +280,11 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 1042.0
-offset_top = 595.0
+offset_top = 597.0
 offset_right = 1098.0
-offset_bottom = 719.66656
+offset_bottom = 721.66656
 grow_horizontal = 1
 grow_vertical = 1
-disabled = true
 
 [node name="RadarButton" type="Button" parent="." unique_id=1811648738 groups=["Buttons"]]
 layout_mode = 1
@@ -292,16 +293,131 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -81.0
-offset_top = -596.0
-offset_right = -25.0
-offset_bottom = -561.0
+offset_left = -74.0
+offset_top = -620.5357
+offset_right = -30.0
+offset_bottom = -536.4643
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
-theme_override_styles/normal = ExtResource("20_eeg0m")
-theme_override_styles/pressed = ExtResource("21_ecvfe")
-theme_override_styles/hover = ExtResource("20_eeg0m")
+theme_override_styles/normal = ExtResource("6_bpouu")
+theme_override_styles/pressed = ExtResource("7_yjfdw")
+theme_override_styles/hover = ExtResource("6_bpouu")
+toggle_mode = true
+
+[node name="Pilot_Screen_Settings" type="Control" parent="." unique_id=1014197286 node_paths=PackedStringArray("ForecastButton", "GridButton", "ZoomButton", "TopoButton", "WindCorrectionButton")]
+anchors_preset = 0
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("7_h6xln")
+ForecastButton = NodePath("Fore")
+GridButton = NodePath("GRID")
+ZoomButton = NodePath("UI")
+TopoButton = NodePath("Topo")
+WindCorrectionButton = NodePath("WindCor")
+
+[node name="WindCor" type="Button" parent="Pilot_Screen_Settings" unique_id=318848790 groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1106.0
+offset_top = 99.464294
+offset_right = 1150.0
+offset_bottom = 183.5357
+grow_horizontal = 0
+grow_vertical = 0
+focus_mode = 0
+theme_override_styles/normal = ExtResource("6_bpouu")
+theme_override_styles/pressed = ExtResource("7_yjfdw")
+theme_override_styles/hover = ExtResource("6_bpouu")
+toggle_mode = true
+
+[node name="Fore" type="TextureButton" parent="Pilot_Screen_Settings" unique_id=41436554 groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1113.0
+offset_top = 193.0
+offset_right = 1151.0
+offset_bottom = 267.21875
+grow_horizontal = 0
+grow_vertical = 0
+focus_mode = 0
+toggle_mode = true
+texture_normal = ExtResource("26_qqfhp")
+texture_pressed = ExtResource("27_h6xln")
+texture_click_mask = ExtResource("20_h6xln")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="UI" type="TextureButton" parent="Pilot_Screen_Settings" unique_id=477491953 groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1111.0
+offset_top = 242.0
+offset_right = 1151.0
+offset_bottom = 318.4286
+grow_horizontal = 0
+grow_vertical = 0
+focus_mode = 0
+toggle_mode = true
+texture_normal = ExtResource("26_qqfhp")
+texture_pressed = ExtResource("27_h6xln")
+texture_click_mask = ExtResource("20_h6xln")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="GRID" type="TextureButton" parent="Pilot_Screen_Settings" unique_id=69224209 groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1045.0
+offset_top = 242.0
+offset_right = 1085.0
+offset_bottom = 318.4286
+grow_horizontal = 0
+grow_vertical = 0
+focus_mode = 0
+toggle_mode = true
+texture_normal = ExtResource("26_qqfhp")
+texture_pressed = ExtResource("27_h6xln")
+texture_click_mask = ExtResource("20_h6xln")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Topo" type="TextureButton" parent="Pilot_Screen_Settings" unique_id=551517063 groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1046.0
+offset_top = 194.0
+offset_right = 1084.0
+offset_bottom = 266.6071
+grow_horizontal = 0
+grow_vertical = 0
+focus_mode = 0
+toggle_mode = true
+texture_normal = ExtResource("26_qqfhp")
+texture_pressed = ExtResource("27_h6xln")
+texture_click_mask = ExtResource("20_h6xln")
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="LandButton" type="Button" parent="." unique_id=654026330 groups=["Buttons"]]
 layout_mode = 1
@@ -403,12 +519,6 @@ position = Vector2(35, 604)
 rotation = -4.712389
 scale = Vector2(0.88, 0.978)
 
-[connection signal="ForecastToggled" from="VBoxContainer/Pilot_Screen_Settings" to="." method="_on_forecast_button_toggled"]
-[connection signal="GridToggled" from="VBoxContainer/Pilot_Screen_Settings" to="." method="_on_grid_button_toggled"]
-[connection signal="SteerToggled" from="VBoxContainer/Pilot_Screen_Settings" to="." method="_onSteerButtonToggled"]
-[connection signal="TopologyTogled" from="VBoxContainer/Pilot_Screen_Settings" to="." method="_on_topo_button_toggled"]
-[connection signal="WindCorrectionToggled" from="VBoxContainer/Pilot_Screen_Settings" to="." method="_on_wind_correction_toggled"]
-[connection signal="ZoomToggled" from="VBoxContainer/Pilot_Screen_Settings" to="." method="_on_zoom_level_button_toggled"]
 [connection signal="toggled" from="SpeedSimulation" to="." method="_on_speed_simulation_toggled"]
 [connection signal="toggled" from="SimulationButton" to="." method="simPauseToggled"]
 [connection signal="pressed" from="InventoryButton" to="." method="inventoryPressed"]
@@ -416,7 +526,18 @@ scale = Vector2(0.88, 0.978)
 [connection signal="pressed" from="MarkerEditorButton" to="." method="markerEditorButtonPressed"]
 [connection signal="pressed" from="ShipDockButton" to="." method="shipDockButtonPressed"]
 [connection signal="pressed" from="OpenHatchButton" to="." method="openHatchButtonPressed"]
-[connection signal="pressed" from="RadarButton" to="." method="radarButtonPressed"]
+[connection signal="toggled" from="RadarButton" to="." method="radarButtonToggled"]
+[connection signal="ForecastToggled" from="Pilot_Screen_Settings" to="." method="_on_forecast_button_toggled"]
+[connection signal="GridToggled" from="Pilot_Screen_Settings" to="." method="_on_grid_button_toggled"]
+[connection signal="SteerToggled" from="Pilot_Screen_Settings" to="." method="_onSteerButtonToggled"]
+[connection signal="TopologyTogled" from="Pilot_Screen_Settings" to="." method="_on_topo_button_toggled"]
+[connection signal="WindCorrectionToggled" from="Pilot_Screen_Settings" to="." method="_on_wind_correction_toggled"]
+[connection signal="ZoomToggled" from="Pilot_Screen_Settings" to="." method="_on_zoom_level_button_toggled"]
+[connection signal="toggled" from="Pilot_Screen_Settings/WindCor" to="Pilot_Screen_Settings" method="_on_wind_correction_toggled"]
+[connection signal="toggled" from="Pilot_Screen_Settings/Fore" to="Pilot_Screen_Settings" method="_on_forecast_button_toggled"]
+[connection signal="toggled" from="Pilot_Screen_Settings/UI" to="Pilot_Screen_Settings" method="_on_zoom_level_button_toggled"]
+[connection signal="toggled" from="Pilot_Screen_Settings/GRID" to="Pilot_Screen_Settings" method="_on_grid_button_toggled"]
+[connection signal="toggled" from="Pilot_Screen_Settings/Topo" to="Pilot_Screen_Settings" method="_on_topo_button_toggled"]
 [connection signal="pressed" from="LandButton" to="." method="landPressed"]
 [connection signal="pressed" from="Pause" to="." method="pausePressed"]
 [connection signal="RangeChanged" from="ZoomDial" to="." method="_on_zoom_dial_range_changed"]

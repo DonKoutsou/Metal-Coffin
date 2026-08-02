@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://c2ivt2vwjpttm"
+path="res://.godot/imported/NobMask2.png-5227638a9c1be8594f110632346571f4.res"
+
+[deps]
+
+source_file="res://Assets/UIPiecies/Screen/Buttons/NobMask2.png"
+dest_files=["res://.godot/imported/NobMask2.png-5227638a9c1be8594f110632346571f4.res"]
+
+[params]
+
+create_from=0
+threshold=0.5

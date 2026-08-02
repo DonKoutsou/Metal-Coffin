@@ -102,18 +102,17 @@ func SpawnInitialShip() -> void:
 
 func RegisterSelf(D : MapShip) -> void:
 	AvailableShips.append(D)
-
 	D.ToggleFuelRangeVisibility(false)
 	
 	
 
-func RadarButtonPressed() -> void:
+func RadarButtonPressed(t : bool) -> void:
 	var Instigator = ControlledShip
 	if (ControlledShip.Docked):
 		Instigator = ControlledShip.Command
 		
-	Instigator.ToggleRadar(!Instigator.RadarShape.Working)
-	if (Instigator.RadarShape.Working):
+	Instigator.ToggleRadar(t)
+	if (t):
 		PopUpManager.GetInstance().DoFadeNotif("Radar turned on")
 	else:
 		PopUpManager.GetInstance().DoFadeNotif("Radar turned off")
@@ -260,6 +259,8 @@ func OnShipChanged(NewShip : PlayerDrivenShip) -> void:
 	ControlledShip = NewShip
 	UIEventH.OnShipUpdated(NewShip)
 	NewShip.ToggleFuelRangeVisibility(true)
+	UIEventH.OnRadarUpdated(NewShip.RadarWorking())
+	
 	FrameCamToShip()
 	ControlledShip.Teleported.connect(UpdatePlayerInfo)
 	#ShipControllerEventH.ShipChanged(ControlledShip)

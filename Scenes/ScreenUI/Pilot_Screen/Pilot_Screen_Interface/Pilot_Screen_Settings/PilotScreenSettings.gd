@@ -1,18 +1,18 @@
-extends PanelContainer
+extends Control
 
 class_name PilotScreenSettings
 
-@export var ForecastButton : Button
+@export var ForecastButton : BaseButton
 static var ForecastState : bool = false
-@export var GridButton : Button
+@export var GridButton : BaseButton
 static var GridState : bool = true
-@export var SteerButton : Button
-static var SteerState : bool = true
-@export var ZoomButton : Button
+#@export var SteerButton : BaseButton
+#static var SteerState : bool = true
+@export var ZoomButton : BaseButton
 var ZoomState : bool = true
-@export var TopoButton : Button
+@export var TopoButton : BaseButton
 static var TopoState : bool = false
-@export var WindCorrectionButton : Button
+@export var WindCorrectionButton : BaseButton
 static var WindCorrectionState : bool = true
 
 
@@ -28,8 +28,8 @@ func _ready() -> void:
 	ForecastToggled.emit(ForecastState)
 	GridButton.set_pressed_no_signal(GridState)
 	GridToggled.emit(GridState)
-	SteerButton.set_pressed_no_signal(SteerState)
-	SteerToggled.emit(SteerState)
+	#SteerButton.set_pressed_no_signal(SteerState)
+	#SteerToggled.emit(SteerState)
 	TopoButton.set_pressed_no_signal(TopoState)
 	TopologyTogled.emit(TopoState)
 	ZoomButton.set_pressed_no_signal(ZoomState)
@@ -48,9 +48,9 @@ func _on_grid_button_toggled(toggled_on: bool) -> void:
 	GridToggled.emit(toggled_on)
 
 
-func _on_steer_button_toggled(toggled_on: bool) -> void:
-	SteerState = toggled_on
-	SteerToggled.emit(toggled_on)
+#func _on_steer_button_toggled(toggled_on: bool) -> void:
+	#SteerState = toggled_on
+	#SteerToggled.emit(toggled_on)
 
 
 func _on_topo_button_toggled(toggled_on: bool) -> void:

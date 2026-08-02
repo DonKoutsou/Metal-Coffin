@@ -18,7 +18,8 @@ signal WindCorrectionToggled(t : bool)
 #signal AccelerationForced(ForceVal : float)
 #signal DroneButtonPressed()
 signal MissileButtonPressed()
-signal RadarButtonPressed()
+signal RadarUpdated(t : bool)
+signal RadarButtonPressed(t : bool)
 #signal SteerDirForced(ForcedVal : float)
 signal SteerDirChanged(NewDir : float)
 signal SteerOffseted(Offset : float)
@@ -119,8 +120,11 @@ func OnMissileButtonPressed() -> void:
 	MissileButtonPressed.emit()
 
 
-func OnRadarButtonPressed() -> void:
-	RadarButtonPressed.emit()
+func OnRadarButtonPressed(t : bool) -> void:
+	RadarButtonPressed.emit(t)
+
+func OnRadarUpdated(t : bool) -> void:
+	RadarUpdated.emit(t)
 
 func OnSteeringDirectionChanged(NewValue: float) -> void:
 	SteerDirChanged.emit(NewValue)

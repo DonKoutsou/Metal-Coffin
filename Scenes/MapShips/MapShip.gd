@@ -397,7 +397,10 @@ func ToggleRadar(t : bool):
 	RadarShape.ToggleRadar(t)
 	for g in GetSquad():
 		g.ToggleRadar(t)
-		
+
+func RadarWorking() -> bool:
+	return RadarShape.Working
+
 func ToggleElint(t : bool):
 	ElintShape.ToggleElint(t)
 	for g in GetSquad():
