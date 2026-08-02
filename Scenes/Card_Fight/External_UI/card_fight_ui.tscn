@@ -89,18 +89,18 @@ anchor_left = 0.0
 anchor_top = 1.0
 anchor_right = 0.0
 anchor_bottom = 1.0
-offset_left = 1241.0
+offset_left = 1242.0
 offset_top = -599.0
-offset_right = 1241.0
+offset_right = 1242.0
 offset_bottom = -599.0
 grow_horizontal = 1
 grow_vertical = 0
 
 [node name="DiscardPile" parent="." unique_id=521369081 instance=ExtResource("11_omcrt")]
 layout_mode = 1
-offset_left = 600.0
+offset_left = 602.0
 offset_top = -88.0
-offset_right = 600.0
+offset_right = 602.0
 offset_bottom = -88.0
 
 [node name="Label" type="Label" parent="." unique_id=955071202]
@@ -192,9 +192,9 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_iexgv")
 [node name="PullReserves" type="Button" parent="." unique_id=2065884608 groups=["Buttons"]]
 layout_mode = 0
 offset_left = 1225.2374
-offset_top = 655.0
-offset_right = 1253.6747
-offset_bottom = 699.603
+offset_top = 655.436
+offset_right = 1253.5991
+offset_bottom = 700.039
 rotation = 1.57079
 theme_override_styles/normal = ExtResource("14_80dwx")
 theme_override_styles/pressed = ExtResource("15_lf8xs")
@@ -231,10 +231,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -88.0
+offset_left = -87.0
 offset_top = -399.0
-offset_right = -58.0
-offset_bottom = -353.0
+offset_right = -57.0
+offset_bottom = -351.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_styles/normal = ExtResource("16_ksx0p")

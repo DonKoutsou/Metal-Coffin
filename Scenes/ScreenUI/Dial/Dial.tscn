@@ -22,7 +22,6 @@
 [ext_resource type="Texture2D" uid="uid://b1uos50fmh2da" path="res://Assets/UIPiecies/GasFrames/GassFrame1_Camera 1_019.png" id="20_lod21"]
 [ext_resource type="Script" uid="uid://byieey8mlbces" path="res://Scenes/ScreenUI/Dial/Dial.gd" id="21_2eusn"]
 [ext_resource type="AudioStream" uid="uid://bw32ea80qadx8" path="res://Assets/Sounds/MetalClick.mp3" id="22_mtsvb"]
-[ext_resource type="StyleBox" uid="uid://qpvte6fabtg4" path="res://Theme/Monitor_Panel.tres" id="23_lh4h6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8cr6m"]
 animations = [{
@@ -120,14 +119,5 @@ stream = ExtResource("22_mtsvb")
 volume_db = -15.0
 pitch_scale = 0.8
 bus = &"MapSounds"
-
-[node name="Panel" type="Panel" parent="." unique_id=465109606]
-show_behind_parent = true
-offset_left = -138.09523
-offset_top = -38.09527
-offset_right = 135.71422
-offset_bottom = 33.33332
-mouse_filter = 2
-theme_override_styles/panel = ExtResource("23_lh4h6")
 
 [connection signal="gui_input" from="Control" to="." method="_on_Control_gui_input"]

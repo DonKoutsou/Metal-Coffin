@@ -170,6 +170,12 @@ func GetSonarTargetInfo() -> Array[SonarTargetInfo]:
 		Targets.append_array(g.SonarShape.GetSonarTargetInfo())
 	return Targets
 
+func GetElintTargetInfo() -> Array[ElintTargetInfo]:
+	var Targets : Array[ElintTargetInfo] = ElintShape.GetELintTargetInfo()
+	for g : PlayerDrivenShip in GetSquad():
+		Targets.append_array(g.ElintShape.GetELintTargetInfo())
+	return Targets
+
 func GetClosestElint() -> Vector2:
 	var closest : Vector2 = ElintShape.GetClosestElint()
 	var closestdist = global_position.distance_squared_to(closest)

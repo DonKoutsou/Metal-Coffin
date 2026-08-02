@@ -8,7 +8,7 @@ class_name AeroSonar
 @export var radioSpeaker: RadioSpeaker
 @export var cap: Panel
 @export var BaseGrad : GradientTexture2D
-
+@export var ModeButton : BaseButton
 # --- STATE VARIABLES ---
 
 var offset: float = 0.0
@@ -18,6 +18,13 @@ var enabled: bool = false
 var volume: float = 1.0
 var CurrentSonarRange : float = 0.0
 const MAX_GAIN : int = 15
+
+var currentMode : MODE = MODE.SOUND
+
+enum MODE{
+	SOUND,
+	RADAR,
+}
 
 # --- INITIALIZATION / SIGNAL CONNECTIONS ---
 
@@ -55,8 +62,22 @@ func _onControlledShipUpdated(newController: PlayerDrivenShip) -> void:
 func CheckIfWorking() -> void:
 	CurrentSonarRange = GetFleetSonarRange()
 	var hasSonar = CurrentSonarRange > 0
-	toggleSonar(hasSonar)
-	cap.visible = !hasSonar
+	var hasElint = fleetHasElint()
+	toggleSonar(hasSonar or hasElint)
+	cap.visible = !hasSonar and !hasElint
+	if (!hasSonar and currentMode == MODE.SOUND):
+		ModeButton.set_pressed(false)
+	else: if (!hasElint and currentMode == MODE.RADAR):
+		ModeButton.set_pressed(true)
+
+func fleetHasElint() -> bool:
+	# Check if the currently controlled ship or its docked drones have ELINT
+	if controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT) > 0:
+		return true
+	for c: Captain in controller.GetDock().GetCaptains():
+		if c.GetStatFinalValue(STAT_CONST.STATS.ELINT) > 0:
+			return true
+	return false
 
 # --- SONAR AND FLEET UTILITY ---
 
@@ -90,17 +111,68 @@ func isPartOfFleet(target: Node2D) -> bool:
 # --- SONAR PHYSICS AND DETECTION ---
 
 func Update(_delta: float) -> void:
-	if (_contactUpdateThread == null):
-		_contactUpdateThread = Thread.new()
-		var ControllerInfo := SonarTargetInfo.new()
-		ControllerInfo.Position = controller.global_position
-		ControllerInfo.Altitude = controller.Altitude
-		var ContactInfos = controller.GetSonarTargetInfo()
-		_contactUpdateThread.start(_updateContacts.bind(ControllerInfo, ContactInfos))
+	if (currentMode == MODE.SOUND):
+		if (_contactUpdateThread == null):
+			_contactUpdateThread = Thread.new()
+			var ControllerInfo := SonarTargetInfo.new()
+			ControllerInfo.Position = controller.global_position
+			ControllerInfo.Altitude = controller.Altitude
+			var ContactInfos = controller.GetSonarTargetInfo()
+			_contactUpdateThread.start(_updateContacts.bind(ControllerInfo, ContactInfos))
+	else:
+		if (_contactUpdateThread == null):
+			_contactUpdateThread = Thread.new()
+			var ControllerInfo := ElintTargetInfo.new()
+			ControllerInfo.Position = controller.global_position
+			ControllerInfo.Altitude = controller.Altitude
+			var ContactInfos = controller.GetElintTargetInfo()
+			_contactUpdateThread.start(_updateElintContacts.bind(ControllerInfo, ContactInfos))
 	#_updateContacts()
 	radioSpeaker.PlaySound(RadioSpeaker.RadioSound.STATIC, volume - 15)
 
 var _contactUpdateThread : Thread
+
+#Update contacts of controller
+func _updateElintContacts(ControllerInfo : ElintTargetInfo ,ContactInfo : Array[ElintTargetInfo]) -> Image:
+	var contactList: Dictionary[float, float] = {}
+	#retrieve contacts and iterate over them
+	for target in ContactInfo:
+		#make sure we dont register ships from the controllers fleed
+		
+		#terain collision
+		if not TopographyMap.WithinLineOfSight(ControllerInfo.Position, ControllerInfo.Altitude, target.Position, target.Altitude):
+			continue
+			
+		#take the direction to the target
+		var direction = ControllerInfo.Position.angle_to_point(target.Position)
+		
+		#get the sound signature of the target
+		var ElintLvl: int = target.Level
+		#do raycast and find storm collision
+		
+		var stormvalue = 1 - ease(WeatherManage.GetBiggestStormValue(ControllerInfo.Position, target.Position), 4)
+		#figure out distance, at the end is normalised value. Bigger values means target is closer, means sound signature is stronger
+		var dist = 1 -  ease((ControllerInfo.Position.distance_to(target.Position) / (CurrentSonarRange)), 4)
+		#calculate final signature by applying the distance and storm to the SoundSignature
+		var finalsignature = dist * ElintLvl * stormvalue
+		if (finalsignature == 0):
+			continue
+		#if contact exists, add to it.
+		if (contactList.has(direction)):
+			var sounds : Array[float]
+			sounds.append(finalsignature)
+			sounds.append(contactList.has(direction))
+			finalsignature = Helper.CombineNoiseAmplitude(sounds)
+
+		contactList[direction] = finalsignature
+	
+	#bake the contact list into a gradient and send it to the UI
+	var grad = ContactsToGradient(contactList)
+	BaseGrad.gradient = grad
+	#await BaseGrad.changed
+	var Im = BaseGrad.get_image()
+	call_deferred("ContactsUpdated")
+	return Im
 
 #Update contacts of controller
 func _updateContacts(ControllerInfo : SonarTargetInfo ,ContactInfo : Array[SonarTargetInfo]) -> Image:
@@ -245,3 +317,20 @@ func _on_gein_control_range_snapped_changed(direction: bool) -> void:
 
 func _getInterfaceName() -> String:
 	return "AeroSonar"
+
+func _on_mode_toggled(toggled_on: bool) -> void:
+	if (toggled_on):
+		if (GetFleetSonarRange() == 0):
+			ModeButton.set_pressed_no_signal(!toggled_on)
+			PopUpManager.GetInstance().DoFadeNotif("Ship missing sonar")
+			return
+		currentMode = MODE.SOUND
+		lineContainer.Col = Color(1,0,0)
+	else:
+		if (!fleetHasElint()):
+			ModeButton.set_pressed_no_signal(!toggled_on)
+			PopUpManager.GetInstance().DoFadeNotif("Ship missing ELint")
+			return
+		currentMode = MODE.RADAR
+		lineContainer.Col = Color(0.802, 0.416, 0.074, 1.0)
+	Update(0)

@@ -1,0 +1,155 @@
+[gd_scene format=3 uid="uid://ks3xou5acfgp"]
+
+[ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="1_tof8h"]
+
+[node name="InputScroll" type="ScrollContainer" unique_id=1130639760]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tof8h")
+metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1053484144]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=1943625564]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button2" type="Button" parent="VBoxContainer" unique_id=1782638882]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button3" type="Button" parent="VBoxContainer" unique_id=1106690344]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button4" type="Button" parent="VBoxContainer" unique_id=1094259017]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button5" type="Button" parent="VBoxContainer" unique_id=412605560]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button6" type="Button" parent="VBoxContainer" unique_id=1254522993]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button7" type="Button" parent="VBoxContainer" unique_id=501703671]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button8" type="Button" parent="VBoxContainer" unique_id=2107943399]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button9" type="Button" parent="VBoxContainer" unique_id=1934843411]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button10" type="Button" parent="VBoxContainer" unique_id=2051721341]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button11" type="Button" parent="VBoxContainer" unique_id=468298049]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button12" type="Button" parent="VBoxContainer" unique_id=252552735]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button13" type="Button" parent="VBoxContainer" unique_id=2016591638]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button14" type="Button" parent="VBoxContainer" unique_id=149182622]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button15" type="Button" parent="VBoxContainer" unique_id=1978850102]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button16" type="Button" parent="VBoxContainer" unique_id=1172354537]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button17" type="Button" parent="VBoxContainer" unique_id=23006511]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button18" type="Button" parent="VBoxContainer" unique_id=1155097540]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button19" type="Button" parent="VBoxContainer" unique_id=1728468832]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button20" type="Button" parent="VBoxContainer" unique_id=1990433601]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button21" type="Button" parent="VBoxContainer" unique_id=446662509]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button22" type="Button" parent="VBoxContainer" unique_id=1360668516]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button23" type="Button" parent="VBoxContainer" unique_id=2123848620]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button24" type="Button" parent="VBoxContainer" unique_id=1744978128]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button25" type="Button" parent="VBoxContainer" unique_id=1620303439]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button26" type="Button" parent="VBoxContainer" unique_id=554046125]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button27" type="Button" parent="VBoxContainer" unique_id=1873621422]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button28" type="Button" parent="VBoxContainer" unique_id=1796896109]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button29" type="Button" parent="VBoxContainer" unique_id=96228758]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button30" type="Button" parent="VBoxContainer" unique_id=1358843547]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button31" type="Button" parent="VBoxContainer" unique_id=1890641727]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button32" type="Button" parent="VBoxContainer" unique_id=873383682]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button33" type="Button" parent="VBoxContainer" unique_id=1488063042]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button34" type="Button" parent="VBoxContainer" unique_id=158782446]
+layout_mode = 2
+text = "fwafwafwafwawfaf"
+
+[node name="Button35" type="Button" parent="VBoxContainer" unique_id=1449326258]
+layout_mode = 2
+text = "fwafwafwafwawfaf"

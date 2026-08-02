@@ -5,6 +5,7 @@ class_name  AeroSonarLine
 @export var Radius : float = 1.0
 @export var CircleDivisions : int = 3
 @export var N : NoiseTexture2D
+@export var Col : Color = Color(1,0,0)
 
 var ContactGr : Image
 var CurrentStormValue : float = 0.0
@@ -36,7 +37,7 @@ func GetPointInCircle(Point : int, num_points : int = 20) -> Vector2:
 var LastPoint : Vector2
 
 func _draw() -> void:
-	var PointAmm = size.x
+	var PointAmm = snappedi(size.x, 100)
 	var MidPoint = size / 2
 
 	var CurrentOffset = roundi(Offset)
@@ -96,22 +97,22 @@ func _draw() -> void:
 		
 		CurrentOffset = wrap(CurrentOffset + 1, 0, 3)
 		
-		var angle = roundi(rad_to_deg(dir.angle()))
+		var angle = wrap(roundi(rad_to_deg(dir.angle())) + 90, - 180, 180)
 		
 		if (angle % 45 == 0):
 			var t = var_to_str(angle)
 			var stringsize = get_theme_default_font().get_string_size(t,HORIZONTAL_ALIGNMENT_FILL, -1, 7)
 			var PointP = NewPoint - -dir * Radius / 3 - Vector2(stringsize.x / 2, -3)
-			draw_string(get_theme_default_font(), PointP, t, HORIZONTAL_ALIGNMENT_FILL, -1, 7, Color(1,0,0))
+			draw_string(get_theme_default_font(), PointP, t, HORIZONTAL_ALIGNMENT_FILL, -1, 7, Col)
 
 	for g in range(1, CircleDivisions + 1):
 		var r = Radius * 2 / CircleDivisions
 		r *= g
-		draw_circle(MidPoint, r + 10, Color(1,0,0), false)
+		draw_circle(MidPoint, r + 10, Col, false)
 	
 	NoiseOffset = wrap(NoiseOffset + 0.5, -100, 100)
 	
-	draw_multiline(lines, Color(1,0,0))
+	draw_multiline(lines, Col)
 	
 	if (BiggestFind > 3 and BiggestFind > OffsetAmmount):
 		Found.emit(BiggestFind)

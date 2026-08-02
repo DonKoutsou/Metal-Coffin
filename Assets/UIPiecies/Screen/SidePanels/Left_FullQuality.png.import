@@ -2,21 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jkdjqo7vm2l7"
-path="res://.godot/imported/Open_On.png-aa0bec9794dfcb5f49d56e2cf997db80.ctex"
+uid="uid://bbtwe257d708t"
+path="res://.godot/imported/Left_FullQuality.png-fd0940f7488835c640bc7037c6861fe2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UIPiecies/Screen/LandingNob/Open_On.png"
-dest_files=["res://.godot/imported/Open_On.png-aa0bec9794dfcb5f49d56e2cf997db80.ctex"]
+source_file="res://Assets/UIPiecies/Screen/SidePanels/Left_FullQuality.png"
+dest_files=["res://.godot/imported/Left_FullQuality.png-fd0940f7488835c640bc7037c6861fe2.ctex"]
 
 [params]
 
 compress/mode=0
-compress/high_quality=true
+compress/high_quality=false
 compress/high_quality_mode=0
 compress/lossy_quality=0.7
 compress/uastc_level=0

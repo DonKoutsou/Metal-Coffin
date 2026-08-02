@@ -7,7 +7,7 @@ class_name PilotScreenUI
 @export var uiEventHandler: UIEventHandler
 
 @export_group("UI_Elements")
-@export var elint: ElingUI
+#@export var elint: ElingUI
 @export var mapMarkerControls: MapMarkerControls
 @export var thrust: ThrustSlider
 @export var elevationThrust: ThrustSlider

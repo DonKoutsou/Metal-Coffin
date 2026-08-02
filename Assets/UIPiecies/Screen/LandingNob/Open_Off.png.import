@@ -3,21 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c1h7w3y13cg1g"
-path.bptc="res://.godot/imported/Open_Off.png-2fb15155a2772adb3c84f1b2c7a0e4d1.bptc.ctex"
-path.astc="res://.godot/imported/Open_Off.png-2fb15155a2772adb3c84f1b2c7a0e4d1.astc.ctex"
+path="res://.godot/imported/Open_Off.png-2fb15155a2772adb3c84f1b2c7a0e4d1.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc", "etc2_astc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Assets/UIPiecies/Screen/LandingNob/Open_Off.png"
-dest_files=["res://.godot/imported/Open_Off.png-2fb15155a2772adb3c84f1b2c7a0e4d1.bptc.ctex", "res://.godot/imported/Open_Off.png-2fb15155a2772adb3c84f1b2c7a0e4d1.astc.ctex"]
+dest_files=["res://.godot/imported/Open_Off.png-2fb15155a2772adb3c84f1b2c7a0e4d1.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/high_quality=true
 compress/high_quality_mode=0
 compress/lossy_quality=0.7
@@ -39,5 +37,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=256
+process/size_limit=0
 detect_3d/compress_to=1

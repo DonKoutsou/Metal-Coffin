@@ -37,7 +37,7 @@ StatBase = 90.0
 script = ExtResource("3_2ygm8")
 StatName = 3
 
-[sub_resource type="Resource" id="Resource_d625j"]
+[sub_resource type="Resource" id="Resource_vq5gh"]
 resource_local_to_scene = true
 script = ExtResource("3_2ygm8")
 StatName = 4
@@ -57,7 +57,7 @@ metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
 script = ExtResource("3_2ygm8")
 StatName = 1
 
-[sub_resource type="Resource" id="Resource_gnkk4"]
+[sub_resource type="Resource" id="Resource_ayxxd"]
 resource_local_to_scene = true
 script = ExtResource("3_2ygm8")
 
@@ -114,7 +114,7 @@ StatName = 16
 script = ExtResource("3_2ygm8")
 StatName = 17
 
-[sub_resource type="Resource" id="Resource_ep1jr"]
+[sub_resource type="Resource" id="Resource_lb1bt"]
 resource_local_to_scene = true
 script = ExtResource("7_lb1bt")
 ItemName = "Fire Suppression Unit"
@@ -123,25 +123,25 @@ MaxStackCount = 99
 CardProviding = Array[ExtResource("4_25k7t")]([ExtResource("11_e2mx5")])
 Cost = 200
 
-[sub_resource type="Resource" id="Resource_vq5gh"]
+[sub_resource type="Resource" id="Resource_03i86"]
 resource_local_to_scene = true
 script = ExtResource("5_vq5gh")
 CaptainName = "Tick"
 CaptainPortrait = ExtResource("2_qjc7u")
 ShipIcon = ExtResource("6_ayxxd")
-CaptainStats = Array[ExtResource("3_2ygm8")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_mcdo0"), SubResource("Resource_d625j"), SubResource("Resource_7g4dd"), SubResource("Resource_hxdnx"), SubResource("Resource_4p6v8"), SubResource("Resource_gnkk4"), SubResource("Resource_h3q7u"), SubResource("Resource_xmlya"), SubResource("Resource_j0vsk"), SubResource("Resource_mphws"), SubResource("Resource_rjpe7"), SubResource("Resource_mil77"), SubResource("Resource_xx2gh"), SubResource("Resource_bewff"), SubResource("Resource_aqvi6"), SubResource("Resource_lav7j")])
+CaptainStats = Array[ExtResource("3_2ygm8")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_mcdo0"), SubResource("Resource_vq5gh"), SubResource("Resource_7g4dd"), SubResource("Resource_hxdnx"), SubResource("Resource_4p6v8"), SubResource("Resource_ayxxd"), SubResource("Resource_h3q7u"), SubResource("Resource_xmlya"), SubResource("Resource_j0vsk"), SubResource("Resource_mphws"), SubResource("Resource_rjpe7"), SubResource("Resource_mil77"), SubResource("Resource_xx2gh"), SubResource("Resource_bewff"), SubResource("Resource_aqvi6"), SubResource("Resource_lav7j")])
 ShipCallsign = "P1"
-StartingItems = Array[ExtResource("7_lb1bt")]([ExtResource("8_03i86"), ExtResource("9_06s8f"), ExtResource("9_06s8f"), ExtResource("10_o0thl"), SubResource("Resource_ep1jr"), SubResource("Resource_ep1jr"), SubResource("Resource_ep1jr"), ExtResource("12_kp2wg"), ExtResource("12_kp2wg"), ExtResource("12_kp2wg"), ExtResource("13_8huau"), ExtResource("13_8huau"), ExtResource("13_8huau")])
+StartingItems = Array[ExtResource("7_lb1bt")]([ExtResource("8_03i86"), ExtResource("9_06s8f"), ExtResource("9_06s8f"), ExtResource("10_o0thl"), SubResource("Resource_lb1bt"), SubResource("Resource_lb1bt"), SubResource("Resource_lb1bt"), ExtResource("12_kp2wg"), ExtResource("12_kp2wg"), ExtResource("12_kp2wg"), ExtResource("13_8huau"), ExtResource("13_8huau"), ExtResource("13_8huau")])
 ProvidingFunds = 25000
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ayxxd"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_06s8f"]
 resource_local_to_scene = true
 shader = ExtResource("3_qb3w4")
 shader_parameter/ShipSize = 0.08
 shader_parameter/shadow_parallax_amount = 0.5
 shader_parameter/sprite_rotation = -1.57
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_lb1bt"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_o0thl"]
 resource_local_to_scene = true
 radius = 150.0
 
@@ -156,12 +156,12 @@ script = ExtResource("2_vq5gh")
 AccelerationAudio = NodePath("AudioStreamPlayer2D")
 L = NodePath("PointLight2D")
 MissileD = NodePath("MissileDock")
-Cpt = SubResource("Resource_vq5gh")
+Cpt = SubResource("Resource_03i86")
 SonarShape = NodePath("Sonar")
 Dock = NodePath("DroneDock")
 
 [node name="ColorRect" parent="." index="1" unique_id=1708187202]
-material = SubResource("ShaderMaterial_ayxxd")
+material = SubResource("ShaderMaterial_06s8f")
 
 [node name="TrailLine" parent="ColorRect" index="0" unique_id=994780843]
 width = 1.0
@@ -173,7 +173,7 @@ visible = false
 script = ExtResource("16_2ygm8")
 
 [node name="CollisionShape2D" parent="Radar" index="0" unique_id=689109080]
-shape = SubResource("CircleShape2D_lb1bt")
+shape = SubResource("CircleShape2D_o0thl")
 
 [node name="Elint" parent="." index="4" unique_id=268938013]
 script = ExtResource("17_25k7t")

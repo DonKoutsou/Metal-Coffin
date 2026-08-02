@@ -9,7 +9,7 @@ var ElintStat : ShipStat
 signal ElintTriggered(T : bool, Lvl : int, Dir : float)
 signal ElintRangeChanged
 
-
+##Key = Ship Value = Elint Level
 var ElintContacts : Dictionary
 
 func _ready() -> void:
@@ -37,7 +37,10 @@ func UpdateElint(delta: float) -> void:
 	for g in ElintContacts.size():
 		var ship = ElintContacts.keys()[g] as MapShip
 		var lvl = ElintContacts[ship]
-		var Newlvl = GetElintLevel(global_position.distance_squared_to(ship.global_position), ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
+		var radarRange = 90
+		if (ship.RadarWorking()):
+			radarRange = ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE)
+		var Newlvl = GetElintLevel(global_position.distance_squared_to(ship.global_position), radarRange)
 		if (Newlvl > BiggestLevel):
 			BiggestLevel = Newlvl
 			Dir = global_position.angle_to_point(ship.global_position)
@@ -51,8 +54,27 @@ func UpdateElint(delta: float) -> void:
 	else:
 		ElintTriggered.emit(false, -1, 0)
 
+func GetELintTargetInfo() -> Array[ElintTargetInfo]:
+	var TargetInfo : Array[ElintTargetInfo]
+	for g : MapShip in ElintContacts:
+		var lvl = ElintContacts[g]
+		if (isPartOfFleet(get_parent(), g)):
+			continue
+		if (lvl < 0):
+			continue
+		var Info := ElintTargetInfo.new()
+		Info.Altitude = g.Altitude
+		Info.Position = g.global_position
+		Info.Level = lvl
+		TargetInfo.append(Info)
+	return TargetInfo
+
+func isPartOfFleet(controller : PlayerDrivenShip,target: Node2D) -> bool:
+	if (controller.Command != null):
+		return target == controller.Command or target in controller.Command.GetDock().GetDockedShips()
+	return target == controller
+
 func GetClosestElint() -> Vector2:
-	
 	var closest : Vector2 = Vector2.ZERO
 	var closestdist : float = INF
 	

@@ -302,6 +302,7 @@ func _on_button_mouse_entered() -> void:
 	if (TweenHover and TweenHover.is_running()):
 		TweenHover.kill()
 	
+	TrackMouse = true
 	TweenHover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC).set_parallel(true)
 	TweenHover.tween_property(self,"scale", Vector2(1.1, 1.1), 0.55)
 	TweenHover.set_parallel(true)
@@ -328,7 +329,7 @@ func _on_button_mouse_exited() -> void:
 	TweenHover.tween_property(self,"scale", Vector2.ONE, 0.55)
 	TweenHover.set_parallel(true)
 	TweenHover.tween_property(TooltipPos,"scale", Vector2.ONE, 0.55)
-	#TrackMouse = false
+	TrackMouse = false
 	if (dirTw != null):
 		dirTw.kill()
 	dirTw = create_tween()
@@ -348,9 +349,7 @@ func SetCardDiretion(dir : Vector2) -> void:
 var dirTw : Tween
 
 func _on_button_gui_input(_event: InputEvent) -> void:
-
-	
-	
+	return
 	if (dirTw != null):
 		dirTw.kill()
 	dirTw = create_tween()
