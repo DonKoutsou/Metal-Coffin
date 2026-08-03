@@ -2,7 +2,7 @@ shader_type canvas_item;
 render_mode unshaded;
 uniform vec2 res = vec2(864, 486);
 //uniform float Scanres = 500;
-uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear;
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, repeat_disable, filter_nearest;
 uniform int mask_type : hint_range(0, 2) = 0;
 
 group_uniforms Vignette;
@@ -34,9 +34,25 @@ uniform float scanlines_spacing: hint_range(0.3, 3., .01) = 1.;
 uniform float static_chromatic_aberration : hint_range(0.0, 1.0) = 0.1;
 
 
-float ToLinear1(float c){ return (c <= 0.04045) ? c / 12.92 : pow((c + 0.055) / 1.055, 2.4); }
-vec3 ToLinear(vec3 c){ return vec3(ToLinear1(c.r), ToLinear1(c.g), ToLinear1(c.b)); }
+float ToLinear(float c)
+{ 
+	return c * c;
+}
+
+float ToLinearSlow(float c){ 
+	return (c <= 0.04045) ? c / 12.92 : pow((c + 0.055) / 1.055, 2.4); 
+}
+
+vec3 ToLinear(vec3 c)
+{ 
+	return vec3(ToLinear(c.r), ToLinear(c.g), ToLinear(c.b));
+}
+
 vec3 ToSrgb(vec3 c) {
+	return sqrt(max(c, vec3(0.0)));
+}
+
+vec3 ToSrgbSlow(vec3 c) {
 	c = max(c, vec3(0.0));
 	return mix(
 		c * 12.92,
@@ -93,15 +109,14 @@ float ScreenShapeVignette(vec2 uv) {
 	return exp(-vignette_strength * 2.0 * vig);
 }
 
-vec3 Fetch(vec2 pos, vec2 off, sampler2D iChannel0){
-	pos = floor(pos * res + off) / res;
+vec3 Fetch(vec2 base, vec2 off, vec2 inv_res) {
+	vec2 uv = (base + off + vec2(0.5)) * inv_res;
 
-	// Ensure that the return value is vec3(0.0) when out of bounds.
-	if (max(abs(pos.x - 0.5), abs(pos.y - 0.5)) > 0.5) {
+	if (max(abs(uv.x - 0.5), abs(uv.y - 0.5)) > 0.5) {
 		return vec3(0.0);
 	}
 
-	return ToLinear(texture(iChannel0, pos.xy, -16.0).rgb);
+	return texture(SCREEN_TEXTURE, uv).rgb;
 }
 
 vec2 Dist(vec2 pos){
@@ -111,28 +126,33 @@ vec2 Dist(vec2 pos){
 
 float Gaus(float pos, float scale){ return exp2(scale * pos * pos); }
 
-vec3 Horz3(vec2 pos, float off, sampler2D iChannel0){
-	vec3 b = Fetch(pos, vec2(-1.0, off), iChannel0);
-	vec3 c = Fetch(pos, vec2(0.0, off), iChannel0);
-	vec3 d = Fetch(pos, vec2(1.0, off), iChannel0);
-	float dst = Dist(pos).x;
-	float scale = hardPix;
+vec3 Horz3(vec2 base,float yoff,vec2 inv_res,float wx0,float wx1,float wx2,float wx_sum) 
+{
+	vec3 b = Fetch(base, vec2(-1.0, yoff), inv_res);
+	vec3 c = Fetch(base, vec2( 0.0, yoff), inv_res);
+	vec3 d = Fetch(base, vec2( 1.0, yoff), inv_res);
 
-	float wb = Gaus(dst - 1.0, scale);
-	float wc = Gaus(dst, scale);
-	float wd = Gaus(dst + 1.0, scale);
-
-	return (b * wb + c * wc + d * wd) / (wb + wc + wd);
+	return (b * wx0 + c * wx1 + d * wx2) / wx_sum;
 }
 
-vec3 Tri(vec2 pos, sampler2D iChannel0){
-	vec3 a = Horz3(pos, -1.0, iChannel0);
-	vec3 b = Horz3(pos, 0.0, iChannel0);
-	vec3 c = Horz3(pos, 1.0, iChannel0);
-	float wa = Gaus(Dist(pos).y - 1.0, hardScan);
-	float wb = Gaus(Dist(pos).y, hardScan);
-	float wc = Gaus(Dist(pos).y + 1.0, hardScan);
-	return a * wa + b * wb + c * wc;
+vec3 Tri(vec2 pos){
+	vec2 pixel_pos = pos * res;
+	float fy = fract(pixel_pos.y);
+	float dy = 0.5 - fy;
+
+	float y0 = (floor(pixel_pos.y) - 1.0 + 0.5) / res.y;
+	float y1 = (floor(pixel_pos.y)       + 0.5) / res.y;
+	float y2 = (floor(pixel_pos.y) + 1.0 + 0.5) / res.y;
+
+	float wy0 = Gaus(dy - 1.0, hardScan);
+	float wy1 = Gaus(dy,       hardScan);
+	float wy2 = Gaus(dy + 1.0, hardScan);
+
+	vec3 a = ToLinear(texture(SCREEN_TEXTURE, vec2(pos.x, y0)).rgb);
+	vec3 b = ToLinear(texture(SCREEN_TEXTURE, vec2(pos.x, y1)).rgb);
+	vec3 c = ToLinear(texture(SCREEN_TEXTURE, vec2(pos.x, y2)).rgb);
+
+	return a * wy0 + b * wy1 + c * wy2;
 }
 
 vec2 Warp(vec2 pos){
@@ -203,16 +223,24 @@ vec3 yuv_to_rgb(vec3 yuv) {
 }
 
 void fragment(){
-	vec2 pos = Warp(FRAGCOORD.xy / (1.0 / SCREEN_PIXEL_SIZE).xy);
+	vec2 pos = Warp(SCREEN_UV);
+
 	if (border(pos) <= 0.0){
 		COLOR = vec4(0,0,0,1.0);
 	}
 	else{
-		COLOR.rgb = Tri(pos, SCREEN_TEXTURE) * Mask(FRAGCOORD.xy);
+		COLOR.rgb = Tri(pos) * Mask(FRAGCOORD.xy);
+		
 		vec2 look = pos;
-		float window = 1.0 / (1.0 + 20.0 * pow(look.y - mod(TIME / 4.0, 1.0), 2.0)) * image_flicker;
+		
+		//Storing value to multiply by self instead of doing (pow(value, 2.0)
+		float w = look.y - mod(TIME / 4.0, 1.0);
+		float window = 1.0 / (1.0 + 20.0 * w * w) * image_flicker;
 		look.x += sin(look.y * 10.0 + TIME) / 50.0 * onOff(4.0, 4.0, 0.3) * (1.0 + cos(TIME * 80.0)) * window;
-		float vShift = 0.4 * onOff(2.0, 3.0, 0.9) * (pow(sin(TIME) * sin(TIME * 20.0) + (0.5 + 0.1 * sin(TIME * 200.0) * cos(TIME)), 2.0)) * skip;
+		
+		//Storing value to multiply by self instead of doing (pow(value, 2.0)
+		float s = sin(TIME) * sin(TIME * 20.0) + (0.5 + 0.1 * sin(TIME * 200.0) * cos(TIME));
+		float vShift = 0.4 * onOff(2.0, 3.0, 0.9) * (s * s) * skip;
 		look.y = mod(look.y + vShift, 1.0);
 
 		float aberration_amount = 0.005 * window * 5.0;
@@ -221,10 +249,16 @@ void fragment(){
 		
 		COLOR.rgb += stripes(pos);
 
-		float x_offset = noise(vec2(floor(UV.y * 487.0), fract(UV.y * 487.0)), TIME) * color_offset_multiplier;
-		COLOR.r = mix(COLOR.r, texture(SCREEN_TEXTURE, look + x_offset + red_offset - static_chromatic_aberration).r, 0.5);
+		vec2 x_offset = vec2(
+			noise(vec2(floor(UV.y * 487.0), fract(UV.y * 487.0)), TIME) * color_offset_multiplier,
+			0.0
+		);
+
+		vec2 static_ca = vec2(static_chromatic_aberration, 0.0);
+
+		COLOR.r = mix(COLOR.r, texture(SCREEN_TEXTURE, look + x_offset + red_offset - static_ca).r, 0.5);
 		COLOR.g = mix(COLOR.g, texture(SCREEN_TEXTURE, look + x_offset).g, 0.5);
-		COLOR.b = mix(COLOR.b, texture(SCREEN_TEXTURE, look + x_offset + blue_offset + static_chromatic_aberration).b, 0.5);
+		COLOR.b = mix(COLOR.b, texture(SCREEN_TEXTURE, look + x_offset + blue_offset + static_ca).b, 0.5);
 
 		COLOR.rgb *= ScreenShapeVignette(pos);
 		COLOR.rgb = ToSrgb(COLOR.rgb);

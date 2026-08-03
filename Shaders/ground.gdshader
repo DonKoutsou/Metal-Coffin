@@ -24,23 +24,23 @@ const float z = 0.25;
 
 void fragment() {
 	vec2 uv = (UV + offset) * z;
-    // Scale the UVs for the main textures
-    vec2 uv1 = uv * Scale1;
+	// Scale the UVs for the main textures
+	vec2 uv1 = uv * Scale1;
 	vec2 uv2 = uv * Scale2;
 	vec2 uv3 = uv * Scale3;
 	vec2 uvnoise = uv;
-    // Sample noise texture
+	// Sample noise texture
 	//float t = abs(1.0 - texture(GroundTextureMask, uv).r) * 5.0;
 
 	//float texColormask = clamp(t, 0.0, 1.0);
-    vec3 patternNoise = texture(NoiseTexture, uvnoise).rgb; // Sample red channel for noise; adjust scale as needed
+	vec3 patternNoise = texture(NoiseTexture, uvnoise).rgb; // Sample red channel for noise; adjust scale as needed
 
-    // Normalize noise to [0, 1] if necessary
-    // patternNoise = (patternNoise + 1.0) / 2.0; // Uncomment if your noise texture has values in range [-1, 1]
+	// Normalize noise to [0, 1] if necessary
+	// patternNoise = (patternNoise + 1.0) / 2.0; // Uncomment if your noise texture has values in range [-1, 1]
 
-    // Sample colors from the textures
-    vec4 texColor1 = texture(GroundTexture, uv1);
-    vec4 texColor2 = texture(GroundTexture2, uv2);
+	// Sample colors from the textures
+	vec4 texColor1 = texture(GroundTexture, uv1);
+	vec4 texColor2 = texture(GroundTexture2, uv2);
 	vec4 texColor3 = texture(GroundTexture3, uv3);
 
 	vec3 texNormal1 = texture(GroundNormalTexture, uv1).rgb;
@@ -49,18 +49,18 @@ void fragment() {
 	vec3 texNormal3 = texture(GroundNormal3Texture, uv3).rgb;
 	//texNormal1.b = clamp(texNormal1.b + patternNoise, 0, 1);
 	//texNormal2.b = clamp(texNormal2.b + patternNoise, 0, 1);
-    // Blend colors based on sampled noise
+	// Blend colors based on sampled noise
 	vec4 fincol = mix(texColor1, texColor2, patternNoise.g);
 	fincol = mix(fincol, texColor3, patternNoise.b);
 	
 	vec3 finNorm = mix(texNormal1, texNormal2, patternNoise.g);
 	finNorm = mix(finNorm, texNormal3, patternNoise.b);
 	
-    COLOR.rgb = fincol.rgb;
+	COLOR.rgb = fincol.rgb;
 	COLOR.rgb *= Light;
 	//COLOR = t;
 	NORMAL_MAP = finNorm;
 	//NORMAL_MAP += texture(NoiseTexture3, uv1).rgb;
-    NORMAL_MAP_DEPTH = NormalD;
+	NORMAL_MAP_DEPTH = NormalD;
 	
 }

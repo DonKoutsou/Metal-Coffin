@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://ciq487snqicgb" path="res://Assets/Sounds/Sqeak1.mp3" id="4_tsg7p"]
 [ext_resource type="AudioStream" uid="uid://bir6mqhkctabs" path="res://Assets/Sounds/Sqeak2.mp3" id="5_x04yk"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/UIPiecies/Light.png" id="6_7vs4e"]
-[ext_resource type="Texture2D" uid="uid://cbkii1pjnwxww" path="res://Assets/UIPiecies/LightCone.png" id="7_b8jrd"]
+[ext_resource type="Texture2D" uid="uid://dg8jbhrloh84u" path="res://Assets/UIPiecies/LightCone2.png" id="7_8npwn"]
 [ext_resource type="AudioStream" uid="uid://7crsokjngvxo" path="res://Assets/Sounds/beepNoLoop.mp3" id="8_d4jit"]
 [ext_resource type="AudioStream" uid="uid://iiqji6xlmffd" path="res://Assets/Sounds/Explosion.wav" id="9_rttps"]
 [ext_resource type="AudioStream" uid="uid://djpsnwnkd7dlx" path="res://Assets/Sounds/ShakeLoop.wav" id="10_qy5r3"]
@@ -240,7 +240,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [1.0]
+"values": [2.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i8scw"]
@@ -299,11 +299,12 @@ texture_scale = 13.0
 
 [node name="AlarmLight2" type="PointLight2D" parent="LightPivot1/LightPivot2" unique_id=696037205]
 position = Vector2(0, 8.84003)
+energy = 2.0
 blend_mode = 2
 range_z_min = 0
 range_layer_min = 2
 range_layer_max = 4
-texture = ExtResource("7_b8jrd")
+texture = ExtResource("7_8npwn")
 offset = Vector2(0, 900)
 texture_scale = 7.0
 

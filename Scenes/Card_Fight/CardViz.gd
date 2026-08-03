@@ -15,6 +15,7 @@ class_name CardViz
 var Target : Control
 var Going = false
 var SpawnPos : Vector2 = Vector2.ZERO
+var counter : float = 0
 # Wiggle amplitude and speed
 @export var wiggle_amplitude = 5.0
 @export var wiggle_frequency = 3.0
@@ -52,6 +53,8 @@ func _physics_process(delta: float) -> void:
 	if (!Going or Target == null):
 		return
 	
+	counter += delta
+	
 	var direction = (Target.global_position + (Target.size / 2)) - global_position
 	var distance = direction.length()
 	
@@ -86,7 +89,7 @@ func _physics_process(delta: float) -> void:
 		
 		position += Vector2(cos(rotation), sin(rotation)) * speed
 	
-	if (global_position.distance_squared_to(Target.global_position + (Target.size / 2)) < 500):
+	if (global_position.distance_squared_to(Target.global_position + (Target.size / 2)) < 500 or counter > 1.5):
 		global_position = Target.global_position + (Target.size / 2)
 		Going = false
 		Reached.emit()

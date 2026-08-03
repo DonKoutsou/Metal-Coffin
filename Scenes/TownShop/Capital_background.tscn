@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://h6l78xy6duvo" path="res://Scripts/parallax_background.gd" id="1_y52c6"]
 [ext_resource type="Texture2D" uid="uid://bvxgotu4e723h" path="res://Assets/TownBackgrounds/IndustrialLayer-2.png" id="2_eg41f"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="3_kl0cj"]
-[ext_resource type="Shader" uid="uid://luuysqiab62e" path="res://Scenes/TownShop/Blur.gdshader" id="3_s3kbl"]
 [ext_resource type="Texture2D" uid="uid://d1p7ntae2wlxa" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame2.png" id="4_cjb24"]
 [ext_resource type="Texture2D" uid="uid://dsgqqj48iwm8p" path="res://Assets/TownBackgrounds/IndustrialLayer-1.png" id="4_coxqh"]
 [ext_resource type="Texture2D" uid="uid://de1cx0wwuxx0x" path="res://Assets/smoke_09.png" id="5_6jamx"]
@@ -28,10 +27,6 @@
 bg_color = Color(0, 0, 0, 1)
 border_width_top = 375
 border_blend = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_s3kbl"]
-shader = ExtResource("3_s3kbl")
-shader_parameter/offset = 10.000000475
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ri552"]
 animations = [{
@@ -168,8 +163,8 @@ motion_scale = Vector2(0.5, 0.5)
 [node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer" unique_id=428946363]
 
 [node name="Sprite2D2" type="AnimatedSprite2D" parent="ParallaxLayer/Parallax2D" unique_id=852055646]
-texture_filter = 1
-material = SubResource("ShaderMaterial_s3kbl")
+texture_filter = 4
+material = ExtResource("16_qnoug")
 position = Vector2(640, 180)
 scale = Vector2(2.66667, 2.66667)
 sprite_frames = SubResource("SpriteFrames_ri552")
@@ -220,6 +215,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_cfcdw")
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer/Parallax2D" unique_id=753749268]
+texture_filter = 4
 material = ExtResource("16_qnoug")
 position = Vector2(640, 180)
 scale = Vector2(2.66667, 2.66667)
@@ -254,6 +250,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_cfcdw")
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer4/Parallax2D" unique_id=2045819160]
+texture_filter = 4
 material = ExtResource("19_633vk")
 position = Vector2(640, 180)
 scale = Vector2(2.66667, 2.66667)
@@ -265,6 +262,7 @@ motion_scale = Vector2(1.5, 1.5)
 [node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer2" unique_id=1963985475]
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2/Parallax2D" unique_id=94302610]
+texture_filter = 4
 material = ExtResource("21_hxouk")
 position = Vector2(640, 180)
 scale = Vector2(2.66667, 2.66667)
@@ -311,6 +309,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_cfcdw")
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer3/Parallax2D" unique_id=1109645419]
+texture_filter = 4
 position = Vector2(640, 180)
 scale = Vector2(2.66667, 2.66667)
 texture = ExtResource("8_woovf")

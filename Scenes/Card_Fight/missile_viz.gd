@@ -19,12 +19,14 @@ class_name MissileViz
 @export var SoundNode : AudioStreamPlayer
 @export var Trail : TrailLine
 
+
 signal Finished
 signal Reached
 
 var Target : Control
 var Going = false
 var SpawnPos : Vector2 = Vector2.ZERO
+var counter : float = 0
 
 func _ready() -> void:
 	global_position = SpawnPos
@@ -53,6 +55,8 @@ func _physics_process(delta: float) -> void:
 	
 	if (!Going or Target == null):
 		return
+	
+	counter += delta
 	
 	var direction = (Target.global_position + (Target.size / 2)) - global_position
 	var distance = direction.length()
@@ -86,7 +90,7 @@ func _physics_process(delta: float) -> void:
 		
 		position += Vector2(cos(rotation), sin(rotation)) * speed
 	
-	if (global_position.distance_squared_to(Target.global_position + (Target.size / 2)) < 500):
+	if (global_position.distance_squared_to(Target.global_position + (Target.size / 2)) < 500 or counter > 1.5):
 		global_position = Target.global_position + (Target.size / 2)
 		EndingParticle.global_position = global_position
 		EndingParticle.global_rotation = 0

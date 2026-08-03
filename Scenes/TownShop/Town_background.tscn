@@ -182,6 +182,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_cfcdw")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="ParallaxLayer/Parallax2D" unique_id=1020081051]
+texture_filter = 4
 material = ExtResource("4_s8jj8")
 position = Vector2(640, 180)
 scale = Vector2(2.66667, 2.66667)
@@ -207,6 +208,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_t75tb")
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer4/Parallax2D" unique_id=367474307]
+texture_filter = 4
 material = ExtResource("17_x3e2u")
 position = Vector2(640, 180)
 scale = Vector2(2.66667, 2.66667)
@@ -218,6 +220,7 @@ motion_scale = Vector2(1.5, 1.5)
 [node name="Parallax2D" type="Parallax2D" parent="ParallaxLayer2" unique_id=1189764013]
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2/Parallax2D" unique_id=1226604672]
+texture_filter = 4
 material = ExtResource("19_p78ya")
 position = Vector2(640, 180)
 scale = Vector2(2.66667, 2.66667)

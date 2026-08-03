@@ -4,4 +4,4 @@
 
 [resource]
 shader = ExtResource("1_vegb6")
-shader_parameter/offset = 8.00000038
+shader_parameter/offset = 3.0000001425

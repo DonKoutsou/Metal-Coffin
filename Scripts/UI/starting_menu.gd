@@ -36,7 +36,7 @@ func _ready() -> void:
 	tw.set_trans(Tween.TRANS_EXPO)
 	tw.tween_property($CanvasModulate, "color", Color(0.2,0.2,0.2,1), 2)
 	tw.set_parallel(true)
-	tw.tween_property($AlarmLight2, "energy", 1, 2)
+	tw.tween_property($AlarmLight2, "energy", 2, 2)
 	
 	call_deferred("DoLights")
 	VersionLabel.text = "Demo Version v{0}".format([ProjectSettings.get_setting("application/config/version")])

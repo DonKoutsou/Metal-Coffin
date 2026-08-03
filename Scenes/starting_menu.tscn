@@ -30,10 +30,10 @@
 [ext_resource type="StyleBox" uid="uid://chq4sdt1mihdh" path="res://Theme/Buttons/ButtonBlue_Pressed.tres" id="29_t54ed"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="34_aa43b"]
 [ext_resource type="Texture2D" uid="uid://ben2ixlvxo42b" path="res://Assets/UIPiecies/Screen/Buttons/Button10_Camera 1_FullQuality.png" id="35_xqmn8"]
-[ext_resource type="Texture2D" uid="uid://cbkii1pjnwxww" path="res://Assets/UIPiecies/LightCone.png" id="36_j43p8"]
 [ext_resource type="Texture2D" uid="uid://cfwm15q52gd55" path="res://Assets/UIPiecies/Screen/Buttons/Button10_Camera 1_FullQuality_pressed.png" id="36_sjyyd"]
 [ext_resource type="StyleBox" uid="uid://c5x3vcw8x46rj" path="res://Theme/Buttons/ButtonRed.tres" id="37_xqmn8"]
 [ext_resource type="StyleBox" uid="uid://bvwu33dvi8506" path="res://Theme/Buttons/ButtonRed_Pressed.tres" id="38_sjyyd"]
+[ext_resource type="Texture2D" uid="uid://dg8jbhrloh84u" path="res://Assets/UIPiecies/LightCone2.png" id="38_t54ed"]
 [ext_resource type="PackedScene" uid="uid://dwhre3xvmvjwf" path="res://Scenes/ScreenUI/Fan.tscn" id="39_nthvp"]
 [ext_resource type="Texture2D" uid="uid://jo4d26lfwv65" path="res://Assets/UIPiecies/cables2_Camera 1.png" id="40_xqmn8"]
 [ext_resource type="Script" uid="uid://c11sqafe6873w" path="res://Scripts/Cables.gd" id="41_sjyyd"]
@@ -85,7 +85,7 @@ canvas_item_default_texture_filter = 2
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 0
 positional_shadow_atlas_16_bits = false
-size = Vector2i(868, 594)
+size = Vector2i(1433, 981)
 size_2d_override = Vector2i(868, 594)
 size_2d_override_stretch = true
 render_target_update_mode = 4
@@ -752,10 +752,11 @@ color = Color(0.5019608, 0.5019608, 0.5019608, 1)
 [node name="AlarmLight2" type="PointLight2D" parent="." unique_id=368259133]
 texture_filter = 2
 position = Vector2(657, -700)
+energy = 2.0
 blend_mode = 2
-texture = ExtResource("36_j43p8")
+texture = ExtResource("38_t54ed")
 offset = Vector2(0, 1000)
-texture_scale = 7.0
+texture_scale = 6.27
 
 [connection signal="OnButtonPressed" from="SubViewportContainer/SubViewport/VBoxContainer/Credits" to="." method="_on_credits_on_button_pressed"]
 [connection signal="pressed" from="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/Cancel" to="." method="_on_cancel_pressed"]

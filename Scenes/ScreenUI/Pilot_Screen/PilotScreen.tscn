@@ -30,7 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://bbtwe257d708t" path="res://Assets/UIPiecies/Screen/SidePanels/Left_FullQuality.png" id="28_188si"]
 [ext_resource type="PackedScene" uid="uid://dmmhk1exrryca" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/ControlledShipUI/ControlledShipSelection.tscn" id="28_hc833"]
 
-[node name="PilotScreen" type="Control" unique_id=1109053421 node_paths=PackedStringArray("mapMarkerControls", "thrust", "elevationThrust", "steer", "SonarUI", "speedSimulationButton", "pauseSimulationButton", "landButton", "hatchButton", "regroupButton", "shipDockButton", "radarButton", "zoomDial", "yDial", "xDial", "missileUI")]
+[node name="PilotScreen" type="Control" unique_id=1109053421 node_paths=PackedStringArray("mapMarkerControls", "thrust", "elevationThrust", "steer", "pilotScreenSet", "SonarUI", "speedSimulationButton", "pauseSimulationButton", "landButton", "hatchButton", "regroupButton", "shipDockButton", "zoomDial", "yDial", "xDial", "missileUI")]
 texture_filter = 2
 layout_mode = 3
 anchors_preset = 15
@@ -45,6 +45,7 @@ mapMarkerControls = NodePath("VBoxContainer/MapMarkerControls")
 thrust = NodePath("ThrustLever")
 elevationThrust = NodePath("ElevationLever")
 steer = NodePath("SteeringWheel")
+pilotScreenSet = NodePath("Pilot_Screen_Settings")
 SonarUI = NodePath("VBoxContainer/Sonar")
 speedSimulationButton = NodePath("SpeedSimulation")
 pauseSimulationButton = NodePath("SimulationButton")
@@ -52,7 +53,6 @@ landButton = NodePath("LandButton")
 hatchButton = NodePath("OpenHatchButton")
 regroupButton = NodePath("Regroup")
 shipDockButton = NodePath("ShipDockButton")
-radarButton = NodePath("RadarButton")
 zoomDial = NodePath("ZoomDial")
 yDial = NodePath("YDial")
 xDial = NodePath("XDial")
@@ -270,26 +270,7 @@ grow_horizontal = 1
 grow_vertical = 1
 disabled = true
 
-[node name="RadarButton" type="Button" parent="." unique_id=1811648738 groups=["Buttons"]]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -74.0
-offset_top = -620.5357
-offset_right = -30.0
-offset_bottom = -536.4643
-grow_horizontal = 0
-grow_vertical = 0
-focus_mode = 0
-theme_override_styles/normal = ExtResource("6_bpouu")
-theme_override_styles/pressed = ExtResource("7_yjfdw")
-theme_override_styles/hover = ExtResource("6_bpouu")
-toggle_mode = true
-
-[node name="Pilot_Screen_Settings" type="Control" parent="." unique_id=1014197286 node_paths=PackedStringArray("ForecastButton", "GridButton", "ZoomButton", "TopoButton", "WindCorrectionButton")]
+[node name="Pilot_Screen_Settings" type="Control" parent="." unique_id=1014197286 node_paths=PackedStringArray("ForecastButton", "GridButton", "ZoomButton", "TopoButton", "WindCorrectionButton", "RadarButton")]
 anchors_preset = 0
 size_flags_vertical = 3
 mouse_filter = 2
@@ -299,6 +280,7 @@ GridButton = NodePath("GRID")
 ZoomButton = NodePath("UI")
 TopoButton = NodePath("Topo")
 WindCorrectionButton = NodePath("WindCor")
+RadarButton = NodePath("RadarButton")
 
 [node name="WindCor" type="Button" parent="Pilot_Screen_Settings" unique_id=318848790 groups=["Buttons"]]
 layout_mode = 1
@@ -402,6 +384,25 @@ texture_pressed = ExtResource("27_h6xln")
 texture_click_mask = ExtResource("20_h6xln")
 ignore_texture_size = true
 stretch_mode = 5
+
+[node name="RadarButton" type="Button" parent="Pilot_Screen_Settings" unique_id=1811648738 groups=["Buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1206.0
+offset_top = 99.464294
+offset_right = 1250.0
+offset_bottom = 183.5357
+grow_horizontal = 0
+grow_vertical = 0
+focus_mode = 0
+theme_override_styles/normal = ExtResource("6_bpouu")
+theme_override_styles/pressed = ExtResource("7_yjfdw")
+theme_override_styles/hover = ExtResource("6_bpouu")
+toggle_mode = true
 
 [node name="LandButton" type="Button" parent="." unique_id=654026330 groups=["Buttons"]]
 layout_mode = 1
@@ -520,9 +521,9 @@ scale = Vector2(0.7339007, 0.9608484)
 [connection signal="pressed" from="MarkerEditorButton" to="." method="markerEditorButtonPressed"]
 [connection signal="pressed" from="ShipDockButton" to="." method="shipDockButtonPressed"]
 [connection signal="pressed" from="OpenHatchButton" to="." method="openHatchButtonPressed"]
-[connection signal="toggled" from="RadarButton" to="." method="radarButtonToggled"]
 [connection signal="ForecastToggled" from="Pilot_Screen_Settings" to="." method="_on_forecast_button_toggled"]
 [connection signal="GridToggled" from="Pilot_Screen_Settings" to="." method="_on_grid_button_toggled"]
+[connection signal="RadarToggled" from="Pilot_Screen_Settings" to="." method="radarButtonToggled"]
 [connection signal="SteerToggled" from="Pilot_Screen_Settings" to="." method="_onSteerButtonToggled"]
 [connection signal="TopologyTogled" from="Pilot_Screen_Settings" to="." method="_on_topo_button_toggled"]
 [connection signal="WindCorrectionToggled" from="Pilot_Screen_Settings" to="." method="_on_wind_correction_toggled"]
@@ -532,6 +533,7 @@ scale = Vector2(0.7339007, 0.9608484)
 [connection signal="toggled" from="Pilot_Screen_Settings/UI" to="Pilot_Screen_Settings" method="_on_zoom_level_button_toggled"]
 [connection signal="toggled" from="Pilot_Screen_Settings/GRID" to="Pilot_Screen_Settings" method="_on_grid_button_toggled"]
 [connection signal="toggled" from="Pilot_Screen_Settings/Topo" to="Pilot_Screen_Settings" method="_on_topo_button_toggled"]
+[connection signal="toggled" from="Pilot_Screen_Settings/RadarButton" to="Pilot_Screen_Settings" method="_on_radar_button_toggled"]
 [connection signal="pressed" from="LandButton" to="." method="landPressed"]
 [connection signal="pressed" from="Pause" to="." method="pausePressed"]
 [connection signal="RangeChanged" from="ZoomDial" to="." method="_on_zoom_dial_range_changed"]

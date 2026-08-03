@@ -57,6 +57,7 @@ polygon = PackedVector2Array(14, 0, 200, 100, 220, 0, 200, -100)
 shape = SubResource("CircleShape2D_xahj0")
 
 [node name="ColorRect" type="Sprite2D" parent="." unique_id=615541520]
+texture_filter = 4
 material = SubResource("ShaderMaterial_38xgp")
 rotation = -1.5708
 scale = Vector2(0.5, 0.5)

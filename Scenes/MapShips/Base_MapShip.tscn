@@ -50,6 +50,7 @@ Acceleration = NodePath("Aceleration")
 
 [node name="ColorRect" type="Sprite2D" parent="." unique_id=1708187202]
 z_index = -2
+texture_filter = 4
 material = SubResource("ShaderMaterial_7v2kq")
 rotation = -1.5708
 texture = ExtResource("5_oe1x5")

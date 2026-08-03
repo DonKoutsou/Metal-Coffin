@@ -20,7 +20,6 @@ class_name PilotScreenUI
 @export var hatchButton : Button
 @export var regroupButton: Button
 @export var shipDockButton: Button
-@export var radarButton: Button
 @export var zoomDial: Dial
 @export var yDial: Dial
 @export var xDial: Dial
@@ -55,7 +54,7 @@ func simulationToggled(paused: bool) -> void:
 	pauseSimulationButton.button_down.emit()
 
 func radarToggled(t : bool) -> void:
-	radarButton.set_pressed_no_signal(t)
+	pilotScreenSet.set_Radar(t)
 
 # --- OUTGOING EVENTS TO GAME LOGIC/UI DISPATCH ---
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1p7ntae2wlxa"
-path="res://.godot/imported/IndustrialLayer-2_Frame2.png-81a71bba04f2e7ea70b90ca176e51347.ctex"
+uid="uid://dg8jbhrloh84u"
+path="res://.godot/imported/LightCone2.png-b08a367b241681c8fe08f40488220070.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame2.png"
-dest_files=["res://.godot/imported/IndustrialLayer-2_Frame2.png-81a71bba04f2e7ea70b90ca176e51347.ctex"]
+source_file="res://Assets/UIPiecies/LightCone2.png"
+dest_files=["res://.godot/imported/LightCone2.png-b08a367b241681c8fe08f40488220070.ctex"]
 
 [params]
 
@@ -24,7 +24,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -37,5 +37,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=720
+process/size_limit=256
 detect_3d/compress_to=1

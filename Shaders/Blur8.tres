@@ -4,4 +4,4 @@
 
 [resource]
 shader = ExtResource("1_7ypm3")
-shader_parameter/offset = 2.000000095
+shader_parameter/offset = 1.0000000475

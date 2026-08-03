@@ -161,6 +161,7 @@ SonarShape = NodePath("Sonar")
 Dock = NodePath("DroneDock")
 
 [node name="ColorRect" parent="." index="1" unique_id=1708187202]
+texture_filter = 4
 material = SubResource("ShaderMaterial_06s8f")
 
 [node name="TrailLine" parent="ColorRect" index="0" unique_id=994780843]
