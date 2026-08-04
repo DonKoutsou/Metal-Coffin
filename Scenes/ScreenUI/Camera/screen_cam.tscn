@@ -298,7 +298,7 @@ texture = ExtResource("6_7vs4e")
 texture_scale = 13.0
 
 [node name="AlarmLight2" type="PointLight2D" parent="LightPivot1/LightPivot2" unique_id=696037205]
-position = Vector2(0, 8.84003)
+position = Vector2(0, 48.999943)
 energy = 2.0
 blend_mode = 2
 range_z_min = 0
@@ -306,7 +306,7 @@ range_layer_min = 2
 range_layer_max = 4
 texture = ExtResource("7_8npwn")
 offset = Vector2(0, 900)
-texture_scale = 7.0
+texture_scale = 7.2
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="LightPivot1/LightPivot2" unique_id=1309977194]
 stream = ExtResource("5_x04yk")

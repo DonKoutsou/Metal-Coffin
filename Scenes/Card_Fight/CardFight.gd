@@ -191,14 +191,14 @@ func ReplaceShip(Ship : BattleShipStats, TurnPosition : int, Friendly : bool) ->
 
 		ShipTurns.insert(TurnPosition, NewCombatant)
 
-	else: if (EnemyReserves.size() > 0):
+	else: if (!Friendly and EnemyReserves.size() > 0):
 		
 		NewCombatant = EnemyReserves.pop_front()
 		EnemyCombatants.append(NewCombatant)
 		EnemyReserves.erase(NewCombatant)
 		
 		ShipTurns.insert(TurnPosition, NewCombatant)
-
+	
 	var NewVisuals 
 	if (NewCombatant != null):
 		NewVisuals = CreateShipVisuals(NewCombatant, Friendly)
