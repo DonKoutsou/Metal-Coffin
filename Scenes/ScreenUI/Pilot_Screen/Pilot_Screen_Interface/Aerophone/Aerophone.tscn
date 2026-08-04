@@ -76,6 +76,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="AeroSonarLine" type="Control" parent="." unique_id=1384447880]
+modulate = Color(1, 0, 0, 1)
 material = SubResource("CanvasItemMaterial_mi4l8")
 anchors_preset = 0
 offset_left = 87.49997
@@ -87,6 +88,7 @@ script = ExtResource("1_u0q8c")
 OffsetAmmount = 4.14
 Radius = 30.0
 N = SubResource("NoiseTexture2D_kirju")
+Col = Color(1, 1, 1, 1)
 
 [node name="Label" type="Label" parent="AeroSonarLine" unique_id=733326543]
 material = SubResource("CanvasItemMaterial_4wgxe")
@@ -96,19 +98,19 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -70.12024
-offset_top = -7.5
-offset_right = 70.12024
-offset_bottom = 7.5
+offset_left = -18.0
+offset_top = -18.0
+offset_right = 18.0
+offset_bottom = 18.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.978254, 0, 0.0338846, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 14
 text = "GAIN:10"
 horizontal_alignment = 1
 vertical_alignment = 1
-autowrap_mode = 2
+autowrap_mode = 1
 
 [node name="Mode" type="TextureButton" parent="." unique_id=540318672 groups=["Buttons"]]
 layout_mode = 1

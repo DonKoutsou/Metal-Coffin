@@ -149,7 +149,7 @@ func _physics_process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if (World.WORLDST == World.WORLDSTATE.NORMAL):
 		if (event is InputEventMouseMotion):
-			if (get_global_mouse_position().x < 10 and position.x != 370):
+			if (get_global_mouse_position().x < 20 and position.x != 370):
 				LightPivot1.ApplyShake(1)
 				position.x = 370
 			else: if (get_global_mouse_position().x > 900 and position.x != OriginalPos.x):

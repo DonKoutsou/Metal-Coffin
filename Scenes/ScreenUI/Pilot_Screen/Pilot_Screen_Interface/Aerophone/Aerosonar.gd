@@ -325,12 +325,12 @@ func _on_mode_toggled(toggled_on: bool) -> void:
 			PopUpManager.GetInstance().DoFadeNotif("Ship missing sonar")
 			return
 		currentMode = MODE.SOUND
-		lineContainer.Col = Color(1,0,0)
+		lineContainer.modulate = Color(1,0,0)
 	else:
 		if (!fleetHasElint()):
 			ModeButton.set_pressed_no_signal(!toggled_on)
 			PopUpManager.GetInstance().DoFadeNotif("Ship missing ELint")
 			return
 		currentMode = MODE.RADAR
-		lineContainer.Col = Color(0.802, 0.416, 0.074, 1.0)
+		lineContainer.modulate = Color(0.802, 0.416, 0.074, 1.0)
 	Update(0)

@@ -99,6 +99,9 @@ static func FindTooltips(card : CardStats) -> PackedStringArray:
 	var words = strip_bbcode(desc.replace("\n", " ")).split(" ")
 	var tips : PackedStringArray = []
 	
+	if (card.PutOnTop):
+		tips.append(ToolTips["SWIFT"])
+	
 	for g in card.OnUseModules:
 		if (g is DeffenceCardModule):
 			if (g.AOE):
@@ -126,7 +129,7 @@ static func FindTooltips(card : CardStats) -> PackedStringArray:
 		tips.append(ToolTips["PERMISS"])
 	if (card.UseConditions.has(CardStats.CardUseCondition.ENERGY_DEPENDANT)):
 		tips.append(ToolTips["ENDEP"])
-	
+
 	var perfModule = card.OnPerformModule
 	if (perfModule != null):
 		if (perfModule is OffensiveCardModule and perfModule.AOE):
@@ -167,6 +170,7 @@ const ToolTips : Dictionary[String, String] = {
 	"COUNTER_DIR" : "This card will defend the user from an offensive [color=#ffc315]DIRECT ATTACK[/color] card",
 	"COUNTER_HOM" : "This card will defend the user from an offensive [color=#ffc315]HOMING ATTACK[/color] card",
 	"DMG_RDC_ANY" : "This card will reduce the damage of an offensive card",
+	"SWIFT" : "[color=#ffc315]SWIFT[/color]\nThis card will be placed at the top of the pile at the start of every card figh",
 }
 
 enum WeaponType{

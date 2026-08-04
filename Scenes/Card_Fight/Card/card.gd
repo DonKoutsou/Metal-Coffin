@@ -35,6 +35,7 @@ var mat : ShaderMaterial
 
 var isStatic : bool = false
 
+var dirTw : Tween
 
 func _physics_process(delta: float) -> void:
 	InterpolationValue = min(InterpolationValue + delta *5, 1)
@@ -293,10 +294,6 @@ var RotTweenHover : Tween
 
 
 func _on_button_mouse_entered() -> void:
-	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.SWIFT_CARDS)):
-		ActionTracker.OnActionCompleted(ActionTracker.Action.SWIFT_CARDS)
-		ActionTracker.QueueTutorial("Swift Cards", "Some cards are marked witn [color=#ffc315]SW[/color] in their name. Those cards will be placed at the top of the pile at the start of every card fight. Usefull for starting a fight prepared.", [])
-	
 	z_index = 1
 	
 	if (TweenHover and TweenHover.is_running()):
@@ -346,24 +343,23 @@ func SetCardDiretion(dir : Vector2) -> void:
 	mat.set_shader_parameter("y_rot", dir.y)
 	mat.set_shader_parameter("x_rot", dir.x)
 	
-var dirTw : Tween
 
-func _on_button_gui_input(_event: InputEvent) -> void:
-	return
-	if (dirTw != null):
-		dirTw.kill()
-	dirTw = create_tween()
-	dirTw.set_ease(Tween.EASE_OUT)
-	dirTw.set_trans(Tween.TRANS_BACK)
-	
-	var pos = global_position + (size/2)
-	var offset = get_global_mouse_position() - pos
-	var currenty = mat.get_shader_parameter("y_rot")
-	var currentx = mat.get_shader_parameter("x_rot")
-	var Newy = -offset.x / 8
-	var Newx = offset.y / 8
-	#mat.set_shader_parameter("y_rot", Newy)
-	#mat.set_shader_parameter("x_rot", Newx)
-	
-	dirTw.tween_method(SetCardDiretion, Vector2(currentx, currenty), Vector2(Newx, Newy), 1)
+#
+#func _on_button_gui_input(_event: InputEvent) -> void:
+	#if (dirTw != null):
+		#dirTw.kill()
+	#dirTw = create_tween()
+	#dirTw.set_ease(Tween.EASE_OUT)
+	#dirTw.set_trans(Tween.TRANS_BACK)
+	#
+	#var pos = global_position + (size/2)
+	#var offset = get_global_mouse_position() - pos
+	#var currenty = mat.get_shader_parameter("y_rot")
+	#var currentx = mat.get_shader_parameter("x_rot")
+	#var Newy = -offset.x / 8
+	#var Newx = offset.y / 8
+	##mat.set_shader_parameter("y_rot", Newy)
+	##mat.set_shader_parameter("x_rot", Newx)
+	#
+	#dirTw.tween_method(SetCardDiretion, Vector2(currentx, currenty), Vector2(Newx, Newy), 1)
 	

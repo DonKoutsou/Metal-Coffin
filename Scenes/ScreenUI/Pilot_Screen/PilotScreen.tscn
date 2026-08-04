@@ -20,10 +20,10 @@
 [ext_resource type="PackedScene" uid="uid://dj4mdtpd50mk1" path="res://Scenes/ScreenUI/Pilot_Screen/open_hatch_button.tscn" id="20_8mt3t"]
 [ext_resource type="BitMap" uid="uid://c2ivt2vwjpttm" path="res://Assets/UIPiecies/Screen/Buttons/NobMask2.png" id="20_h6xln"]
 [ext_resource type="StyleBox" uid="uid://bj8tmjsnlmj0" path="res://Theme/Buttons/ButtonBlack.tres" id="20_uojtp"]
+[ext_resource type="StyleBox" uid="uid://c5x3vcw8x46rj" path="res://Theme/Buttons/ButtonRed.tres" id="21_188si"]
 [ext_resource type="StyleBox" uid="uid://g2ic8um6hit" path="res://Theme/Buttons/ButtonBlack_Pressed.tres" id="21_hc833"]
+[ext_resource type="StyleBox" uid="uid://bvwu33dvi8506" path="res://Theme/Buttons/ButtonRed_Pressed.tres" id="22_8mt3t"]
 [ext_resource type="FontFile" uid="uid://mwyuu26jo0fk" path="res://Fonts/Bank Gothic Light Regular.otf" id="23_j5ioc"]
-[ext_resource type="StyleBox" uid="uid://bblal3stslrb1" path="res://Theme/Buttons/ButtonWhite.tres" id="24_8mt3t"]
-[ext_resource type="StyleBox" uid="uid://cwsk20kaf6n22" path="res://Theme/Buttons/ButtonWhite_Pressed.tres" id="25_q2jn7"]
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/Dial/Dial.tscn" id="26_ecvfe"]
 [ext_resource type="Texture2D" uid="uid://c7sjnn0llsgx6" path="res://Assets/UIPiecies/Screen/Buttons/Nob2.png" id="26_qqfhp"]
 [ext_resource type="Texture2D" uid="uid://b5847pm3qa860" path="res://Assets/UIPiecies/Screen/Buttons/Nob.png" id="27_h6xln"]
@@ -144,9 +144,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -60.0
-offset_top = -486.93103
+offset_top = -485.0
 offset_right = -21.0
-offset_bottom = -410.27588
+offset_bottom = -408.34485
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
@@ -164,9 +164,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -12.0
-offset_right = -63.0
+offset_left = -105.0
+offset_top = -14.0
+offset_right = -61.0
 offset_bottom = 29.0
 grow_horizontal = 0
 grow_vertical = 2
@@ -185,10 +185,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -217.0
-offset_top = 4.0
-offset_right = -178.0
-offset_bottom = 28.0
+offset_left = -219.0
+offset_top = 1.0
+offset_right = -175.0
+offset_bottom = 26.0
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 0
@@ -225,10 +225,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -165.0
-offset_top = -355.0
-offset_right = -127.0
-offset_bottom = -332.0
+offset_left = -168.0
+offset_top = -359.0
+offset_right = -124.0
+offset_bottom = -333.0
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
@@ -262,10 +262,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 1030.0
-offset_top = 583.0
-offset_right = 1102.0
-offset_bottom = 724.1766
+offset_left = 1054.0
+offset_top = 577.0
+offset_right = 1126.0
+offset_bottom = 718.1766
 grow_horizontal = 1
 grow_vertical = 1
 disabled = true
@@ -411,16 +411,16 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -185.0
-offset_top = -56.0
-offset_right = -167.0
-offset_bottom = -19.0
+offset_left = -162.0
+offset_top = -53.0
+offset_right = -117.0
+offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
-theme_override_styles/normal = ExtResource("24_8mt3t")
-theme_override_styles/pressed = ExtResource("25_q2jn7")
-theme_override_styles/hover = ExtResource("24_8mt3t")
+theme_override_styles/normal = ExtResource("21_188si")
+theme_override_styles/pressed = ExtResource("22_8mt3t")
+theme_override_styles/hover = ExtResource("21_188si")
 
 [node name="ThrustLever" parent="." unique_id=1806408407 instance=ExtResource("3_ecvfe")]
 layout_mode = 1
@@ -446,10 +446,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -107.0
-offset_top = 20.0
+offset_left = -105.0
+offset_top = 18.0
 offset_right = -40.0
-offset_bottom = 58.0
+offset_bottom = 60.0
 grow_horizontal = 0
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -502,19 +502,19 @@ stretch_mode = 5
 [node name="ZoomDial" parent="." unique_id=456827188 instance=ExtResource("26_ecvfe")]
 position = Vector2(41.614456, 144.64256)
 rotation = 1.5707964
-scale = Vector2(0.7403954, 0.94920444)
+scale = Vector2(0.7198156, 0.8739407)
 frame = 4
 frame_progress = 0.3159618
 
 [node name="YDial" parent="." unique_id=1133286453 instance=ExtResource("26_ecvfe")]
 position = Vector2(41.000004, 372.12854)
 rotation = 1.5707964
-scale = Vector2(0.7307508, 0.9542874)
+scale = Vector2(0.7198156, 0.8739407)
 
 [node name="XDial" parent="." unique_id=884440325 instance=ExtResource("26_ecvfe")]
 position = Vector2(41, 601.8287)
 rotation = -4.712389
-scale = Vector2(0.7339007, 0.9608484)
+scale = Vector2(0.7198156, 0.8739407)
 
 [connection signal="toggled" from="SpeedSimulation" to="." method="_on_speed_simulation_toggled"]
 [connection signal="toggled" from="SimulationButton" to="." method="simPauseToggled"]
