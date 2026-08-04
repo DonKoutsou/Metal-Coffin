@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://dxt6oe4rhk3du"]
 
-[ext_resource type="Shader" uid="uid://cl4oumrqvlmki" path="res://Shaders/ColorIndexMat.gdshader" id="1_rg5ws"]
+[ext_resource type="Shader" uid="uid://cl4oumrqvlmki" path="res://Shaders/PostProcess.gdshader" id="1_rg5ws"]
 [ext_resource type="Texture2D" uid="uid://bhdisnmqx0k2c" path="res://Assets/dithertexture2.png" id="2_l2bqx"]
 
 [resource]

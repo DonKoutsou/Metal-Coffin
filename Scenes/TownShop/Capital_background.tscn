@@ -19,9 +19,9 @@
 [ext_resource type="Texture2D" uid="uid://b25b3kqpagiyd" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame9.png" id="11_xlvej"]
 [ext_resource type="Texture2D" uid="uid://chjjt4cq58jan" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame10.png" id="12_aelfl"]
 [ext_resource type="Texture2D" uid="uid://c6q2y8r7ojth2" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame11.png" id="13_pee3d"]
-[ext_resource type="Material" uid="uid://bsqawqp83u5sx" path="res://Shaders/Blur14.tres" id="16_qnoug"]
-[ext_resource type="Material" uid="uid://d2ewn5jt0b25e" path="res://Shaders/Blur10.tres" id="19_633vk"]
-[ext_resource type="Material" uid="uid://0u7e70ufido3" path="res://Shaders/Blur8.tres" id="21_hxouk"]
+[ext_resource type="Material" uid="uid://bsqawqp83u5sx" path="res://Shaders/Blur/Blur14.tres" id="16_qnoug"]
+[ext_resource type="Material" uid="uid://d2ewn5jt0b25e" path="res://Shaders/Blur/Blur10.tres" id="19_633vk"]
+[ext_resource type="Material" uid="uid://0u7e70ufido3" path="res://Shaders/Blur/Blur8.tres" id="21_hxouk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gf58y"]
 bg_color = Color(0, 0, 0, 1)

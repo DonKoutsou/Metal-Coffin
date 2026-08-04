@@ -27,7 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://ckhssy2ej85mq" path="res://Scenes/ScreenUI/Dial/Dial.tscn" id="26_ecvfe"]
 [ext_resource type="Texture2D" uid="uid://c7sjnn0llsgx6" path="res://Assets/UIPiecies/Screen/Buttons/Nob2.png" id="26_qqfhp"]
 [ext_resource type="Texture2D" uid="uid://b5847pm3qa860" path="res://Assets/UIPiecies/Screen/Buttons/Nob.png" id="27_h6xln"]
-[ext_resource type="Texture2D" uid="uid://bbtwe257d708t" path="res://Assets/UIPiecies/Screen/SidePanels/Left_FullQuality.png" id="28_188si"]
+[ext_resource type="Texture2D" uid="uid://lhupseg00i2j" path="res://Assets/UIPiecies/Screen/SidePanels/Left.png" id="28_188si"]
 [ext_resource type="PackedScene" uid="uid://dmmhk1exrryca" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/ControlledShipUI/ControlledShipSelection.tscn" id="28_hc833"]
 
 [node name="PilotScreen" type="Control" unique_id=1109053421 node_paths=PackedStringArray("mapMarkerControls", "thrust", "elevationThrust", "steer", "pilotScreenSet", "SonarUI", "speedSimulationButton", "pauseSimulationButton", "landButton", "hatchButton", "regroupButton", "shipDockButton", "zoomDial", "yDial", "xDial", "missileUI")]
@@ -491,7 +491,9 @@ vertical_alignment = 1
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
+offset_top = -1.0
 offset_right = 80.0
+offset_bottom = 1.0
 grow_vertical = 2
 texture = ExtResource("28_188si")
 expand_mode = 1

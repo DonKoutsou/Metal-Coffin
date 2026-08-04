@@ -9,35 +9,45 @@ class_name SettingsPanel
 @export var SoundButton : Control
 @export var MusicButton : Control
 @export var ShakeEffectButton : Control
+@export var RainButton : BaseButton
 
+static var HasRain = true
 static var HasGlitch = true
 
 func _ready() -> void:
 	GlitchButton.set_pressed_no_signal(HasGlitch)
+	RainButton.set_pressed_no_signal(HasRain)
 	FullScreenButton.set_pressed_no_signal(DisplayServer.window_get_mode(0) == DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN)
 	SoundButton.set_pressed_no_signal(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Sounds")) == 0)
 	MusicButton.set_pressed_no_signal(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music")) == 0)
 	ShakeEffectButton.set_pressed_no_signal(ScreenCamera.ShakeEffects)
 	
+#-------------------------------------------------------------------
+##FULLSCREEN
 func _on_full_screen_check_box_toggled(toggled_on: bool) -> void:
 	if (toggled_on):
 		DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_WINDOWED)
 
-
+#-------------------------------------------------------------------
+##SOUND
 func _on_sound_check_box_toggled(toggled_on: bool) -> void:
 	if (toggled_on):
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sounds"), 0)
 	else:
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sounds"), -64)
 
+#-------------------------------------------------------------------
+##MUSIC
 func _on_music_check_box_toggled(toggled_on: bool) -> void:
 	if (toggled_on):
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), 0)
 	else:
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), -64)
 
+#-------------------------------------------------------------------
+##GLITCH
 static func GetGlitch() -> bool:
 	return HasGlitch
 
@@ -46,7 +56,6 @@ func _on_glitches_check_box_toggled(toggled_on: bool) -> void:
 	ToggleScreenGlitches(toggled_on)
 
 func ToggleScreenGlitches(t : bool) -> void:
-
 	var ImageFlicker = 0
 	var Skip = 0
 	if (t):
@@ -56,6 +65,16 @@ func ToggleScreenGlitches(t : bool) -> void:
 	mat.set_shader_parameter("image_flicker", ImageFlicker)
 	mat.set_shader_parameter("skip", Skip)
 
-
+#-------------------------------------------------------------------
+##Shake
 func _on_shake_check_box_toggled(toggled_on: bool) -> void:
 	ScreenCamera.ShakeEffects = toggled_on
+
+#-------------------------------------------------------------------
+##Rain
+static func GetRain() -> bool:
+	return HasRain
+
+func _on_rain_check_box_toggled(toggled_on: bool) -> void:
+	HasRain = toggled_on
+	RainEffect.Instance.ToggleEffects(toggled_on)

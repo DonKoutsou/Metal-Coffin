@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://camvvfprrteei"]
 
-[ext_resource type="Shader" uid="uid://cp7f1eve77if5" path="res://Shaders/Screen2.gdshader" id="1_wo0vq"]
+[ext_resource type="Shader" uid="uid://cp7f1eve77if5" path="res://Shaders/CRT.gdshader" id="1_wo0vq"]
 
 [resource]
 shader = ExtResource("1_wo0vq")

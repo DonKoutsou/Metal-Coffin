@@ -4,15 +4,15 @@
 [ext_resource type="Material" uid="uid://dfyldqd1bqaq3" path="res://Shaders/RainMat.tres" id="2_psq1t"]
 [ext_resource type="AudioStream" uid="uid://bwci15q31ick8" path="res://Assets/Sounds/RainSound2.mp3" id="3_p3mox"]
 
-[node name="CanvasLayer2" type="CanvasLayer" unique_id=574561548 node_paths=PackedStringArray("RainSound")]
-layer = 5
+[node name="CanvasLayer2" type="CanvasLayer" unique_id=623453896 node_paths=PackedStringArray("RainSound")]
+layer = 3
 script = ExtResource("1_skesx")
 RainMat = ExtResource("2_psq1t")
 RainSound = NodePath("AudioStreamPlayer2D")
 
 [node name="RainEffect" type="ColorRect" parent="." unique_id=997444341]
-visible = false
 z_index = 1
+texture_filter = 3
 material = ExtResource("2_psq1t")
 anchors_preset = 15
 anchor_right = 1.0

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbtwe257d708t"
-path="res://.godot/imported/Left_FullQuality.png-fd0940f7488835c640bc7037c6861fe2.ctex"
+uid="uid://lhupseg00i2j"
+path="res://.godot/imported/Left.png-305ff46f68780b1e929a46e461ba7b52.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UIPiecies/Screen/SidePanels/Left_FullQuality.png"
-dest_files=["res://.godot/imported/Left_FullQuality.png-fd0940f7488835c640bc7037c6861fe2.ctex"]
+source_file="res://Assets/UIPiecies/Screen/SidePanels/Left.png"
+dest_files=["res://.godot/imported/Left.png-305ff46f68780b1e929a46e461ba7b52.ctex"]
 
 [params]
 

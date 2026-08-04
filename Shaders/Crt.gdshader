@@ -1,110 +1,266 @@
 shader_type canvas_item;
 render_mode unshaded;
-uniform sampler2D screen_texture: hint_screen_texture, filter_linear_mipmap, repeat_disable;
-
-group_uniforms Image;
-uniform float curvature: hint_range(0., 10., .01) = 2.;
-uniform float skip: hint_range(0., 1., .01) = 1.;
-uniform float image_flicker: hint_range(0., 1., .01) = 1.;
+uniform vec2 res = vec2(864, 486);
+//uniform float Scanres = 500;
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, repeat_disable, filter_nearest;
+uniform int mask_type : hint_range(0, 2) = 0;
 
 group_uniforms Vignette;
-uniform float vignette_flicker_speed: hint_range(0., 2., .01) = 1.;
-uniform float vignette_strength: hint_range(0., 3., 0.01) = 1.;
+uniform float vignette_strength : hint_range(0., 10., 0.01) = 1.;
+uniform float vignette_spread : hint_range(0.0, 1.0, 0.01) = 0.45;
+uniform float vignette_harshness : hint_range(0.1, 50.0, 0.01) = 2.0;
+uniform float vignette_roundness : hint_range(0.0, 0.5, 0.01) = 0.08;
 
-group_uniforms Scanlines;
-uniform float small_scanlines_speed: hint_range(0., 10., .01) = 1.;
-uniform float small_scanlines_proximity: hint_range(.01, 2., .01) = 1.;
-uniform float small_scanlines_opacity: hint_range(0.01, 5., .01) = 1.;
+uniform float image_flicker : hint_range(0., 1., .01) = 1.;
+uniform float skip : hint_range(0., 1., .01) = 1.;
+
+uniform float color_offset_multiplier: hint_range(0.0, 0.1) =  0.004;
+//uniform float black_offset_multiplier: hint_range(0.0, 0.1) = 0.1;
+//uniform float color_offset: hint_range(-0.1, 0.1) = 0.005;
+//uniform float blur_amount: hint_range(0.0, 3.0, 0.1);
+
+uniform float hardScan : hint_range(-12.0, -1.0) = -8.0;
+uniform float hardPix : hint_range(-4.0, 0.0) = -2.0;
+
+uniform vec2 warp = vec2(64.0, 24.0);
+
+uniform float maskDark : hint_range(0.0, 1.0) = 0.5;
+uniform float maskLight : hint_range(1.0, 2.0) = 1.5;
+
 uniform float scanlines_opacity: hint_range(0., 2., .01) = 1.;
 uniform float scanlines_speed: hint_range(0., 5., .01) = 1.;
 uniform float scanline_thickness: hint_range(0., .6, .01) = 0.5;
 uniform float scanlines_spacing: hint_range(0.3, 3., .01) = 1.;
-uniform float static_noise_intensity : hint_range(0.0, 1.0) = 0.06;
 uniform float static_chromatic_aberration : hint_range(0.0, 1.0) = 0.1;
-group_uniforms Noise;
-uniform sampler2D noise_texture: filter_linear_mipmap, repeat_enable;
 
-float noise(vec2 p, vec2 uv)
-{
-    float s = texture(noise_texture, vec2(1. * TIME, 2. * TIME) * 8. + p * 1.).x;
-    s *= s;
-    return s;
+
+float ToLinear(float c)
+{ 
+	return c * c;
 }
 
-float onOff(float a, float b, float c)
-{
-    return step(c, sin(TIME + a * cos(TIME * b)));
+float ToLinearSlow(float c){ 
+	return (c <= 0.04045) ? c / 12.92 : pow((c + 0.055) / 1.055, 2.4); 
+}
+
+vec3 ToLinear(vec3 c)
+{ 
+	return vec3(ToLinear(c.r), ToLinear(c.g), ToLinear(c.b));
+}
+
+vec3 ToSrgb(vec3 c) {
+	return sqrt(max(c, vec3(0.0)));
+}
+
+vec3 ToSrgbSlow(vec3 c) {
+	c = max(c, vec3(0.0));
+	return mix(
+		c * 12.92,
+		1.055 * pow(c, vec3(1.0 / 2.4)) - 0.055,
+		greaterThanEqual(c, vec3(0.0031308))
+	);
 }
 
 float ramp(float y, float start, float end)
 {
-    float inside = step(start, y) - step(end, y);
-    float fact = (y-start)/(end-start) * inside;
-    return (1.-fact) * inside;
+	float inside = step(start, y) - step(end, y);
+	float fact = (y-start)/(end-start) * inside;
+	return (1.-fact) * inside;
 }
 
 float stripes(vec2 uv)
 {
-    float noi = noise(uv * vec2(0.5, 1.) + vec2(1., 3.), uv) * scanlines_opacity;
-    return ramp(mod(uv.y * 4. * scanlines_spacing + TIME * scanlines_speed / (2. * scanlines_spacing) + sin(TIME * scanlines_speed + sin(TIME * scanlines_speed * 0.63 * scanlines_spacing)), 1.), scanline_thickness, .6) * noi;
+	float noi = scanlines_opacity;
+	return ramp(mod(uv.y * 4. * scanlines_spacing + TIME * scanlines_speed / (2. * scanlines_spacing) + sin(TIME * scanlines_speed + sin(TIME * scanlines_speed * 0.63 * scanlines_spacing)), 1.), scanline_thickness, .6) * noi;
 }
 
-vec3 getVideo(vec2 uv)
+//vec3 to_indexed_palette(vec3 color) {
+	//vec3 quant = floor(color * ColorAmm + 0.5) / ColorAmm;
+	//return quant;
+//}
+
+float rounded_rect_sdf_aspect(vec2 uv, float radius) {
+	float aspect = res.x / res.y;
+
+	// Center UV around 0 and scale X by aspect.
+	vec2 p = uv * 2.0 - 1.0;
+	p.x *= aspect;
+
+	// The screen is now a wide rounded rectangle in corrected space.
+	vec2 half_size = vec2(aspect, 1.0);
+
+	vec2 q = abs(p) - (half_size - vec2(radius));
+
+	return length(max(q, vec2(0.0))) + min(max(q.x, q.y), 0.0) - radius;
+}
+
+float ScreenShapeVignette(vec2 uv) {
+	float sdf = rounded_rect_sdf_aspect(uv, vignette_roundness);
+
+	// Distance from the inside of the screen edge.
+	float edge_dist = max(-sdf, 0.0);
+
+	float spread = mix(0.001, 1.0, vignette_spread);
+
+	float vig = 1.0 - smoothstep(0.0, spread, edge_dist);
+
+	vig = pow(vig, vignette_harshness);
+
+	return exp(-vignette_strength * 2.0 * vig);
+}
+
+vec3 Fetch(vec2 base, vec2 off, vec2 inv_res) {
+	vec2 uv = (base + off + vec2(0.5)) * inv_res;
+
+	if (max(abs(uv.x - 0.5), abs(uv.y - 0.5)) > 0.5) {
+		return vec3(0.0);
+	}
+
+	return texture(SCREEN_TEXTURE, uv).rgb;
+}
+
+vec2 Dist(vec2 pos){
+	pos *= res;
+	return (vec2(0.5) - (pos - floor(pos)));
+}
+
+float Gaus(float pos, float scale){ return exp2(scale * pos * pos); }
+
+vec3 Horz3(vec2 base,float yoff,vec2 inv_res,float wx0,float wx1,float wx2,float wx_sum) 
 {
-    vec2 look = uv;
-    float window = 1. / (1. + 20. * (look.y - mod(TIME/4., 1.)) * (look.y - mod(TIME/4., 1.))) * image_flicker;
-    look.x = look.x + sin(look.y * 10. + TIME) / 50. * onOff(4., 4., .3) * (1. + cos(TIME * 80.)) * window;
-    float vShift = 0.4 * onOff(2., 3., .9) * (sin(TIME) * sin(TIME * 20.) + (0.5 + 0.1 * sin(TIME * 200.) * cos(TIME))) * skip;
-    look.y = mod(look.y + vShift, 1.);
+	vec3 b = Fetch(base, vec2(-1.0, yoff), inv_res);
+	vec3 c = Fetch(base, vec2( 0.0, yoff), inv_res);
+	vec3 d = Fetch(base, vec2( 1.0, yoff), inv_res);
 
-    // Offset positions for each color channel to create chromatic aberration effect
-    float aberration_amount = 0.005 * (window * 5.0); // Scale the aberration effect with image_flicker
-    vec2 red_offset = vec2(-aberration_amount, 0.0);
-    vec2 blue_offset = vec2(aberration_amount, 0.0);
-
-    vec3 video;
-    video.r = texture(screen_texture, look + red_offset + static_chromatic_aberration).r ;
-    video.g = texture(screen_texture, look).g;
-    video.b = texture(screen_texture, look + blue_offset - static_chromatic_aberration).b;
-
-    return video;
+	return (b * wx0 + c * wx1 + d * wx2) / wx_sum;
 }
 
-vec2 screenDistort(vec2 uv)
-{
-    uv -= vec2(.5, .5);
-    uv = uv * 1.2 * (1./1.2 + curvature * uv.x * uv.x * uv.y * uv.y);
-    uv += vec2(.5, .5);
-    return uv;
+vec3 Tri(vec2 pos){
+	vec2 pixel_pos = pos * res;
+	float fy = fract(pixel_pos.y);
+	float dy = 0.5 - fy;
+
+	float y0 = (floor(pixel_pos.y) - 1.0 + 0.5) / res.y;
+	float y1 = (floor(pixel_pos.y)       + 0.5) / res.y;
+	float y2 = (floor(pixel_pos.y) + 1.0 + 0.5) / res.y;
+
+	float wy0 = Gaus(dy - 1.0, hardScan);
+	float wy1 = Gaus(dy,       hardScan);
+	float wy2 = Gaus(dy + 1.0, hardScan);
+
+	vec3 a = ToLinear(texture(SCREEN_TEXTURE, vec2(pos.x, y0)).rgb);
+	vec3 b = ToLinear(texture(SCREEN_TEXTURE, vec2(pos.x, y1)).rgb);
+	vec3 c = ToLinear(texture(SCREEN_TEXTURE, vec2(pos.x, y2)).rgb);
+
+	return a * wy0 + b * wy1 + c * wy2;
 }
-vec2 random(vec2 uv){
-    uv = vec2( dot(uv, vec2(127.1,311.7) ),
-               dot(uv, vec2(269.5,183.3) ) );
-    return -1.0 + 2.0 * fract(sin(uv) * 43758.5453123);
+
+vec2 Warp(vec2 pos){
+pos = pos * 2.0 - 1.0;
+pos *= vec2(1.0 + (pos.y * pos.y) * 1.0 / warp.x, 1.0 + (pos.x * pos.x) * 1.0/ warp.y);
+
+return pos * 0.5+0.5;
+
+}
+vec2 warp2(vec2 uv){
+	vec2 delta = uv - 0.5;
+	float delta2 = dot(delta.xy, delta.xy);
+	float delta4 = delta2 * delta2;
+	float delta_offset = delta4 * warp.x;
+
+	return uv + delta * delta_offset;
 }
 
+vec3 Mask(vec2 pos){
+	if(mask_type == 0){
+		float line = maskLight, odd = fract(pos.x / 6.0) < 0.5 ? 1.0 : 0.0;
+		if (fract((pos.y + odd) / 2.0) < 0.5) line = maskDark;
+		pos.x = fract(pos.x / 3.0);
+		return vec3(pos.x < 0.333 ? maskLight : pos.x < 0.666 ? maskDark : maskDark) * line;
+	} else if(mask_type == 1) {
+		pos.x += pos.y * 3.0; pos.x = fract(pos.x / 6.0);
+		return vec3(pos.x < 0.333 ? maskLight : pos.x < 0.666 ? maskDark : maskDark);
+	} else {
+		pos.xy = floor(pos.xy * vec2(1.0, 0.5));
+		pos.x += pos.y * 3.0; pos.x = fract(pos.x / 6.0);
+		return vec3(pos.x < 0.333 ? maskLight : pos.x < 0.666 ? maskDark : maskDark);
+	}
+}
 
-void fragment()
-{
-    vec2 uv = FRAGCOORD.xy / (1.0 / SCREEN_PIXEL_SIZE).xy;
-    uv = screenDistort(uv);
+float onOff(float a, float b, float c){
+	return step(c, sin(TIME + a * cos(TIME * b)));
+}
 
-    vec3 video = getVideo(uv);
-	// Apply static
-    if (static_noise_intensity > 0.0) {
-        video.rgb += clamp(random((ceil(uv) / uv) + fract(TIME)).x, 0.0, 1.0) * static_noise_intensity;
-    }
+float border (vec2 uv){
+	float radius = min(warp.x, 0.08);
+	radius = max(min(min(abs(radius * 2.0), abs(1.0)), abs(1.0)), 1e-5);
+	vec2 abs_uv = abs(uv * 2.0 - 1.0) - vec2(1.0, 1.0) + radius;
+	float dist = length(max(vec2(0.0), abs_uv)) / radius;
+	float square = smoothstep(0.96, 1.0, dist);
+	return clamp(1.0 - square, 0.0, 1.0);
+}
 
-    float vigAmt = 3. + .3 * sin(TIME * vignette_flicker_speed + 1. + 5. * cos(TIME * 5. * vignette_flicker_speed + 1.));
-    vigAmt *= vignette_strength;
-    float vignette = (1. - vigAmt * (uv.y - 0.5) * (uv.y - .5)) * (1.0 - vigAmt * (uv.x - .5) * (uv.x - .5));
+float noise(vec2 uv, float offset) {
+	return (fract(sin(dot(uv * offset, vec2(12.9898, 78.233))) * 43758.5453) - 0.5) * 2.0;
+}
 
-    // Original effect application
-    video += stripes(uv);
-    //video += noise(uv * 2., uv) / 2.;
+vec3 rgb_to_yuv(vec3 rgb) {
+	const mat3 RGB_TO_YUV = mat3(
+		vec3(0.299, 0.587, 0.114),
+		vec3(-0.14713, -0.28886, 0.436),
+		vec3(.615, -0.51499, -0.10001)
+		);
+	return rgb * RGB_TO_YUV;
+}
 
-    video *= vignette;
-    video *= (12. / small_scanlines_opacity + mod(uv.y * 30. * small_scanlines_proximity + TIME * small_scanlines_speed, 1.)) / 13. * small_scanlines_opacity;
+vec3 yuv_to_rgb(vec3 yuv) {
+	const mat3 YUV_TO_RGB = mat3(
+		vec3(1.0, 0.0, 1.13983),
+		vec3(1.0, -0.39465, -0.58060),
+		vec3(1.0, 2.03211, 0.0)
+		);
+	return clamp(yuv * YUV_TO_RGB, vec3(0.0), vec3(1.0));
+}
 
-    COLOR = vec4(video, 1.0);
+void fragment(){
+	vec2 pos = Warp(SCREEN_UV);
+
+	if (border(pos) <= 0.0){
+		COLOR = vec4(0,0,0,1.0);
+	}
+	else{
+		COLOR.rgb = Tri(pos) * Mask(FRAGCOORD.xy);
+		
+		vec2 look = pos;
+		
+		//Storing value to multiply by self instead of doing (pow(value, 2.0)
+		float w = look.y - mod(TIME / 4.0, 1.0);
+		float window = 1.0 / (1.0 + 20.0 * w * w) * image_flicker;
+		look.x += sin(look.y * 10.0 + TIME) / 50.0 * onOff(4.0, 4.0, 0.3) * (1.0 + cos(TIME * 80.0)) * window;
+		
+		//Storing value to multiply by self instead of doing (pow(value, 2.0)
+		float s = sin(TIME) * sin(TIME * 20.0) + (0.5 + 0.1 * sin(TIME * 200.0) * cos(TIME));
+		float vShift = 0.4 * onOff(2.0, 3.0, 0.9) * (s * s) * skip;
+		look.y = mod(look.y + vShift, 1.0);
+
+		float aberration_amount = 0.005 * window * 5.0;
+		vec2 red_offset = vec2(-aberration_amount, 0.0);
+		vec2 blue_offset = vec2(aberration_amount, 0.0);
+		
+		COLOR.rgb += stripes(pos);
+
+		vec2 x_offset = vec2(
+			noise(vec2(floor(UV.y * 487.0), fract(UV.y * 487.0)), TIME) * color_offset_multiplier,
+			0.0
+		);
+
+		vec2 static_ca = vec2(static_chromatic_aberration, 0.0);
+
+		COLOR.r = mix(COLOR.r, texture(SCREEN_TEXTURE, look + x_offset + red_offset - static_ca).r, 0.5);
+		COLOR.g = mix(COLOR.g, texture(SCREEN_TEXTURE, look + x_offset).g, 0.5);
+		COLOR.b = mix(COLOR.b, texture(SCREEN_TEXTURE, look + x_offset + blue_offset + static_ca).b, 0.5);
+
+		COLOR.rgb *= ScreenShapeVignette(pos);
+		COLOR.rgb = ToSrgb(COLOR.rgb);
+	}
 }

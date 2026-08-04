@@ -1,7 +1,0 @@
-[gd_resource type="ShaderMaterial" format=3 uid="uid://bnymd18yxjcws"]
-
-[ext_resource type="Shader" uid="uid://ly164morwf7f" path="res://Shaders/Screen.gdshader" id="1_7ug1e"]
-
-[resource]
-shader = ExtResource("1_7ug1e")
-shader_parameter/line_color = Color(0.196558, 0.254891, 0.195613, 1)

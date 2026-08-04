@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cqxnjihcai1kd"]
 
 [ext_resource type="Script" uid="uid://8du0534sf0gr" path="res://Scripts/UI/starting_screen.gd" id="1_kry56"]
-[ext_resource type="Material" uid="uid://dxt6oe4rhk3du" path="res://Shaders/ColorIndex.tres" id="3_62h02"]
+[ext_resource type="Material" uid="uid://dxt6oe4rhk3du" path="res://Shaders/PostProcessMat.tres" id="3_62h02"]
 
 [node name="StartingScreen" type="Node" unique_id=64991473]
 process_mode = 3

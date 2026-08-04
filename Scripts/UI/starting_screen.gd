@@ -15,10 +15,10 @@ var Wor : World
 const APPID = "3679120"
  #Called when the node enters the scene tree for the first time.
 
-func _init() -> void:
-	if (OS.get_name() == "Windows"):
-		OS.set_environment("SteamAppID", APPID)
-		OS.set_environment("SteamGameID", APPID)
+#func _init() -> void:
+	#if (OS.get_name() == "Windows"):
+		#OS.set_environment("SteamAppID", APPID)
+		#OS.set_environment("SteamGameID", APPID)
 
 
 func _ready() -> void:
@@ -30,19 +30,19 @@ func _ready() -> void:
 	#siz.y = min(siz.y, 1080)
 	#DitherShader.set_shader_parameter("ScreenSize",siz)
 	#print("Screen Size = {0}".format([siz]))
-	if (OS.get_name() == "Windows"):
-		Steam.steamInit()
-		var IsRunning = Steam.isSteamRunning()
-		
-		if (!IsRunning):
-			printerr("Steam Is Not Running")
-		else:
-			print("Steam Is Running")
-			var ID = Steam.getSteamID()
-			var n = Steam.getFriendPersonaName(ID)
-			print("Username : ", str(n))
-			AchievementManager.GetInstance().SteamRunning = true
-			print("Achievement Tracking Enabled")
+	#if (OS.get_name() == "Windows"):
+		#Steam.steamInit()
+		#var IsRunning = Steam.isSteamRunning()
+		#
+		#if (!IsRunning):
+			#printerr("Steam Is Not Running")
+		#else:
+			#print("Steam Is Running")
+			#var ID = Steam.getSteamID()
+			#var n = Steam.getFriendPersonaName(ID)
+			#print("Username : ", str(n))
+			#AchievementManager.GetInstance().SteamRunning = true
+			#print("Achievement Tracking Enabled")
 			
 	await Start()
 

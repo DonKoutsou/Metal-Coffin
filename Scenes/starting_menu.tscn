@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/UIPiecies/Light.png" id="15_7x35f"]
 [ext_resource type="PackedScene" uid="uid://bagsk7yyq8sv1" path="res://Scenes/WishlistButton.tscn" id="21_srpg8"]
 [ext_resource type="Texture2D" uid="uid://tklv7f2e06gq" path="res://Assets/Logos/Discord-Symbol-White.png" id="21_xqmn8"]
-[ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRTFInal.tres" id="22_jns0o"]
+[ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRT_Mat.tres" id="22_jns0o"]
 [ext_resource type="PackedScene" uid="uid://bb2xsv1qpwei" path="res://Scenes/InScreenUI/Settings/setting_panel.tscn" id="22_nthvp"]
 [ext_resource type="Texture2D" uid="uid://d261r1cyo8fd2" path="res://Assets/UIPiecies/Screen/SidePanels/Menu_Cover.png" id="22_qskuh"]
 [ext_resource type="Environment" uid="uid://bkmqb06466wvr" path="res://Enviroments/Env.tres" id="22_xop3l"]
@@ -85,7 +85,7 @@ canvas_item_default_texture_filter = 2
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 0
 positional_shadow_atlas_16_bits = false
-size = Vector2i(1433, 981)
+size = Vector2i(809, 554)
 size_2d_override = Vector2i(868, 594)
 size_2d_override_stretch = true
 render_target_update_mode = 4
@@ -153,7 +153,6 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect3" unique_id=971039501]
 show_behind_parent = true
 position = Vector2(15, 7)
-points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -199,7 +198,6 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4" unique_id=620173937]
 show_behind_parent = true
 position = Vector2(30, 9.00005)
-points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -245,7 +243,6 @@ expand_mode = 1
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5" unique_id=1499058002]
 show_behind_parent = true
 position = Vector2(30, 9.00005)
-points = PackedVector2Array(0, 0)
 width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
@@ -756,7 +753,7 @@ energy = 2.0
 blend_mode = 2
 texture = ExtResource("38_t54ed")
 offset = Vector2(0, 1000)
-texture_scale = 6.27
+texture_scale = 7.25
 
 [connection signal="OnButtonPressed" from="SubViewportContainer/SubViewport/VBoxContainer/Credits" to="." method="_on_credits_on_button_pressed"]
 [connection signal="pressed" from="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/Cancel" to="." method="_on_cancel_pressed"]
