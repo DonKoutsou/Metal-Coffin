@@ -25,8 +25,8 @@ TUT_Cardfight_HandLimitTitle,Hand Limit
 TUT_Cardfight_HandLimitText,"At any time you can hold a max of {0} cards in your hand. If at any point an extra hand is about to be placed in your hand, you will be asked to choose one card to throw out. Picked card is placed on the discard pile."
 TUT_Aerosonar_Title,
 TUT_Aerosonar_Text,
-TYT_Landing_Title,Landing
-TYT_Landing_Text,"""You have entrered the perimiter of a [color=#ffc315]Town[/color].\nTo visit the [color=#ffc315]town[/color]'s verdors and resuply you'll need to land your fleet.\nTo do so click the [color=#ffc315]Land Button[/color] to initiate the landing procedure or lower the [color=#ffc315]Altitude Lever[/color] all the way to the bottom. Once the landing is complete press the [color=#ffc315]Open Hatch[/color] button bellow the land button to visit the town."""
+TUT_Landing_Title,Landing
+TUT_Landing_Text,"""You have entrered the perimiter of a [color=#ffc315]Town[/color].\nTo visit the [color=#ffc315]town[/color]'s verdors and resuply you'll need to land your fleet.\nTo do so click the [color=#ffc315]Land Button[/color] to initiate the landing procedure or lower the [color=#ffc315]Altitude Lever[/color] all the way to the bottom. Once the landing is complete press the [color=#ffc315]Open Hatch[/color] button bellow the land button to visit the town."""
 TUT_MapMarker_Title,Map Markers
 TUT_MapMarker_Text,Marking vital information on the map is usefull for making edjucated decisions in the future. Use the [color=#ffc315]Map Marker Editor[/color] to place text markers and measure distances. Toggle the [color=#ffc315]Map Marker Editor[/color] using the dediacted button on the [color=#ffc315]Ship Controller[/color].
 TUT_MapMarkerControlls_Title,Map Marker Editor Controlls
@@ -69,3 +69,20 @@ TUT_Inventory_Title,Cargo
 TUT_Inventory_Text,The [color=#ffc315]Cargo Panel[/color] is where the details for each ship in your fleet can be found. From their stats to their inventory contents.
 TUT_ItemInspection_Title,Item Inspection
 TUT_ItemInspection_Text,"When selecting an [color=#ffc315]Item[/color] you can check the items details that apear on the panel to the right. There you can choose to [color=#ffc315]Upgrade[/color] it if its a ship part, [color=#ffc315]Transfer[/color] it to another ship if its allowed and check any [color=#ffc315]Cards[/color] it provides in close quarters combat."
+TLTP_FIRE,[color=#ff3c22]Fire[/color] damages the ship once per turn until extinguished
+TLTP_ONUSE,[color=#ffc315]ON USE[/color] effects are performed the moment the card is played
+TLTP_ONDISC,[color=#ffc315]ON DISCARD[/color] effects are performed the moment the card is discarded
+TLTP_ONCOUNTER,[color=#ffc315]ON COUNTER[/color] effects are applied on successfull counters
+TLTP_ONHIT,[color=#ffc315]ON HIT[/color] effects are applied once the attack lands
+TLTP_PERHIT,[color=#ffc315]PER HIT[/color] effects are applied every time the attack lands
+TLTP_ONMISS,[color=#ffc315]ON MISS[/color] effects are applied if the attack fails to land
+TLTP_PERMISS,[color=#ffc315]PER MISS[/color] effects are applied everytime the attack fails to land
+TLTP_SHIELD,[color=#6be2e9]SHIELD[/color] protects the ship from direct damage
+TLTP_ENDEP,[color=#ffc315]ENERGY DEPENDANT[/color] cards will use all of the user's energy to improve its stats
+TLTP_UNAVOIDABLE,[color=#ffc315]UNAVOIDABLE[/color]\ncan't be avoided using a defence card
+TLTP_AOE,[color=#ffc315]TEAM[/color] cards are applied to the entire team
+TLTP_SELF_EXC,The effect of this card is not applied on the user
+TLTP_COUNTER_DIR,This card will defend the user from an offensive [color=#ffc315]DIRECT ATTACK[/color] card
+TLTP_COUNTER_HOM,This card will defend the user from an offensive [color=#ffc315]HOMING ATTACK[/color] card
+TLTP_DMG_RDC_ANY,This card will reduce the damage of an offensive card
+TLTP_SWIFT,[color=#ffc315]SWIFT[/color]\nThis card will be placed at the top of the pile at the start of every card figh

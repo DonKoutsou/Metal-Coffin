@@ -311,7 +311,7 @@ func ShowToolTip() -> void:
 	var tips = CardStats.FindTooltips(CStats)
 	for g in range(tips.size() - 1, -1, -1):
 		var tip : Control = TooltipScene.instantiate()
-		tip.get_child(0).text = tips[g]
+		tip.get_child(0).text = TranslationServer.translate(tips[g])
 		TooltipPos.add_child(tip)
 		tip.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	

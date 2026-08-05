@@ -54,13 +54,13 @@ func GetDescription() -> String:
 		Desc += OnPerformModule.GetDesc(RealTier)
 		Desc += "\n"
 	if (OnUseModules.size() > 0):
-		Desc += "[color=#ffc315]On Use[/color] : "
+		Desc += "[color=#ffc315]{0}[/color] : ".format([TranslationServer.translate("On Use")])
 		for g in OnUseModules:
 			Desc += g.GetDesc(RealTier)
 	if (OnDiscardModules.size() > 0):
 		if (Desc.length() > 0):
 			Desc += "\n"
-		Desc += "[color=#ffc315]On Discard[/color] : "
+		Desc += "[color=#ffc315]{0}[/color] : ".format([TranslationServer.translate("On Discard")])
 		for g in OnDiscardModules:
 			Desc += g.GetDesc(RealTier)
 	
@@ -79,13 +79,13 @@ func GetBattleDescription(User : BattleShipStats) -> String:
 		Desc += OnPerformModule.GetBattleDesc(User, RealTier)
 		Desc += "\n"
 	if (OnUseModules.size() > 0):
-		Desc += "[color=#ffc315]On Use[/color] : "
+		Desc += "[color=#ffc315]{0}[/color] : ".format([TranslationServer.translate("On Use")])
 		for g in OnUseModules:
 			Desc +=  g.GetBattleDesc(User, RealTier)
 	if (OnDiscardModules.size() > 0):
 		if (Desc.length() > 0):
 			Desc += "\n"
-		Desc += "[color=#ffc315]On Discard[/color] : "
+		Desc += "[color=#ffc315]{0}[/color] : ".format([TranslationServer.translate("On Discard")])
 		Desc += "\n"
 		for g in OnDiscardModules:
 			Desc += g.GetBattleDesc(User, RealTier)
@@ -95,8 +95,8 @@ func IsSame(C : CardStats) -> bool:
 	return C.GetCardName() == GetCardName()
 
 static func FindTooltips(card : CardStats) -> PackedStringArray:
-	var desc = card.GetDescription()
-	var words = strip_bbcode(desc.replace("\n", " ")).split(" ")
+	#var desc = card.GetDescription()
+	#var words = strip_bbcode(desc.replace("\n", " ")).split(" ")
 	var tips : PackedStringArray = []
 	
 	if (card.PutOnTop):
@@ -109,32 +109,41 @@ static func FindTooltips(card : CardStats) -> PackedStringArray:
 					tips.append(ToolTips["SELF_EXC"])
 				tips.append(ToolTips["AOE"])
 	
-	for g in words:
-		if (ToolTips.has(g)):
-			tips.append(ToolTips[g])
+	#for g in words:
+		#if (ToolTips.has(g)):
+			#tips.append(ToolTips[g])
 			
-	if (desc.find("On Use") > 0):
+	if (card.OnUseModules.size() > 0):
+		for g in card.OnUseModules:
+			if (g is FireExtinguishModule):
+				tips.append(ToolTips["FIRE"])
 		tips.append(ToolTips["ONUSE"])
-	if (desc.find("On Discard") > 0):
+	if (card.OnDiscardModules.size() > 0):
 		tips.append(ToolTips["ONDISC"])
-	if (desc.find("On Counter") > 0):
-		tips.append(ToolTips["ONCOUNTER"])
-	if (desc.find("On Hit") > 0):
-		tips.append(ToolTips["ONHIT"])
-	if (desc.find("Per Hit") > 0):
-		tips.append(ToolTips["PERHIT"])
-	if (desc.find("On Miss") > 0):
-		tips.append(ToolTips["ONMISS"])
-	if (desc.find("Per Miss") > 0):
-		tips.append(ToolTips["PERMISS"])
 	if (card.UseConditions.has(CardStats.CardUseCondition.ENERGY_DEPENDANT)):
 		tips.append(ToolTips["ENDEP"])
 
 	var perfModule = card.OnPerformModule
 	if (perfModule != null):
-		if (perfModule is OffensiveCardModule and perfModule.AOE):
-			tips.append(ToolTips["AOE"])
+		if (perfModule is OffensiveCardModule):
+			if (perfModule.AOE):
+				tips.append(ToolTips["AOE"])
+				
+			if (perfModule.OnSuccesfullAtackModules.size() > 0):
+				if (perfModule.forEachHit):
+					tips.append(ToolTips["PERHIT"])
+				else:
+					tips.append(ToolTips["ONHIT"])
+			
+			if (perfModule.OnUnSuccesfullAtackModules.size() > 0):
+				if (perfModule.forEachMis):
+					tips.append(ToolTips["ONMISS"])
+				else:
+					tips.append(ToolTips["PERMISS"])
+				
 		if (perfModule is CounterCardModule):
+			if (perfModule.OnSuccesfullDeffenceModules.size() > 0):
+				tips.append(ToolTips["ONCOUNTER"])
 			if (perfModule.CounterType == OffensiveCardModule.AtackTypes.DIRECT_ATTACK):
 				tips.append(ToolTips["COUNTER_DIR"])
 			if (perfModule.CounterType == OffensiveCardModule.AtackTypes.HOMING_ATTACK):
@@ -153,24 +162,23 @@ static func strip_bbcode(source:String) -> String:
 	return regex.sub(source, "", true)
 
 const ToolTips : Dictionary[String, String] = {
-	"fire" : "[color=#ff3c22]Fire[/color] damages the ship once per turn until extinguished",
-	"fires" : "[color=#ff3c22]Fire[/color] damages the ship once per turn until extinguished",
-	"ONUSE" : "[color=#ffc315]ON USE[/color] effects are performed the moment the card is played",
-	"ONDISC" : "[color=#ffc315]ON DISCARD[/color] effects are performed the moment the card is discarded",
-	"ONCOUNTER" : "[color=#ffc315]ON COUNTER[/color] effects are applied on successfull counters",
-	"ONHIT" : "[color=#ffc315]ON HIT[/color] effects are applied once the attack lands",
-	"PERHIT" : "[color=#ffc315]PER HIT[/color] effects are applied every time the attack lands",
-	"ONMISS" : "[color=#ffc315]ON MISS[/color] effects are applied if the attack fails to land",
-	"PERMISS" : "[color=#ffc315]PER MISS[/color] effects are applied everytime the attack fails to land",
-	"Shield" : "[color=#6be2e9]SHIELD[/color] protects the ship from direct damage",
-	"ENDEP" : "[color=#ffc315]ENERGY DEPENDANT[/color] cards will use all of the user's energy to improve its stats",
-	"UNAVOIDABLE" : "[color=#ffc315]UNAVOIDABLE[/color]\ncan't be avoided using a defence card",
-	"AOE" : "[color=#ffc315]TEAM[/color] cards are applied to the entire team",
-	"SELF_EXC" : "The effect of this card is not applied on the user",
-	"COUNTER_DIR" : "This card will defend the user from an offensive [color=#ffc315]DIRECT ATTACK[/color] card",
-	"COUNTER_HOM" : "This card will defend the user from an offensive [color=#ffc315]HOMING ATTACK[/color] card",
-	"DMG_RDC_ANY" : "This card will reduce the damage of an offensive card",
-	"SWIFT" : "[color=#ffc315]SWIFT[/color]\nThis card will be placed at the top of the pile at the start of every card figh",
+	"FIRE" : "TLTP_FIRE",
+	"ONUSE" : "TLTP_ONUSE",
+	"ONDISC" : "TLTP_ONDISC",
+	"ONCOUNTER" : "TLTP_ONCOUNTER",
+	"ONHIT" : "TLTP_ONHIT",
+	"PERHIT" : "TLTP_PERHIT",
+	"ONMISS" : "TLTP_ONMISS",
+	"PERMISS" : "TLTP_PERMISS",
+	"Shield" : "TLTP_SHIELD",
+	"ENDEP" : "TLTP_ENDEP",
+	"UNAVOIDABLE" : "TLTP_UNAVOIDABLE",
+	"AOE" : "TLTP_AOE",
+	"SELF_EXC" : "TLTP_SELF_EXC",
+	"COUNTER_DIR" : "TLTP_COUNTER_DIR",
+	"COUNTER_HOM" : "TLTP_COUNTER_HOM",
+	"DMG_RDC_ANY" : "TLTP_DMG_RDC_ANY",
+	"SWIFT" : "TLTP_SWIFT",
 }
 
 enum WeaponType{
