@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_ac416")
-Title = "Fuel Storage"
-Text = "In the Fuel Storage you can buy fuel for your fleet.\\nYou can see the full ammount of [color=#ffc315]FUEL[/color] of you landed ships on the left, and their range in the middle. \\nDag the slider to the right to buy more fuel or to the left to sell it, adding fuel to your fleet takes time.\\nEnsure your fleet is fully refueled before embarking on your next mission!"
+Title = "TUT_FuelShip_Title"
+Text = "TUT_FuelShip_Text"
 metadata/_custom_type_script = "uid://451ovq2ynuka"

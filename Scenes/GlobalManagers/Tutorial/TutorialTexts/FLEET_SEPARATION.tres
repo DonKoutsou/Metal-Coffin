@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_unn7l")
-Title = "Ship Dock"
-Text = "In the ship dock screen, you can effectively organize your current fleet. To create a new fleet, simply select the ships you wish to move from your existing fleet.\\nDon't forget to allocate fuel appropriately! Use the sliders at the bottom of the screen to ensure each fleet has enough fuel to operate efficiently."
+Title = "TUT_ShipDock_Title"
+Text = "TUT_ShipDock_Text"
 metadata/_custom_type_script = "uid://451ovq2ynuka"

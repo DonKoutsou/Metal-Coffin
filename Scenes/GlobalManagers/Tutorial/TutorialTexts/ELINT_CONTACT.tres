@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_bpeh3")
-Title = "Electronic Intelligence"
-Text = "The Elint sensors of one of your ships has been triggered. Elint detects enemy radar signals and provides a rough estimation on the distance and the direction of the signal. If the sensor is triggered it means you are about to enter into a radar's signal range and be detected."
+Title = "TUT_ElintContact_Tile"
+Text = "TUT_ElintContact_Text"
 metadata/_custom_type_script = "uid://451ovq2ynuka"

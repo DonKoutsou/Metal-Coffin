@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_lf44j")
-Title = "Cargo"
-Text = "The [color=#ffc315]Cargo Panel[/color] is where the details for each ship in your fleet can be found. From their stats to their inventory contents."
+Title = "TUT_Inventory_Title"
+Text = "TUT_Inventory_Text"
 metadata/_custom_type_script = "uid://451ovq2ynuka"

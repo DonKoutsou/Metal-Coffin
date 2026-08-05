@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_1rd62")
-Title = "Camera Controls"
-Text = "Use the [color=#ffc315]WASD[/color] keys or [color=#ffc315]Left Click[/color] and drag the mouse to move the camera. To [color=#ffc315]Zoom In/Out[/color] use the [color=#ffc315]Mouse Wheel[/color]."
+Title = "TUT_CameraControl_Title"
+Text = "TUT_CameraControl_Text"
 metadata/_custom_type_script = "uid://451ovq2ynuka"

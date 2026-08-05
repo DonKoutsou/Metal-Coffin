@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_5xdba")
-Title = "Map Markers"
-Text = "Marking vital information on the map is usefull for making edjucated decisions in the future. Use the [color=#ffc315]Map Marker Editor[/color] to place text markers and measure distances. Toggle the [color=#ffc315]Map Marker Editor[/color] using the dediacted button on the [color=#ffc315]Ship Controller[/color]."
+Title = "TUT_MapMarker_Title"
+Text = "TUT_MapMarker_Text"
 Target = Array[int]([2])
 metadata/_custom_type_script = "uid://451ovq2ynuka"

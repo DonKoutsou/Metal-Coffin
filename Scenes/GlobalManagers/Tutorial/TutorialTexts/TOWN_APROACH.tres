@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_sv3gq")
-Title = "Friendly Villages"
-Text = "You are reaching one of the many friendly [color=#ffc315]villages[/color] in the glacier. No enemies exist in those [color=#ffc315]villages[/color] and none of the locals wil raise the [color=#ffc315]alarm[/color] on you. You are free to use those [color=#ffc315]villages[/color] to restock/repair or even as a hideout. The location of those [color=#ffc315]villages[/color] is unknown and will need to be discovered."
+Title = "TUT_Aproach_Title"
+Text = "TUT_Aproach_Text"
 metadata/_custom_type_script = "uid://451ovq2ynuka"

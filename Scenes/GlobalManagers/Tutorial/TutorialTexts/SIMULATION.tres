@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_yc8ie")
-Title = "Simulation Management"
-Text = "A successfull campaign requires proper planning.\\nUse the [color=#ffc315]Simulation Buttons[/color] to either [color=#f35033]Stop[/color] the simulation and think over your plans or speed up the simulations to [color=#308a4d]speed[/color] through big protions of your voyage."
+Title = "TUT_Simulation_Title"
+Text = "TUT_Simulation_Text"
 Target = Array[int]([0, 1])
 metadata/_custom_type_script = "uid://451ovq2ynuka"

@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_5jyp2")
-Title = "Missile Launch"
-Text = "Finally turn the dial to aim, then press Launch to send it away."
+Title = "TUT_MissileLaunchTitle"
+Text = "TUT_MissileLaunchText"
 Target = Array[int]([10, 11])
 metadata/_custom_type_script = "uid://451ovq2ynuka"

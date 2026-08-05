@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_41uuy")
-Title = "Controlling the fleet"
-Text = "Use the [color=#ffc315]Steer[/color] found on the left of the controller to steer the fleet. To controll the speed of the fleet use the [color=#ffc315]Thrust Lever[/color] on the right side of the controller"
+Title = "TUT_Steer_Title"
+Text = "TUT_Steer_Text"
 Target = Array[int]([5, 6])
 metadata/_custom_type_script = "uid://451ovq2ynuka"

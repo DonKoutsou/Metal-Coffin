@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_rgbvi")
-Title = "Enemy Cities"
-Text = "You are reaching an enemy [color=#ffc315]city[/color]. Enemy cities are usual refuel spots for [color=#ffc315]patrols[/color], and always have a guarding [color=#ffc315]garrisson[/color] in their center. Entering the perimiter of a city will comence combat with all enemies that happen to be in it."
+Title = "TUT_EnemyAproach_Title"
+Text = "TUE_EnemyAproach_Text"
 metadata/_custom_type_script = "uid://451ovq2ynuka"

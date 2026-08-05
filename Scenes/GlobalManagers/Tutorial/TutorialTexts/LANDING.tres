@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_pe86a")
-Title = "Landing"
-Text = "\"You have entrered the perimiter of a [color=#ffc315]Town[/color].\\nTo visit the [color=#ffc315]town[/color]'s verdors and resuply you'll need to land your fleet.\\nTo do so click the [color=#ffc315]Land Button[/color] to initiate the landing procedure or lower the [color=#ffc315]Altitude Lever[/color] all the way to the bottom. Once the landing is complete press the [color=#ffc315]Open Hatch[/color] button bellow the land button to visit the town.\""
+Title = "TUT_Landing_Title"
+Text = "TUT_Landing_Text"
 Target = Array[int]([13, 12])
 metadata/_custom_type_script = "uid://451ovq2ynuka"

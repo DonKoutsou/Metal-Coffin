@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_nfs8d")
-Title = "Disembarkation"
-Text = "You've landed in a town. To disembark and visit it press the [color=#ffc315]Open Hatch[/color] button."
+Title = "TUT_Hatch_Title"
+Text = "TUT_Hatch_Text"
 Target = Array[int]([14])
 metadata/_custom_type_script = "uid://451ovq2ynuka"

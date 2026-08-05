@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_om12u")
-Title = "Altitude"
-Text = "Managing altitude is one of your fleets strongest weapons. Radar signals, noise and wind are obstucted by the terains. Use this to your advantage to stay undetected or hide from strong head winds. Use the [color=#ffc315]Elevation Lever[/color] to manage your altitude and the [color=#ffc315]Topography Visualisation[/color] for view a topographic map of the area. The ship will increase it's altitude when an imminent collision is detected."
+Title = "TUT_Elevation_Title"
+Text = "TUT_Elevation_Text"
 Target = Array[int]([12, 15])
 metadata/_custom_type_script = "uid://451ovq2ynuka"
