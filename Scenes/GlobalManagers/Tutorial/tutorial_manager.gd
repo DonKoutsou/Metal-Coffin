@@ -4,16 +4,19 @@ class_name ActionTracker
 
 @export var TutorialScene : PackedScene
 @export var OutTutorialScene : PackedScene
+@export_file("*.tres") var TutorialTexts : PackedStringArray
 
+static var TutorialArgs : Dictionary[Action, PackedStringArray]
 static var CompletedActions : Array[Action]
 
 static var Instance : ActionTracker
 
 static var ShowTutorials : bool = false
 
+
 var ShowingTutorial : bool = false
 
-static var QueuedTutorials : Array[TutorialData]
+static var QueuedTutorials : Array[Action]
 
 func _ready() -> void:
 	Instance = self
@@ -31,20 +34,27 @@ static func OnActionCompleted(Act : Action) -> void:
 func _physics_process(_delta: float) -> void:
 	if (World.WORLDST != World.WORLDSTATE.INITIAL and !ShowingTutorial and !TransitionPanel.Transitioning):
 		if QueuedTutorials.size() > 0:
-			var nexttut = QueuedTutorials[0]
+			var act = QueuedTutorials[0]
+			var nexttut : TutorialData = load(TutorialTexts[act])
 			if (TargetsExists(nexttut.Target)):
-				ShowTutorial(nexttut.TutorialTitle, nexttut.TutorialText, nexttut.Target)
+				var title : String = nexttut.Title
+				var text : String = nexttut.Text
+				
+				if (TutorialArgs.has(act)): #check if we have arguments to place into the string
+					text.format(TutorialArgs[act])
+					TutorialArgs.erase(act)
+
+				text = TranslationServer.translate(text)
+				
+				ShowTutorial(title, text, nexttut.Target)
 				QueuedTutorials.pop_front()
 
-static func QueueTutorial(TurotialTitle : String, TutorialText : String, ElementsToFocusOn : Array[ScreenUI.UI_ELEMENT]) -> void:
+static func QueueTutorial(Turotial : Action, Args : PackedStringArray = []) -> void:
 	if (!ShowTutorials):
 		return
-
-	var SavedData = TutorialData.new()
-	SavedData.TutorialTitle = TurotialTitle
-	SavedData.TutorialText = TutorialText
-	SavedData.Target = ElementsToFocusOn
-	QueuedTutorials.append(SavedData)
+	if (Args.size() > 0):
+		TutorialArgs[Turotial] = Args
+	QueuedTutorials.append(Turotial)
 
 func ShowTutorial(TurotialTitle : String, TutorialText : String, ElementsToFocusOn : Array[ScreenUI.UI_ELEMENT]) -> void:
 	get_tree().paused = true
@@ -158,44 +168,44 @@ func DeleteSave() -> void:
 	
 
 enum Action{
-	INVENTORY_OPEN,
-	ITEM_INSPECTION,
-	STEER,
-	CAMERA_CONTROL,
-	TOWN_APROACH,
-	ENEMY_TOWN_APROACH,
-	CARD_FIGHT,
-	CARD_FIGHT_ACTION_PICK,
-	CARD_FIGHT_SPEED_EXPLENATION,
-	CARD_FIGHT_ENERGY,
-	CARD_FIGHT_RESERVES,
-	CARD_FIGHT_ENEMY_ACTION_PERFORM,
-	CARD_FIGHT_TARGET_PICKING,
-	CARD_FIGHT_SHIPLOSS,
-	CARD_FIGHT_HAND_LIMIT,
-	ELINT_CONTACT,
-	LANDING,
-	TOWN_SHOP,
-	FUEL_SHOP,
-	REPAIR_SHOP,
-	MERCH_SHOP,
-	UPGRADE_SHOP,
-	FLEET_SEPARATION,
-	MISSILE_LAUNCH,
-	HAPPENING,
-	RECRUIT,
-	WORLDVIEW_CHECK,
-	GARISSION_ALARM,
-	CONVOY,
-	SIMULATION,
-	MAP_MARKER,
-	MAP_MARKER_INTRO,
-	MISSILE_TOGGLE,
-	MISSILE_ARM,
-	MISSILE_SELECT_NUM,
-	HATCH,
-	ELEVATION,
-	AEROSONAR,
-	CARD_FIGHT_OUTNUMER_BONUS,
-	CARD_FIGHT_CARD_RECYCLE,
+	INVENTORY_OPEN = 0,
+	ITEM_INSPECTION = 1,
+	STEER = 2,
+	CAMERA_CONTROL = 3,
+	TOWN_APROACH = 4,
+	ENEMY_TOWN_APROACH = 5,
+	CARD_FIGHT = 6,
+	CARD_FIGHT_ACTION_PICK = 7,
+	CARD_FIGHT_SPEED_EXPLENATION = 8,
+	CARD_FIGHT_ENERGY = 9,
+	CARD_FIGHT_RESERVES = 10,
+	CARD_FIGHT_ENEMY_ACTION_PERFORM = 11,
+	CARD_FIGHT_TARGET_PICKING = 12,
+	CARD_FIGHT_SHIPLOSS = 13,
+	CARD_FIGHT_HAND_LIMIT = 14,
+	ELINT_CONTACT = 15,
+	LANDING = 16,
+	TOWN_SHOP = 17,
+	FUEL_SHOP = 18,
+	REPAIR_SHOP = 19,
+	MERCH_SHOP = 20,
+	UPGRADE_SHOP = 21,
+	FLEET_SEPARATION = 22,
+	MISSILE_LAUNCH = 23,
+	HAPPENING = 24,
+	RECRUIT = 25,
+	WORLDVIEW_CHECK = 26,
+	GARISSION_ALARM = 27,
+	CONVOY = 28,
+	SIMULATION = 29,
+	MAP_MARKER = 30,
+	MAP_MARKER_INTRO = 31,
+	MISSILE_TOGGLE = 32,
+	MISSILE_ARM = 33,
+	MISSILE_SELECT_NUM = 34,
+	HATCH = 35,
+	ELEVATION = 36,
+	AEROSONAR = 37,
+	CARD_FIGHT_OUTNUMER_BONUS = 38,
+	CARD_FIGHT_CARD_RECYCLE = 39,
 }

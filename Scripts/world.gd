@@ -218,13 +218,11 @@ func ShowArmak():
 func SteerTut() -> void:
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CAMERA_CONTROL)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.CAMERA_CONTROL)
-		var text = "Use the [color=#ffc315]WASD[/color] keys or [color=#ffc315]Left Click[/color] and drag the mouse to move the camera. To [color=#ffc315]Zoom In/Out[/color] use the [color=#ffc315]Mouse Wheel[/color]."
-		ActionTracker.QueueTutorial("Camera Controls", text, [])
+		ActionTracker.QueueTutorial(ActionTracker.Action.CAMERA_CONTROL)
 	
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.STEER)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.STEER)
-		var text = "Use the [color=#ffc315]Steer[/color] found on the left of the controller to steer the fleet. To controll the speed of the fleet use the [color=#ffc315]Thrust Lever[/color] on the right side of the controller"
-		ActionTracker.QueueTutorial("Controlling the fleet", text, [ScreenUI.UI_ELEMENT.STEER, ScreenUI.UI_ELEMENT.THRUST])
+		ActionTracker.QueueTutorial(ActionTracker.Action.STEER)
 	
 
 func PlayIntro():
@@ -290,8 +288,7 @@ func StartShipTrade(ControlledShip : PlayerDrivenShip) -> void:
 	sc.connect("SeperationFinished", ShipSeparationFinished)
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.FLEET_SEPARATION)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.FLEET_SEPARATION)
-		var text = "In the ship dock screen, you can effectively organize your current fleet. To create a new fleet, simply select the ships you wish to move from your existing fleet.\nDon't forget to allocate fuel appropriately! Use the sliders at the bottom of the screen to ensure each fleet has enough fuel to operate efficiently."
-		ActionTracker.QueueTutorial("Ship Dock", text, [])
+		ActionTracker.QueueTutorial(ActionTracker.Action.FLEET_SEPARATION)
 	
 #-----------------------------------------------------------
 func ShipSeparationFinished() -> void:
@@ -471,8 +468,7 @@ func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 		
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.TOWN_SHOP)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.TOWN_SHOP)
-		var text = "When landing on a town you are able to refuel, repair, rearm and upgrade your fleet.\n\nEach city provides certain bonuses to the price and speed of one or all services. The bonuses can be seen on the left bellow the port's name. Drag on the sliders to buy or sell the shown resource."
-		ActionTracker.QueueTutorial("Towns", text, [])
+		ActionTracker.QueueTutorial(ActionTracker.Action.TOWN_SHOP)
 	#UIEventH.OnScreenUIToggled(false)
 	#UIEventH.OnButtonCoverToggled(true)
 	
@@ -520,8 +516,7 @@ func FuelTransactionFinished(BFuel : float, Ships : Array[MapShip], Scene : Town
 		if (g == ActionTracker.Action.RECRUIT and!ActionTracker.IsActionCompleted(ActionTracker.Action.RECRUIT)):
 			TutorialsToShow.append(ActionTracker.Action.RECRUIT)
 			ActionTracker.OnActionCompleted(ActionTracker.Action.RECRUIT)
-			var text = "Managing your fleet is key to a successful campaign.\nShips in the same fleet share [color=#ffc315]Fuel[/color], so adding a ship with extra fuel to a fleet can help it go further.\nTo split and trade fuel between fleets, use the Ship Dock in the controller.\nTo merge [color=#ffc315]Fleets[/color], click the [color=#ffc315]Regroup[/color] button and pick the target fleet.\nSelect a different ship to control by clicking on their name on the right part of the screen."
-			ActionTracker.QueueTutorial("Managing a fleet", text, [ScreenUI.UI_ELEMENT.REGROUP_BUTTON, ScreenUI.UI_ELEMENT.SHIP_DOCK_BUTTON])
+			ActionTracker.QueueTutorial(ActionTracker.Action.RECRUIT)
 			
 	TutorialsToShow.clear()
 	

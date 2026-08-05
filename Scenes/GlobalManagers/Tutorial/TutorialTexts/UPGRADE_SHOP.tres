@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TutorialData" format=3 uid="uid://dlaljererj5gp"]
+
+[ext_resource type="Script" uid="uid://451ovq2ynuka" path="res://Scenes/GlobalManagers/Tutorial/TutorialData.gd" id="1_x67wr"]
+
+[resource]
+script = ExtResource("1_x67wr")
+Title = "Workshop"
+Text = "In the workshop you can inspect your fleet and choose parts to [color=#ffc315]Upgrade[/color] or [color=#ffc315]Install[/color].\\nUpgraded parts provide better stats and also extra [color=#ffc315]Cards[/color] for the ship's [color=#ffc315]deck[/color].\\nEach ship can have only one of their parts being upgraded at each time.\\n[color=#ffc315]Upgrade[/color] progress updates only while the simulation is running."
+metadata/_custom_type_script = "uid://451ovq2ynuka"

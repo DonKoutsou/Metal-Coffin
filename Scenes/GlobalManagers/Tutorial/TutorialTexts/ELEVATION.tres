@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TutorialData" format=3 uid="uid://deup8oq8iwigo"]
+
+[ext_resource type="Script" uid="uid://451ovq2ynuka" path="res://Scenes/GlobalManagers/Tutorial/TutorialData.gd" id="1_om12u"]
+
+[resource]
+script = ExtResource("1_om12u")
+Title = "Altitude"
+Text = "Managing altitude is one of your fleets strongest weapons. Radar signals, noise and wind are obstucted by the terains. Use this to your advantage to stay undetected or hide from strong head winds. Use the [color=#ffc315]Elevation Lever[/color] to manage your altitude and the [color=#ffc315]Topography Visualisation[/color] for view a topographic map of the area. The ship will increase it's altitude when an imminent collision is detected."
+Target = Array[int]([12, 15])
+metadata/_custom_type_script = "uid://451ovq2ynuka"

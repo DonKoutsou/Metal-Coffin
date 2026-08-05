@@ -163,7 +163,7 @@ func _input(event: InputEvent) -> void:
 			#var newy = clamp(r.y, OriginalPos.y / zoom.y, OriginalPos.y * zoom.y)
 			#position = Vector2(newx, newy)
 
-func FrameCam(FrameTrarget : Control) -> void:
+func FrameCam(FrameTrarget : Node) -> void:
 	if (FrameTrarget.global_position.x < 10):
 		position.x = 370
 	else: if (FrameTrarget.global_position.x > 900):

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TutorialData" format=3 uid="uid://ndojj5u2ytrb"]
+
+[ext_resource type="Script" uid="uid://451ovq2ynuka" path="res://Scenes/GlobalManagers/Tutorial/TutorialData.gd" id="1_yc8ie"]
+
+[resource]
+script = ExtResource("1_yc8ie")
+Title = "Simulation Management"
+Text = "A successfull campaign requires proper planning.\\nUse the [color=#ffc315]Simulation Buttons[/color] to either [color=#f35033]Stop[/color] the simulation and think over your plans or speed up the simulations to [color=#308a4d]speed[/color] through big protions of your voyage."
+Target = Array[int]([0, 1])
+metadata/_custom_type_script = "uid://451ovq2ynuka"

@@ -1,7 +1,7 @@
-extends RefCounted
+extends Resource
 
 class_name TutorialData
 
-var TutorialTitle : String 
-var TutorialText : String
-var Target : Array[ScreenUI.UI_ELEMENT]
+@export var Title : String
+@export_multiline var Text : String
+@export var Target : Array[ScreenUI.UI_ELEMENT]

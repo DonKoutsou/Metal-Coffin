@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TutorialData" format=3 uid="uid://c4vqp7pg4hvnr"]
+
+[ext_resource type="Script" uid="uid://451ovq2ynuka" path="res://Scenes/GlobalManagers/Tutorial/TutorialData.gd" id="1_bpeh3"]
+
+[resource]
+script = ExtResource("1_bpeh3")
+Title = "Electronic Intelligence"
+Text = "The Elint sensors of one of your ships has been triggered. Elint detects enemy radar signals and provides a rough estimation on the distance and the direction of the signal. If the sensor is triggered it means you are about to enter into a radar's signal range and be detected."
+metadata/_custom_type_script = "uid://451ovq2ynuka"

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TutorialData" format=3 uid="uid://buabtpepfcs0"]
+
+[ext_resource type="Script" uid="uid://451ovq2ynuka" path="res://Scenes/GlobalManagers/Tutorial/TutorialData.gd" id="1_pjm30"]
+
+[resource]
+script = ExtResource("1_pjm30")
+Title = "Towns"
+Text = "When landing on a town you are able to refuel, repair, rearm and upgrade your fleet.\\n\\nEach city provides certain bonuses to the price and speed of one or all services. The bonuses can be seen on the left bellow the port's name. Drag on the sliders to buy or sell the shown resource."
+metadata/_custom_type_script = "uid://451ovq2ynuka"

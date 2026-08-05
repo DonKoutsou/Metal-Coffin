@@ -459,7 +459,7 @@ func ToggleInventory() -> void:
 		await ToggleTween.finished
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.INVENTORY_OPEN)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.INVENTORY_OPEN)
-			InventoryTutorial()
+			ActionTracker.QueueTutorial(ActionTracker.Action.INVENTORY_OPEN)
 	else:
 		#print(global_position.y)
 		visible = !visible
@@ -468,8 +468,3 @@ func ToggleInventory() -> void:
 		ToggleTween.tween_property(self, "size", Vector2(size.x, 0), 0.15)
 		await ToggleTween.finished
 		visible = !visible
-
-#-------------------------------------------------------
-func InventoryTutorial() -> void:
-	var TutorialText = "The [color=#ffc315]Cargo Panel[/color] is where the details for each ship in your fleet can be found. From their stats to their inventory contents."
-	ActionTracker.QueueTutorial("Cargo", TutorialText, [])

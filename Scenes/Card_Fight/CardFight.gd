@@ -173,7 +173,7 @@ func IntroDeclarationFinished() -> void:
 	#ActionDeclaration.ActionDeclarationFinished.disconnect(IntroDeclarationFinished)
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT)
-		ActionTracker.QueueTutorial("TUT_CardfightTitle", "TUT_CardfightText", [])
+		ActionTracker.QueueTutorial(ActionTracker.Action.CARD_FIGHT)
 	
 	call_deferred("RunTurn")
 ##----------------------------------------------------------------------##
@@ -414,7 +414,7 @@ func PickPhaseStart() -> void:
 
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_ACTION_PICK)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ACTION_PICK)
-		ActionTracker.QueueTutorial("TUT_Cardfight_ActionPickingTitle", "TUT_Cardfight_ActionPickingText", [])
+		ActionTracker.QueueTutorial(ActionTracker.Action.CARD_FIGHT_ACTION_PICK)
 
 	CurrentPlayerLabel.visible = true
 	
@@ -454,11 +454,11 @@ func RunShipsTurn(Ship : BattleShipStats) -> void:
 		#ExternalUI.ToggleEnergyVisibility(true)
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_ENERGY)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ENERGY)
-			ActionTracker.QueueTutorial("TUT_Cardfight_EnergyTitle", "TUT_Cardfight_EnergyText", [ScreenUI.UI_ELEMENT.CARD_FIGHT_ENERGY_BAR])
+			ActionTracker.QueueTutorial(ActionTracker.Action.CARD_FIGHT_ENERGY)
 
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_RESERVES)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_RESERVES)
-			ActionTracker.QueueTutorial("TUT_Cardfight_EnergyReserveTitle", "TUT_Cardfight_EnergyReserveText", [ScreenUI.UI_ELEMENT.CARD_FIGHT_RESERVE_BAR])
+			ActionTracker.QueueTutorial(ActionTracker.Action.CARD_FIGHT_RESERVES)
 		
 		RestartCards()
 		
@@ -596,7 +596,7 @@ func OnCardSelected(C : Card, target : BattleShipStats = null) -> bool:
 	else: if (Ship.deck.Hand.size() > 0 and Ship.Energy == 0):
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_CARD_RECYCLE)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_CARD_RECYCLE)
-			ActionTracker.QueueTutorial("Card recycling", "In situations where the ships energy has been depleted but it still has cards in its hand it is possible to manually discard these cards in exchange for some energy.\nFor every 2 cards discarded the ship is awarded 1 energy.", [ScreenUI.UI_ELEMENT.CARD_FIGHT_DISCARD])
+			ActionTracker.QueueTutorial(ActionTracker.Action.CARD_FIGHT_CARD_RECYCLE)
 		#TODO add tutorial for discarding cards
 
 	
@@ -858,7 +858,7 @@ func StartActionPerform() -> void:
 func ActionPerformPhase() -> void:
 	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_ENEMY_ACTION_PERFORM)):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ENEMY_ACTION_PERFORM)
-		ActionTracker.QueueTutorial("TUT_Cardfight_ActionPTitle", "TUT_Cardfight_ActionPText", [])
+		ActionTracker.QueueTutorial(ActionTracker.Action.CARD_FIGHT_ENEMY_ACTION_PERFORM)
 	
 	CurrentPlayerLabel.visible = true
 	CurrentTurn = 0
@@ -1020,7 +1020,7 @@ func RestartCards() -> void:
 		PopUpManager.GetInstance().DoFadeNotif("Ship outnumbered\nBonus Energy Provided")
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_OUTNUMER_BONUS)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_OUTNUMER_BONUS)
-			ActionTracker.QueueTutorial("Outnumber Energy Bonus", "When outnumbered ships are provided an energy boost, giving them a fighting chance.", [ScreenUI.UI_ELEMENT.CARD_FIGHT_ENERGY_BAR])
+			ActionTracker.QueueTutorial(ActionTracker.Action.CARD_FIGHT_OUTNUMER_BONUS)
 		
 	#since max fleet ammount is 3 this number can't be more than 2, and since we normalise it we
 	var finalTurnEnergy = TurnEnergy + roundi(TurnEnergy * outNumberedBonus)
@@ -1394,7 +1394,7 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats, _targetOverride : B
 			if (Friendly):
 				if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_TARGET_PICKING) and Team.size() > 0):
 					ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_TARGET_PICKING)
-					ActionTracker.QueueTutorial("TUT_Cardfight_TargetTitle", "TUT_Cardfight_TargetText", [])
+					ActionTracker.QueueTutorial(ActionTracker.Action.CARD_FIGHT_TARGET_PICKING)
 				TargetSelect.SetEnemies(Team)
 				SelectingTarget = true
 				var Target = await TargetSelect.EnemySelected
@@ -1422,7 +1422,7 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats, _targetOverride : B
 			if (Friendly):
 				if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_TARGET_PICKING) and EnemyTeam.size() > 0):
 					ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_TARGET_PICKING)
-					ActionTracker.QueueTutorial("TUT_Cardfight_TargetTitle", "TUT_Cardfight_TargetText", [])
+					ActionTracker.QueueTutorial(ActionTracker.Action.CARD_FIGHT_TARGET_PICKING)
 				TargetSelect.SetEnemies(EnemyTeam)
 				SelectingTarget = true
 				var Target = await TargetSelect.EnemySelected
@@ -1498,7 +1498,7 @@ func HandleDrawCard(Performer : BattleShipStats, ConsumeEnergy : bool = false) -
 	if (Performer.Energy == 0):
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_CARD_RECYCLE)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_CARD_RECYCLE)
-			ActionTracker.QueueTutorial("Card recycling", "In situations where the ships energy has been depleted but it still has cards in its hand it is possible to manually discard these cards in exchange for some energy.\n\nFor every 2 cards discarded the ship is awarded 1 energy.\n\nDrag and drop any card on the discard pile to discard it.", [ScreenUI.UI_ELEMENT.CARD_FIGHT_DISCARD])
+			ActionTracker.QueueTutorial(ActionTracker.Action.CARD_FIGHT_CARD_RECYCLE)
 		#TODO add tutorial for discarding cards
 
 	return true
@@ -1648,7 +1648,7 @@ func ShipDamaged(amm : float, Ship : BattleShipStats) -> void:
 		
 		if (Ship.CurrentHull < 40 and !ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_SHIPLOSS)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_SHIPLOSS)
-			ActionTracker.QueueTutorial("TUT_Cardfight_ShipLossTitle", "TUT_Cardfight_ShipLossText", [])
+			ActionTracker.QueueTutorial(ActionTracker.Action.CARD_FIGHT_SHIPLOSS)
 	
 		DamageGot += amm
 		if (amm > 0):
@@ -1937,7 +1937,7 @@ func PlaceCardInPlayerHand(Performer : BattleShipStats,C : Card) -> bool:
 		SelectingTarget = true
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_HAND_LIMIT)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_HAND_LIMIT)
-			ActionTracker.QueueTutorial("TUT_Cardfight_HandLimitTitle", TranslationServer.translate("TUT_Cardfight_HandLimitText").format([MaxCardsInHand]), [])
+			ActionTracker.QueueTutorial(ActionTracker.Action.CARD_FIGHT_HAND_LIMIT, [MaxCardsInHand])
 		
 		var ToDiscard : int = await CardSelect.CardSelected
 		SelectingTarget = false

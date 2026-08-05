@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TutorialData" format=3 uid="uid://dabus6igneixd"]
+
+[ext_resource type="Script" uid="uid://451ovq2ynuka" path="res://Scenes/GlobalManagers/Tutorial/TutorialData.gd" id="1_321pw"]
+
+[resource]
+script = ExtResource("1_321pw")
+Title = "TUT_Cardfight_ShipLossTitle"
+Text = "TUT_Cardfight_ShipLossText"
+metadata/_custom_type_script = "uid://451ovq2ynuka"

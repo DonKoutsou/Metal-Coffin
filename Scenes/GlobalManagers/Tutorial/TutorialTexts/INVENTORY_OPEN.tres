@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TutorialData" format=3 uid="uid://cyglg4qs2orih"]
+
+[ext_resource type="Script" uid="uid://451ovq2ynuka" path="res://Scenes/GlobalManagers/Tutorial/TutorialData.gd" id="1_lf44j"]
+
+[resource]
+script = ExtResource("1_lf44j")
+Title = "Cargo"
+Text = "The [color=#ffc315]Cargo Panel[/color] is where the details for each ship in your fleet can be found. From their stats to their inventory contents."
+metadata/_custom_type_script = "uid://451ovq2ynuka"

@@ -282,7 +282,7 @@ func toggleSonar(enable: bool) -> void:
 	if enable:
 		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.AEROSONAR)):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.AEROSONAR)
-			ActionTracker.QueueTutorial("TUT_Aerosonar_Title", "TUT_Aerosonar_Text", [ScreenUI.UI_ELEMENT.AEROSONAR])
+			ActionTracker.QueueTutorial(ActionTracker.Action.AEROSONAR)
 		working = fleetHasAeroSonar()
 		#controller.ToggleSonarVisual(working)
 		lineContainer.OffsetAmmount = currentOffset

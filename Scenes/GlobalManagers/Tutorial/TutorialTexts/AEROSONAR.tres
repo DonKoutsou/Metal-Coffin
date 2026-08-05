@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TutorialData" format=3 uid="uid://dccc151w2oada"]
+
+[ext_resource type="Script" uid="uid://451ovq2ynuka" path="res://Scenes/GlobalManagers/Tutorial/TutorialData.gd" id="1_jieoj"]
+
+[resource]
+script = ExtResource("1_jieoj")
+Title = "TUT_Aerosonar_Title"
+Text = "TUT_Aerosonar_Text"
+Target = Array[int]([16])
+metadata/_custom_type_script = "uid://451ovq2ynuka"

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TutorialData" format=3 uid="uid://djjnx7dibcfhu"]
+
+[ext_resource type="Script" uid="uid://451ovq2ynuka" path="res://Scenes/GlobalManagers/Tutorial/TutorialData.gd" id="1_1rd62"]
+
+[resource]
+script = ExtResource("1_1rd62")
+Title = "Camera Controls"
+Text = "Use the [color=#ffc315]WASD[/color] keys or [color=#ffc315]Left Click[/color] and drag the mouse to move the camera. To [color=#ffc315]Zoom In/Out[/color] use the [color=#ffc315]Mouse Wheel[/color]."
+metadata/_custom_type_script = "uid://451ovq2ynuka"

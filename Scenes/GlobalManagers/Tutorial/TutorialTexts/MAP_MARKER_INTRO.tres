@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TutorialData" format=3 uid="uid://dtu0vmnqyvi03"]
+
+[ext_resource type="Script" uid="uid://451ovq2ynuka" path="res://Scenes/GlobalManagers/Tutorial/TutorialData.gd" id="1_l7i8o"]
+
+[resource]
+script = ExtResource("1_l7i8o")
+Title = "Map Marker Editor Controlls"
+Text = "The [color=#ffc315]Map Marker Editor[/color] provides the creation of texts markers and measuring lines. Use the [color=#ffc315]Move Horizontal[/color] and [color=#ffc315]Move Vertical[/color] dials to select the plecement of the marker.\\n\\nClicking the [color=#ffc315]Text Button[/color] will prompt you with inputing the text that will aprear on the marker.\\n\\nClicking the [color=#ffc315]Line Button[/color] will start drawing a line, use the dials to extend the line and press the [color=#ffc315]Line Button[/color] again to place the line."
+Target = Array[int]([2])
+metadata/_custom_type_script = "uid://451ovq2ynuka"

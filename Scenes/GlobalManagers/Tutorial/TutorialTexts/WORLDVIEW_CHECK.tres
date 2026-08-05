@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TutorialData" format=3 uid="uid://cvuf2a60iyufh"]
+
+[ext_resource type="Script" uid="uid://451ovq2ynuka" path="res://Scenes/GlobalManagers/Tutorial/TutorialData.gd" id="1_fevoy"]
+
+[resource]
+script = ExtResource("1_fevoy")
+Title = "Worldview Checks"
+Text = "Certain dialogue options require a stat check to happen.\\nThis check will determine if the option will have the outcome you want or not."
+metadata/_custom_type_script = "uid://451ovq2ynuka"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TutorialData" format=3 uid="uid://bbc6kqmcxi7c4"]
+
+[ext_resource type="Script" uid="uid://451ovq2ynuka" path="res://Scenes/GlobalManagers/Tutorial/TutorialData.gd" id="1_5jyp2"]
+
+[resource]
+script = ExtResource("1_5jyp2")
+Title = "Missile Launch"
+Text = "Finally turn the dial to aim, then press Launch to send it away."
+Target = Array[int]([10, 11])
+metadata/_custom_type_script = "uid://451ovq2ynuka"

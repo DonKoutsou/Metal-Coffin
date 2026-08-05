@@ -19,7 +19,7 @@
 [ext_resource type="FontFile" uid="uid://ble63qtuapau3" path="res://Fonts/digital-7.ttf" id="16_6ithd"]
 [ext_resource type="StyleBox" uid="uid://cicae3yqgxkcm" path="res://Theme/MetalPanel.tres" id="18_uy6ab"]
 
-[node name="Missile Tab" type="Control" unique_id=1968593876 node_paths=PackedStringArray("missileSelectLight", "angleSelectLight", "rangeText", "selectedMissileText", "turnOffButton", "armButton", "dissarmButton", "launchButton", "cap")]
+[node name="Missile Tab" type="Control" unique_id=1968593876 node_paths=PackedStringArray("missileSelectLight", "angleSelectLight", "rangeText", "selectedMissileText", "turnOffButton", "armButton", "dissarmButton", "launchButton", "cap", "missileDial")]
 custom_minimum_size = Vector2(274, 157)
 custom_maximum_size = Vector2(274, 157)
 layout_mode = 3
@@ -47,6 +47,7 @@ armButton = NodePath("ArmButton")
 dissarmButton = NodePath("DissarmButton")
 launchButton = NodePath("LaunchButton")
 cap = NodePath("PanelContainer")
+missileDial = NodePath("DroneGas2")
 controllerEventHandler = ExtResource("3_fka4o")
 droneDockEventHandler = ExtResource("4_2m6j3")
 

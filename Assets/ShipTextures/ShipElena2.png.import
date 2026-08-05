@@ -3,21 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bgkjjkyouc1mb"
-path.bptc="res://.godot/imported/ShipElena2.png-1c830e9fd273fc5bb3e7332833b08046.bptc.ctex"
-path.astc="res://.godot/imported/ShipElena2.png-1c830e9fd273fc5bb3e7332833b08046.astc.ctex"
+path="res://.godot/imported/ShipElena2.png-1c830e9fd273fc5bb3e7332833b08046.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc", "etc2_astc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Assets/ShipTextures/ShipElena2.png"
-dest_files=["res://.godot/imported/ShipElena2.png-1c830e9fd273fc5bb3e7332833b08046.bptc.ctex", "res://.godot/imported/ShipElena2.png-1c830e9fd273fc5bb3e7332833b08046.astc.ctex"]
+dest_files=["res://.godot/imported/ShipElena2.png-1c830e9fd273fc5bb3e7332833b08046.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=true
 compress/high_quality_mode=0
 compress/lossy_quality=0.7

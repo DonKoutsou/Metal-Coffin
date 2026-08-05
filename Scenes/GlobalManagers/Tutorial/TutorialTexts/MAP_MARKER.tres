@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TutorialData" format=3 uid="uid://wendqlsr6crx"]
+
+[ext_resource type="Script" uid="uid://451ovq2ynuka" path="res://Scenes/GlobalManagers/Tutorial/TutorialData.gd" id="1_5xdba"]
+
+[resource]
+script = ExtResource("1_5xdba")
+Title = "Map Markers"
+Text = "Marking vital information on the map is usefull for making edjucated decisions in the future. Use the [color=#ffc315]Map Marker Editor[/color] to place text markers and measure distances. Toggle the [color=#ffc315]Map Marker Editor[/color] using the dediacted button on the [color=#ffc315]Ship Controller[/color]."
+Target = Array[int]([2])
+metadata/_custom_type_script = "uid://451ovq2ynuka"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TutorialData" format=3 uid="uid://b5hqvkxmbqdl"]
+
+[ext_resource type="Script" uid="uid://451ovq2ynuka" path="res://Scenes/GlobalManagers/Tutorial/TutorialData.gd" id="1_7yfb2"]
+
+[resource]
+script = ExtResource("1_7yfb2")
+Title = "Managing a fleet"
+Text = "Managing your fleet is key to a successful campaign.\\nShips in the same fleet share [color=#ffc315]Fuel[/color], so adding a ship with extra fuel to a fleet can help it go further.\\nTo split and trade fuel between fleets, use the Ship Dock in the controller.\\nTo merge [color=#ffc315]Fleets[/color], click the [color=#ffc315]Regroup[/color] button and pick the target fleet.\\nSelect a different ship to control by clicking on their name on the right part of the screen."
+Target = Array[int]([17, 18])
+metadata/_custom_type_script = "uid://451ovq2ynuka"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TutorialData" format=3 uid="uid://p4hapcgd174u"]
+
+[ext_resource type="Script" uid="uid://451ovq2ynuka" path="res://Scenes/GlobalManagers/Tutorial/TutorialData.gd" id="1_nfs8d"]
+
+[resource]
+script = ExtResource("1_nfs8d")
+Title = "Disembarkation"
+Text = "You've landed in a town. To disembark and visit it press the [color=#ffc315]Open Hatch[/color] button."
+Target = Array[int]([14])
+metadata/_custom_type_script = "uid://451ovq2ynuka"

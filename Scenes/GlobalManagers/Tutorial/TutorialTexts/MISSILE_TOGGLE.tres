@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TutorialData" format=3 uid="uid://d35s71ijvyhju"]
+
+[ext_resource type="Script" uid="uid://451ovq2ynuka" path="res://Scenes/GlobalManagers/Tutorial/TutorialData.gd" id="1_03633"]
+
+[resource]
+script = ExtResource("1_03633")
+Title = "TUT_MissileToggleTitle"
+Text = "TUT_MissileToggleText"
+Target = Array[int]([7])
+metadata/_custom_type_script = "uid://451ovq2ynuka"

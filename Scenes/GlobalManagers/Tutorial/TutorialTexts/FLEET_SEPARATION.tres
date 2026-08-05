@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TutorialData" format=3 uid="uid://cr6lqc7qub7eh"]
+
+[ext_resource type="Script" uid="uid://451ovq2ynuka" path="res://Scenes/GlobalManagers/Tutorial/TutorialData.gd" id="1_unn7l"]
+
+[resource]
+script = ExtResource("1_unn7l")
+Title = "Ship Dock"
+Text = "In the ship dock screen, you can effectively organize your current fleet. To create a new fleet, simply select the ships you wish to move from your existing fleet.\\nDon't forget to allocate fuel appropriately! Use the sliders at the bottom of the screen to ensure each fleet has enough fuel to operate efficiently."
+metadata/_custom_type_script = "uid://451ovq2ynuka"

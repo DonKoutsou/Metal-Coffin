@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TutorialData" format=3 uid="uid://ftfbljcoi5o6"]
+
+[ext_resource type="Script" uid="uid://451ovq2ynuka" path="res://Scenes/GlobalManagers/Tutorial/TutorialData.gd" id="1_kblwj"]
+
+[resource]
+script = ExtResource("1_kblwj")
+Title = "Munition Shop"
+Text = "In the munition shop you can supply your ships with various single use items, from [color=#ffc315]Missiles[/color] to [color=#ffc315]Fire Suppression Units[/color].\\nSome of those [color=#ffc315]Items[/color] are ment to be used in the overworld while others will provide you with extra [color=#ffc315]Cards[/color] for your [color=#ffc315]Deck[/color]."
+metadata/_custom_type_script = "uid://451ovq2ynuka"

@@ -106,10 +106,6 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 		var SimulationTrigger = TutorialTrigger.instantiate() as TutTrigger
 		SimulationTrigger.Inscreen = false
 		SimulationTrigger.TutorialToShow = ActionTracker.Action.SIMULATION
-		SimulationTrigger.TutorialTitle = "Simulation Management"
-		SimulationTrigger.TutorialText = "A successfull campaign requires proper planning.\nUse the [color=#ffc315]Simulation Buttons[/color] to either [color=#f35033]Stop[/color] the simulation and think over your plans or speed up the simulations to [color=#308a4d]speed[/color] through big protions of your voyage."
-		SimulationTrigger.TutorialElement.append(ScreenUI.UI_ELEMENT.PILOT_SIMULATION_BUTTON)
-		SimulationTrigger.TutorialElement.append(ScreenUI.UI_ELEMENT.PILOT_SIMULATION_SPEED_BUTTON)
 		WorldParent.add_child(SimulationTrigger)
 		var triggerpos = pos
 		triggerpos.y -= 100
@@ -118,10 +114,6 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 		var ElevationTrigger = TutorialTrigger.instantiate() as TutTrigger
 		ElevationTrigger.Inscreen = false
 		ElevationTrigger.TutorialToShow = ActionTracker.Action.ELEVATION
-		ElevationTrigger.TutorialTitle = "Altitude"
-		ElevationTrigger.TutorialText = "Managing altitude is one of your fleets strongest weapons. Radar signals, noise and wind are obstucted by the terains. Use this to your advantage to stay undetected or hide from strong head winds. Use the [color=#ffc315]Elevation Lever[/color] to manage your altitude and the [color=#ffc315]Topography Visualisation[/color] for view a topographic map of the area. The ship will increase it's altitude when an imminent collision is detected."
-		ElevationTrigger.TutorialElement.append(ScreenUI.UI_ELEMENT.ELEVATION)
-		ElevationTrigger.TutorialElement.append(ScreenUI.UI_ELEMENT.TOPOLOGY_TOGGLE)
 		WorldParent.add_child(ElevationTrigger)
 		var Elevationtriggerpos = pos
 		Elevationtriggerpos.y -= 350
@@ -130,9 +122,6 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 		var MapMarkerTrigger = TutorialTrigger.instantiate() as TutTrigger
 		MapMarkerTrigger.Inscreen = false
 		MapMarkerTrigger.TutorialToShow = ActionTracker.Action.MAP_MARKER
-		MapMarkerTrigger.TutorialTitle = "Map Markers"
-		MapMarkerTrigger.TutorialText = "Marking vital information on the map is usefull for making edjucated decisions in the future. Use the [color=#ffc315]Map Marker Editor[/color] to place text markers and measure distances. Toggle the [color=#ffc315]Map Marker Editor[/color] using the dediacted button on the [color=#ffc315]Ship Controller[/color]."
-		MapMarkerTrigger.TutorialElement.append(ScreenUI.UI_ELEMENT.PILOT_MAP_MARKER_TOGGLE)
 		WorldParent.add_child(MapMarkerTrigger)
 		var MapMarkerTriggerpos = pos
 		MapMarkerTriggerpos.y -= 750

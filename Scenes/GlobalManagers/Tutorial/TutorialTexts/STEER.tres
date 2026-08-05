@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TutorialData" format=3 uid="uid://clsfxrw427fwk"]
+
+[ext_resource type="Script" uid="uid://451ovq2ynuka" path="res://Scenes/GlobalManagers/Tutorial/TutorialData.gd" id="1_41uuy"]
+
+[resource]
+script = ExtResource("1_41uuy")
+Title = "Controlling the fleet"
+Text = "Use the [color=#ffc315]Steer[/color] found on the left of the controller to steer the fleet. To controll the speed of the fleet use the [color=#ffc315]Thrust Lever[/color] on the right side of the controller"
+Target = Array[int]([5, 6])
+metadata/_custom_type_script = "uid://451ovq2ynuka"

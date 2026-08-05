@@ -33,27 +33,6 @@ var amountArmed: bool = false
 var amount: int = 0
 var steeringDir: float = 0.0
 
-# --- TUTORIALS ---
-
-func doIntroductionTutorial() -> void:
-	ActionTracker.QueueTutorial("TUT_MissileToggleTitle", 
-		"TUT_MissileToggleText", [ScreenUI.UI_ELEMENT.MISSILE_TOGGLE])
-
-func doMissileArmTutorial() -> void:
-	ActionTracker.QueueTutorial("TUT_MissileArmTitle",
-		"TUT_MissileArmText", 
-		[ScreenUI.UI_ELEMENT.MISSILE_ARM, ScreenUI.UI_ELEMENT.MISSILE_DIAL])
-	
-func doMissileAmountTutorial() -> void:
-	ActionTracker.QueueTutorial("TUT_MissileAmmountTitle",
-		"TUT_MissileAmmountText",
-		[ScreenUI.UI_ELEMENT.MISSILE_ARM, ScreenUI.UI_ELEMENT.MISSILE_DIAL])
-
-func doMissileLaunchTutorial() -> void:
-	ActionTracker.QueueTutorial("Missile Launch",
-		"Finally turn the dial to aim, then press Launch to send it away.",
-		[ScreenUI.UI_ELEMENT.MISSILE_LAUNCH, ScreenUI.UI_ELEMENT.MISSILE_DIAL])
-
 # --- MISSILE/FLEET LOGIC ---
 
 func fleetHasMissileLauncher() -> bool:
@@ -92,7 +71,7 @@ func _onControlledShipUpdated(ship: PlayerDrivenShip) -> void:
 	else:
 		if not ActionTracker.IsActionCompleted(ActionTracker.Action.MISSILE_TOGGLE):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.MISSILE_TOGGLE)
-			doIntroductionTutorial()
+			ActionTracker.QueueTutorial(ActionTracker.Action.MISSILE_TOGGLE)
 
 func _onDroneAdded(_drone: PlayerDrivenShip, target: MapShip) -> void:
 	if target == controller:
@@ -172,14 +151,14 @@ func onArmPressed() -> void:
 		missileDockEventH.MissileArmed(currentlySelectedMissile, controller.Cpt)
 		if not ActionTracker.IsActionCompleted(ActionTracker.Action.MISSILE_LAUNCH):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.MISSILE_LAUNCH)
-			doMissileLaunchTutorial()
+			ActionTracker.QueueTutorial(ActionTracker.Action.MISSILE_LAUNCH)
 		return
 	if amountArmed:
 		PopUpManager.GetInstance().DoFadeNotif("A missile is already armed")
 		return 
 	if not ActionTracker.IsActionCompleted(ActionTracker.Action.MISSILE_SELECT_NUM):
 		ActionTracker.OnActionCompleted(ActionTracker.Action.MISSILE_SELECT_NUM)
-		doMissileAmountTutorial()
+		ActionTracker.QueueTutorial(ActionTracker.Action.MISSILE_SELECT_NUM)
 	armed = true
 	amount = 1
 	rangeText.text = "Amount : %s" % var_to_str(amount)
@@ -266,7 +245,7 @@ func _on_turn_off_toggled(toggled_on: bool) -> void:
 	else:
 		if not ActionTracker.IsActionCompleted(ActionTracker.Action.MISSILE_ARM):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.MISSILE_ARM)
-			doMissileArmTutorial()
+			ActionTracker.QueueTutorial(ActionTracker.Action.MISSILE_ARM)
 		showing = true
 		updateMissileSelect()
 		rangeText.visible = true

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TutorialData" format=3 uid="uid://cee8s2ayub7rx"]
+
+[ext_resource type="Script" uid="uid://451ovq2ynuka" path="res://Scenes/GlobalManagers/Tutorial/TutorialData.gd" id="1_5qgbv"]
+
+[resource]
+script = ExtResource("1_5qgbv")
+Title = "Item Inspection"
+Text = "When selecting an [color=#ffc315]Item[/color] you can check the items details that apear on the panel to the right. There you can choose to [color=#ffc315]Upgrade[/color] it if its a ship part, [color=#ffc315]Transfer[/color] it to another ship if its allowed and check any [color=#ffc315]Cards[/color] it provides in close quarters combat."
+metadata/_custom_type_script = "uid://451ovq2ynuka"
