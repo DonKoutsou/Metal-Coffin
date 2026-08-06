@@ -18,6 +18,7 @@ signal ItemTransf(Box : Inventory_Box_Res, OwnerInventory : CharacterInventory)
 signal OnCharacterInspectionPressed
 signal OnCharacterDeckInspectionPressed
 signal OnCharacterInventoryInspectionPressed
+signal OnCharacterDispositionInspectionPressed
 
 var _InventoryContents : Dictionary[Item, int]
 var boxes : Dictionary[ShipPart.ShipPartType, Array] = {
@@ -522,6 +523,9 @@ func _on_button_pressed() -> void:
 
 func _on_deck_pressed() -> void:
 	OnCharacterDeckInspectionPressed.emit()
+	
+func _on_disposition_pressed() -> void:
+	OnCharacterDispositionInspectionPressed.emit()
 
 func _on_inventory_vis_toggle_pressed() -> void:
 	OnCharacterInventoryInspectionPressed.emit()

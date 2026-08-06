@@ -24,6 +24,14 @@ signal OnNameChanged(NewName : String)
 var CaptainShip : MapShip
 var _CharInv : CharacterInventory
 
+var Disposition : Dictionary[CaptainDispositionUI.Dispositions, float] = {
+	CaptainDispositionUI.Dispositions.PHYSICAL : 0.0,
+	CaptainDispositionUI.Dispositions.ELECTRIC : 0.0,
+	CaptainDispositionUI.Dispositions.FLAME : 0.0,
+	CaptainDispositionUI.Dispositions.DECAY : 0.0,
+	CaptainDispositionUI.Dispositions.PLASMA : 0.0,
+}
+
 func OnCharacterNameChanged(NewName : String) -> void:
 	TempName = NewName
 	OnNameChanged.emit(GetCaptainName())
@@ -47,6 +55,7 @@ func _init() -> void:
 func SetUpStats() -> void:
 	for g in StartingItems:
 		if (g is ShipPart):
+			Disposition[g.Disposition] += g.DispositionAmm
 			for st : ShipPartUpgrade in g.Upgrades:
 				_GetStat(st.UpgradeName).AddShipPartBuff(st.UpgradeAmmount)
 				_GetStat(st.UpgradeName).AddShipPartPenalty(st.PenaltyAmmount)
@@ -239,6 +248,7 @@ func ConsumeResource(StatN : STAT_CONST.STATS, Consumption : float) -> void:
 	StatChanged.emit(StatN)
 
 func OnShipPartAddedToInventory(It : ShipPart) -> void:
+	Disposition[It.Disposition] += It.DispositionAmm
 	for Up in It.Upgrades:
 		_GetStat(Up.UpgradeName).AddShipPartBuff(Up.UpgradeAmmount)
 		_GetStat(Up.UpgradeName).AddShipPartPenalty(Up.PenaltyAmmount)
@@ -246,6 +256,7 @@ func OnShipPartAddedToInventory(It : ShipPart) -> void:
 	ShipPartChanged.emit(It)
 
 func OnShipPartRemovedFromInventory(It : ShipPart) -> void:
+	Disposition[It.Disposition] -= It.DispositionAmm
 	for Up in It.Upgrades:
 		_GetStat(Up.UpgradeName).RemoveShipPartBuff(Up.UpgradeAmmount)
 		_GetStat(Up.UpgradeName).AddShipPartPenalty(-Up.PenaltyAmmount)

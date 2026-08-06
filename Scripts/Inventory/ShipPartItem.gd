@@ -6,7 +6,8 @@ class_name ShipPart
 @export var UpgradeVersion : ShipPart
 @export var UpgradeTime : float
 @export var IsDamaged : bool = false
-
+@export var Disposition : CaptainDispositionUI.Dispositions = CaptainDispositionUI.Dispositions.PHYSICAL
+@export var DispositionAmm : float = 0.1
 
 
 func _setup_local_to_scene() -> void:

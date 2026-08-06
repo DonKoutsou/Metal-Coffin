@@ -5,6 +5,7 @@
 [ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="5_c3lfk"]
 [ext_resource type="Texture2D" uid="uid://bk3hmnxkvr5ab" path="res://Assets/UIPiecies/network-bars.png" id="6_j2tgv"]
 [ext_resource type="Texture2D" uid="uid://dw7al4e4pdao4" path="res://Assets/UIPiecies/Card.png" id="6_w6jla"]
+[ext_resource type="Texture2D" uid="uid://c2v600qe1d181" path="res://Assets/UIPiecies/nested-hexagons.png" id="7_w6jla"]
 [ext_resource type="Texture2D" uid="uid://c7wkqvg4osdjt" path="res://Assets/UIPiecies/cardboard-box.png" id="8_8t562"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c3lfk"]
@@ -83,6 +84,14 @@ theme_override_font_sizes/font_size = 22
 icon = ExtResource("8_8t562")
 icon_alignment = 1
 
+[node name="Disposition" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=100044532 groups=["DigitalBouncingButton"]]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("5_c3lfk")
+theme_override_font_sizes/font_size = 22
+icon = ExtResource("7_w6jla")
+icon_alignment = 1
+
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer" unique_id=842790455]
 visible = false
 layout_mode = 2
@@ -102,3 +111,4 @@ text = "Cards"
 [connection signal="pressed" from="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/Deck" to="." method="_on_deck_pressed"]
 [connection signal="pressed" from="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/InventoryVisToggle" to="." method="_on_inventory_vis_toggle_pressed"]
+[connection signal="pressed" from="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/Disposition" to="." method="_on_disposition_pressed"]

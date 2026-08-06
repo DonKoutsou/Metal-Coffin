@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Card_Fight/Card/Card.tscn" id="5_gxgtf"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="6_uviis"]
 [ext_resource type="PackedScene" uid="uid://dk1p1g38kvyjb" path="res://Scenes/Inventory/InventoryInterface.tscn" id="7_qyvw6"]
+[ext_resource type="PackedScene" uid="uid://muscxdppqdat" path="res://Scenes/Inventory/CaptainsDispotitionUI.tscn" id="8_7pj6b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_12j2j"]
 content_margin_left = 8.0
@@ -21,7 +22,7 @@ corner_detail = 1
 content_margin_top = 20.0
 content_margin_bottom = 50.0
 
-[node name="CaptainStatContainer" type="PanelContainer" unique_id=1727051882 node_paths=PackedStringArray("ShipStats", "ShipDeck", "ShipInventory", "CaptainIcon")]
+[node name="CaptainStatContainer" type="PanelContainer" unique_id=1727051882 node_paths=PackedStringArray("ShipStats", "ShipDeck", "ShipInventory", "DispositionScreen", "CaptainIcon")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -32,6 +33,7 @@ script = ExtResource("1_gx6im")
 ShipStats = NodePath("PanelContainer/InventoryShipStats")
 ShipDeck = NodePath("PanelContainer/ShipDeck")
 ShipInventory = NodePath("PanelContainer/InputScroll/InventoryInterface")
+DispositionScreen = NodePath("PanelContainer/PanelContainer")
 CaptainIcon = NodePath("PanelContainer/CaptainIcon")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=383408915]
@@ -140,5 +142,8 @@ theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = -131
 alignment = 1
 last_wrap_alignment = 2
+
+[node name="PanelContainer" parent="PanelContainer" unique_id=1619360619 instance=ExtResource("8_7pj6b")]
+layout_mode = 2
 
 [connection signal="BoxSelected" from="PanelContainer/InputScroll/InventoryInterface" to="." method="_on_inventory_interface_box_selected"]

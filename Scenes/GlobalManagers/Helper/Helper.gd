@@ -49,6 +49,28 @@ static func LoadThreaded(File : String) -> SignalObject:
 	
 	return Sign
 
+static func Translate(text: String, context: StringName = &"") -> String:
+	var regex := RegEx.new()
+	regex.compile(r"\[\[([A-Za-z0-9_.:-]+)\]\]")
+
+	var result := ""
+	var last_pos := 0
+
+	for match in regex.search_all(text):
+		var start := match.get_start()
+		var end := match.get_end()
+
+		result += text.substr(last_pos, start - last_pos)
+
+		var key := match.get_string(1)
+		var translated := String(TranslationServer.translate(key, context))
+
+		result += translated
+		last_pos = end
+
+	result += text.substr(last_pos)
+	return result
+
 static func FromMinutesToString(Minutees : float) -> String:
 	var Str : String = ""
 	var Hours = 0

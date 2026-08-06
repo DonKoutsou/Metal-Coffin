@@ -1408,6 +1408,7 @@ shadow_size = 5
 anti_aliasing_size = 2.0
 
 [resource]
+default_font = ExtResource("14_xwr5s")
 AcceptDialog/colors/title_color = Color(1, 1, 1, 1)
 AcceptDialog/colors/title_outline_modulate = Color(0, 0, 0, 1)
 AcceptDialog/constants/buttons_separation = 10
@@ -1515,7 +1516,7 @@ PanelContainer/styles/panel = ExtResource("9_yv80o")
 PopupMenu/colors/font_color = Color(1, 0.763983, 0.0812772, 1)
 PopupMenu/colors/font_outline_color = Color(0.291151, 0.212503, 4.81308e-08, 1)
 PopupMenu/constants/outline_size = 8
-PopupMenu/fonts/font = null
+PopupMenu/fonts/font = ExtResource("14_xwr5s")
 PopupMenu/styles/panel = ExtResource("9_udhci")
 ProgressBar/colors/font_color = Color(1, 0.763983, 0.0812772, 1)
 ProgressBar/colors/font_outline_color = Color(0, 0, 0, 1)

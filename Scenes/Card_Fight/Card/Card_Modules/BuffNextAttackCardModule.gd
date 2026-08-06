@@ -11,10 +11,10 @@ func NeedsTargetSelect() -> bool:
 
 func GetDesc(Tier : int) -> String:
 	if (AOE):
-		return "Buff team's next [color=#ffc315]{1} attack(s)[/color] by [color=#f35033]* {0}[/color]".format([GetBuffAmmount(Tier), GetBuffDuration(Tier)])
+		return "[[CT_BUFFTS]] [[CT_NEXT]] [color=#ffc315]{1} CT_ATTACKS[/color] [[CT_BY]] [color=#f35033]* {0}[/color]".format([GetBuffAmmount(Tier), GetBuffDuration(Tier)])
 	else : if (CanBeUsedOnOther):
-		return "Buff ship's next [color=#ffc315]{1} attack(s)[/color] by [color=#f35033]* {0}[/color]".format([GetBuffAmmount(Tier), GetBuffDuration(Tier)])
-	return "Buff ship's next [color=#ffc315]{1} attack(s)[/color] by [color=#f35033]* {0}[/color]".format([GetBuffAmmount(Tier), GetBuffDuration(Tier)])
+		return "[[CT_BUFFSs]] [[CT_NEXT]] [color=#ffc315]{1} CT_ATTACKS[/color] [[CT_BY]] [color=#f35033]* {0}[/color]".format([GetBuffAmmount(Tier), GetBuffDuration(Tier)])
+	return "[[CT_BUFFSS]] [[CT_NEXT]] [color=#ffc315]{1} CT_ATTACKS[/color] [[CT_BY]] [color=#f35033]* {0}[/color]".format([GetBuffAmmount(Tier), GetBuffDuration(Tier)])
 
 func GetBuffDuration(Tier : int) -> int:
 	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):

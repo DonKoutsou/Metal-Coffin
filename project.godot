@@ -588,7 +588,7 @@ Cnt={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://Localisations/LOC_Tutorial.english.translation")
+locale/translations=PackedStringArray("res://Localisations/LOC_Tutorial.english.translation", "res://Localisations/LOC_Cards.english.translation", "res://Localisations/LOC_Cards.greek.translation")
 locale/test="en"
 locale/locale_filter_mode=1
 

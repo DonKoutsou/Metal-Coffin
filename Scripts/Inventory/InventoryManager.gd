@@ -293,6 +293,7 @@ func AddCharacter(Cha : Captain) -> void:
 	CharInv.OnCharacterInspectionPressed.connect(InspectCharacter.bind(Cha))
 	CharInv.OnCharacterDeckInspectionPressed.connect(InspectCharacterDeck.bind(Cha))
 	CharInv.OnCharacterInventoryInspectionPressed.connect(InspectCharacterInventory.bind(Cha))
+	CharInv.OnCharacterDispositionInspectionPressed.connect(InspectCharacterDisposition.bind(Cha))
 	
 	for g in Cha.StartingItems:
 		if (g is ShipPart):
@@ -332,6 +333,7 @@ func LoadCharacter(Data : SD_CharacterInventory) -> void:
 		CharInv.OnItemAdded.connect(OnItemAdded.bind(Cha))
 		CharInv.OnItemRemoved.connect(OnItemRemoved.bind(Cha))
 		CharInv.OnCharacterInspectionPressed.connect(InspectCharacter.bind(Cha))
+		CharInv.OnCharacterDispositionInspectionPressed.connect(InspectCharacterDisposition.bind(Cha))
 		CharInv.OnCharacterDeckInspectionPressed.connect(InspectCharacterDeck.bind(Cha))
 		
 	Cha.RegisterInventory(CharInv)
@@ -386,6 +388,11 @@ func InspectCharacterInventory(Cha : Captain) -> void:
 	CloseDescriptor()
 	CaptainStats.SetCaptain(Cha)
 	CaptainStats.ShowInvetory()
+
+func InspectCharacterDisposition(Cha : Captain) -> void:
+	CloseDescriptor()
+	CaptainStats.SetCaptain(Cha)
+	CaptainStats.ShowDisposition()
 
 #-------------------------------------------------------
 func CloseDescriptor() -> void:

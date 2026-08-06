@@ -7,6 +7,7 @@ class_name BuffModule
 
 const StatText = "[color=#ffc315]HULL[/color][p][color=#6be2e9]SHIELD[/color][p][color=#308a4d]SPEED[/color][p][color=#f35033]FPWR[/color]"
 
+
 func NeedsTargetSelect() -> bool:
 	return true
 
@@ -21,10 +22,10 @@ func GetDesc(Tier : int) -> String:
 	else : if (StatToBuff == Stat.DEFENCE):
 		TextColor = "color=#7bb0b4"
 	if (AOE):
-		return "Buff team\n[{3}] {0}[/color][color=#ffc315] * {1}[/color] for {2} turns".format([Stat.keys()[StatToBuff], GetBuffAmmount(Tier), GetBuffDuration(Tier), TextColor])
+		return "[[CT_BUFFT]]\n[{3}] [[{0}]][/color][color=#ffc315] * {1}[/color] [[CT_FOR]] {2} [[CT_TURNS]]".format([Stat.keys()[StatToBuff], GetBuffAmmount(Tier), GetBuffDuration(Tier), TextColor])
 	else : if (CanBeUsedOnOther):
-		return "Buff a ship\n[{3}] {0}[/color][color=#ffc315] * {1}[/color] for {2} turns".format([Stat.keys()[StatToBuff], GetBuffAmmount(Tier), GetBuffDuration(Tier), TextColor])
-	return "Buff\n[{3}] {0}[/color][color=#ffc315] * {1}[/color] for {2} turns".format([Stat.keys()[StatToBuff], GetBuffAmmount(Tier), GetBuffDuration(Tier), TextColor])
+		return "[[CT_BUFFS]]\n[{3}] [[{0}]][/color][color=#ffc315] * {1}[/color] [[CT_FOR]] {2} [[CT_TURNS]]".format([Stat.keys()[StatToBuff], GetBuffAmmount(Tier), GetBuffDuration(Tier), TextColor])
+	return "[[CT_BUFFS]]\n[{3}] [[{0}]][/color][color=#ffc315] * {1}[/color] [[CT_FOR]] {2} [[CT_TURNS]]".format([Stat.keys()[StatToBuff], GetBuffAmmount(Tier), GetBuffDuration(Tier), TextColor])
 
 func GetBuffDuration(Tier : int) -> int:
 	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):

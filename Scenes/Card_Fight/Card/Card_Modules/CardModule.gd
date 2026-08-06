@@ -24,11 +24,11 @@ func GetBattleDesc(_User : BattleShipStats, Tier : int) -> String:
 func GetStatShortName(St : Stat) -> String:
 	var StatName : String
 	if (St == Stat.FIREPOWER):
-		return "FRPW"
+		return TranslationServer.translate("FRPW")
 	if (St == Stat.SPEED):
-		return "SPD"
+		return TranslationServer.translate("SPD")
 	if (St == Stat.DEFENCE):
-		return "DEF"
+		return TranslationServer.translate("DEF")
 	
 	return StatName
 enum Stat{

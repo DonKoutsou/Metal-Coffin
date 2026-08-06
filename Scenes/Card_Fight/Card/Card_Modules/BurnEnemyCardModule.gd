@@ -8,13 +8,13 @@ func NeedsTargetSelect() -> bool:
 
 func GetDesc(Tier : int) -> String:
 	if (AOE):
-		return "Burn {0} cards on each enemy ship's deck".format([GetBurnAmmount(Tier)])
-	return "Burn {0} cards on target ship's deck".format([GetBurnAmmount(Tier)])
+		return "[[CT_BURN]] {0} [[CT_CARDSENEM]]".format([GetBurnAmmount(Tier)])
+	return "[[CT_BURN]] {0} [[CT_CARDSTRGT]]".format([GetBurnAmmount(Tier)])
 
 func GetBattleDesc(_User : BattleShipStats, Tier : int) -> String:
 	if (AOE):
-		return "Burn {0} cards on each enemy ship's deck".format([GetBurnAmmount(Tier)])
-	return "Burn {0} cards on target ship's deck".format([GetBurnAmmount(Tier)])
+		return "[[CT_BURN]] {0} [[CT_CARDSENEM]]".format([GetBurnAmmount(Tier)])
+	return "[[CT_BURN]] {0} [[CT_CARDSTRGT]]".format([GetBurnAmmount(Tier)])
 	
 func GetBurnAmmount(Tier : int) -> int:
 	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):
