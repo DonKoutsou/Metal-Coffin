@@ -379,3 +379,7 @@ func _on_stats_button_pressed() -> void:
 
 func _on_deck_button_pressed() -> void:
 	ShipStats.ShowDeck()
+
+
+func _on_distr_pressed() -> void:
+	ShipStats.ShowDisposition()

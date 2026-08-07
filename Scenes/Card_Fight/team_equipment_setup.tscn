@@ -166,6 +166,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "INVENTORY"
 
+[node name="Disposition" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1327165155]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "DISPOSITION"
+
 [node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer" unique_id=1794221082]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
@@ -245,4 +250,5 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_yc5nm")
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/HBoxContainer/Stats" to="." method="_on_stats_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/HBoxContainer/Deck" to="." method="_on_deck_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/HBoxContainer/Inventory" to="." method="_on_inventory_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/HBoxContainer/Disposition" to="." method="_on_disposition_pressed"]
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]

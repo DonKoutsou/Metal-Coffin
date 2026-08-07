@@ -15,7 +15,7 @@ class_name MissileTab
 @export var armButton: Button
 @export var dissarmButton: Button
 @export var launchButton: Button
-@export var cap: Panel
+@export var cap: Control
 @export var missileDial: Dial
 
 # --- SIGNALS ---

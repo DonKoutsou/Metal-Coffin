@@ -9,7 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://dk1p1g38kvyjb" path="res://Scenes/Inventory/InventoryInterface.tscn" id="8_qfy02"]
 [ext_resource type="PackedScene" uid="uid://bnonfp8ywr3vl" path="res://Scenes/Inventory/captain_stat_container.tscn" id="9_gy23n"]
 [ext_resource type="PackedScene" uid="uid://blgxtaj45pjfs" path="res://Scenes/Inventory/MerchShopDescription.tscn" id="9_itsvt"]
+[ext_resource type="Texture2D" uid="uid://bk3hmnxkvr5ab" path="res://Assets/UIPiecies/network-bars.png" id="10_hfjff"]
 [ext_resource type="AudioStream" uid="uid://tc32omtm74y7" path="res://Assets/Sounds/workshop.mp3" id="10_itsvt"]
+[ext_resource type="Texture2D" uid="uid://dw7al4e4pdao4" path="res://Assets/UIPiecies/Card.png" id="11_orplh"]
+[ext_resource type="Texture2D" uid="uid://c2v600qe1d181" path="res://Assets/UIPiecies/nested-hexagons.png" id="12_pjo8k"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rs5of"]
 content_margin_left = 5.0
@@ -158,11 +161,19 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 text = "STATS"
+icon = ExtResource("10_hfjff")
 
 [node name="DeckButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=735396897]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "DECK"
+icon = ExtResource("11_orplh")
+
+[node name="DispositionButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=404931635]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "DISPOSITION"
+icon = ExtResource("12_pjo8k")
 
 [node name="PanelContainer2" type="PanelContainer" parent="PanelContainer" unique_id=339938003]
 visible = false
@@ -220,4 +231,5 @@ bus = &"Sounds"
 [connection signal="BoxSelected" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/ScrollContainer/HBoxContainer" to="." method="ItemSelected"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/StatsButton" to="." method="_on_stats_button_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/DeckButton" to="." method="_on_deck_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/DispositionButton" to="." method="_on_distr_pressed"]
 [connection signal="pressed" from="PanelContainer/PanelContainer2/VBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]

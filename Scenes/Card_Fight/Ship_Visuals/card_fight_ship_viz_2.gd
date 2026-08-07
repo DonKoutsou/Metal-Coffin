@@ -36,12 +36,14 @@ signal OnFallbackPressed()
 signal Hovered()
 signal Unhovered()
 
+var Destroyed : bool = false
 var Ship : BattleShipStats
 var Fr : bool
 
 var CurrentCardShown : Card
 
 func Destroy() -> void:
+	Destroyed = true
 	var mat = ExplosionPart.process_material as ParticleProcessMaterial
 	mat.scale_max = 0.6
 	ExplosionPart.emitting = true
@@ -215,6 +217,8 @@ func OnActionsPerformed() -> void:
 	HasMovePanel.visible = false
 
 func Refresh() -> void:
+	if (Destroyed):
+		return
 	UpdateStats(Ship)
 	ToggleDmgBuff(Ship.FirePowerBuff > 1, Ship.FirePowerBuff)
 	ToggleSpeedBuff(Ship.SpeedBuff > 1, Ship.SpeedBuff)

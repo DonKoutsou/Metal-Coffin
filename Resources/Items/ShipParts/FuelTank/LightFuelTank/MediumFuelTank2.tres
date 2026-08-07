@@ -29,7 +29,6 @@ script = ExtResource("4_sjam0")
 Upgrades = Array[ExtResource("3_34rnk")]([SubResource("Resource_i41uq"), SubResource("Resource_bic66"), SubResource("Resource_372t0")])
 UpgradeVersion = ExtResource("3_ku1j6")
 UpgradeTime = 900.0
-Disposition = 1
 DispositionAmm = 0.3
 ItemName = "SPT-200"
 ItemDesc = "A continuation of the SPT-100 model. This upgraded model provides an increased fuel capacity with a reduced weight ratio that the SPT series is known for."

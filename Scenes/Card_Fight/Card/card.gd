@@ -2,6 +2,7 @@ extends Control
 
 class_name Card
 
+@export_group("Nodes")
 @export var CardName : RichTextLabel
 @export var CardDesc : RichTextLabel
 @export var CardCost : Label
@@ -15,35 +16,61 @@ class_name Card
 @export var Line : Line2D
 @export var AmmountLabel : Label
 @export var TooltipPos : Control
+
+@export_group("Settings")
 @export var TooltipScene : PackedScene
+##Font to be used when card is switched to realistic
 @export var RealisticFont : Font
 
 signal OnCardPressed(C : Card)
 signal OnCardReleased
 signal CardKilled
 
+##Card stats
 var CStats : CardStats
 
 var ShownCost : int
 
-var TargetLocs : Array[Vector2]
-
 var InterpolationValue : float
-
-var TrackMouse : bool = false
-
-var mat : ShaderMaterial
+var TargetLocs : Array[Vector2]
 
 var isStatic : bool = false
 
-var dirTw : Tween
-var disp : bool = false
+#Hover interactions
+var TrackMouse : bool = false
+var mat : ShaderMaterial
 
+var disp : bool = false
+var dirTw : Tween
+var TweenHover : Tween
+
+#--------------------------------------------------------------
+func _ready() -> void:
+	mat = FrontSide.material as ShaderMaterial
+	
+	var SoundMan = UISoundMan.GetInstance()
+	if (is_instance_valid(SoundMan)):
+		SoundMan.AddSelf(But)
+	
+	Lines.append(Line)
+	for g in TargetLocs.size() - 1:
+		var NewLine = Line.duplicate()
+		add_child(NewLine)
+		Lines.append(NewLine)
+		NewLine.position = size/2
+	set_physics_process(TargetLocs.size() > 0)
+	Line.visible = TargetLocs.size() > 0
+
+#--------------------------------------------------------------
+func _enter_tree() -> void:
+	$SubViewportContainer/SubViewport.set_deferred("render_target_update_mode",  SubViewport.UPDATE_ONCE)
+
+#--------------------------------------------------------------
 func _physics_process(delta: float) -> void:
 	InterpolationValue = min(InterpolationValue + delta *5, 1)
 	UpdateLine()
 
-
+#--------------------------------------------------------------
 func _process(delta: float) -> void:
 	var endPos = global_position.x + size.x + TooltipPos.size.x + 20
 	var endPosy = global_position.y + TooltipPos.size.y + 30
@@ -71,14 +98,14 @@ func _process(delta: float) -> void:
 		mat.set_shader_parameter("y_rot", Newy)
 		mat.set_shader_parameter("x_rot", Newx)
 
-
+#--------------------------------------------------------------
 func UpdateLine() -> void:
 	Line.gradient.set_offset(1, wrap(Line.gradient.get_offset(1) + 0.05, 0, 1))
 	for g in TargetLocs.size():
 		Lines[g].set_point_position(1, lerp(Vector2.ZERO ,Line.to_local(TargetLocs[g]),InterpolationValue) / 2)
 		Lines[g].set_point_position(2, lerp(Vector2.ZERO ,Line.to_local(TargetLocs[g]),InterpolationValue))
 
-
+#--------------------------------------------------------------
 func KillCard(CustomTime : float = 1.0, Free : bool = true) -> void:
 	But.disabled = true
 	var KillTw = create_tween()
@@ -91,11 +118,11 @@ func KillCard(CustomTime : float = 1.0, Free : bool = true) -> void:
 	if (Free):
 		queue_free()
 
-
+#--------------------------------------------------------------
 func UpdateBurnShader(Value : float) -> void:
 	FrontSide.material.set_shader_parameter("dissolve_value", Value)
 
-
+#--------------------------------------------------------------
 func ForcePersp(t : bool) -> void:
 	var Value : float
 	if (t):
@@ -104,7 +131,7 @@ func ForcePersp(t : bool) -> void:
 		Value = 0
 	mat.set_shader_parameter("x_rot", Value)
 
-
+#--------------------------------------------------------------
 func TogglePerspective(t : bool, tOverride : float = 0.75) -> void:
 	var Value : float
 	if (t):
@@ -117,31 +144,11 @@ func TogglePerspective(t : bool, tOverride : float = 0.75) -> void:
 	tw.set_trans(Tween.TRANS_QUAD)
 	tw.tween_method(UpdatePersp, mat.get_shader_parameter("x_rot"), Value, tOverride)
 
-
+#--------------------------------------------------------------
 func UpdatePersp(v : float) -> void:
 	mat.set_shader_parameter("x_rot", v)
 
-
-func _ready() -> void:
-	mat = FrontSide.material as ShaderMaterial
-	
-	var SoundMan = UISoundMan.GetInstance()
-	if (is_instance_valid(SoundMan)):
-		SoundMan.AddSelf(But)
-	
-	Lines.append(Line)
-	for g in TargetLocs.size() - 1:
-		var NewLine = Line.duplicate()
-		add_child(NewLine)
-		Lines.append(NewLine)
-		NewLine.position = size/2
-	set_physics_process(TargetLocs.size() > 0)
-	Line.visible = TargetLocs.size() > 0
-
-func _enter_tree() -> void:
-	$SubViewportContainer/SubViewport.set_deferred("render_target_update_mode",  SubViewport.UPDATE_ONCE)
-	
-
+#--------------------------------------------------------------
 func SetCardStats(Stats : CardStats, Amm : int = 0) -> void:
 	CStats = Stats
 	disp = Stats.IsDisposition
@@ -171,6 +178,42 @@ func SetCardStats(Stats : CardStats, Amm : int = 0) -> void:
 	#if (Stats.OnPerformModule is OffensiveCardModule):
 		#CardTex.modulate = Color(1.0, 0.235, 0.132)
 
+#--------------------------------------------------------------
+#SetCardStats duplicate, used durring battles
+func SetCardBattleStats(User : BattleShipStats, Stats : CardStats, Amm : int = 0) -> void:
+	CStats = Stats
+	disp = Stats.IsDisposition
+	#var Cost = Stats.GetCost()
+	But.visible = !disp
+	DispBut.visible = disp
+	
+	ShownCost = GetBattleCost(User, Stats)
+	if (Stats.Burned):
+		CardName.text = "Burned"
+		CardDesc.text = ""
+		CardCost.text = "0"
+		UpdateBurnShader(0.75)
+		CardTex.texture = null
+	else:
+		var DescText =  "[center] {0}".format([Stats.GetBattleDescription(User)])
+		CardName.text = Stats.GetCardName()
+		CardDesc.text = DescText
+		CardCost.text = "{0}".format([ShownCost])
+		CardTex.texture = Stats.Icon
+
+	UpdateText()
+
+	$Amm.visible = Amm > 1
+	AmmountLabel.text = "{0}x".format([Amm])
+
+	if (Stats.Type == CardStats.CardType.OFFENSIVE):
+		CardTypeEmblem.modulate = Color("ff3c22")
+	else : if (Stats.Type == CardStats.CardType.DEFFENSIVE):
+		CardTypeEmblem.modulate = Color("6be2e9")
+	else:
+		CardTypeEmblem.modulate = Color("8db354")
+
+#--------------------------------------------------------------
 func UpdateText() -> void:
 	var fontSize = 16
 	#return
@@ -179,7 +222,7 @@ func UpdateText() -> void:
 		fontSize -= 1
 		CardDesc.add_theme_font_size_override("normal_font_size", fontSize)
 
-
+#--------------------------------------------------------------
 func UpdateBattleStats(User : BattleShipStats) -> void:
 	if (CStats.Burned):
 		CardDesc.text = ""
@@ -196,41 +239,13 @@ func UpdateBattleStats(User : BattleShipStats) -> void:
 	
 	$SubViewportContainer/SubViewport.set_deferred("render_target_update_mode",  SubViewport.UPDATE_ONCE)
 
+#--------------------------------------------------------------
 func Flip() -> void:
 	FrontSide.visible = false
 	BackSide.visible = true
 	$Amm.visible = false
 
-
-func SetCardBattleStats(User : BattleShipStats, Stats : CardStats, Amm : int = 0) -> void:
-	CStats = Stats
-	#var Cost = Stats.GetCost()
-	ShownCost = GetBattleCost(User, Stats)
-	if (Stats.Burned):
-		CardName.text = "Burned"
-		CardDesc.text = ""
-		CardCost.text = "0"
-		UpdateBurnShader(0.75)
-		CardTex.texture = null
-	else:
-		var DescText =  "[center] {0}".format([Stats.GetBattleDescription(User)])
-		CardName.text = Stats.GetCardName()
-		CardDesc.text = DescText
-		CardCost.text = "{0}".format([ShownCost])
-		CardTex.texture = Stats.Icon
-	
-	UpdateText()
-
-	$Amm.visible = Amm > 1
-	AmmountLabel.text = "{0}x".format([Amm])
-
-	if (Stats.Type == CardStats.CardType.OFFENSIVE):
-		CardTypeEmblem.modulate = Color("ff3c22")
-	else : if (Stats.Type == CardStats.CardType.DEFFENSIVE):
-		CardTypeEmblem.modulate = Color("6be2e9")
-	else:
-		CardTypeEmblem.modulate = Color("8db354")
-
+#--------------------------------------------------------------
 func GetBattleCost(User : BattleShipStats, Stats : CardStats) -> int:
 	if (Stats.Burned):
 		return 0
@@ -250,11 +265,14 @@ func GetBattleCost(User : BattleShipStats, Stats : CardStats) -> int:
 	
 	return CCost
 
+#--------------------------------------------------------------
 func SetRealistic() -> void:
 	$SubViewportContainer/SubViewport/TextureRect.visible = !disp
 	$SubViewportContainer/SubViewport/DispTex.visible = disp
 	$SubViewportContainer/SubViewport/Panel.visible = false
 	$SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer/CardCost/TextureRect.visible = false
+	But.visible = false
+	DispBut.visible = false
 	$SubViewportContainer/SubViewport.set_deferred("render_target_update_mode",  SubViewport.UPDATE_ONCE)
 	
 	CardName.add_theme_font_override("normal_font", RealisticFont)
@@ -262,16 +280,20 @@ func SetRealistic() -> void:
 	CardDesc.add_theme_font_override("normal_font", RealisticFont)
 	CardCost.get_child(0).visible = false
 
+#--------------------------------------------------------------
 func SetPressed() -> void:
 	FrontSide.set_pressed_no_signal(true)
 	But.set_pressed_no_signal(true)
 
+#--------------------------------------------------------------
 func OnButtonPressed() -> void:
 	OnCardPressed.emit(self)
 
+#--------------------------------------------------------------
 func OnButtonReleased() -> void:
 	OnCardReleased.emit()
 
+#--------------------------------------------------------------
 func Dissable(Filter : bool = false) -> void:
 	FrontSide.disabled = true
 	#But.disabled = true
@@ -281,6 +303,8 @@ func Dissable(Filter : bool = false) -> void:
 	if (Filter):
 		#But.set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
 		FrontSide.set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
+		
+#--------------------------------------------------------------
 func Enable() -> void:
 	FrontSide.disabled = false
 	#But.disabled = false
@@ -290,15 +314,11 @@ func Enable() -> void:
 	#But.set_mouse_filter(Control.MOUSE_FILTER_PASS)
 	FrontSide.set_mouse_filter(Control.MOUSE_FILTER_PASS)
 	
-	
+#--------------------------------------------------------------
 func GetCost() -> int:
 	return CStats.GetCost()
 
-var OriginalRot : float
-var TweenHover : Tween
-var RotTweenHover : Tween
-
-
+#--------------------------------------------------------------
 func _on_button_mouse_entered() -> void:
 	z_index = 1
 	
@@ -312,6 +332,7 @@ func _on_button_mouse_entered() -> void:
 	TweenHover.tween_property(TooltipPos,"scale", Vector2(1.1, 1.1), 0.55)
 	ShowToolTip()
 
+#--------------------------------------------------------------
 func ShowToolTip() -> void:
 	#TooltipPos.rotation = -rotation
 	var tips = CardStats.FindTooltips(CStats)
@@ -323,6 +344,7 @@ func ShowToolTip() -> void:
 	
 	#TrackMouse = true
 
+#--------------------------------------------------------------
 func _on_button_mouse_exited() -> void:
 	z_index = 0
 	if (TweenHover and TweenHover.is_running()):
@@ -345,12 +367,12 @@ func _on_button_mouse_exited() -> void:
 	for g in TooltipPos.get_children():
 		g.queue_free()
 
+#--------------------------------------------------------------
 func SetCardDiretion(dir : Vector2) -> void:
 	mat.set_shader_parameter("y_rot", dir.y)
 	mat.set_shader_parameter("x_rot", dir.x)
 	
-
-#
+#--------------------------------------------------------------
 #func _on_button_gui_input(_event: InputEvent) -> void:
 	#if (dirTw != null):
 		#dirTw.kill()

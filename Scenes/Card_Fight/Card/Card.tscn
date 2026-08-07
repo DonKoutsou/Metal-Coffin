@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://xuequw4xcwgf" path="res://Scenes/Inventory/CardTooltip.tscn" id="2_paso5"]
 [ext_resource type="Texture2D" uid="uid://buffodrv1xn4a" path="res://Assets/Cards/card.png" id="3_wohcr"]
 [ext_resource type="Texture2D" uid="uid://bf3p61os8mhr7" path="res://Assets/UIPiecies/Bolt.png" id="4_5n23x"]
+[ext_resource type="Texture2D" uid="uid://xd6axehcm6jm" path="res://Assets/Cards/card2.png" id="5_7lp2o"]
 [ext_resource type="Texture2D" uid="uid://c1d4jybs1oolg" path="res://Assets/Cards/BarraceIncendiery.png" id="5_p48hs"]
 [ext_resource type="Material" uid="uid://dwvsafe1eaxbk" path="res://Shaders/Card.tres" id="6_btfbu"]
 [ext_resource type="Texture2D" uid="uid://cwbo84yj0q3om" path="res://Assets/Cards/CardBack.png" id="7_ucyjg"]
@@ -180,7 +181,7 @@ transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 4
 oversampling = false
-size = Vector2i(124, 171)
+size = Vector2i(599, 824)
 size_2d_override = Vector2i(186, 256)
 size_2d_override_stretch = true
 render_target_update_mode = 1
@@ -276,7 +277,7 @@ offset_bottom = -13.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("3_wohcr")
+texture = ExtResource("5_7lp2o")
 expand_mode = 1
 
 [node name="Panel2" type="Panel" parent="SubViewportContainer/SubViewport" unique_id=1580813051]

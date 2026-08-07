@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://ox4pbwakfxs1" path="res://Scenes/ScreenUI/Dial/Dial_NoPanel.tscn" id="10_ntf1p"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="15_pknbg"]
 [ext_resource type="FontFile" uid="uid://ble63qtuapau3" path="res://Fonts/digital-7.ttf" id="16_6ithd"]
-[ext_resource type="StyleBox" uid="uid://cicae3yqgxkcm" path="res://Theme/MetalPanel.tres" id="18_uy6ab"]
+[ext_resource type="Texture2D" uid="uid://d08gyap6gk3up" path="res://Assets/UIPiecies/Screen/SmallCap_FullQuality.png" id="18_a1eqg"]
 
 [node name="Missile Tab" type="Control" unique_id=1968593876 node_paths=PackedStringArray("missileSelectLight", "angleSelectLight", "rangeText", "selectedMissileText", "turnOffButton", "armButton", "dissarmButton", "launchButton", "cap", "missileDial")]
 custom_minimum_size = Vector2(274, 157)
@@ -169,15 +169,15 @@ theme_override_styles/normal = ExtResource("9_fka4o")
 theme_override_styles/pressed = ExtResource("10_2m6j3")
 theme_override_styles/hover = ExtResource("9_fka4o")
 
-[node name="PanelContainer" type="Panel" parent="." unique_id=1109730313]
-visible = false
+[node name="PanelContainer" type="TextureRect" parent="." unique_id=1005341687]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("18_uy6ab")
+texture = ExtResource("18_a1eqg")
+expand_mode = 1
 
 [connection signal="toggled" from="TurnOff" to="." method="_on_turn_off_toggled"]
 [connection signal="RangeChanged" from="DroneGas2" to="." method="updateSteer"]

@@ -5,8 +5,12 @@
 [ext_resource type="StyleBox" uid="uid://elj4u7a13oc1" path="res://Theme/YellowTopPanel.tres" id="4_8rciy"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="6_xjf37"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="7_ensoj"]
+[ext_resource type="Texture2D" uid="uid://bk3hmnxkvr5ab" path="res://Assets/UIPiecies/network-bars.png" id="7_irqbf"]
+[ext_resource type="Texture2D" uid="uid://dw7al4e4pdao4" path="res://Assets/UIPiecies/Card.png" id="8_ti3qq"]
+[ext_resource type="Texture2D" uid="uid://c7wkqvg4osdjt" path="res://Assets/UIPiecies/cardboard-box.png" id="9_154xo"]
 [ext_resource type="PackedScene" uid="uid://bnonfp8ywr3vl" path="res://Scenes/Inventory/captain_stat_container.tscn" id="9_n5htp"]
 [ext_resource type="AudioStream" uid="uid://tc32omtm74y7" path="res://Assets/Sounds/workshop.mp3" id="10_s2njy"]
+[ext_resource type="Texture2D" uid="uid://c2v600qe1d181" path="res://Assets/UIPiecies/nested-hexagons.png" id="10_xeu44"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rs5of"]
 content_margin_left = 5.0
@@ -112,16 +116,25 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 text = "STATS"
+icon = ExtResource("7_irqbf")
 
 [node name="Button2" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=20245679]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "DECK"
+icon = ExtResource("8_ti3qq")
 
 [node name="Button3" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=1686066979]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "CARGO"
+icon = ExtResource("9_154xo")
+
+[node name="Button4" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=1185154378]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "DISPOSITION"
+icon = ExtResource("10_xeu44")
 
 [node name="WorkShopSound" type="AudioStreamPlayer" parent="." unique_id=1351277791]
 stream = ExtResource("10_s2njy")
@@ -133,3 +146,4 @@ bus = &"Sounds"
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/Button4" to="." method="_on_button_4_pressed"]

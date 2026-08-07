@@ -3,6 +3,7 @@ extends Control
 
 class_name CaptainDispositionUI
 
+@export var StatsDraw : DispositionStatsUI
 @export var LineAmm : int = 5
 
 var labels : Array[Label]
@@ -18,8 +19,9 @@ var CharacterStats : Dictionary[DispositionManager.Dispositions, float] = {
 @export var DispositionColors : PackedColorArray = []
 
 func SetStats(ch : Captain) -> void:
-	CharacterStats = ch.Disposition
+	CharacterStats = ch.disp
 	queue_redraw()
+	
 	
 func _ready() -> void:
 	for g in DispositionManager.Dispositions:
@@ -32,16 +34,14 @@ func _draw() -> void:
 	var PointAmm = DispositionManager.Dispositions.size()
 	var Radius = min(size.x, size.y) / 2.0 - 40
 
-
 	var stats : PackedVector2Array = []
-	var statCols : PackedColorArray = []
+	stats.resize(CharacterStats.size())
 	for g in CharacterStats:
 		var m = Helper.normalize_value(g, 0, CharacterStats.size())
-		var rad = Radius * min(1, CharacterStats[g] * 2)
+		var rad = Radius * clamp(CharacterStats[g], 0.1, 1)
 		var pointX = cos(m * (PI * 2) - 0.32)
 		var pointY = sin(m * (PI * 2) - 0.32)
-		stats.append(Vector2(pointX, pointY) * rad + size / 2.0)
-		statCols.append(Color("ffc315"))
+		stats[g] = Vector2(pointX, pointY) * rad + size / 2.0
 		
 		labels[g].text = DispositionManager.Dispositions.keys()[g]
 		labels[g].position = Vector2(pointX, pointY) * Radius + size / 2.0 - labels[g].size / 2.0
@@ -49,19 +49,17 @@ func _draw() -> void:
 			labels[g].position -= Vector2(0,10)
 		else:
 			labels[g].position += Vector2(0,10)
-	
 
-	draw_polygon(stats, DispositionColors)
-	for g in stats.size():
-		var pos = stats[g]
-		draw_circle(pos, 2, Color(1,1,1))
-
+	StatsDraw.UpdateStats(stats)
 		
 	
-	var points : Array[PackedVector2Array]
+	var points : Array[PackedVector2Array] = []
+	points.resize(LineAmm - 1)
+	
 	for g in range(0, LineAmm - 1):
 		var arr : PackedVector2Array = []
-		points.append(arr)
+		arr.resize(PointAmm + 1)
+		points[g] = arr
 
 	for g in range(0, PointAmm):
 		#we normalise the current point
@@ -75,12 +73,12 @@ func _draw() -> void:
 			var rad = Radius * f
 
 			#draw_circle(Vector2(pointX, pointY) + size / 2.0, 10, Color(1,0,0))
-			var lineIndex = wrap(z - 1, 0, LineAmm )
+			var lineIndex = wrap(z - 1, 0, LineAmm)
 			#print(lineIndex)
-			points[lineIndex].append(Vector2(pointX, pointY) * rad + size / 2.0)
+			points[lineIndex][g] = Vector2(pointX, pointY) * rad + size / 2.0
 			
 	for g in points:
-		g.append(g[0])
+		g[PointAmm] = g[0]
 		draw_polyline(g, Color(1.0, 1.0, 1.0, 1.0), 1, true)
 	
 	

@@ -6,7 +6,7 @@ class_name AeroSonar
 @export var lineContainer: AeroSonarLine
 @export var gainLabel: Label
 @export var radioSpeaker: RadioSpeaker
-@export var cap: Panel
+@export var cap: Control
 @export var BaseGrad : GradientTexture2D
 @export var ModeButton : BaseButton
 # --- STATE VARIABLES ---

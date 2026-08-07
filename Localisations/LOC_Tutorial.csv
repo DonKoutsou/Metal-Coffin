@@ -1,88 +1,89 @@
-,english
-TUT_MissileToggleTitle,Missile Launcher
-TUT_MissileToggleText,To turn on the missile launcher use this knob
-TUT_MissileArmTitle,Missile Arming
-TUT_MissileArmText,"Turn the dial to select missile types in the current fleet, then arm to start launching."
-TUT_MissileAmmountTitle,Missile Amount
-TUT_MissileAmmountText,Turn the dial to pick the amount of missiles you want to shoot and press the arm button again to pick a direction
-TUT_MissileLaunchTitle,Missile Launch
-TUT_MissileLaunchText,"Finally turn the dial to aim, then press Launch to send it away."
-TUT_CardfightTitle,Dog Fight
-TUT_CardfightText,"Close quarters combat is conducted in two distinct phases: the [color=#ffc315]Action Picking Phase[/color] and the [color=#ffc315]Action Performing Phase[/color]. Each ship has their [color=#ffc315]deck[/color] composed out of the parts that exist on the ship. At any given time, a maximum of three ships from each side can engage in combat.\n\nWhen a ship is destroyed, it is immediately replaced by another from the fleet. [color=#ffc315]Victory[/color] is achieved when one side eliminates all enemy ships.\n\nHave faith in your crew captains and good luck!"
-TUT_Cardfight_ActionPickingTitle,Action Picking Phase
-TUT_Cardfight_ActionPickingText,"the Action Picking Phase, each ship selects its moves for the upcoming Action Performing Phase. Ships with higher speed have the advantage of choosing and executing their moves first.\nRemember that every offensive action has a corresponding defensive option, so it’s crucial to protect your ship while maintaining a strong offensive stance."
-TUT_Cardfight_EnergyTitle,Energy
-TUT_Cardfight_EnergyText,Each card has a cost that needs to be payed in order to use it. \nEach ship starts their action picking phase with 10 energy to spare. \nAny unused energy is lost at the end of turn.
-TUT_Cardfight_EnergyReserveTitle,Energy Reserves
-TUT_Cardfight_EnergyReserveText,Some cards can provide a ship with energy reserves. Energy reserves are kept until the player decides to use them and can be accumulated indefinetly. At any point the 'Pull Reserves' is pressed any amount of reserves kept on the ship will be lost and gained as energy to use on that turn.
-TUT_Cardfight_ActionPTitle,Action Perform Phase
-TUT_Cardfight_ActionPText,"In the Action Perform Phase each ship performs the moves they've picked in the Action Pick Phase.\nIn the end of the phase any unused card, like an extra deffensive card, will be returned to the discard pile."
-TUT_Cardfight_TargetTitle,Target Picking
-TUT_Cardfight_TargetText,"Some cards require you to pick a target, weather that is a friendly or enemy depends on the card.\nOther cards can be multi target, meaning they instantly target the whole team, or self use meaning they are used by the performer. Those cards will be used instantly without asking for a target."
-TUT_Cardfight_ShipLossTitle,Lossing Ships
-TUT_Cardfight_ShipLossText,"When a ships hull reaches zero, they are threwn out of the fight and the capmaign. Make use of the 'Switch Ship' button to switch up ships in the fight. The ship that gets switched in loses one turn."
-TUT_Cardfight_HandLimitTitle,Hand Limit
-TUT_Cardfight_HandLimitText,"At any time you can hold a max of {0} cards in your hand. If at any point an extra hand is about to be placed in your hand, you will be asked to choose one card to throw out. Picked card is placed on the discard pile."
-TUT_Aerosonar_Title,
-TUT_Aerosonar_Text,
-TUT_Landing_Title,Landing
-TUT_Landing_Text,"""You have entrered the perimiter of a [color=#ffc315]Town[/color].\nTo visit the [color=#ffc315]town[/color]'s verdors and resuply you'll need to land your fleet.\nTo do so click the [color=#ffc315]Land Button[/color] to initiate the landing procedure or lower the [color=#ffc315]Altitude Lever[/color] all the way to the bottom. Once the landing is complete press the [color=#ffc315]Open Hatch[/color] button bellow the land button to visit the town."""
-TUT_MapMarker_Title,Map Markers
-TUT_MapMarker_Text,Marking vital information on the map is usefull for making edjucated decisions in the future. Use the [color=#ffc315]Map Marker Editor[/color] to place text markers and measure distances. Toggle the [color=#ffc315]Map Marker Editor[/color] using the dediacted button on the [color=#ffc315]Ship Controller[/color].
-TUT_MapMarkerControlls_Title,Map Marker Editor Controlls
-TUT_MapMarkerControlls_Text,"The [color=#ffc315]Map Marker Editor[/color] provides the creation of texts markers and measuring lines. Use the [color=#ffc315]Move Horizontal[/color] and [color=#ffc315]Move Vertical[/color] dials to select the plecement of the marker.\n\nClicking the [color=#ffc315]Text Button[/color] will prompt you with inputing the text that will aprear on the marker.\n\nClicking the [color=#ffc315]Line Button[/color] will start drawing a line, use the dials to extend the line and press the [color=#ffc315]Line Button[/color] again to place the line."
-TUT_MerchShop_Title,Munition Shop
-TUT_MerchShop_Text,"In the munition shop you can supply your ships with various single use items, from [color=#ffc315]Missiles[/color] to [color=#ffc315]Fire Suppression Units[/color].\nSome of those [color=#ffc315]Items[/color] are ment to be used in the overworld while others will provide you with extra [color=#ffc315]Cards[/color] for your [color=#ffc315]Deck[/color]."
-TUT_Recruit_Title,Managing a fleet
-TUT_Recruit_Text,"Managing your fleet is key to a successful campaign.\nShips in the same fleet share [color=#ffc315]Fuel[/color], so adding a ship with extra fuel to a fleet can help it go further.\nTo split and trade fuel between fleets, use the Ship Dock in the controller.\nTo merge [color=#ffc315]Fleets[/color], click the [color=#ffc315]Regroup[/color] button and pick the target fleet.\nSelect a different ship to control by clicking on their name on the right part of the screen."
-TUT_RepairShip_Title,Repair Bay
-TUT_RepairShip_Text,"In the Repair Bay you can buy repair parts for your fleet.\nYou can see the hull condition of each of your ships and also their repair price. Buying all the nececary repair parts will allow the ship to slowly repair itself.\nAfter buying the parts the fleet can depart and keep repairing on another port, bought ship parts stay with the ship."
-TUT_Simulation_Title,Simulation Management
-TUT_Simulation_Text,A successfull campaign requires proper planning.\nUse the [color=#ffc315]Simulation Buttons[/color] to either [color=#f35033]Stop[/color] the simulation and think over your plans or speed up the simulations to [color=#308a4d]speed[/color] through big protions of your voyage.
-TUT_Steer_Title,Controlling the fleet
-TUT_Steer_Text,Use the [color=#ffc315]Steer[/color] found on the left of the controller to steer the fleet. To controll the speed of the fleet use the [color=#ffc315]Thrust Lever[/color] on the right side of the controller
-TUT_Aproach_Title,Friendly Villages
-TUT_Aproach_Text,You are reaching one of the many friendly [color=#ffc315]villages[/color] in the glacier. No enemies exist in those [color=#ffc315]villages[/color] and none of the locals wil raise the [color=#ffc315]alarm[/color] on you. You are free to use those [color=#ffc315]villages[/color] to restock/repair or even as a hideout. The location of those [color=#ffc315]villages[/color] is unknown and will need to be discovered.
-TUT_TownShop_Title,Towns
-TUT_TownShop_Text,"When landing on a town you are able to refuel, repair, rearm and upgrade your fleet.\n\nEach city provides certain bonuses to the price and speed of one or all services. The bonuses can be seen on the left bellow the port's name. Drag on the sliders to buy or sell the shown resource."
-TUT_UpgradeShop_Title,Workshop
-TUT_UpgradeShop_Text,In the workshop you can inspect your fleet and choose parts to [color=#ffc315]Upgrade[/color] or [color=#ffc315]Install[/color].\nUpgraded parts provide better stats and also extra [color=#ffc315]Cards[/color] for the ship's [color=#ffc315]deck[/color].\nEach ship can have only one of their parts being upgraded at each time.\n[color=#ffc315]Upgrade[/color] progress updates only while the simulation is running.
-TUT_WorldView_Title,Worldview Checks
-TUT_WorldView_Text,Certain dialogue options require a stat check to happen.\nThis check will determine if the option will have the outcome you want or not.
-TUT_CameraControl_Title,Camera Controls
-TUT_CameraControl_Text,Use the [color=#ffc315]WASD[/color] keys or [color=#ffc315]Left Click[/color] and drag the mouse to move the camera. To [color=#ffc315]Zoom In/Out[/color] use the [color=#ffc315]Mouse Wheel[/color].
-TUT_Elevation_Title,Altitude
-TUT_Elevation_Text,"Managing altitude is one of your fleets strongest weapons. Radar signals, noise and wind are obstucted by the terains. Use this to your advantage to stay undetected or hide from strong head winds. Use the [color=#ffc315]Elevation Lever[/color] to manage your altitude and the [color=#ffc315]Topography Visualisation[/color] for view a topographic map of the area. The ship will increase it's altitude when an imminent collision is detected."
-TUT_ElintContact_Tile,Electronic Intelligence
-TUT_ElintContact_Text,The Elint sensors of one of your ships has been triggered. Elint detects enemy radar signals and provides a rough estimation on the distance and the direction of the signal. If the sensor is triggered it means you are about to enter into a radar's signal range and be detected.
-TUT_EnemyAproach_Title,Enemy Cities
-TUE_EnemyAproach_Text,"You are reaching an enemy [color=#ffc315]city[/color]. Enemy cities are usual refuel spots for [color=#ffc315]patrols[/color], and always have a guarding [color=#ffc315]garrisson[/color] in their center. Entering the perimiter of a city will comence combat with all enemies that happen to be in it."
-TUT_ShipDock_Title,Ship Dock
-TUT_ShipDock_Text,"In the ship dock screen, you can effectively organize your current fleet. To create a new fleet, simply select the ships you wish to move from your existing fleet.\nDon't forget to allocate fuel appropriately! Use the sliders at the bottom of the screen to ensure each fleet has enough fuel to operate efficiently."
-TUT_FuelShip_Title,Fuel Storage
-TUT_FuelShip_Text,"In the Fuel Storage you can buy fuel for your fleet.\nYou can see the full ammount of [color=#ffc315]FUEL[/color] of you landed ships on the left, and their range in the middle. \nDag the slider to the right to buy more fuel or to the left to sell it, adding fuel to your fleet takes time.\nEnsure your fleet is fully refueled before embarking on your next mission!"
-TUT_GarissonAlarm_Title,Surprise Atack
-TUT_GarissonAlarm_Text,When entering enemy cities you are given a small time frame where you can surprise the enemy\n That time is signified by the red bar bellow the enemie's ship marker.\nIf the bar finishes the alarm will be raised and an enemy patrol will start heading your way. Its recomended to invade cities with faster ships and initiating combat fast before getting detected
-TUT_Hatch_Title,Disembarkation
-TUT_Hatch_Text,You've landed in a town. To disembark and visit it press the [color=#ffc315]Open Hatch[/color] button.
-TUT_Inventory_Title,Cargo
-TUT_Inventory_Text,The [color=#ffc315]Cargo Panel[/color] is where the details for each ship in your fleet can be found. From their stats to their inventory contents.
-TUT_ItemInspection_Title,Item Inspection
-TUT_ItemInspection_Text,"When selecting an [color=#ffc315]Item[/color] you can check the items details that apear on the panel to the right. There you can choose to [color=#ffc315]Upgrade[/color] it if its a ship part, [color=#ffc315]Transfer[/color] it to another ship if its allowed and check any [color=#ffc315]Cards[/color] it provides in close quarters combat."
-TLTP_FIRE,[color=#ff3c22]Fire[/color] damages the ship once per turn until extinguished
-TLTP_ONUSE,[color=#ffc315]ON USE[/color] effects are performed the moment the card is played
-TLTP_ONDISC,[color=#ffc315]ON DISCARD[/color] effects are performed the moment the card is discarded
-TLTP_ONCOUNTER,[color=#ffc315]ON COUNTER[/color] effects are applied on successfull counters
-TLTP_ONHIT,[color=#ffc315]ON HIT[/color] effects are applied once the attack lands
-TLTP_PERHIT,[color=#ffc315]PER HIT[/color] effects are applied every time the attack lands
-TLTP_ONMISS,[color=#ffc315]ON MISS[/color] effects are applied if the attack fails to land
-TLTP_PERMISS,[color=#ffc315]PER MISS[/color] effects are applied everytime the attack fails to land
-TLTP_SHIELD,[color=#6be2e9]SHIELD[/color] protects the ship from direct damage
-TLTP_ENDEP,[color=#ffc315]ENERGY DEPENDANT[/color] cards will use all of the user's energy to improve its stats
-TLTP_UNAVOIDABLE,[color=#ffc315]UNAVOIDABLE[/color]\ncan't be avoided using a defence card
-TLTP_AOE,[color=#ffc315]TEAM[/color] cards are applied to the entire team
-TLTP_SELF_EXC,The effect of this card is not applied on the user
-TLTP_COUNTER_DIR,This card will defend the user from an offensive [color=#ffc315]DIRECT ATTACK[/color] card
-TLTP_COUNTER_HOM,This card will defend the user from an offensive [color=#ffc315]HOMING ATTACK[/color] card
-TLTP_DMG_RDC_ANY,This card will reduce the damage of an offensive card
-TLTP_SWIFT,[color=#ffc315]SWIFT[/color]\nThis card will be placed at the top of the pile at the start of every card figh
+,english,greek
+TUT_MissileToggleTitle,Missile Launcher,
+TUT_MissileToggleText,To turn on the missile launcher use this knob,
+TUT_MissileArmTitle,Missile Arming,
+TUT_MissileArmText,"Turn the dial to select missile types in the current fleet, then arm to start launching.",
+TUT_MissileAmmountTitle,Missile Amount,
+TUT_MissileAmmountText,Turn the dial to pick the amount of missiles you want to shoot and press the arm button again to pick a direction,
+TUT_MissileLaunchTitle,Missile Launch,
+TUT_MissileLaunchText,"Finally turn the dial to aim, then press Launch to send it away.",
+TUT_CardfightTitle,Dog Fight,
+TUT_CardfightText,"Close quarters combat is conducted in two distinct phases: the [color=#ffc315]Action Picking Phase[/color] and the [color=#ffc315]Action Performing Phase[/color]. Each ship has their [color=#ffc315]deck[/color] composed out of the parts that exist on the ship. At any given time, a maximum of three ships from each side can engage in combat.\n\nWhen a ship is destroyed, it is immediately replaced by another from the fleet. [color=#ffc315]Victory[/color] is achieved when one side eliminates all enemy ships.\n\nHave faith in your crew captains and good luck!",
+TUT_Cardfight_ActionPickingTitle,Action Picking Phase,
+TUT_Cardfight_ActionPickingText,"the Action Picking Phase, each ship selects its moves for the upcoming Action Performing Phase. Ships with higher speed have the advantage of choosing and executing their moves first.\nRemember that every offensive action has a corresponding defensive option, so it’s crucial to protect your ship while maintaining a strong offensive stance.",
+TUT_Cardfight_EnergyTitle,Energy,
+TUT_Cardfight_EnergyText,Each card has a cost that needs to be payed in order to use it. \nEach ship starts their action picking phase with 10 energy to spare. \nAny unused energy is lost at the end of turn.,
+TUT_Cardfight_EnergyReserveTitle,Energy Reserves,
+TUT_Cardfight_EnergyReserveText,Some cards can provide a ship with energy reserves. Energy reserves are kept until the player decides to use them and can be accumulated indefinetly. At any point the 'Pull Reserves' is pressed any amount of reserves kept on the ship will be lost and gained as energy to use on that turn.,
+TUT_Cardfight_ActionPTitle,Action Perform Phase,
+TUT_Cardfight_ActionPText,"In the Action Perform Phase each ship performs the moves they've picked in the Action Pick Phase.\nIn the end of the phase any unused card, like an extra deffensive card, will be returned to the discard pile.",
+TUT_Cardfight_TargetTitle,Target Picking,
+TUT_Cardfight_TargetText,"Some cards require you to pick a target, weather that is a friendly or enemy depends on the card.\nOther cards can be multi target, meaning they instantly target the whole team, or self use meaning they are used by the performer. Those cards will be used instantly without asking for a target.",
+TUT_Cardfight_ShipLossTitle,Lossing Ships,
+TUT_Cardfight_ShipLossText,"When a ships hull reaches zero, they are threwn out of the fight and the capmaign. Make use of the 'Switch Ship' button to switch up ships in the fight. The ship that gets switched in loses one turn.",
+TUT_Cardfight_HandLimitTitle,Hand Limit,
+TUT_Cardfight_HandLimitText,"At any time you can hold a max of {0} cards in your hand. If at any point an extra hand is about to be placed in your hand, you will be asked to choose one card to throw out. Picked card is placed on the discard pile.",
+TUT_Aerosonar_Title,,
+TUT_Aerosonar_Text,,
+TUT_Landing_Title,Landing,
+TUT_Landing_Text,"""You have entrered the perimiter of a [color=#ffc315]Town[/color].\nTo visit the [color=#ffc315]town[/color]'s verdors and resuply you'll need to land your fleet.\nTo do so click the [color=#ffc315]Land Button[/color] to initiate the landing procedure or lower the [color=#ffc315]Altitude Lever[/color] all the way to the bottom. Once the landing is complete press the [color=#ffc315]Open Hatch[/color] button bellow the land button to visit the town.""",
+TUT_MapMarker_Title,Map Markers,
+TUT_MapMarker_Text,Marking vital information on the map is usefull for making edjucated decisions in the future. Use the [color=#ffc315]Map Marker Editor[/color] to place text markers and measure distances. Toggle the [color=#ffc315]Map Marker Editor[/color] using the dediacted button on the [color=#ffc315]Ship Controller[/color].,
+TUT_MapMarkerControlls_Title,Map Marker Editor Controlls,
+TUT_MapMarkerControlls_Text,"The [color=#ffc315]Map Marker Editor[/color] provides the creation of texts markers and measuring lines. Use the [color=#ffc315]Move Horizontal[/color] and [color=#ffc315]Move Vertical[/color] dials to select the plecement of the marker.\n\nClicking the [color=#ffc315]Text Button[/color] will prompt you with inputing the text that will aprear on the marker.\n\nClicking the [color=#ffc315]Line Button[/color] will start drawing a line, use the dials to extend the line and press the [color=#ffc315]Line Button[/color] again to place the line.",
+TUT_MerchShop_Title,Munition Shop,
+TUT_MerchShop_Text,"In the munition shop you can supply your ships with various single use items, from [color=#ffc315]Missiles[/color] to [color=#ffc315]Fire Suppression Units[/color].\nSome of those [color=#ffc315]Items[/color] are ment to be used in the overworld while others will provide you with extra [color=#ffc315]Cards[/color] for your [color=#ffc315]Deck[/color].",
+TUT_Recruit_Title,Managing a fleet,
+TUT_Recruit_Text,"Managing your fleet is key to a successful campaign.\nShips in the same fleet share [color=#ffc315]Fuel[/color], so adding a ship with extra fuel to a fleet can help it go further.\nTo split and trade fuel between fleets, use the Ship Dock in the controller.\nTo merge [color=#ffc315]Fleets[/color], click the [color=#ffc315]Regroup[/color] button and pick the target fleet.\nSelect a different ship to control by clicking on their name on the right part of the screen.",
+TUT_RepairShip_Title,Repair Bay,
+TUT_RepairShip_Text,"In the Repair Bay you can buy repair parts for your fleet.\nYou can see the hull condition of each of your ships and also their repair price. Buying all the nececary repair parts will allow the ship to slowly repair itself.\nAfter buying the parts the fleet can depart and keep repairing on another port, bought ship parts stay with the ship.",
+TUT_Simulation_Title,Simulation Management,
+TUT_Simulation_Text,A successfull campaign requires proper planning.\nUse the [color=#ffc315]Simulation Buttons[/color] to either [color=#f35033]Stop[/color] the simulation and think over your plans or speed up the simulations to [color=#308a4d]speed[/color] through big protions of your voyage.,
+TUT_Steer_Title,Controlling the fleet,
+TUT_Steer_Text,Use the [color=#ffc315]Steer[/color] found on the left of the controller to steer the fleet. To controll the speed of the fleet use the [color=#ffc315]Thrust Lever[/color] on the right side of the controller,
+TUT_Aproach_Title,Friendly Villages,
+TUT_Aproach_Text,You are reaching one of the many friendly [color=#ffc315]villages[/color] in the glacier. No enemies exist in those [color=#ffc315]villages[/color] and none of the locals wil raise the [color=#ffc315]alarm[/color] on you. You are free to use those [color=#ffc315]villages[/color] to restock/repair or even as a hideout. The location of those [color=#ffc315]villages[/color] is unknown and will need to be discovered.,
+TUT_TownShop_Title,Towns,
+TUT_TownShop_Text,"When landing on a town you are able to refuel, repair, rearm and upgrade your fleet.\n\nEach city provides certain bonuses to the price and speed of one or all services. The bonuses can be seen on the left bellow the port's name. Drag on the sliders to buy or sell the shown resource.",
+TUT_UpgradeShop_Title,Workshop,
+TUT_UpgradeShop_Text,In the workshop you can inspect your fleet and choose parts to [color=#ffc315]Upgrade[/color] or [color=#ffc315]Install[/color].\nUpgraded parts provide better stats and also extra [color=#ffc315]Cards[/color] for the ship's [color=#ffc315]deck[/color].\nEach ship can have only one of their parts being upgraded at each time.\n[color=#ffc315]Upgrade[/color] progress updates only while the simulation is running.,
+TUT_WorldView_Title,Worldview Checks,
+TUT_WorldView_Text,Certain dialogue options require a stat check to happen.\nThis check will determine if the option will have the outcome you want or not.,
+TUT_CameraControl_Title,Camera Controls,
+TUT_CameraControl_Text,Use the [color=#ffc315]WASD[/color] keys or [color=#ffc315]Left Click[/color] and drag the mouse to move the camera. To [color=#ffc315]Zoom In/Out[/color] use the [color=#ffc315]Mouse Wheel[/color].,
+TUT_Elevation_Title,Altitude,
+TUT_Elevation_Text,"Managing altitude is one of your fleets strongest weapons. Radar signals, noise and wind are obstucted by the terains. Use this to your advantage to stay undetected or hide from strong head winds. Use the [color=#ffc315]Elevation Lever[/color] to manage your altitude and the [color=#ffc315]Topography Visualisation[/color] for view a topographic map of the area. The ship will increase it's altitude when an imminent collision is detected.",
+TUT_ElintContact_Tile,Electronic Intelligence,
+TUT_ElintContact_Text,The Elint sensors of one of your ships has been triggered. Elint detects enemy radar signals and provides a rough estimation on the distance and the direction of the signal. If the sensor is triggered it means you are about to enter into a radar's signal range and be detected.,
+TUT_EnemyAproach_Title,Enemy Cities,
+TUE_EnemyAproach_Text,"You are reaching an enemy [color=#ffc315]city[/color]. Enemy cities are usual refuel spots for [color=#ffc315]patrols[/color], and always have a guarding [color=#ffc315]garrisson[/color] in their center. Entering the perimiter of a city will comence combat with all enemies that happen to be in it.",
+TUT_ShipDock_Title,Ship Dock,
+TUT_ShipDock_Text,"In the ship dock screen, you can effectively organize your current fleet. To create a new fleet, simply select the ships you wish to move from your existing fleet.\nDon't forget to allocate fuel appropriately! Use the sliders at the bottom of the screen to ensure each fleet has enough fuel to operate efficiently.",
+TUT_FuelShip_Title,Fuel Storage,
+TUT_FuelShip_Text,"In the Fuel Storage you can buy fuel for your fleet.\nYou can see the full ammount of [color=#ffc315]FUEL[/color] of you landed ships on the left, and their range in the middle. \nDag the slider to the right to buy more fuel or to the left to sell it, adding fuel to your fleet takes time.\nEnsure your fleet is fully refueled before embarking on your next mission!",
+TUT_GarissonAlarm_Title,Surprise Atack,
+TUT_GarissonAlarm_Text,When entering enemy cities you are given a small time frame where you can surprise the enemy\n That time is signified by the red bar bellow the enemie's ship marker.\nIf the bar finishes the alarm will be raised and an enemy patrol will start heading your way. Its recomended to invade cities with faster ships and initiating combat fast before getting detected,
+TUT_Hatch_Title,Disembarkation,
+TUT_Hatch_Text,You've landed in a town. To disembark and visit it press the [color=#ffc315]Open Hatch[/color] button.,
+TUT_Inventory_Title,Cargo,
+TUT_Inventory_Text,The [color=#ffc315]Cargo Panel[/color] is where the details for each ship in your fleet can be found. From their stats to their inventory contents.,
+TUT_ItemInspection_Title,Item Inspection,
+TUT_ItemInspection_Text,"When selecting an [color=#ffc315]Item[/color] you can check the items details that apear on the panel to the right. There you can choose to [color=#ffc315]Upgrade[/color] it if its a ship part, [color=#ffc315]Transfer[/color] it to another ship if its allowed and check any [color=#ffc315]Cards[/color] it provides in close quarters combat.",
+TLTP_FIRE,[color=#ff3c22]Fire[/color] damages the ship once per turn until extinguished,
+TLTP_ONUSE,[color=#ffc315]ON USE[/color] effects are performed the moment the card is played,
+TLTP_ONDISC,[color=#ffc315]ON DISCARD[/color] effects are performed the moment the card is discarded,
+TLTP_ONCOUNTER,[color=#ffc315]ON COUNTER[/color] effects are applied on successfull counters,
+TLTP_ONHIT,[color=#ffc315]ON HIT[/color] effects are applied once the attack lands,
+TLTP_PERHIT,[color=#ffc315]PER HIT[/color] effects are applied every time the attack lands,
+TLTP_ONMISS,[color=#ffc315]ON MISS[/color] effects are applied if the attack fails to land,
+TLTP_PERMISS,[color=#ffc315]PER MISS[/color] effects are applied everytime the attack fails to land,
+TLTP_SHIELD,[color=#6be2e9]SHIELD[/color] protects the ship from direct damage,
+TLTP_ENDEP,[color=#ffc315]ENERGY DEPENDANT[/color] cards will use all of the user's energy to improve its stats,
+TLTP_UNAVOIDABLE,[color=#ffc315]UNAVOIDABLE[/color]\ncan't be avoided using a defence card,
+TLTP_AOE,[color=#ffc315]TEAM[/color] cards are applied to the entire team,
+TLTP_SELF_EXC,The effect of this card is not applied on the user,
+TLTP_COUNTER_DIR,This card will defend the user from an offensive [color=#ffc315]DIRECT ATTACK[/color] card,
+TLTP_COUNTER_HOM,This card will defend the user from an offensive [color=#ffc315]HOMING ATTACK[/color] card,
+TLTP_DMG_RDC_ANY,This card will reduce the damage of an offensive card,
+TLTP_SWIFT,[color=#ffc315]SWIFT[/color]\nThis card will be placed at the top of the pile at the start of every card figh,
+TLTP_DISPOSITION,[color=#ffc315]Disposition[/color]\nThis card is provided by the ships disposition.,

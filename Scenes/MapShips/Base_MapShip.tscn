@@ -50,7 +50,7 @@ Acceleration = NodePath("Aceleration")
 
 [node name="ColorRect" type="Sprite2D" parent="." unique_id=1708187202]
 z_index = -2
-texture_filter = 4
+texture_filter = 3
 material = SubResource("ShaderMaterial_7v2kq")
 rotation = -1.5708
 texture = ExtResource("5_oe1x5")
@@ -59,7 +59,6 @@ texture = ExtResource("5_oe1x5")
 show_behind_parent = true
 position = Vector2(0, -1)
 rotation = 1.57078
-points = PackedVector2Array(0, 0)
 width = 2.0
 width_curve = SubResource("Curve_mktum")
 gradient = SubResource("Gradient_wfgcg")

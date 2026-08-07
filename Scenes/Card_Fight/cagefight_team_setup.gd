@@ -40,9 +40,7 @@ func OnCptButtonPressed(Cpt : Captain) -> void:
 func OnCptReleased(Cpt : Captain) -> void:
 	FloatingButton.queue_free()
 	FloatingButton = null
-	
-	
-	
+
 	var CharB = CharButton.instantiate() as CaptainButton
 	CharB.SetCpt(Cpt)
 	CharB.OnShipSelected.connect(RemoveFromTeam.bind(CharB))
@@ -56,7 +54,7 @@ func OnCptReleased(Cpt : Captain) -> void:
 		EnemyTeam.append(Cpt)
 	else:
 		CharB.queue_free()
-		Cpt._CharInv.queue_free()
+		#Cpt._CharInv.queue_free()
 
 func RemoveFromTeam(B : CaptainButton) -> void:
 	

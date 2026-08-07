@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://muscxdppqdat"]
 
 [ext_resource type="Script" uid="uid://b3idkra5vjfuy" path="res://Scenes/Inventory/captains_dispotition_ui.gd" id="1_nvnnh"]
+[ext_resource type="Script" uid="uid://c10mrord5sp48" path="res://Scenes/Inventory/disposition_stats_ui.gd" id="2_bbv8w"]
 
-[node name="PanelContainer" type="Control" unique_id=687125661]
+[node name="DispositionUI" type="Control" unique_id=687125661 node_paths=PackedStringArray("StatsDraw")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,4 +11,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_nvnnh")
+StatsDraw = NodePath("DispositionStatsUI")
+LineAmm = 6
 DispositionColors = PackedColorArray(1, 0.7647059, 0.08235294, 1, 1, 0.7647059, 0.08235294, 1, 1, 0.7647059, 0.08235294, 1, 1, 0.7647059, 0.08235294, 1, 1, 0.7647059, 0.08235294, 1)
+
+[node name="DispositionStatsUI" type="Control" parent="." unique_id=1789287685]
+modulate = Color(1, 1, 1, 0.5764706)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_bbv8w")
+DispositionColors = [Color(1, 0.7647059, 0.08235294, 1), Color(1, 0.7647059, 0.08235294, 1), Color(1, 0.7647059, 0.08235294, 1), Color(1, 0.7647059, 0.08235294, 1), Color(1, 0.7647059, 0.08235294, 1)]

@@ -6,7 +6,7 @@ class_name ShipPart
 @export var UpgradeVersion : ShipPart
 @export var UpgradeTime : float
 @export var IsDamaged : bool = false
-@export var Disposition : DispositionManager.Dispositions = DispositionManager.Dispositions.KINETIC
+@export var disp : DispositionManager.Dispositions = DispositionManager.Dispositions.KINETIC
 @export var DispositionAmm : float = 0.1
 
 
@@ -35,11 +35,11 @@ func GetItemDesc() -> String:
 		UpNames += "\n[color=#{4}]{0}[/color] : {3} {1} {2}".format([UpName, UpAmm, STAT_CONST.GetStatMetric(Upgrades[g].UpgradeName), UpSymbol, Col])
 	var PartTypeString : String = ShipPartType.keys()[PartType]
 	PartTypeString = PartTypeString.replace("_", " ")
-	return "[color=#ffc315]Ship Part Type[/color] : {2}\n[color=#ffc315]-------------[/color]\n{0} {1}".format([ItemDesc, UpNames, PartTypeString])
+	return "[color=#ffc315]Ship Part Type[/color] : {2}\n[color=#ffc315]DISPOSITION[/color] : {3}\n[color=#ffc315]-------------[/color]\n{0} {1}".format([ItemDesc, UpNames, PartTypeString, DispositionManager.Dispositions.keys()[disp]])
 
 
 func GetWorkshopItemDesc() -> String:
-	var UpNames = "PROVIDING STATS"
+	var UpNames = "DISPOSITION : {0}\nPROVIDING STATS".format([DispositionManager.Dispositions.keys()[disp]])
 	for g in Upgrades.size():
 		#var Multiplier = 1
 		#if (Upgrades[g].UpgradeName == STAT_CONST.STATS.THRUST):

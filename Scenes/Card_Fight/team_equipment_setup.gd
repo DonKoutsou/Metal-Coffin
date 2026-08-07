@@ -238,3 +238,7 @@ func _on_deck_pressed() -> void:
 
 func _on_inventory_pressed() -> void:
 	CaptainStatCont.ShowInvetory()
+
+
+func _on_disposition_pressed() -> void:
+	CaptainStatCont.ShowDisposition()

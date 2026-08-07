@@ -40,9 +40,12 @@ size_flags_vertical = 0
 text = "Craden"
 
 [node name="CapPortrait" type="TextureRect" parent="." unique_id=575248650]
+texture_filter = 3
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 10
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.3, 1.3)
 mouse_filter = 2
 texture = ExtResource("4_5k7vr")
 expand_mode = 1

@@ -23,7 +23,6 @@ script = ExtResource("5_0p3li")
 WType = 6
 Upgrades = Array[ExtResource("4_atcjf")]([SubResource("Resource_fmxhr"), SubResource("Resource_locm8")])
 UpgradeTime = 1200.0
-Disposition = 2
 DispositionAmm = 0.5
 ItemName = "Flamethrower +2"
 ItemDesc = "WIP"

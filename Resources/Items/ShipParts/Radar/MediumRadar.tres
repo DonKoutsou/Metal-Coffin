@@ -31,7 +31,6 @@ script = ExtResource("3_r1wno")
 Upgrades = Array[ExtResource("6_ony00")]([SubResource("Resource_g0jur"), SubResource("Resource_ewb3g"), SubResource("Resource_btbhb")])
 UpgradeVersion = ExtResource("4_6ok2g")
 UpgradeTime = 1500.0
-Disposition = 1
 DispositionAmm = 0.3
 ItemName = "RA-50"
 ItemDesc = "An advanced unit with extended detection capabilities. It uses adaptive filtering algorithms to enhance clarity in threat analysis."
