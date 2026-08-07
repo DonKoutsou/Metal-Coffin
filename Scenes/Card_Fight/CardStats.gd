@@ -20,9 +20,10 @@ class_name CardStats
 @export var WeapT : WeaponType
 @export var UseConditions : Array[CardUseCondition]
 @export var AllowTier : bool = true
-
+@export var IsDisposition : bool = false
 var EnergyReduction : int = 0
 var Tier : int = 0
+
 
 func GetCost() -> int:
 	return max(0, Energy - EnergyReduction)
@@ -92,12 +93,15 @@ func GetBattleDescription(User : BattleShipStats) -> String:
 	return Helper.Translate(Desc)
 
 func IsSame(C : CardStats) -> bool:
-	return C.GetCardName() == GetCardName()
+	return C.GetCardName() == GetCardName() and C.IsDisposition == IsDisposition
 
 static func FindTooltips(card : CardStats) -> PackedStringArray:
 	#var desc = card.GetDescription()
 	#var words = strip_bbcode(desc.replace("\n", " ")).split(" ")
 	var tips : PackedStringArray = []
+	
+	if (card.IsDisposition):
+		tips.append(ToolTips["DISP"])
 	
 	if (card.PutOnTop):
 		tips.append(ToolTips["SWIFT"])
@@ -179,6 +183,7 @@ const ToolTips : Dictionary[String, String] = {
 	"COUNTER_HOM" : "TLTP_COUNTER_HOM",
 	"DMG_RDC_ANY" : "TLTP_DMG_RDC_ANY",
 	"SWIFT" : "TLTP_SWIFT",
+	"DISP" : "TLTP_DISPOSITION",
 }
 
 enum WeaponType{

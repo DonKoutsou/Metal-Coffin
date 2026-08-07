@@ -7,35 +7,29 @@ class_name CaptainDispositionUI
 
 var labels : Array[Label]
 
-var CharacterStats : Dictionary[Dispositions, float] = {
-	Dispositions.PHYSICAL : 1.0,
-	Dispositions.ELECTRIC : 0.1,
-	Dispositions.FLAME : 0.3,
-	Dispositions.DECAY : 0.4,
-	Dispositions.PLASMA : 0.5,
+var CharacterStats : Dictionary[DispositionManager.Dispositions, float] = {
+	DispositionManager.Dispositions.KINETIC : 1.0,
+	DispositionManager.Dispositions.ELECTRICAL : 0.1,
+	DispositionManager.Dispositions.THERMAL : 0.3,
+	DispositionManager.Dispositions.MAGNETIC : 0.4,
+	DispositionManager.Dispositions.RADIANT : 0.5,
 }
+
+@export var DispositionColors : PackedColorArray = []
 
 func SetStats(ch : Captain) -> void:
 	CharacterStats = ch.Disposition
 	queue_redraw()
 	
-enum Dispositions {
-	PHYSICAL,
-	ELECTRIC,
-	FLAME,
-	DECAY,
-	PLASMA,
-}
-
 func _ready() -> void:
-	for g in Dispositions:
+	for g in DispositionManager.Dispositions:
 		var l = Label.new()
 		add_child(l)
 		labels.append(l)
 		l.add_theme_font_size_override("normal", 12)
 
 func _draw() -> void:
-	var PointAmm = Dispositions.size()
+	var PointAmm = DispositionManager.Dispositions.size()
 	var Radius = min(size.x, size.y) / 2.0 - 40
 
 
@@ -49,22 +43,19 @@ func _draw() -> void:
 		stats.append(Vector2(pointX, pointY) * rad + size / 2.0)
 		statCols.append(Color("ffc315"))
 		
-		labels[g].text = Dispositions.keys()[g]
+		labels[g].text = DispositionManager.Dispositions.keys()[g]
 		labels[g].position = Vector2(pointX, pointY) * Radius + size / 2.0 - labels[g].size / 2.0
 		if (labels[g].position.y < size.y / 2):
 			labels[g].position -= Vector2(0,10)
 		else:
 			labels[g].position += Vector2(0,10)
+	
 
-	draw_polygon(stats, statCols)
+	draw_polygon(stats, DispositionColors)
 	for g in stats.size():
 		var pos = stats[g]
-		
 		draw_circle(pos, 2, Color(1,1,1))
-		
-		
-		
-		
+
 		
 	
 	var points : Array[PackedVector2Array]

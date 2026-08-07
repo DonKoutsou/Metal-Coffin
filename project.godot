@@ -37,6 +37,7 @@ Save="*res://Scripts/Save/save_load_manager.gd"
 TutorialManager="*res://Scenes/GlobalManagers/Tutorial/tutorial_manager.tscn"
 AchMan="*res://Scenes/GlobalManagers/Tutorial/achievement_manager.gd"
 PopupManager="*res://Scenes/GlobalManagers/PopupManager.tscn"
+DispoisitionManager="*uid://cuad168v6mleh"
 
 [display]
 
@@ -56,7 +57,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/BurstParticles2D/plugin.cfg", "res://addons/beehave/plugin.cfg", "res://addons/script-ide/plugin.cfg")
+enabled=PackedStringArray("res://addons/BurstParticles2D/plugin.cfg", "res://addons/beehave/plugin.cfg")
 
 [global_group]
 

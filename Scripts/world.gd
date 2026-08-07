@@ -45,6 +45,7 @@ enum WORLDSTATE{
 # array holding the strings of the stats that we have already notified the player that are getting low
 var StatsNotifiedLow : Array[String] = []
 var SkipStory : bool
+
 signal WRLD_OnGameEnded
 signal WRLD_WorldReady
 signal WorldSpawnTransitionFinished

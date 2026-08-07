@@ -24,12 +24,12 @@ signal OnNameChanged(NewName : String)
 var CaptainShip : MapShip
 var _CharInv : CharacterInventory
 
-var Disposition : Dictionary[CaptainDispositionUI.Dispositions, float] = {
-	CaptainDispositionUI.Dispositions.PHYSICAL : 0.0,
-	CaptainDispositionUI.Dispositions.ELECTRIC : 0.0,
-	CaptainDispositionUI.Dispositions.FLAME : 0.0,
-	CaptainDispositionUI.Dispositions.DECAY : 0.0,
-	CaptainDispositionUI.Dispositions.PLASMA : 0.0,
+var Disposition : Dictionary[DispositionManager.Dispositions, float] = {
+	DispositionManager.Dispositions.KINETIC : 0.0,
+	DispositionManager.Dispositions.ELECTRICAL : 0.0,
+	DispositionManager.Dispositions.THERMAL : 0.0,
+	DispositionManager.Dispositions.MAGNETIC : 0.0,
+	DispositionManager.Dispositions.RADIANT : 0.0,
 }
 
 func OnCharacterNameChanged(NewName : String) -> void:
@@ -103,7 +103,11 @@ func GetBattleStats() -> BattleShipStats:
 	for g in Cards:
 		for z in Cards[g]:
 			c.append(g)
-		
+			
+	for g in DispositionManager.Instance.GetRewards(self):
+		for z in Cards[g]:
+			c.append(g)
+	
 	stats.Hull = Hull
 	stats.CurrentHull = Hull
 	stats.Speed = (Thrust * 1000) / Weight

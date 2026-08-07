@@ -1,13 +1,13 @@
-[gd_scene format=3 uid="uid://b4yumrb4c0xyd"]
+[gd_scene format=3 uid="uid://ci5gff86vno50"]
 
-[ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scenes/Card_Fight/Card/card.gd" id="1_utwiq"]
-[ext_resource type="FontFile" uid="uid://dpimg5va4xy40" path="res://Fonts/P22 Typewriter Regular.ttf" id="2_g808j"]
-[ext_resource type="PackedScene" uid="uid://xuequw4xcwgf" path="res://Scenes/Inventory/CardTooltip.tscn" id="2_paso5"]
-[ext_resource type="Texture2D" uid="uid://buffodrv1xn4a" path="res://Assets/Cards/card.png" id="3_wohcr"]
-[ext_resource type="Texture2D" uid="uid://bf3p61os8mhr7" path="res://Assets/UIPiecies/Bolt.png" id="4_5n23x"]
-[ext_resource type="Texture2D" uid="uid://c1d4jybs1oolg" path="res://Assets/Cards/BarraceIncendiery.png" id="5_p48hs"]
-[ext_resource type="Material" uid="uid://dwvsafe1eaxbk" path="res://Shaders/Card.tres" id="6_btfbu"]
-[ext_resource type="Texture2D" uid="uid://cwbo84yj0q3om" path="res://Assets/Cards/CardBack.png" id="7_ucyjg"]
+[ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scenes/Card_Fight/Card/card.gd" id="1_i0ur2"]
+[ext_resource type="PackedScene" uid="uid://xuequw4xcwgf" path="res://Scenes/Inventory/CardTooltip.tscn" id="2_6upq6"]
+[ext_resource type="FontFile" uid="uid://dpimg5va4xy40" path="res://Fonts/P22 Typewriter Regular.ttf" id="3_eh8wv"]
+[ext_resource type="Texture2D" uid="uid://buffodrv1xn4a" path="res://Assets/Cards/card.png" id="4_k04bh"]
+[ext_resource type="Texture2D" uid="uid://bf3p61os8mhr7" path="res://Assets/UIPiecies/Bolt.png" id="5_2o14k"]
+[ext_resource type="Texture2D" uid="uid://c1d4jybs1oolg" path="res://Assets/Cards/BarraceIncendiery.png" id="6_pmlm1"]
+[ext_resource type="Material" uid="uid://dwvsafe1eaxbk" path="res://Shaders/Card.tres" id="7_34pwi"]
+[ext_resource type="Texture2D" uid="uid://cwbo84yj0q3om" path="res://Assets/Cards/CardBack.png" id="8_2rd7a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4v2x1"]
 bg_color = Color(1, 1, 1, 1)
@@ -28,12 +28,12 @@ content_margin_left = 8.0
 content_margin_top = 8.0
 content_margin_right = 8.0
 content_margin_bottom = 8.0
-bg_color = Color(0.11435, 0.205627, 0.212156, 1)
+bg_color = Color(0.11, 0.11, 0.11, 1)
 border_width_left = 2
 border_width_top = 42
 border_width_right = 2
 border_width_bottom = 103
-border_color = Color(1, 0.7647059, 0.08235294, 1)
+border_color = Color(0.46, 0.46, 0.46, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
@@ -76,23 +76,13 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_paso5"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.11, 0.11, 0.11, 1)
-border_width_left = 2
-border_width_top = 42
-border_width_right = 2
-border_width_bottom = 103
-border_color = Color(0.46, 0.46, 0.46, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 4
-anti_aliasing_size = 2.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3yyhe"]
+bg_color = Color(1, 1, 1, 0)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nilbr"]
 bg_color = Color(1, 1, 1, 1)
@@ -125,7 +115,7 @@ corner_detail = 2
 shadow_size = 8
 anti_aliasing_size = 2.0
 
-[node name="Card" type="Control" unique_id=1687597269 node_paths=PackedStringArray("CardName", "CardDesc", "CardCost", "CardTex", "But", "DispBut", "CardTypeEmblem", "FrontSide", "BackSide", "Line", "AmmountLabel", "TooltipPos") groups=["Card"]]
+[node name="Card" type="Control" unique_id=1687597269 node_paths=PackedStringArray("CardName", "CardDesc", "CardCost", "CardTex", "But", "CardTypeEmblem", "FrontSide", "BackSide", "Line", "AmmountLabel", "TooltipPos") groups=["Card"]]
 custom_minimum_size = Vector2(160, 220)
 layout_mode = 3
 anchors_preset = 8
@@ -143,24 +133,22 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-script = ExtResource("1_utwiq")
+script = ExtResource("1_i0ur2")
 CardName = NodePath("SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer/Label")
 CardDesc = NodePath("SubViewportContainer/SubViewport/VBoxContainer/CardDesc")
 CardCost = NodePath("SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer/CardCost")
 CardTex = NodePath("SubViewportContainer/SubViewport/VBoxContainer/CardText")
 But = NodePath("SubViewportContainer/SubViewport/Button")
-DispBut = NodePath("SubViewportContainer/SubViewport/Disposition")
 CardTypeEmblem = NodePath("SubViewportContainer/SubViewport/Panel2")
 FrontSide = NodePath("TextureButton")
 BackSide = NodePath("TextureRect")
 Line = NodePath("Line2D")
 AmmountLabel = NodePath("Amm/Label")
 TooltipPos = NodePath("Control/VBoxContainer")
-TooltipScene = ExtResource("2_paso5")
-RealisticFont = ExtResource("2_g808j")
+TooltipScene = ExtResource("2_6upq6")
+RealisticFont = ExtResource("3_eh8wv")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=2087537965]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -180,10 +168,9 @@ transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 4
 oversampling = false
-size = Vector2i(124, 171)
+size = Vector2i(338, 465)
 size_2d_override = Vector2i(186, 256)
 size_2d_override_stretch = true
-render_target_update_mode = 1
 
 [node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport" unique_id=1329688651]
 anchors_preset = 15
@@ -223,32 +210,6 @@ icon_alignment = 1
 vertical_icon_alignment = 2
 expand_icon = true
 
-[node name="Disposition" type="Button" parent="SubViewportContainer/SubViewport" unique_id=841715718 groups=["DigitalButtons"]]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 14.0
-offset_top = 14.0
-offset_right = -14.0
-offset_bottom = -16.0
-grow_horizontal = 2
-grow_vertical = 2
-focus_mode = 0
-mouse_filter = 1
-theme_override_font_sizes/font_size = 26
-theme_override_styles/normal = SubResource("StyleBoxFlat_paso5")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_7mr5f")
-theme_override_styles/hover = SubResource("StyleBoxFlat_paso5")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_yh81d")
-theme_override_styles/focus = SubResource("StyleBoxFlat_58ae4")
-action_mode = 0
-keep_pressed_outside = true
-autowrap_mode = 3
-icon_alignment = 1
-vertical_icon_alignment = 2
-expand_icon = true
-
 [node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport" unique_id=61408993]
 visible = false
 anchors_preset = 15
@@ -261,23 +222,22 @@ offset_bottom = -13.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("3_wohcr")
+texture = ExtResource("4_k04bh")
 expand_mode = 1
 
-[node name="DispTex" type="TextureRect" parent="SubViewportContainer/SubViewport" unique_id=630777988]
-visible = false
+[node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport/TextureRect" unique_id=879423676]
+show_behind_parent = true
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 6.0
-offset_top = 10.0
-offset_right = -6.0
-offset_bottom = -13.0
+offset_left = 4.0
+offset_right = -4.0
+offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("3_wohcr")
-expand_mode = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_3yyhe")
 
 [node name="Panel2" type="Panel" parent="SubViewportContainer/SubViewport" unique_id=1580813051]
 anchors_preset = 2
@@ -341,7 +301,7 @@ grow_vertical = 0
 rotation = 0.619955
 scale = Vector2(1.16834, 1.15055)
 mouse_filter = 2
-texture = ExtResource("4_5n23x")
+texture = ExtResource("5_2o14k")
 expand_mode = 1
 stretch_mode = 5
 
@@ -370,7 +330,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 mouse_filter = 2
-texture = ExtResource("5_p48hs")
+texture = ExtResource("6_pmlm1")
 expand_mode = 1
 stretch_mode = 5
 
@@ -398,8 +358,9 @@ vertical_alignment = 1
 visible_characters_behavior = 1
 
 [node name="TextureButton" type="TextureButton" parent="." unique_id=2008636766]
+visible = false
 texture_filter = 4
-material = ExtResource("6_btfbu")
+material = ExtResource("7_34pwi")
 layout_mode = 0
 offset_left = -12.0
 offset_top = -17.0
@@ -419,7 +380,7 @@ offset_left = -4.0
 offset_top = -8.0
 offset_right = 163.0
 offset_bottom = 225.0
-texture = ExtResource("7_ucyjg")
+texture = ExtResource("8_2rd7a")
 expand_mode = 1
 
 [node name="Line2D" type="Line2D" parent="." unique_id=798469361]

@@ -7,6 +7,7 @@ class_name Card
 @export var CardCost : Label
 @export var CardTex : TextureRect
 @export var But : Button
+@export var DispBut : Button
 @export var Lines : Array[Line2D]
 @export var CardTypeEmblem : Panel
 @export var FrontSide : Control
@@ -36,6 +37,7 @@ var mat : ShaderMaterial
 var isStatic : bool = false
 
 var dirTw : Tween
+var disp : bool = false
 
 func _physics_process(delta: float) -> void:
 	InterpolationValue = min(InterpolationValue + delta *5, 1)
@@ -142,9 +144,13 @@ func _enter_tree() -> void:
 
 func SetCardStats(Stats : CardStats, Amm : int = 0) -> void:
 	CStats = Stats
+	disp = Stats.IsDisposition
 	var Cost = Stats.GetCost()
 	var DescText =  "[center] {0}".format([Stats.GetDescription()])
-
+	
+	But.visible = !disp
+	DispBut.visible = disp
+	
 	CardName.text = Stats.GetCardName()
 	CardTex.texture = Stats.Icon
 	
@@ -244,9 +250,9 @@ func GetBattleCost(User : BattleShipStats, Stats : CardStats) -> int:
 	
 	return CCost
 
-
 func SetRealistic() -> void:
-	$SubViewportContainer/SubViewport/TextureRect.visible = true
+	$SubViewportContainer/SubViewport/TextureRect.visible = !disp
+	$SubViewportContainer/SubViewport/DispTex.visible = disp
 	$SubViewportContainer/SubViewport/Panel.visible = false
 	$SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer/CardCost/TextureRect.visible = false
 	$SubViewportContainer/SubViewport.set_deferred("render_target_update_mode",  SubViewport.UPDATE_ONCE)

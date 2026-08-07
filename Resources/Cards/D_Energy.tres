@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://c1a7o5r1retgi"]
+
+[ext_resource type="Texture2D" uid="uid://cngvmnworwmqg" path="res://Assets/Cards/Energy.png" id="1_ifqii"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="2_560c7"]
+[ext_resource type="Script" uid="uid://h6mrpid3a2ps" path="res://Scenes/Card_Fight/Card/Card_Modules/ResupplyModule.gd" id="3_6bruq"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="4_3c47t"]
+
+[sub_resource type="Resource" id="Resource_o5gji"]
+script = ExtResource("3_6bruq")
+metadata/_custom_type_script = "uid://h6mrpid3a2ps"
+
+[resource]
+script = ExtResource("4_3c47t")
+Icon = ExtResource("1_ifqii")
+CardName = "Resupply"
+AllowDuplicates = true
+OnUseModules = Array[ExtResource("2_560c7")]([SubResource("Resource_o5gji")])
+Type = 2
+IsDisposition = true

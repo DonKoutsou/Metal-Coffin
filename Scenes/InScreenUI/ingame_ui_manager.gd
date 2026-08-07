@@ -130,4 +130,4 @@ const FullSize = Vector2(1148.0, 595.0)
 func SetScreenRes(Res : Vector2) -> void:
 	Screen.material.set_shader_parameter("res", Res)
 	var w = (Res / FullSize) * Vector2(25,25)
-	Screen.material.set_shader_parameter("warp", clamp(w, Vector2(15,15), Vector2(25,25)))
+	Screen.material.set_shader_parameter("warp", clamp(w, Vector2(12,12), Vector2(25,25)))

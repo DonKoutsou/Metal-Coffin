@@ -6,7 +6,7 @@ class_name ShipPart
 @export var UpgradeVersion : ShipPart
 @export var UpgradeTime : float
 @export var IsDamaged : bool = false
-@export var Disposition : CaptainDispositionUI.Dispositions = CaptainDispositionUI.Dispositions.PHYSICAL
+@export var Disposition : DispositionManager.Dispositions = DispositionManager.Dispositions.KINETIC
 @export var DispositionAmm : float = 0.1
 
 
