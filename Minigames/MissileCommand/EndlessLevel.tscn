@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://kh2qej8y5so8"]
+
+[ext_resource type="Script" uid="uid://cdrd2yj6nr75i" path="res://Minigames/MissileCommand/EndlessLevel.gd" id="1_4fkwo"]
+[ext_resource type="PackedScene" uid="uid://n3jq5t5ef0pc" path="res://Minigames/MissileCommand/DropMissile2.tscn" id="2_dmqvf"]
+[ext_resource type="PackedScene" uid="uid://dwaefqoun5b8l" path="res://Minigames/MissileCommand/DropMissile.tscn" id="3_mgjno"]
+[ext_resource type="PackedScene" uid="uid://6th3jwe3jtne" path="res://Minigames/MissileCommand/plane.tscn" id="4_dmqvf"]
+[ext_resource type="PackedScene" uid="uid://nl0uqvuk06ns" path="res://Minigames/MissileCommand/building.tscn" id="5_64uwr"]
+[ext_resource type="PackedScene" uid="uid://ed8nd44sxy2i" path="res://Minigames/MissileCommand/gunner.tscn" id="5_p6ctr"]
+
+[node name="Main" type="Control" unique_id=1840972905 node_paths=PackedStringArray("ScoreLabel", "SpawnTimer")]
+process_mode = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4fkwo")
+FastDropMissileScene = ExtResource("2_dmqvf")
+DropMissileScene = ExtResource("3_mgjno")
+Planes = ExtResource("4_dmqvf")
+ScoreLabel = NodePath("Label")
+SpawnTimer = NodePath("SpawnTimer")
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=429984909]
+autostart = true
+
+[node name="Label" type="Label" parent="." unique_id=1890615298]
+z_index = 1
+layout_mode = 1
+offset_left = 1.0
+offset_top = 19.0
+offset_right = 62.0
+offset_bottom = 36.0
+theme_override_font_sizes/font_size = 12
+text = "Score : 0"
+
+[node name="Gunner" parent="." unique_id=1775998824 instance=ExtResource("5_p6ctr")]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -72.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=432817119]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -37.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Building" parent="HBoxContainer" unique_id=1835009202 instance=ExtResource("5_64uwr")]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Building9" parent="HBoxContainer" unique_id=2061798123 instance=ExtResource("5_64uwr")]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Building7" parent="HBoxContainer" unique_id=51147060 instance=ExtResource("5_64uwr")]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Building8" parent="HBoxContainer" unique_id=165835249 instance=ExtResource("5_64uwr")]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Building2" parent="HBoxContainer" unique_id=535477553 instance=ExtResource("5_64uwr")]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Building3" parent="HBoxContainer" unique_id=1175631085 instance=ExtResource("5_64uwr")]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Building4" parent="HBoxContainer" unique_id=1179386542 instance=ExtResource("5_64uwr")]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Building5" parent="HBoxContainer" unique_id=1603047028 instance=ExtResource("5_64uwr")]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Building6" parent="HBoxContainer" unique_id=231345982 instance=ExtResource("5_64uwr")]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

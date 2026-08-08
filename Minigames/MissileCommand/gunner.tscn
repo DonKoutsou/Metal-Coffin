@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://ed8nd44sxy2i"]
+
+[ext_resource type="Script" uid="uid://dd4sgvpihcyv5" path="res://Minigames/MissileCommand/gunner.gd" id="1_1c0r8"]
+[ext_resource type="PackedScene" uid="uid://cyj5avq3gv3sh" path="res://Minigames/MissileCommand/gun.tscn" id="1_bgi16"]
+
+[node name="Gunner" type="HBoxContainer" unique_id=601746808]
+size_flags_horizontal = 6
+size_flags_vertical = 6
+script = ExtResource("1_1c0r8")
+
+[node name="Gun" parent="." unique_id=1583676157 instance=ExtResource("1_bgi16")]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Gun3" parent="." unique_id=405674520 instance=ExtResource("1_bgi16")]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Gun2" parent="." unique_id=777879352 instance=ExtResource("1_bgi16")]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4

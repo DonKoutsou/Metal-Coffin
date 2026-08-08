@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://nl0uqvuk06ns"]
+
+[ext_resource type="Texture2D" uid="uid://rsnybd082hha" path="res://Minigames/MissileCommand/house.png" id="1_avus0"]
+[ext_resource type="Script" uid="uid://c5kdm1euscod1" path="res://Minigames/MissileCommand/building.gd" id="1_uj2qm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_avus0"]
+radius = 4.12311
+
+[node name="Building" type="Control" unique_id=410201688 groups=["Destructable"]]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_uj2qm")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=829850433]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_avus0")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1264611864]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1186321606]
+shape = SubResource("CircleShape2D_avus0")

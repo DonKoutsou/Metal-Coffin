@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://cyj5avq3gv3sh"]
+
+[ext_resource type="Script" uid="uid://drjamvaweoenc" path="res://Minigames/MissileCommand/gun.gd" id="1_vk1bi"]
+[ext_resource type="PackedScene" uid="uid://dsjr5anmrlmrj" path="res://Minigames/MissileCommand/Missile.tscn" id="2_dk5gl"]
+[ext_resource type="Texture2D" uid="uid://cpyymekncj8g4" path="res://Minigames/MissileCommand/anti-aircraft-gun.png" id="3_t6ynv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t6ynv"]
+radius = 6.0
+
+[node name="Gun" type="Control" unique_id=1677534706 node_paths=PackedStringArray("BulletLabel") groups=["Destructable"]]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_vk1bi")
+MaxBullets = 6
+MissileScene = ExtResource("2_dk5gl")
+BulletLabel = NodePath("Label")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1683024795]
+scale = Vector2(0.4375, 0.4375)
+texture = ExtResource("3_t6ynv")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=739956351]
+position = Vector2(0, -5)
+
+[node name="Label" type="Label" parent="." unique_id=1516079401]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.5
+offset_top = 7.0
+offset_right = 10.5
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 8
+text = "1/2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ReloadTimer" type="Timer" parent="." unique_id=1665769316]
+autostart = true
+
+[node name="Area2D" type="Area2D" parent="." unique_id=867664221]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=945094075]
+shape = SubResource("CircleShape2D_t6ynv")
+
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]

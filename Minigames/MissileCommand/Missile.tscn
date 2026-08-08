@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://dsjr5anmrlmrj"]
+
+[ext_resource type="Script" uid="uid://bt1c7odwxmnub" path="res://Minigames/MissileCommand/missile.gd" id="1_0tsf4"]
+[ext_resource type="Texture2D" uid="uid://c3ywg7cg0rv6e" path="res://Minigames/MissileCommand/Circle.png" id="2_tfoha"]
+[ext_resource type="AudioStream" uid="uid://blcqu3s2is8yh" path="res://Minigames/MissileCommand/Sounds/Missile.mp3" id="3_0tsf4"]
+[ext_resource type="AudioStream" uid="uid://di7giyaln4ial" path="res://Minigames/MissileCommand/Sounds/Explosion.mp3" id="4_tfoha"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5onpw"]
+
+[sub_resource type="Curve" id="Curve_fenu4"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.485839, 1), 0.0, 0.0, 0, 0, Vector2(0.896514, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_kc57e"]
+curve = SubResource("Curve_fenu4")
+
+[sub_resource type="Gradient" id="Gradient_5onpw"]
+offsets = PackedFloat32Array(0.00113636, 0.997727)
+colors = PackedColorArray(0.860409, 0.400596, 0.181806, 1, 0.96721, 0.807868, 0.757136, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bg26n"]
+gradient = SubResource("Gradient_5onpw")
+
+[sub_resource type="Curve" id="Curve_bg26n"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.178649, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_fenu4"]
+curve = SubResource("Curve_bg26n")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bg26n"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 2.2
+angle_min = 1.07288e-05
+angle_max = 360.0
+gravity = Vector3(0, 0, 0)
+scale_min = 1.2
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_fenu4")
+color_ramp = SubResource("GradientTexture1D_bg26n")
+alpha_curve = SubResource("CurveTexture_kc57e")
+
+[node name="Missile" type="Node2D" unique_id=1675902332 node_paths=PackedStringArray("Text", "Area", "MissileSound", "ExplosionSound", "ExplosionParticle")]
+script = ExtResource("1_0tsf4")
+Speed = 150.0
+Text = NodePath("Sprite2D")
+Area = NodePath("Area2D")
+MissileSound = NodePath("Launch")
+ExplosionSound = NodePath("Explosion")
+ExplosionParticle = NodePath("Area2D/GPUParticles2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1155534391]
+scale = Vector2(0.0625, 0.0625)
+texture = ExtResource("2_tfoha")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=2125523162]
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=185411971]
+shape = SubResource("CircleShape2D_5onpw")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Area2D" unique_id=762980303]
+emitting = false
+amount = 4
+texture = ExtResource("2_tfoha")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.72
+draw_order = 2
+process_material = SubResource("ParticleProcessMaterial_bg26n")
+
+[node name="Launch" type="AudioStreamPlayer2D" parent="." unique_id=2086379398]
+stream = ExtResource("3_0tsf4")
+pitch_scale = 2.0
+autoplay = true
+bus = &"MapSounds"
+
+[node name="Explosion" type="AudioStreamPlayer2D" parent="." unique_id=750277119]
+stream = ExtResource("4_tfoha")
+bus = &"MapSounds"
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="finished" from="Area2D/GPUParticles2D" to="." method="_on_gpu_particles_2d_finished"]

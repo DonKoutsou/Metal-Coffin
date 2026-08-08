@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://6th3jwe3jtne"]
+
+[ext_resource type="Texture2D" uid="uid://bwb8dnqygiel3" path="res://Minigames/MissileCommand/Plane.png" id="1_6ebbn"]
+[ext_resource type="Script" uid="uid://dji0vlswc5vw7" path="res://Minigames/MissileCommand/plane.gd" id="1_ly0hq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6ebbn"]
+radius = 3.0
+
+[node name="Plane" type="Node2D"]
+script = ExtResource("1_ly0hq")
+Speed = 25.0
+Points = 200
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.428572, 0.428571)
+texture = ExtResource("1_6ebbn")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_6ebbn")

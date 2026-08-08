@@ -59,6 +59,12 @@ version_control/autoload_on_startup=true
 
 enabled=PackedStringArray("res://addons/BurstParticles2D/plugin.cfg", "res://addons/beehave/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://Minigames/": "red"
+}
+
 [global_group]
 
 ItemDescriptor=""

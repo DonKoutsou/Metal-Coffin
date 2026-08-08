@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://b3igywymiutks"]
+
+[ext_resource type="Script" uid="uid://d4lmj17ceaqgr" path="res://Minigames/MissileCommand/MissileCommandMain.gd" id="1_kqlx0"]
+[ext_resource type="PackedScene" uid="uid://ca6i3s4haeass" path="res://Minigames/MissileCommand/MainMenu.tscn" id="2_3542b"]
+[ext_resource type="PackedScene" uid="uid://crc1aam56dufl" path="res://Minigames/MissileCommand/Level.tscn" id="3_sc0wc"]
+[ext_resource type="PackedScene" uid="uid://kh2qej8y5so8" path="res://Minigames/MissileCommand/EndlessLevel.tscn" id="4_leiti"]
+[ext_resource type="PackedScene" uid="uid://dc41wyh0q1mnr" path="res://Minigames/MissileCommand/PauseMenu.tscn" id="5_4oivc"]
+
+[node name="Main" type="Node" unique_id=37964480]
+process_mode = 3
+script = ExtResource("1_kqlx0")
+MainMenuScene = ExtResource("2_3542b")
+LevelScene = ExtResource("3_sc0wc")
+EndlessLevelScene = ExtResource("4_leiti")
+PauseScene = ExtResource("5_4oivc")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=838701707]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="PanelContainer" unique_id=1563740003]
+texture_filter = 1
+layout_mode = 2
+stretch = true
+stretch_shrink = 2
+
+[node name="SubViewport" type="SubViewport" parent="PanelContainer/SubViewportContainer" unique_id=1993944715]
+own_world_3d = true
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+audio_listener_enable_2d = true
+audio_listener_enable_3d = true
+size = Vector2i(789, 437)
+size_2d_override = Vector2i(636, 352)
+size_2d_override_stretch = true

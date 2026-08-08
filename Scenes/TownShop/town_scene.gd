@@ -20,6 +20,7 @@ class_name TownScene
 @export var RepairStationScene : PackedScene
 @export var WorkshopScene : PackedScene
 @export var RecruitShopScene : PackedScene
+@export var MinigameScene : PackedScene
 
 var BoughtFuel : float = 0
 
@@ -98,10 +99,13 @@ func FuelExchangeFinished(Fuel : float) -> void:
 	BoughtFuel = Fuel
 
 func On_Recruit_Pressed() -> void:
-	var RShop = RecruitShopScene.instantiate() as RecruitShop
-	add_child(RShop)
-	RShop.Init(TownSpot.Recruits)
-	RShop.OnCaptainBought.connect(OnShipBought)
+	var miniGame = MinigameScene.instantiate() as MissileCommandMain
+	add_child(miniGame)
+	
+	#var RShop = RecruitShopScene.instantiate() as RecruitShop
+	#add_child(RShop)
+	#RShop.Init(TownSpot.Recruits)
+	#RShop.OnCaptainBought.connect(OnShipBought)
 
 func OnUpgradeShopPressed() -> void:
 	var WShop = WorkshopScene.instantiate() as WorkShop

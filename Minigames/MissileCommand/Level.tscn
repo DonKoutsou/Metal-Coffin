@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://crc1aam56dufl"]
+
+[ext_resource type="Script" uid="uid://clax5xipe2qvh" path="res://Minigames/MissileCommand/Level.gd" id="1_xylue"]
+[ext_resource type="PackedScene" uid="uid://dwaefqoun5b8l" path="res://Minigames/MissileCommand/DropMissile.tscn" id="2_tj5wv"]
+[ext_resource type="PackedScene" uid="uid://n3jq5t5ef0pc" path="res://Minigames/MissileCommand/DropMissile2.tscn" id="2_xylue"]
+[ext_resource type="PackedScene" uid="uid://nl0uqvuk06ns" path="res://Minigames/MissileCommand/building.tscn" id="4_5rrr5"]
+[ext_resource type="PackedScene" uid="uid://6th3jwe3jtne" path="res://Minigames/MissileCommand/plane.tscn" id="4_tj5wv"]
+[ext_resource type="PackedScene" uid="uid://ed8nd44sxy2i" path="res://Minigames/MissileCommand/gunner.tscn" id="4_xylue"]
+
+[node name="Level" type="Control" unique_id=315839058 node_paths=PackedStringArray("ScoreLabel", "EndText", "SpawnTimer")]
+process_mode = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xylue")
+FastDropMissileScene = ExtResource("2_xylue")
+DropMissileScene = ExtResource("2_tj5wv")
+Planes = ExtResource("4_tj5wv")
+ScoreLabel = NodePath("Label")
+EndText = NodePath("Control/Label")
+SpawnTimer = NodePath("SpawnTimer")
+metadata/_edit_horizontal_guides_ = [226.0]
+
+[node name="Gunner" parent="." unique_id=838494068 instance=ExtResource("4_xylue")]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -76.0
+offset_bottom = -33.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1938757245]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -59.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Building" parent="HBoxContainer" unique_id=549702284 instance=ExtResource("4_5rrr5")]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Building2" parent="HBoxContainer" unique_id=257732494 instance=ExtResource("4_5rrr5")]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Building3" parent="HBoxContainer" unique_id=688715077 instance=ExtResource("4_5rrr5")]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Building4" parent="HBoxContainer" unique_id=1709609278 instance=ExtResource("4_5rrr5")]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=733954726]
+autostart = true
+
+[node name="Label" type="Label" parent="." unique_id=285502866]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 17.0
+theme_override_font_sizes/font_size = 12
+text = "Score : 0"
+
+[node name="Control" type="Control" parent="." unique_id=61515233]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Control" unique_id=1737184295]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -8.5
+offset_right = 20.0
+offset_bottom = 8.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "VICTORY
+SCORE : 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
