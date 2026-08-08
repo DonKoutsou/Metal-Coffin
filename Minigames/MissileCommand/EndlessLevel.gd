@@ -35,7 +35,9 @@ func _on_spawn_timer_timeout() -> void:
 	if (Targets.size() == 0):
 		return
 	
-	var r = randi_range(0, 2)
+	SpawnTimer.wait_time -= 0.000001
+	
+	var r = randi_range(0, 1)
 	var NewEnemy : Enemy
 	
 	if (r == 0):

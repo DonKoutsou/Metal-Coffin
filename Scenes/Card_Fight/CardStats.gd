@@ -14,6 +14,7 @@ class_name CardStats
 @export var OnUseModules : Array[CardModule]
 @export var OnDiscardModules : Array[CardModule]
 @export var OnPerformModule : CardModule
+@export var Passive : Card_Passive
 @export var Type : CardType
 @export var PutOnTop : bool = false
 @export var Burned : bool = false
@@ -65,6 +66,10 @@ func GetDescription() -> String:
 		for g in OnDiscardModules:
 			Desc += g.GetDesc(RealTier)
 	
+	if (Passive != null):
+		Desc += Passive.GetDesc(RealTier)
+		Desc += "\n"
+		
 	return Helper.Translate(Desc)
 
 func GetBattleDescription(User : BattleShipStats) -> String:
@@ -90,6 +95,11 @@ func GetBattleDescription(User : BattleShipStats) -> String:
 		Desc += "\n"
 		for g in OnDiscardModules:
 			Desc += g.GetBattleDesc(User, RealTier)
+	
+	if (Passive != null):
+		Desc += Passive.GetDesc(RealTier)
+		Desc += "\n"
+	
 	return Helper.Translate(Desc)
 
 func IsSame(C : CardStats) -> bool:

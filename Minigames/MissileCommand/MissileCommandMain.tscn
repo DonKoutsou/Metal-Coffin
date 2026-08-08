@@ -14,25 +14,22 @@ LevelScene = ExtResource("3_sc0wc")
 EndlessLevelScene = ExtResource("4_leiti")
 PauseScene = ExtResource("5_4oivc")
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=838701707]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1563740003]
+texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="PanelContainer" unique_id=1563740003]
-texture_filter = 1
-layout_mode = 2
 stretch = true
 stretch_shrink = 2
 
-[node name="SubViewport" type="SubViewport" parent="PanelContainer/SubViewportContainer" unique_id=1993944715]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1993944715]
 own_world_3d = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
 audio_listener_enable_2d = true
 audio_listener_enable_3d = true
-size = Vector2i(789, 437)
-size_2d_override = Vector2i(636, 352)
+size = Vector2i(873, 491)
+size_2d_override = Vector2i(640, 360)
 size_2d_override_stretch = true

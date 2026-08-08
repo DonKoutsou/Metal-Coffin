@@ -3,11 +3,9 @@ extends Resource
 
 class_name CardModule
 
-
 @export var AOE : bool = false
 @export var TierUpgrade : float = 1
 @export var TierUpgradeMethod : DamageInfo.CalcuationMethod
-
 
 func GetDesc(_Tier : int) -> String:
 	return ""

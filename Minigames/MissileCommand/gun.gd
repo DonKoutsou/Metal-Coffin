@@ -19,7 +19,7 @@ func CanShoot() -> bool:
 	return CurrentBullets > 0
 
 func Shoot(Location : Vector2) -> void:
-	var m = MissileScene.instantiate() as Missile
+	var m = MissileScene.instantiate() as MC_Missile
 	m.Location = Location
 	
 	get_parent().add_child(m)

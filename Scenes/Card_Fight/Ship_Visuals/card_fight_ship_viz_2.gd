@@ -3,7 +3,7 @@ extends Control
 class_name CardFightShipViz2
 
 @export_file_path(".tscn") var CardScene : String
-
+@export var floaterScene : PackedScene
 @export_group("Nodes")
 @export var ShipNameLabel : Label
 @export var ShipIcon : TextureRect
@@ -41,6 +41,13 @@ var Ship : BattleShipStats
 var Fr : bool
 
 var CurrentCardShown : Card
+
+func DoFloater(text : String, col : Color = Color(1,1,1)) -> void:
+	var DFloater = floaterScene.instantiate() as Floater
+	DFloater.text = text
+	DFloater.modulate = col
+	add_child(DFloater)
+	DFloater.global_position = (global_position + (size / 2)) - DFloater.size / 2
 
 func Destroy() -> void:
 	Destroyed = true

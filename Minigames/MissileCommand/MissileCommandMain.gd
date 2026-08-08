@@ -19,7 +19,7 @@ func _ready() -> void:
 
 func SpawnMenu() -> void:
 	Menu = MainMenuScene.instantiate()
-	$PanelContainer/SubViewportContainer/SubViewport.add_child(Menu)
+	$SubViewportContainer/SubViewport.add_child(Menu)
 	Menu.ExitPressed.connect(ExitPressed)
 	Menu.LevelStarted.connect(LevelSelected)
 	
@@ -28,12 +28,12 @@ func LevelSelected(LevelNumber : int) -> void:
 	if (LevelNumber == -1):
 		CurrentEndlessLevel = EndlessLevelScene.instantiate()
 		CurrentEndlessLevel.LevelFinished.connect(EndlessLevelFinished)
-		$PanelContainer/SubViewportContainer/SubViewport.add_child(CurrentEndlessLevel)
+		$SubViewportContainer/SubViewport.add_child(CurrentEndlessLevel)
 	else:
 		CurrentLevel = LevelScene.instantiate()
 		CurrentLevel.LevelFinished.connect(LevelFinished)
 		CurrentLevel.SetDificulty(LevelNumber)
-		$PanelContainer/SubViewportContainer/SubViewport.add_child(CurrentLevel)
+		$SubViewportContainer/SubViewport.add_child(CurrentLevel)
 
 func LevelFinished() -> void:
 	CurrentLevel.queue_free()
@@ -54,7 +54,7 @@ func _input(event: InputEvent) -> void:
 			return
 		
 		PMenu = PauseScene.instantiate()
-		$PanelContainer/SubViewportContainer/SubViewport.add_child(PMenu)
+		$SubViewportContainer/SubViewport.add_child(PMenu)
 		PMenu.ContinuePressed.connect(UnpausePressed)
 		PMenu.ExitPressed.connect(ExitPressed)
 		PMenu.ExitToMenuPressed.connect(ExitToMenuPressed)

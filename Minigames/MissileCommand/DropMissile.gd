@@ -54,7 +54,7 @@ func _physics_process(delta: float) -> void:
 	
 func Explode() -> void:
 	set_physics_process(false)
-	Text.queue_free()
+	#Text.queue_free()
 	ExplosionParticle.emitting = true
 	#Area.monitoring = true
 	EnemyKilled.emit(self, false)

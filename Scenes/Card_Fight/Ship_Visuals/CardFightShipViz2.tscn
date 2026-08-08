@@ -3,6 +3,7 @@
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_ydw5a"]
 [ext_resource type="Script" uid="uid://cgsbkqrd6pbkq" path="res://Scenes/Card_Fight/Ship_Visuals/card_fight_ship_viz_2.gd" id="2_ydw5a"]
 [ext_resource type="Texture2D" uid="uid://b870cywtujqjn" path="res://Assets/Cards/Arrow.png" id="3_avrvh"]
+[ext_resource type="PackedScene" uid="uid://mxfnm7hywo4f" path="res://Scenes/Old/damage_floater.tscn" id="3_ej477"]
 [ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/ShipTextures/Ship3_001.png" id="3_mg5jy"]
 [ext_resource type="StyleBox" uid="uid://cq66xt1psso06" path="res://Theme/GreyPanel.tres" id="4_0orxy"]
 [ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scenes/Card_Fight/External_UI/CardHandContainer.gd" id="4_cmntb"]
@@ -193,6 +194,7 @@ size_flags_vertical = 4
 theme = ExtResource("1_ydw5a")
 script = ExtResource("2_ydw5a")
 CardScene = "res://Scenes/Card_Fight/Card/Card.tscn"
+floaterScene = ExtResource("3_ej477")
 ShipNameLabel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer/Label")
 ShipIcon = NodePath("HBoxContainer/Control/TextureRect")
 HullBar = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/ProgressBar")

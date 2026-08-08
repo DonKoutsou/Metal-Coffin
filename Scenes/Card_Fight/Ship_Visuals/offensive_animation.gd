@@ -10,7 +10,6 @@ signal AnimationFinished
 @export var CardScene : PackedScene
 @export var DamageFloater : PackedScene
 
-@export_file("*.tscn") var ShipVizFile : String
 @export_file("*.tscn") var AtackVisualFile : String
 @export_file("*.tscn") var DefVisualFile : String
 @export_file("*.tscn") var CardVisualFile : String
@@ -394,20 +393,6 @@ func DoDraw(User : Control) -> void:
 	AnimationFinished.emit()
 	Fin = true
 	queue_free()
-
-func DoFire(OriginShip : BattleShipStats, FriendShip : bool) -> void:
-	var ShipViz : PackedScene = ResourceLoader.load(ShipVizFile)
-	var Ship = ShipViz.instantiate() as CardFightShipViz
-	Ship.disabled = true
-	Ship.SetStatsAnimation(OriginShip, FriendShip)
-	$HBoxContainer.add_child(Ship)
-	
-	Ship.ToggleFire(true)
-	var d = DamageFloater.instantiate() as Floater
-	d.text = "Fire Damage"
-	add_child(d)
-	d.global_position = (Ship.global_position + (Ship.size / 2)) - d.size / 2
-	d.Ended.connect(AnimEnded)
 
 var Finished : bool = false
 

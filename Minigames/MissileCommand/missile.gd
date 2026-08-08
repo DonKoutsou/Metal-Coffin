@@ -1,6 +1,6 @@
 extends Node2D
 
-class_name Missile
+class_name MC_Missile
 
 @export var Speed : float
 @export var Text : Node2D

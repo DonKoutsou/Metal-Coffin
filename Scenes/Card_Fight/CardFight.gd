@@ -85,7 +85,7 @@ var EnemyCasualties : Array[BattleShipStats]
 
 #Once a ship pickes a move its saved here and this list is used to perform the action on the action perform phase
 var ActionList = CardFightActionList.new()
-
+var PassiveList = CardfightPassiveList.new()
 
 var SelectingTarget : bool = false
 var EnemyPickingMove : bool = false
@@ -133,12 +133,15 @@ func _ready() -> void:
 		EnemyCombatants.append(NewCombatant)
 		EnemyReserves.erase(NewCombatant)
 		CreateShipVisuals(NewCombatant, false)
+		PassiveList.AddShip(NewCombatant)
+		
 	var PlReservesAmm : int = PlayerReserves.size()
 	for g in min(MaxCombatants, PlReservesAmm):
 		var NewCombatant = PlayerReserves.pop_front()
 		PlayerCombatants.append(NewCombatant)
 		PlayerReserves.erase(NewCombatant)
 		CreateShipVisuals(NewCombatant, true)
+		PassiveList.AddShip(NewCombatant)
 
 	ShipTurns.append_array(EnemyCombatants)
 	ShipTurns.append_array(PlayerCombatants)
@@ -258,6 +261,8 @@ func CreateDecks() -> void:
 ##----------------------------------------------------------------------##
 func CardDrawn(C : CardStats) -> void:
 	var Performer = GetCurrentShip()
+	
+	PassiveList.OnActionPerformed(Card_Passive.ActionType.CARD_DRAW, Performer)
 	
 	if (!Performer.Friendly):
 		PlaceCardInEnemyHand(Performer, C)
@@ -1085,6 +1090,7 @@ func OnFightEnded(Won : bool) -> void:
 	
 	CardFightDestroyed.emit()
 	#queue_free()
+	
 ##----------------------------------------------------------------------##
 #/////////////////////////////////////////////////////////////////////
 #██   ██  █████  ███    ██ ██████  ██      ███████ ██████  ███████ 
@@ -1196,6 +1202,9 @@ func HandleModulesPl(Performer : BattleShipStats, C : CardStats, targetOverride 
 		else:
 			targets = await HandleTargets(C.OnPerformModule, Performer)
 		await HandleOffensiveModule(Performer, C ,C.OnPerformModule, targets)
+	
+	if (C.Passive != null):
+		PassiveList.AddPassive(Performer, C.Passive)
 		
 	if (AnimData.size() > 0):
 		await DoCardAnim(C, AnimData, Performer, true)
