@@ -23,6 +23,7 @@ class_name CardFightShipViz2
 @export var SPDLabel : RichTextLabel
 @export var HasMovePanel : Control
 @export var ActionParent : Control
+@export var PassiveParent : Control
 @export var ShadowPivot : Control
 
 @export var DefBuff : GPUParticles2D
@@ -110,6 +111,7 @@ func _ready() -> void:
 	#Destroy()
 	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2.visible = false
 	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3.visible = false
+	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PassiveParent.visible = false
 	ToggleFire(false)
 	set_physics_process(false)
 
@@ -183,7 +185,18 @@ func ActionPicked(C : CardStats, Targets : Array[BattleShipStats] = []) -> void:
 	TexNode.mouse_exited.connect(ActionUnhovered.bind())
 	ActionParent.add_child(TexNode)
 
-func ActionHovered(C : CardStats, Targets : Array[BattleShipStats]) -> void:
+func PassiveAdded(C : CardStats) -> void:
+	var TexNode = TextureRect.new()
+	TexNode.texture = C.Icon
+	TexNode.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	TexNode.custom_minimum_size = Vector2(38,22)
+	TexNode.mouse_filter = Control.MOUSE_FILTER_PASS
+	TexNode.mouse_entered.connect(ActionHovered.bind(C))
+	TexNode.mouse_exited.connect(ActionUnhovered.bind())
+	TexNode.modulate = Color("f58800ff")
+	PassiveParent.add_child(TexNode)
+
+func ActionHovered(C : CardStats, Targets : Array[BattleShipStats] = []) -> void:
 	if (ExternalCardFightUI.HOLDING_CARD):
 		return
 	var targetlocs : Array[Vector2] = []
@@ -333,13 +346,14 @@ func _on_panel_container_2_mouse_entered() -> void:
 	tw = create_tween()
 	tw.set_ease(Tween.EASE_OUT)
 	tw.set_trans(Tween.TRANS_BACK)
-	tw.tween_property($HBoxContainer/VBoxContainer/PanelContainer2, "custom_minimum_size", Vector2(0,97), 0.15)
+	tw.tween_property($HBoxContainer/VBoxContainer/PanelContainer2, "custom_minimum_size", Vector2(0,119), 0.15)
 	tw.finished.connect(ToggleStatVisibility.bind(true))
 	Hovered.emit()
 
 func ToggleStatVisibility(t : bool) -> void:
 	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2.visible = t
 	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3.visible = t
+	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PassiveParent.visible = t
 
 
 func _on_panel_container_2_mouse_exited() -> void:

@@ -13,6 +13,7 @@ signal Shuffling(t : bool)
 signal PileChanged(t : bool)
 signal DiscardChanged(t : bool)
 signal OnCardDrawn(C : CardStats)
+signal OnCardDiscarded(C : CardStats)
 signal MultiCardDrawn(DrawnCards : Array[CardStats], discardAmm : int)
 signal MultiSpecificDrawn(DrawnCards : Array[CardStats])
 
@@ -42,14 +43,14 @@ func DrawMulti(drawAmm : int, discardAmm : int) -> void:
 		
 	MultiCardDrawn.emit(DrawnCards, discardAmm)
 
-func DrawCard() -> bool:
+func DrawCard(Manual : bool = false) -> bool:
 	if (DeckPile.size() <= 0):
 		await ShuffleDiscardedIntoDeck()
 	if (DeckPile.size() <= 0):
 		return false
 	var C = DeckPile.pop_front()
 	PileChanged.emit(false)
-	OnCardDrawn.emit(C)
+	OnCardDrawn.emit(C, Manual)
 	return true
 
 func DrawSpecific(C : CardStats) -> void:
@@ -70,7 +71,7 @@ func DrawSpecific(C : CardStats) -> void:
 		return
 	
 	PileChanged.emit(false)
-	OnCardDrawn.emit(C)
+	OnCardDrawn.emit(C, false)
 
 func DrawSpecificFromList(list : Array[CardStats]) -> void:
 	if (DeckPile.size() <= 0):
@@ -92,7 +93,7 @@ func DrawSpecificFromList(list : Array[CardStats]) -> void:
 	var cardToDraw = PossibleDraws.pick_random()
 	DeckPile.erase(cardToDraw)
 	PileChanged.emit(false)
-	OnCardDrawn.emit(cardToDraw)
+	OnCardDrawn.emit(cardToDraw, false)
 
 func DrawSingleOfType(type : CardStats.CardType) -> void:
 	var PossibleCards : Array[CardStats]
@@ -113,12 +114,13 @@ func DrawSingleOfType(type : CardStats.CardType) -> void:
 func TestCard(Mod : CardStats, testType : CardStats.CardType) -> bool:
 	return Mod.Type == testType
 
-func DiscardCard(C : CardStats) -> void:
+func DiscardCard(C : CardStats, Manual : bool = false) -> void:
 	if (friendly):
 		PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
 	DiscardPile.append(C)
 	C.EnergyReduction = 0
 	DiscardChanged.emit(true)
+	OnCardDiscarded.emit(C, Manual)
 
 func ShuffleDiscardedIntoDeck(DoAnim : bool = true) -> void:
 	if (friendly):

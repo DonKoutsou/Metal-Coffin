@@ -7,6 +7,7 @@ class_name ShipDeckViz
 @export var OffensiveCardPosition : Control
 @export var DeffencsiveCardPosition : Control
 @export var UtilityCardPosition : Control
+@export var PowerCardPosition : Control
 
 var CurrentlyShownCharacter : Captain
 
@@ -52,6 +53,9 @@ func SetDeck(Ch : Captain) -> void:
 		PooledCards.append(g)
 		UtilityCardPosition.remove_child(g)
 		#g.queue_free()
+	for g in PowerCardPosition.get_children():
+		PooledCards.append(g)
+		PowerCardPosition.remove_child(g)
 	
 	
 	
@@ -77,6 +81,8 @@ func GetParentForCard(C : CardStats) -> Control:
 			return DeffencsiveCardPosition
 		CardStats.CardType.UTILITY:
 			return UtilityCardPosition
+		CardStats.CardType.POWER:
+			return PowerCardPosition
 	return null
 
 func Clear() -> void:

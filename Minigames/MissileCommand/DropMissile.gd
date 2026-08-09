@@ -47,6 +47,8 @@ func _physics_process(delta: float) -> void:
 	global_position += Direction * (Speed * delta)
 	if (CurveOff):
 		Direction = Direction.rotated((global_position.direction_to(TargetPosition).angle() - Direction.angle()) / 100)
+	if (position.y > get_viewport_rect().size.y):
+		Explode()
 	#Direction.move_toward(global_position.direction_to(Target.global_position), 1000)
 	#global_position = global_position.move_toward(Target.global_position, delta * Speed)
 	#if (global_position == Target.global_position):

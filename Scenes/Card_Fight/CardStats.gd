@@ -111,62 +111,60 @@ static func FindTooltips(card : CardStats) -> PackedStringArray:
 	var tips : PackedStringArray = []
 	
 	if (card.IsDisposition):
-		tips.append(ToolTips["DISP"])
+		tips.append("TLTP_DISPOSITION")
+	
+	if (card.Type == CardStats.CardType.POWER):
+		tips.append("TLTP_POWER")
 	
 	if (card.PutOnTop):
-		tips.append(ToolTips["SWIFT"])
+		tips.append("TLTP_SWIFT")
 	
 	for g in card.OnUseModules:
 		if (g is DeffenceCardModule):
 			if (g.AOE):
 				if (!g.SelfUse):
-					tips.append(ToolTips["SELF_EXC"])
-				tips.append(ToolTips["AOE"])
-	
-	#for g in words:
-		#if (ToolTips.has(g)):
-			#tips.append(ToolTips[g])
+					tips.append("TLTP_SELF_EXC")
+				tips.append("TLTP_AOE")
 			
 	if (card.OnUseModules.size() > 0):
 		for g in card.OnUseModules:
 			if (g is FireExtinguishModule):
-				tips.append(ToolTips["FIRE"])
-		tips.append(ToolTips["ONUSE"])
+				tips.append("TLTP_FIRE")
+		tips.append("TLTP_ONUSE")
 	if (card.OnDiscardModules.size() > 0):
-		tips.append(ToolTips["ONDISC"])
+		tips.append("TLTP_ONDISC")
 	if (card.UseConditions.has(CardStats.CardUseCondition.ENERGY_DEPENDANT)):
-		tips.append(ToolTips["ENDEP"])
+		tips.append("TLTP_ENDEP")
 
 	var perfModule = card.OnPerformModule
 	if (perfModule != null):
 		if (perfModule is OffensiveCardModule):
 			if (perfModule.AOE):
-				tips.append(ToolTips["AOE"])
+				tips.append("TLTP_AOE")
 				
 			if (perfModule.OnSuccesfullAtackModules.size() > 0):
 				if (perfModule.forEachHit):
-					tips.append(ToolTips["PERHIT"])
+					tips.append("TLTP_PERHIT")
 				else:
-					tips.append(ToolTips["ONHIT"])
+					tips.append("TLTP_ONHIT")
 			
 			if (perfModule.OnUnSuccesfullAtackModules.size() > 0):
 				if (perfModule.forEachMis):
-					tips.append(ToolTips["ONMISS"])
+					tips.append("TLTP_ONMISS")
 				else:
-					tips.append(ToolTips["PERMISS"])
+					tips.append("TLTP_PERMISS")
 				
 		if (perfModule is CounterCardModule):
 			if (perfModule.OnSuccesfullDeffenceModules.size() > 0):
-				tips.append(ToolTips["ONCOUNTER"])
+				tips.append("TLTP_ONCOUNTER")
 			if (perfModule.CounterType == OffensiveCardModule.AtackTypes.DIRECT_ATTACK):
-				tips.append(ToolTips["COUNTER_DIR"])
+				tips.append("TLTP_COUNTER_DIR")
 			if (perfModule.CounterType == OffensiveCardModule.AtackTypes.HOMING_ATTACK):
-				tips.append(ToolTips["COUNTER_HOM"])
+				tips.append("TLTP_COUNTER_HOM")
 			
 		if (perfModule is DamageReductionCardModule):
 			if (perfModule.CounterType == OffensiveCardModule.AtackTypes.ANY_ATACK):
-				tips.append(ToolTips["DMG_RDC_ANY"])
-			
+				tips.append("TLTP_DMG_RDC_ANY")
 	
 	return tips
 
@@ -174,28 +172,7 @@ static func strip_bbcode(source:String) -> String:
 	var regex = RegEx.new()
 	regex.compile("\\[.+?\\]")
 	return regex.sub(source, "", true)
-
-const ToolTips : Dictionary[String, String] = {
-	"FIRE" : "TLTP_FIRE",
-	"ONUSE" : "TLTP_ONUSE",
-	"ONDISC" : "TLTP_ONDISC",
-	"ONCOUNTER" : "TLTP_ONCOUNTER",
-	"ONHIT" : "TLTP_ONHIT",
-	"PERHIT" : "TLTP_PERHIT",
-	"ONMISS" : "TLTP_ONMISS",
-	"PERMISS" : "TLTP_PERMISS",
-	"Shield" : "TLTP_SHIELD",
-	"ENDEP" : "TLTP_ENDEP",
-	"UNAVOIDABLE" : "TLTP_UNAVOIDABLE",
-	"AOE" : "TLTP_AOE",
-	"SELF_EXC" : "TLTP_SELF_EXC",
-	"COUNTER_DIR" : "TLTP_COUNTER_DIR",
-	"COUNTER_HOM" : "TLTP_COUNTER_HOM",
-	"DMG_RDC_ANY" : "TLTP_DMG_RDC_ANY",
-	"SWIFT" : "TLTP_SWIFT",
-	"DISP" : "TLTP_DISPOSITION",
-}
-
+	
 enum WeaponType{
 	NONE,
 	MG_100mm,
@@ -209,7 +186,8 @@ enum WeaponType{
 enum CardType {
 	OFFENSIVE,
 	DEFFENSIVE,
-	UTILITY
+	UTILITY,
+	POWER,
 }
 
 enum CardUseCondition{

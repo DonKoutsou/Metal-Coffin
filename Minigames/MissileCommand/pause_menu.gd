@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-class_name PauseMenu
+class_name MC_PauseMenu
 
 signal ContinuePressed
 signal ExitToMenuPressed

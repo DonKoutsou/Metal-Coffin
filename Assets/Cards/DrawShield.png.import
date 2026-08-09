@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xd6axehcm6jm"
-path="res://.godot/imported/card2.png-d79e46925f0d72498ce4d348b50d4e05.ctex"
+uid="uid://w2odhvsxkpx0"
+path="res://.godot/imported/DrawShield.png-ffffff301f1507e47393a9bea517f417.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Cards/card2.png"
-dest_files=["res://.godot/imported/card2.png-d79e46925f0d72498ce4d348b50d4e05.ctex"]
+source_file="res://Assets/Cards/DrawShield.png"
+dest_files=["res://.godot/imported/DrawShield.png-ffffff301f1507e47393a9bea517f417.ctex"]
 
 [params]
 
@@ -24,7 +24,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

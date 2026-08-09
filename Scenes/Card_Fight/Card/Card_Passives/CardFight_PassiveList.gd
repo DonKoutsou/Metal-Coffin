@@ -12,10 +12,10 @@ func GetShipsActions(Ship : BattleShipStats) -> Array:
 		return []
 	return List[Ship]
 
-func AddPassive(Instigator : BattleShipStats, Passive : Card_Passive) -> void:
+func AddPassive(Instigator : BattleShipStats, Passive : CardStats) -> void:
 	List[Instigator].append(Passive)
 
-func RemovePassiveFromShip(Ship : BattleShipStats, Passive : Card_Passive) -> void:
+func RemovePassiveFromShip(Ship : BattleShipStats, Passive : CardStats) -> void:
 	List[Ship].erase(Passive)
 
 func AddShip(Ship : BattleShipStats) -> void:
@@ -27,7 +27,12 @@ func RemoveShip(Ship : BattleShipStats) -> void:
 func Clear() -> void:
 	List.clear()
 
-func OnActionPerformed(actionType : Card_Passive.ActionType, Performer : BattleShipStats) -> void:
+func OnActionPerformed(data : Dictionary) -> Array[PassiveAnimationData]:
+	var Anim : Array[PassiveAnimationData] = []
 	for ship : BattleShipStats in List:
-		for passive : Card_Passive in List[ship]:
-			passive.OnActionPerformed(actionType, Performer, ship)
+		for card : CardStats in List[ship]:
+			var anim : PassiveAnimationData = card.Passive.OnActionPerformed(data, ship)
+			if (anim != null):
+				anim.OriginalCard = card
+				Anim.append(anim)
+	return Anim

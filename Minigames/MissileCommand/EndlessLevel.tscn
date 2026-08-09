@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://nl0uqvuk06ns" path="res://Minigames/MissileCommand/building.tscn" id="5_64uwr"]
 [ext_resource type="PackedScene" uid="uid://ed8nd44sxy2i" path="res://Minigames/MissileCommand/gunner.tscn" id="5_p6ctr"]
 
-[node name="Main" type="Control" unique_id=1840972905 node_paths=PackedStringArray("ScoreLabel", "SpawnTimer")]
+[node name="Main" type="Control" unique_id=1840972905 node_paths=PackedStringArray("ScoreLabel", "FinalScoreLabel", "SpawnTimer")]
 process_mode = 1
 layout_mode = 3
 anchors_preset = 15
@@ -20,6 +20,7 @@ FastDropMissileScene = ExtResource("2_dmqvf")
 DropMissileScene = ExtResource("3_mgjno")
 Planes = ExtResource("4_dmqvf")
 ScoreLabel = NodePath("Label")
+FinalScoreLabel = NodePath("Label2")
 SpawnTimer = NodePath("SpawnTimer")
 
 [node name="SpawnTimer" type="Timer" parent="." unique_id=429984909]
@@ -101,4 +102,38 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 
+[node name="Label2" type="Label" parent="." unique_id=1378311005]
+visible = false
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -10.0
+offset_right = 20.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 34
+text = "FINAL SCORE 10000"
+
+[node name="Button" type="Button" parent="Label2" unique_id=298356953]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = 26.0
+offset_right = 46.0
+offset_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "FINISH"
+
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="pressed" from="Label2/Button" to="." method="_on_button_pressed"]

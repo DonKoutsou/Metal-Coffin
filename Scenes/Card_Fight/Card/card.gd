@@ -8,7 +8,6 @@ class_name Card
 @export var CardCost : Label
 @export var CardTex : TextureRect
 @export var But : Button
-@export var DispBut : Button
 @export var Lines : Array[Line2D]
 @export var CardTypeEmblem : Panel
 @export var FrontSide : Control
@@ -16,6 +15,14 @@ class_name Card
 @export var Line : Line2D
 @export var AmmountLabel : Label
 @export var TooltipPos : Control
+
+@export_group("CardTypes")
+@export var NormalCardColors : StyleBox
+@export var DispositionCardColors : StyleBox
+@export var PowerCardColors : StyleBox
+@export var NormalCardTexture : Texture
+@export var DispositionCardTexture : Texture
+@export var PowerCardTexture : Texture
 
 @export_group("Settings")
 @export var TooltipScene : PackedScene
@@ -40,7 +47,6 @@ var isStatic : bool = false
 var TrackMouse : bool = false
 var mat : ShaderMaterial
 
-var disp : bool = false
 var dirTw : Tween
 var TweenHover : Tween
 
@@ -151,13 +157,22 @@ func UpdatePersp(v : float) -> void:
 #--------------------------------------------------------------
 func SetCardStats(Stats : CardStats, Amm : int = 0) -> void:
 	CStats = Stats
-	disp = Stats.IsDisposition
 	var Cost = Stats.GetCost()
 	var DescText =  "[center] {0}".format([Stats.GetDescription()])
 	
-	But.visible = !disp
-	DispBut.visible = disp
-	
+	if (Stats.Passive != null):
+		But.add_theme_stylebox_override("normal", PowerCardColors)
+		But.add_theme_stylebox_override("disabled", PowerCardColors)
+		$SubViewportContainer/SubViewport/TextureRect.texture = PowerCardTexture
+	else: if (Stats.IsDisposition):
+		But.add_theme_stylebox_override("normal", DispositionCardColors)
+		But.add_theme_stylebox_override("disabled", DispositionCardColors)
+		$SubViewportContainer/SubViewport/TextureRect.texture = DispositionCardTexture
+	else:
+		But.add_theme_stylebox_override("normal", NormalCardColors)
+		But.add_theme_stylebox_override("disabled", NormalCardColors)
+		$SubViewportContainer/SubViewport/TextureRect.texture = NormalCardTexture
+
 	CardName.text = Stats.GetCardName()
 	CardTex.texture = Stats.Icon
 	
@@ -173,6 +188,8 @@ func SetCardStats(Stats : CardStats, Amm : int = 0) -> void:
 		CardTypeEmblem.modulate = Color("ff3c22")
 	else : if (Stats.Type == CardStats.CardType.DEFFENSIVE):
 		CardTypeEmblem.modulate = Color("6be2e9")
+	else : if (Stats.Type == CardStats.CardType.POWER):
+		CardTypeEmblem.modulate = Color("f58800")
 	else:
 		CardTypeEmblem.modulate = Color("8db354")
 	#if (Stats.OnPerformModule is OffensiveCardModule):
@@ -182,11 +199,20 @@ func SetCardStats(Stats : CardStats, Amm : int = 0) -> void:
 #SetCardStats duplicate, used durring battles
 func SetCardBattleStats(User : BattleShipStats, Stats : CardStats, Amm : int = 0) -> void:
 	CStats = Stats
-	disp = Stats.IsDisposition
-	#var Cost = Stats.GetCost()
-	But.visible = !disp
-	DispBut.visible = disp
 	
+	if (Stats.Passive != null):
+		But.add_theme_stylebox_override("normal", PowerCardColors)
+		But.add_theme_stylebox_override("disabled", PowerCardColors)
+		$SubViewportContainer/SubViewport/TextureRect.texture = PowerCardTexture
+	else: if (Stats.IsDisposition):
+		But.add_theme_stylebox_override("normal", DispositionCardColors)
+		But.add_theme_stylebox_override("disabled", DispositionCardColors)
+		$SubViewportContainer/SubViewport/TextureRect.texture = DispositionCardTexture
+	else:
+		But.add_theme_stylebox_override("normal", NormalCardColors)
+		But.add_theme_stylebox_override("disabled", NormalCardColors)
+		$SubViewportContainer/SubViewport/TextureRect.texture = NormalCardTexture
+		
 	ShownCost = GetBattleCost(User, Stats)
 	if (Stats.Burned):
 		CardName.text = "Burned"
@@ -210,6 +236,8 @@ func SetCardBattleStats(User : BattleShipStats, Stats : CardStats, Amm : int = 0
 		CardTypeEmblem.modulate = Color("ff3c22")
 	else : if (Stats.Type == CardStats.CardType.DEFFENSIVE):
 		CardTypeEmblem.modulate = Color("6be2e9")
+	else : if (Stats.Type == CardStats.CardType.POWER):
+		CardTypeEmblem.modulate = Color("f58800")
 	else:
 		CardTypeEmblem.modulate = Color("8db354")
 
@@ -267,12 +295,11 @@ func GetBattleCost(User : BattleShipStats, Stats : CardStats) -> int:
 
 #--------------------------------------------------------------
 func SetRealistic() -> void:
-	$SubViewportContainer/SubViewport/TextureRect.visible = !disp
-	$SubViewportContainer/SubViewport/DispTex.visible = disp
+	$SubViewportContainer/SubViewport/TextureRect.visible = true
+	
 	$SubViewportContainer/SubViewport/Panel.visible = false
 	$SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer/CardCost/TextureRect.visible = false
 	But.visible = false
-	DispBut.visible = false
 	$SubViewportContainer/SubViewport.set_deferred("render_target_update_mode",  SubViewport.UPDATE_ONCE)
 	
 	CardName.add_theme_font_override("normal_font", RealisticFont)

@@ -179,6 +179,7 @@ func IntroDeclarationFinished() -> void:
 		ActionTracker.QueueTutorial(ActionTracker.Action.CARD_FIGHT)
 	
 	call_deferred("RunTurn")
+	
 ##----------------------------------------------------------------------##
 func ReplaceShip(Ship : BattleShipStats, TurnPosition : int, Friendly : bool) -> void:
 	ActionList.RemoveShip(Ship)
@@ -256,13 +257,23 @@ func CreateDecks() -> void:
 			D.DiscardChanged.connect(DiscardPileChanged)
 			D.PileChanged.connect(DeckPileChanged)
 		D.OnCardDrawn.connect(CardDrawn)
+		D.OnCardDiscarded.connect(CardDiscarded)
 		D.MultiCardDrawn.connect(MultiCardDrawn)
 		D.MultiSpecificDrawn.connect(MultiSpcificCardDrawn)
+		
 ##----------------------------------------------------------------------##
-func CardDrawn(C : CardStats) -> void:
+func CardDrawn(C : CardStats, Manually : bool) -> void:
 	var Performer = GetCurrentShip()
+	var data : Dictionary = {
+		"actionType" : Card_Passive.ActionType.CARD_DRAW,
+		"Performer" : Performer,
+		"ManualDraw" : Manually,
+	}
 	
-	PassiveList.OnActionPerformed(Card_Passive.ActionType.CARD_DRAW, Performer)
+	var AnimData = PassiveList.OnActionPerformed(data)
+	if (AnimData.size() > 0):
+		for g in AnimData:
+			DoCardAnim(g.OriginalCard, [g], g.Performer, g.Performer.Friendly)
 	
 	if (!Performer.Friendly):
 		PlaceCardInEnemyHand(Performer, C)
@@ -276,7 +287,29 @@ func CardDrawn(C : CardStats) -> void:
 		if (!Placed):
 			c.queue_free()
 		
-		
+
+func CardDiscarded(C : CardStats, Manually : bool) -> void:
+	var Performer = GetCurrentShip()
+	var data : Dictionary = {
+		"actionType" : Card_Passive.ActionType.CARD_DISCARD,
+		"Performer" : Performer,
+		"ManualDraw" : Manually,
+	}
+	
+	var AnimData = PassiveList.OnActionPerformed(data)
+	if (AnimData.size() > 0):
+		for g in AnimData:
+			DoCardAnim(g.OriginalCard, [g], g.Performer, g.Performer.Friendly)
+	
+	if (Manually):
+		StoredEnergy += 1
+		if (StoredEnergy == 2):
+			StoredEnergy = 0
+			Performer.SetEnergy(Performer.Energy + 1)
+			PopUpManager.GetInstance().DoFadeNotif("Card recycled")
+	
+	HandleDiscardModules(Performer, C)
+
 ##----------------------------------------------------------------------##
 func MultiSpcificCardDrawn(DrawnCards : Array[CardStats]) -> void:
 	var Performer = GetCurrentShip()
@@ -492,17 +525,9 @@ func OnCardDiscarded(C : Card, manually : bool = false) -> bool:
 	
 	var Ship = GetCurrentShip()
 	
-	if (manually):
-		StoredEnergy += 1
-		if (StoredEnergy == 2):
-			StoredEnergy = 0
-			Ship.SetEnergy(Ship.Energy + 1)
-			PopUpManager.GetInstance().DoFadeNotif("Card recycled")
-	
 	Ship.deck.Hand.erase(C.CStats)
-	Ship.deck.DiscardCard(C.CStats)
+	Ship.deck.DiscardCard(C.CStats, manually)
 	ExternalUI.UpdateCardsInHandAmm(Ship.deck.Hand.size(), MaxCardsInHand)
-	HandleDiscardModules(Ship, C.CStats)
 	return true
 ##----------------------------------------------------------------------##
 func OnCardSelected(C : Card, target : BattleShipStats = null) -> bool:
@@ -686,7 +711,7 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 		return Acts
 		
 	while (AvailableActions.size() > 0):
-		var Action = (AvailableActions.pick_random() as CardStats)
+		var Action : CardStats = AvailableActions.pick_random()
 		var ActionCost = Action.Energy
 		if (Action.Burned):
 			ActionCost = 0
@@ -698,7 +723,10 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 
 		else: if (ActionCost > Ship.Energy):
 			print("{0} cant use {1}, not enough energy".format([Ship.Name, Action.GetCardName()]))
+			Ship.deck.Hand.erase(Action)
+			Ship.deck.DiscardCard(Action, true)
 			AvailableActions.erase(Action)
+			
 			AvailableActions = await t.call(AvailableActions)
 			
 		else : if (Action.UseConditions.has(CardStats.CardUseCondition.ON_FIRE)):
@@ -1204,7 +1232,8 @@ func HandleModulesPl(Performer : BattleShipStats, C : CardStats, targetOverride 
 		await HandleOffensiveModule(Performer, C ,C.OnPerformModule, targets)
 	
 	if (C.Passive != null):
-		PassiveList.AddPassive(Performer, C.Passive)
+		PassiveList.AddPassive(Performer, C)
+		Performer.ShipViz.PassiveAdded(C)
 		
 	if (AnimData.size() > 0):
 		await DoCardAnim(C, AnimData, Performer, true)
@@ -1286,7 +1315,7 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 				else:
 					tar.append(Performer)
 				var DamageReduction = Mod.GetFinalDamage(Performer,Action.Tier) * CounterMod.GetReductionPercent(Def.Tier)
-				var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Performer,Action.Tier) - DamageReduction, Mod.CauseFile, Mod.SkipShield)
+				var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Performer,Action.Tier) - DamageReduction, Mod.CauseFile, Mod.SkipShield, Performer)
 				DamageCallables.append(c)
 				for SDefMod in CounterMod.OnSuccesfullDeffenceModules:
 					AnimData.append(HandleModule(g, Def, SDefMod, tar))
@@ -1303,12 +1332,12 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 					AnimData.append(HandleModule(g, Def, SDefMod, tar))
 					
 			else:
-				var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Performer,Action.Tier), Mod.CauseFile, Mod.SkipShield)
+				var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Performer,Action.Tier), Mod.CauseFile, Mod.SkipShield, Performer)
 				DamageCallables.append(c)
 		else:
 			AtackConnected = true
 			currentConnected = true
-			var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Performer,Action.Tier), Mod.CauseFile, Mod.SkipShield)
+			var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Performer,Action.Tier), Mod.CauseFile, Mod.SkipShield, Performer)
 			DamageCallables.append(c)
 		
 		#Apply effects based on if card was connected or not
@@ -1498,7 +1527,7 @@ func HandleDrawCard(Performer : BattleShipStats, ConsumeEnergy : bool = false) -
 		PopUpManager.GetInstance().DoFadeNotif("Shuffling in progress")
 		return false
 	
-	if (!await Performer.deck.DrawCard()):
+	if (!await Performer.deck.DrawCard(ConsumeEnergy)):
 		return false
 	
 	if (ConsumeEnergy):
@@ -1652,7 +1681,7 @@ func IsShipFriendly(Ship : BattleShipStats) -> bool:
 #███████    ██    ██   ██    ██        ██      ██ ██   ██ ██   ████ ██ ██       ██████  ███████ ██   ██    ██    ██  ██████  ██   ████ 
 #////////////////////////////////////////////////////////////////////////////
 ##----------------------------------------------------------------------##
-func ShipDamaged(amm : float, Ship : BattleShipStats) -> void:
+func ShipDamaged(amm : float, shieldAmm : float, Instigator : BattleShipStats, Ship : BattleShipStats) -> void:
 	if (IsShipFriendly(Ship)):
 		
 		if (Ship.CurrentHull < 40 and !ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_SHIPLOSS)):
@@ -1664,6 +1693,19 @@ func ShipDamaged(amm : float, Ship : BattleShipStats) -> void:
 			UIEventH.OnControlledShipDamaged(amm)
 	else:
 		DamageDone += amm
+	
+	var Data : Dictionary = {
+		"actionType" : Card_Passive.ActionType.DAMAGED,
+		"Instigator" : Instigator,
+		"Receiver" : Ship,
+		"Damage": amm,
+		"ShieldDamage" : shieldAmm,
+	}
+	var AnimData = PassiveList.OnActionPerformed(Data)
+	if (AnimData.size() > 0):
+		for g in AnimData:
+			DoCardAnim(g.OriginalCard, [g], g.Performer, g.Performer.Friendly)
+	
 	if (Ship.CurrentHull <= 0):
 		ShipDestroyed(Ship)
 ##----------------------------------------------------------------------##

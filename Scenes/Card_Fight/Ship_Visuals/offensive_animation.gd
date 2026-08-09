@@ -28,6 +28,7 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 
 	var card = CardScene.instantiate() as Card
 	card.Dissable(true)
+	
 	card.SetCardBattleStats(Performer, AnimationCard)
 	$HBoxContainer.add_child(card)
 
@@ -42,6 +43,7 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 	if (!AnimationCard.Burned):
 		for AnimData in Data:
 			var Mod = AnimData.Mod
+			var Passive = AnimData.Passive
 			if (AnimData is OffensiveAnimationData):
 				var DeffenceList = AnimData.DeffenceList
 				for g in DeffenceList.values().size():
@@ -83,6 +85,14 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 			if (AnimData is DeffensiveAnimationData):
 
 				var TargetShips = AnimData.Targets
+				
+				if (Passive is ShieldOnDraw_Passive):
+					for Ship in TargetShips:
+						call_deferred("SpawnShieldVisual", Ship, card, "Shield +")
+				if (Passive is Thorns_Passive):
+					for Ship in TargetShips:
+						call_deferred("SpawnVisual", Ship, card, null, "Recoil")
+				
 				
 				if (Mod is BuffModule):
 					var BuffText = "{0} +".format([CardModule.Stat.keys()[Mod.StatToBuff]])

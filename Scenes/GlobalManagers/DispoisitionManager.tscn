@@ -4,13 +4,15 @@
 [ext_resource type="Script" uid="uid://b440ymk6opetf" path="res://Scenes/GlobalManagers/Dispotition.gd" id="2_s7tc1"]
 [ext_resource type="Script" uid="uid://brinqcu2jdpo8" path="res://Scenes/GlobalManagers/DispositionLevel.gd" id="3_5ev3m"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="4_5ev3m"]
-[ext_resource type="Resource" uid="uid://c1a7o5r1retgi" path="res://Resources/Cards/D_Energy.tres" id="5_5ev3m"]
+[ext_resource type="Resource" uid="uid://odkwy5rk0vxe" path="res://Resources/Cards/Powers/ShieldOnDraw.tres" id="5_5ev3m"]
+[ext_resource type="Resource" uid="uid://barj6en5mlnje" path="res://Resources/Cards/Powers/Thorns.tres" id="6_w74s6"]
 
 [sub_resource type="Resource" id="Resource_s7tc1"]
 script = ExtResource("3_5ev3m")
 DispoistionStage = 0.1
 Rewards = Dictionary[ExtResource("4_5ev3m"), int]({
-ExtResource("5_5ev3m"): 4
+ExtResource("5_5ev3m"): 1,
+ExtResource("6_w74s6"): 1
 })
 metadata/_custom_type_script = "uid://brinqcu2jdpo8"
 

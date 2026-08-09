@@ -175,7 +175,7 @@ gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_r755l")
 color_ramp = SubResource("GradientTexture1D_r755l")
 
-[node name="CardFightShipViz" type="Control" unique_id=718270550 node_paths=PackedStringArray("ShipNameLabel", "ShipIcon", "HullBar", "HullLabel", "ShieldBar", "TurnPanel", "SpeedBuff", "SpeedDeBuff", "FPBuff", "FPDeBuff", "FirePart", "ExplosionPart", "SmokePart", "FPLabel", "SPDLabel", "HasMovePanel", "ActionParent", "ShadowPivot", "DefBuff", "DefDeBuff", "WeightLabel", "DefenceLabel")]
+[node name="CardFightShipViz" type="Control" unique_id=718270550 node_paths=PackedStringArray("ShipNameLabel", "ShipIcon", "HullBar", "HullLabel", "ShieldBar", "TurnPanel", "SpeedBuff", "SpeedDeBuff", "FPBuff", "FPDeBuff", "FirePart", "ExplosionPart", "SmokePart", "FPLabel", "SPDLabel", "HasMovePanel", "ActionParent", "PassiveParent", "ShadowPivot", "DefBuff", "DefDeBuff", "WeightLabel", "DefenceLabel")]
 custom_minimum_size = Vector2(180, 100)
 layout_mode = 3
 anchors_preset = 8
@@ -211,7 +211,8 @@ SmokePart = NodePath("HBoxContainer/Control/TextureRect/Smoke")
 FPLabel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2/Label")
 SPDLabel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2/Label2")
 HasMovePanel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/Panel")
-ActionParent = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer")
+ActionParent = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/ActionParent")
+PassiveParent = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PassiveParent")
 ShadowPivot = NodePath("HBoxContainer/Control/TextureRect/ShadowPivot")
 DefBuff = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/DefBuff")
 DefDeBuff = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/DefDeBuff")
@@ -318,7 +319,7 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rmogf")
 
-[node name="PanelContainer" type="Container" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=913279673]
+[node name="ActionParent" type="Container" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=913279673]
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
 mouse_filter = 2
@@ -382,6 +383,13 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
+
+[node name="PassiveParent" type="Container" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=740590331]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("4_cmntb")
+metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 
 [node name="SpeedBuff" type="GPUParticles2D" parent="HBoxContainer/VBoxContainer/PanelContainer2" unique_id=1835526654]
 visible = false

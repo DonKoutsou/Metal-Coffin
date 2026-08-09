@@ -23,7 +23,7 @@ func _input(event: InputEvent) -> void:
 
 func TryShotAtPosition(Pos : Vector2) -> void:
 	var Closest : Gun
-	var Dist : float = 9999999999
+	var Dist : float = INF
 	for g in Guns:
 		if (g.CanShoot()):
 			var CurrentGunDist = g.global_position.distance_squared_to(Pos)

@@ -8,7 +8,7 @@ class_name MissileCommandMain
 @export var PauseScene : PackedScene
 
 var Menu : MainMenu
-var PMenu : PauseMenu
+var PMenu : MC_PauseMenu
 var CurrentLevel : Level
 var CurrentEndlessLevel : EndlessLevel
 

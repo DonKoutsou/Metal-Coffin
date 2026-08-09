@@ -75,11 +75,9 @@ process_material = SubResource("ParticleProcessMaterial_bg26n")
 stream = ExtResource("3_0tsf4")
 pitch_scale = 2.0
 autoplay = true
-bus = &"MapSounds"
 
 [node name="Explosion" type="AudioStreamPlayer2D" parent="." unique_id=750277119]
 stream = ExtResource("4_tfoha")
-bus = &"MapSounds"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="finished" from="Area2D/GPUParticles2D" to="." method="_on_gpu_particles_2d_finished"]

@@ -70,7 +70,7 @@ size_flags_vertical = 3
 layout_mode = 2
 StatsShown = Array[int]([4, 16, 15, 6, 7, 17, 3, 0, 1, 2, 9, 22])
 
-[node name="ShipDeck" type="VBoxContainer" parent="PanelContainer" unique_id=1467780086 node_paths=PackedStringArray("CharPortrait", "OffensiveCardPosition", "DeffencsiveCardPosition", "UtilityCardPosition")]
+[node name="ShipDeck" type="VBoxContainer" parent="PanelContainer" unique_id=1467780086 node_paths=PackedStringArray("CharPortrait", "OffensiveCardPosition", "DeffencsiveCardPosition", "UtilityCardPosition", "PowerCardPosition")]
 layout_mode = 2
 script = ExtResource("4_7pj6b")
 CharPortrait = NodePath("../CaptainIcon")
@@ -78,6 +78,7 @@ CardScene = ExtResource("5_gxgtf")
 OffensiveCardPosition = NodePath("ScrollContainer/VBoxContainer/HFlowContainer")
 DeffencsiveCardPosition = NodePath("ScrollContainer/VBoxContainer/HFlowContainer2")
 UtilityCardPosition = NodePath("ScrollContainer/VBoxContainer/HFlowContainer3")
+PowerCardPosition = NodePath("ScrollContainer/VBoxContainer/HFlowContainer4")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/ShipDeck" unique_id=591578839]
 clip_contents = false
@@ -138,6 +139,23 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="HFlowContainer3" type="HFlowContainer" parent="PanelContainer/ShipDeck/ScrollContainer/VBoxContainer" unique_id=967366652]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = -131
+alignment = 1
+last_wrap_alignment = 2
+
+[node name="Label4" type="Label" parent="PanelContainer/ShipDeck/ScrollContainer/VBoxContainer" unique_id=1851033404]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="HFlowContainer4" type="HFlowContainer" parent="PanelContainer/ShipDeck/ScrollContainer/VBoxContainer" unique_id=1225019300]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
