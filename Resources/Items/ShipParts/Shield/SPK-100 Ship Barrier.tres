@@ -35,7 +35,6 @@ metadata/_custom_type_script = "uid://dfaauelrksdv8"
 script = ExtResource("4_p5xd3")
 Upgrades = Array[ExtResource("3_c5tjm")]([SubResource("Resource_x8weo"), SubResource("Resource_8waow"), SubResource("Resource_2hja1"), SubResource("Resource_vv8tf")])
 UpgradeTime = 1200.0
-Disposition = 4
 DispositionAmm = 0.5
 ItemName = "SPK-100 Ship Barrier"
 ItemDesc = "The SPK-100 represents the apex of modern barrier systems, generating an impervious energy shield capable of nullifying even the most formidable ballistic threats. Designed for flagship vessels, it provides unmatched protection, ensuring dominance in the most intense combat scenarios by neutralizing advanced ordnance with ease."

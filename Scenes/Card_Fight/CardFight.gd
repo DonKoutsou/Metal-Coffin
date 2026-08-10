@@ -227,35 +227,27 @@ func ReplaceShip(Ship : BattleShipStats, TurnPosition : int, Friendly : bool) ->
 		NewVisuals.visible = true
 			
 	UpdateFleetSizeAmmount()
+
 ##----------------------------------------------------------------------##
+func OnShuffling(t : bool) -> void:
+	Shuffling = t
+
+##----------------------------------------------------------------------##
+##Called at the start of the game to create all the decks for all ships
 func CreateDecks() -> void:
 	#Create the deck
 	var Ships : Array[BattleShipStats]
 	Ships.append_array(PlayerReserves)
 	Ships.append_array(EnemyReserves)
+	
 	for g in Ships:
-		var D = Deck.new()
-		
-		D.DeckPile.append_array(g.Cards)
-		#Create Hand
-		D.DeckPile.shuffle()
-		#Place priority card on top
-		for card : CardStats in D.DeckPile:
-			if (card.PutOnTop):
-				D.DeckPile.erase(card)
-				D.DeckPile.push_front(card)
-			
-		#for Hand in StartingCardAmm:
-			#var C = D.DeckPile.pop_front()
-			#if (C != null):
-				#D.Hand.append(C)
-		
-		g.deck = D
-		D.Shuffling.connect(OnShuffling)
+		var D = Deck.NewDeck(g)
+
 		if (IsShipFriendly(g)):
-			D.friendly = true
 			D.DiscardChanged.connect(DiscardPileChanged)
 			D.PileChanged.connect(DeckPileChanged)
+		
+		D.Shuffling.connect(OnShuffling)
 		D.OnCardDrawn.connect(CardDrawn)
 		D.OnCardDiscarded.connect(CardDiscarded)
 		D.MultiCardDrawn.connect(MultiCardDrawn)
@@ -266,14 +258,17 @@ func CardDrawn(C : CardStats, Manually : bool) -> void:
 	var Performer = GetCurrentShip()
 	var data : Dictionary = {
 		"actionType" : Card_Passive.ActionType.CARD_DRAW,
+		"Friendly" : GetShipsTeam(Performer),
+		"Enemy" : GetShipEnemyTeam(Performer),
 		"Performer" : Performer,
+		"Receiver" : Performer,
 		"ManualDraw" : Manually,
 	}
 	
 	var AnimData = PassiveList.OnActionPerformed(data)
 	if (AnimData.size() > 0):
 		for g in AnimData:
-			DoCardAnim(g.OriginalCard, [g], g.Performer, g.Performer.Friendly)
+			HandlePassiveModules(g.Performer, g.OriginalCard, g.Targets)
 	
 	if (!Performer.Friendly):
 		PlaceCardInEnemyHand(Performer, C)
@@ -286,20 +281,24 @@ func CardDrawn(C : CardStats, Manually : bool) -> void:
 		
 		if (!Placed):
 			c.queue_free()
-		
 
+
+##----------------------------------------------------------------------##
 func CardDiscarded(C : CardStats, Manually : bool) -> void:
 	var Performer = GetCurrentShip()
 	var data : Dictionary = {
 		"actionType" : Card_Passive.ActionType.CARD_DISCARD,
+		"Friendly" : GetShipsTeam(Performer),
+		"Enemy" : GetShipEnemyTeam(Performer),
 		"Performer" : Performer,
+		"Receiver" : Performer,
 		"ManualDraw" : Manually,
 	}
 	
 	var AnimData = PassiveList.OnActionPerformed(data)
 	if (AnimData.size() > 0):
 		for g in AnimData:
-			DoCardAnim(g.OriginalCard, [g], g.Performer, g.Performer.Friendly)
+			HandlePassiveModules(g.Performer, g.OriginalCard, g.Targets)
 	
 	if (Manually):
 		StoredEnergy += 1
@@ -313,6 +312,21 @@ func CardDiscarded(C : CardStats, Manually : bool) -> void:
 ##----------------------------------------------------------------------##
 func MultiSpcificCardDrawn(DrawnCards : Array[CardStats]) -> void:
 	var Performer = GetCurrentShip()
+	
+	for card in DrawnCards:
+		var data : Dictionary = {
+			"actionType" : Card_Passive.ActionType.CARD_DRAW,
+			"Friendly" : GetShipsTeam(Performer),
+			"Enemy" : GetShipEnemyTeam(Performer),
+			"Performer" : Performer,
+			"Receiver" : Performer,
+			"ManualDraw" : false,
+		}
+		var AnimData = PassiveList.OnActionPerformed(data)
+		if (AnimData.size() > 0):
+			for g in AnimData:
+				HandlePassiveModules(g.Performer, g.OriginalCard, g.Targets)
+	
 	if (IsShipFriendly(Performer)):
 		CardSelect.SetCardsPick(Performer, DrawnCards)
 		SelectingTarget = true
@@ -321,10 +335,25 @@ func MultiSpcificCardDrawn(DrawnCards : Array[CardStats]) -> void:
 		Performer.deck.DrawSpecific(DrawnCards[Picked])
 	else:
 		Performer.deck.DrawSpecific(DrawnCards.pick_random())
+		
 ##----------------------------------------------------------------------##
 func MultiCardDrawn(DrawnCards : Array[CardStats], discardAmm : int) -> void:
 	var CardsToDiscard : Array[CardStats] = []
 	var Performer = GetCurrentShip()
+	
+	for card in DrawnCards:
+		var data : Dictionary = {
+			"actionType" : Card_Passive.ActionType.CARD_DRAW,
+			"Friendly" : GetShipsTeam(Performer),
+			"Enemy" : GetShipEnemyTeam(Performer),
+			"Performer" : Performer,
+			"Receiver" : Performer,
+			"ManualDraw" : false,
+		}
+		var AnimData = PassiveList.OnActionPerformed(data)
+		if (AnimData.size() > 0):
+			for g in AnimData:
+				HandlePassiveModules(g.Performer, g.OriginalCard, g.Targets)
 	
 	if (IsShipFriendly(Performer)):
 		while CardsToDiscard.size() < discardAmm:
@@ -358,9 +387,8 @@ func MultiCardDrawn(DrawnCards : Array[CardStats], discardAmm : int) -> void:
 		
 		for g in DrawnCards:
 			PlaceCardInEnemyHand(Performer, g)
-##----------------------------------------------------------------------##
-func OnShuffling(t : bool) -> void:
-	Shuffling = t
+
+	
 ##----------------------------------------------------------------------##
 func DiscardPileChanged(t : bool) -> void:
 	if (t):
@@ -542,6 +570,8 @@ func OnCardSelected(C : Card, target : BattleShipStats = null) -> bool:
 	if (Shuffling):
 		PopUpManager.GetInstance().DoFadeNotif("Shuffling in progress")
 		return false
+	if (!PickingMoves):
+		return false
 	
 	var Ship = GetCurrentShip()
 	var Cost = C.GetCost()
@@ -639,7 +669,11 @@ func RemoveCard(C : Card) -> void:
 	if (EnemyPickingMove):
 		PopUpManager.GetInstance().DoFadeNotif("Enemy is selecting their moves")
 		return
-
+	if (Shuffling):
+		PopUpManager.GetInstance().DoFadeNotif("Shuffling in progress")
+		return
+	if (!PickingMoves):
+		return
 	var CurrentShip = GetCurrentShip()
 	
 	if (CurrentShip.deck.Hand.size() == MaxCardsInHand):
@@ -937,7 +971,7 @@ func DoShipFireDamage() -> void:
 			d.global_position = (viz.global_position + (viz.size / 2)) - d.size / 2
 			
 			#Make sure that the game is not over, if it is, break out of the loop
-			Ship.DamageShip(Ship.GetFireDamage(), false, true)
+			Ship.DamageShip(Ship.GetFireDamage(), false, false, true)
 			if (GameOver):
 				break
 			
@@ -997,7 +1031,7 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 	var Mod = Action.OnPerformModule
 
 	if (Mod is OffensiveCardModule):
-		await HandleOffensiveModule(Ship, Action, Mod, TargetShips)
+		await HandleOffensiveModule(Ship, Action, Mod, TargetShips, true)
 		ActionList.RemoveActionFromShip(Ship, Action)
 	else:
 		ActionIndex += 1
@@ -1172,9 +1206,33 @@ func HandleModules(Performer : BattleShipStats, C : CardStats) -> void:
 			
 		if (Data != null):
 			AnimData.append(Data)
-		
+	
+	if (C.Passive != null):
+		PassiveList.AddPassive(Performer, C)
+		Performer.ShipViz.PassiveAdded(C)
+	
 	if (AnimData.size() > 0):
 		await DoCardAnim(C, AnimData, Performer, true)
+
+##----------------------------------------------------------------------##
+func HandlePassiveModules(Performer : BattleShipStats, C : CardStats, targets : Array[BattleShipStats]) -> void:
+	if (C.Passive.Module is OffensiveCardModule):
+		if (C.Passive.Module is EnergyOffensiveCardModule):
+			var NewMod = C.Passive.Module.duplicate()
+			NewMod.StoredEnergy = Performer.Energy
+			Performer.SetEnergy(0)
+			C.Passive.Module = NewMod
+
+		await HandleOffensiveModule(Performer, C ,C.Passive.Module, targets, false)
+	else:
+		var Mod = C.Passive.Module
+		var Data : AnimationData
+		
+		Data = HandleModule(Performer, C ,Mod, targets)
+
+		if (Data != null):
+			DoCardAnim(C, [Data], Performer, true)
+
 ##----------------------------------------------------------------------##
 func HandleModulesPl(Performer : BattleShipStats, C : CardStats, targetOverride : BattleShipStats = null) -> bool:
 	var AnimData : Array[AnimationData]
@@ -1229,7 +1287,7 @@ func HandleModulesPl(Performer : BattleShipStats, C : CardStats, targetOverride 
 			targets.append(targetOverride)
 		else:
 			targets = await HandleTargets(C.OnPerformModule, Performer)
-		await HandleOffensiveModule(Performer, C ,C.OnPerformModule, targets)
+		await HandleOffensiveModule(Performer, C ,C.OnPerformModule, targets, true)
 	
 	if (C.Passive != null):
 		PassiveList.AddPassive(Performer, C)
@@ -1240,7 +1298,7 @@ func HandleModulesPl(Performer : BattleShipStats, C : CardStats, targetOverride 
 	return true
 ##----------------------------------------------------------------------##
 ##Handles offensive logic, checks for enemy counter cards and plays offensive animation
-func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod : OffensiveCardModule, TargetShips : Array[BattleShipStats]) -> void:
+func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod : OffensiveCardModule, TargetShips : Array[BattleShipStats], direct : bool) -> void:
 	var AnimData : Array[AnimationData]
 	var Friendly = IsShipFriendly(Performer)
 
@@ -1315,7 +1373,7 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 				else:
 					tar.append(Performer)
 				var DamageReduction = Mod.GetFinalDamage(Performer,Action.Tier) * CounterMod.GetReductionPercent(Def.Tier)
-				var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Performer,Action.Tier) - DamageReduction, Mod.CauseFile, Mod.SkipShield, Performer)
+				var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Performer,Action.Tier) - DamageReduction, direct, Mod.CauseFile, Mod.SkipShield, Performer)
 				DamageCallables.append(c)
 				for SDefMod in CounterMod.OnSuccesfullDeffenceModules:
 					AnimData.append(HandleModule(g, Def, SDefMod, tar))
@@ -1332,12 +1390,12 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 					AnimData.append(HandleModule(g, Def, SDefMod, tar))
 					
 			else:
-				var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Performer,Action.Tier), Mod.CauseFile, Mod.SkipShield, Performer)
+				var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Performer,Action.Tier), direct, Mod.CauseFile, Mod.SkipShield, Performer)
 				DamageCallables.append(c)
 		else:
 			AtackConnected = true
 			currentConnected = true
-			var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Performer,Action.Tier), Mod.CauseFile, Mod.SkipShield, Performer)
+			var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Performer,Action.Tier), direct, Mod.CauseFile, Mod.SkipShield, Performer)
 			DamageCallables.append(c)
 		
 		#Apply effects based on if card was connected or not
@@ -1681,7 +1739,7 @@ func IsShipFriendly(Ship : BattleShipStats) -> bool:
 #███████    ██    ██   ██    ██        ██      ██ ██   ██ ██   ████ ██ ██       ██████  ███████ ██   ██    ██    ██  ██████  ██   ████ 
 #////////////////////////////////////////////////////////////////////////////
 ##----------------------------------------------------------------------##
-func ShipDamaged(amm : float, shieldAmm : float, Instigator : BattleShipStats, Ship : BattleShipStats) -> void:
+func ShipDamaged(amm : float, shieldAmm : float, Instigator : BattleShipStats, direct : bool, Ship : BattleShipStats) -> void:
 	if (IsShipFriendly(Ship)):
 		
 		if (Ship.CurrentHull < 40 and !ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_SHIPLOSS)):
@@ -1696,15 +1754,18 @@ func ShipDamaged(amm : float, shieldAmm : float, Instigator : BattleShipStats, S
 	
 	var Data : Dictionary = {
 		"actionType" : Card_Passive.ActionType.DAMAGED,
-		"Instigator" : Instigator,
 		"Receiver" : Ship,
+		"Performer" : Instigator,
+ 		"Friendly" : GetShipsTeam(Ship),
+		"Enemy" : GetShipEnemyTeam(Ship),
 		"Damage": amm,
 		"ShieldDamage" : shieldAmm,
+		"Direct" : direct,
 	}
 	var AnimData = PassiveList.OnActionPerformed(Data)
 	if (AnimData.size() > 0):
-		for g in AnimData:
-			DoCardAnim(g.OriginalCard, [g], g.Performer, g.Performer.Friendly)
+		for g : PassiveAnimationData in AnimData:
+			HandlePassiveModules(g.Performer, g.OriginalCard, g.Targets)
 	
 	if (Ship.CurrentHull <= 0):
 		ShipDestroyed(Ship)
@@ -2043,6 +2104,7 @@ func PlaceCardInEnemyHand(Performer : BattleShipStats, C : CardStats) -> bool:
 #██   ██ ██   ██ ██  ██ ██ ██   ██ ██    ██ ██  ██  ██     ██      ██ ██    ██ ██   ██    ██    
 #██   ██ ██   ██ ██   ████ ██████   ██████  ██      ██     ██      ██  ██████  ██   ██    ██    
 #////////////////////////////////////////////////////////////////////////////////////////////////
+
 ##----------------------------------------------------------------------##
 func InitRandomFight(ShipAmm : int) -> void:
 	if (EnemyReserves.size() == 0):
@@ -2051,14 +2113,16 @@ func InitRandomFight(ShipAmm : int) -> void:
 	if (PlayerReserves.size() == 0):
 		for g in ShipAmm:
 			PlayerReserves.append(load(GetRandomCaptain(false)).GetBattleStats())
+			
 ##----------------------------------------------------------------------##
-func GetRandomCaptain(Enemy : bool) -> String:
+func GetRandomCaptain(IsEnemy : bool) -> String:
 	var Cpts
-	if (!Enemy):
+	if (!IsEnemy):
 		Cpts = ["res://Resources/Captains/PlayerCaptains/Craden.tres", "res://Resources/Captains/PlayerCaptains/Amol.tres", "res://Resources/Captains/PlayerCaptains/Baron.tres", "res://Resources/Captains/PlayerCaptains/Corkan.tres", "res://Resources/Captains/PlayerCaptains/Dimitry.tres", "res://Resources/Captains/PlayerCaptains/Elena.tres", "res://Resources/Captains/PlayerCaptains/Gilian.tres", "res://Resources/Captains/PlayerCaptains/Jor.tres"]
 	else:
 		Cpts = ["res://Resources/Captains/EnemyCaptains/EnemyFireship1.tres", "res://Resources/Captains/EnemyCaptains/EnemyFireship2.tres", "res://Resources/Captains/EnemyCaptains/EnemyFireship3.tres", "res://Resources/Captains/EnemyCaptains/EnemyFireship4.tres", "res://Resources/Captains/EnemyCaptains/EnemyMissileCarrier1.tres", "res://Resources/Captains/EnemyCaptains/EnemyMissileCarrier2.tres", "res://Resources/Captains/EnemyCaptains/EnemyMissileCarrier3.tres", "res://Resources/Captains/EnemyCaptains/EnemyMissileCarrier4.tres", "res://Resources/Captains/EnemyCaptains/EnemyRadarShip1.tres", "res://Resources/Captains/EnemyCaptains/EnemyRadarShip2.tres", "res://Resources/Captains/EnemyCaptains/EnemyRadarShip3.tres", "res://Resources/Captains/EnemyCaptains/EnemyRadarShip4.tres", "res://Resources/Captains/EnemyCaptains/EnemyTanker1.tres", "res://Resources/Captains/EnemyCaptains/EnemyTanker2.tres", "res://Resources/Captains/EnemyCaptains/EnemyTanker3.tres", "res://Resources/Captains/EnemyCaptains/EnemyTanker4.tres", "res://Resources/Captains/EnemyCaptains/LandEnemyFireship1.tres", "res://Resources/Captains/EnemyCaptains/LandEnemyFireship2.tres"]
 	return Cpts.pick_random()
+	
 ##----------------------------------------------------------------------##
 func GetRandomShipIcon() -> String:
 	var Icons = ["res://Assets/Spaceship/Spaceship_top_2_Main Camera.png", "res://Assets/Spaceship/Spaceship_top_Main Camera.png", "res://Assets/Spaceship/Tanker2.png", "res://Assets/Spaceship/Tanker.png", "res://Assets/Spaceship/Convoy.png", "res://Assets/Spaceship/Scarab.png", "res://Assets/Spaceship/Ship3_001.png", "res://Assets/Spaceship/Ship4_001.png", "res://Assets/Spaceship/ShipElena2.png", "res://Assets/Spaceship/ShipElena.png"]

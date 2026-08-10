@@ -175,7 +175,7 @@ func DeBuffDefence(Amm : float, Turns : int = 2) -> void:
 	ShipViz.Refresh()
 	StatsBuffed.emit()
 
-func DamageShip(Amm : float, ShouldCauseFire : bool = false, SkipShield : bool = false, Instigator : BattleShipStats = null) -> void:
+func DamageShip(Amm : float, direct : bool, ShouldCauseFire : bool = false, SkipShield : bool = false, Instigator : BattleShipStats = null) -> void:
 	var Dmg = Amm
 	var shieldDmg : float
 	if (!SkipShield):
@@ -200,7 +200,7 @@ func DamageShip(Amm : float, ShouldCauseFire : bool = false, SkipShield : bool =
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_SHIPLOSS)
 			ActionTracker.QueueTutorial(ActionTracker.Action.CARD_FIGHT_SHIPLOSS)
 		
-	ShipDamaged.emit(Dmg, shieldDmg, Instigator)
+	ShipDamaged.emit(Dmg, shieldDmg, Instigator, direct)
 	
 	ShipViz.Refresh()
 	StatsBuffed.emit()

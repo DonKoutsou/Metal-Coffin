@@ -99,13 +99,13 @@ func FuelExchangeFinished(Fuel : float) -> void:
 	BoughtFuel = Fuel
 
 func On_Recruit_Pressed() -> void:
-	var miniGame = MinigameScene.instantiate() as MissileCommandMain
-	add_child(miniGame)
+	#var miniGame = MinigameScene.instantiate() as MissileCommandMain
+	#add_child(miniGame)
 	
-	#var RShop = RecruitShopScene.instantiate() as RecruitShop
-	#add_child(RShop)
-	#RShop.Init(TownSpot.Recruits)
-	#RShop.OnCaptainBought.connect(OnShipBought)
+	var RShop = RecruitShopScene.instantiate() as RecruitShop
+	add_child(RShop)
+	RShop.Init(TownSpot.Recruits)
+	RShop.OnCaptainBought.connect(OnShipBought)
 
 func OnUpgradeShopPressed() -> void:
 	var WShop = WorkshopScene.instantiate() as WorkShop
@@ -145,7 +145,7 @@ func OnShipSold(Ship : MapShip) -> void:
 
 
 func OnItemSold(It : Item) -> void:
-	PopupManager.GetInstance().DoFadeNotif("{0} has been sold".format([It.GetItemName()]))
+	PopupManager.DoFadeNotif("{0} has been sold".format([It.GetItemName()]))
 	
 	for g in LandedShips:
 		var inv = g.Cpt.GetCharacterInventory()
@@ -162,7 +162,7 @@ func OnItemSold(It : Item) -> void:
 	TownSpot.Merch.append(Merch)
 	
 func OnItemBought(It : Item) -> void:
-	PopupManager.GetInstance().DoFadeNotif("{0} bought".format([It.GetItemName()]))
+	PopupManager.DoFadeNotif("{0} bought".format([It.GetItemName()]))
 	
 	var Added = false
 	

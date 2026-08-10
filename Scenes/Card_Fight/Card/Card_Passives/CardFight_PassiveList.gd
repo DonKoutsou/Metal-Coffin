@@ -28,10 +28,15 @@ func Clear() -> void:
 	List.clear()
 
 func OnActionPerformed(data : Dictionary) -> Array[PassiveAnimationData]:
+	var Type : Card_Passive.ActionType = data["actionType"]
+	
 	var Anim : Array[PassiveAnimationData] = []
 	for ship : BattleShipStats in List:
 		for card : CardStats in List[ship]:
-			var anim : PassiveAnimationData = card.Passive.OnActionPerformed(data, ship)
+			if (card.Passive.GetTrigger() != Type):
+				continue
+			
+			var anim : PassiveAnimationData = card.Passive.OnActionPerformed(data, card, ship)
 			if (anim != null):
 				anim.OriginalCard = card
 				Anim.append(anim)

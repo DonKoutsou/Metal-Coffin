@@ -18,7 +18,7 @@ func Handle(Performer : BattleShipStats, Action : CardStats, Targets : Array[Bat
 	if (Action.Burned):
 		return DeffensiveAnimationData.new()
 	var Callables : Array[Callable]
-	Callables.append(Performer.DamageShip.bind(GetFinalDamage(Action.Tier), false, false, Performer))
+	Callables.append(Performer.DamageShip.bind(GetFinalDamage(Action.Tier), true, false, false, Performer))
 	
 	var AnimData = OffensiveAnimationData.new()
 	AnimData.Mod = self

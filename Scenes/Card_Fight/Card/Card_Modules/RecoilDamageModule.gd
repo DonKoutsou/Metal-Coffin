@@ -22,7 +22,7 @@ func Handle(Performer : BattleShipStats, Action : CardStats, _Targets : Array[Ba
 	
 	var Callables : Array[Callable]
 	var Recoil = GetRecoilAmmount(finalDmg)
-	Callables.append(Performer.DamageShip.bind(Recoil, false, false, Performer))
+	Callables.append(Performer.DamageShip.bind(Recoil, true, false, false, Performer))
 	
 	var AnimData = OffensiveAnimationData.new()
 	AnimData.Mod = self

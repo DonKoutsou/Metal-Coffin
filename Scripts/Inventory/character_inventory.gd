@@ -63,7 +63,13 @@ func GetCards() -> Array[CardStats]:
 				var C = z.duplicate() as CardStats
 				C.Tier = g.Tier
 				CardsInInventory.append(C)
-
+	
+	var dispositionCards : Dictionary[CardStats, int] = DispositionManager.Instance.GetRewards(inventoryOwner.Cpt)
+	
+	for g in dispositionCards:
+		for z in dispositionCards[g]:
+			CardsInInventory.append(g)
+	
 	return CardsInInventory
 
 func GetCardDictionary() -> Dictionary[CardStats, int]:
@@ -87,6 +93,9 @@ func GetCardDictionary() -> Dictionary[CardStats, int]:
 						break
 				if (!Added):
 					c[C] = 1
+	
+	
+	
 	return c
 #func GetCardAmmo() -> Dictionary:
 	#return _CardAmmo.duplicate()

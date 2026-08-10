@@ -38,7 +38,6 @@ script = ExtResource("4_n02hm")
 Upgrades = Array[ExtResource("3_30ir8")]([SubResource("Resource_mhm0j"), SubResource("Resource_385cy"), SubResource("Resource_o58x0"), SubResource("Resource_c0jg3")])
 UpgradeVersion = ExtResource("3_ivh6q")
 UpgradeTime = 1200.0
-Disposition = 4
 DispositionAmm = 0.25
 ItemName = "SPK-50 Ship Barrier"
 ItemDesc = "The SPK-50 enhances barrier technology with a fortified energy lattice, expanding its coverage and strength. Capable of withstanding greater impacts, it ensures superior defense against concentrated missile volleys and sustained heavy weapons fire. Ideal for medium-class ships requiring enhanced survivability in high-stakes confrontations."

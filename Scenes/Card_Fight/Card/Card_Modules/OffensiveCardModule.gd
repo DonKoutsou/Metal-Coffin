@@ -17,7 +17,9 @@ func NeedsTargetSelect() -> bool:
 	return true
 
 func GetFinalDamage(Performer : BattleShipStats, Tier : int) -> float:
-	var Dmg = 0.0
+	var Dmg = 0
+	if (ScaleStat.size() == 0):
+		Dmg = Damage
 	for DmgInfo in ScaleStat:
 		var StatAmm : float
 		if (DmgInfo.ScalingStat == CardModule.Stat.FIREPOWER):
@@ -59,6 +61,8 @@ func GetDesc(Tier : int) -> String:
 		Desc = "Hit enemy"
 	
 	var DamageString : String = ""
+	if (ScaleStat.size() == 0):
+		DamageString = var_to_str(roundi(Damage))
 	for stat in ScaleStat.size():
 		var DmgInfo = ScaleStat[stat] as DamageInfo
 		
@@ -75,7 +79,7 @@ func GetDesc(Tier : int) -> String:
 		DamageString += "[color=#ffc315]{0}% [/color][{2}]{1}[/color]".format([snapped(GetTieredDamage(Tier), 0.001) * 100, StatText,TextColors[stat]]).replace(".0", "")
 		
 		
-	Desc += " for {0}".format([DamageString])
+	Desc += " for {0} damage".format([DamageString])
 	
 	if (OnSuccesfullAtackModules.size() > 0):
 		if (forEachHit):
@@ -122,7 +126,8 @@ func GetBattleDesc(User : BattleShipStats, Tier : int) -> String:
 		Desc = "Hit enemy"
 	
 	var FinalDamage = 0.0
-	
+	if (ScaleStat.size() == 0):
+		FinalDamage = Damage
 	for stat in ScaleStat:
 		var Dmg : float
 		if (stat.ScalingStat == CardModule.Stat.FIREPOWER):

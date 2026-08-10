@@ -1,38 +1,29 @@
-
 extends Card_Passive
 
-class_name OnDamagedPassibe
+class_name OnDrawPassive
 
-@export var AllowSelfDamage : bool = false
-@export var AllowShieldDamage : bool = false
-
-func GetTrigger() -> ActionType:
-	return ActionType.DAMAGED
+@export var ManualOnly : bool = false
 
 func OnActionPerformed(data : Dictionary, _C : CardStats, PassiveOwner : BattleShipStats) -> PassiveAnimationData:
-	if (!data["Direct"]):
-		return
-	
-	if (data["Damage"] == 0):
-		if (data["ShieldDamage"] > 0 and !AllowShieldDamage):
-			return
-		else: if (data["ShieldDamage"] == 0):
-			return
-	
-	var actionReceiver : BattleShipStats = data["Receiver"]
-	var Instigator : BattleShipStats = data["Performer"]
-	
-	if (!AllowSelfDamage and actionReceiver == Instigator):
+	if (ManualOnly and !data["ManualDraw"]):
 		return null
-		
+	var actionReceiver : BattleShipStats = data["Receiver"]
+	
 	var possibleReceivers : Array[BattleShipStats] = GetPossibleReceivers(data, PassiveOwner)
 	if (!possibleReceivers.has(actionReceiver)):
 		return null
 	
 	var targets : Array[BattleShipStats] = GetPossibleTargets(data, PassiveOwner)
 	
+	if (targets.size() == 0):
+		return null
+	
 	var dat : PassiveAnimationData = PassiveAnimationData.new()
-	dat.Performer = PassiveOwner
+	dat.Performer = data["Performer"]
 	dat.Targets = targets
 
 	return dat
+
+
+func GetTrigger() -> ActionType:
+	return ActionType.CARD_DRAW

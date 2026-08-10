@@ -83,7 +83,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LinkButton3" type="LinkButton" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1336728501]
-custom_minimum_size = Vector2(300, 21)
+custom_minimum_size = Vector2(507.625, 21)
 layout_mode = 2
 size_flags_horizontal = 4
 uri = "https://linktr.ee/hidris.uiux"
@@ -97,6 +97,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Hadjoudj Mohammed Islam (Idris) - Card Icons"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label8" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1346921586]
+layout_mode = 2
+text = "Rcpxl - Ship Icons"
 horizontal_alignment = 1
 vertical_alignment = 1
 

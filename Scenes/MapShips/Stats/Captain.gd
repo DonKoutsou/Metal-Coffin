@@ -313,6 +313,14 @@ func GetStartingDeck() -> Dictionary[CardStats, int]:
 				D[c] += 1
 			else:
 				D[c] = 1
+	var dispositionCards : Dictionary[CardStats, int] = DispositionManager.Instance.GetRewards(self)
+	
+	for g in dispositionCards:
+		if (D.has(g)):
+			D[g] += dispositionCards[g]
+		else:
+			D[g] = dispositionCards[g]
+			
 	return D
  	
 	

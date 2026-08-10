@@ -111,7 +111,8 @@ func _ready() -> void:
 	#Destroy()
 	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2.visible = false
 	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3.visible = false
-	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PassiveParent.visible = false
+	HullLabel.visible = false
+	#PassiveParent.visible = false
 	ToggleFire(false)
 	set_physics_process(false)
 
@@ -176,6 +177,7 @@ func GetShipPos() -> Vector2:
 	return ShipIcon.global_position
 
 func ActionPicked(C : CardStats, Targets : Array[BattleShipStats] = []) -> void:
+	ActionParent.visible = true
 	var TexNode = TextureRect.new()
 	TexNode.texture = C.Icon
 	TexNode.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
@@ -228,7 +230,8 @@ func ActionRemoved(Tex : Texture) -> void:
 	for g : TextureRect in ActionParent.get_children():
 		if (g.texture == Tex):
 			g.free()
-			return
+			break
+	ActionParent.visible = ActionParent.get_child_count() > 0
 
 func OnNewTurnStarted() -> void:
 	HasMovePanel.visible = true
@@ -346,14 +349,16 @@ func _on_panel_container_2_mouse_entered() -> void:
 	tw = create_tween()
 	tw.set_ease(Tween.EASE_OUT)
 	tw.set_trans(Tween.TRANS_BACK)
-	tw.tween_property($HBoxContainer/VBoxContainer/PanelContainer2, "custom_minimum_size", Vector2(0,119), 0.15)
+	tw.tween_property($HBoxContainer/VBoxContainer/PanelContainer2, "custom_minimum_size", Vector2(0,116), 0.15)
 	tw.finished.connect(ToggleStatVisibility.bind(true))
 	Hovered.emit()
 
 func ToggleStatVisibility(t : bool) -> void:
 	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2.visible = t
 	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3.visible = t
-	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PassiveParent.visible = t
+	#PassiveParent.visible = t
+	HullLabel.visible = t
+	
 
 
 func _on_panel_container_2_mouse_exited() -> void:

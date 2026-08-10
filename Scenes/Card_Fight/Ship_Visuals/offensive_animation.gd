@@ -86,13 +86,13 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 
 				var TargetShips = AnimData.Targets
 				
-				if (Passive is ShieldOnDraw_Passive):
-					for Ship in TargetShips:
-						call_deferred("SpawnShieldVisual", Ship, card, "Shield +")
-				if (Passive is Thorns_Passive):
-					for Ship in TargetShips:
-						call_deferred("SpawnVisual", Ship, card, null, "Recoil")
-				
+				#if (Passive is ShieldOnDraw_Passive):
+					#for Ship in TargetShips:
+						#call_deferred("SpawnShieldVisual", Ship, card, "Shield +")
+				#if (Passive is Thorns_Passive):
+					#for Ship in TargetShips:
+						#call_deferred("SpawnVisual", Ship, card, null, "Recoil")
+				#
 				
 				if (Mod is BuffModule):
 					var BuffText = "{0} +".format([CardModule.Stat.keys()[Mod.StatToBuff]])

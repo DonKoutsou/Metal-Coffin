@@ -1,21 +1,30 @@
 [gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://odkwy5rk0vxe"]
 
 [ext_resource type="Texture2D" uid="uid://w2odhvsxkpx0" path="res://Assets/Cards/DrawShield.png" id="1_0wfkp"]
-[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="1_ri05c"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="2_0wfkp"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="2_ahpd2"]
-[ext_resource type="Script" uid="uid://dlxe45abi7yqk" path="res://Scenes/Card_Fight/Card/Card_Passives/Shield_OnDraw.gd" id="3_0eqit"]
+[ext_resource type="Script" uid="uid://cct7paebscrse" path="res://Scenes/Card_Fight/Card/Card_Passives/On_DrawPassive.gd" id="3_0eqit"]
+[ext_resource type="Script" uid="uid://cxqm0ly7x6xpc" path="res://Scenes/Card_Fight/Card/Card_Modules/ShieldCardModule.gd" id="3_l7pqa"]
 
 [sub_resource type="Resource" id="Resource_0wfkp"]
+script = ExtResource("3_l7pqa")
+metadata/_custom_type_script = "uid://cxqm0ly7x6xpc"
+
+[sub_resource type="Resource" id="Resource_j3pel"]
 script = ExtResource("3_0eqit")
-SelfOnly = true
-metadata/_custom_type_script = "uid://dlxe45abi7yqk"
+ManualOnly = true
+PassiveTrigger = 1
+Module = SubResource("Resource_0wfkp")
+Target = 1
+metadata/_custom_type_script = "uid://cct7paebscrse"
 
 [resource]
 script = ExtResource("2_ahpd2")
 Icon = ExtResource("1_0wfkp")
 CardName = "Shield Draw"
 Energy = 2
-Passive = SubResource("Resource_0wfkp")
+Consume = true
+Passive = SubResource("Resource_j3pel")
 Type = 3
 PutOnTop = true
 IsDisposition = true

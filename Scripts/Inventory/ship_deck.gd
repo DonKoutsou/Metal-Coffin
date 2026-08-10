@@ -28,19 +28,15 @@ func SetDeck(Ch : Captain) -> void:
 			CurrentlyShownCharacter = Ch
 			Inv.InventoryUpdated.connect(InventoryUpdated)
 		deck = Inv.GetCardDictionary()
+		var dispositionCards : Dictionary[CardStats, int] = DispositionManager.Instance.GetRewards(Ch)
+	
+		for g in dispositionCards:
+			if (deck.has(g)):
+				deck[g] += dispositionCards[g]
+			else:
+				deck[g] = dispositionCards[g]
 	else:
 		deck = Ch.GetStartingDeck()
-	
-	var rewards : Dictionary[CardStats, int] = DispositionManager.Instance.GetRewards(Ch)
-	for g in rewards:
-		var Added : bool = false
-		for Ca : CardStats in deck.keys():
-			if (Ca.IsSame(g)):
-				deck[Ca] += rewards[g]
-				Added = true
-				break
-		if (!Added):
-			deck[g] = rewards[g]
 
 	var PooledCards : Array[Card]
 	for g in OffensiveCardPosition.get_children():
