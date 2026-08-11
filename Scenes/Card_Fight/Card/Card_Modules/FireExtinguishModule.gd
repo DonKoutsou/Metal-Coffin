@@ -2,7 +2,7 @@ extends DeffenceCardModule
 
 class_name FireExtinguishModule
 
-func GetDesc(_Tier : int) -> String:
+func GetDesc(Tier : int, _targetOverride : String = "") -> String:
 	return "Extinguishes [color=#ff3c22]fires[/color] on ship"
 
 func NeedsTargetSelect() -> bool:

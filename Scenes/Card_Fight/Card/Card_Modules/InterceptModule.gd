@@ -1,7 +1,7 @@
 extends CardModule
 class_name InterceptModule
 
-func GetDesc(_Tier : int) -> String:
+func GetDesc(Tier : int, _targetOverride : String = "") -> String:
 	return "Intercept an atack aimed at a different ship."
 
 func NeedsTargetSelect() -> bool:

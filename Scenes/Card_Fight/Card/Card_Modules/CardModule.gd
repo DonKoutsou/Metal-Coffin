@@ -7,7 +7,7 @@ class_name CardModule
 @export var TierUpgrade : float = 1
 @export var TierUpgradeMethod : DamageInfo.CalcuationMethod
 
-func GetDesc(_Tier : int) -> String:
+func GetDesc(_Tier : int, _targetOverride : String = "") -> String:
 	return ""
 
 @abstract
@@ -16,7 +16,7 @@ func NeedsTargetSelect() -> bool
 @abstract
 func Handle(Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> AnimationData
 
-func GetBattleDesc(_User : BattleShipStats, Tier : int) -> String:
+func GetBattleDesc(_User : BattleShipStats, Tier : int, _targetOverride : String = "") -> String:
 	return GetDesc(Tier)
 
 func GetStatShortName(St : Stat) -> String:

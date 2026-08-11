@@ -3,7 +3,7 @@ class_name OffensiveCardSpawnModule
 
 @export var CardToSpawn : CardStats
 
-func GetDesc(Tier : int) -> String:
+func GetDesc(Tier : int, targetOverride : String = "") -> String:
 	return "Draw a {0} from the deck".format([CardToSpawn.GetCardName()])
 
 func NeedsTargetSelect() -> bool:

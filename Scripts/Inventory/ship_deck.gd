@@ -23,7 +23,7 @@ func SetDeck(Ch : Captain) -> void:
 	
 	if (Inv != null):
 		if (CurrentlyShownCharacter != Ch):
-			if (CurrentlyShownCharacter != null):
+			if (CurrentlyShownCharacter != null and CurrentlyShownCharacter.GetCharacterInventory() != null):
 				CurrentlyShownCharacter.GetCharacterInventory().InventoryUpdated.disconnect(InventoryUpdated)
 			CurrentlyShownCharacter = Ch
 			Inv.InventoryUpdated.connect(InventoryUpdated)

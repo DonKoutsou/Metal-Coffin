@@ -4,7 +4,8 @@ class_name DrawCardModule
 @export var DrawAmmount : int
 @export var DiscardAmmount : int
 
-func GetDesc(Tier : int) -> String:
+func GetDesc(Tier : int, _targetOverride : String = "") -> String:
+
 	if (DiscardAmmount > 0):
 		return "Draw {0}, Discard {1}".format([GetDrawAmmount(Tier), DiscardAmmount])
 	return "Draw {0}".format([GetDrawAmmount(Tier)])

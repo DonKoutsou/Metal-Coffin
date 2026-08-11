@@ -6,12 +6,12 @@ class_name BurnEnemyCardModule
 func NeedsTargetSelect() -> bool:
 	return true
 
-func GetDesc(Tier : int) -> String:
+func GetDesc(Tier : int, _targetOverride : String = "") -> String:
 	if (AOE):
 		return "[[CT_BURN]] {0} [[CT_CARDSENEM]]".format([GetBurnAmmount(Tier)])
 	return "[[CT_BURN]] {0} [[CT_CARDSTRGT]]".format([GetBurnAmmount(Tier)])
 
-func GetBattleDesc(_User : BattleShipStats, Tier : int) -> String:
+func GetBattleDesc(_User : BattleShipStats, Tier : int, _targetOverride : String = "") -> String:
 	if (AOE):
 		return "[[CT_BURN]] {0} [[CT_CARDSENEM]]".format([GetBurnAmmount(Tier)])
 	return "[[CT_BURN]] {0} [[CT_CARDSTRGT]]".format([GetBurnAmmount(Tier)])

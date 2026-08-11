@@ -14,7 +14,16 @@ func OnActionPerformed(data : Dictionary, C : CardStats, PassiveOwner : BattleSh
 	
 func GetDesc(Tier : int) -> String:
 	var st : String = ActionType.keys()[PassiveTrigger]
-	return "[color=#ffc315]ON {0}[/color]\n{1}".format([st.replace("_", " "),Module.GetDesc(Tier)])
+	return "[color=#ffc315]ON {0}[/color]\n{1}".format([st.replace("_", " "),Module.GetDesc(Tier, GetTargetString())])
+
+func GetBattleDesc(User : BattleShipStats,Tier : int) -> String:
+	var st : String = ActionType.keys()[PassiveTrigger]
+	return "[color=#ffc315]ON {0}[/color]\n{1}".format([st.replace("_", " "),Module.GetBattleDesc(User, Tier, GetTargetString())])
+
+func GetTargetString() -> String:
+	var targetString : String = TargetType.keys()[Target]
+	targetString = targetString.to_lower().replace("_", " ")
+	return targetString
 
 @abstract
 func GetTrigger() -> ActionType

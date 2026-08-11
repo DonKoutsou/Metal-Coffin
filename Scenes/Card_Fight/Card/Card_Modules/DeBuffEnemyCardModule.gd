@@ -8,7 +8,7 @@ class_name DeBuffEnemyModule
 func NeedsTargetSelect() -> bool:
 	return true
 
-func GetDesc(Tier : int) -> String:
+func GetDesc(Tier : int, _targetOverride : String = "") -> String:
 	var TextColor : String
 	if (StatToDeBuff == Stat.FIREPOWER):
 		TextColor = "color=#f35033"
@@ -22,7 +22,7 @@ func GetDesc(Tier : int) -> String:
 		return "Debuff team\n[{3}] {0}[/color] by [color=#f35033]{1}%[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], roundi(GetDebuffAmmount(Tier) * 100), GetDebuffDuration(Tier), TextColor])
 	return "Debuff\n[{3}] {0}[/color] by [color=#f35033]{1}%[/color] for {2} turns".format([Stat.keys()[StatToDeBuff], roundi(GetDebuffAmmount(Tier) * 100), GetDebuffDuration(Tier), TextColor])
 
-func GetBattleDesc(_User : BattleShipStats, Tier : int) -> String:
+func GetBattleDesc(_User : BattleShipStats, Tier : int, _targetOverride : String = "") -> String:
 	var TextColor : String
 	if (StatToDeBuff == Stat.FIREPOWER):
 		TextColor = "color=#f35033"

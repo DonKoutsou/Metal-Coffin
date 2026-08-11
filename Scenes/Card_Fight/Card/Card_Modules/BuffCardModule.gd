@@ -11,7 +11,8 @@ const StatText = "[color=#ffc315]HULL[/color][p][color=#6be2e9]SHIELD[/color][p]
 func NeedsTargetSelect() -> bool:
 	return true
 
-func GetDesc(Tier : int) -> String:
+func GetDesc(Tier : int, _targetOverride : String = "") -> String:
+	
 	var TextColor : String
 	if (StatToBuff == Stat.FIREPOWER):
 		TextColor = "color=#f35033"
@@ -26,6 +27,19 @@ func GetDesc(Tier : int) -> String:
 	else : if (CanBeUsedOnOther):
 		return "[[CT_BUFFS]]\n[{3}] [[{0}]][/color][color=#ffc315] * {1}[/color] [[CT_FOR]] {2} [[CT_TURNS]]".format([Stat.keys()[StatToBuff], GetBuffAmmount(Tier), GetBuffDuration(Tier), TextColor])
 	return "[[CT_BUFFS]]\n[{3}] [[{0}]][/color][color=#ffc315] * {1}[/color] [[CT_FOR]] {2} [[CT_TURNS]]".format([Stat.keys()[StatToBuff], GetBuffAmmount(Tier), GetBuffDuration(Tier), TextColor])
+
+func GetUntargetedDesc(Tier : int) -> String:
+	var TextColor : String
+	if (StatToBuff == Stat.FIREPOWER):
+		TextColor = "color=#f35033"
+	else : if (StatToBuff == Stat.SPEED):
+		TextColor = "color=#308a4d"
+	if (StatToBuff == Stat.WEIGHT):
+		TextColor = "color=#828dff"
+	else : if (StatToBuff == Stat.DEFENCE):
+		TextColor = "color=#7bb0b4"
+
+	return "[{3}] [[{0}]][/color][color=#ffc315] * {1}[/color] [[CT_FOR]] {2} [[CT_TURNS]]".format([Stat.keys()[StatToBuff], GetBuffAmmount(Tier), GetBuffDuration(Tier), TextColor])
 
 func GetBuffDuration(Tier : int) -> int:
 	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):

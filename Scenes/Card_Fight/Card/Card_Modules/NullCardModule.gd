@@ -2,10 +2,10 @@ extends DeffenceCardModule
 
 class_name NullCardModule
 
-func GetDesc(_Tier : int) -> String:
+func GetDesc(Tier : int, _targetOverride : String = "") -> String:
 	return "Null"
 	
-func GetBattleDesc(_User : BattleShipStats, _Tier : int) -> String:
+func GetBattleDesc(_User : BattleShipStats, _Tier : int, _targetOverride : String = "") -> String:
 	return "Null"
 
 func NeedsTargetSelect() -> bool:

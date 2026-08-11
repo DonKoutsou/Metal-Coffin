@@ -4,10 +4,17 @@ class_name ShieldCardModule
 
 @export var ShieldAmm : int = 10
 
-func GetDesc(Tier : int) -> String:
-	if (AOE):
-		return "[color=#6be2e9]+{0} Shield[/color] for team".format([GetShieldAmm(Tier)])
-	return "[color=#6be2e9]+{0} Shield[/color] for self".format([GetShieldAmm(Tier)])
+func GetDesc(Tier : int, targetOverride : String = "") -> String:
+	var targetString : String = ""
+	if (targetOverride != ""):
+		targetString = targetOverride
+	else:
+		if (AOE):
+			targetString = "team"
+		else:
+			targetString =  "self"
+			
+	return "[color=#6be2e9]+{0} Shield[/color] for {1}".format([GetShieldAmm(Tier), targetString]).replace(".0", "")
 
 func GetShieldAmm(Tier : float) -> float:
 	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):

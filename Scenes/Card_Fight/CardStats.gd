@@ -97,7 +97,7 @@ func GetBattleDescription(User : BattleShipStats) -> String:
 			Desc += g.GetBattleDesc(User, RealTier)
 	
 	if (Passive != null):
-		Desc += Passive.GetDesc(RealTier)
+		Desc += Passive.GetBattleDesc(User, RealTier)
 		Desc += "\n"
 	
 	return Helper.Translate(Desc)

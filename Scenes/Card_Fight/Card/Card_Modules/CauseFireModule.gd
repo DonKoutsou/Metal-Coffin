@@ -2,7 +2,7 @@ extends DeffenceCardModule
 
 class_name CauseFireModule
 
-func GetDesc(_Tier : int) -> String:
+func GetDesc(Tier : int, _targetOverride : String = "") -> String:
 	return "[color=#ff3c22]{0}[/color]".format([TranslationServer.translate("Cause fire")])
 
 func NeedsTargetSelect() -> bool:

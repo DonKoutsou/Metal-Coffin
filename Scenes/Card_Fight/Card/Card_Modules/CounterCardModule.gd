@@ -6,7 +6,8 @@ class_name CounterCardModule
 
 @export var OnSuccesfullDeffenceModules : Array[CardModule]
 @export var OnSuccesfullDeffenceModulesUseSelf : bool = false
-func GetDesc(Tier : int) -> String:
+
+func GetDesc(Tier : int, _targetOverride : String = "") -> String:
 	var Desc = "Avoid an incomming\n[color=#ffc315]{0}[/color]".format([OffensiveCardModule.AtackTypes.keys()[CounterType].replace("_", " ")])
 	if (OnSuccesfullDeffenceModules.size() > 0):
 		Desc += "\n[color=#ffc315]On Counter[/color] : "
@@ -14,7 +15,7 @@ func GetDesc(Tier : int) -> String:
 			Desc += g.GetDesc(Tier)
 	return Desc
 
-func GetBattleDesc(User : BattleShipStats, Tier : int) -> String:
+func GetBattleDesc(User : BattleShipStats, Tier : int, _targetOverride : String = "") -> String:
 	var Desc = "Avoid an incomming\n[color=#ffc315]{0}[/color]".format([OffensiveCardModule.AtackTypes.keys()[CounterType].replace("_", " ")])
 	if (OnSuccesfullDeffenceModules.size() > 0):
 		Desc += "\n[color=#ffc315]On Counter[/color] : "

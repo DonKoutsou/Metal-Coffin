@@ -3,7 +3,7 @@ class_name CardSpawnModule
 
 @export var CardsToSpawn : Array[CardStats]
 
-func GetDesc(_Tier : int) -> String:
+func GetDesc(Tier : int, _targetOverride : String = "") -> String:
 	return "Draw a {0} from the deck".format([CardsToSpawn[0].GetCardName()])
 
 func NeedsTargetSelect() -> bool:

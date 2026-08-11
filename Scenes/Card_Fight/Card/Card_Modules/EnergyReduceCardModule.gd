@@ -9,7 +9,7 @@ const StatText = "[color=#ffc315]HULL[/color][p][color=#6be2e9]SHIELD[/color][p]
 func NeedsTargetSelect() -> bool:
 	return true
 
-func GetDesc(Tier : int) -> String:
+func GetDesc(Tier : int, _targetOverride : String = "") -> String:
 	return "Reduce the energy cost of [color=#ffc315]{0}[/color] cards in hand by [color=#ffc315]{1}[/color]".format([GetCardAmm(Tier), GetReductionAmm(Tier)])
 
 func GetCardAmm(Tier : int) -> int:

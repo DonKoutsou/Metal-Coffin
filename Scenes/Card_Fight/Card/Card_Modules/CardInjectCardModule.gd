@@ -7,12 +7,12 @@ class_name CardInjectCardModule
 func NeedsTargetSelect() -> bool:
 	return true
 
-func GetDesc(Tier : int) -> String:
+func GetDesc(Tier : int, _targetOverride : String = "") -> String:
 	if (AOE):
 		return "[[CR_ADD]] {0} {1} on each enemy ship's deck".format([GetCardAmmount(Tier), CardToInject.GetCardName()])
 	return "[[CR_ADD]] {0} {1} on target ship's deck".format([GetCardAmmount(Tier), CardToInject.GetCardName()])
 
-func GetBattleDesc(_User : BattleShipStats, Tier : int) -> String:
+func GetBattleDesc(_User : BattleShipStats, Tier : int, _targetOverride : String = "") -> String:
 	if (AOE):
 		return "[[CR_ADD]] {0} {1} on each enemy ship's deck".format([GetCardAmmount(Tier), CardToInject.GetCardName()])
 	return "[[CR_ADD]] {0} {1} on target ship's deck".format([GetCardAmmount(Tier), CardToInject.GetCardName()])
