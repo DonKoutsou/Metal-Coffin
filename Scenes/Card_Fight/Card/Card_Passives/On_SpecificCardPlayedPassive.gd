@@ -1,6 +1,6 @@
-extends OnDiscardPassive
+extends OnCardPlayedPassive
 
-class_name OnDiscardSpecificPassive
+class_name OnSpecificCardPlayedPassive
 
 @export var CardType : CardStats.CardType
 

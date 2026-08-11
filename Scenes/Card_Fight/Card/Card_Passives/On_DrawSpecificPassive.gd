@@ -10,8 +10,8 @@ func OnActionPerformed(data : Dictionary, C : CardStats, PassiveOwner : BattleSh
 		
 	return super(data, C, PassiveOwner)
 
-func GetDesc(Tier : int) -> String:
-	var targetString : String = TargetType.keys()[Target]
-	targetString = targetString.replace("_", " ")
-	var st : String = ActionType.keys()[PassiveTrigger]
-	return "[color=#ffc315]ON {1} {0}N[/color]\n{1}".format([st.replace("_", " "),Module.GetDesc(Tier, targetString), CardStats.CardType.keys()[CardType]])
+func GetTrigerString() -> String:
+	var triggerString : String = ActionType.keys()[GetTrigger()].replace("_", " ")
+	var receiverString : String = ReceiverType.keys()[Receiver].replace("_", " ")
+	
+	return "[color=#ffc315]ON {2} {0} BY {1}[/color]".format([triggerString, receiverString, CardStats.CardType.keys()[CardType]])

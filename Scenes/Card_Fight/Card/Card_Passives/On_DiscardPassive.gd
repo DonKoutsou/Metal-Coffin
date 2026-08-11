@@ -27,4 +27,4 @@ func OnActionPerformed(data : Dictionary, _C : CardStats, PassiveOwner : BattleS
 
 
 func GetTrigger() -> ActionType:
-	return ActionType.CARD_DISCARD
+	return ActionType.CARD_DISCARDED

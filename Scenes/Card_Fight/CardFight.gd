@@ -257,7 +257,7 @@ func CreateDecks() -> void:
 func CardDrawn(C : CardStats, Manually : bool) -> void:
 	var Performer = GetCurrentShip()
 	var data : Dictionary = {
-		"actionType" : Card_Passive.ActionType.CARD_DRAW,
+		"actionType" : Card_Passive.ActionType.CARD_DRAWN,
 		"Friendly" : GetShipsTeam(Performer),
 		"Enemy" : GetShipEnemyTeam(Performer),
 		"Performer" : Performer,
@@ -287,7 +287,7 @@ func CardDrawn(C : CardStats, Manually : bool) -> void:
 func CardDiscarded(C : CardStats, Manually : bool) -> void:
 	var Performer = GetCurrentShip()
 	var data : Dictionary = {
-		"actionType" : Card_Passive.ActionType.CARD_DISCARD,
+		"actionType" : Card_Passive.ActionType.CARD_DISCARDED,
 		"Friendly" : GetShipsTeam(Performer),
 		"Enemy" : GetShipEnemyTeam(Performer),
 		"Performer" : Performer,
@@ -315,7 +315,7 @@ func MultiSpcificCardDrawn(DrawnCards : Array[CardStats]) -> void:
 	
 	for card in DrawnCards:
 		var data : Dictionary = {
-			"actionType" : Card_Passive.ActionType.CARD_DRAW,
+			"actionType" : Card_Passive.ActionType.CARD_DRAWN,
 			"Friendly" : GetShipsTeam(Performer),
 			"Enemy" : GetShipEnemyTeam(Performer),
 			"Performer" : Performer,
@@ -343,7 +343,7 @@ func MultiCardDrawn(DrawnCards : Array[CardStats], discardAmm : int) -> void:
 	
 	for card in DrawnCards:
 		var data : Dictionary = {
-			"actionType" : Card_Passive.ActionType.CARD_DRAW,
+			"actionType" : Card_Passive.ActionType.CARD_DRAWN,
 			"Friendly" : GetShipsTeam(Performer),
 			"Enemy" : GetShipEnemyTeam(Performer),
 			"Performer" : Performer,
@@ -645,9 +645,23 @@ func OnCardSelected(C : Card, target : BattleShipStats = null) -> bool:
 		S.volume_db = -10
 	
 	ExternalUI.UpdateCardsInHandAmm(Ship.deck.Hand.size(), MaxCardsInHand)
-
+	
+	var card = C.CStats
 	if (!await HandleModulesPl(Ship, C.CStats, target)):
 		return false
+	
+	var data : Dictionary = {
+		"actionType" : Card_Passive.ActionType.CARD_PLAYED,
+		"Friendly" : GetShipsTeam(Ship),
+		"Enemy" : GetShipEnemyTeam(Ship),
+		"Performer" : Ship,
+		"Receiver" : Ship,
+		"Card" : card
+	}
+	var AnimData = PassiveList.OnActionPerformed(data)
+	if (AnimData.size() > 0):
+		for g in AnimData:
+			HandlePassiveModules(g.Performer, g.OriginalCard, g.Targets)
 	
 	PlayerPerformingMove = false
 	if (Ship.deck.Hand.size() == 0 and Ship.Energy == 0 and Ship.EnergyReserves == 0):
@@ -825,7 +839,21 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 			Ship.deck.Hand.erase(Action)
 			#EnemyDeck.DiscardPile.append(Action)
 			AvailableActions.erase(Action)
+			
 			await HandleModules(Ship, SelectedAction)
+			
+			var data : Dictionary = {
+				"actionType" : Card_Passive.ActionType.CARD_PLAYED,
+				"Friendly" : GetShipsTeam(Ship),
+				"Enemy" : GetShipEnemyTeam(Ship),
+				"Performer" : Ship,
+				"Receiver" : Ship,
+				"Card" : SelectedAction
+			}
+			var AnimData = PassiveList.OnActionPerformed(data)
+			if (AnimData.size() > 0):
+				for g in AnimData:
+					HandlePassiveModules(g.Performer, g.OriginalCard, g.Targets)
 			
 			if (SelectedAction.OnPerformModule != null and !SelectedAction.Burned):
 				if (SelectedAction.OnPerformModule is EnergyOffensiveCardModule):
@@ -847,6 +875,19 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 	
 	if (FireExtinguishToUse != null):
 		await HandleModules(Ship, FireExtinguishToUse)
+		
+		var data : Dictionary = {
+			"actionType" : Card_Passive.ActionType.CARD_PLAYED,
+			"Friendly" : GetShipsTeam(Ship),
+			"Enemy" : GetShipEnemyTeam(Ship),
+			"Performer" : Ship,
+			"Receiver" : Ship,
+			"Card" : FireExtinguishToUse,
+		}
+		var AnimData = PassiveList.OnActionPerformed(data)
+		if (AnimData.size() > 0):
+			for g in AnimData:
+				HandlePassiveModules(g.Performer, g.OriginalCard, g.Targets)
 		
 	print("{0} ended their turn with {1} exess energy".format([Ship.Name, Ship.Energy]))
 	EnemyActionPickedEnded.emit()
@@ -1769,6 +1810,21 @@ func ShipDamaged(amm : float, shieldAmm : float, Instigator : BattleShipStats, d
 	
 	if (Ship.CurrentHull <= 0):
 		ShipDestroyed(Ship)
+
+##----------------------------------------------------------------------##
+func ShipSetOnFire(Instigator : BattleShipStats, Ship : BattleShipStats) -> void:
+	var Data : Dictionary = {
+		"actionType" : Card_Passive.ActionType.FIRE_CAUSED,
+		"Receiver" : Ship,
+		"Performer" : Instigator,
+ 		"Friendly" : GetShipsTeam(Ship),
+		"Enemy" : GetShipEnemyTeam(Ship),
+	}
+	var AnimData = PassiveList.OnActionPerformed(Data)
+	if (AnimData.size() > 0):
+		for g : PassiveAnimationData in AnimData:
+			HandlePassiveModules(g.Performer, g.OriginalCard, g.Targets)
+			
 ##----------------------------------------------------------------------##
 # RETURN TRUE IF FIGHT IS OVER
 func ShipDestroyed(Ship : BattleShipStats) -> bool:
@@ -1835,6 +1891,7 @@ func CreateShipVisuals(BattleS : BattleShipStats, Friendly : bool) -> CardFightS
 		EnemyShipVisualPlecement.add_child(ShipVisuals)
 	
 	BattleS.ShipDamaged.connect(ShipDamaged.bind(BattleS))
+	BattleS.ShipSetOnFire.connect(ShipSetOnFire.bind(BattleS))
 	BattleS.StatsBuffed.connect(UpdateShipStats.bind(BattleS))
 	BattleS.CardsBuffed.connect(UpdateShipStats.bind(BattleS))
 	BattleS.ShipViz = ShipVisuals

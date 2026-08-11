@@ -25,12 +25,10 @@ func _on_clear_lines_pressed() -> void:
 		return
 	EventHandler.OnMarkerEditorClearLinesPressed()
 
-
 func _on_draw_line_pressed() -> void:
 	if (!Working):
 		return
 	EventHandler.OnMarkerEditorDrawLinePressed()
-
 
 func _on_draw_text_pressed() -> void:
 	if (!Working):

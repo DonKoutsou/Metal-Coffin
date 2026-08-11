@@ -115,21 +115,15 @@ static func FindTooltips(card : CardStats) -> PackedStringArray:
 	
 	if (card.Type == CardStats.CardType.POWER):
 		tips.append("TLTP_POWER")
+		tips.append_array(GetTooltipsForModule(card.Passive.Module))
 	
 	if (card.PutOnTop):
 		tips.append("TLTP_SWIFT")
 	
 	for g in card.OnUseModules:
-		if (g is DeffenceCardModule):
-			if (g.AOE):
-				if (!g.SelfUse):
-					tips.append("TLTP_SELF_EXC")
-				tips.append("TLTP_AOE")
+		tips.append_array(GetTooltipsForModule(g))
 			
 	if (card.OnUseModules.size() > 0):
-		for g in card.OnUseModules:
-			if (g is FireExtinguishModule):
-				tips.append("TLTP_FIRE")
 		tips.append("TLTP_ONUSE")
 	if (card.OnDiscardModules.size() > 0):
 		tips.append("TLTP_ONDISC")
@@ -138,35 +132,49 @@ static func FindTooltips(card : CardStats) -> PackedStringArray:
 
 	var perfModule = card.OnPerformModule
 	if (perfModule != null):
-		if (perfModule is OffensiveCardModule):
-			if (perfModule.AOE):
-				tips.append("TLTP_AOE")
-				
-			if (perfModule.OnSuccesfullAtackModules.size() > 0):
-				if (perfModule.forEachHit):
-					tips.append("TLTP_PERHIT")
-				else:
-					tips.append("TLTP_ONHIT")
-			
-			if (perfModule.OnUnSuccesfullAtackModules.size() > 0):
-				if (perfModule.forEachMis):
-					tips.append("TLTP_ONMISS")
-				else:
-					tips.append("TLTP_PERMISS")
-				
-		if (perfModule is CounterCardModule):
-			if (perfModule.OnSuccesfullDeffenceModules.size() > 0):
-				tips.append("TLTP_ONCOUNTER")
-			if (perfModule.CounterType == OffensiveCardModule.AtackTypes.DIRECT_ATTACK):
-				tips.append("TLTP_COUNTER_DIR")
-			if (perfModule.CounterType == OffensiveCardModule.AtackTypes.HOMING_ATTACK):
-				tips.append("TLTP_COUNTER_HOM")
-			
-		if (perfModule is DamageReductionCardModule):
-			if (perfModule.CounterType == OffensiveCardModule.AtackTypes.ANY_ATACK):
-				tips.append("TLTP_DMG_RDC_ANY")
+		tips.append_array(GetTooltipsForModule(perfModule))
 	
 	return tips
+
+static func GetTooltipsForModule(mod : CardModule) -> PackedStringArray:
+	var tips : PackedStringArray = []
+	if (mod is DeffenceCardModule):
+		if (mod.AOE):
+			if (!mod.SelfUse):
+				tips.append("TLTP_SELF_EXC")
+			tips.append("TLTP_AOE")
+	if (mod is FireExtinguishModule):
+		tips.append("TLTP_FIRE")
+	if (mod is OffensiveCardModule):
+		if (mod.AOE):
+			tips.append("TLTP_AOE")
+			
+		if (mod.OnSuccesfullAtackModules.size() > 0):
+			if (mod.forEachHit):
+				tips.append("TLTP_PERHIT")
+			else:
+				tips.append("TLTP_ONHIT")
+		
+		if (mod.OnUnSuccesfullAtackModules.size() > 0):
+			if (mod.forEachMis):
+				tips.append("TLTP_ONMISS")
+			else:
+				tips.append("TLTP_PERMISS")
+			
+	if (mod is CounterCardModule):
+		if (mod.OnSuccesfullDeffenceModules.size() > 0):
+			tips.append("TLTP_ONCOUNTER")
+		if (mod.CounterType == OffensiveCardModule.AtackTypes.DIRECT_ATTACK):
+			tips.append("TLTP_COUNTER_DIR")
+		if (mod.CounterType == OffensiveCardModule.AtackTypes.HOMING_ATTACK):
+			tips.append("TLTP_COUNTER_HOM")
+		
+	if (mod is DamageReductionCardModule):
+		if (mod.CounterType == OffensiveCardModule.AtackTypes.ANY_ATACK):
+			tips.append("TLTP_DMG_RDC_ANY")
+	
+	return tips
+	
 
 static func strip_bbcode(source:String) -> String:
 	var regex = RegEx.new()

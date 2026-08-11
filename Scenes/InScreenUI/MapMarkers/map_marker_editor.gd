@@ -71,6 +71,8 @@ func _on_text_confirm_pressed() -> void:
 	textInput.text = ""
 	PopUpManager.GetInstance().DoFadeNotif("Text marker placed")
 
+func IsDrawingLine() -> bool:
+	return Line != null
 
 func _on_drone_button_pressed() -> void:
 	if (Line == null):
@@ -92,6 +94,10 @@ func _on_drone_button_pressed() -> void:
 		Line = null
 		PopUpManager.GetInstance().DoFadeNotif("Line marker placed")
 
+func UpdatePosCustom() -> void:
+	YLine.global_position = get_local_mouse_position()
+	XLine.global_position = get_local_mouse_position()
+	update()
 
 func _on_y_gas_range_changed(NewVal: float) -> void:
 	YLine.global_position.y = clamp(YLine.global_position.y + NewVal * 5, 0, get_viewport_rect().size.y)

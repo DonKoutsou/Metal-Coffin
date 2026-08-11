@@ -72,6 +72,7 @@ signal ReservesChanged(reservesAdded : int)
 signal StatsBuffed
 signal CardsBuffed
 signal ShipDamaged(amm : float, shieldamm : float, Instigator : BattleShipStats)
+signal ShipSetOnFire(Instigator : BattleShipStats)
 
 func ShieldShip(Amm : float) -> void:
 	Shield = min(Shield + Amm, MaxShield)
@@ -96,10 +97,11 @@ func StripBuff(Stat : CardModule.Stat) -> void:
 	ShipViz.Refresh()
 	StatsBuffed.emit()
 
-func CauseFire() -> void:
+func CauseFire(Instigator : BattleShipStats) -> void:
 	if (IsOnFire):
 		TurnsOnFire += 1
 	else:
+		ShipSetOnFire.emit(Instigator)
 		IsOnFire = true
 		TurnsOnFire = 0
 	ShipViz.Refresh()
@@ -186,14 +188,14 @@ func DamageShip(Amm : float, direct : bool, ShouldCauseFire : bool = false, Skip
 			shieldDmg = origshield - Shield
 	#only do fire roll when shield didt absorb all the damage
 	if (Dmg > 0 and Helper.TrySetFire()):
-		CauseFire()
+		CauseFire(Instigator)
 	
 	Dmg -= min(1, Amm * GetDef())
 	
 	CurrentHull -= Dmg
 	
 	if (ShouldCauseFire):
-		CauseFire()
+		CauseFire(Instigator)
 	
 	if (Friendly):
 		if (CurrentHull < 40 and !ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_SHIPLOSS)):

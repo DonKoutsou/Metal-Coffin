@@ -15,7 +15,6 @@ metadata/_custom_type_script = "uid://cdrx0lnf7xlv7"
 
 [sub_resource type="Resource" id="Resource_803yc"]
 script = ExtResource("3_l8dgo")
-PassiveTrigger = 2
 Module = SubResource("Resource_1wbrc")
 Target = 4
 metadata/_custom_type_script = "uid://uro0nyfixggn"
@@ -28,6 +27,5 @@ Energy = 2
 Consume = true
 Passive = SubResource("Resource_803yc")
 Type = 3
-PutOnTop = true
 IsDisposition = true
 metadata/_custom_type_script = "uid://cg2tajspojecm"

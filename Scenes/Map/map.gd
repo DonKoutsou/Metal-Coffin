@@ -303,6 +303,19 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 
 
 func _MAP_INPUT(event: InputEvent) -> void:
+	if (event.is_action_pressed("Click")):
+		if (GetMapMarkerEditor().visible):
+			GetMapMarkerEditor()._on_drone_button_pressed()
+	if (event.is_action_released("Click")):
+		if (GetMapMarkerEditor().visible and GetMapMarkerEditor().IsDrawingLine()):
+			GetMapMarkerEditor()._on_drone_button_pressed()
+	#check if map marker controlls are on
+	if (event is InputEventMouseMotion):
+		if (GetMapMarkerEditor().visible):
+			GetMapMarkerEditor().UpdatePosCustom()
+			return
+	
+	
 	if (event is InputEventScreenTouch):
 		_Camera._HANDLE_TOUCH(event)
 	else : if (event is InputEventScreenDrag):

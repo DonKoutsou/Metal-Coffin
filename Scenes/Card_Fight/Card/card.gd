@@ -305,7 +305,10 @@ func SetRealistic() -> void:
 	CardName.add_theme_font_override("normal_font", RealisticFont)
 	CardCost.add_theme_font_override("font", RealisticFont)
 	CardDesc.add_theme_font_override("normal_font", RealisticFont)
+	CardDesc.add_theme_font_size_override("normal_font_size", 15)
 	CardCost.get_child(0).visible = false
+	
+	UpdateText()
 
 #--------------------------------------------------------------
 func SetPressed() -> void:

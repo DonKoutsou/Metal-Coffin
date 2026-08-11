@@ -8,7 +8,7 @@ func GetDesc(Tier : int, _targetOverride : String = "") -> String:
 func NeedsTargetSelect() -> bool:
 	return true
 
-func Handle(_Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> AnimationData:
+func Handle(Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> AnimationData:
 	if (Action.Burned):
 		return DeffensiveAnimationData.new()
 	var TargetViz : Array[Control]
@@ -19,7 +19,7 @@ func Handle(_Performer : BattleShipStats, Action : CardStats, Targets : Array[Ba
 		if (g == null):
 			continue
 		TargetViz.append(g.ShipViz)
-		Callables.append(g.CauseFire)
+		Callables.append(g.CauseFire.bind(Performer))
 		
 	var Data = DeffensiveAnimationData.new()
 	Data.Mod = self

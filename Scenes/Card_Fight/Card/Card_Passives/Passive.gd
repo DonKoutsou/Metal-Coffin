@@ -3,49 +3,66 @@ extends Resource
 
 class_name Card_Passive
 
-@export var PassiveTrigger : ActionType = ActionType.NONE
-
 @export var Module : CardModule
-@export var Receiver : ReceiverType = ReceiverType.SELF
-@export var Target : TargetType = TargetType.SELF
+@export var Receiver : ReceiverType = ReceiverType.OWNER
+@export var Target : TargetType = TargetType.OWNER
 
+#------------------------------------------------------
 @abstract
 func OnActionPerformed(data : Dictionary, C : CardStats, PassiveOwner : BattleShipStats) -> PassiveAnimationData
-	
+
+#------------------------------------------------------
 func GetDesc(Tier : int) -> String:
-	var st : String = ActionType.keys()[PassiveTrigger]
-	return "[color=#ffc315]ON {0}[/color]\n{1}".format([st.replace("_", " "),Module.GetDesc(Tier, GetTargetString())])
+	return "{0}\n{1}".format([GetTrigerString() ,Module.GetDesc(Tier, GetTargetString())])
 
+#------------------------------------------------------
 func GetBattleDesc(User : BattleShipStats,Tier : int) -> String:
-	var st : String = ActionType.keys()[PassiveTrigger]
-	return "[color=#ffc315]ON {0}[/color]\n{1}".format([st.replace("_", " "),Module.GetBattleDesc(User, Tier, GetTargetString())])
+	return "{0}\n{1}".format([GetTrigerString() ,Module.GetBattleDesc(User, Tier, GetTargetString())])
 
+#------------------------------------------------------
 func GetTargetString() -> String:
 	var targetString : String = TargetType.keys()[Target]
-	targetString = targetString.to_lower().replace("_", " ")
-	return targetString
+	targetString = targetString.replace("_", " ")
+	return "[color=#ffc315]{0}[/color]".format([targetString])
 
+#------------------------------------------------------
+func GetTrigerString() -> String:
+	var triggerString : String = ActionType.keys()[GetTrigger()].replace("_", " ")
+	var receiverString : String = ReceiverType.keys()[Receiver].replace("_", " ")
+	
+	return "[color=#ffc315]ON {0} BY {1}[/color]".format([triggerString, receiverString])
+
+#------------------------------------------------------
 @abstract
 func GetTrigger() -> ActionType
 
+#------------------------------------------------------
 func GetPossibleReceivers(data : Dictionary, PassiveOwner : BattleShipStats) -> Array[BattleShipStats]:
 	var targets : Array[BattleShipStats] = []
-	if (Receiver == ReceiverType.SELF):
+	if (Receiver == ReceiverType.OWNER):
 		targets.append(PassiveOwner)
+		
 	else: if (Receiver == ReceiverType.ANY_FRIENDLY):
 		var friendly : Array[BattleShipStats] = data["Friendly"].duplicate()
 		friendly.erase(PassiveOwner)
 		targets.append_array(friendly)
+		
 	else: if (Receiver == ReceiverType.ANY_FRIENDLY_INCLUSIVE):
 		targets.append_array(data["Friendly"])
+		
 	else: if (Receiver == ReceiverType.ANY_ENEMY):
+		targets.append_array(data["Enemy"])
+		
+	else: if (Receiver == ReceiverType.ANY_SHIP):
+		targets.append_array(data["Friendly"])
 		targets.append_array(data["Enemy"])
 		
 	return targets
 
+#------------------------------------------------------
 func GetPossibleTargets(data : Dictionary, PassiveOwner : BattleShipStats) -> Array[BattleShipStats]:
 	var targets : Array[BattleShipStats] = []
-	if (Target == TargetType.SELF):
+	if (Target == TargetType.OWNER):
 		targets.append(PassiveOwner)
 		
 	else: if (Target == TargetType.RANDOM_FRIENDLY):
@@ -64,30 +81,38 @@ func GetPossibleTargets(data : Dictionary, PassiveOwner : BattleShipStats) -> Ar
 	else: if (Target == TargetType.INSTIGATOR):
 		targets.append(data["Performer"])
 	
+	else: if (Target == TargetType.RANDOM_SHIP):
+		targets.append(data["Friendly"].pick_random())
+		targets.append(data["Enemy"].pick_random())
+	
 	return targets
 
+#------------------------------------------------------
 enum TargetType
 {
-	SELF,
+	OWNER,
 	RANDOM_FRIENDLY,
 	RANDOM_FRIENDLY_INCLUSIVE,
 	RANDOM_ENEMY,
 	INSTIGATOR,
+	RANDOM_SHIP,
 }
+
 enum ReceiverType
 {
-	SELF,
+	OWNER,
 	ANY_FRIENDLY,
 	ANY_FRIENDLY_INCLUSIVE,
 	ANY_ENEMY,
-	TARGET,
+	ANY_SHIP,
 }
 
 enum ActionType
 {
 	NONE,
-	CARD_DRAW,
+	CARD_DRAWN,
 	DAMAGED,
-	PLAYED_CARD,
-	CARD_DISCARD,
+	CARD_PLAYED,
+	CARD_DISCARDED,
+	FIRE_CAUSED,
 }

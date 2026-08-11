@@ -112,7 +112,16 @@ func GetDesc(Tier : int, targetOverride : String = "") -> String:
 	
 	return Desc
 
-func GetBattleDesc(User : BattleShipStats, Tier : int, _targetOverride : String = "") -> String:
+func GetBattleDesc(User : BattleShipStats, Tier : int, targetOverride : String = "") -> String:
+	var targetString : String = ""
+	if (targetOverride != ""):
+		targetString = targetOverride
+	else:
+		if (AOE):
+			targetString = "enemy team"
+		else:
+			targetString = "enemy"
+			
 	var TextColors : Array[String]
 	for stat in ScaleStat:
 		if (stat.ScalingStat == Stat.FIREPOWER):
@@ -124,11 +133,7 @@ func GetBattleDesc(User : BattleShipStats, Tier : int, _targetOverride : String 
 		else : if (stat.ScalingStat == Stat.WEIGHT):
 			TextColors.append("color=#828dff")
 
-	var Desc = ""
-	if (AOE):
-		Desc = "Hit enemy team"
-	else:
-		Desc = "Hit enemy"
+	var Desc = "Hit {0}".format([targetString])
 	
 	var FinalDamage = 0.0
 	if (ScaleStat.size() == 0):

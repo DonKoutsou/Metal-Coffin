@@ -6,13 +6,15 @@
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="4_5ev3m"]
 [ext_resource type="Resource" uid="uid://odkwy5rk0vxe" path="res://Resources/Cards/Powers/ShieldOnDraw.tres" id="5_5ev3m"]
 [ext_resource type="Resource" uid="uid://barj6en5mlnje" path="res://Resources/Cards/Powers/Thorns.tres" id="6_w74s6"]
+[ext_resource type="Resource" uid="uid://dodbhtu4orn01" path="res://Resources/Cards/Powers/Test.tres" id="7_sk3h7"]
 
 [sub_resource type="Resource" id="Resource_s7tc1"]
 script = ExtResource("3_5ev3m")
 DispoistionStage = 0.1
 Rewards = Dictionary[ExtResource("4_5ev3m"), int]({
 ExtResource("5_5ev3m"): 1,
-ExtResource("6_w74s6"): 1
+ExtResource("6_w74s6"): 1,
+ExtResource("7_sk3h7"): 1
 })
 metadata/_custom_type_script = "uid://brinqcu2jdpo8"
 

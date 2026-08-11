@@ -16,8 +16,8 @@ func NeedsTargetSelect() -> bool
 @abstract
 func Handle(Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> AnimationData
 
-func GetBattleDesc(_User : BattleShipStats, Tier : int, _targetOverride : String = "") -> String:
-	return GetDesc(Tier)
+func GetBattleDesc(_User : BattleShipStats, Tier : int, targetOverride : String = "") -> String:
+	return GetDesc(Tier, targetOverride)
 
 func GetStatShortName(St : Stat) -> String:
 	var StatName : String

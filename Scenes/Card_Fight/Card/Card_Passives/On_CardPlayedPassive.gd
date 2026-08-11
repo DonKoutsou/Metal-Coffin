@@ -1,12 +1,12 @@
 extends Card_Passive
 
-class_name OnDrawPassive
-
-@export var ManualOnly : bool = false
+class_name OnCardPlayedPassive
 
 func OnActionPerformed(data : Dictionary, _C : CardStats, PassiveOwner : BattleShipStats) -> PassiveAnimationData:
-	if (ManualOnly and !data["ManualDraw"]):
+	var card : CardStats = data["Card"]
+	if (card.OnPerformModule != null and card.OnPerformModule is not OffensiveCardModule):
 		return null
+		
 	var actionReceiver : BattleShipStats = data["Receiver"]
 	
 	var possibleReceivers : Array[BattleShipStats] = GetPossibleReceivers(data, PassiveOwner)
@@ -26,4 +26,4 @@ func OnActionPerformed(data : Dictionary, _C : CardStats, PassiveOwner : BattleS
 
 
 func GetTrigger() -> ActionType:
-	return ActionType.CARD_DRAWN
+	return ActionType.CARD_PLAYED
