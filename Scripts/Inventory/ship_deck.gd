@@ -11,12 +11,19 @@ class_name ShipDeckViz
 
 var CurrentlyShownCharacter : Captain
 
+var PooledCards : Array[Card] = []
+
 func InventoryUpdated() -> void:
 	if (!visible):
 		return
 	SetDeck(CurrentlyShownCharacter)
 
+func _exit_tree() -> void:
+	for g in PooledCards:
+		g.queue_free()
+
 func SetDeck(Ch : Captain) -> void:
+	var msBefore = Time.get_ticks_msec()
 	var Inv = Ch.GetCharacterInventory()
 
 	var deck : Dictionary[CardStats, int]
@@ -38,36 +45,44 @@ func SetDeck(Ch : Captain) -> void:
 	else:
 		deck = Ch.GetStartingDeck()
 
-	var PooledCards : Array[Card]
+	
 	for g in OffensiveCardPosition.get_children():
 		PooledCards.append(g)
-		OffensiveCardPosition.remove_child(g)
+		#OffensiveCardPosition.remove_child(g)
 	for g in DeffencsiveCardPosition.get_children():
 		PooledCards.append(g)
-		DeffencsiveCardPosition.remove_child(g)
+		#DeffencsiveCardPosition.remove_child(g)
 	for g in UtilityCardPosition.get_children():
 		PooledCards.append(g)
-		UtilityCardPosition.remove_child(g)
+		#UtilityCardPosition.remove_child(g)
 		#g.queue_free()
 	for g in PowerCardPosition.get_children():
 		PooledCards.append(g)
-		PowerCardPosition.remove_child(g)
-	
-	
+		#PowerCardPosition.remove_child(g)
 	
 	for card : CardStats in deck:
 		var c : Card
 		if (PooledCards.size() > 0):
 			c = PooledCards.pop_back()
+			var parent = c.get_parent()
+			if (parent):
+				c.reparent(GetParentForCard(card))
+			else:
+				GetParentForCard(card).add_child(c)
 		else:
 			c = CardScene.instantiate()
-		GetParentForCard(card).add_child(c)
+			GetParentForCard(card).add_child(c)
 		c.SetCardStats(card, deck[card])
-		
 		c.Dissable()
 	
 	for g in PooledCards:
-		g.queue_free()
+		var parent = g.get_parent()
+		if (parent):
+			g.get_parent().remove_child(g)
+			
+	print("Pooled = {0}".format([PooledCards.size()]))
+	var msAfter = Time.get_ticks_msec()
+	print("Card Setting took {0}".format([msAfter - msBefore]))
 
 func GetParentForCard(C : CardStats) -> Control:
 	match C.Type:

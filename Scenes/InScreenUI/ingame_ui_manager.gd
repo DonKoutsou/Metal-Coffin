@@ -36,6 +36,7 @@ func _ready() -> void:
 	EventHandler.MarkerEditorYRangeChanged.connect(_MapMarkerEditor._on_y_gas_range_changed)
 	EventHandler.MarkerEditorXRangeChanged.connect(_MapMarkerEditor._on_x_gas_range_changed)
 	EventHandler.MarkerEditorToggled.connect(_MapMarkerEditor.ToggleVisibilidy)
+	_MapMarkerEditor.CustomOffset.connect(EventHandler.OnMapMarkerCustomOffset)
 	EventHandler.TopoPressed.connect(TopologyTriggered)
 	EventHandler.ZoomToggled.connect(ToggleZoomUI)
 	EventHandler.AltToggled.connect(ToggleAltitudeUI)

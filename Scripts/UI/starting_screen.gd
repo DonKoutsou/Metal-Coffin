@@ -22,7 +22,7 @@ func _init() -> void:
 
 
 func _ready() -> void:
-	
+	LoadSavedSettings()
 	#get_viewport().disable_3d = true
 	TranslationServer.set_locale("english")
 	#var siz =  DisplayServer.screen_get_size()
@@ -137,3 +137,48 @@ func OnGameEnded() -> void:
 	Wor.TerminateWorld()
 	Wor.queue_free()
 	await SpawnMenu()
+
+func _exit_tree() -> void:
+	UpdateSavedSettings()
+
+func LoadSavedSettings() -> void:
+	if (!FileAccess.file_exists("user://Settings.tres")):
+		return
+		
+	var CurrentVersion = ProjectSettings.get_setting("application/config/version")
+	var sav = load("user://Settings.tres") as Saved_Settings
+	
+	if (sav == null):
+		return
+	if (sav.GameVersion != str_to_var(CurrentVersion)):
+		return
+	
+	if (sav.FullScreen):
+		DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_WINDOWED)
+	
+	if (sav.Sound):
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sounds"), 0)
+	else:
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sounds"), -64)
+	
+	if (sav.Music):
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), 0)
+	else:
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), -64)
+	
+	ScreenCamera.ShakeEffects = sav.ShakeEffect
+	SettingsPanel.HasRain = sav.Rain
+
+func UpdateSavedSettings() -> void:
+	var save = Saved_Settings.new()
+	save.FullScreen = DisplayServer.window_get_mode(0) == DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN
+	save.Glitch = SettingsPanel.HasGlitch
+	save.Rain = SettingsPanel.HasRain
+	save.Sound = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Sounds")) == 0
+	save.Music = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music")) == 0
+	save.ShakeEffect = ScreenCamera.ShakeEffects
+	save.GameVersion = ProjectSettings.get_setting("application/config/version")
+	
+	ResourceSaver.save(save, "user://Settings.tres")

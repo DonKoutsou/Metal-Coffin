@@ -35,6 +35,7 @@ signal DrawLinePressed()
 signal DrawTextPressed()
 signal MarkerEditorYRangeChanged(NewValue : float)
 signal MarkerEditorXRangeChanged(NewVlaue : float)
+signal MapMarkerCustomOffset(offset : Vector2)
 
 signal RegroupPressed()
 signal LandPressed()
@@ -162,6 +163,9 @@ func OnMarkerEditorYRangeChanged(NewVal : float) -> void:
 
 func OnMarkerEditorXRangeChanged(NewVal : float) -> void:
 	MarkerEditorXRangeChanged.emit(NewVal)
+
+func OnMapMarkerCustomOffset(offset : Vector2) -> void:
+	MapMarkerCustomOffset.emit(offset)
 
 func OnRegroupPressed() -> void:
 	RegroupPressed.emit()

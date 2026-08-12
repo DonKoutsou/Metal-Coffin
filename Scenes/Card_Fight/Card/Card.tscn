@@ -119,11 +119,10 @@ own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 4
-oversampling = false
-size = Vector2i(372, 512)
+size = Vector2i(158, 217)
 size_2d_override = Vector2i(186, 256)
 size_2d_override_stretch = true
-render_target_update_mode = 1
+render_target_update_mode = 0
 
 [node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport" unique_id=1329688651]
 anchors_preset = 15
@@ -201,6 +200,7 @@ mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport/VBoxContainer" unique_id=388063333]
+custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = -5
@@ -271,6 +271,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="CardDesc" type="RichTextLabel" parent="SubViewportContainer/SubViewport/VBoxContainer" unique_id=2019122254]
+custom_minimum_size = Vector2(0, 103)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -286,8 +287,11 @@ theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "Throws a barragge on the enemy.
 CAN'T BE AVOIDED
+dwadwa
+dwadwadwawda
 "
 fit_content = true
+scroll_active = false
 autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1

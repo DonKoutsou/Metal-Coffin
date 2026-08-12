@@ -11,7 +11,7 @@
 [ext_resource type="StyleBox" uid="uid://bj8tmjsnlmj0" path="res://Theme/Buttons/ButtonBlack.tres" id="9_gq5gp"]
 [ext_resource type="StyleBox" uid="uid://g2ic8um6hit" path="res://Theme/Buttons/ButtonBlack_Pressed.tres" id="10_ukqae"]
 
-[node name="MapMarkerControls" type="Control" unique_id=329577773 node_paths=PackedStringArray("ToggleButton")]
+[node name="MapMarkerControls" type="Control" unique_id=329577773 node_paths=PackedStringArray("ToggleButton", "XSlider", "YSlider")]
 custom_minimum_size = Vector2(274, 157)
 custom_maximum_size = Vector2(274, 157)
 layout_mode = 3
@@ -30,6 +30,8 @@ mouse_filter = 2
 script = ExtResource("1_67mm3")
 ToggleButton = NodePath("ExitMapMarker")
 EventHandler = ExtResource("2_djntk")
+XSlider = NodePath("DroneGas2")
+YSlider = NodePath("DroneGas")
 
 [node name="PanelContainer" type="TextureRect" parent="." unique_id=250094317]
 layout_mode = 1

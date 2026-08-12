@@ -12,7 +12,7 @@ static func GetInstance() -> SaveLoadManager:
 func DeleteSave() -> void:
 	DirAccess.remove_absolute("user://SavedGame.tres")
 	DirAccess.remove_absolute("user://PrologueSavedGame.tres")
-	TutorialManager.GetInstance().DeleteSave()
+	TutorialManager.DeleteSave()
 
 static func SaveExists(Sav : String) -> bool:
 	if (!FileAccess.file_exists(Sav)):
@@ -105,8 +105,6 @@ func Load(world : World) ->Dictionary:
 		Resaults["Succsess"] = false
 		Resaults["Reason"] = "Game Version doesen't match save file.\nSave File Version = {0}".format([sav.GameVersion])
 		return Resaults
-	
-	
 	
 	var Mapz = world.GetMap() as Map
 	var DiagHolder = world.GetDialogueProgress()

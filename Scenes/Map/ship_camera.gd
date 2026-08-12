@@ -250,9 +250,7 @@ func _physics_process(delta: float) -> void:
 	if (FocusedShip != null):
 		UpdateCameraPos((global_position - FocusedShip.global_position) * delta * (SimulationManager.SimSpeed() * 2), false, true)
 		#ForceCamPosition(FocusedShip.global_position)
-	
-	
-	
+
 	var rel : Vector2
 	if (Input.is_action_pressed("MapDown")):
 		rel.y -= 10
@@ -269,6 +267,9 @@ func _physics_process(delta: float) -> void:
 		GroundMat.set_shader_parameter("Light", light)
 	
 	if (CommandLine.Typing):
+		return
+	
+	if (MapMarkerEditor.WritingText):
 		return
 	
 	if (Input.is_action_pressed("ZoomIn")):

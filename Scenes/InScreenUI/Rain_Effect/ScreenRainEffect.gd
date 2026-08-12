@@ -7,7 +7,7 @@ class_name RainEffect
 
 static var Instance : RainEffect
 
-var working : bool = true
+static var working : bool = true
 
 func _ready() -> void:
 	Instance = self

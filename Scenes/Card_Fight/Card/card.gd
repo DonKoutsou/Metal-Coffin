@@ -68,8 +68,8 @@ func _ready() -> void:
 	Line.visible = TargetLocs.size() > 0
 
 #--------------------------------------------------------------
-func _enter_tree() -> void:
-	$SubViewportContainer/SubViewport.set_deferred("render_target_update_mode",  SubViewport.UPDATE_ONCE)
+func _exit_tree() -> void:
+	$SubViewportContainer/SubViewport.set_deferred("render_target_update_mode",  SubViewport.UPDATE_DISABLED)
 
 #--------------------------------------------------------------
 func _physics_process(delta: float) -> void:
@@ -180,8 +180,8 @@ func SetCardStats(Stats : CardStats, Amm : int = 0) -> void:
 	AmmountLabel.text = "{0}x".format([Amm])
 	
 	CardDesc.text = DescText
-	UpdateText()
-	
+	CardDesc.add_theme_font_size_override("normal_font_size", 16)
+	Helper.CallLater(UpdateTextSize, 0.01)
 	CardCost.text = "{0}".format([Cost])
 	
 	if (Stats.Type == CardStats.CardType.OFFENSIVE):
@@ -227,8 +227,8 @@ func SetCardBattleStats(User : BattleShipStats, Stats : CardStats, Amm : int = 0
 		CardCost.text = "{0}".format([ShownCost])
 		CardTex.texture = Stats.Icon
 
-	UpdateText()
-
+	CardDesc.add_theme_font_size_override("normal_font_size", 16)
+	Helper.CallLater(UpdateTextSize, 0.01)
 	$Amm.visible = Amm > 1
 	AmmountLabel.text = "{0}x".format([Amm])
 
@@ -242,14 +242,16 @@ func SetCardBattleStats(User : BattleShipStats, Stats : CardStats, Amm : int = 0
 		CardTypeEmblem.modulate = Color("8db354")
 
 #--------------------------------------------------------------
-func UpdateText() -> void:
-	var fontSize = 16
+func UpdateTextSize() -> void:
+	var fontSize = CardDesc.get_theme_font_size("normal_font_size")
 	#return
-
-	while(CardDesc.get_content_height() > 280 and fontSize > 12):
+	
+	if (CardDesc.size.y > 103 and fontSize > 12):
 		fontSize -= 1
 		CardDesc.add_theme_font_size_override("normal_font_size", fontSize)
-
+		Helper.CallLater(UpdateTextSize, 0.01)
+	else:
+		$SubViewportContainer/SubViewport.set_deferred("render_target_update_mode",  SubViewport.UPDATE_ONCE)
 #--------------------------------------------------------------
 func UpdateBattleStats(User : BattleShipStats) -> void:
 	if (CStats.Burned):
@@ -264,8 +266,8 @@ func UpdateBattleStats(User : BattleShipStats) -> void:
 		else:
 			CardCost.modulate = Color(1,1,1)
 		CardCost.text = "{0}".format([ShownCost])
-	
-	$SubViewportContainer/SubViewport.set_deferred("render_target_update_mode",  SubViewport.UPDATE_ONCE)
+		
+	Helper.CallLater(UpdateTextSize, 0.01)
 
 #--------------------------------------------------------------
 func Flip() -> void:
@@ -307,8 +309,7 @@ func SetRealistic() -> void:
 	CardDesc.add_theme_font_override("normal_font", RealisticFont)
 	CardDesc.add_theme_font_size_override("normal_font_size", 15)
 	CardCost.get_child(0).visible = false
-	
-	UpdateText()
+
 
 #--------------------------------------------------------------
 func SetPressed() -> void:

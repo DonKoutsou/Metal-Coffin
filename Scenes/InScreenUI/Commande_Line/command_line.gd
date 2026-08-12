@@ -283,10 +283,11 @@ func OnCloseButtonPressed() -> void:
 func UpdateRecomendations() -> void:
 	ClearRecomendations()
 	if (Text.text.length() == 0):
-		for g in CommandListConfiguration:
-			var commandText = ListToString(g)
-			var args = GetMethodArguments(CommandListConfiguration[g])
-			AddRecomendation(commandText + ListToString(args))
+		return
+		#for g in CommandListConfiguration:
+			#var commandText = ListToString(g)
+			#var args = GetMethodArguments(CommandListConfiguration[g])
+			#AddRecomendation(commandText + ListToString(args))
 	else:
 		var text = Text.text.to_lower().split(" ")
 		var matchingCommandIndexes : Array[int] = []
@@ -310,7 +311,6 @@ func UpdateRecomendations() -> void:
 			var args = GetMethodArguments(CommandListConfiguration[list])
 			AddRecomendation(commandText + ListToString(args))
 				
-					
 
 func GetMethodArguments(methodName : String) -> PackedStringArray:
 	var methods = get_method_list()

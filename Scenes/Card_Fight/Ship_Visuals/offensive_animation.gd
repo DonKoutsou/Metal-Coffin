@@ -159,7 +159,8 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 				
 				else : if (Mod is StackDamageCardModule):
 					call_deferred("SpawnUpDamageVisual", card, card, "Damage +")
-				
+				else:
+					card.CardKilled.connect(AnimEnded)
 			if (Data.size() > 1):
 				await wait(0.2)
 			

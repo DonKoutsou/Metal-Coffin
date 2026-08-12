@@ -181,6 +181,8 @@ func ActionPicked(C : CardStats, Targets : Array[BattleShipStats] = []) -> void:
 	var TexNode = TextureRect.new()
 	TexNode.texture = C.Icon
 	TexNode.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	TexNode.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+
 	TexNode.custom_minimum_size = Vector2(38,22)
 	TexNode.mouse_filter = Control.MOUSE_FILTER_PASS
 	TexNode.mouse_entered.connect(ActionHovered.bind(C, Targets))
@@ -191,6 +193,8 @@ func PassiveAdded(C : CardStats) -> void:
 	var TexNode = TextureRect.new()
 	TexNode.texture = C.Icon
 	TexNode.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	TexNode.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	
 	TexNode.custom_minimum_size = Vector2(38,22)
 	TexNode.mouse_filter = Control.MOUSE_FILTER_PASS
 	TexNode.mouse_entered.connect(ActionHovered.bind(C))

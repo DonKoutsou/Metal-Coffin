@@ -1251,6 +1251,7 @@ func HandleModules(Performer : BattleShipStats, C : CardStats) -> void:
 	if (C.Passive != null):
 		PassiveList.AddPassive(Performer, C)
 		Performer.ShipViz.PassiveAdded(C)
+		AnimData.append(DeffensiveAnimationData.new())
 	
 	if (AnimData.size() > 0):
 		await DoCardAnim(C, AnimData, Performer, true)
@@ -1333,6 +1334,7 @@ func HandleModulesPl(Performer : BattleShipStats, C : CardStats, targetOverride 
 	if (C.Passive != null):
 		PassiveList.AddPassive(Performer, C)
 		Performer.ShipViz.PassiveAdded(C)
+		AnimData.append(DeffensiveAnimationData.new())
 		
 	if (AnimData.size() > 0):
 		await DoCardAnim(C, AnimData, Performer, true)

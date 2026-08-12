@@ -22,7 +22,7 @@ corner_radius_bottom_right = 13
 corner_radius_bottom_left = 13
 corner_detail = 6
 
-[node name="MapMarkerEditor" type="Control" unique_id=1132314757 node_paths=PackedStringArray("XLine", "YLine", "lineTarget", "textInput", "textInputParent") groups=["CameraPositionAffected", "ZoomAffected"]]
+[node name="MapMarkerEditor" type="Control" unique_id=1132314757 node_paths=PackedStringArray("XLine", "YLine", "lineTarget", "textInput", "textInputParent", "TempLineParent") groups=["CameraPositionAffected", "ZoomAffected"]]
 material = SubResource("CanvasItemMaterial_0ok87")
 layout_mode = 3
 anchors_preset = 15
@@ -37,6 +37,7 @@ YLine = NodePath("YLine")
 lineTarget = NodePath("Panel")
 textInput = NodePath("MarkerTextEditor/VBoxContainer/TextEdit")
 textInputParent = NodePath("MarkerTextEditor")
+TempLineParent = NodePath("Linetemp")
 LineScene = ExtResource("2_5eayg")
 TextScene = ExtResource("3_ikfwh")
 

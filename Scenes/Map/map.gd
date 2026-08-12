@@ -303,17 +303,19 @@ func LoadSaveData(Data : Array[Resource]) -> void:
 
 
 func _MAP_INPUT(event: InputEvent) -> void:
+	if (GetMapMarkerEditor().visible and GetMapMarkerEditor().IsDrawingText()):
+		return
+	
+	if (CommandLine.Typing):
+		return
+	
 	if (event.is_action_pressed("Click")):
 		if (GetMapMarkerEditor().visible):
-			GetMapMarkerEditor()._on_drone_button_pressed()
-	if (event.is_action_released("Click")):
-		if (GetMapMarkerEditor().visible and GetMapMarkerEditor().IsDrawingLine()):
-			GetMapMarkerEditor()._on_drone_button_pressed()
-	#check if map marker controlls are on
+			GetMapMarkerEditor()._OnTextButtonPressed()
 	if (event is InputEventMouseMotion):
 		if (GetMapMarkerEditor().visible):
 			GetMapMarkerEditor().UpdatePosCustom()
-			return
+			#return
 	
 	
 	if (event is InputEventScreenTouch):
@@ -333,14 +335,20 @@ func _MAP_INPUT(event: InputEvent) -> void:
 		#_InScreenUI.MousePosChanged(event.position)
 	else : if (event is InputEventMouseButton):
 		if (event.button_index == MOUSE_BUTTON_RIGHT and event.pressed):
-			_Camera.get_global_mouse_position()
-			var pos = _Camera.get_global_mouse_position()
-			if (Input.is_action_pressed("Cnt")):
-				ControllerEvH.OnTargetPositionAdded(pos)
-				PopUpManager.GetInstance().DoFadeNotif("Updating Course")
+			if (GetMapMarkerEditor().visible):
+				GetMapMarkerEditor()._on_drone_button_pressed()
 			else:
-				ControllerEvH.OnTargetPositionPicked(pos)
-				PopUpManager.GetInstance().DoFadeNotif("Updating Course")
+				_Camera.get_global_mouse_position()
+				var pos = _Camera.get_global_mouse_position()
+				if (Input.is_action_pressed("Cnt")):
+					ControllerEvH.OnTargetPositionAdded(pos)
+					PopUpManager.GetInstance().DoFadeNotif("Updating Course")
+				else:
+					ControllerEvH.OnTargetPositionPicked(pos)
+					PopUpManager.GetInstance().DoFadeNotif("Updating Course")
+		if (event.button_index == MOUSE_BUTTON_RIGHT and event.is_released()):
+			if (GetMapMarkerEditor().visible and GetMapMarkerEditor().IsDrawingLine()):
+				GetMapMarkerEditor()._on_drone_button_pressed()
 
 func MouseIn() -> void:
 	_InScreenUI.MousePointer.MouseIn()
@@ -349,6 +357,8 @@ func MouseOut() -> void:
 	_InScreenUI.MousePointer.MouseOut()
 
 func MoveTargetSpotSelected(Spot : SpotMarker) -> void:
+	if (GetMapMarkerEditor().visible):
+		return
 	if (Input.is_action_pressed("Cnt")):
 		ControllerEvH.OnTargetPositionAdded(Spot.global_position)
 		PopUpManager.GetInstance().DoFadeNotif("Updating Course Towards\n{0}".format([Spot.SpotNameLabel.text]))
@@ -357,6 +367,8 @@ func MoveTargetSpotSelected(Spot : SpotMarker) -> void:
 		PopUpManager.GetInstance().DoFadeNotif("Updating Course Towards\n{0}".format([Spot.SpotNameLabel.text]))
 
 func MoveTargetSelected(Target : MapShip) -> void:
+	if (GetMapMarkerEditor().visible):
+		return
 	ControllerEvH.OnTargetShipSelected(Target)
 	PopUpManager.GetInstance().DoFadeNotif("Updating Course")
 
