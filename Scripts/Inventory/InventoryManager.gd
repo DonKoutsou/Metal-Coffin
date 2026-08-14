@@ -336,11 +336,12 @@ func LoadCharacter(Data : SD_CharacterInventory) -> void:
 		CharInv.OnCharacterDispositionInspectionPressed.connect(InspectCharacterDisposition.bind(Cha))
 		CharInv.OnCharacterDeckInspectionPressed.connect(InspectCharacterDeck.bind(Cha))
 		
-	Cha.RegisterInventory(CharInv)
+	Cha._CharInv = CharInv
+	CharInv.inventoryOwner = Cha.CaptainShip
 	
-	for g in CharInv._GetInventoryBoxes():
-		for z in g._ContentAmmout:
-			CharInv.RemoveItemFromBox(g)
+	for g in CharInv.GetInventoryContents():
+		CharInv.RemoveItem(g)
+
 	for g in Data.Items:
 		for z in g.Ammount:
 			if (g.ItemType is ShipPart):
@@ -464,9 +465,8 @@ func ToggleInventory() -> void:
 		#print(global_position.y)
 		ToggleTween.tween_property(self, "size", Vector2(size.x, s - get_parent().global_position.y), 0.15)
 		await ToggleTween.finished
-		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.INVENTORY_OPEN)):
-			ActionTracker.OnActionCompleted(ActionTracker.Action.INVENTORY_OPEN)
-			ActionTracker.QueueTutorial(ActionTracker.Action.INVENTORY_OPEN)
+		ActionTracker.OnActionCompleted(ActionTracker.Action.INVENTORY_OPEN)
+		
 	else:
 		#print(global_position.y)
 		visible = !visible

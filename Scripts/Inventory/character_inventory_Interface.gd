@@ -4,12 +4,12 @@ class_name CharacterInventoryInterface
 
 @export_group("Nodes")
 @export var InventoryBoxScene : PackedScene
-@export var EngineInventoryBoxParent : VBoxContainer
-@export var SensorInventoryBoxParent : VBoxContainer
-@export var FuelTankInventoryBoxParent : VBoxContainer
-@export var WeaponInventoryBoxParent : VBoxContainer
-@export var ShieldInventoryBoxParent : VBoxContainer
-@export var InventoryBoxParent : VBoxContainer
+@export var EngineInventoryBoxParent : Control
+@export var SensorInventoryBoxParent : Control
+@export var FuelTankInventoryBoxParent : Control
+@export var WeaponInventoryBoxParent : Control
+@export var ShieldInventoryBoxParent : Control
+@export var InventoryBoxParent : Control
 
 var KeepBoxesActive : bool = false
 signal BoxSelected(Box : Inventory_Box_Res)
@@ -56,6 +56,7 @@ func InitStartingInventory(Cha : Captain) -> void:
 	for g in CharInvSpace:
 		var par = GetBoxParentForType(ShipPart.ShipPartType.INVENTORY)
 		var boxRes = Inventory_Box_Res.new()
+		boxRes.Initialise(Cha.GetCharacterInventory())
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		if (KeepBoxesActive):
 			Box.allowDissable = false
@@ -66,6 +67,7 @@ func InitStartingInventory(Cha : Captain) -> void:
 	for g in CharEngineSpace:
 		var par = GetBoxParentForType(ShipPart.ShipPartType.ENGINE)
 		var boxRes = Inventory_Box_Res.new()
+		boxRes.Initialise(Cha.GetCharacterInventory())
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		if (KeepBoxesActive):
 			Box.allowDissable = false
@@ -76,6 +78,7 @@ func InitStartingInventory(Cha : Captain) -> void:
 	for g in CharSensorSpace:
 		var par = GetBoxParentForType(ShipPart.ShipPartType.SENSOR)
 		var boxRes = Inventory_Box_Res.new()
+		boxRes.Initialise(Cha.GetCharacterInventory())
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		if (KeepBoxesActive):
 			Box.allowDissable = false
@@ -86,6 +89,7 @@ func InitStartingInventory(Cha : Captain) -> void:
 	for g in CharFuelTankSpace:
 		var par = GetBoxParentForType(ShipPart.ShipPartType.FUEL_TANK)
 		var boxRes = Inventory_Box_Res.new()
+		boxRes.Initialise(Cha.GetCharacterInventory())
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		if (KeepBoxesActive):
 			Box.allowDissable = false
@@ -98,6 +102,7 @@ func InitStartingInventory(Cha : Captain) -> void:
 	for g in CharShieldSpace:
 		var par = GetBoxParentForType(ShipPart.ShipPartType.SHIELD)
 		var boxRes = Inventory_Box_Res.new()
+		boxRes.Initialise(Cha.GetCharacterInventory())
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		if (KeepBoxesActive):
 			Box.allowDissable = false
@@ -110,6 +115,7 @@ func InitStartingInventory(Cha : Captain) -> void:
 	for g in CharWeaponSpace:
 		var par = GetBoxParentForType(ShipPart.ShipPartType.WEAPON)
 		var boxRes = Inventory_Box_Res.new()
+		boxRes.Initialise(Cha.GetCharacterInventory())
 		var Box = InventoryBoxScene.instantiate() as Inventory_Box
 		if (KeepBoxesActive):
 			Box.allowDissable = false
@@ -141,6 +147,20 @@ func InitStartingInventory(Cha : Captain) -> void:
 				#_InventoryContents[It] = 1
 #
 			#continue
+
+func SetBoxedSelectable() -> void:
+	for g : Inventory_Box in InventoryBoxParent.get_children():
+		g.Enable()
+	for g : Inventory_Box in EngineInventoryBoxParent.get_children():
+		g.Enable()
+	for g : Inventory_Box in SensorInventoryBoxParent.get_children():
+		g.Enable()
+	for g : Inventory_Box in FuelTankInventoryBoxParent.get_children():
+		g.Enable()
+	for g : Inventory_Box in ShieldInventoryBoxParent.get_children():
+		g.Enable()
+	for g : Inventory_Box in WeaponInventoryBoxParent.get_children():
+		g.Enable()
 
 func ItemSelected(Box : Inventory_Box_Res) -> void:
 	BoxSelected.emit(Box)

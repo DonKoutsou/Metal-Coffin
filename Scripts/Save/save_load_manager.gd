@@ -94,7 +94,7 @@ func Load(world : World) ->Dictionary:
 		Resaults["Reason"] = "Save file could not be found."
 		return Resaults
 	
-	var sav = load(SaveName) as SaveData
+	var sav = ResourceLoader.load(SaveName) as SaveData
 	
 	if (sav == null):
 		Resaults["Succsess"] = false

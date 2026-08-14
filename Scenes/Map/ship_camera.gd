@@ -44,6 +44,7 @@ func _ready() -> void:
 	UIEventHandle.YDialMoved.connect(MoveCameraY)
 	UIEventHandle.XDialMoved.connect(MoveCameraX)
 	UIEventHandle.TopoPressed.connect(ToggleTopo)
+	call_deferred("ForceZoom", zoom)
 
 #---------------------------------------
 func ToggleTopo(t : bool) -> void:
@@ -248,7 +249,8 @@ func _physics_process(delta: float) -> void:
 		#CloudMat.set_shader_parameter("fractal_lacunarity", clamp(l + randf_range(-0.01,0.01), 1,2))
 	
 	if (FocusedShip != null):
-		UpdateCameraPos((global_position - FocusedShip.global_position) * delta * (SimulationManager.SimSpeed() * 2), false, true)
+		var pos = (global_position - FocusedShip.global_position) * delta * (SimulationManager.SimSpeed() * 2)
+		UpdateCameraPos(pos, false, true)
 		#ForceCamPosition(FocusedShip.global_position)
 
 	var rel : Vector2

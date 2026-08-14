@@ -93,10 +93,9 @@ func GetCardDictionary() -> Dictionary[CardStats, int]:
 						break
 				if (!Added):
 					c[C] = 1
-	
-	
-	
+
 	return c
+	
 #func GetCardAmmo() -> Dictionary:
 	#return _CardAmmo.duplicate()
 

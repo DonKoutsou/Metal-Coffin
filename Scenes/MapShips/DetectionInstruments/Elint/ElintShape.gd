@@ -47,9 +47,7 @@ func UpdateElint(delta: float) -> void:
 		if (Newlvl != lvl):
 			ElintContacts[ship] = Newlvl
 	if (BiggestLevel > -1):
-		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.ELINT_CONTACT)):
-			ActionTracker.OnActionCompleted(ActionTracker.Action.ELINT_CONTACT)
-			ActionTracker.QueueTutorial(ActionTracker.Action.ELINT_CONTACT)
+		ActionTracker.OnActionCompleted(ActionTracker.Action.ELINT_CONTACT)
 		ElintTriggered.emit(true, BiggestLevel, Dir)
 	else:
 		ElintTriggered.emit(false, -1, 0)

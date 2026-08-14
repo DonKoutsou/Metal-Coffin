@@ -80,14 +80,18 @@ func OnShipSelected(Ship : MapShip) -> void:
 	
 	
 	interface.InitialiseInventory(Cha)
+	interface.SetBoxedSelectable()
 	
 func RefreshInventory() -> void:
 	interface.InitialiseInventory(CurrentShip.Cpt)
+	interface.SetBoxedSelectable()
 
 
 func GetTypeOfBox(Box : Inventory_Box_Res) -> ShipPart.ShipPartType:
-	var Type : ShipPart.ShipPartType = Box._ParentInventory.boxes.find_key(Box)
-	return Type
+	for g in Box._ParentInventory.boxes:
+		if (Box._ParentInventory.boxes[g].has(Box)):
+			return g
+	return ShipPart.ShipPartType.INVENTORY
 
 func ItemSelected(Box : Inventory_Box_Res) -> void:
 	
@@ -118,7 +122,7 @@ func ItemSelected(Box : Inventory_Box_Res) -> void:
 		#Descriptor.connect("ItemDropped", OwnerInventory.RemoveItemFromBox)
 		#Descriptor.connect("ItemTransf", ItemTranfer)
 	DescriptorPlace.add_child(WorkshopDescriptor)
-	WorkshopDescriptor.set_physics_process(false)
+	#WorkshopDescriptor.set_physics_process(false)
 
 func UpdateDescriptor(Box : Inventory_Box_Res) -> void:
 	if (WorkshopDescriptor != null):

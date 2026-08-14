@@ -123,10 +123,8 @@ func NextStage() -> void:
 				else:
 					CurrentCheck = Checks[0]
 				but.text += "\nWorldView check : {0}".format([CurrentCheck])
-				
-				if (!ActionTracker.IsActionCompleted(ActionTracker.Action.WORLDVIEW_CHECK)):
-					ActionTracker.OnActionCompleted(ActionTracker.Action.WORLDVIEW_CHECK)
-					ActionTracker.QueueTutorial(ActionTracker.Action.WORLDVIEW_CHECK)
+
+				ActionTracker.OnActionCompleted(ActionTracker.Action.WORLDVIEW_CHECK)
 
 		
 		await ResponseReceived

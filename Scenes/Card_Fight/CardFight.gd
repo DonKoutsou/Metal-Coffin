@@ -87,12 +87,15 @@ var EnemyCasualties : Array[BattleShipStats]
 var ActionList = CardFightActionList.new()
 var PassiveList = CardfightPassiveList.new()
 
+#States
 var SelectingTarget : bool = false
 var EnemyPickingMove : bool = false
 var PlayerPerformingMove : bool = false
 var PickingMoves : bool = false
 var CurrentPhase : CardFightPhase
 var Shuffling : bool = false
+
+static var LOG_ENEMY_LOGIC : bool = false
 
 ##Energy stored when player manually discards card.
 var StoredEnergy : int = 0
@@ -174,9 +177,7 @@ func StartFight() -> void:
 ##----------------------------------------------------------------------##
 func IntroDeclarationFinished() -> void:
 	#ActionDeclaration.ActionDeclarationFinished.disconnect(IntroDeclarationFinished)
-	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT)):
-		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT)
-		ActionTracker.QueueTutorial(ActionTracker.Action.CARD_FIGHT)
+	ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT)
 	
 	call_deferred("RunTurn")
 	
@@ -252,7 +253,21 @@ func CreateDecks() -> void:
 		D.OnCardDiscarded.connect(CardDiscarded)
 		D.MultiCardDrawn.connect(MultiCardDrawn)
 		D.MultiSpecificDrawn.connect(MultiSpcificCardDrawn)
-		
+
+func CardPlayed(Ship : BattleShipStats, C : CardStats) -> void:
+	var data : Dictionary = {
+		"actionType" : Card_Passive.ActionType.CARD_PLAYED,
+		"Friendly" : GetShipsTeam(Ship),
+		"Enemy" : GetShipEnemyTeam(Ship),
+		"Performer" : Ship,
+		"Receiver" : Ship,
+		"Card" : C
+	}
+	var AnimData = PassiveList.OnActionPerformed(data)
+	if (AnimData.size() > 0):
+		for g in AnimData:
+			HandlePassiveModules(g.Performer, g.OriginalCard, g.Targets)
+
 ##----------------------------------------------------------------------##
 func CardDrawn(C : CardStats, Manually : bool) -> void:
 	var Performer = GetCurrentShip()
@@ -478,9 +493,7 @@ func PickPhaseStart() -> void:
 		return
 	CurrentTurn = 0
 
-	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_ACTION_PICK)):
-		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ACTION_PICK)
-		ActionTracker.QueueTutorial(ActionTracker.Action.CARD_FIGHT_ACTION_PICK)
+	ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ACTION_PICK)
 
 	CurrentPlayerLabel.visible = true
 	
@@ -518,13 +531,9 @@ func RunShipsTurn(Ship : BattleShipStats) -> void:
 				PlayerActionPickingEnded.emit()
 				return
 		#ExternalUI.ToggleEnergyVisibility(true)
-		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_ENERGY)):
-			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ENERGY)
-			ActionTracker.QueueTutorial(ActionTracker.Action.CARD_FIGHT_ENERGY)
+		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ENERGY)
 
-		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_RESERVES)):
-			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_RESERVES)
-			ActionTracker.QueueTutorial(ActionTracker.Action.CARD_FIGHT_RESERVES)
+		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_RESERVES)
 		
 		RestartCards()
 		
@@ -647,30 +656,17 @@ func OnCardSelected(C : Card, target : BattleShipStats = null) -> bool:
 	ExternalUI.UpdateCardsInHandAmm(Ship.deck.Hand.size(), MaxCardsInHand)
 	
 	var card = C.CStats
-	if (!await HandleModulesPl(Ship, C.CStats, target)):
+	if (!await HandleModules(Ship, C.CStats, target)):
 		return false
 	
-	var data : Dictionary = {
-		"actionType" : Card_Passive.ActionType.CARD_PLAYED,
-		"Friendly" : GetShipsTeam(Ship),
-		"Enemy" : GetShipEnemyTeam(Ship),
-		"Performer" : Ship,
-		"Receiver" : Ship,
-		"Card" : card
-	}
-	var AnimData = PassiveList.OnActionPerformed(data)
-	if (AnimData.size() > 0):
-		for g in AnimData:
-			HandlePassiveModules(g.Performer, g.OriginalCard, g.Targets)
+	CardPlayed(Ship, card)
 	
 	PlayerPerformingMove = false
 	if (Ship.deck.Hand.size() == 0 and Ship.Energy == 0 and Ship.EnergyReserves == 0):
 		PlayerActionSelectionEnded()
 	
 	else: if (Ship.deck.Hand.size() > 0 and Ship.Energy == 0):
-		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_CARD_RECYCLE)):
-			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_CARD_RECYCLE)
-			ActionTracker.QueueTutorial(ActionTracker.Action.CARD_FIGHT_CARD_RECYCLE)
+		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_CARD_RECYCLE)
 		#TODO add tutorial for discarding cards
 
 	
@@ -726,6 +722,14 @@ func RemoveCard(C : Card) -> void:
 	
 	C.queue_free()
 ##----------------------------------------------------------------------##
+func CheckIfToDraw(Ship : BattleShipStats, Acts : Array[CardStats]) -> Array[CardStats]:
+	if (Acts.size() == 0 and Ship.Energy > 0 and Ship.deck.Hand.size() < MaxCardsInHand):
+		print("{0} draws a card".format([Ship.Name]))
+		Ship.Energy -= 1
+		await Ship.deck.DrawCard()
+		Acts.clear()
+		return Ship.deck.Hand.duplicate()
+	return Acts
 #Function used by enemies to pick moves
 func EnemyActionSelection(Ship : BattleShipStats) -> void:
 	#Add the energy to the current ship
@@ -749,111 +753,103 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 		Actions += g.GetCardName() + ", "
 	print("{0}'s hand : {1}".format([Ship.Name, Actions]))
 	
-	var t = func CheckIfToDraw(Acts : Array[CardStats]) -> Array[CardStats]:
-		if (Acts.size() == 0 and Ship.Energy > 0 and Ship.deck.Hand.size() < MaxCardsInHand):
-			print("{0} draws a card".format([Ship.Name]))
-			Ship.Energy -= 1
-			await Ship.deck.DrawCard()
-			Acts.clear()
-			return Ship.deck.Hand.duplicate()
-		return Acts
-		
+	var actionLog : PackedStringArray
+	
 	while (AvailableActions.size() > 0):
 		var Action : CardStats = AvailableActions.pick_random()
+		
 		var ActionCost = Action.Energy
 		if (Action.Burned):
 			ActionCost = 0
-		print("{0} tries to player card {1}".format([Ship.Name, Action.GetCardName()]))
+			
+		actionLog.append("{0} tries to player card {1}".format([Ship.Name, Action.GetCardName()]))
 		
 		if (!Action.AllowDuplicates and ActionList.ShipHasAction(Ship, Action)):
 			AvailableActions.erase(Action)
-			AvailableActions = await t.call(AvailableActions)
-
+			AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
+			
+		##ENERGY
 		else: if (ActionCost > Ship.Energy):
-			print("{0} cant use {1}, not enough energy".format([Ship.Name, Action.GetCardName()]))
+			actionLog.append("{0} cant use {1}, not enough energy".format([Ship.Name, Action.GetCardName()]))
 			Ship.deck.Hand.erase(Action)
 			Ship.deck.DiscardCard(Action, true)
 			AvailableActions.erase(Action)
-			
-			AvailableActions = await t.call(AvailableActions)
-			
+			AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
+		##ON FIRE
 		else : if (Action.UseConditions.has(CardStats.CardUseCondition.ON_FIRE)):
 			if (Ship.IsOnFire):
+				#We want to store the extinguish fire action for the end of the turn to avoid setting self on fire again
 				Ship.Energy -= ActionCost
 				FireExtinguishToUse = Action
+				
+				actionLog.append("{0} has been added to {1}'s discard pile.".format([Action.GetCardName(), Ship.Name]))
 				Ship.deck.Hand.erase(Action)
-				print("{0} has been added to {1}'s discard pile.".format([Action.GetCardName(), Ship.Name]))
 				Ship.deck.DiscardPile.append(Action)
 				AvailableActions.erase(Action)
-				AvailableActions = await t.call(AvailableActions)
+				AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
 			else:
-				print("{0} cant use {1}, not on fire".format([Ship.Name, Action.GetCardName()]))
+				actionLog.append("{0} cant use {1}, not on fire".format([Ship.Name, Action.GetCardName()]))
 				AvailableActions.erase(Action)
-				AvailableActions = await t.call(AvailableActions)
-			
+				AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
+		##NO SOLO
 		else: if (Action.UseConditions.has(CardStats.CardUseCondition.NO_SOLO) and EnemyCombatants.size() == 1):
-			print("{0} cant use {1}, team too small".format([Ship.Name, Action.GetCardName()]))
+			actionLog.append("{0} cant use {1}, team too small".format([Ship.Name, Action.GetCardName()]))
 			AvailableActions.erase(Action)
-			AvailableActions = await t.call(AvailableActions)
-			
+			AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
+		##ENERGY DEPENDANT
 		else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENERGY_DEPENDANT) and Ship.Energy == 0):
-			print("{0} cant use {1}, card is scales with energy and ship has none".format([Ship.Name, Action.GetCardName()]))
+			actionLog.append("{0} cant use {1}, card is scales with energy and ship has none".format([Ship.Name, Action.GetCardName()]))
 			AvailableActions.erase(Action)
-			AvailableActions = await t.call(AvailableActions)
-		
+			AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
+		##RESERVE DEPENDANT
 		else : if (Action.UseConditions.has(CardStats.CardUseCondition.RESERVE_DEPENDANT) and Ship.EnergyReserves == 0):
-			print("{0} cant use {1}, card is scales with reserve and ship has none".format([Ship.Name, Action.GetCardName()]))
+			actionLog.append("{0} cant use {1}, card is scales with reserve and ship has none".format([Ship.Name, Action.GetCardName()]))
 			AvailableActions.erase(Action)
-			AvailableActions = await t.call(AvailableActions)
-		
+			AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
+		##ENOUGH TURNS
 		else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENOUGH_TURNS_PASSED) and CurrentTurn > ShipTurns.size() / 2.0):
-			print("{0} cant use {1}, not enought turns passed".format([Ship.Name, Action.GetCardName()]))
+			actionLog.append("{0} cant use {1}, not enought turns passed".format([Ship.Name, Action.GetCardName()]))
 			AvailableActions.erase(Action)
-			AvailableActions = await t.call(AvailableActions)
-			
+			AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
+		##HAS DEBUFF
 		else : if (Action.UseConditions.has(CardStats.CardUseCondition.HAS_DEBUFF) and !Ship.HasDebuff()):
-			print("{0} cant use {1}, card is cleansing debuffs and ship has none".format([Ship.Name, Action.GetCardName()]))
+			actionLog.append("{0} cant use {1}, card is cleansing debuffs and ship has none".format([Ship.Name, Action.GetCardName()]))
 			AvailableActions.erase(Action)
-			AvailableActions = await t.call(AvailableActions)
+			AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
+		##ENOUGH HP
 		else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENOUGH_HP) and (Ship.CurrentHull / Ship.Hull) * 100 < 10):
-			print("{0} cant use {1}, it's hull is too low.".format([Ship.Name, Action.GetCardName()]))
+			actionLog.append("{0} cant use {1}, it's hull is too low.".format([Ship.Name, Action.GetCardName()]))
 			AvailableActions.erase(Action)
-			AvailableActions = await t.call(AvailableActions)
+			AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
+		##ENOUGH DEF
 		else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENOUGH_DEF) and Ship.GetDef() <= 0):
-			print("{0} cant use {1}, it's defense is too low.".format([Ship.Name, Action.GetCardName()]))
+			actionLog.append("{0} cant use {1}, it's defense is too low.".format([Ship.Name, Action.GetCardName()]))
 			AvailableActions.erase(Action)
-			AvailableActions = await t.call(AvailableActions)
-		#else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENOUGH_FP) and Ship.GetFirePower() <= 0):
-			#print("{0} cant use {1}, it's hull is too low.".format([Ship.Name, Action.GetCardName()]))
-			#AvailableActions.erase(Action)
-			#AvailableActions = await t.call(AvailableActions)
-		#else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENOUGHT_SPEED) and Ship.GetSpeed() <= 0):
-			#print("{0} cant use {1}, it's hull is too low.".format([Ship.Name, Action.GetCardName()]))
-			#AvailableActions.erase(Action)
-			#AvailableActions = await t.call(AvailableActions)
+			AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
+		##ENOUGH FP
+		else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENOUGH_FP) and Ship.GetFirePower() <= 0):
+			actionLog.append("{0} cant use {1}, it's hull is too low.".format([Ship.Name, Action.GetCardName()]))
+			AvailableActions.erase(Action)
+			AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
+		##ENOUGH SPEED
+		else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENOUGHT_SPEED) and Ship.GetSpeed() <= 0):
+			actionLog.append("{0} cant use {1}, it's hull is too low.".format([Ship.Name, Action.GetCardName()]))
+			AvailableActions.erase(Action)
+			AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
+			
 		else:
-			print("{0} uses {1}".format([Ship.Name, Action.GetCardName()]))
+			actionLog.append("{0} uses {1}".format([Ship.Name, Action.GetCardName()]))
 			var SelectedAction : CardStats = Action.duplicate()
 			
 			Ship.Energy -= ActionCost
 			Ship.deck.Hand.erase(Action)
+			#Cards are discarded when actually played so we dont discard them here
 			#EnemyDeck.DiscardPile.append(Action)
 			AvailableActions.erase(Action)
 			
 			await HandleModules(Ship, SelectedAction)
 			
-			var data : Dictionary = {
-				"actionType" : Card_Passive.ActionType.CARD_PLAYED,
-				"Friendly" : GetShipsTeam(Ship),
-				"Enemy" : GetShipEnemyTeam(Ship),
-				"Performer" : Ship,
-				"Receiver" : Ship,
-				"Card" : SelectedAction
-			}
-			var AnimData = PassiveList.OnActionPerformed(data)
-			if (AnimData.size() > 0):
-				for g in AnimData:
-					HandlePassiveModules(g.Performer, g.OriginalCard, g.Targets)
+			CardPlayed(Ship, SelectedAction)
 			
 			if (SelectedAction.OnPerformModule != null and !SelectedAction.Burned):
 				if (SelectedAction.OnPerformModule is EnergyOffensiveCardModule):
@@ -871,25 +867,17 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 				Ship.ShipViz.ActionPicked(SelectedAction, ShipAction.Targets)
 				ActionList.AddAction(Ship, ShipAction)
 
-			AvailableActions = await t.call(AvailableActions)
+			AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
 	
 	if (FireExtinguishToUse != null):
 		await HandleModules(Ship, FireExtinguishToUse)
 		
-		var data : Dictionary = {
-			"actionType" : Card_Passive.ActionType.CARD_PLAYED,
-			"Friendly" : GetShipsTeam(Ship),
-			"Enemy" : GetShipEnemyTeam(Ship),
-			"Performer" : Ship,
-			"Receiver" : Ship,
-			"Card" : FireExtinguishToUse,
-		}
-		var AnimData = PassiveList.OnActionPerformed(data)
-		if (AnimData.size() > 0):
-			for g in AnimData:
-				HandlePassiveModules(g.Performer, g.OriginalCard, g.Targets)
+		CardPlayed(Ship, FireExtinguishToUse)
 		
-	print("{0} ended their turn with {1} exess energy".format([Ship.Name, Ship.Energy]))
+	actionLog.append("{0} ended their turn with {1} exess energy".format([Ship.Name, Ship.Energy]))
+	if (LOG_ENEMY_LOGIC):
+		print(actionLog)
+		
 	EnemyActionPickedEnded.emit()
 ##----------------------------------------------------------------------##
 func PlayerActionSelectionEnded() -> void:
@@ -964,9 +952,7 @@ func StartActionPerform() -> void:
 	
 ##----------------------------------------------------------------------##
 func ActionPerformPhase() -> void:
-	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_ENEMY_ACTION_PERFORM)):
-		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ENEMY_ACTION_PERFORM)
-		ActionTracker.QueueTutorial(ActionTracker.Action.CARD_FIGHT_ENEMY_ACTION_PERFORM)
+	ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ENEMY_ACTION_PERFORM)
 	
 	CurrentPlayerLabel.visible = true
 	CurrentTurn = 0
@@ -1126,9 +1112,7 @@ func RestartCards() -> void:
 	var outNumberedBonus : float = Helper.normalize_value(max(0, EnemyCombatants.size() - PlayerCombatants.size()), 0, 2)
 	if (outNumberedBonus > 0):
 		PopUpManager.GetInstance().DoFadeNotif("Ship outnumbered\nBonus Energy Provided")
-		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_OUTNUMER_BONUS)):
-			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_OUTNUMER_BONUS)
-			ActionTracker.QueueTutorial(ActionTracker.Action.CARD_FIGHT_OUTNUMER_BONUS)
+		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_OUTNUMER_BONUS)
 		
 	#since max fleet ammount is 3 this number can't be more than 2, and since we normalise it we
 	var finalTurnEnergy = TurnEnergy + roundi(TurnEnergy * outNumberedBonus)
@@ -1220,14 +1204,23 @@ func HandleDiscardModules(Performer : BattleShipStats, C : CardStats) -> void:
 	if (AnimData.size() > 0):
 		await DoCardAnim(C, AnimData, Performer, true)
 	
-func HandleModules(Performer : BattleShipStats, C : CardStats) -> void:
+func HandleModules(Performer : BattleShipStats, C : CardStats, targetOverride : BattleShipStats = null) -> bool:
 	if (C.Burned):
 		Performer.deck.DiscardCard(C)
 	else:
-		if (C.OnPerformModule):
-			pass
+		if (C.OnPerformModule != null):
+			if (Performer.Friendly and C.OnPerformModule is OffensiveCardModule):
+				if (C.ShouldConsume()):
+					for g : CardStats in Performer.Cards:
+						if (g.IsSame(C)):
+							Performer.Cards.erase(g)
+							break
+				else:
+					Performer.deck.DiscardCard(C)
+					HandleDiscardModules(Performer, C)
+					
 		else: if (C.ShouldConsume()):
-			for g in Performer.Cards:
+			for g : CardStats in Performer.Cards:
 				if (g.IsSame(C)):
 					Performer.Cards.erase(g)
 					break
@@ -1236,17 +1229,36 @@ func HandleModules(Performer : BattleShipStats, C : CardStats) -> void:
 			HandleDiscardModules(Performer, C)
 
 	var AnimData : Array[AnimationData]
-	for Mod in C.OnUseModules.size():
-		var Data : AnimationData
+	for ModIndex in C.OnUseModules.size():
+		var Mod = C.OnUseModules[ModIndex]
 		
-		var targets = await HandleTargets(C.OnUseModules[Mod], Performer)
-		Data = HandleModule(Performer, C ,C.OnUseModules[Mod], targets)
+		var targets : Array[BattleShipStats] = [] 
+		if (targetOverride != null and !Mod.AOE):
+			targets.append(targetOverride)
+		else:
+			targets = await HandleTargets(Mod, Performer)
 		
-		if (Mod < C.OnUseModules.size() - 1):
+		var Data : AnimationData = HandleModule(Performer, C ,Mod, targets)
+		#if not on last module add small wait time to add spacing between their execution
+		if (ModIndex < C.OnUseModules.size() - 1):
 			await Helper.wait(0.2)
 			
 		if (Data != null):
 			AnimData.append(Data)
+	
+	if (Performer.Friendly and C.OnPerformModule != null and C.OnPerformModule is OffensiveCardModule):
+		if (C.OnPerformModule is EnergyOffensiveCardModule):
+			var NewMod = C.OnPerformModule.duplicate()
+			NewMod.StoredEnergy = Performer.Energy
+			Performer.SetEnergy(0)
+			C.OnPerformModule = NewMod
+		
+		var targets : Array[BattleShipStats] = [] 
+		if (targetOverride != null and !C.OnPerformModule.AOE):
+			targets.append(targetOverride)
+		else:
+			targets = await HandleTargets(C.OnPerformModule, Performer)
+		await HandleOffensiveModule(Performer, C ,C.OnPerformModule, targets, true)
 	
 	if (C.Passive != null):
 		PassiveList.AddPassive(Performer, C)
@@ -1255,6 +1267,8 @@ func HandleModules(Performer : BattleShipStats, C : CardStats) -> void:
 	
 	if (AnimData.size() > 0):
 		await DoCardAnim(C, AnimData, Performer, true)
+	
+	return true
 
 ##----------------------------------------------------------------------##
 func HandlePassiveModules(Performer : BattleShipStats, C : CardStats, targets : Array[BattleShipStats]) -> void:
@@ -1276,70 +1290,6 @@ func HandlePassiveModules(Performer : BattleShipStats, C : CardStats, targets : 
 			DoCardAnim(C, [Data], Performer, true)
 
 ##----------------------------------------------------------------------##
-func HandleModulesPl(Performer : BattleShipStats, C : CardStats, targetOverride : BattleShipStats = null) -> bool:
-	var AnimData : Array[AnimationData]
-	if (C.Burned):
-		Performer.deck.DiscardCard(C)
-	else:
-		if (C.OnPerformModule):
-			if (C.OnPerformModule is OffensiveCardModule):
-				if (C.ShouldConsume()):
-					for g in Performer.Cards:
-						if (g.IsSame(C)):
-							Performer.Cards.erase(g)
-							break
-				else:
-					Performer.deck.DiscardCard(C)
-					HandleDiscardModules(Performer, C)
-		else: if (C.ShouldConsume()):
-			for g in Performer.Cards:
-				if (g.IsSame(C)):
-					Performer.Cards.erase(g)
-					break
-		else:
-			Performer.deck.DiscardCard(C)
-			HandleDiscardModules(Performer, C)
-	
-	for ModIndex in C.OnUseModules.size():
-		var Mod = C.OnUseModules[ModIndex]
-		var targets : Array[BattleShipStats] = [] 
-		if (targetOverride != null and !Mod.AOE):
-			targets.append(targetOverride)
-		else:
-			targets = await HandleTargets(Mod, Performer)
-		
-		var Data : AnimationData
-		
-		Data = HandleModule(Performer, C ,Mod, targets)
-		
-		if (ModIndex < C.OnUseModules.size() - 1):
-			await Helper.wait(0.2)
-			
-		if (Data != null):
-			AnimData.append(Data)
-	if (C.OnPerformModule != null and C.OnPerformModule is OffensiveCardModule):
-		if (C.OnPerformModule is EnergyOffensiveCardModule):
-			var NewMod = C.OnPerformModule.duplicate()
-			NewMod.StoredEnergy = Performer.Energy
-			Performer.SetEnergy(0)
-			C.OnPerformModule = NewMod
-		
-		var targets : Array[BattleShipStats] = [] 
-		if (targetOverride != null and !C.OnPerformModule.AOE):
-			targets.append(targetOverride)
-		else:
-			targets = await HandleTargets(C.OnPerformModule, Performer)
-		await HandleOffensiveModule(Performer, C ,C.OnPerformModule, targets, true)
-	
-	if (C.Passive != null):
-		PassiveList.AddPassive(Performer, C)
-		Performer.ShipViz.PassiveAdded(C)
-		AnimData.append(DeffensiveAnimationData.new())
-		
-	if (AnimData.size() > 0):
-		await DoCardAnim(C, AnimData, Performer, true)
-	return true
-##----------------------------------------------------------------------##
 ##Handles offensive logic, checks for enemy counter cards and plays offensive animation
 func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod : OffensiveCardModule, TargetShips : Array[BattleShipStats], direct : bool) -> void:
 	var AnimData : Array[AnimationData]
@@ -1348,8 +1298,8 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 	var AtackType = Mod.AtackType
 	
 	if (!Mod.AOE):
-		var EnemyTeam = GetShipEnemyTeam(Performer)
-		for enemy in EnemyTeam:
+		var EnemyTeam : Array[BattleShipStats] = GetShipEnemyTeam(Performer)
+		for enemy : BattleShipStats in EnemyTeam:
 			if enemy in TargetShips: #we dont want to intercept atack that already is comming to us
 				continue
 			for Act : CardFightAction in ActionList.GetShipsActions(enemy):
@@ -1474,6 +1424,7 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 			d.global_position = (viz.global_position + (viz.size / 2)) - d.size / 2
 	
 	await DoCardAnim(Action, AnimData, Performer, Friendly)
+	
 ##----------------------------------------------------------------------##
 func HandleModule(Performer : BattleShipStats, C : CardStats, Mod : CardModule, Targets : Array[BattleShipStats] = []) -> AnimationData:
 	var AnimData : AnimationData = Mod.Handle(Performer, C, Targets)
@@ -1516,7 +1467,6 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats, _targetOverride : B
 		return Targets
 		
 	var Friendly = IsShipFriendly(User)
-	
 	# we handle deffensive target picking a bit differently
 	if (Mod is DeffenceCardModule):
 		var Team = GetShipsTeam(User)
@@ -1531,9 +1481,9 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats, _targetOverride : B
 		#If can be used on others prompt player to choose, or if enemy pick randomly
 		else: if Mod.CanBeUsedOnOther:
 			if (Friendly):
-				if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_TARGET_PICKING) and Team.size() > 0):
+				if (Team.size() > 0):
 					ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_TARGET_PICKING)
-					ActionTracker.QueueTutorial(ActionTracker.Action.CARD_FIGHT_TARGET_PICKING)
+					
 				TargetSelect.SetEnemies(Team)
 				SelectingTarget = true
 				var Target = await TargetSelect.EnemySelected
@@ -1559,9 +1509,9 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats, _targetOverride : B
 			Targets.append(EnemyTeam[0])
 		else:
 			if (Friendly):
-				if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_TARGET_PICKING) and EnemyTeam.size() > 0):
+				if (EnemyTeam.size() > 0):
 					ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_TARGET_PICKING)
-					ActionTracker.QueueTutorial(ActionTracker.Action.CARD_FIGHT_TARGET_PICKING)
+
 				TargetSelect.SetEnemies(EnemyTeam)
 				SelectingTarget = true
 				var Target = await TargetSelect.EnemySelected
@@ -1635,9 +1585,8 @@ func HandleDrawCard(Performer : BattleShipStats, ConsumeEnergy : bool = false) -
 		Performer.SetEnergy(Performer.Energy - 1)
 	
 	if (Performer.Energy == 0):
-		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_CARD_RECYCLE)):
-			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_CARD_RECYCLE)
-			ActionTracker.QueueTutorial(ActionTracker.Action.CARD_FIGHT_CARD_RECYCLE)
+		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_CARD_RECYCLE)
+
 		#TODO add tutorial for discarding cards
 
 	return true
@@ -1785,9 +1734,8 @@ func IsShipFriendly(Ship : BattleShipStats) -> bool:
 func ShipDamaged(amm : float, shieldAmm : float, Instigator : BattleShipStats, direct : bool, Ship : BattleShipStats) -> void:
 	if (IsShipFriendly(Ship)):
 		
-		if (Ship.CurrentHull < 40 and !ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_SHIPLOSS)):
+		if (Ship.CurrentHull < 40):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_SHIPLOSS)
-			ActionTracker.QueueTutorial(ActionTracker.Action.CARD_FIGHT_SHIPLOSS)
 	
 		DamageGot += amm
 		if (amm > 0):
@@ -2106,9 +2054,7 @@ func PlaceCardInPlayerHand(Performer : BattleShipStats,C : Card) -> bool:
 		
 		CardSelect.SetCardsDiscard(Performer, Hand)
 		SelectingTarget = true
-		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_HAND_LIMIT)):
-			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_HAND_LIMIT)
-			ActionTracker.QueueTutorial(ActionTracker.Action.CARD_FIGHT_HAND_LIMIT, [MaxCardsInHand])
+		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_HAND_LIMIT, [MaxCardsInHand])
 		
 		var ToDiscard : int = await CardSelect.CardSelected
 		SelectingTarget = false

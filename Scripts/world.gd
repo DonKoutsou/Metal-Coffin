@@ -217,13 +217,8 @@ func ShowArmak():
 	GetMap().GetCamera().FrameCamToPos(Helper.GetCityByName("Armak").global_position, 6)
 
 func SteerTut() -> void:
-	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.CAMERA_CONTROL)):
-		ActionTracker.OnActionCompleted(ActionTracker.Action.CAMERA_CONTROL)
-		ActionTracker.QueueTutorial(ActionTracker.Action.CAMERA_CONTROL)
-	
-	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.STEER)):
-		ActionTracker.OnActionCompleted(ActionTracker.Action.STEER)
-		ActionTracker.QueueTutorial(ActionTracker.Action.STEER)
+	ActionTracker.OnActionCompleted(ActionTracker.Action.CAMERA_CONTROL)
+	ActionTracker.OnActionCompleted(ActionTracker.Action.STEER)
 	
 
 func PlayIntro():
@@ -287,9 +282,7 @@ func StartShipTrade(ControlledShip : PlayerDrivenShip) -> void:
 	Ingame_UIManager.GetInstance().AddUI(sc)
 	
 	sc.connect("SeperationFinished", ShipSeparationFinished)
-	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.FLEET_SEPARATION)):
-		ActionTracker.OnActionCompleted(ActionTracker.Action.FLEET_SEPARATION)
-		ActionTracker.QueueTutorial(ActionTracker.Action.FLEET_SEPARATION)
+	ActionTracker.OnActionCompleted(ActionTracker.Action.FLEET_SEPARATION)
 	
 #-----------------------------------------------------------
 func ShipSeparationFinished() -> void:
@@ -299,7 +292,7 @@ func ShipSeparationFinished() -> void:
 #Dogfight-----------------------------------------------
 var FighingFriendlyUnits : Array[MapShip] = []
 var FighingEnemyUnits : Array[MapShip] = []
-func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip], Missiles : Array[BattleShipStats]):
+func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip], Missiles : Array[BattleShipStats], EnemyMissiles : Array[BattleShipStats]):
 	if (WORLDST == WORLDSTATE.FIGHT):
 		return
 		
@@ -331,12 +324,29 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip], Missil
 		FighingEnemyUnits.append(g)
 		EBattleStats.append(g.GetBattleStats())
 	
-	if (Enemies.size() > 0):
+	#If both arrays have missiles then this is a strictly missile fight
+	if (Missiles.size() > 0 and EnemyMissiles.size() > 0):
 		for g in Missiles:
 			FBattleStats.append(g)
-	else:
-		for g in Missiles:
+
+		for g in EnemyMissiles:
 			EBattleStats.append(g)
+	
+	#if not we need to shift the aliance of missiles
+	else:
+		if (FBattleStats.size() > 0):
+			for g in Missiles:
+				EBattleStats.append(g)
+
+			for g in EnemyMissiles:
+				EBattleStats.append(g)
+		else:
+			for g in Missiles:
+				FBattleStats.append(g)
+
+			for g in EnemyMissiles:
+				FBattleStats.append(g)
+	
 	CardF.PlayerReserves = FBattleStats
 	CardF.EnemyReserves = EBattleStats
 	
@@ -467,9 +477,7 @@ func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 	await GetMap().GetScreenUi().FullScreenToggleFinished
 
 		
-	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.TOWN_SHOP)):
-		ActionTracker.OnActionCompleted(ActionTracker.Action.TOWN_SHOP)
-		ActionTracker.QueueTutorial(ActionTracker.Action.TOWN_SHOP)
+	ActionTracker.OnActionCompleted(ActionTracker.Action.TOWN_SHOP)
 	#UIEventH.OnScreenUIToggled(false)
 	#UIEventH.OnButtonCoverToggled(true)
 	
@@ -514,10 +522,9 @@ func FuelTransactionFinished(BFuel : float, Ships : Array[MapShip], Scene : Town
 	OverworldEventsToShow.clear()
 	
 	for g in TutorialsToShow:
-		if (g == ActionTracker.Action.RECRUIT and!ActionTracker.IsActionCompleted(ActionTracker.Action.RECRUIT)):
+		if (g == ActionTracker.Action.RECRUIT):
 			TutorialsToShow.append(ActionTracker.Action.RECRUIT)
 			ActionTracker.OnActionCompleted(ActionTracker.Action.RECRUIT)
-			ActionTracker.QueueTutorial(ActionTracker.Action.RECRUIT)
 			
 	TutorialsToShow.clear()
 	

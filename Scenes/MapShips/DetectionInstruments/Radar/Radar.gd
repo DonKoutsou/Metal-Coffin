@@ -50,9 +50,9 @@ func BodyEnteredRadar(Body : Area2D) -> void:
 	if (Parent is HostileShip):
 		InsideRadar.append(Parent)
 		#Parent.OnShipSeen(self)
-		if (Parent.Convoy and !ActionTracker.IsActionCompleted(ActionTracker.Action.CONVOY)):
+		if (Parent.Convoy):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CONVOY)
-			ActionTracker.QueueTutorial(ActionTracker.Action.CONVOY)
+
 		
 	else: if (Parent is Missile):
 		if (Parent.FiredBy is HostileShip):
@@ -60,13 +60,9 @@ func BodyEnteredRadar(Body : Area2D) -> void:
 			#Parent.OnShipSeen(self)
 	else : if (Parent is MapSpot):
 		if (Parent.EnemyCity):
-			if (!ActionTracker.IsActionCompleted(ActionTracker.Action.ENEMY_TOWN_APROACH)):
-				ActionTracker.OnActionCompleted(ActionTracker.Action.ENEMY_TOWN_APROACH)
-				ActionTracker.QueueTutorial(ActionTracker.Action.ENEMY_TOWN_APROACH)
+			ActionTracker.OnActionCompleted(ActionTracker.Action.ENEMY_TOWN_APROACH)
 		else:
-			if (!ActionTracker.IsActionCompleted(ActionTracker.Action.TOWN_APROACH)):
-				ActionTracker.OnActionCompleted(ActionTracker.Action.TOWN_APROACH)
-				ActionTracker.QueueTutorial(ActionTracker.Action.TOWN_APROACH)
+			ActionTracker.OnActionCompleted(ActionTracker.Action.TOWN_APROACH)
 				
 		if (!Parent.Seen):
 			Parent.OnSpotSeen()

@@ -118,11 +118,12 @@ disable_3d = true
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
+scaling_3d_mode = 5
 canvas_item_default_texture_filter = 4
-size = Vector2i(158, 217)
+size = Vector2i(279, 384)
 size_2d_override = Vector2i(186, 256)
 size_2d_override_stretch = true
-render_target_update_mode = 0
+render_target_update_mode = 1
 
 [node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport" unique_id=1329688651]
 anchors_preset = 15

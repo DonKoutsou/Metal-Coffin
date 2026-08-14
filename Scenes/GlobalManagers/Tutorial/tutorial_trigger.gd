@@ -7,7 +7,5 @@ class_name TutTrigger
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if (area.get_parent() is PlayerDrivenShip):
-		if (!ActionTracker.IsActionCompleted(TutorialToShow)):
-			ActionTracker.OnActionCompleted(TutorialToShow)
-			ActionTracker.QueueTutorial(TutorialToShow)
+		ActionTracker.OnActionCompleted(TutorialToShow)
 		queue_free()

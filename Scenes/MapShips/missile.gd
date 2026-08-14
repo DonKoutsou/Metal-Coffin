@@ -216,32 +216,49 @@ func _on_missile_body_area_entered(area: Area2D) -> void:
 			return
 		if (Bod.Destroyed):
 			return
-	if (area.get_parent() is Missile):
-		Bod.Kill()
-		Kill()
-		return
-	var s : MapShip = Bod
-	var Command : MapShip
-	if (s.Command == null):
-		Command = s
-	else:
-		Command = s.Command
+	#if (area.get_parent() is Missile):
+		#Bod.Kill()
+		#Kill()
+		#return
 	
-	var Squad : Array[MapShip]
 	
-	Squad.append(Command)
-	Squad.append_array(Command.GetDock().GetDockedShips())
 	
 	var PlSquad : Array[MapShip]
 	var HostileSquad : Array[MapShip]
-	if (Command is HostileShip):
-		HostileSquad = Squad
-	else:
-		PlSquad = Squad
+	
+	if (Bod is MapShip):
+		var s : MapShip = Bod
+		var Command : MapShip
+		if (s.Command == null):
+			Command = s
+		else:
+			Command = s.Command
+		
+		var Squad : Array[MapShip]
+		Squad.append(Command)
+		Squad.append_array(Command.GetDock().GetDockedShips())
+		if (Command is HostileShip):
+			HostileSquad = Squad
+		else:
+			PlSquad = Squad
+
 	var Mis : Array[BattleShipStats]
-	for g in Amm:
-		Mis.append(GetBattleStats())
-	ShipMet.emit(PlSquad, HostileSquad, Mis)
+	var EnemyMis : Array[BattleShipStats]
+	
+	if (FiredBy is HostileShip):
+		for g in Amm:
+			EnemyMis.append(GetBattleStats())
+		if (Bod is Missile):
+			for g in Bod.Amm:
+				Mis.append(GetBattleStats())
+	else:
+		for g in Amm:
+			Mis.append(GetBattleStats())
+		if (Bod is Missile):
+			for g in Bod.Amm:
+				EnemyMis.append(Bod.GetBattleStats())
+		
+	ShipMet.emit(PlSquad, HostileSquad, Mis, EnemyMis)
 	
 	#area.get_parent().Damage(Damage)
 	#if (area.get_parent().IsDead()):

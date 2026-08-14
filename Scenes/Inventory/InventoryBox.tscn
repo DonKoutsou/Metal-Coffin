@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://b1k2h35khc40y"]
 
 [ext_resource type="Script" uid="uid://faswynkmbrw2" path="res://Scripts/Inventory/Inventory_Box.gd" id="1_1cx5j"]
+[ext_resource type="StyleBox" uid="uid://elcf43aevshf" path="res://Theme/InventoryBoxNormal.tres" id="2_xojqn"]
+[ext_resource type="StyleBox" uid="uid://cvi8gchh1oopn" path="res://Theme/InventoryBoxPressed.tres" id="3_my7nm"]
+[ext_resource type="StyleBox" uid="uid://ca8x8llgaf2yu" path="res://Theme/InventoryBoxHover.tres" id="4_0gm1e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3xrnb"]
 bg_color = Color(0.0991728, 0.182517, 0.188478, 1)
@@ -29,8 +32,8 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[node name="InventoryBox" type="PanelContainer" unique_id=1449330592 node_paths=PackedStringArray("Butto")]
-custom_minimum_size = Vector2(110, 30)
+[node name="InventoryBox" type="PanelContainer" unique_id=1449330592 node_paths=PackedStringArray("Butto", "txt", "AmmountLabel")]
+custom_minimum_size = Vector2(120, 80)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -44,12 +47,17 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3xrnb")
 script = ExtResource("1_1cx5j")
 Butto = NodePath("ItemButton")
+txt = NodePath("ItemButton/HBoxContainer/ItemName")
+AmmountLabel = NodePath("ItemButton/HBoxContainer/PanelContainer/Label")
 
 [node name="ItemButton" type="Button" parent="." unique_id=1170581497 groups=["DigitalBouncingButton"]]
 layout_mode = 2
 focus_mode = 0
 mouse_filter = 2
 theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = ExtResource("2_xojqn")
+theme_override_styles/pressed = ExtResource("3_my7nm")
+theme_override_styles/hover = ExtResource("4_0gm1e")
 disabled = true
 action_mode = 0
 autowrap_mode = 2
@@ -66,7 +74,7 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch_mode = 3
 
-[node name="ItemName" type="Label" parent="ItemButton" unique_id=2110085130]
+[node name="HBoxContainer" type="HBoxContainer" parent="ItemButton" unique_id=1840622958]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -74,29 +82,24 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+alignment = 1
+
+[node name="ItemName" type="Label" parent="ItemButton/HBoxContainer" unique_id=2110085130]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 15
+text = "adwdaw"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="ItemButton" unique_id=1159467317]
-visible = false
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -18.0
-offset_top = -15.5
-offset_bottom = 15.5
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
+[node name="PanelContainer" type="PanelContainer" parent="ItemButton/HBoxContainer" unique_id=1159467317]
+layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_708pr")
 
-[node name="Label" type="Label" parent="ItemButton/PanelContainer" unique_id=834797717]
+[node name="Label" type="Label" parent="ItemButton/HBoxContainer/PanelContainer" unique_id=834797717]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 24

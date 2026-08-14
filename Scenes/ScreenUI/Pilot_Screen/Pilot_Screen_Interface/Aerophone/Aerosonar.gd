@@ -280,9 +280,7 @@ func toggleSonar(enable: bool) -> void:
 	set_physics_process(enable)
 	enabled = enable
 	if enable:
-		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.AEROSONAR)):
-			ActionTracker.OnActionCompleted(ActionTracker.Action.AEROSONAR)
-			ActionTracker.QueueTutorial(ActionTracker.Action.AEROSONAR)
+		ActionTracker.OnActionCompleted(ActionTracker.Action.AEROSONAR)
 		working = fleetHasAeroSonar()
 		#controller.ToggleSonarVisual(working)
 		lineContainer.OffsetAmmount = currentOffset

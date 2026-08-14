@@ -65,9 +65,7 @@ func PlayIntroAnim() -> void:
 	await tw.finished
 	#scroll.visible = true
 	#get_child(0).get_child(0).visible = true
-	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.ITEM_INSPECTION)):
-		ActionTracker.OnActionCompleted(ActionTracker.Action.ITEM_INSPECTION)
-		ActionTracker.QueueTutorial(ActionTracker.Action.ITEM_INSPECTION)
+	ActionTracker.OnActionCompleted(ActionTracker.Action.ITEM_INSPECTION)
 
 func SetWorkShopData(Box : Inventory_Box_Res, CanUpgrade : bool, Owner : Captain) -> void:
 	var scroll = get_child(0) as Control
@@ -277,7 +275,8 @@ func SetEmptyShopData(Type : ShipPart.ShipPartType) -> void:
 		ItemDesc.visible = false
 	#set_physics_process(false) 
 	ItemName.text = "Empty {0} Slot".format([ShipPart.ShipPartType.keys()[Type]])
-	CardSection.get_parent().visible = false
+	CardSection.visible = false
+	#CardSection.get_parent().visible = false
 
 func _on_upgrade_pressed() -> void:
 	ItemUpgraded.emit(DescribedContainer)

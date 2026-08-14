@@ -33,7 +33,7 @@ theme_override_font_sizes/font_size = 22
 text = "Engines"
 uppercase = true
 
-[node name="Engines" type="VBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=239597674]
+[node name="Engines" type="HFlowContainer" parent="PanelContainer/VBoxContainer" unique_id=1968677830]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -53,7 +53,7 @@ theme_override_font_sizes/font_size = 22
 text = "Fuel Tanks"
 uppercase = true
 
-[node name="Fuel Tanks" type="VBoxContainer" parent="PanelContainer2/VBoxContainer2" unique_id=1199183129]
+[node name="Fuel Tanks" type="HFlowContainer" parent="PanelContainer2/VBoxContainer2" unique_id=1526651959]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
@@ -73,7 +73,7 @@ theme_override_font_sizes/font_size = 22
 text = "Sensors"
 uppercase = true
 
-[node name="Sensors" type="VBoxContainer" parent="PanelContainer3/VBoxContainer3" unique_id=483583616]
+[node name="Sensors" type="HFlowContainer" parent="PanelContainer3/VBoxContainer3" unique_id=1127970759]
 layout_mode = 2
 size_flags_vertical = 2
 
@@ -92,7 +92,7 @@ theme_override_font_sizes/font_size = 22
 text = "Fortifications"
 uppercase = true
 
-[node name="Shields" type="VBoxContainer" parent="PanelContainer4/VBoxContainer4" unique_id=689813056]
+[node name="Shields" type="HFlowContainer" parent="PanelContainer4/VBoxContainer4" unique_id=205965129]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
@@ -112,7 +112,7 @@ theme_override_font_sizes/font_size = 22
 text = "Weapons"
 uppercase = true
 
-[node name="Weapons" type="VBoxContainer" parent="PanelContainer5/VBoxContainer5" unique_id=1660098637]
+[node name="Weapons" type="HFlowContainer" parent="PanelContainer5/VBoxContainer5" unique_id=1974812839]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
@@ -132,7 +132,7 @@ theme_override_font_sizes/font_size = 22
 text = "Cargo"
 uppercase = true
 
-[node name="Inventory" type="VBoxContainer" parent="PanelContainer6/VBoxContainer6" unique_id=1405634650]
+[node name="Inventory" type="HFlowContainer" parent="PanelContainer6/VBoxContainer6" unique_id=1418918751]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2

@@ -69,9 +69,7 @@ func _onControlledShipUpdated(ship: PlayerDrivenShip) -> void:
 	if not hasLauncher:
 		_on_turn_off_toggled(false)
 	else:
-		if not ActionTracker.IsActionCompleted(ActionTracker.Action.MISSILE_TOGGLE):
-			ActionTracker.OnActionCompleted(ActionTracker.Action.MISSILE_TOGGLE)
-			ActionTracker.QueueTutorial(ActionTracker.Action.MISSILE_TOGGLE)
+		ActionTracker.OnActionCompleted(ActionTracker.Action.MISSILE_TOGGLE)
 
 func _onDroneAdded(_drone: PlayerDrivenShip, target: MapShip) -> void:
 	if target == controller:
@@ -149,16 +147,13 @@ func onArmPressed() -> void:
 		missileSelectLight.Toggle(false, false)
 		angleSelectLight.Toggle(true, true)
 		missileDockEventH.MissileArmed(currentlySelectedMissile, controller.Cpt)
-		if not ActionTracker.IsActionCompleted(ActionTracker.Action.MISSILE_LAUNCH):
-			ActionTracker.OnActionCompleted(ActionTracker.Action.MISSILE_LAUNCH)
-			ActionTracker.QueueTutorial(ActionTracker.Action.MISSILE_LAUNCH)
+		ActionTracker.OnActionCompleted(ActionTracker.Action.MISSILE_LAUNCH)
 		return
 	if amountArmed:
 		PopUpManager.GetInstance().DoFadeNotif("A missile is already armed")
 		return 
-	if not ActionTracker.IsActionCompleted(ActionTracker.Action.MISSILE_SELECT_NUM):
-		ActionTracker.OnActionCompleted(ActionTracker.Action.MISSILE_SELECT_NUM)
-		ActionTracker.QueueTutorial(ActionTracker.Action.MISSILE_SELECT_NUM)
+		
+	ActionTracker.OnActionCompleted(ActionTracker.Action.MISSILE_SELECT_NUM)
 	armed = true
 	amount = 1
 	rangeText.text = "Amount : %s" % var_to_str(amount)
@@ -243,9 +238,7 @@ func _on_turn_off_toggled(toggled_on: bool) -> void:
 		missileSelectLight.Toggle(false, false)
 		turnOffButton.set_pressed_no_signal(false)
 	else:
-		if not ActionTracker.IsActionCompleted(ActionTracker.Action.MISSILE_ARM):
-			ActionTracker.OnActionCompleted(ActionTracker.Action.MISSILE_ARM)
-			ActionTracker.QueueTutorial(ActionTracker.Action.MISSILE_ARM)
+		ActionTracker.OnActionCompleted(ActionTracker.Action.MISSILE_ARM)
 		showing = true
 		updateMissileSelect()
 		rangeText.visible = true

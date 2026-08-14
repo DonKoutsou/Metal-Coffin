@@ -198,9 +198,9 @@ func DamageShip(Amm : float, direct : bool, ShouldCauseFire : bool = false, Skip
 		CauseFire(Instigator)
 	
 	if (Friendly):
-		if (CurrentHull < 40 and !ActionTracker.IsActionCompleted(ActionTracker.Action.CARD_FIGHT_SHIPLOSS)):
+		if (CurrentHull < 40):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_SHIPLOSS)
-			ActionTracker.QueueTutorial(ActionTracker.Action.CARD_FIGHT_SHIPLOSS)
+
 		
 	ShipDamaged.emit(Dmg, shieldDmg, Instigator, direct)
 	

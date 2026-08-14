@@ -39,11 +39,11 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 	DefCardTween.tween_property(card, "modulate", Color(1,1,1,1), 0.4)
 	
 	var Null : bool = false
-	
+	var Called : bool = false
 	if (!AnimationCard.Burned):
 		for AnimData in Data:
 			var Mod = AnimData.Mod
-			var Passive = AnimData.Passive
+
 			if (AnimData is OffensiveAnimationData):
 				var DeffenceList = AnimData.DeffenceList
 				for g in DeffenceList.values().size():
@@ -79,8 +79,10 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 					
 					if (Mod is OffensiveCardModule):
 						call_deferred("SpawnVisual", Viz, card, DefC, "Hit")
+						Called = true
 					else : if (Mod is RecoilDamageModule):
 						call_deferred("SpawnVisual", Viz, card, DefC, "Recoil")
+						Called = true
 					
 			if (AnimData is DeffensiveAnimationData):
 
@@ -98,11 +100,13 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 					var BuffText = "{0} +".format([CardModule.Stat.keys()[Mod.StatToBuff]])
 					for Ship in TargetShips:
 						call_deferred("SpawnUpVisual", Ship, card, BuffText)
+						Called = true
 				
 				if (Mod is BuffNextAttackModule):
 					var BuffText = "Firepower +"
 					for Ship in TargetShips:
 						call_deferred("SpawnUpVisual", Ship, card, BuffText)
+						Called = true
 				
 				else: if (Mod is NullCardModule):
 					Null = true
@@ -110,62 +114,77 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 				else: if (Mod is ShieldCardModule or Mod is MaxShieldCardModule):
 					for Ship in TargetShips:
 						call_deferred("SpawnShieldVisual", Ship, card, "Shield +")
+						Called = true
 						
 				else : if (Mod is FireExtinguishModule):
 					for Ship in TargetShips:
 						call_deferred("SpawnShieldVisual", Ship, card, "Fire\nExtinguished")
+						Called = true
 						
 				else : if (Mod is CleanseDebuffModule):
 					for Ship in TargetShips:
 						call_deferred("SpawnShieldVisual", Ship, card, "Debuffs\nCleansed")
+						Called = true
 				
 				else : if (Mod is LoseBuffSelfModule):
 					var BuffText = "{0}\nRemoved".format([CardModule.Stat.keys()[Mod.StatToStrip]])
 					for Ship in TargetShips:
 						call_deferred("SpawnDownVisual", Ship, card, BuffText)
+						Called = true
 				
 				else : if (Mod is CauseFireModule):
 					for Ship in TargetShips:
 						call_deferred("SpawnFlameVisual", Ship, card, "Fire")
+						Called = true
 				
 				else : if (Mod is ResupplyModule or Mod is ReserveConversionModule):
 					for Ship in TargetShips:
 						call_deferred("SpawnEnergyVisual", Ship, card, "Energy +")
+						Called = true
 
 				else : if (Mod is ReserveModule or Mod is MaxReserveModule):
 					for Ship in TargetShips:
 						call_deferred("SpawnEnergyVisual", Ship, card, "Energy\nReserve +")
+						Called = true
+						
 				else : if (Mod is HandCardEnergyReduceModule):
 					for Ship in TargetShips:
 						call_deferred("SpawnEnergyVisual", Ship, card, "Cost -")
+						Called = true
+						
 				else : if (Mod is InterceptModule):
 					for Ship in TargetShips:
 						call_deferred("SpawnShieldVisual", Ship, card, "Interceptor")
+						Called = true
 						
 				else : if (Mod is DeBuffEnemyModule or Mod is DeBuffSelfModule):
 					var BuffText = "{0} -".format([CardModule.Stat.keys()[Mod.StatToDeBuff]])
 					for Ship in TargetShips:
 						call_deferred("SpawnDownVisual", Ship, card, BuffText)
+						Called = true
 						
 				else : if (Mod is BurnEnemyCardModule):
 					var BuffText = "Cards Burned"
 					for Ship in TargetShips:
 						call_deferred("SpawnFlameVisual", Ship, card, BuffText)
+						Called = true
 				
 				else : if (Mod is CardInjectCardModule):
 					var BuffText = "Cards\nInjected"
 					for Ship in TargetShips:
 						call_deferred("SpawnCardVisual", Ship, card, BuffText)
+						Called = true
 				
 				else : if (Mod is StackDamageCardModule):
 					call_deferred("SpawnUpDamageVisual", card, card, "Damage +")
-				else:
-					card.CardKilled.connect(AnimEnded)
+					Called = true
+				
+					
 			if (Data.size() > 1):
 				await wait(0.2)
 			
 		card.KillCard(0.5, false)
-		if (Data.size() == 0 or Null):
+		if (Data.size() == 0 or Null or !Called):
 			card.CardKilled.connect(AnimEnded)
 	else:
 		card.KillCard(0.5, false)

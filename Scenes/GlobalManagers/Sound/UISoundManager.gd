@@ -132,7 +132,7 @@ func OnBouncingButtonHovered(But : Control) -> void:
 	tw.set_trans(Tween.TRANS_BACK)
 	tw.tween_property(But, "scale", Vector2(1.02,1.1), 0.25)
 	#But.scale = Vector2(1.1, 1.1)
-	#But.z_index = 1
+	But.z_index = 1
 
 func OnBouncingButtonHoverEnded(But : Control) -> void:
 	var tw :Tween = create_tween()
@@ -140,7 +140,7 @@ func OnBouncingButtonHoverEnded(But : Control) -> void:
 	tw.set_trans(Tween.TRANS_BACK)
 	tw.tween_property(But, "scale", Vector2(1,1), 0.25)
 	#But.scale = Vector2(1, 1)
-	#But.z_index = 0
+	But.z_index = 0
 	
 func OnButtonHovered() -> void:
 	Sounds[3].playing = true

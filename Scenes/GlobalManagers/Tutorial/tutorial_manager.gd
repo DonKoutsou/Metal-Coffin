@@ -25,11 +25,16 @@ func _ready() -> void:
 static func GetInstance() -> ActionTracker:
 	return Instance
 
-static func IsActionCompleted(Act : Action) -> bool:
-	return Act in CompletedActions
-
-static func OnActionCompleted(Act : Action) -> void:
+static func OnActionCompleted(Act : Action, Args : PackedStringArray = []) -> void:
+	if (Act in CompletedActions):
+		return
+		
 	CompletedActions.append(Act)
+	if (!ShowTutorials):
+		return
+	if (Args.size() > 0):
+		TutorialArgs[Act] = Args
+	QueuedTutorials.append(Act)
 
 func _physics_process(_delta: float) -> void:
 	if (World.WORLDST != World.WORLDSTATE.INITIAL and !ShowingTutorial and !TransitionPanel.Transitioning):
@@ -49,12 +54,6 @@ func _physics_process(_delta: float) -> void:
 				ShowTutorial(title, text, nexttut.Target)
 				QueuedTutorials.pop_front()
 
-static func QueueTutorial(Turotial : Action, Args : PackedStringArray = []) -> void:
-	if (!ShowTutorials):
-		return
-	if (Args.size() > 0):
-		TutorialArgs[Turotial] = Args
-	QueuedTutorials.append(Turotial)
 
 func ShowTutorial(TurotialTitle : String, TutorialText : String, ElementsToFocusOn : Array[ScreenUI.UI_ELEMENT]) -> void:
 	get_tree().paused = true

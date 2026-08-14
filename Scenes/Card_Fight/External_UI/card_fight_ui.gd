@@ -148,86 +148,81 @@ func HoldCard(C : Card) -> void:
 
 func ReleaseCard() -> void:
 	HOLDING_CARD = false
+	print("thing")
 	#mouse_filter = Control.MOUSE_FILTER_IGNORE
-	ToggleHandInput(true)
 	InScreenCursor.Instance.ToggleMouse(true)
+	ToggleHandInput(true)
+	
 	PlayCardSound()
-	HeldCard.Enable()
+	
 	if (HoveredShip != null):
 		InserCardtoPlay(HeldCard, false)
-		HeldCard = null
-		return
 	
-	if (HeldCard.get_parent() == self):
+	else: if (HeldCard.get_parent() == self):
 		HeldCard.reparent(PlayerCardPlecement, false)
-		HeldCard = null
+		HeldCard.Enable()
+		
 	else: if (HeldCard.get_parent() == DiscardInsert):
 		##IMPLEMENT DISCARD LOGIC
 		InsertCardToDiscard(HeldCard, true)
 		FightScene.OnCardDiscarded(HeldCard, true)
-		HeldCard = null
+		
 	else: if (HeldCard.get_parent() == PlayCardInsert):
 		InserCardtoPlay(HeldCard, true)
-		HeldCard = null
+		
+	HeldCard = null
 
 func InserCardtoPlay(C : Card, skipTransition : bool = false) -> void:
 	AllowEnd = false
 	var target = HoveredShip
 	C.Dissable(true)
-	PlayerCardPlecement.Blocked = true
+
 	if (!skipTransition):
-		#var pos = C.global_position
+
 		C.reparent(self)
-		#C.get_parent().remove_child(C)
-		#add_child(C)
-		
 		C.rotation = 0
-		#C.global_position = pos
+
 		var Movetw = create_tween()
 		Movetw.set_ease(Tween.EASE_OUT)
 		Movetw.set_trans(Tween.TRANS_QUAD)
 		Movetw.tween_property(C, "global_position", PlayCardInsert.global_position + Vector2(10, 15), 0.25)
-		
-		#var ScaleTw = create_tween()
-		#ScaleTw.tween_property(C, "scale", Vector2(0.85, 0.85), 0.25)
+
 		PlayCardSound()
 		
 		await Movetw.finished
-	
-	#ScaleTw.set_ease(Tween.EASE_IN)
-	#ScaleTw.set_trans(Tween.TRANS_CUBIC)
-	
-	
-	PlayerCardPlecement.Blocked = false
+
 	C.TogglePerspective(true)
 	var Cont = Control.new()
 	
 	Cont.size = PlayCardInsert.size
-	#Cont.scale.y = 0.8
-	#C.get_parent().remove_child(C)
 	PlayCardInsert.add_child(Cont)
 	C.reparent(Cont)
-	#Cont.add_child(C)
 	C.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
-	#C.position = Vector2(15, -5)
+	
+	PlayCardInsertSound(CardSoundType.INSERT)
+	
+	#TWEEN
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_IN)
 	tw.set_trans(Tween.TRANS_QUAD)
 	tw.tween_property(Cont, "size", Vector2(PlayCardInsert.size.x, 0), 0.55)
-	PlayCardInsertSound(CardSoundType.INSERT)
 	await tw.finished
+	
 	PlayCardInsertSound(CardSoundType.BEEP)
 	
 	if (!await FightScene.OnCardSelected(C, target)):
 		PlayCardInsertSound(CardSoundType.BEEPNO)
+		PlayCardInsertSound(CardSoundType.EXIT)
+		C.TogglePerspective(false, 1)
+		C.scale = Vector2(1,1)
+		
+		#TWEEN
 		var tw2 = create_tween()
 		tw.set_ease(Tween.EASE_OUT)
 		tw2.set_trans(Tween.TRANS_QUAD)
 		tw2.tween_property(Cont, "size", Vector2(PlayCardInsert.size), 0.55)
-		PlayCardInsertSound(CardSoundType.EXIT)
-		C.TogglePerspective(false, 1)
-		C.scale = Vector2(1,1)
 		await tw2.finished
+		
 		Cont.remove_child(C)
 		Cont.queue_free()
 		PlayerCardPlecement.add_child(C)

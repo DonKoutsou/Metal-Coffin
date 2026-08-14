@@ -3,6 +3,8 @@ extends Control
 class_name Inventory_Box
 
 @export var Butto : Button
+@export var txt : Label
+@export var AmmountLabel : Label
 
 var box : Inventory_Box_Res
 var allowDissable : bool = true
@@ -31,19 +33,20 @@ func _exit_tree() -> void:
 func UpdateAmm(newAmm : int) -> void:
 	if (allowDissable):
 		if (newAmm <= 0):
+			$ItemButton/HBoxContainer.hide()
 			Butto.disabled = true
 			Butto.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		else:
 			Butto.mouse_filter = Control.MOUSE_FILTER_PASS
+			$ItemButton/HBoxContainer.show()
 	_UpdateAmmountLabel(newAmm)
 
 func UpdateAmmNoDissable(newAmm : int) -> void:
 	_UpdateAmmountLabel(newAmm)
 
 func _UpdateAmmountLabel(newAmm : int) -> void:
-	var Text = $ItemButton/PanelContainer/Label
-	Text.text = var_to_str(newAmm)
-	$ItemButton/PanelContainer.visible = newAmm > 1
+	AmmountLabel.text = var_to_str(newAmm)
+	$ItemButton/HBoxContainer/PanelContainer.visible = newAmm > 1
 
 func Enable() -> void:
 	Butto.disabled = false
@@ -51,10 +54,10 @@ func Enable() -> void:
 	
 func _UpdateItemIcon(it : Item) -> void:
 	if (it):
-		$ItemButton.text = it.GetItemName()
+		txt.text = it.GetItemName()
 		Butto.disabled = false
 	else:
-		$ItemButton.text = ""
+		txt.text = ""
 
 func _On_Item_Pressed() -> void:
 	ItemSelected.emit(box)

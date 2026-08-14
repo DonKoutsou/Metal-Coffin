@@ -57,9 +57,7 @@ func Toggle(t : bool) -> void:
 	else:
 		Working = true
 		EventHandler.OnMarkerEditorToggled(true)
-		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.MAP_MARKER_INTRO)):
-			ActionTracker.OnActionCompleted(ActionTracker.Action.MAP_MARKER_INTRO)
-			ActionTracker.QueueTutorial(ActionTracker.Action.MAP_MARKER_INTRO)
+		ActionTracker.OnActionCompleted(ActionTracker.Action.MAP_MARKER_INTRO)
 
 #-------------------------------------------------------
 func _on_exit_map_marker_toggled(toggled_on: bool) -> void:

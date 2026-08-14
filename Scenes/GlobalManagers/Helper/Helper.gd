@@ -28,7 +28,9 @@ func _process(_delta: float) -> void:
 		if (Status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED):
 			_LoadFinished(fileQueue[file], ResourceLoader.load_threaded_get(file))
 			fileQueue.erase(file)
-			
+		if (Status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_FAILED):
+			_LoadFinished(fileQueue[file], null)
+			fileQueue.erase(file)
 
 func _physics_process(delta: float) -> void:
 	Cog.rotation = wrap(Cog.rotation + delta, 0, PI * 4)

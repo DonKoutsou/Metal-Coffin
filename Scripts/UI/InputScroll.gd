@@ -11,14 +11,21 @@ var pos : Vector2
 func _ready() -> void:
 	gui_input.connect(HandleInput)
 	pos = Vector2(scroll_horizontal, scroll_vertical)
+	visibility_changed.connect(OnVisChanged)
+
+func OnVisChanged() -> void:
+	set_process(is_visible_in_tree())
 
 func _process(delta: float) -> void:
-	var maxPos = abs(get_child(0).size - size)
-	#print(maxPos)
-	var appliedForce = force * delta * 10
-	pos = pos + appliedForce
-	pos = Vector2(clamp(pos.x, 0, maxPos.x), clamp(pos.y, 0, maxPos.y + 50))
+	var maxPos : Vector2 = Vector2.ZERO
 	
+	if (get_child_count() > 0):
+		maxPos = abs(get_child(0).size - size)
+		#print(maxPos)
+		var appliedForce = force * delta * 10
+		pos = pos + appliedForce
+		pos = Vector2(clamp(pos.x, 0, maxPos.x), clamp(pos.y, 0, maxPos.y + 50))
+		
 	scroll_vertical = roundi(pos.y)
 	scroll_horizontal = roundi(pos.x)
 	

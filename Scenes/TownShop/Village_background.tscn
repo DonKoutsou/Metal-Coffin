@@ -157,34 +157,34 @@ scale = Vector2(2.66667, 2.66667)
 texture = ExtResource("7_vcb2a")
 
 [node name="WorkShop" type="Node2D" parent="ParallaxLayer3/Parallax2D" unique_id=483534151]
-position = Vector2(453, 418)
+position = Vector2(572, 414)
 
 [node name="WorkShop2" type="Node2D" parent="ParallaxLayer3/Parallax2D/WorkShop" unique_id=1999300657]
-position = Vector2(174, 196)
+position = Vector2(56, 256)
 
 [node name="Repair" type="Node2D" parent="ParallaxLayer3/Parallax2D" unique_id=240947102]
-position = Vector2(870, 452)
+position = Vector2(937, 472)
 
 [node name="Repair2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Repair" unique_id=1734065363]
-position = Vector2(-60, 162)
+position = Vector2(-127, 200)
 
 [node name="Fuel" type="Node2D" parent="ParallaxLayer3/Parallax2D" unique_id=1871388674]
 position = Vector2(109, 452)
 
 [node name="Fuel2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Fuel" unique_id=1130358627]
-position = Vector2(-102, 133)
+position = Vector2(-102, 215)
 
 [node name="Merch" type="Node2D" parent="ParallaxLayer3/Parallax2D" unique_id=704424854]
 position = Vector2(1150, 378)
 
 [node name="Merch2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Merch" unique_id=1345336933]
-position = Vector2(181, 238)
+position = Vector2(225, 308)
 
 [node name="Recruit" type="Node2D" parent="ParallaxLayer3/Parallax2D" unique_id=912565182]
-position = Vector2(252, 378)
+position = Vector2(364, 292)
 
 [node name="Recruit2" type="Node2D" parent="ParallaxLayer3/Parallax2D/Recruit" unique_id=1640313458]
-position = Vector2(181, 238)
+position = Vector2(19, 377)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=652188506]
 position = Vector2(642, 360)

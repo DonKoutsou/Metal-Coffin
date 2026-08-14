@@ -136,7 +136,7 @@ func _Update(delta: float) -> void:
 	var SimulationSpeed = SimulationManager.SimSpeed()
 	
 	if (Reloading > 0):
-		print("{0} is reloading a their missiles".format([Cpt.GetCaptainName()]))
+		#print("{0} is reloading a their missiles".format([Cpt.GetCaptainName()]))
 		Reloading = max(0, Reloading - (delta * SimulationSpeed))
 	
 	for g in TrailLines:

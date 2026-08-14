@@ -36,9 +36,8 @@ var VisualContactCountdown = 20
 signal VisualContactCountdownStarted(Value : float)
 
 func GarissonVisualContact(Ship : MapShip) -> void:
-	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.GARISSION_ALARM)):
-		ActionTracker.OnActionCompleted(ActionTracker.Action.GARISSION_ALARM)
-		ActionTracker.QueueTutorial(ActionTracker.Action.GARISSION_ALARM)
+	ActionTracker.OnActionCompleted(ActionTracker.Action.GARISSION_ALARM)
+
 	if (GarrissonVisualContacts.has(Ship)):
 		return
 	

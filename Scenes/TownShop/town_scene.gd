@@ -9,10 +9,19 @@ class_name TownScene
 @export var PortBuffText : RichTextLabel
 @export_group("Buttons")
 @export var MerchendiseButton : Button
+@export var MerchendiseButton2 : Button
+
 @export var WorkshopButton : Button
+@export var WorkshopButton2 : Button
+
 @export var FuelButton : Button
+@export var FuelButton2 : Button
+
 @export var RepairButton : Button
+@export var RepairButton2 : Button
+
 @export var RecruitButton : Button
+@export var RecruitButton2 : Button
 
 @export_group("Scenes")
 @export var MerchShopScene : PackedScene
@@ -45,9 +54,10 @@ func _ready() -> void:
 	UISoundMan.GetInstance().Refresh()
 
 func SetTownBuffs() -> void:
-	RepairButton.visible = TownSpot.HasRepair()
+	#RepairButton.visible = TownSpot.HasRepair()
 	#WorkshopButton.visible = TownSpot.HasUpgrade()
 	RecruitButton.visible = TownSpot.HasRecruit()
+	RecruitButton2.visible = TownSpot.HasRecruit()
 	
 	var Text : String = ""
 	if (TownSpot.HasFuel()):
@@ -80,9 +90,7 @@ func OnRefuelShopPressed() -> void:
 	
 	Scene.Init(BoughtFuel, FuelPricePerTon, LandedShips, TownSpot)
 	Scene.FuelTransactionFinished.connect(FuelExchangeFinished)
-	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.FUEL_SHOP)):
-		ActionTracker.OnActionCompleted(ActionTracker.Action.FUEL_SHOP)
-		ActionTracker.QueueTutorial(ActionTracker.Action.FUEL_SHOP)
+	ActionTracker.OnActionCompleted(ActionTracker.Action.FUEL_SHOP)
 
 func OnRepairStationPressed() -> void:
 	var Scene = RepairStationScene.instantiate() as RepairStation
@@ -90,9 +98,7 @@ func OnRepairStationPressed() -> void:
 
 	Scene.Init(TownSpot.HasRepair(), LandedShips)
 	#Scene.FuelTransactionFinished.connect(FuelExchangeFinished)
-	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.REPAIR_SHOP)):
-		ActionTracker.OnActionCompleted(ActionTracker.Action.REPAIR_SHOP)
-		ActionTracker.QueueTutorial(ActionTracker.Action.REPAIR_SHOP)
+	ActionTracker.OnActionCompleted(ActionTracker.Action.REPAIR_SHOP)
 
 
 func FuelExchangeFinished(Fuel : float) -> void:
@@ -112,9 +118,7 @@ func OnUpgradeShopPressed() -> void:
 	add_child(WShop)
 	WShop.ShipSold.connect(OnShipSold)
 	WShop.Init(LandedShips, TownSpot.HasUpgrade(), TownSpot.WorkShopMerch)
-	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.UPGRADE_SHOP)):
-		ActionTracker.OnActionCompleted(ActionTracker.Action.UPGRADE_SHOP)
-		ActionTracker.QueueTutorial(ActionTracker.Action.UPGRADE_SHOP)
+	ActionTracker.OnActionCompleted(ActionTracker.Action.UPGRADE_SHOP)
 
 func OnMunitionShopToggled() -> void:
 	var Scene = MerchShopScene.instantiate() as MerchShop
@@ -122,9 +126,7 @@ func OnMunitionShopToggled() -> void:
 	Scene.ItemSold.connect(OnItemSold)
 	Scene.ItemBought.connect(OnItemBought)
 	Scene.Init(LandedShips, TownSpot.Merch)
-	if (!ActionTracker.IsActionCompleted(ActionTracker.Action.MERCH_SHOP)):
-		ActionTracker.OnActionCompleted(ActionTracker.Action.MERCH_SHOP)
-		ActionTracker.QueueTutorial(ActionTracker.Action.MERCH_SHOP)
+	ActionTracker.OnActionCompleted(ActionTracker.Action.MERCH_SHOP)
 
 func OnShipBought(Cap : Captain) -> void:
 	var NewCommander : MapShip

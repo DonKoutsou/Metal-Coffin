@@ -76,10 +76,12 @@ func Init() -> void:
 	sorted_ground_captain_list.sort_custom(SortByCostDescending)
 	sorted_convoy_captain_list.sort_custom(SortByCostDescending)
 	
-func GetMerchForPosition(YPos: float, HasUp : bool) -> Array[Merchandise]:
+func GetMerchForPosition(YPos: float, HasUp : bool, capital : bool) -> Array[Merchandise]:
 	var available_merch: Array[Merchandise] = []
 	var points = GetMerchPointsForPosition(abs(YPos))
 	var stage = Happening.GetStageForYPos(YPos)
+	if (capital):
+		points *= 1.5
 	if (HasUp):
 		points *= 2
 		stage = min(stage + 1, Happening.GameStage.size() - 1)
@@ -107,11 +109,14 @@ func GetMerchForPosition(YPos: float, HasUp : bool) -> Array[Merchandise]:
 	return available_merch
 
 
-func GetRecruitsForPosition(YPos: float, HasRec : bool) -> Array[Captain]:
+func GetRecruitsForPosition(YPos: float, HasRec : bool, capital : bool) -> Array[Captain]:
 	var available_Recruits : Array[Captain] = []
 	var points = GetRecruitPointsForPosition(abs(YPos))
+	if (capital):
+		points *= 1.5
 	if (HasRec):
 		points *= 2
+		
 	print("Picking recruits for pos {0} with points {1}".format([YPos, points]))
 	var stage = Happening.GetStageForYPos(YPos)
 	# Iterate through the MerchList to select merchandise based on points
@@ -126,12 +131,14 @@ func GetRecruitsForPosition(YPos: float, HasRec : bool) -> Array[Captain]:
 
 	return available_Recruits
 
-func GetWorkshopMerchForPosition(YPos: float, HasUp : bool) -> Array[Merchandise]:
+func GetWorkshopMerchForPosition(YPos: float, HasUp : bool, capital : bool) -> Array[Merchandise]:
 	var available_merch: Array[Merchandise] = []
 	if (!HasUp):
 		return available_merch
 	var points = GetWorkshopMerchPointsForPosition(abs(YPos))
-	
+	if (capital):
+		points *= 1.5
+		
 	var stage = Happening.GetStageForYPos(YPos)
 	# Iterate through the MerchList to select merchandise based on points
 	while points > MerchLowest:
@@ -156,11 +163,13 @@ func GetWorkshopMerchForPosition(YPos: float, HasUp : bool) -> Array[Merchandise
 			points -= m.Cost
 	return available_merch
 
-func GetSpawnsForLocation(YPos : float, Patrol : bool, Convoy : bool) -> Array[Captain]:
+func GetSpawnsForLocation(YPos : float, Patrol : bool, Convoy : bool, capital : bool) -> Array[Captain]:
 	#var time = Time.get_ticks_msec()
 	var stage = Happening.GetStageForYPos(YPos)
 	var Fleet : Array[Captain] = []
 	var Points = GetPointsForPosition(abs(YPos))
+	if (capital):
+		Points *= 1.5
 
 	var CptnInfo = generate_fleet(Points, Patrol, Convoy, stage)
 	for g in CptnInfo:

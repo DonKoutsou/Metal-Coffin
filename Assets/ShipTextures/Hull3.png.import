@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b63k578u1lf5e"
-path.bptc="res://.godot/imported/Tanker.png-7cc4f98d631cde9b7b3b7b5d3b6b02c6.bptc.ctex"
-path.astc="res://.godot/imported/Tanker.png-7cc4f98d631cde9b7b3b7b5d3b6b02c6.astc.ctex"
+path.bptc="res://.godot/imported/Hull3.png-d21a376187ed6369ded1170da2138f64.bptc.ctex"
+path.astc="res://.godot/imported/Hull3.png-d21a376187ed6369ded1170da2138f64.astc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/ShipTextures/Tanker.png"
-dest_files=["res://.godot/imported/Tanker.png-7cc4f98d631cde9b7b3b7b5d3b6b02c6.bptc.ctex", "res://.godot/imported/Tanker.png-7cc4f98d631cde9b7b3b7b5d3b6b02c6.astc.ctex"]
+source_file="res://Assets/ShipTextures/Hull3.png"
+dest_files=["res://.godot/imported/Hull3.png-d21a376187ed6369ded1170da2138f64.bptc.ctex", "res://.godot/imported/Hull3.png-d21a376187ed6369ded1170da2138f64.astc.ctex"]
 
 [params]
 

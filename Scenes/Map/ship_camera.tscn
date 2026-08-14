@@ -18,6 +18,7 @@ light_mode = 1
 light_mode = 1
 
 [node name="ShipCamera" type="Camera2D" unique_id=1015760443 node_paths=PackedStringArray("Background", "Grid", "C", "Ground", "GroundMap", "WeatherMan", "ClickSound") groups=["Clock"]]
+zoom = Vector2(0.1, 0.1)
 process_callback = 0
 position_smoothing_speed = 20.0
 editor_draw_limits = true

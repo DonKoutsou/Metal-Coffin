@@ -33,9 +33,8 @@ func PortUpdated(_NewAlt : float) -> void:
 		#LandingText.text = "FLYING OVER {0}\nCLEAR TO LAND".format([CurrentShip.CurrentPort.GetSpotName()])
 		
 	else: if (CurrentShip.Landed()):
-		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.HATCH)):
-			ActionTracker.OnActionCompleted(ActionTracker.Action.HATCH)
-			ActionTracker.QueueTutorial(ActionTracker.Action.HATCH)
+		ActionTracker.OnActionCompleted(ActionTracker.Action.HATCH)
+
 		
 		LandingText.text = "Landed on {0}".format([CurrentShip.CurrentPort.GetSpotName()])
 	else:

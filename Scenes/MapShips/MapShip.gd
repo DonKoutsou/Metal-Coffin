@@ -426,9 +426,7 @@ func BodyEnteredBody(Body : Area2D) -> void:
 		return
 	var Parent = Body.get_parent()
 	if (Parent is MapSpot):
-		if (!ActionTracker.IsActionCompleted(ActionTracker.Action.LANDING)):
-			ActionTracker.OnActionCompleted(ActionTracker.Action.LANDING)
-			ActionTracker.QueueTutorial(ActionTracker.Action.LANDING)
+		ActionTracker.OnActionCompleted(ActionTracker.Action.LANDING)
 		SetCurrentPort(Parent)
 		Parent.OnSpotAproached(self)
 		for g in GetSquad():

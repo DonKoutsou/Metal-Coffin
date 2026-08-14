@@ -9,8 +9,7 @@
 [ext_resource type="Script" uid="uid://dnjdy3xj0atfy" path="res://Scripts/intro_menu_ships.gd" id="6_yrlew"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scenes/MapShips/Trail_Line/trail_line.gd" id="8_eb1s8"]
 [ext_resource type="Texture2D" uid="uid://ev8n5tjqls2e" path="res://Assets/ShipTextures/Hull2.png" id="9_j43p8"]
-[ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/ShipTextures/Tanker.png" id="11_23r0g"]
-[ext_resource type="Texture2D" uid="uid://b7dafanmawwi0" path="res://Assets/ShipTextures/Tanker2.png" id="12_23r0g"]
+[ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/ShipTextures/Hull3.png" id="11_23r0g"]
 [ext_resource type="Material" uid="uid://c43qdgvsab5kq" path="res://Shaders/Clouds/CloudsStartingMenu.tres" id="12_t54ed"]
 [ext_resource type="Texture2D" uid="uid://f727c3anmat7" path="res://Assets/Logos/tbrender.png" id="14_61hxs"]
 [ext_resource type="StyleBox" uid="uid://twgjhudvlwrx" path="res://Theme/BlackBars.tres" id="14_xop3l"]
@@ -85,7 +84,7 @@ canvas_item_default_texture_filter = 2
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 0
 positional_shadow_atlas_16_bits = false
-size = Vector2i(1184, 810)
+size = Vector2i(1736, 1188)
 size_2d_override = Vector2i(868, 594)
 size_2d_override_stretch = true
 render_target_update_mode = 4
@@ -197,52 +196,6 @@ texture = ExtResource("11_23r0g")
 expand_mode = 1
 
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4" unique_id=620173937]
-show_behind_parent = true
-position = Vector2(30, 9.00005)
-points = PackedVector2Array(0, 0)
-width = 4.0
-width_curve = SubResource("Curve_1p5b6")
-gradient = SubResource("Gradient_srpg8")
-begin_cap_mode = 2
-end_cap_mode = 2
-script = ExtResource("8_eb1s8")
-trail_fade_speed = 30.0
-min_distance = 1.0
-metadata/_custom_type_script = "uid://cmkc6lix20rjb"
-
-[node name="TextureRect5" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips" unique_id=2055639107]
-layout_mode = 0
-offset_left = -49.0
-offset_top = 47.0
-offset_right = 11.0
-offset_bottom = 107.0
-rotation = -1.5708
-pivot_offset = Vector2(15, 15)
-texture = ExtResource("12_23r0g")
-expand_mode = 1
-
-[node name="Control" type="Control" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5" unique_id=678784665]
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(15, 15)
-
-[node name="TextureRect6" type="TextureRect" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5/Control" unique_id=234782464]
-modulate = Color(0, 0, 0, 0.6)
-layout_mode = 0
-offset_left = -8.0
-offset_top = 8.0
-offset_right = 52.0
-offset_bottom = 68.0
-pivot_offset = Vector2(15, 15)
-texture = ExtResource("12_23r0g")
-expand_mode = 1
-
-[node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect5" unique_id=1499058002]
 show_behind_parent = true
 position = Vector2(30, 9.00005)
 points = PackedVector2Array(0, 0)

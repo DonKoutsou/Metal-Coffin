@@ -129,8 +129,8 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	
 
 #Called when enemy ship touches friendly one to strart a fight
-func EnemyMet(FriendlyShips : Array[MapShip] , EnemyShips : Array[MapShip], Missiles : Array[BattleShipStats]):
-	MAP_EnemyArrival.emit(FriendlyShips, EnemyShips, Missiles)
+func EnemyMet(PlayerShips : Array[MapShip] , EnemyShips : Array[MapShip], PlayerMissiles : Array[BattleShipStats], EnemyMissiles : Array[BattleShipStats]):
+	MAP_EnemyArrival.emit(PlayerShips, EnemyShips, PlayerMissiles, EnemyMissiles)
 
 func ScreenControls(t : bool) -> void:
 	$OuterUI/ButtonCover.visible = !t
@@ -202,7 +202,7 @@ func Arrival(Spot : MapSpot) -> void:
 				break
 	
 	if (StartFight):
-		EnemyMet(PlayerShips, HostileShips, [])
+		EnemyMet(PlayerShips, HostileShips, [], [])
 	#else:
 		#for g in Convoys:
 			#g.Command.GetDock().UndockCaptive(g)
@@ -451,8 +451,9 @@ func GenerateMapThreaded() -> void:
 	call_deferred("MapGenFinished", GeneratedSpots, WorldSize)
 	
 	for g in GeneratedSpots:
-		g.call_deferred("SetMerch", EnSpawner.GetMerchForPosition(g.Pos.y, g.GetSpot().HasUpgrade()), EnSpawner.GetWorkshopMerchForPosition(g.Pos.y, g.GetSpot().HasUpgrade()))
-		g.call_deferred("SetRecruits", EnSpawner.GetRecruitsForPosition(g.Pos.y, g.GetSpot().HasRecruit()))
+		var isCapital = g.GetSpot().SpotType.SpotK == MapSpotType.SpotKind.CAPITAL
+		g.call_deferred("SetMerch", EnSpawner.GetMerchForPosition(g.Pos.y, g.GetSpot().HasUpgrade(), isCapital), EnSpawner.GetWorkshopMerchForPosition(g.Pos.y, g.GetSpot().HasUpgrade(), isCapital))
+		g.call_deferred("SetRecruits", EnSpawner.GetRecruitsForPosition(g.Pos.y, g.GetSpot().HasRecruit(), isCapital))
 	
 	
 	if (OS.is_debug_build()):
@@ -662,7 +663,7 @@ func SpawnFin() -> void:
 
 func SpawnSpotFleet(Spot : MapSpot, Patrol : bool, Convoy : bool,  Pos : Vector2) -> void:
 	print("Spawning for {0}".format([Spot.GetSpotName()]))
-	var Fleet = EnSpawner.GetSpawnsForLocation(Pos.y, Patrol, Convoy)
+	var Fleet = EnSpawner.GetSpawnsForLocation(Pos.y, Patrol, Convoy, Spot.SpotType.SpotK == MapSpotType.SpotKind.CAPITAL)
 	var SpawnedFleet = []
 	#var SpawnedCallsigns = []
 	for f in Fleet:
