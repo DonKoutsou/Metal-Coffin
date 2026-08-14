@@ -234,13 +234,16 @@ func Update(IsControlled : bool, CamPos : Vector2, delta : float) -> void:
 				#global_position = newpos
 				#UpdateTrajectory(randf_range(PI * 2, PI * -2))
 			#else:
+			if (Commander.ENEMY_DEBUG):
+				OnCaptainNameChanged(CurrentShip.ShipName + " LOD : {0}".format([CurrentShip.currentLOD]))
+				
 			global_position = CurrentShip.GetShipParalaxPosition(CamPos, CurrentZoom)
 			SavedPosition = global_position
-			if (CurrentShip.ExposedValue > 2):
+			if (CurrentShip.ExposedValue > 2 or Commander.ENEMY_DEBUG):
 				UpdateSpeed(CurrentShip.GetShipSpeed())
 			else:
 				SetSpeedUnknown()
-			if (CurrentShip.ExposedValue > 4):
+			if (CurrentShip.ExposedValue > 4 or Commander.ENEMY_DEBUG):
 				UpdateTrajectory(CurrentShip.global_rotation)
 			else:
 				HideTrajectory()

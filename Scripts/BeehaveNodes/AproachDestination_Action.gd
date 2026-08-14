@@ -51,7 +51,8 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 		
 		var directiontoDestination = MainShip.global_position.direction_to(DestinationPos).angle()
 		if (MainShip.rotation != directiontoDestination):
-			MainShip.Steer(clamp((directiontoDestination - MainShip.rotation) * TickRate * SimulationSpeed, -0.01, 0.01))
+			var newrot = lerp_angle(MainShip.rotation, directiontoDestination, TickRate * SimulationSpeed * 0.01)
+			MainShip.ForceSteer(newrot)
 		#MainShip.ShipLookAt(DestinationPos)
 		return SUCCESS
 	

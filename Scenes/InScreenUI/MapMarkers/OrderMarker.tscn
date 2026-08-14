@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://cm8mr51eu0otx"]
+
+[ext_resource type="Script" uid="uid://c5hyg3hdjc568" path="res://Scenes/InScreenUI/MapMarkers/OrderMarker.gd" id="1_y8q8p"]
+[ext_resource type="Texture2D" uid="uid://bbvfo5xkwu8pg" path="res://Assets/MapElements/triangle-target.png" id="6_yl3nc"]
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="9_usdfn"]
+
+[node name="OrderMarker" type="Node2D" unique_id=443548216 node_paths=PackedStringArray("Icon", "text")]
+use_parent_material = true
+script = ExtResource("1_y8q8p")
+Icon = NodePath("Icon")
+text = NodePath("Icon/ShipSymbol")
+
+[node name="Icon" type="TextureRect" parent="." unique_id=1946680749]
+texture_filter = 1
+use_parent_material = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = -17.0
+offset_right = 17.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(17, 17)
+texture = ExtResource("6_yl3nc")
+expand_mode = 1
+
+[node name="ShipSymbol" type="Label" parent="Icon" unique_id=1047617609]
+texture_filter = 3
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -0.5
+offset_top = -24.0
+offset_right = 0.5
+grow_horizontal = 2
+pivot_offset = Vector2(0, 35)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("9_usdfn")
+theme_override_font_sizes/font_size = 20
+text = "Investigate"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1052161438]
+rect = Rect2(-128, -128, 256, 256)
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="EnteredScreen"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="LeftScreen"]

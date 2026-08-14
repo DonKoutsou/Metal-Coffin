@@ -8,6 +8,7 @@ class_name MapPointerManager
 @export var MapLonePos : Node2D
 @export var MarkerScene : PackedScene
 @export var MapSpotMarkerScene : PackedScene
+@export var OrderMarker : PackedScene
 @export var FriendlyColor : Color
 @export var EnemyColor : Color
 @export var ConvoyColor : Color
@@ -15,6 +16,7 @@ class_name MapPointerManager
 @export var ControllerEventHandler : ShipControllerEventHandler
 @export var MapSpotMarkerParent : Node2D
 @export var ShipMarkerParent : Node2D
+@export var OrderMarkersParent : Node2D
 
 #@export var SpotColor : Color
 
@@ -22,6 +24,8 @@ var Ships : Array[Node2D] = []
 var _ShipMarkers : Array[ShipMarker] = []
 var Spots : Array[Node2D] = []
 var _SpotMarkers : Array[SpotMarker] = []
+
+var _OrderMarkers : Array[OrderMarker] = []
 
 static func GetInstance() -> MapPointerManager:
 	return Instance
@@ -40,7 +44,6 @@ func _ready() -> void:
 	UIEventH.connect("MarkerEditorCleared", ClearLines)
 	ControllerEventHandler.connect("OnControlledShipChanged", OnControlledShipChanged)
 	ControlledShip = ControllerEventHandler.CurrentControlled
-
 
 func UpdateCameraZoom(NewZoom : float) -> void:
 	CircleDr.UpdateCameraZoom(NewZoom)
@@ -65,6 +68,21 @@ func ClearLines() -> void:
 		g.queue_free()
 	PopUpManager.GetInstance().DoFadeNotif("Marker Cleared")
 	
+func AddOrder(Order : Resource) -> void:
+	print("Added Order")
+	var marker = OrderMarker.instantiate() as OrderMarker
+	OrderMarkersParent.add_child(marker)
+	marker.SetOrder(Order)
+	_OrderMarkers.append(marker)
+
+func RemoveOrder(Order : Resource) -> void:
+	print("Removed Order")
+	for g in _OrderMarkers:
+		if (g.Order == Order):
+			g.queue_free()
+			_OrderMarkers.erase(g)
+			break
+
 func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> ShipMarker:
 	if (Ships.has(Ship)):
 		if (Ship is HostileShip and !Ship.Destroyed and notify):

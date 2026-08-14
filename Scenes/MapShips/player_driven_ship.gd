@@ -316,6 +316,9 @@ func Steer(Rotation : float) -> void:
 		PopUpManager.GetInstance().DoFadeNotif("Planned Course Aborted\nManual Control Engaged")
 
 func _HandleAccelerationSound() -> void:
+	if (GetShipSpeed() == 0):
+		AccelerationAudio.stop()
+		return
 	var Audioween = create_tween()
 	Audioween.tween_property(AccelerationAudio, "pitch_scale", lerp(0.1, 1.0, GetShipSpeed() / GetShipMaxSpeed()), 2)
 	if (!AccelerationAudio.playing):
