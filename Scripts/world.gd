@@ -523,7 +523,7 @@ func FuelTransactionFinished(BFuel : float, Ships : Array[MapShip], Scene : Town
 	
 	for g in TutorialsToShow:
 		if (g == ActionTracker.Action.RECRUIT):
-			TutorialsToShow.append(ActionTracker.Action.RECRUIT)
+			#TutorialsToShow.append(ActionTracker.Action.RECRUIT)
 			ActionTracker.OnActionCompleted(ActionTracker.Action.RECRUIT)
 			
 	TutorialsToShow.clear()

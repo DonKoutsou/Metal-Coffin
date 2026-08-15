@@ -162,7 +162,7 @@ func DoAlarmVisual() -> void:
 func LaunchMissile(Mis : Array[MissileItem], Pos : Vector2) -> void:
 	var MissileScene : PackedScene = ResourceLoader.load(Mis[0].MissileFile)
 	var missile = MissileScene.instantiate() as Missile
-	missile.FiredBy = self
+	missile.RegisterOwner(self)
 	missile.SetData(Mis)
 	if (Command != null):
 		missile.global_position = Command.global_position

@@ -295,7 +295,7 @@ func Update(IsControlled : bool, CamPos : Vector2, delta : float) -> void:
 			UpdateDroneFuel(roundi(fuelstats["CurrentFuel"]), fuelstats["MaxFuel"])
 
 		else : if (CurrentShip is Missile):
-			if (CurrentShip.FiredBy is PlayerDrivenShip or CurrentShip.VisibleBy.size() > 0):
+			if (CurrentShip.Friendly or CurrentShip.VisibleBy.size() > 0):
 				RadarRange.rotation = CurrentShip.rotation
 				global_position = CurrentShip.global_position
 				SavedPosition = global_position

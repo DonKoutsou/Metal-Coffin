@@ -1026,7 +1026,7 @@ func PerformActions(Ship : BattleShipStats) -> void:
 		await PerformTurnFinished(Ship)
 		return
 		
-	await Ship.ShipViz.Pop(true)
+	Ship.ShipViz.Pop(true)
 	#viz.Enable()
 	PerformNextActionForShip(Ship, 0)
 ##----------------------------------------------------------------------##
@@ -1070,7 +1070,7 @@ func PerformTurnFinished(Ship : BattleShipStats) -> void:
 		await ShipReplecementFinished
 		
 	if (Ship != null):
-		await Ship.ShipViz.Pop(false)
+		Ship.ShipViz.Pop(false)
 	CurrentTurn = CurrentTurn + 1
 	StartCurrentShipsPerformTurn()
 ##----------------------------------------------------------------------##

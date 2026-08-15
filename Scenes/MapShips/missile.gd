@@ -39,6 +39,13 @@ func SetData(Dat :Array[MissileItem]) -> void:
 	Distance = Dat[0].Distance
 	Amm = Dat.size()
 
+func RegisterOwner(owner : MapShip) -> void:
+	FiredBy = owner
+	owner.OnShipDestroyed.connect(OwnerDestroyed)
+
+func OwnerDestroyed(sh : MapShip) -> void:
+	FiredBy = null
+
 func GetSpeed() -> float:
 	return Speed
 
@@ -47,7 +54,7 @@ func GetShipName() -> String:
 
 func _ready() -> void:
 	TargetAltitude = Altitude
-	if (FiredBy is not HostileShip):
+	if (Friendly):
 		var s = DeletableSound.new()
 		s.stream = MissileLaunchSound
 		s.volume_db = -15
@@ -177,7 +184,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			bod.connect("OnShipDestroyed" ,OnShipDest)
 		else : if (bod is Missile):
 			bod.connect("OnShipDestroyed" ,OnMissDest)
-		if (FiredBy is PlayerDrivenShip):
+		if (Friendly):
 			if (bod is HostileShip):
 				bod.OnShipSeen(self)
 				
@@ -190,7 +197,7 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 			area.get_parent().disconnect("OnShipDestroyed" ,OnShipDest)
 		else : if (area.get_parent() is Missile):
 			area.get_parent().disconnect("OnShipDestroyed" ,OnMissDest)
-		if (FiredBy is PlayerDrivenShip):
+		if (Friendly):
 			if (area.get_parent() is HostileShip):
 				area.get_parent().OnShipUnseen(self)
 				
@@ -210,7 +217,7 @@ func _on_missile_body_area_entered(area: Area2D) -> void:
 		return
 		
 	if (Bod is HostileShip):
-		if (FiredBy is HostileShip):
+		if (!Friendly):
 			Bod.Damage(Damage)
 			Kill()
 			return
@@ -245,7 +252,7 @@ func _on_missile_body_area_entered(area: Area2D) -> void:
 	var Mis : Array[BattleShipStats]
 	var EnemyMis : Array[BattleShipStats]
 	
-	if (FiredBy is HostileShip):
+	if (!Friendly):
 		for g in Amm:
 			EnemyMis.append(GetBattleStats())
 		if (Bod is Missile):

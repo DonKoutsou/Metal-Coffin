@@ -23,6 +23,8 @@ func ShipHasAction(Ship : BattleShipStats, Action : CardStats) -> bool:
 	return false
 
 func RemoveActionFromShip(Ship : BattleShipStats, Action : CardStats) -> void:
+	if (!List.has(Ship)):
+		return
 	for g in List[Ship]:
 		var act = g as CardFightAction
 		if (act.Action.GetCardName() == Action.GetCardName()):
