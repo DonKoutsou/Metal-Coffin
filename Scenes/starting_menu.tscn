@@ -84,7 +84,7 @@ canvas_item_default_texture_filter = 2
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 0
 positional_shadow_atlas_16_bits = false
-size = Vector2i(1736, 1188)
+size = Vector2i(913, 625)
 size_2d_override = Vector2i(868, 594)
 size_2d_override_stretch = true
 render_target_update_mode = 4
@@ -437,6 +437,17 @@ offset_bottom = 92.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="CommandLine" parent="SubViewportContainer/SubViewport" unique_id=277886953 instance=ExtResource("23_t54ed")]
+visible = false
+offset_left = 70.0
+offset_top = -108.5
+offset_right = -70.0
+offset_bottom = -16.5
+StartingMen = true
+
+[node name="InScreenMouse" parent="SubViewportContainer/SubViewport" unique_id=804818995 instance=ExtResource("24_rh5bc")]
+z_index = 1
+
 [node name="CRTEffect" type="ColorRect" parent="SubViewportContainer/SubViewport" unique_id=210530036]
 process_mode = 3
 z_index = 1
@@ -447,16 +458,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-
-[node name="CommandLine" parent="SubViewportContainer/SubViewport" unique_id=277886953 instance=ExtResource("23_t54ed")]
-visible = false
-offset_left = 70.0
-offset_top = -108.5
-offset_right = -70.0
-offset_bottom = -16.5
-StartingMen = true
-
-[node name="InScreenMouse" parent="SubViewportContainer/SubViewport" unique_id=804818995 instance=ExtResource("24_rh5bc")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport" unique_id=1406036585]
 environment = ExtResource("22_xop3l")

@@ -163,8 +163,8 @@ Dock = NodePath("DroneDock")
 [node name="ColorRect" parent="." index="1" unique_id=1708187202]
 material = SubResource("ShaderMaterial_06s8f")
 
-[node name="TrailLine" parent="ColorRect" index="0" unique_id=994780843]
-width = 1.0
+[node name="TrailLine" parent="ColorRect" index="0" unique_id=909123147]
+position = Vector2(0, 0.1)
 
 [node name="CollisionShape2D" parent="ShipBody" parent_id_path=PackedInt32Array(1910492064) index="0" unique_id=243368945]
 visible = false

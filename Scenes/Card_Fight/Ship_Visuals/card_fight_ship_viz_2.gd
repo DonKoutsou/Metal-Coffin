@@ -36,12 +36,12 @@ const StatText = "[color=#ffc315]HULL[/color][p][color=#6be2e9]SHIELD[/color][p]
 signal OnFallbackPressed()
 signal Hovered()
 signal Unhovered()
+signal ActionHovered()
+signal ActionUnhovered()
 
 var Destroyed : bool = false
 var Ship : BattleShipStats
 var Fr : bool
-
-var CurrentCardShown : Card
 
 func DoFloater(text : String, col : Color = Color(1,1,1)) -> void:
 	var DFloater = floaterScene.instantiate() as Floater
@@ -114,19 +114,19 @@ func _ready() -> void:
 	HullLabel.visible = false
 	#PassiveParent.visible = false
 	ToggleFire(false)
-	set_physics_process(false)
+	#set_physics_process(false)
 
-func _physics_process(_delta: float) -> void:
-	PositionCard()
-	#CurrentCardShown.global_position = get_global_mouse_position() - CurrentCardShown.size
-
-func PositionCard() -> void:
-	
-	CurrentCardShown.global_position = get_viewport_rect().size / 2.0 - CurrentCardShown.size / 2
+#func _physics_process(_delta: float) -> void:
+	#PositionCard()
+	##CurrentCardShown.global_position = get_global_mouse_position() - CurrentCardShown.size
+#
+#func PositionCard() -> void:
+	#
+	#CurrentCardShown.global_position = get_viewport_rect().size / 2.0 - CurrentCardShown.size / 2
 
 func Pop(t : bool):
 	var PopTween = create_tween()
-	var FinalPos : Vector2 = Vector2(0, 50)
+	var FinalPos : Vector2 = Vector2(0, position.y)
 	if (t):
 		if (Fr):
 			FinalPos.x = 270
@@ -185,8 +185,8 @@ func ActionPicked(C : CardStats, Targets : Array[BattleShipStats] = []) -> void:
 
 	TexNode.custom_minimum_size = Vector2(38,22)
 	TexNode.mouse_filter = Control.MOUSE_FILTER_PASS
-	TexNode.mouse_entered.connect(ActionHovered.bind(C, Targets))
-	TexNode.mouse_exited.connect(ActionUnhovered.bind())
+	TexNode.mouse_entered.connect(OnActionHovered.bind(C, Targets))
+	TexNode.mouse_exited.connect(OnActionUnhovered.bind())
 	ActionParent.add_child(TexNode)
 
 func PassiveAdded(C : CardStats) -> void:
@@ -197,38 +197,16 @@ func PassiveAdded(C : CardStats) -> void:
 	
 	TexNode.custom_minimum_size = Vector2(38,22)
 	TexNode.mouse_filter = Control.MOUSE_FILTER_PASS
-	TexNode.mouse_entered.connect(ActionHovered.bind(C))
-	TexNode.mouse_exited.connect(ActionUnhovered.bind())
+	TexNode.mouse_entered.connect(OnActionHovered.bind(C))
+	TexNode.mouse_exited.connect(OnActionUnhovered.bind())
 	TexNode.modulate = Color("f58800ff")
 	PassiveParent.add_child(TexNode)
 
-func ActionHovered(C : CardStats, Targets : Array[BattleShipStats] = []) -> void:
-	if (ExternalCardFightUI.HOLDING_CARD):
-		return
-	var targetlocs : Array[Vector2] = []
-	for g in Targets:
-		var n = g.ShipViz
-		var pos = n.global_position + Vector2(n.size.x, n.size.y / 2)
-		targetlocs.append(pos)
-	
-	CurrentCardShown = ResourceLoader.load(CardScene).instantiate()
-	CurrentCardShown.SetCardBattleStats(Ship ,C)
-	CurrentCardShown.Dissable(true)
-	CurrentCardShown.TargetLocs = targetlocs
-	CurrentCardShown.ShowToolTip()
-	
-	Ingame_UIManager.GetInstance().add_child(CurrentCardShown)
-	CurrentCardShown.isStatic = true
-	set_physics_process(true)
-	PositionCard()
-	print("Action hovered")
+func OnActionHovered(C : CardStats, Targets : Array[BattleShipStats] = []) -> void:
+	ActionHovered.emit(Ship, C, Targets)
 
-func ActionUnhovered() -> void:
-	if (CurrentCardShown == null):
-		return
-	CurrentCardShown.queue_free()
-	set_physics_process(false)
-	print("Action unhovered")
+func OnActionUnhovered() -> void:
+	ActionUnhovered.emit()
 
 func ActionRemoved(Tex : Texture) -> void:
 	for g : TextureRect in ActionParent.get_children():

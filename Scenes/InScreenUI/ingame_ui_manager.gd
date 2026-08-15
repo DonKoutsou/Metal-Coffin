@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 class_name Ingame_UIManager
 
 @export var _Inventory : InventoryManager
@@ -116,7 +116,7 @@ func Pause() -> void:
 	else:
 		var PauseMenuScene = ResourceLoader.load(PauseMenuSceneFile)
 		PauseContainer = PauseMenuScene.instantiate()
-		UnderstatUI.add_child(PauseContainer)
+		AddUI(PauseContainer, false, true)
 
 
 func On_Game_Lost_Button_Pressed() -> void:

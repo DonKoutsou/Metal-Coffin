@@ -16,7 +16,7 @@ func DoActionDeclaration(ActionName : String, CustomTime : float = 2) -> void:
 	var Tw = create_tween()
 	Tw.set_ease(Tween.EASE_OUT)
 	Tw.set_trans(Tween.TRANS_BACK)
-	Tw.tween_property(self, "custom_minimum_size", Vector2(650, 80), CustomTime/6)
+	Tw.tween_property(self, "custom_minimum_size", Vector2(450, 80), CustomTime/6)
 	
 	var InSound = DeletableSoundGlobal.new()
 	InSound.stream = UIInSound

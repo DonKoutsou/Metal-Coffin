@@ -6,7 +6,6 @@
 [ext_resource type="AudioStream" uid="uid://cmalipflqp1uv" path="res://Assets/Sounds/UI_out.mp3" id="4_l1nw6"]
 
 [node name="Action Declaration" type="PanelContainer" unique_id=243662110]
-z_index = 1
 custom_minimum_size = Vector2(0, 80)
 anchors_preset = 8
 anchor_left = 0.5
@@ -27,8 +26,11 @@ UIInSound = ExtResource("3_dlnjb")
 UIOutSound = ExtResource("4_l1nw6")
 
 [node name="Label" type="Label" parent="." unique_id=516594582]
+custom_maximum_size = Vector2(350, -1)
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 40
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
 uppercase = true

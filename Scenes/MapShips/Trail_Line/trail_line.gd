@@ -14,6 +14,13 @@ var stationary_time: float = 0.0
 var  PointPos : PackedVector2Array = []
 
 
+#func _process(delta: float) -> void:
+	##if (Engine.is_editor_hint()):
+	#
+	#global_position = get_global_mouse_position()
+	#Update(delta)
+
+
 func _exit_tree() -> void:
 	clear_points()
 
@@ -62,7 +69,8 @@ func Update(delta: float) -> void:
 	while points.size() > max_points:
 		PointPos.remove_at(PointPos.size() - 1)
 		remove_point(get_point_count() - 1)
-
+	
+	
 func UpdateProjected(delta: float, paralax : float) -> void:
 	
 	#var base_uv = (global_position / lerp(0.0, 0.008, paralax)) / 2.0 + Vector2(0.5, 0.5)

@@ -148,7 +148,7 @@ func HoldCard(C : Card) -> void:
 
 func ReleaseCard() -> void:
 	HOLDING_CARD = false
-	print("thing")
+	#print("thing")
 	#mouse_filter = Control.MOUSE_FILTER_IGNORE
 	InScreenCursor.Instance.ToggleMouse(true)
 	ToggleHandInput(true)
@@ -200,7 +200,7 @@ func InserCardtoPlay(C : Card, skipTransition : bool = false) -> void:
 	C.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
 	
 	PlayCardInsertSound(CardSoundType.INSERT)
-	
+	PlayCardInsertSound(CardSoundType.DISCARD, false)
 	#TWEEN
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_IN)
@@ -290,6 +290,7 @@ func OnCardDrawn(C : Card) -> void:
 	PlayCardInsertSound(CardSoundType.BEEPLONG)
 	await Helper.wait(0.1)
 	PlayCardInsertSound(CardSoundType.EXIT)
+	PlayCardInsertSound(CardSoundType.DISCARD, false)
 	await Helper.wait(0.1)
 	C.rotation = 0
 	var Cont = Control.new()
@@ -339,14 +340,25 @@ func PlayCardSound() -> void:
 	add_child(S)
 	S.volume_db = - 20
 
-func PlayCardInsertSound(type : CardSoundType) -> void:
+var playingSounds : Array[CardSoundType]
+
+func PlayCardInsertSound(type : CardSoundType, stack : bool = true) -> void:
+	if (!stack):
+		if (playingSounds.has(type)):
+			return
+		playingSounds.append(type)
 	var S = DeletableSoundGlobal.new()
 	S.stream = GetSoundSample(type)
 	S.autoplay = true
 	S.pitch_scale = randf_range(0.8, 1.2)
-	#S.bus = "MapSounds"
+	S.bus = "Sounds"
 	add_child(S)
 	S.volume_db = - 7
+	S.finished.connect(SoundEnded.bind(type))
+
+func SoundEnded(type : CardSoundType) -> void:
+	playingSounds.erase(type)
+
 
 func GetSoundSample(type : CardSoundType) -> AudioStream:
 	var Sample : AudioStream

@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://b1v6aeesflsrh" path="res://Scenes/MapShips/MapShip.gd" id="1_2mwka"]
 [ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyFireship1.tres" id="3_hup4s"]
 [ext_resource type="Shader" uid="uid://cqgk0egpp8vmb" path="res://Shaders/ShipVisualTest.gdshader" id="4_ql18u"]
+[ext_resource type="PackedScene" uid="uid://bhkb6xo1tkk6l" path="res://Scenes/MapShips/ShipTrailLine.tscn" id="5_hi2nu"]
 [ext_resource type="Texture2D" uid="uid://bx78x3avxyhmf" path="res://Assets/ShipTextures/Scarab.png" id="5_oe1x5"]
 [ext_resource type="Script" uid="uid://7kme48vf7smt" path="res://Scenes/MapShips/DetectionInstruments/Radar/Radar.gd" id="6_ubqfg"]
-[ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scenes/MapShips/Trail_Line/trail_line.gd" id="6_wandv"]
 [ext_resource type="Script" uid="uid://bk57mr2q3tq7q" path="res://Scenes/MapShips/DetectionInstruments/Elint/ElintShape.gd" id="7_hi2nu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7v2kq"]
@@ -14,15 +14,6 @@ shader = ExtResource("4_ql18u")
 shader_parameter/ShipSize = 0.08
 shader_parameter/shadow_parallax_amount = 0.5
 shader_parameter/sprite_rotation = -1.57
-
-[sub_resource type="Curve" id="Curve_mktum"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0802469, 0.320469), 0.0, 0.0, 0, 0, Vector2(0.123457, 0), 0.0, 0.0, 0, 0, Vector2(0.162551, 0.638007), -0.304774, -0.304774, 0, 0, Vector2(0.195556, 0), 0.0, 0.0, 0, 0, Vector2(0.217778, 0.911893), 0.0, 0.0, 0, 0, Vector2(0.254444, 0), 0.0, 0.0, 0, 0, Vector2(0.276667, 0.893606), 0.0, 0.0, 0, 0, Vector2(0.32, 0), 0.0, 0.0, 0, 0, Vector2(0.326667, 0.842072), 0.0, 0.0, 0, 0, Vector2(0.358889, 0), 0.0, 0.0, 0, 0, Vector2(0.368889, 0.808824), 0.0, 0.0, 0, 0, Vector2(0.397778, 0), 0.0, 0.0, 0, 0, Vector2(0.413333, 0.772251), 0.0, 0.0, 0, 0, Vector2(0.437778, 0), 0.0, 0.0, 0, 0, Vector2(0.454444, 0.757289), 0.0, 0.0, 0, 0, Vector2(0.482222, 0), 0.0, 0.0, 0, 0, Vector2(0.524444, 0.740665), 0.0, -24.6888, 0, 1, Vector2(0.554444, 0), 0.0, 0.0, 0, 0, Vector2(0.577778, 0.73734), 0.0, 0.0, 0, 0, Vector2(0.622222, 0), 0.0, 0.0, 0, 0, Vector2(0.645556, 0.675831), 0.0, 0.0, 0, 0, Vector2(0.717778, 0), 0.0, 0.0, 0, 0, Vector2(0.738889, 0.66087), 0.0, 0.0, 0, 0, Vector2(0.792222, 0), 0.0, 0.0, 0, 0, Vector2(0.817778, 0.615985), 0.0, 0.0, 0, 0, Vector2(0.854445, 0), 0.0, 0.0, 0, 0, Vector2(0.923333, 0.592711), 0.0, 0.0, 0, 0, Vector2(0.944444, 0.012532), 0.0, 0.0, 0, 0, Vector2(0.997413, 0.585293), 0.0, 0.0, 0, 0]
-point_count = 30
-
-[sub_resource type="Gradient" id="Gradient_wfgcg"]
-interpolation_color_space = 1
-offsets = PackedFloat32Array(0, 0.715481, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.313, 0.313, 0.313, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jc744"]
 radius = 5.0
@@ -55,18 +46,9 @@ material = SubResource("ShaderMaterial_7v2kq")
 rotation = -1.5708
 texture = ExtResource("5_oe1x5")
 
-[node name="TrailLine" type="Line2D" parent="ColorRect" unique_id=994780843]
-show_behind_parent = true
+[node name="TrailLine" parent="ColorRect" unique_id=909123147 instance=ExtResource("5_hi2nu")]
 position = Vector2(0, -1)
-rotation = 1.57078
-points = PackedVector2Array(0, 0)
-width = 2.0
-width_curve = SubResource("Curve_mktum")
-gradient = SubResource("Gradient_wfgcg")
-round_precision = 1
-script = ExtResource("6_wandv")
-min_distance = 1.0
-metadata/_custom_type_script = "uid://cmkc6lix20rjb"
+width = 10.0
 
 [node name="ShipBody" type="Area2D" parent="." unique_id=1910492064]
 collision_mask = 5

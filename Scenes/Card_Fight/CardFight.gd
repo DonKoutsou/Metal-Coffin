@@ -1,4 +1,4 @@
-extends SubViewportContainer
+extends Control
 
 class_name Card_Fight
 #/////////////////////////////////////////////////////////////
@@ -21,7 +21,7 @@ class_name Card_Fight
 #Scene that shows the stats of the fight
 @export_file("*.tscn") var EndSceneFile : String
 @export_file("*.tscn") var ShipInfoSceneFile : String
-
+@export_file("*.tscn") var AcrionDeclarationScene : String
 @export var CardPlecementSound : AudioStream
 @export var RemoveCardSound : AudioStream
 @export_group("Plecement Referances")
@@ -38,9 +38,6 @@ class_name Card_Fight
 #UI for selecting a card to discard
 @export var CardSelect : CardFightDiscardSelection
 #UI for action declaration
-#@export var ActionDeclaration : ActionDeclarationUI
-@export_file("*.tscn") var AcrionDeclarationScene : String
-@export var ActionDeclarationPlacement : Control
 @export var cloudRect : ColorRect
 @export var CloudNoise : FastNoiseLite
 #Showing size of player fleet
@@ -100,6 +97,8 @@ static var LOG_ENEMY_LOGIC : bool = false
 ##Energy stored when player manually discards card.
 var StoredEnergy : int = 0
 
+var CurrentCardShown : Card
+
 var ShipBeingReplaced : Array[CardFightShipViz2]
 signal ShipReplecementFinished
 
@@ -154,7 +153,7 @@ func _ready() -> void:
 
 	Helper.CallLater(StartFight, 2)
 	
-	var Mat = $SubViewport/Control2/Ground.material as ShaderMaterial
+	var Mat = $Ground.material as ShaderMaterial
 	Mat.set_shader_parameter("offset", Vector2(randf_range(-100, 100), randf_range(-100, 100)))
 ##----------------------------------------------------------------------##
 func _exit_tree() -> void:
@@ -171,7 +170,7 @@ func _physics_process(_delta: float) -> void:
 func StartFight() -> void:
 	var declaration : PackedScene = ResourceLoader.load(AcrionDeclarationScene)
 	var act : ActionDeclarationUI = declaration.instantiate()
-	ActionDeclarationPlacement.add_child(act)
+	add_child(act)
 	act.DoActionDeclaration("Fight Start", 1.5)
 	act.ActionDeclarationFinished.connect(IntroDeclarationFinished)
 ##----------------------------------------------------------------------##
@@ -220,7 +219,7 @@ func ReplaceShip(Ship : BattleShipStats, TurnPosition : int, Friendly : bool) ->
 	ShipBeingReplaced.erase(Viz)
 	var Pos = Viz.global_position
 	Viz.get_parent().remove_child(Viz)
-	$SubViewport/Control2/DeadShipLoc.add_child(Viz)
+	$DeadShipLoc.add_child(Viz)
 	Viz.global_position = Pos
 	NewTurnStarted.disconnect(Viz.OnNewTurnStarted)
 	
@@ -449,7 +448,7 @@ func RunTurn() -> void:
 		return
 	var declaration : PackedScene = ResourceLoader.load(AcrionDeclarationScene)
 	var act : ActionDeclarationUI = declaration.instantiate()
-	ActionDeclarationPlacement.add_child(act)
+	add_child(act)
 	act.DoActionDeclaration("Enemy Pick Phase", 1.5)
 	act.ActionDeclarationFinished.connect(PickPhase)
 ##----------------------------------------------------------------------##
@@ -507,7 +506,7 @@ func StartCurrentShipsPickTurn() -> void:
 		CurrentPlayerLabel.text = "{0} picking".format([Ship.Name])
 		var declaration : PackedScene = ResourceLoader.load(AcrionDeclarationScene)
 		var act : ActionDeclarationUI = declaration.instantiate()
-		ActionDeclarationPlacement.add_child(act)
+		add_child(act)
 		act.DoActionDeclaration(Ship.Name + "'s turn", 1.5)
 		act.ActionDeclarationFinished.connect(RunShipsTurn.bind(Ship))
 		EnemyPickingMove = !IsShipFriendly(Ship)
@@ -920,7 +919,7 @@ func CurrentEnemyTurnEnded() -> void:
 	if (playerNext):
 		var declaration : PackedScene = ResourceLoader.load(AcrionDeclarationScene)
 		var act : ActionDeclarationUI = declaration.instantiate()
-		ActionDeclarationPlacement.add_child(act)
+		add_child(act)
 		act.DoActionDeclaration("Player Perform Phase", 1.5)
 		act.ActionDeclarationFinished.connect(StartCurrentShipsPickTurn)
 	else:
@@ -946,7 +945,7 @@ func StartActionPerform() -> void:
 	CurrentPhase = CardFightPhase.ACTION_PERFORM
 	var declaration : PackedScene = ResourceLoader.load(AcrionDeclarationScene)
 	var act : ActionDeclarationUI = declaration.instantiate()
-	ActionDeclarationPlacement.add_child(act)
+	add_child(act)
 	act.DoActionDeclaration("Enemy Perform Phase", 1.5)
 	act.ActionDeclarationFinished.connect(ActionPerformPhase)
 	
@@ -1024,7 +1023,7 @@ func PerformActions(Ship : BattleShipStats) -> void:
 	var ShipActions = ActionList.GetShipsActions(Ship)
 	
 	if (ShipActions.size() == 0):
-		PerformTurnFinished(Ship)
+		await PerformTurnFinished(Ship)
 		return
 		
 	await Ship.ShipViz.Pop(true)
@@ -1038,7 +1037,7 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 	var ShipActions = ActionList.GetShipsActions(Ship)
 	
 	if (ShipActions.size() - 1 < ActionIndex):
-		PerformTurnFinished(Ship)
+		await PerformTurnFinished(Ship)
 		return
 	
 	var ShipAction = ShipActions[ActionIndex] as CardFightAction
@@ -1655,7 +1654,7 @@ func DoCardPlecementAnimation(User : BattleShipStats, C : Card, OriginalPos : Ve
 	var c = CardScene.instantiate() as Card
 
 	c.SetCardBattleStats(User, C.CStats)
-	$SubViewport/Control2.add_child(c)
+	add_child(c)
 	c.global_position = OriginalPos
 	var S = DeletableSoundGlobal.new()
 	S.stream = CardPlecementSound
@@ -1829,8 +1828,12 @@ func RemoveShip(Ship : BattleShipStats) -> void:
 func CreateShipVisuals(BattleS : BattleShipStats, Friendly : bool) -> CardFightShipViz2:
 	var VizScene : PackedScene = ResourceLoader.load(ShipVizScene)
 	var ShipVisuals = VizScene.instantiate() as CardFightShipViz2
+	
 	ShipVisuals.Hovered.connect(ShipVisualHovered.bind(BattleS))
 	ShipVisuals.Unhovered.connect(ShipVisualUnHovered.bind(BattleS))
+	ShipVisuals.ActionHovered.connect(ShipActionHovered)
+	ShipVisuals.ActionUnhovered.connect(ShipActionUnhovered)
+	
 	ShipVisuals.SetStats(BattleS, Friendly)
 	
 	if (Friendly):
@@ -1853,8 +1856,40 @@ func CreateShipVisuals(BattleS : BattleShipStats, Friendly : bool) -> CardFightS
 func ShipVisualHovered(ship : BattleShipStats) -> void:
 	ExternalUI.ShipHovered(ship)
 
+##----------------------------------------------------------------------##
+func ShipActionHovered(Ship : BattleShipStats, C : CardStats, Targets : Array[BattleShipStats] = []) -> void:
+	if (ExternalCardFightUI.HOLDING_CARD):
+		return
+
+	var targetlocs : Array[Vector2] = []
+	for g in Targets:
+		var n = g.ShipViz
+		var pos = n.global_position + Vector2(n.size.x, n.size.y / 2)
+		targetlocs.append(pos)
+	
+	if (CurrentCardShown != null):
+		CurrentCardShown.queue_free()
+	
+	CurrentCardShown = CardScene.instantiate()
+	CurrentCardShown.SetCardBattleStats(Ship ,C)
+	CurrentCardShown.Dissable(true)
+	CurrentCardShown.TargetLocs = targetlocs
+	CurrentCardShown.ShowToolTip()
+	
+	AnimationPlecement.add_child(CurrentCardShown)
+	
+	CurrentCardShown.isStatic = true
+
+##----------------------------------------------------------------------##
+func ShipActionUnhovered() -> void:
+	if (CurrentCardShown == null):
+		return
+	CurrentCardShown.queue_free()
+
+##----------------------------------------------------------------------##
 func ShipVisualUnHovered(ship : BattleShipStats) -> void:
 	ExternalUI.ShipUnhovered(ship)
+	
 ##----------------------------------------------------------------------##
 func UpdateHandCards() -> void:
 	

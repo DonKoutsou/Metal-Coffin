@@ -60,7 +60,7 @@ func Update(delta: float) -> void:
 	RadarShape.EvaluateRadarrPoint(Altitude)
 	
 	for g in TrailLines:
-		g.UpdateProjected(delta, Altitude / 10000.0)
+		g.call_deferred("UpdateProjected", delta, Altitude / 10000.0)
 	
 	if (SimulationManager.IsPaused()):
 		return

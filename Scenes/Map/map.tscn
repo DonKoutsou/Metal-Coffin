@@ -72,7 +72,7 @@ own_world_3d = true
 handle_input_locally = false
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 512
-size = Vector2i(2374, 1725)
+size = Vector2i(2014, 1463)
 size_2d_override = Vector2i(812, 590)
 size_2d_override_stretch = true
 render_target_update_mode = 4
@@ -92,11 +92,11 @@ stretch = true
 disable_3d = true
 own_world_3d = true
 handle_input_locally = false
-canvas_item_default_texture_filter = 0
+canvas_item_default_texture_filter = 3
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 0
 positional_shadow_atlas_16_bits = false
-size = Vector2i(2374, 1725)
+size = Vector2i(2015, 1463)
 size_2d_override = Vector2i(812, 590)
 size_2d_override_stretch = true
 render_target_update_mode = 4
@@ -160,7 +160,6 @@ ShipControllerEvent = ExtResource("22_n73so")
 Col = Color(100, 0.395, 0.144, 1)
 
 [node name="InScreenUI" parent="SubViewportContainer/ViewPort" unique_id=391064499 instance=ExtResource("23_53oad")]
-layer = 3
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/ViewPort" unique_id=718275547]
 environment = ExtResource("16_8uruf")

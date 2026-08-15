@@ -53,11 +53,11 @@ func BodyEnteredRadar(Body : Area2D) -> void:
 		if (Parent.Convoy):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.CONVOY)
 
-		
 	else: if (Parent is Missile):
 		if (Parent.FiredBy is HostileShip):
 			InsideRadar.append(Parent)
 			#Parent.OnShipSeen(self)
+			
 	else : if (Parent is MapSpot):
 		if (Parent.EnemyCity):
 			ActionTracker.OnActionCompleted(ActionTracker.Action.ENEMY_TOWN_APROACH)
@@ -71,7 +71,7 @@ func BodyLeftRadar(Body : Area2D) -> void:
 	var Parent = Body.get_parent()
 	if (Parent is HostileShip):
 		InsideRadar.erase(Parent)
-		Parent.OnShipUnseen(self)
+		Parent.OnShipUnseen(get_parent())
 		#Parent.OnShipUnseen(self)
 	else: if (Parent is Missile):
 		if (Parent.FiredBy is HostileShip):
