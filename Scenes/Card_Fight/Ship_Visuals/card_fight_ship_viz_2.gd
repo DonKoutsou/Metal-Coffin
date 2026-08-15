@@ -126,7 +126,7 @@ func _ready() -> void:
 
 func Pop(t : bool):
 	var PopTween = create_tween()
-	var FinalPos : Vector2 = Vector2(0, position.y)
+	var FinalPos : Vector2 = Vector2(0, $HBoxContainer/Control.position.y)
 	if (t):
 		if (Fr):
 			FinalPos.x = 270
@@ -177,7 +177,7 @@ func GetShipPos() -> Vector2:
 	return ShipIcon.global_position
 
 func ActionPicked(C : CardStats, Targets : Array[BattleShipStats] = []) -> void:
-	ActionParent.visible = true
+	#ActionParent.visible = true
 	var TexNode = TextureRect.new()
 	TexNode.texture = C.Icon
 	TexNode.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
@@ -213,7 +213,7 @@ func ActionRemoved(Tex : Texture) -> void:
 		if (g.texture == Tex):
 			g.free()
 			break
-	ActionParent.visible = ActionParent.get_child_count() > 0
+	#ActionParent.visible = ActionParent.get_child_count() > 0
 
 func OnNewTurnStarted() -> void:
 	HasMovePanel.visible = true
