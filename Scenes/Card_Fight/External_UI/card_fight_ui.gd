@@ -176,7 +176,7 @@ func InserCardtoPlay(C : Card, skipTransition : bool = false) -> void:
 	AllowEnd = false
 	var target = HoveredShip
 	C.Dissable(true)
-
+	var xPos = (PlayCardInsert.size.x - C.size.x) / 2.0
 	if (!skipTransition):
 
 		C.reparent(self)
@@ -185,7 +185,8 @@ func InserCardtoPlay(C : Card, skipTransition : bool = false) -> void:
 		var Movetw = create_tween()
 		Movetw.set_ease(Tween.EASE_OUT)
 		Movetw.set_trans(Tween.TRANS_QUAD)
-		Movetw.tween_property(C, "global_position", PlayCardInsert.global_position + Vector2(10, 15), 0.25)
+		
+		Movetw.tween_property(C, "global_position", PlayCardInsert.global_position + Vector2(xPos, 5), 0.25)
 
 		PlayCardSound()
 		
@@ -246,6 +247,7 @@ func InsertCardToDiscard(C : Card, skipTransition : bool = false) -> void:
 	AllowEnd = false
 	C.Dissable(true)
 	C.rotation = 0
+	var xPos = (DiscardInsert.size.x - C.size.x) / 2
 	if (!skipTransition):
 		var pos = C.global_position
 		C.get_parent().remove_child(C)
@@ -256,7 +258,7 @@ func InsertCardToDiscard(C : Card, skipTransition : bool = false) -> void:
 		var Movetw = create_tween()
 		Movetw.set_ease(Tween.EASE_OUT)
 		Movetw.set_trans(Tween.TRANS_QUAD)
-		Movetw.tween_property(C, "global_position", DiscardInsert.global_position + Vector2(15, 5), 0.25)
+		Movetw.tween_property(C, "global_position", DiscardInsert.global_position + Vector2(xPos, 5), 0.25)
 		
 		PlayCardSound()
 		await Movetw.finished
@@ -269,7 +271,8 @@ func InsertCardToDiscard(C : Card, skipTransition : bool = false) -> void:
 	DiscardInsert.add_child(Cont)
 	Cont.add_child(C)
 	C.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
-	C.position = Vector2(15, -5)
+	
+	C.position = Vector2(xPos, -5)
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_IN)
 	tw.set_trans(Tween.TRANS_QUAD)
@@ -301,8 +304,9 @@ func OnCardDrawn(C : Card) -> void:
 	C.ForcePersp(true)
 	C.TogglePerspective(false, 1)
 	Cont.size = DrawCardInsert.size
+	var xPos = (DrawCardInsert.size.x - C.size.x) / 2
 	C.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
-	C.position = Vector2(15, -5)
+	C.position = Vector2(xPos, -5)
 	Cont.size = Vector2(DrawCardInsert.size.x, 0)
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_OUT)
@@ -408,12 +412,12 @@ func _on_card_discard_input_mouse_entered() -> void:
 		HeldCard.reparent(DiscardInsert, true)
 		HeldCard.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
 		HeldCard.rotation = 0
-		
-		HeldCard.position = Vector2(15, 55)
+		var xPos = (DiscardInsert.size.x - HeldCard.size.x) / 2
+		HeldCard.position = Vector2(xPos, 55)
 		InsertTween = create_tween()
 		InsertTween.set_ease(Tween.EASE_OUT)
 		InsertTween.set_trans(Tween.TRANS_BACK)
-		InsertTween.tween_property(HeldCard, "position", Vector2(15, -5), 0.25)
+		InsertTween.tween_property(HeldCard, "position", Vector2(xPos, -5), 0.25)
 
 
 func _on_card_discard_input_mouse_exited() -> void:
@@ -428,11 +432,12 @@ func _on_card_insert_input_mouse_entered() -> void:
 		HeldCard.reparent(PlayCardInsert, false)
 		HeldCard.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
 		HeldCard.rotation = 0
-		HeldCard.position = Vector2(15, 55)
+		var xPos = (PlayCardInsert.size.x - HeldCard.size.x) / 2
+		HeldCard.position = Vector2(xPos, 55)
 		InsertTween = create_tween()
 		InsertTween.set_ease(Tween.EASE_OUT)
 		InsertTween.set_trans(Tween.TRANS_BACK)
-		InsertTween.tween_property(HeldCard, "position", Vector2(15, -5), 0.25)
+		InsertTween.tween_property(HeldCard, "position", Vector2(xPos, -5), 0.25)
 
 
 func _on_card_insert_input_mouse_exited() -> void:
