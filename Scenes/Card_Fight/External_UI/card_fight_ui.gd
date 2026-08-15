@@ -390,6 +390,7 @@ enum CardSoundType{
 
 func _on_pause_pressed() -> void:
 	EventH.OnPausePressed()
+	PlayerCardPlecement.visible = !get_tree().paused
 
 func MouseIn() -> void:
 	InScreenCursor.Instance.ToggleMouse(false)
