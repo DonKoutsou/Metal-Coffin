@@ -210,7 +210,7 @@ Cnt={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://Localisations/LOC_Tutorial.english.translation", "res://Localisations/LOC_Cards.english.translation", "res://Localisations/LOC_Cards.greek.translation")
+locale/translations=PackedStringArray("res://Localisations/LOC - Stat.english.translation", "res://Localisations/LOC - Cards.greek.translation", "res://Localisations/LOC - Cards.english.translation", "res://Localisations/LOC - Tutorial.english.translation")
 locale/test="en"
 locale/locale_filter_mode=1
 

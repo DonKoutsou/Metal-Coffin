@@ -15,7 +15,7 @@ var CurrentlySelectedCap : Captain
 @export var AddItemMenu : PopupMenu
 @export var Inventory : CharacterInventoryInterface
 @export var Stats : CPT_CR_InventoryShipStats
-
+@export var Disp : CaptainDispositionUI
 
 var ShowItemStats = true
 
@@ -123,6 +123,7 @@ func UpdateInventoryBoxes() -> void:
 	CurrentlySelectedCap.RegisterInventory(newInventory)
 	Inventory.InitialiseInventory(CurrentlySelectedCap)
 	Stats.SetCaptainEditor(CurrentlySelectedCap, ShowItemStats)
+	Disp.SetStats(CurrentlySelectedCap)
 	SelectedBox = null
 
 func GetShipMaxSpeed() -> float:

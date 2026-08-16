@@ -98,7 +98,6 @@ size_flags_vertical = 6
 mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_jvfpq")
 theme_override_styles/fill = SubResource("StyleBoxFlat_6mq6a")
-value = 19.17
 show_percentage = false
 
 [node name="ItemBar" type="ProgressBar" parent="ProgressBar" unique_id=515354391]
@@ -112,7 +111,6 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_jokjb")
 theme_override_styles/fill = SubResource("StyleBoxFlat_5v3x0")
-value = 60.17
 show_percentage = false
 
 [node name="ItemNegBar" type="ProgressBar" parent="ProgressBar" unique_id=1067938817]
@@ -125,7 +123,6 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_ueh8q")
 theme_override_styles/fill = SubResource("StyleBoxFlat_nasb0")
-value = 10.0
 show_percentage = false
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

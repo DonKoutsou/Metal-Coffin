@@ -3,23 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cw03v1o7v0lpp"
-path.bptc="res://.godot/imported/Rock062_1K-PNG_Color.png-738554afc7eff144184f1343a5a61ad5.bptc.ctex"
-path.astc="res://.godot/imported/Rock062_1K-PNG_Color.png-738554afc7eff144184f1343a5a61ad5.astc.ctex"
+path="res://.godot/imported/Rock062_1K-PNG_Color.png-738554afc7eff144184f1343a5a61ad5.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc", "etc2_astc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Assets/Sand/Rock062_1K-PNG_Color.png"
-dest_files=["res://.godot/imported/Rock062_1K-PNG_Color.png-738554afc7eff144184f1343a5a61ad5.bptc.ctex", "res://.godot/imported/Rock062_1K-PNG_Color.png-738554afc7eff144184f1343a5a61ad5.astc.ctex"]
+dest_files=["res://.godot/imported/Rock062_1K-PNG_Color.png-738554afc7eff144184f1343a5a61ad5.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=true
-compress/high_quality_mode=0
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

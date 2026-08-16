@@ -87,3 +87,4 @@ TLTP_COUNTER_HOM,This card will defend the user from an offensive [color=#ffc315
 TLTP_DMG_RDC_ANY,This card will reduce the damage of an offensive card,
 TLTP_SWIFT,[color=#ffc315]SWIFT[/color]\nThis card will be placed at the top of the pile at the start of every card figh,
 TLTP_DISPOSITION,[color=#ffc315]Disposition[/color]\nThis card is provided by the ships disposition.,
+TLTP_POWER,[color=#ffc315]Power[/color] cards provide permanent abilities that remain until the end of the fight.,

@@ -425,7 +425,7 @@ func OnReachedPursuing() -> void:
 	
 	var Mis : Array[BattleShipStats] = []
 	
-	OnPlayerShipMet.emit(plships, hostships, Mis)
+	OnPlayerShipMet.emit(plships, hostships, Mis, Mis)
 
 func GetCurrentDestination() -> Vector2:
 	var destination : Vector2

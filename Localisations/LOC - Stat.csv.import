@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bayoweluj5kg6"
+
+[deps]
+
+files=["res://Localisations/LOC - Stat.english.translation"]
+
+source_file="res://Localisations/LOC - Stat.csv"
+dest_files=["res://Localisations/LOC - Stat.english.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

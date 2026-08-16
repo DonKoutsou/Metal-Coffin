@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://ctvywcfyfs2te"
+
+[deps]
+
+files=["res://Localisations/LOC - Tutorial.english.translation"]
+
+source_file="res://Localisations/LOC - Tutorial.csv"
+dest_files=["res://Localisations/LOC - Tutorial.english.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

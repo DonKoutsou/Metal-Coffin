@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bptyq85f751ys"
+
+[deps]
+
+files=["res://Localisations/LOC - Cards.english.translation", "res://Localisations/LOC - Cards.greek.translation"]
+
+source_file="res://Localisations/LOC - Cards.csv"
+dest_files=["res://Localisations/LOC - Cards.english.translation", "res://Localisations/LOC - Cards.greek.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

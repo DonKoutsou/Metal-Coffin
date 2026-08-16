@@ -75,11 +75,15 @@ func UpdateStatCustom(StatVal : float, ItemVar : float, ItemPenalty : float) -> 
 	
 	StatValueLabel.text = "{0} {1}".format([var_to_str(StatVal + ItemVar - ItemPenalty).replace(".0", ""), Metric])
 
-	ShipStatBar.value = StatVal
-	ItemStatBar.value = StatVal + ItemVar
-	
+	var tw = create_tween()
+	tw.set_ease(Tween.EASE_OUT)
+	tw.set_trans(Tween.TRANS_BACK)
+	tw.set_parallel(true)
+	tw.tween_property(ShipStatBar, "value", StatVal, 0.25)
+	tw.tween_property(ItemStatBar, "value", StatVal + ItemVar, 0.25)
+	tw.tween_property(ItemNegativeBar, "value", StatVal + ItemVar - ItemPenalty, 0.25)
+
 	ItemNegativeBar.visible = ItemPenalty > 0
-	ItemNegativeBar.value = StatVal + ItemVar - ItemPenalty
 	
 func UpdateStatValue(StatVal : float, ItemVar : float, ItemPenalty : float) -> void:
 
@@ -88,10 +92,16 @@ func UpdateStatValue(StatVal : float, ItemVar : float, ItemPenalty : float) -> v
 	else:
 		StatValueLabel.text = "{0} {1}".format([var_to_str(StatVal + ItemVar - ItemPenalty).replace(".0", ""), Metric])
 	
-	ShipStatBar.value = StatVal
-	ItemStatBar.value = StatVal + ItemVar
+	var tw = create_tween()
+	tw.set_ease(Tween.EASE_OUT)
+	tw.set_trans(Tween.TRANS_BACK)
+	tw.set_parallel(true)
+	tw.tween_property(ShipStatBar, "value", StatVal, 0.25)
+	tw.tween_property(ItemStatBar, "value", StatVal + ItemVar, 0.25)
+	tw.tween_property(ItemNegativeBar, "value", StatVal + ItemVar - ItemPenalty, 0.25)
+
 	ItemNegativeBar.visible = ItemPenalty > 0
-	ItemNegativeBar.value = StatVal + ItemVar - ItemPenalty
+
 
 func _on_mouse_entered() -> void:
 	if (Engine.is_editor_hint()):

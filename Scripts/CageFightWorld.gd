@@ -68,8 +68,9 @@ func StartDogFight(PlTeam : Array[Captain], EnTeam : Array[Captain]):
 		var bt : BattleShipStats = g.GetBattleStats()
 		bt.Friendly = false
 		CardF.EnemyReserves.append(bt)
-
-	#CardF.InitRandomFight(5)
+	
+	if (PlTeam.size() == 0 and EnTeam.size() == 0):
+		CardF.InitRandomFight(3)
 	
 	#SimulationManager.GetInstance().TogglePause(true)
 	#CardF.SetBattleData(FBattleStats, EBattleStats)

@@ -33,14 +33,18 @@ func _exit_tree() -> void:
 	UISoundMan.GetInstance().RemoveSelf(Butto)
 
 func UpdateAmm(newAmm : int) -> void:
-	if (allowDissable):
-		if (newAmm <= 0):
-			$ItemButton/HBoxContainer.hide()
+	
+	if (newAmm <= 0):
+		$ItemButton/HBoxContainer.hide()
+		if (allowDissable):
 			Butto.disabled = true
 			Butto.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		else:
+	else:
+		$ItemButton/HBoxContainer.show()
+		if (allowDissable):
 			Butto.mouse_filter = Control.MOUSE_FILTER_PASS
-			$ItemButton/HBoxContainer.show()
+			Butto.disabled = false
+		
 	_UpdateAmmountLabel(newAmm)
 
 func UpdateAmmNoDissable(newAmm : int) -> void:

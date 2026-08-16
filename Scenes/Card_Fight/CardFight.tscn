@@ -68,7 +68,7 @@ height = 600.0
 [node name="Ground" type="ColorRect" parent="." unique_id=1742857488]
 light_mask = 524289
 z_index = -2
-texture_filter = 1
+texture_filter = 3
 material = ExtResource("7_hm5ka")
 layout_mode = 1
 anchors_preset = 8
@@ -94,7 +94,7 @@ grow_vertical = 2
 [node name="Clouds" type="ColorRect" parent="." unique_id=759849753]
 light_mask = 524289
 z_index = -1
-texture_filter = 1
+texture_filter = 3
 material = ExtResource("8_hm5ka")
 layout_mode = 1
 anchors_preset = 8

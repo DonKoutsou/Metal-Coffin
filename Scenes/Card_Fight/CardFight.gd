@@ -168,11 +168,17 @@ func _physics_process(_delta: float) -> void:
 	CloudNoise.offset.z += 0.01
 ##----------------------------------------------------------------------##
 func StartFight() -> void:
+	Declaration("Fight Start", 1.5).ActionDeclarationFinished.connect(IntroDeclarationFinished)
+	
+##----------------------------------------------------------------------##
+func Declaration(text : String, duration : float = 1.5) -> ActionDeclarationUI:
 	var declaration : PackedScene = ResourceLoader.load(AcrionDeclarationScene)
 	var act : ActionDeclarationUI = declaration.instantiate()
 	add_child(act)
-	act.DoActionDeclaration("Fight Start", 1.5)
-	act.ActionDeclarationFinished.connect(IntroDeclarationFinished)
+	act.DoActionDeclaration(text, duration)
+	act.position = size / 2.0 - act.size / 2.0
+	return act
+	
 ##----------------------------------------------------------------------##
 func IntroDeclarationFinished() -> void:
 	#ActionDeclaration.ActionDeclarationFinished.disconnect(IntroDeclarationFinished)
@@ -446,11 +452,8 @@ signal EnemyActionPickedEnded
 func RunTurn() -> void:
 	if (GameOver):
 		return
-	var declaration : PackedScene = ResourceLoader.load(AcrionDeclarationScene)
-	var act : ActionDeclarationUI = declaration.instantiate()
-	add_child(act)
-	act.DoActionDeclaration("Enemy Pick Phase", 1.5)
-	act.ActionDeclarationFinished.connect(PickPhase)
+	Declaration("Enemy Pick Phase", 1.5).ActionDeclarationFinished.connect(PickPhase)
+
 ##----------------------------------------------------------------------##
 func PickPhase() -> void:
 	if (GameOver):
@@ -504,11 +507,8 @@ func StartCurrentShipsPickTurn() -> void:
 	if (CurrentTurn < ShipTurns.size()):
 		var Ship = GetCurrentShip()
 		CurrentPlayerLabel.text = "{0} picking".format([Ship.Name])
-		var declaration : PackedScene = ResourceLoader.load(AcrionDeclarationScene)
-		var act : ActionDeclarationUI = declaration.instantiate()
-		add_child(act)
-		act.DoActionDeclaration(Ship.Name + "'s turn", 1.5)
-		act.ActionDeclarationFinished.connect(RunShipsTurn.bind(Ship))
+		Declaration(Ship.Name + "'s turn", 1.5).ActionDeclarationFinished.connect(RunShipsTurn.bind(Ship))
+
 		EnemyPickingMove = !IsShipFriendly(Ship)
 	else:
 		StartActionPerform()
@@ -917,11 +917,7 @@ func CurrentEnemyTurnEnded() -> void:
 	
 	var playerNext = IsShipFriendly(ShipTurns[CurrentTurn])
 	if (playerNext):
-		var declaration : PackedScene = ResourceLoader.load(AcrionDeclarationScene)
-		var act : ActionDeclarationUI = declaration.instantiate()
-		add_child(act)
-		act.DoActionDeclaration("Player Perform Phase", 1.5)
-		act.ActionDeclarationFinished.connect(StartCurrentShipsPickTurn)
+		Declaration("Player Perform Phase", 1.5).ActionDeclarationFinished.connect(StartCurrentShipsPickTurn)
 	else:
 		StartCurrentShipsPickTurn()
 ##----------------------------------------------------------------------##
@@ -943,12 +939,8 @@ func StartActionPerform() -> void:
 	ClearCards()
 	ExternalUI.HideInfo()
 	CurrentPhase = CardFightPhase.ACTION_PERFORM
-	var declaration : PackedScene = ResourceLoader.load(AcrionDeclarationScene)
-	var act : ActionDeclarationUI = declaration.instantiate()
-	add_child(act)
-	act.DoActionDeclaration("Enemy Perform Phase", 1.5)
-	act.ActionDeclarationFinished.connect(ActionPerformPhase)
-	
+	Declaration("Enemy Perform Phase", 1.5).ActionDeclarationFinished.connect(ActionPerformPhase)
+
 ##----------------------------------------------------------------------##
 func ActionPerformPhase() -> void:
 	ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ENEMY_ACTION_PERFORM)
@@ -2147,13 +2139,17 @@ func PlaceCardInEnemyHand(Performer : BattleShipStats, C : CardStats) -> bool:
 
 ##----------------------------------------------------------------------##
 func InitRandomFight(ShipAmm : int) -> void:
-	if (EnemyReserves.size() == 0):
-		for g in ShipAmm:
-			EnemyReserves.append(load(GetRandomCaptain(true)).GetBattleStats())
 	if (PlayerReserves.size() == 0):
 		for g in ShipAmm:
-			PlayerReserves.append(load(GetRandomCaptain(false)).GetBattleStats())
-			
+			var battleStats : BattleShipStats = load(GetRandomCaptain(false)).GetBattleStats()
+			battleStats.Friendly = true
+			PlayerReserves.append(battleStats)
+	if (EnemyReserves.size() == 0):
+		for g in ShipAmm:
+			var battleStats : BattleShipStats = load(GetRandomCaptain(true)).GetBattleStats()
+			battleStats.Friendly = false
+			EnemyReserves.append(battleStats)
+
 ##----------------------------------------------------------------------##
 func GetRandomCaptain(IsEnemy : bool) -> String:
 	var Cpts

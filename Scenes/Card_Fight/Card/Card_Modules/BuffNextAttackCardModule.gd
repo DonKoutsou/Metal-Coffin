@@ -11,10 +11,10 @@ func NeedsTargetSelect() -> bool:
 
 func GetDesc(Tier : int, _targetOverride : String = "") -> String:
 	if (AOE):
-		return "[[CT_BUFFTS]] [[CT_NEXT]] [color=#ffc315]{1} CT_ATTACKS[/color] [[CT_BY]] [color=#f35033]* {0}[/color]".format([GetBuffAmmount(Tier), GetBuffDuration(Tier)])
+		return "[[CT_BUFFTSS]] [[CT_NEXT]] [color=#ffc315]{1} [[CT_ATTACKS]][/color] [[CT_BY]] [color=#f35033]* {0}[/color]".format([GetBuffAmmount(Tier), GetBuffDuration(Tier)])
 	else : if (CanBeUsedOnOther):
-		return "[[CT_BUFFSs]] [[CT_NEXT]] [color=#ffc315]{1} CT_ATTACKS[/color] [[CT_BY]] [color=#f35033]* {0}[/color]".format([GetBuffAmmount(Tier), GetBuffDuration(Tier)])
-	return "[[CT_BUFFSS]] [[CT_NEXT]] [color=#ffc315]{1} CT_ATTACKS[/color] [[CT_BY]] [color=#f35033]* {0}[/color]".format([GetBuffAmmount(Tier), GetBuffDuration(Tier)])
+		return "[[CT_BUFFSS]] [[CT_NEXT]] [color=#ffc315]{1} [[CT_ATTACKS]][/color] [[CT_BY]] [color=#f35033]* {0}[/color]".format([GetBuffAmmount(Tier), GetBuffDuration(Tier)])
+	return "[[CT_BUFFSS]] [[CT_NEXT]] [color=#ffc315]{1} [[CT_ATTACKS]][/color] [[CT_BY]] [color=#f35033]* {0}[/color]".format([GetBuffAmmount(Tier), GetBuffDuration(Tier)])
 
 func GetBuffDuration(Tier : int) -> int:
 	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):

@@ -202,12 +202,6 @@ Equipment = Array[ExtResource("33_ovnka")]([ExtResource("46_ufipr"), ExtResource
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=296015774]
 layout_mode = 2
 
-[node name="Random" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=780708355]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 26
-text = "Pick Random"
-
 [node name="TeamComp" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=2019789918]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -226,11 +220,17 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
 text = "Start Fight"
 
+[node name="Random" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=780708355]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+text = "Pick Random"
+
 [connection signal="mouse_entered" from="PanelContainer/VBoxContainer/TeamCompSetup/VBoxContainer/PlayerTeam" to="." method="_on_player_team_mouse_entered"]
 [connection signal="mouse_exited" from="PanelContainer/VBoxContainer/TeamCompSetup/VBoxContainer/PlayerTeam" to="." method="_on_player_team_mouse_exited"]
 [connection signal="mouse_entered" from="PanelContainer/VBoxContainer/TeamCompSetup/VBoxContainer/EnemyTeam" to="." method="_on_enemy_team_mouse_entered"]
 [connection signal="mouse_exited" from="PanelContainer/VBoxContainer/TeamCompSetup/VBoxContainer/EnemyTeam" to="." method="_on_enemy_team_mouse_exited"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Random" to="." method="_on_random_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/TeamComp" to="." method="_on_team_comp_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/PickItems" to="." method="_on_pick_items_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Ready" to="." method="_on_ready_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Random" to="." method="_on_random_pressed"]

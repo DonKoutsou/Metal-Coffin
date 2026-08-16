@@ -19,9 +19,18 @@ var CharacterStats : Dictionary[DispositionManager.Dispositions, float] = {
 @export var DispositionColors : PackedColorArray = []
 
 func SetStats(ch : Captain) -> void:
-	CharacterStats = ch.disp
+	if (Engine.is_editor_hint()):
+		GetCharacterEditorDisp(ch)
+	else:
+		CharacterStats = ch.disp
 	queue_redraw()
-	
+
+func GetCharacterEditorDisp(ch : Captain) -> void:
+	for g in CharacterStats:
+		CharacterStats[g] = 0
+	for g in ch.StartingItems:
+		if (g is ShipPart):
+			CharacterStats[g.disp] += g.DispositionAmm
 	
 func _ready() -> void:
 	for g in DispositionManager.Dispositions:

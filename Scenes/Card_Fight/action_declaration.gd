@@ -4,7 +4,7 @@ class_name ActionDeclarationUI
 
 @export var UIInSound : AudioStream
 @export var UIOutSound : AudioStream
-
+@export var Lab : Label
 signal ActionDeclarationFinished
 
 func _ready() -> void:
@@ -28,7 +28,7 @@ func DoActionDeclaration(ActionName : String, CustomTime : float = 2) -> void:
 	Tw.finished.connect(ActionDeclarationStage1.bind(CustomTime))
 
 func ActionDeclarationStage1(CustomTime : float) -> void:
-	get_child(0).visible = true
+	Lab.visible_ratio = 1.0
 	
 	var Tw2 = create_tween()
 	Tw2.set_ease(Tween.EASE_OUT)
@@ -47,7 +47,7 @@ func ActionDeclarationStage3(CustomTime : float) -> void:
 	Tw3.finished.connect(ActionDeclarationStage4.bind(CustomTime))
 	
 func ActionDeclarationStage4(CustomTime : float) -> void:
-	get_child(0).visible = false
+	Lab.visible_ratio = 0
 	
 	var Tw4 = create_tween()
 	Tw4.set_ease(Tween.EASE_IN)

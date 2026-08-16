@@ -60,6 +60,7 @@ shadow_size = 8
 anti_aliasing_size = 2.0
 
 [node name="Card" type="Control" unique_id=1687597269 node_paths=PackedStringArray("CardName", "CardDesc", "CardCost", "CardTex", "But", "CardTypeEmblem", "FrontSide", "BackSide", "Line", "AmmountLabel", "TooltipPos") groups=["Card"]]
+texture_filter = 3
 custom_minimum_size = Vector2(160, 220)
 layout_mode = 3
 anchors_preset = 8
@@ -120,7 +121,7 @@ transparent_bg = true
 handle_input_locally = false
 scaling_3d_mode = 5
 canvas_item_default_texture_filter = 4
-size = Vector2i(287, 395)
+size = Vector2i(409, 563)
 size_2d_override = Vector2i(186, 256)
 size_2d_override_stretch = true
 render_target_update_mode = 1
