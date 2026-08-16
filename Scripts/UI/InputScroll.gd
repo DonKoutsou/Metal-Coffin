@@ -1,3 +1,4 @@
+@tool
 extends ScrollContainer
 
 class_name InputScroll

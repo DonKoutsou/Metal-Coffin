@@ -1,3 +1,4 @@
+@tool
 extends VBoxContainer
 
 class_name CharacterInventoryInterface
@@ -46,6 +47,19 @@ func InitialiseInventory(cpt : Captain) -> void:
 
 
 func InitStartingInventory(Cha : Captain) -> void:
+	for g in InventoryBoxParent.get_children():
+		g.queue_free()
+	for g in EngineInventoryBoxParent.get_children():
+		g.queue_free()
+	for g in SensorInventoryBoxParent.get_children():
+		g.queue_free()
+	for g in FuelTankInventoryBoxParent.get_children():
+		g.queue_free()
+	for g in ShieldInventoryBoxParent.get_children():
+		g.queue_free()
+	for g in WeaponInventoryBoxParent.get_children():
+		g.queue_free()
+		
 	var CharInvSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.INVENTORY_SPACE)
 	var CharEngineSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.ENGINES_SLOTS)
 	var CharSensorSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.SENSOR_SLOTS)

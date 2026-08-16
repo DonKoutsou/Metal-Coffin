@@ -28,6 +28,8 @@ func _ready() -> void:
 		Enable()
 
 func _exit_tree() -> void:
+	if (Engine.is_editor_hint()):
+		return
 	UISoundMan.GetInstance().RemoveSelf(Butto)
 
 func UpdateAmm(newAmm : int) -> void:

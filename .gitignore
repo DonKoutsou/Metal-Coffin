@@ -43,12 +43,11 @@
 .godot/editor/map_spot.tscn-editstate-86f0460dced1c305e2f364d8c6e81077.cfg
 
 *.cfg
-/addons/imgui-godot
 /.godot/exported
 /.godot/editor
 /android/build/.gradle
 /android/build
 /.godot/editor
-/addons
+/addons/godotsteam
 /data_test_linuxbsd_x86_64
 /.idea

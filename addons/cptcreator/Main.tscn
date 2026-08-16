@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://d0ie3g0lfeiie"]
+
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_cj4kj"]
+
+[node name="PanelContainer" type="PanelContainer" unique_id=2109229134]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_cj4kj")
