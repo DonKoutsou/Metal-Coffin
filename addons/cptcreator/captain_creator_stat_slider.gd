@@ -1,45 +1,34 @@
 @tool
-extends VBoxContainer
+extends ShipStatContainer
 
 class_name CapCrStatSlider
 
-signal StatChanged
+@export var slider : HSlider
 
-var CurrentStat : ShipStat
+signal StatChanged
 
 var ItemAddedStat : float = 0
 var ItemPenaltyStat : float = 0
 
-func _SetData(Stat : ShipStat) -> void:
-	#$ShipStatContainer/HBoxContainer/Label.theme_override_font_sizes/font_size = 2
-	CurrentStat = Stat
-	#$Label.text = STAT_CONST.STATS.keys()[Stat.StatName]
-	#$HBoxContainer/Label.text = var_to_str(Stat.GetFinalValue()).replace(".0", "")
+func SetData(Stat : STAT_CONST.STATS) -> void:
+	super(Stat)
+
 	$HSlider.min_value = 0
-	var MaxV = STAT_CONST.GetStatMaxValue(Stat.StatName)
+	var MaxV = STAT_CONST.GetStatMaxValue(STName)
 	if (MaxV >= 1000):
 		$HSlider.step = 10
 	$HSlider.max_value = MaxV
-	$HSlider.value = Stat.GetFinalValue()
-	$ShipStatContainer.SetData(Stat.StatName)
-	$ShipStatContainer.UpdateStatValue(Stat.GetBaseValue(), ItemAddedStat, ItemPenaltyStat)
+	
 
-func ResetItemStat() -> void:
-	ItemAddedStat = 0
-	ItemPenaltyStat = 0
-	$ShipStatContainer.UpdateStatValue(CurrentStat.GetBaseValue(), ItemAddedStat, ItemPenaltyStat)
+#used for "custom" stats that are pseudo stat, created from the combination of others, like speed and range
+func SetDataCustom(MaxValue : float, StatMetric : String, StatName : String, Stat : STAT_CONST.STATS) -> void:
+	super(MaxValue, StatMetric, StatName, Stat)
 	
-func AddToItemStat(Amm : float, PenaltyAmm : float) -> void:
-	ItemAddedStat += Amm
-	ItemPenaltyStat += PenaltyAmm
-	#CurrentStat.StatBase = ItemAddedStat
-	$ShipStatContainer.UpdateStatValue(CurrentStat.GetBaseValue(), ItemAddedStat, ItemPenaltyStat)
-	
+	slider.max_value = MaxValue
+
+func UpdateStatValue(StatVal : float, ItemVar : float, ItemPenalty : float) -> void:
+	super(StatVal, ItemVar, ItemPenalty)
+	$HSlider.value = StatVal
+
 func _on_h_slider_value_changed(value: float) -> void:
-	#$HBoxContainer/Label.text = var_to_str(value).replace(".0", "")
-	CurrentStat.StatBase = value
-	$ShipStatContainer.UpdateStatValue(CurrentStat.GetBaseValue(), ItemAddedStat, ItemPenaltyStat)
-	StatChanged.emit()
-
-func GetStatValue() -> float:
-	return CurrentStat.GetBaseValue() + ItemAddedStat - ItemPenaltyStat
+	StatChanged.emit(STName, value)

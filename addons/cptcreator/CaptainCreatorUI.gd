@@ -10,13 +10,11 @@ var CurrentlySelectedCap : Captain
 @export var ItemBoxScene : PackedScene
 @export_group("Captain Info Nodes")
 @export var CaptainName : TextEdit
-@export var CaptainProtrait : TextureRect
 @export var ShipIcon : TextureRect
-@export var RangeLabel : Label
-@export var StatParent : Control
 @export var ItemText : RichTextLabel
 @export var AddItemMenu : PopupMenu
 @export var Inventory : CharacterInventoryInterface
+@export var Stats : CPT_CR_InventoryShipStats
 
 
 var ShowItemStats = true
@@ -82,21 +80,16 @@ func RefrshExistingItems() -> void:
 func _exit_tree() -> void:
 	Captains.clear()
 	Items.clear()
-	for g in StatParent.get_children():
-		g.free()
 
 
 func SetCaptain(C : Captain) -> void:
 	
 	CurrentlySelectedCap = C
 	CaptainName.text = C.GetCaptainName()
-	CaptainProtrait.texture = C.CaptainPortrait
 	ShipIcon.texture = C.ShipIcon
-	$VBoxContainer/PanelContainer5/VBoxContainer/StartingFunds.value = C.ProvidingFunds
-	print(C.ProvidingFunds)
 	
-	for g in StatParent.get_children():
-		g.free()
+	print(C.ProvidingFunds)
+
 	
 	for g in STAT_CONST.STATS.values().size():
 		var HasStat = false
@@ -108,16 +101,7 @@ func SetCaptain(C : Captain) -> void:
 			var NewStat = ShipStat.new()
 			NewStat.StatName = g
 			C.CaptainStats.append(NewStat)
-			
-	for g in C.CaptainStats:
-		var newStatUI = StatScene.instantiate() as CapCrStatSlider
-		newStatUI._SetData(g)
-		newStatUI.StatChanged.connect(SaveCurrentCap)
-		if (g.StatName == STAT_CONST.STATS.INVENTORY_SPACE or g.StatName == STAT_CONST.STATS.ENGINES_SLOTS or g.StatName == STAT_CONST.STATS.SENSOR_SLOTS or g.StatName == STAT_CONST.STATS.FUEL_TANK_SLOTS or g.StatName == STAT_CONST.STATS.SHIELD_SLOTS or g.StatName == STAT_CONST.STATS.WEAPON_SLOTS):
-			newStatUI.StatChanged.connect(InventorySizeChanged)
-		newStatUI.StatChanged.connect(UpdateInventoryBoxes)
-		StatParent.add_child(newStatUI)
-		
+	
 	UpdateInventoryBoxes()
 	SaveCurrentCap()
 	
@@ -138,8 +122,27 @@ func UpdateInventoryBoxes() -> void:
 	var newInventory = CharacterInventory.newInv(CurrentlySelectedCap)
 	CurrentlySelectedCap.RegisterInventory(newInventory)
 	Inventory.InitialiseInventory(CurrentlySelectedCap)
-	
+	Stats.SetCaptainEditor(CurrentlySelectedCap, ShowItemStats)
 	SelectedBox = null
+
+func GetShipMaxSpeed() -> float:
+	var Spd = (CurrentlySelectedCap.GetStatFinalValue(STAT_CONST.STATS.THRUST) * 1000) / CurrentlySelectedCap.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
+
+	return Spd
+
+func GetFuelRange() -> float:
+	var Weight = CurrentlySelectedCap.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
+	var fuelStats = CurrentlySelectedCap.GetFuelStats()
+	
+	var fuel = fuelStats["FUEL"]
+	var fuel_ef = fuelStats["F_EFF"]
+	var fleetsize = 1
+	var total_fuel = fuel
+	var inverse_ef_sum = 1.0 / ((fuel_ef / pow(Weight, 0.5)) * 10)
+
+	var effective_efficiency = fleetsize / inverse_ef_sum
+	# Calculate average efficiency for the group
+	return total_fuel * effective_efficiency / fleetsize
 	
 var SelectedBox : Inventory_Box_Res
 
@@ -225,11 +228,7 @@ func _on_cap_name_text_changed() -> void:
 
 			
 func FindSliderWithStat(St : STAT_CONST.STATS) -> CapCrStatSlider:
-	for g in StatParent.get_children():
-		var sl = g as CapCrStatSlider
-		if (sl.CurrentStat.StatName == St):
-			print("Fount slider for stat" + STAT_CONST.STATS.keys()[St])
-			return g
+
 	return null
 	
 func _on_change_pic_pressed() -> void:
@@ -246,7 +245,6 @@ func _on_change_pic_pressed() -> void:
 func NewPicSelected(NewPic) -> void:
 	CurrentlySelectedCap.CaptainPortrait = load(NewPic)
 	SaveCurrentCap()
-	CaptainProtrait.texture = CurrentlySelectedCap.CaptainPortrait
 
 
 func _on_change_ship_icon_pressed() -> void:
@@ -274,3 +272,11 @@ func _on_starting_funds_value_changed(value: float) -> void:
 	CurrentlySelectedCap.ProvidingFunds = value
 	SaveCurrentCap()
 	print("StartingFundsUpdated " + var_to_str(value))
+
+
+func _on_inventory_ship_stats_stat_changed(stat : STAT_CONST.STATS, value : float) -> void:
+	if (stat == STAT_CONST.STATS.VALUE):
+		CurrentlySelectedCap.ProvidingFunds = value
+	else:
+		CurrentlySelectedCap._GetStat(stat).StatBase = value
+	UpdateInventoryBoxes()

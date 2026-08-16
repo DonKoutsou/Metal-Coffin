@@ -9,7 +9,6 @@
 
 [sub_resource type="Resource" id="Resource_jvup1"]
 script = ExtResource("2_5r51y")
-StatBase = 2.0
 
 [sub_resource type="Resource" id="Resource_bf8ot"]
 script = ExtResource("2_5r51y")
@@ -108,11 +107,31 @@ StatName = 16
 script = ExtResource("2_5r51y")
 StatName = 17
 
+[sub_resource type="Resource" id="Resource_c6cgs"]
+script = ExtResource("2_5r51y")
+StatName = 18
+
+[sub_resource type="Resource" id="Resource_8rqhj"]
+script = ExtResource("2_5r51y")
+StatName = 19
+
+[sub_resource type="Resource" id="Resource_bo173"]
+script = ExtResource("2_5r51y")
+StatName = 20
+
+[sub_resource type="Resource" id="Resource_hpmlm"]
+script = ExtResource("2_5r51y")
+StatName = 21
+
+[sub_resource type="Resource" id="Resource_w03t5"]
+script = ExtResource("2_5r51y")
+StatName = 22
+
 [resource]
 resource_local_to_scene = true
 script = ExtResource("4_b2ula")
 CaptainName = "Grunt"
 CaptainPortrait = ExtResource("1_rer20")
 ShipIcon = ExtResource("3_ln4rf")
-CaptainStats = Array[ExtResource("2_5r51y")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_mcdo0"), SubResource("Resource_yl52l"), SubResource("Resource_7g4dd"), SubResource("Resource_4p6v8"), SubResource("Resource_66526"), SubResource("Resource_h3q7u"), SubResource("Resource_hg1bf"), SubResource("Resource_62pqv"), SubResource("Resource_njxg2"), SubResource("Resource_2igpr"), SubResource("Resource_ox4id"), SubResource("Resource_hl4y2"), SubResource("Resource_1abhi"), SubResource("Resource_14la3"), SubResource("Resource_y6u8d"), SubResource("Resource_hkump"), SubResource("Resource_t7jp6"), SubResource("Resource_ebwde"), SubResource("Resource_lk4qj"), SubResource("Resource_gdj07"), SubResource("Resource_253vf"), SubResource("Resource_22qwx"), SubResource("Resource_oglrj")])
+CaptainStats = Array[ExtResource("2_5r51y")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_mcdo0"), SubResource("Resource_yl52l"), SubResource("Resource_7g4dd"), SubResource("Resource_4p6v8"), SubResource("Resource_66526"), SubResource("Resource_h3q7u"), SubResource("Resource_hg1bf"), SubResource("Resource_62pqv"), SubResource("Resource_njxg2"), SubResource("Resource_2igpr"), SubResource("Resource_ox4id"), SubResource("Resource_hl4y2"), SubResource("Resource_1abhi"), SubResource("Resource_14la3"), SubResource("Resource_y6u8d"), SubResource("Resource_hkump"), SubResource("Resource_t7jp6"), SubResource("Resource_ebwde"), SubResource("Resource_lk4qj"), SubResource("Resource_gdj07"), SubResource("Resource_253vf"), SubResource("Resource_22qwx"), SubResource("Resource_oglrj"), SubResource("Resource_c6cgs"), SubResource("Resource_8rqhj"), SubResource("Resource_bo173"), SubResource("Resource_hpmlm"), SubResource("Resource_w03t5")])
 ShipCallsign = "T"

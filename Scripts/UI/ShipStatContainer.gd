@@ -94,6 +94,8 @@ func UpdateStatValue(StatVal : float, ItemVar : float, ItemPenalty : float) -> v
 	ItemNegativeBar.value = StatVal + ItemVar - ItemPenalty
 
 func _on_mouse_entered() -> void:
+	if (Engine.is_editor_hint()):
+		return
 	var tipscene : PackedScene = ResourceLoader.load(Tooltipscene)
 	Tooltip = tipscene.instantiate()
 	
@@ -106,5 +108,11 @@ func _on_mouse_entered() -> void:
 	set_process(true)
 
 func _on_mouse_exited() -> void:
+	if (Engine.is_editor_hint()):
+		return
 	Tooltip.queue_free()
 	set_process(false)
+
+
+func _on_h_slider_value_changed(value: float) -> void:
+	pass # Replace with function body.

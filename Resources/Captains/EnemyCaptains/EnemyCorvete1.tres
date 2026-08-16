@@ -106,13 +106,33 @@ StatName = 16
 script = ExtResource("2_3y7uy")
 StatName = 17
 
+[sub_resource type="Resource" id="Resource_m68jj"]
+script = ExtResource("2_3y7uy")
+StatName = 18
+
+[sub_resource type="Resource" id="Resource_l55jq"]
+script = ExtResource("2_3y7uy")
+StatName = 19
+
+[sub_resource type="Resource" id="Resource_gpdrm"]
+script = ExtResource("2_3y7uy")
+StatName = 20
+
+[sub_resource type="Resource" id="Resource_mhp50"]
+script = ExtResource("2_3y7uy")
+StatName = 21
+
+[sub_resource type="Resource" id="Resource_jjip0"]
+script = ExtResource("2_3y7uy")
+StatName = 22
+
 [resource]
 resource_local_to_scene = true
 script = ExtResource("4_ju6f0")
 CaptainName = "Corvete"
 CaptainPortrait = ExtResource("1_1tohq")
 ShipIcon = ExtResource("5_1tohq")
-CaptainStats = Array[ExtResource("2_3y7uy")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_mcdo0"), SubResource("Resource_yl52l"), SubResource("Resource_7g4dd"), SubResource("Resource_hxdnx"), SubResource("Resource_4p6v8"), SubResource("Resource_66526"), SubResource("Resource_h3q7u"), SubResource("Resource_xmlya"), SubResource("Resource_j0vsk"), SubResource("Resource_mphws"), SubResource("Resource_rjpe7"), SubResource("Resource_mil77"), SubResource("Resource_xx2gh"), SubResource("Resource_bewff"), SubResource("Resource_aqvi6"), SubResource("Resource_kc2xt")])
+CaptainStats = Array[ExtResource("2_3y7uy")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_mcdo0"), SubResource("Resource_yl52l"), SubResource("Resource_7g4dd"), SubResource("Resource_hxdnx"), SubResource("Resource_4p6v8"), SubResource("Resource_66526"), SubResource("Resource_h3q7u"), SubResource("Resource_xmlya"), SubResource("Resource_j0vsk"), SubResource("Resource_mphws"), SubResource("Resource_rjpe7"), SubResource("Resource_mil77"), SubResource("Resource_xx2gh"), SubResource("Resource_bewff"), SubResource("Resource_aqvi6"), SubResource("Resource_kc2xt"), SubResource("Resource_m68jj"), SubResource("Resource_l55jq"), SubResource("Resource_gpdrm"), SubResource("Resource_mhp50"), SubResource("Resource_jjip0")])
 ShipCallsign = "C1"
 StartingItems = Array[ExtResource("6_xadym")]([ExtResource("8_tcu60"), ExtResource("9_3wfcb"), ExtResource("10_j1x3n"), ExtResource("10_j1x3n"), ExtResource("11_3u7qw"), ExtResource("11_3u7qw"), ExtResource("12_plef7"), ExtResource("12_plef7"), ExtResource("12_plef7"), ExtResource("13_7x4wy"), ExtResource("13_kiru2"), ExtResource("14_7ps1d"), ExtResource("15_kc2xt"), ExtResource("9_3wfcb"), ExtResource("13_kiru2")])
 ProvidingFunds = 25000
