@@ -7,6 +7,7 @@ class_name TownScene
 @export var PortName : Label
 @export var Population : Label
 @export var PortBuffText : RichTextLabel
+@export var PlWallet : Wallet
 @export_group("Buttons")
 @export var MerchendiseButton : Button
 @export var MerchendiseButton2 : Button
@@ -28,6 +29,7 @@ class_name TownScene
 @export var FuelStorageScene : PackedScene
 @export var RepairStationScene : PackedScene
 @export var WorkshopScene : PackedScene
+@export var TavernScene : PackedScene
 @export var RecruitShopScene : PackedScene
 @export var MinigameScene : PackedScene
 
@@ -105,13 +107,22 @@ func FuelExchangeFinished(Fuel : float) -> void:
 	BoughtFuel = Fuel
 
 func On_Recruit_Pressed() -> void:
-	#var miniGame = MinigameScene.instantiate() as MissileCommandMain
-	#add_child(miniGame)
-	
+	var tavern = TavernScene.instantiate() as Tavern
+	add_child(tavern)
+	tavern.Arcade.connect(OpenArcade)
+	tavern.RecShop.connect(OpenRecruitShop)
+
+func OpenRecruitShop() -> void:
 	var RShop = RecruitShopScene.instantiate() as RecruitShop
 	add_child(RShop)
 	RShop.Init(TownSpot.Recruits)
 	RShop.OnCaptainBought.connect(OnShipBought)
+
+func OpenArcade() -> void:
+	PlWallet.AddFunds(-1)
+	Map.GetInstance().GetScreenUi().TownUi.DropCoins(1)
+	var miniGame = MinigameScene.instantiate() as MissileCommandMain
+	add_child(miniGame)
 
 func OnUpgradeShopPressed() -> void:
 	var WShop = WorkshopScene.instantiate() as WorkShop

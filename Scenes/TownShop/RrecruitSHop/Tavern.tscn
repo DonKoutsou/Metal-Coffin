@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://cdocsye77jsgy"]
+
+[ext_resource type="Texture2D" uid="uid://dy0i72dpxefsl" path="res://Assets/PaperBg.png" id="1_8j1e7"]
+[ext_resource type="Script" uid="uid://jy3w88tv28yt" path="res://Scenes/TownShop/RrecruitSHop/tavern.gd" id="1_ike48"]
+
+[node name="Control" type="Control" unique_id=858826103]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ike48")
+
+[node name="PanelContainer" type="TextureRect" parent="." unique_id=881014614]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_8j1e7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1939233060]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 499.0
+offset_right = -499.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 98
+alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=1724822960]
+layout_mode = 2
+text = "CHECK FOR RECRUITS"
+
+[node name="Button2" type="Button" parent="VBoxContainer" unique_id=1495083106]
+layout_mode = 2
+text = "PLAY THE ARCADE
+COST : 1 ₯"
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_button_2_pressed"]

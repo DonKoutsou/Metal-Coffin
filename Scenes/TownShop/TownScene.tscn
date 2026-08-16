@@ -2,8 +2,10 @@
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_ca22g"]
 [ext_resource type="Script" uid="uid://bagv52808c2n2" path="res://Scenes/TownShop/town_scene.gd" id="2_epy1b"]
+[ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="3_t244x"]
 [ext_resource type="PackedScene" uid="uid://d3irrnfaw10g4" path="res://Scenes/TownShop/RepairStation.tscn" id="5_otyss"]
 [ext_resource type="PackedScene" uid="uid://bhcsc4won0txa" path="res://Scenes/TownShop/RrecruitSHop/RecruitShop.tscn" id="7_3xe8e"]
+[ext_resource type="PackedScene" uid="uid://cdocsye77jsgy" path="res://Scenes/TownShop/RrecruitSHop/Tavern.tscn" id="7_box5h"]
 [ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="8_2uwot"]
 [ext_resource type="PackedScene" uid="uid://b3igywymiutks" path="res://Minigames/MissileCommand/MissileCommandMain.tscn" id="8_plrk5"]
 [ext_resource type="Texture2D" uid="uid://d1yk65ppopgv7" path="res://Assets/Items/Fuel.png" id="11_7xkt0"]
@@ -42,6 +44,7 @@ script = ExtResource("2_epy1b")
 PortName = NodePath("HBoxContainer2/HBoxContainer/PanelContainer2/HBoxContainer/CityName")
 Population = NodePath("HBoxContainer2/HBoxContainer/PanelContainer2/HBoxContainer/CityName2")
 PortBuffText = NodePath("HBoxContainer2/HBoxContainer/PanelContainer2/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/CityBuffs")
+PlWallet = ExtResource("3_t244x")
 MerchendiseButton = NodePath("Button2")
 MerchendiseButton2 = NodePath("PanelContainer/VBoxContainer2/VBoxContainer/Merch")
 WorkshopButton = NodePath("Button3")
@@ -56,6 +59,7 @@ MerchShopScene = ExtResource("17_vaeb3")
 FuelStorageScene = ExtResource("18_u4st4")
 RepairStationScene = ExtResource("5_otyss")
 WorkshopScene = ExtResource("17_t244x")
+TavernScene = ExtResource("7_box5h")
 RecruitShopScene = ExtResource("7_3xe8e")
 MinigameScene = ExtResource("8_plrk5")
 
@@ -72,7 +76,7 @@ stretch = true
 disable_3d = true
 world_3d = SubResource("World3D_oyy4e")
 handle_input_locally = false
-size = Vector2i(1587, 893)
+size = Vector2i(1746, 982)
 size_2d_override = Vector2i(1280, 720)
 size_2d_override_stretch = true
 render_target_update_mode = 4
@@ -298,7 +302,7 @@ size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_fonts/bold_font = ExtResource("8_2uwot")
 bbcode_enabled = true
-text = "[p][img={32}x{32}]res://Assets/Items/Fuel.png[/img] REFUEL TIME/COST -[p]"
+text = "[p][img={32}x{32}]res://Assets/Items/Fuel.png[/img] REFUEL TIME/COST -[p]q"
 fit_content = true
 
 [node name="Button" type="Button" parent="HBoxContainer2" unique_id=1443515357 groups=["DigitalButtons"]]

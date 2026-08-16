@@ -18,6 +18,7 @@ func _ready() -> void:
 	SpawnMenu()
 
 func SpawnMenu() -> void:
+	
 	Menu = MainMenuScene.instantiate()
 	$SubViewportContainer/SubViewport.add_child(Menu)
 	Menu.ExitPressed.connect(ExitPressed)

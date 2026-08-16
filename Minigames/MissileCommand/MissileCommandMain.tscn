@@ -30,6 +30,6 @@ handle_input_locally = false
 canvas_item_default_texture_filter = 0
 audio_listener_enable_2d = true
 audio_listener_enable_3d = true
-size = Vector2i(873, 491)
+size = Vector2i(960, 540)
 size_2d_override = Vector2i(640, 360)
 size_2d_override_stretch = true
