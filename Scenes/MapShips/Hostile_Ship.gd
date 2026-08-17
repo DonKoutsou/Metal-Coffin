@@ -153,7 +153,7 @@ func _Update(delta: float) -> void:
 			Cpt.RefillResource(STAT_CONST.STATS.MISSILE_SPACE ,0.005 * SimulationSpeed)
 			
 	else: if (BTree != null):
-		BTree.Process_Tree()
+		BTree.tick()
 		
 
 func DoAlarmVisual() -> void:

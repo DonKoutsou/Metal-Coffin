@@ -62,7 +62,7 @@ func Update(delta: float) -> void:
 	
 	ProcessLODList()
 	
-	$BeehaveTree.Process_Tree()
+	$BeehaveTree.tick()
 	for g in Fleet:
 		if (!g.Lodded):
 			if (g.currentLOD == 0):

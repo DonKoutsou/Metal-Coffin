@@ -1,7 +1,7 @@
 @tool
 extends GraphEdit
 
-const BeehaveGraphNode := preload("graph_node.gd")
+const BeehaveGraphNode := preload("old_graph_node.gd")
 
 const HORIZONTAL_LAYOUT_ICON := preload("icons/horizontal_layout.svg")
 const VERTICAL_LAYOUT_ICON := preload("icons/vertical_layout.svg")
@@ -10,7 +10,6 @@ const PROGRESS_SHIFT: int = 50
 const INACTIVE_COLOR: Color = Color("#898989aa")
 const ACTIVE_COLOR: Color = Color("#ffcc00c8")
 const SUCCESS_COLOR: Color = Color("#009944c8")
-
 
 var updating_graph: bool = false
 var arraging_nodes: bool = false
@@ -32,24 +31,19 @@ var horizontal_layout: bool = false:
 		_update_layout_button()
 		_update_graph()
 
-
-var frames:RefCounted
+var frames: RefCounted
 var active_nodes: Array[String]
 var progress: int = 0
 var layout_button: Button
 
 
-func _init(frames:RefCounted) -> void:
+func _init(frames: RefCounted) -> void:
 	self.frames = frames
 
 
 func _ready() -> void:
 	custom_minimum_size = Vector2(100, 300)
-	# Godot 4.2+
-	if "show_arrange_button" in self:
-		set("show_arrange_button", true)
-	else:
-		set("arrange_nodes_button_hidden", true)
+	set("arrange_nodes_button_hidden", true)
 	minimap_enabled = false
 	layout_button = Button.new()
 	layout_button.flat = true
@@ -143,12 +137,7 @@ func _get_icon(type: StringName) -> Texture2D:
 
 
 func get_menu_container() -> Control:
-	# Godot 4.0+
-	if has_method("get_zoom_hbox"):
-		return call("get_zoom_hbox")
-
-	# Godot 4.2+
-	return call("get_menu_hbox")
+	return call("get_zoom_hbox")
 
 
 func get_status(status: int) -> String:
@@ -173,7 +162,7 @@ func process_tick(instance_id: int, status: int) -> void:
 		node.text = "Status: %s" % get_status(status)
 		node.set_status(status)
 		node.set_meta("status", status)
-		if status == 0 or status == 2:
+		if status == BeehaveNode.SUCCESS or status == BeehaveNode.RUNNING:
 			if not active_nodes.has(node.name):
 				active_nodes.push_back(node.name)
 
@@ -185,13 +174,13 @@ func process_end(instance_id: int) -> void:
 	for child in _get_child_nodes():
 		var status := child.get_meta("status", -1)
 		match status:
-			0:
+			BeehaveNode.SUCCESS:
 				active_nodes.erase(child.name)
 				child.set_color(SUCCESS_COLOR)
-			1:
+			BeehaveNode.FAILURE:
 				active_nodes.erase(child.name)
 				child.set_color(INACTIVE_COLOR)
-			2:
+			BeehaveNode.RUNNING:
 				child.set_color(ACTIVE_COLOR)
 			_:
 				child.text = " "
@@ -248,14 +237,8 @@ func _draw() -> void:
 		var from_node: StringName
 		var to_node: StringName
 
-		# Godot 4.0+
-		if c.has("from"):
-			from_node = c.from
-			to_node = c.to
-		# Godot 4.2+
-		else:
-			from_node = c.from_node
-			to_node = c.to_node
+		from_node = c.from
+		to_node = c.to
 
 		if not from_node in active_nodes or not c.to_node in active_nodes:
 			continue
@@ -269,14 +252,10 @@ func _draw() -> void:
 		var output_port_position: Vector2
 		var input_port_position: Vector2
 
-		# Godot 4.0+
-		if from.has_method("get_connection_output_position"):
-			output_port_position = from.position + from.call("get_connection_output_position", c.from_port)
-			input_port_position = to.position + to.call("get_connection_input_position", c.to_port)
-		# Godot 4.2+
-		else:
-			output_port_position = from.position + from.call("get_output_port_position", c.from_port)
-			input_port_position = to.position + to.call("get_input_port_position", c.to_port)
+		output_port_position = (
+			from.position + from.call("get_connection_output_position", c.from_port)
+		)
+		input_port_position = to.position + to.call("get_connection_input_position", c.to_port)
 
 		var line := _get_connection_line(output_port_position, input_port_position)
 
@@ -302,4 +281,6 @@ func _draw() -> void:
 
 func _update_layout_button() -> void:
 	layout_button.icon = VERTICAL_LAYOUT_ICON if horizontal_layout else HORIZONTAL_LAYOUT_ICON
-	layout_button.tooltip_text = "Switch to Vertical layout" if horizontal_layout else "Switch to Horizontal layout"
+	layout_button.tooltip_text = (
+		"Switch to Vertical layout" if horizontal_layout else "Switch to Horizontal layout"
+	)

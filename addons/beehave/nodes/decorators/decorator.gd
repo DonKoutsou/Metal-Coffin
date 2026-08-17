@@ -1,9 +1,8 @@
+## Decorator nodes are used to transform the result received by its child.
+## Must only have one child.
 @tool
 @icon("../../icons/category_decorator.svg")
 class_name Decorator extends BeehaveNode
-
-## Decorator nodes are used to transform the result received by its child.
-## Must only have one child.
 
 var running_child: BeehaveNode = null
 
@@ -21,6 +20,7 @@ func interrupt(actor: Node, blackboard: Blackboard) -> void:
 	if running_child != null:
 		running_child.interrupt(actor, blackboard)
 		running_child = null
+	super.interrupt(actor, blackboard)
 
 
 func after_run(actor: Node, blackboard: Blackboard) -> void:

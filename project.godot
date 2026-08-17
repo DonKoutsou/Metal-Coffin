@@ -28,8 +28,6 @@ buses/default_bus_layout="uid://c3nyxeslcljc8"
 
 [autoload]
 
-BeehaveGlobalMetrics="*uid://c1nosmpvoruc4"
-BeehaveGlobalDebugger="*uid://bixaa4oogkffw"
 MusicMan="*res://Scenes/GlobalManagers/Sound/music_manager.tscn"
 UiSoundManager="*res://Scenes/GlobalManagers/Sound/ui_sound_manager.tscn"
 Help="*res://Scenes/GlobalManagers/Helper/helper.tscn"
@@ -38,6 +36,8 @@ TutorialManager="*res://Scenes/GlobalManagers/Tutorial/tutorial_manager.tscn"
 AchMan="*res://Scenes/GlobalManagers/Tutorial/achievement_manager.gd"
 PopupManager="*res://Scenes/GlobalManagers/PopupManager.tscn"
 DispoisitionManager="*uid://cuad168v6mleh"
+BeehaveGlobalMetrics="*uid://c3ktl6ontsdt7"
+BeehaveGlobalDebugger="*uid://bl3ma400hpvsh"
 
 [display]
 

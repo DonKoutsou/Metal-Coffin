@@ -2,9 +2,10 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccknbx3mjrdiv"
+uid="uid://bmnkcmk7bkdjd"
 path="res://.godot/imported/selector_random.svg-d52fea1352c24483ecd9dc8609cf00f3.ctex"
 metadata={
+"has_editor_variant": true,
 "vram_texture": false
 }
 
@@ -17,7 +18,6 @@ dest_files=["res://.godot/imported/selector_random.svg-d52fea1352c24483ecd9dc860
 
 compress/mode=0
 compress/high_quality=false
-compress/high_quality_mode=0
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
@@ -40,5 +40,5 @@ process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
 svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false
+editor/scale_with_editor_scale=true
+editor/convert_colors_with_editor_theme=true
