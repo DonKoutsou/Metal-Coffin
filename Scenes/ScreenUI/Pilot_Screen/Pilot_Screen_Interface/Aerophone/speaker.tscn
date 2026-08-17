@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://cbg33obslhrhy" path="res://Assets/UIPiecies/Screen/SidePanels/Speaker_FullQuality.png" id="13_xhvq3"]
 [ext_resource type="AudioStream" uid="uid://7crsokjngvxo" path="res://Assets/Sounds/beepNoLoop.mp3" id="14_kxl5j"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="15_3b7e2"]
+[ext_resource type="AudioStream" uid="uid://dnpagykktvaa6" path="res://Assets/Sounds/toggle_003.mp3" id="15_qecpw"]
 
 [node name="Speaker" type="Control" unique_id=9267803 node_paths=PackedStringArray("L") groups=["Shakable"]]
 layout_mode = 3
@@ -37,7 +38,8 @@ SoundList = Dictionary[int, Array]({
 7: [ExtResource("11_cotvj")],
 8: [ExtResource("12_4ylf7")],
 9: [ExtResource("13_mivq8")],
-10: [ExtResource("14_kxl5j")]
+10: [ExtResource("14_kxl5j")],
+11: [ExtResource("15_qecpw")]
 })
 L = NodePath("Light")
 

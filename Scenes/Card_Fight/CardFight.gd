@@ -259,6 +259,18 @@ func CreateDecks() -> void:
 		D.MultiCardDrawn.connect(MultiCardDrawn)
 		D.MultiSpecificDrawn.connect(MultiSpcificCardDrawn)
 
+func FireTicked(Ship : BattleShipStats) -> void:
+	var data : Dictionary = {
+		"actionType" : Card_Passive.ActionType.FIRE_TICK,
+		"Friendly" : GetShipsTeam(Ship),
+		"Enemy" : GetShipEnemyTeam(Ship),
+		"Receiver" : Ship,
+	}
+	var AnimData = PassiveList.OnActionPerformed(data)
+	if (AnimData.size() > 0):
+		for g in AnimData:
+			HandlePassiveModules(g.Performer, g.OriginalCard, g.Targets)
+
 func CardPlayed(Ship : BattleShipStats, C : CardStats) -> void:
 	var data : Dictionary = {
 		"actionType" : Card_Passive.ActionType.CARD_PLAYED,
@@ -579,6 +591,9 @@ func OnCardSelected(C : Card, target : BattleShipStats = null) -> bool:
 		PopUpManager.GetInstance().DoFadeNotif("Shuffling in progress")
 		return false
 	if (!PickingMoves):
+		return false
+	if (PlayerPerformingMove):
+		PopUpManager.GetInstance().DoFadeNotif("Already performing move")
 		return false
 	
 	var Ship = GetCurrentShip()
@@ -993,12 +1008,14 @@ func DoShipFireDamage() -> void:
 			if (GameOver):
 				break
 			
+			FireTicked(Ship)
 			#Wait for damage floaer if not finished
 			if (d != null):
 				await d.Ended
 			
 			#Store this turn's fire damage
 			Ship.TurnsOnFire += 1
+			
 
 	FireDamageFinished()
 ##----------------------------------------------------------------------##
@@ -1775,6 +1792,7 @@ func ShipDestroyed(Ship : BattleShipStats) -> bool:
 		FundsToWin += Ship.Funds
 	
 	var TurnPosition = ShipTurns.find(Ship)
+	var Index = ShipTurns.find(Ship)
 	ShipTurns.erase(Ship)
 	
 	if (Friendly):
@@ -1790,7 +1808,9 @@ func ShipDestroyed(Ship : BattleShipStats) -> bool:
 	GameOver = !EnemiesAlive or !PlayerAlive
 	
 	ReplaceShip(Ship, TurnPosition, Friendly)
-	
+	#if (CurrentTurn > Index):
+		#CurrentTurn -= 1
+		
 	if (GameOver):
 		await Helper.wait(3)
 		call_deferred("OnFightEnded", PlayerAlive)

@@ -35,5 +35,5 @@ ItemName = "Titanium Plates"
 ItemDesc = "WIP"
 CardProviding = Array[ExtResource("1_pwfb6")]([ExtResource("2_44fvt"), ExtResource("2_44fvt"), ExtResource("3_44fvt"), ExtResource("3_44fvt"), ExtResource("4_4chja")])
 CanTransfer = false
-Cost = 50000
+Cost = 25000
 PartType = 5

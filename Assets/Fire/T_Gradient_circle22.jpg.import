@@ -2,29 +2,28 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://da1lirtdr0h7b"
-path="res://.godot/imported/Ship3_001.png-b8bf83eb35122ce5ea4be1869b0cfcc7.ctex"
+uid="uid://bgn0wbojedfhw"
+path="res://.godot/imported/T_Gradient_circle22.jpg-1a68c1f44bebe3bcdf48ad33b4161071.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/ShipTextures/Ship3_001.png"
-dest_files=["res://.godot/imported/Ship3_001.png-b8bf83eb35122ce5ea4be1869b0cfcc7.ctex"]
+source_file="res://Assets/Fire/T_Gradient_circle22.jpg"
+dest_files=["res://.godot/imported/T_Gradient_circle22.jpg-1a68c1f44bebe3bcdf48ad33b4161071.ctex"]
 
 [params]
 
 compress/mode=0
-compress/high_quality=true
-compress/high_quality_mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -37,5 +36,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=0
+process/size_limit=64
 detect_3d/compress_to=1

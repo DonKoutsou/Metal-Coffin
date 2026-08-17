@@ -36,5 +36,5 @@ ItemName = "SPT-100"
 ItemDesc = "A light weight fuel tank with reduced size. Constructed from lightweight materials for reliability in combat operations. Finds its uses in smaller and more adgile ships."
 CardProviding = Array[ExtResource("1_5kv6q")]([ExtResource("2_vlra8"), ExtResource("2_vlra8"), ExtResource("2_vlra8"), ExtResource("3_ry7j3"), ExtResource("3_ry7j3"), ExtResource("4_udr7u"), ExtResource("5_udr7u")])
 CanTransfer = false
-Cost = 25000
+Cost = 7500
 PartType = 3

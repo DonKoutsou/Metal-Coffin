@@ -4,13 +4,13 @@
 [ext_resource type="Script" uid="uid://cgsbkqrd6pbkq" path="res://Scenes/Card_Fight/Ship_Visuals/card_fight_ship_viz_2.gd" id="2_ydw5a"]
 [ext_resource type="Texture2D" uid="uid://b870cywtujqjn" path="res://Assets/Cards/Arrow.png" id="3_avrvh"]
 [ext_resource type="PackedScene" uid="uid://mxfnm7hywo4f" path="res://Scenes/Old/damage_floater.tscn" id="3_ej477"]
-[ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/ShipTextures/Ship3_001.png" id="3_mg5jy"]
 [ext_resource type="StyleBox" uid="uid://cq66xt1psso06" path="res://Theme/GreyPanel.tres" id="4_0orxy"]
 [ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scenes/Card_Fight/External_UI/CardHandContainer.gd" id="4_cmntb"]
 [ext_resource type="Texture2D" uid="uid://cyqs71v0yadm1" path="res://Assets/ShipTextures/Hull1.png" id="6_vewtr"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="6_wmwbv"]
 [ext_resource type="Texture2D" uid="uid://de1cx0wwuxx0x" path="res://Assets/smoke_09.png" id="7_cmntb"]
 [ext_resource type="AudioStream" uid="uid://iiqji6xlmffd" path="res://Assets/Sounds/Explosion.wav" id="8_r755l"]
+[ext_resource type="PackedScene" uid="uid://rjp78jwbs17y" path="res://Scenes/Card_Fight/Ship_Visuals/Fire.tscn" id="12_2rekq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0orxy"]
 content_margin_left = 5.0
@@ -95,36 +95,6 @@ scale_max = 0.05
 scale_curve = SubResource("CurveTexture_mg5jy")
 color_ramp = SubResource("GradientTexture1D_mg5jy")
 
-[sub_resource type="Gradient" id="Gradient_iq4iy"]
-offsets = PackedFloat32Array(0, 0.998609)
-colors = PackedColorArray(1, 0.380321, 0.138099, 1, 0.957883, 0.775879, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_x4s8m"]
-gradient = SubResource("Gradient_iq4iy")
-
-[sub_resource type="Curve" id="Curve_wmwbv"]
-_data = [Vector2(0, 0.463514), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_tsd2f"]
-curve = SubResource("Curve_wmwbv")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_on4wq"]
-particle_flag_disable_z = true
-angle_min = 1.07288e-05
-angle_max = 360.0
-direction = Vector3(0, 0, 0)
-spread = 22.226
-initial_velocity_min = 10.0
-initial_velocity_max = 10.0
-angular_velocity_min = -1.60933e-05
-angular_velocity_max = 316.1
-gravity = Vector3(0, 0, 0)
-scale_min = 15.0
-scale_max = 20.0
-scale_curve = SubResource("CurveTexture_tsd2f")
-color_ramp = SubResource("GradientTexture1D_x4s8m")
-
 [sub_resource type="Gradient" id="Gradient_wmwbv"]
 offsets = PackedFloat32Array(0, 0.147975, 0.272586, 0.825545, 1)
 colors = PackedColorArray(1, 0.380321, 0.138099, 1, 0.957883, 0.775879, 0, 1, 0.440007, 0.41714, 0.319656, 1, 0.928817, 0.92606, 0.913978, 1, 0.802, 0.802, 0.802, 0)
@@ -205,7 +175,7 @@ SpeedBuff = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/SpeedBuff")
 SpeedDeBuff = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/SpeedDeBuff")
 FPBuff = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/FirepowerBuff")
 FPDeBuff = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/FirepowerDeBuff")
-FirePart = NodePath("HBoxContainer/Control/TextureRect/GPUParticles2D")
+FirePart = NodePath("HBoxContainer/Control/TextureRect/Fire")
 ExplosionPart = NodePath("HBoxContainer/Control/TextureRect/Explosion")
 SmokePart = NodePath("HBoxContainer/Control/TextureRect/Smoke")
 FPLabel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2/Label")
@@ -265,6 +235,7 @@ mouse_filter = 2
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
+theme_override_constants/separation = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer" unique_id=474614247]
 layout_mode = 2
@@ -273,9 +244,10 @@ mouse_filter = 2
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=344741726]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/line_spacing = -5
 theme_override_font_sizes/font_size = 16
 text = "GERdwadwadwa"
-clip_text = true
+autowrap_mode = 1
 uppercase = true
 
 [node name="PassiveParent" type="Container" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=740590331]
@@ -516,15 +488,9 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.6, 0.6)
 mouse_filter = 2
-texture = ExtResource("3_mg5jy")
+texture = ExtResource("6_vewtr")
 expand_mode = 1
 stretch_mode = 3
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="HBoxContainer/Control/TextureRect" unique_id=854716739]
-position = Vector2(1.52588e-05, 0.00016427)
-scale = Vector2(5.24097, 5.24097)
-amount = 20
-process_material = SubResource("ParticleProcessMaterial_on4wq")
 
 [node name="Smoke" type="GPUParticles2D" parent="HBoxContainer/Control/TextureRect" unique_id=415524541]
 visible = false
@@ -538,6 +504,11 @@ randomness = 0.23
 fixed_fps = 20
 interpolate = false
 process_material = SubResource("ParticleProcessMaterial_rmogf")
+
+[node name="Fire" parent="HBoxContainer/Control/TextureRect" unique_id=1440653444 instance=ExtResource("12_2rekq")]
+position = Vector2(19.375, 0)
+rotation = 1.5707964
+scale = Vector2(33.16942, 50.075054)
 
 [node name="Explosion" type="GPUParticles2D" parent="HBoxContainer/Control/TextureRect" unique_id=755917109]
 position = Vector2(1.90735e-05, -3.20142e-10)

@@ -3,23 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bx78x3avxyhmf"
-path.bptc="res://.godot/imported/Scarab.png-c54f9617f1257ba34b07405ea3efc4a0.bptc.ctex"
-path.astc="res://.godot/imported/Scarab.png-c54f9617f1257ba34b07405ea3efc4a0.astc.ctex"
+path="res://.godot/imported/Hull5.png-5374f54bc3f202dc42841e0778f695a1.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc", "etc2_astc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/ShipTextures/Scarab.png"
-dest_files=["res://.godot/imported/Scarab.png-c54f9617f1257ba34b07405ea3efc4a0.bptc.ctex", "res://.godot/imported/Scarab.png-c54f9617f1257ba34b07405ea3efc4a0.astc.ctex"]
+source_file="res://Assets/ShipTextures/Hull5.png"
+dest_files=["res://.godot/imported/Hull5.png-5374f54bc3f202dc42841e0778f695a1.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=true
-compress/high_quality_mode=0
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

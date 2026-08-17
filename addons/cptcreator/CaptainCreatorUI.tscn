@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bbxyip8ihbpfo" path="res://addons/cptcreator/CP_CR_inventory_ship_stats.tscn" id="12_vd57e"]
 [ext_resource type="Texture2D" uid="uid://b7dafanmawwi0" path="res://Assets/ShipTextures/Hull4.png" id="22_275hr"]
 
-[node name="CaptainCreatorUI" type="ScrollContainer" unique_id=262611357 node_paths=PackedStringArray("CaptainName", "ShipIcon", "ItemText", "AddItemMenu", "Inventory", "Stats", "Disp")]
+[node name="CaptainCreatorUI" type="EditorDock" unique_id=2095748193 node_paths=PackedStringArray("CaptainName", "ShipIcon", "ItemText", "AddItemMenu", "Inventory", "Stats", "Disp")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -26,33 +26,40 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_qfx4k")
+title = "Captain Creator"
+default_slot = 4
 script = ExtResource("2_8328o")
 StatScene = ExtResource("3_ul25k")
 ItemBoxScene = ExtResource("4_yrrrb")
-CaptainName = NodePath("VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/CapName")
-ShipIcon = NodePath("VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/VBoxContainer/TextureRect")
-ItemText = NodePath("VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer/PanelContainer/VBoxContainer/Label")
-AddItemMenu = NodePath("VBoxContainer/PanelContainer2/HBoxContainer/MenuBar/Add Item")
-Inventory = NodePath("VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer/InventoryInterface")
-Stats = NodePath("VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/InventoryShipStats")
-Disp = NodePath("VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/DispositionUI")
+CaptainName = NodePath("InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/CapName")
+ShipIcon = NodePath("InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/VBoxContainer/TextureRect")
+ItemText = NodePath("InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer/PanelContainer/VBoxContainer/Label")
+AddItemMenu = NodePath("InputScroll/VBoxContainer/PanelContainer2/HBoxContainer/MenuBar/Add Item")
+Inventory = NodePath("InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer/InventoryInterface")
+Stats = NodePath("InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/InventoryShipStats")
+Disp = NodePath("InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/DispositionUI")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1443653618]
+[node name="InputScroll" type="ScrollContainer" parent="." unique_id=491485578]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InputScroll" unique_id=1443653618]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer" unique_id=1030336436]
+[node name="PanelContainer2" type="PanelContainer" parent="InputScroll/VBoxContainer" unique_id=1030336436]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("5_tnq84")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2" unique_id=525057672]
+[node name="HBoxContainer" type="HBoxContainer" parent="InputScroll/VBoxContainer/PanelContainer2" unique_id=525057672]
 layout_mode = 2
 
-[node name="MenuBar" type="MenuBar" parent="VBoxContainer/PanelContainer2/HBoxContainer" unique_id=472673988]
+[node name="MenuBar" type="MenuBar" parent="InputScroll/VBoxContainer/PanelContainer2/HBoxContainer" unique_id=472673988]
 layout_mode = 2
 theme_override_font_sizes/font_size = 27
 
-[node name="Select Captain" type="PopupMenu" parent="VBoxContainer/PanelContainer2/HBoxContainer/MenuBar" unique_id=1904929059]
+[node name="Select Captain" type="PopupMenu" parent="InputScroll/VBoxContainer/PanelContainer2/HBoxContainer/MenuBar" unique_id=1904929059]
 size = Vector2i(100, 251)
 item_count = 34
 item_0/text = "Amol"
@@ -124,7 +131,7 @@ item_32/id = 32
 item_33/text = "Grunt"
 item_33/id = 33
 
-[node name="Add Item" type="PopupMenu" parent="VBoxContainer/PanelContainer2/HBoxContainer/MenuBar" unique_id=1918876853]
+[node name="Add Item" type="PopupMenu" parent="InputScroll/VBoxContainer/PanelContainer2/HBoxContainer/MenuBar" unique_id=1918876853]
 auto_translate_mode = 1
 size = Vector2i(100, 251)
 item_count = 73
@@ -279,63 +286,63 @@ item_71/id = 71
 item_72/text = "SPT-200"
 item_72/id = 72
 
-[node name="ShowItStats" type="CheckButton" parent="VBoxContainer/PanelContainer2/HBoxContainer" unique_id=1228063095]
+[node name="ShowItStats" type="CheckButton" parent="InputScroll/VBoxContainer/PanelContainer2/HBoxContainer" unique_id=1228063095]
 layout_mode = 2
 size_flags_horizontal = 10
 button_pressed = true
 text = "Include Item Stats"
 
-[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer" unique_id=909966476]
+[node name="PanelContainer3" type="PanelContainer" parent="InputScroll/VBoxContainer" unique_id=909966476]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_styles/panel = ExtResource("5_tnq84")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer3" unique_id=873014840]
+[node name="HBoxContainer" type="HBoxContainer" parent="InputScroll/VBoxContainer/PanelContainer3" unique_id=873014840]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer3/HBoxContainer" unique_id=1515261900]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer" unique_id=167457578]
+[node name="PanelContainer" type="PanelContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer" unique_id=1515261900]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="InventoryShipStats" parent="VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer" unique_id=826388942 instance=ExtResource("12_vd57e")]
+[node name="VBoxContainer" type="VBoxContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer" unique_id=167457578]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="InventoryShipStats" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer" unique_id=826388942 instance=ExtResource("12_vd57e")]
 layout_mode = 2
 size_flags_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer" unique_id=1705996630]
+[node name="PanelContainer" type="PanelContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer" unique_id=1705996630]
 layout_mode = 2
 
-[node name="DispositionUI" parent="VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer" unique_id=687125661 instance=ExtResource("11_vd57e")]
+[node name="DispositionUI" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer" unique_id=687125661 instance=ExtResource("11_vd57e")]
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 size_flags_vertical = 2
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer/PanelContainer3/HBoxContainer" unique_id=98074735]
+[node name="VBoxContainer3" type="VBoxContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer" unique_id=98074735]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3" unique_id=731221188]
+[node name="Label" type="Label" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3" unique_id=731221188]
 layout_mode = 2
 text = "Captain Name"
 uppercase = true
 
-[node name="CapName" type="TextEdit" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3" unique_id=1864577608]
+[node name="CapName" type="TextEdit" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3" unique_id=1864577608]
 layout_mode = 2
 text = "Amol"
 wrap_mode = 1
 scroll_fit_content_height = true
 
-[node name="Label3" type="Label" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3" unique_id=483836793]
+[node name="Label3" type="Label" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3" unique_id=483836793]
 layout_mode = 2
 text = "Ship Icon"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3" unique_id=1413947447]
+[node name="VBoxContainer" type="VBoxContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3" unique_id=1413947447]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/VBoxContainer" unique_id=200612640]
+[node name="TextureRect" type="TextureRect" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/VBoxContainer" unique_id=200612640]
 texture_filter = 3
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
@@ -343,28 +350,28 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("22_275hr")
 
-[node name="ChangeShipIcon" type="Button" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/VBoxContainer" unique_id=616391956]
+[node name="ChangeShipIcon" type="Button" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/VBoxContainer" unique_id=616391956]
 layout_mode = 2
 text = "Change Picture"
 
-[node name="PanelContainer4" type="PanelContainer" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3" unique_id=2034851028]
+[node name="PanelContainer4" type="PanelContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3" unique_id=2034851028]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("5_tnq84")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4" unique_id=1759177098]
+[node name="VBoxContainer" type="VBoxContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4" unique_id=1759177098]
 layout_mode = 2
 
-[node name="InventoryInterface" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer" unique_id=399381214 instance=ExtResource("12_tnq84")]
+[node name="InventoryInterface" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer" unique_id=399381214 instance=ExtResource("12_tnq84")]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer" unique_id=1219644843]
+[node name="PanelContainer" type="PanelContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer" unique_id=1219644843]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer/PanelContainer" unique_id=938586947]
+[node name="VBoxContainer" type="VBoxContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer/PanelContainer" unique_id=938586947]
 layout_mode = 2
 
-[node name="Label" type="RichTextLabel" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1932509843]
+[node name="Label" type="RichTextLabel" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1932509843]
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("7_2tpp3")
 theme_override_font_sizes/normal_font_size = 24
@@ -373,24 +380,24 @@ text = "Select Item Above To Show Stats"
 fit_content = true
 autowrap_mode = 2
 
-[node name="MoveItem" type="Button" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer/PanelContainer/VBoxContainer" unique_id=692886598]
+[node name="MoveItem" type="Button" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer/PanelContainer/VBoxContainer" unique_id=692886598]
 layout_mode = 2
 text = "Move Item To Front"
 
-[node name="UpgradeItem" type="Button" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer/PanelContainer/VBoxContainer" unique_id=512790162]
+[node name="UpgradeItem" type="Button" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer/PanelContainer/VBoxContainer" unique_id=512790162]
 layout_mode = 2
 text = "Upgrade Item"
 
-[node name="RemoveItem" type="Button" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer/PanelContainer/VBoxContainer" unique_id=790352398]
+[node name="RemoveItem" type="Button" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer/PanelContainer/VBoxContainer" unique_id=790352398]
 layout_mode = 2
 text = "Remove Item"
 
-[connection signal="index_pressed" from="VBoxContainer/PanelContainer2/HBoxContainer/MenuBar/Select Captain" to="." method="_on_chaptain_select_index_pressed"]
-[connection signal="index_pressed" from="VBoxContainer/PanelContainer2/HBoxContainer/MenuBar/Add Item" to="." method="_on_item_select_index_pressed"]
-[connection signal="toggled" from="VBoxContainer/PanelContainer2/HBoxContainer/ShowItStats" to="." method="_on_show_it_stats_toggled"]
-[connection signal="StatChanged" from="VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/InventoryShipStats" to="." method="_on_inventory_ship_stats_stat_changed"]
-[connection signal="text_changed" from="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/CapName" to="." method="_on_cap_name_text_changed"]
-[connection signal="pressed" from="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/VBoxContainer/ChangeShipIcon" to="." method="_on_change_ship_icon_pressed"]
-[connection signal="pressed" from="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer/PanelContainer/VBoxContainer/MoveItem" to="." method="_on_move_item_pressed"]
-[connection signal="pressed" from="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer/PanelContainer/VBoxContainer/UpgradeItem" to="." method="_on_upgrade_item_pressed"]
-[connection signal="pressed" from="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer/PanelContainer/VBoxContainer/RemoveItem" to="." method="_on_remove_item_pressed"]
+[connection signal="index_pressed" from="InputScroll/VBoxContainer/PanelContainer2/HBoxContainer/MenuBar/Select Captain" to="." method="_on_chaptain_select_index_pressed"]
+[connection signal="index_pressed" from="InputScroll/VBoxContainer/PanelContainer2/HBoxContainer/MenuBar/Add Item" to="." method="_on_item_select_index_pressed"]
+[connection signal="toggled" from="InputScroll/VBoxContainer/PanelContainer2/HBoxContainer/ShowItStats" to="." method="_on_show_it_stats_toggled"]
+[connection signal="StatChanged" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/InventoryShipStats" to="." method="_on_inventory_ship_stats_stat_changed"]
+[connection signal="text_changed" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/CapName" to="." method="_on_cap_name_text_changed"]
+[connection signal="pressed" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/VBoxContainer/ChangeShipIcon" to="." method="_on_change_ship_icon_pressed"]
+[connection signal="pressed" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer/PanelContainer/VBoxContainer/MoveItem" to="." method="_on_move_item_pressed"]
+[connection signal="pressed" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer/PanelContainer/VBoxContainer/UpgradeItem" to="." method="_on_upgrade_item_pressed"]
+[connection signal="pressed" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer/PanelContainer/VBoxContainer/RemoveItem" to="." method="_on_remove_item_pressed"]

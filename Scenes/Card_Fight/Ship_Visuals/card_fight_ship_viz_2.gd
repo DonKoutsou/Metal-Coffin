@@ -16,7 +16,7 @@ class_name CardFightShipViz2
 @export var FPBuff : GPUParticles2D
 @export var FPDeBuff : GPUParticles2D
 
-@export var FirePart : GPUParticles2D
+@export var FirePart : Node2D
 @export var ExplosionPart : GPUParticles2D
 @export var SmokePart : GPUParticles2D
 @export var FPLabel : RichTextLabel

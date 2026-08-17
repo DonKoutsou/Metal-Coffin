@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dhfqn405u7iov"]
 
 [ext_resource type="Script" uid="uid://c1614nt44tmoh" path="res://Scenes/Card_Fight/Ship_Visuals/card_fight_ship_viz.gd" id="1_o7oni"]
-[ext_resource type="Texture2D" uid="uid://da1lirtdr0h7b" path="res://Assets/ShipTextures/Ship3_001.png" id="2_lbgr3"]
+[ext_resource type="Texture2D" uid="uid://cyqs71v0yadm1" path="res://Assets/ShipTextures/Hull1.png" id="2_jfxyx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3h25u"]
 bg_color = Color(0.231024, 0.490544, 0.236315, 1)
@@ -76,7 +76,7 @@ autowrap_mode = 1
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=1923837237]
 layout_mode = 2
-texture = ExtResource("2_lbgr3")
+texture = ExtResource("2_jfxyx")
 expand_mode = 2
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=2098314865]

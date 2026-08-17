@@ -202,25 +202,25 @@ Equipment = Array[ExtResource("33_ovnka")]([ExtResource("46_ufipr"), ExtResource
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=296015774]
 layout_mode = 2
 
-[node name="TeamComp" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=2019789918]
+[node name="TeamComp" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=2019789918 groups=["DigitalBouncingButton"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
 text = "Team Composition"
 
-[node name="PickItems" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=13818852]
+[node name="PickItems" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=13818852 groups=["DigitalBouncingButton"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
 text = "Pick Items"
 
-[node name="Ready" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=336333216]
+[node name="Ready" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=336333216 groups=["DigitalBouncingButton"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
 text = "Start Fight"
 
-[node name="Random" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=780708355]
+[node name="Random" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=780708355 groups=["DigitalBouncingButton"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26

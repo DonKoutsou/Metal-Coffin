@@ -61,9 +61,9 @@ func _physics_process(_delta: float) -> void:
 	var NewX = clamp($Camera2D.position.x + MovementMagnitude.x / 50000, LimitSide, LimitSide + midpoint.x)
 	var NewY = clamp($Camera2D.position.y + MovementMagnitude.y / 50000, 250, midpoint.y + 50)
 	#if ($Camera2D.global_position != Vector2(NewX, NewY)):
-	PositionChanged.emit()
 		
 	$Camera2D.position = Vector2(NewX, NewY)
+	PositionChanged.emit()
 
 #func _input(event: InputEvent) -> void:
 	#if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):

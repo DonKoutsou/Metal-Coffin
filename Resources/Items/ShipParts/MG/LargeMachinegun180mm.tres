@@ -35,5 +35,5 @@ ItemDesc = "the elite choice for those requiring ultimate firepower in critical 
 CardProviding = Array[ExtResource("1_ycg0w")]([ExtResource("2_ycg0w"), ExtResource("2_ycg0w"), ExtResource("2_ycg0w"), ExtResource("2_ycg0w"), ExtResource("3_f7oqs"), ExtResource("4_ycg0w"), ExtResource("4_ycg0w"), ExtResource("3_f7oqs"), ExtResource("5_ycg0w"), ExtResource("5_ycg0w")])
 Tier = 2
 CanTransfer = false
-Cost = 180000
+Cost = 70000
 PartType = 4

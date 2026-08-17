@@ -14,6 +14,7 @@ UpgradeAmmount = 1400.0
 script = ExtResource("4_6tjws")
 Upgrades = Array[ExtResource("5_gbrn0")]([SubResource("Resource_l8s17")])
 UpgradeTime = 500.0
+disp = 3
 DispositionAmm = 0.5
 ItemName = "Super HighRange Radar"
 CardProviding = Array[ExtResource("1_in1r4")]([ExtResource("2_3uncw")])

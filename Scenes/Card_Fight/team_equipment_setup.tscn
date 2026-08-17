@@ -151,22 +151,22 @@ size_flags_horizontal = 3
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer" unique_id=1206853727]
 layout_mode = 2
 
-[node name="Stats" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=588128854]
+[node name="Stats" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=588128854 groups=["DigitalBouncingButton"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "STATS"
 
-[node name="Deck" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=583285027]
+[node name="Deck" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=583285027 groups=["DigitalBouncingButton"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "DECK"
 
-[node name="Inventory" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=328537838]
+[node name="Inventory" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=328537838 groups=["DigitalBouncingButton"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "INVENTORY"
 
-[node name="Disposition" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1327165155]
+[node name="Disposition" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1327165155 groups=["DigitalBouncingButton"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "DISPOSITION"

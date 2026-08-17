@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="4_xbxhh"]
 [ext_resource type="Shader" uid="uid://cqgk0egpp8vmb" path="res://Shaders/ShipVisualTest.gdshader" id="5_7v2kq"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scenes/MapShips/Stats/Captain.gd" id="5_ghxqh"]
-[ext_resource type="Texture2D" uid="uid://bx78x3avxyhmf" path="res://Assets/ShipTextures/Scarab.png" id="6_tlfh0"]
+[ext_resource type="Texture2D" uid="uid://bx78x3avxyhmf" path="res://Assets/ShipTextures/Hull5.png" id="6_tlfh0"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="7_5qtwm"]
 [ext_resource type="PackedScene" uid="uid://dv64iu4t4ja87" path="res://Scenes/MapShips/DroneDock/HostileDroneDock.tscn" id="7_hahnw"]
 [ext_resource type="Resource" uid="uid://c8wthdbwacfhe" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/Engine2.tres" id="8_ubtua"]

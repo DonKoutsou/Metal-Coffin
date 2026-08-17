@@ -35,5 +35,5 @@ ItemDesc = "A continuation of the SPT-100 model. This upgraded model provides an
 CardProviding = Array[ExtResource("1_tlvwb")]([ExtResource("2_372t0"), ExtResource("2_372t0"), ExtResource("2_372t0"), ExtResource("2_372t0"), ExtResource("2_372t0"), ExtResource("2_372t0")])
 Tier = 1
 CanTransfer = false
-Cost = 40000
+Cost = 20000
 PartType = 3

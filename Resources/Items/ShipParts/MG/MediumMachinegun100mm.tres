@@ -38,5 +38,5 @@ ItemDesc = "Fury builds upon its predecessor with enhanced rate of fire and targ
 CardProviding = Array[ExtResource("2_1qqs8")]([ExtResource("2_q5ys8"), ExtResource("2_q5ys8"), ExtResource("2_q5ys8"), ExtResource("3_acqvg"), ExtResource("4_sygso"), ExtResource("4_sygso"), ExtResource("5_sygso"), ExtResource("6_odqxh")])
 Tier = 1
 CanTransfer = false
-Cost = 80000
+Cost = 38000
 PartType = 4

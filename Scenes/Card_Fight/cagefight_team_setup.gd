@@ -22,6 +22,7 @@ var EnemyTeam : Array[Captain]
 signal TeamReady(PlTeam : Array[Captain], EnTeam : Array[Captain])
 
 func _ready() -> void:
+	UISoundMan.GetInstance().Refresh()
 	for g in PossibleCharacters:
 		var CharB = CharButton.instantiate() as CaptainButton
 		CharB.SetCpt(g)

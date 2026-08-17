@@ -206,23 +206,28 @@ func OnItemBought(It : Item) -> void:
 func _on_town_background_position_changed() -> void:
 	var WorkshopNode = TownBG.GetNodeForPosition(TownBackground.Location.WORKSHOP)
 	WorkshopButton.global_position = WorkshopNode.global_position
-	(WorkshopButton.get_child(0) as Line2D).set_point_position(1, (WorkshopButton.get_child(0) as Line2D).to_local(WorkshopNode.get_child(0).global_position))
+	var WorkshopLine : Line2D = WorkshopButton.get_child(0)
+	WorkshopLine.set_point_position(1, WorkshopLine.to_local(WorkshopNode.get_child(0).global_position))
 	
 	var MerchendiseNode = TownBG.GetNodeForPosition(TownBackground.Location.MERCH)
 	MerchendiseButton.global_position = MerchendiseNode.global_position
-	(MerchendiseButton.get_child(0) as Line2D).set_point_position(1, (MerchendiseButton.get_child(0) as Line2D).to_local(MerchendiseNode.get_child(0).global_position))
+	var MerchLine : Line2D = MerchendiseButton.get_child(0)
+	MerchLine.set_point_position(1, MerchLine.to_local(MerchendiseNode.get_child(0).global_position))
 	
 	var FuelNode = TownBG.GetNodeForPosition(TownBackground.Location.FUEL)
 	FuelButton.global_position = FuelNode.global_position
-	(FuelButton.get_child(0) as Line2D).set_point_position(1, (FuelButton.get_child(0) as Line2D).to_local(FuelNode.get_child(0).global_position))
+	var FuelLine : Line2D = FuelButton.get_child(0)
+	FuelLine.set_point_position(1, FuelLine.to_local(FuelNode.get_child(0).global_position))
 
 	var RepairNode = TownBG.GetNodeForPosition(TownBackground.Location.REPAIR)
 	RepairButton.global_position = RepairNode.global_position
-	(RepairButton.get_child(0) as Line2D).set_point_position(1, (RepairButton.get_child(0) as Line2D).to_local(RepairNode.get_child(0).global_position))
+	var RepairLine : Line2D = RepairButton.get_child(0)
+	RepairLine.set_point_position(1, RepairLine.to_local(RepairNode.get_child(0).global_position))
 	
 	var RecruitNode = TownBG.GetNodeForPosition(TownBackground.Location.RECRUIT)
 	RecruitButton.global_position = RecruitNode.global_position
-	(RecruitButton.get_child(0) as Line2D).set_point_position(1, (RecruitButton.get_child(0) as Line2D).to_local(RecruitNode.get_child(0).global_position))
+	var RecruitLine : Line2D = RecruitButton.get_child(0)
+	RecruitLine.set_point_position(1, RecruitLine.to_local(RecruitNode.get_child(0).global_position))
 
 	
 

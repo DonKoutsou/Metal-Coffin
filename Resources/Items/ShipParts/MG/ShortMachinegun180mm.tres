@@ -35,5 +35,5 @@ ItemName = "KPH -02 \"Kokti\" 180mm"
 ItemDesc = "a basic machine gun turret designed for straightforward, high-rate-of-fire engagements. It offers standard round delivery with fundamental targeting precision, providing ships with an entry-level solution for close-range defense and suppression."
 CardProviding = Array[ExtResource("1_70g5e")]([ExtResource("2_70g5e"), ExtResource("2_70g5e"), ExtResource("2_70g5e"), ExtResource("2_70g5e"), ExtResource("2_70g5e"), ExtResource("3_70g5e"), ExtResource("3_70g5e"), ExtResource("4_4rjku")])
 CanTransfer = false
-Cost = 60000
+Cost = 22000
 PartType = 4

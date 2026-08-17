@@ -25,7 +25,7 @@ func GetRewards(ch : Captain) -> Dictionary[CardStats, int]:
 		
 		var disp : Disposition = DispositionRewards[g]
 		for d in disp.Levels:
-			if (dispositionValue > d.DispoistionStage):
+			if (dispositionValue >= d.DispoistionStage):
 				for reward in d.Rewards:
 					if (rewards.has(reward)):
 						rewards[reward] += d.Rewards[reward]

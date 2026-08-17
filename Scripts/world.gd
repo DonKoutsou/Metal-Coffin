@@ -388,7 +388,7 @@ func CardFightEnded(Survivors : Array[BattleShipStats], won : bool) -> void:
 			Unit.Damage(9999999, false)
 			if (Unit is HostileShip):
 				Unit.DestroyEnemyDebry()
-				WonFunds += Unit.Cpt.ProvidingFunds
+				WonFunds += snapped(randi_range(2000, Unit.Cpt.GetValue()), 1000)
 	if (won):
 		if (WonFunds > 0):
 			PlayerWallet.AddFunds(WonFunds)

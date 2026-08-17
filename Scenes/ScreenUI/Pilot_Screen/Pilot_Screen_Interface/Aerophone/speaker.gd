@@ -87,6 +87,7 @@ enum RadioSound{
 	APROACHING,
 	STATIC,
 	BEEP,
+	SWAP,
 }
 
 

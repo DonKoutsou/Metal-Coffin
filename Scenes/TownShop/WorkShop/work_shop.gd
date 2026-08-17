@@ -277,7 +277,7 @@ func CancelUpgrade(Box : Inventory_Box_Res) -> void:
 	
 	var OriginalItem : ShipPart = Box.GetContainedItem()
 	var UpgradedItem : ShipPart = OriginalItem.UpgradeVersion
-	var Cost = UpgradedItem.Cost
+	var Cost = UpgradedItem.Cost - OriginalItem.Cost
 	var PLWallet = World.GetInstance().PlayerWallet
 	PLWallet.AddFunds(Cost / 2.0)
 	Map.GetInstance().GetScreenUi().TownUi.CoinsReceived(roundi(Cost / 100.0))
@@ -301,7 +301,7 @@ func UpgradeItem(Box : Inventory_Box_Res) -> void:
 		#print("Ship is already upgrading a part. Wait for it to finish first.")
 		return
 
-	var Cost = UpgradedItem.Cost
+	var Cost = UpgradedItem.Cost - OriginalItem.Cost
 	if (HasUpgradeBuff):
 		Cost *= 0.75
 	var PLWallet = World.GetInstance().PlayerWallet

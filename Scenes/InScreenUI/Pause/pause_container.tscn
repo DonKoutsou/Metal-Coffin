@@ -11,6 +11,7 @@
 
 [node name="PauseContainer" type="PanelContainer" unique_id=92918920 node_paths=PackedStringArray("Manual")]
 process_mode = 3
+z_index = 10
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

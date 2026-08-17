@@ -1,5 +1,7 @@
 @tool
-extends ScrollContainer
+extends EditorDock
+
+class_name CaptainCreatorUI
 
 var Captains : Array[Captain]
 var Items : Array[Item]
@@ -19,12 +21,13 @@ var CurrentlySelectedCap : Captain
 
 var ShowItemStats = true
 
-
+#------------------------------------------------------------
 func _enter_tree() -> void:
 	RefreshCharacters()
 	RefrshExistingItems()
 	Inventory.BoxSelected.connect(ItemSelected)
-	
+
+#------------------------------------------------------------
 func RefreshCharacters() -> void:
 	var dir = DirAccess.open("res://Resources/Captains/PlayerCaptains")
 	if dir:
@@ -52,6 +55,7 @@ func RefreshCharacters() -> void:
 	
 	SetCaptain(Captains[0])
 
+#------------------------------------------------------------
 func RefrshExistingItems() -> void:
 	var DirsToExplore :Array[String] = ["res://Resources/Items"]
 	for g in DirsToExplore:
@@ -77,11 +81,12 @@ func RefrshExistingItems() -> void:
 		#Menu.add_item(Items[g].ItemName, g)
 		AddItemMenu.add_icon_item(Items[g].ItemIcon ,Items[g].ItemName, g)
 
+#------------------------------------------------------------
 func _exit_tree() -> void:
 	Captains.clear()
 	Items.clear()
 
-
+#------------------------------------------------------------
 func SetCaptain(C : Captain) -> void:
 	
 	CurrentlySelectedCap = C
@@ -105,16 +110,19 @@ func SetCaptain(C : Captain) -> void:
 	UpdateInventoryBoxes()
 	SaveCurrentCap()
 	
-	
+#------------------------------------------------------------
 func _on_chaptain_select_index_pressed(index: int) -> void:
 	SetCaptain(Captains[index])
 
+#------------------------------------------------------------
 func SaveCurrentCap() -> void:
 	ResourceSaver.save(CurrentlySelectedCap, CurrentlySelectedCap.resource_path)
 
+#------------------------------------------------------------
 func InventorySizeChanged() -> void:
 	UpdateInventoryBoxes()
 
+#------------------------------------------------------------
 func UpdateInventoryBoxes() -> void:
 	if (CurrentlySelectedCap._CharInv != null):
 		CurrentlySelectedCap._CharInv.queue_free()
@@ -126,11 +134,15 @@ func UpdateInventoryBoxes() -> void:
 	Disp.SetStats(CurrentlySelectedCap)
 	SelectedBox = null
 
+#------------------------------------------------------------
 func GetShipMaxSpeed() -> float:
-	var Spd = (CurrentlySelectedCap.GetStatFinalValue(STAT_CONST.STATS.THRUST) * 1000) / CurrentlySelectedCap.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
+	var thrust = CurrentlySelectedCap.GetStatFinalValue(STAT_CONST.STATS.THRUST)
+	var weight = CurrentlySelectedCap.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
+	var Spd = (thrust * 1000) / weight
 
 	return Spd
 
+#------------------------------------------------------------
 func GetFuelRange() -> float:
 	var Weight = CurrentlySelectedCap.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	var fuelStats = CurrentlySelectedCap.GetFuelStats()
@@ -147,10 +159,12 @@ func GetFuelRange() -> float:
 	
 var SelectedBox : Inventory_Box_Res
 
+#------------------------------------------------------------
 func ItemSelected(It : Inventory_Box_Res) -> void:
 	SelectedBox = It
 	ItemText.text = "{0}\n{1}".format([It._ContainedItem.ItemName, It._ContainedItem.GetItemDesc()])
 
+#------------------------------------------------------------
 func _on_remove_item_pressed() -> void:
 	if (SelectedBox != null):
 		for g in CurrentlySelectedCap.StartingItems.size():
@@ -160,6 +174,7 @@ func _on_remove_item_pressed() -> void:
 	SaveCurrentCap()
 	UpdateInventoryBoxes()
 
+#------------------------------------------------------------
 func _on_move_item_pressed() -> void:
 	if (SelectedBox != null):
 		for g in CurrentlySelectedCap.StartingItems.size():
@@ -171,6 +186,7 @@ func _on_move_item_pressed() -> void:
 	SaveCurrentCap()
 	UpdateInventoryBoxes()
 
+#------------------------------------------------------------
 func _on_upgrade_item_pressed() -> void:
 	if (SelectedBox != null):
 		for g in CurrentlySelectedCap.StartingItems.size():
@@ -184,11 +200,13 @@ func _on_upgrade_item_pressed() -> void:
 	SaveCurrentCap()
 	UpdateInventoryBoxes()
 
+#------------------------------------------------------------
 func _on_item_select_index_pressed(index: int) -> void:
 	CurrentlySelectedCap.StartingItems.append(Items[index])
 	SaveCurrentCap()
 	UpdateInventoryBoxes()
 
+#------------------------------------------------------------
 func _on_cap_name_text_changed() -> void:
 	var NewLine = CaptainName.text
 	print("Changed {0}'s name to {1} and saved to file {2}".format([CurrentlySelectedCap.GetCaptainName(), NewLine, CurrentlySelectedCap.resource_path]))
@@ -227,11 +245,12 @@ func _on_cap_name_text_changed() -> void:
 		#for g : ShipPartUpgrade in up:
 			#FindSliderWithStat(g.UpgradeName).AddToItemStat(g.UpgradeAmmount, g.PenaltyAmmount)
 
-			
+#------------------------------------------------------------
 func FindSliderWithStat(St : STAT_CONST.STATS) -> CapCrStatSlider:
 
 	return null
-	
+
+#------------------------------------------------------------
 func _on_change_pic_pressed() -> void:
 	var fd = EditorFileDialog.new()
 	#fd.mode = Window.MODE_EXCLUSIVE_FULLSCREEN
@@ -242,12 +261,12 @@ func _on_change_pic_pressed() -> void:
 	#get_parent().add_child(fd)
 	#var d = await fd.file_selected
 	
-
+#------------------------------------------------------------
 func NewPicSelected(NewPic) -> void:
 	CurrentlySelectedCap.CaptainPortrait = load(NewPic)
 	SaveCurrentCap()
 
-
+#------------------------------------------------------------
 func _on_change_ship_icon_pressed() -> void:
 	var fd = EditorFileDialog.new()
 	#fd.mode = Window.MODE_EXCLUSIVE_FULLSCREEN
@@ -258,23 +277,24 @@ func _on_change_ship_icon_pressed() -> void:
 	#get_parent().add_child(fd)
 	#var d = await fd.file_selected
 
+#------------------------------------------------------------
 func NewShipPicSelected(NewPic) -> void:
 	CurrentlySelectedCap.ShipIcon = load(NewPic)
 	SaveCurrentCap()
 	ShipIcon.texture = CurrentlySelectedCap.ShipIcon
 
-
+#------------------------------------------------------------
 func _on_show_it_stats_toggled(toggled_on: bool) -> void:
 	ShowItemStats = toggled_on
 	UpdateInventoryBoxes()
 
-
+#------------------------------------------------------------
 func _on_starting_funds_value_changed(value: float) -> void:
 	CurrentlySelectedCap.ProvidingFunds = value
 	SaveCurrentCap()
 	print("StartingFundsUpdated " + var_to_str(value))
 
-
+#------------------------------------------------------------
 func _on_inventory_ship_stats_stat_changed(stat : STAT_CONST.STATS, value : float) -> void:
 	if (stat == STAT_CONST.STATS.VALUE):
 		CurrentlySelectedCap.ProvidingFunds = value

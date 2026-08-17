@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://rjp78jwbs17y"]
+
+[ext_resource type="Shader" uid="uid://mhis80823qfc" path="res://Scenes/Card_Fight/Ship_Visuals/Fire.tres" id="1_7ct8h"]
+[ext_resource type="Texture2D" uid="uid://gvprhniu08rn" path="res://Assets/Fire/T_1_pixel.jpg" id="2_v30db"]
+[ext_resource type="Texture2D" uid="uid://bgn0wbojedfhw" path="res://Assets/Fire/T_Gradient_circle22.jpg" id="2_y8ytq"]
+[ext_resource type="Texture2D" uid="uid://q4nirdqn1udg" path="res://Assets/Fire/T_VFX_Noise_12.PNG" id="3_sr0d0"]
+
+[sub_resource type="Gradient" id="Gradient_y8ytq"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.08116883, 0.19805194, 0.33116883, 0.9448052)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0, 0.08, 0, 0, 1, 0.8, 0.32000002, 0, 1, 0.98333335, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_y8ytq"]
+gradient = SubResource("Gradient_y8ytq")
+width = 16
+
+[sub_resource type="Gradient" id="Gradient_v30db"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_84607"]
+gradient = SubResource("Gradient_v30db")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_sr0d0"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rdq0u"]
+gradient = SubResource("Gradient_sr0d0")
+width = 1
+height = 12
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_spb5j"]
+shader = ExtResource("1_7ct8h")
+shader_parameter/Vector2Paramter3 = Vector2(1, 1)
+shader_parameter/Speed = Vector2(0, 1)
+shader_parameter/Texture_1 = ExtResource("3_sr0d0")
+shader_parameter/Texture2DParameter2 = SubResource("GradientTexture2D_84607")
+shader_parameter/Texture2DParameter3 = ExtResource("2_y8ytq")
+shader_parameter/Texture2DParameter4 = SubResource("GradientTexture2D_rdq0u")
+shader_parameter/Color = SubResource("GradientTexture1D_y8ytq")
+
+[node name="TextureRect" type="Sprite2D" unique_id=1440653444]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_spb5j")
+scale = Vector2(148.01958, 157.99998)
+texture = ExtResource("2_v30db")

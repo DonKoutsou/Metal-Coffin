@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://w0powsomsqvs"]
+
+[ext_resource type="Texture2D" uid="uid://btpk7ot0qwksh" path="res://Assets/Cards/FlameDeffence.png" id="1_u67ox"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="2_4nj0o"]
+[ext_resource type="Script" uid="uid://cxqm0ly7x6xpc" path="res://Scenes/Card_Fight/Card/Card_Modules/ShieldCardModule.gd" id="3_jtve2"]
+[ext_resource type="Script" uid="uid://dii0601eue75s" path="res://Scenes/Card_Fight/Card/Card_Passives/On_FireTickPassive.gd" id="4_u67ox"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="5_a11ci"]
+
+[sub_resource type="Resource" id="Resource_2ia5w"]
+script = ExtResource("3_jtve2")
+metadata/_custom_type_script = "uid://cxqm0ly7x6xpc"
+
+[sub_resource type="Resource" id="Resource_bbv8w"]
+script = ExtResource("4_u67ox")
+Module = SubResource("Resource_2ia5w")
+Receiver = 3
+metadata/_custom_type_script = "uid://dii0601eue75s"
+
+[resource]
+script = ExtResource("5_a11ci")
+Icon = ExtResource("1_u67ox")
+CardName = "Fire Heal"
+Energy = 2
+Consume = true
+Passive = SubResource("Resource_bbv8w")
+Type = 3
+IsDisposition = true
+metadata/_custom_type_script = "uid://cg2tajspojecm"

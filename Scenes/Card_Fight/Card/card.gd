@@ -305,9 +305,20 @@ func SetRealistic() -> void:
 	$SubViewportContainer/SubViewport.set_deferred("render_target_update_mode",  SubViewport.UPDATE_ONCE)
 	
 	CardName.add_theme_font_override("normal_font", RealisticFont)
+	CardName.add_theme_constant_override("shadow_outline_size", 0)
+	CardName.add_theme_constant_override("shadow_offset_x", 0)
+	CardName.add_theme_constant_override("shadow_offset_y", 0)
 	CardCost.add_theme_font_override("font", RealisticFont)
+	CardCost.add_theme_constant_override("shadow_outline_size", 0)
+	CardCost.add_theme_constant_override("shadow_offset_x", 0)
+	CardCost.add_theme_constant_override("shadow_offset_y", 0)
+	
 	CardDesc.add_theme_font_override("normal_font", RealisticFont)
 	CardDesc.add_theme_font_size_override("normal_font_size", 15)
+	CardDesc.add_theme_constant_override("shadow_outline_size", 0)
+	CardDesc.add_theme_constant_override("shadow_offset_x", 0)
+	CardDesc.add_theme_constant_override("shadow_offset_y", 0)
+	
 	CardCost.get_child(0).visible = false
 
 

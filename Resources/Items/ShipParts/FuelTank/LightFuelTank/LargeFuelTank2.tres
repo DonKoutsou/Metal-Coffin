@@ -33,5 +33,5 @@ ItemDesc = "The pinnacle of the SPT series. Constructed from lightweight durable
 CardProviding = Array[ExtResource("1_kjc2w")]([ExtResource("2_377un"), ExtResource("2_377un"), ExtResource("2_377un"), ExtResource("2_377un"), ExtResource("2_377un"), ExtResource("2_377un")])
 Tier = 2
 CanTransfer = false
-Cost = 60000
+Cost = 40000
 PartType = 3

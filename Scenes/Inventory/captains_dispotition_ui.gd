@@ -47,7 +47,9 @@ func _draw() -> void:
 	stats.resize(CharacterStats.size())
 	for g in CharacterStats:
 		var m = Helper.normalize_value(g, 0, CharacterStats.size())
-		var rad = Radius * clamp(CharacterStats[g], 0.1, 1)
+		
+		var rad = Radius * Helper.mapvalue(clamp(CharacterStats[g], 0, 1), 0.1, 1.1)
+		#var rad = Radius * clamp(CharacterStats[g], 0.1, 1)
 		var pointX = cos(m * (PI * 2) - 0.32)
 		var pointY = sin(m * (PI * 2) - 0.32)
 		stats[g] = Vector2(pointX, pointY) * rad + size / 2.0

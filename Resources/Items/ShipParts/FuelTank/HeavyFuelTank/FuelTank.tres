@@ -35,5 +35,5 @@ ItemName = "FT-500"
 ItemDesc = "A standard fuel containment solution with dual baffled chambers for stability. Constructed from reinforced materials for reliability in routine operations."
 CardProviding = Array[ExtResource("1_yqtop")]([ExtResource("2_7lqrd"), ExtResource("2_7lqrd"), ExtResource("2_7lqrd"), ExtResource("3_7hda1"), ExtResource("3_7hda1")])
 CanTransfer = false
-Cost = 30000
+Cost = 8000
 PartType = 3
