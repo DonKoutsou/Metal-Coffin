@@ -202,6 +202,10 @@ func PassiveAdded(C : CardStats) -> void:
 	TexNode.modulate = Color("f58800ff")
 	PassiveParent.add_child(TexNode)
 
+func ClearPassives() -> void:
+	for g in PassiveParent.get_children():
+		g.queue_free()
+
 func OnActionHovered(C : CardStats, Targets : Array[BattleShipStats] = []) -> void:
 	ActionHovered.emit(Ship, C, Targets)
 
@@ -214,6 +218,8 @@ func ActionRemoved(Tex : Texture) -> void:
 			g.free()
 			break
 	#ActionParent.visible = ActionParent.get_child_count() > 0
+
+
 
 func OnNewTurnStarted() -> void:
 	HasMovePanel.visible = true

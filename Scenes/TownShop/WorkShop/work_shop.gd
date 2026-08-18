@@ -3,7 +3,6 @@ extends Control
 class_name WorkShop
 
 @export var ShipButtonsParent : Control
-@export var interface : CharacterInventoryInterface
 @export var DescriptorPlace : Control
 @export var WorkshopItemUI : PackedScene
 @export var ItemDescriptorScene : PackedScene
@@ -15,6 +14,8 @@ class_name WorkShop
 @export var Descr : ItemDescriptor
 
 var CurrentShip : MapShip
+var CurrentShipIndex : int = -1
+
 var WorkShopMerch : Array[Merchandise]
 var WorkshopDescriptor : ItemDescriptor
 var HasUpgradeBuff : bool = false
@@ -44,47 +45,45 @@ func _physics_process(_delta: float) -> void:
 func Init(Ships : Array[MapShip], HasUpgrade : bool, Merch : Array[Merchandise]) -> void:
 	HasUpgradeBuff = HasUpgrade
 	WorkShopMerch = Merch
-	for g in Ships:
-		var b = Button.new()
-		ShipButtonsParent.add_child(b)
-		b.text = g.Cpt.GetCaptainName()
-		b.pressed.connect(OnShipSelected.bind(g))
+	
 	AvailableShips = Ships
-	OnShipSelected(Ships[0])
+	RefreshCaptains()
+	var b : Button = ShipButtonsParent.get_child(0)
+	b.set_pressed_no_signal(true)
+	
+	
 
 func RefreshCaptains() -> void:
 	for g in ShipButtonsParent.get_children():
 		g.queue_free()
 		
-	for g in AvailableShips:
+	for g in AvailableShips.size():
 		var b = Button.new()
 		ShipButtonsParent.add_child(b)
-		b.text = g.Cpt.GetCaptainName()
+		b.text = AvailableShips[g].Cpt.GetCaptainName()
 		b.pressed.connect(OnShipSelected.bind(g))
+		b.toggle_mode = true
 		
-	OnShipSelected(AvailableShips[0])
+	OnShipSelected(0)
 
-func OnShipSelected(Ship : MapShip) -> void:
-	if (Ship == CurrentShip):
+func OnShipSelected(ShipIndex : int) -> void:
+	if (ShipIndex == CurrentShipIndex):
+		var b : Button = ShipButtonsParent.get_child(ShipIndex)
+		b.set_pressed_no_signal(true)
 		return
-	
+	else:
+		var b : Button = ShipButtonsParent.get_child(CurrentShipIndex)
+		b.set_pressed_no_signal(false)
+		
 	CloseDescriptor()
 	
-	CurrentShip = Ship
+	CurrentShip = AvailableShips[ShipIndex]
+	CurrentShipIndex = ShipIndex
 	
-	ShipStats.SetCaptain(Ship.Cpt)
+	ShipStats.SetCaptain(CurrentShip.Cpt)
 	ShipStats.ShowStats()
-	#ShipIcons.texture = Ship.Cpt.ShipIcon
-	
-	var Cha = Ship.Cpt
-	
-	
-	interface.InitialiseInventory(Cha)
-	interface.SetBoxedSelectable()
-	
-func RefreshInventory() -> void:
-	interface.InitialiseInventory(CurrentShip.Cpt)
-	interface.SetBoxedSelectable()
+	ShipStats.ShipInventory.SetBoxedSelectable()
+	ShipStats.ShipInventory.KeepBoxesActive = true
 
 
 func GetTypeOfBox(Box : Inventory_Box_Res) -> ShipPart.ShipPartType:
@@ -93,7 +92,7 @@ func GetTypeOfBox(Box : Inventory_Box_Res) -> ShipPart.ShipPartType:
 			return g
 	return ShipPart.ShipPartType.INVENTORY
 
-func ItemSelected(Box : Inventory_Box_Res) -> void:
+func ItemSelected(Box : Inventory_Box_Res, _inv : CharacterInventory) -> void:
 	
 	if (WorkshopDescriptor != null):
 		DescriptorPlace.remove_child(WorkshopDescriptor)
@@ -122,6 +121,7 @@ func ItemSelected(Box : Inventory_Box_Res) -> void:
 		#Descriptor.connect("ItemDropped", OwnerInventory.RemoveItemFromBox)
 		#Descriptor.connect("ItemTransf", ItemTranfer)
 	DescriptorPlace.add_child(WorkshopDescriptor)
+	DescriptorPlace.move_child(WorkshopDescriptor, 0)
 	#WorkshopDescriptor.set_physics_process(false)
 
 func UpdateDescriptor(Box : Inventory_Box_Res) -> void:
@@ -141,8 +141,8 @@ func RemoveItem(Box : Inventory_Box_Res) -> void:
 	var PLWallet = World.GetInstance().PlayerWallet
 	PLWallet.AddFunds(Cost)
 	PopUpManager.GetInstance().DoFadeNotif("{0} removed from\n{1}'s ship".format([It.GetItemName(), CurrentShip.Cpt.GetCaptainName()]))
-	CurrentShip.Cpt.GetCharacterInventory().RemoveItem(It)
-	RefreshInventory()
+	CurrentShip.Cpt.GetCharacterInventory().RemoveItemFromBox(Box)
+
 	CloseDescriptor()
 	for g in WorkShopMerch:
 		if (g.It.IsSame(It)):
@@ -181,6 +181,8 @@ func AddItem(Box : Inventory_Box_Res) -> void:
 		return
 	PopUpManager.GetInstance().DoFadeNotif("{0} combatible parts found".format([Amm]))
 	ItemCat.visible = true
+	ShipStats.visible = false
+	CloseDescriptor()
 	var c2 = Control.new()
 	c2.custom_minimum_size.y = 200
 	ItemParent.add_child(c2)
@@ -232,6 +234,7 @@ func ItemToAddSelected(M : Merchandise, Box : Inventory_Box_Res) -> void:
 	Map.GetInstance().GetScreenUi().TownUi.DropCoins(roundi(Cost / 100.0))
 	
 	ItemCat.visible = false
+	ShipStats.visible = true
 	for g in ItemParent.get_children():
 		g.queue_free()
 	
@@ -239,14 +242,12 @@ func ItemToAddSelected(M : Merchandise, Box : Inventory_Box_Res) -> void:
 	var placeholder = PlaceHolderItem.new()
 	placeholder.ContainedItem = M.It
 	CurrentShip.Cpt.GetCharacterInventory().AddItemToBox(placeholder, box)
-	Box.RegisterItem(placeholder)
-	Box.UpdateAmm(1)
-	#CurrentShip.Cpt.GetCharacterInventory().AddItem(M.It)
+	
 	PopUpManager.GetInstance().DoFadeNotif("{0} Added".format([M.It.GetItemName()]))
 	CloseDescriptor()
-	RefreshInventory()
 
-func CancelInstall(Box : Inventory_Box) -> void:
+
+func CancelInstall(Box : Inventory_Box_Res) -> void:
 	var Inv = CurrentShip.Cpt.GetCharacterInventory()
 	Inv.CancelInstall()
 	var placeholderItem : PlaceHolderItem = Box._ContainedItem
@@ -259,7 +260,7 @@ func CancelInstall(Box : Inventory_Box) -> void:
 	Inv.RemoveItem(placeholderItem)
 
 	CloseDescriptor()
-	RefreshInventory()
+
 	
 	for g in WorkShopMerch:
 		if (g.It.IsSame(placeholderItem.ContainedItem)):
@@ -356,6 +357,7 @@ func _on_button_pressed() -> void:
 
 func _on_cancel_button_pressed() -> void:
 	ItemCat.visible = false
+	ShipStats.visible = true
 	for g in ItemParent.get_children():
 		g.queue_free()
 
@@ -363,7 +365,7 @@ func _on_sell_pressed() -> void:
 	#if (CurrentShip is PlayerShip):
 		#PopUpManager.GetInstance().DoFadeNotif("Flagship can't be sold")
 		#return
-	var s = PopUpManager.GetInstance().DoConfirm("Sell ship?", "Yes", null)
+	var s = PopUpManager.GetInstance().DoConfirm("Sell ship for {0} drahma?".format([CurrentShip.Cpt.GetValue()]), "Yes", null)
 	s.Sign.connect(SellConfirmed)
 
 func SellConfirmed(t : bool) -> void:
@@ -384,6 +386,8 @@ func _on_stats_button_pressed() -> void:
 func _on_deck_button_pressed() -> void:
 	ShipStats.ShowDeck()
 
-
 func _on_distr_pressed() -> void:
 	ShipStats.ShowDisposition()
+
+func _on_inventory_button_pressed() -> void:
+	ShipStats.ShowInvetory()

@@ -834,13 +834,13 @@ func GeneratePathsFromLines(Lines : Array):
 
 #/////////////////////////////////////////////////////////////
 #SCREEN RESIZING
-const ScreenPos = Vector2(67.0,62.0)
-const PilotPos = Vector2(132.0,62.0)
+const ScreenPos = Vector2(40.0,40.0)
+const PilotPos = Vector2(116.0,41.0)
 const NormalPos = Vector2(342, 62)
-const OriginalSize = Vector2(869, 595.0)
-const PilotSize = Vector2(812.0, 590.0)
+const OriginalSize = Vector2(926.0, 643.0)
+const PilotSize = Vector2(852.0, 640.0)
 const NormalSize = Vector2(595, 595)
-const FullSize = Vector2(1148.0, 595.0)
+const FullSize = Vector2(1200.0, 640.0)
 
 func ToggleFullScreen(NewState : ScreenUI.ScreenState) -> void:
 	

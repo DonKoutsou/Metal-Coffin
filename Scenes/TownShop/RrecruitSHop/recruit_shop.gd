@@ -8,7 +8,7 @@ class_name RecruitShop
 #@export var Inv : CharacterInventory
 
 var CurrentShip : Captain
-var currentIndex : int = 0
+var currentIndex : int = -1
 
 signal RecruitClosed
 
@@ -24,33 +24,37 @@ func Init(Ships : Array[Captain]) -> void:
 	
 	AvailableCaptains = Ships
 	
-	for g in Ships:
-		var b = Button.new()
-		ShipButtonsParent.add_child(b)
-		b.text = g.GetCaptainName()
-		b.pressed.connect(OnShipSelected.bind(g))
+	RefreshCaptains()
 	
-	OnShipSelected(Ships[0])
+	var B : Button = ShipButtonsParent.get_child(0)
+	B.set_pressed_no_signal(true)
 
 func RefreshCaptains() -> void:
 	for g in ShipButtonsParent.get_children():
 		g.queue_free()
-		
-	for g in AvailableCaptains:
+	
+	for g in AvailableCaptains.size():
 		var b = Button.new()
 		ShipButtonsParent.add_child(b)
-		b.text = g.GetCaptainName()
+		b.text = AvailableCaptains[g].GetCaptainName()
 		b.pressed.connect(OnShipSelected.bind(g))
-	OnShipSelected(AvailableCaptains[0])
+		b.toggle_mode = true
 
-func OnShipSelected(Ship : Captain) -> void:
-	if (Ship == CurrentShip):
+	OnShipSelected(0)
+
+func OnShipSelected(ShipIndex : int) -> void:
+	if (ShipIndex == currentIndex):
+		var B : Button = ShipButtonsParent.get_child(currentIndex)
+		B.set_pressed_no_signal(true)
 		return
 	if (CurrentShip != null):
 		CurrentShip._CharInv.queue_free()
-	CurrentShip = Ship
-	CurrentShip = Ship.GetDuplicate()
-	currentIndex = AvailableCaptains.find(Ship)
+		var B : Button = ShipButtonsParent.get_child(currentIndex)
+		B.set_pressed_no_signal(false)
+		
+	CurrentShip = AvailableCaptains[ShipIndex].GetDuplicate()
+
+	currentIndex = ShipIndex
 	CurrentShip.RegisterInventory(CharacterInventory.newInv(CurrentShip))
 	Stats.SetCaptain(CurrentShip)
 	Stats.ShowStats()
@@ -58,14 +62,18 @@ func OnShipSelected(Ship : Captain) -> void:
 
 func _on_buy_pressed() -> void:
 	if (PlWaller.Funds > CurrentShip.GetValue()):
-		PlWaller.AddFunds(-CurrentShip.GetValue())
-		OnCaptainBought.emit(CurrentShip.duplicate(true))
-		
-		CurrentShip._CharInv.queue_free()
-		AvailableCaptains.remove_at(currentIndex)
-		RefreshCaptains()
+		var s = PopUpManager.GetInstance().DoConfirm("Buy ship for {0} drahma?".format([CurrentShip.GetValue()]), "Yes", null)
+		s.Sign.connect(OnBuyConfirmed)
 	else:
 		PopUpManager.GetInstance().DoFadeNotif("Not enough funds")
+
+func OnBuyConfirmed() -> void:
+	PlWaller.AddFunds(-CurrentShip.GetValue())
+	OnCaptainBought.emit(AvailableCaptains[currentIndex].duplicate(true))
+	
+	CurrentShip._CharInv.queue_free()
+	AvailableCaptains.remove_at(currentIndex)
+	RefreshCaptains()
 
 func _on_close_pressed() -> void:
 	RecruitClosed.emit()

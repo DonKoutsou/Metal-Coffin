@@ -19,7 +19,8 @@ func _ready() -> void:
 func ToggleElint(t : bool):
 	if (!t):
 		ElintContacts.clear()
-	collision_shape_2d.disabled = t
+		
+	collision_shape_2d.set_deferred("disabled", t)
 
 func UpdateELINTTRange():
 	(collision_shape_2d.shape as CircleShape2D).radius = ElintStat.GetFinalValue()

@@ -22,6 +22,34 @@ corner_detail = 1
 content_margin_top = 20.0
 content_margin_bottom = 50.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7pj6b"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.282501, 0.267741, 0.268801, 1)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gxgtf"]
+bg_color = Color(1, 0.763983, 0.0812772, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.423551, 0.31482, 2.40654e-07, 1)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 1
+
 [node name="CaptainStatContainer" type="PanelContainer" unique_id=1727051882 node_paths=PackedStringArray("ShipStats", "ShipDeck", "ShipInventory", "DispositionScreen", "CaptainIcon")]
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,7 +61,7 @@ script = ExtResource("1_gx6im")
 ShipStats = NodePath("PanelContainer/InventoryShipStats")
 ShipDeck = NodePath("PanelContainer/ShipDeck")
 ShipInventory = NodePath("PanelContainer/InputScroll/InventoryInterface")
-DispositionScreen = NodePath("PanelContainer/PanelContainer")
+DispositionScreen = NodePath("PanelContainer/VBoxContainer/PanelContainer")
 CaptainIcon = NodePath("PanelContainer/CaptainIcon")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=383408915]
@@ -62,11 +90,13 @@ script = ExtResource("6_uviis")
 metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
 [node name="InventoryInterface" parent="PanelContainer/InputScroll" unique_id=399381214 instance=ExtResource("7_qyvw6")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="InventoryShipStats" parent="PanelContainer" unique_id=1343149227 instance=ExtResource("3_qyvw6")]
+visible = false
 layout_mode = 2
 StatsShown = Array[int]([4, 16, 15, 6, 7, 17, 3, 0, 1, 2, 9, 22])
 
@@ -108,7 +138,7 @@ uppercase = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/h_separation = 10
+theme_override_constants/h_separation = -20
 theme_override_constants/v_separation = -131
 alignment = 1
 last_wrap_alignment = 2
@@ -125,7 +155,7 @@ uppercase = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/h_separation = 10
+theme_override_constants/h_separation = -20
 theme_override_constants/v_separation = -131
 alignment = 1
 last_wrap_alignment = 2
@@ -142,7 +172,7 @@ uppercase = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/h_separation = 10
+theme_override_constants/h_separation = -20
 theme_override_constants/v_separation = -131
 alignment = 1
 last_wrap_alignment = 2
@@ -164,7 +194,58 @@ theme_override_constants/v_separation = -131
 alignment = 1
 last_wrap_alignment = 2
 
-[node name="PanelContainer" parent="PanelContainer" unique_id=1619360619 instance=ExtResource("8_7pj6b")]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1543313664]
+visible = false
 layout_mode = 2
+
+[node name="VBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=317736113]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/VBoxContainer" unique_id=1656008641]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Panel2" type="Panel" parent="PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=1348801597]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_7pj6b")
+
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=1667706255]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "Base Stats"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/VBoxContainer" unique_id=2009527284]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Panel" type="Panel" parent="PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer2" unique_id=762330820]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_gxgtf")
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer2" unique_id=670223122]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Ship Part Buffs"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=1619360619 instance=ExtResource("8_7pj6b")]
+layout_mode = 2
+size_flags_vertical = 3
 
 [connection signal="BoxSelected" from="PanelContainer/InputScroll/InventoryInterface" to="." method="_on_inventory_interface_box_selected"]

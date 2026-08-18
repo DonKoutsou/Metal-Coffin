@@ -173,7 +173,7 @@ func SetCardStats(Stats : CardStats, Amm : int = 0) -> void:
 		But.add_theme_stylebox_override("disabled", NormalCardColors)
 		$SubViewportContainer/SubViewport/TextureRect.texture = NormalCardTexture
 
-	CardName.text = Stats.GetCardName()
+	CardName.text = Stats.GetCardName().to_upper()
 	CardTex.texture = Stats.Icon
 	
 	$Amm.visible = Amm > 1
@@ -215,14 +215,14 @@ func SetCardBattleStats(User : BattleShipStats, Stats : CardStats, Amm : int = 0
 		
 	ShownCost = GetBattleCost(User, Stats)
 	if (Stats.Burned):
-		CardName.text = "Burned"
+		CardName.text = "Burned".to_upper()
 		CardDesc.text = ""
 		CardCost.text = "0"
 		UpdateBurnShader(0.75)
 		CardTex.texture = null
 	else:
 		var DescText =  "[center] {0}".format([Stats.GetBattleDescription(User)])
-		CardName.text = Stats.GetCardName()
+		CardName.text = Stats.GetCardName().to_upper()
 		CardDesc.text = DescText
 		CardCost.text = "{0}".format([ShownCost])
 		CardTex.texture = Stats.Icon

@@ -76,6 +76,7 @@ func DoFadeInAnim() -> void:
 	var S = DeletableSoundGlobal.new()
 	S.stream = InSound
 	S.autoplay = true
+	S.bus = "Sounds"
 	add_child(S)
 	
 	#if (Target != null):

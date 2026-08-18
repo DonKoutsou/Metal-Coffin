@@ -16,12 +16,12 @@
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/UIPiecies/Light.png" id="15_7x35f"]
 [ext_resource type="PackedScene" uid="uid://bagsk7yyq8sv1" path="res://Scenes/WishlistButton.tscn" id="21_srpg8"]
 [ext_resource type="Texture2D" uid="uid://tklv7f2e06gq" path="res://Assets/Logos/Discord-Symbol-White.png" id="21_xqmn8"]
+[ext_resource type="Texture2D" uid="uid://cjsbdqokrpwiv" path="res://Assets/UIPiecies/Screen/ScreenFrames/Screen.png" id="22_23r0g"]
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRT_Mat.tres" id="22_jns0o"]
 [ext_resource type="PackedScene" uid="uid://bb2xsv1qpwei" path="res://Scenes/InScreenUI/Settings/setting_panel.tscn" id="22_nthvp"]
 [ext_resource type="Texture2D" uid="uid://d261r1cyo8fd2" path="res://Assets/UIPiecies/Screen/SidePanels/Menu_Cover.png" id="22_qskuh"]
 [ext_resource type="Environment" uid="uid://bkmqb06466wvr" path="res://Enviroments/Env.tres" id="22_xop3l"]
 [ext_resource type="PackedScene" uid="uid://d0iiqaijsg1y1" path="res://Scenes/InScreenUI/Commande_Line/command_line.tscn" id="23_t54ed"]
-[ext_resource type="Texture2D" uid="uid://dum1h361hyptq" path="res://Assets/UIPiecies/Screen/ScreenFrames/StartMenu_Screen.png" id="24_nthvp"]
 [ext_resource type="PackedScene" uid="uid://bq1ns0us14bn3" path="res://Scenes/InScreenUI/Cursor/Cursor.tscn" id="24_rh5bc"]
 [ext_resource type="StyleBox" uid="uid://bj8tmjsnlmj0" path="res://Theme/Buttons/ButtonBlack.tres" id="26_67h1o"]
 [ext_resource type="StyleBox" uid="uid://g2ic8um6hit" path="res://Theme/Buttons/ButtonBlack_Pressed.tres" id="27_pmm2a"]
@@ -68,10 +68,10 @@ cloudNoise = ExtResource("3_t54ed")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 68.0
-offset_top = 63.0
-offset_right = -344.0
-offset_bottom = -63.0
+offset_left = 38.0
+offset_top = 39.0
+offset_right = -313.0
+offset_bottom = -39.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch = true
@@ -84,8 +84,8 @@ canvas_item_default_texture_filter = 2
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 0
 positional_shadow_atlas_16_bits = false
-size = Vector2i(1302, 891)
-size_2d_override = Vector2i(868, 594)
+size = Vector2i(1855, 1282)
+size_2d_override = Vector2i(929, 642)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 
@@ -226,10 +226,10 @@ grow_vertical = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = 10.0
-offset_right = -3.0
-offset_bottom = -98.0
+offset_left = 31.222229
+offset_top = 47.0
+offset_right = -33.22223
+offset_bottom = -95.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 8
@@ -240,6 +240,7 @@ expand_mode = 1
 [node name="TextureRect3" type="TextureRect" parent="SubViewportContainer/SubViewport/TextureRect3" unique_id=1889635855]
 self_modulate = Color(0, 0, 0, 0.6)
 show_behind_parent = true
+light_mask = 0
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -286,6 +287,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="SubViewportContainer/SubViewport" unique_id=1720222894]
 position = Vector2(422, 234)
+blend_mode = 2
 texture = ExtResource("15_7x35f")
 texture_scale = 5.0
 height = 217.0
@@ -425,6 +427,7 @@ layout_mode = 2
 texture = ExtResource("3_s86m3")
 
 [node name="SettingPanel" parent="SubViewportContainer/SubViewport" unique_id=1258850840 instance=ExtResource("22_nthvp")]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -467,10 +470,11 @@ custom_minimum_size = Vector2(0, 38.045)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -274.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("24_nthvp")
+texture = ExtResource("22_23r0g")
 expand_mode = 1
 
 [node name="ScreenFrame2" type="TextureRect" parent="." unique_id=750980056]

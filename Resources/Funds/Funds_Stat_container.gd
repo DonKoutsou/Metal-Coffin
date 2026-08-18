@@ -9,7 +9,7 @@ class_name FundsStat
 var CurrentAmm :int = 0
 var tw : Tween
 func _ready() -> void:
-	Text.text = "FUNDS : {0} {1}".format([roundi(PlayerWallet.Funds), FundsThing])
+	Text.text = "FUNDS :\n{0} {1}".format([roundi(PlayerWallet.Funds), FundsThing])
 	CurrentAmm = roundi(PlayerWallet.Funds)
 	UpDateFunds(CurrentAmm)
 	PlayerWallet.connect("OnFundsUpdated", UpDateFunds)
@@ -32,6 +32,6 @@ func UpdateLabel(Amm : int) -> void:
 			continue
 		AmmStr = AmmStr.insert(dotPlacement, ".")
 
-	Text.text = "FUNDS : {0} {1}".format([AmmStr, FundsThing])
+	Text.text = "FUNDS :\n{0}{1}".format([AmmStr, FundsThing])
 	CurrentAmm = Amm
 	Sound.play()

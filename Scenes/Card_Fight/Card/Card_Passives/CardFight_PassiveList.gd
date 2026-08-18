@@ -24,6 +24,9 @@ func AddShip(Ship : BattleShipStats) -> void:
 func RemoveShip(Ship : BattleShipStats) -> void:
 	List.erase(Ship)
 
+func ClearShipPassives(Ship : BattleShipStats) -> void:
+	List[Ship].clear()
+
 func Clear() -> void:
 	List.clear()
 

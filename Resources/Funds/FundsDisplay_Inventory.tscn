@@ -38,6 +38,7 @@ offset_right = 65.5
 offset_bottom = 16.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/line_spacing = -10
 theme_override_font_sizes/font_size = 28
 text = "Funds 1214124"
 horizontal_alignment = 1

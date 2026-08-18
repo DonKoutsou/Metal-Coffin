@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://cuad168v6mleh"]
+
+[ext_resource type="Script" uid="uid://7yh7c1xphg2i" path="res://Scenes/GlobalManagers/DispositionManager.gd" id="1_qnfdb"]
+[ext_resource type="Script" uid="uid://b440ymk6opetf" path="res://Scenes/GlobalManagers/Dispotition.gd" id="2_in2jj"]
+[ext_resource type="Script" uid="uid://brinqcu2jdpo8" path="res://Scenes/GlobalManagers/DispositionLevel.gd" id="3_2mlnm"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="4_1jc4x"]
+[ext_resource type="Resource" uid="uid://odkwy5rk0vxe" path="res://Resources/Cards/Powers/ShieldOnDraw.tres" id="5_46o2s"]
+[ext_resource type="Resource" uid="uid://barj6en5mlnje" path="res://Resources/Cards/Powers/Thorns.tres" id="6_pt5js"]
+[ext_resource type="Resource" uid="uid://w0powsomsqvs" path="res://Resources/Cards/Powers/FireHeal.tres" id="7_f6e7l"]
+[ext_resource type="Resource" uid="uid://ccj7o7kccax76" path="res://Resources/Cards/Self_Combustion.tres" id="8_in2jj"]
+[ext_resource type="Resource" uid="uid://bubqxvuk4i0ow" path="res://Resources/Cards/Powers/Pyromania.tres" id="8_ny27q"]
+
+[sub_resource type="Resource" id="Resource_s7tc1"]
+script = ExtResource("3_2mlnm")
+Rewards = Dictionary[ExtResource("4_1jc4x"), int]({
+ExtResource("5_46o2s"): 1
+})
+metadata/_custom_type_script = "uid://brinqcu2jdpo8"
+
+[sub_resource type="Resource" id="Resource_5owba"]
+script = ExtResource("3_2mlnm")
+DispoistionStage = 0.6
+Rewards = Dictionary[ExtResource("4_1jc4x"), int]({
+ExtResource("6_pt5js"): 1
+})
+metadata/_custom_type_script = "uid://brinqcu2jdpo8"
+
+[sub_resource type="Resource" id="Resource_hdcf2"]
+script = ExtResource("2_in2jj")
+Levels = Array[ExtResource("3_2mlnm")]([SubResource("Resource_s7tc1"), SubResource("Resource_5owba")])
+metadata/_custom_type_script = "uid://b440ymk6opetf"
+
+[sub_resource type="Resource" id="Resource_w74s6"]
+script = ExtResource("2_in2jj")
+metadata/_custom_type_script = "uid://b440ymk6opetf"
+
+[sub_resource type="Resource" id="Resource_4nj0o"]
+script = ExtResource("3_2mlnm")
+Rewards = Dictionary[ExtResource("4_1jc4x"), int]({
+ExtResource("7_f6e7l"): 1,
+ExtResource("8_in2jj"): 3
+})
+metadata/_custom_type_script = "uid://brinqcu2jdpo8"
+
+[sub_resource type="Resource" id="Resource_2e8ie"]
+script = ExtResource("3_2mlnm")
+DispoistionStage = 0.4
+Rewards = Dictionary[ExtResource("4_1jc4x"), int]({
+ExtResource("8_ny27q"): 1
+})
+metadata/_custom_type_script = "uid://brinqcu2jdpo8"
+
+[sub_resource type="Resource" id="Resource_sk3h7"]
+script = ExtResource("2_in2jj")
+Levels = Array[ExtResource("3_2mlnm")]([SubResource("Resource_4nj0o"), SubResource("Resource_2e8ie")])
+metadata/_custom_type_script = "uid://b440ymk6opetf"
+
+[sub_resource type="Resource" id="Resource_dvowk"]
+script = ExtResource("2_in2jj")
+metadata/_custom_type_script = "uid://b440ymk6opetf"
+
+[sub_resource type="Resource" id="Resource_dnouy"]
+script = ExtResource("2_in2jj")
+metadata/_custom_type_script = "uid://b440ymk6opetf"
+
+[node name="DispoisitionManager" type="Node" unique_id=315877250]
+script = ExtResource("1_qnfdb")
+DispositionRewards = Array[ExtResource("2_in2jj")]([SubResource("Resource_hdcf2"), SubResource("Resource_w74s6"), SubResource("Resource_sk3h7"), SubResource("Resource_dvowk"), SubResource("Resource_dnouy")])

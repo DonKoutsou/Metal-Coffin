@@ -1,114 +1,53 @@
 [gd_scene format=3 uid="uid://cmvl7w65kwp5a"]
 
 [ext_resource type="Script" uid="uid://jgplvqx2dscs" path="res://Scripts/Inventory/character_inventory.gd" id="1_i6whi"]
-[ext_resource type="Texture2D" uid="uid://bkya84hu7h3c4" path="res://Assets/CaptainPortraits/Captain7.png" id="3_1f7qw"]
-[ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="5_c3lfk"]
-[ext_resource type="Texture2D" uid="uid://bk3hmnxkvr5ab" path="res://Assets/UIPiecies/network-bars.png" id="6_j2tgv"]
-[ext_resource type="Texture2D" uid="uid://dw7al4e4pdao4" path="res://Assets/UIPiecies/Card.png" id="6_w6jla"]
-[ext_resource type="Texture2D" uid="uid://c2v600qe1d181" path="res://Assets/UIPiecies/nested-hexagons.png" id="7_w6jla"]
-[ext_resource type="Texture2D" uid="uid://c7wkqvg4osdjt" path="res://Assets/UIPiecies/cardboard-box.png" id="8_8t562"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c3lfk"]
 
-[node name="CharacterInventoryUI" type="PanelContainer" unique_id=1843118128 node_paths=PackedStringArray("CaptainNameLabel")]
-anchors_preset = 14
+[node name="CharacterInventoryUI" type="HBoxContainer" unique_id=1045310667 node_paths=PackedStringArray("CaptainNameLabel")]
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_top = -61.0
-offset_bottom = 43.0
+offset_left = -145.0
+offset_top = -20.0
+offset_right = 145.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_vertical = 6
 mouse_filter = 2
 script = ExtResource("1_i6whi")
-CaptainNameLabel = NodePath("VBoxContainer2/VBoxContainer/HBoxContainer2/CharacterName")
+CaptainNameLabel = NodePath("Button/CharacterName")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=367368584]
-visible = false
-modulate = Color(1, 1, 1, 0.5)
-custom_minimum_size = Vector2(180, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-texture = ExtResource("3_1f7qw")
-expand_mode = 1
-stretch_mode = 6
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=1621792032]
-layout_mode = 2
-size_flags_vertical = 0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2" unique_id=178598801]
-layout_mode = 2
-
-[node name="HBoxContainer2" type="VBoxContainer" parent="VBoxContainer2/VBoxContainer" unique_id=808241198]
-layout_mode = 2
-
-[node name="CharacterName" type="LineEdit" parent="VBoxContainer2/VBoxContainer/HBoxContainer2" unique_id=412651198]
+[node name="Button" type="Button" parent="." unique_id=587787046]
+custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="CharacterName" type="LineEdit" parent="Button" unique_id=412651198]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_right = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxEmpty_c3lfk")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_c3lfk")
 text = "Char Name"
 max_length = 20
-expand_to_text_length = true
+caret_blink = true
+caret_blink_interval = 0.28
 
-[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer/HBoxContainer2" unique_id=882672510]
+[node name="Button2" type="Button" parent="." unique_id=1358540188]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=84194165 groups=["DigitalBouncingButton"]]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("5_c3lfk")
-theme_override_font_sizes/font_size = 22
-icon = ExtResource("6_j2tgv")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Deck" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=755038022 groups=["DigitalBouncingButton"]]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("5_c3lfk")
-theme_override_font_sizes/font_size = 22
-icon = ExtResource("6_w6jla")
-icon_alignment = 1
-expand_icon = true
-
-[node name="InventoryVisToggle" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=2138011353 groups=["DigitalBouncingButton"]]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("5_c3lfk")
-theme_override_font_sizes/font_size = 22
-icon = ExtResource("8_8t562")
-icon_alignment = 1
-
-[node name="Disposition" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=100044532 groups=["DigitalBouncingButton"]]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("5_c3lfk")
-theme_override_font_sizes/font_size = 22
-icon = ExtResource("7_w6jla")
-icon_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer" unique_id=842790455]
-visible = false
-layout_mode = 2
-alignment = 1
-
-[node name="Button2" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer" unique_id=457660940 groups=["DigitalButtons"]]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Items"
-
-[node name="Button3" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer" unique_id=369785024 groups=["DigitalButtons"]]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Cards"
-
-[connection signal="text_changed" from="VBoxContainer2/VBoxContainer/HBoxContainer2/CharacterName" to="." method="_on_character_name_text_changed"]
-[connection signal="pressed" from="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/Deck" to="." method="_on_deck_pressed"]
-[connection signal="pressed" from="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/InventoryVisToggle" to="." method="_on_inventory_vis_toggle_pressed"]
-[connection signal="pressed" from="VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/Disposition" to="." method="_on_disposition_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="text_changed" from="Button/CharacterName" to="." method="_on_character_name_text_changed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

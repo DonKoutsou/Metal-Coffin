@@ -21,7 +21,7 @@ func GetRewards(ch : Captain) -> Dictionary[CardStats, int]:
 	var rewards : Dictionary[CardStats, int]
 
 	for g in ch.disp:
-		var dispositionValue = ch.disp[g]
+		var dispositionValue = ch.disp[g] + ch.itemDisposition[g]
 		
 		var disp : Disposition = DispositionRewards[g]
 		for d in disp.Levels:

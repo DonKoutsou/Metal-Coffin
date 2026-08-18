@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bwb4h83od4vgp" path="res://Scenes/ScreenUI/Pilot_Screen/PilotScreen.gd" id="1_fq67n"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_ecvfe"]
+[ext_resource type="Texture2D" uid="uid://cjsbdqokrpwiv" path="res://Assets/UIPiecies/Screen/ScreenFrames/Screen.png" id="3_188si"]
 [ext_resource type="PackedScene" uid="uid://dn356hqaf372p" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/ThrustSlider/thrust_slider.tscn" id="3_ecvfe"]
-[ext_resource type="Texture2D" uid="uid://dum1h361hyptq" path="res://Assets/UIPiecies/Screen/ScreenFrames/StartMenu_Screen.png" id="3_h6xln"]
 [ext_resource type="Texture2D" uid="uid://dxr40jficax1" path="res://Assets/UIPiecies/Screen/SidePanels/Pilot_Cover.png" id="4_8mt3t"]
 [ext_resource type="StyleBox" uid="uid://bc1y4hhkl7ce6" path="res://Theme/Buttons/NobButton.tres" id="6_bpouu"]
 [ext_resource type="PackedScene" uid="uid://k7pqywm80h3m" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/ThrustSlider/Elevation_slider.tscn" id="6_jqinv"]
@@ -63,12 +63,12 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 72.0
-offset_right = -18.0
+offset_left = 80.0
+offset_right = -276.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("3_h6xln")
+texture = ExtResource("3_188si")
 expand_mode = 1
 
 [node name="ScreenBackground" type="TextureRect" parent="." unique_id=776636619]

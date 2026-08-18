@@ -96,9 +96,9 @@ func CardFightDestroyed() -> void:
 	FightEnded.emit()
 #/////////////////////////////////////////////////////////////
 #SCREEN RESIZING
-const ScreenPos = Vector2(67.0,62.0)
-const OriginalSize = Vector2(869, 595.0)
-const FullSize = Vector2(1148.0, 595.0)
+const ScreenPos = Vector2(40.0,40.0)
+const OriginalSize = Vector2(926.0, 643.0)
+const FullSize = Vector2(1200.0, 640.0)
 
 func ToggleFullScreen(NewState : ScreenUI.ScreenState) -> void:
 	

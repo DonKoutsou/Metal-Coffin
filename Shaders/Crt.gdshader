@@ -94,20 +94,7 @@ float rounded_rect_sdf_aspect(vec2 uv, float radius) {
 	return length(max(q, vec2(0.0))) + min(max(q.x, q.y), 0.0) - radius;
 }
 
-float ScreenShapeVignette(vec2 uv) {
-	float sdf = rounded_rect_sdf_aspect(uv, vignette_roundness);
 
-	// Distance from the inside of the screen edge.
-	float edge_dist = max(-sdf, 0.0);
-
-	float spread = mix(0.001, 1.0, vignette_spread);
-
-	float vig = 1.0 - smoothstep(0.0, spread, edge_dist);
-
-	vig = pow(vig, vignette_harshness);
-
-	return exp(-vignette_strength * 2.0 * vig);
-}
 
 vec3 Fetch(vec2 base, vec2 off, vec2 inv_res) {
 	vec2 uv = (base + off + vec2(0.5)) * inv_res;
@@ -222,11 +209,54 @@ vec3 yuv_to_rgb(vec3 yuv) {
 	return clamp(yuv * YUV_TO_RGB, vec3(0.0), vec3(1.0));
 }
 
+float crt_screen_sdf(vec2 warped_uv) {
+	float aspect = res.x / res.y;
+
+	// Center around 0.
+	vec2 p = warped_uv * 2.0 - 1.0;
+
+	// Correct aspect so the corner radius is visually even.
+	p.x *= aspect;
+
+	float r = vignette_roundness;
+
+	vec2 half_size = vec2(aspect, 1.0);
+	vec2 q = abs(p) - (half_size - vec2(r));
+
+	return length(max(q, vec2(0.0))) + min(max(q.x, q.y), 0.0) - r;
+}
+
+float crt_screen_mask(vec2 warped_uv) {
+	float d = crt_screen_sdf(warped_uv);
+
+	// Anti-alias the screen edge.
+	float aa = max(fwidth(d), 0.001);
+
+	// 1.0 inside screen, 0.0 outside.
+	return 1.0 - smoothstep(-aa, aa, d);
+}
+
+float ScreenShapeVignette(vec2 warped_uv) {
+	float d = crt_screen_sdf(warped_uv);
+
+	// Distance from the inside edge of the warped CRT shape.
+	float edge_dist = max(-d, 0.0);
+
+	float spread = mix(0.001, 0.8, vignette_spread);
+
+	float vig = 1.0 - smoothstep(0.0, spread, edge_dist);
+	vig = pow(vig, vignette_harshness);
+
+	return exp(-vignette_strength * 2.0 * vig);
+}
+
 void fragment(){
 	vec2 pos = Warp(SCREEN_UV);
 
-	if (border(pos) <= 0.0){
-		COLOR = vec4(0,0,0,1.0);
+	float screen_mask = crt_screen_mask(pos);
+
+	if (screen_mask <= 0.001) {
+		COLOR = vec4(0.0, 0.0, 0.0, 1.0);
 	}
 	else{
 		COLOR.rgb = Tri(pos) * Mask(FRAGCOORD.xy);

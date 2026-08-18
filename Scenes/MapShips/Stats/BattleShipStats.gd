@@ -73,6 +73,7 @@ signal StatsBuffed
 signal CardsBuffed
 signal ShipDamaged(amm : float, shieldamm : float, Instigator : BattleShipStats)
 signal ShipSetOnFire(Instigator : BattleShipStats)
+signal PassivesCleansed()
 
 func ShieldShip(Amm : float) -> void:
 	Shield = min(Shield + Amm, MaxShield)
@@ -155,6 +156,9 @@ func CleanseDebuffs() -> void:
 	DefDebuff = 0
 	ShipViz.Refresh()
 	StatsBuffed.emit()
+
+func CleansePassives() -> void:
+	PassivesCleansed.emit()
 
 func DeBuffSpeed(Amm : float, Turns : int = 2) -> void:
 	#buffs are usually 1.2 or 1.3 so we keep the 0.2 and add it

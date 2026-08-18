@@ -249,7 +249,7 @@ func _physics_process(delta: float) -> void:
 		#CloudMat.set_shader_parameter("fractal_lacunarity", clamp(l + randf_range(-0.01,0.01), 1,2))
 	
 	if (FocusedShip != null):
-		var pos = (global_position - FocusedShip.global_position) * delta * (SimulationManager.SimSpeed() * 2)
+		var pos = (global_position - FocusedShip.global_position) * delta * zoom.x * 10
 		UpdateCameraPos(pos, false, true)
 		#ForceCamPosition(FocusedShip.global_position)
 

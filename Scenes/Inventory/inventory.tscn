@@ -12,7 +12,11 @@
 [ext_resource type="PackedScene" uid="uid://bnonfp8ywr3vl" path="res://Scenes/Inventory/captain_stat_container.tscn" id="9_o4jeo"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="9_ubet6"]
 [ext_resource type="PackedScene" uid="uid://5eroibth7was" path="res://Resources/Funds/FundsDisplay_Inventory.tscn" id="11_37qp6"]
+[ext_resource type="Texture2D" uid="uid://bk3hmnxkvr5ab" path="res://Assets/UIPiecies/network-bars.png" id="11_oglie"]
+[ext_resource type="Texture2D" uid="uid://dw7al4e4pdao4" path="res://Assets/UIPiecies/Card.png" id="12_3d65x"]
+[ext_resource type="Texture2D" uid="uid://c7wkqvg4osdjt" path="res://Assets/UIPiecies/cardboard-box.png" id="13_1sr3f"]
 [ext_resource type="AudioStream" uid="uid://d4k7al36dc8er" path="res://Assets/Sounds/ScreenZap.wav" id="13_jjw7x"]
+[ext_resource type="Texture2D" uid="uid://c2v600qe1d181" path="res://Assets/UIPiecies/nested-hexagons.png" id="14_vv4sd"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n1gkd"]
 content_margin_left = 0.0
@@ -48,8 +52,8 @@ CharInvScene = ExtResource("3_5gkpo")
 ItemDescriptorScene = ExtResource("4_8j1nc")
 ItemTransferScene = ExtResource("5_pqw7i")
 ItemNotifScene = ExtResource("6_q7t14")
-CharacterPlace = NodePath("VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2/VBoxContainer/ScrollContainer/VBoxContainer")
-DescriptorPlace = NodePath("VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2")
+CharacterPlace = NodePath("VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2/VBoxContainer/PanelContainer2/ScrollContainer/VBoxContainer")
+DescriptorPlace = NodePath("VBoxContainer2/PanelContainer/HBoxContainer")
 CaptainStats = NodePath("VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/CaptainStatContainer")
 MissileDockEventH = ExtResource("7_ffxnd")
 DroneDockEventH = ExtResource("8_0fcos")
@@ -76,17 +80,44 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer" unique_id=1613336804]
+[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer" unique_id=366693959]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer" unique_id=133740933]
+layout_mode = 2
+
+[node name="StatsButton" type="Button" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1041466533]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+icon = ExtResource("11_oglie")
+
+[node name="DeckButton" type="Button" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=502606399]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+icon = ExtResource("12_3d65x")
+
+[node name="InventoryButton" type="Button" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1975341829]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+icon = ExtResource("13_1sr3f")
+
+[node name="DispositionButton" type="Button" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1951854749]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+icon = ExtResource("14_vv4sd")
 
 [node name="CaptainStatContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer" unique_id=1493115153 instance=ExtResource("9_o4jeo")]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer" unique_id=864552121]
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2" unique_id=1746959925]
 layout_mode = 2
@@ -100,8 +131,13 @@ custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2/VBoxContainer" unique_id=85486460]
-custom_minimum_size = Vector2(300, 0)
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2/VBoxContainer" unique_id=20501166]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2/VBoxContainer/PanelContainer2" unique_id=85486460]
+clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -111,7 +147,7 @@ vertical_scroll_mode = 3
 script = ExtResource("9_ubet6")
 metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2/VBoxContainer/ScrollContainer" unique_id=1779502213]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2/VBoxContainer/PanelContainer2/ScrollContainer" unique_id=1779502213]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
@@ -126,4 +162,8 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_4fam5")
 stream = ExtResource("13_jjw7x")
 bus = &"Sounds"
 
+[connection signal="pressed" from="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer/StatsButton" to="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/CaptainStatContainer" method="ShowStats"]
+[connection signal="pressed" from="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer/DeckButton" to="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/CaptainStatContainer" method="ShowDeck"]
+[connection signal="pressed" from="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer/InventoryButton" to="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/CaptainStatContainer" method="ShowInvetory"]
+[connection signal="pressed" from="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer/DispositionButton" to="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/CaptainStatContainer" method="ShowDisposition"]
 [connection signal="InventoryBoxSelected" from="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/CaptainStatContainer" to="." method="BoxSelected"]

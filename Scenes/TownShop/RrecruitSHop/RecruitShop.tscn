@@ -29,7 +29,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_avlo7")
 Stats = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/CaptainStatContainer")
-ShipButtonsParent = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer")
+ShipButtonsParent = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/PanelContainer/ScrollContainer/VBoxContainer")
 PlWaller = ExtResource("2_8k3dn")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1464941558]
@@ -47,6 +47,41 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=432730740]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1575597021]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=2076453274]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=504506716]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+icon = ExtResource("7_irqbf")
+
+[node name="Button2" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=20245679]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+icon = ExtResource("8_ti3qq")
+
+[node name="Button3" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=1686066979]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+icon = ExtResource("9_154xo")
+
+[node name="Button4" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=1185154378]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+icon = ExtResource("10_xeu44")
+
+[node name="CaptainStatContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1727051882 instance=ExtResource("9_n5htp")]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1292178761]
 custom_minimum_size = Vector2(200, 0)
@@ -75,11 +110,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("6_xjf37")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/PanelContainer" unique_id=2120448741]
-custom_minimum_size = Vector2(112, 0)
-layout_mode = 2
-
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1345407154]
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/PanelContainer" unique_id=1345407154]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_rs5of")
@@ -88,62 +119,35 @@ vertical_scroll_mode = 3
 script = ExtResource("7_ensoj")
 metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/PanelContainer/VBoxContainer/ScrollContainer" unique_id=209076296]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/PanelContainer/ScrollContainer" unique_id=209076296]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Buy" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1965928851]
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer" unique_id=771677035]
 layout_mode = 2
-text = "Buy"
+theme_override_styles/panel = ExtResource("6_xjf37")
 
-[node name="Close" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1067636434]
-layout_mode = 2
-text = "Close"
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=483839682]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="CaptainStatContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1727051882 instance=ExtResource("9_n5htp")]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=207478929]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/PanelContainer2" unique_id=529310459]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=504506716]
+[node name="Buy" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=1965928851]
 layout_mode = 2
-size_flags_horizontal = 3
-text = "STATS"
-icon = ExtResource("7_irqbf")
+theme_override_font_sizes/font_size = 24
+text = "BUY SHIP"
 
-[node name="Button2" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=20245679]
+[node name="Close" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=1067636434]
 layout_mode = 2
-size_flags_horizontal = 3
-text = "DECK"
-icon = ExtResource("8_ti3qq")
-
-[node name="Button3" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=1686066979]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "CARGO"
-icon = ExtResource("9_154xo")
-
-[node name="Button4" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=1185154378]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "DISPOSITION"
-icon = ExtResource("10_xeu44")
+text = "LEAVE"
 
 [node name="WorkShopSound" type="AudioStreamPlayer" parent="." unique_id=1351277791]
 stream = ExtResource("10_s2njy")
 autoplay = true
 bus = &"Sounds"
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/PanelContainer/VBoxContainer/Buy" to="." method="_on_buy_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/PanelContainer/VBoxContainer/Close" to="." method="_on_close_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/Button3" to="." method="_on_button_3_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/Button4" to="." method="_on_button_4_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/PanelContainer2/VBoxContainer/Buy" to="." method="_on_buy_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/VBoxContainer/PanelContainer2/VBoxContainer/Close" to="." method="_on_close_pressed"]

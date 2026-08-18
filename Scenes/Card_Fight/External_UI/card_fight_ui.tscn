@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bl8iy8s43qakx" path="res://Scenes/Card_Fight/External_UI/FanCardHandContainer.gd" id="1_8e13a"]
 [ext_resource type="Script" uid="uid://c72jhtq31f4w3" path="res://Scenes/Card_Fight/External_UI/card_fight_ui.gd" id="1_u6pkr"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_lf8xs"]
-[ext_resource type="Texture2D" uid="uid://dum1h361hyptq" path="res://Assets/UIPiecies/Screen/ScreenFrames/StartMenu_Screen.png" id="3_ibt5m"]
+[ext_resource type="Texture2D" uid="uid://cjsbdqokrpwiv" path="res://Assets/UIPiecies/Screen/ScreenFrames/Screen.png" id="3_ibt5m"]
 [ext_resource type="PackedScene" uid="uid://cy1ohrkbe4n1e" path="res://Scenes/Card_Fight/SegmentedBar/segmented_hp.tscn" id="4_fje4l"]
 [ext_resource type="Texture2D" uid="uid://ci6jggfuspccp" path="res://Assets/UIPiecies/Screen/SidePanels/CardFight_Cover.png" id="4_ibt5m"]
 [ext_resource type="PackedScene" uid="uid://dp1kurhtal0no" path="res://Scenes/Card_Fight/External_UI/discard_pile.tscn" id="11_omcrt"]
@@ -57,26 +57,21 @@ BeepSound = "uid://81kxs8jf66hv"
 BeepNoSound = "uid://c43kn36ymgltb"
 BeepLong = "uid://djpdmpewc6sg"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=462058612]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/separation = -276
-
-[node name="ScreenFrame2" type="TextureRect" parent="HBoxContainer" unique_id=1893763889]
+[node name="ScreenFrame2" type="TextureRect" parent="." unique_id=1893763889]
 custom_minimum_size = Vector2(0, 38.045)
-layout_mode = 2
+layout_mode = 0
+offset_right = 1005.0
+offset_bottom = 720.0
 size_flags_horizontal = 3
 mouse_filter = 2
 texture = ExtResource("3_ibt5m")
 expand_mode = 1
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=1112117608]
-layout_mode = 2
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1112117608]
+layout_mode = 0
+offset_left = 1006.0
+offset_right = 1280.0
+offset_bottom = 720.0
 mouse_filter = 2
 texture = ExtResource("4_ibt5m")
 expand_mode = 3

@@ -23,7 +23,7 @@ func ShowStats() -> void:
 	ShipStats.visible = true
 	ShipDeck.visible = false
 	ShipInventory.visible = false
-	DispositionScreen.visible = false
+	DispositionScreen.get_parent().visible = false
 
 func ShowOnlyStats(stats : Array[STAT_CONST.STATS]) -> void:
 	ShipStats.ShowStats(stats)
@@ -32,19 +32,19 @@ func ShowDeck() -> void:
 	ShipStats.visible = false
 	ShipDeck.visible = true
 	ShipInventory.visible = false
-	DispositionScreen.visible = false
+	DispositionScreen.get_parent().visible = false
 
 func ShowInvetory() -> void:
 	ShipInventory.visible = true
 	ShipStats.visible = false
 	ShipDeck.visible = false
-	DispositionScreen.visible = false
+	DispositionScreen.get_parent().visible = false
 
 func ShowDisposition() -> void:
 	ShipInventory.visible = false
 	ShipStats.visible = false
 	ShipDeck.visible = false
-	DispositionScreen.visible = true
+	DispositionScreen.get_parent().visible = true
 
 func UpdateValues() -> void:
 	if (CurrentlyShownCaptain == null):

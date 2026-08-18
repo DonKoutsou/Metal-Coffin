@@ -15,6 +15,34 @@
 [ext_resource type="PackedScene" uid="uid://bbxyip8ihbpfo" path="res://addons/cptcreator/CP_CR_inventory_ship_stats.tscn" id="12_vd57e"]
 [ext_resource type="Texture2D" uid="uid://b7dafanmawwi0" path="res://Assets/ShipTextures/Hull4.png" id="22_275hr"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vd57e"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.282501, 0.267741, 0.268801, 1)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kkobr"]
+bg_color = Color(1, 0.763983, 0.0812772, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.423551, 0.31482, 2.40654e-07, 1)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 1
+
 [node name="CaptainCreatorUI" type="EditorDock" unique_id=2095748193 node_paths=PackedStringArray("CaptainName", "ShipIcon", "ItemText", "AddItemMenu", "Inventory", "Stats", "Disp")]
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,7 +65,7 @@ ItemText = NodePath("InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBo
 AddItemMenu = NodePath("InputScroll/VBoxContainer/PanelContainer2/HBoxContainer/MenuBar/Add Item")
 Inventory = NodePath("InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer/InventoryInterface")
 Stats = NodePath("InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/InventoryShipStats")
-Disp = NodePath("InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/DispositionUI")
+Disp = NodePath("InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/DispositionUI")
 
 [node name="InputScroll" type="ScrollContainer" parent="." unique_id=491485578]
 layout_mode = 2
@@ -315,7 +343,56 @@ size_flags_vertical = 2
 [node name="PanelContainer" type="PanelContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer" unique_id=1705996630]
 layout_mode = 2
 
-[node name="DispositionUI" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer" unique_id=687125661 instance=ExtResource("11_vd57e")]
+[node name="VBoxContainer" type="VBoxContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer" unique_id=782384857]
+layout_mode = 2
+
+[node name="VBoxContainer" type="HBoxContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1141440742]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=1725119088]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Panel2" type="Panel" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=519733534]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_vd57e")
+
+[node name="Label2" type="Label" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=731541520]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "Base Stats"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=1149750656]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Panel" type="Panel" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1987005368]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_kkobr")
+
+[node name="Label" type="Label" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer2" unique_id=374881689]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Ship Part Buffs"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DispositionUI" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=687125661 instance=ExtResource("11_vd57e")]
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 size_flags_vertical = 2

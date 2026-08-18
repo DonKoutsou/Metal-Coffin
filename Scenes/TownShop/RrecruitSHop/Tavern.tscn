@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cdocsye77jsgy"]
 
-[ext_resource type="Texture2D" uid="uid://dy0i72dpxefsl" path="res://Assets/PaperBg.png" id="1_8j1e7"]
+[ext_resource type="Texture2D" uid="uid://dy0i72dpxefsl" path="res://Assets/TownBackgrounds/PaperBg.png" id="1_8j1e7"]
 [ext_resource type="Script" uid="uid://jy3w88tv28yt" path="res://Scenes/TownShop/RrecruitSHop/tavern.gd" id="1_ike48"]
 
 [node name="Control" type="Control" unique_id=858826103]

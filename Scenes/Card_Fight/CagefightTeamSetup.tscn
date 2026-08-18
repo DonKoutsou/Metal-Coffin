@@ -183,7 +183,8 @@ theme_override_styles/panel = ExtResource("1_dj5ey")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/TeamCompSetup/VBoxContainer2/PanelContainer" unique_id=141657578]
 layout_mode = 2
-horizontal_scroll_mode = 0
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
 script = ExtResource("32_mgnjr")
 metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 

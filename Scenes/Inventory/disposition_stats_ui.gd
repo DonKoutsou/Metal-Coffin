@@ -6,6 +6,7 @@ class_name DispositionStatsUI
 @export var DispositionColors : PackedColorArray = []
 
 var points : PackedVector2Array
+var ItemPoints : PackedVector2Array
 
 var offset : float = 0
 
@@ -16,17 +17,27 @@ func _process(delta: float) -> void:
 		set_process(false)
 	queue_redraw()
 
-func UpdateStats(stats : PackedVector2Array) -> void:
+func UpdateStats(stats : PackedVector2Array, ItemStats : PackedVector2Array) -> void:
 	points = stats
+	ItemPoints = ItemStats
 	set_process(true)
 	offset = 0
 
 func _draw() -> void:
 	var finalPoints : PackedVector2Array
+	var finalItemPoints : PackedVector2Array
 	for point in points:
 		finalPoints.append((size / 2).slerp(point, offset))
-		 
-	draw_polygon(finalPoints, DispositionColors)
+	
+	for point in ItemPoints:
+		finalItemPoints.append((size / 2).slerp(point, offset))
+	
+	draw_polygon(finalItemPoints, DispositionColors)
+	draw_polygon(finalPoints, [Color(1,1,1)])
+	
 	for g in finalPoints.size():
 		var pos = finalPoints[g]
+		draw_circle(pos, 2, Color(1,1,1))
+	for g in finalItemPoints.size():
+		var pos = finalItemPoints[g]
 		draw_circle(pos, 2, Color(1,1,1))

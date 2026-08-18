@@ -1857,6 +1857,8 @@ func CreateShipVisuals(BattleS : BattleShipStats, Friendly : bool) -> CardFightS
 	
 	BattleS.ShipDamaged.connect(ShipDamaged.bind(BattleS))
 	BattleS.ShipSetOnFire.connect(ShipSetOnFire.bind(BattleS))
+	BattleS.PassivesCleansed.connect(PassiveList.ClearShipPassives.bind(BattleS))
+	BattleS.PassivesCleansed.connect(ShipVisuals.ClearPassives)
 	BattleS.StatsBuffed.connect(UpdateShipStats.bind(BattleS))
 	BattleS.CardsBuffed.connect(UpdateShipStats.bind(BattleS))
 	BattleS.ShipViz = ShipVisuals

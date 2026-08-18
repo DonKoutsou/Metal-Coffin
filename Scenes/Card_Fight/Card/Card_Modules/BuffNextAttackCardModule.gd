@@ -9,12 +9,19 @@ const StatText = "[color=#ffc315]HULL[/color][p][color=#6be2e9]SHIELD[/color][p]
 func NeedsTargetSelect() -> bool:
 	return true
 
-func GetDesc(Tier : int, _targetOverride : String = "") -> String:
-	if (AOE):
-		return "[[CT_BUFFTSS]] [[CT_NEXT]] [color=#ffc315]{1} [[CT_ATTACKS]][/color] [[CT_BY]] [color=#f35033]* {0}[/color]".format([GetBuffAmmount(Tier), GetBuffDuration(Tier)])
-	else : if (CanBeUsedOnOther):
-		return "[[CT_BUFFSS]] [[CT_NEXT]] [color=#ffc315]{1} [[CT_ATTACKS]][/color] [[CT_BY]] [color=#f35033]* {0}[/color]".format([GetBuffAmmount(Tier), GetBuffDuration(Tier)])
-	return "[[CT_BUFFSS]] [[CT_NEXT]] [color=#ffc315]{1} [[CT_ATTACKS]][/color] [[CT_BY]] [color=#f35033]* {0}[/color]".format([GetBuffAmmount(Tier), GetBuffDuration(Tier)])
+func GetDesc(Tier : int, targetOverride : String = "") -> String:
+	var targetString : String = ""
+	if (targetOverride != ""):
+		targetString = "Buff {0}'s".format([targetOverride])
+	else:
+		if (AOE):
+			targetString = "[[CT_BUFFTSS]]"
+		else : if (CanBeUsedOnOther):
+			targetString =  "[[CT_BUFFSS]]"
+		else:
+			targetString =  "[[CT_BUFFSS]]"
+	
+	return "{2} [[CT_NEXT]] [color=#ffc315]{1} [[CT_ATTACKS]][/color] [[CT_BY]] [color=#f35033]* {0}[/color]".format([GetBuffAmmount(Tier), GetBuffDuration(Tier), targetString])
 
 func GetBuffDuration(Tier : int) -> int:
 	if (TierUpgradeMethod == DamageInfo.CalcuationMethod.ADD):

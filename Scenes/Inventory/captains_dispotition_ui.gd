@@ -16,6 +16,14 @@ var CharacterStats : Dictionary[DispositionManager.Dispositions, float] = {
 	DispositionManager.Dispositions.RADIANT : 0.5,
 }
 
+var ItemStats : Dictionary[DispositionManager.Dispositions, float] = {
+	DispositionManager.Dispositions.KINETIC : 1.0,
+	DispositionManager.Dispositions.ELECTRICAL : 0.1,
+	DispositionManager.Dispositions.THERMAL : 0.3,
+	DispositionManager.Dispositions.MAGNETIC : 0.4,
+	DispositionManager.Dispositions.RADIANT : 0.5,
+}
+
 @export var DispositionColors : PackedColorArray = []
 
 func SetStats(ch : Captain) -> void:
@@ -23,14 +31,16 @@ func SetStats(ch : Captain) -> void:
 		GetCharacterEditorDisp(ch)
 	else:
 		CharacterStats = ch.disp
+		ItemStats = ch.itemDisposition
 	queue_redraw()
 
 func GetCharacterEditorDisp(ch : Captain) -> void:
 	for g in CharacterStats:
-		CharacterStats[g] = 0
+		CharacterStats[g] = ch.disp[g]
+		ItemStats[g] = 0
 	for g in ch.StartingItems:
 		if (g is ShipPart):
-			CharacterStats[g.disp] += g.DispositionAmm
+			ItemStats[g.disp] += g.DispositionAmm
 	
 func _ready() -> void:
 	for g in DispositionManager.Dispositions:
@@ -44,15 +54,19 @@ func _draw() -> void:
 	var Radius = min(size.x, size.y) / 2.0 - 40
 
 	var stats : PackedVector2Array = []
+	var itStats : PackedVector2Array = []
 	stats.resize(CharacterStats.size())
+	itStats.resize(CharacterStats.size())
 	for g in CharacterStats:
 		var m = Helper.normalize_value(g, 0, CharacterStats.size())
 		
 		var rad = Radius * Helper.mapvalue(clamp(CharacterStats[g], 0, 1), 0.1, 1.1)
+		var itRad = Radius * Helper.mapvalue(clamp(CharacterStats[g] + ItemStats[g], 0, 1), 0.1, 1.1)
 		#var rad = Radius * clamp(CharacterStats[g], 0.1, 1)
 		var pointX = cos(m * (PI * 2) - 0.32)
 		var pointY = sin(m * (PI * 2) - 0.32)
 		stats[g] = Vector2(pointX, pointY) * rad + size / 2.0
+		itStats[g] = Vector2(pointX, pointY) * itRad + size / 2.0
 		
 		labels[g].text = DispositionManager.Dispositions.keys()[g]
 		labels[g].position = Vector2(pointX, pointY) * Radius + size / 2.0 - labels[g].size / 2.0
@@ -61,7 +75,7 @@ func _draw() -> void:
 		else:
 			labels[g].position += Vector2(0,10)
 
-	StatsDraw.UpdateStats(stats)
+	StatsDraw.UpdateStats(stats, itStats)
 		
 	
 	var points : Array[PackedVector2Array] = []

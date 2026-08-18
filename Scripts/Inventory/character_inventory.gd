@@ -1,12 +1,11 @@
 @tool
-extends PanelContainer
+extends HBoxContainer
 
 class_name CharacterInventory
 
 @export_group("Nodes")
 @export var CaptainNameLabel : LineEdit
 @export var HideOnStart : bool = true
-@export var interface : CharacterInventoryInterface
 signal InventoryUpdated
 signal OnItemAdded(it : Item)
 signal OnItemRemoved(it : Item)
@@ -182,8 +181,7 @@ func InitialiseInventory(Cha : Captain) -> void:
 		#WeaponInventoryBoxParent.columns = min(2, CharWeaponSpace)
 		
 	CaptainNameLabel.text = CharName
-	if (interface != null):
-		interface.InitialiseInventory(Cha)
+
 
 static func newInv(Cha : Captain) -> CharacterInventory:
 	var inv = CharacterInventory.new()
@@ -259,8 +257,7 @@ func InitialiseStarting(Cha : Captain) -> void:
 				_InventoryContents[It] = 1
 
 			continue
-	if (interface != null):
-		interface.InitialiseInventory(Cha)
+
 
 
 func ItemSelected(Box : Inventory_Box_Res) -> void:
@@ -529,15 +526,15 @@ func GetItemBeingUpgraded() -> Inventory_Box_Res:
 
 func _on_button_pressed() -> void:
 	OnCharacterInspectionPressed.emit()
-
-func _on_deck_pressed() -> void:
-	OnCharacterDeckInspectionPressed.emit()
-	
-func _on_disposition_pressed() -> void:
-	OnCharacterDispositionInspectionPressed.emit()
-
-func _on_inventory_vis_toggle_pressed() -> void:
-	OnCharacterInventoryInspectionPressed.emit()
+#
+#func _on_deck_pressed() -> void:
+	#OnCharacterDeckInspectionPressed.emit()
+	#
+#func _on_disposition_pressed() -> void:
+	#OnCharacterDispositionInspectionPressed.emit()
+#
+#func _on_inventory_vis_toggle_pressed() -> void:
+	#OnCharacterInventoryInspectionPressed.emit()
 
 	#$VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/InventoryVisToggle.disabled = true
 	#var prevc = custom_minimum_size.y
@@ -568,7 +565,7 @@ func _on_inventory_vis_toggle_pressed() -> void:
 	#else:
 		#$VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/InventoryVisToggle.text = "Show Inventory"
 	
-	$VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/InventoryVisToggle.disabled = false
+	#$VBoxContainer2/VBoxContainer/HBoxContainer2/VBoxContainer/InventoryVisToggle.disabled = false
 
 func CharacterNameChange(NewNae : String) -> void:
 	if (CaptainNameLabel.text != NewNae):
@@ -576,3 +573,8 @@ func CharacterNameChange(NewNae : String) -> void:
 
 func _on_character_name_text_changed(NewText : String) -> void:
 	CharNameChanged.emit(NewText)
+
+
+func _on_button_2_pressed() -> void:
+	CaptainNameLabel.grab_focus()
+	CaptainNameLabel.caret_column = 90
