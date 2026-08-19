@@ -5,6 +5,9 @@ class_name PauseMenu
 @export var Manual : FlightManual
 @export var PopupPlecement : Control
 
+func _ready() -> void:
+	UISoundMan.Instance.Refresh()
+
 func _on_flight_manual_pressed() -> void:
 	Manual.visible = true
 

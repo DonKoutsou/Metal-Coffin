@@ -8,7 +8,6 @@
 [ext_resource type="StyleBox" uid="uid://54vphqglxfyk" path="res://Theme/ProgressBarFill.tres" id="5_rqfwx"]
 [ext_resource type="StyleBox" uid="uid://46p0yqwfh7ud" path="res://Theme/HSlider_Grabber.tres" id="7_c6x1m"]
 [ext_resource type="StyleBox" uid="uid://cjob57ldf08tq" path="res://Theme/HSlider_GrabberH.tres" id="8_xd0bq"]
-[ext_resource type="StyleBox" uid="uid://d2d2677f3j08f" path="res://Theme/HSlider_Slider.tres" id="9_hukj5"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="9_udhci"]
 [ext_resource type="StyleBox" uid="uid://elj4u7a13oc1" path="res://Theme/YellowTopPanel.tres" id="9_yv80o"]
 [ext_resource type="StyleBox" uid="uid://b55uyr0b56r5s" path="res://Theme/VSlider_Grabber.tres" id="14_v41hx"]
@@ -1456,13 +1455,13 @@ HScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_d37h5")
 HScrollBar/styles/scroll = SubResource("StyleBoxFlat_jsyfk")
 HSlider/constants/center_grabber = 0
 HSlider/constants/grabber_offset = 0
-HSlider/icons/grabber = null
+HSlider/icons/grabber = SubResource("ImageTexture_j5830")
 HSlider/icons/grabber_disabled = null
-HSlider/icons/grabber_highlight = null
+HSlider/icons/grabber_highlight = SubResource("ImageTexture_j5830")
 HSlider/icons/tick = SubResource("ImageTexture_j5830")
 HSlider/styles/grabber_area = ExtResource("7_c6x1m")
 HSlider/styles/grabber_area_highlight = ExtResource("8_xd0bq")
-HSlider/styles/slider = ExtResource("9_hukj5")
+HSlider/styles/slider = ExtResource("9_udhci")
 Label/colors/font_color = Color(1, 0.7647059, 0.08235294, 1)
 Label/colors/font_outline_color = Color(0.211454, 0.150914, 0, 1)
 Label/colors/font_shadow_color = Color(0, 0, 0, 1)

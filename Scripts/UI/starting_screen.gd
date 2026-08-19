@@ -30,19 +30,19 @@ func _ready() -> void:
 	#siz.y = min(siz.y, 1080)
 	#DitherShader.set_shader_parameter("ScreenSize",siz)
 	#print("Screen Size = {0}".format([siz]))
-	if (OS.get_name() == "Windows"):
-		Steam.steamInit()
-		var IsRunning = Steam.isSteamRunning()
-		
-		if (!IsRunning):
-			printerr("Steam Is Not Running")
-		else:
-			print("Steam Is Running")
-			var ID = Steam.getSteamID()
-			var n = Steam.getFriendPersonaName(ID)
-			print("Username : ", str(n))
-			AchievementManager.GetInstance().SteamRunning = true
-			print("Achievement Tracking Enabled")
+	#if (OS.get_name() == "Windows"):
+		#Steam.steamInit()S
+		#var IsRunning = Steam.isSteamRunning()
+		#
+		#if (!IsRunning):
+			#printerr("Steam Is Not Running")
+		#else:
+			#print("Steam Is Running")
+			#var ID = Steam.getSteamID()
+			#var n = Steam.getFriendPersonaName(ID)
+			#print("Username : ", str(n))
+			#AchievementManager.GetInstance().SteamRunning = true
+			#print("Achievement Tracking Enabled")
 			
 	await Start()
 
@@ -158,15 +158,8 @@ func LoadSavedSettings() -> void:
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_WINDOWED)
 	
-	if (sav.Sound):
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sounds"), 0)
-	else:
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sounds"), -64)
-	
-	if (sav.Music):
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), 0)
-	else:
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), -64)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sounds"), sav.Sound)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), sav.Music)
 	
 	ScreenCamera.ShakeEffects = sav.ShakeEffect
 	SettingsPanel.HasRain = sav.Rain
@@ -176,8 +169,8 @@ func UpdateSavedSettings() -> void:
 	save.FullScreen = DisplayServer.window_get_mode(0) == DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN
 	save.Glitch = SettingsPanel.HasGlitch
 	save.Rain = SettingsPanel.HasRain
-	save.Sound = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Sounds")) == 0
-	save.Music = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music")) == 0
+	save.Sound = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Sounds"))
+	save.Music = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music"))
 	save.ShakeEffect = ScreenCamera.ShakeEffects
 	save.GameVersion = ProjectSettings.get_setting("application/config/version")
 	

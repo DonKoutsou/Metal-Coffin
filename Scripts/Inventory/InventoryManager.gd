@@ -165,6 +165,7 @@ func BoxSelected(Box : Inventory_Box_Res, OwnerInventory : CharacterInventory) -
 	CurrentDesc.ToggleClosable(true)
 	CurrentDesc.Closed.connect(RemoveDescriptor)
 	DescriptorPlace.add_child(CurrentDesc)
+	DescriptorPlace.move_child(CurrentDesc, 0)
 	CaptainStats.get_parent().visible = false
 	#var cpt = GetBoxOwner(Box)
 	#var HasUp = false

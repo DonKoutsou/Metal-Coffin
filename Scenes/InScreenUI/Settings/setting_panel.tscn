@@ -4,16 +4,18 @@
 [ext_resource type="Script" uid="uid://bp1bu8mlf6f3p" path="res://Scenes/InScreenUI/Settings/setting_panel.gd" id="2_clx0a"]
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRT_Mat.tres" id="3_os1sx"]
 
-[node name="SettingPanel" type="PanelContainer" unique_id=1258850840 node_paths=PackedStringArray("GlitchButton", "FullScreenButton", "SoundButton", "MusicButton", "ShakeEffectButton", "RainButton")]
+[node name="SettingPanel" type="PanelContainer" unique_id=1258850840 node_paths=PackedStringArray("GlitchButton", "FullScreenButton", "SoundSlider", "MusicSlider", "ShakeEffectButton", "RainButton")]
 use_parent_material = true
+offset_right = 330.0
+offset_bottom = 232.0
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("1_wos5w")
 script = ExtResource("2_clx0a")
 mat = ExtResource("3_os1sx")
 GlitchButton = NodePath("VBoxContainer/GridContainer/GlitchesCheckBox")
 FullScreenButton = NodePath("VBoxContainer/GridContainer/FullScreenCheckBox")
-SoundButton = NodePath("VBoxContainer/GridContainer/SoundCheckBox")
-MusicButton = NodePath("VBoxContainer/GridContainer/MusicCheckBox")
+SoundSlider = NodePath("VBoxContainer/GridContainer/Sound")
+MusicSlider = NodePath("VBoxContainer/GridContainer/Music")
 ShakeEffectButton = NodePath("VBoxContainer/GridContainer/ShakeCheckBox")
 RainButton = NodePath("VBoxContainer/GridContainer/RainCheckBox")
 
@@ -39,26 +41,6 @@ layout_mode = 2
 text = "Full Screen"
 
 [node name="FullScreenCheckBox" type="CheckBox" parent="VBoxContainer/GridContainer" unique_id=161386147 groups=["DigitalButtons"]]
-use_parent_material = true
-layout_mode = 2
-size_flags_horizontal = 10
-
-[node name="Label2" type="Label" parent="VBoxContainer/GridContainer" unique_id=581084942]
-use_parent_material = true
-layout_mode = 2
-text = "Sound"
-
-[node name="SoundCheckBox" type="CheckBox" parent="VBoxContainer/GridContainer" unique_id=1328677983 groups=["DigitalButtons"]]
-use_parent_material = true
-layout_mode = 2
-size_flags_horizontal = 10
-
-[node name="Label3" type="Label" parent="VBoxContainer/GridContainer" unique_id=314129088]
-use_parent_material = true
-layout_mode = 2
-text = "Music"
-
-[node name="MusicCheckBox" type="CheckBox" parent="VBoxContainer/GridContainer" unique_id=608086793 groups=["DigitalButtons"]]
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 10
@@ -93,9 +75,31 @@ use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 10
 
+[node name="Label2" type="Label" parent="VBoxContainer/GridContainer" unique_id=581084942]
+use_parent_material = true
+layout_mode = 2
+text = "Sound"
+
+[node name="Sound" type="HSlider" parent="VBoxContainer/GridContainer" unique_id=1177367176]
+layout_mode = 2
+focus_mode = 0
+max_value = 1.0
+step = 0.05
+
+[node name="Label3" type="Label" parent="VBoxContainer/GridContainer" unique_id=314129088]
+use_parent_material = true
+layout_mode = 2
+text = "Music"
+
+[node name="Music" type="HSlider" parent="VBoxContainer/GridContainer" unique_id=1816315373]
+layout_mode = 2
+focus_mode = 0
+max_value = 1.0
+step = 0.05
+
 [connection signal="toggled" from="VBoxContainer/GridContainer/FullScreenCheckBox" to="." method="_on_full_screen_check_box_toggled"]
-[connection signal="toggled" from="VBoxContainer/GridContainer/SoundCheckBox" to="." method="_on_sound_check_box_toggled"]
-[connection signal="toggled" from="VBoxContainer/GridContainer/MusicCheckBox" to="." method="_on_music_check_box_toggled"]
 [connection signal="toggled" from="VBoxContainer/GridContainer/GlitchesCheckBox" to="." method="_on_glitches_check_box_toggled"]
 [connection signal="toggled" from="VBoxContainer/GridContainer/ShakeCheckBox" to="." method="_on_shake_check_box_toggled"]
 [connection signal="toggled" from="VBoxContainer/GridContainer/RainCheckBox" to="." method="_on_rain_check_box_toggled"]
+[connection signal="value_changed" from="VBoxContainer/GridContainer/Sound" to="." method="_on_sound_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/GridContainer/Music" to="." method="_on_music_value_changed"]

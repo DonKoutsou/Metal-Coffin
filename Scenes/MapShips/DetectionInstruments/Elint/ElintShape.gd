@@ -71,7 +71,7 @@ func GetELintTargetInfo() -> Array[ElintTargetInfo]:
 func isPartOfFleet(controller : PlayerDrivenShip,target: Node2D) -> bool:
 	if (controller.Command != null):
 		return target == controller.Command or target in controller.Command.GetDock().GetDockedShips()
-	return target == controller
+	return target == controller or target in controller.GetDock().GetDockedShips()
 
 func GetClosestElint() -> Vector2:
 	var closest : Vector2 = Vector2.ZERO

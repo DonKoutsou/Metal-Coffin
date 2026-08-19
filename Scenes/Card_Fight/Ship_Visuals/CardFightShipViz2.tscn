@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://mxfnm7hywo4f" path="res://Scenes/Old/damage_floater.tscn" id="3_ej477"]
 [ext_resource type="StyleBox" uid="uid://cq66xt1psso06" path="res://Theme/GreyPanel.tres" id="4_0orxy"]
 [ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scenes/Card_Fight/External_UI/CardHandContainer.gd" id="4_cmntb"]
-[ext_resource type="Texture2D" uid="uid://cyqs71v0yadm1" path="res://Assets/ShipTextures/Hull1.png" id="6_vewtr"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="6_wmwbv"]
 [ext_resource type="Texture2D" uid="uid://de1cx0wwuxx0x" path="res://Assets/smoke_09.png" id="7_cmntb"]
+[ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/ShipTextures/Hull3.png" id="7_ej477"]
 [ext_resource type="AudioStream" uid="uid://iiqji6xlmffd" path="res://Assets/Sounds/Explosion.wav" id="8_r755l"]
 [ext_resource type="PackedScene" uid="uid://rjp78jwbs17y" path="res://Scenes/Card_Fight/Ship_Visuals/Fire.tscn" id="12_2rekq"]
 
@@ -463,7 +463,7 @@ scale = Vector2(0.8, 0.8)
 offset_transform_enabled = true
 offset_transform_scale = Vector2(1.6, 1.6)
 mouse_filter = 2
-texture = ExtResource("6_vewtr")
+texture = ExtResource("7_ej477")
 expand_mode = 2
 stretch_mode = 3
 
@@ -488,7 +488,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.6, 0.6)
 mouse_filter = 2
-texture = ExtResource("6_vewtr")
+texture = ExtResource("7_ej477")
 expand_mode = 1
 stretch_mode = 3
 

@@ -36,7 +36,7 @@ theme_override_styles/panel = ExtResource("2_wl1jv")
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/separation = 30
+theme_override_constants/separation = 13
 alignment = 1
 
 [node name="PauseLabel" type="Label" parent="PanelContainer/VBoxContainer" unique_id=1019745852]
@@ -59,27 +59,7 @@ theme_override_font_sizes/font_size = 34
 text = "Return
 "
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=121249064]
-layout_mode = 2
-alignment = 1
-
-[node name="SettingPanel" parent="PanelContainer/VBoxContainer/HBoxContainer2" unique_id=1258850840 instance=ExtResource("5_qcvvw")]
-layout_mode = 2
-
-[node name="HBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer2" unique_id=2092298172]
-layout_mode = 2
-size_flags_horizontal = 4
-alignment = 1
-
-[node name="Save" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer2/HBoxContainer" unique_id=124362621 groups=["DigitalButtons"]]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("3_m40rn")
-theme_override_font_sizes/font_size = 34
-text = "Save Game"
-
-[node name="Flight Manual" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer2/HBoxContainer" unique_id=614392475 groups=["DigitalButtons"]]
+[node name="Flight Manual" type="Button" parent="PanelContainer/VBoxContainer" unique_id=614392475 groups=["DigitalButtons"]]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_vertical = 3
@@ -87,18 +67,34 @@ theme = ExtResource("3_m40rn")
 theme_override_font_sizes/font_size = 34
 text = "Flight Manual"
 
-[node name="Exit" type="Button" parent="PanelContainer/VBoxContainer" unique_id=42466374 groups=["DigitalButtons"]]
+[node name="SettingPanel" parent="PanelContainer/VBoxContainer" unique_id=1258850840 instance=ExtResource("5_qcvvw")]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=1959713681]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Save" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=124362621 groups=["DigitalButtons"]]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("3_m40rn")
 theme_override_font_sizes/font_size = 34
-text = "Exit To Main Menu"
+text = "Save Game"
+
+[node name="Exit" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=42466374 groups=["DigitalButtons"]]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("3_m40rn")
+theme_override_font_sizes/font_size = 34
+text = "Exit To Menu"
 
 [node name="FlightManual" parent="." unique_id=1037505951 instance=ExtResource("6_1ia1i")]
 visible = false
 layout_mode = 2
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Save" to="." method="_on_save_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Flight Manual" to="." method="_on_flight_manual_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Flight Manual" to="." method="_on_flight_manual_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Exit" to="." method="_on_exit_pressed"]
