@@ -18,40 +18,51 @@ var CurrentlySelectedCap : Captain
 @export var Inventory : CharacterInventoryInterface
 @export var Stats : CPT_CR_InventoryShipStats
 @export var Disp : CaptainDispositionUI
-
+@export var DispSliderParent : Control
 var ShowItemStats = true
 
 #------------------------------------------------------------
 func _enter_tree() -> void:
+	for g in DispositionManager.Dispositions:
+		var slider : CapCrStatSlider = StatScene.instantiate()
+		DispSliderParent.add_child(slider)
+		slider.SetDataCustom(1, "", g, 0, 0.1)
+		slider.StatChanged.connect(DispositionChanged.bind(DispositionManager.Dispositions[g]))
+		
 	RefreshCharacters()
 	RefrshExistingItems()
 	Inventory.BoxSelected.connect(ItemSelected)
 
+func DispositionChanged(Stat : STAT_CONST.STATS, newValue : float, disp : DispositionManager.Dispositions):
+	CurrentlySelectedCap.disp[disp] = newValue
+	UpdateInventoryBoxes()
+	UpdateDispositionSliders()
+	SaveCurrentCap()
+
 #------------------------------------------------------------
 func RefreshCharacters() -> void:
-	var dir = DirAccess.open("res://Resources/Captains/PlayerCaptains")
-	if dir:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != "":
-			var c = load("res://Resources/Captains/PlayerCaptains/" + file_name)
-			Captains.append(c)
-			file_name = dir.get_next()
+	var Menu = $"InputScroll/VBoxContainer/PanelContainer2/HBoxContainer/MenuBar/Select Captain" as PopupMenu
+	Menu.clear()
+	Captains.clear()
 	
-	var dir2 = DirAccess.open("res://Resources/Captains/EnemyCaptains")
-	if dir2:
-		dir2.list_dir_begin()
-		var file_name = dir2.get_next()
-		while file_name != "":
-			var c = load("res://Resources/Captains/EnemyCaptains/" + file_name)
-			Captains.append(c)
-			file_name = dir2.get_next()
-	
-	var Menu = $"VBoxContainer/PanelContainer2/HBoxContainer/MenuBar/Select Captain" as PopupMenu
-	while Menu.item_count > 0:
-		Menu.remove_item(0)
-	for g in Captains.size():
-		Menu.add_item(Captains[g].GetCaptainName(), g)
+	var DirsToExplore :Array[String] = ["res://Resources/Captains/"]
+	for g in DirsToExplore:
+		var dir = DirAccess.open(g)
+		if dir:
+			dir.list_dir_begin()
+			var file_name = dir.get_next()
+			while file_name != "":
+				if dir.current_is_dir():
+					print("Found directory: " + file_name)
+					DirsToExplore.append(g + "/" + file_name)
+				else:
+					print("Found file: " + file_name)
+					var cap = load(g + "/" + file_name)
+					if (cap is Captain):
+						Captains.append(cap)
+						Menu.add_item(cap.GetCaptainName())
+				
+				file_name = dir.get_next()
 	
 	SetCaptain(Captains[0])
 
@@ -83,6 +94,8 @@ func RefrshExistingItems() -> void:
 
 #------------------------------------------------------------
 func _exit_tree() -> void:
+	for g in DispSliderParent.get_children():
+		g.queue_free()
 	Captains.clear()
 	Items.clear()
 
@@ -96,6 +109,7 @@ func SetCaptain(C : Captain) -> void:
 	print(C.ProvidingFunds)
 
 	
+	
 	for g in STAT_CONST.STATS.values().size():
 		var HasStat = false
 		for stat in C.CaptainStats:
@@ -106,8 +120,11 @@ func SetCaptain(C : Captain) -> void:
 			var NewStat = ShipStat.new()
 			NewStat.StatName = g
 			C.CaptainStats.append(NewStat)
-	
+
 	UpdateInventoryBoxes()
+	UpdateDispositionSliders()
+	
+		
 	SaveCurrentCap()
 	
 #------------------------------------------------------------
@@ -133,6 +150,12 @@ func UpdateInventoryBoxes() -> void:
 	Stats.SetCaptainEditor(CurrentlySelectedCap, ShowItemStats)
 	Disp.SetStats(CurrentlySelectedCap)
 	SelectedBox = null
+
+func UpdateDispositionSliders() -> void:
+	for g in Disp.CharacterStats:
+		var slid : CapCrStatSlider = DispSliderParent.get_child(g)
+		var disp = snappedf(Disp.CharacterStats[g], 0.1)
+		slid.UpdateStatCustom(disp, snappedf(Disp.ItemStats[g], 0.1), 0)
 
 #------------------------------------------------------------
 func GetShipMaxSpeed() -> float:

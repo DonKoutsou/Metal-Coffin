@@ -91,7 +91,7 @@ StatName = 8
 [sub_resource type="Resource" id="Resource_04s81"]
 script = ExtResource("2_rura2")
 StatName = 15
-StatBase = 120.0
+StatBase = 60.0
 
 [sub_resource type="Resource" id="Resource_epxoh"]
 script = ExtResource("2_rura2")
@@ -133,3 +133,10 @@ CaptainStats = Array[ExtResource("2_rura2")]([SubResource("Resource_5y7kc"), Sub
 StartingItems = Array[ExtResource("3_wbv1e")]([ExtResource("5_dgj0j"), ExtResource("8_1cw16"), ExtResource("10_2dfck"), ExtResource("10_2dfck"), ExtResource("11_xyrt1"), ExtResource("11_xyrt1"), ExtResource("11_xyrt1"), ExtResource("12_vxgw7"), ExtResource("12_vxgw7"), ExtResource("12_vxgw7"), ExtResource("13_0l4hh")])
 CheckForErrors = true
 ProvidingCaptains = Array[ExtResource("2_mv381")]([ExtResource("5_0l4hh")])
+disp = Dictionary[int, float]({
+0: 0.1,
+1: 0.0,
+2: 0.0,
+3: 0.0,
+4: 0.0
+})

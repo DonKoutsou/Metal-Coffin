@@ -7,4 +7,4 @@
 script = ExtResource("2_4abio")
 Cpt = ExtResource("1_ts5h3")
 Cost = 50
-MaxAmmInFleet = 10
+MaxAmmInFleet = 2

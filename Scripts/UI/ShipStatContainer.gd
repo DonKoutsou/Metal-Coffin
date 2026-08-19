@@ -72,8 +72,8 @@ func SetDataCustom(MaxValue : float, StatMetric : String, StatName : String, Sta
 
 
 func UpdateStatCustom(StatVal : float, ItemVar : float, ItemPenalty : float) -> void:
-	
-	StatValueLabel.text = "{0} {1}".format([var_to_str(StatVal + ItemVar - ItemPenalty).replace(".0", ""), Metric])
+	var finalValue = snappedf(StatVal + ItemVar - ItemPenalty, 0.1)
+	StatValueLabel.text = "{0} {1}".format([finalValue, Metric])
 
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_OUT)

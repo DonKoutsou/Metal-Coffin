@@ -60,10 +60,8 @@ BeepLong = "uid://djpdmpewc6sg"
 [node name="ScreenFrame2" type="TextureRect" parent="." unique_id=1893763889]
 custom_minimum_size = Vector2(0, 38.045)
 layout_mode = 0
-offset_left = 1.0
-offset_top = 1.0
 offset_right = 1005.0
-offset_bottom = 719.0
+offset_bottom = 720.0
 size_flags_horizontal = 3
 mouse_filter = 2
 texture = ExtResource("3_ibt5m")

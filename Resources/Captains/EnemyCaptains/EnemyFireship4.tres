@@ -109,7 +109,7 @@ metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
 [resource]
 resource_local_to_scene = true
 script = ExtResource("4_7fnxg")
-CaptainName = "P4"
+CaptainName = "Tick4"
 CaptainPortrait = ExtResource("1_647rd")
 ShipIcon = ExtResource("9_o8ada")
 CaptainStats = Array[ExtResource("2_xnlyj")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_mcdo0"), SubResource("Resource_yl52l"), SubResource("Resource_7g4dd"), SubResource("Resource_4p6v8"), SubResource("Resource_66526"), SubResource("Resource_h3q7u"), SubResource("Resource_o8ada"), SubResource("Resource_7vblj"), SubResource("Resource_qlrpd"), SubResource("Resource_58kvj"), SubResource("Resource_8as2c"), SubResource("Resource_8frym"), SubResource("Resource_pd0w2"), SubResource("Resource_2ynjo"), SubResource("Resource_vyvmp"), SubResource("Resource_b5rw8"), SubResource("Resource_nou4h")])

@@ -21,10 +21,11 @@ func SetData(Stat : STAT_CONST.STATS) -> void:
 	
 
 #used for "custom" stats that are pseudo stat, created from the combination of others, like speed and range
-func SetDataCustom(MaxValue : float, StatMetric : String, StatName : String, Stat : STAT_CONST.STATS) -> void:
+func SetDataCustom(MaxValue : float, StatMetric : String, StatName : String, Stat : STAT_CONST.STATS, step : float = 1.0) -> void:
 	super(MaxValue, StatMetric, StatName, Stat)
 	
 	slider.max_value = MaxValue
+	slider.step = step
 
 func UpdateStatValue(StatVal : float, ItemVar : float, ItemPenalty : float) -> void:
 	super(StatVal, ItemVar, ItemPenalty)

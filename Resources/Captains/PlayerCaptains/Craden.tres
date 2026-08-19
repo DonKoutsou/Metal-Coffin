@@ -94,7 +94,7 @@ StatName = 8
 [sub_resource type="Resource" id="Resource_1e2ke"]
 script = ExtResource("2_ttymy")
 StatName = 15
-StatBase = 120.0
+StatBase = 200.0
 
 [sub_resource type="Resource" id="Resource_2khr6"]
 script = ExtResource("2_ttymy")
@@ -137,3 +137,10 @@ StartingItems = Array[ExtResource("3_y0oxi")]([ExtResource("8_tfttw"), ExtResour
 CheckForErrors = true
 ProvidingFunds = 20000
 ProvidingCaptains = Array[ExtResource("14_8itwo")]([ExtResource("5_tcmus")])
+disp = Dictionary[int, float]({
+0: 0.2,
+1: 0.1,
+2: 0.0,
+3: 0.1,
+4: 0.0
+})

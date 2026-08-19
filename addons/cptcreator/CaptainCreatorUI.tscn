@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_qfx4k"]
 [ext_resource type="Script" uid="uid://csfgatvvxvqjh" path="res://addons/cptcreator/CaptainCreatorUI.gd" id="2_8328o"]
-[ext_resource type="PackedScene" uid="uid://c7guccqp25yix" path="res://addons/cptcreator/CaptainCreatorStatSlider.tscn" id="3_ul25k"]
+[ext_resource type="PackedScene" uid="uid://c1dta5ogorg77" path="res://addons/cptcreator/CPT_CR_ship_stat_container.tscn" id="3_vd57e"]
 [ext_resource type="PackedScene" uid="uid://b1k2h35khc40y" path="res://Scenes/Inventory/InventoryBox.tscn" id="4_yrrrb"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="5_tnq84"]
 [ext_resource type="Texture2D" uid="uid://dwwluk8xikvpe" path="res://Assets/Items/cubeforcesmol.png" id="6_onoap"]
@@ -11,9 +11,9 @@
 [ext_resource type="FontFile" uid="uid://mwyuu26jo0fk" path="res://Fonts/Bank Gothic Light Regular.otf" id="7_2tpp3"]
 [ext_resource type="Texture2D" uid="uid://3q376ia6bctu" path="res://Assets/Items/Wrench.png" id="8_tnq84"]
 [ext_resource type="PackedScene" uid="uid://muscxdppqdat" path="res://Scenes/Inventory/CaptainsDispotitionUI.tscn" id="11_vd57e"]
+[ext_resource type="Texture2D" uid="uid://7h4uf5rwddw6" path="res://Assets/ShipTextures/Convoy.png" id="12_kkobr"]
 [ext_resource type="PackedScene" uid="uid://dk1p1g38kvyjb" path="res://Scenes/Inventory/InventoryInterface.tscn" id="12_tnq84"]
 [ext_resource type="PackedScene" uid="uid://bbxyip8ihbpfo" path="res://addons/cptcreator/CP_CR_inventory_ship_stats.tscn" id="12_vd57e"]
-[ext_resource type="Texture2D" uid="uid://b7dafanmawwi0" path="res://Assets/ShipTextures/Hull4.png" id="22_275hr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vd57e"]
 bg_color = Color(1, 1, 1, 1)
@@ -43,7 +43,7 @@ corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 corner_detail = 1
 
-[node name="CaptainCreatorUI" type="EditorDock" unique_id=2095748193 node_paths=PackedStringArray("CaptainName", "ShipIcon", "ItemText", "AddItemMenu", "Inventory", "Stats", "Disp")]
+[node name="CaptainCreatorUI" type="EditorDock" unique_id=2095748193 node_paths=PackedStringArray("CaptainName", "ShipIcon", "ItemText", "AddItemMenu", "Inventory", "Stats", "Disp", "DispSliderParent")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -55,9 +55,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_qfx4k")
 title = "Captain Creator"
+closable = true
 default_slot = 4
 script = ExtResource("2_8328o")
-StatScene = ExtResource("3_ul25k")
+StatScene = ExtResource("3_vd57e")
 ItemBoxScene = ExtResource("4_yrrrb")
 CaptainName = NodePath("InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/CapName")
 ShipIcon = NodePath("InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/VBoxContainer/TextureRect")
@@ -66,6 +67,7 @@ AddItemMenu = NodePath("InputScroll/VBoxContainer/PanelContainer2/HBoxContainer/
 Inventory = NodePath("InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer/InventoryInterface")
 Stats = NodePath("InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/InventoryShipStats")
 Disp = NodePath("InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/DispositionUI")
+DispSliderParent = NodePath("InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2")
 
 [node name="InputScroll" type="ScrollContainer" parent="." unique_id=491485578]
 layout_mode = 2
@@ -89,75 +91,77 @@ theme_override_font_sizes/font_size = 27
 
 [node name="Select Captain" type="PopupMenu" parent="InputScroll/VBoxContainer/PanelContainer2/HBoxContainer/MenuBar" unique_id=1904929059]
 size = Vector2i(100, 251)
-item_count = 34
-item_0/text = "Amol"
+item_count = 35
+item_0/text = "Convoy"
 item_0/id = 0
-item_1/text = "Baron"
+item_1/text = "Corvete"
 item_1/id = 1
-item_2/text = "Corkan"
+item_2/text = "Corvete2"
 item_2/id = 2
-item_3/text = "Craden"
+item_3/text = "Corvete3"
 item_3/id = 3
-item_4/text = "Dimitry"
+item_4/text = "Corvete4"
 item_4/id = 4
-item_5/text = "Elena"
+item_5/text = "Tick"
 item_5/id = 5
-item_6/text = "Gilian"
+item_6/text = "Tick2"
 item_6/id = 6
-item_7/text = "Jor"
+item_7/text = "Tick3"
 item_7/id = 7
-item_8/text = "Samir"
+item_8/text = "Tick4"
 item_8/id = 8
-item_9/text = "Sirius"
+item_9/text = "M1"
 item_9/id = 9
-item_10/text = "Convoy"
+item_10/text = "M2"
 item_10/id = 10
-item_11/text = "Corvete"
+item_11/text = "M3"
 item_11/id = 11
-item_12/text = "Corvete2"
+item_12/text = "M4"
 item_12/id = 12
-item_13/text = "Corvete3"
+item_13/text = "R1"
 item_13/id = 13
-item_14/text = "Corvete4"
+item_14/text = "R2"
 item_14/id = 14
-item_15/text = "Tick"
+item_15/text = "R3"
 item_15/id = 15
-item_16/text = "P2"
+item_16/text = "R4"
 item_16/id = 16
-item_17/text = "P3"
+item_17/text = "Tanker"
 item_17/id = 17
-item_18/text = "P4"
+item_18/text = "T2"
 item_18/id = 18
-item_19/text = "Missile Carrier"
+item_19/text = "T3"
 item_19/id = 19
-item_20/text = "M2"
+item_20/text = "T4"
 item_20/id = 20
-item_21/text = "M3"
+item_21/text = "Worker"
 item_21/id = 21
-item_22/text = "M4"
+item_22/text = "Land Unit"
 item_22/id = 22
-item_23/text = "Air Defense Ship"
+item_23/text = "LF2"
 item_23/id = 23
-item_24/text = "R2"
+item_24/text = "Grunt"
 item_24/id = 24
-item_25/text = "R3"
+item_25/text = "Amol"
 item_25/id = 25
-item_26/text = "R4"
+item_26/text = "Baron"
 item_26/id = 26
-item_27/text = "Tanker"
+item_27/text = "Corkan"
 item_27/id = 27
-item_28/text = "T2"
+item_28/text = "Craden"
 item_28/id = 28
-item_29/text = "T3"
+item_29/text = "Dimitry"
 item_29/id = 29
-item_30/text = "T4"
+item_30/text = "Elena"
 item_30/id = 30
-item_31/text = "Land Unit"
+item_31/text = "Gilian"
 item_31/id = 31
-item_32/text = "LF2"
+item_32/text = "Jor"
 item_32/id = 32
-item_33/text = "Grunt"
+item_33/text = "Samir"
 item_33/id = 33
+item_34/text = "Sirius"
+item_34/id = 34
 
 [node name="Add Item" type="PopupMenu" parent="InputScroll/VBoxContainer/PanelContainer2/HBoxContainer/MenuBar" unique_id=1918876853]
 auto_translate_mode = 1
@@ -397,6 +401,9 @@ custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 size_flags_vertical = 2
 
+[node name="VBoxContainer2" type="VBoxContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1626338858]
+layout_mode = 2
+
 [node name="VBoxContainer3" type="VBoxContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer" unique_id=98074735]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -408,7 +415,7 @@ uppercase = true
 
 [node name="CapName" type="TextEdit" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3" unique_id=1864577608]
 layout_mode = 2
-text = "Amol"
+text = "Convoy"
 wrap_mode = 1
 scroll_fit_content_height = true
 
@@ -425,7 +432,7 @@ custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("22_275hr")
+texture = ExtResource("12_kkobr")
 
 [node name="ChangeShipIcon" type="Button" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/VBoxContainer" unique_id=616391956]
 layout_mode = 2
@@ -473,6 +480,16 @@ text = "Remove Item"
 [connection signal="index_pressed" from="InputScroll/VBoxContainer/PanelContainer2/HBoxContainer/MenuBar/Add Item" to="." method="_on_item_select_index_pressed"]
 [connection signal="toggled" from="InputScroll/VBoxContainer/PanelContainer2/HBoxContainer/ShowItStats" to="." method="_on_show_it_stats_toggled"]
 [connection signal="StatChanged" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/InventoryShipStats" to="." method="_on_inventory_ship_stats_stat_changed"]
+[connection signal="mouse_entered" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/ShipStatContainer" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/ShipStatContainer" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/ShipStatContainer" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/ShipStatContainer" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@21243" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@21243" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@21243" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@21243" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@21244" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@21244" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@21244" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@21244" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@21245" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@21245" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@21245" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@21245" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@21246" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@21246" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@21246" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@21246" method="_on_mouse_exited"]
 [connection signal="text_changed" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/CapName" to="." method="_on_cap_name_text_changed"]
 [connection signal="pressed" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/VBoxContainer/ChangeShipIcon" to="." method="_on_change_ship_icon_pressed"]
 [connection signal="pressed" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer/PanelContainer/VBoxContainer/MoveItem" to="." method="_on_move_item_pressed"]

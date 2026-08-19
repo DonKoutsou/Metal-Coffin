@@ -1,10 +1,11 @@
-[gd_scene format=3 uid="uid://c7guccqp25yix"]
+[gd_scene format=3 uid="uid://cwcpb5yv3oww2"]
 
 [ext_resource type="Script" uid="uid://d4ib0fxcug26a" path="res://addons/cptcreator/captain_creator_stat_slider.gd" id="1_sadii"]
 [ext_resource type="PackedScene" uid="uid://r8hnhjq1f0q0" path="res://Scenes/Inventory/ShipStatContainer.tscn" id="2_1frwb"]
 
-[node name="StatSlider" type="VBoxContainer" unique_id=1285657924]
+[node name="StatSlider" type="VBoxContainer" unique_id=1285657924 node_paths=PackedStringArray("slider")]
 script = ExtResource("1_sadii")
+slider = NodePath("HSlider")
 
 [node name="ShipStatContainer" parent="." unique_id=1703653256 instance=ExtResource("2_1frwb")]
 layout_mode = 2

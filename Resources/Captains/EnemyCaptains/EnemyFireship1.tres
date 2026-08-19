@@ -135,3 +135,10 @@ CaptainStats = Array[ExtResource("2_0or3p")]([SubResource("Resource_jvup1"), Sub
 ShipCallsign = "P1"
 StartingItems = Array[ExtResource("3_c5lqg")]([ExtResource("23_mil77"), ExtResource("24_xx2gh"), ExtResource("24_xx2gh"), ExtResource("24_xx2gh"), ExtResource("25_hxdnx"), ExtResource("25_hxdnx"), ExtResource("25_hxdnx"), ExtResource("26_uxo2e"), ExtResource("26_uxo2e"), ExtResource("26_uxo2e"), ExtResource("22_rjpe7"), ExtResource("8_bewff")])
 ProvidingFunds = 10000
+disp = Dictionary[int, float]({
+0: 0.1,
+1: 0.0,
+2: 0.0,
+3: 0.0,
+4: 0.0
+})
