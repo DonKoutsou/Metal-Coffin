@@ -11,7 +11,6 @@
 [ext_resource type="Resource" uid="uid://cnrek2mbia331" path="res://Resources/Items/Ammo/ProxyFuseAmmoMagazine100mm.tres" id="10_lyd6f"]
 [ext_resource type="Resource" uid="uid://c8wthdbwacfhe" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/Engine2.tres" id="11_tlmlu"]
 [ext_resource type="Resource" uid="uid://css6e78uhfsfa" path="res://Resources/Items/ShipParts/MG/ShortMachinegun100mm.tres" id="12_e6mhc"]
-[ext_resource type="Resource" uid="uid://cxrq5fe4uqxsf" path="res://Resources/Items/ShipParts/MissilePods/ShortMissilePod.tres" id="12_uc8e0"]
 
 [sub_resource type="Resource" id="Resource_jvup1"]
 script = ExtResource("2_735um")
@@ -132,7 +131,7 @@ CaptainPortrait = ExtResource("1_uc8e0")
 ShipIcon = ExtResource("5_uc8e0")
 CaptainStats = Array[ExtResource("2_735um")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_mcdo0"), SubResource("Resource_yl52l"), SubResource("Resource_7g4dd"), SubResource("Resource_hxdnx"), SubResource("Resource_4p6v8"), SubResource("Resource_66526"), SubResource("Resource_h3q7u"), SubResource("Resource_xmlya"), SubResource("Resource_j0vsk"), SubResource("Resource_mphws"), SubResource("Resource_rjpe7"), SubResource("Resource_mil77"), SubResource("Resource_xx2gh"), SubResource("Resource_bewff"), SubResource("Resource_aqvi6"), SubResource("Resource_lav7j"), SubResource("Resource_t070w"), SubResource("Resource_iwvy3"), SubResource("Resource_toygr"), SubResource("Resource_nq4xw"), SubResource("Resource_s7nv5")])
 ShipCallsign = "W1"
-StartingItems = Array[ExtResource("6_8eti3")]([ExtResource("7_elupc"), ExtResource("8_8jrwv"), ExtResource("8_8jrwv"), ExtResource("10_lyd6f"), ExtResource("10_lyd6f"), ExtResource("10_lyd6f"), ExtResource("12_e6mhc"), ExtResource("11_tlmlu"), ExtResource("12_uc8e0")])
+StartingItems = Array[ExtResource("6_8eti3")]([ExtResource("7_elupc"), ExtResource("8_8jrwv"), ExtResource("8_8jrwv"), ExtResource("10_lyd6f"), ExtResource("10_lyd6f"), ExtResource("10_lyd6f"), ExtResource("12_e6mhc"), ExtResource("11_tlmlu")])
 ProvidingFunds = 20000
 disp = Dictionary[int, float]({
 0: 0.0,

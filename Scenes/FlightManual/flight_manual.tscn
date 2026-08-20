@@ -11,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://dx6k7ujf6hpkg" path="res://Scenes/FlightManual/Entries/MissileTypes.tres" id="7_u7g5t"]
 [ext_resource type="Resource" uid="uid://dv741f7fcu3lu" path="res://Scenes/FlightManual/Entries/ShipStats.tres" id="8_2kj71"]
 [ext_resource type="Resource" uid="uid://cvfuunncgb30h" path="res://Scenes/FlightManual/Entries/ShipDeck.tres" id="9_oivmy"]
+[ext_resource type="Resource" uid="uid://dfeb6w8hqg8uk" path="res://Scenes/FlightManual/Entries/Disposition.tres" id="10_82ypx"]
 
 [node name="FlightManual" type="Control" unique_id=1037505951 node_paths=PackedStringArray("EntryNameLabel", "EntryLabel", "EntryButtonLocation")]
 process_mode = 3
@@ -21,7 +22,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xll1p")
-FlightManualEntries = Array[ExtResource("2_x06mv")]([ExtResource("3_3gukv"), ExtResource("4_82ypx"), ExtResource("5_yadiy"), ExtResource("6_7fhkt"), ExtResource("7_u7g5t"), ExtResource("8_2kj71"), ExtResource("9_oivmy")])
+FlightManualEntries = Array[ExtResource("2_x06mv")]([ExtResource("3_3gukv"), ExtResource("4_82ypx"), ExtResource("5_yadiy"), ExtResource("6_7fhkt"), ExtResource("7_u7g5t"), ExtResource("8_2kj71"), ExtResource("9_oivmy"), ExtResource("10_82ypx")])
 EntryNameLabel = NodePath("HBoxContainer/PanelContainer/ScrollContainer/VBoxContainer/Label")
 EntryLabel = NodePath("HBoxContainer/PanelContainer/ScrollContainer/VBoxContainer/RichTextLabel")
 EntryButtonLocation = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/VBoxContainer")

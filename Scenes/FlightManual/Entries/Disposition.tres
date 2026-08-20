@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FlightManualEntry" format=3 uid="uid://dfeb6w8hqg8uk"]
+
+[ext_resource type="Script" uid="uid://cvx22oa8uksuj" path="res://Scenes/FlightManual/flight_manual_entry.gd" id="1_knym4"]
+
+[resource]
+script = ExtResource("1_knym4")
+EntryName = "FM_Disposition_Title"
+EntryDesc = "FM_Disposition_Text"
+metadata/_custom_type_script = "uid://cvx22oa8uksuj"

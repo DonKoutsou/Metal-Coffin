@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://byk8ikxmio8k1"]
+
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="1_nbth7"]
+[ext_resource type="Resource" uid="uid://cfcixcsymvkwg" path="res://Resources/Cards/CardInject.tres" id="2_ykqd2"]
+[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="3_hlaoa"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="4_mwar8"]
+
+[sub_resource type="Resource" id="Resource_nbypy"]
+script = ExtResource("3_hlaoa")
+UpgradeName = 17
+UpgradeAmmount = 2800.0
+
+[sub_resource type="Resource" id="Resource_nmdsm"]
+script = ExtResource("3_hlaoa")
+UpgradeName = 9
+UpgradeAmmount = 35.0
+metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
+[sub_resource type="Resource" id="Resource_pqt5y"]
+script = ExtResource("3_hlaoa")
+UpgradeName = 16
+UpgradeAmmount = 45.0
+metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
+[resource]
+script = ExtResource("4_mwar8")
+Upgrades = Array[ExtResource("3_hlaoa")]([SubResource("Resource_nbypy"), SubResource("Resource_nmdsm"), SubResource("Resource_pqt5y")])
+UpgradeTime = 1200.0
+disp = 3
+DispositionAmm = 0.4
+ItemName = "AIRH-315"
+ItemDesc = "A fundamental radar system offering basic detection capabilities. Ideal for identifying nearby low-profile threats in standard operational conditions."
+CardProviding = Array[ExtResource("1_nbth7")]([ExtResource("2_ykqd2"), ExtResource("2_ykqd2")])
+Cost = 96000
+PartType = 2

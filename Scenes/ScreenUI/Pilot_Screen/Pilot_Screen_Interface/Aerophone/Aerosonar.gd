@@ -64,7 +64,10 @@ func CheckIfWorking() -> void:
 	var hasSonar = CurrentSonarRange > 0
 	var hasElint = fleetHasElint()
 	toggleSonar(hasSonar or hasElint)
-	cap.visible = !hasSonar and !hasElint
+	var hasAny = hasSonar and hasElint
+	cap.visible = !hasAny
+	if (!hasAny):
+		return
 	if (!hasSonar and currentMode == MODE.SOUND):
 		ModeButton.set_pressed(false)
 	else: if (!hasElint and currentMode == MODE.RADAR):

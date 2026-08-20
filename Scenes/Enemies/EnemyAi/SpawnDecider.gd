@@ -114,17 +114,20 @@ func GetRecruitsForPosition(YPos: float, HasRec : bool, capital : bool) -> Array
 	var points = GetRecruitPointsForPosition(abs(YPos))
 	if (capital):
 		points *= 1.5
-	if (HasRec):
-		points *= 2
 		
 	print("Picking recruits for pos {0} with points {1}".format([YPos, points]))
 	var stage = Happening.GetStageForYPos(YPos)
+	var recs = RecruitList.duplicate()
 	# Iterate through the MerchList to select merchandise based on points
-	while points > RECRUIT_LOWEST:
-		var RandomRec = RecruitList.pick_random() as CaptainSpawnInfo
+	while points > RECRUIT_LOWEST and recs.size() > 0:
+		var RandomRec = recs.pick_random() as CaptainSpawnInfo
 		if (RandomRec.DontGenerateBefore > stage):
 			continue
-
+		
+		var amm = available_Recruits.count(RandomRec.Cpt)
+		if (amm >= RandomRec.MaxAmmInFleet):
+			recs.erase(RandomRec)
+			continue
 		if (points > RandomRec.Cost):
 			available_Recruits.append(RandomRec.Cpt)
 			points -= RandomRec.Cost

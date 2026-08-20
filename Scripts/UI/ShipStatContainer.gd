@@ -74,7 +74,11 @@ func SetDataCustom(MaxValue : float, StatMetric : String, StatName : String, Sta
 func UpdateStatCustom(StatVal : float, ItemVar : float, ItemPenalty : float) -> void:
 	var finalValue = snappedf(StatVal + ItemVar - ItemPenalty, 0.1)
 	StatValueLabel.text = "{0} {1}".format([finalValue, Metric])
-
+	
+	ShipStatBar.value = 0
+	ItemStatBar.value = 0
+	ItemNegativeBar.value = 0
+	
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_OUT)
 	tw.set_trans(Tween.TRANS_BACK)
@@ -91,6 +95,10 @@ func UpdateStatValue(StatVal : float, ItemVar : float, ItemPenalty : float) -> v
 		StatValueLabel.text = "{0} {1}".format([var_to_str(max(StatVal, ItemVar) - ItemPenalty).replace(".0", ""), Metric])
 	else:
 		StatValueLabel.text = "{0} {1}".format([var_to_str(StatVal + ItemVar - ItemPenalty).replace(".0", ""), Metric])
+	
+	ShipStatBar.value = 0
+	ItemStatBar.value = 0
+	ItemNegativeBar.value = 0
 	
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_OUT)

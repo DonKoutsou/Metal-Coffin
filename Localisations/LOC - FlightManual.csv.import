@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://cfhw7uvonj4ai"
+
+[deps]
+
+files=["res://Localisations/LOC - FlightManual.english.translation"]
+
+source_file="res://Localisations/LOC - FlightManual.csv"
+dest_files=["res://Localisations/LOC - FlightManual.english.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

@@ -2,17 +2,16 @@ extends CanvasLayer
 
 class_name StartingMenu
 
-@export var CreditsScene : PackedScene
+@export_file() var CreditsScene : String
 @export var LoadPrologueLight : Light
 @export var LoadLight : Light
 @export var HintDialogue : Control
-@export var Credits : Control
 @export var Settings : Control
 @export var NormalUI : Control
 @export var VersionLabel : Label
 @export var cloudNoise : FastNoiseLite
 
-var SpawnedCredits : Control
+var SpawnedCredits : Credits
 
 var Selecting : bool
 
@@ -26,7 +25,6 @@ signal ShowTutorial(i : int)
 
 func _ready() -> void:
 	HintDialogue.visible = false
-	Credits.visible = false
 	Settings.visible = false
 	$CanvasModulate.color = Color(0,0,0,1)
 	$AlarmLight2.energy = 0
@@ -81,15 +79,17 @@ func On_Credits_Pressed() -> void:
 	if (Selecting):
 		return
 	
-	var t = !Credits.visible
-	Credits.visible = t
-	NormalUI.visible = !t
-	Settings.visible = false
-
-func _on_credits_on_button_pressed() -> void:
-	Credits.visible = false
-	Settings.visible = false
-	NormalUI.visible = true
+	if (SpawnedCredits != null):
+		SpawnedCredits.queue_free()
+		NormalUI.visible = true
+		Settings.visible = false
+	else:
+		var cr : PackedScene = load(CreditsScene)
+		SpawnedCredits = cr.instantiate()
+		$SubViewportContainer/SubViewport/VBoxContainer.add_child(SpawnedCredits)
+		SpawnedCredits.OnButtonPressed.connect(On_Credits_Pressed)
+		NormalUI.visible = false
+		Settings.visible = false
 
 func _on_settings_pressed() -> void:
 	var t = !Settings.visible

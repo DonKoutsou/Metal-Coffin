@@ -28,6 +28,8 @@ func Init(Ships : Array[Captain]) -> void:
 	
 	var B : Button = ShipButtonsParent.get_child(0)
 	B.set_pressed_no_signal(true)
+	
+	Stats.ShowStats()
 
 func RefreshCaptains() -> void:
 	for g in ShipButtonsParent.get_children():
@@ -57,7 +59,7 @@ func OnShipSelected(ShipIndex : int) -> void:
 	currentIndex = ShipIndex
 	CurrentShip.RegisterInventory(CharacterInventory.newInv(CurrentShip))
 	Stats.SetCaptain(CurrentShip)
-	Stats.ShowStats()
+	#Stats.ShowStats()
 	#Inv.InitialiseStarting(Ship)
 
 func _on_buy_pressed() -> void:
@@ -67,13 +69,18 @@ func _on_buy_pressed() -> void:
 	else:
 		PopUpManager.GetInstance().DoFadeNotif("Not enough funds")
 
-func OnBuyConfirmed() -> void:
-	PlWaller.AddFunds(-CurrentShip.GetValue())
-	OnCaptainBought.emit(AvailableCaptains[currentIndex].duplicate(true))
-	
-	CurrentShip._CharInv.queue_free()
-	AvailableCaptains.remove_at(currentIndex)
-	RefreshCaptains()
+func OnBuyConfirmed(t : bool) -> void:
+	if (t):
+		PlWaller.AddFunds(-CurrentShip.GetValue())
+		OnCaptainBought.emit(AvailableCaptains[currentIndex].duplicate(true))
+		
+		CurrentShip._CharInv.queue_free()
+		AvailableCaptains.remove_at(currentIndex)
+		CurrentShip = null
+		if (AvailableCaptains.size() == 0):
+			_on_close_pressed()
+		else:
+			RefreshCaptains()
 
 func _on_close_pressed() -> void:
 	RecruitClosed.emit()

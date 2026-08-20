@@ -113,10 +113,13 @@ func On_Recruit_Pressed() -> void:
 	tavern.RecShop.connect(OpenRecruitShop)
 
 func OpenRecruitShop() -> void:
-	var RShop = RecruitShopScene.instantiate() as RecruitShop
-	add_child(RShop)
-	RShop.Init(TownSpot.Recruits)
-	RShop.OnCaptainBought.connect(OnShipBought)
+	if (TownSpot.Recruits.size() == 0):
+		PopupManager.DoFadeNotif("No recruits available!", null)
+	else:
+		var RShop = RecruitShopScene.instantiate() as RecruitShop
+		add_child(RShop)
+		RShop.Init(TownSpot.Recruits)
+		RShop.OnCaptainBought.connect(OnShipBought)
 
 func OpenArcade() -> void:
 	PlWallet.AddFunds(-1)

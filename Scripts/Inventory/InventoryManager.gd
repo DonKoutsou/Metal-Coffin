@@ -48,6 +48,7 @@ func ControllerChanged(NewController : PlayerDrivenShip) -> void:
 	var squad : Array[Captain] = NewController.GetSquadCaptains()
 	squad.append(NewController.Cpt)
 	InspectCharacter(squad[0])
+	CaptainStats.ShowStats()
 	for g in _CharacterInventories:
 		var inv : CharacterInventory = _CharacterInventories[g]
 		inv.visible = g in squad
@@ -375,7 +376,7 @@ func OnItemRemoved(It : Item, Owner : Captain) -> void:
 func InspectCharacter(Cha : Captain) -> void:
 	CloseDescriptor()
 	CaptainStats.SetCaptain(Cha)
-	CaptainStats.ShowStats()
+	#CaptainStats.ShowStats()
 	#ShipStats.visible = true
 	#ShipDeck.visible = false
 

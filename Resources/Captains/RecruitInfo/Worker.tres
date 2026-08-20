@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CaptainSpawnInfo" format=3 uid="uid://rtfbawkovhx5"]
+[gd_resource type="Resource" script_class="CaptainSpawnInfo" format=3 uid="uid://scamsw4s17r2"]
 
 [ext_resource type="Resource" uid="uid://bf1kg366cvfpc" path="res://Resources/Captains/EnemyCaptains/EnemyWorker1.tres" id="1_rpgyi"]
 [ext_resource type="Script" uid="uid://ci53582k6iewi" path="res://Scenes/Enemies/EnemyAi/CaptainSpawnInfo.gd" id="2_a25tu"]

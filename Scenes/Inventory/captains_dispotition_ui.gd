@@ -60,8 +60,8 @@ func _draw() -> void:
 	for g in CharacterStats:
 		var m = Helper.normalize_value(g, 0, CharacterStats.size())
 		
-		var rad = Radius * Helper.mapvalue(clamp(CharacterStats[g], 0, 1), 0.1, 1.1)
-		var itRad = Radius * Helper.mapvalue(clamp(CharacterStats[g] + ItemStats[g], 0, 1), 0.1, 1.1)
+		var rad = Radius * Helper.mapvalue(clamp(CharacterStats[g], 0, 1), 0.1, 1.0)
+		var itRad = Radius * Helper.mapvalue(clamp(CharacterStats[g] + ItemStats[g], 0, 1), 0.1, 1.0)
 		#var rad = Radius * clamp(CharacterStats[g], 0.1, 1)
 		var pointX = cos(m * (PI * 2) - 0.32)
 		var pointY = sin(m * (PI * 2) - 0.32)

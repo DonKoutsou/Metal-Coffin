@@ -156,7 +156,7 @@ custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 
 [node name="PlayerShipPlecement" type="Container" parent="VBoxContainer4/VBoxContainer2" unique_id=1637451095]
-custom_minimum_size = Vector2(220, 0)
+custom_minimum_size = Vector2(280, 0)
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 3
@@ -203,7 +203,7 @@ custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 
 [node name="EnemyShipPlecement" type="Container" parent="VBoxContainer4/VBoxContainer3" unique_id=2007953978]
-custom_minimum_size = Vector2(220, 0)
+custom_minimum_size = Vector2(280, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 3

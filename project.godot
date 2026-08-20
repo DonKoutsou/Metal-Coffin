@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Metal Coffin"
-config/version="0.7.39"
+config/version="0.7.4"
 run/main_scene="uid://cqxnjihcai1kd"
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.7", "Mobile")
@@ -215,7 +215,7 @@ Cnt={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://Localisations/LOC - Stat.english.translation", "res://Localisations/LOC - Cards.greek.translation", "res://Localisations/LOC - Cards.english.translation", "res://Localisations/LOC - Tutorial.english.translation")
+locale/translations=PackedStringArray("res://Localisations/LOC - Stat.english.translation", "res://Localisations/LOC - Cards.greek.translation", "res://Localisations/LOC - Cards.english.translation", "res://Localisations/LOC - Tutorial.english.translation", "res://Localisations/LOC - FlightManual.english.translation")
 locale/test="en"
 locale/locale_filter_mode=1
 

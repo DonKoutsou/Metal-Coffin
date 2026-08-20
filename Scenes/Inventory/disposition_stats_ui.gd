@@ -10,11 +10,8 @@ var ItemPoints : PackedVector2Array
 
 var offset : float = 0
 
-func _process(delta: float) -> void:
-	offset = min(1, offset + delta * 4)
-	queue_redraw()
-	if (offset == 1):
-		set_process(false)
+func UpdateOffset(newOffset : float) -> void:
+	offset = newOffset
 	queue_redraw()
 
 func UpdateStats(stats : PackedVector2Array, ItemStats : PackedVector2Array) -> void:
@@ -22,6 +19,11 @@ func UpdateStats(stats : PackedVector2Array, ItemStats : PackedVector2Array) -> 
 	ItemPoints = ItemStats
 	set_process(true)
 	offset = 0
+	var tw = create_tween()
+	tw.set_ease(Tween.EASE_OUT)
+	tw.set_trans(Tween.TRANS_BACK)
+	tw.tween_method(UpdateOffset, 0.0, 1.0, 0.5)
+	
 
 func _draw() -> void:
 	var finalPoints : PackedVector2Array

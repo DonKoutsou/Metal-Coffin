@@ -144,6 +144,8 @@ func _Update(delta: float) -> void:
 	
 	if (VisibleBy.size() > 0):
 		ExposedValue += delta
+	else:
+		ExposedValue = max(0, ExposedValue - delta)
 	
 	if (UseDefaultBehavior):
 		if (!Cpt.IsResourceFull(STAT_CONST.STATS.HULL)):
@@ -486,8 +488,8 @@ func OnShipUnseen(UnSeenBy : Node2D) -> void:
 	for g : HostileShip in GetDock().GetDockedShips():
 		g.VisibleBy.erase(UnSeenBy)
 		
-	if (VisibleBy.size() == 0):
-		ExposedValue = 0
+	#if (VisibleBy.size() == 0):
+		#ExposedValue = 0
 	#$Radar/Radar_Range.visible = VisibleBt.size() > 0
 
 

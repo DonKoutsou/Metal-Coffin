@@ -3,21 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bhg24g7ywfqe8"
-path="res://.godot/imported/Spaceship_top_2_Main Camera.png-359f035e5ac803a214ebf24cbd015f63.ctex"
+path="res://.godot/imported/Hull6.png-619d86e451874bd414633334555f2217.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/ShipTextures/Spaceship_top_2_Main Camera.png"
-dest_files=["res://.godot/imported/Spaceship_top_2_Main Camera.png-359f035e5ac803a214ebf24cbd015f63.ctex"]
+source_file="res://Assets/ShipTextures/Hull6.png"
+dest_files=["res://.godot/imported/Hull6.png-619d86e451874bd414633334555f2217.ctex"]
 
 [params]
 
 compress/mode=0
 compress/high_quality=true
-compress/high_quality_mode=0
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://d0isgdl6kesvp"]
+
+[ext_resource type="Script" uid="uid://ch4m5dp1do4n5" path="res://ruler.gd" id="1_5w0y0"]
+
+[node name="Node2D" type="Node2D" unique_id=1694640239]
+position = Vector2(627, 307)
+script = ExtResource("1_5w0y0")
+size = 200.0

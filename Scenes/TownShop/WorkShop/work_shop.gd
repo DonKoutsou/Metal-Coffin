@@ -51,7 +51,7 @@ func Init(Ships : Array[MapShip], HasUpgrade : bool, Merch : Array[Merchandise])
 	var b : Button = ShipButtonsParent.get_child(0)
 	b.set_pressed_no_signal(true)
 	
-	
+	ShipStats.ShowStats()
 
 func RefreshCaptains() -> void:
 	for g in ShipButtonsParent.get_children():
@@ -81,7 +81,7 @@ func OnShipSelected(ShipIndex : int) -> void:
 	CurrentShipIndex = ShipIndex
 	
 	ShipStats.SetCaptain(CurrentShip.Cpt)
-	ShipStats.ShowStats()
+	#ShipStats.ShowStats()
 	ShipStats.ShipInventory.SetBoxedSelectable()
 	ShipStats.ShipInventory.KeepBoxesActive = true
 
