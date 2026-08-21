@@ -30,15 +30,18 @@ position = Vector2(235, 0)
 texture = ExtResource("4_t2rfa")
 
 [node name="Sprite2D5" type="Sprite2D" parent="." unique_id=253918933]
-position = Vector2(351, 0)
+position = Vector2(369, 0)
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("1_p21nc")
 
 [node name="Sprite2D6" type="Sprite2D" parent="." unique_id=89115949]
 position = Vector2(498, 0)
+scale = Vector2(0.64, 0.64)
 texture = ExtResource("6_el075")
 
 [node name="Sprite2D7" type="Sprite2D" parent="." unique_id=484442752]
 position = Vector2(596, 0)
+scale = Vector2(0.525, 0.525)
 texture = ExtResource("7_x62tc")
 
 [node name="Sprite2D8" type="Sprite2D" parent="." unique_id=257752200]

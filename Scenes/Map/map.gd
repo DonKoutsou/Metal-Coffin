@@ -389,13 +389,15 @@ func GenerateMap() -> void:
 	ShowingTutorial = true
 
 func GenerateMapThreaded() -> void:
+	print("||||||||||||||||||||||| SPAWNING SPOTS |||||||||||||||||||||||")
+	
 	var time = Time.get_ticks_msec()
 	
 	var CapitalCitySpots : Array[int] = []
 	for z in CapitalAmm:
 		var spot = roundi(MapSize/CapitalAmm * (z + 1)) - randi_range(2, 5)
 		CapitalCitySpots.append(spot)
-		
+
 	var VillageSpots : Array[int] = []
 	
 	for z in VillageAmm:
@@ -453,7 +455,15 @@ func GenerateMapThreaded() -> void:
 	for g in GeneratedSpots:
 		var isCapital = g.GetSpot().SpotType.SpotK == MapSpotType.SpotKind.CAPITAL
 		g.call_deferred("SetMerch", EnSpawner.GetMerchForPosition(g.Pos.y, g.GetSpot().HasUpgrade(), isCapital), EnSpawner.GetWorkshopMerchForPosition(g.Pos.y, g.GetSpot().HasUpgrade(), isCapital))
-		g.call_deferred("SetRecruits", EnSpawner.GetRecruitsForPosition(g.Pos.y, g.GetSpot().HasRecruit(), isCapital))
+		
+		var Recruits = EnSpawner.GetRecruitsForPosition(g.Pos.y, g.GetSpot().HasRecruit(), isCapital)
+		var recruitCallsigns = []
+		for rec in Recruits:
+			recruitCallsigns.append(rec.CaptainName)
+			
+		print("Recruits for {1} was decided as {0}".format([var_to_str(recruitCallsigns), g.GetCityName()]))
+		
+		g.call_deferred("SetRecruits", Recruits)
 	
 	
 	if (OS.is_debug_build()):
@@ -662,10 +672,10 @@ func SpawnFin() -> void:
 	call_deferred("FGenerationFinished")
 
 func SpawnSpotFleet(Spot : MapSpot, Patrol : bool, Convoy : bool,  Pos : Vector2) -> void:
-	print("Spawning for {0}".format([Spot.GetSpotName()]))
+	#print("Spawning for {0}".format([Spot.GetSpotName()]))
 	var Fleet = EnSpawner.GetSpawnsForLocation(Pos.y, Patrol, Convoy, Spot.SpotType.SpotK == MapSpotType.SpotKind.CAPITAL)
 	var SpawnedFleet = []
-	#var SpawnedCallsigns = []
+	var SpawnedCallsigns = []
 	for f in Fleet:
 		var Ship = EnemyScene.instantiate() as HostileShip
 		Ship.Cpt = f
@@ -679,7 +689,7 @@ func SpawnSpotFleet(Spot : MapSpot, Patrol : bool, Convoy : bool,  Pos : Vector2
 		Ship.ShipName = ShipName
 		TempEnemyNames.remove_at(TempEnemyNames.size() - 1)
 		M.unlock()
-		#SpawnedCallsigns.append(f.ShipCallsign)
+		SpawnedCallsigns.append(f.ShipCallsign)
 		SpawnedFleet.append(Ship)
 		Ship.global_position = Pos
 		Ship.connect("OnPlayerShipMet", EnemyMet)
@@ -689,7 +699,7 @@ func SpawnSpotFleet(Spot : MapSpot, Patrol : bool, Convoy : bool,  Pos : Vector2
 			Ship.ToggleDocked(true)
 			Ship.Command = SpawnedFleet[0]
 			SpawnedFleet[0].GetDock().call_deferred("DockShip", Ship)
-	#print("A fleet consisting of {0} was spawned at the port of {1}. Patrol = {2}".format([var_to_str(SpawnedCallsigns), Spot.GetSpotName(), Patrol]))
+	print("A fleet consisting of {0} was spawned at the port of {1}. Patrol = {2}".format([var_to_str(SpawnedCallsigns), Spot.GetSpotName(), Patrol]))
 	#TempEnemyNames.clear()
 
 func RespawnEnemiesThreaded(EnemyData : Array[Resource]) -> void:

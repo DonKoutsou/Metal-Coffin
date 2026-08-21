@@ -55,7 +55,7 @@ func GetSaveData() -> DroneSaveData:
 func _exit_tree() -> void:
 	WeatherManage.UnregisterShip(self)
 
-func Update(delta: float) -> void:
+func Update(delta: float, _unaffectedDelta : float) -> void:
 	ElintShape.UpdateElint(delta)
 	RadarShape.EvaluateRadarrPoint(Altitude)
 	
@@ -84,7 +84,7 @@ func Update(delta: float) -> void:
 		_HandleAccelerationSound()
 
 	if (CurrentPort != null):
-		_HandleRestock()
+		_HandleRestock(delta)
 	
 	if (Landed()):
 		LastRecordedOffset = Vector2.ZERO
@@ -325,24 +325,36 @@ func _HandleAccelerationSound() -> void:
 		AccelerationAudio.play()
 	AccelChanged = false
 
-func _HandleRestock() -> void:
+func _HandleRestock(delta : float) -> void:
 	if(!Landed()):
 		ShipDockActions.emit("Refueling", false, 0)
 		ShipDockActions.emit("Repairing", false, 0)
 		ShipDockActions.emit("Upgrading", false, 0)
 		ShipDockActions.emit("Installing", false, 0)
 		return
-	Refuel()
-	Repair()
+
+	var refuelT = Refuel()
+	var repairT = Repair()
+	var upT = Upgrade(delta)
+	var iT = Install(delta)
 	
-	var inv = Cpt.GetCharacterInventory()
-	if (inv != null and inv._ItemBeingUpgraded != null):
-		ShipDockActions.emit("Upgrading", true, roundi(inv.GetUpgradeTimeLeft()))
+	if (refuelT > 0):
+		ShipDockActions.emit("Refueling", true, refuelT)
+	else:
+		ShipDockActions.emit("Refueling", false, 0)
+	
+	if (repairT > 0):
+		ShipDockActions.emit("Repairing", true, repairT)
+	else:
+		ShipDockActions.emit("Repairing", false, 0)
+	
+	if (upT > 0):
+		ShipDockActions.emit("Upgrading", true, upT)
 	else:
 		ShipDockActions.emit("Upgrading", false, 0)
 	
-	if (inv != null and inv._ItemBeingEquipped != null):
-		ShipDockActions.emit("Installing", true, roundi(inv.GetEquipTimeLeft()))
+	if (iT > 0):
+		ShipDockActions.emit("Installing", true, iT)
 	else:
 		ShipDockActions.emit("Installing", false, 0)
 

@@ -66,7 +66,7 @@ static func GetStageForYPos(YPos : float) -> Happening.GameStage:
 	else:
 		GameSt = Happening.GameStage.EARLY
 	
-	print("Position {0} stage = {1}".format([YPos, Happening.GameStage.keys()[GameSt]]))
+	#print("Position {0} stage = {1}".format([YPos, Happening.GameStage.keys()[GameSt]]))
 	return GameSt
 
 enum GameStage

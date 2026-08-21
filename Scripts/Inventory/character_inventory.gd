@@ -46,9 +46,9 @@ var inventoryOwner : MapShip
 #var CurrentPort : MapSpot
 
 func _ready() -> void:
-	
+	pass
 	#MissileDockEventH.connect("MissileLaunched", RemoveItem)
-	set_physics_process(_ItemBeingUpgraded != null)
+	#set_physics_process(_ItemBeingUpgraded != null)
 
 func GetCards() -> Array[CardStats]:
 	var CardsInInventory : Array[CardStats]
@@ -416,62 +416,39 @@ func TransferItem(Box : Inventory_Box_Res) -> void:
 
 func StartUpgrade(Box : Inventory_Box_Res) -> void:
 	var Part = Box.GetContainedItem() as ShipPart
-	_UpgradeTime = Part.UpgradeVersion.UpgradeTime
+	_UpgradeTime = Part.UpgradeTime
 	_ItemBeingUpgraded = Box
-	set_physics_process(true)
+	#set_physics_process(true)
 
 func StartEquip(_Box : Inventory_Box_Res, It : ShipPart) -> Inventory_Box_Res:
 	_ItemBeingEquipped = It
 	_EquipLocation = FindBox(It)
 	_EquipTime = It.UpgradeTime
-	set_physics_process(true)
+	#set_physics_process(true)
 	return _EquipLocation
 
 func ReStartEquip(It : ShipPart, EquipTime : float) -> void:
 	_ItemBeingEquipped = It
 	_EquipLocation = FindBox(It)
 	_EquipTime = EquipTime
-	set_physics_process(true)
+	#set_physics_process(true)
 
 func ReStartUpgrade(Box : Inventory_Box_Res, UpTime : float) -> void:
 	#var Part = Box.GetContainedItem() as ShipPart
 	_UpgradeTime = UpTime
 	_ItemBeingUpgraded = Box
-	set_physics_process(true)
-	
-func _physics_process(delta: float) -> void:
-	if (SimPaused or inventoryOwner.CurrentPort == null):
-		return
-
-	#_UpgradeTime -= (delta * 10)
-	if (_ItemBeingUpgraded != null):
-		var upgradeProgress = (delta * 10) * SimulationManager.SimSpeed()
-		if (inventoryOwner.CurrentPort.HasUpgrade()):
-			upgradeProgress *= 2
-		_UpgradeTime -= upgradeProgress
-		if (_UpgradeTime <= 0):
-			ItemUpgradeFinished()
-	
-	if (_ItemBeingEquipped != null):
-		var equipProgress = (delta * 10) * SimulationManager.SimSpeed()
-		if (inventoryOwner.CurrentPort.HasUpgrade()):
-			equipProgress *= 2
-		_EquipTime -= equipProgress
-		if (_EquipTime <= 0):
-			ItemEquipFinished()
-	
-	set_physics_process(_UpgradeTime > 0 or _EquipTime > 0)
+	#set_physics_process(true)
 
 func CancelUpgrade() -> void:
 	_ItemBeingUpgraded = null
 	_UpgradeTime = 0
-	set_physics_process(_UpgradeTime > 0 or _EquipTime > 0)
+	#set_physics_process(_UpgradeTime > 0 or _EquipTime > 0)
 
 func CancelInstall() -> void:
 	_ItemBeingEquipped = null
 	_EquipLocation = null
 	_EquipTime = 0
-	set_physics_process(_UpgradeTime > 0 or _EquipTime > 0)
+	#set_physics_process(_UpgradeTime > 0 or _EquipTime > 0)
 
 func ItemUpgradeFinished() -> void:
 	var Part = _ItemBeingUpgraded.GetContainedItem() as ShipPart

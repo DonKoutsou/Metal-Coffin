@@ -191,7 +191,7 @@ func _physics_process(delta: float) -> void:
 	
 	var CurrentDelta = delta * SimulationManager.SimSpeed()
 
-	UpdatePlayerShips(CurrentDelta)
+	UpdatePlayerShips(CurrentDelta, delta)
 	
 	if (!SimulationManager.Paused):
 		_Map.Update(delta)
@@ -203,8 +203,8 @@ func _physics_process(delta: float) -> void:
 		_Command.Update(CurrentDelta)
 		UpdateCities(CurrentDelta)
 
-func UpdatePlayerShips(delta : float) -> void:
-	get_tree().call_group("PlayerShips", "Update", delta)
+func UpdatePlayerShips(delta : float, unaffectedDelta : float) -> void:
+	get_tree().call_group("PlayerShips", "Update", delta, unaffectedDelta)
 
 func UpdateCities(delta : float) -> void:
 	get_tree().call_group("City", "Update", delta)

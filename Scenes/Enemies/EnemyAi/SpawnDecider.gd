@@ -115,7 +115,7 @@ func GetRecruitsForPosition(YPos: float, HasRec : bool, capital : bool) -> Array
 	if (capital):
 		points *= 1.5
 		
-	print("Picking recruits for pos {0} with points {1}".format([YPos, points]))
+	#print("Picking recruits for pos {0} with points {1}".format([YPos, points]))
 	var stage = Happening.GetStageForYPos(YPos)
 	var recs = RecruitList.duplicate()
 	# Iterate through the MerchList to select merchandise based on points

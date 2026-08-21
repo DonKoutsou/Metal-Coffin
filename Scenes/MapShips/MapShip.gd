@@ -81,14 +81,16 @@ func IsCommander() -> bool:
 	return Command == null
 	
 #Refuel logic
-func Refuel() -> void:
+func Refuel() -> float:
 	#Make sure that the ship is landed
 	#Make sure that fuel tanks are not full
 	#Make sure port has fuel
 	#IsLanded = Altitude == 0
 	var FuelIsFull = IsFuelFull()
 	var TownHasFuel = CurrentPort.PlayerHasFuelReserves()
-
+	
+	var timeLeft : float = 0
+	
 	if (!FuelIsFull and TownHasFuel):
 		var SimulationSpeed = SimulationManager.SimSpeed()
 		
@@ -122,31 +124,73 @@ func Refuel() -> void:
 			#Add fule to ship and remove from city
 			Capt.RefillResource(STAT_CONST.STATS.FUEL_TANK, AmmountRefilled)
 			CurrentPort.AddToFuelReserves(-AmmountRefilled)
-		ShipDockActions.emit("Refueling", true, roundi(BiggestTimeLeft))
-	else:
+			
+		timeLeft = BiggestTimeLeft
 		
-		ShipDockActions.emit("Refueling", false, 0)
-
-func Repair() -> void:
+	return timeLeft
+	
+func Repair() -> float:
+	var timeLeft : float = 0
+	
 	if (!Cpt.IsResourceFull(STAT_CONST.STATS.HULL) and Cpt.Repair_Parts > 0):
 		var Simulationp = 0
 		if (!SimulationManager.IsPaused()):
 			Simulationp = 1
 		var SimulationSpeed = SimulationManager.SimSpeed() * Simulationp
-		var TimeMulti = 0.05
+		var TimeMulti = 0.025
 		
 		if (CurrentPort.HasRepair()):
-			TimeMulti = 0.25
-		var timeleft = ((Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL) - Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)) / TimeMulti / 6)
-		ShipDockActions.emit("Repairing", true, roundi(timeleft))
+			TimeMulti = 0.10
+		timeLeft = ((Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL) - Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)) / TimeMulti / 6)
+		#ShipDockActions.emit("Repairing", true, roundi(timeleft))
 		Cpt.RefillResource(STAT_CONST.STATS.HULL ,TimeMulti * SimulationSpeed)
 		Cpt.Repair_Parts -= TimeMulti * SimulationSpeed
-	else:
-		ShipDockActions.emit("Repairing", false, 0)
+		
+	for g in GetSquad():
+		timeLeft = max(timeLeft, g.Repair())
+	
+	return timeLeft
+	
+func Upgrade(delta : float) -> float:
+	var timeLeft : float = 0
+	
+	var inv = Cpt.GetCharacterInventory()
+
+	if (inv._ItemBeingUpgraded != null):
+		var upgradeProgress = (delta * 10)
+		if (CurrentPort.HasUpgrade()):
+			upgradeProgress *= 2
+			
+		inv._UpgradeTime -= upgradeProgress
+		if (inv._UpgradeTime <= 0):
+			inv.ItemUpgradeFinished()
+		
+		timeLeft = roundi(inv.GetUpgradeTimeLeft())
 	
 	for g in GetSquad():
-		g.Repair()
+		timeLeft = max(timeLeft, g.Upgrade(delta))
+	
+	return timeLeft
+	
+func Install(delta :float) -> float:
+	var timeLeft : float = 0
+	var inv = Cpt.GetCharacterInventory()
 
+	if (inv._ItemBeingEquipped != null):
+		var equipProgress = (delta * 10)
+		if (CurrentPort.HasUpgrade()):
+			equipProgress *= 2
+		inv._EquipTime -= equipProgress
+		
+		if (inv._EquipTime <= 0):
+			inv.ItemEquipFinished()
+		
+		timeLeft = roundi(inv.GetEquipTimeLeft())
+	
+	for g in GetSquad():
+		timeLeft = max(timeLeft, g.Install(delta))
+	
+	return timeLeft
 
 #CALLED WHEN A SHIP PART IS REMOVED OR ADDED TO INVENTORY TO UPDATE VISUAL RANGE AND ELINT RANGE
 func PartChanged(It : ShipPart) -> void:

@@ -63,7 +63,7 @@ func SetRecruits(Recruits : Array[Captain]) -> void:
 	GetSpot().Recruits = Recruits
 
 func GetCityName() -> String:
-	return $CitySpot.SpotName
+	return GetSpot().SpotName
 	
 func LoadSaveData(Dat : TownSaveData) -> void:
 	position = Dat.TownLoc

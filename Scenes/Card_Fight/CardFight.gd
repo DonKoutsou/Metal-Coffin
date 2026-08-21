@@ -332,12 +332,12 @@ func CardDiscarded(C : CardStats, Manually : bool) -> void:
 		for g in AnimData:
 			HandlePassiveModules(g.Performer, g.OriginalCard, g.Targets)
 	
-	if (Manually):
-		StoredEnergy += 1
-		if (StoredEnergy == 2):
-			StoredEnergy = 0
-			Performer.SetEnergy(Performer.Energy + 1)
-			PopUpManager.GetInstance().DoFadeNotif("Card recycled")
+	#if (Manually):
+		#StoredEnergy += 1
+		#if (StoredEnergy == 2):
+			#StoredEnergy = 0
+			#Performer.SetEnergy(Performer.Energy + 1)
+			#PopUpManager.GetInstance().DoFadeNotif("Card recycled")
 	
 	HandleDiscardModules(Performer, C)
 
@@ -785,8 +785,8 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 		##ENERGY
 		else: if (ActionCost > Ship.Energy):
 			actionLog.append("{0} cant use {1}, not enough energy".format([Ship.Name, Action.GetCardName()]))
-			Ship.deck.Hand.erase(Action)
-			Ship.deck.DiscardCard(Action, true)
+			#Ship.deck.Hand.erase(Action)
+			#Ship.deck.DiscardCard(Action, true)
 			AvailableActions.erase(Action)
 			AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
 		##ON FIRE

@@ -23,7 +23,7 @@ func _exit_tree() -> void:
 		g.queue_free()
 
 func SetDeck(Ch : Captain) -> void:
-	var msBefore = Time.get_ticks_msec()
+	#var msBefore = Time.get_ticks_msec()
 	var Inv = Ch.GetCharacterInventory()
 
 	var deck : Dictionary[CardStats, int]
@@ -80,9 +80,9 @@ func SetDeck(Ch : Captain) -> void:
 		if (parent):
 			g.get_parent().remove_child(g)
 			
-	print("Pooled = {0}".format([PooledCards.size()]))
-	var msAfter = Time.get_ticks_msec()
-	print("Card Setting took {0}".format([msAfter - msBefore]))
+	#print("Pooled = {0}".format([PooledCards.size()]))
+	#var msAfter = Time.get_ticks_msec()
+	#print("Card Setting took {0}".format([msAfter - msBefore]))
 
 func GetParentForCard(C : CardStats) -> Control:
 	match C.Type:
