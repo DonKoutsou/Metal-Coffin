@@ -125,7 +125,7 @@ func LoadMapDat(Data : SaveData) -> void:
 	#var Ships = get_tree().get_nodes_in_group("Ships")
 	var Controller = W.Controller
 	Controller.LoadSaveData(Data.GetData("PLData"))
-	W.LoadSaveData((Data.GetData("Wallet") as SaveData).Datas[0])
+	W.LoadSaveData((Data.GetData("Wallet") as SaveData))
 	Mp.RespawnEnemies((Data.GetData("Enemies") as SaveData).Datas)
 	Mp.RespawnMissiles((Data.GetData("Missiles") as SaveData).Datas)
 	#await Mp.GenerationFinished

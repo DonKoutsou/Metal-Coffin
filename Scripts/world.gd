@@ -57,6 +57,7 @@ var TutorialsToShow : Array[ActionTracker.Action]
 
 var Loading = false
 
+static var instanceRandom : Rand
 static var Instance : World
 
 static func GetInstance() -> World:
@@ -75,6 +76,8 @@ func _ready() -> void:
 	WORLDST = WORLDSTATE.INITIAL
 	SimulationManager.GetInstance().TogglePause(true)
 	Instance = self
+	instanceRandom = Rand.NewRand()
+	
 	GetMap().GetScreenUi().DoIntroFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	WorldSpawnTransitionFinished.emit()
@@ -604,11 +607,18 @@ func GetSaveData() -> SaveData:
 	var Data = SaveData.new()
 	Data.DataName = "Wallet"
 	Data.Datas.append(PlayerWallet.duplicate())
+	var randData = RandomSaveData.new()
+	randData.seed = instanceRandom.seed
+	randData.state = instanceRandom.state
+	Data.Datas.append(instanceRandom.state)
 	return Data
 
 #---------------------------------------------------
-func LoadSaveData(PlWallet : Wallet) -> void:
+func LoadSaveData(data : SaveData) -> void:
+	var PlWallet : Wallet = data.Datas[0]
 	PlayerWallet.SetFunds(PlWallet.Funds)
+	var randData : RandomSaveData = data.Datas[1]
+	instanceRandom = Rand.NewRand(randData.state, randData.seed)
 
 #--------------------------------------------------------
 func GameLost(reason : String):

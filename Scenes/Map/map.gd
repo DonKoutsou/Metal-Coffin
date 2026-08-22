@@ -49,11 +49,18 @@ signal MAP_EnemyArrival(FriendlyShips : Array[MapShip] , EnemyShips : Array[MapS
 signal MAP_NeighborsSet
 signal GenerationFinished
 
-var M : Mutex
 var TempEnemyNames: PackedStringArray
 var SpotList : Array[Town]
 var ShowingTutorial = false
 
+##Threads
+var EnemySpawnTh : Thread
+var Maplt : Thread
+var Roadt : Thread
+var Regiont : Thread
+var GenThread : Thread
+var EventThread : Thread
+var Mut : Mutex
 
 
 static var Instance : Map
@@ -379,7 +386,6 @@ func MoveTargetSelected(Target : MapShip) -> void:
 #██  ██  ██ ██   ██ ██          ██    ██ ██      ██  ██ ██ ██      ██   ██ ██   ██    ██    ██ ██    ██ ██  ██ ██ 
 #██      ██ ██   ██ ██           ██████  ███████ ██   ████ ███████ ██   ██ ██   ██    ██    ██  ██████  ██   ████ 
 
-var GenThread : Thread
 
 func GenerateMap() -> void:
 	#if (SpotList.size() == 0):
@@ -395,7 +401,7 @@ func GenerateMapThreaded() -> void:
 	
 	var CapitalCitySpots : Array[int] = []
 	for z in CapitalAmm:
-		var spot = roundi(MapSize/CapitalAmm * (z + 1)) - randi_range(2, 5)
+		var spot = roundi(MapSize/CapitalAmm * (z + 1)) - World.instanceRandom.RandIRange(2, 5)
 		CapitalCitySpots.append(spot)
 
 	var VillageSpots : Array[int] = []
@@ -491,20 +497,20 @@ func poisson_disk_sampling(region_size: Vector2, min_dist: float, max_samples: i
 	var spawn_points = []
 	
 	var initial_point = Vector2(
-		randf_range(0, region_size.x),
-		randf_range(0, region_size.y)
+		World.instanceRandom.RandFRange(0, region_size.x),
+		World.instanceRandom.RandFRange(0, region_size.y)
 	)
 	points.append(initial_point)
 	spawn_points.append(initial_point)
 	grid[_grid_index(initial_point, cell_size, grid_size)] = initial_point
 	
 	while spawn_points.size() > 0:
-		var spawn_index = randi() % spawn_points.size()
+		var spawn_index = World.instanceRandom.RandI() % spawn_points.size()
 		var center = spawn_points[spawn_index]
 		var found = false
 		for i in range(K):
-			var angle = randf() * PI * 2.0
-			var rad = randf_range(min_dist, min_dist * 2.0)
+			var angle = World.instanceRandom.RandF() * PI * 2.0
+			var rad = World.instanceRandom.RandFRange(min_dist, min_dist * 2.0)
 			var dir = Vector2(cos(angle), sin(angle))
 			var candidate = center + dir * rad
 			if _is_valid(candidate, region_size, cell_size, grid, grid_size, min_dist):
@@ -547,7 +553,7 @@ func MapGenFinished(Spots : Array[Town], WorldSize : float) -> void:
 	GenerationFinished.emit()
 	ShipCamera.WorldBounds = (Vector2(SpawningBounds.x, WorldSize))
 
-var EventThread : Thread
+
 
 func GenerateEvents() -> void:
 	EventThread = Thread.new()
@@ -565,8 +571,8 @@ func GenerateEventsThreaded() -> void:
 		
 		while SpEvents.size() > 0 and Spots.size() > 0:
 			#var EventToGive = SpEvents[0]
-
-			var S = Spots.pick_random() as MapSpot
+			var randomIndex = World.instanceRandom.RandIRange(0, Spots.size() - 1)
+			var S = Spots[randomIndex] as MapSpot
 			var YPos = S.get_parent().Pos.y
 			var E = FigureOutEvent(YPos, SpEvents)
 			if (E != null):
@@ -585,7 +591,8 @@ func GenerateEventsThreaded() -> void:
 		Spots.shuffle()
 		var Events = EventManager.GetInstance().GetEventsForSpotType(MapSpotType.SpotKind[g])
 		while Events.size() > 0 and Spots.size() > 0:
-			var Sp = Spots.pick_random()
+			var randomIndex = World.instanceRandom.RandIRange(0, Spots.size() - 1)
+			var Sp = Spots[randomIndex]
 			if (Sp.Event != null):
 				var Hap = FigureOutEvent(Sp.get_parent().Pos.y, Events)
 				if (Hap != null):
@@ -610,7 +617,8 @@ func FigureOutEvent(YPos : float, Events : Array) -> Happening:
 			PossibleHappenings.append(g)
 	
 	if (PossibleHappenings.size() > 0):
-		var Hap = PossibleHappenings.pick_random() as Happening
+		var randomIndex = World.instanceRandom.RandIRange(0, PossibleHappenings.size() - 1)
+		var Hap = PossibleHappenings[randomIndex] as Happening
 		if (Hap != null):
 			return Hap
 	
@@ -628,10 +636,10 @@ func EventGenFinished() -> void:
 #███████ ██   ████ ███████ ██      ██    ██        ███████ ██      ██   ██  ███ ███  ██   ████ ██ ██   ████  ██████  
 
 
-var EnemySpawnTh : Thread
+
 
 func SpawnTownEnemies() -> void:
-	M = Mutex.new()
+	Mut = Mutex.new()
 	EnSpawner.Init()
 	TempEnemyNames.clear()
 	var List : StringList = await Helper.LoadThreaded(EnemyShipNameList).Sign
@@ -641,7 +649,7 @@ func SpawnTownEnemies() -> void:
 	
 	
 func RespawnEnemies(EnemyData : Array[Resource]) -> void:
-	M = Mutex.new()
+	Mut = Mutex.new()
 	EnSpawner.Init()
 	#TempEnemyNames.append_array(EnemyShipNames)
 	EnemySpawnTh = Thread.new()
@@ -684,11 +692,11 @@ func SpawnSpotFleet(Spot : MapSpot, Patrol : bool, Convoy : bool,  Pos : Vector2
 		Ship.Patrol = Patrol
 		Ship.Convoy = Convoy
 		#if (TempEnemyNames.size() > 0):
-		M.lock()
+		Mut.lock()
 		var ShipName = TempEnemyNames[TempEnemyNames.size() - 1]
 		Ship.ShipName = ShipName
 		TempEnemyNames.remove_at(TempEnemyNames.size() - 1)
-		M.unlock()
+		Mut.unlock()
 		SpawnedCallsigns.append(f.ShipCallsign)
 		SpawnedFleet.append(Ship)
 		Ship.global_position = Pos
@@ -778,10 +786,7 @@ func EnemySpawnFinished() -> void:
 #██   ██ ██    ██ ██   ██ ██   ██     ██    ██ ██      ██  ██ ██ ██      ██   ██ ██   ██    ██    ██ ██    ██ ██  ██ ██ 
 #██   ██  ██████  ██   ██ ██████       ██████  ███████ ██   ████ ███████ ██   ██ ██   ██    ██    ██  ██████  ██   ████
 
-var Maplt : Thread
-var Roadt : Thread
-var Regiont : Thread
-var Mut : Mutex
+
 
 func GenerateRoads() -> void:
 	var CityGroups = ["CAPITAL", "CITY_CENTER"]
