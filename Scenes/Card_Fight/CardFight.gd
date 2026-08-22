@@ -1137,7 +1137,7 @@ func RestartCards() -> void:
 	#GetShipViz(ShipTurns[CurrentTurn]).Enable()
 	
 	for g in StartingCardAmm:
-		HandleDrawCard(currentship)
+		await HandleDrawCard(currentship)
 		await Helper.wait(0.1)
 
 ##----------------------------------------------------------------------##

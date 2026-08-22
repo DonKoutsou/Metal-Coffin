@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://33sxgbk0di7b"]
+
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="1_1bgl8"]
+[ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="2_yb4av"]
+[ext_resource type="Resource" uid="uid://0glrophqko3g" path="res://Resources/Cards/EnergyReserveAOE.tres" id="3_e2imw"]
+[ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FT-1000.tres" id="4_i1mcj"]
+[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="5_guoec"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="6_52nal"]
+
+[sub_resource type="Resource" id="Resource_i41uq"]
+resource_local_to_scene = true
+script = ExtResource("5_guoec")
+UpgradeAmmount = 250.0
+CurrentValue = 250.0
+
+[sub_resource type="Resource" id="Resource_ygi31"]
+resource_local_to_scene = true
+script = ExtResource("5_guoec")
+UpgradeName = 9
+UpgradeAmmount = 60.0
+
+[sub_resource type="Resource" id="Resource_lptv5"]
+script = ExtResource("5_guoec")
+UpgradeName = 16
+UpgradeAmmount = 10.0
+metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
+[resource]
+script = ExtResource("6_52nal")
+Upgrades = Array[ExtResource("5_guoec")]([SubResource("Resource_i41uq"), SubResource("Resource_ygi31"), SubResource("Resource_lptv5")])
+UpgradeVersion = ExtResource("4_i1mcj")
+UpgradeTime = 1000.0
+DispositionAmm = 0.2
+ItemName = "FT-500"
+ItemDesc = "A standard fuel containment solution with dual baffled chambers for stability. Constructed from reinforced materials for reliability in routine operations."
+CardProviding = Array[ExtResource("1_1bgl8")]([ExtResource("2_yb4av"), ExtResource("2_yb4av"), ExtResource("2_yb4av"), ExtResource("3_e2imw")])
+CanTransfer = false
+Cost = 8000
+PartType = 3

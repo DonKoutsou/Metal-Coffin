@@ -9,7 +9,7 @@
 [ext_resource type="Resource" uid="uid://css6e78uhfsfa" path="res://Resources/Items/ShipParts/MG/ShortMachinegun100mm.tres" id="10_0xigk"]
 [ext_resource type="Resource" uid="uid://cnrek2mbia331" path="res://Resources/Items/Ammo/ProxyFuseAmmoMagazine100mm.tres" id="10_l1t0x"]
 [ext_resource type="Resource" uid="uid://c8wthdbwacfhe" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/Engine2.tres" id="10_th4ne"]
-[ext_resource type="Resource" uid="uid://cwoay1furrmi7" path="res://Resources/Items/ShipParts/FuelTank/LightFuelTank/FuelTank2.tres" id="10_uiwrn"]
+[ext_resource type="Resource" uid="uid://cwoay1furrmi7" path="res://Resources/Items/ShipParts/FuelTank/LightFuelTank/SPT-100.tres" id="10_uiwrn"]
 
 [sub_resource type="Resource" id="Resource_8ea6t"]
 script = ExtResource("2_wx6fp")

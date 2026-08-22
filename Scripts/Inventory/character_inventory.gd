@@ -16,9 +16,10 @@ signal BoxSelected(Box : Inventory_Box_Res, OwnerInventory : CharacterInventory)
 signal ItemUpgrade(Box : Inventory_Box_Res, OwnerInventory : CharacterInventory)
 signal ItemTransf(Box : Inventory_Box_Res, OwnerInventory : CharacterInventory)
 signal OnCharacterInspectionPressed
-signal OnCharacterDeckInspectionPressed
-signal OnCharacterInventoryInspectionPressed
-signal OnCharacterDispositionInspectionPressed
+
+#signal OnCharacterDeckInspectionPressed
+#signal OnCharacterInventoryInspectionPressed
+#signal OnCharacterDispositionInspectionPressed
 
 var _InventoryContents : Dictionary[Item, int]
 var boxes : Dictionary[ShipPart.ShipPartType, Array] = {

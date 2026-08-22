@@ -38,6 +38,17 @@ func TimePassedInMinutes() -> int:
 	
 	return MinPassed
 
+static func MinutesToHours(mins : int) -> String:
+	var finalHours : int = 0
+	
+	while (mins >= 60):
+		finalHours += 1
+		mins -= 60
+	if (mins == 0):
+		return "{0} hours".format([finalHours])
+	else:
+		return "{0} hours and {1} minutes".format([finalHours, mins])
+
 static func GetDateTimeString() -> String:
 	return "{0}/{1}/{2} {3}:{4}".format([CurrentDay, CurrentMonth, CurrentYear, currentHour, roundi(currentMin)])
 

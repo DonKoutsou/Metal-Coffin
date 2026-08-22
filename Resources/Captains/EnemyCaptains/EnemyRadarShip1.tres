@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bbknduw5emfut" path="res://Assets/ShipTextures/Ship12.png" id="5_spbky"]
 [ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/Engine.tres" id="18_bid2u"]
 [ext_resource type="Resource" uid="uid://c6j0y0r05rijg" path="res://Resources/Items/ShipParts/Radar/ShortRadar.tres" id="20_joc1i"]
-[ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FuelTank.tres" id="21_ey8hg"]
+[ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FT-500.tres" id="21_ey8hg"]
 [ext_resource type="Resource" uid="uid://bja0tfjegmyxx" path="res://Resources/Items/ShipParts/Shield/SGP-1 Ship Barrier.tres" id="22_kcgtn"]
 [ext_resource type="Resource" uid="uid://f8x3cqxrqo6s" path="res://Resources/Items/Ammo/Flares.tres" id="24_qdmeo"]
 [ext_resource type="Resource" uid="uid://b0oy34hfyku06" path="res://Resources/Items/ShipParts/Coil/ShortCoil.tres" id="26_i57e5"]

@@ -6,7 +6,7 @@
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="4_jvdwb"]
 [ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="4_tywce"]
 
-[node name="Fuel Storages" type="PanelContainer" unique_id=1154589013 node_paths=PackedStringArray("FuelPriceLabel", "CurrentFuelLabel", "FuelBar")]
+[node name="Fuel Storages" type="PanelContainer" unique_id=1154589013 node_paths=PackedStringArray("FuelPriceLabel", "CurrentFuelLabel", "FuelBar", "rangeLabel", "refuelTimeLabel")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -19,6 +19,8 @@ FuelPriceLabel = NodePath("VBoxContainer/VBoxContainer/HBoxContainer/HBoxContain
 CurrentFuelLabel = NodePath("VBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer/FuelAmm")
 FuelBar = NodePath("VBoxContainer/VBoxContainer/ProgressBar")
 PlayerWallet = ExtResource("3_tywce")
+rangeLabel = NodePath("VBoxContainer/VBoxContainer/Label2")
+refuelTimeLabel = NodePath("VBoxContainer/VBoxContainer/Label3")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=845474002]
 layout_mode = 2
@@ -32,6 +34,7 @@ alignment = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/VBoxContainer" unique_id=2031232489]
 layout_mode = 2
+size_flags_vertical = 2
 theme_override_fonts/font = ExtResource("4_tywce")
 theme_override_font_sizes/font_size = 50
 text = "Fuel Reserves"
@@ -46,8 +49,17 @@ text = "Fleet Range : 1000"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer" unique_id=1788291104]
+[node name="Label3" type="Label" parent="VBoxContainer/VBoxContainer" unique_id=351705073]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_tywce")
+text = "Refuel Time : {0}"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer" unique_id=1788291104]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
@@ -72,7 +84,7 @@ theme_override_font_sizes/font_size = 16
 text = "tons"
 horizontal_alignment = 2
 
-[node name="Panel" type="Panel" parent="VBoxContainer/VBoxContainer/HBoxContainer" unique_id=695241479]
+[node name="Panel" type="Control" parent="VBoxContainer/VBoxContainer/HBoxContainer" unique_id=851095019]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_jvdwb")
@@ -98,8 +110,9 @@ theme_override_font_sizes/font_size = 22
 text = "202139"
 
 [node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/VBoxContainer" unique_id=2054400698]
-custom_minimum_size = Vector2(120, 40)
+custom_minimum_size = Vector2(400, 40)
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 4
 offset_transform_enabled = true
 value = 27.12

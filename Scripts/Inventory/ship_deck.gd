@@ -8,6 +8,7 @@ class_name ShipDeckViz
 @export var DeffencsiveCardPosition : Control
 @export var UtilityCardPosition : Control
 @export var PowerCardPosition : Control
+@export var sizeLabel : Label
 
 var CurrentlyShownCharacter : Captain
 
@@ -60,8 +61,10 @@ func SetDeck(Ch : Captain) -> void:
 		PooledCards.append(g)
 		#PowerCardPosition.remove_child(g)
 	
+	var deckSize : int = 0
 	for card : CardStats in deck:
 		var c : Card
+		deckSize += deck[card]
 		if (PooledCards.size() > 0):
 			c = PooledCards.pop_back()
 			var parent = c.get_parent()
@@ -79,7 +82,8 @@ func SetDeck(Ch : Captain) -> void:
 		var parent = g.get_parent()
 		if (parent):
 			g.get_parent().remove_child(g)
-			
+	
+	sizeLabel.text = "Deck Size : {0}".format([deckSize])
 	#print("Pooled = {0}".format([PooledCards.size()]))
 	#var msAfter = Time.get_ticks_msec()
 	#print("Card Setting took {0}".format([msAfter - msBefore]))

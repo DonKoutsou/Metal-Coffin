@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://2w4vfo8rh87h"]
+
+[ext_resource type="Texture2D" uid="uid://buffodrv1xn4a" path="res://Assets/Cards/card.png" id="1_n84ic"]
+[ext_resource type="Texture2D" uid="uid://xd6axehcm6jm" path="res://Assets/Cards/card2.png" id="2_lxuwv"]
+[ext_resource type="Texture2D" uid="uid://bywgpj7wie73c" path="res://Assets/Cards/card_D.png" id="2_tvm60"]
+[ext_resource type="Texture2D" uid="uid://bnprfsht41v2n" path="res://Assets/Cards/card3.png" id="3_tvm60"]
+
+[node name="Control" type="Control" unique_id=785078591]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="HBoxContainer" parent="." unique_id=1740229496]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer" unique_id=796177]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_n84ic")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="TextureRect4" type="TextureRect" parent="VBoxContainer" unique_id=1652469968]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_tvm60")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer" unique_id=1932553314]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_lxuwv")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer" unique_id=235954991]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_tvm60")
+expand_mode = 1
+stretch_mode = 3

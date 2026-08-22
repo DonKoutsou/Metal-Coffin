@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="MerchandiseInfo" format=3 uid="uid://ussf8w5051h7"]
 
-[ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/MediumFuelTank.tres" id="1_xkco0"]
+[ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FT-1000.tres" id="1_xkco0"]
 [ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scenes/TownShop/merchandise.gd" id="2_iv1p0"]
 [ext_resource type="Script" uid="uid://bpenulp2lk361" path="res://Scenes/TownShop/merchandise_info.gd" id="3_bcdk2"]
 

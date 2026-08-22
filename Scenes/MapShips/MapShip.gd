@@ -97,10 +97,10 @@ func Refuel() -> float:
 		if (SimulationManager.IsPaused()):
 			SimulationSpeed = 0
 
-		var FuelPerTic = 0.05
+		var FuelPerTic = STAT_CONST.REFUEL_TICK
 		#Towns with fuel, refuel faster
 		if (CurrentPort.HasFuel()):
-			FuelPerTic = 0.1
+			FuelPerTic *= 2
 		#Ammount to refill on the current tic
 		var AmmountRefilled = FuelPerTic * SimulationSpeed
 		

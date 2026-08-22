@@ -95,7 +95,8 @@ func _on_settings_pressed() -> void:
 	var t = !Settings.visible
 	
 	Settings.visible = t
-	Credits.visible = false
+	if (SpawnedCredits != null):
+		SpawnedCredits.queue_free()
 	NormalUI.visible = !t
 
 

@@ -6,6 +6,8 @@ class_name TownFuelStorages
 @export var CurrentFuelLabel : Label
 @export var FuelBar : ProgressBar
 @export var PlayerWallet : Wallet
+@export var rangeLabel : Label
+@export var refuelTimeLabel : Label
 
 var FuelPricePerTon : float
 
@@ -13,11 +15,12 @@ var FuelPricePerTon : float
 var PlFuel : float = 0
 var PlMaxFuel : float = 0
 var PlayerBoughtFuel : float = 0
-
+var refuelTime : int = 0
 
 
 signal FuelTransactionFinished(BoughtFuel : float)
 
+var Spot : MapSpot
 var Spots : Dictionary[MapSpot, Vector2]
 var Ships : Array[MapShip]
 var Rng = 0
@@ -48,15 +51,49 @@ func _draw() -> void:
 	draw_circle(get_viewport_rect().size / 2.0, Rng / 15.0, Color(0.3, 0.7, 0.915), false, 4)
 	draw_multiline(Lines, Color(1, 1, 1, 0.1), 3, true)
 
+func UpdateRefuelTime() -> void:
+	var unsatisfiedShips : Dictionary[MapShip, float]
+	for g in Ships:
+		unsatisfiedShips[g] = 0.0
+		
+	var excessFuel : float = PlayerBoughtFuel
+	while (!is_equal_approx(excessFuel, 0) and unsatisfiedShips.size() > 1):
+		var deservedFuel = excessFuel / unsatisfiedShips.size()
+		for g in unsatisfiedShips:
+			var maxfuelcap = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
+			var currentfuel = g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) + unsatisfiedShips[g]
+			var neededFuel = maxfuelcap - currentfuel
+
+			if (neededFuel < deservedFuel):
+				excessFuel -= neededFuel
+				unsatisfiedShips.erase(g)
+				break
+			else:
+				unsatisfiedShips[g] += deservedFuel
+				excessFuel -= deservedFuel
+			
+	var biggestFuel = unsatisfiedShips.values()[0] + excessFuel
+	var FuelPerTic = STAT_CONST.REFUEL_TICK
+	if (Spot.HasFuel()):
+		FuelPerTic *= 2
+	
+	refuelTime = max(0, biggestFuel / FuelPerTic / 6)
+
 func RedrawThing() -> void:
 	Rng = 0
 	for g in Ships:
 		if (g.Command == null):
 			Rng += g.GetFuelRangeWithExtraFuel(PlayerBoughtFuel)
-	$VBoxContainer/VBoxContainer/Label2.text = "Fleet Range : {0}km".format([roundi(Rng)])
+	
+	UpdateRefuelTime()
+	
+	refuelTimeLabel.text = "Refuel Time : {0}".format([Clock.MinutesToHours(refuelTime)])
+	rangeLabel.text = "Fleet Range : {0}km".format([roundi(Rng)])
+	
 	queue_redraw()
 
 func Init(BoughtFuel : float, FuelPrice : float, LandedShips : Array[MapShip], Pos : MapSpot) -> void:
+	Spot = Pos
 	var CenterSpot = Pos.global_position
 	var SpotsInRange = Helper.GetSpotsCloserThan(Pos.global_position, 64000000)
 	Spots[Pos] = get_viewport_rect().size / 2
@@ -65,18 +102,20 @@ func Init(BoughtFuel : float, FuelPrice : float, LandedShips : Array[MapShip], P
 			continue
 		var Spotpos = g.global_position - CenterSpot
 		Spots[g] = (get_viewport_rect().size / 2) + (Spotpos / 15)
-		
+
 	for g in LandedShips:
 		if (g.Command == null):
 			Rng += g.GetFuelRangeWithExtraFuel(BoughtFuel)
 	#var Rng = LandedShips[0].GetFuelRange()
 	queue_redraw()
 	
-	$VBoxContainer/VBoxContainer/Label2.text = "Fleet Range : {0}km".format([roundi(Rng)])
-	
 	Ships = LandedShips
 	PlayerBoughtFuel = BoughtFuel
 	FuelPricePerTon = FuelPrice
+	
+	UpdateRefuelTime()
+	refuelTimeLabel.text = "Refuel Time : {0}".format([Clock.MinutesToHours(refuelTime)])
+	rangeLabel.text = "Fleet Range : {0}km".format([roundi(Rng)])
 	
 	var WindAngle = WeatherManage.WindDirection.angle()
 	var wd = Helper.AngleToDirectionShort(WindAngle)

@@ -3,6 +3,8 @@ extends Node
 
 class_name STAT_CONST
 
+const REFUEL_TICK : float = 0.05
+
 const StatToolTips : Dictionary = {
 	STATS.FUEL_TANK : "Indicates how much fuel a ship can carry. Combined with fuel efficiency, this determines the ship’s maximum travel distance without refueling.",
 	STATS.FUEL_EFFICIENCY : "Determines how far a ship can travel per unit of fuel. Higher fuel efficiency means longer travel on less fuel. Heavier ships suffer from reduced fuel efficiency.",

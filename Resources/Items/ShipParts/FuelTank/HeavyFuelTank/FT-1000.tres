@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://n1uvu44r7eyd"]
+
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="1_u2cys"]
+[ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="2_n880c"]
+[ext_resource type="Resource" uid="uid://0glrophqko3g" path="res://Resources/Cards/EnergyReserveAOE.tres" id="3_2lr1f"]
+[ext_resource type="Resource" uid="uid://bwwby1vknkefj" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FT-2000.tres" id="4_4grpg"]
+[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="5_qpol5"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="6_53f87"]
+
+[sub_resource type="Resource" id="Resource_mdpmd"]
+resource_local_to_scene = true
+script = ExtResource("5_qpol5")
+UpgradeAmmount = 320.0
+CurrentValue = 320.0
+
+[sub_resource type="Resource" id="Resource_xgd67"]
+resource_local_to_scene = true
+script = ExtResource("5_qpol5")
+UpgradeName = 9
+UpgradeAmmount = 50.0
+
+[sub_resource type="Resource" id="Resource_d8ac8"]
+script = ExtResource("5_qpol5")
+UpgradeName = 16
+UpgradeAmmount = 15.0
+metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
+[resource]
+script = ExtResource("6_53f87")
+Upgrades = Array[ExtResource("5_qpol5")]([SubResource("Resource_mdpmd"), SubResource("Resource_xgd67"), SubResource("Resource_d8ac8")])
+UpgradeVersion = ExtResource("4_4grpg")
+UpgradeTime = 1200.0
+DispositionAmm = 0.3
+ItemName = "FT-1000"
+ItemDesc = "Designed for medium-range missions, this tank offers increased fuel retention. Its triple-layered internal lining adds to its structural integrity."
+CardProviding = Array[ExtResource("1_u2cys")]([ExtResource("2_n880c"), ExtResource("2_n880c"), ExtResource("2_n880c"), ExtResource("2_n880c"), ExtResource("3_2lr1f"), ExtResource("3_2lr1f")])
+Tier = 1
+CanTransfer = false
+Cost = 25000
+PartType = 3

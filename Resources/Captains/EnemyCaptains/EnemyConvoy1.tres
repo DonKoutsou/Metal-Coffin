@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="8_o2kyv"]
 [ext_resource type="Texture2D" uid="uid://7h4uf5rwddw6" path="res://Assets/ShipTextures/Convoy.png" id="9_bip6n"]
 [ext_resource type="Resource" uid="uid://k0unclveytur" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/MediumEngine.tres" id="14_ha1o8"]
-[ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FuelTank.tres" id="15_o2kyv"]
+[ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FT-500.tres" id="15_o2kyv"]
 [ext_resource type="Resource" uid="uid://b5mce733abxqu" path="res://Resources/Items/Ammo/FireSuppressionUnit.tres" id="16_s51np"]
 [ext_resource type="Resource" uid="uid://ycrdbo5lywoa" path="res://Resources/Items/ShipParts/Shield/SPK-25 Ship Barrier.tres" id="17_f5kyr"]
 

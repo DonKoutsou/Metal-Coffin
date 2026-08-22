@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ev8n5tjqls2e" path="res://Assets/ShipTextures/Hull2.png" id="7_tb2uj"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="8_bl7ko"]
 [ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/Engine.tres" id="9_3eyyc"]
-[ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FuelTank.tres" id="10_nrwnm"]
+[ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FT-500.tres" id="10_nrwnm"]
 [ext_resource type="Resource" uid="uid://cxrq5fe4uqxsf" path="res://Resources/Items/ShipParts/MissilePods/ShortMissilePod.tres" id="11_lfaem"]
 
 [sub_resource type="Resource" id="Resource_w8w27"]

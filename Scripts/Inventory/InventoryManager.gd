@@ -293,9 +293,9 @@ func AddCharacter(Cha : Captain) -> void:
 	CharInv.OnItemRemoved.connect(OnItemRemoved.bind(Cha))
 	
 	CharInv.OnCharacterInspectionPressed.connect(InspectCharacter.bind(Cha))
-	CharInv.OnCharacterDeckInspectionPressed.connect(InspectCharacterDeck.bind(Cha))
-	CharInv.OnCharacterInventoryInspectionPressed.connect(InspectCharacterInventory.bind(Cha))
-	CharInv.OnCharacterDispositionInspectionPressed.connect(InspectCharacterDisposition.bind(Cha))
+	#CharInv.OnCharacterDeckInspectionPressed.connect(InspectCharacterDeck.bind(Cha))
+	#CharInv.OnCharacterInventoryInspectionPressed.connect(InspectCharacterInventory.bind(Cha))
+	#CharInv.OnCharacterDispositionInspectionPressed.connect(InspectCharacterDisposition.bind(Cha))
 	
 	for g in Cha.StartingItems:
 		if (g is ShipPart):

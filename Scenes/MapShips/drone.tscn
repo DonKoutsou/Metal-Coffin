@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://cw6nos06km7b3" path="res://Scenes/MapShips/DroneDock/PlayerDock.tscn" id="9_82ju4"]
 [ext_resource type="Script" uid="uid://dn2ybl8146b6t" path="res://Scenes/MapShips/missile_dock.gd" id="9_f4h60"]
 [ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/EventHandlers/MissileDockEventHandler.tres" id="10_ilnq0"]
-[ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FuelTank.tres" id="10_o0thl"]
+[ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FT-500.tres" id="10_o0thl"]
 [ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="11_e2mx5"]
 [ext_resource type="Resource" uid="uid://f8x3cqxrqo6s" path="res://Resources/Items/Ammo/Flares.tres" id="12_kp2wg"]
 [ext_resource type="Resource" uid="uid://cnrek2mbia331" path="res://Resources/Items/Ammo/ProxyFuseAmmoMagazine100mm.tres" id="13_8huau"]

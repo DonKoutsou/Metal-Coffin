@@ -7,6 +7,7 @@ class_name CaptainStatContainer
 @export var ShipInventory : CharacterInventoryInterface
 @export var DispositionScreen : CaptainDispositionUI
 @export var CaptainIcon : TextureRect
+
 var CurrentlyShownCaptain : Captain
 
 signal InventoryBoxSelected(box : Inventory_Box_Res, inv : CharacterInventory)

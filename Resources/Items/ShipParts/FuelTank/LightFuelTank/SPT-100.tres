@@ -2,10 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="1_5kv6q"]
 [ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="2_vlra8"]
-[ext_resource type="Resource" uid="uid://d0a5l4aegq46m" path="res://Resources/Items/ShipParts/FuelTank/LightFuelTank/MediumFuelTank2.tres" id="3_o7sn3"]
-[ext_resource type="Resource" uid="uid://0glrophqko3g" path="res://Resources/Cards/EnergyReserveAOE.tres" id="3_ry7j3"]
+[ext_resource type="Resource" uid="uid://d0a5l4aegq46m" path="res://Resources/Items/ShipParts/FuelTank/LightFuelTank/SPT-200.tres" id="3_o7sn3"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="4_nw4kc"]
-[ext_resource type="Resource" uid="uid://c8reou7hykm77" path="res://Resources/Cards/ReserveConversion.tres" id="4_udr7u"]
+[ext_resource type="Resource" uid="uid://cuhyegxnhjaq4" path="res://Resources/Cards/DrawDiscard.tres" id="4_ry7j3"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="5_fgxqn"]
 [ext_resource type="Resource" uid="uid://daou2wqtcgcxt" path="res://Resources/Cards/MaxEnergyReserve.tres" id="5_udr7u"]
 
@@ -34,7 +33,7 @@ UpgradeVersion = ExtResource("3_o7sn3")
 UpgradeTime = 600.0
 ItemName = "SPT-100"
 ItemDesc = "A light weight fuel tank with reduced size. Constructed from lightweight materials for reliability in combat operations. Finds its uses in smaller and more adgile ships."
-CardProviding = Array[ExtResource("1_5kv6q")]([ExtResource("2_vlra8"), ExtResource("2_vlra8"), ExtResource("2_vlra8"), ExtResource("3_ry7j3"), ExtResource("3_ry7j3"), ExtResource("4_udr7u"), ExtResource("5_udr7u")])
+CardProviding = Array[ExtResource("1_5kv6q")]([ExtResource("2_vlra8"), ExtResource("2_vlra8"), ExtResource("2_vlra8"), ExtResource("5_udr7u"), ExtResource("4_ry7j3")])
 CanTransfer = false
 Cost = 7500
 PartType = 3

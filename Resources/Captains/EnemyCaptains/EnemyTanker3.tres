@@ -10,7 +10,7 @@
 [ext_resource type="Resource" uid="uid://by5pd080gjivc" path="res://Resources/Items/ShipParts/Shield/SGP-3 Ship Barrier.tres" id="19_7dp10"]
 [ext_resource type="Resource" uid="uid://ctlms8do0piak" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/MediumEngine2.tres" id="20_w2pwr"]
 [ext_resource type="Resource" uid="uid://cs6mrrxnafmbt" path="res://Resources/Items/ShipParts/Shield/SGP-2 Ship Barrier.tres" id="21_g1wir"]
-[ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/MediumFuelTank.tres" id="22_up8b4"]
+[ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FT-1000.tres" id="22_up8b4"]
 [ext_resource type="Resource" uid="uid://gcxghv6bm43p" path="res://Resources/Items/ShipParts/Coil/MediumCoil.tres" id="23_0ussi"]
 [ext_resource type="Resource" uid="uid://b0oy34hfyku06" path="res://Resources/Items/ShipParts/Coil/ShortCoil.tres" id="24_8qdxh"]
 [ext_resource type="Resource" uid="uid://b5mce733abxqu" path="res://Resources/Items/Ammo/FireSuppressionUnit.tres" id="25_dke62"]

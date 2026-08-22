@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://bwwby1vknkefj"]
+
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="1_b3fn3"]
+[ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="2_i32th"]
+[ext_resource type="Resource" uid="uid://0glrophqko3g" path="res://Resources/Cards/EnergyReserveAOE.tres" id="3_h32ar"]
+[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="4_kl3b3"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="5_bqotv"]
+
+[sub_resource type="Resource" id="Resource_o628u"]
+resource_local_to_scene = true
+script = ExtResource("4_kl3b3")
+UpgradeAmmount = 400.0
+CurrentValue = 400.0
+
+[sub_resource type="Resource" id="Resource_pmgj3"]
+resource_local_to_scene = true
+script = ExtResource("4_kl3b3")
+UpgradeName = 9
+UpgradeAmmount = 100.0
+
+[sub_resource type="Resource" id="Resource_ffkco"]
+script = ExtResource("4_kl3b3")
+UpgradeName = 16
+UpgradeAmmount = 20.0
+metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
+[resource]
+script = ExtResource("5_bqotv")
+Upgrades = Array[ExtResource("4_kl3b3")]([SubResource("Resource_o628u"), SubResource("Resource_pmgj3"), SubResource("Resource_ffkco")])
+UpgradeTime = 1500.0
+DispositionAmm = 0.5
+ItemName = "FT-2000"
+ItemDesc = "A high-capacity fuel tank built for extended missions. Made with proprietary composite materials, it maintains durability even under the most challenging conditions"
+CardProviding = Array[ExtResource("1_b3fn3")]([ExtResource("2_i32th"), ExtResource("2_i32th"), ExtResource("2_i32th"), ExtResource("2_i32th"), ExtResource("3_h32ar"), ExtResource("3_h32ar")])
+Tier = 2
+CanTransfer = false
+Cost = 12000
+PartType = 3

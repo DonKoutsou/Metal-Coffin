@@ -1,17 +1,13 @@
 [gd_scene format=3 uid="uid://b4yumrb4c0xyd"]
 
 [ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scenes/Card_Fight/Card/card.gd" id="1_utwiq"]
-[ext_resource type="FontFile" uid="uid://dpimg5va4xy40" path="res://Fonts/P22 Typewriter Regular.ttf" id="2_g808j"]
 [ext_resource type="PackedScene" uid="uid://xuequw4xcwgf" path="res://Scenes/Inventory/CardTooltip.tscn" id="2_paso5"]
-[ext_resource type="Texture2D" uid="uid://buffodrv1xn4a" path="res://Assets/Cards/card.png" id="3_wohcr"]
 [ext_resource type="Texture2D" uid="uid://bf3p61os8mhr7" path="res://Assets/UIPiecies/Bolt.png" id="4_5n23x"]
 [ext_resource type="StyleBox" uid="uid://nx2m88wohluk" path="res://Scenes/Card_Fight/Card/Base_Card_Colors.tres" id="4_22va6"]
-[ext_resource type="Texture2D" uid="uid://xd6axehcm6jm" path="res://Assets/Cards/card2.png" id="5_7lp2o"]
 [ext_resource type="StyleBox" uid="uid://c4g6yr1eejnwc" path="res://Scenes/Card_Fight/Card/Disposition_Card_Colors.tres" id="5_oc32p"]
 [ext_resource type="Texture2D" uid="uid://c1d4jybs1oolg" path="res://Assets/Cards/BarraceIncendiery.png" id="5_p48hs"]
 [ext_resource type="Material" uid="uid://dwvsafe1eaxbk" path="res://Shaders/Card.tres" id="6_btfbu"]
 [ext_resource type="StyleBox" uid="uid://bkhv2od4pe3up" path="res://Scenes/Card_Fight/Card/Power_Card_Colors.tres" id="6_cedgx"]
-[ext_resource type="Texture2D" uid="uid://bnprfsht41v2n" path="res://Assets/Cards/card3.png" id="7_oc32p"]
 [ext_resource type="Texture2D" uid="uid://cwbo84yj0q3om" path="res://Assets/Cards/CardBack.png" id="7_ucyjg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4v2x1"]
@@ -27,6 +23,9 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 shadow_size = 10
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_oc32p"]
+load_path = "res://.godot/imported/card_D.png-c5e9dbf2e82bdebb128760543a1a6130.ctex"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nilbr"]
 bg_color = Color(1, 1, 1, 1)
@@ -93,11 +92,10 @@ TooltipPos = NodePath("Control/VBoxContainer")
 NormalCardColors = ExtResource("4_22va6")
 DispositionCardColors = ExtResource("5_oc32p")
 PowerCardColors = ExtResource("6_cedgx")
-NormalCardTexture = ExtResource("3_wohcr")
-DispositionCardTexture = ExtResource("5_7lp2o")
-PowerCardTexture = ExtResource("7_oc32p")
+NormalCardTexture = "uid://buffodrv1xn4a"
+DispositionCardTexture = "uid://xd6axehcm6jm"
+PowerCardTexture = "uid://bnprfsht41v2n"
 TooltipScene = ExtResource("2_paso5")
-RealisticFont = ExtResource("2_g808j")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=2087537965]
 visible = false
@@ -121,10 +119,10 @@ transparent_bg = true
 handle_input_locally = false
 scaling_3d_mode = 5
 canvas_item_default_texture_filter = 4
-size = Vector2i(174, 239)
+size = Vector2i(797, 1096)
 size_2d_override = Vector2i(186, 256)
 size_2d_override_stretch = true
-render_target_update_mode = 1
+render_target_update_mode = 0
 
 [node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport" unique_id=1329688651]
 anchors_preset = 15
@@ -138,6 +136,20 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4v2x1")
+
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport" unique_id=61408993]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 10.0
+offset_right = -6.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("CompressedTexture2D_oc32p")
+expand_mode = 1
 
 [node name="Button" type="Button" parent="SubViewportContainer/SubViewport" unique_id=110634723 groups=["DigitalButtons"]]
 anchors_preset = 15
@@ -161,21 +173,6 @@ icon_alignment = 1
 vertical_icon_alignment = 2
 expand_icon = true
 
-[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport" unique_id=61408993]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 6.0
-offset_top = 10.0
-offset_right = -6.0
-offset_bottom = -13.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("3_wohcr")
-expand_mode = 1
-
 [node name="Panel2" type="Panel" parent="SubViewportContainer/SubViewport" unique_id=1580813051]
 anchors_preset = 2
 anchor_top = 1.0
@@ -192,9 +189,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_nilbr")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 14.0
+offset_left = 15.0
 offset_top = 14.0
-offset_right = -14.0
+offset_right = -15.0
 offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2

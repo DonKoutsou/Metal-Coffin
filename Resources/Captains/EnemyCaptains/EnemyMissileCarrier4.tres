@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scenes/MapShips/Stats/Captain.gd" id="4_apvlk"]
 [ext_resource type="Texture2D" uid="uid://w4t57uq2b86c" path="res://Assets/ShipTextures/Ship11.png" id="5_2uwu7"]
 [ext_resource type="Resource" uid="uid://by5pd080gjivc" path="res://Resources/Items/ShipParts/Shield/SGP-3 Ship Barrier.tres" id="8_uppi0"]
-[ext_resource type="Resource" uid="uid://bwwby1vknkefj" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/LargeFuelTank.tres" id="10_5wl4n"]
+[ext_resource type="Resource" uid="uid://bwwby1vknkefj" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FT-2000.tres" id="10_5wl4n"]
 [ext_resource type="Resource" uid="uid://c77l5prboewm2" path="res://Resources/Items/Ammo/ClusterMissile.tres" id="10_oedrd"]
 [ext_resource type="Resource" uid="uid://b30l72bpalbfy" path="res://Resources/Items/ShipParts/MissilePods/LargeMissilePod.tres" id="11_sl0l1"]
 [ext_resource type="Resource" uid="uid://b5mce733abxqu" path="res://Resources/Items/Ammo/FireSuppressionUnit.tres" id="13_epfl7"]

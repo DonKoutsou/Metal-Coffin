@@ -20,14 +20,15 @@ class_name Card
 @export var NormalCardColors : StyleBox
 @export var DispositionCardColors : StyleBox
 @export var PowerCardColors : StyleBox
-@export var NormalCardTexture : Texture
-@export var DispositionCardTexture : Texture
-@export var PowerCardTexture : Texture
+
+@export_file("*.png") var NormalCardTexture : String
+@export_file("*.png") var DispositionCardTexture : String
+@export_file("*.png") var PowerCardTexture : String
 
 @export_group("Settings")
 @export var TooltipScene : PackedScene
 ##Font to be used when card is switched to realistic
-@export var RealisticFont : Font
+#@export var RealisticFont : Font
 
 signal OnCardPressed(C : Card)
 signal OnCardReleased
@@ -49,6 +50,8 @@ var mat : ShaderMaterial
 
 var dirTw : Tween
 var TweenHover : Tween
+
+var type : int = 0
 
 #--------------------------------------------------------------
 func _ready() -> void:
@@ -163,15 +166,18 @@ func SetCardStats(Stats : CardStats, Amm : int = 0) -> void:
 	if (Stats.Passive != null):
 		But.add_theme_stylebox_override("normal", PowerCardColors)
 		But.add_theme_stylebox_override("disabled", PowerCardColors)
-		$SubViewportContainer/SubViewport/TextureRect.texture = PowerCardTexture
+		type = 2
+
 	else: if (Stats.IsDisposition):
 		But.add_theme_stylebox_override("normal", DispositionCardColors)
 		But.add_theme_stylebox_override("disabled", DispositionCardColors)
-		$SubViewportContainer/SubViewport/TextureRect.texture = DispositionCardTexture
+		type = 1
+
 	else:
 		But.add_theme_stylebox_override("normal", NormalCardColors)
 		But.add_theme_stylebox_override("disabled", NormalCardColors)
-		$SubViewportContainer/SubViewport/TextureRect.texture = NormalCardTexture
+		type = 0
+		
 
 	CardName.text = Stats.GetCardName().to_upper()
 	CardTex.texture = Stats.Icon
@@ -203,15 +209,17 @@ func SetCardBattleStats(User : BattleShipStats, Stats : CardStats, Amm : int = 0
 	if (Stats.Passive != null):
 		But.add_theme_stylebox_override("normal", PowerCardColors)
 		But.add_theme_stylebox_override("disabled", PowerCardColors)
-		$SubViewportContainer/SubViewport/TextureRect.texture = PowerCardTexture
+		type = 2
+
 	else: if (Stats.IsDisposition):
 		But.add_theme_stylebox_override("normal", DispositionCardColors)
 		But.add_theme_stylebox_override("disabled", DispositionCardColors)
-		$SubViewportContainer/SubViewport/TextureRect.texture = DispositionCardTexture
+		type = 1
+
 	else:
 		But.add_theme_stylebox_override("normal", NormalCardColors)
 		But.add_theme_stylebox_override("disabled", NormalCardColors)
-		$SubViewportContainer/SubViewport/TextureRect.texture = NormalCardTexture
+		type = 0
 		
 	ShownCost = GetBattleCost(User, Stats)
 	if (Stats.Burned):
@@ -297,23 +305,33 @@ func GetBattleCost(User : BattleShipStats, Stats : CardStats) -> int:
 
 #--------------------------------------------------------------
 func SetRealistic() -> void:
+	
 	$SubViewportContainer/SubViewport/TextureRect.visible = true
+	
+	var texture : Texture
+	if (type == 0):
+		texture = ResourceLoader.load(NormalCardTexture)
+	if (type == 1):
+		texture = ResourceLoader.load(DispositionCardTexture)
+	if (type == 2):
+		texture = ResourceLoader.load(PowerCardTexture)
+	$SubViewportContainer/SubViewport/TextureRect.texture = texture
 	
 	$SubViewportContainer/SubViewport/Panel.visible = false
 	$SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer/CardCost/TextureRect.visible = false
 	But.visible = false
 	$SubViewportContainer/SubViewport.set_deferred("render_target_update_mode",  SubViewport.UPDATE_ONCE)
 	
-	CardName.add_theme_font_override("normal_font", RealisticFont)
+	#CardName.add_theme_font_override("normal_font", RealisticFont)
 	CardName.add_theme_constant_override("shadow_outline_size", 0)
 	CardName.add_theme_constant_override("shadow_offset_x", 0)
 	CardName.add_theme_constant_override("shadow_offset_y", 0)
-	CardCost.add_theme_font_override("font", RealisticFont)
+	#CardCost.add_theme_font_override("font", RealisticFont)
 	CardCost.add_theme_constant_override("shadow_outline_size", 0)
 	CardCost.add_theme_constant_override("shadow_offset_x", 0)
 	CardCost.add_theme_constant_override("shadow_offset_y", 0)
 	
-	CardDesc.add_theme_font_override("normal_font", RealisticFont)
+	#CardDesc.add_theme_font_override("normal_font", RealisticFont)
 	CardDesc.add_theme_font_size_override("normal_font_size", 15)
 	CardDesc.add_theme_constant_override("shadow_outline_size", 0)
 	CardDesc.add_theme_constant_override("shadow_offset_x", 0)

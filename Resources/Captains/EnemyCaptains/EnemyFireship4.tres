@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bx78x3avxyhmf" path="res://Assets/ShipTextures/Hull5.png" id="9_o8ada"]
 [ext_resource type="Resource" uid="uid://bv1syjs12hg14" path="res://Resources/Items/ShipParts/Radar/ShortCheapRadar.tres" id="16_vyvmp"]
 [ext_resource type="Resource" uid="uid://77852w5u88sm" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/LargeEngine2.tres" id="21_qlrpd"]
-[ext_resource type="Resource" uid="uid://bwwby1vknkefj" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/LargeFuelTank.tres" id="22_58kvj"]
+[ext_resource type="Resource" uid="uid://bwwby1vknkefj" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FT-2000.tres" id="22_58kvj"]
 [ext_resource type="Resource" uid="uid://d3ll4cruuw7vf" path="res://Resources/Items/ShipParts/MG/LargeMachinegun100mm.tres" id="24_8frym"]
 [ext_resource type="Resource" uid="uid://dlrxjlssarqit" path="res://Resources/Items/Ammo/APAmmoMagazine100mm.tres" id="25_pd0w2"]
 [ext_resource type="Resource" uid="uid://b5mce733abxqu" path="res://Resources/Items/Ammo/FireSuppressionUnit.tres" id="26_vh5j7"]
