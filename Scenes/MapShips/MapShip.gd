@@ -107,25 +107,43 @@ func Refuel() -> float:
 		var ShipsToRefuel : Array[MapShip] = [self]
 		ShipsToRefuel.append_array(GetSquad())
 		
-		var BiggestTimeLeft : float
+		var unsatisfiedShips : Dictionary[MapShip, float]
 		
 		for g in ShipsToRefuel:
 			var Capt = g.Cpt
 		
 			var maxfuelcap = Capt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
 			var currentfuel = Capt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
-			var AmmountUntilFull = min(maxfuelcap, currentfuel + CurrentPort.PlayerFuelReserves) - currentfuel
+			var AmmountUntilFull = maxfuelcap - currentfuel
 			if (AmmountUntilFull == 0):
 				continue
-			var timeleft = AmmountUntilFull / FuelPerTic / 6
-			if (timeleft > BiggestTimeLeft):
-				BiggestTimeLeft = timeleft
+				
+			unsatisfiedShips[g] = 0.0
 			
-			#Add fule to ship and remove from city
-			Capt.RefillResource(STAT_CONST.STATS.FUEL_TANK, AmmountRefilled)
-			CurrentPort.AddToFuelReserves(-AmmountRefilled)
-			
-		timeLeft = BiggestTimeLeft
+			var refilled = min(AmmountRefilled, AmmountUntilFull)
+			Capt.RefillResource(STAT_CONST.STATS.FUEL_TANK, refilled)
+			CurrentPort.AddToFuelReserves(-refilled)
+
+		var excessFuel : float = CurrentPort.PlayerFuelReserves
+		
+		while (!is_equal_approx(excessFuel, 0) and unsatisfiedShips.size() > 1):
+			var deservedFuel = excessFuel / unsatisfiedShips.size()
+			for g in unsatisfiedShips:
+				var maxfuelcap = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
+				var currentfuel = g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) + unsatisfiedShips[g]
+				var neededFuel = maxfuelcap - currentfuel
+
+				if (neededFuel < deservedFuel):
+					excessFuel -= neededFuel
+					unsatisfiedShips.erase(g)
+					break
+				else:
+					unsatisfiedShips[g] += deservedFuel
+					excessFuel -= deservedFuel
+				
+		var biggestFuel = unsatisfiedShips.values()[0] + excessFuel
+		
+		timeLeft = max(0, biggestFuel / FuelPerTic / 6)
 		
 	return timeLeft
 	

@@ -107,7 +107,7 @@ enum CardFightPhase{
 	ACTION_PERFORM,
 }
 
-signal CardFightEnded(Survivors : Array[BattleShipStats], won : bool)
+signal CardFightEnded(Survivors : Array[BattleShipStats], won : bool, wonFunds : int)
 signal CardFightDestroyed()
 ##----------------------------------------------------------------------##
 func _ready() -> void:
@@ -1177,7 +1177,7 @@ func OnFightEnded(Won : bool) -> void:
 		g.Cards = g.deck.GetCardList()
 	
 	var won = EnemyCombatants.size() + EnemyReserves.size() < PlayerCombatants.size() + PlayerReserves.size()
-	CardFightEnded.emit(Survivors, won)
+	CardFightEnded.emit(Survivors, won, FundsToWin)
 	
 	ExternalUI.TogglePlayerCardPlacement(false)
 	
@@ -1789,7 +1789,7 @@ func ShipDestroyed(Ship : BattleShipStats) -> bool:
 	var Friendly = IsShipFriendly(Ship)
 		
 	if (EnemyCombatants.has(Ship)):
-		FundsToWin += Ship.Funds
+		FundsToWin += snapped(randi_range(2000, Ship.Funds), 1000)
 	
 	var TurnPosition = ShipTurns.find(Ship)
 	var Index = ShipTurns.find(Ship)

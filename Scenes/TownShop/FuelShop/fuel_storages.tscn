@@ -6,6 +6,13 @@
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="4_jvdwb"]
 [ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="4_tywce"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8vrlf"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0, 0, 0.34509805)
+
 [node name="Fuel Storages" type="PanelContainer" unique_id=1154589013 node_paths=PackedStringArray("FuelPriceLabel", "CurrentFuelLabel", "FuelBar", "rangeLabel", "refuelTimeLabel")]
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,12 +22,12 @@ grow_vertical = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("1_ac0ke")
 script = ExtResource("2_tywce")
-FuelPriceLabel = NodePath("VBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer2/TonPrice")
-CurrentFuelLabel = NodePath("VBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer/FuelAmm")
-FuelBar = NodePath("VBoxContainer/VBoxContainer/ProgressBar")
+FuelPriceLabel = NodePath("VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer2/TonPrice")
+CurrentFuelLabel = NodePath("VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer/FuelAmm")
+FuelBar = NodePath("VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/ProgressBar")
 PlayerWallet = ExtResource("3_tywce")
-rangeLabel = NodePath("VBoxContainer/VBoxContainer/Label2")
-refuelTimeLabel = NodePath("VBoxContainer/VBoxContainer/Label3")
+rangeLabel = NodePath("VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/Label2")
+refuelTimeLabel = NodePath("VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/Label3")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=845474002]
 layout_mode = 2
@@ -33,6 +40,7 @@ theme_override_constants/separation = 10
 alignment = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/VBoxContainer" unique_id=2031232489]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 2
 theme_override_fonts/font = ExtResource("4_tywce")
@@ -42,39 +50,47 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="Label2" type="Label" parent="VBoxContainer/VBoxContainer" unique_id=929873773]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/VBoxContainer" unique_id=1492403620]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8vrlf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer/PanelContainer" unique_id=1665452690]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label2" type="Label" parent="VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=929873773]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_tywce")
 text = "Fleet Range : 1000"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label3" type="Label" parent="VBoxContainer/VBoxContainer" unique_id=351705073]
+[node name="Label3" type="Label" parent="VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=351705073]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_tywce")
 text = "Refuel Time : {0}"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer" unique_id=1788291104]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1788291104]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/HBoxContainer" unique_id=1429329643]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1429329643]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="FuelAmm" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=2091006548]
+[node name="FuelAmm" type="Label" parent="VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=2091006548]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_tywce")
 theme_override_font_sizes/font_size = 22
 text = "4214"
 
-[node name="Label2" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=1929036868]
+[node name="Label2" type="Label" parent="VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=1929036868]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -84,17 +100,17 @@ theme_override_font_sizes/font_size = 16
 text = "tons"
 horizontal_alignment = 2
 
-[node name="Panel" type="Control" parent="VBoxContainer/VBoxContainer/HBoxContainer" unique_id=851095019]
+[node name="Panel" type="Control" parent="VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=851095019]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_jvdwb")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/HBoxContainer" unique_id=2138823263]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=2138823263]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="Label3" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer2" unique_id=2101969590]
+[node name="Label3" type="Label" parent="VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer2" unique_id=2101969590]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -103,13 +119,13 @@ theme_override_fonts/font = ExtResource("4_tywce")
 theme_override_font_sizes/font_size = 16
 text = "Ton Price:"
 
-[node name="TonPrice" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer2" unique_id=2034998064]
+[node name="TonPrice" type="Label" parent="VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer2" unique_id=2034998064]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_tywce")
 theme_override_font_sizes/font_size = 22
 text = "202139"
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/VBoxContainer" unique_id=2054400698]
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=2054400698]
 custom_minimum_size = Vector2(400, 40)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -119,7 +135,7 @@ value = 27.12
 show_percentage = false
 
 [node name="Control" type="Control" parent="VBoxContainer" unique_id=2002483963]
-custom_minimum_size = Vector2(0, 31.43)
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
 [node name="LeaveFuelStorage" type="Button" parent="VBoxContainer" unique_id=220181823]
@@ -132,7 +148,7 @@ size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "Wind Direction : SW"
 
-[connection signal="gui_input" from="VBoxContainer/VBoxContainer/ProgressBar" to="." method="FuelBar_gui_input"]
-[connection signal="mouse_entered" from="VBoxContainer/VBoxContainer/ProgressBar" to="." method="_on_progress_bar_mouse_entered"]
-[connection signal="mouse_exited" from="VBoxContainer/VBoxContainer/ProgressBar" to="." method="_on_progress_bar_mouse_exited"]
+[connection signal="gui_input" from="VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/ProgressBar" to="." method="FuelBar_gui_input"]
+[connection signal="mouse_entered" from="VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/ProgressBar" to="." method="_on_progress_bar_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/ProgressBar" to="." method="_on_progress_bar_mouse_exited"]
 [connection signal="pressed" from="VBoxContainer/LeaveFuelStorage" to="." method="_on_leave_fuel_storage_pressed"]

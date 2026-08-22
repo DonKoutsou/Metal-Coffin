@@ -147,10 +147,16 @@ func SetControlledShipElevation(value: float) -> void:
 	
 		
 func OnControlledShipSpeedChanged(NewSpeed : float) -> void:
-	UIEventH.OnSpeedSet(NewSpeed / ControlledShip.GetShipMaxSpeed())
+	if (NewSpeed == 0):
+		UIEventH.OnSpeedSet(0)
+	else:
+		UIEventH.OnSpeedSet(NewSpeed / ControlledShip.GetShipMaxSpeed())
 
 func OnControlledShipSpeedForced(NewSpeed : float) -> void:
-	UIEventH.OnSpeedForced(NewSpeed / ControlledShip.GetShipMaxSpeed())
+	if (NewSpeed == 0):
+		UIEventH.OnSpeedForced(0)
+	else:
+		UIEventH.OnSpeedForced(NewSpeed / ControlledShip.GetShipMaxSpeed())
 
 func OnControlledShipSteerChanged(NewSteer : float) -> void:
 	UIEventH.OnSteerSet(NewSteer)
@@ -365,7 +371,7 @@ func LoadSaveData(Data : PlayerSaveData) -> void:
 			DockedShip.Cpt = Ship.Cpt
 			DockedShip.Cpt.Repair_Parts = Ship.RepairParts
 			DockedShip.Cpt.OnCharacterNameChanged(Ship.TempName)
-			CommanderShip.GetDock().AddShip(DockedShip)
+			CommanderShip.GetDock().AddShip(DockedShip, false)
 	
 	var AllShips = get_tree().get_nodes_in_group("PlayerShips")
 	for ToRegoup in RegroupingShips:

@@ -326,6 +326,8 @@ func LoadCharacter(Data : SD_CharacterInventory) -> void:
 		CharInv = _CharacterInventories[Cha]
 	else:
 		CharInv = CharInvScene.instantiate() as CharacterInventory
+		CharInv.inventoryOwner = Cha.CaptainShip
+		Cha.RegisterInventory(CharInv)
 		CharInv.InitialiseInventory(Cha)
 		_CharacterInventories[Cha] = CharInv
 		CharacterPlace.add_child(CharInv)
@@ -335,14 +337,14 @@ func LoadCharacter(Data : SD_CharacterInventory) -> void:
 		CharInv.OnItemAdded.connect(OnItemAdded.bind(Cha))
 		CharInv.OnItemRemoved.connect(OnItemRemoved.bind(Cha))
 		CharInv.OnCharacterInspectionPressed.connect(InspectCharacter.bind(Cha))
-		CharInv.OnCharacterDispositionInspectionPressed.connect(InspectCharacterDisposition.bind(Cha))
-		CharInv.OnCharacterDeckInspectionPressed.connect(InspectCharacterDeck.bind(Cha))
+		#CharInv.OnCharacterDispositionInspectionPressed.connect(InspectCharacterDisposition.bind(Cha))
+		#CharInv.OnCharacterDeckInspectionPressed.connect(InspectCharacterDeck.bind(Cha))
 		
 	Cha._CharInv = CharInv
 	CharInv.inventoryOwner = Cha.CaptainShip
-	
-	for g in CharInv.GetInventoryContents():
-		CharInv.RemoveItem(g)
+	Cha.RegisterInventory(CharInv)
+	CharInv.ClearInventory()
+
 
 	for g in Data.Items:
 		for z in g.Ammount:

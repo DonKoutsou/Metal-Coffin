@@ -288,6 +288,12 @@ func FindBox(It : Item) -> Inventory_Box_Res:
 
 	return null
 
+func ClearInventory() -> void:
+	for g in range(_InventoryContents.size() - 1, -1, -1):
+		var it = _InventoryContents.keys()[g]
+		for z in _InventoryContents[it]:
+			RemoveItem(it)
+
 func AddItem(It : Item) -> void:
 	var boxeList = boxes[It.PartType]
 

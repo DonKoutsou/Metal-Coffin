@@ -39,7 +39,7 @@ MissileLaunchSound = SubResource("AudioStreamRandomizer_brtn2")
 C = ExtResource("4_brtn2")
 MissileVisual = NodePath("ColorRect")
 CollisionDetector = NodePath("CollisionDetector")
-AltitudeChangeSpeed = 2000.0
+AltitudeChangeSpeed = 4000.0
 
 [node name="AccelPosition" type="Node2D" parent="." unique_id=1303542076]
 position = Vector2(29, 0)
