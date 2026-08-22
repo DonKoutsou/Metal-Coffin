@@ -326,7 +326,6 @@ func LoadCharacter(Data : SD_CharacterInventory) -> void:
 		CharInv = _CharacterInventories[Cha]
 	else:
 		CharInv = CharInvScene.instantiate() as CharacterInventory
-		CharInv.inventoryOwner = Cha.CaptainShip
 		Cha.RegisterInventory(CharInv)
 		CharInv.InitialiseInventory(Cha)
 		_CharacterInventories[Cha] = CharInv
@@ -342,7 +341,6 @@ func LoadCharacter(Data : SD_CharacterInventory) -> void:
 		
 	Cha._CharInv = CharInv
 	CharInv.inventoryOwner = Cha.CaptainShip
-	Cha.RegisterInventory(CharInv)
 	CharInv.ClearInventory()
 
 
