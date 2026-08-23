@@ -72,11 +72,11 @@ func GetMap() -> Map:
 func GetCommander() -> Commander:
 	return _Command
 
-func _ready() -> void:
+func init(customSeed : int = -1) -> void:
 	WORLDST = WORLDSTATE.INITIAL
 	SimulationManager.GetInstance().TogglePause(true)
 	Instance = self
-	instanceRandom = Rand.NewRand()
+	instanceRandom = Rand.NewRand(-1, customSeed)
 	
 	GetMap().GetScreenUi().DoIntroFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
@@ -180,6 +180,9 @@ func _ready() -> void:
 	GetMap().GetScreenUi().OpenScreen(ScreenUI.ScreenState.PILOT_SCREEN)
 	WORLDST = WORLDSTATE.NORMAL
 	WeatherManage.Instance.Update(0)
+	
+	print("World generation ended with random state of {0}".format([instanceRandom.GetState()]))
+	
 	
 var WeatherManagerUpdate : float
 

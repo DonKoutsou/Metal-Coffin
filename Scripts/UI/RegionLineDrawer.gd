@@ -88,7 +88,7 @@ func _DrawingEnded() -> void:
 		l.set("theme_override_font_sizes/font_size", 1200)
 		var ypos = points[0] + points[0].direction_to(points[points.size() - 1]) * (points[0].distance_to(points[points.size() - 1]) / 2)
 		call_deferred("PositionLabel", l, Vector2(0, ypos.y))
-		l.rotation = randf_range(-0.1, 0.1)
+		l.rotation = World.instanceRandom.RandFRange(-0.1, 0.1)
 		l.add_theme_constant_override("shadow_outline_size", 0)
 		l.add_theme_constant_override("shadow_offset_x", 0)
 		l.add_theme_constant_override("shadow_offset_y", 0)
@@ -177,7 +177,7 @@ func calculate_convex_hulls(Lines : Dictionary[MapSpotCompleteInfo.REGIONS, Arra
 				if (!foundpair):
 					var newpoint = c
 					
-					newpoint.y += randf_range(500, 1000)
+					newpoint.y += World.instanceRandom.RandFRange(500, 1000)
 
 					for p : Vector2 in previousBottomPoints:
 						if (newpoint.x >= p.x):
@@ -226,7 +226,7 @@ func calculate_convex_hulls(Lines : Dictionary[MapSpotCompleteInfo.REGIONS, Arra
 
 				if (!foundpair):
 					var newpoint = c
-					newpoint.y -= randf_range(500, 1000)
+					newpoint.y -= World.instanceRandom.RandFRange(500, 1000)
 
 					for p : Vector2 in NextTopPoints:
 						if (newpoint.x <= p.x):

@@ -66,7 +66,7 @@ func SpawnMenu() -> void:
 	StMenu.FightStart.connect(StartCageFight)
 	UISoundMan.GetInstance().Refresh()
 
-func StartPrologue(Load : bool, SkipStory : bool = false) -> void:
+func StartPrologue(Load : bool, SkipStory : bool = false, customSeed : int = -1) -> void:
 	var IntroScene = await Helper.LoadThreaded(IntroGameScene).Sign
 	Wor = IntroScene.instantiate() as World
 	if (Load):
@@ -77,6 +77,9 @@ func StartPrologue(Load : bool, SkipStory : bool = false) -> void:
 	
 	$SubViewportContainer/SubViewport.add_child(Wor)
 	Wor.SkipStory = SkipStory
+	Wor.init(customSeed)
+	
+	
 	await Wor.WorldSpawnTransitionFinished
 	StMenu.queue_free()
 	#$ColorRect.visible = false

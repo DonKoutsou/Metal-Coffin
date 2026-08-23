@@ -42,7 +42,6 @@
 .godot/uid_cache.bin
 .godot/editor/map_spot.tscn-editstate-86f0460dced1c305e2f364d8c6e81077.cfg
 
-*.cfg
 /.godot/exported
 /.godot/editor
 /android/build/.gradle

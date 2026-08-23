@@ -186,14 +186,14 @@ func _on_command_line_start_campaign(SkipStory: bool) -> void:
 	GameStart.emit(false, SkipStory)
 
 
-func _on_command_line_start_prologue(SkipStory: bool) -> void:
+func _on_command_line_start_prologue(SkipStory: bool, customSeed : int) -> void:
 	if (Selecting):
 		return
 		
 	var Run = await ChooseTutorial()
 	if (!Run):
 		return
-	PrologueStart.emit(false, SkipStory)
+	PrologueStart.emit(false, SkipStory, customSeed)
 
 
 #func MouseIn() -> void:

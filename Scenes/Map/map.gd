@@ -456,8 +456,6 @@ func GenerateMapThreaded() -> void:
 		
 		GeneratedSpots.append(sc)
 	
-	call_deferred("MapGenFinished", GeneratedSpots, WorldSize)
-	
 	for g in GeneratedSpots:
 		var isCapital = g.GetSpot().SpotType.SpotK == MapSpotType.SpotKind.CAPITAL
 		g.call_deferred("SetMerch", EnSpawner.GetMerchForPosition(g.Pos.y, g.GetSpot().HasUpgrade(), isCapital), EnSpawner.GetWorkshopMerchForPosition(g.Pos.y, g.GetSpot().HasUpgrade(), isCapital))
@@ -471,6 +469,7 @@ func GenerateMapThreaded() -> void:
 		
 		g.call_deferred("SetRecruits", Recruits)
 	
+	call_deferred("MapGenFinished", GeneratedSpots, WorldSize)
 	
 	if (OS.is_debug_build()):
 		print("Generating map took " + var_to_str(Time.get_ticks_msec() - time) + " msec")
@@ -588,6 +587,7 @@ func GenerateEventsThreaded() -> void:
 		#var Events = (Spots[0] as MapSpot).SpotType.GetNormalEvents()
 		Spots.clear()
 		Spots.append_array(get_tree().get_nodes_in_group(g))
+		seed(World.instanceRandom.r.seed)
 		Spots.shuffle()
 		var Events = EventManager.GetInstance().GetEventsForSpotType(MapSpotType.SpotKind[g])
 		while Events.size() > 0 and Spots.size() > 0:

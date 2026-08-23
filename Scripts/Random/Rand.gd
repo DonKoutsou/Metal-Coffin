@@ -5,16 +5,19 @@ class_name Rand
 var r : RandomNumberGenerator
 var mut : Mutex
 
-func Init(state : int = -1, seed : int = -1) -> void:
+func GetState() -> int:
+	return r.state
+
+func Init(state : int = -1, customSeed : int = -1) -> void:
 	r = RandomNumberGenerator.new()
-	if (state != -1):
-		r.state = state
-	else:
-		r.state = 1
-	if (seed != -1):
-		r.seed = seed
+	if (customSeed != -1):
+		r.seed = customSeed
 	else:
 		r.seed = 1
+		
+	if (state != -1):
+		r.state = state
+	
 	mut = Mutex.new()
 
 func RandFRange(from : float, to : float) -> float:
@@ -46,7 +49,7 @@ func RandIRange(from : int, to : int) -> int:
 	return randomInt
 	
 
-static func NewRand(state : int = -1, seed : int = -1) -> Rand:
+static func NewRand(state : int = -1, customSeed : int = -1) -> Rand:
 	var rand = Rand.new()
-	rand.Init(state, seed)
+	rand.Init(state, customSeed)
 	return rand

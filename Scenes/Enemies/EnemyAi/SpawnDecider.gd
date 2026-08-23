@@ -87,7 +87,8 @@ func GetMerchForPosition(YPos: float, HasUp : bool, capital : bool) -> Array[Mer
 		stage = min(stage + 1, Happening.GameStage.size() - 1)
 	# Iterate through the MerchList to select merchandise based on points
 	while points > MerchLowest:
-		var m = MerchList.pick_random() as MerchandiseInfo
+		var randomIndex = World.instanceRandom.RandIRange(0, MerchList.size() - 1) 
+		var m = MerchList[randomIndex] as MerchandiseInfo
 		if (m.DontGenerateBefore > stage):
 				continue
 		var M : Merchandise
@@ -120,7 +121,8 @@ func GetRecruitsForPosition(YPos: float, HasRec : bool, capital : bool) -> Array
 	var recs = RecruitList.duplicate()
 	# Iterate through the MerchList to select merchandise based on points
 	while points > RECRUIT_LOWEST and recs.size() > 0:
-		var RandomRec = recs.pick_random() as CaptainSpawnInfo
+		var randomIndex = World.instanceRandom.RandIRange(0, recs.size() - 1)
+		var RandomRec = recs[randomIndex] as CaptainSpawnInfo
 		if (RandomRec.DontGenerateBefore > stage):
 			continue
 		
@@ -145,7 +147,8 @@ func GetWorkshopMerchForPosition(YPos: float, HasUp : bool, capital : bool) -> A
 	var stage = Happening.GetStageForYPos(YPos)
 	# Iterate through the MerchList to select merchandise based on points
 	while points > MerchLowest:
-		var m = WorkshopList.pick_random() as MerchandiseInfo
+		var randomIndex = World.instanceRandom.RandIRange(0, WorkshopList.size() - 1) 
+		var m = WorkshopList[randomIndex] as MerchandiseInfo
 		if (m.DontGenerateBefore > stage):
 			continue
 		var M : Merchandise

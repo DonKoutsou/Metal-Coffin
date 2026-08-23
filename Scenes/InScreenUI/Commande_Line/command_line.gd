@@ -9,8 +9,8 @@ class_name CommandLine
 
 var Items : Array[Item]
 
-signal StartPrologue(SkipStory : bool)
-signal StartCampaign(SkipStory : bool)
+signal StartPrologue(SkipStory : bool, customSeed : int)
+signal StartCampaign(SkipStory : bool, customSeed : int)
 
 static var Typing : bool = false
 
@@ -118,18 +118,22 @@ func HandlePrologueCommand(Command) -> String:
 		StartPrologue.emit(false)
 		return "Starting Prologue"
 	
+	var customSeed : int = -1
+	if (Command.size() == 3):
+		customSeed = Command[2]
+	
 	match (Command[1].to_lower()):
 		"skip":
-			StartPrologue.emit(true)
+			StartPrologue.emit(true, customSeed)
 			return "Starting Prologue\nSkipping Story"
 	
 	return "Error Handling Location Command"
 
-func Prologue(skip : bool) -> String:
+func Prologue(skip : bool, customSeed : int) -> String:
 	if (World.Instance != null):
 		return "Can only apply while in main menu"
 
-	StartPrologue.emit(skip)
+	StartPrologue.emit(skip, customSeed)
 	return "Starting Prologue"
 
 
