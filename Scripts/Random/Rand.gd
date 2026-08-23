@@ -41,13 +41,27 @@ func RandI() -> int:
 	print("Got random {0}".format([randomInt]))
 	return randomInt
 
+func RandWeighted(weights : PackedFloat32Array) -> int:
+	mut.lock()
+	var randomInt = r.rand_weighted(weights)
+	mut.unlock()
+	print("Got random {0}".format([randomInt]))
+	return randomInt
+
 func RandIRange(from : int, to : int) -> int:
 	mut.lock()
 	var randomInt = r.randi_range(from, to)
 	mut.unlock()
 	print("Got random {0}".format([randomInt]))
 	return randomInt
-	
+
+func shuffle_array(arr: Array) -> void:
+	for i in range(arr.size() - 1, 0, -1):
+		var j := RandIRange(0, i)
+
+		var temp = arr[i]
+		arr[i] = arr[j]
+		arr[j] = temp
 
 static func NewRand(state : int = -1, customSeed : int = -1) -> Rand:
 	var rand = Rand.new()

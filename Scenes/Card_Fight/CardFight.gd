@@ -366,7 +366,8 @@ func MultiSpcificCardDrawn(DrawnCards : Array[CardStats]) -> void:
 		SelectingTarget = false
 		Performer.deck.DrawSpecific(DrawnCards[Picked])
 	else:
-		Performer.deck.DrawSpecific(DrawnCards.pick_random())
+		var randomIndex : int = World.instanceRandom.RandIRange(0, DrawnCards.size() - 1)
+		Performer.deck.DrawSpecific(DrawnCards[randomIndex])
 		
 ##----------------------------------------------------------------------##
 func MultiCardDrawn(DrawnCards : Array[CardStats], discardAmm : int) -> void:
@@ -411,8 +412,9 @@ func MultiCardDrawn(DrawnCards : Array[CardStats], discardAmm : int) -> void:
 				c.queue_free()
 	else:
 		while CardsToDiscard.size() < discardAmm:
-			var ToDiscard = DrawnCards.pick_random()
-			DrawnCards.erase(ToDiscard)
+			var randomIndex : int = World.instanceRandom.RandIRange(0, DrawnCards.size() - 1)
+			var ToDiscard = DrawnCards[randomIndex]
+			DrawnCards.remove_at(randomIndex)
 			CardsToDiscard.append(ToDiscard)
 			Performer.deck.DiscardCard(ToDiscard)
 			HandleDiscardModules(Performer, ToDiscard)
@@ -770,7 +772,8 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 	var actionLog : PackedStringArray
 	
 	while (AvailableActions.size() > 0):
-		var Action : CardStats = AvailableActions.pick_random()
+		var randomActionIndex : int = World.instanceRandom.RandIRange(0, AvailableActions.size() -1)
+		var Action : CardStats = AvailableActions[randomActionIndex]
 		
 		var ActionCost = Action.Energy
 		if (Action.Burned):
@@ -1502,7 +1505,8 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats, _targetOverride : B
 				if (Mod is BuffModule):
 					Targets.append(GetTargetWithBiggestStat(Team, Mod.StatToBuff))
 				else:
-					Targets.append(Team.pick_random())
+					var randomTargetIndex : int = World.instanceRandom.RandIRange(0, Team.size() - 1)
+					Targets.append(Team[randomTargetIndex])
 		#if nothing of the above counts pick the user as the target
 		else:
 			Targets = [User]
@@ -1549,8 +1553,8 @@ func GetBestTargetForAtack(Candidates : Array[BattleShipStats]) -> BattleShipSta
 	#for p in points_list:
 		#total_points += max(0, p) # avoid negatives
 	
-	var r = RandomNumberGenerator.new()
-	var pickedIndex = r.rand_weighted(points_list)
+	#var r = RandomNumberGenerator.new()
+	var pickedIndex = World.instanceRandom.RandWeighted(points_list)
 	# Pick based on weighted chance
 	#var rand = randf() * total_points
 	#var cumulative = 0.0
@@ -1789,10 +1793,10 @@ func ShipDestroyed(Ship : BattleShipStats) -> bool:
 	var Friendly = IsShipFriendly(Ship)
 		
 	if (EnemyCombatants.has(Ship)):
-		FundsToWin += snapped(randi_range(2000, Ship.Funds), 1000)
+		FundsToWin += snapped(World.instanceRandom.RandIRange(2000, Ship.Funds), 1000)
 	
 	var TurnPosition = ShipTurns.find(Ship)
-	var Index = ShipTurns.find(Ship)
+	#var Index = ShipTurns.find(Ship)
 	ShipTurns.erase(Ship)
 	
 	if (Friendly):
@@ -2144,8 +2148,9 @@ func PlaceCardInEnemyHand(Performer : BattleShipStats, C : CardStats) -> bool:
 		print("{0} has been added to {1}'s hand pile.".format([C.GetCardName(), Performer.Name]))
 	else:
 		Performer.deck.Hand.append(C)
-		var ToDiscard = Performer.deck.Hand.pick_random()
-		Performer.deck.Hand.erase(ToDiscard)
+		var randomIndex = World.instanceRandom.RandIRange(0, Performer.deck.Hand.size() - 1)
+		var ToDiscard = Performer.deck.Hand[randomIndex]
+		Performer.deck.Hand.remove_at(randomIndex)
 		print("{0} has been added to {1}'s discard pile.".format([ToDiscard.GetCardName(), Performer.Name]))
 		Performer.deck.DiscardPile.append(ToDiscard)
 

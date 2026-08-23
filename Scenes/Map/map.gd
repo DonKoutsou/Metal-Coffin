@@ -564,7 +564,8 @@ func GenerateEventsThreaded() -> void:
 	for g in SpotGroups:
 		var Spots : Array
 		Spots.append_array(get_tree().get_nodes_in_group(g))
-		Spots.shuffle()
+		
+		World.instanceRandom.shuffle_array(Spots)
 		
 		var SpEvents = EventManager.GetInstance().GetSpecialEventsForSpotType(MapSpotType.SpotKind[g])
 		
@@ -587,8 +588,9 @@ func GenerateEventsThreaded() -> void:
 		#var Events = (Spots[0] as MapSpot).SpotType.GetNormalEvents()
 		Spots.clear()
 		Spots.append_array(get_tree().get_nodes_in_group(g))
-		seed(World.instanceRandom.r.seed)
-		Spots.shuffle()
+		
+		World.instanceRandom.shuffle_array(Spots)
+
 		var Events = EventManager.GetInstance().GetEventsForSpotType(MapSpotType.SpotKind[g])
 		while Events.size() > 0 and Spots.size() > 0:
 			var randomIndex = World.instanceRandom.RandIRange(0, Spots.size() - 1)

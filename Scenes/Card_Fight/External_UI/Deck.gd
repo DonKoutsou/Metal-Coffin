@@ -22,7 +22,7 @@ static func NewDeck(Owner : BattleShipStats) -> Deck:
 	d.DeckPile.append_array(Owner.Cards)
 	d.friendly = Owner.Friendly
 	#Create Hand
-	d.DeckPile.shuffle()
+	World.instanceRandom.shuffle_array(d.DeckPile)
 	#Place priority card on top
 	for card : CardStats in d.DeckPile:
 		if (card.PutOnTop):
@@ -164,6 +164,6 @@ func ShuffleDiscardedIntoDeck(DoAnim : bool = true) -> void:
 	DeckPile.append_array(DiscardPile)
 	DiscardPile.clear()
 	
-	DeckPile.shuffle()
+	World.instanceRandom.shuffle_array(DeckPile)
 	isShuffling = false
 	Shuffling.emit(false)

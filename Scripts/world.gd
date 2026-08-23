@@ -72,16 +72,20 @@ func GetMap() -> Map:
 func GetCommander() -> Commander:
 	return _Command
 
-func init(customSeed : int = -1) -> void:
+func  _ready() -> void:
 	WORLDST = WORLDSTATE.INITIAL
 	SimulationManager.GetInstance().TogglePause(true)
 	Instance = self
+
+func init(customSeed : int = -1) -> void:
 	instanceRandom = Rand.NewRand(-1, customSeed)
 	
+	#Switch screen
 	GetMap().GetScreenUi().DoIntroFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	WorldSpawnTransitionFinished.emit()
-	#$Inventory.Player = GetMap().GetPlayerShip()
+	
+	#Add loading screen
 	var Loadingscr = load(LoadingScene).instantiate() as LoadingScreen
 	Ingame_UIManager.GetInstance().AddUI(Loadingscr, false, false)
 	
