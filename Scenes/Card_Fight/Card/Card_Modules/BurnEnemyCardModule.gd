@@ -36,7 +36,8 @@ func Handle(_Performer : BattleShipStats, Action : CardStats, Targets : Array[Ba
 		if (g.deck.DeckPile.is_empty()):
 			continue
 		for toBurn in burnAmm:
-			g.deck.DeckPile.pick_random().Burned = true
+			var randomIndex : int = World.instanceRandom.RandIRange(0, g.deck.DeckPile.size() - 1)
+			g.deck.DeckPile[randomIndex].Burned = true
 
 	var Data = DeffensiveAnimationData.new()
 	Data.Mod = self

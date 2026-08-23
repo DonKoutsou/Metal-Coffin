@@ -31,7 +31,8 @@ func Init() -> void:
 		var Picked : Array[WorldviewQuestion]
 		
 		while Picked.size() < 3:
-			var Question = PossibleQuestions.pick_random()
+			var randomIndex = World.instanceRandom.RandIRange(0, PossibleQuestions.size() - 1)
+			var Question = PossibleQuestions[randomIndex]
 			if (Question.WorldviewSkill != Stat):
 				continue
 			if (Picked.has(Question) or PickedQuestions.has(Question)):

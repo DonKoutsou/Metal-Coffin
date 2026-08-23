@@ -76,9 +76,7 @@ func  _ready() -> void:
 	WORLDST = WORLDSTATE.INITIAL
 	SimulationManager.GetInstance().TogglePause(true)
 	Instance = self
-
-func init(customSeed : int = -1) -> void:
-	instanceRandom = Rand.NewRand(-1, customSeed)
+	instanceRandom = Rand.NewRand(-1)
 	
 	#Switch screen
 	GetMap().GetScreenUi().DoIntroFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
@@ -625,7 +623,8 @@ func LoadSaveData(data : SaveData) -> void:
 	var PlWallet : Wallet = data.Datas[0]
 	PlayerWallet.SetFunds(PlWallet.Funds)
 	var randData : RandomSaveData = data.Datas[1]
-	instanceRandom = Rand.NewRand(randData.state, randData.seed)
+	Rand.customSeed = randData.seed
+	instanceRandom = Rand.NewRand(randData.state)
 
 #--------------------------------------------------------
 func GameLost(reason : String):

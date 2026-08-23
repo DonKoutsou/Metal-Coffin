@@ -75,10 +75,9 @@ func StartPrologue(Load : bool, SkipStory : bool = false, customSeed : int = -1)
 			PopupManager.DoFadeNotif(LoadResault["Reason"], StMenu.GetVp())
 			return
 	
+	Rand.customSeed = customSeed
 	$SubViewportContainer/SubViewport.add_child(Wor)
 	Wor.SkipStory = SkipStory
-	Wor.init(customSeed)
-	
 	
 	await Wor.WorldSpawnTransitionFinished
 	StMenu.queue_free()

@@ -681,8 +681,8 @@ func OnCardSelected(C : Card, target : BattleShipStats = null) -> bool:
 	if (Ship.deck.Hand.size() == 0 and Ship.Energy == 0 and Ship.EnergyReserves == 0):
 		PlayerActionSelectionEnded()
 	
-	else: if (Ship.deck.Hand.size() > 0 and Ship.Energy == 0):
-		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_CARD_RECYCLE)
+	#else: if (Ship.deck.Hand.size() > 0 and Ship.Energy == 0):
+		#ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_CARD_RECYCLE)
 		#TODO add tutorial for discarding cards
 
 	
@@ -1214,7 +1214,8 @@ func HandleDiscardModules(Performer : BattleShipStats, C : CardStats) -> void:
 		
 	if (AnimData.size() > 0):
 		await DoCardAnim(C, AnimData, Performer, true)
-	
+
+##----------------------------------------------------------------------##
 func HandleModules(Performer : BattleShipStats, C : CardStats, targetOverride : BattleShipStats = null) -> bool:
 	if (C.Burned):
 		Performer.deck.DiscardCard(C)
@@ -1439,12 +1440,12 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 ##----------------------------------------------------------------------##
 func HandleModule(Performer : BattleShipStats, C : CardStats, Mod : CardModule, Targets : Array[BattleShipStats] = []) -> AnimationData:
 	var AnimData : AnimationData = Mod.Handle(Performer, C, Targets)
-
 	return AnimData
-##----------------------------------------------------------------------##
-func IsTargetValid(card : CardStats, User : BattleShipStats, target : BattleShipStats = null) -> bool:
-	#var frUser = IsShipFriendly(User)
 	
+##----------------------------------------------------------------------##
+##Checks if card can be used on selected targets.
+##Here we set rules for target picking
+func IsTargetValid(card : CardStats, User : BattleShipStats, target : BattleShipStats = null) -> bool:
 	for Mod in card.OnUseModules:
 		
 		if (Mod is DeffenceCardModule):
@@ -1472,6 +1473,7 @@ func IsTargetValid(card : CardStats, User : BattleShipStats, target : BattleShip
 	
 	return true
 
+
 func HandleTargets(Mod : CardModule, User : BattleShipStats, _targetOverride : BattleShipStats = null) -> Array[BattleShipStats]:
 	var Targets : Array[BattleShipStats]
 	if (!Mod.NeedsTargetSelect()):
@@ -1489,6 +1491,7 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats, _targetOverride : B
 				Targets.append(g)
 		else: if Team.size() == 1:
 			Targets.append(Team[0])
+			
 		#If can be used on others prompt player to choose, or if enemy pick randomly
 		else: if Mod.CanBeUsedOnOther:
 			if (Friendly):
@@ -1536,12 +1539,14 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats, _targetOverride : B
 	return Targets
 ##----------------------------------------------------------------------##
 func GetBestTargetForAtack(Candidates : Array[BattleShipStats]) -> BattleShipStats:
+	#find the ship with bigger firepower
 	var biggestAttack : float = 0
 	for g in Candidates:
 		var fp = g.GetFirePower()
 		if (biggestAttack < fp):
 			biggestAttack = fp
 	
+	#calculate weights
 	var points_list : PackedFloat32Array
 	for g in Candidates:
 		var remainingHealthNormalised = (g.	Hull - g.CurrentHull) / g.Hull
@@ -1549,21 +1554,8 @@ func GetBestTargetForAtack(Candidates : Array[BattleShipStats]) -> BattleShipSta
 		var points = (g.DefDebuff * 10) + threatLevel + remainingHealthNormalised
 		points_list.append(max(0.2, points))
 	
-	#var total_points = 0.0
-	#for p in points_list:
-		#total_points += max(0, p) # avoid negatives
-	
-	#var r = RandomNumberGenerator.new()
 	var pickedIndex = World.instanceRandom.RandWeighted(points_list)
-	# Pick based on weighted chance
-	#var rand = randf() * total_points
-	#var cumulative = 0.0
-	#for i in range(Candidates.size()):
-		#cumulative += max(0, points_list[i])
-		#if rand <= cumulative:
-			#return Candidates[i]
 
-	# As fallback (should not happen), return a random one
 	return Candidates[pickedIndex]
 ##----------------------------------------------------------------------##
 func GetTargetWithBiggestStat(Candidates : Array[BattleShipStats], St : CardModule.Stat) -> BattleShipStats:
@@ -1571,19 +1563,14 @@ func GetTargetWithBiggestStat(Candidates : Array[BattleShipStats], St : CardModu
 	var CurrentTarget : BattleShipStats
 	
 	for g in Candidates:
-		var Stat : float
-		if (St== CardModule.Stat.FIREPOWER):
-			Stat = g.GetFirePower()
-		else : if (St == CardModule.Stat.SPEED):
-			Stat = g.GetSpeed()
-		else : if (St == CardModule.Stat.DEFENCE):
-			Stat = g.GetDef()
+		var Stat : float = g.GetStat(St)
 
 		if (CurrentBiggestStat < Stat):
 			CurrentTarget = g
 			CurrentBiggestStat = Stat
 	
 	return CurrentTarget
+	
 ##----------------------------------------------------------------------##
 func HandleDrawCard(Performer : BattleShipStats, ConsumeEnergy : bool = false) -> bool:
 	if (Performer.deck.isShuffling):
@@ -1596,8 +1583,8 @@ func HandleDrawCard(Performer : BattleShipStats, ConsumeEnergy : bool = false) -
 	if (ConsumeEnergy):
 		Performer.SetEnergy(Performer.Energy - 1)
 	
-	if (Performer.Energy == 0):
-		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_CARD_RECYCLE)
+	#if (Performer.Energy == 0):
+		#ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_CARD_RECYCLE)
 
 		#TODO add tutorial for discarding cards
 

@@ -91,11 +91,11 @@ func SetSpotData(Type : MapSpotType, Data : MapSpotCustomData_CompleteInfo) -> v
 	SpotType = Type
 	
 	if (Type.SpotK == MapSpotType.SpotKind.CITY_CENTER):
-		Population = randi_range(10000, 50000)
+		Population = World.instanceRandom.RandIRange(10000, 50000)
 	else : if (Type.SpotK == MapSpotType.SpotKind.CAPITAL):
-		Population = randi_range(80000, 150000)
+		Population = World.instanceRandom.RandIRange(80000, 150000)
 	else : if (Type.SpotK == MapSpotType.SpotKind.VILLAGE):
-		Population = randi_range(2000, 6000)
+		Population = World.instanceRandom.RandIRange(2000, 6000)
 	
 	SetSize()
 	

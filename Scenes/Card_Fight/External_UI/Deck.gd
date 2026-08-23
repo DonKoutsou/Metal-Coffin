@@ -111,7 +111,8 @@ func DrawSpecificFromList(list : Array[CardStats]) -> void:
 	if (PossibleDraws.size() == 0):
 		return
 	
-	var cardToDraw = PossibleDraws.pick_random()
+	var randomIndex : int = World.instanceRandom.RandIRange(0, PossibleDraws.size() - 1)
+	var cardToDraw = PossibleDraws[randomIndex]
 	DeckPile.erase(cardToDraw)
 	PileChanged.emit(false)
 	OnCardDrawn.emit(cardToDraw, false)

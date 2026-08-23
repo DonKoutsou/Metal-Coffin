@@ -257,6 +257,19 @@ func UpdateAttackBuffs() -> Array[String]:
 	StatsBuffed.emit()
 	return ExpiredBuffs
 
+func GetStat(stat : CardModule.Stat) -> float:
+	var statValue : float = 0
+	match (stat):
+		CardModule.Stat.FIREPOWER:
+			statValue = GetFirePower()
+		CardModule.Stat.SPEED:
+			statValue = GetSpeed()
+		CardModule.Stat.DEFENCE:
+			statValue = GetDef()
+		CardModule.Stat.WEIGHT:
+			statValue = GetWeight()
+	return statValue
+
 func GetFirePower() -> float:
 	return FirePower * (FirePowerBuff - FirePowerDeBuff) * (FirePowerAttackBuff - FirePowerAttackDebuff)
 
