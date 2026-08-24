@@ -55,7 +55,6 @@ signal ShipSpawned
 signal ShipWrecked
 signal Alarmed
 
-
 #var SavedParent : Node
 
 func SetLOD(lod : int) -> void:
@@ -75,13 +74,17 @@ func ToggleLod(t : bool) -> void:
 		WeatherManage.UnregisterShip(self)
 	
 func  _ready() -> void:
-	#SavedParent = get_parent()
-	
 	BodyShape.connect("area_entered", BodyEnteredBody)
 	BodyShape.connect("area_exited", BodyLeftBody)
 	Cpt.connect("ShipPartChanged", PartChanged)
 	RadarShape.VisStat = Cpt._GetStat(STAT_CONST.STATS.VISUAL_RANGE)
 	ElintShape.ElintStat = Cpt._GetStat(STAT_CONST.STATS.ELINT)
+	
+	#GetDock().SquadSonarRangeChanged.connect(OnSonarRangeChanged)
+	GetDock().SquadElintRangeChanged.connect(OnElintRangeChanged)
+	ElintShape.ElintRangeChanged.connect(OnElintRangeChanged)
+	#SonarShape.AerosonarRangeChanged.connect(OnSonarRangeChanged)
+	
 	ToggleFuelRangeVisibility(false)
 	call_deferred("InitialiseShip")
 	
@@ -100,7 +103,6 @@ func _exit_tree() -> void:
 func InitialiseShip() -> void:
 	Spawned = true
 	ShipSpawned.emit()
-	
 	
 	if (!LoadingSave):
 		for g in Cpt.CaptainStats:
@@ -229,6 +231,7 @@ func NeedsReload() -> bool:
 
 func TogglePause(_t : bool):
 	pass
+	
 #func TogglePause(t : bool):
 	#Paused = t
 	#if (t and BTree != null):
@@ -241,7 +244,6 @@ func ToggleDocked(t : bool) -> void:
 	if (BTree != null):
 		BTree.enabled = !t
 		BTree.set_physics_process(!t)
-
 
 #///////////////////////////////////////////////////
 #██████  ███████ ███████ ████████ ██ ███    ██  █████  ████████ ██  ██████  ███    ██     ███    ███  █████  ███    ██  █████   ██████  ███    ███ ███████ ███    ██ ████████ 
@@ -362,8 +364,6 @@ func IntersectPusruing() -> Vector2:
 	
 	if (pursuing_ship_speed == 0):
 		return pursuing_ship_position
-	
-	
 	
 	var DirToPrey = global_position.direction_to(pursuing_ship_position)
 	var speed = GetShipMaxSpeed() / 360
@@ -554,7 +554,7 @@ func GetBattleStats() -> BattleShipStats:
 	stats.ShipIcon = Cpt.ShipIcon
 	stats.CaptainIcon = Cpt.CaptainPortrait
 	stats.Name = GetShipName()
-	stats.Funds = Cpt.ProvidingFunds
+	stats.Funds = Cpt.GetValue()
 	stats.Weight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	stats.MaxShield =  Cpt.GetStatFinalValue(STAT_CONST.STATS.MAX_SHIELD)
 	stats.Convoy = Convoy

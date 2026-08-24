@@ -32,8 +32,6 @@ func _init(seed_value: int = 1) -> void:
 
 
 func set_seed(seed_value: int) -> void:
-	if (seed_value == -1):
-		seed_value = randi()
 	_calls = 0
 	_splitmix_state = seed_value
 

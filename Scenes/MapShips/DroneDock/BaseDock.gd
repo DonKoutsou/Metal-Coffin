@@ -11,6 +11,9 @@ var Captives : Array[MapShip]
 signal DroneAdded
 signal DroneRemoved
 
+signal SquadSonarRangeChanged
+signal SquadElintRangeChanged
+
 #----------------------------------------
 func AddCaptain(Cpt : Captain, _Notify : bool = true) -> MapShip:
 	World.GetInstance().PlayerWallet.AddFunds(Cpt.ProvidingFunds)
@@ -84,6 +87,9 @@ func DockShip(ship : MapShip):
 		call_deferred("TrySetDockPath", trans, ship)
 
 	ship.ToggleDocked(true)
+	
+	ship.SonarRangeChanged.connect(OnSonarRangeChanged)
+	ship.ElintRangeChanged.connect(OnElintRangeChanged)
 
 	if (ship.Altitude != Command.Altitude):
 		ship.TargetAltitude = Command.Altitude
@@ -95,10 +101,21 @@ func DockShip(ship : MapShip):
 		ship.SetCurrentPort(Command.CurrentPort)
 		Command.CurrentPort.OnSpotAproached(ship)
 
+func OnSonarRangeChanged() -> void:
+	SquadSonarRangeChanged.emit()
+
+func OnElintRangeChanged() -> void:
+	SquadElintRangeChanged.emit()
+
 #-----------------------------------------
 func UndockShip(Ship : MapShip):
 	DockedShips.erase(Ship)
 	Ship.Command = null
+	
+	if (Ship.SonarShape != null):
+		Ship.SonarShape.AerosonarRangeChanged.disconnect(OnSonarRangeChanged)
+	if (Ship.ElintShape != null):
+		Ship.ElintShape.ElintRangeChanged.disconnect(OnElintRangeChanged)
 	
 	var docks = $DroneSpots.get_children()
 	for g in docks:

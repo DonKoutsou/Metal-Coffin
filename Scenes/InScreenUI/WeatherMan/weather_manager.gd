@@ -4,7 +4,6 @@ class_name WeatherManage
 
 @export var EventHandler : UIEventHandler
 @export var WindChangeMinimumTime_Minutes : float = 20.0
-#@export var N : Image
 @export_file(".tres") var NoiseFile : String
 
 #@export var G : Gradient
@@ -26,7 +25,7 @@ var Mat : ShaderMaterial
 var CurrentCamOffset : Vector2
 var LastTimeWindChanged : float
 var WindDirectionOffset : int = 1
-var rand : Xoshiro256
+var rand : Rand
 
 static var M : Mutex #Use mutex to allow texture to be read through thread
 
@@ -43,12 +42,13 @@ func _ready() -> void:
 	Mat = material
 	M = Mutex.new()
 	
-	rand = Xoshiro256.new()
-	rand.set_seed(Rand.customSeed)
+	#initialise random
+	rand = Rand.NewRand()
 	
 	#Init wind direction, setting it to random dir
-	WindDirection = Vector2.RIGHT.rotated(rand.range_float(-2 * PI, 2 * PI))
-	WindSpeed = rand.range_float(0, MAX_WIND_SPEED)
+	WindDirection = Vector2.RIGHT.rotated(rand.RandFRange(-2 * PI, 2 * PI))
+	WindSpeed = rand.RandFRange(0, MAX_WIND_SPEED)
+	
 	EventHandler.ForecastToggled.connect(ToggleWeatherMan)
 	Instance = self
 	LastTimeWindChanged = 0
@@ -57,7 +57,7 @@ func _ready() -> void:
 	#Prepare noise
 	N = ResourceLoader.load(NoiseFile)
 	
-	N.noise.offset = Vector3(rand.range_float(-10000, 10000), rand.range_float(-10000, 10000), 0)
+	N.noise.offset = Vector3(rand.RandFRange(-10000, 10000), rand.RandFRange(-10000, 10000), 0)
 
 	DataTexture = N.get_image()
 	N.changed.connect(NoiseChanged)
@@ -76,23 +76,23 @@ func Update(delta: float) -> void:
 	var TimePased = Clock.Instance.TimePassedInMinutes() - LastTimeWindChanged
 	if (TimePased > WindChangeMinimumTime_Minutes):
 		LastTimeWindChanged = Clock.Instance.TimePassedInMinutes()
-		if (rand.next_bool()):
+		if (rand.RandBool()):
 			WindDirectionOffset = -1
 		else:
 			WindDirectionOffset = 1
 			
 	#Update wind direction and speed
-	var WindRotation = rand.range_float(0, 0.01) * WindDirectionOffset
+	var WindRotation = rand.RandFRange(0, 0.01) * WindDirectionOffset
 	WindDirection = WindDirection.rotated(WindRotation * (delta * 10))
-	WindSpeed = clamp(WindSpeed + rand.range_float(-0.2, 0.2), 0, MAX_WIND_SPEED)
+	WindSpeed = clamp(WindSpeed + rand.RandFRange(-0.2, 0.2), 0, MAX_WIND_SPEED)
 	
 	#Update noise
 	#CurrentOffset -= Vector2(WindDirection.x, WindDirection.y) * (delta * 0.01) * (WindSpeed * 0.005)
 	#Mat.set_shader_parameter("offset", CurrentOffset + CurrentCamOffset)
 	N.noise.offset -= Vector3(WindDirection.x, WindDirection.y, 0) * delta * (WindSpeed * 0.005)
 	N.noise.offset += Vector3(0,0,0.5) * delta
-	N.noise.fractal_gain = clamp(N.noise.fractal_gain + rand.range_float(-0.02, 0.02) * (delta * 0.1), -10, 10)
-	N.noise.fractal_lacunarity = clamp(N.noise.fractal_gain + rand.range_float(-0.02, 0.02) * (delta * 0.1), 2, 4)
+	N.noise.fractal_gain = clamp(N.noise.fractal_gain + rand.RandFRange(-0.02, 0.02) * (delta * 0.1), -10, 10)
+	N.noise.fractal_lacunarity = clamp(N.noise.fractal_gain + rand.RandFRange(-0.02, 0.02) * (delta * 0.1), 2, 4)
 	
 	var L = GetLightAmm()
 	
@@ -165,7 +165,7 @@ func GetSaveData() -> SaveData:
 	Data.Offset = N.noise.offset
 	Data.WindDirectionOffset = WindDirectionOffset
 	Data.LastTimeWindChanged = LastTimeWindChanged
-	Data.state = rand.get_state()
+	Data.state = rand.GetState()
 	Sav.Datas.append(Data)
 	return Sav
 
@@ -175,6 +175,5 @@ func LoadSaveData(Data : SD_WeatherMan) -> void:
 	WindDirectionOffset = Data.WindDirectionOffset
 	LastTimeWindChanged = Data.LastTimeWindChanged
 	N.noise.offset = Data.Offset
-	rand.set_seed(Rand.customSeed)
-	rand.set_state(Data.state)
+	rand = Rand.NewRand(Data.state)
 	#tx = texture.get_image()

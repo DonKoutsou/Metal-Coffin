@@ -27,15 +27,16 @@ enum MODE{
 }
 
 # --- INITIALIZATION / SIGNAL CONNECTIONS ---
-
+#----------------------------------------
 func _ready() -> void:
 	super()
 	lineContainer.Found.connect(_onSignalFound)
 	lineContainer.Update(BaseGrad.get_image(), WeatherManage.StormValueInPosition(controller.global_position))
 	#BaseGrad.changed.connect(GradientUpdated)
 	#_updateContacts()
+	
 # --- FLEET AND DRONE DOCK MANAGEMENT ---
-
+#----------------------------------------
 func _onDroneAdded(_drone: PlayerDrivenShip, target: MapShip) -> void:
 	if target == controller:
 		CurrentSonarRange = GetFleetSonarRange()
@@ -43,6 +44,7 @@ func _onDroneAdded(_drone: PlayerDrivenShip, target: MapShip) -> void:
 		cap.visible = !hasSonar
 		toggleSonar(hasSonar)
 
+#----------------------------------------
 func _onDroneRemoved(_drone: PlayerDrivenShip, target: MapShip) -> void:
 	if target == controller:
 		CurrentSonarRange = GetFleetSonarRange()
@@ -50,17 +52,22 @@ func _onDroneRemoved(_drone: PlayerDrivenShip, target: MapShip) -> void:
 		cap.visible = !hasSonar
 		toggleSonar(hasSonar)
 
+#----------------------------------------
 func _onControlledShipUpdated(newController: PlayerDrivenShip) -> void:
 	if (controller == newController):
 		return
 	if controller != null:
-		controller.SonarShape.AerosonarRangeChanged.disconnect(CheckIfWorking)
+		controller.ElintRangeChanged.disconnect(CheckIfWorking)
+		controller.SonarRangeChanged.disconnect(CheckIfWorking)
 	controller = newController
-	controller.SonarShape.AerosonarRangeChanged.connect(CheckIfWorking)
+	
+	controller.ElintRangeChanged.connect(CheckIfWorking)
+	controller.SonarRangeChanged.connect(CheckIfWorking)
 	CheckIfWorking()
 	#if !hasSonar and enabled:
 		#toggleSonar(false)
 
+#----------------------------------------
 func CheckIfWorking() -> void:
 	CurrentSonarRange = GetFleetSonarRange()
 	var hasSonar = CurrentSonarRange > 0
@@ -75,6 +82,7 @@ func CheckIfWorking() -> void:
 	else: if (!hasElint and currentMode == MODE.RADAR):
 		ModeButton.set_pressed(true)
 
+#----------------------------------------
 func fleetHasElint() -> bool:
 	# Check if the currently controlled ship or its docked drones have ELINT
 	if controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT) > 0:
@@ -85,7 +93,7 @@ func fleetHasElint() -> bool:
 	return false
 
 # --- SONAR AND FLEET UTILITY ---
-
+#----------------------------------------
 func fleetHasAeroSonar() -> bool:
 	if controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE) > 0:
 		return true
@@ -94,6 +102,7 @@ func fleetHasAeroSonar() -> bool:
 			return true
 	return false
 
+#----------------------------------------
 func GetFleetSonarRange() -> float:
 	var SonarRange : float = controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE)
 	for c: Captain in controller.GetDock().GetCaptains():
@@ -102,6 +111,7 @@ func GetFleetSonarRange() -> float:
 			SonarRange = dronerange
 	return SonarRange
 
+#----------------------------------------
 func getCurrentFleetAeroSonarRange() -> float:
 	var maxRange = controller.Cpt.GetStatFinalValue(STAT_CONST.STATS.AEROSONAR_RANGE)
 	for c: Captain in controller.GetDock().GetCaptains():
@@ -110,11 +120,12 @@ func getCurrentFleetAeroSonarRange() -> float:
 			maxRange = testRange
 	return maxRange
 
+#----------------------------------------
 func isPartOfFleet(target: Node2D) -> bool:
 	return target == controller or target in controller.GetDock().GetDockedShips()
 
 # --- SONAR PHYSICS AND DETECTION ---
-
+#----------------------------------------
 func Update(_delta: float) -> void:
 	if (currentMode == MODE.SOUND):
 		if (_contactUpdateThread == null):
@@ -138,6 +149,7 @@ func Update(_delta: float) -> void:
 var _contactUpdateThread : Thread
 
 #Update contacts of controller
+#----------------------------------------
 func _updateElintContacts(ControllerInfo : ElintTargetInfo ,ContactInfo : Array[ElintTargetInfo]) -> Image:
 	var contactList: Dictionary[float, float] = {}
 	#retrieve contacts and iterate over them
@@ -180,6 +192,7 @@ func _updateElintContacts(ControllerInfo : ElintTargetInfo ,ContactInfo : Array[
 	return Im
 
 #Update contacts of controller
+#----------------------------------------
 func _updateContacts(ControllerInfo : SonarTargetInfo ,ContactInfo : Array[SonarTargetInfo]) -> Image:
 	var contactList: Dictionary[float, float] = {}
 	#retrieve contacts and iterate over them
@@ -222,6 +235,7 @@ func _updateContacts(ControllerInfo : SonarTargetInfo ,ContactInfo : Array[Sonar
 	call_deferred("ContactsUpdated")
 	return Im
 
+#----------------------------------------
 func ContactsUpdated() -> void:
 	var ContactGradient : Image = _contactUpdateThread.wait_to_finish()
 	#print(ContactGradient.get_size())
@@ -234,6 +248,7 @@ func ContactsUpdated() -> void:
 	#var Im = BaseGrad.get_image()
 	#lineContainer.Update(Im, WeatherManage.StormValueInPosition(controller.global_position))
 
+#----------------------------------------
 func ContactsToGradient(Contacts : Dictionary[float, float]) -> Gradient:
 	#var g : GradientTexture2D = BaseGrad.duplicate()
 	var gradient = Gradient.new()
@@ -258,27 +273,31 @@ func ContactsToGradient(Contacts : Dictionary[float, float]) -> Gradient:
 		
 	return gradient
 
+#----------------------------------------
 func _onSignalFound(_signalStrength: float) -> void:
 	pass
 	#radioSpeaker.PlaySound(RadioSpeaker.RadioSound.BEEP, signalStrength - 35)
 
 # --- SONAR CONTROLS AND TOGGLING ---
-
+#----------------------------------------
 func toggle(on: bool) -> void:
 	if not on:
 		_onClosePressed()
 	else:
 		_onRadioClicked()
 
+#----------------------------------------
 func _onClosePressed() -> void:
 	if not fleetHasAeroSonar():
 		PopUpManager.GetInstance().DoFadeNotif("Ship missing sonar")
 		return
 	toggleSonar(!working)
 
+#----------------------------------------
 func _onCloseToggled(toggledOn: bool) -> void:
 	toggleSonar(toggledOn)
 
+#----------------------------------------
 func toggleSonar(enable: bool) -> void:
 	lineContainer.visible = enable
 	gainLabel.visible = enable
@@ -291,11 +310,12 @@ func toggleSonar(enable: bool) -> void:
 		lineContainer.OffsetAmmount = currentOffset
 		#controller.ToggleSonarVisual(false)
 
+#----------------------------------------
 func _onRadioClicked() -> void:
 	pass  # Future implementation, see commented legacy code
 
 # --- GAIN/NOISE HANDLER ---
-
+#----------------------------------------
 func _on_gein_control_range_changed(newVal: float) -> void:
 	var newOffsetVal = clamp(currentOffset + (-newVal / 2), 1, MAX_GAIN)
 	volume = newOffsetVal
@@ -305,6 +325,7 @@ func _on_gein_control_range_changed(newVal: float) -> void:
 		#return
 	lineContainer.OffsetAmmount = newOffsetVal
 
+#----------------------------------------
 func _on_gein_control_range_snapped_changed(direction: bool) -> void:
 	var newOffsetVal = currentOffset
 	if (!direction):
@@ -318,9 +339,11 @@ func _on_gein_control_range_snapped_changed(direction: bool) -> void:
 		#return
 	lineContainer.OffsetAmmount = newOffsetVal
 
+#----------------------------------------
 func _getInterfaceName() -> String:
-	return "AeroSonar"
+	return "Passive Detectors"
 
+#----------------------------------------
 func _on_mode_toggled(toggled_on: bool) -> void:
 	if (toggled_on):
 		if (GetFleetSonarRange() == 0):

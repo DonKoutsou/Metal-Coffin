@@ -305,8 +305,8 @@ range_z_min = 0
 range_layer_min = 2
 range_layer_max = 4
 texture = ExtResource("7_8npwn")
-offset = Vector2(0, 900)
-texture_scale = 7.2
+offset = Vector2(0, 850)
+texture_scale = 7.0
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="LightPivot1/LightPivot2" unique_id=1309977194]
 stream = ExtResource("5_x04yk")

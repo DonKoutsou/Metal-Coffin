@@ -39,6 +39,7 @@ func _ready() -> void:
 	DroneDockEventH.DroneDocked.connect(OnDroneDocked)
 	DroneDockEventH.DroneUndocked.connect(OnDroneUnDocked)
 	ControlledEventH.OnControlledShipChanged.connect(ControllerChanged)
+	SimulationManager.GetInstance().SimulationToggled.connect(OnSimulationPaused)
 	controller = ControlledEventH.CurrentControlled
 	Instance = self
 

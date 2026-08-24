@@ -20,6 +20,7 @@ var sorted_convoy_captain_list
 
 @export_tool_button("Refresh") var RefreshAction = RefrshExistingItems 
 
+#------------------------------------------------------------------------
 func RefrshExistingItems() -> void:
 	#WorkshopList.clear()
 	#MerchList.clear()
@@ -42,6 +43,7 @@ func RefrshExistingItems() -> void:
 					
 				file_name = dir.get_next()
 
+#------------------------------------------------------------------------
 func AddMerchToLists(It : Item, FileName :String) -> void:
 	var MerInfo = MerchandiseInfo.new()
 	var Mer = Merchandise.new()
@@ -76,10 +78,12 @@ func Init() -> void:
 	sorted_ground_captain_list.sort_custom(SortByCostDescending)
 	sorted_convoy_captain_list.sort_custom(SortByCostDescending)
 	
+#------------------------------------------------------------------------
 func GetMerchForPosition(YPos: float, HasUp : bool, capital : bool) -> Array[Merchandise]:
 	var available_merch: Array[Merchandise] = []
 	var points = GetMerchPointsForPosition(abs(YPos))
 	var stage = Happening.GetStageForYPos(YPos)
+	
 	if (capital):
 		points *= 1.5
 	if (HasUp):
@@ -109,8 +113,8 @@ func GetMerchForPosition(YPos: float, HasUp : bool, capital : bool) -> Array[Mer
 				available_merch.append(NewMerch)
 			points -= m.Cost
 	return available_merch
-
-
+	
+#------------------------------------------------------------------------
 func GetRecruitsForPosition(YPos: float, _HasRec : bool, capital : bool) -> Array[Captain]:
 	var available_Recruits : Array[Captain] = []
 	var points = GetRecruitPointsForPosition(abs(YPos))
@@ -120,24 +124,29 @@ func GetRecruitsForPosition(YPos: float, _HasRec : bool, capital : bool) -> Arra
 	#print("Picking recruits for pos {0} with points {1}".format([YPos, points]))
 	var stage = Happening.GetStageForYPos(YPos)
 	var recs = RecruitList.duplicate()
+	
 	# Iterate through the MerchList to select merchandise based on points
 	while points > RECRUIT_LOWEST and recs.size() > 0:
 		var randomIndex = World.instanceRandom.RandIRange(0, recs.size() - 1)
-		var RandomRec = recs[randomIndex] as CaptainSpawnInfo
+		var RandomRec : CaptainSpawnInfo = recs[randomIndex]
 		
 		if (RandomRec.DontGenerateBefore > stage):
 			continue
 		
-		var amm = available_Recruits.count(RandomRec.Cpt)
-		if (amm >= RandomRec.MaxAmmInFleet):
+		#Check if surpassing max ammount in fleet
+		var ammInFleet = available_Recruits.count(RandomRec.Cpt)
+		if (ammInFleet >= RandomRec.MaxAmmInFleet):
 			recs.erase(RandomRec)
 			continue
+		
+		#If cost allows add it to available recruits
 		if (points > RandomRec.Cost):
 			available_Recruits.append(RandomRec.Cpt.duplicate())
 			points -= RandomRec.Cost
 
 	return available_Recruits
 
+#------------------------------------------------------------------------
 func GetWorkshopMerchForPosition(YPos: float, HasUp : bool, capital : bool) -> Array[Merchandise]:
 	var available_merch: Array[Merchandise] = []
 	if (!HasUp):
@@ -157,7 +166,7 @@ func GetWorkshopMerchForPosition(YPos: float, HasUp : bool, capital : bool) -> A
 			continue
 		var M : Merchandise
 		for g in available_merch:
-			if (m.Merch.It.GetItemName() == g.It.GetItemName()):
+			if (m.Merch.It == g.It):
 				M = g
 				break
 		
@@ -173,6 +182,7 @@ func GetWorkshopMerchForPosition(YPos: float, HasUp : bool, capital : bool) -> A
 			points -= m.Cost
 	return available_merch
 
+#------------------------------------------------------------------------
 func GetSpawnsForLocation(YPos : float, Patrol : bool, Convoy : bool, capital : bool) -> Array[Captain]:
 	#var time = Time.get_ticks_msec()
 	var stage = Happening.GetStageForYPos(YPos)
@@ -189,18 +199,23 @@ func GetSpawnsForLocation(YPos : float, Patrol : bool, Convoy : bool, capital : 
 
 	return Fleet
 
+#------------------------------------------------------------------------
 func GetPointsForPosition(YPos : float) -> int:
 	return roundi(max(100, YPos / 50.0))
 
+#------------------------------------------------------------------------
 func GetMerchPointsForPosition(YPos : float) -> int:
 	return roundi(max(20, YPos / 500.0))
 
+#------------------------------------------------------------------------
 func GetWorkshopMerchPointsForPosition(YPos : float) -> int:
 	return roundi(max(20, YPos / 250.0))
 
+#------------------------------------------------------------------------
 func GetRecruitPointsForPosition(YPos : float) -> int:
 	return roundi(max(50, YPos / 100.0))
 
+#------------------------------------------------------------------------
 func generate_fleet(points: int, Patrol : bool, Convoy : bool, stage : Happening.GameStage) -> Array[CaptainSpawnInfo]:
 	var fleet : Array[CaptainSpawnInfo] = []
 	var fleetFuelStats : Array[Dictionary]
@@ -265,10 +280,10 @@ func generate_fleet(points: int, Patrol : bool, Convoy : bool, stage : Happening
 			points -= selected_ship.Cost
 			if (selected_ship.MaxAmmInFleet == fleet.count(selected_ship)):
 				available_ships.erase(selected_ship)
-			
-
+				
 	return fleet
 
+#------------------------------------------------------------------------
 func GetFleetRange(OriginalFleetFuelStats : Array[Dictionary], NewShip : Dictionary) -> float:
 	var fuel = NewShip["FUEL"]
 	var fuel_ef = NewShip["F_EFF"]
@@ -287,6 +302,7 @@ func GetFleetRange(OriginalFleetFuelStats : Array[Dictionary], NewShip : Diction
 	# Calculate average efficiency for the group
 	return (total_fuel * effective_efficiency) / fleetsize
 
+#------------------------------------------------------------------------
 # Custom sort function: Sort by cost descending
 static func SortByCostDescending(a :CaptainSpawnInfo, b : CaptainSpawnInfo):
 	return b.Cost - a.Cost

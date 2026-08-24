@@ -50,6 +50,9 @@ signal SteerChanged(NewSteer : float)
 signal SteerForced(NewSteer : float)
 signal Teleported
 
+signal SonarRangeChanged
+signal ElintRangeChanged
+
 var LastRecordedOffset : Vector2
 
 signal PortChanged()
@@ -60,10 +63,13 @@ var WindVector : Vector2
 var FuelWindEffect : float
 
 func _ready() -> void:
-	
 	BodyShape.connect("area_entered", BodyEnteredBody)
 	BodyShape.connect("area_exited", BodyLeftBody)
 	Cpt.connect("ShipPartChanged", PartChanged)
+	GetDock().SquadSonarRangeChanged.connect(OnSonarRangeChanged)
+	GetDock().SquadElintRangeChanged.connect(OnElintRangeChanged)
+	ElintShape.ElintRangeChanged.connect(OnElintRangeChanged)
+	SonarShape.AerosonarRangeChanged.connect(OnSonarRangeChanged)
 	
 	MapPointerManager.GetInstance().AddShip(self, true)
 
@@ -232,6 +238,9 @@ func GetSonarTargetInfo() -> Array[SonarTargetInfo]:
 		Targets.append_array(g.SonarShape.GetSonarTargetInfo())
 	return Targets
 
+func OnSonarRangeChanged() -> void:
+	SonarRangeChanged.emit()
+
 func GetElintTargetInfo() -> Array[ElintTargetInfo]:
 	var Targets : Array[ElintTargetInfo] = ElintShape.GetELintTargetInfo()
 	for g : PlayerDrivenShip in GetSquad():
@@ -253,6 +262,9 @@ func GetClosestElintLevel() -> int:
 	for g:MapShip in GetSquad():
 		Newlvl = max(Newlvl, g.ElintShape.GetClosestElintLevel())
 	return Newlvl
+
+func OnElintRangeChanged() -> void:
+	ElintRangeChanged.emit()
 
 func ToggleFuelRangeVisibility(t : bool) -> void:
 	ShowFuelRange = t
@@ -449,8 +461,7 @@ func GetShipParalaxPosition(CamPos : Vector2, Zoom : float) -> Vector2:
 	offset.x /= 1.65
 	return global_position - offset
 
-
-
+#-------------------------------------------------
 func ToggleDocked(t : bool) -> void:
 	Docked = t
 
@@ -461,14 +472,17 @@ func ToggleDocked(t : bool) -> void:
 #██   ██ ██   ██ ██   ██ ██   ██ ██   ██  ██    ██      ██      ██ ██  ██ ██    ██    
 #██   ██ ██   ██ ██████  ██   ██ ██   ██ ██     ███████ ███████ ██ ██   ████    ██    
 
+#-------------------------------------------------
 func ToggleRadar(t : bool):
 	RadarShape.ToggleRadar(t)
 	for g in GetSquad():
 		g.ToggleRadar(t)
 
+#-------------------------------------------------
 func RadarWorking() -> bool:
 	return RadarShape.Working
 
+#-------------------------------------------------
 func ToggleElint(t : bool):
 	ElintShape.ToggleElint(t)
 	for g in GetSquad():
@@ -482,7 +496,7 @@ func ToggleElint(t : bool):
 #██      ██   ██    ██    ███████ ██  ██████ ███████     ███████   ████   ███████ ██   ████    ██    ███████ 
 
 
-			
+#-------------------------------------------------
 func BodyEnteredBody(Body : Area2D) -> void:
 	if (Docked):
 		return
@@ -494,7 +508,8 @@ func BodyEnteredBody(Body : Area2D) -> void:
 		for g in GetSquad():
 			g.SetCurrentPort(Parent)
 			Parent.OnSpotAproached(g)
-	
+
+#-------------------------------------------------
 func BodyLeftBody(Body : Area2D) -> void:
 	if (Docked):
 		return
@@ -513,18 +528,24 @@ func BodyLeftBody(Body : Area2D) -> void:
 #██    ██ ██         ██       ██    ██      ██   ██      ██ 
  #██████  ███████    ██       ██    ███████ ██   ██ ███████ 
 
+#-------------------------------------------------
 func GetShipBodyArea() -> Area2D:
 	return BodyShape
 	
+#-------------------------------------------------
 func GetShipRadarArea() -> Area2D:
 	return RadarShape
 
+
+#-------------------------------------------------
 func GetShipAcelerationNode() -> Node2D:
 	return Acceleration
-	
+
+#-------------------------------------------------
 func GetShipIcon() -> Node2D:
 	return ShipSprite
 
+#-------------------------------------------------
 func GetFuelStats() -> Dictionary[String, float]:
 	var Stats : Dictionary[String, float]
 	
@@ -555,6 +576,7 @@ func GetFuelStats() -> Dictionary[String, float]:
 	Stats["FleetRange"] = total_fuel * effective_efficiency / fleetsize
 	return Stats
 
+#-------------------------------------------------
 func GetFleet() -> Array[MapShip]:
 	var Fleet : Array[MapShip]
 	
@@ -566,6 +588,7 @@ func GetFleet() -> Array[MapShip]:
 	
 	return Fleet
 
+#-------------------------------------------------
 func GetFuelRange() -> float:
 	if (Command != null):
 		return Command.GetFuelRange()
@@ -591,6 +614,7 @@ func GetFuelRange() -> float:
 	# Calculate average efficiency for the group
 	return total_fuel * effective_efficiency / fleetsize
 
+#-------------------------------------------------
 func GetFuelRangeWithExtraFuel(ExtraFuel : float) -> float:
 	if (Command != null):
 		return Command.GetFuelRange()
@@ -616,6 +640,7 @@ func GetFuelRangeWithExtraFuel(ExtraFuel : float) -> float:
 	# Calculate average efficiency for the group
 	return total_fuel * effective_efficiency / fleetsize
 
+#-------------------------------------------------
 func GetBattleStats() -> BattleShipStats:
 	
 	var stats = BattleShipStats.new()
@@ -630,11 +655,12 @@ func GetBattleStats() -> BattleShipStats:
 	stats.Weight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	stats.MaxShield =  Cpt.GetStatFinalValue(STAT_CONST.STATS.MAX_SHIELD)
 	#stats.Ammo = Cpt.GetCharacterInventory().GetCardAmmo()
-	stats.Funds = Cpt.ProvidingFunds
+	stats.Funds = Cpt.GetValue()
 	stats.Convoy = false
 	stats.Friendly = true
 	return stats
-	
+
+#-------------------------------------------------
 func GetShipMaxSpeed() -> float:
 	var Spd
 	if (Docked):
@@ -647,27 +673,33 @@ func GetShipMaxSpeed() -> float:
 				Spd = DroneSpd
 
 	return Spd
-	
+
+#-------------------------------------------------
 func GetShipName() -> String:
 	return Cpt.GetCaptainName()
 
+#-------------------------------------------------
 func GetCurrentAcceleration() -> float:
 	return Acceleration.position.x
 
+#-------------------------------------------------
 func GetShipSpeed() -> float:
 	if (Command != null):
 		return Command.GetShipSpeed()
 	return LastRecordedOffset.length() * 360
 
+#-------------------------------------------------
 func GetShipSpeedVec() -> Vector2:
 	return Acceleration.global_position - global_position
 
+#-------------------------------------------------
 func GetShipAffectedSpeedVec() -> Vector2:
 	var Spd = Acceleration.global_position - global_position
 	var Windage = Cpt.GetStatFinalValue(STAT_CONST.STATS.WINDAGE) * 0.0001
 	var AffectedSpeed = Spd + (WindVector * Windage)
 	return AffectedSpeed
 
+#-------------------------------------------------
 func UpdateShipWindManipulationModifier() -> void:
 	var StormAffectedWind = WeatherManage.WindDirection + (WeatherManage.WindDirection * StormValue)
 	var WeightModifier = 1 - Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT) / STAT_CONST.GetStatMaxValue(STAT_CONST.STATS.WEIGHT)
@@ -675,10 +707,12 @@ func UpdateShipWindManipulationModifier() -> void:
 	var WindProt = TopographyMap.GetWindProtection(global_position ,Altitude)
 	WindVector = (StormAffectedWind * WeightModifier * Height) * WindProt
 
+#-------------------------------------------------
 func GetShipThrust() -> float:
 	var Thrust = Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST)
 	return Thrust
 
+#-------------------------------------------------
 func GetSquaddB() -> float:
 	var sounds : Array[float]
 	sounds.append(GetdB())
@@ -717,6 +751,7 @@ func IsFuelFull() -> bool:
 		if (!g.IsFuelFull()):
 			return false
 	return Cpt.IsResourceFull(STAT_CONST.STATS.FUEL_TANK)
+
 
 func GetValue() -> int:
 	var Value : int = roundi(Cpt.ProvidingFunds / 2.0)

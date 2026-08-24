@@ -67,7 +67,10 @@ func SpawnMenu() -> void:
 	UISoundMan.GetInstance().Refresh()
 
 func StartPrologue(Load : bool, SkipStory : bool = false, customSeed : int = -1) -> void:
-	Rand.customSeed = customSeed
+	if (customSeed == -1):
+		Rand.customSeed = randi()
+	else:
+		Rand.customSeed = customSeed
 	
 	var IntroScene = await Helper.LoadThreaded(IntroGameScene).Sign
 	Wor = IntroScene.instantiate() as World
@@ -76,7 +79,6 @@ func StartPrologue(Load : bool, SkipStory : bool = false, customSeed : int = -1)
 		if (!LoadResault["Succsess"]):
 			PopupManager.DoFadeNotif(LoadResault["Reason"], StMenu.GetVp())
 			return
-	
 	
 	$SubViewportContainer/SubViewport.add_child(Wor)
 	Wor.SkipStory = SkipStory

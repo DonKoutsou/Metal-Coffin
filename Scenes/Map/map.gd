@@ -820,7 +820,7 @@ func GenerateRoads() -> void:
 	#Regiont = Thread.new()
 	#Regiont.start(_DrawBorders.bind(Spots2))
 	
-	
+
 func GeneratePathsFromLines(Lines : Array):
 	GenerationFinished.emit()
 	var time = Time.get_ticks_msec()

@@ -9,19 +9,23 @@ var SonarTargets : Array[Node2D]
 
 signal AerosonarRangeChanged
 
+#----------------------------------------
 func UpdateSonarRange():
 	var sonarValue = SonarStat.GetFinalValue()
 	(collision_shape_2d.shape as CircleShape2D).radius = sonarValue
 	collision_shape_2d.disabled = sonarValue == 0
 	AerosonarRangeChanged.emit()
 
+#----------------------------------------
 func _ready() -> void:
 	area_entered.connect(BodyEnteredSonar)
 	area_exited.connect(BodyLeftSonar)
 
+#----------------------------------------
 func GetSonarTargets() -> Array[Node2D]:
 	return SonarTargets.duplicate()
 
+#----------------------------------------
 func GetSonarTargetInfo() -> Array[SonarTargetInfo]:
 	var TargetInfo : Array[SonarTargetInfo]
 	for g in SonarTargets:
@@ -40,11 +44,13 @@ func GetSonarTargetInfo() -> Array[SonarTargetInfo]:
 		TargetInfo.append(Info)
 	return TargetInfo
 
+#----------------------------------------
 func isPartOfFleet(controller : PlayerDrivenShip,target: Node2D) -> bool:
 	if (controller.Command != null):
 		return target == controller.Command or target in controller.Command.GetDock().GetDockedShips()
 	return target == controller
 
+#----------------------------------------
 func BodyEnteredSonar(Body : Area2D) -> void:
 	var Parent = Body.get_parent()
 	if (Parent == get_parent()):
@@ -53,6 +59,7 @@ func BodyEnteredSonar(Body : Area2D) -> void:
 		#ShipEnteredSonar.emit(Body.get_parent())
 		SonarTargets.append(Parent)
 
+#----------------------------------------
 func BodyLeftSonar(Body : Area2D) -> void:
 	var Parent = Body.get_parent()
 	if (Parent == get_parent()):
