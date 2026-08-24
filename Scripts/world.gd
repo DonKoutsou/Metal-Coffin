@@ -76,7 +76,7 @@ func  _ready() -> void:
 	WORLDST = WORLDSTATE.INITIAL
 	SimulationManager.GetInstance().TogglePause(true)
 	Instance = self
-	instanceRandom = Rand.NewRand(-1)
+	instanceRandom = Rand.NewRand()
 	
 	#Switch screen
 	GetMap().GetScreenUi().DoIntroFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
@@ -86,47 +86,60 @@ func  _ready() -> void:
 	#Add loading screen
 	var Loadingscr = load(LoadingScene).instantiate() as LoadingScreen
 	Ingame_UIManager.GetInstance().AddUI(Loadingscr, false, false)
-	
-	#add_child(Loadingscr)
+
 	#TODO needs fix
 	if (!Loading):
+		# Generate Map Spots
 		Loadingscr.ProcessStarted("Generating Map Spot Plecement")
 		GetMap().GenerateMap()
 		await GetMap().GenerationFinished
 		Loadingscr.ProcesFinished("Generating Map Spot Plecement")
 		Loadingscr.UpdateProgress(10)
 		await Helper.wait(1)
+		
+		# Generate Events
 		Loadingscr.ProcessStarted("Generating Events")
 		GetMap().GenerateEvents()
 		await GetMap().GenerationFinished
 		Loadingscr.ProcesFinished("Generating Events")
+		Loadingscr.UpdateProgress(20)
 		await Helper.wait(1)
+		
 	else:
 		Loadingscr.DissableText()
-	Loadingscr.UpdateProgress(20)
+	
+	# Roads
 	Loadingscr.ProcessStarted("Generating Road Networks")
 	GetMap().GenerateRoads()
 	await GetMap().GenerationFinished
 	Loadingscr.ProcesFinished("Generating Road Networks")
+	Loadingscr.UpdateProgress(30)
+	
 	Loadingscr.ProcessStarted("Generating Spot Connections")
 	Loadingscr.UpdateProgress(40)
 	await GetMap().GenerationFinished
 	Loadingscr.ProcesFinished("Generating Spot Connections")
 	Loadingscr.UpdateProgress(60)
 	await Helper.wait(1)
+	
 	if (!Loading):
+		# Enemy Spawn
 		Loadingscr.ProcessStarted("Spawning Enemy Fleets")
 		GetMap().SpawnTownEnemies()
 		await GetMap().GenerationFinished
 		Loadingscr.ProcesFinished("Creating Enemy Fleets")
-		await Helper.wait(1)
 		GetMap().EnemySpawnFinished()
+		await Helper.wait(1)
+		
+		# Enemy placement
 		Loadingscr.ProcessStarted("Placing Fleets In World")
 		Loadingscr.UpdateProgress(80)
 		#await GetMap().GenerationFinished
 		Loadingscr.ProcesFinished("Placing Fleets In World")
 		await Helper.wait(1)
+		
 	Loadingscr.UpdateProgress(100)
+	await Helper.wait(1)
 	
 	Loadingscr.StartDest()
 	await Loadingscr.IntroFinished
@@ -613,9 +626,9 @@ func GetSaveData() -> SaveData:
 	Data.DataName = "Wallet"
 	Data.Datas.append(PlayerWallet.duplicate())
 	var randData = RandomSaveData.new()
-	randData.seed = instanceRandom.seed
-	randData.state = instanceRandom.state
-	Data.Datas.append(instanceRandom.state)
+	randData.seed = Rand.customSeed
+	randData.state = instanceRandom.GetState()
+	Data.Datas.append(randData)
 	return Data
 
 #---------------------------------------------------

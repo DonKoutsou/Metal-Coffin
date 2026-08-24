@@ -76,8 +76,9 @@ func HandleCommand(Command : String) -> String:
 			var args : Array = []
 			for g in range(currentCheckedWord, CommandList.size()):
 				args.append(str_to_var(CommandList[g]))
-			if (get_method_argument_count(commandToExecute) != args.size()):
-				return "Missing arguments.\nFailed to call command"
+
+			#if (get_method_argument_count(commandToExecute) != args.size()):
+				#return "Missing arguments.\nFailed to call command"
 			if (!DoArgumentMatch(commandToExecute, args)):
 				return "Error matching arguments"
 			return callv(commandToExecute, args)
@@ -101,17 +102,33 @@ func DoArgumentMatch(methodName : String, methodArgs : Array[Variant]) -> bool:
 	for method in m:
 		var n = method["name"]
 		var args = method["args"]
+		
 		if (n != methodName):
 			continue
+			
+		var def : Array = method["default_args"]
+		var incommingArgs = methodArgs.duplicate()
+		var dif = args.size() - def.size()
+		
+		for arg in range(incommingArgs.size(), args.size()):
+			var defaultIndex : int = arg - dif
+			incommingArgs.append(def[defaultIndex])
+
+		if (incommingArgs.size() != args.size()):
+			continue
+		
 		for argumentIndex in args.size():
 			var methodArgument = args[argumentIndex]
-			var incommingArgument = methodArgs[argumentIndex]
+			var incommingArgument = incommingArgs[argumentIndex]
 			var methodArgumentType = methodArgument["type"]
 			var incommingArgumentType = typeof(incommingArgument)
 			if (methodArgumentType == incommingArgumentType):
 				matchingArguments += 1
-		break
-	return matchingArguments == methodArgs.size()
+		
+		if (matchingArguments == incommingArgs.size()):
+			return true
+
+	return false
 
 func HandlePrologueCommand(Command) -> String:
 	if (Command.size() == 1):
@@ -129,7 +146,7 @@ func HandlePrologueCommand(Command) -> String:
 	
 	return "Error Handling Location Command"
 
-func Prologue(skip : bool, customSeed : int) -> String:
+func Prologue(skip : bool = false, customSeed : int = -1) -> String:
 	if (World.Instance != null):
 		return "Can only apply while in main menu"
 
@@ -323,10 +340,18 @@ func GetMethodArguments(methodName : String) -> PackedStringArray:
 	for g in methods:
 		if (g["name"] == methodName):
 			var args = g["args"]
+			var def = g["default_args"]
 			for argumentIndex in args.size():
 				var ArgumentName : String = args[argumentIndex]["name"]
 				var ArgumentType = args[argumentIndex]["type"]
-				argList.append("({0}:{1})".format([ArgumentName, type_string(ArgumentType)]))
+				
+				#check if defaults has a value
+				var dif = args.size() - def.size()
+				var defIndex = argumentIndex - dif
+				if (def.size() > defIndex and defIndex >= 0):
+					argList.append("({0}:{1} = {2})".format([ArgumentName, type_string(ArgumentType), def[defIndex]]))
+				else:
+					argList.append("({0}:{1})".format([ArgumentName, type_string(ArgumentType)]))
 	return argList
 
 func ListToString(list : PackedStringArray) -> String:

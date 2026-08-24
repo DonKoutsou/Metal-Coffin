@@ -1,0 +1,19 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://btugokgt07d6w"]
+
+[ext_resource type="Shader" uid="uid://d244xcjcfgecq" path="res://Shaders/Grid_New.gdshader" id="1_c1h7l"]
+
+[resource]
+shader = ExtResource("1_c1h7l")
+shader_parameter/viewport_size = Vector2(852, 640)
+shader_parameter/camera_position = Vector2(0, 0)
+shader_parameter/camera_zoom = 1.0
+shader_parameter/camera_rotation = 0.0
+shader_parameter/target_major_px = 100.485
+shader_parameter/minor_fade_start_px = 8.0
+shader_parameter/minor_fade_end_px = 30.0
+shader_parameter/minor_half_thickness_px = 0.5
+shader_parameter/major_half_thickness_px = 1.0
+shader_parameter/axis_half_thickness_px = 1.5
+shader_parameter/background_color = Color(0, 0, 0, 0)
+shader_parameter/minor_color = Color(0, 0, 0, 0.3)
+shader_parameter/major_color = Color(0, 0, 0, 0.3)

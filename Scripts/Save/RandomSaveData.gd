@@ -2,5 +2,5 @@ extends Resource
 
 class_name RandomSaveData
 
-@export var state : int
+@export var state : Dictionary
 @export var seed : int

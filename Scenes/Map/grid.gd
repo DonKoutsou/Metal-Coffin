@@ -1,4 +1,4 @@
-extends Control
+extends ColorRect
 
 class_name MapGrid
 
@@ -6,6 +6,7 @@ class_name MapGrid
 @export var AxisColor : Color
 @export var ZoomLevel = 1.0
 @export var EventHandler : UIEventHandler
+@export var Mat : ShaderMaterial
 var Offset : Vector2
 
 var FreeLabels : Array[RichTextLabel]
@@ -67,12 +68,15 @@ func ToggleGrid(t : bool) -> void:
 		ReprocessLines()
 
 func UpdateOffset(NewOffset : Vector2) -> void:
-	Offset = NewOffset
-	if (visible):
-		ReprocessLines()
+	Mat.set_shader_parameter("camera_position", NewOffset)
+
+	#Offset = NewOffset
+	#if (visible):
+		#ReprocessLines()
 
 func UpdateCameraZoom(NewZoom : float) -> void:
 	ZoomLevel = NewZoom
+	Mat.set_shader_parameter("camera_zoom", NewZoom)
 	#ReprocessLines()
 
 
@@ -300,6 +304,7 @@ func LinesUpdateFinished(T : Thread) -> void:
 	queue_redraw()
 
 func _draw() -> void:
+	return
 	M.lock()
 	#for g in TLines:
 	if (TLines.size() > 0):

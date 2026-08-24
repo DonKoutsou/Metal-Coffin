@@ -118,18 +118,6 @@ gravity = Vector3(0, 0, 0)
 scale_min = 2.0
 scale_max = 3.0
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gf58y"]
-particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(1, 400, 1)
-direction = Vector3(-1, 0, 0)
-spread = 4.565
-initial_velocity_min = 389.56
-initial_velocity_max = 393.57
-gravity = Vector3(0, 0, 0)
-scale_min = 0.1
-scale_max = 0.1
-
 [node name="TownBackground" type="ParallaxBackground" unique_id=435978849 node_paths=PackedStringArray("Animated", "Camera")]
 script = ExtResource("1_y52c6")
 LimitTop = 1920.0
@@ -281,17 +269,6 @@ interpolate = false
 visibility_rect = Rect2(-1920, -200, 1868.26, 800)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_t75tb")
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="ParallaxLayer2/Parallax2D" unique_id=1399785054]
-position = Vector2(1650, 316)
-amount = 40
-texture = ExtResource("3_kl0cj")
-lifetime = 6.0
-fixed_fps = 8
-interpolate = false
-visibility_rect = Rect2(-1920, -400, 1868.26, 800)
-local_coords = true
-process_material = SubResource("ParticleProcessMaterial_gf58y")
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="." unique_id=448774240]
 motion_scale = Vector2(2, 2)

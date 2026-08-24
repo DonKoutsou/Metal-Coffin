@@ -34,7 +34,8 @@ func Handle(Performer : BattleShipStats, Action : CardStats, Targets : Array[Bat
 			continue
 		TargetViz.append(g.ShipViz)
 		var hand = g.deck.Hand.duplicate()
-		hand.shuffle()
+		World.instanceRandom.shuffle_array(hand)
+		
 		for i in GetCardAmm(Action.Tier):
 			var c : CardStats = hand.pop_back()
 			if (c == null):

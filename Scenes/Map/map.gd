@@ -163,7 +163,7 @@ func UpdateCameraPosition(NewPos : Vector2) -> void:
 
 func UpdateCameraZoom(NewZoom : float) -> void:
 	CamZoom = NewZoom
-	WorldParent.visible = NewZoom > 0.5
+	WorldParent.visible = NewZoom > ShipCamera.ZoomSwitchStage
 
 static func GetCameraPosition() -> Vector2:
 	return CamPos
@@ -400,12 +400,13 @@ func GenerateMapThreaded() -> void:
 	var time = Time.get_ticks_msec()
 	
 	var CapitalCitySpots : Array[int] = []
+
 	for z in CapitalAmm:
 		var spot = roundi(MapSize/CapitalAmm * (z + 1)) - World.instanceRandom.RandIRange(2, 5)
 		CapitalCitySpots.append(spot)
 
 	var VillageSpots : Array[int] = []
-	
+
 	for z in VillageAmm:
 		var spot = roundi(MapSize/VillageAmm * z)
 		if (CapitalCitySpots.has(spot)):
@@ -456,9 +457,13 @@ func GenerateMapThreaded() -> void:
 		
 		GeneratedSpots.append(sc)
 	
+	Happening.OnWorldGenerated(WorldSize)
+	
 	for g in GeneratedSpots:
 		var isCapital = g.GetSpot().SpotType.SpotK == MapSpotType.SpotKind.CAPITAL
-		g.call_deferred("SetMerch", EnSpawner.GetMerchForPosition(g.Pos.y, g.GetSpot().HasUpgrade(), isCapital), EnSpawner.GetWorkshopMerchForPosition(g.Pos.y, g.GetSpot().HasUpgrade(), isCapital))
+		var workShopMerch : Array[Merchandise] = EnSpawner.GetWorkshopMerchForPosition(g.Pos.y, g.GetSpot().HasUpgrade(), isCapital)
+		var merch : Array[Merchandise] = EnSpawner.GetMerchForPosition(g.Pos.y, g.GetSpot().HasUpgrade(), isCapital)
+		g.call_deferred("SetMerch", merch, workShopMerch)
 		
 		var Recruits = EnSpawner.GetRecruitsForPosition(g.Pos.y, g.GetSpot().HasRecruit(), isCapital)
 		var recruitCallsigns = []
@@ -468,7 +473,7 @@ func GenerateMapThreaded() -> void:
 		print("Recruits for {1} was decided as {0}".format([var_to_str(recruitCallsigns), g.GetCityName()]))
 		
 		g.call_deferred("SetRecruits", Recruits)
-	
+
 	call_deferred("MapGenFinished", GeneratedSpots, WorldSize)
 	
 	if (OS.is_debug_build()):
@@ -546,7 +551,6 @@ func _grid_index(point: Vector2, cell_size: float, grid_size: Vector2) -> int:
 	return x + y * int(grid_size.x)
 
 func MapGenFinished(Spots : Array[Town], WorldSize : float) -> void:
-	Happening.OnWorldGenerated(WorldSize)
 	SpotList.append_array(Spots)
 	GenThread.wait_to_finish()
 	GenerationFinished.emit()

@@ -1,19 +1,17 @@
 [gd_scene format=3 uid="uid://boe0re3ai5qdj"]
 
 [ext_resource type="Script" uid="uid://dqxqlhuuh81ct" path="res://Scenes/Map/grid.gd" id="1_08rl4"]
+[ext_resource type="Material" uid="uid://btugokgt07d6w" path="res://Shaders/Grid.tres" id="1_amd2g"]
 
-[node name="DarkBlueBackground" type="Control" unique_id=1684704099 groups=["ZoomAffected"]]
-layout_mode = 3
+[node name="DarkBlueBackground" type="ColorRect" unique_id=2114891668 groups=["ZoomAffected"]]
+material = ExtResource("1_amd2g")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -15000.0
-offset_top = -15000.0
-offset_right = 15000.0
-offset_bottom = 15000.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_08rl4")
 Col = Color(0, 0, 0, 0.3)
 AxisColor = Color(1, 0.7647059, 0.08235294, 1)
+Mat = ExtResource("1_amd2g")

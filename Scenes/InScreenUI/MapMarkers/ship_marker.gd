@@ -335,12 +335,17 @@ func UpdateTexts() -> void:
 	if (HullText != ""):
 		T += "\n" + HullText
 	ShipDetailLabel.text = T
-	
+
+var hostileNotif : ShipMarkerNotif
+
 func PlayHostileShipNotif(text : String) -> void:
-	var notif = NotificationScene.instantiate() as ShipMarkerNotif
-	notif.SetText(text)
+	if (is_instance_valid(hostileNotif)):
+		return
+	hostileNotif = NotificationScene.instantiate() as ShipMarkerNotif
+	hostileNotif.SetText(text)
 	RadioSpeaker.AddSoundToQueue(RadioSpeaker.RadioSound.RADAR_DETECTED)
-	add_child(notif)
+	add_child(hostileNotif)
+	
 	
 func OnShipDeparted(DepartedFrom : MapSpot) -> void:
 	if (ResuplyNotif != null):

@@ -55,7 +55,7 @@ func Update(delta: float) -> void:
 	if (EnemyCity and !AlarmRaised and VisitingShips.size() > 0):
 		AlarmProgress += delta
 		
-		if (AlarmProgress > 300):
+		if (AlarmProgress > 600):
 			OnAlarmRaised(true)
 
 func _exit_tree() -> void:

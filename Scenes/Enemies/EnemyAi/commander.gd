@@ -298,16 +298,17 @@ func OnEnemySeen(Ship : MapShip, SeenBy : HostileShip) -> void:
 				OrderShipToPursue(SeenBy, Ship)
 			else:
 				OrderShipToPursue(SeenBy.Command, Ship)
+		if (KnownEnemies.keys().has(Ship)):
+			KnownEnemies[Ship].append(SeenBy)
+		else :
+			if (SeenBy.VisibleBy.size() > 0):
+				SeenBy.DoAlarmVisual()
+			KnownEnemies[Ship] = [SeenBy]
+
 	else:
 		print(Ship.GetShipName() + " location has been exposed.")
 		
-	if (KnownEnemies.keys().has(Ship)):
-		KnownEnemies[Ship].append(SeenBy)
-	else :
-		if (SeenBy.VisibleBy.size() > 0):
-			SeenBy.DoAlarmVisual()
-		KnownEnemies[Ship] = [SeenBy]
-
+	
 func OnEnemyVisualLost(Ship : MapShip, _LostBy : HostileShip) -> void:
 	if (KnownEnemies.has(Ship)):
 		KnownEnemies.erase(Ship)

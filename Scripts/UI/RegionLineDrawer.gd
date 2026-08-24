@@ -12,7 +12,7 @@ var Labels : Array[Label]
 @export var ResizeLinesWithZoom : bool = false
 
 func UpdateCameraZoom(NewZoom : float) -> void:
-	visible = NewZoom < 0.5
+	visible = NewZoom < ShipCamera.ZoomSwitchStage
 	for g in BLines:
 		g.width = 10 / NewZoom
 	#for g in Labels:

@@ -85,6 +85,7 @@ func GetMerchForPosition(YPos: float, HasUp : bool, capital : bool) -> Array[Mer
 	if (HasUp):
 		points *= 2
 		stage = min(stage + 1, Happening.GameStage.size() - 1)
+		
 	# Iterate through the MerchList to select merchandise based on points
 	while points > MerchLowest:
 		var randomIndex = World.instanceRandom.RandIRange(0, MerchList.size() - 1) 
@@ -93,7 +94,7 @@ func GetMerchForPosition(YPos: float, HasUp : bool, capital : bool) -> Array[Mer
 				continue
 		var M : Merchandise
 		for g in available_merch:
-			if (m.Merch.It == g.It):
+			if (m.Merch.It.GetItemName() == g.It.GetItemName()):
 				M = g
 				break
 		
@@ -123,6 +124,7 @@ func GetRecruitsForPosition(YPos: float, HasRec : bool, capital : bool) -> Array
 	while points > RECRUIT_LOWEST and recs.size() > 0:
 		var randomIndex = World.instanceRandom.RandIRange(0, recs.size() - 1)
 		var RandomRec = recs[randomIndex] as CaptainSpawnInfo
+		
 		if (RandomRec.DontGenerateBefore > stage):
 			continue
 		
@@ -131,7 +133,7 @@ func GetRecruitsForPosition(YPos: float, HasRec : bool, capital : bool) -> Array
 			recs.erase(RandomRec)
 			continue
 		if (points > RandomRec.Cost):
-			available_Recruits.append(RandomRec.Cpt)
+			available_Recruits.append(RandomRec.Cpt.duplicate())
 			points -= RandomRec.Cost
 
 	return available_Recruits
@@ -143,17 +145,19 @@ func GetWorkshopMerchForPosition(YPos: float, HasUp : bool, capital : bool) -> A
 	var points = GetWorkshopMerchPointsForPosition(abs(YPos))
 	if (capital):
 		points *= 1.5
-		
+
 	var stage = Happening.GetStageForYPos(YPos)
+
 	# Iterate through the MerchList to select merchandise based on points
 	while points > MerchLowest:
-		var randomIndex = World.instanceRandom.RandIRange(0, WorkshopList.size() - 1) 
+		var randomIndex = World.instanceRandom.RandIRange(0, WorkshopList.size() - 1)
 		var m = WorkshopList[randomIndex] as MerchandiseInfo
+		
 		if (m.DontGenerateBefore > stage):
 			continue
 		var M : Merchandise
 		for g in available_merch:
-			if (m.Merch.It == g.It):
+			if (m.Merch.It.GetItemName() == g.It.GetItemName()):
 				M = g
 				break
 		
@@ -219,7 +223,7 @@ func generate_fleet(points: int, Patrol : bool, Convoy : bool, stage : Happening
 	# While there's space in the fleet, try to maximize the points usage
 	# with a dynamic strategy.
 	while fleet.size() < 7 and points >= LowestPrice and available_ships.size() > 0:
-		available_ships.shuffle()
+		World.instanceRandom.shuffle_array(available_ships)
 		
 		var selected_ship: CaptainSpawnInfo = null
 		#var best_value = 0

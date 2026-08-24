@@ -41,7 +41,7 @@ func Init() -> void:
 			
 		PickedQuestions.append_array(Picked)
 		
-	PickedQuestions.shuffle()
+	World.instanceRandom.shuffle_array(PickedQuestions)
 	DiagButtons.visible = true
 	Text.visible = true
 	Text.text = IntroDialogue[CurrentIntroDialogue]
