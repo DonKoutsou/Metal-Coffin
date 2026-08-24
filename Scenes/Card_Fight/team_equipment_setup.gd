@@ -91,7 +91,7 @@ func GetTypeOfBox(Box : Inventory_Box_Res) -> ShipPart.ShipPartType:
 	var Type : ShipPart.ShipPartType = CurrentCpt.GetCharacterInventory().GetBoxType(Box)
 	return Type
 
-func ItemSelected(Box : Inventory_Box_Res, inv : CharacterInventory) -> void:
+func ItemSelected(Box : Inventory_Box_Res, _inv : CharacterInventory) -> void:
 	if (CurrentDescriptor != null):
 		#var desc = descriptors[0] as ItemDescriptor
 		DescriptorPlace.remove_child(CurrentDescriptor)

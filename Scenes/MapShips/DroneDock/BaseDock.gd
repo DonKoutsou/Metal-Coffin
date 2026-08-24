@@ -16,7 +16,7 @@ func AddCaptain(Cpt : Captain, _Notify : bool = true) -> MapShip:
 	World.GetInstance().PlayerWallet.AddFunds(Cpt.ProvidingFunds)
 	var ship = (load(Ship_Scene) as PackedScene).instantiate() as MapShip
 	ship.Cpt = Cpt
-	AddShip(ship, false)
+	AddShip(ship, false) 
 	
 	for Crew in Cpt.ProvidingCaptains:
 		var NewShip = (load(Ship_Scene) as PackedScene).instantiate() as MapShip

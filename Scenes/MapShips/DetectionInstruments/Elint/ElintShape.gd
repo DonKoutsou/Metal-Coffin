@@ -33,8 +33,8 @@ func UpdateElint(delta: float) -> void:
 	if (d > 0):
 		return
 	d = 0.4
-	var BiggestLevel = -1
-	var Dir : float
+	#var BiggestLevel = -1
+	#var Dir : float
 	for g in ElintContacts.size():
 		var ship = ElintContacts.keys()[g] as MapShip
 		var lvl = ElintContacts[ship]
@@ -42,16 +42,16 @@ func UpdateElint(delta: float) -> void:
 		if (ship.RadarWorking()):
 			radarRange = ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE)
 		var Newlvl = GetElintLevel(global_position.distance_squared_to(ship.global_position), radarRange)
-		if (Newlvl > BiggestLevel):
-			BiggestLevel = Newlvl
-			Dir = global_position.angle_to_point(ship.global_position)
+		#if (Newlvl > BiggestLevel):
+			#BiggestLevel = Newlvl
+			#Dir = global_position.angle_to_point(ship.global_position)
 		if (Newlvl != lvl):
 			ElintContacts[ship] = Newlvl
-	if (BiggestLevel > -1):
-		ActionTracker.OnActionCompleted(ActionTracker.Action.ELINT_CONTACT)
-		ElintTriggered.emit(true, BiggestLevel, Dir)
-	else:
-		ElintTriggered.emit(false, -1, 0)
+	#if (BiggestLevel > -1):
+		#ActionTracker.OnActionCompleted(ActionTracker.Action.ELINT_CONTACT)
+		#ElintTriggered.emit(true, BiggestLevel, Dir)
+	#else:
+		#ElintTriggered.emit(false, -1, 0)
 
 func GetELintTargetInfo() -> Array[ElintTargetInfo]:
 	var TargetInfo : Array[ElintTargetInfo]
@@ -64,7 +64,7 @@ func GetELintTargetInfo() -> Array[ElintTargetInfo]:
 		var Info := ElintTargetInfo.new()
 		Info.Altitude = g.Altitude
 		Info.Position = g.global_position
-		Info.Level = lvl
+		Info.ElintLevel = lvl
 		TargetInfo.append(Info)
 	return TargetInfo
 

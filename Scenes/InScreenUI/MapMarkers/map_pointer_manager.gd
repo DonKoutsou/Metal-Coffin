@@ -8,7 +8,7 @@ class_name MapPointerManager
 @export var MapLonePos : Node2D
 @export var MarkerScene : PackedScene
 @export var MapSpotMarkerScene : PackedScene
-@export var OrderMarker : PackedScene
+@export var OrderMarkerScene : PackedScene
 @export var FriendlyColor : Color
 @export var EnemyColor : Color
 @export var ConvoyColor : Color
@@ -70,7 +70,7 @@ func ClearLines() -> void:
 	
 func AddOrder(Order : Resource) -> void:
 	print("Added Order")
-	var marker = OrderMarker.instantiate() as OrderMarker
+	var marker = OrderMarkerScene.instantiate() as OrderMarker
 	OrderMarkersParent.add_child(marker)
 	marker.SetOrder(Order)
 	_OrderMarkers.append(marker)

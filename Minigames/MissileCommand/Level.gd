@@ -21,9 +21,9 @@ func SetDificulty(LevelNumber : int) -> void:
 	var missileammount = 5 + LevelNumber * 3
 	for g in missileammount :
 		Arsenal.append(DropMissileScene.instantiate())
-	for g in missileammount / 10:
+	for g in missileammount / 10.0:
 		Arsenal.append(FastDropMissileScene.instantiate())
-	for g in missileammount / 10:
+	for g in missileammount / 10.0:
 		Arsenal.append(Planes.instantiate())
 	SpawnTimer.wait_time = max(0.2, 2.0 - LevelNumber * 0.15)
 

@@ -305,19 +305,19 @@ func LinesUpdateFinished(T : Thread) -> void:
 
 func _draw() -> void:
 	return
-	M.lock()
-	#for g in TLines:
-	if (TLines.size() > 0):
-		draw_multiline(TLines, Col, max(16, 80 - (ZoomLevel * 160)), false)
-	#for g in TLines2:
-	if (TLines2.size() > 0):
-		draw_multiline(TLines2, Col, max(8, 40 - (ZoomLevel * 80)), false)
-		#draw_line(g[0], g[1], Col, max(8, 40 - (ZoomLevel * 80)), true)
-	#for g in TLines3:
-	if (TLines3.size() > 0):
-		draw_multiline(TLines3, Col, max(2, 20 - (ZoomLevel * 40)), false)
-		#draw_line(g[0], g[1], Col, max(2, 10 - (ZoomLevel * 20)), true)
-	M.unlock()
+	#M.lock()
+	##for g in TLines:
+	#if (TLines.size() > 0):
+		#draw_multiline(TLines, Col, max(16, 80 - (ZoomLevel * 160)), false)
+	##for g in TLines2:
+	#if (TLines2.size() > 0):
+		#draw_multiline(TLines2, Col, max(8, 40 - (ZoomLevel * 80)), false)
+		##draw_line(g[0], g[1], Col, max(8, 40 - (ZoomLevel * 80)), true)
+	##for g in TLines3:
+	#if (TLines3.size() > 0):
+		#draw_multiline(TLines3, Col, max(2, 20 - (ZoomLevel * 40)), false)
+		##draw_line(g[0], g[1], Col, max(2, 10 - (ZoomLevel * 20)), true)
+	#M.unlock()
 	
 	#for g in TStrings:
 		#var L = GetFreeLabel()

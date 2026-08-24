@@ -9,7 +9,7 @@ var CurrentZoom : float
 
 var Order : Resource
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if (Order is PursuitOrder):
 		global_position = Order.Target.global_position
 

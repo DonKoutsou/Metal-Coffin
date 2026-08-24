@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ch5wka76gr5r0"]
 
 [ext_resource type="Texture2D" uid="uid://ev8n5tjqls2e" path="res://Assets/ShipTextures/Hull2.png" id="1_l0ax8"]
-[ext_resource type="Texture2D" uid="uid://d1vusg0beo7lv" path="res://Assets/ShipTextures/Ship10.png" id="1_p21nc"]
+[ext_resource type="Texture2D" uid="uid://d1vusg0beo7lv" path="res://Assets/ShipTextures/Hull7.png" id="1_p21nc"]
 [ext_resource type="Texture2D" uid="uid://bx78x3avxyhmf" path="res://Assets/ShipTextures/Hull5.png" id="2_xe7ge"]
 [ext_resource type="Texture2D" uid="uid://7h4uf5rwddw6" path="res://Assets/ShipTextures/Convoy.png" id="3_el075"]
 [ext_resource type="Texture2D" uid="uid://cyqs71v0yadm1" path="res://Assets/ShipTextures/Hull1.png" id="4_t2rfa"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://w4t57uq2b86c" path="res://Assets/ShipTextures/Ship11.png" id="11_t2rfa"]
 
 [node name="ShipSizeTest" type="Node2D" unique_id=1312695390]
+texture_filter = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=356743018]
 texture = ExtResource("1_l0ax8")
@@ -31,7 +32,6 @@ texture = ExtResource("4_t2rfa")
 
 [node name="Sprite2D5" type="Sprite2D" parent="." unique_id=253918933]
 position = Vector2(369, 0)
-scale = Vector2(0.8, 0.8)
 texture = ExtResource("1_p21nc")
 
 [node name="Sprite2D6" type="Sprite2D" parent="." unique_id=89115949]

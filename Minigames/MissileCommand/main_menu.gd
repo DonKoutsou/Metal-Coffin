@@ -9,7 +9,7 @@ signal LevelStarted(LevelNumber : int)
 signal ExitPressed
 
 func _ready() -> void:
-	$VBoxContainer/GridContainer.columns = LevelAmmount /2
+	$VBoxContainer/GridContainer.columns = LevelAmmount / 2.0
 	for g in range(1, LevelAmmount + 1):
 		var b = Button.new()
 		b.text = var_to_str(g)

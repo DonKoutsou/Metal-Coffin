@@ -39,11 +39,11 @@ func SetData(Dat :Array[MissileItem]) -> void:
 	Distance = Dat[0].Distance
 	Amm = Dat.size()
 
-func RegisterOwner(owner : MapShip) -> void:
-	FiredBy = owner
-	owner.OnShipDestroyed.connect(OwnerDestroyed)
+func RegisterOwner(ownerShip : MapShip) -> void:
+	FiredBy = ownerShip
+	ownerShip.OnShipDestroyed.connect(OwnerDestroyed)
 
-func OwnerDestroyed(sh : MapShip) -> void:
+func OwnerDestroyed(_sh : MapShip) -> void:
 	FiredBy = null
 
 func GetSpeed() -> float:

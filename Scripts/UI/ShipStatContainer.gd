@@ -132,5 +132,5 @@ func _on_mouse_exited() -> void:
 	set_process(false)
 
 
-func _on_h_slider_value_changed(value: float) -> void:
+func _on_h_slider_value_changed(_value: float) -> void:
 	pass # Replace with function body.

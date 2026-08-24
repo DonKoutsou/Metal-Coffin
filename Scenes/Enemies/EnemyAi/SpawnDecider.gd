@@ -111,7 +111,7 @@ func GetMerchForPosition(YPos: float, HasUp : bool, capital : bool) -> Array[Mer
 	return available_merch
 
 
-func GetRecruitsForPosition(YPos: float, HasRec : bool, capital : bool) -> Array[Captain]:
+func GetRecruitsForPosition(YPos: float, _HasRec : bool, capital : bool) -> Array[Captain]:
 	var available_Recruits : Array[Captain] = []
 	var points = GetRecruitPointsForPosition(abs(YPos))
 	if (capital):

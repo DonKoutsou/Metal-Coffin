@@ -626,7 +626,7 @@ func GetSaveData() -> SaveData:
 	Data.DataName = "Wallet"
 	Data.Datas.append(PlayerWallet.duplicate())
 	var randData = RandomSaveData.new()
-	randData.seed = Rand.customSeed
+	randData.customSeed = Rand.customSeed
 	randData.state = instanceRandom.GetState()
 	Data.Datas.append(randData)
 	return Data
@@ -636,7 +636,7 @@ func LoadSaveData(data : SaveData) -> void:
 	var PlWallet : Wallet = data.Datas[0]
 	PlayerWallet.SetFunds(PlWallet.Funds)
 	var randData : RandomSaveData = data.Datas[1]
-	Rand.customSeed = randData.seed
+	Rand.customSeed = randData.customSeed
 	instanceRandom = Rand.NewRand(randData.state)
 
 #--------------------------------------------------------

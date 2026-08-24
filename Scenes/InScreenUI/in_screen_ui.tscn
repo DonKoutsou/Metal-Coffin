@@ -108,19 +108,16 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_avpxw")
 
 [node name="Control" type="Control" parent="HBoxContainer/PanelContainer" unique_id=1258325407]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Line2D" type="Line2D" parent="HBoxContainer/PanelContainer/Control" unique_id=1364758694]
-visible = false
-points = PackedVector2Array(0, 0, 0, 133.285)
+points = PackedVector2Array(0, 0, -15.905, 41.325)
 width = 1.0
 default_color = Color(1, 0.7647059, 0.08235294, 1)
 
 [node name="AltitudeText" type="Label" parent="HBoxContainer/PanelContainer/Control" unique_id=1510011798]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -128,9 +125,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -578.0
-offset_top = 138.0
+offset_top = 52.0
 offset_right = 578.0
-offset_bottom = 158.0
+offset_bottom = 72.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "12km"

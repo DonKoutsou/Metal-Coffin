@@ -51,6 +51,8 @@ func _onDroneRemoved(_drone: PlayerDrivenShip, target: MapShip) -> void:
 		toggleSonar(hasSonar)
 
 func _onControlledShipUpdated(newController: PlayerDrivenShip) -> void:
+	if (controller == newController):
+		return
 	if controller != null:
 		controller.SonarShape.AerosonarRangeChanged.disconnect(CheckIfWorking)
 	controller = newController
@@ -64,7 +66,7 @@ func CheckIfWorking() -> void:
 	var hasSonar = CurrentSonarRange > 0
 	var hasElint = fleetHasElint()
 	toggleSonar(hasSonar or hasElint)
-	var hasAny = hasSonar and hasElint
+	var hasAny = hasSonar or hasElint
 	cap.visible = !hasAny
 	if (!hasAny):
 		return
@@ -150,7 +152,7 @@ func _updateElintContacts(ControllerInfo : ElintTargetInfo ,ContactInfo : Array[
 		var direction = ControllerInfo.Position.angle_to_point(target.Position)
 		
 		#get the sound signature of the target
-		var ElintLvl: int = target.Level
+		var ElintLvl: int = target.ElintLevel
 		#do raycast and find storm collision
 		
 		var stormvalue = 1 - ease(WeatherManage.GetBiggestStormValue(ControllerInfo.Position, target.Position), 4)
@@ -284,7 +286,7 @@ func toggleSonar(enable: bool) -> void:
 	enabled = enable
 	if enable:
 		ActionTracker.OnActionCompleted(ActionTracker.Action.AEROSONAR)
-		working = fleetHasAeroSonar()
+		#working = fleetHasAeroSonar()
 		#controller.ToggleSonarVisual(working)
 		lineContainer.OffsetAmmount = currentOffset
 		#controller.ToggleSonarVisual(false)
@@ -299,8 +301,8 @@ func _on_gein_control_range_changed(newVal: float) -> void:
 	volume = newOffsetVal
 	currentOffset = newOffsetVal
 	gainLabel.text = "Gain:{0}".format([snapped(newOffsetVal, 0.1)]).replace(".0", "")
-	if not working:
-		return
+	#if not working:
+		#return
 	lineContainer.OffsetAmmount = newOffsetVal
 
 func _on_gein_control_range_snapped_changed(direction: bool) -> void:
@@ -312,8 +314,8 @@ func _on_gein_control_range_snapped_changed(direction: bool) -> void:
 	volume = newOffsetVal
 	currentOffset = newOffsetVal
 	gainLabel.text = "Gain:{0}".format([snapped(newOffsetVal, 0.1)]).replace(".0", "")
-	if not working:
-		return
+	#if not working:
+		#return
 	lineContainer.OffsetAmmount = newOffsetVal
 
 func _getInterfaceName() -> String:

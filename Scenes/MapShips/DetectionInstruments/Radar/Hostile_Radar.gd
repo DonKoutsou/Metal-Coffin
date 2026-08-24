@@ -46,7 +46,7 @@ func GarissonVisualContact(Ship : MapShip) -> void:
 			#VisualContactCountdown = 5
 		#else:
 		var HeatSignature = Ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST)
-		VisualContactCountdown = 20 - (20 * (HeatSignature / 100))
+		VisualContactCountdown = 20 - (20 * (HeatSignature / 20))
 		VisualContactCountdownStarted.emit(VisualContactCountdown)
 			
 	if (VisualContactCountdown < 0):

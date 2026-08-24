@@ -78,7 +78,7 @@ func Init(Ship : Node2D) -> void:
 	else : if (Ship is PlayerDrivenShip):
 		Ship.ShipDockActions.connect(ToggleShowRefuel)
 		Ship.ShipDeparted.connect(OnShipDeparted)
-		Ship.ElintShape.ElintTriggered.connect(ToggleShowElint)
+		#Ship.ElintShape.ElintTriggered.connect(ToggleShowElint)
 		Ship.Cpt.OnNameChanged.connect(OnCaptainNameChanged)
 		Ship.AltitudeChanged.connect(AltitudeChanged)
 		#Ship.SonarToggled.connect(ToggleRadarRange)

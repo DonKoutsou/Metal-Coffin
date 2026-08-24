@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/ShipTextures/Hull6.png" id="3_qqv1c"]
 [ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/ShipTextures/Hull3.png" id="3_rd5hk"]
 [ext_resource type="Texture2D" uid="uid://bx78x3avxyhmf" path="res://Assets/ShipTextures/Hull5.png" id="4_2suqw"]
-[ext_resource type="Texture2D" uid="uid://d1vusg0beo7lv" path="res://Assets/ShipTextures/Ship10.png" id="5_d47s1"]
+[ext_resource type="Texture2D" uid="uid://d1vusg0beo7lv" path="res://Assets/ShipTextures/Hull7.png" id="5_d47s1"]
 
 [node name="Sprite2D" type="Sprite2D" unique_id=1536705037]
 texture_filter = 1

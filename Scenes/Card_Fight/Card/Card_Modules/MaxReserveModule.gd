@@ -1,7 +1,7 @@
 extends DeffenceCardModule
 class_name MaxReserveModule
 
-func GetDesc(Tier : int, _targetOverride : String = "") -> String:
+func GetDesc(_Tier : int, _targetOverride : String = "") -> String:
 	if (AOE):
 		return "Converts all remaining [color=#ffc315]Energy[/color] as [color=#ffc315]Reserve[/color] to team"
 	return "Converts all remaining [color=#ffc315]Energy[/color] as [color=#ffc315]Reserve[/color] to self"

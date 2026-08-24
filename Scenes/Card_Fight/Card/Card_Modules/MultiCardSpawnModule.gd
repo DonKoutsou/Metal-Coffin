@@ -6,7 +6,7 @@ class_name MultiCardSpawnModule
 func TestCard(Mod : CardStats) -> bool:
 	return Mod.Type == CardToSpawn
 
-func GetDesc(Tier : int, _targetOverride : String = "") -> String:
+func GetDesc(_Tier : int, _targetOverride : String = "") -> String:
 	return "Put one {0} card from the deck to you hand.".format([CardStats.CardType.keys()[CardToSpawn]])
 
 func NeedsTargetSelect() -> bool:
