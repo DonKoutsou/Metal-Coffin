@@ -18,7 +18,7 @@ func Handle(Performer : BattleShipStats, Action : CardStats, Targets : Array[Bat
 	for g in Targets:
 		if (g == null):
 			continue
-		TargetViz.append(g.ShipViz)
+		TargetViz.append(g.ShipViz.ShipIcon)
 		Callables.append(g.CauseFire.bind(Performer))
 		
 	var Data = DeffensiveAnimationData.new()

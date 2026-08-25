@@ -238,6 +238,32 @@ func ReplaceShip(Ship : BattleShipStats, TurnPosition : int, Friendly : bool) ->
 func OnShuffling(t : bool) -> void:
 	Shuffling = t
 
+func TurnStarted(Performer : BattleShipStats) -> void:
+	var data : Dictionary = {
+			"actionType" : Card_Passive.ActionType.TURN_START,
+			"Friendly" : GetShipsTeam(Performer),
+			"Enemy" : GetShipEnemyTeam(Performer),
+			"Performer" : Performer,
+		}
+		
+	var AnimData = PassiveList.OnActionPerformed(data)
+	if (AnimData.size() > 0):
+		for g in AnimData:
+			HandlePassiveModules(g.Performer, g.OriginalCard, g.Targets)
+
+func TurnEnded(Performer : BattleShipStats) -> void:
+	var data : Dictionary = {
+			"actionType" : Card_Passive.ActionType.TURN_END,
+			"Friendly" : GetShipsTeam(Performer),
+			"Enemy" : GetShipEnemyTeam(Performer),
+			"Performer" : Performer,
+		}
+		
+	var AnimData = PassiveList.OnActionPerformed(data)
+	if (AnimData.size() > 0):
+		for g in AnimData:
+			HandlePassiveModules(g.Performer, g.OriginalCard, g.Targets)
+
 ##----------------------------------------------------------------------##
 ##Called at the start of the game to create all the decks for all ships
 func CreateDecks() -> void:
@@ -344,7 +370,8 @@ func CardDiscarded(C : CardStats, Manually : bool) -> void:
 ##----------------------------------------------------------------------##
 func MultiSpcificCardDrawn(DrawnCards : Array[CardStats]) -> void:
 	var Performer = GetCurrentShip()
-	
+	if (DrawnCards.size() == 0):
+		return
 	for card in DrawnCards:
 		var data : Dictionary = {
 			"actionType" : Card_Passive.ActionType.CARD_DRAWN,
@@ -366,7 +393,7 @@ func MultiSpcificCardDrawn(DrawnCards : Array[CardStats]) -> void:
 		SelectingTarget = false
 		Performer.deck.DrawSpecific(DrawnCards[Picked])
 	else:
-		var randomIndex : int = World.instanceRandom.RandIRange(0, DrawnCards.size() - 1)
+		var randomIndex : int = Rand.InstanceRandom.RandIRange(0, DrawnCards.size() - 1)
 		Performer.deck.DrawSpecific(DrawnCards[randomIndex])
 		
 ##----------------------------------------------------------------------##
@@ -412,7 +439,7 @@ func MultiCardDrawn(DrawnCards : Array[CardStats], discardAmm : int) -> void:
 				c.queue_free()
 	else:
 		while CardsToDiscard.size() < discardAmm:
-			var randomIndex : int = World.instanceRandom.RandIRange(0, DrawnCards.size() - 1)
+			var randomIndex : int = Rand.InstanceRandom.RandIRange(0, DrawnCards.size() - 1)
 			var ToDiscard = DrawnCards[randomIndex]
 			DrawnCards.remove_at(randomIndex)
 			CardsToDiscard.append(ToDiscard)
@@ -518,11 +545,12 @@ func PickPhaseStart() -> void:
 func StartCurrentShipsPickTurn() -> void:
 	if (GameOver):
 		return
+
 	if (CurrentTurn < ShipTurns.size()):
 		var Ship = GetCurrentShip()
 		CurrentPlayerLabel.text = "{0} picking".format([Ship.Name])
 		Declaration(Ship.Name + "'s turn", 1.5).ActionDeclarationFinished.connect(RunShipsTurn.bind(Ship))
-
+		
 		EnemyPickingMove = !IsShipFriendly(Ship)
 	else:
 		StartActionPerform()
@@ -533,7 +561,8 @@ func RunShipsTurn(Ship : BattleShipStats) -> void:
 
 	var viz = Ship.ShipViz
 	viz.Enable()
-
+	TurnStarted(Ship)
+	
 	ActionList.AddShip(Ship)
 	if (IsShipFriendly(Ship)):
 		if (Ship.deck.GetCardAmm() == 0):
@@ -713,7 +742,7 @@ func RemoveCard(C : Card) -> void:
 	
 	C.disconnect("OnCardPressed", RemoveCard)
 
-	if (Stats.Consume):
+	if (Stats.ShouldConsume()):
 		var ShipCards = CurrentShip.Cards
 		ShipCards.append(Stats)
 
@@ -772,7 +801,7 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 	var actionLog : PackedStringArray
 	
 	while (AvailableActions.size() > 0):
-		var randomActionIndex : int = World.instanceRandom.RandIRange(0, AvailableActions.size() -1)
+		var randomActionIndex : int = Rand.InstanceRandom.RandIRange(0, AvailableActions.size() -1)
 		var Action : CardStats = AvailableActions[randomActionIndex]
 		
 		var ActionCost = Action.Energy
@@ -932,6 +961,7 @@ func CurrentEnemyTurnEnded() -> void:
 	EnemyPickingMove = false
 	StoredEnergy = 0
 	CurrentTurn = CurrentTurn + 1
+	TurnEnded(Ship)
 	
 	var playerNext = IsShipFriendly(ShipTurns[CurrentTurn])
 	if (playerNext):
@@ -949,7 +979,7 @@ func CurrentPlayerTurnEnded() -> void:
 	viz.OnActionsPerformed()
 	
 	CurrentTurn = CurrentTurn + 1
-	
+	TurnEnded(Ship)
 	StartCurrentShipsPickTurn()
 ##----------------------------------------------------------------------##
 func StartActionPerform() -> void:
@@ -1038,7 +1068,7 @@ func PerformActions(Ship : BattleShipStats) -> void:
 		await PerformTurnFinished(Ship)
 		return
 		
-	Ship.ShipViz.Pop(true)
+	#Ship.ShipViz.Pop(true)
 	#viz.Enable()
 	PerformNextActionForShip(Ship, 0)
 ##----------------------------------------------------------------------##
@@ -1081,8 +1111,8 @@ func PerformTurnFinished(Ship : BattleShipStats) -> void:
 	for g in ReplacingAmm:
 		await ShipReplecementFinished
 		
-	if (Ship != null):
-		Ship.ShipViz.Pop(false)
+	#if (Ship != null):
+		#Ship.ShipViz.Pop(false)
 	CurrentTurn = CurrentTurn + 1
 	StartCurrentShipsPerformTurn()
 ##----------------------------------------------------------------------##
@@ -1227,6 +1257,8 @@ func HandleModules(Performer : BattleShipStats, C : CardStats, targetOverride : 
 						if (g.IsSame(C)):
 							Performer.Cards.erase(g)
 							break
+				else: if (C.ShouldExhaust()):
+					Performer.deck.ExhaustCard(C)
 				else:
 					Performer.deck.DiscardCard(C)
 					HandleDiscardModules(Performer, C)
@@ -1236,6 +1268,8 @@ func HandleModules(Performer : BattleShipStats, C : CardStats, targetOverride : 
 				if (g.IsSame(C)):
 					Performer.Cards.erase(g)
 					break
+		else: if (C.ShouldExhaust()):
+			Performer.deck.ExhaustCard(C)
 		else:
 			Performer.deck.DiscardCard(C)
 			HandleDiscardModules(Performer, C)
@@ -1340,7 +1374,7 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 			
 		var Data : Dictionary = {
 			"Def" : Counter,
-			"Viz" : g.ShipViz
+			"Viz" : g.ShipViz.ShipIcon
 		}
 		TargetList[g] = Data
 	
@@ -1360,12 +1394,17 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 		
 		if (TargetList[g]["Def"] != null):
 			
-			var TargetViz = TargetList[g]["Viz"]
+			var TargetViz = g.ShipViz
 			TargetViz.ActionRemoved(Def.Icon)
 			ActionList.RemoveActionFromShip(g, Def)
-			if (!Def.ShouldConsume()):
+			if (Def.ShouldConsume()):
+				pass
+			else: if (Def.ShouldExhaust()):
+				g.deck.ExhaustCard(Def)
+			else:
 				g.deck.DiscardCard(Def)
 				HandleDiscardModules(Performer, Def)
+				
 			if (!Friendly):
 				DamageNeg += Mod.GetFinalDamage(Performer, Action.Tier)
 				
@@ -1425,7 +1464,7 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 	AtackData.Callables = DamageCallables
 
 	var ExpiredBuffs = Performer.UpdateAttackBuffs()
-	var viz = Performer.ShipViz
+	var viz = Performer.ShipViz.ShipIcon
 	if (ExpiredBuffs.size() > 0):
 		var d : Floater
 		for g in ExpiredBuffs:
@@ -1508,7 +1547,7 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats, _targetOverride : B
 				if (Mod is BuffModule):
 					Targets.append(GetTargetWithBiggestStat(Team, Mod.StatToBuff))
 				else:
-					var randomTargetIndex : int = World.instanceRandom.RandIRange(0, Team.size() - 1)
+					var randomTargetIndex : int = Rand.InstanceRandom.RandIRange(0, Team.size() - 1)
 					Targets.append(Team[randomTargetIndex])
 		#if nothing of the above counts pick the user as the target
 		else:
@@ -1554,7 +1593,7 @@ func GetBestTargetForAtack(Candidates : Array[BattleShipStats]) -> BattleShipSta
 		var points = (g.DefDebuff * 10) + threatLevel + remainingHealthNormalised
 		points_list.append(max(0.2, points))
 	
-	var pickedIndex = World.instanceRandom.RandWeighted(points_list)
+	var pickedIndex = Rand.InstanceRandom.RandWeighted(points_list)
 
 	return Candidates[pickedIndex]
 ##----------------------------------------------------------------------##
@@ -1780,7 +1819,7 @@ func ShipDestroyed(Ship : BattleShipStats) -> bool:
 	var Friendly = IsShipFriendly(Ship)
 		
 	if (!Ship.Friendly):
-		FundsToWin += snapped(World.instanceRandom.RandIRange(2000, Ship.Funds), 1000)
+		FundsToWin += snapped(Rand.InstanceRandom.RandIRange(2000, Ship.Funds), 1000)
 	
 	var TurnPosition = ShipTurns.find(Ship)
 	#var Index = ShipTurns.find(Ship)
@@ -2135,7 +2174,7 @@ func PlaceCardInEnemyHand(Performer : BattleShipStats, C : CardStats) -> bool:
 		print("{0} has been added to {1}'s hand pile.".format([C.GetCardName(), Performer.Name]))
 	else:
 		Performer.deck.Hand.append(C)
-		var randomIndex = World.instanceRandom.RandIRange(0, Performer.deck.Hand.size() - 1)
+		var randomIndex = Rand.InstanceRandom.RandIRange(0, Performer.deck.Hand.size() - 1)
 		var ToDiscard = Performer.deck.Hand[randomIndex]
 		Performer.deck.Hand.remove_at(randomIndex)
 		print("{0} has been added to {1}'s discard pile.".format([ToDiscard.GetCardName(), Performer.Name]))

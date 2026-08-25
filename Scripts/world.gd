@@ -57,7 +57,6 @@ var TutorialsToShow : Array[ActionTracker.Action]
 
 var Loading = false
 
-static var instanceRandom : Rand
 static var Instance : World
 
 static func GetInstance() -> World:
@@ -76,7 +75,7 @@ func  _ready() -> void:
 	WORLDST = WORLDSTATE.INITIAL
 	SimulationManager.GetInstance().TogglePause(true)
 	Instance = self
-	instanceRandom = Rand.NewRand()
+	Rand.NewStaticRand()
 	
 	#Switch screen
 	GetMap().GetScreenUi().DoIntroFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
@@ -196,7 +195,7 @@ func  _ready() -> void:
 	WORLDST = WORLDSTATE.NORMAL
 	WeatherManage.Instance.Update(0)
 	
-	print("World generation ended with random state of {0}".format([instanceRandom.GetState()]))
+	print("World generation ended with random state of {0}".format([Rand.InstanceRandom.GetState()]))
 	
 	
 var WeatherManagerUpdate : float
@@ -627,7 +626,7 @@ func GetSaveData() -> SaveData:
 	Data.Datas.append(PlayerWallet.duplicate())
 	var randData = RandomSaveData.new()
 	randData.customSeed = Rand.customSeed
-	randData.state = instanceRandom.GetState()
+	randData.state = Rand.InstanceRandom.GetState()
 	Data.Datas.append(randData)
 	return Data
 
@@ -637,7 +636,7 @@ func LoadSaveData(data : SaveData) -> void:
 	PlayerWallet.SetFunds(PlWallet.Funds)
 	var randData : RandomSaveData = data.Datas[1]
 	Rand.customSeed = randData.customSeed
-	instanceRandom = Rand.NewRand(randData.state)
+	Rand.NewStaticRand(randData.state)
 
 #--------------------------------------------------------
 func GameLost(reason : String):

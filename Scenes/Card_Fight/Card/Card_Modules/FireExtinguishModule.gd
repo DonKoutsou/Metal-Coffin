@@ -15,6 +15,6 @@ func Handle(Performer : BattleShipStats, Action : CardStats, Targets : Array[Bat
 	
 	var Data = DeffensiveAnimationData.new()
 	Data.Mod = self
-	Data.Targets.append(Performer.ShipViz)
+	Data.Targets.append(Performer.ShipViz.ShipIcon)
 	Data.Callables = Callables
 	return Data

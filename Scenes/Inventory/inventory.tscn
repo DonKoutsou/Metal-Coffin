@@ -152,6 +152,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 
+[node name="Button" type="Button" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2/VBoxContainer" unique_id=1204593624]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "CLOSE"
+
 [node name="Panel2" type="Panel" parent="VBoxContainer2/PanelContainer/HBoxContainer" unique_id=375629562]
 visible = false
 custom_minimum_size = Vector2(15, 0)
@@ -167,3 +172,4 @@ bus = &"Sounds"
 [connection signal="pressed" from="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer/InventoryButton" to="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/CaptainStatContainer" method="ShowInvetory"]
 [connection signal="pressed" from="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer/DispositionButton" to="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/CaptainStatContainer" method="ShowDisposition"]
 [connection signal="InventoryBoxSelected" from="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/CaptainStatContainer" to="." method="BoxSelected"]
+[connection signal="pressed" from="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2/VBoxContainer/Button" to="." method="_on_button_pressed"]

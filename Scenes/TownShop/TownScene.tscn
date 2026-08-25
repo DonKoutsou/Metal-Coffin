@@ -18,7 +18,6 @@
 [ext_resource type="PackedScene" uid="uid://dhbyfc1rfad2f" path="res://Scenes/TownShop/WorkShop/work_shop.tscn" id="17_t244x"]
 [ext_resource type="PackedScene" uid="uid://bhpyiqwlbnmad" path="res://Scenes/TownShop/merch_ship.tscn" id="17_vaeb3"]
 [ext_resource type="PackedScene" uid="uid://c6pyjquo47hnr" path="res://Scenes/TownShop/FuelShop/fuel_storages.tscn" id="18_u4st4"]
-[ext_resource type="Texture2D" uid="uid://bkya84hu7h3c4" path="res://Assets/CaptainPortraits/Captain7.png" id="18_vaeb3"]
 
 [sub_resource type="Environment" id="Environment_t244x"]
 background_mode = 3
@@ -76,7 +75,7 @@ stretch = true
 disable_3d = true
 world_3d = SubResource("World3D_oyy4e")
 handle_input_locally = false
-size = Vector2i(2324, 1307)
+size = Vector2i(1443, 812)
 size_2d_override = Vector2i(1280, 720)
 size_2d_override_stretch = true
 render_target_update_mode = 4
@@ -326,7 +325,6 @@ theme_override_constants/separation = 75
 alignment = 1
 
 [node name="TownShowWelcomScreen" type="PanelContainer" parent="HBoxContainer" unique_id=2073038459]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("15_baphb")
@@ -358,7 +356,6 @@ theme_override_styles/panel = ExtResource("15_baphb")
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/TownShowWelcomScreen/VBoxContainer/HBoxContainer/PanelContainer" unique_id=103596707]
 custom_minimum_size = Vector2(250, 250)
 layout_mode = 2
-texture = ExtResource("18_vaeb3")
 expand_mode = 1
 stretch_mode = 5
 

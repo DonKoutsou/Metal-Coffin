@@ -281,6 +281,7 @@ position = Vector2(0, 514)
 
 [node name="ScreenLight" type="PointLight2D" parent="LightPivot1/LightPivot2" unique_id=2111855320]
 visible = false
+scale = Vector2(8, 8)
 color = Color(0.21411, 0.398386, 0.176593, 1)
 energy = 2.71
 blend_mode = 2
@@ -290,6 +291,7 @@ texture_scale = 13.0
 
 [node name="AlarmLight" type="PointLight2D" parent="LightPivot1/LightPivot2" unique_id=465121529]
 visible = false
+scale = Vector2(8, 8)
 color = Color(0.851914, 0.187693, 0, 1)
 energy = 1.69
 blend_mode = 2

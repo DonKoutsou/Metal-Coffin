@@ -29,7 +29,7 @@ func Handle(Performer : BattleShipStats, Action : CardStats, Targets : Array[Bat
 	Performer.SetEnergy(Performer.Energy + resupplyamm)
 
 	var TargetViz : Array[Control]
-	TargetViz.append(Performer.ShipViz)
+	TargetViz.append(Performer.ShipViz.ShipIcon)
 	var Data = DeffensiveAnimationData.new()
 	Data.Mod = self
 	Data.Targets = TargetViz

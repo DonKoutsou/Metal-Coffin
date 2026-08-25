@@ -1,18 +1,13 @@
 [gd_resource type="Resource" script_class="Happening" format=3 uid="uid://chjcgb4pp86hr"]
 
-[ext_resource type="Texture2D" uid="uid://416d5uw306xw" path="res://Assets/CaptainPortraits/PriestHood.png" id="1_8tlxq"]
 [ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scenes/Map/MapSpot/Happenings/HappeningStage.gd" id="1_afuai"]
 [ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scenes/Map/MapSpot/Happenings/HappeningOption.gd" id="2_ifktw"]
 [ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scenes/Map/MapSpot/Happenings/Happening.gd" id="3_8tlxq"]
 [ext_resource type="Script" uid="uid://ii12ceb6fgif" path="res://Scenes/Map/MapSpot/Happenings/StringHappeningOption.gd" id="3_ifktw"]
-[ext_resource type="Texture2D" uid="uid://b680xs4rw5ro1" path="res://Assets/CaptainPortraits/Priest.png" id="5_gl0ga"]
 [ext_resource type="Resource" uid="uid://bkfcg5rwf7vhu" path="res://Resources/Captains/PlayerCaptains/Dimitry.tres" id="6_vgxkk"]
 [ext_resource type="Script" uid="uid://w3pbagqwci26" path="res://Scenes/Map/MapSpot/Happenings/DroneHappeningOption.gd" id="7_143ge"]
 [ext_resource type="Resource" uid="uid://c8b3lpqbi11up" path="res://Resources/Captains/PlayerCaptains/Jor.tres" id="8_dy2mo"]
-[ext_resource type="Texture2D" uid="uid://g3ml8lxq5yyn" path="res://Assets/CaptainPortraits/Captain10_1.png" id="8_rhe50"]
-[ext_resource type="Texture2D" uid="uid://1l0uuhes56vw" path="res://Assets/CaptainPortraits/Captain3.png" id="9_7bg2p"]
 [ext_resource type="Script" uid="uid://b5ww8sd3i6oa4" path="res://Scenes/Map/MapSpot/Happenings/DroneLossHappeningOption.gd" id="9_ftcno"]
-[ext_resource type="Texture2D" uid="uid://cabyq8qd4qe5y" path="res://Assets/CaptainPortraits/Captain1.png" id="9_rhe50"]
 [ext_resource type="Script" uid="uid://k3yo61qak6d8" path="res://Scenes/Map/MapSpot/Happenings/EndGameHappeningOption.gd" id="10_uqsfa"]
 [ext_resource type="Script" uid="uid://diug21pe121lm" path="res://Scripts/OverworldCityEventData.gd" id="12_7bg2p"]
 
@@ -57,44 +52,40 @@ metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_dy2mo"]
 script = ExtResource("1_afuai")
-StagePic = ExtResource("1_8tlxq")
+StagePic = "uid://416d5uw306xw"
 HappeningTexts = Array[String](["In the far end of the room you are met by a hooded figure. The sight of it brings certain memories back. Something makes you think you've met the figure before. Maybe a dream?", "The figure extends its arm gracefully and gestures you to approach. A voice seems to emanate under the hood, you can just barely hear the words.", "[color=#c19200]\"Welcome my child, this is not the introduction I would hope to give you but times are as they are now. Let us hope the future holds a better meeting place for us, but for now this will do.\"", "[color=#c19200]\"What I am about to offer you is a chance, there is a chance for us to change this world. This world was not always as it is now as you may know. When a chance for something this big is given to you, you take it, am I right?\""])
 Options = Array[ExtResource("2_ifktw")]([SubResource("Resource_3j43l"), SubResource("Resource_vgxkk")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_143ge"]
 script = ExtResource("1_afuai")
-StagePic = ExtResource("1_8tlxq")
+StagePic = "uid://416d5uw306xw"
 HappeningTexts = Array[String](["[color=#c19200]\"Have you confidence in your crew captain, and does your crew have confidence in you? Answer this to yourself, what you answer to me now changes nothing.\"", "You are slowly starting to feel the gravity of the situation, whatever the future holds for you, you have nobody else to support on than them and they nobody than you. What will this man ask of you?", "[color=#c19200]\"You may have started to understand who I might be, and why this secrecy is important. Ever since the war has started, if you can call it that we've had to live like this.\"", "[color=#c19200]\"We helped build this world and we now have to see it through crack on the wall.\" [/color]It finally hits you... Without even realizing the surprise it is written all over your face."])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_ftcno"]
 script = ExtResource("1_afuai")
-StagePic = ExtResource("5_gl0ga")
+StagePic = "uid://b680xs4rw5ro1"
 HappeningTexts = Array[String](["[color=#c19200]\"That is right...\" With a quick move of his hand the figure pulls out his mask and reveals his mechanical face. \"I was there when the idea of the metropolis was conceived my child.\"", "[color=#c19200]\"You must be familiar with the story of us machines by now... For milenias we are forced to see your kind bring demise to themselves and the world around them. \"", "[color=#c19200]\"When is this cycle to end? And what will the next cycle give birth to? Being the product of one of those cycles myself, not knowing if its the first on or the tenth..... i am tired.\"", "[color=#c19200]\"You must now understand our mission......\""])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_v8t0e"]
 script = ExtResource("1_afuai")
-StagePic = ExtResource("5_gl0ga")
 HappeningTexts = Array[String](["[color=#c19200]\"You have our eternal gratitude my child... Not many would take this option, but you did. As I said before we will be handing some help to you. I will be putting Dimitry and Amol under your command from now on. They will follow you to the pits of hell. Put your trust onto them child.\""])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_4ttfb"]
 script = ExtResource("1_afuai")
-StagePic = ExtResource("8_rhe50")
 HappeningTexts = Array[String](["[color=#c19200]\"It's my honor to take part in this sacred campaign along with you sir. Let me make this journey of yours a little less cumbersome.\""])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_27exd"]
 script = ExtResource("1_afuai")
-StagePic = ExtResource("9_rhe50")
 HappeningTexts = Array[String](["You turn and look at Amol. You didn't expect a machine into the battlefield... [color=#c19200]\"I am not able to fight for you sir but I'll provide any other service I can.\" [/color] Amol bows its head and stays there for a few seconds."])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_r6bso"]
 script = ExtResource("1_afuai")
-StagePic = ExtResource("5_gl0ga")
 HappeningTexts = Array[String](["[color=#c19200]\"The plan is for you to infiltrate enemy territory and push towards Dormak. Once we have Dormak then everything becomes easier. We have some chips to negotiate with.\"", "[color=#c19200]\"First part of the plan is for you to reach Armak. There we have another representative who will provide a little helping hand.\"", "[color=#c19200]\"And with that you should head out my child. We will also be relocating. This position will soon become exposed and we can't risk being found. Not now... I recommend you do the same.\""])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
@@ -120,7 +111,6 @@ metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_gtnr6"]
 script = ExtResource("1_afuai")
-StagePic = ExtResource("9_7bg2p")
 HappeningTexts = Array[String](["\"I am sorry Captain, but that won't do. I've promised my men that they will be back to their families within a week. I will not drag them into a war just like that.\"", "\"We will be heading out.... It's been nice captain... Good luck.\"", "Jor's crew gets on their ship and heads off. Your crew seems to be jealous of them. But the decision has been made. There is no turning back now.", ""])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
@@ -159,7 +149,6 @@ metadata/_custom_type_script = "uid://w3pbagqwci26"
 
 [sub_resource type="Resource" id="Resource_pwkje"]
 script = ExtResource("1_afuai")
-StagePic = ExtResource("5_gl0ga")
 HappeningTexts = Array[String](["In that case I will have to ask you to leave. This is no place for you to be. We will be relocating shortly. The place will most likely be exposed in the next few hours.", "\"Please forget about this meeting happening....\"", "\"Pack up your stuff people, we are leaving.\" With a fell swoop you see everybody in the room, get up, pick up their stuff and head out of the room. Within a few moments you are left alone in the room. There is nothing left for you to do and go to your ship and head home.", ""])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
@@ -172,7 +161,7 @@ metadata/_custom_type_script = "uid://k3yo61qak6d8"
 
 [sub_resource type="Resource" id="Resource_xjsvv"]
 script = ExtResource("1_afuai")
-StagePic = ExtResource("5_gl0ga")
+StagePic = "uid://b680xs4rw5ro1"
 HappeningTexts = Array[String](["[color=#c19200]\"You must know, what we're to ask you we've asked before to others. You are not the first to enter this room only to regret it. As you probably have guessed none of them have succeeded, and are probably lying somewhere deep in the desert.\"", "[color=#c19200]\"I want not to mislead you, there is a choice for you to make here. There is no major assistance we will be able to provide other than a couple of ships.\" The machine takes 2 objects and holds them in front of you. One is a sword and the other seems to be a scarf.", "[color=#c19200]\"Choose the sword, and you join a righteous cause to bring back peace into this world. Choose the blindfold and you join all the others who picked to look away. You might not understand the gravity of these choices but you must choose. So... Come child, choose life or death.\""])
 Options = Array[ExtResource("2_ifktw")]([SubResource("Resource_7bg2p"), SubResource("Resource_wlpbn")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"

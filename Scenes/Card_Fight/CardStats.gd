@@ -4,31 +4,56 @@ class_name CardStats
 @export var Icon : Texture
 @export var CardName : String
 @export var CardDescriptionOverride : String
+
 ## Energy consumption of card
 @export var Energy : int
-#@export var Options : Array[CardOption]
+
 ## Allow this card to be done twice in one turn?
 @export var AllowDuplicates : bool
-## Consume this card after use?
-@export var Consume : bool = false
+
+## Consume/Exhaust this card after use?
+@export var OnUsed : OnUsePlacement = OnUsePlacement.NORMAL
+
+##Modules applied once card is used
 @export var OnUseModules : Array[CardModule]
+
+##Modules applied once card is discarded
 @export var OnDiscardModules : Array[CardModule]
+
+##Modules applied once card is performed, mostly used for attacks. (Applied mostly to AI since players use attacks immidietly)
 @export var OnPerformModule : CardModule
+
+##Passive abilities
 @export var Passive : Card_Passive
+
 @export var Type : CardType
+
+##Makes the card spawn on top of the deck at the start of the fight
 @export var PutOnTop : bool = false
+
+##If burned can't be used no more
 @export var Burned : bool = false
+
+##Weapon that this card needs to be able to be used
 @export var WeapT : WeaponType
+
+##Used for AI to easily determine if card can be used
 @export var UseConditions : Array[CardUseCondition]
+
+##Allow card to be upgraded with its owner ship part
 @export var AllowTier : bool = true
+
+##IF card is provided from disposition
 @export var IsDisposition : bool = false
+
 var EnergyReduction : int = 0
 var Tier : int = 0
 
-
+#-------------------------------------------------------
 func GetCost() -> int:
 	return max(0, Energy - EnergyReduction)
 
+#-------------------------------------------------------
 func GetCardName() ->String:
 	var n : String = ""
 	if (Tier > 0 and AllowTier):
@@ -39,11 +64,7 @@ func GetCardName() ->String:
 		n = "[color=#ffc315]SW[/color] " + n
 	return n
 
-func ShouldConsume() -> bool:
-	#if is_instance_valid(SelectedOption):
-		#return SelectedOption.CauseConsumption
-	return Consume
-
+#-------------------------------------------------------
 func GetDescription() -> String:
 	var RealTier = 0
 	if (AllowTier):
@@ -72,6 +93,7 @@ func GetDescription() -> String:
 		
 	return Helper.Translate(Desc)
 
+#-------------------------------------------------------
 func GetBattleDescription(User : BattleShipStats) -> String:
 	if (CardDescriptionOverride != ""):
 		return CardDescriptionOverride
@@ -102,12 +124,20 @@ func GetBattleDescription(User : BattleShipStats) -> String:
 	
 	return Helper.Translate(Desc)
 
+#-------------------------------------------------------
+func ShouldConsume() -> bool:
+	return OnUsed == OnUsePlacement.CONSUME
+
+#-------------------------------------------------------
+func ShouldExhaust() -> bool:
+	return OnUsed == OnUsePlacement.EXHAUST
+
+#-------------------------------------------------------
 func IsSame(C : CardStats) -> bool:
 	return C.GetCardName() == GetCardName() and C.IsDisposition == IsDisposition
 
+#-------------------------------------------------------
 static func FindTooltips(card : CardStats) -> PackedStringArray:
-	#var desc = card.GetDescription()
-	#var words = strip_bbcode(desc.replace("\n", " ")).split(" ")
 	var tips : PackedStringArray = []
 	
 	if (card.IsDisposition):
@@ -136,6 +166,7 @@ static func FindTooltips(card : CardStats) -> PackedStringArray:
 	
 	return tips
 
+#-------------------------------------------------------
 static func GetTooltipsForModule(mod : CardModule) -> PackedStringArray:
 	var tips : PackedStringArray = []
 	if (mod is DeffenceCardModule):
@@ -174,13 +205,8 @@ static func GetTooltipsForModule(mod : CardModule) -> PackedStringArray:
 			tips.append("TLTP_DMG_RDC_ANY")
 	
 	return tips
-	
 
-static func strip_bbcode(source:String) -> String:
-	var regex = RegEx.new()
-	regex.compile("\\[.+?\\]")
-	return regex.sub(source, "", true)
-	
+
 enum WeaponType{
 	NONE,
 	MG_100mm,
@@ -189,6 +215,12 @@ enum WeaponType{
 	MG_180mm,
 	DRONE_DOCK,
 	FLAME_THROWER,
+}
+
+enum OnUsePlacement{
+	NORMAL,
+	CONSUME,
+	EXHAUST,
 }
 
 enum CardType {

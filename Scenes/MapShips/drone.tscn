@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://4pq5t6l3c55k"]
 
 [ext_resource type="PackedScene" uid="uid://wtmojbpjfelb" path="res://Scenes/MapShips/Base_MapShip.tscn" id="1_airq3"]
-[ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/CaptainPortraits/plane_Wheel_BaseColor.png" id="2_qjc7u"]
 [ext_resource type="Script" uid="uid://cj1p2x5gvfvgf" path="res://Scenes/MapShips/player_driven_ship.gd" id="2_vq5gh"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scenes/MapShips/Stats/ShipStat.gd" id="3_2ygm8"]
 [ext_resource type="Shader" uid="uid://cqgk0egpp8vmb" path="res://Shaders/ShipVisualTest.gdshader" id="3_qb3w4"]
@@ -127,7 +126,6 @@ Cost = 200
 resource_local_to_scene = true
 script = ExtResource("5_vq5gh")
 CaptainName = "Tick"
-CaptainPortrait = ExtResource("2_qjc7u")
 ShipIcon = ExtResource("6_ayxxd")
 CaptainStats = Array[ExtResource("3_2ygm8")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_mcdo0"), SubResource("Resource_vq5gh"), SubResource("Resource_7g4dd"), SubResource("Resource_hxdnx"), SubResource("Resource_4p6v8"), SubResource("Resource_ayxxd"), SubResource("Resource_h3q7u"), SubResource("Resource_xmlya"), SubResource("Resource_j0vsk"), SubResource("Resource_mphws"), SubResource("Resource_rjpe7"), SubResource("Resource_mil77"), SubResource("Resource_xx2gh"), SubResource("Resource_bewff"), SubResource("Resource_aqvi6"), SubResource("Resource_lav7j")])
 ShipCallsign = "P1"
@@ -162,6 +160,8 @@ Dock = NodePath("DroneDock")
 
 [node name="ColorRect" parent="." index="1" unique_id=1708187202]
 material = SubResource("ShaderMaterial_06s8f")
+texture = ExtResource("6_ayxxd")
+region_rect = Rect2(0.6666565, -2, 134.99997, 137.33334)
 
 [node name="TrailLine" parent="ColorRect" index="0" unique_id=909123147]
 position = Vector2(0, 0.1)
@@ -212,6 +212,8 @@ bus = &"Engine"
 [node name="DroneDock" parent="." index="9" unique_id=71181084 instance=ExtResource("9_82ju4")]
 
 [node name="PointLight2D" type="PointLight2D" parent="." index="10" unique_id=796806027]
+texture_filter = 4
+scale = Vector2(8, 8)
 energy = 0.5
 blend_mode = 2
 shadow_color = Color(0.919342, 0, 0.452291, 0)

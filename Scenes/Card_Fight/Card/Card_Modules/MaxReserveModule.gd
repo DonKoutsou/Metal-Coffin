@@ -24,7 +24,7 @@ func Handle(Performer : BattleShipStats, Action : CardStats, Targets : Array[Bat
 	for g in Targets:
 		if (g == null):
 			continue
-		TargetViz.append(g.ShipViz)
+		TargetViz.append(g.ShipViz.ShipIcon)
 		g.SetReserves(g.EnergyReserves + resupplyamm)
 	
 	Performer.SetEnergy(0)

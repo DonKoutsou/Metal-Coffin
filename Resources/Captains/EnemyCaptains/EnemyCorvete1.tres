@@ -1,10 +1,9 @@
 [gd_resource type="Resource" script_class="Captain" format=3 uid="uid://bf4xrtdscw4m3"]
 
-[ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/CaptainPortraits/plane_Wheel_BaseColor.png" id="1_1tohq"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scenes/MapShips/Stats/ShipStat.gd" id="2_3y7uy"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="3_bhrql"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scenes/MapShips/Stats/Captain.gd" id="4_ju6f0"]
-[ext_resource type="Texture2D" uid="uid://bgkjjkyouc1mb" path="res://Assets/ShipTextures/ShipElena2.png" id="5_1tohq"]
+[ext_resource type="Texture2D" uid="uid://bgkjjkyouc1mb" path="res://Assets/ShipTextures/Hull10.png" id="5_1tohq"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="6_xadym"]
 [ext_resource type="Resource" uid="uid://css6e78uhfsfa" path="res://Resources/Items/ShipParts/MG/ShortMachinegun100mm.tres" id="8_tcu60"]
 [ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FT-500.tres" id="9_3wfcb"]
@@ -130,7 +129,6 @@ StatName = 22
 resource_local_to_scene = true
 script = ExtResource("4_ju6f0")
 CaptainName = "Corvete"
-CaptainPortrait = ExtResource("1_1tohq")
 ShipIcon = ExtResource("5_1tohq")
 CaptainStats = Array[ExtResource("2_3y7uy")]([SubResource("Resource_uq0r8"), SubResource("Resource_koioh"), SubResource("Resource_lh4jx"), SubResource("Resource_yl52l"), SubResource("Resource_jkd3g"), SubResource("Resource_1undj"), SubResource("Resource_qu4cj"), SubResource("Resource_66526"), SubResource("Resource_enwnd"), SubResource("Resource_uaum2"), SubResource("Resource_cbwtu"), SubResource("Resource_ak3in"), SubResource("Resource_015l8"), SubResource("Resource_gepb3"), SubResource("Resource_hwk21"), SubResource("Resource_e3dn0"), SubResource("Resource_8cnmi"), SubResource("Resource_kc2xt"), SubResource("Resource_m68jj"), SubResource("Resource_l55jq"), SubResource("Resource_gpdrm"), SubResource("Resource_mhp50"), SubResource("Resource_jjip0")])
 ShipCallsign = "C1"

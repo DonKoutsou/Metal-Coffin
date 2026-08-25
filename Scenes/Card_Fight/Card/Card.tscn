@@ -25,7 +25,6 @@ corner_radius_bottom_left = 5
 shadow_size = 10
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_oc32p"]
-load_path = "res://.godot/imported/card_D.png-c5e9dbf2e82bdebb128760543a1a6130.ctex"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nilbr"]
 bg_color = Color(1, 1, 1, 1)
@@ -119,10 +118,10 @@ transparent_bg = true
 handle_input_locally = false
 scaling_3d_mode = 5
 canvas_item_default_texture_filter = 4
-size = Vector2i(797, 1096)
+size = Vector2i(254, 350)
 size_2d_override = Vector2i(186, 256)
 size_2d_override_stretch = true
-render_target_update_mode = 0
+render_target_update_mode = 1
 
 [node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport" unique_id=1329688651]
 anchors_preset = 15

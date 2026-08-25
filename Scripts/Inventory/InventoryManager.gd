@@ -478,3 +478,7 @@ func ToggleInventory() -> void:
 		ToggleTween.tween_property(self, "size", Vector2(size.x, 0), 0.15)
 		await ToggleTween.finished
 		visible = !visible
+
+
+func _on_button_pressed() -> void:
+	ToggleInventory()

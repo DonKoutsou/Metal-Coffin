@@ -16,7 +16,7 @@ dest_files=["res://.godot/imported/Hull3.png-d21a376187ed6369ded1170da2138f64.ct
 [params]
 
 compress/mode=0
-compress/high_quality=true
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

@@ -92,7 +92,7 @@ func GetMerchForPosition(YPos: float, HasUp : bool, capital : bool) -> Array[Mer
 		
 	# Iterate through the MerchList to select merchandise based on points
 	while points > MerchLowest:
-		var randomIndex = World.instanceRandom.RandIRange(0, MerchList.size() - 1) 
+		var randomIndex = Rand.InstanceRandom.RandIRange(0, MerchList.size() - 1) 
 		var m = MerchList[randomIndex] as MerchandiseInfo
 		if (m.DontGenerateBefore > stage):
 				continue
@@ -127,7 +127,7 @@ func GetRecruitsForPosition(YPos: float, _HasRec : bool, capital : bool) -> Arra
 	
 	# Iterate through the MerchList to select merchandise based on points
 	while points > RECRUIT_LOWEST and recs.size() > 0:
-		var randomIndex = World.instanceRandom.RandIRange(0, recs.size() - 1)
+		var randomIndex = Rand.InstanceRandom.RandIRange(0, recs.size() - 1)
 		var RandomRec : CaptainSpawnInfo = recs[randomIndex]
 		
 		if (RandomRec.DontGenerateBefore > stage):
@@ -159,7 +159,7 @@ func GetWorkshopMerchForPosition(YPos: float, HasUp : bool, capital : bool) -> A
 
 	# Iterate through the MerchList to select merchandise based on points
 	while points > MerchLowest:
-		var randomIndex = World.instanceRandom.RandIRange(0, WorkshopList.size() - 1)
+		var randomIndex = Rand.InstanceRandom.RandIRange(0, WorkshopList.size() - 1)
 		var m = WorkshopList[randomIndex] as MerchandiseInfo
 		
 		if (m.DontGenerateBefore > stage):
@@ -238,7 +238,7 @@ func generate_fleet(points: int, Patrol : bool, Convoy : bool, stage : Happening
 	# While there's space in the fleet, try to maximize the points usage
 	# with a dynamic strategy.
 	while fleet.size() < 7 and points >= LowestPrice and available_ships.size() > 0:
-		World.instanceRandom.shuffle_array(available_ships)
+		Rand.InstanceRandom.shuffle_array(available_ships)
 		
 		var selected_ship: CaptainSpawnInfo = null
 		#var best_value = 0

@@ -5,6 +5,7 @@ class_name Deck
 var DeckPile : Array[CardStats]
 var Hand : Array[CardStats]
 var DiscardPile : Array[CardStats]
+var ExhaustPile : Array[CardStats]
 
 var isShuffling : bool = false
 var friendly : bool = false
@@ -14,6 +15,7 @@ signal PileChanged(t : bool)
 signal DiscardChanged(t : bool)
 signal OnCardDrawn(C : CardStats)
 signal OnCardDiscarded(C : CardStats)
+signal OnCardExhausted(C : CardStats)
 signal MultiCardDrawn(DrawnCards : Array[CardStats], discardAmm : int)
 signal MultiSpecificDrawn(DrawnCards : Array[CardStats])
 
@@ -22,7 +24,7 @@ static func NewDeck(Owner : BattleShipStats) -> Deck:
 	d.DeckPile.append_array(Owner.Cards)
 	d.friendly = Owner.Friendly
 	#Create Hand
-	World.instanceRandom.shuffle_array(d.DeckPile)
+	Rand.InstanceRandom.shuffle_array(d.DeckPile)
 	#Place priority card on top
 	for card : CardStats in d.DeckPile:
 		if (card.PutOnTop):
@@ -111,7 +113,7 @@ func DrawSpecificFromList(list : Array[CardStats]) -> void:
 	if (PossibleDraws.size() == 0):
 		return
 	
-	var randomIndex : int = World.instanceRandom.RandIRange(0, PossibleDraws.size() - 1)
+	var randomIndex : int = Rand.InstanceRandom.RandIRange(0, PossibleDraws.size() - 1)
 	var cardToDraw = PossibleDraws[randomIndex]
 	DeckPile.erase(cardToDraw)
 	PileChanged.emit(false)
@@ -137,6 +139,15 @@ func DrawSingleOfType(type : CardStats.CardType) -> void:
 #--------------------------------------------
 func TestCard(Mod : CardStats, testType : CardStats.CardType) -> bool:
 	return Mod.Type == testType
+
+#--------------------------------------------
+func ExhaustCard(C : CardStats, Manual : bool = false) -> void:
+	if (friendly):
+		PopUpManager.GetInstance().DoFadeNotif("Card Exhausted")
+	ExhaustPile.append(C)
+	C.EnergyReduction = 0
+	#DiscardChanged.emit(true)
+	OnCardExhausted.emit(C, Manual)
 
 #--------------------------------------------
 func DiscardCard(C : CardStats, Manual : bool = false) -> void:
@@ -165,6 +176,6 @@ func ShuffleDiscardedIntoDeck(DoAnim : bool = true) -> void:
 	DeckPile.append_array(DiscardPile)
 	DiscardPile.clear()
 	
-	World.instanceRandom.shuffle_array(DeckPile)
+	Rand.InstanceRandom.shuffle_array(DeckPile)
 	isShuffling = false
 	Shuffling.emit(false)

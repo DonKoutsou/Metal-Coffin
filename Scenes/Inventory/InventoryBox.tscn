@@ -33,7 +33,7 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
 [node name="InventoryBox" type="PanelContainer" unique_id=1449330592 node_paths=PackedStringArray("Butto", "txt", "AmmountLabel")]
-custom_minimum_size = Vector2(120, 80)
+custom_minimum_size = Vector2(125, 80)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

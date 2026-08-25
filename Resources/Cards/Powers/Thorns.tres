@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://barj6en5mlnje"]
 
-[ext_resource type="Texture2D" uid="uid://chpdhvnha7hih" path="res://Assets/Cards/DecelerationField.png" id="1_l8dgo"]
+[ext_resource type="Texture2D" uid="uid://chpdhvnha7hih" path="res://Assets/Cards/DecelerationField.png" id="1_mffum"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="2_l8dgo"]
 [ext_resource type="Script" uid="uid://uro0nyfixggn" path="res://Scenes/Card_Fight/Card/Card_Passives/Thorns.gd" id="3_l8dgo"]
 [ext_resource type="Script" uid="uid://c4p5ur132vdkj" path="res://Scenes/Card_Fight/DamageInfo.gd" id="3_mffum"]
@@ -21,10 +21,10 @@ metadata/_custom_type_script = "uid://uro0nyfixggn"
 
 [resource]
 script = ExtResource("4_ol158")
-Icon = ExtResource("1_l8dgo")
+Icon = ExtResource("1_mffum")
 CardName = "Thorns"
 Energy = 2
-Consume = true
+OnUsed = 2
 Passive = SubResource("Resource_803yc")
 Type = 3
 IsDisposition = true

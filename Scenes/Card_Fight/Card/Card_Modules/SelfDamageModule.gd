@@ -25,7 +25,7 @@ func Handle(Performer : BattleShipStats, Action : CardStats, Targets : Array[Bat
 	
 	var Data : Dictionary
 	Data["Def"] = null
-	Data["Viz"] = Performer.ShipViz
+	Data["Viz"] = Performer.ShipViz.ShipIcon
 	var DefList : Dictionary[BattleShipStats, Dictionary]
 	DefList[Performer] = Data
 	AnimData.DeffenceList = DefList

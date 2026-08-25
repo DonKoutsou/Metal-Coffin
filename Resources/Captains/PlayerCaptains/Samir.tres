@@ -1,10 +1,9 @@
 [gd_resource type="Resource" script_class="Captain" format=3 uid="uid://disqw5cbdncos"]
 
-[ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/CaptainPortraits/plane_Wheel_BaseColor.png" id="1_ofvjl"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scenes/MapShips/Stats/ShipStat.gd" id="2_ufoo0"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scenes/MapShips/Stats/Captain.gd" id="3_3cbbo"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="3_52iue"]
-[ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/ShipTextures/Spaceship_top_Main Camera.png" id="3_yl744"]
+[ext_resource type="Texture2D" uid="uid://dxhiurny73kpr" path="res://Assets/ShipTextures/Hull12.png" id="3_yl744"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_yy4iq"]
 
 [sub_resource type="Resource" id="Resource_ju8ek"]
@@ -108,7 +107,6 @@ StatName = 21
 [resource]
 script = ExtResource("3_3cbbo")
 CaptainName = "Samir"
-CaptainPortrait = ExtResource("1_ofvjl")
 ShipIcon = ExtResource("3_yl744")
 CaptainStats = Array[ExtResource("2_ufoo0")]([SubResource("Resource_ju8ek"), SubResource("Resource_w0tur"), SubResource("Resource_34f4w"), SubResource("Resource_hjfxs"), SubResource("Resource_wxl3a"), SubResource("Resource_haf7u"), SubResource("Resource_knqm1"), SubResource("Resource_fwmht"), SubResource("Resource_ofvjl"), SubResource("Resource_el1gt"), SubResource("Resource_e88pt"), SubResource("Resource_3h6tm"), SubResource("Resource_dtywx"), SubResource("Resource_v30r8"), SubResource("Resource_heiep"), SubResource("Resource_cmo0y"), SubResource("Resource_nx2e3"), SubResource("Resource_cussd"), SubResource("Resource_sgmt4"), SubResource("Resource_qqifc"), SubResource("Resource_efgfi"), SubResource("Resource_2xmd8"), SubResource("Resource_isa78")])
 CheckForErrors = true

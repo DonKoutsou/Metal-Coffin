@@ -280,6 +280,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="SubViewportContainer/SubViewport" unique_id=1720222894]
 position = Vector2(422, 234)
+scale = Vector2(8, 8)
 blend_mode = 2
 texture = ExtResource("15_7x35f")
 texture_scale = 5.0

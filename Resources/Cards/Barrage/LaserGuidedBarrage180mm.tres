@@ -25,5 +25,6 @@ Icon = ExtResource("1_1t21l")
 CardName = "Laser Guided Barragge"
 Energy = 2
 AllowDuplicates = true
+OnUsed = 1
 OnPerformModule = SubResource("Resource_tpj2d")
 WeapT = 4

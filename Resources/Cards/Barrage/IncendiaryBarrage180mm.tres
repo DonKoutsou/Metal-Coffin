@@ -25,6 +25,6 @@ Icon = ExtResource("1_0hhq8")
 CardName = "Incendiary Barragge"
 Energy = 2
 AllowDuplicates = true
-Consume = true
+OnUsed = 1
 OnPerformModule = SubResource("Resource_0a432")
 WeapT = 4

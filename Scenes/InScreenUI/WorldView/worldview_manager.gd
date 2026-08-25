@@ -56,7 +56,7 @@ func LoadData(SavedStats : Array[int]) -> void:
 func SkillCheck(Stat : WorldViews, Possetive : bool, Difficulty : int) -> bool:
 	var skill_value = WorldviewStats[Stat]
 	
-	var roll = World.instanceRandom.RandFRange(1, 100)
+	var roll = Rand.InstanceRandom.RandFRange(1, 100)
 	
 	var result = skill_value
 	if (Possetive):

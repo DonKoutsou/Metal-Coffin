@@ -402,7 +402,7 @@ func GenerateMapThreaded() -> void:
 	var CapitalCitySpots : Array[int] = []
 
 	for z in CapitalAmm:
-		var spot = roundi(MapSize/CapitalAmm * (z + 1)) - World.instanceRandom.RandIRange(2, 5)
+		var spot = roundi(MapSize/CapitalAmm * (z + 1)) - Rand.InstanceRandom.RandIRange(2, 5)
 		CapitalCitySpots.append(spot)
 
 	var VillageSpots : Array[int] = []
@@ -501,20 +501,20 @@ func poisson_disk_sampling(region_size: Vector2, min_dist: float, max_samples: i
 	var spawn_points = []
 	
 	var initial_point = Vector2(
-		World.instanceRandom.RandFRange(0, region_size.x),
-		World.instanceRandom.RandFRange(0, region_size.y)
+		Rand.InstanceRandom.RandFRange(0, region_size.x),
+		Rand.InstanceRandom.RandFRange(0, region_size.y)
 	)
 	points.append(initial_point)
 	spawn_points.append(initial_point)
 	grid[_grid_index(initial_point, cell_size, grid_size)] = initial_point
 	
 	while spawn_points.size() > 0:
-		var spawn_index = World.instanceRandom.RandI() % spawn_points.size()
+		var spawn_index = Rand.InstanceRandom.RandI() % spawn_points.size()
 		var center = spawn_points[spawn_index]
 		var found = false
 		for i in range(K):
-			var angle = World.instanceRandom.RandF() * PI * 2.0
-			var rad = World.instanceRandom.RandFRange(min_dist, min_dist * 2.0)
+			var angle = Rand.InstanceRandom.RandF() * PI * 2.0
+			var rad = Rand.InstanceRandom.RandFRange(min_dist, min_dist * 2.0)
 			var dir = Vector2(cos(angle), sin(angle))
 			var candidate = center + dir * rad
 			if _is_valid(candidate, region_size, cell_size, grid, grid_size, min_dist):
@@ -569,13 +569,13 @@ func GenerateEventsThreaded() -> void:
 		var Spots : Array
 		Spots.append_array(get_tree().get_nodes_in_group(g))
 		
-		World.instanceRandom.shuffle_array(Spots)
+		Rand.InstanceRandom.shuffle_array(Spots)
 		
 		var SpEvents = EventManager.GetInstance().GetSpecialEventsForSpotType(MapSpotType.SpotKind[g])
 		
 		while SpEvents.size() > 0 and Spots.size() > 0:
 			#var EventToGive = SpEvents[0]
-			var randomIndex = World.instanceRandom.RandIRange(0, Spots.size() - 1)
+			var randomIndex = Rand.InstanceRandom.RandIRange(0, Spots.size() - 1)
 			var S = Spots[randomIndex] as MapSpot
 			var YPos = S.get_parent().Pos.y
 			var E = FigureOutEvent(YPos, SpEvents)
@@ -593,11 +593,11 @@ func GenerateEventsThreaded() -> void:
 		Spots.clear()
 		Spots.append_array(get_tree().get_nodes_in_group(g))
 		
-		World.instanceRandom.shuffle_array(Spots)
+		Rand.InstanceRandom.shuffle_array(Spots)
 
 		var Events = EventManager.GetInstance().GetEventsForSpotType(MapSpotType.SpotKind[g])
 		while Events.size() > 0 and Spots.size() > 0:
-			var randomIndex = World.instanceRandom.RandIRange(0, Spots.size() - 1)
+			var randomIndex = Rand.InstanceRandom.RandIRange(0, Spots.size() - 1)
 			var Sp = Spots[randomIndex]
 			if (Sp.Event != null):
 				var Hap = FigureOutEvent(Sp.get_parent().Pos.y, Events)
@@ -623,7 +623,7 @@ func FigureOutEvent(YPos : float, Events : Array) -> Happening:
 			PossibleHappenings.append(g)
 	
 	if (PossibleHappenings.size() > 0):
-		var randomIndex = World.instanceRandom.RandIRange(0, PossibleHappenings.size() - 1)
+		var randomIndex = Rand.InstanceRandom.RandIRange(0, PossibleHappenings.size() - 1)
 		var Hap = PossibleHappenings[randomIndex] as Happening
 		if (Hap != null):
 			return Hap

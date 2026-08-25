@@ -32,11 +32,11 @@ func Handle(_Performer : BattleShipStats, Action : CardStats, Targets : Array[Ba
 	for g in Targets:
 		if (g == null):
 			continue
-		TargetViz.append(g.ShipViz)
+		TargetViz.append(g.ShipViz.ShipIcon)
 		if (g.deck.DeckPile.is_empty()):
 			continue
 		for toBurn in burnAmm:
-			var randomIndex : int = World.instanceRandom.RandIRange(0, g.deck.DeckPile.size() - 1)
+			var randomIndex : int = Rand.InstanceRandom.RandIRange(0, g.deck.DeckPile.size() - 1)
 			g.deck.DeckPile[randomIndex].Burned = true
 
 	var Data = DeffensiveAnimationData.new()

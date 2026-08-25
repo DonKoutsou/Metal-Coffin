@@ -16,7 +16,7 @@ class_name CardFightShipViz2
 @export var FPBuff : GPUParticles2D
 @export var FPDeBuff : GPUParticles2D
 
-@export var FirePart : Node2D
+@export var FirePart : Control
 @export var ExplosionPart : GPUParticles2D
 @export var SmokePart : GPUParticles2D
 @export var FPLabel : RichTextLabel
@@ -30,6 +30,35 @@ class_name CardFightShipViz2
 @export var DefDeBuff : GPUParticles2D
 @export var WeightLabel : RichTextLabel
 @export var DefenceLabel : RichTextLabel
+
+@export_group("Animation")
+@export var drift_radius: Vector2 = Vector2(24.0, 12.0)
+@export var drift_speed: float = 0.7
+
+@export var bob_height: float = 8.0
+@export var bob_speed: float = 1.6
+
+@export var wobble_amount_degrees: float = 3.0
+@export var wobble_speed: float = 2.0
+
+@export var turn_smoothing: float = 8.0
+@export var facing_offset_degrees: float = 0.0
+
+@export_group("Damage Pushback")
+@export var pushback_strength: float = 250.0
+@export var pushback_return_strength: float = 35.0
+@export var pushback_damping: float = 8.0
+@export var damage_wobble_degrees: float = 12.0
+@export var damage_wobble_decay: float = 7.0
+
+var time: float = 0.0
+var phase: float = 0.0
+var pushback_offset: Vector2 = Vector2.ZERO
+var pushback_velocity: Vector2 = Vector2.ZERO
+var lastPos : Vector2
+var returnOffset : Vector2
+
+var damage_wobble: float = 0.0
 
 const StatText = "[color=#ffc315]HULL[/color][p][color=#6be2e9]SHIELD[/color][p][color=#308a4d]SPEED[/color][p][color=#f35033]FPWR[/color]"
 
@@ -55,7 +84,7 @@ func Destroy() -> void:
 	var mat = ExplosionPart.process_material as ParticleProcessMaterial
 	mat.scale_max = 0.6
 	ExplosionPart.emitting = true
-	$HBoxContainer/Control/TextureRect/ExplosionSound.play()
+	$HBoxContainer/Control/Control/TextureRect/ExplosionSound.play()
 	var RandomPos = ShipIcon.global_position + Vector2(randf_range(-100, 100), randf_range(-100, 100))
 	var MoveTw = create_tween()
 	MoveTw.set_ease(Tween.EASE_IN)
@@ -101,7 +130,7 @@ func Destroy() -> void:
 	$HBoxContainer/VBoxContainer/PanelContainer2.queue_free()
 	
 	await MoveTw.finished
-	$HBoxContainer/Control/TextureRect/LandSound.play()
+	$HBoxContainer/Control/Control/TextureRect/LandSound.play()
 	mat.scale_max = 0.1
 	ExplosionPart.restart()
 	ExplosionPart.emitting = true
@@ -112,34 +141,111 @@ func _ready() -> void:
 	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2.visible = false
 	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3.visible = false
 	HullLabel.visible = false
-	#PassiveParent.visible = false
 	ToggleFire(false)
-	#set_physics_process(false)
+	phase = randf() * TAU
 
-#func _physics_process(_delta: float) -> void:
-	#PositionCard()
-	##CurrentCardShown.global_position = get_global_mouse_position() - CurrentCardShown.size
-#
-#func PositionCard() -> void:
-	#
-	#CurrentCardShown.global_position = get_viewport_rect().size / 2.0 - CurrentCardShown.size / 2
+
+
+func _process(delta: float) -> void:
+	if (Destroyed):
+		return
+	
+	
+	
+	time += delta
+
+	_update_pushback(delta)
+	
+	var drift := Vector2(
+		cos(time * drift_speed + phase) * drift_radius.x,
+		sin(time * drift_speed * 1.37 + phase) * drift_radius.y
+	)
+
+	var bob := Vector2(
+		0.0,
+		sin(time * bob_speed + phase) * bob_height
+	)
+	
+	#if (pushback_offset.is_equal_approx(Vector2.ZERO)):
+		#apply_damage_pushback(0,0,null)
+	if (lastPos != ShipIcon.global_position):
+		returnOffset += ShipIcon.global_position - lastPos
+
+	ShipIcon.position = drift + bob + pushback_offset - returnOffset
+	lastPos = ShipIcon.global_position
+	returnOffset = returnOffset.lerp(Vector2.ZERO, delta * 4)
+	#returnOffset = returnOffset.move_toward(Vector2.ZERO, delta * 100)
+
+	# The visual center of the Control
+	var my_center := ShipIcon.global_position
+
+	var center = get_viewport_rect().size / 2
+	center.y = clamp(center.y, my_center.y - 30, my_center.y + 30)
+	var direction_to_center = center - my_center
+
+	if direction_to_center.length_squared() > 0.001:
+		var target_rotation := direction_to_center.angle() - deg_to_rad(90)
+		target_rotation += deg_to_rad(facing_offset_degrees)
+
+		var wobble := sin(time * wobble_speed + phase) * deg_to_rad(wobble_amount_degrees)
+		var hit_wobble := sin(time * 28.0) * deg_to_rad(damage_wobble)
+		target_rotation += wobble + hit_wobble
+
+		ShipIcon.rotation = lerp_angle(ShipIcon.rotation, target_rotation, delta * turn_smoothing)
+		
+	ShadowPivot.rotation = -ShipIcon.rotation - deg_to_rad(90)
+	ShadowPivot.get_child(0).rotation = ShipIcon.rotation + deg_to_rad(90)
+	
+	
+
+func _update_pushback(delta: float) -> void:
+	# Spring back toward the normal idle position.
+	pushback_velocity += -pushback_offset * pushback_return_strength * delta
+
+	# Dampen the motion so it settles.
+	pushback_velocity = pushback_velocity.lerp(Vector2.ZERO, pushback_damping * delta)
+
+	pushback_offset += pushback_velocity * delta
+
+	# Damage wobble fadeout.
+	damage_wobble = move_toward(damage_wobble, 0.0, damage_wobble_decay * delta)
+
+
+func apply_damage_pushback(amm : float, shieldamm : float, Instigator : BattleShipStats, strength: float = 250) -> void:
+	if (Instigator == null):
+		return
+	var my_center := ShipIcon.global_position
+
+	var center = get_viewport_rect().size / 2
+	# Push away from the thing that hit us.
+	var direction = my_center - center
+
+	if direction.length_squared() < 0.001:
+		# Fallback: push away from the world center.
+		direction = my_center - center
+
+	if direction.length_squared() < 0.001:
+		direction = Vector2.RIGHT
+
+	direction = direction.normalized()
+
+	pushback_velocity += direction * 800
+	damage_wobble = 1.0
 
 func Pop(t : bool):
 	var PopTween = create_tween()
-	var FinalPos : Vector2 = Vector2(0, $HBoxContainer/Control.position.y)
+	var FinalPos : Vector2 = Vector2(0, 0)
 	if (t):
 		if (Fr):
-			FinalPos.x = 270
+			FinalPos.x = 100
 		else:
-			FinalPos.x = -90
+			FinalPos.x = -40
 	else:
-		if (Fr):
-			FinalPos.x = 180
-		else:
-			FinalPos.x = 0
+		FinalPos.x = 30
+
 	PopTween.set_ease(Tween.EASE_OUT)
 	PopTween.set_trans(Tween.TRANS_QUAD)
-	PopTween.tween_property($HBoxContainer/Control, "position", FinalPos, 0.2)
+	PopTween.tween_property($HBoxContainer/Control/Control, "position", FinalPos, 0.2)
 	await PopTween.finished
 	
 func SetStats(S : BattleShipStats, Friendly : bool) -> void:
@@ -158,8 +264,14 @@ func SetStats(S : BattleShipStats, Friendly : bool) -> void:
 	WeightLabel.text = "[color=#828dff]WGHT[/color] {0}".format([S.GetWeight()]).replace(".0", "")
 	DefenceLabel.text = "[color=#7bb0b4]DEF[/color] {0}".format([roundi(S.GetDef())])
 	
-	ShipIcon.flip_v = !Friendly
-	ShadowPivot.get_child(0).flip_v = !Friendly
+	var t : Texture2D = S.ShipIcon
+	var tsize = t.get_size().x
+	FirePart.scale.x = tsize / 2
+	FirePart.scale.y = FirePart.scale.x * 1.5
+	
+	S.ShipDamaged.connect(apply_damage_pushback)
+	#ShipIcon.flip_v = !Friendly
+	#ShadowPivot.get_child(0).flip_v = !Friendly
 	
 	if (Friendly):
 		$HBoxContainer.move_child($HBoxContainer/VBoxContainer, 0)

@@ -31,7 +31,7 @@ func Init() -> void:
 		var Picked : Array[WorldviewQuestion]
 		
 		while Picked.size() < 3:
-			var randomIndex = World.instanceRandom.RandIRange(0, PossibleQuestions.size() - 1)
+			var randomIndex = Rand.InstanceRandom.RandIRange(0, PossibleQuestions.size() - 1)
 			var Question = PossibleQuestions[randomIndex]
 			if (Question.WorldviewSkill != Stat):
 				continue
@@ -41,7 +41,7 @@ func Init() -> void:
 			
 		PickedQuestions.append_array(Picked)
 		
-	World.instanceRandom.shuffle_array(PickedQuestions)
+	Rand.InstanceRandom.shuffle_array(PickedQuestions)
 	DiagButtons.visible = true
 	Text.visible = true
 	Text.text = IntroDialogue[CurrentIntroDialogue]

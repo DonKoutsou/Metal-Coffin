@@ -17,6 +17,8 @@ static func GetInstance() -> CageFightWorld:
 	return Instance
 
 func _ready() -> void:
+	Rand.NewStaticRand()
+	
 	ScrUI.StateSwitched.connect(ToggleFullScreen)
 	Instance = self
 	ScrUI.DoIntroFullScreen(ScreenUI.ScreenState.FULL_SCREEN)

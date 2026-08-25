@@ -49,7 +49,7 @@ func _DrawMapLines(SpotLocs : PackedVector2Array) -> void:
 			var pointamm = roundi(dist / 80)
 			var offsetperpoint = dist/pointamm
 			for g in pointamm:
-				var offs = (dir * (offsetperpoint * g)) + Vector2(World.instanceRandom.RandFRange(-20, 20), World.instanceRandom.RandFRange(-20, 20))
+				var offs = (dir * (offsetperpoint * g)) + Vector2(Rand.InstanceRandom.RandFRange(-20, 20), Rand.InstanceRandom.RandFRange(-20, 20))
 				#Mut.lock()
 				Line.append(point1 + offs)
 				#Mut.unlock()

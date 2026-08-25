@@ -5,7 +5,7 @@ class_name BattleShipStats
 var Name : String
 
 var ShipIcon : Texture
-var CaptainIcon : Texture
+var CaptainIcon : String
 
 var Funds : int
 var Convoy : bool

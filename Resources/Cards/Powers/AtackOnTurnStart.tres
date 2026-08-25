@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://b2ykcfrjmixps"]
+
+[ext_resource type="Texture2D" uid="uid://bv3vkwi5obsul" path="res://Assets/Cards/BarrageReload.png" id="1_73p2o"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="2_5jj34"]
+[ext_resource type="Script" uid="uid://ckmhix4w7rxv5" path="res://Scenes/Card_Fight/Card/Card_Modules/BuffCardModule.gd" id="3_5jj34"]
+[ext_resource type="Script" uid="uid://credtpxpn7llw" path="res://Scenes/Card_Fight/Card/Card_Passives/OnTurnStartedPassive.gd" id="4_1cjgn"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="5_v8bm8"]
+
+[sub_resource type="Resource" id="Resource_34k3c"]
+script = ExtResource("3_5jj34")
+BuffDuration = 1
+BuffAmmount = 1.2
+TierUpgrade = 1.2
+TierUpgradeMethod = 1
+metadata/_custom_type_script = "uid://ckmhix4w7rxv5"
+
+[sub_resource type="Resource" id="Resource_mv4e3"]
+script = ExtResource("4_1cjgn")
+Module = SubResource("Resource_34k3c")
+metadata/_custom_type_script = "uid://credtpxpn7llw"
+
+[resource]
+script = ExtResource("5_v8bm8")
+Icon = ExtResource("1_73p2o")
+CardName = "Momentum"
+Energy = 2
+OnUsed = 2
+Passive = SubResource("Resource_mv4e3")
+Type = 3
+IsDisposition = true
+metadata/_custom_type_script = "uid://cg2tajspojecm"

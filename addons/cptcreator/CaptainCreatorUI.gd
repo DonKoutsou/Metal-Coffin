@@ -286,7 +286,7 @@ func _on_change_pic_pressed() -> void:
 	
 #------------------------------------------------------------
 func NewPicSelected(NewPic) -> void:
-	CurrentlySelectedCap.CaptainPortrait = load(NewPic)
+	CurrentlySelectedCap.CaptainPortrait = NewPic
 	SaveCurrentCap()
 
 #------------------------------------------------------------

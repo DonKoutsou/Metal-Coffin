@@ -1,6 +1,5 @@
 [gd_resource type="Resource" script_class="Captain" format=3 uid="uid://cga5buofwr6yr"]
 
-[ext_resource type="Texture2D" uid="uid://dlebd41j7q7s1" path="res://Assets/CaptainPortraits/Captain10.png" id="1_2qy3x"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scenes/MapShips/Stats/ShipStat.gd" id="2_ot5w6"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scenes/MapShips/Stats/Captain.gd" id="3_5m53b"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_43sb5"]
@@ -119,7 +118,7 @@ StatName = 22
 [resource]
 script = ExtResource("3_5m53b")
 CaptainName = "Sirius"
-CaptainPortrait = ExtResource("1_2qy3x")
+CaptainPortrait = "uid://dlebd41j7q7s1"
 ShipIcon = ExtResource("3_kc55u")
 CaptainStats = Array[ExtResource("2_ot5w6")]([SubResource("Resource_wdy4b"), SubResource("Resource_8m37w"), SubResource("Resource_fckyd"), SubResource("Resource_vknwa"), SubResource("Resource_41ee3"), SubResource("Resource_367st"), SubResource("Resource_48366"), SubResource("Resource_hl7ky"), SubResource("Resource_1mnok"), SubResource("Resource_8kp6e"), SubResource("Resource_0d70u"), SubResource("Resource_2b1rh"), SubResource("Resource_eugd7"), SubResource("Resource_qfj73"), SubResource("Resource_ynkuk"), SubResource("Resource_opkhg"), SubResource("Resource_lumq3"), SubResource("Resource_nheko"), SubResource("Resource_al4bv"), SubResource("Resource_6t7up"), SubResource("Resource_hystv"), SubResource("Resource_dt3dj"), SubResource("Resource_cbi3g"), SubResource("Resource_0cjm6")])
 CheckForErrors = true

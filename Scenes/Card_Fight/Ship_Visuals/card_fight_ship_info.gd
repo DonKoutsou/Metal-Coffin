@@ -14,7 +14,7 @@ func _ready() -> void:
 	UISoundMan.GetInstance().AddSelf($VBoxContainer/Button)
 
 func SetUpShip(Ship : BattleShipStats) -> void:
-	CaptainPortrait.texture = Ship.CaptainIcon
+	CaptainPortrait.texture = load(Ship.CaptainIcon)
 	ShipIcon.texture = Ship.ShipIcon
 	ShipName.text = Ship.Name
 	#ShipDesctext = Ship.

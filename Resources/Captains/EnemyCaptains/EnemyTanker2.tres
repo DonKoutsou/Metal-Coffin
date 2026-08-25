@@ -1,6 +1,5 @@
 [gd_resource type="Resource" script_class="Captain" format=3 uid="uid://wdewnahxdu77"]
 
-[ext_resource type="Texture2D" uid="uid://b4fgn6probadw" path="res://Assets/CaptainPortraits/plane_Wheel_BaseColor.png" id="1_s4bbh"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scenes/MapShips/Stats/ShipStat.gd" id="2_nhpak"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_hsc4q"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="3_shbq8"]
@@ -126,7 +125,6 @@ StatName = 21
 resource_local_to_scene = true
 script = ExtResource("4_a63wb")
 CaptainName = "T2"
-CaptainPortrait = ExtResource("1_s4bbh")
 ShipIcon = ExtResource("5_jklya")
 CaptainStats = Array[ExtResource("2_nhpak")]([SubResource("Resource_k7kt8"), SubResource("Resource_nn3aw"), SubResource("Resource_0a6up"), SubResource("Resource_he0oc"), SubResource("Resource_q78cv"), SubResource("Resource_rpqpm"), SubResource("Resource_vhm23"), SubResource("Resource_lqay8"), SubResource("Resource_0y3bp"), SubResource("Resource_vppjj"), SubResource("Resource_g5n4n"), SubResource("Resource_35qqk"), SubResource("Resource_37pgh"), SubResource("Resource_jy3ac"), SubResource("Resource_udlwg"), SubResource("Resource_i7vcv"), SubResource("Resource_jklya"), SubResource("Resource_1qgbr"), SubResource("Resource_rxk6e"), SubResource("Resource_fdpd8"), SubResource("Resource_74hwk"), SubResource("Resource_y82q1"), SubResource("Resource_swadk")])
 ShipCallsign = "T2"

@@ -25,7 +25,7 @@ func SetCpt(Cpt : Captain) -> void:
 	SetVisuals2(Cpt)
 
 func SetVisuals(Cap : Captain) -> void:
-	CapPortrait.texture = Cap.CaptainPortrait
+	CapPortrait.texture = load(Cap.CaptainPortrait)
 
 	CapName.text = Cap.GetCaptainName()
 

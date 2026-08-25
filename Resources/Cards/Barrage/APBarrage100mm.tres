@@ -25,6 +25,6 @@ Icon = ExtResource("1_ybroc")
 CardName = "AP Barragge"
 Energy = 1
 AllowDuplicates = true
-Consume = true
+OnUsed = 1
 OnPerformModule = SubResource("Resource_fktga")
 WeapT = 1

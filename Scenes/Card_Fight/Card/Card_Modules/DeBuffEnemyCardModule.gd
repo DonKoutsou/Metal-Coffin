@@ -59,7 +59,7 @@ func Handle(_Performer : BattleShipStats, Action : CardStats, Targets : Array[Ba
 	for g in Targets:
 		if (g == null):
 			continue
-		TargetViz.append(g.ShipViz)
+		TargetViz.append(g.ShipViz.ShipIcon)
 
 		if (StatToDeBuff == CardModule.Stat.FIREPOWER):
 			Callables.append(g.DeBuffSpeed.bind(DebuffAmmount, DebuffDurration))

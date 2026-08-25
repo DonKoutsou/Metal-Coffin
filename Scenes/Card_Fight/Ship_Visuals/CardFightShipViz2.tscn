@@ -7,7 +7,7 @@
 [ext_resource type="StyleBox" uid="uid://cq66xt1psso06" path="res://Theme/GreyPanel.tres" id="4_0orxy"]
 [ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scenes/Card_Fight/External_UI/CardHandContainer.gd" id="4_cmntb"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="6_wmwbv"]
-[ext_resource type="Texture2D" uid="uid://bx78x3avxyhmf" path="res://Assets/ShipTextures/Hull5.png" id="7_2rekq"]
+[ext_resource type="Texture2D" uid="uid://cyqs71v0yadm1" path="res://Assets/ShipTextures/Hull1.png" id="7_2rekq"]
 [ext_resource type="Texture2D" uid="uid://de1cx0wwuxx0x" path="res://Assets/smoke_09.png" id="7_cmntb"]
 [ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/ShipTextures/Hull3.png" id="7_ej477"]
 [ext_resource type="AudioStream" uid="uid://iiqji6xlmffd" path="res://Assets/Sounds/Explosion.wav" id="8_r755l"]
@@ -167,7 +167,7 @@ script = ExtResource("2_ydw5a")
 CardScene = "res://Scenes/Card_Fight/Card/Card.tscn"
 floaterScene = ExtResource("3_ej477")
 ShipNameLabel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer/Label")
-ShipIcon = NodePath("HBoxContainer/Control/TextureRect")
+ShipIcon = NodePath("HBoxContainer/Control/Control/TextureRect")
 HullBar = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer2/ProgressBar")
 HullLabel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer2/Hull")
 ShieldBar = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer2/ProgressBar/ProgressBar2")
@@ -176,19 +176,23 @@ SpeedBuff = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/SpeedBuff")
 SpeedDeBuff = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/SpeedDeBuff")
 FPBuff = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/FirepowerBuff")
 FPDeBuff = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/FirepowerDeBuff")
-FirePart = NodePath("HBoxContainer/Control/TextureRect/Fire")
-ExplosionPart = NodePath("HBoxContainer/Control/TextureRect/Explosion")
-SmokePart = NodePath("HBoxContainer/Control/TextureRect/Smoke")
+FirePart = NodePath("HBoxContainer/Control/Control/TextureRect/Fire")
+ExplosionPart = NodePath("HBoxContainer/Control/Control/TextureRect/Explosion")
+SmokePart = NodePath("HBoxContainer/Control/Control/TextureRect/Smoke")
 FPLabel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2/Label")
 SPDLabel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2/Label2")
 HasMovePanel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/Panel")
 ActionParent = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer/ActionParent")
 PassiveParent = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer/PassiveParent")
-ShadowPivot = NodePath("HBoxContainer/Control/TextureRect/ShadowPivot")
+ShadowPivot = NodePath("HBoxContainer/Control/Control/TextureRect/ShadowPivot")
 DefBuff = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/DefBuff")
 DefDeBuff = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/DefDeBuff")
 WeightLabel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3/Label")
 DefenceLabel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3/Label2")
+drift_radius = Vector2(6, 12)
+bob_speed = 0.46
+wobble_amount_degrees = 0.5
+pushback_return_strength = 10.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=977037210]
 layout_mode = 1
@@ -450,7 +454,12 @@ custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 size_flags_vertical = 6
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Control" unique_id=1544881616]
+[node name="Control" type="Control" parent="HBoxContainer/Control" unique_id=823988004]
+anchors_preset = 0
+offset_left = 30.0
+offset_right = 30.0
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Control/Control" unique_id=1544881616]
 texture_filter = 3
 layout_mode = 1
 anchors_preset = 8
@@ -469,11 +478,11 @@ texture = ExtResource("7_2rekq")
 expand_mode = 2
 stretch_mode = 3
 
-[node name="ShadowPivot" type="Control" parent="HBoxContainer/Control/TextureRect" unique_id=958676430]
+[node name="ShadowPivot" type="Control" parent="HBoxContainer/Control/Control/TextureRect" unique_id=958676430]
 show_behind_parent = true
 anchors_preset = 0
 
-[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/Control/TextureRect/ShadowPivot" unique_id=2103533902]
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/Control/Control/TextureRect/ShadowPivot" unique_id=2103533902]
 modulate = Color(0, 0, 0, 0.5)
 show_behind_parent = true
 layout_mode = 1
@@ -494,7 +503,7 @@ texture = ExtResource("7_ej477")
 expand_mode = 1
 stretch_mode = 3
 
-[node name="Smoke" type="GPUParticles2D" parent="HBoxContainer/Control/TextureRect" unique_id=415524541]
+[node name="Smoke" type="GPUParticles2D" parent="HBoxContainer/Control/Control/TextureRect" unique_id=415524541]
 visible = false
 position = Vector2(32.25, -3.80784e-05)
 scale = Vector2(5.24097, 5.24097)
@@ -507,12 +516,20 @@ fixed_fps = 20
 interpolate = false
 process_material = SubResource("ParticleProcessMaterial_rmogf")
 
-[node name="Fire" parent="HBoxContainer/Control/TextureRect" unique_id=1440653444 instance=ExtResource("12_2rekq")]
-position = Vector2(19.375, 0)
-rotation = 1.5707964
-scale = Vector2(33.16942, 50.075054)
+[node name="Fire" parent="HBoxContainer/Control/Control/TextureRect" unique_id=1440653444 instance=ExtResource("12_2rekq")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 0.0
+offset_right = 1.0
+offset_bottom = 1.0
+scale = Vector2(34.515, 52.108)
+pivot_offset_ratio = Vector2(0.5, 1)
 
-[node name="Explosion" type="GPUParticles2D" parent="HBoxContainer/Control/TextureRect" unique_id=755917109]
+[node name="Explosion" type="GPUParticles2D" parent="HBoxContainer/Control/Control/TextureRect" unique_id=755917109]
 position = Vector2(1.90735e-05, -3.20142e-10)
 emitting = false
 amount = 3
@@ -522,11 +539,11 @@ one_shot = true
 explosiveness = 0.8
 process_material = SubResource("ParticleProcessMaterial_0orxy")
 
-[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="HBoxContainer/Control/TextureRect" unique_id=2020135589]
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="HBoxContainer/Control/Control/TextureRect" unique_id=2020135589]
 stream = ExtResource("8_r755l")
 bus = &"Sounds"
 
-[node name="LandSound" type="AudioStreamPlayer2D" parent="HBoxContainer/Control/TextureRect" unique_id=1614739803]
+[node name="LandSound" type="AudioStreamPlayer2D" parent="HBoxContainer/Control/Control/TextureRect" unique_id=1614739803]
 stream = ExtResource("8_r755l")
 pitch_scale = 0.3
 bus = &"MapSounds"

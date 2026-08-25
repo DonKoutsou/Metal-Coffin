@@ -7,6 +7,8 @@ static var customSeed : int = -1
 var r : Xoroshiro128
 var mut : Mutex
 
+static var InstanceRandom : Rand
+
 #----------------------------------------
 func GetState() -> Dictionary:
 	mut.lock()
@@ -85,3 +87,10 @@ static func NewRand(state : Dictionary = {}) -> Rand:
 	rand.Init(state)
 	print("Started new random with state {0}".format([rand.GetState()]))
 	return rand
+
+#----------------------------------------
+static func NewStaticRand(state : Dictionary = {}) -> void:
+	var rand = Rand.new()
+	rand.Init(state)
+	InstanceRandom = rand
+	print("Started new static random with state {0}".format([rand.GetState()]))

@@ -37,6 +37,7 @@ uppercase = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/h_separation = 3
 
 [node name="PanelContainer2" type="PanelContainer" parent="." unique_id=53729161]
 layout_mode = 2
@@ -57,6 +58,7 @@ uppercase = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
+theme_override_constants/h_separation = 3
 
 [node name="PanelContainer3" type="PanelContainer" parent="." unique_id=1988670620]
 layout_mode = 2

@@ -32,9 +32,9 @@ func Handle(Performer : BattleShipStats, Action : CardStats, Targets : Array[Bat
 	for g in Targets:
 		if (g == null):
 			continue
-		TargetViz.append(g.ShipViz)
+		TargetViz.append(g.ShipViz.ShipIcon)
 		var hand = g.deck.Hand.duplicate()
-		World.instanceRandom.shuffle_array(hand)
+		Rand.InstanceRandom.shuffle_array(hand)
 		
 		for i in GetCardAmm(Action.Tier):
 			var c : CardStats = hand.pop_back()

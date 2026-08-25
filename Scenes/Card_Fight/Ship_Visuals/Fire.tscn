@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://rjp78jwbs17y"]
 
 [ext_resource type="Shader" uid="uid://mhis80823qfc" path="res://Scenes/Card_Fight/Ship_Visuals/Fire.tres" id="1_7ct8h"]
-[ext_resource type="Texture2D" uid="uid://gvprhniu08rn" path="res://Assets/Fire/T_1_pixel.jpg" id="2_v30db"]
 [ext_resource type="Texture2D" uid="uid://bgn0wbojedfhw" path="res://Assets/Fire/T_Gradient_circle22.jpg" id="2_y8ytq"]
 [ext_resource type="Texture2D" uid="uid://q4nirdqn1udg" path="res://Assets/Fire/T_VFX_Noise_12.PNG" id="3_sr0d0"]
 
@@ -40,8 +39,14 @@ shader_parameter/Texture2DParameter3 = ExtResource("2_y8ytq")
 shader_parameter/Texture2DParameter4 = SubResource("GradientTexture2D_rdq0u")
 shader_parameter/Color = SubResource("GradientTexture1D_y8ytq")
 
-[node name="TextureRect" type="Sprite2D" unique_id=1440653444]
+[node name="TextureRect" type="ColorRect" unique_id=508684237]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_spb5j")
-scale = Vector2(148.01958, 157.99998)
-texture = ExtResource("2_v30db")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 320.0
+offset_right = -320.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)

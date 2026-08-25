@@ -20,7 +20,7 @@ metadata/_custom_type_script = "uid://bcb7fsgw7n04o"
 [resource]
 script = ExtResource("2_gbmu4")
 Icon = ExtResource("1_wljg3")
-Consume = true
+OnUsed = 2
 Passive = SubResource("Resource_ri5s0")
 Type = 3
 PutOnTop = true

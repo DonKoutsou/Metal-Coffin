@@ -1,6 +1,5 @@
 [gd_resource type="Resource" script_class="Captain" format=3 uid="uid://baci05am3ufd7"]
 
-[ext_resource type="Texture2D" uid="uid://b0phhvss368w5" path="res://Assets/CaptainPortraits/Captain4.png" id="1_th3p2"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scenes/MapShips/Stats/Captain.gd" id="2_g2kmb"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scenes/MapShips/Stats/ShipStat.gd" id="2_vqeqm"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_a7xj7"]
@@ -9,7 +8,7 @@
 [ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FT-1000.tres" id="6_38vj0"]
 [ext_resource type="Resource" uid="uid://k0unclveytur" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/MediumEngine.tres" id="7_777j8"]
 [ext_resource type="Resource" uid="uid://hncmt3swcqbu" path="res://Resources/Items/ShipParts/MG/MediumMachinegun100mm.tres" id="7_b2r4g"]
-[ext_resource type="Texture2D" uid="uid://cmor560rv0qcn" path="res://Assets/ShipTextures/ShipElena.png" id="7_pbppl"]
+[ext_resource type="Texture2D" uid="uid://cmor560rv0qcn" path="res://Assets/ShipTextures/Hull11.png" id="7_pbppl"]
 [ext_resource type="Resource" uid="uid://p0sngnrp8hgi" path="res://Resources/Items/ShipParts/ELINT/MediumElint.tres" id="8_khliy"]
 [ext_resource type="Resource" uid="uid://dxg1gr0twgav3" path="res://Resources/Items/ShipParts/Radar/MediumRadar.tres" id="9_gnr4m"]
 [ext_resource type="Resource" uid="uid://b4slsaff7t4ha" path="res://Resources/Items/Ammo/FireAmmoMagazine100mm.tres" id="10_4nffx"]
@@ -130,7 +129,7 @@ StatName = 21
 [resource]
 script = ExtResource("2_g2kmb")
 CaptainName = "Elena"
-CaptainPortrait = ExtResource("1_th3p2")
+CaptainPortrait = "uid://b0phhvss368w5"
 ShipIcon = ExtResource("7_pbppl")
 CaptainStats = Array[ExtResource("2_vqeqm")]([SubResource("Resource_t21ml"), SubResource("Resource_bob4r"), SubResource("Resource_laqgl"), SubResource("Resource_ecade"), SubResource("Resource_ws6c0"), SubResource("Resource_mwl6h"), SubResource("Resource_fem14"), SubResource("Resource_06of4"), SubResource("Resource_35fxm"), SubResource("Resource_pbppl"), SubResource("Resource_ohxm6"), SubResource("Resource_iditt"), SubResource("Resource_c64jo"), SubResource("Resource_n1x11"), SubResource("Resource_moxpq"), SubResource("Resource_6yq07"), SubResource("Resource_ri8ae"), SubResource("Resource_hvxhi"), SubResource("Resource_2de6x"), SubResource("Resource_m0quv"), SubResource("Resource_a4gmq"), SubResource("Resource_cvxsd"), SubResource("Resource_pmlqk")])
 StartingItems = Array[ExtResource("3_a7xj7")]([ExtResource("7_777j8"), ExtResource("6_38vj0"), ExtResource("9_gnr4m"), ExtResource("8_khliy"), ExtResource("12_pbppl"), ExtResource("7_b2r4g"), ExtResource("10_4nffx"), ExtResource("10_4nffx"), ExtResource("10_4nffx"), ExtResource("10_4nffx"), ExtResource("10_4nffx")])

@@ -3,7 +3,7 @@ extends Resource
 class_name Captain
 
 @export var CaptainName : String
-@export var CaptainPortrait : Texture
+@export_file("*.png") var CaptainPortrait : String
 @export var ShipIcon : Texture
 @export var CaptainStats : Array[ShipStat]
 #var MappedStats : Array[STAT_CONST.STATS]

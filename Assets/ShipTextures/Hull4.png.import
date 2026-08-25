@@ -3,23 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b7dafanmawwi0"
-path.bptc="res://.godot/imported/Hull4.png-15d44a74d0b46bc34ff06d0925704fcf.bptc.ctex"
-path.astc="res://.godot/imported/Hull4.png-15d44a74d0b46bc34ff06d0925704fcf.astc.ctex"
+path="res://.godot/imported/Hull4.png-15d44a74d0b46bc34ff06d0925704fcf.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc", "etc2_astc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Assets/ShipTextures/Hull4.png"
-dest_files=["res://.godot/imported/Hull4.png-15d44a74d0b46bc34ff06d0925704fcf.bptc.ctex", "res://.godot/imported/Hull4.png-15d44a74d0b46bc34ff06d0925704fcf.astc.ctex"]
+dest_files=["res://.godot/imported/Hull4.png-15d44a74d0b46bc34ff06d0925704fcf.ctex"]
 
 [params]
 
-compress/mode=2
-compress/high_quality=true
-compress/high_quality_mode=0
+compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

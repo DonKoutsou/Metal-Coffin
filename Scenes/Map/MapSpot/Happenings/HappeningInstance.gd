@@ -64,9 +64,11 @@ func PresentHappening(Hap : Happening):
 
 func NextStage() -> void:
 	var Stage = CurrentBranch[CurrentStage]
-	HappeningBackgroundTexture.texture = Stage.StagePic
 	
-	if (Stage.StagePic != null):
+	
+	if (Stage.StagePic != ""):
+		HappeningBackgroundTexture.texture = load(Stage.StagePic)
+		
 		var bTw = create_tween()
 		bTw.set_ease(Tween.EASE_OUT)
 		bTw.set_trans(Tween.TRANS_QUAD)
@@ -74,7 +76,7 @@ func NextStage() -> void:
 		bTw.tween_property($VBoxContainer/HBoxContainer2/Control, "custom_minimum_size", Vector2(320,0), 1)
 
 	else:
-
+		HappeningBackgroundTexture.texture = null
 		var bTw = create_tween()
 		bTw.set_ease(Tween.EASE_OUT)
 		bTw.set_trans(Tween.TRANS_QUAD)

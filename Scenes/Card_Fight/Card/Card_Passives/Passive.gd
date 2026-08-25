@@ -70,24 +70,24 @@ func GetPossibleTargets(data : Dictionary, PassiveOwner : BattleShipStats) -> Ar
 		friendly.erase(PassiveOwner)
 		if (friendly.size() == 0):
 			return targets
-		var randomIndex : int = World.instanceRandom.RandIRange(0, friendly.size() - 1)
+		var randomIndex : int = Rand.InstanceRandom.RandIRange(0, friendly.size() - 1)
 		targets.append(friendly[randomIndex])
 		
 	else: if (Target == TargetType.RANDOM_FRIENDLY_INCLUSIVE):
-		var randomIndex : int = World.instanceRandom.RandIRange(0, data["Friendly"].size() - 1)
+		var randomIndex : int = Rand.InstanceRandom.RandIRange(0, data["Friendly"].size() - 1)
 		targets.append(data["Friendly"][randomIndex])
 		
 	else: if (Target == TargetType.RANDOM_ENEMY):
-		var randomIndex : int = World.instanceRandom.RandIRange(0, data["Enemy"].size() - 1)
+		var randomIndex : int = Rand.InstanceRandom.RandIRange(0, data["Enemy"].size() - 1)
 		targets.append(data["Enemy"][randomIndex])
 		
 	else: if (Target == TargetType.INSTIGATOR):
 		targets.append(data["Performer"])
 	
 	else: if (Target == TargetType.RANDOM_SHIP):
-		var randomIndex : int = World.instanceRandom.RandIRange(0, data["Friendly"].size() - 1)
+		var randomIndex : int = Rand.InstanceRandom.RandIRange(0, data["Friendly"].size() - 1)
 		targets.append(data["Friendly"][randomIndex])
-		var randomIndex2 : int = World.instanceRandom.RandIRange(0, data["Friendly"].size() - 1)
+		var randomIndex2 : int = Rand.InstanceRandom.RandIRange(0, data["Friendly"].size() - 1)
 		targets.append(data["Enemy"][randomIndex2])
 	
 	return targets
@@ -121,4 +121,6 @@ enum ActionType
 	CARD_DISCARDED,
 	FIRE_CAUSED,
 	FIRE_TICK,
+	TURN_START,
+	TURN_END,
 }
