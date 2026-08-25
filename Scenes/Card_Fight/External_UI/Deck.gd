@@ -122,7 +122,10 @@ func DrawSpecificFromList(list : Array[CardStats]) -> void:
 #--------------------------------------------
 func DrawSingleOfType(type : CardStats.CardType) -> void:
 	var PossibleCards : Array[CardStats]
-	
+	if (DeckPile.size() <= 0):
+		await ShuffleDiscardedIntoDeck()
+	if (DeckPile.size() <= 0):
+		return
 	for g : CardStats in DeckPile:
 		var Exists : bool = false
 		for C in PossibleCards:
