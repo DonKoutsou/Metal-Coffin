@@ -13,14 +13,15 @@ var StMenu : StartingMenu
 var Wor : World
 
 const APPID = "3679430"
- #Called when the node enters the scene tree for the first time.
 
+ #Called when the node enters the scene tree for the first time.
+#-----------------------------------------------------------------------------------
 func _init() -> void:
 	if (OS.get_name() == "Windows"):
 		OS.set_environment("SteamAppID", APPID)
 		OS.set_environment("SteamGameID", APPID)
 
-
+#-----------------------------------------------------------------------------------
 func _ready() -> void:
 	LoadSavedSettings()
 	#get_viewport().disable_3d = true
@@ -46,6 +47,7 @@ func _ready() -> void:
 			
 	await Start()
 
+#-----------------------------------------------------------------------------------
 func Start() -> void:
 	var StudioAnimScene = ResourceLoader.load(StudioAnim)
 	var vidpl = StudioAnimScene.instantiate() as StudioAnimation
@@ -56,6 +58,7 @@ func Start() -> void:
 	vidpl.queue_free()
 	await SpawnMenu()
 
+#-----------------------------------------------------------------------------------
 func SpawnMenu() -> void:
 	var Menu = await Helper.LoadThreaded(StartingMenuScene).Sign
 	StMenu = Menu.instantiate() as StartingMenu
@@ -66,6 +69,7 @@ func SpawnMenu() -> void:
 	StMenu.FightStart.connect(StartCageFight)
 	UISoundMan.GetInstance().Refresh()
 
+#-----------------------------------------------------------------------------------
 func StartPrologue(Load : bool, SkipStory : bool = false, customSeed : int = -1) -> void:
 	if (customSeed == -1):
 		Rand.customSeed = randi()
@@ -89,6 +93,7 @@ func StartPrologue(Load : bool, SkipStory : bool = false, customSeed : int = -1)
 	#$PanelContainer.visible = false
 	Wor.connect("WRLD_OnGameEnded", OnGameEnded)
 
+#-----------------------------------------------------------------------------------
 func StartCageFight() -> void:
 	var FightScene = await Helper.LoadThreaded(CageFightGameScene).Sign
 	var fight = FightScene.instantiate() as CageFightWorld
@@ -100,6 +105,7 @@ func StartCageFight() -> void:
 	#$PanelContainer.visible = false
 	fight.FightEnded.connect(FightEnded.bind(fight))
 
+#-----------------------------------------------------------------------------------
 func StartGame(Load : bool, _SkipStory : bool = false) -> void:
 	#TODO enable on full release
 	if (!ActionTracker.GetInstance().DidPrologue()):
@@ -126,27 +132,30 @@ func StartGame(Load : bool, _SkipStory : bool = false) -> void:
 	#$PanelContainer.visible = false
 	Wor.WRLD_OnGameEnded.connect(OnGameEnded)
 
+#-----------------------------------------------------------------------------------
 func DelSave() -> void:
-	
 	PopUpManager.GetInstance().DoFadeNotif("Saves have been nuked", StMenu.GetVp())
-	
 	SaveLoadManager.GetInstance().DeleteSave()
 	#ActionTracker.GetInstance().DeleteSave()
-	
+
+#-----------------------------------------------------------------------------------
 func FightEnded(Fight : CageFightWorld) -> void:
 	get_tree().paused = false
 	Fight.queue_free()
 	await SpawnMenu()
 
+#-----------------------------------------------------------------------------------
 func OnGameEnded() -> void:
 	get_tree().paused = false
 	Wor.TerminateWorld()
 	Wor.queue_free()
 	await SpawnMenu()
 
+#-----------------------------------------------------------------------------------
 func _exit_tree() -> void:
 	UpdateSavedSettings()
 
+#-----------------------------------------------------------------------------------
 func LoadSavedSettings() -> void:
 	if (!FileAccess.file_exists("user://Settings.tres")):
 		return
@@ -170,6 +179,7 @@ func LoadSavedSettings() -> void:
 	ScreenCamera.ShakeEffects = sav.ShakeEffect
 	SettingsPanel.HasRain = sav.Rain
 
+#-----------------------------------------------------------------------------------
 func UpdateSavedSettings() -> void:
 	var save = Saved_Settings.new()
 	save.FullScreen = DisplayServer.window_get_mode(0) == DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN

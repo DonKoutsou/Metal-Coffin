@@ -78,7 +78,7 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 							DamageReductionCard = DefCard
 					
 					if (Mod is OffensiveCardModule):
-						call_deferred("SpawnVisual", Viz, card, DefC, "Hit")
+						call_deferred("SpawnVisual", Viz, card, DefC, "")
 						Called = true
 					else : if (Mod is RecoilDamageModule):
 						call_deferred("SpawnVisual", Viz, card, DefC, "Recoil")
@@ -181,7 +181,7 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 				
 					
 			if (Data.size() > 1):
-				await wait(0.2)
+				await Helper.wait(0.2)
 			
 		card.KillCard(0.5, false)
 		if (Data.size() == 0 or Null or !Called):
@@ -191,9 +191,8 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 		card.CardKilled.connect(AnimEnded)
 		#AnimEnded()
 
+#-----------------------------------------------------------------------------------
 func SpawnVisual(Target : Control, AtackCard : Card, DeffenceCard : Card, FloaterText : String) -> void:
-	#await wait (0.15)
-	
 	AtackCardDestroyed.emit(AtackCard.global_position + (AtackCard.size / 2))
 	var AtackVisual : PackedScene = ResourceLoader.load(AtackVisualFile)
 	var Visual = AtackVisual.instantiate() as MissileViz
@@ -206,9 +205,8 @@ func SpawnVisual(Target : Control, AtackCard : Card, DeffenceCard : Card, Floate
 	
 	Visual.connect("Reached", TweenEnded.bind(Target , DeffenceCard, FloaterText))
 
+#-----------------------------------------------------------------------------------
 func SpawnShieldVisual(Target : Control, DefCard : Card, FloaterText : String) -> void:
-	#await wait (0.15)
-
 	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
 	
 	var ShieldVisual : PackedScene = ResourceLoader.load(ShieldVisualFile)
@@ -219,9 +217,8 @@ func SpawnShieldVisual(Target : Control, DefCard : Card, FloaterText : String) -
 
 	Visual.connect("Reached", ShieldTweenEnded.bind(Target, FloaterText))
 
+#-----------------------------------------------------------------------------------
 func SpawnFlameVisual(Target : Control, DefCard : Card, FloaterText : String) -> void:
-	#await wait (0.15)
-
 	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
 	
 	var ShieldVisual : PackedScene = ResourceLoader.load(FlameVisualFile)
@@ -232,10 +229,8 @@ func SpawnFlameVisual(Target : Control, DefCard : Card, FloaterText : String) ->
 
 	Visual.connect("Reached", ShieldTweenEnded.bind(Target, FloaterText))
 
-
+#-----------------------------------------------------------------------------------
 func SpawnCardVisual(Target : Control, DefCard : Card, FloaterText : String) -> void:
-	#await wait (0.15)
-
 	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
 	
 	var ShieldVisual : PackedScene = ResourceLoader.load(CardVisualFile)
@@ -246,9 +241,8 @@ func SpawnCardVisual(Target : Control, DefCard : Card, FloaterText : String) -> 
 
 	Visual.connect("Reached", ShieldTweenEnded.bind(Target, FloaterText))
 
+#-----------------------------------------------------------------------------------
 func SpawnEnergyVisual(Target : Control, DefCard : Card, FloaterText : String) -> void:
-	#await wait (0.15)
-
 	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
 	
 	var EnergyVisual : PackedScene = ResourceLoader.load(EnergyVisualFile)
@@ -259,9 +253,8 @@ func SpawnEnergyVisual(Target : Control, DefCard : Card, FloaterText : String) -
 
 	Visual.connect("Reached", ShieldTweenEnded.bind(Target, FloaterText))
 
+#-----------------------------------------------------------------------------------
 func SpawnUpVisual(Target : Control, DefCard : Card, FloaterText : String) -> void:
-	#await wait (0.4)
-	
 	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
 	var BuffVisual : PackedScene = ResourceLoader.load(BuffVisualFile)
 	var Visual = BuffVisual.instantiate() as MissileViz
@@ -271,9 +264,8 @@ func SpawnUpVisual(Target : Control, DefCard : Card, FloaterText : String) -> vo
 
 	Visual.connect("Reached", BuffTweenEnded.bind(Target, FloaterText))
 
+#-----------------------------------------------------------------------------------
 func SpawnDownVisual(Target : Control, DefCard : Card, FloaterText : String) -> void:
-	#await wait (0.4)
-	
 	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
 	var DeBuffVisual : PackedScene = ResourceLoader.load(DebuffVisualFile)
 	var Visual = DeBuffVisual.instantiate() as MissileViz
@@ -283,6 +275,7 @@ func SpawnDownVisual(Target : Control, DefCard : Card, FloaterText : String) -> 
 
 	Visual.connect("Reached", BuffTweenEnded.bind(Target, FloaterText))
 
+#-----------------------------------------------------------------------------------
 func SpawnBurnVisual(Target : Control, DefCard : Card, FloaterText : String) -> void:
 	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
 	var DeBuffVisual : PackedScene = ResourceLoader.load(DebuffVisualFile)
@@ -293,6 +286,7 @@ func SpawnBurnVisual(Target : Control, DefCard : Card, FloaterText : String) -> 
 
 	Visual.connect("Reached", BuffTweenEnded.bind(Target, FloaterText))
 
+#-----------------------------------------------------------------------------------
 func SpawnUpDamageVisual(Target : Control, DefCard : Card, FloaterText : String) -> void:
 	#await wait (0.2)
 	
@@ -305,25 +299,20 @@ func SpawnUpDamageVisual(Target : Control, DefCard : Card, FloaterText : String)
 
 	Visual.connect("Reached", BuffTweenEnded.bind(Target, FloaterText))
 
-func wait(secs : float) -> Signal:
-	return get_tree().create_timer(secs).timeout
-
-
+#-----------------------------------------------------------------------------------
 func TweenEnded(Target : Control, DeffenceCard : Card, FloaterText : String) -> void:
 	Connected.emit()
 	if (DeffenceCard == null):
-		
-		#print("Damage Floater")
 		var d = DamageFloater.instantiate()
 		d.modulate = Color(1,0,0,1)
 		d.text = FloaterText
 		d.connect("Ended", AnimEnded)
 		add_child(d)
 		d.global_position = (Target.global_position + (Target.size / 2)) - d.size / 2.
+
 		if (DamageReductionCard != null):
 			DamageReductionCard.KillCard(0.5, false)
 			DeffenceCardDestroyed.emit(DamageReductionCard.global_position + (DamageReductionCard.size / 2))
-		
 	else :
 		var d = DamageFloater.instantiate()
 		d.text = "Blocked"
@@ -340,6 +329,7 @@ func TweenEnded(Target : Control, DeffenceCard : Card, FloaterText : String) -> 
 		ShieldEff.global_position = (DeffenceCard.global_position + (DeffenceCard.size / 2))
 		ShieldEff.burst()
 
+#-----------------------------------------------------------------------------------
 func ShieldTweenEnded(target : Control, FloaterText : String) -> void:
 	Connected.emit()
 	var DFloater = DamageFloater.instantiate() as Floater
@@ -349,6 +339,7 @@ func ShieldTweenEnded(target : Control, FloaterText : String) -> void:
 	DFloater.global_position = (target.global_position + (target.size / 2)) - DFloater.size / 2
 	DFloater.Ended.connect(AnimEnded)
 
+#-----------------------------------------------------------------------------------
 func BuffTweenEnded(target : Control, FloaterText : String) -> void:
 	Connected.emit()
 	var DFloater = DamageFloater.instantiate() as Floater
@@ -358,8 +349,7 @@ func BuffTweenEnded(target : Control, FloaterText : String) -> void:
 	DFloater.global_position = (target.global_position + (target.size / 2)) - DFloater.size / 2
 	DFloater.Ended.connect(AnimEnded)
 
-
-	
+#-----------------------------------------------------------------------------------
 func DoSelection(C : CardStats, Performer : BattleShipStats, User : Control) -> void:
 	var DeffenceCard = CardScene.instantiate() as Card
 	DeffenceCard.Dissable(true)
@@ -392,6 +382,7 @@ func DoSelection(C : CardStats, Performer : BattleShipStats, User : Control) -> 
 	Fin = true
 	queue_free()
 
+#-----------------------------------------------------------------------------------
 func DoDraw(User : Control) -> void:
 	var DeffenceCard = CardScene.instantiate() as Card
 	DeffenceCard.Dissable(true)
@@ -424,6 +415,7 @@ func DoDraw(User : Control) -> void:
 	Fin = true
 	queue_free()
 
+#-----------------------------------------------------------------------------------
 var Finished : bool = false
 
 func AnimEnded() -> void:

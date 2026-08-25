@@ -44,15 +44,17 @@ func Update(delta : float) -> void:
 	SonarUI.Update(delta)
 
 # --- INCOMING EVENTS FROM GAME LOGIC ---
-
+#-----------------------------------------------------------------------------------
 func speedUpdated(enabled: bool) -> void:
 	speedSimulationButton.set_pressed_no_signal(enabled)
 	speedSimulationButton.button_down.emit()
 
+#-----------------------------------------------------------------------------------
 func simulationToggled(paused: bool) -> void:
 	pauseSimulationButton.set_pressed_no_signal(!paused)
 	pauseSimulationButton.button_down.emit()
 
+#-----------------------------------------------------------------------------------
 func radarToggled(t : bool) -> void:
 	pilotScreenSet.set_Radar(t)
 
@@ -60,84 +62,107 @@ func radarToggled(t : bool) -> void:
 
 #func _on_altitude_dial_range_changed(newVal: float) -> void:
 	#controllerEventHandler.OnTargetAltitudeChanged(newVal)
-
+#-----------------------------------------------------------------------------------
 func _onSteerButtonToggled(toggledOn: bool) -> void:
 	steer.Toggle(toggledOn)
 
+#-----------------------------------------------------------------------------------
 func _on_speed_simulation_toggled(toggledOn: bool) -> void:
 	SimulationManager.GetInstance().SpeedToggle(toggledOn)
 
+#-----------------------------------------------------------------------------------
 func simPauseToggled(toggledOn: bool) -> void:
 	SimulationManager.GetInstance().TogglePause(!toggledOn)
 
+#-----------------------------------------------------------------------------------
 func radarButtonToggled(t : bool) -> void:
 	uiEventHandler.OnRadarButtonPressed(t)
 
+#-----------------------------------------------------------------------------------
 func accelerationEnded(valueChanged: float) -> void:
 	uiEventHandler.OnAccelerationEnded(valueChanged)
 
+#-----------------------------------------------------------------------------------
 func accelerationChanged(value: float) -> void:
 	uiEventHandler.OnAccelerationChanged(value)
 
+#-----------------------------------------------------------------------------------
 func elevationEnded(valueChanged: float) -> void:
 	uiEventHandler.OnElevationEnded(valueChanged)
 
+#-----------------------------------------------------------------------------------
 func elevationChanged(value: float) -> void:
 	uiEventHandler.OnElevationChanged(value)
 	elevationThrust.UpdateHandle(value)
 
+#-----------------------------------------------------------------------------------
 func inventoryPressed() -> void:
 	uiEventHandler.OnInventoryPressed()
 
+#-----------------------------------------------------------------------------------
 func regroupPressed() -> void:
 	uiEventHandler.OnRegroupPressed()
 
+#-----------------------------------------------------------------------------------
 func openHatchButtonPressed() -> void:
 	uiEventHandler.OnOpenHatchPressed()
 
-	
-
+#-----------------------------------------------------------------------------------
 func landPressed() -> void:
 	uiEventHandler.OnLandPressed()
 
+#-----------------------------------------------------------------------------------
 func pausePressed() -> void:
 	uiEventHandler.OnPausePressed()
 
+#-----------------------------------------------------------------------------------
 func markerEditorButtonPressed() -> void:
 	uiEventHandler.OnMarkerEditorToggled(false)
 
+#-----------------------------------------------------------------------------------
 func shipDockButtonPressed() -> void:
 	uiEventHandler.OnFleetSeparationPressed()
 
+#-----------------------------------------------------------------------------------
 func _on_forecast_button_toggled(toggledOn: bool) -> void:
 	uiEventHandler.OnForecastPressed(toggledOn)
 
+#-----------------------------------------------------------------------------------
 func _on_grid_button_toggled(toggledOn: bool) -> void:
 	uiEventHandler.OnGridPressed(toggledOn)
 
+#-----------------------------------------------------------------------------------
 func _on_zoom_level_button_toggled(toggledOn: bool) -> void:
 	uiEventHandler.OnZoomTogglePressed(toggledOn)
 
+#-----------------------------------------------------------------------------------
 func _on_altitude_toggled(toggledOn: bool) -> void:
 	uiEventHandler.OnAltTogglePressed(toggledOn)
 
+#-----------------------------------------------------------------------------------
 func _on_team_button_toggled(toggledOn: bool) -> void:
 	uiEventHandler.OnTeamTogglePressed(toggledOn)
 
+#-----------------------------------------------------------------------------------
 func _on_sonar_button_toggled(toggledOn: bool) -> void:
 	uiEventHandler.OnSonarPressed(toggledOn)
 
+#-----------------------------------------------------------------------------------
 func _on_zoom_dial_range_changed(newVal: float) -> void:
 	uiEventHandler.OnZoomDialMoved(-newVal / 10)
 
+#-----------------------------------------------------------------------------------
 func _on_y_dial_range_changed(newVal: float) -> void:
 	uiEventHandler.OnYDialMoved(-newVal * 10)
 
+#-----------------------------------------------------------------------------------
 func _on_x_dial_range_changed(newVal: float) -> void:
 	uiEventHandler.OnXDialMoved(-newVal * 10)
 
+#-----------------------------------------------------------------------------------
 func _on_topo_button_toggled(toggledOn: bool) -> void:
 	uiEventHandler.OnTopoPressed(toggledOn)
 
+#-----------------------------------------------------------------------------------
 func _on_wind_correction_toggled(t: bool) -> void:
 	uiEventHandler.OnWindCorrectionToggled(t)

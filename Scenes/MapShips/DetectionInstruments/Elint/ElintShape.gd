@@ -12,22 +12,25 @@ signal ElintRangeChanged
 ##Key = Ship Value = Elint Level
 var ElintContacts : Dictionary
 
+#-----------------------------------------------------------------------------------
 func _ready() -> void:
 	area_entered.connect(BodyEnteredElint)
 	area_exited.connect(BodyLeftElint)
 
+#-----------------------------------------------------------------------------------
 func ToggleElint(t : bool):
 	if (!t):
 		ElintContacts.clear()
 		
 	collision_shape_2d.set_deferred("disabled", t)
 
+#-----------------------------------------------------------------------------------
 func UpdateELINTTRange():
 	(collision_shape_2d.shape as CircleShape2D).radius = ElintStat.GetFinalValue()
 	ElintRangeChanged.emit()
 
 var d = 0.4
-
+#-----------------------------------------------------------------------------------
 func UpdateElint(delta: float) -> void:
 	d -= delta
 	if (d > 0):
@@ -53,6 +56,7 @@ func UpdateElint(delta: float) -> void:
 	#else:
 		#ElintTriggered.emit(false, -1, 0)
 
+#-----------------------------------------------------------------------------------
 func GetELintTargetInfo() -> Array[ElintTargetInfo]:
 	var TargetInfo : Array[ElintTargetInfo]
 	for g : MapShip in ElintContacts:
@@ -68,11 +72,13 @@ func GetELintTargetInfo() -> Array[ElintTargetInfo]:
 		TargetInfo.append(Info)
 	return TargetInfo
 
+#-----------------------------------------------------------------------------------
 func isPartOfFleet(controller : PlayerDrivenShip,target: Node2D) -> bool:
 	if (controller.Command != null):
 		return target == controller.Command or target in controller.Command.GetDock().GetDockedShips()
 	return target == controller or target in controller.GetDock().GetDockedShips()
 
+#-----------------------------------------------------------------------------------
 func GetClosestElint() -> Vector2:
 	var closest : Vector2 = Vector2.ZERO
 	var closestdist : float = INF
@@ -83,9 +89,10 @@ func GetClosestElint() -> Vector2:
 		if (closestdist > dist):
 			closest = ship.global_position
 			closestdist = dist
-	
+
 	return closest
 
+#-----------------------------------------------------------------------------------
 func GetClosestElintLevel() -> int:
 	if (ElintContacts.size() == 0):
 		return -1
@@ -104,6 +111,7 @@ func GetClosestElintLevel() -> int:
 	
 	return Newlvl
 	
+#-----------------------------------------------------------------------------------
 func GetElintLevel(DistSq : float, RadarL : float) -> int:
 	var Lvl = -1
 	var RadarLSq = RadarL * RadarL
@@ -118,12 +126,14 @@ func GetElintLevel(DistSq : float, RadarL : float) -> int:
 		Lvl = 1
 	return Lvl
 
+#-----------------------------------------------------------------------------------
 func BodyEnteredElint(Body: Area2D) -> void:
 	if (Body.get_parent() == self):
 		return
 	ElintContacts[Body.get_parent()] = 0
 	#Elint.emit(true, 1)
-	
+
+#-----------------------------------------------------------------------------------
 func BodyLeftElint(Body: Area2D) -> void:
 	if (Body.get_parent() == self):
 		return
