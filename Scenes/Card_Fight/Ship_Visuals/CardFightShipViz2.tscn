@@ -7,11 +7,12 @@
 [ext_resource type="StyleBox" uid="uid://cq66xt1psso06" path="res://Theme/GreyPanel.tres" id="4_0orxy"]
 [ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scenes/Card_Fight/External_UI/CardHandContainer.gd" id="4_cmntb"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="6_wmwbv"]
-[ext_resource type="Texture2D" uid="uid://cyqs71v0yadm1" path="res://Assets/ShipTextures/Hull1.png" id="7_2rekq"]
+[ext_resource type="Texture2D" uid="uid://cxjy6hrsj65pg" path="res://Assets/ShipTextures/Hull1.tres" id="7_2rekq"]
 [ext_resource type="Texture2D" uid="uid://de1cx0wwuxx0x" path="res://Assets/smoke_09.png" id="7_cmntb"]
 [ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/ShipTextures/Hull3.png" id="7_ej477"]
 [ext_resource type="AudioStream" uid="uid://iiqji6xlmffd" path="res://Assets/Sounds/Explosion.wav" id="8_r755l"]
 [ext_resource type="PackedScene" uid="uid://rjp78jwbs17y" path="res://Scenes/Card_Fight/Ship_Visuals/Fire.tscn" id="12_2rekq"]
+[ext_resource type="Shader" uid="uid://bf1f6mjy34nt" path="res://Scenes/Card_Fight/Ship_Visuals/Shield.gdshader" id="13_spb5j"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0orxy"]
 content_margin_left = 5.0
@@ -146,7 +147,16 @@ gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_r755l")
 color_ramp = SubResource("GradientTexture1D_r755l")
 
-[node name="CardFightShipViz" type="Control" unique_id=718270550 node_paths=PackedStringArray("ShipNameLabel", "ShipIcon", "HullBar", "HullLabel", "ShieldBar", "TurnPanel", "SpeedBuff", "SpeedDeBuff", "FPBuff", "FPDeBuff", "FirePart", "ExplosionPart", "SmokePart", "FPLabel", "SPDLabel", "HasMovePanel", "ActionParent", "PassiveParent", "ShadowPivot", "DefBuff", "DefDeBuff", "WeightLabel", "DefenceLabel")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1vivr"]
+shader = ExtResource("13_spb5j")
+shader_parameter/progress = 0.50000002375
+shader_parameter/border_energy_offset = 1.0
+shader_parameter/color = Color(0, 0.5999999, 1, 1)
+shader_parameter/edges_color = Color(0.5355, 0.62985, 0.85, 1)
+shader_parameter/edges_valueable = 1.0
+shader_parameter/edges_fade = 1.0
+
+[node name="CardFightShipViz" type="Control" unique_id=718270550 node_paths=PackedStringArray("ShipNameLabel", "ShipIcon", "ShadowPivot", "TurnPanel", "HasMovePanel", "ActionParent", "PassiveParent", "FirePart", "Shield", "SpeedBuff", "SpeedDeBuff", "FPBuff", "FPDeBuff", "ExplosionPart", "SmokePart", "DefBuff", "DefDeBuff", "Explosion", "Land", "statContainer", "HullBar", "HullLabel", "ShieldBar", "FPLabel", "SPDLabel", "WeightLabel", "DefenceLabel")]
 custom_minimum_size = Vector2(180, 100)
 layout_mode = 3
 anchors_preset = 8
@@ -166,30 +176,35 @@ theme = ExtResource("1_ydw5a")
 script = ExtResource("2_ydw5a")
 CardScene = "res://Scenes/Card_Fight/Card/Card.tscn"
 floaterScene = ExtResource("3_ej477")
-ShipNameLabel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer/Label")
-ShipIcon = NodePath("HBoxContainer/Control/Control/TextureRect")
-HullBar = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer2/ProgressBar")
-HullLabel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer2/Hull")
-ShieldBar = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer2/ProgressBar/ProgressBar2")
-TurnPanel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3")
-SpeedBuff = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/SpeedBuff")
-SpeedDeBuff = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/SpeedDeBuff")
-FPBuff = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/FirepowerBuff")
-FPDeBuff = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/FirepowerDeBuff")
-FirePart = NodePath("HBoxContainer/Control/Control/TextureRect/Fire")
-ExplosionPart = NodePath("HBoxContainer/Control/Control/TextureRect/Explosion")
-SmokePart = NodePath("HBoxContainer/Control/Control/TextureRect/Smoke")
-FPLabel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2/Label")
-SPDLabel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2/Label2")
-HasMovePanel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/Panel")
-ActionParent = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer/ActionParent")
-PassiveParent = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer/PassiveParent")
-ShadowPivot = NodePath("HBoxContainer/Control/Control/TextureRect/ShadowPivot")
-DefBuff = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/DefBuff")
-DefDeBuff = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/DefDeBuff")
-WeightLabel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3/Label")
-DefenceLabel = NodePath("HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3/Label2")
+ShipNameLabel = NodePath("HBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer/Label")
+ShipIcon = NodePath("HBoxContainer/Control/ShipPivot/TextureRect")
+ShadowPivot = NodePath("HBoxContainer/Control/ShipPivot/TextureRect/ShadowPivot")
+TurnPanel = NodePath("HBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3")
+HasMovePanel = NodePath("HBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/HasAction")
+ActionParent = NodePath("HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer/ActionParent")
+PassiveParent = NodePath("HBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer/PassiveParent")
+FirePart = NodePath("HBoxContainer/Control/ShipPivot/TextureRect/Fire")
+Shield = NodePath("HBoxContainer/Control/ShipPivot/TextureRect/ColorRect")
+SpeedBuff = NodePath("HBoxContainer/PanelContainer2/SpeedBuff")
+SpeedDeBuff = NodePath("HBoxContainer/PanelContainer2/SpeedDeBuff")
+FPBuff = NodePath("HBoxContainer/PanelContainer2/FirepowerBuff")
+FPDeBuff = NodePath("HBoxContainer/PanelContainer2/FirepowerDeBuff")
+ExplosionPart = NodePath("HBoxContainer/Control/ShipPivot/TextureRect/Explosion")
+SmokePart = NodePath("HBoxContainer/Control/ShipPivot/TextureRect/Smoke")
+DefBuff = NodePath("HBoxContainer/PanelContainer2/DefBuff")
+DefDeBuff = NodePath("HBoxContainer/PanelContainer2/DefDeBuff")
+Explosion = NodePath("HBoxContainer/Control/ShipPivot/TextureRect/ExplosionSound")
+Land = NodePath("HBoxContainer/Control/ShipPivot/TextureRect/LandSound")
+statContainer = NodePath("HBoxContainer/PanelContainer2/VBoxContainer/StatContainer")
+HullBar = NodePath("HBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer2/ProgressBar")
+HullLabel = NodePath("HBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer2/Hull")
+ShieldBar = NodePath("HBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer2/ProgressBar/ProgressBar2")
+FPLabel = NodePath("HBoxContainer/PanelContainer2/VBoxContainer/StatContainer/FirePower")
+SPDLabel = NodePath("HBoxContainer/PanelContainer2/VBoxContainer/StatContainer/Speed")
+WeightLabel = NodePath("HBoxContainer/PanelContainer2/VBoxContainer/StatContainer/Label")
+DefenceLabel = NodePath("HBoxContainer/PanelContainer2/VBoxContainer/StatContainer/Label2")
 drift_radius = Vector2(6, 12)
+bob_height = 20.0
 bob_speed = 0.46
 wobble_amount_degrees = 0.5
 pushback_return_strength = 10.0
@@ -209,44 +224,39 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1700376509]
+[node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer" unique_id=1292068939]
 custom_minimum_size = Vector2(180, 0)
-layout_mode = 2
-theme_override_constants/separation = 0
-alignment = 1
-
-[node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer/VBoxContainer" unique_id=1292068939]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("4_0orxy")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2" unique_id=2043588517]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer2" unique_id=2043588517]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="PanelContainer3" type="PanelContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=171717043]
+[node name="PanelContainer3" type="PanelContainer" parent="HBoxContainer/PanelContainer2/VBoxContainer" unique_id=171717043]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0orxy")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3" unique_id=2042759143]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3" unique_id=2042759143]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer" unique_id=933571925]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer" unique_id=933571925]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer" unique_id=474614247]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer" unique_id=474614247]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=344741726]
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=344741726]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/line_spacing = -5
@@ -255,7 +265,7 @@ text = "GERdwadwadwa"
 autowrap_mode = 2
 uppercase = true
 
-[node name="PassiveParent" type="Container" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=740590331]
+[node name="PassiveParent" type="Container" parent="HBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=740590331]
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -263,12 +273,12 @@ mouse_filter = 2
 script = ExtResource("4_cmntb")
 metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer" unique_id=889448882]
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer" unique_id=889448882]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 alignment = 1
 
-[node name="Hull" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1976177239]
+[node name="Hull" type="Label" parent="HBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1976177239]
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
@@ -277,7 +287,7 @@ horizontal_alignment = 2
 vertical_alignment = 2
 uppercase = true
 
-[node name="ProgressBar" type="ProgressBar" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=2123951813]
+[node name="ProgressBar" type="ProgressBar" parent="HBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=2123951813]
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -288,7 +298,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_mg5jy")
 value = 24.37
 show_percentage = false
 
-[node name="ProgressBar2" type="ProgressBar" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer2/ProgressBar" unique_id=1809309550]
+[node name="ProgressBar2" type="ProgressBar" parent="HBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer2/ProgressBar" unique_id=1809309550]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -303,16 +313,16 @@ allow_greater = true
 fill_mode = 1
 show_percentage = false
 
-[node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer" unique_id=1730153218]
+[node name="HasAction" type="Panel" parent="HBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer" unique_id=1730153218]
 custom_minimum_size = Vector2(2.965, 0)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rmogf")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=47076504]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/PanelContainer2/VBoxContainer" unique_id=47076504]
 layout_mode = 2
 
-[node name="ActionParent" type="Container" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer" unique_id=913279673]
+[node name="ActionParent" type="Container" parent="HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer" unique_id=913279673]
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -320,14 +330,16 @@ mouse_filter = 2
 script = ExtResource("4_cmntb")
 metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=1065534830]
+[node name="StatContainer" type="GridContainer" parent="HBoxContainer/PanelContainer2/VBoxContainer" unique_id=1951654391]
 layout_mode = 2
-mouse_filter = 2
-alignment = 1
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 2
 
-[node name="Label" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2" unique_id=1077168588]
+[node name="FirePower" type="RichTextLabel" parent="HBoxContainer/PanelContainer2/VBoxContainer/StatContainer" unique_id=1077168588]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 4
 mouse_filter = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
@@ -337,9 +349,10 @@ scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="Label2" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2" unique_id=747574443]
+[node name="Speed" type="RichTextLabel" parent="HBoxContainer/PanelContainer2/VBoxContainer/StatContainer" unique_id=747574443]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 4
 mouse_filter = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
@@ -349,14 +362,10 @@ scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=1831587837]
-layout_mode = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="Label" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3" unique_id=1840260904]
+[node name="Label" type="RichTextLabel" parent="HBoxContainer/PanelContainer2/VBoxContainer/StatContainer" unique_id=1840260904]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 4
 mouse_filter = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
@@ -366,9 +375,10 @@ scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="Label2" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3" unique_id=1702962901]
+[node name="Label2" type="RichTextLabel" parent="HBoxContainer/PanelContainer2/VBoxContainer/StatContainer" unique_id=1702962901]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 4
 mouse_filter = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
@@ -378,7 +388,7 @@ scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="SpeedBuff" type="GPUParticles2D" parent="HBoxContainer/VBoxContainer/PanelContainer2" unique_id=1835526654]
+[node name="SpeedBuff" type="GPUParticles2D" parent="HBoxContainer/PanelContainer2" unique_id=1835526654]
 visible = false
 modulate = Color(0.311061, 0.899, 0.506367, 1)
 show_behind_parent = true
@@ -389,7 +399,7 @@ lifetime = 3.0
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_mg5jy")
 
-[node name="SpeedDeBuff" type="GPUParticles2D" parent="HBoxContainer/VBoxContainer/PanelContainer2" unique_id=2050612577]
+[node name="SpeedDeBuff" type="GPUParticles2D" parent="HBoxContainer/PanelContainer2" unique_id=2050612577]
 visible = false
 modulate = Color(0.311061, 0.899, 0.506367, 1)
 show_behind_parent = true
@@ -401,7 +411,7 @@ lifetime = 3.0
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_mg5jy")
 
-[node name="FirepowerBuff" type="GPUParticles2D" parent="HBoxContainer/VBoxContainer/PanelContainer2" unique_id=69346679]
+[node name="FirepowerBuff" type="GPUParticles2D" parent="HBoxContainer/PanelContainer2" unique_id=69346679]
 visible = false
 modulate = Color(0.952941, 0.313726, 0.2, 1)
 show_behind_parent = true
@@ -412,7 +422,7 @@ lifetime = 3.0
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_mg5jy")
 
-[node name="FirepowerDeBuff" type="GPUParticles2D" parent="HBoxContainer/VBoxContainer/PanelContainer2" unique_id=1448523240]
+[node name="FirepowerDeBuff" type="GPUParticles2D" parent="HBoxContainer/PanelContainer2" unique_id=1448523240]
 visible = false
 modulate = Color(0.952941, 0.313726, 0.2, 1)
 show_behind_parent = true
@@ -424,7 +434,7 @@ lifetime = 3.0
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_mg5jy")
 
-[node name="DefBuff" type="GPUParticles2D" parent="HBoxContainer/VBoxContainer/PanelContainer2" unique_id=1266347205]
+[node name="DefBuff" type="GPUParticles2D" parent="HBoxContainer/PanelContainer2" unique_id=1266347205]
 visible = false
 modulate = Color(0.482353, 0.690196, 0.705882, 1)
 show_behind_parent = true
@@ -435,7 +445,7 @@ lifetime = 3.0
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_mg5jy")
 
-[node name="DefDeBuff" type="GPUParticles2D" parent="HBoxContainer/VBoxContainer/PanelContainer2" unique_id=145479719]
+[node name="DefDeBuff" type="GPUParticles2D" parent="HBoxContainer/PanelContainer2" unique_id=145479719]
 visible = false
 modulate = Color(0.482353, 0.690196, 0.705882, 1)
 show_behind_parent = true
@@ -454,12 +464,12 @@ custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 size_flags_vertical = 6
 
-[node name="Control" type="Control" parent="HBoxContainer/Control" unique_id=823988004]
+[node name="ShipPivot" type="Control" parent="HBoxContainer/Control" unique_id=823988004]
 anchors_preset = 0
 offset_left = 30.0
 offset_right = 30.0
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Control/Control" unique_id=1544881616]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Control/ShipPivot" unique_id=1544881616]
 texture_filter = 3
 layout_mode = 1
 anchors_preset = 8
@@ -478,11 +488,11 @@ texture = ExtResource("7_2rekq")
 expand_mode = 2
 stretch_mode = 3
 
-[node name="ShadowPivot" type="Control" parent="HBoxContainer/Control/Control/TextureRect" unique_id=958676430]
+[node name="ShadowPivot" type="Control" parent="HBoxContainer/Control/ShipPivot/TextureRect" unique_id=958676430]
 show_behind_parent = true
 anchors_preset = 0
 
-[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/Control/Control/TextureRect/ShadowPivot" unique_id=2103533902]
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/Control/ShipPivot/TextureRect/ShadowPivot" unique_id=2103533902]
 modulate = Color(0, 0, 0, 0.5)
 show_behind_parent = true
 layout_mode = 1
@@ -503,7 +513,7 @@ texture = ExtResource("7_ej477")
 expand_mode = 1
 stretch_mode = 3
 
-[node name="Smoke" type="GPUParticles2D" parent="HBoxContainer/Control/Control/TextureRect" unique_id=415524541]
+[node name="Smoke" type="GPUParticles2D" parent="HBoxContainer/Control/ShipPivot/TextureRect" unique_id=415524541]
 visible = false
 position = Vector2(32.25, -3.80784e-05)
 scale = Vector2(5.24097, 5.24097)
@@ -516,7 +526,7 @@ fixed_fps = 20
 interpolate = false
 process_material = SubResource("ParticleProcessMaterial_rmogf")
 
-[node name="Fire" parent="HBoxContainer/Control/Control/TextureRect" unique_id=1440653444 instance=ExtResource("12_2rekq")]
+[node name="Fire" parent="HBoxContainer/Control/ShipPivot/TextureRect" unique_id=1440653444 instance=ExtResource("12_2rekq")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -528,8 +538,9 @@ offset_right = 1.0
 offset_bottom = 1.0
 scale = Vector2(34.515, 52.108)
 pivot_offset_ratio = Vector2(0.5, 1)
+mouse_filter = 2
 
-[node name="Explosion" type="GPUParticles2D" parent="HBoxContainer/Control/Control/TextureRect" unique_id=755917109]
+[node name="Explosion" type="GPUParticles2D" parent="HBoxContainer/Control/ShipPivot/TextureRect" unique_id=755917109]
 position = Vector2(1.90735e-05, -3.20142e-10)
 emitting = false
 amount = 3
@@ -539,14 +550,32 @@ one_shot = true
 explosiveness = 0.8
 process_material = SubResource("ParticleProcessMaterial_0orxy")
 
-[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="HBoxContainer/Control/Control/TextureRect" unique_id=2020135589]
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="HBoxContainer/Control/ShipPivot/TextureRect" unique_id=2020135589]
 stream = ExtResource("8_r755l")
 bus = &"Sounds"
 
-[node name="LandSound" type="AudioStreamPlayer2D" parent="HBoxContainer/Control/Control/TextureRect" unique_id=1614739803]
+[node name="LandSound" type="AudioStreamPlayer2D" parent="HBoxContainer/Control/ShipPivot/TextureRect" unique_id=1614739803]
 stream = ExtResource("8_r755l")
 pitch_scale = 0.3
 bus = &"MapSounds"
 
-[connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/PanelContainer2" to="." method="_on_panel_container_2_mouse_entered"]
-[connection signal="mouse_exited" from="HBoxContainer/VBoxContainer/PanelContainer2" to="." method="_on_panel_container_2_mouse_exited"]
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/Control/ShipPivot/TextureRect" unique_id=25845321]
+material = SubResource("ShaderMaterial_1vivr")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -0.5
+offset_right = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5707964
+scale = Vector2(512, 512)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[connection signal="mouse_entered" from="HBoxContainer/PanelContainer2" to="." method="_on_panel_container_2_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/PanelContainer2" to="." method="_on_panel_container_2_mouse_exited"]

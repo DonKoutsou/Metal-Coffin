@@ -10,7 +10,12 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 	var Pos = MainShip.global_position
 	var DestinationPos = MainShip.GetCurrentDestination()
 	var MainShipMaxSpeed = MainShip.GetShipMaxSpeed()
-
+	
+	if (MainShip.Altitude != 10000):
+		MainShip._HandleLanding(SimulationSpeed * TickRate * 0.01)
+		MainShip.UpdateTargetAltitude(10000)
+		#return SUCCESS
+		
 	if (Pos.distance_squared_to(DestinationPos) > 10):
 		var Speed = MainShip.GetShipSpeed() / 360
 		var Cap = MainShip.Cpt
@@ -57,4 +62,5 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 		return SUCCESS
 	
 	MainShip.SetSpeed(0)
+	MainShip.LastRecordedOffset = Vector2.ZERO
 	return SUCCESS

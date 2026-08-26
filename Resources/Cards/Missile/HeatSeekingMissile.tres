@@ -25,6 +25,5 @@ Icon = ExtResource("1_ett3l")
 CardName = "Heat Seeking Missile"
 Energy = 3
 AllowDuplicates = true
-Consume = true
 OnPerformModule = SubResource("Resource_mo274")
 WeapT = 2

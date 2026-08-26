@@ -46,6 +46,8 @@ class_name CardStats
 ##IF card is provided from disposition
 @export var IsDisposition : bool = false
 
+@export var PlayAnimation : CardFightShipViz2.AnimatioType = CardFightShipViz2.AnimatioType.NONE
+
 var EnergyReduction : int = 0
 var Tier : int = 0
 

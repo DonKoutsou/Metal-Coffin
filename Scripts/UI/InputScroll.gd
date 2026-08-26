@@ -36,19 +36,21 @@ func _process(delta: float) -> void:
 	if (pos.x == 0 or pos.x == maxPos.x):
 		force.x = 0
 
-	force = force.move_toward(Vector2.ZERO, delta * 100)
+	force = force.move_toward(Vector2.ZERO, delta * 20)
 
 func HandleInput(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
 		if (!XLock):
 			if (signf(force.x) == signf(event.relative.x)):
 				force.x = 0
-			force.x -= event.relative.x
+			force.x =  clamp(force.x -event.relative.x, event.relative.x * 6, -event.relative.x * 6)
 			
 		if (!YLock):
 			if (signf(force.y) == signf(event.relative.y)):
 				force.y = 0
-			force.y -= event.relative.y
+			
+			force.y =  clamp(force.y -event.relative.y, event.relative.y * 6, -event.relative.y * 6)
+			#force.y = -event.relative.y * 6
 	
 	else: if (event.is_action_pressed("ZoomIn")):
 		if (!YLock):
@@ -66,12 +68,12 @@ func HandleInput(event: InputEvent) -> void:
 		if (!XLock):
 			if (signf(force.x) == signf(event.relative.x)):
 				force.x = 0
-			force.x -= event.relative.x
+			force.x =  clamp(force.x -event.relative.x, event.relative.x * 6, -event.relative.x * 6)
 			
 		if (!YLock):
 			if (signf(force.y) == signf(event.relative.y)):
 				force.y = 0
-			force.y -= event.relative.y
+			force.y =  clamp(force.y -event.relative.y, event.relative.y * 6, -event.relative.y * 6)
 			
 	else: if  Input.is_action_pressed("Click"):
 		force = Vector2.ZERO

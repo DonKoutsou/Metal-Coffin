@@ -101,6 +101,7 @@ func Init(Ship : Node2D) -> void:
 		Ship.RadarShape.VisualContactCountdownStarted.connect(VisualCountountStarted)
 		ToggleVisualContactProgress(true)
 		Ship.Alarmed.connect(DoAlarm)
+		Ship.AltitudeChanged.connect(AltitudeChanged)
 	
 	if (Ship is Missile):
 		RadarRange.visible = Ship.Friendly
@@ -239,6 +240,9 @@ func Update(IsControlled : bool, CamPos : Vector2, delta : float) -> void:
 				
 			global_position = CurrentShip.GetShipParalaxPosition(CamPos, CurrentZoom)
 			SavedPosition = global_position
+			if (Commander.ENEMY_DEBUG):
+				if (LandingNotif != null):
+					UpdateAltitude(CurrentShip.Altitude)
 			
 			if (CurrentShip.ExposedValue > 4 or Commander.ENEMY_DEBUG):
 				UpdateSpeed(CurrentShip.GetShipSpeed())
@@ -407,7 +411,7 @@ func AltitudeChanged(_NewAlt : float) -> void:
 	add_child(LandingNotif)
 
 func ToggleShipDetails(T : bool):
-	DetailPanel.visible = T
+	DetailPanel.visible = T 
 	Line.visible = T
 	#Direction.visible = T
 	#set_physics_process(T)

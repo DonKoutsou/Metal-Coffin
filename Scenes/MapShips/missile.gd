@@ -352,8 +352,9 @@ func GetBattleStats() -> BattleShipStats:
 	stats.Speed = Speed
 	stats.FirePower = Damage
 	stats.ShipIcon = ResourceLoader.load("res://Assets/ShipTextures/Missile.png")
-	stats.CaptainIcon = ResourceLoader.load("res://Assets/ShipTextures/Missile.png")
+	stats.CaptainIcon = "res://Assets/ShipTextures/Missile.png"
 	stats.Name = GetShipName()
+	stats.PlayAnimations = false
 	var cards : Array[CardStats] = [C]
 	stats.Cards = cards
 	stats.Weight = 1

@@ -17,8 +17,13 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 	var SimulationSpeed = SimulationManager.SimSpeed()
 	var TickRate = _blackboard.get_value("TickRate")
 	var DestinationPos = MainShip.RefuelSpot.global_position
-
+	
 	if (Pos.distance_squared_to(DestinationPos) > 100):
+		if (MainShip.Altitude != 10000):
+			MainShip._HandleLanding(SimulationSpeed * TickRate * 0.04)
+			MainShip.UpdateTargetAltitude(10000)
+			#return RUNNING
+			
 		for g in MainShip.GetDock().GetDockedShips():
 			var Ship = g as HostileShip
 			
@@ -41,6 +46,15 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 		MainShip.global_position += offset * SimulationSpeed
 		MainShip.ShipLookAt(DestinationPos)
 		return RUNNING
-	
+	else: if (!MainShip.Landed()):
+		MainShip.LastRecordedOffset = Vector2.ZERO
+		MainShip.SetSpeed(0)
+		
+		MainShip._HandleLanding(SimulationSpeed * TickRate * 0.04)
+		MainShip.UpdateTargetAltitude(-100)
+		return RUNNING
+
+	MainShip.LastRecordedOffset = Vector2.ZERO
 	MainShip.SetSpeed(0)
+		
 	return SUCCESS

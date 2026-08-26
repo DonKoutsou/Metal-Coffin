@@ -2,21 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxr40jficax1"
-path="res://.godot/imported/Pilot_Cover.png-eaacdf99bdb485aef483f8dbdbdcad5e.ctex"
+uid="uid://doc7uh57tvvvi"
+path="res://.godot/imported/Hull6_Frame.png-d1950030f76e7fc47b6954e9a5ae49de.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UIPiecies/Screen/SidePanels/Pilot_Cover.png"
-dest_files=["res://.godot/imported/Pilot_Cover.png-eaacdf99bdb485aef483f8dbdbdcad5e.ctex"]
+source_file="res://Assets/ShipTextures/Hull6_Frame.png"
+dest_files=["res://.godot/imported/Hull6_Frame.png-d1950030f76e7fc47b6954e9a5ae49de.ctex"]
 
 [params]
 
 compress/mode=0
-compress/high_quality=true
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
@@ -24,7 +24,7 @@ compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
-mipmaps/limit=3
+mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
 process/channel_remap/red=0

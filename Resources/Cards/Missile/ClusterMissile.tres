@@ -26,6 +26,5 @@ Icon = ExtResource("1_n7xos")
 CardName = "Cluster Missile"
 Energy = 4
 AllowDuplicates = true
-Consume = true
 OnPerformModule = SubResource("Resource_8ua7m")
 WeapT = 2

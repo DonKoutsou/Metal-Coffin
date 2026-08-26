@@ -16,7 +16,6 @@ Icon = ExtResource("1_6wv8y")
 CardName = "Flare"
 Energy = 1
 AllowDuplicates = true
-Consume = true
 OnPerformModule = SubResource("Resource_v8m8y")
 Type = 1
 AllowTier = false

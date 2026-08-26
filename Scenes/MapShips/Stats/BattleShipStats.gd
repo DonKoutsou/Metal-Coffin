@@ -66,12 +66,14 @@ var SpeedBuffTime : int = 0
 var SpeedDeBuffTime : int = 0
 var DefBuffTime : int = 0
 var DefDeBuffTime : int = 0
+var PlayAnimations : bool = true
 
 signal EnergyChanged(energyAdded : int)
 signal ReservesChanged(reservesAdded : int)
 signal StatsBuffed
 signal CardsBuffed
 signal ShipDamaged(amm : float, shieldamm : float, Instigator : BattleShipStats)
+signal ShieldChanged(NewShield : float)
 signal ShipSetOnFire(Instigator : BattleShipStats)
 signal PassivesCleansed()
 
@@ -79,6 +81,7 @@ func ShieldShip(Amm : float) -> void:
 	Shield = min(Shield + Amm, MaxShield)
 	ShipViz.Refresh()
 	StatsBuffed.emit()
+	ShieldChanged.emit(Shield)
 
 func OnCardsBuffed() -> void:
 	CardsBuffed.emit()

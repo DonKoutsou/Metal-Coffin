@@ -14,19 +14,22 @@ gradient = SubResource("Gradient_y8ytq")
 width = 16
 
 [sub_resource type="Gradient" id="Gradient_v30db"]
-colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.47293532, 0.47293532, 0.47293526, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_84607"]
 gradient = SubResource("Gradient_v30db")
+width = 32
+height = 32
 fill_to = Vector2(0, 1)
 
 [sub_resource type="Gradient" id="Gradient_sr0d0"]
+colors = PackedColorArray(0, 0, 0, 1, 0.72910064, 0.72910076, 0.72910064, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_rdq0u"]
 gradient = SubResource("Gradient_sr0d0")
 width = 1
 height = 12
-fill_from = Vector2(0, 1)
+fill_from = Vector2(0, 0.994302)
 fill_to = Vector2(0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_spb5j"]

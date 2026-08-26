@@ -12,7 +12,6 @@ metadata/_custom_type_script = "uid://351rxhn4j1e4"
 script = ExtResource("5_84f0k")
 CardName = "Null"
 AllowDuplicates = true
-Consume = true
 OnUseModules = Array[ExtResource("2_oxbkc")]([SubResource("Resource_mpp22")])
 Type = 2
 AllowTier = false

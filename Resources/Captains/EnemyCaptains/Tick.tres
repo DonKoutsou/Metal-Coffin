@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scenes/MapShips/Stats/ShipStat.gd" id="2_5r51y"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="3_hg1bf"]
-[ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/ShipTextures/Hull6.png" id="3_ln4rf"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scenes/MapShips/Stats/Captain.gd" id="4_b2ula"]
+[ext_resource type="Texture2D" uid="uid://bx78x3avxyhmf" path="res://Assets/ShipTextures/Hull5.png" id="4_beqgl"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="5_62pqv"]
 
 [sub_resource type="Resource" id="Resource_jvup1"]
@@ -130,6 +130,6 @@ StatName = 22
 resource_local_to_scene = true
 script = ExtResource("4_b2ula")
 CaptainName = "Grunt"
-ShipIcon = ExtResource("3_ln4rf")
+ShipIcon = ExtResource("4_beqgl")
 CaptainStats = Array[ExtResource("2_5r51y")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_mcdo0"), SubResource("Resource_yl52l"), SubResource("Resource_7g4dd"), SubResource("Resource_4p6v8"), SubResource("Resource_66526"), SubResource("Resource_h3q7u"), SubResource("Resource_hg1bf"), SubResource("Resource_62pqv"), SubResource("Resource_njxg2"), SubResource("Resource_2igpr"), SubResource("Resource_ox4id"), SubResource("Resource_hl4y2"), SubResource("Resource_1abhi"), SubResource("Resource_14la3"), SubResource("Resource_y6u8d"), SubResource("Resource_hkump"), SubResource("Resource_t7jp6"), SubResource("Resource_ebwde"), SubResource("Resource_lk4qj"), SubResource("Resource_gdj07"), SubResource("Resource_253vf"), SubResource("Resource_22qwx"), SubResource("Resource_oglrj"), SubResource("Resource_c6cgs"), SubResource("Resource_8rqhj"), SubResource("Resource_bo173"), SubResource("Resource_hpmlm"), SubResource("Resource_w03t5")])
 ShipCallsign = "T"

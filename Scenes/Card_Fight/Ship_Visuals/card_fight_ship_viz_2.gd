@@ -5,29 +5,41 @@ class_name CardFightShipViz2
 @export_file_path(".tscn") var CardScene : String
 @export var floaterScene : PackedScene
 @export_group("Nodes")
+
 @export var ShipNameLabel : Label
+
 @export var ShipIcon : TextureRect
-@export var HullBar : ProgressBar
-@export var HullLabel : Label
-@export var ShieldBar : ProgressBar
+@export var ShadowPivot : Control
+
 @export var TurnPanel : Control
+@export var HasMovePanel : Control
+@export var ActionParent : Control
+@export var PassiveParent : Control
+
+
+@export_group("Particles")
+@export var FirePart : Control
+@export var Shield : Control
 @export var SpeedBuff : GPUParticles2D
 @export var SpeedDeBuff : GPUParticles2D
 @export var FPBuff : GPUParticles2D
 @export var FPDeBuff : GPUParticles2D
-
-@export var FirePart : Control
 @export var ExplosionPart : GPUParticles2D
 @export var SmokePart : GPUParticles2D
-@export var FPLabel : RichTextLabel
-@export var SPDLabel : RichTextLabel
-@export var HasMovePanel : Control
-@export var ActionParent : Control
-@export var PassiveParent : Control
-@export var ShadowPivot : Control
-
 @export var DefBuff : GPUParticles2D
 @export var DefDeBuff : GPUParticles2D
+
+@export_group("Sounds")
+@export var Explosion : AudioStreamPlayer2D
+@export var Land : AudioStreamPlayer2D
+
+@export_group("Stats")
+@export var statContainer : Control
+@export var HullBar : ProgressBar
+@export var HullLabel : Label
+@export var ShieldBar : ProgressBar
+@export var FPLabel : RichTextLabel
+@export var SPDLabel : RichTextLabel
 @export var WeightLabel : RichTextLabel
 @export var DefenceLabel : RichTextLabel
 
@@ -59,6 +71,7 @@ var lastPos : Vector2
 var returnOffset : Vector2
 
 var damage_wobble: float = 0.0
+var animOffset : Vector2 = Vector2.ZERO
 
 const StatText = "[color=#ffc315]HULL[/color][p][color=#6be2e9]SHIELD[/color][p][color=#308a4d]SPEED[/color][p][color=#f35033]FPWR[/color]"
 
@@ -80,41 +93,36 @@ func DoFloater(text : String, col : Color = Color(1,1,1)) -> void:
 	DFloater.global_position = (global_position + (size / 2)) - DFloater.size / 2
 
 func Destroy() -> void:
+	if (ShipIcon.texture is AnimatedTexture):
+		ShipIcon.texture.pause = true
+	
+	Shield.visible = false
 	Destroyed = true
 	var mat = ExplosionPart.process_material as ParticleProcessMaterial
 	mat.scale_max = 0.6
 	ExplosionPart.emitting = true
-	$HBoxContainer/Control/Control/TextureRect/ExplosionSound.play()
+	Explosion.play()
 	var RandomPos = ShipIcon.global_position + Vector2(randf_range(-100, 100), randf_range(-100, 100))
+	
 	var MoveTw = create_tween()
 	MoveTw.set_ease(Tween.EASE_IN)
 	MoveTw.set_trans(Tween.TRANS_QUAD)
+	
 	MoveTw.tween_property(ShipIcon, "global_position", RandomPos, 3)
-	var ScaleTw = create_tween()
-	ScaleTw.set_ease(Tween.EASE_IN)
-	ScaleTw.set_trans(Tween.TRANS_QUAD)
-	ScaleTw.tween_property(ShipIcon, "scale", Vector2(0.2, 0.2), 3)
+
+	MoveTw.tween_property(ShipIcon, "scale", Vector2(0.2, 0.2), 3)
+	
 	var RandomRot = randf_range(-720, 720)
-	var RotTween = create_tween()
-	RotTween.set_ease(Tween.EASE_IN)
-	RotTween.set_trans(Tween.TRANS_QUAD)
-	RotTween.tween_property(ShipIcon, "rotation_degrees", RandomRot, 3)
-	var ShadowPosTween = create_tween()
-	ShadowPosTween.set_ease(Tween.EASE_IN)
-	ShadowPosTween.set_trans(Tween.TRANS_QUAD)
-	ShadowPosTween.tween_property(ShadowPivot.get_child(0), "position", Vector2(0, 0), 3)
-	var ShadowScaleTween = create_tween()
-	ShadowScaleTween.set_ease(Tween.EASE_IN)
-	ShadowScaleTween.set_trans(Tween.TRANS_QUAD)
-	ShadowScaleTween.tween_property(ShadowPivot.get_child(0), "scale", Vector2(1,1), 3)
-	var ShadowPivotRotTween = create_tween()
-	ShadowPivotRotTween.set_ease(Tween.EASE_IN)
-	ShadowPivotRotTween.set_trans(Tween.TRANS_QUAD)
-	ShadowPivotRotTween.tween_property(ShadowPivot, "rotation_degrees", -RandomRot, 3)
-	var ShadowRotTween = create_tween()
-	ShadowRotTween.set_ease(Tween.EASE_IN)
-	ShadowRotTween.set_trans(Tween.TRANS_QUAD)
-	ShadowRotTween.tween_property(ShadowPivot.get_child(0), "rotation_degrees", RandomRot, 3)
+	MoveTw.tween_property(ShipIcon, "rotation_degrees", RandomRot, 3)
+
+	MoveTw.tween_property(ShadowPivot.get_child(0), "position", Vector2(0, 0), 3)
+
+	MoveTw.tween_property(ShadowPivot.get_child(0), "scale", Vector2(1,1), 3)
+
+	MoveTw.tween_property(ShadowPivot, "rotation_degrees", -RandomRot, 3)
+
+	MoveTw.tween_property(ShadowPivot.get_child(0), "rotation_degrees", RandomRot, 3)
+	
 	ToggleFire(false)
 	ToggleDefBuff(false, 1)
 	ToggleDefDeBuff(false)
@@ -122,24 +130,21 @@ func Destroy() -> void:
 	ToggleDmgDebuff(false)
 	ToggleSpeedBuff(false, 1)
 	ToggleSpeedDebuff(false)
-	
-	
+
 	EnableSmoke()
 	if (ModulateTween != null):
 		ModulateTween.kill()
-	$HBoxContainer/VBoxContainer/PanelContainer2.queue_free()
+	$HBoxContainer/PanelContainer2.queue_free()
 	
 	await MoveTw.finished
-	$HBoxContainer/Control/Control/TextureRect/LandSound.play()
+	Land.play()
 	mat.scale_max = 0.1
 	ExplosionPart.restart()
 	ExplosionPart.emitting = true
 	
 
 func _ready() -> void:
-	#Destroy()
-	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2.visible = false
-	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3.visible = false
+	statContainer.visible = false
 	HullLabel.visible = false
 	ToggleFire(false)
 	phase = randf() * TAU
@@ -147,11 +152,9 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if (Destroyed):
+	if (Destroyed or !Ship.PlayAnimations):
 		return
-	
-	
-	
+
 	time += delta
 
 	_update_pushback(delta)
@@ -171,10 +174,9 @@ func _process(delta: float) -> void:
 	if (lastPos != ShipIcon.global_position):
 		returnOffset += ShipIcon.global_position - lastPos
 
-	ShipIcon.position = drift + bob + pushback_offset - returnOffset
+	ShipIcon.position = drift + bob + pushback_offset - returnOffset - animOffset
 	lastPos = ShipIcon.global_position
-	returnOffset = returnOffset.lerp(Vector2.ZERO, delta * 4)
-	#returnOffset = returnOffset.move_toward(Vector2.ZERO, delta * 100)
+	returnOffset = returnOffset.slerp(Vector2.ZERO, delta * 2)
 
 	# The visual center of the Control
 	var my_center := ShipIcon.global_position
@@ -211,7 +213,7 @@ func _update_pushback(delta: float) -> void:
 	damage_wobble = move_toward(damage_wobble, 0.0, damage_wobble_decay * delta)
 
 
-func apply_damage_pushback(amm : float, shieldamm : float, Instigator : BattleShipStats, strength: float = 250) -> void:
+func apply_damage_pushback(amm : float, shieldamm : float, Instigator : BattleShipStats, direct : bool) -> void:
 	if (Instigator == null):
 		return
 	var my_center := ShipIcon.global_position
@@ -229,7 +231,7 @@ func apply_damage_pushback(amm : float, shieldamm : float, Instigator : BattleSh
 
 	direction = direction.normalized()
 
-	pushback_velocity += direction * 800
+	pushback_velocity += direction * 40 * amm
 	damage_wobble = 1.0
 
 func Pop(t : bool):
@@ -252,8 +254,16 @@ func SetStats(S : BattleShipStats, Friendly : bool) -> void:
 	Ship = S
 	Fr = Friendly
 	ShipNameLabel.text = S.Name
-	ShipIcon.texture = S.ShipIcon
-	ShadowPivot.get_child(0).texture = S.ShipIcon
+	
+	var newIcon : Texture
+	if (S.ShipIcon is AnimatedTexture):
+		#We make sure to duplicate it so we can pause it without pausing everything else on the world
+		newIcon = S.ShipIcon.duplicate()
+	else:
+		newIcon = S.ShipIcon
+		
+	ShipIcon.texture = newIcon
+	ShadowPivot.get_child(0).texture = newIcon
 	HullLabel.text = "{0}/{1}".format([roundi(S.CurrentHull + S.Shield), S.Hull]).replace(".0", "")
 	HullBar.max_value = S.Hull
 	ShieldBar.max_value = S.MaxShield
@@ -265,25 +275,31 @@ func SetStats(S : BattleShipStats, Friendly : bool) -> void:
 	DefenceLabel.text = "[color=#7bb0b4]DEF[/color] {0}".format([roundi(S.GetDef())])
 	
 	var t : Texture2D = S.ShipIcon
-	var tsize = t.get_size().x
-	FirePart.scale.x = tsize / 2
+	var tsize = t.get_size()
+	FirePart.scale.x = tsize.x / 2
 	FirePart.scale.y = FirePart.scale.x * 1.5
+	Shield.scale = Vector2(tsize.y, tsize.y) * 2
+	Shield.visible = false
 	
 	S.ShipDamaged.connect(apply_damage_pushback)
+	S.ShieldChanged.connect(ShieldChanged)
 	#ShipIcon.flip_v = !Friendly
 	#ShadowPivot.get_child(0).flip_v = !Friendly
 	
 	if (Friendly):
-		$HBoxContainer.move_child($HBoxContainer/VBoxContainer, 0)
+		$HBoxContainer.move_child($HBoxContainer/PanelContainer2, 0)
 	else:
 		ShipNameLabel.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		ShipNameLabel.get_parent().move_child(ShipNameLabel, 1)
 		HullLabel.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-		$HBoxContainer.move_child($HBoxContainer/VBoxContainer, 1)
+		$HBoxContainer.move_child($HBoxContainer/PanelContainer2, 1)
 		HasMovePanel.get_parent().move_child(HasMovePanel, 0)
 	
 	HasMovePanel.visible = false
 	TurnPanel.self_modulate.a = 0
+
+func ShieldChanged(newShield : float) -> void:
+	Shield.visible = newShield > 0
 
 func GetShipPos() -> Vector2:
 	return ShipIcon.global_position
@@ -449,24 +465,67 @@ func _on_panel_container_2_mouse_entered() -> void:
 	tw = create_tween()
 	tw.set_ease(Tween.EASE_OUT)
 	tw.set_trans(Tween.TRANS_BACK)
-	tw.tween_property($HBoxContainer/VBoxContainer/PanelContainer2, "custom_minimum_size", Vector2(0,116), 0.15)
+	tw.tween_property($HBoxContainer/PanelContainer2, "custom_minimum_size", Vector2(180,116), 0.15)
 	tw.finished.connect(ToggleStatVisibility.bind(true))
 	Hovered.emit()
 
 func ToggleStatVisibility(t : bool) -> void:
-	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2.visible = t
-	$HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3.visible = t
+	statContainer.visible = t
 	#PassiveParent.visible = t
 	HullLabel.visible = t
 	
-
-
 func _on_panel_container_2_mouse_exited() -> void:
 	if (tw != null):
 		tw.kill()
 	tw = create_tween()
 	tw.set_ease(Tween.EASE_IN)
 	tw.set_trans(Tween.TRANS_BACK)
-	tw.tween_property($HBoxContainer/VBoxContainer/PanelContainer2, "custom_minimum_size", Vector2.ZERO, 0.15)
+	tw.tween_property($HBoxContainer/PanelContainer2, "custom_minimum_size", Vector2(180, 0), 0.15)
 	ToggleStatVisibility(false)
 	Unhovered.emit()
+
+var animTween : Tween
+
+func PlayAnim(type : AnimatioType) -> void:
+	if (animTween != null):
+		return
+		
+	if (type == AnimatioType.EVASIVE):
+		#animOffset = Vector2.ZERO
+		animTween = create_tween()
+		animTween.set_ease(Tween.EASE_IN_OUT)
+		animTween.set_trans(Tween.TRANS_QUAD)
+		animTween.tween_property(self, "animOffset", Vector2(0, 60), 0.5)
+		animTween.set_parallel(true)
+		if (Fr):
+			animTween.tween_property(self, "facing_offset_degrees", 10, 0.5)
+		else:
+			animTween.tween_property(self, "facing_offset_degrees", -10, 0.5)
+			
+		await animTween.finished
+		animTween = create_tween()
+		animTween.set_ease(Tween.EASE_IN_OUT)
+		animTween.set_trans(Tween.TRANS_QUAD)
+		animTween.tween_property(self, "animOffset", Vector2(0, -60), 0.5)
+		animTween.set_parallel(true)
+		if (Fr):
+			animTween.tween_property(self, "facing_offset_degrees", -10, 0.5)
+		else:
+			animTween.tween_property(self, "facing_offset_degrees", 10, 0.5)
+			
+		await animTween.finished
+		animTween = create_tween()
+		animTween.set_ease(Tween.EASE_IN_OUT)
+		animTween.set_trans(Tween.TRANS_QUAD)
+		animTween.tween_property(self, "animOffset", Vector2(0, 0), 0.5)
+		animTween.set_parallel(true)
+		animTween.tween_property(self, "facing_offset_degrees", 0, 0.5)
+		
+		animTween = null
+		#drift_speed = 0.7
+		#drift_speed = 0.7
+	
+enum AnimatioType{
+	NONE,
+	EVASIVE,
+}

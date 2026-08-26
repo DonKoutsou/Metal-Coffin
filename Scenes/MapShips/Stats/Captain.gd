@@ -1,5 +1,5 @@
 @tool
-extends Resource
+extends InheritedResource
 class_name Captain
 
 @export var CaptainName : String

@@ -18,3 +18,4 @@ AllowDuplicates = true
 OnPerformModule = SubResource("Resource_0wgrv")
 Type = 1
 AllowTier = false
+PlayAnimation = 1

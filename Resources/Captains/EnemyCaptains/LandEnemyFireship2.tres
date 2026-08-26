@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="Captain" format=3 uid="uid://8nr6ss128jfn"]
 
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scenes/MapShips/Stats/ShipStat.gd" id="2_i3g1h"]
-[ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/ShipTextures/Hull6.png" id="3_2tpbu"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="3_f7ih8"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="4_hrcfj"]
+[ext_resource type="Texture2D" uid="uid://cpyoxyvvrjbnk" path="res://Assets/ShipTextures/Hull6.tres" id="4_m30fi"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scenes/MapShips/Stats/Captain.gd" id="5_v4b18"]
 [ext_resource type="Resource" uid="uid://8kvrf75vxyp3" path="res://Resources/Items/ShipParts/MG/ShortMachinegun180mm.tres" id="12_mrxgg"]
 [ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/Engine.tres" id="16_o15ad"]
@@ -121,7 +121,7 @@ StatName = 22
 resource_local_to_scene = true
 script = ExtResource("5_v4b18")
 CaptainName = "LF2"
-ShipIcon = ExtResource("3_2tpbu")
+ShipIcon = ExtResource("4_m30fi")
 CaptainStats = Array[ExtResource("2_i3g1h")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_mcdo0"), SubResource("Resource_yl52l"), SubResource("Resource_7g4dd"), SubResource("Resource_4p6v8"), SubResource("Resource_66526"), SubResource("Resource_h3q7u"), SubResource("Resource_fpso5"), SubResource("Resource_e20g8"), SubResource("Resource_o15ad"), SubResource("Resource_62i66"), SubResource("Resource_8m2j3"), SubResource("Resource_1cheq"), SubResource("Resource_2a4ws"), SubResource("Resource_mrxgg"), SubResource("Resource_xng7e"), SubResource("Resource_o66ax"), SubResource("Resource_e77jl"), SubResource("Resource_kpj03"), SubResource("Resource_55wvb"), SubResource("Resource_cjukq"), SubResource("Resource_da8ii")])
 ShipCallsign = "LP2"
 StartingItems = Array[ExtResource("4_hrcfj")]([ExtResource("16_o15ad"), ExtResource("17_62i66"), ExtResource("19_1cheq"), ExtResource("19_1cheq"), ExtResource("19_1cheq"), ExtResource("19_1cheq"), ExtResource("19_1cheq"), ExtResource("20_2a4ws"), ExtResource("20_2a4ws"), ExtResource("20_2a4ws"), ExtResource("21_e77jl"), ExtResource("21_e77jl"), ExtResource("21_e77jl"), ExtResource("21_e77jl"), ExtResource("12_mrxgg"), ExtResource("12_mrxgg")])

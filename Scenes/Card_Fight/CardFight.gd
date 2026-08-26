@@ -1313,6 +1313,7 @@ func HandleModules(Performer : BattleShipStats, C : CardStats, targetOverride : 
 	
 	if (AnimData.size() > 0):
 		await DoCardAnim(C, AnimData, Performer, true)
+	Performer.ShipViz.PlayAnim(C.PlayAnimation)
 	
 	return true
 

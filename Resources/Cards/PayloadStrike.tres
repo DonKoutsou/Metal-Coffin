@@ -26,6 +26,5 @@ Icon = ExtResource("1_pi5p2")
 CardName = "Payload Strike"
 Energy = 2
 AllowDuplicates = true
-Consume = true
 OnPerformModule = SubResource("Resource_ucqm7")
 WeapT = 5

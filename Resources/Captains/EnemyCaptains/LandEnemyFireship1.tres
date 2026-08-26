@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Captain" format=3 uid="uid://cta70yn02gqg5"]
 
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scenes/MapShips/Stats/ShipStat.gd" id="2_7jpyg"]
-[ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/ShipTextures/Hull6.png" id="3_kdirt"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="3_xtppk"]
+[ext_resource type="Texture2D" uid="uid://cpyoxyvvrjbnk" path="res://Assets/ShipTextures/Hull6.tres" id="4_aym15"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="4_wk585"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scenes/MapShips/Stats/Captain.gd" id="5_mwjps"]
 [ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/Engine.tres" id="17_yctwn"]
@@ -119,7 +119,7 @@ StatName = 22
 resource_local_to_scene = true
 script = ExtResource("5_mwjps")
 CaptainName = "Land Unit"
-ShipIcon = ExtResource("3_kdirt")
+ShipIcon = ExtResource("4_aym15")
 CaptainStats = Array[ExtResource("2_7jpyg")]([SubResource("Resource_02d51"), SubResource("Resource_i3kn7"), SubResource("Resource_qj836"), SubResource("Resource_yl52l"), SubResource("Resource_1iiwu"), SubResource("Resource_beo32"), SubResource("Resource_66526"), SubResource("Resource_j8xsa"), SubResource("Resource_1kxyg"), SubResource("Resource_v0j1y"), SubResource("Resource_6spqc"), SubResource("Resource_yctwn"), SubResource("Resource_yduiv"), SubResource("Resource_dogpg"), SubResource("Resource_05tkb"), SubResource("Resource_dgaf7"), SubResource("Resource_ntqid"), SubResource("Resource_lvqa2"), SubResource("Resource_3g2k8"), SubResource("Resource_s8vn6"), SubResource("Resource_enqva"), SubResource("Resource_f2gx3"), SubResource("Resource_nfjer")])
 ShipCallsign = "LP1"
 StartingItems = Array[ExtResource("4_wk585")]([ExtResource("17_yctwn"), ExtResource("17_yduiv"), ExtResource("18_yduiv"), ExtResource("18_yduiv"), ExtResource("19_dogpg"), ExtResource("19_dogpg"), ExtResource("20_05tkb"), ExtResource("20_05tkb"), ExtResource("20_05tkb"), ExtResource("21_3g2k8"), ExtResource("21_3g2k8"), ExtResource("21_3g2k8")])

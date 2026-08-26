@@ -15,7 +15,6 @@ script = ExtResource("5_r4ikw")
 Icon = ExtResource("1_6xcxn")
 CardName = "Hollow Barragge"
 AllowDuplicates = true
-Consume = true
 OnPerformModule = SubResource("Resource_tpj2d")
 WeapT = 4
 AllowTier = false

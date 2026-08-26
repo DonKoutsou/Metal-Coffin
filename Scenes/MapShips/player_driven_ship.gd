@@ -72,7 +72,7 @@ func Update(delta: float, _unaffectedDelta : float) -> void:
 	
 	UpdateShipWindManipulationModifier()
 	
-	_HandleLanding(delta)
+	(delta)
 	_HandleAutoPilot(delta)
 		
 	if (StoredSteer != 0):

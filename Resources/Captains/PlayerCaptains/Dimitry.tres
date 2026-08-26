@@ -5,8 +5,8 @@
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_wbv1e"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="3_y70ig"]
 [ext_resource type="Resource" uid="uid://b1e5ovklwmp7v" path="res://Resources/Captains/PlayerCaptains/Amol.tres" id="5_0l4hh"]
+[ext_resource type="Texture2D" uid="uid://cpyoxyvvrjbnk" path="res://Assets/ShipTextures/Hull6.tres" id="5_2dfck"]
 [ext_resource type="Resource" uid="uid://c8wthdbwacfhe" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/Engine2.tres" id="5_dgj0j"]
-[ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/ShipTextures/Hull6.png" id="6_0l4hh"]
 [ext_resource type="Resource" uid="uid://cwoay1furrmi7" path="res://Resources/Items/ShipParts/FuelTank/LightFuelTank/SPT-100.tres" id="8_1cw16"]
 [ext_resource type="Resource" uid="uid://css6e78uhfsfa" path="res://Resources/Items/ShipParts/MG/ShortMachinegun100mm.tres" id="10_2dfck"]
 [ext_resource type="Resource" uid="uid://cnrek2mbia331" path="res://Resources/Items/Ammo/ProxyFuseAmmoMagazine100mm.tres" id="11_xyrt1"]
@@ -125,7 +125,7 @@ StatName = 21
 script = ExtResource("2_mv381")
 CaptainName = "Dimitry"
 CaptainPortrait = "uid://g3ml8lxq5yyn"
-ShipIcon = ExtResource("6_0l4hh")
+ShipIcon = ExtResource("5_2dfck")
 CaptainStats = Array[ExtResource("2_rura2")]([SubResource("Resource_5y7kc"), SubResource("Resource_v6t2m"), SubResource("Resource_g5q3n"), SubResource("Resource_qsyx2"), SubResource("Resource_1apas"), SubResource("Resource_8oau1"), SubResource("Resource_g3wpv"), SubResource("Resource_8tqmo"), SubResource("Resource_vxgw7"), SubResource("Resource_0l4hh"), SubResource("Resource_dn4w7"), SubResource("Resource_b7sqh"), SubResource("Resource_jhil0"), SubResource("Resource_qf4jf"), SubResource("Resource_3cfo8"), SubResource("Resource_04s81"), SubResource("Resource_epxoh"), SubResource("Resource_8kdp1"), SubResource("Resource_qsfeq"), SubResource("Resource_ru86m"), SubResource("Resource_2x35o"), SubResource("Resource_6tkk3"), SubResource("Resource_2mv6e")])
 StartingItems = Array[ExtResource("3_wbv1e")]([ExtResource("5_dgj0j"), ExtResource("8_1cw16"), ExtResource("10_2dfck"), ExtResource("10_2dfck"), ExtResource("11_xyrt1"), ExtResource("11_xyrt1"), ExtResource("11_xyrt1")])
 CheckForErrors = true

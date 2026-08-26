@@ -7,6 +7,10 @@ class_name CardHandContainer
 
 var Tweens : Array[Tween]
 
+func _process(delta: float) -> void:
+	for g in Tweens:
+		g.custom_step(delta)
+
 func _sort_children():
 	# Gather only visible Control children
 	var visible_children := []
@@ -60,11 +64,10 @@ func _sort_children():
 			g.position = new_pos
 		else:
 			if g.position != new_pos:
-				var tween = get_tree().create_tween()
-				tween.set_ease(Tween.EASE_OUT)
-				tween.set_trans(Tween.TRANS_BACK)
-				tween.tween_property(g, "position", new_pos, 0.25)\
-					.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+				var tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+
+				tween.tween_property(g, "position", new_pos, 0.25)
+				tween.pause()
 				Tweens.append(tween)
 	
 func _notification(what):

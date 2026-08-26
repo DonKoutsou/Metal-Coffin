@@ -291,7 +291,7 @@ func _HandleLanding(delta : float) -> void:
 
 	if (Altitude != NewAltitude):
 		UpdateAltitude(move_toward(Altitude, NewAltitude, delta * 1000))
-		if (Landed()):
+		if (Landed() and self is PlayerDrivenShip):
 			PopUpManager.GetInstance().DoFadeNotif("{0} has landed".format([Cpt.GetCaptainName()]))
 			RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.LANDING_END)
 
@@ -437,7 +437,7 @@ func SetTargetAltitude(NewTarget : float) -> void:
 func Landed() -> bool:
 	if (!IsCommander()):
 		return Command.Landed()
-	return Altitude == CurrentLandAltitude and !Moving()
+	return is_equal_approx(Altitude, CurrentLandAltitude) and !Moving()
 
 func Moving() -> bool:
 	return Acceleration.position.x > 0
