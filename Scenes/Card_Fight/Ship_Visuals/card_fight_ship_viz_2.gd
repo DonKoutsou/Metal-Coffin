@@ -105,6 +105,7 @@ func Destroy() -> void:
 	var RandomPos = ShipIcon.global_position + Vector2(randf_range(-100, 100), randf_range(-100, 100))
 	
 	var MoveTw = create_tween()
+	MoveTw.set_parallel()
 	MoveTw.set_ease(Tween.EASE_IN)
 	MoveTw.set_trans(Tween.TRANS_QUAD)
 	
@@ -239,15 +240,16 @@ func Pop(t : bool):
 	var FinalPos : Vector2 = Vector2(0, 0)
 	if (t):
 		if (Fr):
-			FinalPos.x = 100
+			FinalPos.x = -70
 		else:
-			FinalPos.x = -40
+			FinalPos.x = 70
 	else:
-		FinalPos.x = 30
+		FinalPos.x = 0
 
-	PopTween.set_ease(Tween.EASE_OUT)
+	PopTween.set_ease(Tween.EASE_IN_OUT)
 	PopTween.set_trans(Tween.TRANS_QUAD)
-	PopTween.tween_property($HBoxContainer/Control/Control, "position", FinalPos, 0.2)
+	
+	PopTween.tween_property(self, "animOffset", FinalPos, 0.2)
 	await PopTween.finished
 	
 func SetStats(S : BattleShipStats, Friendly : bool) -> void:

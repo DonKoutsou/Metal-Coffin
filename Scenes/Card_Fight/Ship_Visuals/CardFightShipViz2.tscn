@@ -578,6 +578,7 @@ grow_vertical = 2
 rotation = 1.5707964
 scale = Vector2(512, 512)
 pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
 
 [connection signal="mouse_entered" from="HBoxContainer/PanelContainer2" to="." method="_on_panel_container_2_mouse_entered"]
 [connection signal="mouse_exited" from="HBoxContainer/PanelContainer2" to="." method="_on_panel_container_2_mouse_exited"]

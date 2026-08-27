@@ -58,12 +58,13 @@ UIEventH = ExtResource("16_734e5")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=212615134]
 position = Vector2(445, 311)
+energy = 0.6
 blend_mode = 2
 range_layer_max = 1
 range_item_cull_mask = 524288
 texture = ExtResource("32_1im06")
-texture_scale = 30.0
-height = 600.0
+texture_scale = 9.37
+height = 222.0
 
 [node name="Ground" type="ColorRect" parent="." unique_id=1742857488]
 light_mask = 524289
@@ -183,17 +184,12 @@ size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_f2au4")
 
 [node name="SelectedCardPlecements" type="Container" parent="VBoxContainer4/VBoxContainer/PanelContainer2" unique_id=278719319]
-custom_minimum_size = Vector2(300, 228)
+custom_minimum_size = Vector2(350, 228)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 script = ExtResource("24_d8sco")
 metadata/_custom_type_script = "uid://bm68ow8pgjukx"
-
-[node name="Control" type="Control" parent="VBoxContainer4/VBoxContainer" unique_id=800616280]
-custom_minimum_size = Vector2(0, 172.735)
-layout_mode = 2
-mouse_filter = 2
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer4" unique_id=841680704]
 layout_mode = 2
