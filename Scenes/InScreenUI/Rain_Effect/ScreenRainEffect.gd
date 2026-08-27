@@ -14,10 +14,9 @@ func _ready() -> void:
 	ToggleEffects(SettingsPanel.GetRain())
 
 func _physics_process(_delta: float) -> void:
-	if (!working):
-		return
 	var storm = ShipContoller.ControlledShipStormValue
-	RainMat.set_shader_parameter("frequency" ,(1 - storm) * 4.0)
+	if (working):
+		RainMat.set_shader_parameter("frequency" ,(1 - storm) * 4.0)
 	RainSound.volume_db = linear_to_db(storm) - 6
 
 func _exit_tree() -> void:
@@ -26,5 +25,5 @@ func _exit_tree() -> void:
 func ToggleEffects(t : bool) -> void:
 	working = t
 	
-	RainSound.playing = t
+	#RainSound.playing = t
 	visible = t

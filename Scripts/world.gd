@@ -312,10 +312,30 @@ func ShipSeparationFinished() -> void:
 #Dogfight-----------------------------------------------
 var FighingFriendlyUnits : Array[MapShip] = []
 var FighingEnemyUnits : Array[MapShip] = []
-func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip], Missiles : Array[BattleShipStats], EnemyMissiles : Array[BattleShipStats]):
+func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip], Missiles : Array[Missile], EnemyMissiles : Array[Missile]):
 	if (WORLDST == WORLDSTATE.FIGHT):
 		return
-		
+	
+	var windDir = WeatherManage.WindDirection
+	var PlDir = windDir
+	
+	var availbableFriendly : Node2D
+	var availableEnemy : Node2D
+	
+	if (Friendlies.size() > 0):
+		availbableFriendly = Friendlies[0]
+	else: if (Missiles.size() > 0):
+		availbableFriendly = Missiles[0]
+	
+	if (Enemies.size() > 0):
+		availableEnemy = Enemies[0]
+	else: if (EnemyMissiles.size() > 0):
+		availableEnemy = EnemyMissiles[0]
+	
+	PlDir = availbableFriendly.global_position.direction_to(availableEnemy.global_position)
+	var dot = PlDir.dot(windDir)
+	
+	
 	#Temp solution to stop fight starting twice
 	WORLDST = WORLDSTATE.FIGHT
 	SimulationManager.GetInstance().TogglePause(true)
@@ -347,29 +367,31 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip], Missil
 	#If both arrays have missiles then this is a strictly missile fight
 	if (Missiles.size() > 0 and EnemyMissiles.size() > 0):
 		for g in Missiles:
-			FBattleStats.append(g)
+			FBattleStats.append(g.GetBattleStats())
 
 		for g in EnemyMissiles:
-			EBattleStats.append(g)
+			EBattleStats.append(g.GetBattleStats())
 	
 	#if not we need to shift the aliance of missiles
 	else:
 		if (FBattleStats.size() > 0):
 			for g in Missiles:
-				EBattleStats.append(g)
+				EBattleStats.append(g.GetBattleStats())
 
 			for g in EnemyMissiles:
-				EBattleStats.append(g)
+				EBattleStats.append(g.GetBattleStats())
 		else:
 			for g in Missiles:
-				FBattleStats.append(g)
+				FBattleStats.append(g.GetBattleStats())
 
 			for g in EnemyMissiles:
-				FBattleStats.append(g)
+				FBattleStats.append(g.GetBattleStats())
 	
 	CardF.PlayerReserves = FBattleStats
 	CardF.EnemyReserves = EBattleStats
-	
+	CardF.WindAdvantage = dot
+	var actualDir = WeatherManage.WindDirection.rotated(-availbableFriendly.global_rotation)
+	CardF.ActualWindDir = actualDir
 	#Store location of fight to add the location at the ending screen
 	var AveragePos : Vector2 = Vector2.ZERO
 	for g in Enemies:

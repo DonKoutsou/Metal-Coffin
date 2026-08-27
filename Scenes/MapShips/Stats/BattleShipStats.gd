@@ -17,7 +17,7 @@ var deck : Deck
 var Cards : Array[CardStats]
 
 var ShipViz : CardFightShipViz2
-
+var WindPenalty : float = 0
 #STATS
 var Weight : float
 
@@ -34,6 +34,8 @@ var FirePowerAttackBuff : float = 1
 var FirePowerAttackDebuff : float = 0
 
 var Speed : float
+var PermaSpeedBuff : float = 1
+var PermaSpeedDebuff : float = 0
 var SpeedBuff : float = 1
 var SpeedDeBuff : float = 0
 
@@ -153,6 +155,11 @@ func BuffSpeed(Amm : float, Turns : int = 2) -> void:
 	ShipViz.Refresh()
 	StatsBuffed.emit()
 
+func PermaBuffSpeed(Amm : float) -> void:
+	PermaSpeedBuff += Amm - 1
+	ShipViz.Refresh()
+	StatsBuffed.emit()
+
 func CleanseDebuffs() -> void:
 	FirePowerDeBuff = 0
 	SpeedDeBuff = 0
@@ -167,6 +174,11 @@ func DeBuffSpeed(Amm : float, Turns : int = 2) -> void:
 	#buffs are usually 1.2 or 1.3 so we keep the 0.2 and add it
 	SpeedDeBuff += Amm
 	SpeedDeBuffTime = Turns
+	ShipViz.Refresh()
+	StatsBuffed.emit()
+
+func PermaDeBuffSpeed(Amm : float) -> void:
+	PermaSpeedDebuff += Amm
 	ShipViz.Refresh()
 	StatsBuffed.emit()
 
@@ -277,7 +289,7 @@ func GetFirePower() -> float:
 	return FirePower * (FirePowerBuff - FirePowerDeBuff) * (FirePowerAttackBuff - FirePowerAttackDebuff)
 
 func GetSpeed() -> float:
-	return Speed * (SpeedBuff - SpeedDeBuff)
+	return Speed * (SpeedBuff - SpeedDeBuff) * (PermaSpeedBuff - PermaSpeedDebuff)
 
 func GetDef() -> float:
 	return Def + (DefBuff - DefDebuff)

@@ -148,7 +148,7 @@ func _ready() -> void:
 	HullLabel.visible = false
 	ToggleFire(false)
 	phase = randf() * TAU
-
+	
 
 
 func _process(delta: float) -> void:
@@ -360,11 +360,11 @@ func Refresh() -> void:
 		return
 	UpdateStats(Ship)
 	ToggleDmgBuff(Ship.FirePowerBuff > 1, Ship.FirePowerBuff)
-	ToggleSpeedBuff(Ship.SpeedBuff > 1, Ship.SpeedBuff)
+	ToggleSpeedBuff(Ship.SpeedBuff + Ship.PermaSpeedBuff > 2, Ship.SpeedBuff + Ship.PermaSpeedBuff)
 	ToggleDefBuff(Ship.DefBuff > 0, Ship.DefBuff)
 	
 	ToggleDmgDebuff(Ship.FirePowerDeBuff > 0)
-	ToggleSpeedDebuff(Ship.SpeedDeBuff > 0)
+	ToggleSpeedDebuff(Ship.SpeedDeBuff + Ship.PermaSpeedDebuff > 0)
 	ToggleDefDeBuff(Ship.DefDebuff > 0)
 	ToggleFire(Ship.IsOnFire)
 

@@ -12,5 +12,4 @@ ClickSound = ExtResource("2_6djbc")
 ClickOutSound = ExtResource("3_tx5of")
 DigitalClick = ExtResource("4_llfjl")
 HoverShound = ExtResource("5_u1rpw")
-AnalogueSoundStr = -20.0
-DigitalSoundStr = -10.0
+AnalogueSoundStr = -10.0

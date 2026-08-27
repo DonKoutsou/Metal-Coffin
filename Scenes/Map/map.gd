@@ -136,7 +136,7 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	
 
 #Called when enemy ship touches friendly one to strart a fight
-func EnemyMet(PlayerShips : Array[MapShip] , EnemyShips : Array[MapShip], PlayerMissiles : Array[BattleShipStats], EnemyMissiles : Array[BattleShipStats]):
+func EnemyMet(PlayerShips : Array[MapShip] , EnemyShips : Array[MapShip], PlayerMissiles : Array[Missile], EnemyMissiles : Array[Missile]):
 	MAP_EnemyArrival.emit(PlayerShips, EnemyShips, PlayerMissiles, EnemyMissiles)
 
 func ScreenControls(t : bool) -> void:

@@ -63,7 +63,6 @@ flip_h = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1516683677]
 stream = ExtResource("4_150ym")
-volume_db = -10.0
 pitch_scale = 4.0
 bus = &"MapSounds"
 

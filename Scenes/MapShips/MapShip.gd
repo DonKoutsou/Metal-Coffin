@@ -280,6 +280,8 @@ func SetCurrentPort(Port : MapSpot):
 		
 func SetSpeed(Spd : float) -> void:
 	GetShipAcelerationNode().position.x = Spd / 360
+	for g in GetSquad():
+		g.GetShipAcelerationNode().position.x = Spd / 360
 
 func _HandleLanding(delta : float) -> void:
 	if (GetShipSpeedVec().length() > 0):
@@ -654,6 +656,7 @@ func GetBattleStats() -> BattleShipStats:
 	stats.Cards = Cpt.GetCharacterInventory().GetCards()
 	stats.Weight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	stats.MaxShield =  Cpt.GetStatFinalValue(STAT_CONST.STATS.MAX_SHIELD)
+	stats.WindPenalty = GetWindPenalty()
 	#stats.Ammo = Cpt.GetCharacterInventory().GetCardAmmo()
 	stats.Funds = Cpt.GetValue()
 	stats.Convoy = false
@@ -699,6 +702,12 @@ func GetShipAffectedSpeedVec() -> Vector2:
 	var AffectedSpeed = Spd + (WindVector * Windage)
 	return AffectedSpeed
 
+func GetWindPenalty() -> float:
+	var MaxSpeed = (Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * 1000) / Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
+	var Windage = Cpt.GetStatFinalValue(STAT_CONST.STATS.WINDAGE) * 0.0001
+	var Penalty : float = (WindVector * Windage).length() * 360
+	return Penalty / MaxSpeed
+
 #-------------------------------------------------
 func UpdateShipWindManipulationModifier() -> void:
 	var StormAffectedWind = WeatherManage.WindDirection + (WeatherManage.WindDirection * StormValue)
@@ -706,7 +715,9 @@ func UpdateShipWindManipulationModifier() -> void:
 	var Height = 0.3 + 0.7 * (Altitude / 10000)
 	var WindProt = TopographyMap.GetWindProtection(global_position ,Altitude)
 	WindVector = (StormAffectedWind * WeightModifier * Height) * WindProt
-
+	for g in GetSquad():
+		var droneWeightModifier = 1 - g.Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT) / STAT_CONST.GetStatMaxValue(STAT_CONST.STATS.WEIGHT)
+		g.WindVector = (StormAffectedWind * droneWeightModifier * Height) * WindProt
 #-------------------------------------------------
 func GetShipThrust() -> float:
 	var Thrust = Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST)

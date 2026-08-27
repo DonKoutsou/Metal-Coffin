@@ -57,7 +57,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/BurstParticles2D/plugin.cfg", "res://addons/beehave/plugin.cfg", "res://addons/cozy-cube-godot-addons/plugin.cfg", "res://addons/cptcreator/plugin.cfg", "res://addons/script-ide/plugin.cfg", "res://addons/yard/plugin.cfg")
+enabled=PackedStringArray("res://addons/BurstParticles2D/plugin.cfg", "res://addons/beehave/plugin.cfg", "res://addons/cptcreator/plugin.cfg", "res://addons/script-ide/plugin.cfg", "res://addons/yard/plugin.cfg")
 
 [file_customization]
 

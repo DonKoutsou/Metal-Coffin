@@ -153,14 +153,13 @@ func ReleaseCard() -> void:
 	InScreenCursor.Instance.ToggleMouse(true)
 	ToggleHandInput(true)
 	
-	PlayCardSound()
-	
 	if (HoveredShip != null):
 		InserCardtoPlay(HeldCard, false)
 	
 	else: if (HeldCard.get_parent() == self):
 		HeldCard.reparent(PlayerCardPlecement, false)
 		HeldCard.Enable()
+		PlayCardSound()
 		
 	else: if (HeldCard.get_parent() == DiscardInsert):
 		##IMPLEMENT DISCARD LOGIC
@@ -342,7 +341,7 @@ func PlayCardSound() -> void:
 	S.pitch_scale = randf_range(0.8, 1.2)
 	#S.bus = "MapSounds"
 	add_child(S)
-	S.volume_db = - 20
+	S.volume_db = - 5
 
 var playingSounds : Array[CardSoundType]
 
@@ -357,7 +356,7 @@ func PlayCardInsertSound(type : CardSoundType, stack : bool = true) -> void:
 	S.pitch_scale = randf_range(0.8, 1.2)
 	S.bus = "Sounds"
 	add_child(S)
-	S.volume_db = - 7
+	#S.volume_db = - 7
 	S.finished.connect(SoundEnded.bind(type))
 
 func SoundEnded(type : CardSoundType) -> void:

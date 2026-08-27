@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TutorialData" format=3 uid="uid://dxlg7e8o1ibkh"]
+
+[ext_resource type="Script" uid="uid://451ovq2ynuka" path="res://Scenes/GlobalManagers/Tutorial/TutorialData.gd" id="1_4au14"]
+
+[resource]
+script = ExtResource("1_4au14")
+Title = "TUT_CardfightWindTitle"
+Text = "TUT_CardfightWindText"
+metadata/_custom_type_script = "uid://451ovq2ynuka"

@@ -44,7 +44,7 @@ func _physics_process(delta: float) -> void:
 			play_sound(RightSound)
 
 	max_rotation = max(max_rotation - delta / 60, 0.003)
-	SoundPlayer.volume_db = lerp(-20, -10, abs(max_rotation))
+	SoundPlayer.volume_db = lerp(-10, 0, abs(max_rotation))
 	previous_rotation = rotation_angle
 	
 func play_sound(sound: AudioStream) -> void:

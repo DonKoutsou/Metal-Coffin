@@ -75,7 +75,7 @@ stretch = true
 disable_3d = true
 world_3d = SubResource("World3D_oyy4e")
 handle_input_locally = false
-size = Vector2i(1443, 812)
+size = Vector2i(854, 480)
 size_2d_override = Vector2i(1280, 720)
 size_2d_override_stretch = true
 render_target_update_mode = 4
@@ -199,35 +199,35 @@ uppercase = true
 [node name="VBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer2" unique_id=1964432442]
 layout_mode = 2
 
-[node name="FuelStorage" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer" unique_id=1473183605]
+[node name="FuelStorage" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer" unique_id=1473183605 groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 icon = ExtResource("11_7xkt0")
 icon_alignment = 1
 
-[node name="Merch" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer" unique_id=1217243690]
+[node name="Merch" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer" unique_id=1217243690 groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 icon = ExtResource("12_0uykb")
 icon_alignment = 1
 
-[node name="Repair" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer" unique_id=1670241402]
+[node name="Repair" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer" unique_id=1670241402 groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 icon = ExtResource("13_baphb")
 icon_alignment = 1
 
-[node name="Workshop" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer" unique_id=202699530]
+[node name="Workshop" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer" unique_id=202699530 groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 icon = ExtResource("14_baphb")
 icon_alignment = 1
 
-[node name="Recruit" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer" unique_id=1553071965]
+[node name="Recruit" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer" unique_id=1553071965 groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

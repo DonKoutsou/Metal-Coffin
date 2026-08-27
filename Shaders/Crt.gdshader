@@ -259,7 +259,7 @@ void fragment(){
 		COLOR = vec4(0.0, 0.0, 0.0, 1.0);
 	}
 	else{
-		COLOR.rgb = Tri(pos) * Mask(FRAGCOORD.xy);
+		COLOR.rgb = Tri(pos);
 		
 		vec2 look = pos;
 		

@@ -122,7 +122,7 @@ MaxStackCount = 99
 CardProviding = Array[ExtResource("4_25k7t")]([ExtResource("11_e2mx5")])
 Cost = 200
 
-[sub_resource type="Resource" id="Resource_03i86"]
+[sub_resource type="Resource" id="Resource_25k7t"]
 resource_local_to_scene = true
 script = ExtResource("5_vq5gh")
 CaptainName = "Tick"
@@ -132,14 +132,14 @@ ShipCallsign = "P1"
 StartingItems = Array[ExtResource("7_lb1bt")]([ExtResource("8_03i86"), ExtResource("9_06s8f"), ExtResource("9_06s8f"), ExtResource("10_o0thl"), SubResource("Resource_lb1bt"), SubResource("Resource_lb1bt"), SubResource("Resource_lb1bt"), ExtResource("12_kp2wg"), ExtResource("12_kp2wg"), ExtResource("12_kp2wg"), ExtResource("13_8huau"), ExtResource("13_8huau"), ExtResource("13_8huau")])
 ProvidingFunds = 25000
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_06s8f"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vq5gh"]
 resource_local_to_scene = true
 shader = ExtResource("3_qb3w4")
 shader_parameter/ShipSize = 0.08
 shader_parameter/shadow_parallax_amount = 0.5
 shader_parameter/sprite_rotation = -1.57
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_o0thl"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_ayxxd"]
 resource_local_to_scene = true
 radius = 150.0
 
@@ -154,13 +154,12 @@ script = ExtResource("2_vq5gh")
 AccelerationAudio = NodePath("AudioStreamPlayer2D")
 L = NodePath("PointLight2D")
 MissileD = NodePath("MissileDock")
-Cpt = SubResource("Resource_03i86")
+Cpt = SubResource("Resource_25k7t")
 SonarShape = NodePath("Sonar")
 Dock = NodePath("DroneDock")
 
 [node name="ColorRect" parent="." index="1" unique_id=1708187202]
-material = SubResource("ShaderMaterial_06s8f")
-texture = ExtResource("6_ayxxd")
+material = SubResource("ShaderMaterial_vq5gh")
 region_rect = Rect2(0.6666565, -2, 134.99997, 137.33334)
 
 [node name="TrailLine" parent="ColorRect" index="0" unique_id=909123147]
@@ -173,7 +172,7 @@ visible = false
 script = ExtResource("16_2ygm8")
 
 [node name="CollisionShape2D" parent="Radar" index="0" unique_id=689109080]
-shape = SubResource("CircleShape2D_o0thl")
+shape = SubResource("CircleShape2D_ayxxd")
 
 [node name="Elint" parent="." index="4" unique_id=268938013]
 script = ExtResource("17_25k7t")

@@ -75,7 +75,7 @@ func SetSize(Spot : MapSpot) -> void:
 func PlaySound():
 	var sound = AudioStreamPlayer2D.new()
 	sound.bus = "MapSounds"
-	sound.volume_db = 10
+	#sound.volume_db = 10
 	sound.stream = BeepSound
 	add_child(sound)
 	sound.play()

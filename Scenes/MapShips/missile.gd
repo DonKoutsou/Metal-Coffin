@@ -26,7 +26,7 @@ var VisibleBy : Array[MapShip]
 
 var CurrentLandAltitude : float
 
-signal ShipMet(FriendlyShips : Array[MapShip] , EnemyShips : Array[MapShip], Missiles : Array[BattleShipStats])
+signal ShipMet(FriendlyShips : Array[MapShip] , EnemyShips : Array[MapShip], Missiles : Array[Missile])
 signal OnShipDestroyed(Mis : Missile)
 signal AltitudeChanged()
 
@@ -57,7 +57,7 @@ func _ready() -> void:
 	if (Friendly):
 		var s = DeletableSound.new()
 		s.stream = MissileLaunchSound
-		s.volume_db = -15
+		#s.volume_db = -15
 		s.bus = "MapSounds"
 		s.autoplay = true
 		s.max_distance = 20000
@@ -254,16 +254,16 @@ func _on_missile_body_area_entered(area: Area2D) -> void:
 	
 	if (!Friendly):
 		for g in Amm:
-			EnemyMis.append(GetBattleStats())
+			EnemyMis.append(self)
 		if (Bod is Missile):
 			for g in Bod.Amm:
-				Mis.append(GetBattleStats())
+				Mis.append(Bod)
 	else:
 		for g in Amm:
-			Mis.append(GetBattleStats())
+			Mis.append(self)
 		if (Bod is Missile):
 			for g in Bod.Amm:
-				EnemyMis.append(Bod.GetBattleStats())
+				EnemyMis.append(Bod)
 		
 	ShipMet.emit(PlSquad, HostileSquad, Mis, EnemyMis)
 	

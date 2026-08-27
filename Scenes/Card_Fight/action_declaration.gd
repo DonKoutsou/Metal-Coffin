@@ -22,6 +22,7 @@ func DoActionDeclaration(ActionName : String, CustomTime : float = 2) -> void:
 	InSound.stream = UIInSound
 	InSound.autoplay = true
 	InSound.bus = "MapSounds"
+	InSound.volume_db = 10
 	InSound.pitch_scale = randf_range(0.9, 1.1)
 	add_child(InSound)
 	
@@ -58,6 +59,7 @@ func ActionDeclarationStage4(CustomTime : float) -> void:
 	OutSound.stream = UIOutSound
 	OutSound.autoplay = true
 	OutSound.bus = "MapSounds"
+	OutSound.volume_db = 10
 	OutSound.pitch_scale = randf_range(0.9, 1.1)
 	add_child(OutSound)
 	

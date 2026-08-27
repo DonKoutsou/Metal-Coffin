@@ -33,7 +33,7 @@ func _ready() -> void:
 	var S = DeletableSoundGlobal.new()
 	S.stream = FireSound
 	get_parent().get_parent().add_child(S)
-	S.volume_db = - 20
+	#S.volume_db = - 20
 	S.play()
 	S.pitch_scale = randf_range(0.8, 1.2)
 	
@@ -100,7 +100,7 @@ func _physics_process(delta: float) -> void:
 		S.pitch_scale = randf_range(0.8, 1.2)
 		#S.bus = "MapSounds"
 		get_parent().add_child(S)
-		S.volume_db = - 20
+		#S.volume_db = - 20
 		
 		queue_free()
 		Finished.emit()

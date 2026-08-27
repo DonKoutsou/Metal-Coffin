@@ -47,7 +47,7 @@ metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 
 [node name="MissileCruise" type="AudioStreamPlayer" parent="." unique_id=2064028885]
 stream = ExtResource("6_x88kr")
-volume_db = -20.0
+volume_db = -5.0
 pitch_scale = 1.13803
 bus = &"Sounds"
 

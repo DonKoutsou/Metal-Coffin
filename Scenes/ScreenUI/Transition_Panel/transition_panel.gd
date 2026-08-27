@@ -48,5 +48,5 @@ func PlaySound(Sound : AudioStream) -> void:
 	Delsound.stream = Sound
 	Delsound.bus = "MapSounds"
 	get_parent().add_child(Delsound)
-	Delsound.volume_db = -12
+	#Delsound.volume_db = -12
 	Delsound.play()

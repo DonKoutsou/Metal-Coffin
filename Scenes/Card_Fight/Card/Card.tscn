@@ -287,13 +287,15 @@ bbcode_enabled = true
 text = "Throws a barragge on the enemy.
 CAN'T BE AVOIDED
 dwadwa
-dwadwadwawda
+dwadwadwawdadwa daw d d aw d  dwaddsssdaw w aad w a w dwa dw a  dwadsad wa daw
 "
 fit_content = true
 scroll_active = false
 autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
+resize_font_to_fit = true
+maximum_font_size = 16
 visible_characters_behavior = 1
 
 [node name="TextureButton" type="TextureButton" parent="." unique_id=2008636766]

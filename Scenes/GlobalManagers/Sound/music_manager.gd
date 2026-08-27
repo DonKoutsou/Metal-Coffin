@@ -17,14 +17,14 @@ func _ready() -> void:
 	Instance = self
 	
 	Stream = AudioStreamPlayer.new()
-	Stream.volume_db = -14
+	Stream.volume_db = -6
 	Stream.stream = AmbientMusic.pick_random()
 	Stream.finished.connect(OnMusicFinished)
 	Stream.bus = "Music"
 	add_child(Stream)
 	
 	FightStream = AudioStreamPlayer.new()
-	FightStream.volume_db = -14
+	FightStream.volume_db = -6
 	FightStream.stream = FightMusic
 	FightStream.finished.connect(OnFightMusicFinished)
 	FightStream.bus = "Music"
@@ -36,15 +36,17 @@ func SwitchMusic(t : bool) -> void:
 	if (t):
 		FightStream.volume_db = -64
 		var FightMusicTween : Tween = create_tween()
-		FightMusicTween.tween_property(FightStream, "volume_db", -14, 2)
+		FightMusicTween.tween_property(FightStream, "volume_db", -6, 2)
 		FightStream.play()
 		
 		var AmbientMusicTween : Tween = create_tween()
 		AmbientMusicTween.tween_property(Stream, "volume_db", -64, 2)
+		await AmbientMusicTween.finished
+		Stream.stop()
 	else:
-
 		var AmbientMusicTween : Tween = create_tween()
-		AmbientMusicTween.tween_property(Stream, "volume_db", -14, 2)
+		AmbientMusicTween.tween_property(Stream, "volume_db", -6, 2)
+		Stream.play()
 		
 		var FightMusicTween : Tween = create_tween()
 		FightMusicTween.tween_property(FightStream, "volume_db", -64, 2)

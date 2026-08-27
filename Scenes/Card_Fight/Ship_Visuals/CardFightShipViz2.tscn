@@ -470,6 +470,7 @@ offset_left = 30.0
 offset_right = 30.0
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/Control/ShipPivot" unique_id=1544881616]
+light_mask = 524289
 texture_filter = 3
 layout_mode = 1
 anchors_preset = 8
@@ -495,6 +496,7 @@ anchors_preset = 0
 [node name="TextureRect2" type="TextureRect" parent="HBoxContainer/Control/ShipPivot/TextureRect/ShadowPivot" unique_id=2103533902]
 modulate = Color(0, 0, 0, 0.5)
 show_behind_parent = true
+light_mask = 524289
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

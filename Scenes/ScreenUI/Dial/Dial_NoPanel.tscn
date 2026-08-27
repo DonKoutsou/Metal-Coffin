@@ -116,7 +116,7 @@ grow_vertical = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1757883521]
 stream = ExtResource("22_kor77")
-volume_db = -15.0
+volume_db = -5.0
 pitch_scale = 0.8
 bus = &"MapSounds"
 

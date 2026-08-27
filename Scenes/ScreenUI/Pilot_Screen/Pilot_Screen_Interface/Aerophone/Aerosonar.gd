@@ -127,6 +127,8 @@ func isPartOfFleet(target: Node2D) -> bool:
 # --- SONAR PHYSICS AND DETECTION ---
 #----------------------------------------
 func Update(_delta: float) -> void:
+	if (cap.visible):
+		return
 	if (currentMode == MODE.SOUND):
 		if (_contactUpdateThread == null):
 			_contactUpdateThread = Thread.new()
@@ -144,7 +146,7 @@ func Update(_delta: float) -> void:
 			var ContactInfos = controller.GetElintTargetInfo()
 			_contactUpdateThread.start(_updateElintContacts.bind(ControllerInfo, ContactInfos))
 	#_updateContacts()
-	radioSpeaker.PlaySound(RadioSpeaker.RadioSound.STATIC, volume - 15)
+	
 
 var _contactUpdateThread : Thread
 
@@ -242,6 +244,7 @@ func ContactsUpdated() -> void:
 	#BaseGrad.gradient = ContactGradient
 	#var Im = BaseGrad.get_image()
 	_contactUpdateThread = null
+	radioSpeaker.PlaySound(RadioSpeaker.RadioSound.STATIC, volume)
 	lineContainer.Update(ContactGradient, WeatherManage.StormValueInPosition(controller.global_position))
 
 #func GradientUpdated() -> void:

@@ -59,7 +59,7 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 						DefCard.SetCardBattleStats(DeffenceList.keys()[g], Def)
 						add_child(DefCard)
 						if (!FriendShip):
-							var pos = Vector2(Viz.global_position.x + 50, Viz.global_position.y - (DefCard.size.y / 2))
+							var pos = Vector2(Viz.global_position.x + 200, Viz.global_position.y - (Viz.size.y / 2))
 							DefCard.global_position = pos
 						else:
 							var pos = Vector2(Viz.global_position.x - 50, Viz.global_position.y + (DefCard.size.y / 2))

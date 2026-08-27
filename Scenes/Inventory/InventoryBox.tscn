@@ -88,11 +88,15 @@ alignment = 1
 [node name="ItemName" type="Label" parent="ItemButton/HBoxContainer" unique_id=2110085130]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 15
+size_flags_vertical = 1
+theme_override_constants/line_spacing = 0
 text = "adwdaw"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+resize_font_to_fit = true
+minimum_font_size = 15
+maximum_font_size = 20
 
 [node name="PanelContainer" type="PanelContainer" parent="ItemButton/HBoxContainer" unique_id=1159467317]
 layout_mode = 2

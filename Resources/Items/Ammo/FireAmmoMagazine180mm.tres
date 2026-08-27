@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("3_ii2ar")
 WType = 4
-ItemName = "Incendiary ammo magazine 180mm"
+ItemName = "Incendiary magazine 180mm"
 ItemDesc = "This magazine contains rounds engineered with incendiary payloads, designed to ignite upon impact with enemy hulls or systems. The chemical composition ensures rapid ignition and sustained burn, inflicting ongoing thermal damage post-impact."
 MaxStackCount = 99
 CardProviding = Array[ExtResource("1_6atki")]([ExtResource("2_6atki")])

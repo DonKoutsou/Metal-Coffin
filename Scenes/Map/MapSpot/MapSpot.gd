@@ -180,7 +180,7 @@ func AddMapSpot(PlayAnim : bool) -> void:
 func PlaySound():
 	var sound = AudioStreamPlayer2D.new()
 	sound.bus = "MapSounds"
-	sound.volume_db = 10
+	#sound.volume_db = 10
 	sound.stream = load("res://Assets/Sounds/radar-beeping-sound-effect-192404.mp3")
 	add_child(sound)
 	sound.play()
