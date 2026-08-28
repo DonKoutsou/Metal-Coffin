@@ -157,7 +157,8 @@ func BuffSpeed(Amm : float, Turns : int = 2) -> void:
 
 func PermaBuffSpeed(Amm : float) -> void:
 	PermaSpeedBuff += Amm - 1
-	ShipViz.Refresh()
+	if (ShipViz != null):
+		ShipViz.Refresh()
 	StatsBuffed.emit()
 
 func CleanseDebuffs() -> void:
@@ -179,7 +180,8 @@ func DeBuffSpeed(Amm : float, Turns : int = 2) -> void:
 
 func PermaDeBuffSpeed(Amm : float) -> void:
 	PermaSpeedDebuff += Amm
-	ShipViz.Refresh()
+	if (ShipViz != null):
+		ShipViz.Refresh()
 	StatsBuffed.emit()
 
 func BuffDefence(Amm : float, Turns : int = 2) -> void:
@@ -203,6 +205,7 @@ func DamageShip(Amm : float, direct : bool, ShouldCauseFire : bool = false, Skip
 		if Shield > 0:
 			var origshield = Shield
 			Shield = max(0,origshield - Amm)
+			ShieldChanged.emit(Shield)
 			Dmg -= origshield - Shield
 			shieldDmg = origshield - Shield
 	#only do fire roll when shield didt absorb all the damage

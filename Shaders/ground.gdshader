@@ -5,6 +5,7 @@ uniform sampler2D GroundTexture: repeat_enable, filter_nearest_mipmap;
 //uniform sampler2D GroundTextureMask: repeat_enable, filter_nearest_mipmap_anisotropic;
 uniform sampler2D GroundTexture2: repeat_enable, filter_nearest_mipmap;
 uniform sampler2D GroundTexture3: repeat_enable, filter_nearest_mipmap;
+
 // Noise texture
 uniform sampler2D NoiseTexture: repeat_enable, filter_linear_mipmap;  // Add noise texture
 // Normal texture
@@ -44,7 +45,6 @@ void fragment() {
 	vec4 texColor3 = texture(GroundTexture3, uv3);
 
 	vec3 texNormal1 = texture(GroundNormalTexture, uv1).rgb;
-	//texNormal1 /= vec3(1, 1, n.b * 10.0);
 	vec3 texNormal2 = texture(GroundNormal2Texture, uv2).rgb;
 	vec3 texNormal3 = texture(GroundNormal3Texture, uv3).rgb;
 	//texNormal1.b = clamp(texNormal1.b + patternNoise, 0, 1);

@@ -4,17 +4,24 @@
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Card_Fight/Card/Card.tscn" id="2_yc7d8"]
 [ext_resource type="PackedScene" uid="uid://dmq4aarkkp044" path="res://Scenes/Card_Fight/Ship_Visuals/CardFightShipViz.tscn" id="3_n2sfr"]
 [ext_resource type="FastNoiseLite" uid="uid://djv3ki2j68hy4" path="res://Shaders/Clouds/CloudStartingMenuNoise.tres" id="6_fwh7v"]
-[ext_resource type="Material" uid="uid://2l428k4wukko" path="res://Shaders/Ground/StartingMenu_ground.tres" id="7_hm5ka"]
-[ext_resource type="Material" uid="uid://c43qdgvsab5kq" path="res://Shaders/Clouds/CloudsStartingMenu.tres" id="8_hm5ka"]
+[ext_resource type="Gradient" uid="uid://4hsb2urypw75" path="res://Shaders/Clouds/CardFightGradient.tres" id="6_lgbdq"]
 [ext_resource type="PackedScene" uid="uid://mxfnm7hywo4f" path="res://Scenes/Old/damage_floater.tscn" id="8_yl0qx"]
 [ext_resource type="StyleBox" uid="uid://cbl88p1pms3gq" path="res://Theme/YellowBorderPanel.tres" id="9_umcqi"]
+[ext_resource type="Material" uid="uid://cv6dg3o3grw2k" path="res://Shaders/Ground/CardFight_ground.tres" id="10_fkta7"]
+[ext_resource type="Shader" uid="uid://bjf2i5xyoaxa3" path="res://Scenes/Card_Fight/Blur BG.gdshader" id="11_hm5ka"]
+[ext_resource type="Material" uid="uid://cc8eddj1vvy7u" path="res://Shaders/Clouds/CloudsCardFight.tres" id="11_lgbdq"]
 [ext_resource type="AudioStream" uid="uid://i74iqvk0qddm" path="res://Assets/Sounds/CardSound.mp3" id="12_xtulq"]
+[ext_resource type="StyleBox" uid="uid://twgjhudvlwrx" path="res://Theme/BlackBars.tres" id="13_fkta7"]
 [ext_resource type="AudioStream" uid="uid://cn48skwuytprm" path="res://Assets/Sounds/BurnSound.mp3" id="15_8bqim"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="16_734e5"]
 [ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scenes/Card_Fight/External_UI/CardHandContainer.gd" id="24_d8sco"]
 [ext_resource type="Script" uid="uid://c1adplamkw577" path="res://Scenes/Card_Fight/CardFightTargetSelection.gd" id="26_712dp"]
 [ext_resource type="Script" uid="uid://bfjh8yj7umbiw" path="res://Scenes/Card_Fight/CardFightDiscardSelection.gd" id="27_rbthh"]
 [ext_resource type="Texture2D" uid="uid://b3ph2qb17s1h2" path="res://Assets/MapElements/plane_γροθνδτεχτ_BaseColor.png" id="32_1im06"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1vivr"]
+shader = ExtResource("11_hm5ka")
+shader_parameter/LOD = 2.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f2au4"]
 content_margin_left = 10.0
@@ -39,6 +46,7 @@ ShipInfoSceneFile = "uid://6hcd2pi6mky3"
 AcrionDeclarationScene = "uid://bfrogxgpdtepd"
 CardPlecementSound = ExtResource("12_xtulq")
 RemoveCardSound = ExtResource("15_8bqim")
+CloudGr = ExtResource("6_lgbdq")
 SelectedCardPlecement = NodePath("VBoxContainer4/VBoxContainer/PanelContainer2/SelectedCardPlecements")
 AnimationPlecement = NodePath("Control")
 EnemyShipVisualPlecement = NodePath("VBoxContainer4/VBoxContainer3/EnemyShipPlecement")
@@ -49,7 +57,7 @@ cloudRect = NodePath("Clouds")
 CloudNoise = ExtResource("6_fwh7v")
 PlayerFleetSizeLabel = NodePath("Label2")
 EnemyFleetSizeLabel = NodePath("Label3")
-CurrentPlayerLabel = NodePath("CurrentPlayerLabel")
+CurrentPlayerLabel = NodePath("PanelContainer/CurrentPlayerLabel")
 StartingCardAmm = 3
 MaxCardsInHand = 8
 MaxCombatants = 3
@@ -58,7 +66,8 @@ UIEventH = ExtResource("16_734e5")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=212615134]
 position = Vector2(445, 311)
-energy = 0.6
+color = Color(0.78999025, 1, 1, 1)
+energy = 0.8
 blend_mode = 2
 range_layer_max = 1
 range_item_cull_mask = 524288
@@ -70,17 +79,17 @@ height = 222.0
 light_mask = 524289
 z_index = -2
 texture_filter = 3
-material = ExtResource("7_hm5ka")
+material = ExtResource("10_fkta7")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -5640.0
-offset_top = -5360.0
-offset_right = 3360.0
-offset_bottom = 3640.0
+offset_left = -1334.0
+offset_top = -1334.0
+offset_right = 1334.0
+offset_bottom = 1334.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -92,11 +101,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1271653492]
+z_index = -1
+material = SubResource("ShaderMaterial_1vivr")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="Clouds" type="ColorRect" parent="." unique_id=759849753]
 light_mask = 524289
 z_index = -1
 texture_filter = 3
-material = ExtResource("8_hm5ka")
+material = ExtResource("11_lgbdq")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -109,6 +128,64 @@ offset_right = 640.0
 offset_bottom = 640.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1753464219]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 57.0
+grow_horizontal = 2
+theme_override_styles/panel = ExtResource("13_fkta7")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" unique_id=197455098]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Control" type="Control" parent="PanelContainer/HBoxContainer" unique_id=2137334360]
+custom_minimum_size = Vector2(13.205, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer" unique_id=988322957]
+layout_mode = 2
+text = "Storm"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="PanelContainer/HBoxContainer" unique_id=126691550]
+custom_minimum_size = Vector2(160, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 5.0
+step = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="CurrentPlayerLabel" type="Label" parent="PanelContainer" unique_id=1697104601]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_font_sizes/font_size = 34
+text = "Amol Picking Moves"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="PanelContainer2" type="PanelContainer" parent="." unique_id=23221645]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -36.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = ExtResource("13_fkta7")
 
 [node name="Label2" type="Label" parent="." unique_id=612841877]
 visible = false
@@ -153,7 +230,7 @@ mouse_filter = 2
 layout_mode = 2
 
 [node name="Control" type="Control" parent="VBoxContainer4/VBoxContainer2" unique_id=952041932]
-custom_minimum_size = Vector2(0, 70)
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="PlayerShipPlecement" type="Container" parent="VBoxContainer4/VBoxContainer2" unique_id=1637451095]
@@ -167,7 +244,7 @@ Vertical = true
 metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 
 [node name="Control2" type="Control" parent="VBoxContainer4/VBoxContainer2" unique_id=619771845]
-custom_minimum_size = Vector2(0, 70)
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer4" unique_id=432327581]
@@ -195,7 +272,7 @@ metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 layout_mode = 2
 
 [node name="Control" type="Control" parent="VBoxContainer4/VBoxContainer3" unique_id=1213333661]
-custom_minimum_size = Vector2(0, 70)
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="EnemyShipPlecement" type="Container" parent="VBoxContainer4/VBoxContainer3" unique_id=2007953978]
@@ -209,7 +286,7 @@ Vertical = true
 metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 
 [node name="Control2" type="Control" parent="VBoxContainer4/VBoxContainer3" unique_id=1298166318]
-custom_minimum_size = Vector2(0, 70)
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="TargetSelect" type="PanelContainer" parent="." unique_id=1032550551 node_paths=PackedStringArray("ShipVizContainer")]
@@ -304,24 +381,5 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-
-[node name="CurrentPlayerLabel" type="Label" parent="." unique_id=1697104601]
-visible = false
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -198.0
-offset_top = 27.0
-offset_right = 198.0
-offset_bottom = 64.0
-grow_horizontal = 2
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
-theme_override_constants/shadow_outline_size = 2
-theme_override_font_sizes/font_size = 36
-text = "Amol Picking Moves"
-horizontal_alignment = 1
-uppercase = true
 
 [connection signal="pressed" from="TargetSelect/VBoxContainer/Button" to="TargetSelect" method="_on_button_pressed"]

@@ -88,6 +88,7 @@ func DockShip(ship : MapShip):
 
 	ship.ToggleDocked(true)
 	
+	ship.OnShipDestroyed.connect(DroneDischarged)
 	ship.SonarRangeChanged.connect(OnSonarRangeChanged)
 	ship.ElintRangeChanged.connect(OnElintRangeChanged)
 
@@ -112,11 +113,10 @@ func UndockShip(Ship : MapShip):
 	DockedShips.erase(Ship)
 	Ship.Command = null
 	
-	if (Ship.SonarShape != null):
-		Ship.SonarShape.AerosonarRangeChanged.disconnect(OnSonarRangeChanged)
-	if (Ship.ElintShape != null):
-		Ship.ElintShape.ElintRangeChanged.disconnect(OnElintRangeChanged)
-	
+	Ship.OnShipDestroyed.disconnect(DroneDischarged)
+	Ship.SonarRangeChanged.disconnect(OnSonarRangeChanged)
+	Ship.ElintRangeChanged.disconnect(OnElintRangeChanged)
+
 	var docks = $DroneSpots.get_children()
 	for g in docks:
 		var trans = g as RemoteTransform2D

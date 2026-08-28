@@ -72,6 +72,7 @@ var returnOffset : Vector2
 
 var damage_wobble: float = 0.0
 var animOffset : Vector2 = Vector2.ZERO
+var popOffset : Vector2 = Vector2.ZERO
 
 const StatText = "[color=#ffc315]HULL[/color][p][color=#6be2e9]SHIELD[/color][p][color=#308a4d]SPEED[/color][p][color=#f35033]FPWR[/color]"
 
@@ -175,7 +176,7 @@ func _process(delta: float) -> void:
 	if (lastPos != ShipIcon.global_position):
 		returnOffset += ShipIcon.global_position - lastPos
 
-	ShipIcon.position = drift + bob + pushback_offset - returnOffset - animOffset
+	ShipIcon.position = drift + bob + pushback_offset - returnOffset - animOffset - popOffset
 	lastPos = ShipIcon.global_position
 	returnOffset = returnOffset.slerp(Vector2.ZERO, delta * 2)
 
@@ -232,7 +233,7 @@ func apply_damage_pushback(amm : float, shieldamm : float, Instigator : BattleSh
 
 	direction = direction.normalized()
 
-	pushback_velocity += direction * 40 * amm
+	pushback_velocity += direction * 40 * min(amm, 50)
 	damage_wobble = 1.0
 
 func Pop(t : bool):
@@ -249,7 +250,7 @@ func Pop(t : bool):
 	PopTween.set_ease(Tween.EASE_IN_OUT)
 	PopTween.set_trans(Tween.TRANS_QUAD)
 	
-	PopTween.tween_property(self, "animOffset", FinalPos, 0.2)
+	PopTween.tween_property(self, "popOffset", FinalPos, 0.5)
 	await PopTween.finished
 	
 func SetStats(S : BattleShipStats, Friendly : bool) -> void:

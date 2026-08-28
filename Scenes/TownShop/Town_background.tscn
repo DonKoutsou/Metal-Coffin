@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://cro2ryppy8tge" path="res://Assets/TownBackgrounds/TownAnimation/TownLayer-1_Frame6.5.png" id="13_x3e2u"]
 [ext_resource type="Material" uid="uid://d2ewn5jt0b25e" path="res://Shaders/Blur/Blur10.tres" id="17_x3e2u"]
 [ext_resource type="Material" uid="uid://0u7e70ufido3" path="res://Shaders/Blur/Blur8.tres" id="19_p78ya"]
+[ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/UIPiecies/Light.png" id="22_x3e2u"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gf58y"]
 bg_color = Color(0, 0, 0, 1)
@@ -294,3 +295,14 @@ position = Vector2(181, 238)
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1576235899]
 position = Vector2(640, 360)
 position_smoothing_enabled = true
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1953054667]
+color = Color(0, 0, 0, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1238415722]
+position = Vector2(445, 395)
+blend_mode = 2
+range_layer_min = -350
+range_layer_max = 421
+texture = ExtResource("22_x3e2u")
+texture_scale = 29.95

@@ -18,6 +18,7 @@ var FoundShips : Array[Node2D] = []
 var Friendly = false
 var Altitude : float
 var TargetAltitude : float
+var DisiredAltitude : float = -10000
 var DistanceTraveled : float
 var WindVector : Vector2
 var Killed : bool = false
@@ -92,6 +93,11 @@ func _physics_process(delta: float) -> void:
 	
 	CurrentLandAltitude = TopographyMap.GetAltitudeAtGlobalPosition(global_position)
 	
+	var wantedAltitude = TargetAltitude
+	if (DisiredAltitude > - 100):
+		wantedAltitude = DisiredAltitude
+	if (wantedAltitude == null):
+		Kill()
 	var IncommingCollision : Vector3
 	var Collided : bool = false
 	if (CurrentTarget != null):
@@ -104,15 +110,18 @@ func _physics_process(delta: float) -> void:
 	if (Vector2(IncommingCollision.x, IncommingCollision.y) == global_position):
 		Kill()
 	else: if (Collided):
+		#If about to collide move up
 		var NewAlt = max(IncommingCollision.z + 100, CurrentLandAltitude + 100)
-		if (NewAlt > TargetAltitude):
-			TargetAltitude = NewAlt
+		if (NewAlt > wantedAltitude):
+			wantedAltitude = NewAlt
 	else:
-		if (CurrentLandAltitude + 100 > TargetAltitude):
-			TargetAltitude = CurrentLandAltitude + 100
+		#Keep the missile a bit above ground
+		if (CurrentLandAltitude + 100 > wantedAltitude):
+			wantedAltitude = CurrentLandAltitude + 100
 	
-	if (Altitude != TargetAltitude):
-		UpdateAltitude(move_toward(Altitude, TargetAltitude, AltitudeChangeSpeed * SimulatedDelta))
+	if (Altitude != wantedAltitude):
+		UpdateAltitude(move_toward(Altitude, wantedAltitude, AltitudeChangeSpeed * SimulatedDelta))
+		
 	UpdateShipWindManipulationModifier()
 	var offset = GetShipSpeedVec()
 	

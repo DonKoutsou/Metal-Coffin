@@ -315,6 +315,7 @@ func SetRealistic() -> void:
 	CardName.add_theme_constant_override("shadow_outline_size", 0)
 	CardName.add_theme_constant_override("shadow_offset_x", 0)
 	CardName.add_theme_constant_override("shadow_offset_y", 0)
+	#CardName.add_theme_constant_override("outline_size", 6)
 	#CardCost.add_theme_font_override("font", RealisticFont)
 	CardCost.add_theme_constant_override("shadow_outline_size", 0)
 	CardCost.add_theme_constant_override("shadow_offset_x", 0)

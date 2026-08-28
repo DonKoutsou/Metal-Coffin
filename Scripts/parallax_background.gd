@@ -33,6 +33,7 @@ func _ready() -> void:
 	Camera.zoom = Vector2(Zoom, Zoom)
 	var vpsize = get_viewport().get_visible_rect().size.y
 	Camera.position.y = vpsize - ((vpsize / Zoom)/2)
+	$PointLight2D.energy = WeatherManage.GetLightAmm()
 
 func Dissable() -> void:
 	for g in get_children():
@@ -58,7 +59,7 @@ func _physics_process(_delta: float) -> void:
 	var Dist = max(0, midpoint.distance_squared_to(Mousepos) - 50000)
 	var MovementMagnitude = midpoint.direction_to(Mousepos) * Dist
 
-	var NewX = clamp($Camera2D.position.x + MovementMagnitude.x / 50000, LimitSide, LimitSide + midpoint.x)
+	var NewX = clamp($Camera2D.position.x + MovementMagnitude.x / 50000, 300, LimitSide + midpoint.x)
 	var NewY = clamp($Camera2D.position.y + MovementMagnitude.y / 50000, 250, midpoint.y + 50)
 	#if ($Camera2D.global_position != Vector2(NewX, NewY)):
 		

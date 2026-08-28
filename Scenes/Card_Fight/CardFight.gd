@@ -24,6 +24,7 @@ class_name Card_Fight
 @export_file("*.tscn") var AcrionDeclarationScene : String
 @export var CardPlecementSound : AudioStream
 @export var RemoveCardSound : AudioStream
+@export var CloudGr : Gradient
 @export_group("Plecement Referances")
 #Once card is selected to play from player its placed here
 @export var SelectedCardPlecement : Control
@@ -79,6 +80,15 @@ var EnemyCasualties : Array[BattleShipStats]
 
 var WindAdvantage : float = 0
 var ActualWindDir : Vector2 = Vector2.RIGHT
+
+
+#Level 1 
+#Level 2 
+#Level 3 Interference causes each ship to start with less energy
+#Level 4 A card can be randomly charged making it cost more sometimes increasing their effects
+#Level 5 Every turn a ship get's electrocuted, having reserves increases chance
+
+var stormLevel : int = 0
 #List of all UI for each ship combatants, they are created once a ship is added from reserves to combatants
 #var ShipsViz : Dictionary[BattleShipStats, CardFightShipViz2]
 
@@ -125,7 +135,12 @@ func _ready() -> void:
 	ExternalUI.GetReserveBar().Init(0)
 	
 	MusicManager.GetInstance().SwitchMusic(true)
-	$PointLight2D.energy = WeatherManage.GetLightAmm()
+	var light = WeatherManage.GetLightAmm()
+	$PointLight2D.energy = max(0.8, light)
+	if (light <= 0.75):
+		$PointLight2D.color = Color(0.788, 1.0, 1.0, 1.0)
+	else:
+		$PointLight2D.color = Color(1,1,1)
 	
 	PlayerActionPickingEnded.connect(CurrentPlayerTurnEnded)
 	EnemyActionPickedEnded.connect(CurrentEnemyTurnEnded)
@@ -156,6 +171,13 @@ func _ready() -> void:
 
 	Helper.CallLater(StartFight, 2)
 	
+	if (WeatherManage.Instance != null):
+		var storm = WeatherManage.StormValueInPosition(FightLoc)
+		var cov = Helper.mapvalue(storm, 0.63, 0.35)
+		CloudGr.set_offset(1 ,cov)
+		stormLevel = roundi(storm * 5)
+		$PanelContainer/HBoxContainer/ProgressBar.value = stormLevel
+	
 	var Mat = $Ground.material as ShaderMaterial
 	Mat.set_shader_parameter("offset", Vector2(randf_range(-100, 100), randf_range(-100, 100)))
 ##----------------------------------------------------------------------##
@@ -164,7 +186,7 @@ func _exit_tree() -> void:
 ##----------------------------------------------------------------------##
 var CloudOffset = Vector2.ZERO
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	#print_orphan_nodes()
 	CloudOffset += ActualWindDir * delta * 0.01
 	cloudRect.material.set_shader_parameter("Offset", CloudOffset)
@@ -658,9 +680,9 @@ func OnCardSelected(C : Card, target : BattleShipStats = null) -> bool:
 		return false
 	if (!PickingMoves):
 		return false
-	if (PlayerPerformingMove):
-		PopUpManager.GetInstance().DoFadeNotif("Already performing move")
-		return false
+	#if (PlayerPerformingMove):
+		#PopUpManager.GetInstance().DoFadeNotif("Already performing move")
+		#return false
 	
 	var Ship = GetCurrentShip()
 	var Cost = C.GetCost()
@@ -742,8 +764,8 @@ func OnCardSelected(C : Card, target : BattleShipStats = null) -> bool:
 	CardPlayed(Ship, card)
 	
 	PlayerPerformingMove = false
-	if (Ship.deck.Hand.size() == 0 and Ship.Energy == 0 and Ship.EnergyReserves == 0):
-		PlayerActionSelectionEnded()
+	#if (Ship.deck.Hand.size() == 0 and Ship.Energy == 0 and Ship.EnergyReserves == 0):
+		#PlayerActionSelectionEnded()
 	
 	#else: if (Ship.deck.Hand.size() > 0 and Ship.Energy == 0):
 		#ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_CARD_RECYCLE)
@@ -1122,8 +1144,21 @@ func PerformNextActionForShip(Ship : BattleShipStats, ActionIndex : int) -> void
 	if (Mod is OffensiveCardModule):
 		await HandleOffensiveModule(Ship, Action, Mod, TargetShips, true)
 		ActionList.RemoveActionFromShip(Ship, Action)
+		
+		if (Action.ShouldConsume()):
+			for g : CardStats in Ship.Cards:
+				if (g.IsSame(Action)):
+					Ship.Cards.erase(g)
+					break
+		else: if (Action.ShouldExhaust()):
+			Ship.deck.ExhaustCard(Action)
+		else:
+			Ship.deck.DiscardCard(Action)
+			HandleDiscardModules(Ship, Action)
+			
 	else:
 		ActionIndex += 1
+	
 		
 	PerformNextActionForShip(Ship, ActionIndex)
 ##----------------------------------------------------------------------##
@@ -1175,9 +1210,12 @@ func RestartCards() -> void:
 	if (outNumberedBonus > 0):
 		PopUpManager.GetInstance().DoFadeNotif("Ship outnumbered\nBonus Energy Provided")
 		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_OUTNUMER_BONUS)
-		
+	
+	var currentTurnEnergy = TurnEnergy
+	if (stormLevel > 4):
+		currentTurnEnergy -= 1
 	#since max fleet ammount is 3 this number can't be more than 2, and since we normalise it we
-	var finalTurnEnergy = TurnEnergy + roundi(TurnEnergy * outNumberedBonus)
+	var finalTurnEnergy = currentTurnEnergy + roundi(currentTurnEnergy * outNumberedBonus)
 	
 	ExternalUI.GetEnergyBar().ChangeSegmentAmm(finalTurnEnergy)
 	ExternalUI.GetReserveBar().ChangeSegmentAmm(currentship.EnergyReserves)
@@ -1190,7 +1228,11 @@ func RestartCards() -> void:
 	ExternalUI.DeckUI.UpdateDeckPileAmmount(currentship.deck.DeckPile.size())
 	#GetShipViz(ShipTurns[CurrentTurn]).Enable()
 	
-	for g in StartingCardAmm:
+	var cardsToPick = StartingCardAmm
+	if (stormLevel > 3):
+		cardsToPick -= 1
+		
+	for g in cardsToPick:
 		await HandleDrawCard(currentship)
 		await Helper.wait(0.1)
 
@@ -1400,6 +1442,7 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 					var TargetViz = enemy.ShipViz
 					TargetViz.ActionRemoved(Act.Action.Icon)
 					ActionList.RemoveActionFromShip(enemy, Act.Action)
+					enemy.deck.DiscardCard(Act.Action)
 					PopUpManager.GetInstance().DoFadeNotif("Attack Intercepted")
 					break
 	
@@ -1617,11 +1660,11 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats, _targetOverride : B
 					Targets.append(Target)
 				SelectingTarget = false
 			else:
-				Targets.append(GetBestTargetForAtack(EnemyTeam))
+				Targets.append(GetBestTargetForAtack(EnemyTeam, Mod))
 	
 	return Targets
 ##----------------------------------------------------------------------##
-func GetBestTargetForAtack(Candidates : Array[BattleShipStats]) -> BattleShipStats:
+func GetBestTargetForAtack(Candidates : Array[BattleShipStats], attack : CardModule) -> BattleShipStats:
 	#find the ship with bigger firepower
 	var biggestAttack : float = 0
 	for g in Candidates:
@@ -1635,6 +1678,16 @@ func GetBestTargetForAtack(Candidates : Array[BattleShipStats]) -> BattleShipSta
 		var remainingHealthNormalised = (g.	Hull - g.CurrentHull) / g.Hull
 		var threatLevel = g.GetFirePower() / biggestAttack
 		var points = (g.DefDebuff * 10) + threatLevel + remainingHealthNormalised
+		if (attack is OffensiveCardModule):
+			var AtackType = attack.AtackType
+			for Act : CardFightAction in ActionList.GetShipsActions(g):
+				var mod = Act.Action.OnPerformModule
+				if (mod is CounterCardModule or mod is DamageReductionCardModule):
+					#check if this card can counter the current attack
+					if (mod.CounterType == AtackType or mod.CounterType == OffensiveCardModule.AtackTypes.ANY_ATACK):
+						points *= 0.5
+						break
+						
 		points_list.append(max(0.2, points))
 	
 	var pickedIndex = Rand.InstanceRandom.RandWeighted(points_list)
@@ -1737,6 +1790,9 @@ func DoCardPlecementAnimation(User : BattleShipStats, C : Card, OriginalPos : Ve
 	var c = CardScene.instantiate() as Card
 
 	c.SetCardBattleStats(User, C.CStats)
+	#c.UpdateBattleStats(User)
+	#if (C.CStats.ener)
+	C.isStatic = true
 	add_child(c)
 	c.global_position = OriginalPos
 	var S = DeletableSoundGlobal.new()
@@ -1952,7 +2008,7 @@ func ShipActionHovered(Ship : BattleShipStats, C : CardStats, Targets : Array[Ba
 	var targetlocs : Array[Vector2] = []
 	for g in Targets:
 		var n = g.ShipViz
-		var pos = n.global_position + Vector2(n.size.x, n.size.y / 2)
+		var pos = n.ShipIcon.global_position
 		targetlocs.append(pos)
 	
 	if (CurrentCardShown != null):
@@ -1994,16 +2050,16 @@ func UpdateHandCards() -> void:
 	
 	ExternalUI.UpdateCardsInHandAmm(CurrentShip.deck.Hand.size(), MaxCardsInHand)
 ##----------------------------------------------------------------------##
-func UpdateCardDescriptions(User : BattleShipStats):
+func UpdateCardDescriptions():
 	var Cards = get_tree().get_nodes_in_group("Card")
 	for g : Card in Cards:
 		if (g.isStatic):
 			continue
-		g.UpdateBattleStats(User)
+		g.UpdateBattleStats(GetCurrentShip())
 ##----------------------------------------------------------------------##
 func UpdateShipStats(BattleS : BattleShipStats) -> void:
 	if (ShipTurns.find(BattleS) == CurrentTurn):
-		UpdateCardDescriptions(BattleS)
+		UpdateCardDescriptions()
 ##----------------------------------------------------------------------##
 func EnergyUpdated(Ship : BattleShipStats, energyAdded : int) -> void:
 	var OldEnergy = Ship.Energy - energyAdded
@@ -2014,7 +2070,7 @@ func EnergyUpdated(Ship : BattleShipStats, energyAdded : int) -> void:
 		if (Ship.Energy > ExternalUI.GetEnergyBar().GetSegmentAmm()):
 			ExternalUI.GetEnergyBar().ChangeSegmentAmm(Ship.Energy)
 	
-		UpdateCardDescriptions(Ship)
+		UpdateCardDescriptions()
 ##----------------------------------------------------------------------##
 func ReservesUpdated(Ship : BattleShipStats, reservesAdded : int) -> void:
 	var OldEnergy = Ship.EnergyReserves - reservesAdded
@@ -2023,7 +2079,7 @@ func ReservesUpdated(Ship : BattleShipStats, reservesAdded : int) -> void:
 		if (Ship.EnergyReserves > ExternalUI.GetReserveBar().GetSegmentAmm()):
 			ExternalUI.GetReserveBar().ChangeSegmentAmm(Ship.EnergyReserves)
 	
-		UpdateCardDescriptions(Ship)
+		UpdateCardDescriptions()
 ##----------------------------------------------------------------------##
 func UpdateFleetSizeAmmount() -> void:
 	PlayerFleetSizeLabel.text = "Fleet Size\n{0}".format([PlayerReserves.size() + PlayerCombatants.size()])

@@ -390,6 +390,7 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip], Missil
 	CardF.PlayerReserves = FBattleStats
 	CardF.EnemyReserves = EBattleStats
 	CardF.WindAdvantage = dot
+	
 	var actualDir = WeatherManage.WindDirection.rotated(-availbableFriendly.global_rotation)
 	CardF.ActualWindDir = actualDir
 	#Store location of fight to add the location at the ending screen

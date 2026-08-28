@@ -245,6 +245,9 @@ func OnTargetShipPicked(Target : MapShip) -> void:
 	
 
 func OnShipChanged(NewShip : PlayerDrivenShip) -> void:
+	if (NewShip == ControlledShip):
+		FrameCamToShip()
+		return
 	ControlledShip.OnShipDestroyed.disconnect(OnShipDestroyed)
 	ControlledShip.OnShipDamaged.disconnect(OnShipDamaged)
 	ControlledShip.AChanged.disconnect(OnControlledShipSpeedChanged)
@@ -263,11 +266,10 @@ func OnShipChanged(NewShip : PlayerDrivenShip) -> void:
 	ControlledShip.Teleported.disconnect(UpdatePlayerInfo)
 	
 	ControlledShip = NewShip
+	FrameCamToShip()
 	UIEventH.OnShipUpdated(NewShip)
 	NewShip.ToggleFuelRangeVisibility(true)
 	UIEventH.OnRadarUpdated(NewShip.RadarWorking())
-	
-	FrameCamToShip()
 	ControlledShip.Teleported.connect(UpdatePlayerInfo)
 	#ShipControllerEventH.ShipChanged(ControlledShip)
 	#ControlledShip.AChanged.connect(OnControlledShipSpeedChanged)

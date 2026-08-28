@@ -146,7 +146,7 @@ func OrderShipToAtack(Ship : HostileShip, Target : MapShip) -> void:
 	var ArmamentsToUse : Array[MissileItem]
 	ArmamentsToUse.append(GetCheapestArmamentForDistance(Ship.global_position.distance_squared_to(Target.global_position))) 
 	Ship.Cpt.ConsumeResource(STAT_CONST.STATS.MISSILE_SPACE, Armaments[ArmamentsToUse[0]])
-	Ship.LaunchMissile(ArmamentsToUse, Target.global_position)
+	Ship.LaunchMissile(ArmamentsToUse, Target.global_position, Target.Altitude)
 	
 func OrderShipToPursue(Ship : HostileShip, Target : MapShip) -> void:
 	Ship.SetPursuitTarget(Target)

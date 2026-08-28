@@ -48,7 +48,7 @@ position = Vector2(47.055187, 92.42397)
 rotation = 1.5707964
 scale = Vector2(0.4010628, 0.60450935)
 
-[node name="ExitMapMarker" type="Button" parent="." unique_id=1966900206 groups=["Buttons"]]
+[node name="ExitMapMarker" type="Button" parent="." unique_id=1966900206 groups=["Buttons2"]]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

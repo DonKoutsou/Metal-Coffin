@@ -38,7 +38,7 @@ func MissileAimDirChanged(NewDir : float, Owner : Captain) -> void:
 	AimRot += NewDir
 	#$MissileLine.rotation += NewDir
 	
-func LaunchMissile(Mis : Array[MissileItem], _Owner : Captain, User : Captain) -> void:
+func LaunchMissile(Mis : Array[MissileItem], _Owner : Captain, User : Captain, customAlt : float = -10000) -> void:
 	if (!IsOwner(User)):
 		return
 	var MissileScene : PackedScene = ResourceLoader.load(Mis[0].MissileFile)
@@ -50,6 +50,7 @@ func LaunchMissile(Mis : Array[MissileItem], _Owner : Captain, User : Captain) -
 	missile.Altitude = get_parent().Altitude
 	missile.Friendly = true
 	missile.ShipMet.connect(Map.GetInstance().EnemyMet)
+	missile.DisiredAltitude = customAlt
 	get_parent().get_parent().add_child(missile)
 	
 	MapPointerManager.GetInstance().AddShip(missile, true)

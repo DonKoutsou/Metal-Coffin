@@ -70,7 +70,7 @@ func AddShip(Ship : MapShip, Notify : bool = true) -> void:
 		var notif = CaptainNotif.instantiate() as CaptainNotification
 		notif.SetCaptain(Ship.Cpt)
 		Ingame_UIManager.GetInstance().AddUI(notif, true)
-	Ship.connect("OnShipDestroyed", DroneDischarged)
+	
 	super(Ship, Notify)
 
 func SoundEnded() -> void:

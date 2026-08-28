@@ -11,6 +11,7 @@
 [ext_resource type="Material" uid="uid://d2ewn5jt0b25e" path="res://Shaders/Blur/Blur10.tres" id="6_hyy3i"]
 [ext_resource type="Texture2D" uid="uid://bxhipk08h52xs" path="res://Assets/TownBackgrounds/VillageLayer2.png" id="7_vcb2a"]
 [ext_resource type="Material" uid="uid://0u7e70ufido3" path="res://Shaders/Blur/Blur8.tres" id="8_iem75"]
+[ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/UIPiecies/Light.png" id="12_hyy3i"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gf58y"]
 bg_color = Color(0, 0, 0, 1)
@@ -48,7 +49,7 @@ scale_max = 0.1
 [node name="TownBackground" type="ParallaxBackground" unique_id=832065722 node_paths=PackedStringArray("Camera")]
 script = ExtResource("1_vcb2a")
 LimitTop = 1920.0
-LimitSide = 300.0
+LimitSide = 360.0
 Camera = NodePath("Camera2D")
 LocationPositions = Dictionary[int, NodePath]({
 0: NodePath("ParallaxLayer3/Parallax2D/WorkShop"),
@@ -189,3 +190,15 @@ position = Vector2(19, 377)
 [node name="Camera2D" type="Camera2D" parent="." unique_id=652188506]
 position = Vector2(642, 360)
 position_smoothing_enabled = true
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2099281541]
+color = Color(0, 0, 0, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=695538383]
+position = Vector2(438, 466)
+energy = 0.63
+blend_mode = 2
+range_layer_min = -677
+range_layer_max = 1008
+texture = ExtResource("12_hyy3i")
+texture_scale = 33.65

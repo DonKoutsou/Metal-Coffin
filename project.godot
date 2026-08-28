@@ -15,8 +15,7 @@ config/version="0.7.401"
 run/main_scene="uid://cqxnjihcai1kd"
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.7", "Mobile")
-run/max_fps=60
-run/low_processor_mode=true
+run/max_fps=120
 boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="res://Assets/Logos/LogoIcon.png"
 config/windows_native_icon="res://Assets/Logos/LogoIc.ico"
@@ -102,6 +101,7 @@ Card=""
 DigitalBouncingButton=""
 Shakable=""
 CameraPositionAffected=""
+Buttons2=""
 
 [gui]
 

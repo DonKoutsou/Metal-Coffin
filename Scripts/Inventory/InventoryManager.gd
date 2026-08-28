@@ -45,6 +45,8 @@ func _ready() -> void:
 
 #-------------------------------------------------------
 func ControllerChanged(NewController : PlayerDrivenShip) -> void:
+	if (controller == NewController):
+		return
 	controller = NewController
 	var squad : Array[Captain] = NewController.GetSquadCaptains()
 	squad.append(NewController.Cpt)

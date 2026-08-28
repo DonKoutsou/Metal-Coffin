@@ -9,13 +9,10 @@
 [ext_resource type="Material" uid="uid://dwvsafe1eaxbk" path="res://Shaders/Card.tres" id="6_btfbu"]
 [ext_resource type="StyleBox" uid="uid://bkhv2od4pe3up" path="res://Scenes/Card_Fight/Card/Power_Card_Colors.tres" id="6_cedgx"]
 [ext_resource type="Texture2D" uid="uid://cwbo84yj0q3om" path="res://Assets/Cards/CardBack.png" id="7_ucyjg"]
+[ext_resource type="Material" uid="uid://b0dysksj8403q" path="res://Shaders/Card/Bolt.tres" id="10_mchus"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4v2x1"]
 bg_color = Color(1, 1, 1, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
 border_blend = true
 corner_radius_top_left = 5
@@ -118,7 +115,7 @@ transparent_bg = true
 handle_input_locally = false
 scaling_3d_mode = 5
 canvas_item_default_texture_filter = 4
-size = Vector2i(254, 350)
+size = Vector2i(231, 318)
 size_2d_override = Vector2i(186, 256)
 size_2d_override_stretch = true
 render_target_update_mode = 1
@@ -209,8 +206,8 @@ custom_minimum_size = Vector2(30.26, 27.33)
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 6
 theme_override_constants/shadow_outline_size = 2
 theme_override_font_sizes/font_size = 18
@@ -248,9 +245,9 @@ size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0.21176471, 0.14901961, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/line_separation = -2
-theme_override_constants/shadow_outline_size = 0
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 6
 bbcode_enabled = true
 text = "Incindiary Barrage"
@@ -278,9 +275,9 @@ mouse_filter = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.211454, 0.150914, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_outline_size = 0
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
@@ -379,6 +376,15 @@ grow_horizontal = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 offset_transform_enabled = true
 mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=952484273]
+visible = false
+material = ExtResource("10_mchus")
+layout_mode = 0
+offset_left = -197.0
+offset_top = -182.01004
+offset_right = 353.0
+offset_bottom = 397.01004
 
 [connection signal="button_down" from="SubViewportContainer/SubViewport/Button" to="." method="OnButtonPressed"]
 [connection signal="button_up" from="SubViewportContainer/SubViewport/Button" to="." method="OnButtonReleased"]

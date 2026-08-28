@@ -16,7 +16,7 @@ shader_parameter/shadow_parallax_amount = 0.5
 shader_parameter/sprite_rotation = -1.57
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jc744"]
-radius = 5.0
+radius = 14.035668
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_63pb3"]
 resource_local_to_scene = true

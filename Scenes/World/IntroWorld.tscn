@@ -78,4 +78,5 @@ VillageType = "uid://d1ccujxqp1ci3"
 FinalCityType = "uid://q6pvyblp3f1r"
 MapSize = 35
 VillageAmm = 3
+MaxDistance = 2500.0
 SpawningBounds = Vector2(12000, 250000)

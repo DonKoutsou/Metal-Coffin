@@ -114,13 +114,24 @@ stretch = true
 disable_3d = true
 own_world_3d = true
 handle_input_locally = false
-size = Vector2i(4980, 2802)
+size = Vector2i(1312, 738)
 size_2d_override = Vector2i(1280, 720)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 
 [node name="TownBackground" parent="SubViewportContainer/SubViewport" unique_id=712655483 instance=ExtResource("3_jmxc3")]
 Zoom = 0.67
+
+[node name="Camera2D" parent="SubViewportContainer/SubViewport/TownBackground" index="6" unique_id=1898189999]
+position = Vector2(642, 182.68657)
+zoom = Vector2(0.67, 0.67)
+
+[node name="CanvasModulate" parent="SubViewportContainer/SubViewport/TownBackground" index="7" unique_id=774077738]
+visible = false
+
+[node name="PointLight2D" parent="SubViewportContainer/SubViewport/TownBackground" index="8" unique_id=89505973]
+visible = false
+position = Vector2(626, 379)
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=912032770]
 layout_mode = 1
@@ -180,10 +191,10 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 21.0
-offset_top = -42.0
+offset_left = 43.0
+offset_top = -56.0
 offset_right = -146.0
-offset_bottom = -21.0
+offset_bottom = -35.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -195,9 +206,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -130.0
-offset_top = -50.0
+offset_top = -64.0
 offset_right = -72.0
-offset_bottom = -15.0
+offset_bottom = -29.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "Skip"
@@ -211,9 +222,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -59.0
-offset_top = -56.0
+offset_top = -70.0
 offset_right = -9.0
-offset_bottom = -6.0
+offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
@@ -229,9 +240,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -59.0
-offset_top = -56.0
+offset_top = -70.0
 offset_right = -9.0
-offset_bottom = -6.0
+offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
@@ -247,9 +258,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -59.0
-offset_top = -56.0
+offset_top = -70.0
 offset_right = -9.0
-offset_bottom = -6.0
+offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
@@ -265,9 +276,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -59.0
-offset_top = -56.0
+offset_top = -70.0
 offset_right = -9.0
-offset_bottom = -6.0
+offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
@@ -283,9 +294,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -59.0
-offset_top = -56.0
+offset_top = -70.0
 offset_right = -9.0
-offset_bottom = -6.0
+offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
@@ -297,3 +308,5 @@ libraries/ = SubResource("AnimationLibrary_boxul")
 autoplay = &"LogoDraw"
 
 [connection signal="pressed" from="SkipButton" to="." method="_on_skip_button_pressed"]
+
+[editable path="SubViewportContainer/SubViewport/TownBackground"]

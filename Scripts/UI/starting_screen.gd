@@ -175,7 +175,7 @@ func LoadSavedSettings() -> void:
 	
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sounds"), sav.Sound)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), sav.Music)
-	
+	Engine.max_fps = sav.FPS
 	ScreenCamera.ShakeEffects = sav.ShakeEffect
 	SettingsPanel.HasRain = sav.Rain
 
@@ -189,5 +189,5 @@ func UpdateSavedSettings() -> void:
 	save.Music = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music"))
 	save.ShakeEffect = ScreenCamera.ShakeEffects
 	save.GameVersion = ProjectSettings.get_setting("application/config/version")
-	
+	save.FPS = Engine.max_fps
 	ResourceSaver.save(save, "user://Settings.tres")

@@ -28,7 +28,7 @@ var Tweens : Array[Tween]
 func _sort_children():
 	
 	# Gather only visible Control children
-	var visible_children = []
+	var visible_children : Array[Control] = []
 	for child in get_children():
 		if child is Control and child.visible:
 			visible_children.append(child)
@@ -37,11 +37,11 @@ func _sort_children():
 		g.kill()
 	Tweens.clear()
 	
-	if (position != Vector2(120, 492 + Offset)):
+	if (position.y != 492 + Offset):
 		var tw = create_tween()
 		tw.set_ease(Tween.EASE_OUT)
 		tw.set_trans(Tween.TRANS_BACK)
-		tw.tween_property(self, "position", Vector2(120, 492 + Offset), 0.25)
+		tw.tween_property(self, "position", Vector2(position.x, 492 + Offset), 0.25)
 		Tweens.append(tw)
 	
 	var child_count: int = visible_children.size()
@@ -69,9 +69,7 @@ func _sort_children():
 
 	# Assign positions and rotations to visible children
 	for i in range(child_count):
-		var g = visible_children[i]
-		
-		g.pivot_offset = Vector2(g.size.x / 2, g.size.y)
+		var g : Control = visible_children[i]
 		
 		 # Calculate rotation - handle single card special case
 		var rotation_amount: float
@@ -83,25 +81,19 @@ func _sort_children():
 		var HaldChildVal : float = child_count as float / 2 
 		
 		var new_pos: Vector2 = Vector2(start_x + i * step, -((HaldChildVal - abs(i + 0.5 - HaldChildVal)) * 20) * (effective_rotation + abs(rotation_amount)) / 20)
-		
-		
-		if (g.position != new_pos):
-			if Engine.is_editor_hint():
+
+		if Engine.is_editor_hint():
+			if (g.position != new_pos):
 				g.position = new_pos
-			else:
-				pass
+			if (g.rotation_degrees != rotation_amount):
+				g.rotation_degrees = rotation_amount
+		else:
+			if (g.position != new_pos or g.rotation_degrees != rotation_amount):
 				var tween = get_tree().create_tween()
 				tween.set_ease(Tween.EASE_OUT)
 				tween.set_trans(Tween.TRANS_BACK)
 				tween.tween_property(g, "position", new_pos, 0.25)
-				Tweens.append(tween)
-		if (g.rotation_degrees != rotation_amount):
-			if Engine.is_editor_hint():
-				g.rotation_degrees = rotation_amount
-			else:
-				var tween = get_tree().create_tween()
-				tween.set_ease(Tween.EASE_OUT)
-				tween.set_trans(Tween.TRANS_BACK)
+				tween.set_parallel()
 				tween.tween_property(g, "rotation_degrees", rotation_amount, 0.25)
 				Tweens.append(tween)
 

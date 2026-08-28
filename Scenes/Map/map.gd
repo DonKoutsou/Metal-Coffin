@@ -38,6 +38,7 @@ class_name Map
 @export var VillageAmm : int
 @export var CapitalAmm : int = 3
 @export var MinDistance : float = 3000
+@export var MaxDistance : float = 6000
 @export var SpawningBounds : Vector2
 @export var EnSpawner : SpawnDecider
 @export var ControllerEvH : ShipControllerEventHandler
@@ -424,7 +425,7 @@ func GenerateMapThreaded() -> void:
 	var CitySpotType = ResourceLoader.load(CityType, "", ResourceLoader.CACHE_MODE_REUSE) as MapSpotType
 	var CityData = CitySpotType.GetData()
 	
-	var town_positions = poisson_disk_sampling(SpawningBounds, MinDistance, MapSize)
+	var town_positions = poisson_disk_sampling(SpawningBounds, MapSize)
 	var sorted_positions = sort_positions_by_y(town_positions)
 	
 	var GeneratedSpots : Array[Town] = []
@@ -488,10 +489,10 @@ func sort_positions_by_y(positions: Array) -> Array:
 	return sorted
 
 
-func poisson_disk_sampling(region_size: Vector2, min_dist: float, max_samples: int = 0) -> Array:
+func poisson_disk_sampling(region_size: Vector2, max_samples: int = 0) -> Array:
 	const K := 45 # samples per point
 	
-	var cell_size = min_dist / sqrt(2)
+	var cell_size = MinDistance / sqrt(2)
 	var grid_size = Vector2(ceil(region_size.x / cell_size), ceil(region_size.y / cell_size))
 	var grid = []
 	for i in range(int(grid_size.x * grid_size.y)):
@@ -514,10 +515,10 @@ func poisson_disk_sampling(region_size: Vector2, min_dist: float, max_samples: i
 		var found = false
 		for i in range(K):
 			var angle = Rand.InstanceRandom.RandF() * PI * 2.0
-			var rad = Rand.InstanceRandom.RandFRange(min_dist, min_dist * 2.0)
+			var rad = Rand.InstanceRandom.RandFRange(MinDistance, MaxDistance)
 			var dir = Vector2(cos(angle), sin(angle))
 			var candidate = center + dir * rad
-			if _is_valid(candidate, region_size, cell_size, grid, grid_size, min_dist):
+			if _is_valid(candidate, region_size, cell_size, grid, grid_size):
 				points.append(candidate)
 				spawn_points.append(candidate)
 				grid[_grid_index(candidate, cell_size, grid_size)] = candidate
@@ -529,19 +530,26 @@ func poisson_disk_sampling(region_size: Vector2, min_dist: float, max_samples: i
 			break
 	return points
 
-func _is_valid(point: Vector2, region_size: Vector2, cell_size: float, grid: Array, grid_size: Vector2, min_dist: float) -> bool:
+func _is_valid(point: Vector2, region_size: Vector2, cell_size: float, grid: Array, grid_size: Vector2) -> bool:
 	# Check within bounds
 	if point.x < 0 or point.x >= region_size.x or point.y < 0 or point.y >= region_size.y:
 		return false
-
+	
+	var hasClose : bool = false
 	var cell = Vector2i(point / cell_size)
 	for y in range(max(cell.y - 2, 0), min(cell.y + 3, grid_size.y)):
 		for x in range(max(cell.x - 2, 0), min(cell.x + 3, grid_size.x)):
 			var idx = x + y * int(grid_size.x)
 			var other = grid[idx]
-			if other != null and point.distance_to(other) < min_dist:
+			if (other == null):
+				continue
+			var dist = point.distance_to(other)
+			if dist < MinDistance:
 				return false
-	return true
+			if (dist < MaxDistance):
+				hasClose = true
+				
+	return hasClose
 
 func _grid_index(point: Vector2, cell_size: float, grid_size: Vector2) -> int:
 	var x = int(point.x / cell_size)

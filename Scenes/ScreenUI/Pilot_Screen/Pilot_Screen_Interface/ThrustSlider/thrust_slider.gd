@@ -37,6 +37,8 @@ func _ready() -> void:
 # --- STATE/SHIP HANDLING ---
 
 func _onControlledShipUpdated(newController: PlayerDrivenShip) -> void:
+	if (controller == newController):
+		return
 	super(newController)
 	match controlType:
 		ThrustControl.ELEVATION:

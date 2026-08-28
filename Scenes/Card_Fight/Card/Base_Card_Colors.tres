@@ -8,6 +8,6 @@ content_margin_bottom = 8.0
 bg_color = Color(0.11435, 0.205627, 0.212156, 1)
 border_width_top = 42
 border_width_bottom = 103
-border_color = Color(1, 0.7647059, 0.08235294, 1)
+border_color = Color(0.91818744, 0.69768393, 1.540184e-06, 1)
 corner_detail = 4
 anti_aliasing_size = 2.0

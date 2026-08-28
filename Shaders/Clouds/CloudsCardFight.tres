@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cc8eddj1vvy7u"]
+
+[ext_resource type="Shader" uid="uid://bg5g4a5taibb2" path="res://Shaders/Clouds/clouds.gdshader" id="1_701nx"]
+[ext_resource type="Texture2D" uid="uid://clltye05kkqkt" path="res://Shaders/Clouds/CardFightCloudMaskTexture.tres" id="2_634q1"]
+[ext_resource type="Texture2D" uid="uid://d1tknmqoiysie" path="res://Shaders/Clouds/CloudNormal.tres" id="3_yo4tc"]
+
+[resource]
+shader = ExtResource("1_701nx")
+shader_parameter/noise_texture = ExtResource("2_634q1")
+shader_parameter/noise_texturenormal = ExtResource("3_yo4tc")
+shader_parameter/density = 2.000000095
+shader_parameter/Camera_Offset = Vector2(0, 0)
+shader_parameter/Offset = Vector2(0, 0)
+shader_parameter/WindDir = Vector2(0, 0)
+shader_parameter/NormalStr = -2.0
+shader_parameter/Light = 1.0
+shader_parameter/Alpha = 1.0
+shader_parameter/shadow_strength = 0.370000017575
+shader_parameter/shadow_parallax_amount = -0.04
+shader_parameter/rotation_angle = -1.0

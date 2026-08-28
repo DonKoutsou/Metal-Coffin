@@ -1,0 +1,13 @@
+[gd_resource type="NoiseTexture2D" format=3 uid="uid://clltye05kkqkt"]
+
+[ext_resource type="Gradient" uid="uid://4hsb2urypw75" path="res://Shaders/Clouds/CardFightGradient.tres" id="1_s28yb"]
+[ext_resource type="FastNoiseLite" uid="uid://djv3ki2j68hy4" path="res://Shaders/Clouds/CloudStartingMenuNoise.tres" id="2_7mc84"]
+
+[resource]
+width = 1024
+noise = ExtResource("2_7mc84")
+color_ramp = ExtResource("1_s28yb")
+seamless = true
+in_3d_space = true
+normalize = false
+seamless_blend_skirt = 1.0

@@ -116,7 +116,7 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="SpeedSimulation" type="TextureButton" parent="." unique_id=1938511727 groups=["Buttons"]]
+[node name="SpeedSimulation" type="TextureButton" parent="." unique_id=1938511727 groups=["Buttons2"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -138,7 +138,7 @@ texture_click_mask = ExtResource("20_h6xln")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="SimulationButton" type="TextureButton" parent="." unique_id=1481011792 groups=["Buttons"]]
+[node name="SimulationButton" type="TextureButton" parent="." unique_id=1481011792 groups=["Buttons2"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -153,6 +153,7 @@ grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
 toggle_mode = true
+action_mode = 0
 texture_normal = ExtResource("26_qqfhp")
 texture_pressed = ExtResource("27_h6xln")
 texture_click_mask = ExtResource("20_h6xln")
@@ -284,7 +285,7 @@ TopoButton = NodePath("Topo")
 WindCorrectionButton = NodePath("WindCor")
 RadarButton = NodePath("RadarButton")
 
-[node name="WindCor" type="Button" parent="Pilot_Screen_Settings" unique_id=318848790 groups=["Buttons"]]
+[node name="WindCor" type="Button" parent="Pilot_Screen_Settings" unique_id=318848790 groups=["Buttons2"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -303,7 +304,7 @@ theme_override_styles/pressed = ExtResource("7_yjfdw")
 theme_override_styles/hover = ExtResource("6_bpouu")
 toggle_mode = true
 
-[node name="Fore" type="TextureButton" parent="Pilot_Screen_Settings" unique_id=41436554 groups=["Buttons"]]
+[node name="Fore" type="TextureButton" parent="Pilot_Screen_Settings" unique_id=41436554 groups=["Buttons2"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -324,7 +325,7 @@ texture_click_mask = ExtResource("20_h6xln")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="UI" type="TextureButton" parent="Pilot_Screen_Settings" unique_id=477491953 groups=["Buttons"]]
+[node name="UI" type="TextureButton" parent="Pilot_Screen_Settings" unique_id=477491953 groups=["Buttons2"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -345,7 +346,7 @@ texture_click_mask = ExtResource("20_h6xln")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="GRID" type="TextureButton" parent="Pilot_Screen_Settings" unique_id=69224209 groups=["Buttons"]]
+[node name="GRID" type="TextureButton" parent="Pilot_Screen_Settings" unique_id=69224209 groups=["Buttons2"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -366,7 +367,7 @@ texture_click_mask = ExtResource("20_h6xln")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="Topo" type="TextureButton" parent="Pilot_Screen_Settings" unique_id=551517063 groups=["Buttons"]]
+[node name="Topo" type="TextureButton" parent="Pilot_Screen_Settings" unique_id=551517063 groups=["Buttons2"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -387,7 +388,7 @@ texture_click_mask = ExtResource("20_h6xln")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="RadarButton" type="Button" parent="Pilot_Screen_Settings" unique_id=1811648738 groups=["Buttons"]]
+[node name="RadarButton" type="Button" parent="Pilot_Screen_Settings" unique_id=1811648738 groups=["Buttons2"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0

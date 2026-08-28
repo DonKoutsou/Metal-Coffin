@@ -163,11 +163,12 @@ func _Update(delta: float) -> void:
 func DoAlarmVisual() -> void:
 	Alarmed.emit()
 
-func LaunchMissile(Mis : Array[MissileItem], Pos : Vector2) -> void:
+func LaunchMissile(Mis : Array[MissileItem], Pos : Vector2, alt : float) -> void:
 	var MissileScene : PackedScene = ResourceLoader.load(Mis[0].MissileFile)
 	var missile = MissileScene.instantiate() as Missile
 	missile.RegisterOwner(self)
 	missile.SetData(Mis)
+	missile.DisiredAltitude = alt
 	if (Command != null):
 		missile.global_position = Command.global_position
 		missile.Altitude = Command.Altitude
@@ -425,7 +426,7 @@ func OnReachedPursuing() -> void:
 			else:
 				plships.append(g)
 	
-	var Mis : Array[BattleShipStats] = []
+	var Mis : Array[Missile] = []
 	
 	OnPlayerShipMet.emit(plships, hostships, Mis, Mis)
 

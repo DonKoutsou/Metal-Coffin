@@ -2,14 +2,42 @@
 
 [ext_resource type="Script" uid="uid://bdyunkmrrtpmv" path="res://Scenes/GlobalManagers/Sound/UISoundManager.gd" id="1_rf4sq"]
 [ext_resource type="AudioStream" uid="uid://oyvpm41u3k5x" path="res://Assets/Sounds/ButtonIn.wav" id="2_6djbc"]
+[ext_resource type="AudioStream" uid="uid://dav21tobj6piv" path="res://Assets/Sounds/ButtonIn2.mp3" id="2_efhbb"]
+[ext_resource type="AudioStream" uid="uid://52ga378orxqr" path="res://Assets/Sounds/ButtonOut2.mp3" id="3_76ni5"]
 [ext_resource type="AudioStream" uid="uid://sejltidjhhr8" path="res://Assets/Sounds/ButtonOut.wav" id="3_tx5of"]
 [ext_resource type="AudioStream" uid="uid://ups7egvp1xc5" path="res://Assets/Sounds/Hover.mp3" id="4_llfjl"]
 [ext_resource type="AudioStream" uid="uid://l32wa336ywlb" path="res://Assets/Sounds/Hover2.mp3" id="5_u1rpw"]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3uwd3"]
+random_pitch = 1.005793
+random_volume_offset_db = 1.0
+streams_count = 1
+stream_0/stream = ExtResource("2_efhbb")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yc830"]
+random_pitch = 1.005793
+random_volume_offset_db = 1.0
+streams_count = 1
+stream_0/stream = ExtResource("2_6djbc")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_f2gse"]
+random_pitch = 1.005793
+random_volume_offset_db = 1.0
+streams_count = 1
+stream_0/stream = ExtResource("3_76ni5")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_h5u7i"]
+random_pitch = 1.005793
+random_volume_offset_db = 1.0
+streams_count = 1
+stream_0/stream = ExtResource("3_tx5of")
+
 [node name="UISoundManager" type="Node" unique_id=1724138651]
 script = ExtResource("1_rf4sq")
-ClickSound = ExtResource("2_6djbc")
-ClickOutSound = ExtResource("3_tx5of")
+ClickSound = SubResource("AudioStreamRandomizer_3uwd3")
+ClickSound2 = SubResource("AudioStreamRandomizer_yc830")
+ClickOutSound = SubResource("AudioStreamRandomizer_f2gse")
+ClickOutSound2 = SubResource("AudioStreamRandomizer_h5u7i")
 DigitalClick = ExtResource("4_llfjl")
 HoverShound = ExtResource("5_u1rpw")
 AnalogueSoundStr = -10.0

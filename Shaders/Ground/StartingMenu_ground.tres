@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://2l428k4wukko"]
 
-[ext_resource type="Shader" uid="uid://c04tnhxowl25v" path="res://Shaders/ground.gdshader" id="1_gmgmd"]
+[ext_resource type="Shader" uid="uid://cwm6m471wrbmx" path="res://Shaders/ground_CardFight.gdshader" id="1_430q4"]
 [ext_resource type="Texture2D" uid="uid://bibx4kf5ern4i" path="res://Assets/Sand/Ground055S_1K-PNG_NormalGL.png" id="2_xwkqh"]
 [ext_resource type="Texture2D" uid="uid://blyc50aydat54" path="res://Assets/Sand/Ice002_1K-PNG_NormalGL.png" id="3_gbbym"]
 [ext_resource type="Texture2D" uid="uid://cuyopb6vo0rnu" path="res://Assets/Sand/Rock062_1K-PNG_NormalGL.png" id="4_xxixk"]
@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bih6x8swa3dhe" path="res://Noises/Ground/TEX_GroundVisualNoiseMask.png" id="8_djccu"]
 
 [resource]
-shader = ExtResource("1_gmgmd")
+shader = ExtResource("1_430q4")
 shader_parameter/GroundTexture = ExtResource("5_2jq5r")
 shader_parameter/GroundTexture2 = ExtResource("6_slijr")
 shader_parameter/GroundTexture3 = ExtResource("7_3l5b5")
@@ -20,7 +20,8 @@ shader_parameter/GroundNormal2Texture = ExtResource("2_xwkqh")
 shader_parameter/GroundNormal3Texture = ExtResource("3_gbbym")
 shader_parameter/NormalD = 1.75
 shader_parameter/Light = 0.54
+shader_parameter/LOD = 1.8399999999999999
 shader_parameter/offset = Vector2(0.1, -0.615)
-shader_parameter/Scale1 = Vector2(40, 40)
+shader_parameter/Scale1 = Vector2(60, 60)
 shader_parameter/Scale2 = Vector2(80, 80)
 shader_parameter/Scale3 = Vector2(30, 30)

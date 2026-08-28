@@ -61,7 +61,7 @@ grow_vertical = 2
 texture = ExtResource("6_ntf1p")
 expand_mode = 1
 
-[node name="TurnOff" type="Button" parent="." unique_id=1602153045 groups=["Buttons"]]
+[node name="TurnOff" type="Button" parent="." unique_id=1602153045 groups=["Buttons2"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -170,6 +170,7 @@ theme_override_styles/pressed = ExtResource("10_2m6j3")
 theme_override_styles/hover = ExtResource("9_fka4o")
 
 [node name="PanelContainer" type="TextureRect" parent="." unique_id=1005341687]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

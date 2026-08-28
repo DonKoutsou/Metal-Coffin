@@ -22,6 +22,7 @@
 [ext_resource type="Material" uid="uid://bsqawqp83u5sx" path="res://Shaders/Blur/Blur14.tres" id="16_qnoug"]
 [ext_resource type="Material" uid="uid://d2ewn5jt0b25e" path="res://Shaders/Blur/Blur10.tres" id="19_633vk"]
 [ext_resource type="Material" uid="uid://0u7e70ufido3" path="res://Shaders/Blur/Blur8.tres" id="21_hxouk"]
+[ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/UIPiecies/Light.png" id="23_hxouk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gf58y"]
 bg_color = Color(0, 0, 0, 1)
@@ -338,3 +339,14 @@ position = Vector2(181, 238)
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1898189999]
 position = Vector2(642, 360)
 position_smoothing_enabled = true
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=774077738]
+color = Color(0, 0, 0, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=89505973]
+position = Vector2(445, 395)
+blend_mode = 2
+range_layer_min = -350
+range_layer_max = 421
+texture = ExtResource("23_hxouk")
+texture_scale = 29.95

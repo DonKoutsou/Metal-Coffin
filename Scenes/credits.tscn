@@ -250,6 +250,32 @@ text = "Game-Icons.net"
 underline = 1
 uri = "https://game-icons.net"
 
+[node name="Label9" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=2130640787]
+layout_mode = 2
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 30
+text = "Sounds used"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LinkButton5" type="LinkButton" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1564563538]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 0.7647059, 0.08235294, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "kenny.nl"
+underline = 1
+uri = "https://kenney.nl/assets/ui-audio"
+
 [node name="Control3" type="Control" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=407890701]
 visible = false
 layout_mode = 2

@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://b0dysksj8403q"]
+
+[ext_resource type="Shader" uid="uid://dbv67bhpyuwmx" path="res://Shaders/Card/Bolt.gdshader" id="1_i51yw"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_oiylp"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_41j53"]
+noise = SubResource("FastNoiseLite_oiylp")
+seamless = true
+
+[resource]
+shader = ExtResource("1_i51yw")
+shader_parameter/noise = SubResource("NoiseTexture2D_41j53")
+shader_parameter/noise2 = SubResource("NoiseTexture2D_41j53")
+shader_parameter/brightness = 2.5
+shader_parameter/time_scale = 1.0

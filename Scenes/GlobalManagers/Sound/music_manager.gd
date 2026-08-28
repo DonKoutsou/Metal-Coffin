@@ -15,7 +15,7 @@ static func GetInstance() -> MusicManager:
 
 func _ready() -> void:
 	Instance = self
-	
+	await get_tree().create_timer(2).timeout
 	Stream = AudioStreamPlayer.new()
 	Stream.volume_db = -6
 	Stream.stream = AmbientMusic.pick_random()

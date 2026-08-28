@@ -83,7 +83,7 @@ func StartDogFight(PlTeam : Array[Captain], EnTeam : Array[Captain]):
 	#GetMap().GetScreenUi().ToggleControllCover(true)
 	UISoundMan.GetInstance().Refresh()
 	
-func CardFightEnded(_Survivors : Array[BattleShipStats], won : bool) -> void:
+func CardFightEnded(_Survivors : Array[BattleShipStats], won : bool, WonFUnds : float) -> void:
 	
 	if (won):
 		AchievementManager.GetInstance().IncrementStatInt("CFW", 1)
