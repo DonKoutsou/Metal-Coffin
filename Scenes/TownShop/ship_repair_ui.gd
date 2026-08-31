@@ -74,5 +74,5 @@ func UpdateRepairBar(AddedRepair : float):
 func RepairBar_gui_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click") or event is InputEventScreenDrag):
 		var rel = event.relative
-		var AddedRepair = roundi(((rel.x / 3) * (HullBar.max_value / 100)))
+		var AddedRepair = roundi(((-rel.y / 3) * (HullBar.max_value / 100)))
 		UpdateRepairBar(AddedRepair)

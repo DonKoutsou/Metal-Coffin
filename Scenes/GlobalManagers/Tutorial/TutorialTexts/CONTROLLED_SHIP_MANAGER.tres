@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TutorialData" format=3 uid="uid://dmontauamx6gr"]
+
+[ext_resource type="Script" uid="uid://451ovq2ynuka" path="res://Scenes/GlobalManagers/Tutorial/TutorialData.gd" id="1_cmnbj"]
+
+[resource]
+script = ExtResource("1_cmnbj")
+Title = "Ship Manager"
+Text = "To switch between your fleets you can either click on their marker on the map or alternatevely use the [color=#ffc315]Ship Manager[/color]. On the Ship Manager you will be able to preview the stats of your current fleet and by pressing the [color=#f35033]PREV[/color] and [color=#308a4d]NEXT[/color] buttons switch to other fleets. Pressing the [color=#ff9d14ff]FRAME[/color] button will frame the camera and lock the camera on the current fleet."
+Target = Array[int]([20])
+metadata/_custom_type_script = "uid://451ovq2ynuka"

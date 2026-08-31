@@ -149,6 +149,6 @@ use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-text = "Close"
+text = "Understood"
 
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

@@ -9,7 +9,7 @@ static var GridState : bool = false
 #@export var SteerButton : BaseButton
 #static var SteerState : bool = true
 @export var ZoomButton : BaseButton
-var ZoomState : bool = true
+var ZoomState : bool = false
 @export var TopoButton : BaseButton
 static var TopoState : bool = false
 @export var WindCorrectionButton : BaseButton

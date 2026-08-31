@@ -15,7 +15,7 @@ var OriginalPos : Vector2
 #Position shake sound currently at
 var ShakePos : float
 
-
+var Locked : bool = false
 var GoDownValue = 1
 var Shake = false
 var GoingDown = false
@@ -62,7 +62,7 @@ func EnableStormShake(amm : float) -> void:
 		return
 	for g in get_tree().get_nodes_in_group("Shakable"):
 		g.ApplyShake(amm)
-	Anim.play("Damage")
+	#Anim.play("Damage")
 	LightPivot1.ApplyShake(amm)
 	Shake = true
 	
@@ -147,6 +147,8 @@ func _physics_process(delta: float) -> void:
 		offset += of
 
 func _input(event: InputEvent) -> void:
+	if (Locked):
+		return
 	if (World.WORLDST == World.WORLDSTATE.NORMAL):
 		if (event is InputEventMouseMotion):
 			if (get_global_mouse_position().x < 20 and position.x != 370):
@@ -162,6 +164,18 @@ func _input(event: InputEvent) -> void:
 			#var newx = clamp(r.x, OriginalPos.x / zoom.x, OriginalPos.x * zoom.x)
 			#var newy = clamp(r.y, OriginalPos.y / zoom.y, OriginalPos.y * zoom.y)
 			#position = Vector2(newx, newy)
+
+func ToggleLights(t : bool) -> void:
+	if (t):
+		Anim.play("TurnOn")
+	$AudioStreamPlayer2.play()
+	$LightPivot1.visible = t
+
+func LockPosition(t : bool) -> void:
+	Locked = t
+
+func ResetPosition() -> void:
+	position.x = OriginalPos.x
 
 func FrameCam(FrameTrarget : Node) -> void:
 	if (FrameTrarget.global_position.x < 10):

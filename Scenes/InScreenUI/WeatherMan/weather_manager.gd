@@ -15,7 +15,7 @@ const SIZE : Vector2 = Vector2(9000,9000)
 const MAX_WIND_SPEED : int = 200
 
 static var Instance : WeatherManage
-static var WindDirection : Vector2
+static var WindDirection : Vector2 = Vector2.RIGHT
 static var WindSpeed : float = 50
 
 static var LighAmm : Curve = preload("res://Resources/LightCurve.tres")
@@ -105,6 +105,17 @@ func Update(delta: float) -> void:
 		g.RadarShape.VisualRangePenalty = viz
 		g.RadarShape.StormPenalty = Helper.mapvalue(1 - Storm, 0.5, 1.0)
 		g.RadarShape.UpdateVizRange()
+
+func OnShipTeleported(ship : MapShip) -> void:
+	var L = GetLightAmm()
+	var viz = GetVisibilityInPosition(ship.global_position, L)
+	var Storm = StormValueInPosition(ship.global_position)
+	if (ship is PlayerDrivenShip):
+		ship.UpdateLight(L, viz)
+	ship.StormValue = Storm
+	ship.RadarShape.VisualRangePenalty = viz
+	ship.RadarShape.StormPenalty = Helper.mapvalue(1 - Storm, 0.5, 1.0)
+	ship.RadarShape.UpdateVizRange()
 
 func NoiseChanged() -> void:
 	M.lock()

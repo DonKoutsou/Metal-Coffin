@@ -30,6 +30,9 @@ func Update(delta : float) -> void:
 	if (PilotScreen != null):
 		PilotScreen.Update(delta)
 
+func GetCamera() -> ScreenCamera:
+	return Cam
+
 func ToggleCardFightUI(t : bool) -> void:
 	if (t):
 		var Sc : PackedScene = await Helper.LoadThreaded(CardFightUIScene).Sign
@@ -216,6 +219,7 @@ enum UI_ELEMENT{
 	REGROUP_BUTTON,
 	SHIP_DOCK_BUTTON,
 	CARD_FIGHT_DISCARD,
+	SHIP_MANAGER,
 }
 
 func GetUIElement(Element : UI_ELEMENT) -> Node:
@@ -260,6 +264,8 @@ func GetUIElement(Element : UI_ELEMENT) -> Node:
 			return PilotScreen.regroupButton
 		UI_ELEMENT.SHIP_DOCK_BUTTON:
 			return PilotScreen.shipDockButton
+		UI_ELEMENT.SHIP_MANAGER:
+			return PilotScreen.ControlledShipSelector
 	return null
 
 func UIElementExists(Element : UI_ELEMENT) -> bool:
@@ -303,5 +309,7 @@ func UIElementExists(Element : UI_ELEMENT) -> bool:
 		UI_ELEMENT.REGROUP_BUTTON:
 			return PilotScreen != null
 		UI_ELEMENT.SHIP_DOCK_BUTTON:
+			return PilotScreen != null
+		UI_ELEMENT.SHIP_MANAGER:
 			return PilotScreen != null
 	return false

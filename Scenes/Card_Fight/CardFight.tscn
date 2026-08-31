@@ -112,6 +112,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Clouds" type="ColorRect" parent="." unique_id=759849753]
+visible = false
 light_mask = 524289
 z_index = -1
 texture_filter = 3

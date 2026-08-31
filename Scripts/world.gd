@@ -230,7 +230,17 @@ func UpdateCities(delta : float) -> void:
 	get_tree().call_group("City", "Update", delta)
 
 func PlayPrologue():
-	Ingame_UIManager.GetInstance().CallbackDiag(PrologueDialgues, null, "Seg", SteerTut, true)
+	GetMap().GetScreenUi().GetCamera().ResetPosition()
+	GetMap().GetScreenUi().GetCamera().LockPosition(true)
+	GetMap().GetScreenUi().GetCamera().ToggleLights(false)
+	Ingame_UIManager.GetInstance().CallbackDiag(PrologueDialgues, null, "Seg", PrologueDialogueEnded, true)
+
+func PrologueDialogueEnded() -> void:
+	SimulationManager.GetInstance().TogglePause(false)
+	GetMap().GetScreenUi().GetCamera().ToggleLights(true)
+	GetMap().GetScreenUi().GetCamera().LockPosition(false)
+	await Helper.wait(2)
+	SteerTut()
 
 func ShowArmak():
 	Ingame_UIManager.GetInstance().CallbackDiag(PrologueDialogues2, null, "Seg", ReturnCamToPlayer, true)
@@ -308,6 +318,7 @@ func StartShipTrade(ControlledShip : PlayerDrivenShip) -> void:
 func ShipSeparationFinished() -> void:
 	GetMap().HideWorld(true)
 	WORLDST = WORLDSTATE.NORMAL
+	ActionTracker.OnActionCompleted(ActionTracker.Action.SHIP_MANAGER)
 
 #Dogfight-----------------------------------------------
 var FighingFriendlyUnits : Array[MapShip] = []
@@ -609,6 +620,7 @@ func HappeningFinished(Recruited : bool, CapmaignFin : bool, Events : Array[Over
 		TutorialsToShow.append(ActionTracker.Action.RECRUIT)
 	if (CapmaignFin):
 		Ingame_UIManager.GetInstance().CallbackDiag(["Time to head back people. The package has been delivered."], null, "", EndGame, true)
+		GetMap().GetScreenUi().OpenScreen(ScreenUI.ScreenState.PILOT_SCREEN)
 		return
 	
 	#Save events to play once we left town

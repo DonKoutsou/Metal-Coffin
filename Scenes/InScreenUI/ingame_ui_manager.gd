@@ -21,6 +21,7 @@ class_name Ingame_UIManager
 var PauseContainer : PauseMenu
 
 static var Instance :Ingame_UIManager
+static var DoingDialogue : bool
 
 static func GetInstance() -> Ingame_UIManager:
 	return Instance
@@ -98,7 +99,11 @@ func CallbackDiag (Diags : Array[String], Avatar : Texture, TalkerName : String,
 	AddUI(diag, true)
 	diag.PlayDialogue(Diags, Avatar, TalkerName)
 	diag.Callback = Callback
+	DoingDialogue = true
+	diag.DialoguePlayed.connect(DialogueEnded)
 
+func DialogueEnded() -> void:
+	DoingDialogue = false
 
 func GetInventory() -> InventoryManager:
 	return _Inventory

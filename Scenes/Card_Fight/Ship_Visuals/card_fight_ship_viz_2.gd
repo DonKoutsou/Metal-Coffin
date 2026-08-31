@@ -136,12 +136,16 @@ func Destroy() -> void:
 	ToggleSpeedBuff(false, 1)
 	ToggleSpeedDebuff(false)
 
-	EnableSmoke()
 	if (ModulateTween != null):
 		ModulateTween.kill()
 	$HBoxContainer/PanelContainer2.queue_free()
 	
 	await MoveTw.finished
+	EnableSmoke()
+	
+	SmokePart.global_rotation = 0
+	
+	
 	Land.play()
 	mat.scale_max = 0.1
 	ExplosionPart.restart()
@@ -155,7 +159,10 @@ func _ready() -> void:
 	HullLabel.visible = false
 	ToggleFire(false)
 	phase = randf() * TAU
-	
+	var processMat : ParticleProcessMaterial = SmokePart.process_material
+	var windRot = WeatherManage.WindDirection
+	#var finalRot = windRot.rotated(-ShipIcon.rotation)
+	processMat.direction = Vector3(windRot.x, windRot.y, 0)
 
 
 func _process(delta: float) -> void:
@@ -258,7 +265,7 @@ func Pop(t : bool):
 	PopTween.tween_property(self, "popOffset", FinalPos, 0.5)
 	await PopTween.finished
 	
-func SetStats(S : BattleShipStats, Friendly : bool) -> void:
+func SetStats(S : BattleShipStats, Friendly : bool, ) -> void:
 	Ship = S
 	Fr = Friendly
 	ShipNameLabel.text = S.Name

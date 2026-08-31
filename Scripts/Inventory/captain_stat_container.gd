@@ -62,12 +62,14 @@ func ShowStats() -> void:
 	ShipStats.UpdateValues()
 
 func ShowDeck() -> void:
+	ActionTracker.OnActionCompleted(ActionTracker.Action.DECK)
 	transitionToPanel(ShipDeck)
 
 func ShowInvetory() -> void:
 	transitionToPanel(ShipInventory.get_parent())
 
 func ShowDisposition() -> void:
+	ActionTracker.OnActionCompleted(ActionTracker.Action.DISPOSITION)
 	transitionToPanel(DispositionScreen.get_parent())
 
 func UpdateValues() -> void:

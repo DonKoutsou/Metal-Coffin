@@ -58,13 +58,12 @@ func BodyEnteredRadar(Body : Area2D) -> void:
 			InsideRadar.append(Parent)
 			#Parent.OnShipSeen(self)
 			
-	else : if (Parent is MapSpot):
-		if (Parent.EnemyCity):
-			ActionTracker.OnActionCompleted(ActionTracker.Action.ENEMY_TOWN_APROACH)
-		else:
-			ActionTracker.OnActionCompleted(ActionTracker.Action.TOWN_APROACH)
-				
+	else : if (Parent is MapSpot):		
 		if (!Parent.Seen):
+			if (Parent.EnemyCity):
+				ActionTracker.OnActionCompleted(ActionTracker.Action.ENEMY_TOWN_APROACH)
+			#else:
+				#ActionTracker.OnActionCompleted(ActionTracker.Action.TOWN_APROACH)
 			Parent.OnSpotSeen()
 
 func BodyLeftRadar(Body : Area2D) -> void:

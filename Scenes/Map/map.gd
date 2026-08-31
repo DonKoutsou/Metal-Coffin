@@ -116,7 +116,7 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 		SimulationTrigger.TutorialToShow = ActionTracker.Action.SIMULATION
 		WorldParent.add_child(SimulationTrigger)
 		var triggerpos = pos
-		triggerpos.y -= 100
+		triggerpos.y -= 20
 		SimulationTrigger.global_position = triggerpos
 		
 		var ElevationTrigger = TutorialTrigger.instantiate() as TutTrigger

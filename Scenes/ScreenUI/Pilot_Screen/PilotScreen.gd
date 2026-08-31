@@ -16,6 +16,7 @@ class_name PilotScreenUI
 @export var SonarUI : AeroSonar
 @export var speedSimulationButton: BaseButton
 @export var pauseSimulationButton: BaseButton
+@export var ControlledShipSelector : ControlledShipUI
 @export var landButton : Button
 @export var hatchButton : Button
 @export var regroupButton: Button

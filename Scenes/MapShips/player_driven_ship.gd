@@ -21,6 +21,7 @@ func  _ready() -> void:
 	super()
 	ShipContoller.GetInstance().RegisterSelf(self)
 	WeatherManage.RegisterShip(self)
+	Teleported.connect(WeatherManage.GetInstance().OnShipTeleported.bind(self))
 
 func _on_return_sound_trigger_area_entered(area: Area2D) -> void:
 	if (area.get_parent() == TargetShip and CommingBack):

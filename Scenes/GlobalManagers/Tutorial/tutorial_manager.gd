@@ -32,6 +32,7 @@ static func OnActionCompleted(Act : Action, Args : PackedStringArray = []) -> vo
 	CompletedActions.append(Act)
 	if (!ShowTutorials):
 		return
+		
 	if (Args.size() > 0):
 		TutorialArgs[Act] = Args
 	QueuedTutorials.append(Act)
@@ -40,6 +41,11 @@ func _physics_process(_delta: float) -> void:
 	if (World.WORLDST != World.WORLDSTATE.INITIAL and !ShowingTutorial and !TransitionPanel.Transitioning):
 		if QueuedTutorials.size() > 0:
 			var act = QueuedTutorials[0]
+					
+			if (!TutorialTexts.has(act) or TutorialTexts[act] == ""):
+				QueuedTutorials.pop_front()
+				return
+				
 			var nexttut : TutorialData = load(TutorialTexts[act])
 			if (TargetsExists(nexttut.Target)):
 				var title : String = nexttut.Title
@@ -208,5 +214,8 @@ enum Action{
 	CARD_FIGHT_OUTNUMER_BONUS = 38,
 	CARD_FIGHT_CARD_RECYCLE = 39,
 	CARD_FIGHT_WIND = 40,
-	CARD_FIGHT_STORM = 41
+	CARD_FIGHT_STORM = 41,
+	SHIP_MANAGER = 42,
+	DISPOSITION = 43,
+	DECK = 44,
 }

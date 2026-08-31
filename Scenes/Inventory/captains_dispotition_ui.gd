@@ -14,6 +14,7 @@ var CharacterStats : Dictionary[DispositionManager.Dispositions, float] = {
 	DispositionManager.Dispositions.THERMAL : 0.3,
 	DispositionManager.Dispositions.MAGNETIC : 0.4,
 	DispositionManager.Dispositions.RADIANT : 0.5,
+	DispositionManager.Dispositions.NUCLEAR : 0.5,
 }
 
 var ItemStats : Dictionary[DispositionManager.Dispositions, float] = {
@@ -22,6 +23,7 @@ var ItemStats : Dictionary[DispositionManager.Dispositions, float] = {
 	DispositionManager.Dispositions.THERMAL : 0.3,
 	DispositionManager.Dispositions.MAGNETIC : 0.4,
 	DispositionManager.Dispositions.RADIANT : 0.5,
+	DispositionManager.Dispositions.NUCLEAR : 0.5,
 }
 
 @export var DispositionColors : PackedColorArray = []
@@ -63,8 +65,8 @@ func _draw() -> void:
 		var rad = Radius * Helper.mapvalue(clamp(CharacterStats[g], 0, 1), 0.1, 1.0)
 		var itRad = Radius * Helper.mapvalue(clamp(CharacterStats[g] + ItemStats[g], 0, 1), 0.1, 1.0)
 		#var rad = Radius * clamp(CharacterStats[g], 0.1, 1)
-		var pointX = cos(m * (PI * 2) - 0.32)
-		var pointY = sin(m * (PI * 2) - 0.32)
+		var pointX = cos(m * (PI * 2) - 0.53)
+		var pointY = sin(m * (PI * 2) - 0.53)
 		stats[g] = Vector2(pointX, pointY) * rad + size / 2.0
 		itStats[g] = Vector2(pointX, pointY) * itRad + size / 2.0
 		
@@ -89,8 +91,8 @@ func _draw() -> void:
 	for g in range(0, PointAmm):
 		#we normalise the current point
 		var m = Helper.normalize_value(g, 0, PointAmm)
-		var pointX = cos(m * (PI * 2) - 0.32)
-		var pointY = sin(m * (PI * 2) - 0.32)
+		var pointX = cos(m * (PI * 2) - 0.53)
+		var pointY = sin(m * (PI * 2) - 0.53)
 		draw_line(size / 2.0, Vector2(pointX, pointY) * Radius + size / 2.0, Color(1,1,1), 1, true)
 		for z in range(1, LineAmm, 1):
 			

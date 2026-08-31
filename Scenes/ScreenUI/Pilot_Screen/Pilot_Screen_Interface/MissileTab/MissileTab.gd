@@ -68,8 +68,8 @@ func _onControlledShipUpdated(ship: PlayerDrivenShip) -> void:
 	cap.visible = not hasLauncher
 	if not hasLauncher:
 		_on_turn_off_toggled(false)
-	else:
-		ActionTracker.OnActionCompleted(ActionTracker.Action.MISSILE_TOGGLE)
+	#else:
+		#ActionTracker.OnActionCompleted(ActionTracker.Action.MISSILE_TOGGLE)
 
 func _onDroneAdded(_drone: PlayerDrivenShip, target: MapShip) -> void:
 	if target == controller:

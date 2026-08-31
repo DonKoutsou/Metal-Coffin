@@ -63,6 +63,10 @@ metadata/_custom_type_script = "uid://b440ymk6opetf"
 script = ExtResource("2_in2jj")
 metadata/_custom_type_script = "uid://b440ymk6opetf"
 
+[sub_resource type="Resource" id="Resource_bbv8w"]
+script = ExtResource("2_in2jj")
+metadata/_custom_type_script = "uid://b440ymk6opetf"
+
 [node name="DispoisitionManager" type="Node" unique_id=315877250]
 script = ExtResource("1_qnfdb")
-DispositionRewards = Array[ExtResource("2_in2jj")]([SubResource("Resource_hdcf2"), SubResource("Resource_w74s6"), SubResource("Resource_sk3h7"), SubResource("Resource_dvowk"), SubResource("Resource_dnouy")])
+DispositionRewards = Array[ExtResource("2_in2jj")]([SubResource("Resource_hdcf2"), SubResource("Resource_w74s6"), SubResource("Resource_sk3h7"), SubResource("Resource_dvowk"), SubResource("Resource_dnouy"), SubResource("Resource_bbv8w")])

@@ -96,8 +96,8 @@ func DoFadeInAnim() -> void:
 func SetTargetRect(r : Rect2 = Rect2(0,0,0,0), r2 : Rect2 = Rect2(0,0,0,0)) -> void:
 	var mat =  $ColorRect.material as ShaderMaterial
 	var vpRectSize = get_viewport_rect().size
-	#var camoffset = Map.GetInstance()._ScreenUI.Cam.position.x - (vpRectSize.x / 2)
-	var camoffset = 0
+	var camoffset = Map.GetInstance()._ScreenUI.Cam.position.x - (vpRectSize.x / 2)
+	#var camoffset = 0
 	#Devide by VP rect to normalise it
 	var r1pos = (r.position + Vector2(-camoffset, 0))/ vpRectSize
 	var r2pos = (r2.position + Vector2(-camoffset, 0)) / vpRectSize

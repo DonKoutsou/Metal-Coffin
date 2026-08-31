@@ -30,7 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://lhupseg00i2j" path="res://Assets/UIPiecies/Screen/SidePanels/Left.png" id="28_188si"]
 [ext_resource type="PackedScene" uid="uid://dmmhk1exrryca" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/ControlledShipUI/ControlledShipSelection.tscn" id="28_hc833"]
 
-[node name="PilotScreen" type="Control" unique_id=1109053421 node_paths=PackedStringArray("mapMarkerControls", "thrust", "elevationThrust", "steer", "pilotScreenSet", "SonarUI", "speedSimulationButton", "pauseSimulationButton", "landButton", "hatchButton", "regroupButton", "shipDockButton", "zoomDial", "yDial", "xDial", "missileUI")]
+[node name="PilotScreen" type="Control" unique_id=1109053421 node_paths=PackedStringArray("mapMarkerControls", "thrust", "elevationThrust", "steer", "pilotScreenSet", "SonarUI", "speedSimulationButton", "pauseSimulationButton", "ControlledShipSelector", "landButton", "hatchButton", "regroupButton", "shipDockButton", "zoomDial", "yDial", "xDial", "missileUI")]
 texture_filter = 2
 layout_mode = 3
 anchors_preset = 15
@@ -49,6 +49,7 @@ pilotScreenSet = NodePath("Pilot_Screen_Settings")
 SonarUI = NodePath("VBoxContainer/Sonar")
 speedSimulationButton = NodePath("SpeedSimulation")
 pauseSimulationButton = NodePath("SimulationButton")
+ControlledShipSelector = NodePath("VBoxContainer/ControledShipSelector")
 landButton = NodePath("LandButton")
 hatchButton = NodePath("OpenHatchButton")
 regroupButton = NodePath("Regroup")

@@ -30,6 +30,7 @@ var _CharInv : CharacterInventory
 	DispositionManager.Dispositions.THERMAL : 0.0,
 	DispositionManager.Dispositions.MAGNETIC : 0.0,
 	DispositionManager.Dispositions.RADIANT : 0.0,
+	DispositionManager.Dispositions.NUCLEAR : 0.0,
 }
 
 var itemDisposition : Dictionary[DispositionManager.Dispositions, float] = {
@@ -38,6 +39,7 @@ var itemDisposition : Dictionary[DispositionManager.Dispositions, float] = {
 	DispositionManager.Dispositions.THERMAL : 0.0,
 	DispositionManager.Dispositions.MAGNETIC : 0.0,
 	DispositionManager.Dispositions.RADIANT : 0.0,
+	DispositionManager.Dispositions.NUCLEAR : 0.0,
 }
 
 func OnCharacterNameChanged(NewName : String) -> void:

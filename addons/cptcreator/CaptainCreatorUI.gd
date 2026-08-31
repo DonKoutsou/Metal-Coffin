@@ -60,6 +60,7 @@ func RefreshCharacters() -> void:
 					var cap = load(g + "/" + file_name)
 					if (cap is Captain):
 						Captains.append(cap)
+						CheckForIssues(cap)
 						Menu.add_item(cap.GetCaptainName())
 				
 				file_name = dir.get_next()
@@ -99,17 +100,7 @@ func _exit_tree() -> void:
 	Captains.clear()
 	Items.clear()
 
-#------------------------------------------------------------
-func SetCaptain(C : Captain) -> void:
-	
-	CurrentlySelectedCap = C
-	CaptainName.text = C.GetCaptainName()
-	ShipIcon.texture = C.ShipIcon
-	
-	print(C.ProvidingFunds)
-
-	
-	
+func CheckForIssues(C : Captain) -> void:
 	for g in STAT_CONST.STATS.values().size():
 		var HasStat = false
 		for stat in C.CaptainStats:
@@ -120,6 +111,36 @@ func SetCaptain(C : Captain) -> void:
 			var NewStat = ShipStat.new()
 			NewStat.StatName = g
 			C.CaptainStats.append(NewStat)
+	
+	for g in DispositionManager.Dispositions.values():
+		var HasStat = false
+		for stat in C.disp:
+			if (stat == g):
+				HasStat = true
+				break
+		if (!HasStat):
+			C.disp[g] = 0.0
+		
+		var HasItStat = false
+		for stat in C.itemDisposition:
+			if (stat == g):
+				HasItStat = true
+				break
+		if (!HasItStat):
+			C.itemDisposition[g] = 0.0
+
+#------------------------------------------------------------
+func SetCaptain(C : Captain) -> void:
+	
+	CurrentlySelectedCap = C
+	CaptainName.text = C.GetCaptainName()
+	ShipIcon.texture = C.ShipIcon
+	
+	print(C.ProvidingFunds)
+
+	
+	CheckForIssues(C)
+	
 
 	UpdateInventoryBoxes()
 	UpdateDispositionSliders()

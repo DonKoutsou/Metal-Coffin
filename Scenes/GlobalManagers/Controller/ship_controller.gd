@@ -278,6 +278,7 @@ func UpdatePlayerInfo() -> void:
 	ControlledShipPosition = ControlledShip.global_position
 	ControlledShipVisibilityPenaltyValue = ControlledShip.RadarShape.VisualRangePenalty
 	ControlledShipStormValue = ControlledShip.StormValue
+	
 
 var camtw : Tween
 func FrameCamToShip():

@@ -10,6 +10,7 @@ enum Dispositions {
 	THERMAL,
 	MAGNETIC,
 	RADIANT,
+	NUCLEAR
 }
 
 static var Instance : DispositionManager

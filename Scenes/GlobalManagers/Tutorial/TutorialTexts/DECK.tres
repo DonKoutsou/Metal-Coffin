@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TutorialData" format=3 uid="uid://d3q321s4jrf3a"]
+
+[ext_resource type="Script" uid="uid://451ovq2ynuka" path="res://Scenes/GlobalManagers/Tutorial/TutorialData.gd" id="1_7abbf"]
+
+[resource]
+script = ExtResource("1_7abbf")
+Title = "SHIP DECK"
+Text = "Every ship is equipped with a [color=#ffc315]Deck[/color] to deffend it self with durring close quarter [color=#ffc315]Card Fights[/color]. 
+This [color=#ffc315]Deck[/color] is composed by their equipped [color=#ffc315]Ship Parts[/color].
+[color=#ffc315]Ship Parts[/color] can directly provide a ship with [color=#ffc315]Cards[/color] or providing the ship with certain [color=#ffc315]Disposition[/color] wich can also lead to cards being added to the Ship's [color=#ffc315]Deck[/color]"
+metadata/_custom_type_script = "uid://451ovq2ynuka"

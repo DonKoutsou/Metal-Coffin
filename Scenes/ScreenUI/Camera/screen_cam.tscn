@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://7crsokjngvxo" path="res://Assets/Sounds/beepNoLoop.mp3" id="8_d4jit"]
 [ext_resource type="AudioStream" uid="uid://iiqji6xlmffd" path="res://Assets/Sounds/Explosion.wav" id="9_rttps"]
 [ext_resource type="AudioStream" uid="uid://djpsnwnkd7dlx" path="res://Assets/Sounds/ShakeLoop.wav" id="10_qy5r3"]
+[ext_resource type="AudioStream" uid="uid://d4k7al36dc8er" path="res://Assets/Sounds/ScreenZap.wav" id="11_8q2j3"]
 
 [sub_resource type="Curve" id="Curve_8gyii"]
 _limits = [0.0, 2.0, 0.0, 1.0]
@@ -57,7 +58,7 @@ tracks/2/keys = {
 }
 tracks/3/type = "value"
 tracks/3/imported = false
-tracks/3/enabled = true
+tracks/3/enabled = false
 tracks/3/path = NodePath("CanvasModulate:visible")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
@@ -165,7 +166,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.166667, 3.9, 4),
 "transitions": PackedFloat32Array(1, 2.43104, 2.43104, 1),
 "update": 0,
-"values": [1.0, 0.18, 0.18, 1.0]
+"values": [0.8, 0.18, 0.18, 0.8]
 }
 
 [sub_resource type="Animation" id="Animation_ad6t0"]
@@ -240,18 +241,35 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.9]
+"values": [0.8]
+}
+
+[sub_resource type="Animation" id="Animation_8npwn"]
+resource_name = "TurnOn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LightPivot1/LightPivot2/AlarmLight2:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.12136362, 0.15201099, 0.16917352, 0.18756196, 0.23537186, 0.27214873, 0.30402198, 0.33466938, 0.38002747, 0.45971066, 0.5295867, 0.56268585, 0.61172163, 0.6791459, 0.77231395, 0.9831679),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i8scw"]
 _data = {
 &"Alarm": SubResource("Animation_bbf4s"),
 &"Damage": SubResource("Animation_sb2tx"),
-&"RESET": SubResource("Animation_ad6t0")
+&"RESET": SubResource("Animation_ad6t0"),
+&"TurnOn": SubResource("Animation_8npwn")
 }
 
 [node name="ScreenCam" type="Camera2D" unique_id=42013280 node_paths=PackedStringArray("Anim", "LightPivot1", "ShakeSound", "BoomSound")]
 process_mode = 3
+visible = false
 z_index = 1
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0
@@ -300,9 +318,9 @@ texture = ExtResource("6_7vs4e")
 texture_scale = 13.0
 
 [node name="AlarmLight2" type="PointLight2D" parent="LightPivot1/LightPivot2" unique_id=696037205]
+texture_filter = 4
 position = Vector2(0, 48.999943)
-energy = 0.9
-blend_mode = 2
+energy = 0.8
 range_z_min = 0
 range_layer_min = 2
 range_layer_max = 4
@@ -316,8 +334,7 @@ volume_db = -20.0
 bus = &"Sounds"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1225392723]
-visible = false
-color = Color(0.15631494, 0.15631497, 0.15631491, 1)
+color = Color(0.1126788, 0.11267882, 0.11267877, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1309732375]
 stream = ExtResource("8_d4jit")
@@ -336,3 +353,7 @@ bus = &"MapSounds"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1617729201]
 libraries/ = SubResource("AnimationLibrary_i8scw")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=1334327405]
+stream = ExtResource("11_8q2j3")
+bus = &"MapSounds"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TutorialData" format=3 uid="uid://drdka0eeo4g1y"]
+
+[ext_resource type="Script" uid="uid://451ovq2ynuka" path="res://Scenes/GlobalManagers/Tutorial/TutorialData.gd" id="1_ngwho"]
+
+[resource]
+script = ExtResource("1_ngwho")
+Title = "DISPOSITION"
+Text = "The [color=#ffc315]Disposition[/color] of a ship rewards it with various cards in their [color=#ffc315]Deck[/color] allowing for more experimentation with builds. [color=#ffc315]Disposition Cards[/color] cannot be aquired in any other way.
+While certain ships start with some predefined [color=#ffc315]Disposition[/color], their equiped ship parts provide the majority of their [color=#ffc315]Disposition[/color] stats."
+metadata/_custom_type_script = "uid://451ovq2ynuka"
