@@ -36,6 +36,14 @@ func _ready() -> void:
 	NoiseStat.SetDataCustom(STAT_CONST.GetStatMaxValue(STAT_CONST.STATS.SOUND_SIGNATURE), STAT_CONST.GetStatMetric(STAT_CONST.STATS.SOUND_SIGNATURE), "SOUND SIGNATURE", STAT_CONST.STATS.SOUND_SIGNATURE)
 	$GridContainer.add_child(NoiseStat)
 
+func Toggle(t) -> void:
+	if (t):
+		visible = true
+	for g in Stats:
+		g.visible = t
+		await Helper.wait(0.02)
+	visible = t
+
 func ShowStats(stats : Array[STAT_CONST.STATS]) -> void:
 	for g in Stats:
 		g.visible = g.STName in stats

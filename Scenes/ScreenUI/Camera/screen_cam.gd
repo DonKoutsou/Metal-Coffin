@@ -62,7 +62,7 @@ func EnableStormShake(amm : float) -> void:
 		return
 	for g in get_tree().get_nodes_in_group("Shakable"):
 		g.ApplyShake(amm)
-#	Anim.play("Damage")
+	Anim.play("Damage")
 	LightPivot1.ApplyShake(amm)
 	Shake = true
 	

@@ -111,7 +111,8 @@ func SetWorkShopData(Box : Inventory_Box_Res, CanUpgrade : bool, Owner : Captain
 				UpgradeLabel.text = "[color=#ffc315]Upgrade Time[/color] : {0}\n[color=#ffc315]Upgrade Cost[/color] : {1}".format([timeString, roundi(UpCost)])
 	else : if (It is  PlaceHolderItem):
 		var inv = Owner.GetCharacterInventory()
-		var TimeLeft = var_to_str(roundi(inv.GetEquipTimeLeft()))
+		
+		var TimeLeft = Clock.MinutesToHours(roundi(inv.GetEquipTimeLeft()))
 		UpgradeLabel.text = "Install time left : {0} minutes".format([TimeLeft])
 		UpgradeLabel.visible = true
 		CancelInstallButton.visible = true
@@ -238,7 +239,7 @@ func SetData(Box : Inventory_Box_Res, CanUpgrade : bool, CanTransfer : bool, Can
 				UpgradeLabel.text = "[color=#ffc315]Upgrade Time[/color] : {0}\n[color=#ffc315]Upgrade Cost[/color] : {1}\n[color=#ffc315]-------------".format([timeString, UpCost])
 	else : if (It is  PlaceHolderItem):
 		var inv = Box.GetParentInventory()
-		var TimeLeft = var_to_str(roundi(inv.GetEquipTimeLeft()))
+		var TimeLeft = Clock.MinutesToHours(roundi(inv.GetEquipTimeLeft()))
 		UpgradeLabel.text = "Install time left : {0} minutes".format([TimeLeft])
 		UpgradeLabel.visible = true
 		CancelInstallButton.visible = false

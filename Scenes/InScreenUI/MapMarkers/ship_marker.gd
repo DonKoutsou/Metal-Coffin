@@ -341,6 +341,7 @@ func UpdateTexts() -> void:
 	ShipDetailLabel.text = T
 
 var hostileNotif : ShipMarkerNotif
+var windNotif : ShipMarkerNotif
 
 func PlayHostileShipNotif(text : String) -> void:
 	if (is_instance_valid(hostileNotif)):
@@ -349,7 +350,19 @@ func PlayHostileShipNotif(text : String) -> void:
 	hostileNotif.SetText(text)
 	RadioSpeaker.AddSoundToQueue(RadioSpeaker.RadioSound.RADAR_DETECTED)
 	add_child(hostileNotif)
-	
+
+func PlayCounterWindNotif(windAmm : float) -> void:
+	if (is_instance_valid(windNotif)):
+		return
+	var actualWind = windAmm * WeatherManage.WindSpeed
+	if (actualWind < 30):
+		return
+	windNotif = NotificationScene.instantiate() as ShipMarkerNotif
+	var text : String = "Cross Wind"
+	if (actualWind > 80):
+		text = "Strong Cross Wind"
+	windNotif.SetText(text)
+	add_child(windNotif)
 	
 func OnShipDeparted(DepartedFrom : MapSpot) -> void:
 	if (ResuplyNotif != null):

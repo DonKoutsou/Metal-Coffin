@@ -138,6 +138,9 @@ func ShouldExhaust() -> bool:
 func IsSame(C : CardStats) -> bool:
 	return C.GetCardName() == GetCardName() and C.IsDisposition == IsDisposition
 
+func IsEnergyDependant() -> bool:
+	return UseConditions.has(CardUseCondition.ENERGY_DEPENDANT)
+
 #-------------------------------------------------------
 static func FindTooltips(card : CardStats) -> PackedStringArray:
 	var tips : PackedStringArray = []

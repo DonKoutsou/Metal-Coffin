@@ -8,6 +8,7 @@ process_mode = 3
 script = ExtResource("1_kry56")
 DitherShader = ExtResource("3_62h02")
 StudioAnim = "uid://cmdvuq7n6nncl"
+WarningScene = "uid://c1sbundk0bsc7"
 GameScene = "uid://cbhf8nh85npqq"
 IntroGameScene = "uid://cid0s6uni7fky"
 CageFightGameScene = "uid://b575fi0e44gkg"

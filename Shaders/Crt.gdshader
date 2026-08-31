@@ -259,8 +259,9 @@ void fragment(){
 		COLOR = vec4(0.0, 0.0, 0.0, 1.0);
 	}
 	else{
+		//vec2 mask_pos = floor(pos * res);
+		//COLOR.rgb = Tri(pos) * Mask(mask_pos);
 		COLOR.rgb = Tri(pos);
-		
 		vec2 look = pos;
 		
 		//Storing value to multiply by self instead of doing (pow(value, 2.0)

@@ -17,6 +17,7 @@ static func GetInstance() -> CageFightWorld:
 	return Instance
 
 func _ready() -> void:
+	Rand.customSeed = randi()
 	Rand.NewStaticRand()
 	
 	ScrUI.StateSwitched.connect(ToggleFullScreen)

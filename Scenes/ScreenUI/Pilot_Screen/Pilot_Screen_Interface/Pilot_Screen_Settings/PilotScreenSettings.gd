@@ -5,7 +5,7 @@ class_name PilotScreenSettings
 @export var ForecastButton : BaseButton
 static var ForecastState : bool = false
 @export var GridButton : BaseButton
-static var GridState : bool = true
+static var GridState : bool = false
 #@export var SteerButton : BaseButton
 #static var SteerState : bool = true
 @export var ZoomButton : BaseButton

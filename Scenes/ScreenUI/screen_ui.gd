@@ -83,6 +83,8 @@ enum ScreenState{
 }
 
 func CloseScreen() -> void:
+	if (Transition != null):
+		return
 	var TransitionSc : PackedScene = ResourceLoader.load(TransitionScreenScene)
 	Transition = TransitionSc.instantiate()
 	

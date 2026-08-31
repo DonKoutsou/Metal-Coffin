@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://ciq487snqicgb" path="res://Assets/Sounds/Sqeak1.mp3" id="4_tsg7p"]
 [ext_resource type="AudioStream" uid="uid://bir6mqhkctabs" path="res://Assets/Sounds/Sqeak2.mp3" id="5_x04yk"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/UIPiecies/Light.png" id="6_7vs4e"]
-[ext_resource type="Texture2D" uid="uid://dg8jbhrloh84u" path="res://Assets/UIPiecies/LightCone2.png" id="7_8npwn"]
+[ext_resource type="Texture2D" uid="uid://cbkii1pjnwxww" path="res://Assets/UIPiecies/LightCone.png" id="7_8npwn"]
 [ext_resource type="AudioStream" uid="uid://7crsokjngvxo" path="res://Assets/Sounds/beepNoLoop.mp3" id="8_d4jit"]
 [ext_resource type="AudioStream" uid="uid://iiqji6xlmffd" path="res://Assets/Sounds/Explosion.wav" id="9_rttps"]
 [ext_resource type="AudioStream" uid="uid://djpsnwnkd7dlx" path="res://Assets/Sounds/ShakeLoop.wav" id="10_qy5r3"]
@@ -21,7 +21,7 @@ resource_name = "Alarm"
 length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("LightPivot1/LightPivot2/AlarmLight:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -33,7 +33,7 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("LightPivot1/LightPivot2/AlarmLight:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
@@ -57,7 +57,7 @@ tracks/2/keys = {
 }
 tracks/3/type = "value"
 tracks/3/imported = false
-tracks/3/enabled = false
+tracks/3/enabled = true
 tracks/3/path = NodePath("CanvasModulate:visible")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
@@ -69,7 +69,7 @@ tracks/3/keys = {
 }
 tracks/4/type = "value"
 tracks/4/imported = false
-tracks/4/enabled = false
+tracks/4/enabled = true
 tracks/4/path = NodePath("LightPivot1/LightPivot2/ScreenLight:visible")
 tracks/4/interp = 2
 tracks/4/loop_wrap = true
@@ -81,7 +81,7 @@ tracks/4/keys = {
 }
 tracks/5/type = "value"
 tracks/5/imported = false
-tracks/5/enabled = false
+tracks/5/enabled = true
 tracks/5/path = NodePath("LightPivot1/LightPivot2/AlarmLight2:visible")
 tracks/5/interp = 2
 tracks/5/loop_wrap = true
@@ -93,7 +93,7 @@ tracks/5/keys = {
 }
 tracks/6/type = "value"
 tracks/6/imported = false
-tracks/6/enabled = false
+tracks/6/enabled = true
 tracks/6/path = NodePath("LightPivot1/LightPivot2/AlarmLight2:energy")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
@@ -109,7 +109,7 @@ resource_name = "Damage"
 length = 4.0
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("LightPivot1/LightPivot2/AlarmLight:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -133,7 +133,7 @@ tracks/1/keys = {
 }
 tracks/2/type = "value"
 tracks/2/imported = false
-tracks/2/enabled = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("LightPivot1/LightPivot2/ScreenLight:visible")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
@@ -145,7 +145,7 @@ tracks/2/keys = {
 }
 tracks/3/type = "value"
 tracks/3/imported = false
-tracks/3/enabled = false
+tracks/3/enabled = true
 tracks/3/path = NodePath("LightPivot1/LightPivot2/AlarmLight2:visible")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
@@ -157,7 +157,7 @@ tracks/3/keys = {
 }
 tracks/4/type = "value"
 tracks/4/imported = false
-tracks/4/enabled = false
+tracks/4/enabled = true
 tracks/4/path = NodePath("LightPivot1/LightPivot2/AlarmLight2:energy")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
@@ -240,7 +240,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [2.0]
+"values": [0.9]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i8scw"]
@@ -301,13 +301,13 @@ texture_scale = 13.0
 
 [node name="AlarmLight2" type="PointLight2D" parent="LightPivot1/LightPivot2" unique_id=696037205]
 position = Vector2(0, 48.999943)
-energy = 2.0
+energy = 0.9
 blend_mode = 2
 range_z_min = 0
 range_layer_min = 2
 range_layer_max = 4
 texture = ExtResource("7_8npwn")
-offset = Vector2(0, 850)
+offset = Vector2(0, 900)
 texture_scale = 7.0
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="LightPivot1/LightPivot2" unique_id=1309977194]
@@ -316,11 +316,12 @@ volume_db = -20.0
 bus = &"Sounds"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1225392723]
-color = Color(0.36308, 0.36308, 0.36308, 1)
+visible = false
+color = Color(0.15631494, 0.15631497, 0.15631491, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1309732375]
 stream = ExtResource("8_d4jit")
-volume_db = -45.0
+volume_db = -25.0
 pitch_scale = 0.3
 bus = &"MapSounds"
 

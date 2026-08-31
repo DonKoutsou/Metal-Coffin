@@ -26,3 +26,4 @@ Energy = 1
 AllowDuplicates = true
 OnPerformModule = SubResource("Resource_h2u8p")
 WeapT = 1
+AllowTier = false

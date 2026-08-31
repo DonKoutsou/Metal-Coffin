@@ -82,6 +82,7 @@ expand_mode = 1
 stretch_mode = 3
 
 [node name="InputScroll" type="ScrollContainer" parent="PanelContainer" unique_id=548614632]
+visible = false
 layout_mode = 2
 mouse_filter = 0
 horizontal_scroll_mode = 3
@@ -90,17 +91,16 @@ script = ExtResource("6_uviis")
 metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
 [node name="InventoryInterface" parent="PanelContainer/InputScroll" unique_id=399381214 instance=ExtResource("7_qyvw6")]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="InventoryShipStats" parent="PanelContainer" unique_id=1343149227 instance=ExtResource("3_qyvw6")]
-visible = false
 layout_mode = 2
 StatsShown = Array[int]([4, 16, 15, 6, 7, 17, 3, 0, 1, 2, 9, 22])
 
 [node name="ShipDeck" type="VBoxContainer" parent="PanelContainer" unique_id=1467780086 node_paths=PackedStringArray("CharPortrait", "OffensiveCardPosition", "DeffencsiveCardPosition", "UtilityCardPosition", "PowerCardPosition", "sizeLabel")]
+visible = false
 layout_mode = 2
 script = ExtResource("4_7pj6b")
 CharPortrait = NodePath("../CaptainIcon")

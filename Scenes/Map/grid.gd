@@ -15,14 +15,14 @@ var UsedLabels : Array[RichTextLabel]
 var M : Mutex
 var S : Semaphore
 
-var Dissabled : bool = false
+var Dissabled : bool = true
 #func _physics_process(delta: float) -> void:
 	#queue_redraw()
 
 func _ready() -> void:
 	M = Mutex.new()
 	EventHandler.GridPressed.connect(ToggleGrid)
-
+	visible = !Dissabled
 
 
 func CreateRichText() -> RichTextLabel:

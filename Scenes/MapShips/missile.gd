@@ -147,7 +147,7 @@ func _physics_process(delta: float) -> void:
 	
 	
 	if (CurrentTarget != null):
-		HoneAtEnemy(CurrentTarget)
+		HoneAtEnemy(CurrentTarget, delta)
 	
 func CheckForBodiesOnTrajectory(Dir : Vector2) -> Node2D:
 	var Body : Node2D
@@ -258,8 +258,8 @@ func _on_missile_body_area_entered(area: Area2D) -> void:
 		else:
 			PlSquad = Squad
 
-	var Mis : Array[BattleShipStats]
-	var EnemyMis : Array[BattleShipStats]
+	var Mis : Array[Missile]
+	var EnemyMis : Array[Missile]
 	
 	if (!Friendly):
 		for g in Amm:
@@ -289,20 +289,29 @@ func _on_missile_body_area_exited(area: Area2D) -> void:
 func _exit_tree() -> void:
 	MapPointerManager.GetInstance().RemoveShip(self)
 
-func HoneAtEnemy(Ship : Node2D):
+func HoneAtEnemy(Ship : Node2D, delta : float):
 	
 	# Get the current position and velocity of the ship
 	var ship_position = Ship.global_position
 	var ship_velocity = Ship.GetShipSpeedVec()
-	TargetAltitude = Ship.Altitude + 100
-	#var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * (WeatherManage.WindSpeed / WeatherManage.MAX_WIND_SPEED) * 0.2
-	# Predict where the ship will be in a future time `t`
-	var time_to_interception = (global_position.distance_to(ship_position) / GetAffectedSpeed()) / 60
+	
+	var predicted_position
+	
+	if (ship_velocity == Vector2.ZERO):
+		predicted_position = ship_position
+	else:
+		TargetAltitude = Ship.Altitude + 100
+		#var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * (WeatherManage.WindSpeed / WeatherManage.MAX_WIND_SPEED) * 0.2
+		# Predict where the ship will be in a future time `t`
+		var time_to_interception = (global_position.distance_to(ship_position) / GetAffectedSpeed()) / 60
 
-	# Calculate the predicted interception point
-	var predicted_position = ship_position + ship_velocity * time_to_interception
-
-	look_at(predicted_position)
+		# Calculate the predicted interception point
+		predicted_position = ship_position + ship_velocity * time_to_interception
+		
+	var directiontoDestination = global_position.direction_to(predicted_position).angle()
+	
+	var newrot = lerp_angle(rotation, directiontoDestination, delta * SimulationManager.SimulationSpeed)
+	rotation = newrot
 
 func GetAffectedSpeed() -> float:
 	var WindVel = Vector2.RIGHT.rotated(rotation).dot(WeatherManage.WindDirection) * (WeatherManage.WindSpeed / WeatherManage.MAX_WIND_SPEED) * 0.2

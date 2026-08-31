@@ -81,6 +81,7 @@ signal Hovered()
 signal Unhovered()
 signal ActionHovered()
 signal ActionUnhovered()
+signal Fell
 
 var Destroyed : bool = false
 var Ship : BattleShipStats
@@ -125,6 +126,8 @@ func Destroy() -> void:
 
 	MoveTw.tween_property(ShadowPivot.get_child(0), "rotation_degrees", RandomRot, 3)
 	
+	get_tree().create_timer(1.5).timeout.connect(HasFallen)
+	
 	ToggleFire(false)
 	ToggleDefBuff(false, 1)
 	ToggleDefDeBuff(false)
@@ -143,7 +146,9 @@ func Destroy() -> void:
 	mat.scale_max = 0.1
 	ExplosionPart.restart()
 	ExplosionPart.emitting = true
-	
+
+func HasFallen() -> void:
+	Fell.emit()
 
 func _ready() -> void:
 	statContainer.visible = false
@@ -292,6 +297,7 @@ func SetStats(S : BattleShipStats, Friendly : bool) -> void:
 	if (Friendly):
 		$HBoxContainer.move_child($HBoxContainer/PanelContainer2, 0)
 	else:
+		#$HBoxContainer.size.x = 0
 		ShipNameLabel.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		ShipNameLabel.get_parent().move_child(ShipNameLabel, 1)
 		HullLabel.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
@@ -430,21 +436,21 @@ func EnableSmoke() -> void:
 	SmokePart.visible = true
 
 func ToggleDmgBuff(t : bool, amm : float) -> void:
-	FPBuff.amount = roundi(5.0 * amm)
+	FPBuff.amount = roundi(2.0 * amm)
 	FPBuff.visible = t
 
 func ToggleDmgDebuff(t : bool) -> void:
 	FPDeBuff.visible = t
 
 func ToggleDefBuff(t : bool, amm : float) -> void:
-	DefBuff.amount = max(5 * abs(amm), 1)
+	DefBuff.amount = max(2 * abs(amm), 1)
 	DefBuff.visible = t
 
 func ToggleDefDeBuff(t : bool) -> void:
 	DefDeBuff.visible = t
 
 func ToggleSpeedBuff(t : bool, amm : float) -> void:
-	SpeedBuff.amount = roundi(5.0 * amm)
+	SpeedBuff.amount = roundi(2.0 * amm)
 	SpeedBuff.visible = t
 
 func ToggleSpeedDebuff(t : bool) -> void:
@@ -468,7 +474,7 @@ func _on_panel_container_2_mouse_entered() -> void:
 	tw = create_tween()
 	tw.set_ease(Tween.EASE_OUT)
 	tw.set_trans(Tween.TRANS_BACK)
-	tw.tween_property($HBoxContainer/PanelContainer2, "custom_minimum_size", Vector2(180,116), 0.15)
+	tw.tween_property($HBoxContainer/PanelContainer2, "custom_minimum_size", Vector2(155,116), 0.15)
 	tw.finished.connect(ToggleStatVisibility.bind(true))
 	Hovered.emit()
 
@@ -483,7 +489,7 @@ func _on_panel_container_2_mouse_exited() -> void:
 	tw = create_tween()
 	tw.set_ease(Tween.EASE_IN)
 	tw.set_trans(Tween.TRANS_BACK)
-	tw.tween_property($HBoxContainer/PanelContainer2, "custom_minimum_size", Vector2(180, 0), 0.15)
+	tw.tween_property($HBoxContainer/PanelContainer2, "custom_minimum_size", Vector2(155, 0), 0.15)
 	ToggleStatVisibility(false)
 	Unhovered.emit()
 

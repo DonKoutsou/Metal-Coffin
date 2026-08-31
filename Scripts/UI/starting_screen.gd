@@ -5,6 +5,7 @@ class_name StartingScreen
 @export var StartingMenuScene : String = "res://Scenes/starting_menu.tscn"
 @export var DitherShader : ShaderMaterial
 @export_file("*.tscn") var StudioAnim : String
+@export_file("*.tscn") var WarningScene : String
 @export_file("*.tscn") var GameScene : String = "res://Scenes/World.tscn"
 @export_file("*.tscn") var IntroGameScene : String = "res://Scenes/IntroWorld.tscn"
 @export_file("*.tscn") var CageFightGameScene : String = "res://Scenes/CageFightWorld.tscn"
@@ -49,6 +50,17 @@ func _ready() -> void:
 
 #-----------------------------------------------------------------------------------
 func Start() -> void:
+	var warning : PackedScene = ResourceLoader.load(WarningScene)
+	var warningsc : Control = warning.instantiate()
+	warningsc.modulate.a = 0
+	$SubViewportContainer/SubViewport.add_child(warningsc)
+	
+	var tw = create_tween()
+	tw.tween_property(warningsc, "modulate", Color(1,1,1,1), 1)
+	
+	await get_tree().create_timer(3).timeout
+	warningsc.queue_free()
+	
 	var StudioAnimScene = ResourceLoader.load(StudioAnim)
 	var vidpl = StudioAnimScene.instantiate() as StudioAnimation
 	$SubViewportContainer/SubViewport.add_child(vidpl)

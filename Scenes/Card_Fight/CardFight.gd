@@ -119,6 +119,13 @@ enum CardFightPhase{
 	ACTION_PERFORM,
 }
 
+static var TurnType = CardFightTurnType.SET
+
+enum CardFightTurnType{
+	SET,
+	TURN,
+}
+
 signal CardFightEnded(Survivors : Array[BattleShipStats], won : bool, wonFunds : int)
 signal CardFightDestroyed()
 ##----------------------------------------------------------------------##
@@ -138,7 +145,7 @@ func _ready() -> void:
 	var light = WeatherManage.GetLightAmm()
 	$PointLight2D.energy = max(0.8, light)
 	if (light <= 0.75):
-		$PointLight2D.color = Color(0.788, 1.0, 1.0, 1.0)
+		$PointLight2D.color = Color(0.83, 1.0, 1.0, 1.0)
 	else:
 		$PointLight2D.color = Color(1,1,1)
 	
@@ -176,7 +183,15 @@ func _ready() -> void:
 		var cov = Helper.mapvalue(storm, 0.63, 0.35)
 		CloudGr.set_offset(1 ,cov)
 		stormLevel = roundi(storm * 5)
-		$PanelContainer/HBoxContainer/ProgressBar.value = stormLevel
+		$PanelContainer/Label.text = "Storm Level : {0}".format([stormLevel])
+		#$PanelContainer/HBoxContainer/ProgressBar.value = stormLevel
+	else:
+		var storm = randf()
+		var cov = Helper.mapvalue(storm, 0.63, 0.35)
+		CloudGr.set_offset(1 ,cov)
+		stormLevel = roundi(storm * 5)
+		$PanelContainer/Label.text = "Storm Level : {0}".format([stormLevel])
+		WindAdvantage = randf_range(-1, 1)
 	
 	var Mat = $Ground.material as ShaderMaterial
 	Mat.set_shader_parameter("offset", Vector2(randf_range(-100, 100), randf_range(-100, 100)))
@@ -203,7 +218,7 @@ func Declaration(text : String, duration : float = 1.5) -> ActionDeclarationUI:
 	act.DoActionDeclaration(text, duration)
 	act.position = size / 2.0 - act.size / 2.0
 	return act
-	
+
 ##----------------------------------------------------------------------##
 func IntroDeclarationFinished() -> void:
 	#ActionDeclaration.ActionDeclarationFinished.disconnect(IntroDeclarationFinished)
@@ -237,10 +252,17 @@ func IntroDeclarationFinished() -> void:
 		for g in EnemyReserves:
 			g.PermaBuffSpeed(1 + g.WindPenalty)
 	else:
-		call_deferred("RunTurn")
+		call_deferred("WindDeclarationFinishedurn")
 
 func WindDeclarationFinished() -> void:
 	ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_WIND)
+	if (stormLevel > 0):
+		Declaration("Storm Level : {0}".format([stormLevel]), 2).ActionDeclarationFinished.connect(StormDeclarationFinished)
+	else:
+		call_deferred("RunTurn")
+	
+func StormDeclarationFinished() -> void:
+	ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_STORM)
 	call_deferred("RunTurn")
 	
 ##----------------------------------------------------------------------##
@@ -275,21 +297,22 @@ func ReplaceShip(Ship : BattleShipStats, TurnPosition : int, Friendly : bool) ->
 		
 	#Play the dead animation on the ShipViz
 	var Viz = Ship.ShipViz
-	
+	Viz.Fell.connect(ShipFell.bind(Viz))
 	ShipBeingReplaced.append(Viz)
 	Viz.Destroy()
 	ShipReplecementFinished.emit()
 	ShipBeingReplaced.erase(Viz)
-	var Pos = Viz.global_position
-	Viz.get_parent().remove_child(Viz)
-	$DeadShipLoc.add_child(Viz)
-	Viz.global_position = Pos
+	
+	
 	NewTurnStarted.disconnect(Viz.OnNewTurnStarted)
 	
 	if (NewVisuals != null):
 		NewVisuals.visible = true
 			
 	UpdateFleetSizeAmmount()
+
+func ShipFell(vis : CardFightShipViz2) -> void:
+	vis.reparent($DeadShipLoc)
 
 ##----------------------------------------------------------------------##
 func OnShuffling(t : bool) -> void:
@@ -550,7 +573,11 @@ signal EnemyActionPickedEnded
 func RunTurn() -> void:
 	if (GameOver):
 		return
-	Declaration("Pick Phase", 1.5).ActionDeclarationFinished.connect(PickPhase)
+	if (TurnType == CardFightTurnType.SET):
+		Declaration("Pick Phase", 1.5).ActionDeclarationFinished.connect(PickPhase)
+	else: if (TurnType == CardFightTurnType.TURN):
+		Declaration("Enemy Pick Phase", 1.5).ActionDeclarationFinished.connect(PickPhase)
+		
 
 ##----------------------------------------------------------------------##
 func PickPhase() -> void:
@@ -592,7 +619,9 @@ func PickPhaseStart() -> void:
 	if (GameOver):
 		return
 	CurrentTurn = 0
-	ShipTurns.sort_custom(speed_comparator)
+	
+	if (TurnType == CardFightTurnType.SET):
+		ShipTurns.sort_custom(speed_comparator)
 	ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ACTION_PICK)
 
 	CurrentPlayerLabel.visible = true
@@ -680,9 +709,10 @@ func OnCardSelected(C : Card, target : BattleShipStats = null) -> bool:
 		return false
 	if (!PickingMoves):
 		return false
-	#if (PlayerPerformingMove):
-		#PopUpManager.GetInstance().DoFadeNotif("Already performing move")
-		#return false
+		
+	if (TurnType == CardFightTurnType.TURN and PlayerPerformingMove):
+		PopUpManager.GetInstance().DoFadeNotif("Already performing move")
+		return false
 	
 	var Ship = GetCurrentShip()
 	var Cost = C.GetCost()
@@ -707,24 +737,39 @@ func OnCardSelected(C : Card, target : BattleShipStats = null) -> bool:
 	
 	if (!C.CStats.Burned):
 		if (C.CStats.OnPerformModule != null):
-			#if (C.CStats.OnPerformModule is not OffensiveCardModule):
-			var Action : CardStats
-			Action = C.CStats
+			if (TurnType == CardFightTurnType.TURN):
+				if (C.CStats.OnPerformModule is not OffensiveCardModule):
+					var Action : CardStats
+					Action = C.CStats
 
-			#var ShipAction = CardFightAction.new()
-			#ShipAction.Action = Action
+					var ShipAction = CardFightAction.new()
+					ShipAction.Action = Action
+					
+					var CardPosition = C.global_position
+					
+					var c = CardScene.instantiate() as Card
+					c.SetCardBattleStats(Ship, Action)
+					c.connect("OnCardPressed", RemoveCard)
+				
+					SelectedCardPlecement.add_child(c)
+					Ship.ShipViz.ActionPicked(Action)
+					ActionList.AddAction(Ship, ShipAction)
+					
+					await DoCardPlecementAnimation(Ship, c, CardPosition)
+			else:
+				var Action : CardStats
+				Action = C.CStats
+				
+				var CardPosition = C.global_position
+				
+				var c = CardScene.instantiate() as Card
+				c.SetCardBattleStats(Ship, Action)
+				c.connect("OnCardPressed", RemoveCard)
 			
-			var CardPosition = C.global_position
-			
-			var c = CardScene.instantiate() as Card
-			c.SetCardBattleStats(Ship, Action)
-			c.connect("OnCardPressed", RemoveCard)
-		
-			SelectedCardPlecement.add_child(c)
-			#Ship.ShipViz.ActionPicked(Action)
-			#ActionList.AddAction(Ship, ShipAction)
-			
-			await DoCardPlecementAnimation(Ship, c, CardPosition)
+				SelectedCardPlecement.add_child(c)
+
+				await DoCardPlecementAnimation(Ship, c, CardPosition)
+				
 			C.get_parent().queue_free()
 		else:
 			var pos = C.global_position
@@ -1006,11 +1051,14 @@ func CurrentEnemyTurnEnded() -> void:
 	CurrentTurn = CurrentTurn + 1
 	TurnEnded(Ship)
 	
-	#var playerNext = IsShipFriendly(ShipTurns[CurrentTurn])
-	#if (playerNext):
-		#Declaration("Player Perform Phase", 1.5).ActionDeclarationFinished.connect(StartCurrentShipsPickTurn)
-	#else:
-	StartCurrentShipsPickTurn()
+	if (TurnType == CardFightTurnType.TURN):
+		var playerNext = IsShipFriendly(ShipTurns[CurrentTurn])
+		if (playerNext):
+			Declaration("Player Perform Phase", 1.5).ActionDeclarationFinished.connect(StartCurrentShipsPickTurn)
+		else:
+			StartCurrentShipsPickTurn()
+	else:
+		StartCurrentShipsPickTurn()
 ##----------------------------------------------------------------------##
 func CurrentPlayerTurnEnded() -> void:
 	ClearCards()
@@ -1030,7 +1078,11 @@ func StartActionPerform() -> void:
 	ClearCards()
 	ExternalUI.HideInfo()
 	CurrentPhase = CardFightPhase.ACTION_PERFORM
-	Declaration("Perform Phase", 1.5).ActionDeclarationFinished.connect(ActionPerformPhase)
+	
+	if (TurnType == CardFightTurnType.SET):
+		Declaration("Perform Phase", 1.5).ActionDeclarationFinished.connect(ActionPerformPhase)
+	else: if (TurnType == CardFightTurnType.TURN):
+		Declaration("Enemy Perform Phase", 1.5).ActionDeclarationFinished.connect(ActionPerformPhase)
 
 ##----------------------------------------------------------------------##
 func ActionPerformPhase() -> void:
@@ -1047,13 +1099,17 @@ func StartCurrentShipsPerformTurn() -> void:
 	
 	if (CurrentTurn < ShipTurns.size()):
 		var Ship = GetCurrentShip()
-		#if (!IsShipFriendly(Ship)):
-		CurrentPlayerLabel.text = "{0} performing actions".format([Ship.Name])
-
-		PerformActions(Ship)
-		#else:
-			#CurrentTurn = CurrentTurn + 1
-			#StartCurrentShipsPerformTurn()
+		
+		if (TurnType == CardFightTurnType.SET):
+			CurrentPlayerLabel.text = "{0} performing actions".format([Ship.Name])
+			PerformActions(Ship)
+		else:
+			if (!IsShipFriendly(Ship)):
+				CurrentPlayerLabel.text = "{0} performing actions".format([Ship.Name])
+				PerformActions(Ship)
+			else:
+				CurrentTurn = CurrentTurn + 1
+				StartCurrentShipsPerformTurn()
 		return
 		
 	CurrentPlayerLabel.visible = false
@@ -1212,8 +1268,8 @@ func RestartCards() -> void:
 		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_OUTNUMER_BONUS)
 	
 	var currentTurnEnergy = TurnEnergy
-	if (stormLevel > 4):
-		currentTurnEnergy -= 1
+	#if (stormLevel > 4):
+		#currentTurnEnergy -= 1
 	#since max fleet ammount is 3 this number can't be more than 2, and since we normalise it we
 	var finalTurnEnergy = currentTurnEnergy + roundi(currentTurnEnergy * outNumberedBonus)
 	
@@ -1229,8 +1285,8 @@ func RestartCards() -> void:
 	#GetShipViz(ShipTurns[CurrentTurn]).Enable()
 	
 	var cardsToPick = StartingCardAmm
-	if (stormLevel > 3):
-		cardsToPick -= 1
+	#if (stormLevel > 3):
+		#cardsToPick -= 1
 		
 	for g in cardsToPick:
 		await HandleDrawCard(currentship)
@@ -1314,18 +1370,18 @@ func HandleModules(Performer : BattleShipStats, C : CardStats, targetOverride : 
 		Performer.deck.DiscardCard(C)
 	else:
 		if (C.OnPerformModule != null):
-			pass
-			#if (Performer.Friendly and C.OnPerformModule is OffensiveCardModule):
-				#if (C.ShouldConsume()):
-					#for g : CardStats in Performer.Cards:
-						#if (g.IsSame(C)):
-							#Performer.Cards.erase(g)
-							#break
-				#else: if (C.ShouldExhaust()):
-					#Performer.deck.ExhaustCard(C)
-				#else:
-					#Performer.deck.DiscardCard(C)
-					#HandleDiscardModules(Performer, C)
+			if (TurnType == CardFightTurnType.TURN):
+				if (Performer.Friendly and C.OnPerformModule is OffensiveCardModule):
+					if (C.ShouldConsume()):
+						for g : CardStats in Performer.Cards:
+							if (g.IsSame(C)):
+								Performer.Cards.erase(g)
+								break
+					else: if (C.ShouldExhaust()):
+						Performer.deck.ExhaustCard(C)
+					else:
+						Performer.deck.DiscardCard(C)
+						HandleDiscardModules(Performer, C)
 					
 		else: if (C.ShouldConsume()):
 			for g : CardStats in Performer.Cards:
@@ -1356,16 +1412,14 @@ func HandleModules(Performer : BattleShipStats, C : CardStats, targetOverride : 
 		if (Data != null):
 			AnimData.append(Data)
 	
+	
 	if (C.OnPerformModule != null and !C.Burned):
 		if (C.OnPerformModule is EnergyOffensiveCardModule):
 			var NewMod = C.OnPerformModule.duplicate()
 			NewMod.StoredEnergy = Performer.Energy
 			Performer.SetEnergy(0)
 			C.OnPerformModule = NewMod
-		
-		if (!Performer.Friendly):
-			DoCardSelectAnimation(C, Performer, Performer.ShipViz)
-			await Helper.wait(0.6)
+
 		var ShipAction = CardFightAction.new()
 		ShipAction.Action = C
 		var targets : Array[BattleShipStats] = [] 
@@ -1373,10 +1427,22 @@ func HandleModules(Performer : BattleShipStats, C : CardStats, targetOverride : 
 			targets.append(targetOverride)
 		else:
 			targets = await HandleTargets(C.OnPerformModule, Performer)
-			
-		ShipAction.Targets = targets
-		Performer.ShipViz.ActionPicked(C, ShipAction.Targets)
-		ActionList.AddAction(Performer, ShipAction)
+		
+		if (!Performer.Friendly):
+			DoCardSelectAnimation(C, Performer, Performer.ShipViz)
+			await Helper.wait(0.6)
+		
+			ShipAction.Targets = targets
+			Performer.ShipViz.ActionPicked(C, ShipAction.Targets)
+			ActionList.AddAction(Performer, ShipAction)
+		else:
+			if (TurnType == CardFightTurnType.SET):
+				ShipAction.Targets = targets
+				Performer.ShipViz.ActionPicked(C, ShipAction.Targets)
+				ActionList.AddAction(Performer, ShipAction)
+			else: if (C.OnPerformModule is OffensiveCardModule):
+				await HandleOffensiveModule(Performer, C ,C.OnPerformModule, targets, true)
+		
 	#if (Performer.Friendly and C.OnPerformModule != null and C.OnPerformModule is OffensiveCardModule):
 		#if (C.OnPerformModule is EnergyOffensiveCardModule):
 			#var NewMod = C.OnPerformModule.duplicate()
@@ -1792,7 +1858,8 @@ func DoCardPlecementAnimation(User : BattleShipStats, C : Card, OriginalPos : Ve
 	c.SetCardBattleStats(User, C.CStats)
 	#c.UpdateBattleStats(User)
 	#if (C.CStats.ener)
-	C.isStatic = true
+	if (C.CStats.IsEnergyDependant()):
+		C.isStatic = true
 	add_child(c)
 	c.global_position = OriginalPos
 	var S = DeletableSoundGlobal.new()
@@ -1919,7 +1986,7 @@ func ShipDestroyed(Ship : BattleShipStats) -> bool:
 	var Friendly = IsShipFriendly(Ship)
 		
 	if (!Ship.Friendly):
-		FundsToWin += snapped(Rand.InstanceRandom.RandIRange(2000, Ship.Funds), 1000)
+		FundsToWin += snapped(Rand.InstanceRandom.RandIRange(2000, Ship.Funds * 0.5), 1000)
 	
 	var TurnPosition = ShipTurns.find(Ship)
 	#var Index = ShipTurns.find(Ship)
@@ -2203,7 +2270,8 @@ func _on_switch_ship_pressed() -> void:
 	var Spot = ShipTurns.find(CurrentShip)
 	ShipTurns.remove_at(Spot)
 	ShipTurns.insert(Spot, NewCombatant)
-	ShipTurns.sort_custom(speed_comparator)
+	if (TurnType == CardFightTurnType.SET):
+		ShipTurns.sort_custom(speed_comparator)
 	CreateShipVisuals(NewCombatant, true)
 	#CreateDecks()
 	

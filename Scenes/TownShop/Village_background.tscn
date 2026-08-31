@@ -201,4 +201,4 @@ blend_mode = 2
 range_layer_min = -677
 range_layer_max = 1008
 texture = ExtResource("12_hyy3i")
-texture_scale = 33.65
+texture_scale = 50.0

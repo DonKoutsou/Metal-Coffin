@@ -15,6 +15,7 @@ var TargetShip : MapShip
 var TargetShipPos : Vector2
 
 signal DroneReturning
+signal Crosswind
 
 func  _ready() -> void:
 	super()
@@ -55,16 +56,22 @@ func GetSaveData() -> DroneSaveData:
 func _exit_tree() -> void:
 	WeatherManage.UnregisterShip(self)
 
+
 func Update(delta: float, _unaffectedDelta : float) -> void:
 	ElintShape.UpdateElint(delta)
 	RadarShape.EvaluateRadarrPoint(Altitude)
 	
 	for g in TrailLines:
 		g.call_deferred("UpdateProjected", delta, Altitude / 10000.0)
-	
+
+	var offset : Vector2 = GetShipSpeedVec()
+	var frontDot = offset.normalized().dot(WindVector.normalized())
+	if (frontDot < 0):
+		Crosswind.emit(abs(frontDot))
+		
 	if (SimulationManager.IsPaused()):
 		return
-
+	
 	RadarShape.EvaluateRadarTargets(Altitude)
 	
 	if (Docked):
@@ -90,10 +97,8 @@ func Update(delta: float, _unaffectedDelta : float) -> void:
 		return
 	
 	var CorrectionExtra : float = 0.0
-	var offset : Vector2
+
 	if (ShipContoller.AutoCorrectWind):
-		offset = GetShipSpeedVec()
-		
 		var Windage = Cpt.GetStatFinalValue(STAT_CONST.STATS.WINDAGE) * 0.0001
 		var SideWindage = Windage * 0.1
 		
@@ -107,7 +112,9 @@ func Update(delta: float, _unaffectedDelta : float) -> void:
 			
 			var sidecorrection = abs(offset.rotated(PI/2).normalized().dot(WindVector.normalized())) * WindVector.length() * SideWindage
 			
-			var frontcorrection = offset.normalized().dot(WindVector.normalized()) * WindVector.length() * Windage
+			
+				
+			var frontcorrection = frontDot * WindVector.length() * Windage
 			
 			offset -= (offset.normalized() * sidecorrection) - (offset.normalized() * frontcorrection)
 		else:

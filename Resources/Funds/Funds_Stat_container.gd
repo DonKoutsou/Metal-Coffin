@@ -26,9 +26,10 @@ func UpDateFunds(NewAmm : int) -> void:
 func UpdateLabel(Amm : int) -> void:
 	var AmmStr = var_to_str(Amm).replace(".0", "")
 	var dotAmm = roundi(AmmStr.length() / 3.0)
-	for g in range(1, dotAmm):
-		var dotPlacement = g * 3
-		if (dotPlacement == AmmStr.length() - 1):
+	var origLength = AmmStr.length()
+	for g in range(1, dotAmm + 1):
+		var dotPlacement = origLength - g * 3
+		if (dotPlacement == AmmStr.length() - 1 or dotPlacement == 0):
 			continue
 		AmmStr = AmmStr.insert(dotPlacement, ".")
 

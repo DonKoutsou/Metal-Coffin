@@ -116,6 +116,7 @@ func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> ShipMarker:
 	else : if (Ship is PlayerDrivenShip):
 		marker.ShipTargetSelected.connect(OnShipTargetSelected)
 		marker.ShipSelected.connect(ControllerEventHandler.ShipChanged.bind(Ship))
+		Ship.Crosswind.connect(marker.PlayCounterWindNotif)
 		
 	marker.Init(Ship)
 	

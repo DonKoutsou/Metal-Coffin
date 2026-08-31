@@ -59,10 +59,10 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 						DefCard.SetCardBattleStats(DeffenceList.keys()[g], Def)
 						add_child(DefCard)
 						if (!FriendShip):
-							var pos = Vector2(Viz.global_position.x + 25 - (DefCard.size.x / 2), Viz.global_position.y - (DefCard.size.y / 2))
+							var pos = Vector2(Viz.global_position.x + 25 + (DefCard.size.x / 2), Viz.global_position.y - (DefCard.size.y / 2))
 							DefCard.global_position = pos
 						else:
-							var pos = Vector2(Viz.global_position.x - 25 + (DefCard.size.x / 2), Viz.global_position.y - (DefCard.size.y / 2))
+							var pos = Vector2(Viz.global_position.x - 25 - (DefCard.size.x / 2), Viz.global_position.y - (DefCard.size.y / 2))
 							DefCard.global_position = pos
 						#DefC.size_flags_horizontal = Control.SIZE_EXPAND
 						DefCard.show_behind_parent = true
@@ -357,7 +357,7 @@ func DoSelection(C : CardStats, Performer : BattleShipStats, User : Control) -> 
 	DeffenceCard.SetCardBattleStats(Performer, C)
 	add_child(DeffenceCard)
 	
-	var pos = Vector2(User.global_position.x - 200, User.global_position.y - (User.size.y / 2))
+	var pos = Vector2(User.global_position.x - 200, User.global_position.y - (DeffenceCard.size.y / 2))
 	DeffenceCard.global_position = pos
 
 	DeffenceCard.show_behind_parent = true

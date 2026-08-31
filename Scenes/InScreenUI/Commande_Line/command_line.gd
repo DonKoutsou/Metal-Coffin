@@ -153,7 +153,13 @@ func Prologue(skip : bool = false, customSeed : int = -1) -> String:
 	StartPrologue.emit(skip, customSeed)
 	return "Starting Prologue"
 
-
+func CardFightTypeSwitch(newType : Card_Fight.CardFightTurnType) -> String:
+	if (get_tree().get_nodes_in_group("CardFight").size() > 0):
+		return "Can't change type of fight while a fight is happening"
+	if (newType > Card_Fight.CardFightTurnType.size()):
+		return "Invalid type"
+	Card_Fight.TurnType = newType
+	return "Card fight turn type\nchanged to {0}".format([Card_Fight.CardFightTurnType.keys()[newType]])
 #func HandleCampaignCommand(Command) -> String:
 	#if (Command.size() == 1):
 		#return "Prologue What?"

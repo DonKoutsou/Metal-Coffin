@@ -26,3 +26,4 @@ Energy = 2
 AllowDuplicates = true
 OnPerformModule = SubResource("Resource_tpj2d")
 WeapT = 4
+AllowTier = false

@@ -163,16 +163,16 @@ func  _ready() -> void:
 			Armak.add_child(Trigger)
 			
 			if (!SkipStory): #First we need the questionair
-				var Questionair = load(WorldViewQuestionairScene).instantiate() as WorldViewQuestionair
-				Ingame_UIManager.GetInstance().AddUI(Questionair, true, false)
-				Questionair.Init()
-				GetMap().GetScreenUi().OpenScreen(ScreenUI.ScreenState.FULL_SCREEN)
-
-				await Questionair.Ended #wait for player to end it
-				
-				GetMap().GetScreenUi().CloseScreen()
-				await GetMap().GetScreenUi().FullScreenToggleStarted
-				Questionair.queue_free()
+				#var Questionair = load(WorldViewQuestionairScene).instantiate() as WorldViewQuestionair
+				#Ingame_UIManager.GetInstance().AddUI(Questionair, true, false)
+				#Questionair.Init()
+				#GetMap().GetScreenUi().OpenScreen(ScreenUI.ScreenState.FULL_SCREEN)
+#
+				#await Questionair.Ended #wait for player to end it
+				#
+				#GetMap().GetScreenUi().CloseScreen()
+				#await GetMap().GetScreenUi().FullScreenToggleStarted
+				#Questionair.queue_free()
 				PlayPrologue()
 
 			else:
@@ -331,6 +331,9 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip], Missil
 		availableEnemy = Enemies[0]
 	else: if (EnemyMissiles.size() > 0):
 		availableEnemy = EnemyMissiles[0]
+	else: if (Missiles.size() > 0):
+		availableEnemy = Missiles[0]
+		
 	
 	PlDir = availbableFriendly.global_position.direction_to(availableEnemy.global_position)
 	var dot = PlDir.dot(windDir)
@@ -509,14 +512,14 @@ func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 	fuel.LandedShips.append_array(spot.VisitingShips)
 	fuel.TownSpot = spot
 	if (!skiptransition):
-		GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
+		GetMap().GetScreenUi().CloseScreen()
 		await GetMap().GetScreenUi().FullScreenToggleStarted
 		
 	Ingame_UIManager.GetInstance().AddUI(fuel, true)
-	GetMap().GetScreenUi().ToggleTownUI(true)
-	#GetMap().GetScreenUi().TownVisited(true)
+	await GetMap().GetScreenUi().ToggleTownUI(true)
+	
+	GetMap().GetScreenUi().OpenScreen(ScreenUI.ScreenState.HALF_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleFinished
-
 		
 	ActionTracker.OnActionCompleted(ActionTracker.Action.TOWN_SHOP)
 	#UIEventH.OnScreenUIToggled(false)
@@ -548,12 +551,12 @@ func FuelTransactionFinished(BFuel : float, Ships : Array[MapShip], Scene : Town
 	
 	spot.SetFuelReserves(BFuel)
 	
-	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.PILOT_SCREEN)
+	GetMap().GetScreenUi().CloseScreen()
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	Scene.queue_free()
-	#GetMap().GetScreenUi().TownVisited(false)
-	GetMap().GetScreenUi().ToggleTownUI(false)
-	await GetMap().GetScreenUi().FullScreenToggleFinished
+	await GetMap().GetScreenUi().ToggleTownUI(false)
+	
+	GetMap().GetScreenUi().OpenScreen(ScreenUI.ScreenState.PILOT_SCREEN)
 	#Play events saved from happening
 	for g in OverworldEventsToShow:
 		var Pos = g.GetFocusPos()
@@ -582,6 +585,7 @@ func Land(Spot : MapSpot, ControlledShip : MapShip) -> bool:
 		var happeningui = ResourceLoader.load(HappeningUI).instantiate() as HappeningInstance
 		happeningui.EventSpot = Spot
 		happeningui.HappeningInstigator = Instigator
+		
 		GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
 		await GetMap().GetScreenUi().FullScreenToggleStarted
 		Ingame_UIManager.GetInstance().AddUI(happeningui, true)
@@ -596,7 +600,7 @@ func Land(Spot : MapSpot, ControlledShip : MapShip) -> bool:
 #--------------------------------------------------------
 func HappeningFinished(Recruited : bool, CapmaignFin : bool, Events : Array[OverworldEventData], Ship : MapShip) -> void:
 	
-	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.HALF_SCREEN)
+	GetMap().GetScreenUi().CloseScreen()
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 
 	get_tree().get_nodes_in_group("Happening")[0].queue_free()
