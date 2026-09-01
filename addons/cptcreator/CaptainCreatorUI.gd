@@ -1,5 +1,5 @@
 @tool
-extends EditorDock
+extends Control
 
 class_name CaptainCreatorUI
 

@@ -43,20 +43,17 @@ corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 corner_detail = 1
 
-[node name="CaptainCreatorUI" type="EditorDock" unique_id=2095748193 node_paths=PackedStringArray("CaptainName", "ShipIcon", "ItemText", "AddItemMenu", "Inventory", "Stats", "Disp", "DispSliderParent")]
+[node name="CaptainCreatorUI" type="Control" unique_id=1929975660 node_paths=PackedStringArray("CaptainName", "ShipIcon", "ItemText", "AddItemMenu", "Inventory", "Stats", "Disp", "DispSliderParent")]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -784.0
-offset_bottom = 784.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 theme = ExtResource("1_qfx4k")
-title = "Captain Creator"
-closable = true
-default_slot = 4
 script = ExtResource("2_8328o")
 StatScene = ExtResource("3_vd57e")
 ItemBoxScene = ExtResource("4_yrrrb")
@@ -66,13 +63,18 @@ ItemText = NodePath("InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBo
 AddItemMenu = NodePath("InputScroll/VBoxContainer/PanelContainer2/HBoxContainer/MenuBar/Add Item")
 Inventory = NodePath("InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer/InventoryInterface")
 Stats = NodePath("InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/InventoryShipStats")
-Disp = NodePath("InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/DispositionUI")
-DispSliderParent = NodePath("InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2")
+Disp = NodePath("InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/DispositionUI")
+DispSliderParent = NodePath("InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer2")
 
-[node name="InputScroll" type="ScrollContainer" parent="." unique_id=491485578]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[node name="InputScroll" type="ScrollContainer" parent="." unique_id=443722665]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="InputScroll" unique_id=1443653618]
 layout_mode = 2
@@ -336,78 +338,6 @@ theme_override_styles/panel = ExtResource("5_tnq84")
 [node name="HBoxContainer" type="HBoxContainer" parent="InputScroll/VBoxContainer/PanelContainer3" unique_id=873014840]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer" unique_id=1515261900]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer" unique_id=167457578]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="InventoryShipStats" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer" unique_id=826388942 instance=ExtResource("12_vd57e")]
-layout_mode = 2
-size_flags_vertical = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer" unique_id=1705996630]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer" unique_id=782384857]
-layout_mode = 2
-
-[node name="VBoxContainer" type="HBoxContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1141440742]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=1725119088]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 3
-theme_override_constants/separation = 20
-alignment = 1
-
-[node name="Panel2" type="Panel" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=519733534]
-custom_minimum_size = Vector2(15, 15)
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_vd57e")
-
-[node name="Label2" type="Label" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=731541520]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 16
-text = "Base Stats"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=1149750656]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 3
-theme_override_constants/separation = 20
-alignment = 1
-
-[node name="Panel" type="Panel" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1987005368]
-custom_minimum_size = Vector2(15, 15)
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_kkobr")
-
-[node name="Label" type="Label" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer2" unique_id=374881689]
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-text = "Ship Part Buffs"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DispositionUI" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=687125661 instance=ExtResource("11_vd57e")]
-custom_minimum_size = Vector2(0, 400)
-layout_mode = 2
-size_flags_vertical = 2
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1626338858]
-layout_mode = 2
-
 [node name="VBoxContainer3" type="VBoxContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer" unique_id=98074735]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -480,24 +410,97 @@ text = "Upgrade Item"
 layout_mode = 2
 text = "Remove Item"
 
+[node name="PanelContainer" type="PanelContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer" unique_id=1515261900]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer" unique_id=167457578]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="InventoryShipStats" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer" unique_id=826388942 instance=ExtResource("12_vd57e")]
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer" unique_id=1705996630]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2" unique_id=782384857]
+layout_mode = 2
+
+[node name="VBoxContainer" type="HBoxContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer" unique_id=1141440742]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer" unique_id=1725119088]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Panel2" type="Panel" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=519733534]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_vd57e")
+
+[node name="Label2" type="Label" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=731541520]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "Base Stats"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer" unique_id=1149750656]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Panel" type="Panel" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1987005368]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_kkobr")
+
+[node name="Label" type="Label" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer/HBoxContainer2" unique_id=374881689]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Ship Part Buffs"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DispositionUI" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer" unique_id=687125661 instance=ExtResource("11_vd57e")]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer" unique_id=1626338858]
+layout_mode = 2
+
 [connection signal="index_pressed" from="InputScroll/VBoxContainer/PanelContainer2/HBoxContainer/MenuBar/Select Captain" to="." method="_on_chaptain_select_index_pressed"]
 [connection signal="index_pressed" from="InputScroll/VBoxContainer/PanelContainer2/HBoxContainer/MenuBar/Add Item" to="." method="_on_item_select_index_pressed"]
 [connection signal="toggled" from="InputScroll/VBoxContainer/PanelContainer2/HBoxContainer/ShowItStats" to="." method="_on_show_it_stats_toggled"]
-[connection signal="StatChanged" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/InventoryShipStats" to="." method="_on_inventory_ship_stats_stat_changed"]
-[connection signal="mouse_entered" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/ShipStatContainer" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/ShipStatContainer" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/ShipStatContainer" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/ShipStatContainer" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@37632" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@37632" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@37632" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@37632" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@37633" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@37633" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@37633" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@37633" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@37634" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@37634" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@37634" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@37634" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@37635" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@37635" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@37635" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@37635" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@37636" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@37636" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@37636" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/@VBoxContainer@37636" method="_on_mouse_exited"]
 [connection signal="text_changed" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/CapName" to="." method="_on_cap_name_text_changed"]
 [connection signal="pressed" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/VBoxContainer/ChangeShipIcon" to="." method="_on_change_ship_icon_pressed"]
 [connection signal="pressed" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer/PanelContainer/VBoxContainer/MoveItem" to="." method="_on_move_item_pressed"]
 [connection signal="pressed" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer/PanelContainer/VBoxContainer/UpgradeItem" to="." method="_on_upgrade_item_pressed"]
 [connection signal="pressed" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer3/PanelContainer4/VBoxContainer/PanelContainer/VBoxContainer/RemoveItem" to="." method="_on_remove_item_pressed"]
+[connection signal="StatChanged" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer/VBoxContainer/InventoryShipStats" to="." method="_on_inventory_ship_stats_stat_changed"]
+[connection signal="mouse_entered" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer2/ShipStatContainer" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer2/ShipStatContainer" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer2/ShipStatContainer" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer2/ShipStatContainer" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer2/@VBoxContainer@44424" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer2/@VBoxContainer@44424" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer2/@VBoxContainer@44424" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer2/@VBoxContainer@44424" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer2/@VBoxContainer@44425" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer2/@VBoxContainer@44425" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer2/@VBoxContainer@44425" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer2/@VBoxContainer@44425" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer2/@VBoxContainer@44426" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer2/@VBoxContainer@44426" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer2/@VBoxContainer@44426" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer2/@VBoxContainer@44426" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer2/@VBoxContainer@44427" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer2/@VBoxContainer@44427" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer2/@VBoxContainer@44427" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer2/@VBoxContainer@44427" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer2/@VBoxContainer@44428" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer2/@VBoxContainer@44428" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer2/@VBoxContainer@44428" to="InputScroll/VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer2/VBoxContainer/VBoxContainer2/@VBoxContainer@44428" method="_on_mouse_exited"]
