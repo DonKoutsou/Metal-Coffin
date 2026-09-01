@@ -56,7 +56,7 @@ StatName = 8
 [sub_resource type="Resource" id="Resource_xmlya"]
 script = ExtResource("2_0or3p")
 StatName = 9
-StatBase = 30.0
+StatBase = 10.0
 metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
 
 [sub_resource type="Resource" id="Resource_j0vsk"]

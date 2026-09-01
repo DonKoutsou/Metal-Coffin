@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_4e3oh")
 Title = "TUT_Cardfight_ActionPTitle"
-Text = "CARD_FIGHT_ENEMY_ACTION_PERFORM"
+Text = "TUT_Cardfight_ActionPText"
 metadata/_custom_type_script = "uid://451ovq2ynuka"

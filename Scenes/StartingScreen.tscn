@@ -3,6 +3,25 @@
 [ext_resource type="Script" uid="uid://8du0534sf0gr" path="res://Scripts/UI/starting_screen.gd" id="1_kry56"]
 [ext_resource type="Material" uid="uid://dxt6oe4rhk3du" path="res://Shaders/PostProcessMat.tres" id="3_62h02"]
 
+[sub_resource type="Gradient" id="Gradient_7bhdu"]
+colors = PackedColorArray(0.0030234603, 0.0030234596, 0.0030234596, 1, 1, 0.9493333, 0.92, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7bhdu"]
+gradient = SubResource("Gradient_7bhdu")
+width = 64
+
+[sub_resource type="Environment" id="Environment_bewff"]
+background_mode = 3
+background_canvas_max_layer = 217
+ambient_light_source = 1
+reflected_light_source = 1
+adjustment_enabled = true
+adjustment_brightness = 0.98
+adjustment_color_correction = SubResource("GradientTexture1D_7bhdu")
+
+[sub_resource type="World3D" id="World3D_0orch"]
+environment = SubResource("Environment_bewff")
+
 [node name="StartingScreen" type="Node" unique_id=64991473]
 process_mode = 3
 script = ExtResource("1_kry56")
@@ -26,6 +45,7 @@ mouse_target = true
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1724850211]
 disable_3d = true
 own_world_3d = true
+world_3d = SubResource("World3D_0orch")
 handle_input_locally = false
 canvas_item_default_texture_filter = 2
 audio_listener_enable_2d = true
@@ -35,7 +55,7 @@ positional_shadow_atlas_quad_0 = 0
 positional_shadow_atlas_quad_1 = 0
 positional_shadow_atlas_quad_2 = 0
 positional_shadow_atlas_quad_3 = 0
-size = Vector2i(854, 480)
+size = Vector2i(1280, 720)
 size_2d_override = Vector2i(1280, 720)
 size_2d_override_stretch = true
 render_target_update_mode = 4

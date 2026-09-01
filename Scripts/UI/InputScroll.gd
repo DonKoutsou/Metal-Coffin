@@ -5,6 +5,7 @@ class_name InputScroll
 
 @export var XLock : bool = false
 @export var YLock : bool = false
+@export var Momentum : bool = false
 
 var force : Vector2
 var pos : Vector2
@@ -41,39 +42,57 @@ func _process(delta: float) -> void:
 func HandleInput(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")):
 		if (!XLock):
-			if (signf(force.x) == signf(event.relative.x)):
-				force.x = 0
-			force.x =  clamp(force.x -event.relative.x, event.relative.x * 6, -event.relative.x * 6)
+			if(Momentum):
+				if (signf(force.x) == signf(event.relative.x)):
+					force.x = 0
+				force.x =  clamp(force.x -event.relative.x, event.relative.x * 6, -event.relative.x * 6)
+			else:
+				pos.x -= event.relative.x
 			
 		if (!YLock):
-			if (signf(force.y) == signf(event.relative.y)):
-				force.y = 0
-			
-			force.y =  clamp(force.y -event.relative.y, event.relative.y * 6, -event.relative.y * 6)
+			if(Momentum):
+				if (signf(force.y) == signf(event.relative.y)):
+					force.y = 0
+				
+				force.y =  clamp(force.y -event.relative.y, event.relative.y * 6, -event.relative.y * 6)
+			else:
+				pos.y -= event.relative.y
 			#force.y = -event.relative.y * 6
 	
 	else: if (event.is_action_pressed("ZoomIn")):
 		if (!YLock):
-			if (signf(force.y) == 1):
-				force.y = 0
-			force.y -= 20
+			if(Momentum):
+				if (signf(force.y) == 1):
+					force.y = 0
+				force.y -= 20
+			else:
+				pos.y -= 20
 	
 	else: if (event.is_action_pressed("ZoomOut")):
 		if (!YLock):
-			if (signf(force.y) == -1):
-				force.y = 0
-			force.y -= -20
+			if(Momentum):
+				if (signf(force.y) == -1):
+					force.y = 0
+				force.y -= -20
+			else:
+				pos.y += 20
 	
 	else : if (event is InputEventScreenDrag and Input.is_action_pressed("Click")):
 		if (!XLock):
-			if (signf(force.x) == signf(event.relative.x)):
-				force.x = 0
-			force.x =  clamp(force.x -event.relative.x, event.relative.x * 6, -event.relative.x * 6)
+			if(Momentum):
+				if (signf(force.x) == signf(event.relative.x)):
+					force.x = 0
+				force.x =  clamp(force.x -event.relative.x, event.relative.x * 6, -event.relative.x * 6)
+			else:
+				pos.x -= event.relative.x
 			
 		if (!YLock):
-			if (signf(force.y) == signf(event.relative.y)):
-				force.y = 0
-			force.y =  clamp(force.y -event.relative.y, event.relative.y * 6, -event.relative.y * 6)
+			if(Momentum):
+				if (signf(force.y) == signf(event.relative.y)):
+					force.y = 0
+				force.y =  clamp(force.y -event.relative.y, event.relative.y * 6, -event.relative.y * 6)
+			else:
+				pos.y -= event.relative.y
 			
 	else: if  Input.is_action_pressed("Click"):
 		force = Vector2.ZERO

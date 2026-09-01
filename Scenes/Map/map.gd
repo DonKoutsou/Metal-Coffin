@@ -563,7 +563,7 @@ func MapGenFinished(Spots : Array[Town], WorldSize : float) -> void:
 	GenThread.wait_to_finish()
 	GenerationFinished.emit()
 	ShipCamera.WorldBounds = (Vector2(SpawningBounds.x, WorldSize))
-
+	#_Camera.ForceZoom(_Camera.zoom)
 
 
 func GenerateEvents() -> void:

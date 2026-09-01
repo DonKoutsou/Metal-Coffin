@@ -15,6 +15,7 @@ func _setup_local_to_scene() -> void:
 		Up.CurrentValue = Up.UpgradeAmmount
 
 func GetItemDesc() -> String:
+	
 	var UpNames = "\n[color=#ffc315]-------------[/color]\nPROVIDING STATS"
 	for g in Upgrades.size():
 		#var Multiplier = 1
@@ -39,7 +40,11 @@ func GetItemDesc() -> String:
 
 
 func GetWorkshopItemDesc() -> String:
-	var UpNames = "DISPOSITION : {0}\nPROVIDING STATS".format([DispositionManager.Dispositions.keys()[disp]])
+	var PartTypeString : String = ShipPartType.keys()[PartType]
+	PartTypeString = "[color=#ffc315]Ship Part Type[/color] : {0}\n[color=#ffc315]-------------[/color]".format([PartTypeString.replace("_", " ")]) 
+	
+	var DispText = "\n[color=#ffc315]DISPOSITION[/color] : {0}\n[color=#ffc315]-------------[/color]".format([DispositionManager.Dispositions.keys()[disp]])
+	var UpNames = "\nPROVIDING STATS"
 	for g in Upgrades.size():
 		#var Multiplier = 1
 		#if (Upgrades[g].UpgradeName == STAT_CONST.STATS.THRUST):
@@ -57,7 +62,7 @@ func GetWorkshopItemDesc() -> String:
 			UpSymbol = "-"
 			Col = "db2c36"
 		UpNames += "\n[color=#{4}]{0}[/color] : {3} {1} {2}".format([UpName, UpAmm, STAT_CONST.GetStatMetric(Upgrades[g].UpgradeName), UpSymbol, Col])
-	return UpNames
+	return PartTypeString + DispText + UpNames
 
 
 

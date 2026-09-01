@@ -104,6 +104,8 @@ func _DrawingEnded() -> void:
 		for p in g:
 			l.add_point(p)
 		BLines.append(l)
+	
+	UpdateCameraZoom(ShipCamera.Instance.zoom.x)
 
 func PositionLabel(L : Label, pos : Vector2) -> void:
 	var p = Vector2(pos.x - L.size.x / 2, pos.y - L.size.y / 2)

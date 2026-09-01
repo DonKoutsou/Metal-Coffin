@@ -42,7 +42,7 @@ func _physics_process(_delta: float) -> void:
 		if QueuedTutorials.size() > 0:
 			var act = QueuedTutorials[0]
 					
-			if (!TutorialTexts.has(act) or TutorialTexts[act] == ""):
+			if (TutorialTexts[act] == ""):
 				QueuedTutorials.pop_front()
 				return
 				

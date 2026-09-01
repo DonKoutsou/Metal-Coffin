@@ -5,6 +5,7 @@ class_name RepairStation
 @export var RepairUI : PackedScene
 @export var RepairUIPlacement : Node
 @export var PlayerWallet : Wallet
+@export_range(-INF, +INF, 0.1)var test : float
 
 #signal FuelTransactionFinished(BoughtFuel : float)
 

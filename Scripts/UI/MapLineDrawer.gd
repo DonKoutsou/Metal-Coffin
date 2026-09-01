@@ -74,7 +74,7 @@ func GenerationFinished() -> void:
 		PathsGenerated.emit(Lines)
 		
 	DrawLines()
-
+	UpdateCameraZoom(ShipCamera.Instance.zoom.x)
 
 func DrawLines() -> void:
 	for g in get_children():

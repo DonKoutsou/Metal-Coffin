@@ -107,10 +107,10 @@ tracks/6/keys = {
 
 [sub_resource type="Animation" id="Animation_sb2tx"]
 resource_name = "Damage"
-length = 4.0
+length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/path = NodePath("LightPivot1/LightPivot2/AlarmLight:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -122,7 +122,7 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/path = NodePath("AudioStreamPlayer:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
@@ -134,7 +134,7 @@ tracks/1/keys = {
 }
 tracks/2/type = "value"
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/path = NodePath("LightPivot1/LightPivot2/ScreenLight:visible")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
@@ -151,14 +151,14 @@ tracks/3/path = NodePath("LightPivot1/LightPivot2/AlarmLight2:visible")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.0310076, 1.39535, 1.46201, 1.76201, 2.02868, 2.7, 2.76667, 2.9, 2.96667, 3.09535, 3.8666666),
+"times": PackedFloat32Array(0, 0.0310076, 0.40000665, 0.4666667, 0.76666665, 1.0333368, 1.2666667, 1.3333366, 1.4666667, 1.5333366, 1.6620165, 1.9),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [false, true, false, true, false, true, false, true, false, true, false, true]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
-tracks/4/enabled = true
+tracks/4/enabled = false
 tracks/4/path = NodePath("LightPivot1/LightPivot2/AlarmLight2:energy")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
@@ -269,7 +269,6 @@ _data = {
 
 [node name="ScreenCam" type="Camera2D" unique_id=42013280 node_paths=PackedStringArray("Anim", "LightPivot1", "ShakeSound", "BoomSound")]
 process_mode = 3
-visible = false
 z_index = 1
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0

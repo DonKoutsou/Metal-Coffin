@@ -46,6 +46,7 @@ func _ready() -> void:
 	UIEventHandle.XDialMoved.connect(MoveCameraX)
 	UIEventHandle.TopoPressed.connect(ToggleTopo)
 	call_deferred("ForceZoom", zoom)
+	
 
 #---------------------------------------
 func ToggleTopo(t : bool) -> void:

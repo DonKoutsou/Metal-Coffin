@@ -33,6 +33,7 @@ func _ready() -> void:
 	PauseShake(true)
 	OriginalPos = position
 	
+	
 func PauseShake(t : bool) -> void:
 	if t:
 		if (ShakeSound.playing):
