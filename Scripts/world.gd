@@ -179,7 +179,10 @@ func  _ready() -> void:
 				var Cardi = Helper.GetSpotByName("Cardi")
 				var Pl = get_tree().get_nodes_in_group("PlayerShips")[0]
 				Pl.SetShipPosition(Cardi.global_position)
-				Cardi.Event.SkipStory(Pl)
+				if (Cardi.Event != null):
+					Cardi.Event.SkipStory(Pl)
+				else:
+					print("ISSUE")
 				Cardi.OnSpotVisited(false)
 				
 		else:

@@ -435,11 +435,6 @@ func GenerateMapThreaded() -> void:
 		var sc = TownSpotScene.instantiate() as Town
 		var pos = sorted_positions[g]
 		
-		#centering positions
-		pos.x -= SpawningBounds.x / 2
-		#algorith gives values from 0 towards possetive y, we want the opposite
-		pos.y -= sorted_positions[0].y
-		
 		if (g == sorted_positions.size() - 1):
 			sc.GenerateCity(FinalCitySpotType, FinalCityData)
 		else : if (CapitalCitySpots.has(g)):
@@ -488,7 +483,8 @@ func sort_positions_by_y(positions: Array) -> Array:
 	)
 	return sorted
 
-
+#--------------------------------------------------------------------------------
+##Generation of map points
 func poisson_disk_sampling(region_size: Vector2, max_samples: int = 0) -> Array:
 	const K := 45 # samples per point
 	
@@ -501,62 +497,93 @@ func poisson_disk_sampling(region_size: Vector2, max_samples: int = 0) -> Array:
 	var points = []
 	var spawn_points = []
 	
-	var initial_point = Vector2(
-		Rand.InstanceRandom.RandFRange(0, region_size.x),
-		Rand.InstanceRandom.RandFRange(0, region_size.y)
-	)
+	#start from 0 height and move up
+	var initial_point = Vector2(Rand.InstanceRandom.RandFRange(-region_size.x / 2, region_size.x / 2) , 0)
+	
 	points.append(initial_point)
 	spawn_points.append(initial_point)
-	grid[_grid_index(initial_point, cell_size, grid_size)] = initial_point
+	grid[_grid_index(initial_point, cell_size, grid_size, region_size)] = initial_point
+	
 	
 	while spawn_points.size() > 0:
 		var spawn_index = Rand.InstanceRandom.RandI() % spawn_points.size()
 		var center = spawn_points[spawn_index]
 		var found = false
+		
+		#Look for spots around the selected spawnpoint
 		for i in range(K):
 			var angle = Rand.InstanceRandom.RandF() * PI * 2.0
 			var rad = Rand.InstanceRandom.RandFRange(MinDistance, MaxDistance)
 			var dir = Vector2(cos(angle), sin(angle))
 			var candidate = center + dir * rad
+			
+			#If we found a point that works we add it to points and spawnpoints and break out of loop
 			if _is_valid(candidate, region_size, cell_size, grid, grid_size):
 				points.append(candidate)
 				spawn_points.append(candidate)
-				grid[_grid_index(candidate, cell_size, grid_size)] = candidate
+				grid[_grid_index(candidate, cell_size, grid_size, region_size)] = candidate
 				found = true
 				break
+				
 		if not found:
 			spawn_points.remove_at(spawn_index)
 		if max_samples > 0 and points.size() >= max_samples:
 			break
 	return points
 
+#-----------------------------------------------------------------------------
+##Used to evaluate points
 func _is_valid(point: Vector2, region_size: Vector2, cell_size: float, grid: Array, grid_size: Vector2) -> bool:
 	# Check within bounds
-	if point.x < 0 or point.x >= region_size.x or point.y < 0 or point.y >= region_size.y:
+	if point.x < -region_size.x/2 or point.x >= region_size.x / 2 or point.y < -region_size.y or point.y >= 0:
 		return false
 	
-	var hasClose : bool = false
-	var cell = Vector2i(point / cell_size)
-	for y in range(max(cell.y - 2, 0), min(cell.y + 3, grid_size.y)):
-		for x in range(max(cell.x - 2, 0), min(cell.x + 3, grid_size.x)):
-			var idx = x + y * int(grid_size.x)
+	var alt = TopographyMap.GetAltitudeAtGlobalPosition(point)
+	if (alt <= 0):
+		return false
+	
+	var has_close := false
+	var cell := _grid_cell(point, cell_size, region_size, grid_size)
+
+	for y in range(max(cell.y - 2, 0), min(cell.y + 3, int(grid_size.y))):
+		for x in range(max(cell.x - 2, 0), min(cell.x + 3, int(grid_size.x))):
+			var idx := x + y * int(grid_size.x)
 			var other = grid[idx]
-			if (other == null):
+
+			if other == null:
 				continue
-			var dist = point.distance_to(other)
+
+			var dist := point.distance_to(other)
+
 			if dist < MinDistance:
 				return false
-			if (dist < MaxDistance):
-				hasClose = true
-				
-	return hasClose
 
-func _grid_index(point: Vector2, cell_size: float, grid_size: Vector2) -> int:
-	var x = int(point.x / cell_size)
-	var y = int(point.y / cell_size)
-	x = clamp(x, 0, int(grid_size.x) - 1)
-	y = clamp(y, 0, int(grid_size.y) - 1)
-	return x + y * int(grid_size.x)
+			if dist < MaxDistance:
+				has_close = true
+				
+	return has_close
+
+func _grid_cell(point: Vector2,cell_size: float,region_size: Vector2,grid_size: Vector2) -> Vector2i:
+
+	var local := point - Vector2(
+		-region_size.x / 2.0,
+		-region_size.y
+	)
+
+	var cell := Vector2i(local / cell_size)
+
+	cell.x = clamp(cell.x, 0, int(grid_size.x) - 1)
+	cell.y = clamp(cell.y, 0, int(grid_size.y) - 1)
+
+	return cell
+
+
+
+func _grid_index(point: Vector2,cell_size: float,grid_size: Vector2,region_size: Vector2) -> int:
+
+	var cell := _grid_cell(point,cell_size,region_size,grid_size)
+
+	return cell.x + cell.y * int(grid_size.x)
 
 func MapGenFinished(Spots : Array[Town], WorldSize : float) -> void:
 	SpotList.append_array(Spots)
@@ -572,14 +599,18 @@ func GenerateEvents() -> void:
 
 func GenerateEventsThreaded() -> void:
 	var SpotGroups = ["CAPITAL", "CITY_CENTER", "VILLAGE"]
-
+	
+	
+	
 	for g in SpotGroups:
 		var Spots : Array
 		Spots.append_array(get_tree().get_nodes_in_group(g))
 		
-		Rand.InstanceRandom.shuffle_array(Spots)
-		
 		var SpEvents = EventManager.GetInstance().GetSpecialEventsForSpotType(MapSpotType.SpotKind[g])
+		
+		FigureOutMandatoryEvents(SpEvents, Spots)
+		
+		Rand.InstanceRandom.shuffle_array(Spots)
 		
 		while SpEvents.size() > 0 and Spots.size() > 0:
 			#var EventToGive = SpEvents[0]
@@ -587,6 +618,7 @@ func GenerateEventsThreaded() -> void:
 			var S = Spots[randomIndex] as MapSpot
 			var YPos = S.get_parent().Pos.y
 			var E = FigureOutEvent(YPos, SpEvents)
+
 			if (E != null):
 				S.Event = E
 				E.PickedBy.append(S)
@@ -600,23 +632,42 @@ func GenerateEventsThreaded() -> void:
 		#var Events = (Spots[0] as MapSpot).SpotType.GetNormalEvents()
 		Spots.clear()
 		Spots.append_array(get_tree().get_nodes_in_group(g))
+		var Events = EventManager.GetInstance().GetEventsForSpotType(MapSpotType.SpotKind[g])
+		
+		FigureOutMandatoryEvents(Events, Spots)
 		
 		Rand.InstanceRandom.shuffle_array(Spots)
-
-		var Events = EventManager.GetInstance().GetEventsForSpotType(MapSpotType.SpotKind[g])
+		
 		while Events.size() > 0 and Spots.size() > 0:
 			var randomIndex = Rand.InstanceRandom.RandIRange(0, Spots.size() - 1)
 			var Sp = Spots[randomIndex]
 			if (Sp.Event != null):
 				var Hap = FigureOutEvent(Sp.get_parent().Pos.y, Events)
 				if (Hap != null):
-					print("Picked happening {0} for {1}".format([Hap.HappeningName, Sp.GetSpotName()]))
+					if (Hap.MandatoryLocaiton != "" and Hap.MandatoryLocaiton != Sp.GetSpotName()):
+						pass
+					else:
+						print("Picked happening {0} for {1}".format([Hap.HappeningName, Sp.GetSpotName()]))
 
-					Hap.PickedBy.append(Sp)
-					Sp.Event = Hap
+						Hap.PickedBy.append(Sp)
+						Sp.Event = Hap
 			
 			Spots.erase(Sp)
 	call_deferred("EventGenFinished")
+
+func FigureOutMandatoryEvents(events : Array[Happening], spots : Array[MapSpot]) -> void:
+	for event in range(events.size() - 1, -1, -1):
+		var hap : Happening = events[event]
+		if (hap.MandatoryLocaiton != ""):
+			var spot = Helper.GetCityByName(hap.MandatoryLocaiton)
+			if (spot != null):
+				spot.Event = hap
+				hap.PickedBy.append(spot)
+				events.erase(hap)
+				print("Picked happening {0} for {1}".format([hap.HappeningName, spot.GetSpotName()]))
+				if (hap.CrewRecruit):
+					spot.call_deferred("add_to_group", "CrewRecruitTown")
+				spots.erase(spot)
 
 func FigureOutEvent(YPos : float, Events : Array) -> Happening:
 	if (Events == null or Events.size() == 0):

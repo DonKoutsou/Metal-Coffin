@@ -7,6 +7,9 @@ class_name Happening
 @export var HappeningAppearance : GameStage
 @export var Special : bool = false
 @export var CrewRecruit : bool = false
+
+##If this is filled the event will only be added to the spot names like that
+@export var MandatoryLocaiton : String = ""
 var PickedBy : Array
 
 @export var AllowedAppearances : int = 1

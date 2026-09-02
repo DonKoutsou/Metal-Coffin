@@ -1,0 +1,10 @@
+[gd_resource type="AnimatedTexture" format=3 uid="uid://1nyfueymoorg"]
+
+[ext_resource type="Texture2D" uid="uid://bf8ht61s5ovk" path="res://Assets/ShipTextures/Hull14.png" id="1_tv0v7"]
+[ext_resource type="Texture2D" uid="uid://hbtnawa7xkyh" path="res://Assets/ShipTextures/Hull14_Frame.png" id="2_sc6sn"]
+
+[resource]
+frames = 2
+frame_0/texture = ExtResource("1_tv0v7")
+frame_1/texture = ExtResource("2_sc6sn")
+frame_1/duration = 0.2

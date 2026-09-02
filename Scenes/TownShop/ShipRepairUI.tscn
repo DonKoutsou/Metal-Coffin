@@ -15,8 +15,8 @@ offset_bottom = -330.5
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
-size_flags_horizontal = 6
-size_flags_vertical = 3
+size_flags_horizontal = 3
+size_flags_vertical = 4
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("1_k73m2")
 script = ExtResource("2_k73m2")
@@ -35,9 +35,11 @@ alignment = 1
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer2" unique_id=1223383127]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="VBoxContainer2/VBoxContainer2" unique_id=230578061]
 layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 50
 text = "Craden"
@@ -47,7 +49,7 @@ uppercase = true
 
 [node name="HBoxContainer2" type="VBoxContainer" parent="VBoxContainer2/VBoxContainer2" unique_id=505051986]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 2
 size_flags_vertical = 3
 
 [node name="Label2" type="Label" parent="VBoxContainer2/VBoxContainer2/HBoxContainer2" unique_id=229031892]
@@ -57,7 +59,6 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 16
 text = "Hull Integrity"
-horizontal_alignment = 2
 
 [node name="HullAmm" type="Label" parent="VBoxContainer2/VBoxContainer2/HBoxContainer2" unique_id=935500527]
 layout_mode = 2
@@ -67,6 +68,7 @@ horizontal_alignment = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2" unique_id=609539318]
 layout_mode = 2
+size_flags_horizontal = 10
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer" unique_id=2017209200]
 layout_mode = 2
@@ -108,9 +110,9 @@ text = "10h 30m"
 horizontal_alignment = 2
 
 [node name="ProgressBar" type="ProgressBar" parent="VBoxContainer2" unique_id=1876089438]
-custom_minimum_size = Vector2(0, 25)
+custom_minimum_size = Vector2(500, 25)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 8
 size_flags_vertical = 3
 value = 27.12
 show_percentage = false

@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://dowbg3bpia1ny"]
+
+[ext_resource type="StyleBox" uid="uid://bf0mhefk82lu6" path="res://Theme/MapBorder.tres" id="1_pprcb"]
+[ext_resource type="StyleBox" uid="uid://ch5t6gi4cvjc2" path="res://Theme/MapBorder2.tres" id="2_k25hx"]
+
+[node name="Control" type="Panel" unique_id=615768557]
+modulate = Color(1, 1, 1, 0.6666667)
+top_level = true
+use_parent_material = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8318.0
+offset_top = -8692.0
+offset_right = 8318.0
+offset_bottom = 8692.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_pprcb")
+
+[node name="Panel" type="Panel" parent="." unique_id=851471715]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2500.0
+offset_top = -2500.0
+offset_right = 2500.0
+offset_bottom = 2500.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_styles/panel = ExtResource("2_k25hx")

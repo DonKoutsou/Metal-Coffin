@@ -58,6 +58,7 @@ metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+alignment = 1
 
 [node name="LeaveFuelStorage" type="Button" parent="VBoxContainer" unique_id=350283990]
 layout_mode = 2

@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dp3qdp4mcnmly" path="res://Scenes/GlobalManagers/Tutorial/tutorial_trigger.tscn" id="9_6an1p"]
 [ext_resource type="PackedScene" uid="uid://cm8mr51eu0otx" path="res://Scenes/InScreenUI/MapMarkers/OrderMarker.tscn" id="12_4a6f5"]
 [ext_resource type="Resource" uid="uid://c1buiwym6qkh8" path="res://Resources/Merch/1.EnemySpawnDecider.tres" id="12_m1k6s"]
+[ext_resource type="PackedScene" uid="uid://dowbg3bpia1ny" path="res://Scenes/Map/MapBorder.tscn" id="15_kfta0"]
 [ext_resource type="Environment" uid="uid://bkmqb06466wvr" path="res://Enviroments/Env.tres" id="16_8uruf"]
 [ext_resource type="PackedScene" uid="uid://cja47tyjnyae" path="res://Scenes/InScreenUI/MapMarkers/map_line_drawer.tscn" id="16_sp82o"]
 [ext_resource type="PackedScene" uid="uid://dnjccg1nj4bm6" path="res://Scenes/Map/ship_camera.tscn" id="17_6an1p"]
@@ -46,7 +47,10 @@ CapitalType = "uid://dyvpncg7tolc7"
 FinalCityType = "uid://1vptbvrlos7"
 EnemyShipNameList = "uid://cqn4njtiebgrb"
 MapSize = 100
+VillageAmm = null
+CapitalAmm = null
 MinDistance = 1500.0
+MaxDistance = null
 SpawningBounds = Vector2(8000, 250000)
 EnSpawner = ExtResource("12_m1k6s")
 ControllerEvH = ExtResource("22_n73so")
@@ -78,7 +82,7 @@ positional_shadow_atlas_quad_0 = 0
 positional_shadow_atlas_quad_1 = 0
 positional_shadow_atlas_quad_2 = 0
 positional_shadow_atlas_quad_3 = 0
-size = Vector2i(1856, 1286)
+size = Vector2i(619, 429)
 size_2d_override = Vector2i(928, 643)
 size_2d_override_stretch = true
 render_target_update_mode = 4
@@ -107,7 +111,7 @@ positional_shadow_atlas_quad_0 = 0
 positional_shadow_atlas_quad_1 = 0
 positional_shadow_atlas_quad_2 = 0
 positional_shadow_atlas_quad_3 = 0
-size = Vector2i(1856, 1286)
+size = Vector2i(619, 429)
 size_2d_override = Vector2i(928, 643)
 size_2d_override_stretch = true
 render_target_update_mode = 4
@@ -142,10 +146,13 @@ OrderMarkersParent = NodePath("OrderMarker")
 
 [node name="ShipCamera" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" unique_id=1015760443 instance=ExtResource("17_6an1p")]
 
-[node name="RegionMapDrawer" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" unique_id=890045518 instance=ExtResource("16_sp82o")]
-modulate = Color(0, 0, 0, 0.2)
+[node name="RegionMapDrawer" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" unique_id=1677048478]
+visible = false
+modulate = Color(0, 0, 0, 0.25490198)
+use_parent_material = true
 script = ExtResource("27_445lv")
 RegionTrans = 0.2
+border = ExtResource("15_kfta0")
 ResizeLinesWithZoom = true
 
 [node name="MapLines" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" unique_id=1517326412]

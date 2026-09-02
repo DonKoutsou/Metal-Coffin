@@ -3,6 +3,7 @@ extends Node2D
 class_name RegionLineDrawer
 
 @export var RegionTrans : float = 0.05
+@export var border : PackedScene
 
 var BorderLines : Array
 
@@ -12,9 +13,9 @@ var Labels : Array[Label]
 @export var ResizeLinesWithZoom : bool = false
 
 func UpdateCameraZoom(NewZoom : float) -> void:
-	visible = NewZoom < ShipCamera.ZoomSwitchStage
-	for g in BLines:
-		g.width = 10 / NewZoom
+	#visible = NewZoom < ShipCamera.ZoomSwitchStage
+	#for g in BLines:
+		#g.width = 10 / NewZoom
 	#for g in Labels:
 		##g.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		#g.set("theme_override_font_sizes/font_size", 120 / NewZoom)
@@ -104,6 +105,11 @@ func _DrawingEnded() -> void:
 		for p in g:
 			l.add_point(p)
 		BLines.append(l)
+	
+	var topp : Panel = border.instantiate()
+	topp.size = Vector2(ShipCamera.WorldBounds.x + 5500, -ShipCamera.WorldBounds.y + 5250)
+	add_child(topp)
+	topp.global_position = Vector2(-ShipCamera.WorldBounds.x / 2 - 3000, ShipCamera.WorldBounds.y - 2800)
 	
 	UpdateCameraZoom(ShipCamera.Instance.zoom.x)
 
@@ -309,17 +315,17 @@ func create_convex_hull(points: Array) -> Dictionary:
 	
 	#var midpoint = TopPoints[0].y + abs(TopPoints[0].y - BottomPOints[0].y)
 	
-	TopPoints.insert(0, Vector2(-8000, TopPoints[0].y))
+	TopPoints.insert(0, Vector2(-14000, TopPoints[0].y))
 	#TopPoints.insert(0, Vector2(-9000, midpoint))
 	#TopPoints.insert(0, Vector2(-8000, BottomPOints[0].y))
 	
 	
-	TopPoints.append((Vector2(8000, TopPoints[TopPoints.size() - 1].y)))
+	TopPoints.append((Vector2(14000, TopPoints[TopPoints.size() - 1].y)))
 	#TopPoints.append((Vector2(9000, midpoint)))
 	#TopPoints.append((Vector2(8000, BottomPOints[BottomPOints.size() - 1].y)))
 	
-	BottomPOints.insert(0, Vector2(8000, BottomPOints[BottomPOints.size() - 1].y))
-	BottomPOints.append(Vector2(-8000, BottomPOints[0].y))
+	BottomPOints.insert(0, Vector2(14000, BottomPOints[BottomPOints.size() - 1].y))
+	BottomPOints.append(Vector2(-14000, BottomPOints[0].y))
 	#BottomPOints.append(Vector2(-5000, midpoint))
 	
 	HullPoints["TopPoints"] = TopPoints

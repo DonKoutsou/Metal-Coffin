@@ -171,3 +171,4 @@ script = ExtResource("3_8tlxq")
 HappeningName = "The prince"
 Stages = Array[ExtResource("1_afuai")]([SubResource("Resource_afuai"), SubResource("Resource_gl0ga"), SubResource("Resource_dy2mo"), SubResource("Resource_143ge"), SubResource("Resource_ftcno"), SubResource("Resource_xjsvv")])
 Special = true
+MandatoryLocaiton = "Cardi"
