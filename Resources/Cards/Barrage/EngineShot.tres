@@ -37,3 +37,4 @@ Energy = 2
 AllowDuplicates = true
 OnPerformModule = SubResource("Resource_vw6o3")
 WeapT = 1
+AllowTier = false

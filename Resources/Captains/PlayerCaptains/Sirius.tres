@@ -121,21 +121,4 @@ CaptainName = "Sirius"
 CaptainPortrait = "uid://dlebd41j7q7s1"
 ShipIcon = ExtResource("3_kc55u")
 CaptainStats = Array[ExtResource("2_ot5w6")]([SubResource("Resource_wdy4b"), SubResource("Resource_8m37w"), SubResource("Resource_fckyd"), SubResource("Resource_vknwa"), SubResource("Resource_41ee3"), SubResource("Resource_367st"), SubResource("Resource_48366"), SubResource("Resource_hl7ky"), SubResource("Resource_1mnok"), SubResource("Resource_8kp6e"), SubResource("Resource_0d70u"), SubResource("Resource_2b1rh"), SubResource("Resource_eugd7"), SubResource("Resource_qfj73"), SubResource("Resource_ynkuk"), SubResource("Resource_opkhg"), SubResource("Resource_lumq3"), SubResource("Resource_nheko"), SubResource("Resource_al4bv"), SubResource("Resource_6t7up"), SubResource("Resource_hystv"), SubResource("Resource_dt3dj"), SubResource("Resource_cbi3g"), SubResource("Resource_0cjm6")])
-ShipCallsign = "P"
-StartingItems = Array[ExtResource("3_43sb5")]([])
-CurrentPort = ""
 CheckForErrors = true
-ProvidingFunds = 0
-ProvidingCaptains = Array[ExtResource("3_5m53b")]([])
-Cards = Dictionary[ExtResource("3_alabf"), int]({})
-Repair_Parts = 0.0
-TempName = ""
-disp = Dictionary[int, float]({
-0: 0.0,
-1: 0.0,
-2: 0.0,
-3: 0.0,
-4: 0.0,
-5: 0.0
-})
-_property_overrides = Dictionary[StringName, bool]({})

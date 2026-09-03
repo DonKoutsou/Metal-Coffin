@@ -59,6 +59,7 @@ layout_mode = 2
 size_flags_horizontal = 2
 
 [node name="Wind Direction" type="Label" parent="HBoxContainer/HBoxContainer" unique_id=1914941164]
+custom_minimum_size = Vector2(200.225, 0)
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 1
@@ -66,6 +67,7 @@ theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 16
 text = "Wind Dir : North | SPEED : 140 km/h"
 vertical_alignment = 1
+autowrap_mode = 2
 uppercase = true
 
 [node name="Control" type="Control" parent="HBoxContainer/HBoxContainer" unique_id=853007918]
@@ -77,11 +79,26 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -10.999982
+offset_bottom = -10.999981
 grow_horizontal = 2
 grow_vertical = 2
 rotation = -0.6614798
-pivot_offset = Vector2(20, 25)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 text = ">"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer/HBoxContainer/Control" unique_id=1716935992]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 16
+text = "N"
 horizontal_alignment = 1
 vertical_alignment = 1
 

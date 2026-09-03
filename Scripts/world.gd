@@ -182,7 +182,7 @@ func  _ready() -> void:
 				if (Cardi.Event != null):
 					Cardi.Event.SkipStory(Pl)
 				else:
-					print("ISSUE")
+					printerr("ISSUE")
 				Cardi.OnSpotVisited(false)
 				
 		else:

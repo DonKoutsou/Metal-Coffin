@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bf8ht61s5ovk"
-path="res://.godot/imported/Hull14.png-7e56c5535543c1d141e73558dd02feea.ctex"
+uid="uid://bgoia165rdhv5"
+path="res://.godot/imported/Hull14_Frame4.png-001887130debb0e0765c073b7685e134.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/ShipTextures/Hull14.png"
-dest_files=["res://.godot/imported/Hull14.png-7e56c5535543c1d141e73558dd02feea.ctex"]
+source_file="res://Assets/ShipTextures/Hull14_Frame4.png"
+dest_files=["res://.godot/imported/Hull14_Frame4.png-001887130debb0e0765c073b7685e134.ctex"]
 
 [params]
 

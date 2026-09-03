@@ -22,18 +22,22 @@ func _ready() -> void:
 	
 	SpeedStat = ShipStatScene.instantiate() as ShipStatContainer
 	SpeedStat.SetDataCustom(1000, "km/h", "SPEED", STAT_CONST.STATS.SPEED)
+	SpeedStat.STName = STAT_CONST.STATS.SPEED
 	$GridContainer.add_child(SpeedStat)
 	
 	Rangestat = ShipStatScene.instantiate() as ShipStatContainer
 	Rangestat.SetDataCustom(10000, "km", "RANGE", STAT_CONST.STATS.RANGE)
+	Rangestat.STName = STAT_CONST.STATS.RANGE
 	$GridContainer.add_child(Rangestat)
 	
 	ValueStat = ShipStatScene.instantiate() as ShipStatContainer
 	ValueStat.SetDataCustom(1000000, "₯", "VALUE", STAT_CONST.STATS.VALUE)
+	ValueStat.STName = STAT_CONST.STATS.VALUE
 	$GridContainer.add_child(ValueStat)
 	
 	NoiseStat = ShipStatScene.instantiate() as ShipStatContainer
 	NoiseStat.SetDataCustom(STAT_CONST.GetStatMaxValue(STAT_CONST.STATS.SOUND_SIGNATURE), STAT_CONST.GetStatMetric(STAT_CONST.STATS.SOUND_SIGNATURE), "SOUND SIGNATURE", STAT_CONST.STATS.SOUND_SIGNATURE)
+	NoiseStat.STName = STAT_CONST.STATS.SOUND_SIGNATURE
 	$GridContainer.add_child(NoiseStat)
 
 func Toggle(t) -> void:
@@ -47,10 +51,10 @@ func Toggle(t) -> void:
 func ShowStats(stats : Array[STAT_CONST.STATS]) -> void:
 	for g in Stats:
 		g.visible = g.STName in stats
-	#SpeedStat.visible = SpeedStat.STName in stats
-	#Rangestat.visible = Rangestat in stats
-	#ValueStat.visible = Rangestat.STName in stats
-	#NoiseStat.visible = Rangestat.STName in stats
+	SpeedStat.visible = SpeedStat.STName in stats
+	Rangestat.visible = Rangestat.STName in stats
+	ValueStat.visible = ValueStat.STName in stats
+	NoiseStat.visible = NoiseStat.STName in stats
 
 func UpdateValues() -> void:
 	var FuelCap

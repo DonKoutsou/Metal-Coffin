@@ -218,8 +218,9 @@ func ItemToAddSelected(M : Merchandise, Box : Inventory_Box_Res) -> void:
 	NewCap.OnShipPartAddedToInventory(OriginalItem)
 	
 	var StatC = StatComp.instantiate() as StatComperator
-	StatC.SetCaptainsToCompare(OriginalCap, NewCap)
 	add_child(StatC)
+	StatC.SetCaptainsToCompare(OriginalCap, NewCap)
+	
 	
 	var Resault = await StatC.TradeFinished
 	StatC.queue_free()
@@ -291,8 +292,8 @@ func UpgradeItem(Box : Inventory_Box_Res) -> void:
 	var UpgradedItem : ShipPart = OriginalItem.UpgradeVersion
 	
 	var OriginalCap = CurrentShip.Cpt
-	var OriginalInv = OriginalCap._CharInv
 	
+	var OriginalInv = OriginalCap._CharInv
 	if (OriginalInv._ItemBeingUpgraded != null):
 		PopUpManager.GetInstance().DoFadeNotif("Ship is already upgrading a part")
 		#print("Ship is already upgrading a part. Wait for it to finish first.")
@@ -312,24 +313,47 @@ func UpgradeItem(Box : Inventory_Box_Res) -> void:
 	
 	
 	var NewCap = OriginalCap.duplicate(true) as Captain
-	var NewInv = OriginalInv.duplicate(4) as CharacterInventory
-	NewCap.RegisterInventory(NewInv)
+	
 	var NewStats : Array[ShipStat]
 	for g :ShipStat in OriginalCap.CaptainStats:
 		NewStats.append(g.duplicate(true))
-	NewCap.CaptainStats = NewStats
-	NewInv._InventoryContents = OriginalInv._InventoryContents.duplicate()
-	#NewInv._CardInventory = OriginalInv._CardInventory.duplicate()
 	
+	var itemDisposition : Dictionary[DispositionManager.Dispositions, float] = {
+		DispositionManager.Dispositions.KINETIC : 0.0,
+		DispositionManager.Dispositions.ELECTRICAL : 0.0,
+		DispositionManager.Dispositions.THERMAL : 0.0,
+		DispositionManager.Dispositions.MAGNETIC : 0.0,
+		DispositionManager.Dispositions.RADIANT : 0.0,
+		DispositionManager.Dispositions.NUCLEAR : 0.0,
+	}
+	for g in OriginalCap.itemDisposition:
+		itemDisposition[g] = OriginalCap.itemDisposition[g]
+	
+	NewCap.CaptainStats = NewStats
+	NewCap.itemDisposition = itemDisposition
+	
+	var NewInv = CharacterInventory.newInv(NewCap)
+	NewCap.RegisterInventory(NewInv)
+	NewInv.ClearInventory()
+	
+	
+	
+	for g in OriginalInv._InventoryContents:
+		for amm in OriginalInv._InventoryContents[g]:
+			NewInv.AddItem(g)
+	#NewInv._InventoryContents = OriginalInv._InventoryContents.duplicate()
+	#NewInv._CardInventory = OriginalInv._CardInventory.duplicate()
+	#NewCap.RegisterInventory(NewInv)
 	NewInv.RemoveItem(OriginalItem)
 	NewInv.AddItem(UpgradedItem)
-
-	NewCap.OnShipPartRemovedFromInventory(OriginalItem)
-	NewCap.OnShipPartAddedToInventory(UpgradedItem)
+	
+	#NewCap.OnShipPartRemovedFromInventory(OriginalItem)
+	#NewCap.OnShipPartAddedToInventory(UpgradedItem)
 	
 	var StatC = StatComp.instantiate() as StatComperator
-	StatC.SetCaptainsToCompare(OriginalCap, NewCap)
 	add_child(StatC)
+	StatC.SetCaptainsToCompare(OriginalCap, NewCap)
+	
 	
 	var Resault = await StatC.TradeFinished
 	

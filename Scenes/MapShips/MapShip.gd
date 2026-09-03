@@ -146,8 +146,11 @@ func Refuel() -> float:
 				else:
 					unsatisfiedShips[g] += deservedFuel
 					excessFuel -= deservedFuel
-				
-		var biggestFuel = unsatisfiedShips.values()[0] + excessFuel
+		
+		var biggestFuelShip : MapShip = unsatisfiedShips.keys()[0]
+		var maxFuel = biggestFuelShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
+		var currentFuel = biggestFuelShip.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
+		var biggestFuel = min(unsatisfiedShips[biggestFuelShip] + excessFuel, maxFuel - currentFuel)
 		
 		timeLeft = max(0, biggestFuel / FuelPerTic / 6)
 		
@@ -165,7 +168,7 @@ func Repair() -> float:
 		
 		if (CurrentPort.HasRepair()):
 			TimeMulti = 0.10
-		timeLeft = ((Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL) - Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)) / TimeMulti / 6)
+		timeLeft = (Cpt.Repair_Parts / TimeMulti / 6)
 		#ShipDockActions.emit("Repairing", true, roundi(timeleft))
 		Cpt.RefillResource(STAT_CONST.STATS.HULL ,TimeMulti * SimulationSpeed)
 		Cpt.Repair_Parts -= TimeMulti * SimulationSpeed

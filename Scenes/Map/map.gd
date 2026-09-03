@@ -603,10 +603,10 @@ func GenerateEventsThreaded() -> void:
 	
 	
 	for g in SpotGroups:
-		var Spots : Array
-		Spots.append_array(get_tree().get_nodes_in_group(g))
 		
-		var SpEvents = EventManager.GetInstance().GetSpecialEventsForSpotType(MapSpotType.SpotKind[g])
+		var Spots : Array = get_tree().get_nodes_in_group(g)
+		
+		var SpEvents : Array[Happening] = EventManager.GetInstance().GetSpecialEventsForSpotType(MapSpotType.SpotKind[g])
 		
 		FigureOutMandatoryEvents(SpEvents, Spots)
 		
@@ -631,8 +631,8 @@ func GenerateEventsThreaded() -> void:
 
 		#var Events = (Spots[0] as MapSpot).SpotType.GetNormalEvents()
 		Spots.clear()
-		Spots.append_array(get_tree().get_nodes_in_group(g))
-		var Events = EventManager.GetInstance().GetEventsForSpotType(MapSpotType.SpotKind[g])
+		Spots = get_tree().get_nodes_in_group(g)
+		var Events : Array[Happening] = EventManager.GetInstance().GetEventsForSpotType(MapSpotType.SpotKind[g])
 		
 		FigureOutMandatoryEvents(Events, Spots)
 		
@@ -655,7 +655,7 @@ func GenerateEventsThreaded() -> void:
 			Spots.erase(Sp)
 	call_deferred("EventGenFinished")
 
-func FigureOutMandatoryEvents(events : Array[Happening], spots : Array[MapSpot]) -> void:
+func FigureOutMandatoryEvents(events : Array[Happening], spots : Array) -> void:
 	for event in range(events.size() - 1, -1, -1):
 		var hap : Happening = events[event]
 		if (hap.MandatoryLocaiton != ""):

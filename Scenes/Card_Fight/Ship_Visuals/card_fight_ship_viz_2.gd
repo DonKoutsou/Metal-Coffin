@@ -397,10 +397,14 @@ func UpdateStats(S : BattleShipStats) -> void:
 	ShieldTween.tween_property(ShieldBar, "value", S.Shield, 1)
 	
 	HullLabel.text = "{0}/{1}".format([roundi(S.CurrentHull + S.Shield), S.Hull]).replace(".0", "")
-	FPLabel.text = "[color=#f35033]FRPW[/color] {0}".format([S.GetFirePower()]).replace(".0", "")
-	SPDLabel.text = "[color=#308a4d]SPD[/color] {0}".format([roundi(S.GetSpeed())])
-	WeightLabel.text = "[color=#828dff]WGHT[/color] {0}".format([S.GetWeight()]).replace(".0", "")
-	DefenceLabel.text = "[color=#7bb0b4]DEF[/color] {0}".format([S.GetDef()]).replace(".0", "")
+	var fp = snappedf(S.GetFirePower(), 0.1)
+	FPLabel.text = "[color=#f35033]FRPW[/color] {0}".format([fp]).replace(".0", "")
+	var sp = roundi(S.GetSpeed())
+	SPDLabel.text = "[color=#308a4d]SPD[/color] {0}".format([sp])
+	var w = roundi(S.GetWeight())
+	WeightLabel.text = "[color=#828dff]WGHT[/color] {0}".format([w]).replace(".0", "")
+	var def = snapped(S.GetDef(), 0.1)
+	DefenceLabel.text = "[color=#7bb0b4]DEF[/color] {0}".format([def]).replace(".0", "")
 
 
 func SetStatsAnimation(S : BattleShipStats, Friendly : bool) -> void:

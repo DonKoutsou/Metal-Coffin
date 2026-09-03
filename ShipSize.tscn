@@ -2,10 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://cyqs71v0yadm1" path="res://Assets/ShipTextures/Hull1.png" id="1_2rias"]
 [ext_resource type="Texture2D" uid="uid://ev8n5tjqls2e" path="res://Assets/ShipTextures/Hull2.png" id="2_qqv1c"]
+[ext_resource type="Texture2D" uid="uid://bf8ht61s5ovk" path="res://Assets/ShipTextures/Hull14.png" id="3_2suqw"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/ShipTextures/Hull6.png" id="3_qqv1c"]
 [ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/ShipTextures/Hull3.png" id="3_rd5hk"]
 [ext_resource type="Texture2D" uid="uid://bx78x3avxyhmf" path="res://Assets/ShipTextures/Hull5.png" id="4_2suqw"]
 [ext_resource type="Texture2D" uid="uid://d1vusg0beo7lv" path="res://Assets/ShipTextures/Hull7.png" id="5_d47s1"]
+[ext_resource type="Texture2D" uid="uid://7h4uf5rwddw6" path="res://Assets/ShipTextures/Hull13.png" id="7_d47s1"]
 
 [node name="Sprite2D" type="Sprite2D" unique_id=1536705037]
 texture_filter = 1
@@ -15,6 +17,10 @@ texture = ExtResource("1_2rias")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=380309356]
 position = Vector2(127, 0)
 texture = ExtResource("2_qqv1c")
+
+[node name="Sprite2D6" type="Sprite2D" parent="." unique_id=144470625]
+position = Vector2(-188, 0)
+texture = ExtResource("3_2suqw")
 
 [node name="Sprite2D5" type="Sprite2D" parent="." unique_id=797338363]
 position = Vector2(572.00006, 0)
@@ -28,6 +34,11 @@ texture = ExtResource("3_rd5hk")
 [node name="Sprite2D3" type="Sprite2D" parent="." unique_id=1108510223]
 position = Vector2(354, 1)
 texture = ExtResource("4_2suqw")
+
+[node name="Sprite2D7" type="Sprite2D" parent="." unique_id=1611007521]
+position = Vector2(-316, 0)
+scale = Vector2(0.58, 0.58)
+texture = ExtResource("7_d47s1")
 
 [node name="Sprite2D4" type="Sprite2D" parent="." unique_id=1010934868]
 position = Vector2(468.99997, 1)

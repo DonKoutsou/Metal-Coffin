@@ -110,7 +110,7 @@ text = "10h 30m"
 horizontal_alignment = 2
 
 [node name="ProgressBar" type="ProgressBar" parent="VBoxContainer2" unique_id=1876089438]
-custom_minimum_size = Vector2(500, 25)
+custom_minimum_size = Vector2(400, 25)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 3

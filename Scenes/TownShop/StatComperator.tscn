@@ -3,6 +3,10 @@
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_7ppks"]
 [ext_resource type="PackedScene" uid="uid://bnonfp8ywr3vl" path="res://Scenes/Inventory/captain_stat_container.tscn" id="2_qdj1a"]
 [ext_resource type="Script" uid="uid://bul44eo0uywkb" path="res://Scripts/stat_comperator.gd" id="2_r4pak"]
+[ext_resource type="Texture2D" uid="uid://bk3hmnxkvr5ab" path="res://Assets/UIPiecies/network-bars.png" id="4_p3cd6"]
+[ext_resource type="Texture2D" uid="uid://dw7al4e4pdao4" path="res://Assets/UIPiecies/Card.png" id="5_nliit"]
+[ext_resource type="Texture2D" uid="uid://c7wkqvg4osdjt" path="res://Assets/UIPiecies/cardboard-box.png" id="6_nliit"]
+[ext_resource type="Texture2D" uid="uid://c2v600qe1d181" path="res://Assets/UIPiecies/nested-hexagons.png" id="7_t3rds"]
 
 [node name="StatComperator" type="PanelContainer" unique_id=723853942 node_paths=PackedStringArray("ContainerBefore", "ContainerAfter")]
 anchors_preset = 15
@@ -82,20 +86,30 @@ layout_mode = 2
 [node name="ShowStats" type="Button" parent="VBoxContainer/HBoxContainer2" unique_id=1999035061]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "STATS"
+icon = ExtResource("4_p3cd6")
+icon_alignment = 1
 
 [node name="ShowDeck" type="Button" parent="VBoxContainer/HBoxContainer2" unique_id=2144779646]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "DECK"
+icon = ExtResource("5_nliit")
+icon_alignment = 1
 
 [node name="ShowCargo" type="Button" parent="VBoxContainer/HBoxContainer2" unique_id=1031726466]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "CARGO"
+icon = ExtResource("6_nliit")
+icon_alignment = 1
+
+[node name="ShowDisposition" type="Button" parent="VBoxContainer/HBoxContainer2" unique_id=1452509635]
+layout_mode = 2
+size_flags_horizontal = 3
+icon = ExtResource("7_t3rds")
+icon_alignment = 1
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer3/Accept" to="." method="_on_accept_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer3/Decline" to="." method="_on_decline_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/ShowStats" to="." method="_on_show_stats_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/ShowDeck" to="." method="_on_show_deck_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/ShowCargo" to="." method="_on_show_cargo_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/ShowDisposition" to="." method="_on_show_disposition_pressed"]

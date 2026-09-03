@@ -16,11 +16,17 @@ func _ready() -> void:
 static func GetInstance() -> EventManager:
 	return Instance
 
-func GetEventsForSpotType(Spot : MapSpotType.SpotKind) -> Array:
-	return EventsPerSpot[Spot].duplicate()
+func GetEventsForSpotType(Spot : MapSpotType.SpotKind) -> Array[Happening]:
+	var events : Array[Happening] = []
+	
+	for g : Happening in EventsPerSpot[Spot]:
+		if (!g.Special):
+			events.append(g)
+		
+	return events
 
-func GetSpecialEventsForSpotType(Spot : MapSpotType.SpotKind) -> Array:
-	var SpecialEvents : Array = []
+func GetSpecialEventsForSpotType(Spot : MapSpotType.SpotKind) -> Array[Happening]:
+	var SpecialEvents : Array[Happening] = []
 	
 	for g : Happening in EventsPerSpot[Spot]:
 		if (g.Special):
