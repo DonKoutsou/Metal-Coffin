@@ -66,7 +66,7 @@ func HandleInput(event: InputEvent) -> void:
 					force.y = 0
 				force.y -= 20
 			else:
-				pos.y -= 20
+				pos.y -= 40
 	
 	else: if (event.is_action_pressed("ZoomOut")):
 		if (!YLock):
@@ -75,7 +75,7 @@ func HandleInput(event: InputEvent) -> void:
 					force.y = 0
 				force.y -= -20
 			else:
-				pos.y += 20
+				pos.y += 40
 	
 	else : if (event is InputEventScreenDrag and Input.is_action_pressed("Click")):
 		if (!XLock):

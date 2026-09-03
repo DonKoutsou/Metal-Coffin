@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://v1gumu5fm5sd" path="res://Scripts/Inventory/captain_stat_container.gd" id="1_gx6im"]
 [ext_resource type="Texture2D" uid="uid://cyqs71v0yadm1" path="res://Assets/ShipTextures/Hull1.png" id="2_7pj6b"]
+[ext_resource type="Texture2D" uid="uid://hcbn2124kbd3" path="res://Assets/CaptainPortraits/Captain5.png" id="2_gxgtf"]
 [ext_resource type="PackedScene" uid="uid://cr6qn30drails" path="res://Scenes/Inventory/inventory_ship_stats.tscn" id="3_qyvw6"]
 [ext_resource type="Script" uid="uid://c407gsr2ima44" path="res://Scripts/Inventory/ship_deck.gd" id="4_7pj6b"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Card_Fight/Card/Card.tscn" id="5_gxgtf"]
@@ -50,7 +51,7 @@ corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 corner_detail = 1
 
-[node name="CaptainStatContainer" type="PanelContainer" unique_id=1727051882 node_paths=PackedStringArray("ShipStats", "ShipDeck", "ShipInventory", "DispositionScreen", "CaptainIcon")]
+[node name="CaptainStatContainer" type="PanelContainer" unique_id=1727051882 node_paths=PackedStringArray("ShipStats", "ShipDeck", "ShipInventory", "DispositionScreen", "CaptainIcon", "CaptainIcon2")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -63,12 +64,25 @@ ShipDeck = NodePath("PanelContainer/ShipDeck")
 ShipInventory = NodePath("PanelContainer/InputScroll/InventoryInterface")
 DispositionScreen = NodePath("PanelContainer/VBoxContainer/PanelContainer")
 CaptainIcon = NodePath("PanelContainer/CaptainIcon")
+CaptainIcon2 = NodePath("PanelContainer/CaptainIcon2")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=383408915]
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_12j2j")
+
+[node name="CaptainIcon2" type="TextureRect" parent="PanelContainer" unique_id=1449391995]
+modulate = Color(1, 1, 1, 0.15686275)
+show_behind_parent = true
+texture_filter = 3
+layout_mode = 2
+size_flags_vertical = 3
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.6, 1.6)
+texture = ExtResource("2_gxgtf")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="CaptainIcon" type="TextureRect" parent="PanelContainer" unique_id=274165875]
 show_behind_parent = true
