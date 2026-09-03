@@ -82,6 +82,7 @@ func SpawnInitialShip() -> void:
 	ControlledShip.Teleported.connect(UpdatePlayerInfo)
 	InventoryManager.GetInstance().AddCharacter(ControlledShip.Cpt)
 	
+	ControlledShip.ToggleFuelRangeVisibility(true)
 	ControlledShip.connect("OnShipDestroyed", OnShipDestroyed)
 	ControlledShip.connect("OnShipDamaged", OnShipDamaged)
 	

@@ -7,6 +7,7 @@ class_name CaptainStatContainer
 @export var ShipInventory : CharacterInventoryInterface
 @export var DispositionScreen : CaptainDispositionUI
 @export var CaptainIcon : TextureRect
+@export var CaptainIcon2 : TextureRect
 
 var currentStats : Control
 
@@ -21,6 +22,10 @@ func SetCaptain(Cha : Captain) -> void:
 	ShipInventory.InitialiseInventory(Cha)
 	DispositionScreen.SetStats(Cha)
 	CaptainIcon.texture = Cha.ShipIcon
+	if (Cha.CaptainPortrait != ""):
+		CaptainIcon2.texture = load(Cha.CaptainPortrait)
+	else:
+		CaptainIcon2.texture = null
 
 #var tw : Tween
 

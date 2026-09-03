@@ -622,7 +622,7 @@ func GetFuelRange() -> float:
 #-------------------------------------------------
 func GetFuelRangeWithExtraFuel(ExtraFuel : float) -> float:
 	if (Command != null):
-		return Command.GetFuelRange()
+		return Command.GetFuelRangeWithExtraFuel(ExtraFuel)
 	var Fleet = GetSquad()
 	
 	var Weight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)

@@ -80,10 +80,7 @@ func UpdateRefuelTime() -> void:
 	refuelTime = max(0, biggestFuel / FuelPerTic / 6)
 
 func RedrawThing() -> void:
-	Rng = 0
-	for g in Ships:
-		if (g.Command == null):
-			Rng += g.GetFuelRangeWithExtraFuel(PlayerBoughtFuel)
+	Rng = GetFuelRangeWithExtraFuel(PlayerBoughtFuel)
 	
 	UpdateRefuelTime()
 	
@@ -91,6 +88,27 @@ func RedrawThing() -> void:
 	rangeLabel.text = "Fleet Range : {0}km".format([roundi(Rng)])
 	
 	queue_redraw()
+
+func GetFuelRangeWithExtraFuel(ExtraFuel : float) -> float:
+
+	var Weight : float
+	var fuel_ef : float
+	var fleetsize = Ships.size()
+	var total_fuel = ExtraFuel
+	var inverse_ef_sum : float = 0
+	
+	# Group ships fuel and efficiency calculations
+	for g in Ships:
+		var ship_fuel = g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
+		var ship_efficiency = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
+		var ship_weight = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
+		total_fuel += ship_fuel
+		inverse_ef_sum += 1.0 / ((ship_efficiency / pow(ship_weight, 0.5)) * 10)
+		
+
+	var effective_efficiency = fleetsize / inverse_ef_sum
+	# Calculate average efficiency for the group
+	return total_fuel * effective_efficiency / fleetsize
 
 func Init(BoughtFuel : float, FuelPrice : float, LandedShips : Array[MapShip], Pos : MapSpot) -> void:
 	Spot = Pos
@@ -102,14 +120,14 @@ func Init(BoughtFuel : float, FuelPrice : float, LandedShips : Array[MapShip], P
 			continue
 		var Spotpos = g.global_position - CenterSpot
 		Spots[g] = (get_viewport_rect().size / 2) + (Spotpos / 15)
-
-	for g in LandedShips:
-		if (g.Command == null):
-			Rng += g.GetFuelRangeWithExtraFuel(BoughtFuel)
+	
+	Ships = LandedShips
+	
+	Rng = GetFuelRangeWithExtraFuel(PlayerBoughtFuel)
+	
 	#var Rng = LandedShips[0].GetFuelRange()
 	queue_redraw()
 	
-	Ships = LandedShips
 	PlayerBoughtFuel = BoughtFuel
 	FuelPricePerTon = FuelPrice
 	
