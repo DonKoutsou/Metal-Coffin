@@ -95,7 +95,7 @@ func  _ready() -> void:
 	if (!Patrol and !Convoy):
 		CurrentLandAltitude = TopographyMap.GetAltitudeAtGlobalPosition(global_position)
 		UpdateAltitude(CurrentLandAltitude)
-		RadarShape.Stationary = true
+		RadarShape.Landed = true
 
 func _exit_tree() -> void:
 	WeatherManage.UnregisterShip(self)

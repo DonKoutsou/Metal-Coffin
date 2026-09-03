@@ -5,17 +5,17 @@ class_name HostileRadar
 signal OnPlayerVisualContact(Ship : MapShip, SeenBy : HostileShip)
 signal OnPlayerVisualLost(Ship : MapShip, LostBy : HostileShip)
 
-var Stationary : bool = false
+var Landed : bool = false
 
 func EvaluateRadarTargets(Altitude : float) -> void:
 	for g in InsideRadar:
 		if (TopographyMap.WithinLineOfSight(global_position, Altitude, g.global_position, g.Altitude)):
-			if (Stationary):
+			if (Landed):
 				GarissonVisualContact(g)
 			else:
 				OnPlayerVisualContact.emit(g, get_parent())
 		else:
-			if (Stationary):
+			if (Landed):
 				GarissonLostVisualContact(g)
 			else:
 				OnPlayerVisualLost.emit(g, get_parent())
@@ -65,7 +65,7 @@ func GarissonLostVisualContact(Ship : MapShip) -> void:
 func BodyLeftRadar(Body : Area2D) -> void:
 	if (Body.get_parent() is PlayerDrivenShip):
 		InsideRadar.erase(Body.get_parent())
-		if (Stationary):
+		if (Landed):
 			GarissonLostVisualContact(Body.get_parent())
 		else:
 			OnPlayerVisualLost.emit(Body.get_parent(), get_parent())

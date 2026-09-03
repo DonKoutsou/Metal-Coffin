@@ -40,5 +40,5 @@ ItemDesc = "The pinnacle of engineering, this engine includes advanced fuel atom
 CardProviding = Array[ExtResource("2_x01tj")]([ExtResource("1_t7h3x"), ExtResource("1_t7h3x"), ExtResource("3_j5fk8"), ExtResource("4_tq668"), ExtResource("5_tq668"), ExtResource("5_tq668")])
 Tier = 2
 CanTransfer = false
-Cost = 280000
+Cost = 180000
 PartType = 1

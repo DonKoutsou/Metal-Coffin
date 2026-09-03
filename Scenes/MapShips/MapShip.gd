@@ -296,9 +296,12 @@ func _HandleLanding(delta : float) -> void:
 
 	if (Altitude != NewAltitude):
 		UpdateAltitude(move_toward(Altitude, NewAltitude, delta * 1000))
-		if (Landed() and self is PlayerDrivenShip):
+		var landed = Landed()
+		if (landed and self is PlayerDrivenShip):
 			PopUpManager.GetInstance().DoFadeNotif("{0} has landed".format([Cpt.GetCaptainName()]))
 			RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.LANDING_END)
+		else: if (landed and self is HostileShip):
+			RadarShape.Landed = landed
 
 func RemovePort():
 	ShipDeparted.emit(CurrentPort)

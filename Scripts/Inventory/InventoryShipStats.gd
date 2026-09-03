@@ -31,6 +31,7 @@ func _ready() -> void:
 	$GridContainer.add_child(Rangestat)
 	
 	ValueStat = ShipStatScene.instantiate() as ShipStatContainer
+	print("thing")
 	ValueStat.SetDataCustom(1000000, "₯", "VALUE", STAT_CONST.STATS.VALUE)
 	ValueStat.STName = STAT_CONST.STATS.VALUE
 	$GridContainer.add_child(ValueStat)

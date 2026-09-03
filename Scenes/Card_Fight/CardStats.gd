@@ -145,6 +145,10 @@ func IsEnergyDependant() -> bool:
 static func FindTooltips(card : CardStats) -> PackedStringArray:
 	var tips : PackedStringArray = []
 	
+	if (card.Burned):
+		tips.append("TLTP_BURNED")
+		return tips
+	
 	if (card.IsDisposition):
 		tips.append("TLTP_DISPOSITION")
 	

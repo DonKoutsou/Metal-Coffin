@@ -25,7 +25,7 @@ StatBase = 90.0
 [sub_resource type="Resource" id="Resource_owwtk"]
 script = ExtResource("2_mq2gw")
 StatName = 5
-StatBase = 8.0
+StatBase = 6.0
 
 [sub_resource type="Resource" id="Resource_5chah"]
 script = ExtResource("2_mq2gw")
@@ -50,7 +50,7 @@ StatName = 7
 [sub_resource type="Resource" id="Resource_1pd72"]
 script = ExtResource("2_mq2gw")
 StatName = 9
-StatBase = 50.0
+StatBase = 140.0
 metadata/_custom_type_script = "uid://cu0lfdj4ci6bo"
 
 [sub_resource type="Resource" id="Resource_ciy03"]

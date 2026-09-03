@@ -27,9 +27,13 @@ func SetDataCustom(MaxValue : float, StatMetric : String, StatName : String, Sta
 	slider.max_value = MaxValue
 	slider.step = step
 
+func UpdateStatCustom(StatVal : float, ItemVar : float, ItemPenalty : float) -> void:
+	super(StatVal, ItemVar, ItemPenalty)
+	$HSlider.set_value_no_signal(StatVal)
+
 func UpdateStatValue(StatVal : float, ItemVar : float, ItemPenalty : float) -> void:
 	super(StatVal, ItemVar, ItemPenalty)
-	$HSlider.value = StatVal
+	$HSlider.set_value_no_signal(StatVal)
 
 func _on_h_slider_value_changed(value: float) -> void:
 	StatChanged.emit(STName, value)

@@ -42,5 +42,5 @@ ItemDesc = "This intermediate engine integrates enhanced fuel management systems
 CardProviding = Array[ExtResource("2_0ovoj")]([ExtResource("1_ro018"), ExtResource("1_ro018"), ExtResource("3_nw0c3"), ExtResource("4_hehup"), ExtResource("4_hehup"), ExtResource("5_f5x4x")])
 Tier = 1
 CanTransfer = false
-Cost = 200000
+Cost = 120000
 PartType = 1

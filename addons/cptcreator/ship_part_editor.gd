@@ -53,7 +53,7 @@ func SetItem(index : int) -> void:
 
 func UpdateData() -> void:
 
-	slider.SetDataCustom(100000, "₯", "VALUE", STAT_CONST.STATS.VALUE)
+	slider.SetDataCustom(300000, "₯", "VALUE", STAT_CONST.STATS.VALUE, 100)
 	slider.UpdateStatCustom(CurrentlySelectedItem.Cost, 0, 0)
 	slider.UpdateStatValue(CurrentlySelectedItem.Cost, 0, 0)
 

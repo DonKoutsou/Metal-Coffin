@@ -30,5 +30,5 @@ ItemName = "Coil"
 ItemDesc = "WIP"
 CardProviding = Array[ExtResource("1_3xmbh")]([ExtResource("2_aagpo"), ExtResource("2_aagpo"), ExtResource("3_j17v7")])
 CanTransfer = false
-Cost = 60000
+Cost = 45000
 PartType = 4

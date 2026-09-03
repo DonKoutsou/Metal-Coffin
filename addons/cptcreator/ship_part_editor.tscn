@@ -210,21 +210,14 @@ layout_mode = 2
 [node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=379393699]
 layout_mode = 2
 theme_override_font_sizes/font_size = 34
-text = "BT-2"
+text = "Armor-Piercing Magazine 100mm"
 
 [node name="Label2" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=974608444]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "[color=#ffc315]Ship Part Type[/color] : SENSOR
-[color=#ffc315]DISPOSITION[/color] : KINETIC
-[color=#ffc315]-------------[/color]
-A fundamental radar system offering basic detection capabilities. Ideal for identifying nearby low-profile threats in standard operational conditions. 
-[color=#ffc315]-------------[/color]
-PROVIDING STATS
-[color=#ffc315]VISUAL RANGE[/color] : + 350.0 km
-[color=#ffc315]REPAIR PRICE[/color] : + 15.0 Drahma
-[color=#ffc315]WEIGHT[/color] : + 8.0 tons"
+text = "[color=#ffc315]REQUIRES MG_100mm[/color]
+This magazine contains high-velocity rounds with reinforced cores, optimized for penetrating heavy armor and fortified hulls. The dense material composition minimizes deformation upon impact, allowing for deep penetration and critical internal damage."
 fit_content = true
 autowrap_mode = 2
 
