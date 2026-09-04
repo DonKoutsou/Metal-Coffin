@@ -9,7 +9,7 @@ var StartingScale :Vector2
 @export var phase_offset: float = 0.0  # Phase offset for randomness
 @export var max_rotation: float = 0.1  # Maximum angle in radians for rotation
 @export var max_scale_x: float = 1  # Maximum angle in radians for rotation
-
+@export var sound : FmodEventEmitter2D
 @export var BluredSpriteFrames : SpriteFrames
 @export var NonBluredSpriteFrames : SpriteFrames
 
@@ -82,16 +82,14 @@ func _on_control_gui_input(event: InputEvent) -> void:
 func SetFps(FPS: int) -> void:
 	sprite_frames.set_animation_speed("default", FPS)
 	$AnimatedSprite2D.sprite_frames.set_animation_speed("default", FPS)
-	var pitch = FPS / 24.0
-	if (pitch == 0):
-		$AudioStreamPlayer2D.stop()
-		return
-	if (!$AudioStreamPlayer2D.playing):
-		$AudioStreamPlayer2D.play()
-	$AudioStreamPlayer2D.pitch_scale = pitch
+	var pitch = 1 - FPS / 24.0
+	sound.set_parameter("Pitch", pitch)
 
 
 func _on_visibility_changed() -> void:
-	if (!$AudioStreamPlayer2D.is_inside_tree()):
+	if (!sound.is_inside_tree()):
 		return
-	$AudioStreamPlayer2D.playing = is_visible_in_tree()
+	if (is_visible_in_tree()):
+		sound.play()
+	else:
+		sound.stop()

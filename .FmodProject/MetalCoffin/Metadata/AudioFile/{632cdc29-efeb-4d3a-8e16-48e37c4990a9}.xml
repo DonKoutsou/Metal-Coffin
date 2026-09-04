@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{632cdc29-efeb-4d3a-8e16-48e37c4990a9}">
+		<property name="assetPath">
+			<value>Sounds/science-fiction-effect-009-305470.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>20.506122448979593</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{852d438e-cc44-4dae-b5fa-da0c2f632294}</destination>
+		</relationship>
+	</object>
+</objects>

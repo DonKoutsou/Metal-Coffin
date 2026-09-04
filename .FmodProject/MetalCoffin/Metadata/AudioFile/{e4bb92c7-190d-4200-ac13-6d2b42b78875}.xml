@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{e4bb92c7-190d-4200-ac13-6d2b42b78875}">
+		<property name="assetPath">
+			<value>Music/4- For The Cause.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>195.864</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{852d438e-cc44-4dae-b5fa-da0c2f632294}</destination>
+		</relationship>
+	</object>
+</objects>

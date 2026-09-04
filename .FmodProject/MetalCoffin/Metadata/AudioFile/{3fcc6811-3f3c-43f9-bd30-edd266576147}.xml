@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{3fcc6811-3f3c-43f9-bd30-edd266576147}">
+		<property name="assetPath">
+			<value>Sounds/servo_01.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>3.6647619047619049</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{852d438e-cc44-4dae-b5fa-da0c2f632294}</destination>
+		</relationship>
+	</object>
+</objects>

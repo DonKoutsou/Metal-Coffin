@@ -120,7 +120,7 @@ func OpenScreen(NewStat : ScreenState) -> void:
 	StateSwitched.emit(CurrentScreenState)
 	Transition.Open()
 	await Transition.PanelOpened
-	Transition.queue_free()
+	
 	
 	FullScreenToggleFinished.emit()
 	Cam.EnableFullScreenShake()
@@ -152,7 +152,7 @@ func DoIntroFullScreen(NewStat : ScreenState) -> void:
 	
 	Transition.Open()
 	await Transition.PanelOpened
-	Transition.queue_free()
+	
 	
 	FullScreenToggleFinished.emit()
 	Cam.EnableFullScreenShake()
@@ -192,7 +192,7 @@ func ToggleFullScreen(NewStat : ScreenState) -> void:
 
 	Transition.Open()
 	await Transition.PanelOpened
-	Transition.queue_free()
+
 	
 	FullScreenToggleFinished.emit()
 	Cam.EnableFullScreenShake()

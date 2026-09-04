@@ -20,8 +20,11 @@ func _ready() -> void:
 	GlitchButton.set_pressed_no_signal(HasGlitch)
 	RainButton.set_pressed_no_signal(HasRain)
 	FullScreenButton.set_pressed_no_signal(DisplayServer.window_get_mode(0) == DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN)
-	SoundSlider.set_value_no_signal(db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Sounds"))))
-	MusicSlider.set_value_no_signal(db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music"))))
+	
+	var master_vca = FmodServer.get_bus_from_guid("{73e88512-3bf1-41c9-b3bf-f65df22cb358}")
+	SoundSlider.set_value_no_signal(master_vca.get_volume())
+	
+	MusicSlider.set_value_no_signal(MusicManager.Instance.GetMusicVolume())
 	ShakeEffectButton.set_pressed_no_signal(ScreenCamera.ShakeEffects)
 	FPSSlider.value = roundi(Engine.max_fps)
 	FPSLabel.text = var_to_str(roundi(Engine.max_fps))
@@ -72,12 +75,15 @@ func _on_rain_check_box_toggled(toggled_on: bool) -> void:
 #-------------------------------------------------------------------
 ##SOUND
 func _on_sound_value_changed(value: float) -> void:
+	var master_vca = FmodServer.get_bus_from_guid("{73e88512-3bf1-41c9-b3bf-f65df22cb358}")
+	master_vca.set_volume(value)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sounds"), linear_to_db(value))
 	
 #-------------------------------------------------------------------
 ##MUSIC
 func _on_music_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), linear_to_db(value))
+	MusicManager.Instance.UpdateMusicVolume(value)
+	#AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), linear_to_db(value))
 
 
 func _on_fps_value_changed(value: float) -> void:

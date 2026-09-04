@@ -8,6 +8,10 @@
 
 config_version=5
 
+[Fmod]
+
+General/banks_path="res://FMod_Build"
+
 [application]
 
 config/name="Metal Coffin"
@@ -37,6 +41,7 @@ PopupManager="*res://Scenes/GlobalManagers/PopupManager.tscn"
 DispoisitionManager="*uid://cuad168v6mleh"
 BeehaveGlobalMetrics="*uid://c3ktl6ontsdt7"
 BeehaveGlobalDebugger="*uid://bl3ma400hpvsh"
+FmodManager="*uid://cds10pm7hwn3p"
 
 [display]
 
@@ -56,7 +61,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/BurstParticles2D/plugin.cfg", "res://addons/beehave/plugin.cfg", "res://addons/cptcreator/plugin.cfg", "res://addons/script-ide/plugin.cfg", "res://addons/yard/plugin.cfg")
+enabled=PackedStringArray("res://addons/BurstParticles2D/plugin.cfg", "res://addons/beehave/plugin.cfg", "res://addons/cptcreator/plugin.cfg", "res://addons/fmod/plugin.cfg", "res://addons/script-ide/plugin.cfg", "res://addons/yard/plugin.cfg")
 
 [file_customization]
 
@@ -69,6 +74,12 @@ folder_colors={
 "res://Theme/": "blue",
 "res://addons/": "yellow"
 }
+
+[fmod]
+
+banks/import/fmod_studio_path="D:/Software/FMOD Studio 2.03.14/FMOD Studio.exe"
+banks/import/fmod_project_path="E:/Godot_Project/Space_Exploration_Game/.FmodProject/MetalCoffin/MetalCoffin.fspro"
+banks/import/bank_directory="res://FMod_Build"
 
 [global_group]
 

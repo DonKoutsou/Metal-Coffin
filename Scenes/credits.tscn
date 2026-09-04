@@ -8,9 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://i0ngh8uftjja" path="res://Assets/Creds/burstpart.svg" id="6_7emq5"]
 [ext_resource type="Texture2D" uid="uid://3ry1vwlq8lr7" path="res://Assets/Creds/AmbientCGLOGO.png" id="6_uah1q"]
 [ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="7_803yc"]
+[ext_resource type="Texture2D" uid="uid://du2pc7ffalqa0" path="res://Assets/Creds/FMOD Logo White - Transparent Background.png" id="9_1wbrc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1vivr"]
 bg_color = Color(0, 0, 0, 0.7254902)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8vrlf"]
+bg_color = Color(1, 0.7647059, 0.08235294, 1)
 
 [node name="Credits" type="Control" unique_id=392640743]
 layout_mode = 3
@@ -47,6 +51,7 @@ theme_override_constants/separation = 20
 alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer" unique_id=554651441]
+clip_contents = false
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
@@ -58,6 +63,7 @@ metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
+theme_override_constants/separation = 10
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1848319746]
@@ -66,6 +72,11 @@ layout_mode = 2
 texture = ExtResource("4_803yc")
 expand_mode = 1
 stretch_mode = 3
+
+[node name="Panel2" type="Panel" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=635348441]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8vrlf")
 
 [node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1466459938]
 layout_mode = 2
@@ -112,9 +123,10 @@ text = "Rcpxl - Ship Icons"
 underline = 1
 uri = "https://www.fiverr.com/anantapxl18"
 
-[node name="Control4" type="Control" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1215275535]
-custom_minimum_size = Vector2(0, 10.24)
+[node name="Panel6" type="Panel" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1712088729]
+custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8vrlf")
 
 [node name="Label4" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=261392651]
 layout_mode = 2
@@ -146,6 +158,11 @@ theme_override_constants/shadow_outline_size = 0
 text = "LuPáš"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Panel5" type="Panel" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1565347590]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8vrlf")
 
 [node name="Label2" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=792500813]
 layout_mode = 2
@@ -206,6 +223,11 @@ theme_override_font_sizes/font_size = 22
 text = "Burst Particles 2D"
 uppercase = true
 
+[node name="Panel4" type="Panel" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=761332660]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8vrlf")
+
 [node name="Label5" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=295628115]
 layout_mode = 2
 theme_override_constants/shadow_offset_x = 0
@@ -250,6 +272,11 @@ text = "Game-Icons.net"
 underline = 1
 uri = "https://game-icons.net"
 
+[node name="Panel3" type="Panel" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=629569054]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8vrlf")
+
 [node name="Label9" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=2130640787]
 layout_mode = 2
 theme_override_constants/shadow_offset_x = 0
@@ -275,6 +302,29 @@ theme_override_font_sizes/font_size = 40
 text = "kenny.nl"
 underline = 1
 uri = "https://kenney.nl/assets/ui-audio"
+
+[node name="Panel" type="Panel" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1153534948]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8vrlf")
+
+[node name="Label10" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1849384758]
+layout_mode = 2
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 30
+text = "Software Used"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=737883789]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+texture = ExtResource("9_1wbrc")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Control3" type="Control" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=407890701]
 visible = false

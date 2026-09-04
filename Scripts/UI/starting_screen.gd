@@ -6,6 +6,7 @@ class_name StartingScreen
 @export var DitherShader : ShaderMaterial
 @export_file("*.tscn") var StudioAnim : String
 @export_file("*.tscn") var WarningScene : String
+@export_file("*.tscn") var FMODScene : String
 @export_file("*.tscn") var GameScene : String = "res://Scenes/World.tscn"
 @export_file("*.tscn") var IntroGameScene : String = "res://Scenes/IntroWorld.tscn"
 @export_file("*.tscn") var CageFightGameScene : String = "res://Scenes/CageFightWorld.tscn"
@@ -50,16 +51,10 @@ func _ready() -> void:
 
 #-----------------------------------------------------------------------------------
 func Start() -> void:
-	var warning : PackedScene = ResourceLoader.load(WarningScene)
-	var warningsc : Control = warning.instantiate()
-	warningsc.modulate.a = 0
-	$SubViewportContainer/SubViewport.add_child(warningsc)
 	
-	var tw = create_tween()
-	tw.tween_property(warningsc, "modulate", Color(1,1,1,1), 1)
+	await FadeScene(WarningScene)
+	await FadeScene(FMODScene)
 	
-	await get_tree().create_timer(3).timeout
-	warningsc.queue_free()
 	
 	var StudioAnimScene = ResourceLoader.load(StudioAnim)
 	var vidpl = StudioAnimScene.instantiate() as StudioAnimation
@@ -70,6 +65,21 @@ func Start() -> void:
 	vidpl.queue_free()
 	await SpawnMenu()
 
+func FadeScene(sc : String) -> void:
+	var scene : PackedScene = ResourceLoader.load(sc)
+	var instance : Control = scene.instantiate()
+	instance.modulate.a = 0
+	$SubViewportContainer/SubViewport.add_child(instance)
+	
+	var tw = create_tween()
+	tw.tween_property(instance, "modulate", Color(1,1,1,1), 1)
+	
+	await get_tree().create_timer(3).timeout
+	
+	tw = create_tween()
+	tw.tween_property(instance, "modulate", Color(1,1,1,0), 1)
+	await tw.finished
+	instance.queue_free()
 #-----------------------------------------------------------------------------------
 func SpawnMenu() -> void:
 	var Menu = await Helper.LoadThreaded(StartingMenuScene).Sign
@@ -184,9 +194,12 @@ func LoadSavedSettings() -> void:
 		DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_WINDOWED)
-	
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sounds"), sav.Sound)
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), sav.Music)
+
+	var master_vca = FmodServer.get_bus_from_guid("{73e88512-3bf1-41c9-b3bf-f65df22cb358}")
+	master_vca.set_volume(sav.Sound)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sounds"), linear_to_db(sav.Sound))
+	MusicManager.Instance.UpdateMusicVolume(sav.Music)
+
 	Engine.max_fps = sav.FPS
 	ScreenCamera.ShakeEffects = sav.ShakeEffect
 	SettingsPanel.HasRain = sav.Rain
@@ -197,8 +210,11 @@ func UpdateSavedSettings() -> void:
 	save.FullScreen = DisplayServer.window_get_mode(0) == DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN
 	save.Glitch = SettingsPanel.HasGlitch
 	save.Rain = SettingsPanel.HasRain
-	save.Sound = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Sounds"))
-	save.Music = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music"))
+	#save.Sound = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Sounds"))
+	var master_vca = FmodServer.get_bus_from_guid("{73e88512-3bf1-41c9-b3bf-f65df22cb358}")
+	save.Sound =  master_vca.get_volume()
+	
+	save.Music = MusicManager.Instance.GetMusicVolume()
 	save.ShakeEffect = ScreenCamera.ShakeEffects
 	save.GameVersion = ProjectSettings.get_setting("application/config/version")
 	save.FPS = Engine.max_fps

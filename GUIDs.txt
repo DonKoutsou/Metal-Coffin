@@ -1,0 +1,14 @@
+{5e3c498a-7f76-4f6b-9b9f-49906faa09ab} bank:/Master
+{c621695e-0e0d-0329-1dd6-c36e9e590f33} bank:/Master.strings
+{76b1e2d0-8074-422b-b823-59eac5ff7fda} bank:/Music
+{2726f631-c8d3-456a-aae2-c2542ac72abb} bank:/UI
+{73e88512-3bf1-41c9-b3bf-f65df22cb358} bus:/
+{a21135f5-269e-4e92-aaa2-09fd2732550a} bus:/Reverb
+{070a2a88-016c-4f8a-892f-f01fa36fd230} event:/ButtonIn
+{c13cc203-9614-4552-9e59-97a75edba2a7} event:/ButtonIn2
+{0c734a92-c786-4dd2-9d22-82af391622ea} event:/ButtonOut
+{8141ce5c-d3a5-4a20-bd1b-c4fab58dc91d} event:/ButtonOut2
+{a9502468-3b47-4b60-a03f-8b21663f626d} event:/DigitalClick
+{ac97b2a5-2df3-4b4c-8f83-803eee3ddebd} event:/DigitalHover
+{ebf7454f-2ac6-474a-8a77-8e79d5479c44} event:/Music
+{dbc1d48a-7f2e-484d-9f11-85088dd8aa8e} parameter:/Music_Type

@@ -42,6 +42,7 @@ func _Open() -> void:
 	await OpenTw.finished
 	PanelOpened.emit()
 	Transitioning = false
+	queue_free()
 
 func PlaySound(Sound : AudioStream) -> void:
 	var Delsound = DeletableSoundGlobal.new()
