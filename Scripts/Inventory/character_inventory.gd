@@ -184,12 +184,12 @@ func InitialiseInventory(Cha : Captain) -> void:
 	CaptainNameLabel.text = CharName
 
 
-static func newInv(Cha : Captain) -> CharacterInventory:
+static func newInv(Cha : Captain, addStarting : bool = true) -> CharacterInventory:
 	var inv = CharacterInventory.new()
-	inv.InitialiseStarting(Cha)
+	inv.InitialiseStarting(Cha, addStarting)
 	return inv
 
-func InitialiseStarting(Cha : Captain) -> void:
+func InitialiseStarting(Cha : Captain, addStarting : bool) -> void:
 
 	var CharInvSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.INVENTORY_SPACE)
 	var CharEngineSpace = Cha.GetStatFinalValue(STAT_CONST.STATS.ENGINES_SLOTS)
@@ -232,32 +232,32 @@ func InitialiseStarting(Cha : Captain) -> void:
 		var boxRes = Inventory_Box_Res.new()
 		boxes[ShipPart.ShipPartType.WEAPON].append(boxRes)
 		boxRes.Initialise(self)
-
 	
-	for It in Cha.StartingItems:
-		var boxeList = boxes[It.PartType]
+	if (addStarting):
+		for It in Cha.StartingItems:
+			var boxeList = boxes[It.PartType]
 
-		var Empty : Inventory_Box_Res = null
-		for g : Inventory_Box_Res in boxeList:
-			if (g.IsEmpty()):
-				if (Empty == null):
-					Empty = g
+			var Empty : Inventory_Box_Res = null
+			for g : Inventory_Box_Res in boxeList:
+				if (g.IsEmpty()):
+					if (Empty == null):
+						Empty = g
+					continue
+				if (g.GetContainedItemName() == It.ItemName and g.HasSpace()):
+					g.UpdateAmm(1)
+					_InventoryContents[It] += 1
+
+					break
+			#try to find empty box
+			if (Empty != null):
+				Empty.RegisterItem(It)
+				Empty.UpdateAmm(1)
+				if (_InventoryContents.has(It)):
+					_InventoryContents[It] += 1
+				else:
+					_InventoryContents[It] = 1
+
 				continue
-			if (g.GetContainedItemName() == It.ItemName and g.HasSpace()):
-				g.UpdateAmm(1)
-				_InventoryContents[It] += 1
-
-				break
-		#try to find empty box
-		if (Empty != null):
-			Empty.RegisterItem(It)
-			Empty.UpdateAmm(1)
-			if (_InventoryContents.has(It)):
-				_InventoryContents[It] += 1
-			else:
-				_InventoryContents[It] = 1
-
-			continue
 
 
 

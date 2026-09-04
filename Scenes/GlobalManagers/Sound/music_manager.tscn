@@ -13,3 +13,6 @@ bank_paths = ["res://FMod_Build/Music.bank"]
 [node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="." unique_id=73443951]
 event_name = "event:/Music"
 event_guid = "{ebf7454f-2ac6-474a-8a77-8e79d5479c44}"
+fmod_parameters/Music_Type/id = -6260150989800263494
+fmod_parameters/Music_Type = 0.0
+fmod_parameters/Music_Type/variant_type = 3

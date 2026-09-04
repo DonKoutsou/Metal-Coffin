@@ -4,9 +4,8 @@ class_name StartingScreen
 
 @export var StartingMenuScene : String = "res://Scenes/starting_menu.tscn"
 @export var DitherShader : ShaderMaterial
+@export_file("*.tscn") var scenesToShow : Array[String]
 @export_file("*.tscn") var StudioAnim : String
-@export_file("*.tscn") var WarningScene : String
-@export_file("*.tscn") var FMODScene : String
 @export_file("*.tscn") var GameScene : String = "res://Scenes/World.tscn"
 @export_file("*.tscn") var IntroGameScene : String = "res://Scenes/IntroWorld.tscn"
 @export_file("*.tscn") var CageFightGameScene : String = "res://Scenes/CageFightWorld.tscn"
@@ -51,10 +50,9 @@ func _ready() -> void:
 
 #-----------------------------------------------------------------------------------
 func Start() -> void:
-	
-	await FadeScene(WarningScene)
-	await FadeScene(FMODScene)
-	
+
+	for g in scenesToShow:
+		await FadeScene(g)
 	
 	var StudioAnimScene = ResourceLoader.load(StudioAnim)
 	var vidpl = StudioAnimScene.instantiate() as StudioAnimation

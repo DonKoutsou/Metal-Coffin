@@ -205,18 +205,36 @@ func ItemToAddSelected(M : Merchandise, Box : Inventory_Box_Res) -> void:
 		return
 	
 	var NewCap = OriginalCap.duplicate(true) as Captain
-	var NewInv = OriginalInv.duplicate(4) as CharacterInventory
-	NewCap.RegisterInventory(NewInv)
+	
 	var NewStats : Array[ShipStat]
 	for g :ShipStat in OriginalCap.CaptainStats:
-		NewStats.append(g.duplicate(true))
+		var new = g.duplicate(true)
+		new.StatShipPartBuff.clear()
+		new.StatShipPartPenalty = 0
+		NewStats.append(new)
+	
+	var itemDisposition : Dictionary[DispositionManager.Dispositions, float] = {
+		DispositionManager.Dispositions.KINETIC : 0.0,
+		DispositionManager.Dispositions.ELECTRICAL : 0.0,
+		DispositionManager.Dispositions.THERMAL : 0.0,
+		DispositionManager.Dispositions.MAGNETIC : 0.0,
+		DispositionManager.Dispositions.RADIANT : 0.0,
+		DispositionManager.Dispositions.NUCLEAR : 0.0,
+	}
+	
 	NewCap.CaptainStats = NewStats
-	NewInv._InventoryContents = OriginalInv._InventoryContents.duplicate()
-	#NewInv._CardInventory = OriginalInv._CardInventory.duplicate()
+	NewCap.itemDisposition = itemDisposition
+	
+	var NewInv = CharacterInventory.newInv(NewCap, false)
+	NewCap.RegisterInventory(NewInv)
+	NewInv.ClearInventory()
+
+	for g in OriginalInv._InventoryContents:
+		for amm in OriginalInv._InventoryContents[g]:
+			NewInv.AddItem(g)
 
 	NewInv.AddItem(OriginalItem)
-	NewCap.OnShipPartAddedToInventory(OriginalItem)
-	
+
 	var StatC = StatComp.instantiate() as StatComperator
 	add_child(StatC)
 	StatC.SetCaptainsToCompare(OriginalCap, NewCap)
@@ -311,12 +329,14 @@ func UpgradeItem(Box : Inventory_Box_Res) -> void:
 		PopUpManager.GetInstance().DoFadeNotif("Cant pay for upgrade")
 		return
 	
-	
 	var NewCap = OriginalCap.duplicate(true) as Captain
 	
 	var NewStats : Array[ShipStat]
 	for g :ShipStat in OriginalCap.CaptainStats:
-		NewStats.append(g.duplicate(true))
+		var new = g.duplicate(true)
+		new.StatShipPartBuff.clear()
+		new.StatShipPartPenalty = 0
+		NewStats.append(new)
 	
 	var itemDisposition : Dictionary[DispositionManager.Dispositions, float] = {
 		DispositionManager.Dispositions.KINETIC : 0.0,
@@ -326,29 +346,20 @@ func UpgradeItem(Box : Inventory_Box_Res) -> void:
 		DispositionManager.Dispositions.RADIANT : 0.0,
 		DispositionManager.Dispositions.NUCLEAR : 0.0,
 	}
-	for g in OriginalCap.itemDisposition:
-		itemDisposition[g] = OriginalCap.itemDisposition[g]
 	
 	NewCap.CaptainStats = NewStats
 	NewCap.itemDisposition = itemDisposition
 	
-	var NewInv = CharacterInventory.newInv(NewCap)
+	var NewInv = CharacterInventory.newInv(NewCap, false)
 	NewCap.RegisterInventory(NewInv)
 	NewInv.ClearInventory()
-	
-	
-	
+
 	for g in OriginalInv._InventoryContents:
 		for amm in OriginalInv._InventoryContents[g]:
 			NewInv.AddItem(g)
-	#NewInv._InventoryContents = OriginalInv._InventoryContents.duplicate()
-	#NewInv._CardInventory = OriginalInv._CardInventory.duplicate()
-	#NewCap.RegisterInventory(NewInv)
+
 	NewInv.RemoveItem(OriginalItem)
 	NewInv.AddItem(UpgradedItem)
-	
-	#NewCap.OnShipPartRemovedFromInventory(OriginalItem)
-	#NewCap.OnShipPartAddedToInventory(UpgradedItem)
 	
 	var StatC = StatComp.instantiate() as StatComperator
 	add_child(StatC)

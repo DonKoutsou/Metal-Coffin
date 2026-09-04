@@ -17,7 +17,7 @@ static func GetInstance() -> MusicManager:
 
 func _ready() -> void:
 	Instance = self
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(4).timeout
 	player.play()
 
 func SwitchMusic(t : bool) -> void:
