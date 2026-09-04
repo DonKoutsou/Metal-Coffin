@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://vwe34itxqa37" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb_soft.png" id="3_4ips0"]
 [ext_resource type="Texture2D" uid="uid://ovw18l4dc1fv" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb.png" id="4_bjha8"]
 [ext_resource type="Texture2D" uid="uid://bf3p61os8mhr7" path="res://Assets/UIPiecies/Bolt.png" id="5_imln2"]
+[ext_resource type="Texture2D" uid="uid://cpxai80e7ddcg" path="res://Scenes/Card_Fight/AtackEffects/OrbGradient.tres" id="6_e5guv"]
 
 [sub_resource type="Gradient" id="Gradient_bclkm"]
 interpolation_mode = 2
@@ -44,12 +45,12 @@ _data = [Vector2(0, 1), 0.0, -2.41184, 0, 0, Vector2(0.331522, 0.263636), -1.140
 point_count = 3
 
 [sub_resource type="Gradient" id="Gradient_hv3nu"]
-interpolation_mode = 2
-offsets = PackedFloat32Array(0, 0.462838)
-colors = PackedColorArray(1, 1, 1, 0, 0.235578, 0.961326, 0.948787, 1)
+offsets = PackedFloat32Array(0, 0.47379914, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 0.100000024, 0, 1, 0.83, 0.35966668, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_y6tk6"]
 gradient = SubResource("Gradient_hv3nu")
+width = 16
 
 [sub_resource type="Curve" id="Curve_f1fpp"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.454545), 0.0, 0.0, 0, 0]
@@ -128,10 +129,9 @@ lifetime = 0.5
 lifetime_randomness = 0.653
 autostart = false
 texture = ExtResource("4_bjha8")
-image_scale = 0.001
+image_scale = 0.03
 image_scale_randomness = 0.64
 gradient = SubResource("GradientTexture1D_y6tk6")
-blend_mode = 1
 angle_degrees = 197.5
 angle_randomness = 1.0
 randomly_flip_angle = true
@@ -155,7 +155,7 @@ lifetime = 0.5
 autostart = false
 texture = ExtResource("5_imln2")
 image_scale = 0.1
-gradient = SubResource("GradientTexture1D_y6tk6")
+gradient = ExtResource("6_e5guv")
 blend_mode = 1
 distance = 0.0
 align_sprite_rotation = false

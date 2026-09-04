@@ -83,10 +83,10 @@ func getThrustPosition() -> Vector2:
 
 # --- PHYSICS PROCESS: TICKING WHILE DRAGGING ---
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	if abs(accumulatedRelative) < step:
 		thrustChangeEnded(0)
-		set_physics_process(false)
+		set_process(false)
 		return
 	var newPosY: float
 	if accumulatedRelative > 0:
@@ -107,7 +107,7 @@ func handleInput(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click")) or event is InputEventScreenDrag:
 		accumulatedRelative += event.relative.y
 		if abs(accumulatedRelative) > step:
-			set_physics_process(true)
+			set_process(true)
 
 	if event.is_action_released("Click"):
 		thrustChangeEnded(0)

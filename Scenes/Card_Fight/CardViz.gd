@@ -38,17 +38,17 @@ func _ready() -> void:
 	S.pitch_scale = randf_range(0.8, 1.2)
 	
 	$Sprite2D.visible = false
-	set_physics_process(false)
+	set_process(false)
 	InitialParticle.burst()
 	await InitialParticle.Finished
-	set_physics_process(true)
+	set_process(true)
 	$Sprite2D.visible = true
 
 func Init() -> void:
 	$TrailLine.Init()
 	Going = true
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	
 	if (!Going or Target == null):
 		return
@@ -87,7 +87,7 @@ func _physics_process(delta: float) -> void:
 
 		# Move the missile forward
 		
-		position += Vector2(cos(rotation), sin(rotation)) * speed
+		position += Vector2(cos(rotation), sin(rotation)) * speed * delta * 80
 	
 	if (global_position.distance_squared_to(Target.global_position + (Target.size / 2)) < 500 or counter > 1.5):
 		global_position = Target.global_position + (Target.size / 2)

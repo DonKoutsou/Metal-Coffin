@@ -5,17 +5,13 @@
 [ext_resource type="AudioStream" uid="uid://bma0gkj3wnxec" path="res://Assets/Sounds/BeamRev.mp3" id="3_it0yv"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scenes/MapShips/Trail_Line/trail_line.gd" id="3_sj6es"]
 [ext_resource type="PackedScene" uid="uid://dlkjo56vcapoo" path="res://Scenes/Card_Fight/AtackEffects/RevEf.tscn" id="4_it0yv"]
+[ext_resource type="Gradient" uid="uid://d4miprpqrdwuy" path="res://Scenes/Card_Fight/AtackEffects/Trail.tres" id="5_oisu2"]
 [ext_resource type="AudioStream" uid="uid://c4iof3ou2x8m4" path="res://Assets/Sounds/beam-fire-282361.mp3" id="5_p0x65"]
 [ext_resource type="PackedScene" uid="uid://5ubeqcn5eqt5" path="res://Scenes/Card_Fight/AtackEffects/ShieldEffect.tscn" id="5_p7sl4"]
 
 [sub_resource type="Curve" id="Curve_5lbu3"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
-
-[sub_resource type="Gradient" id="Gradient_p7sl4"]
-interpolation_color_space = 1
-offsets = PackedFloat32Array(0, 0.71, 1)
-colors = PackedColorArray(0.421311, 0.88706, 0.915024, 1, 0.810676, 0.304988, 0.106007, 1, 1, 1, 1, 0)
 
 [node name="MissileThing" type="Node2D" unique_id=134857999 node_paths=PackedStringArray("InitialParticle", "EndingParticle", "SoundNode", "Trail")]
 rotation = -1.5708
@@ -35,7 +31,7 @@ Trail = NodePath("TrailLine")
 
 [node name="TrailLine" type="Line2D" parent="." unique_id=2093491223]
 width_curve = SubResource("Curve_5lbu3")
-gradient = SubResource("Gradient_p7sl4")
+gradient = ExtResource("5_oisu2")
 joint_mode = 2
 begin_cap_mode = 2
 round_precision = 32

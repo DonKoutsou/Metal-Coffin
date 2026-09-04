@@ -48,7 +48,7 @@ func HideInfo() -> void:
 	DiscardPile.HideAmm()
 
 func _ready() -> void:
-	set_physics_process(false)
+	#set_physics_process(false)
 	Instance = self
 	PlayerCardPlecement.visible = true
 	PlayerCardPlacementInputBlocker.visible = false

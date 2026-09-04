@@ -14,7 +14,7 @@ func SetText(t : String):
 	T.text = t
 	T.visible_characters = 0
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	if (txt.length() > T.visible_characters):
 		T.visible_characters += 2
 		return

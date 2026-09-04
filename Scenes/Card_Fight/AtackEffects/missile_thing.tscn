@@ -8,18 +8,15 @@
 [ext_resource type="AudioStream" uid="uid://bma0gkj3wnxec" path="res://Assets/Sounds/BeamRev.mp3" id="3_q07tg"]
 [ext_resource type="Texture2D" uid="uid://ovw18l4dc1fv" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb.png" id="4_6elwd"]
 [ext_resource type="Texture2D" uid="uid://vwe34itxqa37" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb_soft.png" id="5_ex23e"]
+[ext_resource type="Gradient" uid="uid://d4miprpqrdwuy" path="res://Scenes/Card_Fight/AtackEffects/Trail.tres" id="5_q1nye"]
 [ext_resource type="Texture2D" uid="uid://d2lceccxwhwet" path="res://addons/BurstParticles2D/BurstParticles2D-demo/ring.png" id="7_1fv0c"]
 [ext_resource type="AudioStream" uid="uid://iiqji6xlmffd" path="res://Assets/Sounds/Explosion.wav" id="9_hv3nu"]
 [ext_resource type="AudioStream" uid="uid://c4iof3ou2x8m4" path="res://Assets/Sounds/beam-fire-282361.mp3" id="9_n0kd1"]
+[ext_resource type="Texture2D" uid="uid://cpxai80e7ddcg" path="res://Scenes/Card_Fight/AtackEffects/OrbGradient.tres" id="10_qbkhg"]
 
 [sub_resource type="Curve" id="Curve_5lbu3"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
-
-[sub_resource type="Gradient" id="Gradient_28kke"]
-interpolation_color_space = 1
-offsets = PackedFloat32Array(0, 0.71, 1)
-colors = PackedColorArray(1, 0.221957, 0.241076, 1, 0.810676, 0.304988, 0.106007, 1, 1, 1, 1, 0)
 
 [sub_resource type="Gradient" id="Gradient_bclkm"]
 interpolation_mode = 2
@@ -57,14 +54,6 @@ point_count = 5
 [sub_resource type="Curve" id="Curve_g0j12"]
 _data = [Vector2(0, 1), 0.0, -2.41184, 0, 0, Vector2(0.331522, 0.263636), -1.1405, -1.1405, 0, 0, Vector2(1, 0), -0.0743434, 0.0, 0, 0]
 point_count = 3
-
-[sub_resource type="Gradient" id="Gradient_hv3nu"]
-interpolation_mode = 2
-offsets = PackedFloat32Array(0, 0.45935)
-colors = PackedColorArray(1, 0.180392, 0.0705882, 0, 1, 0.496174, 0.174318, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_y6tk6"]
-gradient = SubResource("Gradient_hv3nu")
 
 [sub_resource type="Curve" id="Curve_28xwa"]
 _data = [Vector2(0, 0), 0.0, 5.53918, 0, 0, Vector2(0.161403, 0.681818), 1.29545, 1.29545, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -115,6 +104,14 @@ point_count = 3
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.57193, 0.4), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 3
 
+[sub_resource type="Gradient" id="Gradient_hv3nu"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.45935)
+colors = PackedColorArray(1, 0.180392, 0.0705882, 0, 1, 0.496174, 0.174318, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_y6tk6"]
+gradient = SubResource("Gradient_hv3nu")
+
 [sub_resource type="Curve" id="Curve_p482y"]
 _limits = [-2.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 1.31818), 0.0, -13.8901, 0, 0, Vector2(1, -2), -0.901185, 0.146141, 0, 0]
@@ -151,7 +148,7 @@ Trail = NodePath("TrailLine")
 
 [node name="TrailLine" type="Line2D" parent="." unique_id=15096855]
 width_curve = SubResource("Curve_5lbu3")
-gradient = SubResource("Gradient_28kke")
+gradient = ExtResource("5_q1nye")
 joint_mode = 2
 begin_cap_mode = 2
 round_precision = 32
@@ -194,9 +191,9 @@ lifetime = 0.75
 lifetime_randomness = 0.113
 autostart = false
 texture = ExtResource("4_6elwd")
-image_scale = 0.1
+image_scale = 0.2
 image_scale_randomness = 0.64
-gradient = SubResource("GradientTexture1D_y6tk6")
+gradient = ExtResource("10_qbkhg")
 blend_mode = 1
 angle_degrees = 197.5
 angle_randomness = 1.0
@@ -223,8 +220,8 @@ lifetime = 0.75
 lifetime_randomness = 0.113
 autostart = false
 texture = ExtResource("4_6elwd")
-image_scale = 0.05
-gradient = SubResource("GradientTexture1D_y6tk6")
+image_scale = 0.1
+gradient = ExtResource("10_qbkhg")
 blend_mode = 1
 angle_degrees = 197.5
 angle_randomness = 1.0
@@ -251,9 +248,9 @@ lifetime = 0.75
 lifetime_randomness = 0.653
 autostart = false
 texture = ExtResource("4_6elwd")
-image_scale = 0.1
+image_scale = 0.2
 image_scale_randomness = 0.64
-gradient = SubResource("GradientTexture1D_y6tk6")
+gradient = ExtResource("10_qbkhg")
 blend_mode = 1
 angle_degrees = 197.5
 angle_randomness = 1.0
@@ -278,9 +275,9 @@ lifetime = 0.75
 lifetime_randomness = 0.407
 autostart = false
 texture = ExtResource("4_6elwd")
-image_scale = 0.2
+image_scale = 0.4
 image_scale_randomness = 0.193
-gradient = SubResource("GradientTexture1D_y6tk6")
+gradient = ExtResource("10_qbkhg")
 blend_mode = 1
 angle_degrees = 197.5
 angle_randomness = 1.0

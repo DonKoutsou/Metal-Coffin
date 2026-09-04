@@ -26,7 +26,7 @@ func ApplyShake(amm : float = 1) -> void:
 	max_rotation = max(max_rotation, 0.06 * amm)
 
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	var time = Time.get_ticks_msec() / 1000.0
 
 	# Calculate a subtle rotation based on the sine wave

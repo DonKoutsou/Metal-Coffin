@@ -4,14 +4,16 @@
 [ext_resource type="Script" uid="uid://dda30cxipibam" path="res://addons/BurstParticles2D/BurstParticles2D.gd" id="2_esykf"]
 [ext_resource type="Texture2D" uid="uid://vwe34itxqa37" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb_soft.png" id="3_xiof4"]
 [ext_resource type="Texture2D" uid="uid://ovw18l4dc1fv" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb.png" id="4_m40so"]
+[ext_resource type="Texture2D" uid="uid://cpxai80e7ddcg" path="res://Scenes/Card_Fight/AtackEffects/OrbGradient.tres" id="5_eiu4j"]
 
-[sub_resource type="Gradient" id="Gradient_bclkm"]
+[sub_resource type="Gradient" id="Gradient_a1hsf"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0, 0.194529, 0.398176, 0.731707, 1)
-colors = PackedColorArray(1, 0.180392, 0.0705882, 0, 0.686275, 0.482353, 0.478431, 0.858824, 0.366124, 0.88341, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+colors = PackedColorArray(1, 0.180392, 0.0705882, 0, 0.8499129, 0.38817257, 0.11047376, 0.858824, 0.366124, 0.88341, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_o8dmu"]
-gradient = SubResource("Gradient_bclkm")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dewoe"]
+gradient = SubResource("Gradient_a1hsf")
+width = 16
 
 [sub_resource type="Curve" id="Curve_c8u8r"]
 _data = [Vector2(1e-05, 1), 3.4668e-07, 0.0, 0, 0, Vector2(0.807965, 0.593832), -1.34717, -1.34717, 0, 0, Vector2(1, 0), -3.21025, 5.75758, 0, 0]
@@ -41,14 +43,6 @@ point_count = 5
 [sub_resource type="Curve" id="Curve_g0j12"]
 _data = [Vector2(0, 0), -0.0743434, 0.0, 0, 0, Vector2(0.356637, 0.171891), 1.13426, 1.13426, 0, 0, Vector2(0.99999, 1), 0.0, -2.41184, 0, 0]
 point_count = 3
-
-[sub_resource type="Gradient" id="Gradient_hv3nu"]
-interpolation_mode = 2
-offsets = PackedFloat32Array(0, 0.462838)
-colors = PackedColorArray(1, 1, 1, 0, 0.235578, 0.961326, 0.948787, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_y6tk6"]
-gradient = SubResource("Gradient_hv3nu")
 
 [sub_resource type="Curve" id="Curve_f1fpp"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.454545), 0.0, 0.0, 0, 0]
@@ -93,9 +87,8 @@ num_particles = 1
 lifetime = 0.75
 autostart = false
 texture = ExtResource("3_xiof4")
-image_scale = 0.01
-gradient = SubResource("GradientTexture1D_o8dmu")
-blend_mode = 1
+image_scale = 0.04
+gradient = SubResource("GradientTexture1D_dewoe")
 direction = Vector2(0, 1)
 distance = 0.0
 spread_degrees = 0.0
@@ -114,9 +107,9 @@ lifetime = 0.75
 lifetime_randomness = 0.653
 autostart = false
 texture = ExtResource("4_m40so")
-image_scale = 0.001
+image_scale = 0.03
 image_scale_randomness = 0.64
-gradient = SubResource("GradientTexture1D_y6tk6")
+gradient = ExtResource("5_eiu4j")
 blend_mode = 1
 angle_degrees = 197.5
 angle_randomness = 1.0

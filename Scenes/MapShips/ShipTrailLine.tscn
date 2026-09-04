@@ -5,16 +5,15 @@
 
 [sub_resource type="Curve" id="Curve_tr6me"]
 _limits = [0.0, 4.0, 0.0, 1.0]
-_data = [Vector2(0, 0.027624369), 0.0, 0.6474726, 0, 0, Vector2(0.5126354, 0.7127073), 4.987926, 2.1649373, 0, 0, Vector2(1, 2.5414367), 3.9676664, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 0.017142773), 0.0, 0.31368265, 0, 0, Vector2(1, 0.86162615), 3.36389, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_wgwlc"]
-offsets = PackedFloat32Array(0, 0.33935744, 1)
+offsets = PackedFloat32Array(0, 0.5013477, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.63811576, 0.63811576, 0.6381157, 1, 1, 1, 1, 0)
 
 [node name="TrailLine" type="Line2D" unique_id=909123147]
 texture_filter = 3
-points = PackedVector2Array(0, 0)
 width = 7.47
 width_curve = SubResource("Curve_tr6me")
 gradient = SubResource("Gradient_wgwlc")

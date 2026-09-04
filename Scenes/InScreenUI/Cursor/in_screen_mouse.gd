@@ -29,10 +29,10 @@ func SwitchMouse(Mode : MouseMode) -> void:
 			texture = ResourceLoader.load(DirectionalPointer)
 
 func ToggleMouse(t : bool) -> void:
-	set_physics_process(t)
+	set_process(t)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	#var vp = get_tree().root.size
 	#var dif = vp - get_window().size
 	#var mPos = get_global_mouse_position() * (Vector2(get_window().size) / Vector2(1280.0, 720.0))

@@ -192,28 +192,30 @@ func OnSpotAproached(AproachedBy : MapShip) -> void:
 	# if ship is hostile we return
 	if (AproachedBy is HostileShip):
 		VisitingHostiles.append(AproachedBy)
-		return
-	if (!VisitingShips.has(AproachedBy)):
-		#make sure to store all curreny visiting ships
-		VisitingShips.append(AproachedBy)
-	else:
-		push_warning("Trying to add already existing ship")
-	# check if apreaching ship is commander of fleet, if ship has no commander it means they are a commander
-	if (AproachedBy.Command == null):
-		# stop simulation speeding and frame camera to player to let them know
-		SimulationManager.GetInstance().SpeedToggle(false)
-		Map.GetInstance().GetCamera().FrameCamToPos(global_position, 1, false)
-		SpotAproached.emit(self)
-	else:
-		AproachedBy.GetDock()
+		if (VisitingShips.size() > 0):
+			SpotAproached.emit(self)
+	else: 
+		if (!VisitingShips.has(AproachedBy)):
+			#make sure to store all curreny visiting ships
+			VisitingShips.append(AproachedBy)
+		else:
+			push_warning("Trying to add already existing ship")
+		# check if apreaching ship is commander of fleet, if ship has no commander it means they are a commander
+		if (AproachedBy.Command == null):
+			# stop simulation speeding and frame camera to player to let them know
+			SimulationManager.GetInstance().SpeedToggle(false)
+			Map.GetInstance().GetCamera().FrameCamToPos(global_position, 1, false)
+			SpotAproached.emit(self)
+		#else:
+			#AproachedBy.GetDock()
 	
 	#if haven't arrived before, mark as visited
-	if (!Seen):
-		OnSpotSeen()
-	
-	if (EnemyCity):
-		if (AlarmRaised):
-			Commander.GetInstance().OnEnemySeen(AproachedBy, null)
+		if (!Seen):
+			OnSpotSeen()
+		
+		if (EnemyCity):
+			if (AlarmRaised):
+				Commander.GetInstance().OnEnemySeen(AproachedBy, null)
 
 
 func OnSpotDeparture(DepartingShip : MapShip) -> void:

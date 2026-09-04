@@ -189,7 +189,7 @@ func FixLabelClipping() -> void:
 
 var hulls: Array[PackedVector2Array] = []
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	hulls.clear()
 	
 	var CamPos = ShipCamera.GetInstance().get_screen_center_position()

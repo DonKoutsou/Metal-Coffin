@@ -4,17 +4,13 @@
 [ext_resource type="AudioStream" uid="uid://i74iqvk0qddm" path="res://Assets/Sounds/CardSound.mp3" id="2_0lrke"]
 [ext_resource type="AudioStream" uid="uid://bma0gkj3wnxec" path="res://Assets/Sounds/BeamRev.mp3" id="3_8jpsx"]
 [ext_resource type="Texture2D" uid="uid://cwbo84yj0q3om" path="res://Assets/Cards/CardBack.png" id="3_dw01p"]
+[ext_resource type="Gradient" uid="uid://d4miprpqrdwuy" path="res://Scenes/Card_Fight/AtackEffects/Trail.tres" id="4_qq83q"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scenes/MapShips/Trail_Line/trail_line.gd" id="5_4eeik"]
 [ext_resource type="PackedScene" uid="uid://dlkjo56vcapoo" path="res://Scenes/Card_Fight/AtackEffects/RevEf.tscn" id="5_fbrvt"]
 
 [sub_resource type="Curve" id="Curve_5lbu3"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
-
-[sub_resource type="Gradient" id="Gradient_dw01p"]
-interpolation_color_space = 1
-offsets = PackedFloat32Array(0, 0.71, 1)
-colors = PackedColorArray(0.482095, 0.689901, 0.704644, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="CardThing" type="Node2D" unique_id=1082876190 node_paths=PackedStringArray("InitialParticle")]
 z_index = 10
@@ -30,7 +26,7 @@ FireSound = ExtResource("3_8jpsx")
 
 [node name="TrailLine" type="Line2D" parent="." unique_id=1935572844]
 width_curve = SubResource("Curve_5lbu3")
-gradient = SubResource("Gradient_dw01p")
+gradient = ExtResource("4_qq83q")
 joint_mode = 2
 begin_cap_mode = 2
 round_precision = 32
