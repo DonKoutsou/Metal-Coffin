@@ -28,16 +28,16 @@ process_mode = 3
 layer = 0
 follow_viewport_enabled = true
 script = ExtResource("1_vpest")
-_InScreenUI = NodePath("SubViewportContainer/ViewPort/InScreenUI")
+_InScreenUI = NodePath("SubViewportContainer/SubViewport/InScreenUI")
 _ScreenUI = NodePath("ScreenUI")
-_Camera = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager/ShipCamera")
-MapLines = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager/MapLines")
-MapSpots = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/WorldNodes/MapSpots")
-Region = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager/RegionMapDrawer")
-Road = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/WorldNodes/RoadLineDrawer")
-MapLine = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager/MapLineDrawer")
-WorldParent = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/WorldNodes")
-MapPointerMan = NodePath("SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager")
+_Camera = NodePath("SubViewportContainer/SubViewport/MapPointerManager/ShipCamera")
+MapLines = NodePath("SubViewportContainer/SubViewport/MapPointerManager/MapLines")
+MapSpots = NodePath("SubViewportContainer/SubViewport/WorldNodes/MapSpots")
+Region = NodePath("SubViewportContainer/SubViewport/MapPointerManager/RegionMapDrawer")
+Road = NodePath("SubViewportContainer/SubViewport/WorldNodes/RoadLineDrawer")
+MapLine = NodePath("SubViewportContainer/SubViewport/MapPointerManager/MapLineDrawer")
+WorldParent = NodePath("SubViewportContainer/SubViewport/WorldNodes")
+MapPointerMan = NodePath("SubViewportContainer/SubViewport/MapPointerManager")
 TownSpotScene = ExtResource("7_0ker0")
 EnemyScene = ExtResource("3_4a6f5")
 TutorialTrigger = ExtResource("9_6an1p")
@@ -47,47 +47,13 @@ CapitalType = "uid://dyvpncg7tolc7"
 FinalCityType = "uid://1vptbvrlos7"
 EnemyShipNameList = "uid://cqn4njtiebgrb"
 MapSize = 100
-VillageAmm = null
-CapitalAmm = null
 MinDistance = 1500.0
-MaxDistance = null
 SpawningBounds = Vector2(8000, 250000)
 EnSpawner = ExtResource("12_m1k6s")
 ControllerEvH = ExtResource("22_n73so")
 UIEventH = ExtResource("25_8mjbw")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1709335464]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 38.0
-offset_top = 38.0
-offset_right = -314.0
-offset_bottom = -39.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-stretch = true
-
-[node name="ViewPort" type="SubViewport" parent="SubViewportContainer" unique_id=580875506]
-disable_3d = true
-own_world_3d = true
-handle_input_locally = false
-canvas_item_default_texture_filter = 3
-audio_listener_enable_2d = true
-positional_shadow_atlas_size = 0
-positional_shadow_atlas_16_bits = false
-positional_shadow_atlas_quad_0 = 0
-positional_shadow_atlas_quad_1 = 0
-positional_shadow_atlas_quad_2 = 0
-positional_shadow_atlas_quad_3 = 0
-size = Vector2i(1685, 1168)
-size_2d_override = Vector2i(928, 643)
-size_2d_override_stretch = true
-render_target_update_mode = 4
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="SubViewportContainer/ViewPort" unique_id=177781806]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=177781806]
 process_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -97,8 +63,9 @@ offset_top = -3.0517578e-05
 grow_horizontal = 2
 grow_vertical = 2
 stretch = true
+mouse_target = true
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer/ViewPort/SubViewportContainer" unique_id=1417639039]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1417639039]
 disable_3d = true
 own_world_3d = true
 handle_input_locally = false
@@ -111,23 +78,23 @@ positional_shadow_atlas_quad_0 = 0
 positional_shadow_atlas_quad_1 = 0
 positional_shadow_atlas_quad_2 = 0
 positional_shadow_atlas_quad_3 = 0
-size = Vector2i(1685, 1168)
-size_2d_override = Vector2i(928, 643)
+size = Vector2i(1084, 610)
+size_2d_override = Vector2i(1280, 720)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 
-[node name="Darkness" type="CanvasModulate" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" unique_id=2089661940]
+[node name="Darkness" type="CanvasModulate" parent="SubViewportContainer/SubViewport" unique_id=2089661940]
 color = Color(0, 0, 0, 1)
 
-[node name="WorldNodes" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" unique_id=6202529]
+[node name="WorldNodes" type="Node2D" parent="SubViewportContainer/SubViewport" unique_id=6202529]
 
-[node name="RoadLineDrawer" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/WorldNodes" unique_id=232394766 instance=ExtResource("16_sp82o")]
+[node name="RoadLineDrawer" parent="SubViewportContainer/SubViewport/WorldNodes" unique_id=232394766 instance=ExtResource("16_sp82o")]
 z_index = -1
 RoadLines = true
 
-[node name="MapSpots" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/WorldNodes" unique_id=1291599953]
+[node name="MapSpots" type="Node2D" parent="SubViewportContainer/SubViewport/WorldNodes" unique_id=1291599953]
 
-[node name="MapPointerManager" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport" unique_id=67114702 node_paths=PackedStringArray("CircleDr", "MapLonePos", "MapSpotMarkerParent", "ShipMarkerParent", "OrderMarkersParent") groups=["CameraPositionAffected", "ZoomAffected"]]
+[node name="MapPointerManager" type="Node2D" parent="SubViewportContainer/SubViewport" unique_id=67114702 node_paths=PackedStringArray("CircleDr", "MapLonePos", "MapSpotMarkerParent", "ShipMarkerParent", "OrderMarkersParent") groups=["CameraPositionAffected", "ZoomAffected"]]
 material = SubResource("CanvasItemMaterial_w8yg2")
 script = ExtResource("19_ccpfd")
 CircleDr = NodePath("CircleDrawer")
@@ -144,9 +111,9 @@ MapSpotMarkerParent = NodePath("MapSpotMarkers")
 ShipMarkerParent = NodePath("ShipMarkerks")
 OrderMarkersParent = NodePath("OrderMarker")
 
-[node name="ShipCamera" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" unique_id=1015760443 instance=ExtResource("17_6an1p")]
+[node name="ShipCamera" parent="SubViewportContainer/SubViewport/MapPointerManager" unique_id=1015760443 instance=ExtResource("17_6an1p")]
 
-[node name="RegionMapDrawer" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" unique_id=1677048478]
+[node name="RegionMapDrawer" type="Node2D" parent="SubViewportContainer/SubViewport/MapPointerManager" unique_id=1677048478]
 visible = false
 modulate = Color(0, 0, 0, 0.25490198)
 use_parent_material = true
@@ -155,33 +122,34 @@ RegionTrans = 0.2
 border = ExtResource("15_kfta0")
 ResizeLinesWithZoom = true
 
-[node name="MapLines" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" unique_id=1517326412]
+[node name="MapLines" type="Node2D" parent="SubViewportContainer/SubViewport/MapPointerManager" unique_id=1517326412]
 use_parent_material = true
 
-[node name="MapLineDrawer" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" unique_id=560404792 instance=ExtResource("16_sp82o")]
+[node name="MapLineDrawer" parent="SubViewportContainer/SubViewport/MapPointerManager" unique_id=560404792 instance=ExtResource("16_sp82o")]
 modulate = Color(0.43159688, 0.43159688, 0.43159676, 1)
 ResizeLinesWithZoom = true
 
-[node name="MapSpotMarkers" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" unique_id=532983612]
+[node name="MapSpotMarkers" type="Node2D" parent="SubViewportContainer/SubViewport/MapPointerManager" unique_id=532983612]
 use_parent_material = true
 
-[node name="ShipMarkerks" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" unique_id=1575678772]
+[node name="ShipMarkerks" type="Node2D" parent="SubViewportContainer/SubViewport/MapPointerManager" unique_id=1575678772]
 use_parent_material = true
 
-[node name="OrderMarker" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" unique_id=35725205]
+[node name="OrderMarker" type="Node2D" parent="SubViewportContainer/SubViewport/MapPointerManager" unique_id=35725205]
 use_parent_material = true
 
-[node name="CircleDrawer" type="Node2D" parent="SubViewportContainer/ViewPort/SubViewportContainer/SubViewport/MapPointerManager" unique_id=1002635144]
+[node name="CircleDrawer" type="Node2D" parent="SubViewportContainer/SubViewport/MapPointerManager" unique_id=1002635144]
 use_parent_material = true
 script = ExtResource("22_fa7wu")
 ShipControllerEvent = ExtResource("22_n73so")
 Col = Color(100, 0.395, 0.144, 1)
 
-[node name="InScreenUI" parent="SubViewportContainer/ViewPort" unique_id=391064499 instance=ExtResource("23_53oad")]
+[node name="InScreenUI" parent="SubViewportContainer/SubViewport" unique_id=391064499 instance=ExtResource("23_53oad")]
+layer = 2
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/ViewPort" unique_id=718275547]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport" unique_id=718275547]
 environment = ExtResource("16_8uruf")
 
 [node name="ScreenUI" parent="." unique_id=1211286395 instance=ExtResource("24_e5um8")]
 
-[connection signal="gui_input" from="SubViewportContainer/ViewPort/SubViewportContainer" to="." method="_MAP_INPUT"]
+[connection signal="gui_input" from="SubViewportContainer" to="." method="_MAP_INPUT"]

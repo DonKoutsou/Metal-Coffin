@@ -84,7 +84,8 @@ func Update(delta : float) -> void:
 	_ScreenUI.Update(delta)
 
 func HideWorld(t : bool) -> void:
-	WorldParent.get_parent().get_parent().visible = t
+	WorldParent.visible = t
+	MapPointerMan.visible = t
 
 func _exit_tree() -> void:
 	if (Roadt != null):
@@ -315,6 +316,9 @@ func _MAP_INPUT(event: InputEvent) -> void:
 		return
 	
 	if (CommandLine.Typing):
+		return
+	
+	if (World.WORLDST != World.WORLDSTATE.NORMAL):
 		return
 	
 	if (event.is_action_pressed("Click")):

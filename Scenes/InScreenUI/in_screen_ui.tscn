@@ -36,15 +36,8 @@ corner_detail = 1
 shadow_color = Color(0, 0, 0, 0.3137255)
 shadow_size = 100
 
-[node name="InScreenUI" type="Control" unique_id=1770895171 node_paths=PackedStringArray("_Inventory", "_MapMarkerEditor", "PopupPlecement", "UnderstatUI", "OverStatUI", "MousePointer", "AltitudeLabel", "Screen", "ZoomUI", "AltitudeUI")]
+[node name="InScreenUI" type="CanvasLayer" unique_id=845491138 node_paths=PackedStringArray("_Inventory", "_MapMarkerEditor", "PopupPlecement", "UnderstatUI", "OverStatUI", "MousePointer", "AltitudeLabel", "Screen", "ZoomUI", "AltitudeUI")]
 process_mode = 1
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
 script = ExtResource("1_j7r7e")
 _Inventory = NodePath("VBoxContainer/UnderStatUI/Inventory")
 _MapMarkerEditor = NodePath("MapMarkerEditor")
@@ -60,36 +53,9 @@ AltitudeUI = NodePath("HBoxContainer/AltitudeUI")
 PauseMenuSceneFile = "uid://kealc8fl34qi"
 DialogueSceneFile = "uid://cq8y4l8uapojy"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1658011768]
-layer = 4
-follow_viewport_enabled = true
-
-[node name="PopupPlecement" type="Control" parent="CanvasLayer" unique_id=173542646]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="InScreenMouse" parent="CanvasLayer" unique_id=804818995 instance=ExtResource("3_lbfwx")]
-
-[node name="Screen" type="ColorRect" parent="CanvasLayer" unique_id=1451653030]
-process_mode = 3
-z_index = 1
-material = ExtResource("19_j7r7e")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
 [node name="CanvasLayer2" parent="." unique_id=574561548 instance=ExtResource("5_j7r7e")]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=384141535]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -140,10 +106,8 @@ script = ExtResource("9_u111i")
 layout_mode = 2
 
 [node name="MapMarkerEditor" parent="." unique_id=1282522992 instance=ExtResource("4_w862u")]
-layout_mode = 1
 
 [node name="SimulationNotification" parent="." unique_id=340424501 instance=ExtResource("5_g51f2")]
-layout_mode = 1
 anchors_preset = 7
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -153,7 +117,6 @@ grow_vertical = 0
 
 [node name="PanelContainer3" type="PanelContainer" parent="." unique_id=542795109]
 custom_minimum_size = Vector2(0, 40)
-layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -165,10 +128,8 @@ grow_vertical = 0
 theme_override_styles/panel = ExtResource("11_u111i")
 
 [node name="WeatherUI" parent="." unique_id=1503390521 instance=ExtResource("11_j7r7e")]
-layout_mode = 1
 
 [node name="CursorPos" type="Label" parent="." unique_id=498847629]
-layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -190,7 +151,6 @@ vertical_alignment = 1
 script = ExtResource("11_avpxw")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1840033001]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -224,17 +184,14 @@ mouse_force_pass_scroll_events = false
 
 [node name="PortNotification" parent="." unique_id=755876837 instance=ExtResource("7_4bt5v")]
 z_index = 1
-layout_mode = 1
 
 [node name="Clock" parent="." unique_id=104315517 instance=ExtResource("18_adjny")]
 z_index = 1
-layout_mode = 1
 offset_left = 20.0
 offset_right = -20.0
 offset_bottom = 60.0
 
 [node name="CommandLine" parent="." unique_id=969171667 instance=ExtResource("17_aessx")]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_right = 0.5
@@ -245,7 +202,7 @@ offset_bottom = -50.0
 
 [node name="OverStatUI" type="Control" parent="." unique_id=2088496302]
 z_index = 3
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -256,7 +213,6 @@ mouse_filter = 2
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1581311938]
 process_mode = 3
 visible = false
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -288,5 +244,30 @@ size_flags_horizontal = 4
 theme = ExtResource("9_8iafl")
 theme_override_font_sizes/font_size = 26
 text = "OK"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1018325777]
+layer = 2
+
+[node name="PopupPlecement" type="Control" parent="CanvasLayer" unique_id=173542646]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="InScreenMouse" parent="CanvasLayer" unique_id=804818995 instance=ExtResource("3_lbfwx")]
+
+[node name="Screen" type="ColorRect" parent="CanvasLayer" unique_id=1451653030]
+process_mode = 3
+z_index = 100
+material = ExtResource("19_j7r7e")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Button" to="." method="On_Game_Lost_Button_Pressed"]

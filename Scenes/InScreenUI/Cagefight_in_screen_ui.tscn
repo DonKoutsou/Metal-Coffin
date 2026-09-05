@@ -6,14 +6,8 @@
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRT_Mat.tres" id="3_munnc"]
 [ext_resource type="PackedScene" uid="uid://d0iiqaijsg1y1" path="res://Scenes/InScreenUI/Commande_Line/command_line.tscn" id="14_cqdt6"]
 
-[node name="InScreenUI" type="Control" unique_id=389236756 node_paths=PackedStringArray("PopupPlecement", "UnderstatUI", "OverStatUI", "Screen")]
+[node name="InScreenUI" type="CanvasLayer" unique_id=2125392190 node_paths=PackedStringArray("PopupPlecement", "UnderstatUI", "OverStatUI", "Screen")]
 process_mode = 3
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 script = ExtResource("1_agi46")
 PopupPlecement = NodePath("CanvasLayer/PopupPlecement")
 EventHandler = ExtResource("2_wgin8")
@@ -51,7 +45,7 @@ mouse_filter = 2
 
 [node name="UnderStatUI" type="Control" parent="." unique_id=154155135]
 process_mode = 1
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -61,14 +55,13 @@ mouse_filter = 2
 
 [node name="CommandLine" parent="." unique_id=969171667 instance=ExtResource("14_cqdt6")]
 visible = false
-layout_mode = 1
 offset_left = 222.0
 offset_top = -173.5
 offset_right = -222.0
 offset_bottom = -81.5
 
 [node name="OverStatUI" type="Control" parent="." unique_id=2088496302]
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

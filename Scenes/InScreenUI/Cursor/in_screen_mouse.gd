@@ -20,6 +20,10 @@ func _ready() -> void:
 func SwitchMouse(Mode : MouseMode) -> void:
 	if (Mode == CurrentMode):
 		return
+	if (World.WORLDST != World.WORLDSTATE.NORMAL):
+		CurrentMode = MouseMode.NORMAL
+		texture = ResourceLoader.load(NormalPointer)
+		return
 	match (Mode):
 		MouseMode.NORMAL:
 			CurrentMode = MouseMode.NORMAL
@@ -42,7 +46,9 @@ func _process(_delta: float) -> void:
 	
 	
 	#var Local = Helper.mapv2(get_global_mouse_position(), Vector2.ZERO, get_window().size, Vector2.ZERO, Vector2(1280, 720))
-	var Local = get_global_mouse_position() - get_viewport().canvas_transform.origin
+	var mpos = get_global_mouse_position()
+	#print(mpos)
+	var Local = get_global_mouse_position()
 	#print(vp)
 	var MouseInScreen = Local.x > 0 and Local.y > 0 and Local.x < get_viewport_rect().size.x and Local.y < get_viewport_rect().size.y
 	if (MouseInScreen):

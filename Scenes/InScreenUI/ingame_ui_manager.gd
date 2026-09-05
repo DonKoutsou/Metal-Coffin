@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 class_name Ingame_UIManager
 
 @export var _Inventory : InventoryManager

@@ -21,7 +21,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1vivr"]
 shader = ExtResource("11_hm5ka")
-shader_parameter/LOD = 2.0
+shader_parameter/LOD = 2.0000000298024
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f2au4"]
 content_margin_left = 10.0
@@ -69,7 +69,7 @@ position = Vector2(445, 311)
 color = Color(0.78999025, 1, 1, 1)
 energy = 0.8
 blend_mode = 2
-range_layer_max = 1
+range_layer_max = 3
 range_item_cull_mask = 524288
 texture = ExtResource("32_1im06")
 texture_scale = 9.37
@@ -77,7 +77,7 @@ height = 222.0
 
 [node name="Ground" type="ColorRect" parent="." unique_id=1742857488]
 light_mask = 524289
-z_index = -2
+z_index = -1
 texture_filter = 3
 material = ExtResource("10_fkta7")
 layout_mode = 1

@@ -114,7 +114,8 @@ func OnShipTeleported(ship : MapShip) -> void:
 		ship.UpdateLight(L, viz)
 	ship.StormValue = Storm
 	ship.RadarShape.VisualRangePenalty = viz
-	ship.RadarShape.StormPenalty = Helper.mapvalue(1 - Storm, 0.5, 1.0)
+	var stormPenalty = (ship.Altitude / 10000) * Storm
+	ship.RadarShape.StormPenalty = Helper.mapvalue(1 - stormPenalty, 0.5, 1.0)
 	ship.RadarShape.UpdateVizRange()
 
 func NoiseChanged() -> void:

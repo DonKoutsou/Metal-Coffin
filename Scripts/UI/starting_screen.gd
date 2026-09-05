@@ -13,7 +13,7 @@ class_name StartingScreen
 var StMenu : StartingMenu
 var Wor : World
 
-const APPID = "3679120"
+const APPID = "3679430"
 
  #Called when the node enters the scene tree for the first time.
 #-----------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ func _init() -> void:
 #-----------------------------------------------------------------------------------
 func _ready() -> void:
 	LoadSavedSettings()
-	#get_viewport().disable_3d = true
+	get_viewport().disable_3d = true
 	TranslationServer.set_locale("english")
 	#var siz =  DisplayServer.screen_get_size()
 	#siz.x = min(siz.x, 1920)
@@ -52,32 +52,13 @@ func _ready() -> void:
 func Start() -> void:
 
 	for g in scenesToShow:
-		await FadeScene(g)
-	
-	var StudioAnimScene = ResourceLoader.load(StudioAnim)
-	var vidpl = StudioAnimScene.instantiate() as StudioAnimation
-	$SubViewportContainer/SubViewport.add_child(vidpl)
-	
-	await vidpl.Finished
-	
-	vidpl.queue_free()
+		var sc : PackedScene = load(g)
+		var introScene : IntroScene = sc.instantiate()
+		$SubViewportContainer/SubViewport.add_child(introScene)
+		await introScene.Finished
+
 	await SpawnMenu()
 
-func FadeScene(sc : String) -> void:
-	var scene : PackedScene = ResourceLoader.load(sc)
-	var instance : Control = scene.instantiate()
-	instance.modulate.a = 0
-	$SubViewportContainer/SubViewport.add_child(instance)
-	
-	var tw = create_tween()
-	tw.tween_property(instance, "modulate", Color(1,1,1,1), 1)
-	
-	await get_tree().create_timer(3).timeout
-	
-	tw = create_tween()
-	tw.tween_property(instance, "modulate", Color(1,1,1,0), 1)
-	await tw.finished
-	instance.queue_free()
 #-----------------------------------------------------------------------------------
 func SpawnMenu() -> void:
 	var Menu = await Helper.LoadThreaded(StartingMenuScene).Sign

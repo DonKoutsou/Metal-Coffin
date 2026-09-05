@@ -48,6 +48,7 @@ func _draw() -> void:
 		if (g.HasFuel()):
 			draw_texture_rect(load("res://Assets/Items/Fuel.png"), Rect2(Vector2(textpos.x - 20, textpos.y - 14), Vector2(16,16)), false, Color("a29752"))
 			#draw_string(font, Vector2(textpos.x - 18, textpos.y + 16), "Fuel Depot", HORIZONTAL_ALIGNMENT_CENTER, -1, 16,  Color(1, 1,1))
+	Rng = GetFuelRangeWithExtraFuel(PlayerBoughtFuel)
 	draw_circle(get_viewport_rect().size / 2.0, Rng / 15.0, Color(0.3, 0.7, 0.915), false, 4)
 	draw_multiline(Lines, Color(1, 1, 1, 0.1), 3, true)
 

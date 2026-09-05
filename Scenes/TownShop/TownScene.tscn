@@ -75,7 +75,12 @@ stretch = true
 disable_3d = true
 world_3d = SubResource("World3D_oyy4e")
 handle_input_locally = false
-size = Vector2i(1746, 982)
+scaling_3d_mode = 5
+canvas_item_default_texture_filter = 2
+gui_disable_input = true
+gui_snap_controls_to_pixels = false
+oversampling = false
+size = Vector2i(1587, 893)
 size_2d_override = Vector2i(1280, 720)
 size_2d_override_stretch = true
 render_target_update_mode = 4
@@ -301,7 +306,7 @@ size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_fonts/bold_font = ExtResource("8_2uwot")
 bbcode_enabled = true
-text = "[p][img={32}x{32}]res://Assets/Items/Fuel.png[/img] REFUEL TIME/COST -[p]q"
+text = "[p][img={32}x{32}]res://Assets/Items/Fuel.png[/img] REFUEL TIME/COST"
 fit_content = true
 
 [node name="Button" type="Button" parent="HBoxContainer2" unique_id=1443515357 groups=["DigitalButtons"]]

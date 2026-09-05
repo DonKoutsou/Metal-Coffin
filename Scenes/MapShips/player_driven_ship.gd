@@ -154,7 +154,11 @@ func Update(delta: float, _unaffectedDelta : float) -> void:
 		var DroneFuelConsumtion = (Acceleration.position.x + droneCorrectionExtra) / droneEfficiency
 		
 		if (StormValue > 0.9):
-			DroneFuelConsumtion *= 1.3
+			var alt = Altitude / 10000
+			if (alt > 2000):
+				ActionTracker.OnActionCompleted(ActionTracker.Action.STORM_FUEL)
+			var extraConsumption = (DroneFuelConsumtion * 0.3) * alt
+			DroneFuelConsumtion += extraConsumption
 
 		DroneFuelConsumtion *= SimulationManager.SimSpeed()
 		

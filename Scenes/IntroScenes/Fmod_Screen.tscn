@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cyb6idy4lgldn"]
+
+[ext_resource type="Texture2D" uid="uid://du2pc7ffalqa0" path="res://Assets/Creds/FMOD Logo White - Transparent Background.png" id="1_yyd1g"]
+[ext_resource type="Script" uid="uid://chqpdutgcuhsm" path="res://Scenes/IntroScenes/IntroScene.gd" id="2_4oepq"]
+
+[node name="TextureRect" type="Control" unique_id=640452316]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_4oepq")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1576793184]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_yyd1g")
+stretch_mode = 3

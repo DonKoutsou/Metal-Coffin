@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dibt6rigig8hm"]
+
+[ext_resource type="Script" uid="uid://chqpdutgcuhsm" path="res://Scenes/IntroScenes/IntroScene.gd" id="1_4smdj"]
+[ext_resource type="Texture2D" uid="uid://yufakdoucuf8" path="res://Assets/Creds/logo_large_monochrome_dark.png" id="1_hkwcj"]
+
+[node name="TextureRect" type="Control" unique_id=507556267]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4smdj")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1636804509]
+texture_filter = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 252.44446
+offset_top = 142.0
+offset_right = -252.44446
+offset_bottom = -142.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_hkwcj")
+expand_mode = 1
+stretch_mode = 5

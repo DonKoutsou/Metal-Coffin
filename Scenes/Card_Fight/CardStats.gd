@@ -68,7 +68,7 @@ func GetCardName() ->String:
 
 #-------------------------------------------------------
 func GetDescription() -> String:
-	var RealTier = 0
+	var RealTier = 1
 	if (AllowTier):
 		RealTier = Tier
 		
@@ -100,7 +100,7 @@ func GetBattleDescription(User : BattleShipStats) -> String:
 	if (CardDescriptionOverride != ""):
 		return CardDescriptionOverride
 	
-	var RealTier = 0
+	var RealTier = 1
 	if (AllowTier):
 		RealTier = Tier
 	

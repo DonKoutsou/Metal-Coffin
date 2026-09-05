@@ -218,4 +218,5 @@ enum Action{
 	SHIP_MANAGER = 42,
 	DISPOSITION = 43,
 	DECK = 44,
+	STORM_FUEL = 45,
 }
