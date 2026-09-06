@@ -17,8 +17,3 @@ func _process(delta):
 	
 func _notification(what):
 	FmodServer.notification(what)
-
-	if OS.has_feature("mobile"):
-		match what:
-			NOTIFICATION_APPLICATION_FOCUS_OUT: FmodServer.mixer_suspend()
-			NOTIFICATION_APPLICATION_FOCUS_IN: FmodServer.mixer_resume()
