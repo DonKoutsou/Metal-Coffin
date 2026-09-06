@@ -24,7 +24,7 @@
 light_mode = 1
 
 [node name="Map" type="CanvasLayer" unique_id=584405440 node_paths=PackedStringArray("_InScreenUI", "_ScreenUI", "_Camera", "MapLines", "MapSpots", "Region", "Road", "MapLine", "WorldParent", "MapPointerMan") groups=["CameraPositionAffected", "ZoomAffected"]]
-process_mode = 3
+process_mode = 1
 layer = 0
 follow_viewport_enabled = true
 script = ExtResource("1_vpest")
@@ -54,7 +54,7 @@ ControllerEvH = ExtResource("22_n73so")
 UIEventH = ExtResource("25_8mjbw")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=177781806]
-process_mode = 1
+process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -66,6 +66,7 @@ stretch = true
 mouse_target = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1417639039]
+process_mode = 1
 disable_3d = true
 own_world_3d = true
 handle_input_locally = false

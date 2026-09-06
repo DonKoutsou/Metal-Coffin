@@ -252,3 +252,5 @@ stretch_mode = 3
 stream = ExtResource("6_cf7bt")
 volume_db = -10.0
 bus = &"MapSounds"
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

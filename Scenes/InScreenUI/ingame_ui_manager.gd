@@ -116,7 +116,7 @@ func GetMapMarkerEditor() -> MapMarkerEditor:
 func Pause() -> void:
 	var paused = get_tree().paused
 	get_tree().paused = !paused
-	if (paused):
+	if (PauseContainer != null):
 		PauseContainer.queue_free()
 	else:
 		var PauseMenuScene = ResourceLoader.load(PauseMenuSceneFile)
