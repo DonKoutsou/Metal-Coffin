@@ -320,6 +320,7 @@ texture_scale = 13.0
 texture_filter = 4
 position = Vector2(0, 48.999943)
 energy = 0.8
+blend_mode = 2
 range_z_min = 0
 range_layer_min = 2
 range_layer_max = 4
@@ -333,7 +334,7 @@ volume_db = -20.0
 bus = &"Sounds"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1225392723]
-color = Color(0.1126788, 0.11267882, 0.11267877, 1)
+color = Color(0.33909535, 0.33909476, 0.33909494, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1309732375]
 stream = ExtResource("8_d4jit")

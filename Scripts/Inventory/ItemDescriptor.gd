@@ -99,7 +99,7 @@ func SetWorkShopData(Box : Inventory_Box_Res, CanUpgrade : bool, Owner : Captain
 				UpgradeButton.visible = false
 				CancelUpgradeButton.visible = true
 				var TimeLeft = var_to_str(roundi(inv.GetUpgradeTimeLeft()))
-				UpgradeLabel.text = "Upgrade time left : {0} minutes".format([TimeLeft])
+				UpgradeLabel.text = "Upgrade time left : {0}".format([Clock.MinutesToHours(TimeLeft)])
 			else:
 				UpgradeButton.visible = true
 				var UpTime = It.UpgradeTime
@@ -225,7 +225,7 @@ func SetData(Box : Inventory_Box_Res, CanUpgrade : bool, CanTransfer : bool, Can
 				UpgradeButton.visible = CanUpgrade
 				CancelUpgradeButton.visible = true
 				var TimeLeft = var_to_str(roundi(inv.GetUpgradeTimeLeft()))
-				UpgradeLabel.text = "Upgrade time left : {0} minutes".format([TimeLeft])
+				UpgradeLabel.text = "Upgrade time left : {0} minutes".format([Clock.MinutesToHours(TimeLeft)])
 				UpgradeLabel.visible = true
 			else:
 				UpgradeButton.visible = CanUpgrade

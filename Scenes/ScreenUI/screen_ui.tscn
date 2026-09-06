@@ -33,7 +33,6 @@ autoplay = true
 bus = &"Sounds"
 
 [node name="ScreenCam" parent="." unique_id=1291979417 instance=ExtResource("37_6aw6g")]
-visible = true
 position = Vector2(640, 360)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=652607718]
@@ -126,5 +125,4 @@ mouse_filter = 2
 texture = ExtResource("31_g4rws")
 expand_mode = 1
 
-[node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer" unique_id=192523852]
-color = Color(0.36308, 0.36308, 0.36308, 1)
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=954027118]
