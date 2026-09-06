@@ -89,16 +89,7 @@ func GetSaveData() -> Resource:
 
 func SetSpotData(Type : MapSpotType, Data : MapSpotCustomData_CompleteInfo) -> void:
 	SpotType = Type
-	
-	if (Type.SpotK == MapSpotType.SpotKind.CITY_CENTER):
-		Population = Rand.InstanceRandom.RandIRange(10000, 50000)
-	else : if (Type.SpotK == MapSpotType.SpotKind.CAPITAL):
-		Population = Rand.InstanceRandom.RandIRange(80000, 150000)
-	else : if (Type.SpotK == MapSpotType.SpotKind.VILLAGE):
-		Population = Rand.InstanceRandom.RandIRange(2000, 6000)
-	
-	SetSize()
-	
+
 	for z : MapSpotCompleteInfo in Data.PossibleIds:
 		if (z.PickedBy != null):
 			continue
@@ -115,6 +106,16 @@ func SetSpotData(Type : MapSpotType, Data : MapSpotCustomData_CompleteInfo) -> v
 		break
 
 	add_to_group(SpotType.GetSpotEnumString())
+
+func InitPopulation() -> void:
+	if (SpotType.SpotK == MapSpotType.SpotKind.CITY_CENTER):
+		Population = Rand.InstanceRandom.RandIRange(10000, 50000)
+	else : if (SpotType.SpotK == MapSpotType.SpotKind.CAPITAL):
+		Population = Rand.InstanceRandom.RandIRange(80000, 150000)
+	else : if (SpotType.SpotK == MapSpotType.SpotKind.VILLAGE):
+		Population = Rand.InstanceRandom.RandIRange(2000, 6000)
+	
+	SetSize()
 
 func SetSize() -> void:
 	var sizething = (Population / 150000.0) as float

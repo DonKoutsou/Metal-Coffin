@@ -370,6 +370,7 @@ func LoadSaveData(Data : PlayerSaveData) -> void:
 		CommanderShip.ForceSteer(Command.CommanderData.Rot)
 		CommanderShip.SetSpeed(Command.CommanderData.Speed)
 		CommanderShip.UpdateAltitude(Command.CommanderData.Altitude)
+		CommanderShip.TargetAltitude = Command.CommanderData.TargetAltitude
 		for Ship in Command.DockedShips:
 			var DockedShip = DroneScene.instantiate() as PlayerDrivenShip
 			DockedShip.Cpt = Ship.Cpt

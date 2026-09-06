@@ -30,7 +30,7 @@ func GenerateCity(Type : MapSpotType, Data : MapSpotCustomData_CompleteInfo) -> 
 	spt.replace_by(sc)
 	
 	sc.SetSpotData(Type, Data)
-	
+	sc.InitPopulation()
 	SetSize()
 	
 	spt.free()
