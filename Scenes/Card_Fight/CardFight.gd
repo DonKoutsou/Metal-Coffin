@@ -1032,6 +1032,11 @@ func PlayerActionSelectionEnded() -> void:
 	PickingMoves = false
 	var ship = GetCurrentShip()
 	ExternalUI.ToggleHandInput(false)
+	
+	var en = ship.Energy
+	ship.SetEnergy(0)
+	ship.SetReserves(ship.EnergyReserves + en)
+	
 	for g : Card in ExternalUI.GetPlayerCardPlecement().get_children():
 		await ExternalUI.InsertCardToDiscard(g, true)
 		ship.deck.DiscardCard(g.CStats)

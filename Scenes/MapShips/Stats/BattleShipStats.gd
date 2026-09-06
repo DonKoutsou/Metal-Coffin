@@ -126,7 +126,7 @@ func SetEnergy(newEnergy : int) -> void:
 
 func SetReserves(newReserves : int) -> void:
 	var dif = newReserves - EnergyReserves
-	EnergyReserves = newReserves
+	EnergyReserves = min(10, newReserves)
 	ReservesChanged.emit(self, dif)
 
 func BuffFirePower(Amm : float, Turns : int = 2) -> void:
