@@ -126,3 +126,4 @@ texture = ExtResource("31_g4rws")
 expand_mode = 1
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=954027118]
+visible = false

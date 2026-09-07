@@ -13,7 +13,11 @@ class_name StartingScreen
 var StMenu : StartingMenu
 var Wor : World
 
-const APPID = "3679430"
+const MAIN_APP_ID = "3551150"
+const PLAYTEST_APP_ID = "3679430"
+const DEMO_APP_ID = "3679120"
+
+const APPID = DEMO_APP_ID
 
  #Called when the node enters the scene tree for the first time.
 #-----------------------------------------------------------------------------------
@@ -77,8 +81,8 @@ func StartPrologue(Load : bool, SkipStory : bool = false, customSeed : int = -1)
 	else:
 		Rand.customSeed = customSeed
 	
-	var IntroScene = await Helper.LoadThreaded(IntroGameScene).Sign
-	Wor = IntroScene.instantiate() as World
+	var wScene = await Helper.LoadThreaded(IntroGameScene).Sign
+	Wor = wScene.instantiate() as World
 	if (Load):
 		var LoadResault = SaveLoadManager.GetInstance().Load(Wor)
 		if (!LoadResault["Succsess"]):

@@ -21,3 +21,4 @@ AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_hgi3i")]([SubResource("Resource_vivg1")])
 Type = 2
 UseConditions = Array[int]([1])
+AllowTier = false

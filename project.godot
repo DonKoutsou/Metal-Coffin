@@ -15,7 +15,7 @@ General/banks_path="res://FMod_Build"
 [application]
 
 config/name="Metal Coffin"
-config/version="0.7.401"
+config/version="0.7.407"
 run/main_scene="uid://cqxnjihcai1kd"
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.7", "Mobile")
