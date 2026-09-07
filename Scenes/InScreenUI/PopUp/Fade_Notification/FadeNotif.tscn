@@ -3,11 +3,14 @@
 [ext_resource type="Script" uid="uid://clk1tqw1y8r5" path="res://Scenes/InScreenUI/PopUp/Fade_Notification/fade_notif.gd" id="1_sjfyc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xxwjh"]
-content_margin_top = 5.0
-content_margin_bottom = 5.0
-bg_color = Color(0.11, 0.11, 0.11, 0.8)
+content_margin_bottom = 0.0
+bg_color = Color(0.11, 0.11, 0.11, 0.96862745)
+border_width_bottom = 46
+border_color = Color(0.4418791, 0.44188103, 0.4418803, 1)
+border_blend = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3j3ox"]
+bg_color = Color(1, 1, 1, 1)
 
 [node name="FadeNotif" type="PanelContainer" unique_id=689629442 node_paths=PackedStringArray("T") groups=["FadeNotif", "ItemNotification"]]
 process_mode = 3
@@ -49,7 +52,7 @@ theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 0
 theme_override_constants/shadow_outline_size = 2
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 30
 text = "wafwaffwa"
 horizontal_alignment = 1
 vertical_alignment = 1

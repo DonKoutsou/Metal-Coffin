@@ -606,7 +606,7 @@ func Land(Spot : MapSpot, ControlledShip : MapShip) -> bool:
 		happeningui.PresentHappening(Spot.Event)
 		#UIEventH.OnScreenUIToggled(false)
 		#UIEventH.OnButtonCoverToggled(true)
-		happeningui.connect("HappeningFinished", HappeningFinished.bind(ControlledShip))
+		happeningui.HappeningFinished.connect(HappeningFinished.bind(ControlledShip))
 		PlayedEvent = true
 	Spot.OnSpotVisited()
 	return PlayedEvent

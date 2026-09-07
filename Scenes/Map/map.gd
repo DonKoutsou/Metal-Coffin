@@ -321,6 +321,9 @@ func _MAP_INPUT(event: InputEvent) -> void:
 	if (World.WORLDST != World.WORLDSTATE.NORMAL):
 		return
 	
+	if (_InScreenUI.GetInventory().visible):
+		return
+	
 	if (event.is_action_pressed("Click")):
 		if (GetMapMarkerEditor().visible):
 			GetMapMarkerEditor()._OnTextButtonPressed()

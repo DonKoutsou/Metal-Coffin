@@ -172,6 +172,7 @@ func NextStage() -> void:
 		
 			HappeningFinished.emit(RecruitedShips, FinishedCampaign, Events)
 			$VBoxContainer/HBoxContainer2/VBoxContainer2.visible = false
+			return
 		else:
 			var Possiblebranch : Array[HappeningStage] = []
 			if (!Check):
@@ -187,6 +188,7 @@ func NextStage() -> void:
 	if (CurrentBranch.size() == CurrentStage):
 		HappeningFinished.emit(RecruitedShips, FinishedCampaign, Events)
 		$VBoxContainer/HBoxContainer2/VBoxContainer2.visible = false
+		return
 	else:
 		call_deferred("NextStage")
 		
