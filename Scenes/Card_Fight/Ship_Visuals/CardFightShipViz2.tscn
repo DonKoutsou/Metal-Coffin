@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cxjy6hrsj65pg" path="res://Assets/ShipTextures/Hull1.tres" id="7_2rekq"]
 [ext_resource type="Texture2D" uid="uid://de1cx0wwuxx0x" path="res://Assets/smoke_09.png" id="7_cmntb"]
 [ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/ShipTextures/Hull3.png" id="7_ej477"]
+[ext_resource type="Material" uid="uid://bkekcc6fxt5w" path="res://Shaders/Blur/BludShipShadow.tres" id="8_kccki"]
 [ext_resource type="AudioStream" uid="uid://iiqji6xlmffd" path="res://Assets/Sounds/Explosion.wav" id="8_r755l"]
 [ext_resource type="PackedScene" uid="uid://rjp78jwbs17y" path="res://Scenes/Card_Fight/Ship_Visuals/Fire.tscn" id="12_2rekq"]
 [ext_resource type="Shader" uid="uid://bf1f6mjy34nt" path="res://Scenes/Card_Fight/Ship_Visuals/Shield.gdshader" id="13_spb5j"]
@@ -455,51 +456,27 @@ anchors_preset = 0
 offset_left = 30.0
 offset_right = 30.0
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Control/ShipPivot" unique_id=1544881616]
+[node name="TextureRect" type="Sprite2D" parent="HBoxContainer/Control/ShipPivot" unique_id=2066297426]
 light_mask = 524289
 texture_filter = 3
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
 rotation = -1.57079
-scale = Vector2(0.8, 0.8)
-offset_transform_enabled = true
-offset_transform_scale = Vector2(1.6, 1.6)
-mouse_filter = 2
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("7_2rekq")
-expand_mode = 2
-stretch_mode = 3
 
 [node name="ShadowPivot" type="Control" parent="HBoxContainer/Control/ShipPivot/TextureRect" unique_id=958676430]
 show_behind_parent = true
+layout_mode = 3
 anchors_preset = 0
 
-[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/Control/ShipPivot/TextureRect/ShadowPivot" unique_id=2103533902]
+[node name="TextureRect2" type="Sprite2D" parent="HBoxContainer/Control/ShipPivot/TextureRect/ShadowPivot" unique_id=1947176579]
 modulate = Color(0, 0, 0, 0.5)
 show_behind_parent = true
-light_mask = 524289
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -63.0
-offset_top = 37.0
-offset_right = -63.0
-offset_bottom = 37.0
-grow_horizontal = 2
-grow_vertical = 2
+light_mask = 524288
+texture_filter = 3
+material = ExtResource("8_kccki")
+position = Vector2(-63, 37)
 scale = Vector2(0.6, 0.6)
-mouse_filter = 2
 texture = ExtResource("7_ej477")
-expand_mode = 1
-stretch_mode = 3
 
 [node name="Smoke" type="GPUParticles2D" parent="HBoxContainer/Control/ShipPivot/TextureRect" unique_id=415524541]
 visible = false
@@ -514,15 +491,15 @@ interpolate = false
 process_material = SubResource("ParticleProcessMaterial_rmogf")
 
 [node name="Fire" parent="HBoxContainer/Control/ShipPivot/TextureRect" unique_id=1440653444 instance=ExtResource("12_2rekq")]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 0.0
-offset_right = 1.0
-offset_bottom = 1.0
+offset_left = -128.5
+offset_top = -140.5
+offset_right = -127.5
+offset_bottom = -139.5
 scale = Vector2(34.515, 52.108)
 pivot_offset_ratio = Vector2(0.5, 1)
 mouse_filter = 2
@@ -548,16 +525,15 @@ bus = &"MapSounds"
 
 [node name="ColorRect" type="ColorRect" parent="HBoxContainer/Control/ShipPivot/TextureRect" unique_id=25845321]
 material = SubResource("ShaderMaterial_1vivr")
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -0.5
-offset_top = -0.5
-offset_right = 0.5
-offset_bottom = 0.5
+offset_left = -128.5
+offset_top = -140.5
+offset_right = -127.5
+offset_bottom = -139.5
 grow_horizontal = 2
 grow_vertical = 2
 rotation = 1.5707964

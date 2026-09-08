@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bkekcc6fxt5w"]
+
+[ext_resource type="Shader" uid="uid://luuysqiab62e" path="res://Shaders/Blur/Blur.gdshader" id="1_xc557"]
+
+[resource]
+shader = ExtResource("1_xc557")
+shader_parameter/offset = 5.0000002375
+shader_parameter/col = Color(0, 0, 0, 0.5)

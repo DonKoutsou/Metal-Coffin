@@ -53,10 +53,12 @@ func _process(_delta: float) -> void:
 	var MouseInScreen = Local.x > 0 and Local.y > 0 and Local.x < get_viewport_rect().size.x and Local.y < get_viewport_rect().size.y
 	if (MouseInScreen):
 		global_position = get_global_mouse_position()
-		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+		OutScreenCursor.Instance.visible = false
+		
 		#print("mouse hidden " + var_to_str(Time.get_ticks_msec()))
 	else:
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		OutScreenCursor.Instance.visible = true
+		#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 #func MouseOut() -> void:
 	#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

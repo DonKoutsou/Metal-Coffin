@@ -87,7 +87,8 @@ func DoFadeInAnim() -> void:
 	await Tw.finished
 	
 	InScreenCursor.Instance.ToggleMouse(false)
-	Input.mouse_mode =  Input.MOUSE_MODE_VISIBLE
+	OutScreenCursor.Instance.visible = true
+	#Input.mouse_mode =  Input.MOUSE_MODE_VISIBLE
 	
 	set_physics_process(true)
 	$VBoxContainer/PanelContainer/VBoxContainer2.visible = true

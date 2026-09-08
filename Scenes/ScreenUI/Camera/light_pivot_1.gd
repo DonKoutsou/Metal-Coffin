@@ -27,6 +27,9 @@ func ApplyShake(amm : float = 1) -> void:
 
 
 func _process(delta: float) -> void:
+	#var parc : Camera2D = get_parent()
+	#global_position = parc.global_position + Vector2(7, -1550)
+	
 	var time = Time.get_ticks_msec() / 1000.0
 
 	# Calculate a subtle rotation based on the sine wave

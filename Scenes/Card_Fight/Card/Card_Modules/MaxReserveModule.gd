@@ -19,7 +19,7 @@ func Handle(Performer : BattleShipStats, Action : CardStats, Targets : Array[Bat
 		return DeffensiveAnimationData.new()
 	var resupplyamm = Performer.Energy
 			
-	var TargetViz : Array[Control]
+	var TargetViz : Array[Node]
 	
 	for g in Targets:
 		if (g == null):

@@ -5,6 +5,8 @@ class_name Captain
 @export var CaptainName : String
 @export_file("*.png") var CaptainPortrait : String
 @export var ShipIcon : Texture
+@export var CardFightIcons : Array[Texture]
+
 @export var CaptainStats : Array[ShipStat]
 #var MappedStats : Array[STAT_CONST.STATS]
 @export var ShipCallsign : String = "P"
@@ -80,6 +82,7 @@ func GetBattleStats() -> BattleShipStats:
 	var MaxShield = GetStatBaseValue(STAT_CONST.STATS.MAX_SHIELD)
 	
 	stats.ShipIcon = ShipIcon
+	stats.cardFightIcons = CardFightIcons
 	stats.CaptainIcon = CaptainPortrait
 	stats.Name = GetCaptainName()
 	var c : Array[CardStats]

@@ -54,7 +54,7 @@ func GetBuffAmmount(Tier : int) -> float:
 func Handle(_Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> AnimationData:
 	if (Action.Burned):
 		return DeffensiveAnimationData.new()
-	var TargetViz : Array[Control]
+	var TargetViz : Array[Node]
 	
 	var Callables : Array[Callable]
 	

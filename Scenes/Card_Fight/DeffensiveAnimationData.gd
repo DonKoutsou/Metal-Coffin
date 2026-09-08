@@ -2,4 +2,4 @@ extends AnimationData
 
 class_name DeffensiveAnimationData
 
-var Targets : Array[Control]
+var Targets : Array[Node]

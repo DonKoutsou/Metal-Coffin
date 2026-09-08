@@ -12,7 +12,7 @@ class_name CardViz
 
 @export var min_distance = 100
 
-var Target : Control
+var Target : Node
 var Going = false
 var SpawnPos : Vector2 = Vector2.ZERO
 var counter : float = 0

@@ -25,7 +25,7 @@ func GetReductionAmm(Tier : int) -> int:
 func Handle(Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> AnimationData:
 	if (Action.Burned):
 		return DeffensiveAnimationData.new()
-	var TargetViz : Array[Control]
+	var TargetViz : Array[Node]
 	
 	var Callables : Array[Callable]
 	

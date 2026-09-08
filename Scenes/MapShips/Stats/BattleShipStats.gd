@@ -5,6 +5,7 @@ class_name BattleShipStats
 var Name : String
 
 var ShipIcon : Texture
+var cardFightIcons : Array[Texture]
 var CaptainIcon : String
 
 var Funds : int

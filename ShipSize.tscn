@@ -7,7 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/ShipTextures/Hull3.png" id="3_rd5hk"]
 [ext_resource type="Texture2D" uid="uid://bx78x3avxyhmf" path="res://Assets/ShipTextures/Hull5.png" id="4_2suqw"]
 [ext_resource type="Texture2D" uid="uid://d1vusg0beo7lv" path="res://Assets/ShipTextures/Hull7.png" id="5_d47s1"]
-[ext_resource type="Texture2D" uid="uid://7h4uf5rwddw6" path="res://Assets/ShipTextures/Hull13.png" id="7_d47s1"]
+[ext_resource type="Texture2D" uid="uid://cfdvwoeixqqn4" path="res://Assets/ShipTextures/Hull13_0.png" id="7_aalg5"]
+[ext_resource type="Script" uid="uid://b3oh5x8rb6gq7" path="res://TailBone2D.gd" id="8_d47s1"]
+[ext_resource type="Texture2D" uid="uid://cwangywjpsjvb" path="res://Assets/ShipTextures/Hull13_1.png" id="9_aalg5"]
+[ext_resource type="Texture2D" uid="uid://buysn41idx8n" path="res://Assets/ShipTextures/Hull13_2.png" id="10_28juw"]
 
 [node name="Sprite2D" type="Sprite2D" unique_id=1536705037]
 texture_filter = 1
@@ -36,9 +39,27 @@ position = Vector2(354, 1)
 texture = ExtResource("4_2suqw")
 
 [node name="Sprite2D7" type="Sprite2D" parent="." unique_id=1611007521]
-position = Vector2(-316, 0)
-scale = Vector2(0.58, 0.58)
-texture = ExtResource("7_d47s1")
+position = Vector2(-844, 237.00003)
+rotation = 7.397297
+texture = ExtResource("7_aalg5")
+
+[node name="Node2D" type="Node2D" parent="Sprite2D7" unique_id=951806083]
+position = Vector2(0, -30.00003)
+rotation = 0.0022528449
+script = ExtResource("8_d47s1")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D7/Node2D" unique_id=1522173140]
+position = Vector2(8.4e-44, -20.00003)
+texture = ExtResource("9_aalg5")
+
+[node name="Node2D2" type="Node2D" parent="Sprite2D7/Node2D" unique_id=1780302954]
+position = Vector2(1.72e-43, -41)
+rotation = 0.0065849493
+script = ExtResource("8_d47s1")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D7/Node2D/Node2D2" unique_id=527763030]
+position = Vector2(6.18e-43, -21.000061)
+texture = ExtResource("10_28juw")
 
 [node name="Sprite2D4" type="Sprite2D" parent="." unique_id=1010934868]
 position = Vector2(468.99997, 1)

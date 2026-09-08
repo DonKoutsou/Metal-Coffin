@@ -28,7 +28,7 @@ func Handle(Performer : BattleShipStats, Action : CardStats, Targets : Array[Bat
 	Performer.SetReserves(0)
 	Performer.SetEnergy(Performer.Energy + resupplyamm)
 
-	var TargetViz : Array[Control]
+	var TargetViz : Array[Node]
 	TargetViz.append(Performer.ShipViz.ShipIcon)
 	var Data = DeffensiveAnimationData.new()
 	Data.Mod = self

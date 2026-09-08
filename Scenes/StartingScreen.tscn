@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://8du0534sf0gr" path="res://Scripts/UI/starting_screen.gd" id="1_kry56"]
 [ext_resource type="Material" uid="uid://dxt6oe4rhk3du" path="res://Shaders/PostProcessMat.tres" id="3_62h02"]
+[ext_resource type="PackedScene" uid="uid://cneeylrqurx2q" path="res://Scenes/InScreenUI/Cursor/CursorReal.tscn" id="3_vb6t2"]
 
 [sub_resource type="Gradient" id="Gradient_7bhdu"]
 offsets = PackedFloat32Array(0, 0.9474836, 1)
@@ -35,6 +36,7 @@ IntroGameScene = "uid://cid0s6uni7fky"
 CageFightGameScene = "uid://b575fi0e44gkg"
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=905685013]
+texture_repeat = 2
 material = ExtResource("3_62h02")
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,10 +59,17 @@ positional_shadow_atlas_quad_0 = 0
 positional_shadow_atlas_quad_1 = 0
 positional_shadow_atlas_quad_2 = 0
 positional_shadow_atlas_quad_3 = 0
-size = Vector2i(854, 480)
+size = Vector2i(3402, 1914)
 size_2d_override = Vector2i(1280, 720)
 size_2d_override_stretch = true
 render_target_update_mode = 4
+
+[node name="CanvasLayer" type="CanvasLayer" parent="SubViewportContainer/SubViewport" unique_id=880871465]
+layer = 7051
+
+[node name="InScreenMouse" parent="SubViewportContainer/SubViewport/CanvasLayer" unique_id=804818995 instance=ExtResource("3_vb6t2")]
+top_level = true
+z_index = 4096
 
 [node name="FmodBankLoader" type="FmodBankLoader" parent="." unique_id=1161966533]
 bank_paths = ["res://FMod_Build/Master.bank"]

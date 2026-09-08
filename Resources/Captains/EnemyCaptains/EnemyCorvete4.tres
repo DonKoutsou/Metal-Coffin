@@ -127,8 +127,24 @@ StatName = 22
 resource_local_to_scene = true
 script = ExtResource("4_2vjoe")
 CaptainName = "Corvete4"
+CaptainPortrait = ""
 ShipIcon = ExtResource("5_3l80p")
 CaptainStats = Array[ExtResource("2_ouowo")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_mcdo0"), SubResource("Resource_yl52l"), SubResource("Resource_7g4dd"), SubResource("Resource_hxdnx"), SubResource("Resource_4p6v8"), SubResource("Resource_66526"), SubResource("Resource_h3q7u"), SubResource("Resource_xmlya"), SubResource("Resource_j0vsk"), SubResource("Resource_mphws"), SubResource("Resource_rjpe7"), SubResource("Resource_mil77"), SubResource("Resource_xx2gh"), SubResource("Resource_bewff"), SubResource("Resource_aqvi6"), SubResource("Resource_kiaax"), SubResource("Resource_ouowo"), SubResource("Resource_jyg0d"), SubResource("Resource_2vjoe"), SubResource("Resource_3l80p"), SubResource("Resource_2vcbg")])
 ShipCallsign = "C4"
 StartingItems = Array[ExtResource("6_2vcbg")]([ExtResource("7_42oxu"), ExtResource("8_uf8gk"), ExtResource("8_uf8gk"), ExtResource("9_y6jch"), ExtResource("10_wkhcw"), ExtResource("10_wkhcw"), ExtResource("10_wkhcw"), ExtResource("11_x76xp"), ExtResource("11_x76xp"), ExtResource("11_x76xp"), ExtResource("12_td5du"), ExtResource("12_td5du"), ExtResource("12_td5du"), ExtResource("13_gfjjg")])
+CurrentPort = ""
+CheckForErrors = false
 ProvidingFunds = 25000
+ProvidingCaptains = Array[ExtResource("4_2vjoe")]([])
+Cards = Dictionary[ExtResource("3_jyg0d"), int]({})
+Repair_Parts = 0.0
+TempName = ""
+disp = Dictionary[int, float]({
+0: 0.0,
+1: 0.0,
+2: 0.0,
+3: 0.0,
+4: 0.0,
+5: 0.0
+})
+_property_overrides = Dictionary[StringName, bool]({})

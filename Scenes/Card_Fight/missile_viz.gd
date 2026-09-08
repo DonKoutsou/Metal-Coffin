@@ -23,7 +23,7 @@ class_name MissileViz
 signal Finished
 signal Reached
 
-var Target : Control
+var Target : Node
 var Going = false
 var SpawnPos : Vector2 = Vector2.ZERO
 var counter : float = 0
@@ -48,7 +48,7 @@ func _ready() -> void:
 	InitialParticle.burst()
 	await InitialParticle.Finished
 	SoundNode.play()
-	look_at(Target.global_position + (Target.size / 2))
+	look_at(Target.global_position)
 	set_process(true)
 
 func _process(delta: float) -> void:
@@ -58,7 +58,7 @@ func _process(delta: float) -> void:
 	
 	counter += delta
 	
-	var direction = (Target.global_position + (Target.size / 2)) - global_position
+	var direction = (Target.global_position) - global_position
 	var distance = direction.length()
 	
 	# Only adjust if the missile is more than a tiny distance from the target
@@ -90,8 +90,8 @@ func _process(delta: float) -> void:
 		
 		position += Vector2(cos(rotation), sin(rotation)) * speed * delta * 80
 	
-	if (global_position.distance_squared_to(Target.global_position + (Target.size / 2)) < 500 or counter > 1.5):
-		global_position = Target.global_position + (Target.size / 2)
+	if (global_position.distance_squared_to(Target.global_position) < 500 or counter > 1.5):
+		global_position = Target.global_position
 		EndingParticle.global_position = global_position
 		EndingParticle.global_rotation = 0
 		EndingParticle.burst()

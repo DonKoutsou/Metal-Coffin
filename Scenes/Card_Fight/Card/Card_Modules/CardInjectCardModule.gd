@@ -25,7 +25,7 @@ func GetCardAmmount(Tier : int) -> int:
 func Handle(_Performer : BattleShipStats, Action : CardStats, Targets : Array[BattleShipStats] = []) -> DeffensiveAnimationData:
 	if (Action.Burned):
 		return DeffensiveAnimationData.new()
-	var TargetViz : Array[Control]
+	var TargetViz : Array[Node]
 	
 	#var Callables : Array[Callable]
 	var injectAmm : int = GetCardAmmount(Action.Tier)

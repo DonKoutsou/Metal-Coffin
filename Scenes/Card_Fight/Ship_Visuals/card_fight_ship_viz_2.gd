@@ -8,7 +8,7 @@ class_name CardFightShipViz2
 
 @export var ShipNameLabel : Label
 
-@export var ShipIcon : TextureRect
+@export var ShipIcon : Sprite2D
 @export var ShadowPivot : Control
 
 @export var TurnPanel : Control
@@ -270,15 +270,53 @@ func SetStats(S : BattleShipStats, Friendly : bool, ) -> void:
 	Fr = Friendly
 	ShipNameLabel.text = S.Name
 	
-	var newIcon : Texture
-	if (S.ShipIcon is AnimatedTexture):
-		#We make sure to duplicate it so we can pause it without pausing everything else on the world
-		newIcon = S.ShipIcon.duplicate()
-	else:
-		newIcon = S.ShipIcon
+	if (S.cardFightIcons.size() > 0):
+		ShipIcon.texture = S.cardFightIcons[0]
+		ShadowPivot.get_child(0).texture = S.cardFightIcons[0]
 		
-	ShipIcon.texture = newIcon
-	ShadowPivot.get_child(0).texture = newIcon
+		var shadow : Sprite2D = ShadowPivot.get_child(0)
+		
+		var lastParent : Node2D = ShipIcon
+		var lastSpriteSize : float = ShipIcon.texture.get_size().y / 2
+		
+		var lastShadowParent : Node2D = shadow
+		var lastShadowSpriteSize : float = shadow.texture.get_size().y / 2
+		
+		for icon in range(1, S.cardFightIcons.size()):
+			var pivot = TailBone2D.new()
+			lastParent.add_child(pivot)
+			var partIcon = Sprite2D.new()
+			partIcon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST_WITH_MIPMAPS
+			partIcon.texture = S.cardFightIcons[icon]
+			pivot.add_child(partIcon)
+			pivot.position.y = -lastSpriteSize
+			partIcon.position.y = -partIcon.texture.get_size().y / 2
+			lastParent = pivot
+			lastSpriteSize = partIcon.texture.get_size().y
+			
+			var shadowPivot = TailBone2D.new()
+			shadowPivot.use_parent_material = true
+			lastShadowParent.add_child(shadowPivot)
+			var shaodwPartIcon = Sprite2D.new()
+			shaodwPartIcon.use_parent_material = true
+			shaodwPartIcon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST_WITH_MIPMAPS
+			shaodwPartIcon.texture = S.cardFightIcons[icon]
+			shadowPivot.add_child(shaodwPartIcon)
+			shadowPivot.position.y = -lastShadowSpriteSize
+			shaodwPartIcon.position.y = -shaodwPartIcon.texture.get_size().y / 2
+			lastShadowParent = shadowPivot
+			lastShadowSpriteSize = shaodwPartIcon.texture.get_size().y
+	else:
+		var newIcon : Texture
+		if (S.ShipIcon is AnimatedTexture):
+			#We make sure to duplicate it so we can pause it without pausing everything else on the world
+			newIcon = S.ShipIcon.duplicate()
+		else:
+			newIcon = S.ShipIcon
+			
+		ShipIcon.texture = newIcon
+		ShadowPivot.get_child(0).texture = newIcon
+		
 	HullLabel.text = "{0}/{1}".format([roundi(S.CurrentHull + S.Shield), S.Hull]).replace(".0", "")
 	HullBar.max_value = S.Hull
 	ShieldBar.max_value = S.MaxShield

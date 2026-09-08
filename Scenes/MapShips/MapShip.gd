@@ -657,6 +657,7 @@ func GetBattleStats() -> BattleShipStats:
 	stats.Speed = (Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * 1000) / Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	stats.FirePower = Cpt.GetStatFinalValue(STAT_CONST.STATS.FIREPOWER)
 	stats.ShipIcon = Cpt.ShipIcon
+	stats.cardFightIcons = Cpt.CardFightIcons
 	stats.CaptainIcon = Cpt.CaptainPortrait
 	stats.Name = GetShipName()
 	stats.Cards = Cpt.GetCharacterInventory().GetCards()

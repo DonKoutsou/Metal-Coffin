@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cneeylrqurx2q"]
+
+[ext_resource type="Texture2D" uid="uid://c2dsdv2cdsmxx" path="res://Assets/UIPiecies/Screen/cursor-pointer-14.png" id="1_d7wqt"]
+[ext_resource type="Script" uid="uid://c4h6tx86rs81t" path="res://Scenes/InScreenUI/Cursor/Out_Screen_mouse.gd" id="2_d7wqt"]
+
+[node name="InScreenMouse" type="TextureRect" unique_id=804818995]
+process_mode = 3
+texture_filter = 3
+offset_left = 677.0
+offset_top = 331.0
+offset_right = 693.0
+offset_bottom = 347.0
+mouse_filter = 2
+texture = ExtResource("1_d7wqt")
+script = ExtResource("2_d7wqt")
+NormalPointer = "uid://cniwbp32q64vo"

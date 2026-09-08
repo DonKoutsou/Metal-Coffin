@@ -397,7 +397,8 @@ func _on_pause_pressed() -> void:
 
 func MouseIn() -> void:
 	InScreenCursor.Instance.ToggleMouse(false)
-	Input.mouse_mode =  Input.MOUSE_MODE_VISIBLE
+	OutScreenCursor.Instance.visible = true
+	#Input.mouse_mode =  Input.MOUSE_MODE_VISIBLE
 
 func MouseOut() -> void:
 	if (HeldCard == null):

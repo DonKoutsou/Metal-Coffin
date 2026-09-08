@@ -35,7 +35,7 @@ func Handle(Performer : BattleShipStats, Action : CardStats, Targets : Array[Bat
 		return DeffensiveAnimationData.new()
 	var ShieldAmm = Performer.Energy * GetShieldPerEnergy(Action.Tier)
 
-	var TargetViz : Array[Control]
+	var TargetViz : Array[Node]
 	
 	var Callables : Array[Callable]
 	
