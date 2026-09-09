@@ -16,16 +16,16 @@ func _process(delta: float) -> void:
 	var newPos = par.global_position
 	var parentRot = par.global_rotation
 	
-	
+	var magnitude : float = (lastPosition - newPos).length()
 	var dir = lastPosition.direction_to(newPos).rotated(-par.global_rotation)
-	var force = -dir.x * delta
-	lastForce = clamp(force + lastForce, - 0.1, 0.1)
+	var force = -dir.x * magnitude * delta
+	lastForce = clamp(force + lastForce, - 1, 1)
 	
-	var newRot = clamp(lastRot + ((lastRotation - parentRot) * influence) + lastForce, -PI / 5, PI / 5)
+	var newRot = clamp(lastRot + ((lastRotation - parentRot) * influence) + (lastForce * influence), -PI / 5, PI / 5)
 
 	rotation = newRot
-	lastForce = lerp_angle(lastForce, 0.0, delta * 100)
+	lastForce = lerp_angle(lastForce, 0.0, delta * 50)
 	
-	lastRot = lerp(newRot, 0.0, delta)
+	lastRot = lerp_angle(newRot, 0.0, delta)
 	lastPosition = newPos
 	lastRotation = parentRot

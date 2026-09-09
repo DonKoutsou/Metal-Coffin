@@ -7,9 +7,9 @@
 [ext_resource type="StyleBox" uid="uid://cq66xt1psso06" path="res://Theme/GreyPanel.tres" id="4_0orxy"]
 [ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scenes/Card_Fight/External_UI/CardHandContainer.gd" id="4_cmntb"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="6_wmwbv"]
-[ext_resource type="Texture2D" uid="uid://cxjy6hrsj65pg" path="res://Assets/ShipTextures/Hull1.tres" id="7_2rekq"]
 [ext_resource type="Texture2D" uid="uid://de1cx0wwuxx0x" path="res://Assets/smoke_09.png" id="7_cmntb"]
 [ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/ShipTextures/Hull3.png" id="7_ej477"]
+[ext_resource type="Texture2D" uid="uid://7h4uf5rwddw6" path="res://Assets/ShipTextures/Hull13.png" id="7_kccki"]
 [ext_resource type="Material" uid="uid://bkekcc6fxt5w" path="res://Shaders/Blur/BludShipShadow.tres" id="8_kccki"]
 [ext_resource type="AudioStream" uid="uid://iiqji6xlmffd" path="res://Assets/Sounds/Explosion.wav" id="8_r755l"]
 [ext_resource type="PackedScene" uid="uid://rjp78jwbs17y" path="res://Scenes/Card_Fight/Ship_Visuals/Fire.tscn" id="12_2rekq"]
@@ -177,8 +177,8 @@ TurnPanel = NodePath("HBoxContainer/PanelContainer2/VBoxContainer/PanelContainer
 HasMovePanel = NodePath("HBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/HasAction")
 ActionParent = NodePath("HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer/ActionParent")
 PassiveParent = NodePath("HBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/HBoxContainer/PassiveParent")
-FirePart = NodePath("HBoxContainer/Control/ShipPivot/TextureRect/Fire")
-Shield = NodePath("HBoxContainer/Control/ShipPivot/TextureRect/ColorRect")
+FirePart = NodePath("HBoxContainer/Control/ShipPivot/TextureRect/Control/Fire")
+Shield = NodePath("HBoxContainer/Control/ShipPivot/TextureRect/Control/ColorRect")
 SpeedBuff = NodePath("HBoxContainer/PanelContainer2/SpeedBuff")
 SpeedDeBuff = NodePath("HBoxContainer/PanelContainer2/SpeedDeBuff")
 FPBuff = NodePath("HBoxContainer/PanelContainer2/FirepowerBuff")
@@ -461,7 +461,7 @@ light_mask = 524289
 texture_filter = 3
 rotation = -1.57079
 scale = Vector2(1.2, 1.2)
-texture = ExtResource("7_2rekq")
+texture = ExtResource("7_kccki")
 
 [node name="ShadowPivot" type="Control" parent="HBoxContainer/Control/ShipPivot/TextureRect" unique_id=958676430]
 show_behind_parent = true
@@ -490,20 +490,6 @@ fixed_fps = 20
 interpolate = false
 process_material = SubResource("ParticleProcessMaterial_rmogf")
 
-[node name="Fire" parent="HBoxContainer/Control/ShipPivot/TextureRect" unique_id=1440653444 instance=ExtResource("12_2rekq")]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.5
-offset_top = -140.5
-offset_right = -127.5
-offset_bottom = -139.5
-scale = Vector2(34.515, 52.108)
-pivot_offset_ratio = Vector2(0.5, 1)
-mouse_filter = 2
-
 [node name="Explosion" type="GPUParticles2D" parent="HBoxContainer/Control/ShipPivot/TextureRect" unique_id=755917109]
 position = Vector2(1.90735e-05, -3.20142e-10)
 emitting = false
@@ -523,17 +509,36 @@ stream = ExtResource("8_r755l")
 pitch_scale = 0.3
 bus = &"MapSounds"
 
-[node name="ColorRect" type="ColorRect" parent="HBoxContainer/Control/ShipPivot/TextureRect" unique_id=25845321]
-material = SubResource("ShaderMaterial_1vivr")
+[node name="Control" type="Control" parent="HBoxContainer/Control/ShipPivot/TextureRect" unique_id=681275273]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Fire" parent="HBoxContainer/Control/ShipPivot/TextureRect/Control" unique_id=1440653444 instance=ExtResource("12_2rekq")]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -128.5
-offset_top = -140.5
-offset_right = -127.5
-offset_bottom = -139.5
+offset_left = -7.6293945e-06
+offset_top = 3.0517578e-05
+offset_right = 0.9999924
+offset_bottom = 1.0000305
+scale = Vector2(34.515, 52.108)
+pivot_offset_ratio = Vector2(0.5, 1)
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/Control/ShipPivot/TextureRect/Control" unique_id=25845321]
+material = SubResource("ShaderMaterial_1vivr")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -1.5258789e-05
+offset_right = 1.0
+offset_bottom = 0.99998474
 grow_horizontal = 2
 grow_vertical = 2
 rotation = 1.5707964

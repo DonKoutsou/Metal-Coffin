@@ -282,8 +282,11 @@ func SetStats(S : BattleShipStats, Friendly : bool, ) -> void:
 		var lastShadowParent : Node2D = shadow
 		var lastShadowSpriteSize : float = shadow.texture.get_size().y / 2
 		
+		var infl = 1
+		
 		for icon in range(1, S.cardFightIcons.size()):
 			var pivot = TailBone2D.new()
+			pivot.influence = infl
 			lastParent.add_child(pivot)
 			var partIcon = Sprite2D.new()
 			partIcon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST_WITH_MIPMAPS
@@ -295,6 +298,7 @@ func SetStats(S : BattleShipStats, Friendly : bool, ) -> void:
 			lastSpriteSize = partIcon.texture.get_size().y
 			
 			var shadowPivot = TailBone2D.new()
+			shadowPivot.influence = infl
 			shadowPivot.use_parent_material = true
 			lastShadowParent.add_child(shadowPivot)
 			var shaodwPartIcon = Sprite2D.new()
@@ -306,6 +310,8 @@ func SetStats(S : BattleShipStats, Friendly : bool, ) -> void:
 			shaodwPartIcon.position.y = -shaodwPartIcon.texture.get_size().y / 2
 			lastShadowParent = shadowPivot
 			lastShadowSpriteSize = shaodwPartIcon.texture.get_size().y
+			
+			infl += 1
 	else:
 		var newIcon : Texture
 		if (S.ShipIcon is AnimatedTexture):
@@ -316,7 +322,7 @@ func SetStats(S : BattleShipStats, Friendly : bool, ) -> void:
 			
 		ShipIcon.texture = newIcon
 		ShadowPivot.get_child(0).texture = newIcon
-		
+	
 	HullLabel.text = "{0}/{1}".format([roundi(S.CurrentHull + S.Shield), S.Hull]).replace(".0", "")
 	HullBar.max_value = S.Hull
 	ShieldBar.max_value = S.MaxShield
