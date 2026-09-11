@@ -2,11 +2,16 @@
 
 [ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scenes/Map/MapSpot/Happenings/HappeningStage.gd" id="1_tpfoe"]
 [ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scenes/Map/MapSpot/Happenings/HappeningOption.gd" id="2_7kn1s"]
+[ext_resource type="Script" uid="uid://cj6lgkawdqkd8" path="res://Scenes/Map/MapSpot/Happenings/HappeningText.gd" id="3_tpfoe"]
 [ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scenes/Map/MapSpot/Happenings/Happening.gd" id="4_kp7kq"]
+
+[sub_resource type="Resource" id="Resource_tpfoe"]
+script = ExtResource("3_tpfoe")
+Text = "Test"
 
 [sub_resource type="Resource" id="Resource_4kru7"]
 script = ExtResource("1_tpfoe")
-HappeningTexts = Array[String](["Test"])
+Texts = Array[ExtResource("3_tpfoe")]([SubResource("Resource_tpfoe")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [resource]

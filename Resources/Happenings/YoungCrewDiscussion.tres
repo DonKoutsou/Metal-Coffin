@@ -2,12 +2,32 @@
 
 [ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scenes/Map/MapSpot/Happenings/HappeningStage.gd" id="1_qaalc"]
 [ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scenes/Map/MapSpot/Happenings/HappeningOption.gd" id="2_3td2i"]
+[ext_resource type="Script" uid="uid://cj6lgkawdqkd8" path="res://Scenes/Map/MapSpot/Happenings/HappeningText.gd" id="3_3td2i"]
 [ext_resource type="Script" uid="uid://ii12ceb6fgif" path="res://Scenes/Map/MapSpot/Happenings/StringHappeningOption.gd" id="3_c5nxy"]
 [ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scenes/Map/MapSpot/Happenings/Happening.gd" id="4_ni7lq"]
 
+[sub_resource type="Resource" id="Resource_y5gne"]
+script = ExtResource("3_3td2i")
+Text = "You sit next to the boy and you take it in your embrace. You sit there for what feels like an hour."
+
+[sub_resource type="Resource" id="Resource_w6x1x"]
+script = ExtResource("3_3td2i")
+Text = "The twitching slowly fades away, the boy is slowly takes control back of his body. The silence is quickly broken as the boy breaks into a sobbing cry."
+
+[sub_resource type="Resource" id="Resource_mguym"]
+script = ExtResource("3_3td2i")
+Text = "It was clear to you, this is not a place for a boy. Going through your mind is all the possible circumances that could make the boy want to fight, but alas the purity of his soul had been tarnished enough by this conflict."
+
+[sub_resource type="Resource" id="Resource_f7w6e"]
+script = ExtResource("3_3td2i")
+Text = "You take the boy and you lead it out the ship. You task a couple of the crew to make sure to find a place for the boy to stay in the town, he's seen enough of this conflict."
+
+[sub_resource type="Resource" id="Resource_8acqq"]
+script = ExtResource("3_3td2i")
+
 [sub_resource type="Resource" id="Resource_ni7lq"]
 script = ExtResource("1_qaalc")
-HappeningTexts = Array[String](["You sit next to the boy and you take it in your embrace. You sit there for what feels like an hour.", "The twitching slowly fades away, the boy is slowly takes control back of his body. The silence is quickly broken as the boy breaks into a sobbing cry.", "It was clear to you, this is not a place for a boy. Going through your mind is all the possible circumances that could make the boy want to fight, but alas the purity of his soul had been tarnished enough by this conflict.", "You take the boy and you lead it out the ship. You task a couple of the crew to make sure to find a place for the boy to stay in the town, he's seen enough of this conflict.", ""])
+Texts = Array[ExtResource("3_3td2i")]([SubResource("Resource_y5gne"), SubResource("Resource_w6x1x"), SubResource("Resource_mguym"), SubResource("Resource_f7w6e"), SubResource("Resource_8acqq")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_qaalc"]
@@ -28,9 +48,13 @@ WorldviewEffect = 3
 WorldviewEffectAmm = -10
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
+[sub_resource type="Resource" id="Resource_jayp1"]
+script = ExtResource("3_3td2i")
+Text = "Touching the boy's hands you can feel the cold touch of the abyss. His blood has frozen solid from fear and the twitching has taken over every muscle in him."
+
 [sub_resource type="Resource" id="Resource_c5nxy"]
 script = ExtResource("1_qaalc")
-HappeningTexts = Array[String](["Touching the boy's hands you can feel the cold touch of the abyss. His blood has frozen solid from fear and the twitching has taken over every muscle in him."])
+Texts = Array[ExtResource("3_3td2i")]([SubResource("Resource_jayp1")])
 Options = Array[ExtResource("2_3td2i")]([SubResource("Resource_qaalc"), SubResource("Resource_3td2i")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
@@ -50,9 +74,25 @@ WorldviewEffect = 3
 WorldviewEffectAmm = 20
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
+[sub_resource type="Resource" id="Resource_de3xx"]
+script = ExtResource("3_3td2i")
+Text = "As the ships sets foot on the port, the hum of the engines slowly gives away and the sound of a howling wind hitting the outside walls becomes apparent."
+
+[sub_resource type="Resource" id="Resource_wqtgw"]
+script = ExtResource("3_3td2i")
+Text = "On the way outside, inbetween the all the crew running around doing mentanance on the ship you see a small boy in the corner."
+
+[sub_resource type="Resource" id="Resource_52361"]
+script = ExtResource("3_3td2i")
+Text = "Looking away you realise the boy is in a state of panic, you gaze is thown onto the boy again."
+
+[sub_resource type="Resource" id="Resource_fp7aa"]
+script = ExtResource("3_3td2i")
+Text = "His look is lost into the void, you can see his chest going in and out but his expression shows that he is suffocating."
+
 [sub_resource type="Resource" id="Resource_okl8h"]
 script = ExtResource("1_qaalc")
-HappeningTexts = Array[String](["As the ships sets foot on the port, the hum of the engines slowly gives away and the sound of a howling wind hitting the outside walls becomes apparent.", "On the way outside, inbetween the all the crew running around doing mentanance on the ship you see a small boy in the corner.", "Looking away you realise the boy is in a state of panic, you gaze is thown onto the boy again.", "His look is lost into the void, you can see his chest going in and out but his expression shows that he is suffocating."])
+Texts = Array[ExtResource("3_3td2i")]([SubResource("Resource_de3xx"), SubResource("Resource_wqtgw"), SubResource("Resource_52361"), SubResource("Resource_fp7aa")])
 Options = Array[ExtResource("2_3td2i")]([SubResource("Resource_i5ptm"), SubResource("Resource_qurqx")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 

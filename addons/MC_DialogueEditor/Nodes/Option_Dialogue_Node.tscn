@@ -14,7 +14,7 @@ corner_radius_bottom_left = 4
 corner_detail = 1
 shadow_size = 16
 
-[node name="BaseDialogueNode" unique_id=462244291 node_paths=PackedStringArray("worldViewSet", "worldvewCheckSet", "textInput", "text2") instance=ExtResource("1_ywap6")]
+[node name="BaseDialogueNode" unique_id=462244291 node_paths=PackedStringArray("worldViewSet", "worldvewCheckSet", "resPicker", "textInput", "text2") instance=ExtResource("1_ywap6")]
 offset_left = -305.0
 offset_top = -284.0
 offset_right = 305.0
@@ -23,30 +23,35 @@ theme_override_styles/titlebar = SubResource("StyleBoxFlat_somq4")
 script = ExtResource("2_somq4")
 worldViewSet = NodePath("VBoxContainer/FoldableContainer/WorldViewSetting")
 worldvewCheckSet = NodePath("VBoxContainer/FoldableContainer2/WorldViewSetting2")
+resPicker = NodePath("VBoxContainer/EditorResourcePicker")
 textInput = NodePath("VBoxContainer/TextEdit")
 text2 = NodePath("VBoxContainer/TextEdit2")
 
-[node name="Label" type="Label" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="0" unique_id=779253787]
+[node name="EditorResourcePicker" type="EditorResourcePicker" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="0" unique_id=207230605]
+layout_mode = 2
+base_type = "Happening_Option"
+
+[node name="Label" type="Label" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="1" unique_id=779253787]
 layout_mode = 2
 text = "Option Title"
 
-[node name="TextEdit" type="TextEdit" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="1" unique_id=1248290484]
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="2" unique_id=1248290484]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 wrap_mode = 1
 autowrap_mode = 2
 
-[node name="Label2" type="Label" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="2" unique_id=1838422360]
+[node name="Label2" type="Label" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="3" unique_id=1838422360]
 layout_mode = 2
 text = "Option Dialogue"
 
-[node name="TextEdit2" type="TextEdit" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="3" unique_id=2062280278]
+[node name="TextEdit2" type="TextEdit" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="4" unique_id=2062280278]
 layout_mode = 2
 size_flags_vertical = 3
 wrap_mode = 1
 autowrap_mode = 2
 
-[node name="FoldableContainer3" type="FoldableContainer" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="4" unique_id=1259064305]
+[node name="FoldableContainer3" type="FoldableContainer" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="5" unique_id=1259064305]
 layout_mode = 2
 folded = true
 title = "Overworld Event"
@@ -56,7 +61,7 @@ visible = false
 layout_mode = 2
 base_type = "OverworldEventData"
 
-[node name="FoldableContainer" type="FoldableContainer" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="5" unique_id=767895579]
+[node name="FoldableContainer" type="FoldableContainer" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="6" unique_id=767895579]
 layout_mode = 2
 folded = true
 title = "Worldview Effect"
@@ -65,7 +70,7 @@ title = "Worldview Effect"
 visible = false
 layout_mode = 2
 
-[node name="FoldableContainer2" type="FoldableContainer" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="6" unique_id=2069098395]
+[node name="FoldableContainer2" type="FoldableContainer" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="7" unique_id=2069098395]
 layout_mode = 2
 folded = true
 title = "Worldview Check"
@@ -74,4 +79,8 @@ title = "Worldview Check"
 visible = false
 layout_mode = 2
 
+[connection signal="resource_changed" from="VBoxContainer/EditorResourcePicker" to="." method="_on_editor_resource_picker_resource_changed"]
+[connection signal="text_changed" from="VBoxContainer/TextEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="text_changed" from="VBoxContainer/TextEdit2" to="." method="_on_text_edit_2_text_changed"]
+[connection signal="EffectAmmountChanged" from="VBoxContainer/FoldableContainer/WorldViewSetting" to="." method="_on_world_view_setting_effect_ammount_changed"]
+[connection signal="WorldViewChanged" from="VBoxContainer/FoldableContainer/WorldViewSetting" to="." method="_on_world_view_setting_world_view_changed"]

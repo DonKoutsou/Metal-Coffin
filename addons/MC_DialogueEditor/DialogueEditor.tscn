@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://pwoqxtfwhr2v" path="res://addons/MC_DialogueEditor/Nodes/StageDialogueNode.tscn" id="2_4fswy"]
 [ext_resource type="PackedScene" uid="uid://du7aw36nkpvhd" path="res://addons/MC_DialogueEditor/Nodes/Option_Dialogue_Node.tscn" id="3_4fswy"]
 
-[node name="DialogueEditor" type="Control" unique_id=1974082853 node_paths=PackedStringArray("graph", "Menu")]
+[node name="DialogueEditor" type="Control" unique_id=1974082853 node_paths=PackedStringArray("graph", "Menu", "NodeMenu")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,9 +13,11 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 1
 script = ExtResource("1_0guqq")
 graph = NodePath("VBoxContainer/GraphEdit")
 Menu = NodePath("VBoxContainer/HBoxContainer/MenuBar/PopupMenu")
+NodeMenu = NodePath("VBoxContainer/HBoxContainer/MenuBar/PopupMenu2")
 NodeScenes = Dictionary[int, PackedScene]({
 0: ExtResource("2_4fswy"),
 1: ExtResource("3_4fswy")
@@ -32,15 +34,23 @@ grow_vertical = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1840866602]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=15019580]
-layout_mode = 2
-text = "Add Node"
-
 [node name="MenuBar" type="MenuBar" parent="VBoxContainer/HBoxContainer" unique_id=1886610820]
 layout_mode = 2
 
+[node name="PopupMenu2" type="PopupMenu" parent="VBoxContainer/HBoxContainer/MenuBar" unique_id=1890007505]
+oversampling_override = 1.0
+title = "Add Node"
+size = Vector2i(217, 444)
+item_count = 2
+item_0/text = "NORMAL"
+item_0/id = 0
+item_1/text = "OPTION"
+item_1/id = 1
+
 [node name="PopupMenu" type="PopupMenu" parent="VBoxContainer/HBoxContainer/MenuBar" unique_id=1870119649]
+oversampling_override = 1.0
 title = "Open Dialogue"
+size = Vector2i(217, 444)
 item_count = 21
 item_0/text = "The prince"
 item_0/id = 0
@@ -88,8 +98,12 @@ item_20/id = 20
 [node name="GraphEdit" type="GraphEdit" parent="VBoxContainer" unique_id=987366087]
 layout_mode = 2
 size_flags_vertical = 3
+right_disconnects = true
 
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="index_pressed" from="VBoxContainer/HBoxContainer/MenuBar/PopupMenu2" to="." method="_on_popup_menu_2_index_pressed"]
 [connection signal="index_pressed" from="VBoxContainer/HBoxContainer/MenuBar/PopupMenu" to="." method="_on_popup_menu_index_pressed"]
-[connection signal="connection_request" from="VBoxContainer/GraphEdit" to="." method="_on_graph_edit_connection_request"]
-[connection signal="disconnection_request" from="VBoxContainer/GraphEdit" to="." method="_on_graph_edit_disconnection_request"]
+[connection signal="connection_request" from="VBoxContainer/GraphEdit" to="." method="OnNodeConnected"]
+[connection signal="connection_to_empty" from="VBoxContainer/GraphEdit" to="." method="OnNodeConectToEmpty"]
+[connection signal="delete_nodes_request" from="VBoxContainer/GraphEdit" to="." method="OnNodeDeleted"]
+[connection signal="disconnection_request" from="VBoxContainer/GraphEdit" to="." method="OnNodeDisconnected"]
+[connection signal="gui_input" from="VBoxContainer/GraphEdit" to="." method="_on_graph_edit_gui_input"]

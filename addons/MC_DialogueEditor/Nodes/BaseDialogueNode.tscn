@@ -2,6 +2,15 @@
 
 [ext_resource type="Script" uid="uid://c1sl37wn0gufe" path="res://addons/MC_DialogueEditor/Nodes/base_dialogue_node.gd" id="1_d5jih"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4fswy"]
+bg_color = Color(0.23778024, 0.2377801, 0.2377801, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+shadow_size = 8
+
 [node name="BaseDialogueNode" type="GraphNode" unique_id=462244291]
 anchors_preset = 8
 anchor_left = 0.5
@@ -14,6 +23,7 @@ offset_right = 156.0
 offset_bottom = 225.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/titlebar = SubResource("StyleBoxFlat_4fswy")
 resizable = true
 slot/0/left_enabled = true
 slot/0/left_type = 0

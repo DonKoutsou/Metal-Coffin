@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scenes/Map/MapSpot/Happenings/HappeningOption.gd" id="2_hcc0v"]
 [ext_resource type="Script" uid="uid://ccd5qmxeujy5i" path="res://Scenes/Map/MapSpot/Happenings/RecruitLocatorHappeningOption.gd" id="3_jrds2"]
 [ext_resource type="Script" uid="uid://diwf2l5h75sxb" path="res://Scenes/Map/MapSpot/Happenings/VillageLocatorHappeningOption.gd" id="4_2kdco"]
+[ext_resource type="Script" uid="uid://cj6lgkawdqkd8" path="res://Scenes/Map/MapSpot/Happenings/HappeningText.gd" id="5_hcc0v"]
 [ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scenes/Map/MapSpot/Happenings/Happening.gd" id="5_y46tn"]
 
 [sub_resource type="Resource" id="Resource_c4s21"]
@@ -18,9 +19,17 @@ OptionName = "You ask them of any nearby rebel villages."
 FinishDiag = true
 metadata/_custom_type_script = "uid://diwf2l5h75sxb"
 
+[sub_resource type="Resource" id="Resource_hcc0v"]
+script = ExtResource("5_hcc0v")
+Text = "Reaching the city you are met with a verry busy port. Within all the ruckous you catch a glimpse of a nomad group resting."
+
+[sub_resource type="Resource" id="Resource_jrds2"]
+script = ExtResource("5_hcc0v")
+Text = "You make your way to them hoping to get some information of any nearby happenings."
+
 [sub_resource type="Resource" id="Resource_tahtp"]
 script = ExtResource("1_nu0k6")
-HappeningTexts = Array[String](["Reaching the city you are met with a verry busy port. Within all the ruckous you catch a glimpse of a nomad group resting.", "You make your way to them hoping to get some information of any nearby happenings."])
+Texts = Array[ExtResource("5_hcc0v")]([SubResource("Resource_hcc0v"), SubResource("Resource_jrds2")])
 Options = Array[ExtResource("2_hcc0v")]([SubResource("Resource_c4s21"), SubResource("Resource_ukikf")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 

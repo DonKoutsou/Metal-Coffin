@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scenes/Map/MapSpot/Happenings/HappeningStage.gd" id="2_4o3s8"]
 [ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scenes/Map/MapSpot/Happenings/HappeningOption.gd" id="3_fnrm0"]
 [ext_resource type="Script" uid="uid://ii12ceb6fgif" path="res://Scenes/Map/MapSpot/Happenings/StringHappeningOption.gd" id="4_dh2fs"]
+[ext_resource type="Script" uid="uid://cj6lgkawdqkd8" path="res://Scenes/Map/MapSpot/Happenings/HappeningText.gd" id="4_fnrm0"]
 [ext_resource type="Resource" uid="uid://c6f3bxpe2rsxd" path="res://Resources/Captains/PlayerCaptains/Baron.tres" id="5_fnrm0"]
 [ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scenes/Map/MapSpot/Happenings/Happening.gd" id="5_igefk"]
 [ext_resource type="Script" uid="uid://w3pbagqwci26" path="res://Scenes/Map/MapSpot/Happenings/DroneHappeningOption.gd" id="6_dh2fs"]
@@ -26,15 +27,75 @@ StringReply = "You catch a quick smirk from him, it is almost instantly hiden as
 OptionName = "I wouldn't expect you to understand..."
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
+[sub_resource type="Resource" id="Resource_isnp5"]
+script = ExtResource("4_fnrm0")
+Text = "You reach a small shack and go in, through the stairs that lead to the basement, behind a whole in the wall, through a small tunnel and finaly reach a house."
+
+[sub_resource type="Resource" id="Resource_ty2qr"]
+script = ExtResource("4_fnrm0")
+Text = "This is probably where this \"Baron\" receides. You wander what he wants from you, they dont look like the people that the empire would allay with."
+
+[sub_resource type="Resource" id="Resource_r4c8b"]
+script = ExtResource("4_fnrm0")
+Text = "Your eyes meet with a man in the middle of the room, huge cigar on his lips a glass of probably something really expensive on his hand."
+
+[sub_resource type="Resource" id="Resource_2a5kj"]
+script = ExtResource("4_fnrm0")
+Text = "He stands up to greet you \"Ahhh the mesaiah people, he's arrived. Bow down your heads to his majesty\". You feel the mockery of his voice and its confirmed by the room bursting on a huge laughter."
+
+[sub_resource type="Resource" id="Resource_sklrr"]
+script = ExtResource("4_fnrm0")
+Text = "\"I am sorry for the joke master, but it was too obvious to let go. Please have a seat, we have an urgent mater to discuss\""
+
+[sub_resource type="Resource" id="Resource_tnkad"]
+script = ExtResource("4_fnrm0")
+Text = "\"I hear you are making your way to Dormak, am i wrong ? What buisness do you have with such a place?\""
+
+[sub_resource type="Resource" id="Resource_uj2sl"]
+script = ExtResource("4_fnrm0")
+Text = "\"Who is asking, the words come out of your mouth almost at their own, but you feel that its reasonable request.\""
+
+[sub_resource type="Resource" id="Resource_dg34r"]
+script = ExtResource("4_fnrm0")
+Text = "\"Ahh aint that right, Introductions are in order. People aroung here call me that Baron, i take care of folk around here.\""
+
+[sub_resource type="Resource" id="Resource_5d4oj"]
+script = ExtResource("4_fnrm0")
+Text = "\"With the situation being as it is... i could blame you \"freedom fighters\" for this. It was all fine and dandy before you guys decided to rise up, and for what? Machines, aint that pitifull.\""
+
 [sub_resource type="Resource" id="Resource_fnrm0"]
 script = ExtResource("2_4o3s8")
-HappeningTexts = Array[String](["You reach a small shack and go in, through the stairs that lead to the basement, behind a whole in the wall, through a small tunnel and finaly reach a house.", "This is probably where this \"Baron\" receides. You wander what he wants from you, they dont look like the people that the empire would allay with.", "Your eyes meet with a man in the middle of the room, huge cigar on his lips a glass of probably something really expensive on his hand.", "He stands up to greet you \"Ahhh the mesaiah people, he's arrived. Bow down your heads to his majesty\". You feel the mockery of his voice and its confirmed by the room bursting on a huge laughter.", "\"I am sorry for the joke master, but it was too obvious to let go. Please have a seat, we have an urgent mater to discuss\"", "\"I hear you are making your way to Dormak, am i wrong ? What buisness do you have with such a place?\"", "\"Who is asking, the words come out of your mouth almost at their own, but you feel that its reasonable request.\"", "\"Ahh aint that right, Introductions are in order. People aroung here call me that Baron, i take care of folk around here.\"", "\"With the situation being as it is... i could blame you \"freedom fighters\" for this. It was all fine and dandy before you guys decided to rise up, and for what? Machines, aint that pitifull.\""])
+Texts = Array[ExtResource("4_fnrm0")]([SubResource("Resource_isnp5"), SubResource("Resource_ty2qr"), SubResource("Resource_r4c8b"), SubResource("Resource_2a5kj"), SubResource("Resource_sklrr"), SubResource("Resource_tnkad"), SubResource("Resource_uj2sl"), SubResource("Resource_dg34r"), SubResource("Resource_5d4oj")])
 Options = Array[ExtResource("3_fnrm0")]([SubResource("Resource_8l24b"), SubResource("Resource_4o3s8")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
+[sub_resource type="Resource" id="Resource_5ulj2"]
+script = ExtResource("4_fnrm0")
+Text = "We must do what needs to be done tho, we cannot lose at any cost. We can't get soft now that we are so close."
+
+[sub_resource type="Resource" id="Resource_1xxoi"]
+script = ExtResource("4_fnrm0")
+Text = "\"Aaahhhh\" the Baron yells in a celebratory gesture. You see him take a second glass out and fill it with a drink, he passes it to you and you take it. \"A celebratory drink is in order, to a fruitfull colaboration your majesty\"."
+
+[sub_resource type="Resource" id="Resource_mfmax"]
+script = ExtResource("4_fnrm0")
+Text = "You glasses cling and after you take a sip you leave it to the table and ask the figure to guide you to your ship. Reaching your ship you see your squad have already gathered outside trying to see where your are going to come from."
+
+[sub_resource type="Resource" id="Resource_jek72"]
+script = ExtResource("4_fnrm0")
+Text = "Reaching them you see the relief in their faces. You hear a question from the crowd. \"What happened captain?\". \"I secured us some help. Questionable one that is, but help none the less\"."
+
+[sub_resource type="Resource" id="Resource_02h6m"]
+script = ExtResource("4_fnrm0")
+Text = "After finishing the sentence you hear 3 ships take of nearby and after a while they land next to your ship, the Baron comes out and salutes you with a small grin on his face. At your services captain."
+
+[sub_resource type="Resource" id="Resource_stjgv"]
+script = ExtResource("4_fnrm0")
+Text = "You signal all the crew to take their positions, your are leaving..."
+
 [sub_resource type="Resource" id="Resource_j03jq"]
 script = ExtResource("2_4o3s8")
-HappeningTexts = Array[String](["We must do what needs to be done tho, we cannot lose at any cost. We can't get soft now that we are so close.", "\"Aaahhhh\" the Baron yells in a celebratory gesture. You see him take a second glass out and fill it with a drink, he passes it to you and you take it. \"A celebratory drink is in order, to a fruitfull colaboration your majesty\".", "You glasses cling and after you take a sip you leave it to the table and ask the figure to guide you to your ship. Reaching your ship you see your squad have already gathered outside trying to see where your are going to come from.", "Reaching them you see the relief in their faces. You hear a question from the crowd. \"What happened captain?\". \"I secured us some help. Questionable one that is, but help none the less\".", "After finishing the sentence you hear 3 ships take of nearby and after a while they land next to your ship, the Baron comes out and salutes you with a small grin on his face. At your services captain.", "You signal all the crew to take their positions, your are leaving..."])
+Texts = Array[ExtResource("4_fnrm0")]([SubResource("Resource_5ulj2"), SubResource("Resource_1xxoi"), SubResource("Resource_mfmax"), SubResource("Resource_jek72"), SubResource("Resource_02h6m"), SubResource("Resource_stjgv")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_t3ljt"]
@@ -44,9 +105,29 @@ OptionName = "Accept"
 BranchContinuation = Array[ExtResource("2_4o3s8")]([SubResource("Resource_j03jq")])
 metadata/_custom_type_script = "uid://w3pbagqwci26"
 
+[sub_resource type="Resource" id="Resource_1gcf5"]
+script = ExtResource("4_fnrm0")
+Text = "\"How pitifull, declinig help based on principles. Is that the world you guys want to build. The thing you havent thought is that we will still be here weather you win or not. You are only doing damage to your self with this decission.\""
+
+[sub_resource type="Resource" id="Resource_0t6kv"]
+script = ExtResource("4_fnrm0")
+Text = "\"Dont let me see your face around this parts again.\" You are pushed out by the Baron's guard."
+
+[sub_resource type="Resource" id="Resource_hrxfo"]
+script = ExtResource("4_fnrm0")
+Text = "The figure takes you back to your ship, the Baron's squad has created a parimeter around your ship stopping any of your crew from stepping out. Your crew is agitated thanks to your prolonged leave but are toned down once they see you."
+
+[sub_resource type="Resource" id="Resource_ug15j"]
+script = ExtResource("4_fnrm0")
+Text = "You signal all the crew to take their positions, your are leaving..."
+
+[sub_resource type="Resource" id="Resource_uvn1n"]
+script = ExtResource("4_fnrm0")
+Text = "You've kept everything that happened in that room to yourself. Is that really the best choice to make?"
+
 [sub_resource type="Resource" id="Resource_6gnjm"]
 script = ExtResource("2_4o3s8")
-HappeningTexts = Array[String](["\"How pitifull, declinig help based on principles. Is that the world you guys want to build. The thing you havent thought is that we will still be here weather you win or not. You are only doing damage to your self with this decission.\"", "\"Dont let me see your face around this parts again.\" You are pushed out by the Baron's guard.", "The figure takes you back to your ship, the Baron's squad has created a parimeter around your ship stopping any of your crew from stepping out. Your crew is agitated thanks to your prolonged leave but are toned down once they see you.", "You signal all the crew to take their positions, your are leaving...", "You've kept everything that happened in that room to yourself. Is that really the best choice to make?"])
+Texts = Array[ExtResource("4_fnrm0")]([SubResource("Resource_1gcf5"), SubResource("Resource_0t6kv"), SubResource("Resource_hrxfo"), SubResource("Resource_ug15j"), SubResource("Resource_uvn1n")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_50e5o"]
@@ -56,15 +137,43 @@ OptionName = "Decline"
 BranchContinuation = Array[ExtResource("2_4o3s8")]([SubResource("Resource_6gnjm")])
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
+[sub_resource type="Resource" id="Resource_vcm4y"]
+script = ExtResource("4_fnrm0")
+Text = "The room is silent, you cant really remember if it fell silent just now or it always was. You feel everybody's gaze on you, testing you? Judging you?..."
+
+[sub_resource type="Resource" id="Resource_xgvp6"]
+script = ExtResource("4_fnrm0")
+Text = "Damn right you will, and we will assist you. We have a say in this war like it or not. I wont lie to you, i'm not interested in saving any one. The trick to winning on this life is staying on top."
+
+[sub_resource type="Resource" id="Resource_h6gft"]
+script = ExtResource("4_fnrm0")
+Text = "And to stay on top i need to work with the winner, and i belive you are going to be successfull in your mission. I offer you 3 of my ships, i will personally command one of them. What say you."
+
 [sub_resource type="Resource" id="Resource_bpqwd"]
 script = ExtResource("2_4o3s8")
-HappeningTexts = Array[String](["The room is silent, you cant really remember if it fell silent just now or it always was. You feel everybody's gaze on you, testing you? Judging you?...", "Damn right you will, and we will assist you. We have a say in this war like it or not. I wont lie to you, i'm not interested in saving any one. The trick to winning on this life is staying on top.", "And to stay on top i need to work with the winner, and i belive you are going to be successfull in your mission. I offer you 3 of my ships, i will personally command one of them. What say you."])
+Texts = Array[ExtResource("4_fnrm0")]([SubResource("Resource_vcm4y"), SubResource("Resource_xgvp6"), SubResource("Resource_h6gft")])
 Options = Array[ExtResource("3_fnrm0")]([SubResource("Resource_t3ljt"), SubResource("Resource_50e5o")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
+[sub_resource type="Resource" id="Resource_rihir"]
+script = ExtResource("4_fnrm0")
+Text = "\"Hahahaha, no you will not. Not with that atitude, what happened to your spine? You expect to win a war with hope... Get out of here, i've waisted enough time on you"
+
+[sub_resource type="Resource" id="Resource_m1a4y"]
+script = ExtResource("4_fnrm0")
+Text = "\"Dont let me see your face around this parts again.\" You are pushed out by the Baron's guard."
+
+[sub_resource type="Resource" id="Resource_3prh3"]
+script = ExtResource("4_fnrm0")
+Text = "The figure takes you back to your ship, the Baron's squad has created a parimeter around your ship stopping any of your crew from stepping out. Your crew is agitated thanks to your prolonged leave but are toned down once they see you."
+
+[sub_resource type="Resource" id="Resource_6xcc7"]
+script = ExtResource("4_fnrm0")
+Text = "You signal all the crew to take their positions, your are leaving..."
+
 [sub_resource type="Resource" id="Resource_a5i7n"]
 script = ExtResource("2_4o3s8")
-HappeningTexts = Array[String](["\"Hahahaha, no you will not. Not with that atitude, what happened to your spine? You expect to win a war with hope... Get out of here, i've waisted enough time on you", "\"Dont let me see your face around this parts again.\" You are pushed out by the Baron's guard.", "The figure takes you back to your ship, the Baron's squad has created a parimeter around your ship stopping any of your crew from stepping out. Your crew is agitated thanks to your prolonged leave but are toned down once they see you.", "You signal all the crew to take their positions, your are leaving..."])
+Texts = Array[ExtResource("4_fnrm0")]([SubResource("Resource_rihir"), SubResource("Resource_m1a4y"), SubResource("Resource_3prh3"), SubResource("Resource_6xcc7")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_dh2fs"]
@@ -77,9 +186,21 @@ CheckDifficulty = 50
 WorldViewCheckFailBranch = Array[ExtResource("2_4o3s8")]([SubResource("Resource_a5i7n")])
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
+[sub_resource type="Resource" id="Resource_jo0hp"]
+script = ExtResource("4_fnrm0")
+Text = "\"Dont let me see your face around this parts again.\" You are pushed out by the Baron's guard."
+
+[sub_resource type="Resource" id="Resource_g1jws"]
+script = ExtResource("4_fnrm0")
+Text = "The figure takes you back to your ship, the Baron's squad has created a parimeter around your ship stopping any of your crew from stepping out. Your crew is agitated thanks to your prolonged leave but are toned down once they see you."
+
+[sub_resource type="Resource" id="Resource_5avmm"]
+script = ExtResource("4_fnrm0")
+Text = "You signal all the crew to take their positions, your are leaving..."
+
 [sub_resource type="Resource" id="Resource_g3lsv"]
 script = ExtResource("2_4o3s8")
-HappeningTexts = Array[String](["\"Dont let me see your face around this parts again.\" You are pushed out by the Baron's guard.", "The figure takes you back to your ship, the Baron's squad has created a parimeter around your ship stopping any of your crew from stepping out. Your crew is agitated thanks to your prolonged leave but are toned down once they see you.", "You signal all the crew to take their positions, your are leaving..."])
+Texts = Array[ExtResource("4_fnrm0")]([SubResource("Resource_jo0hp"), SubResource("Resource_g1jws"), SubResource("Resource_5avmm")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_igefk"]
@@ -89,9 +210,13 @@ OptionName = "We will do the best we can"
 BranchContinuation = Array[ExtResource("2_4o3s8")]([SubResource("Resource_g3lsv")])
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
+[sub_resource type="Resource" id="Resource_b5c5j"]
+script = ExtResource("4_fnrm0")
+Text = "\"Are you sirius about reaching Dormak?\""
+
 [sub_resource type="Resource" id="Resource_n8mto"]
 script = ExtResource("2_4o3s8")
-HappeningTexts = Array[String](["\"Are you sirius about reaching Dormak?\""])
+Texts = Array[ExtResource("4_fnrm0")]([SubResource("Resource_b5c5j")])
 Options = Array[ExtResource("3_fnrm0")]([SubResource("Resource_dh2fs"), SubResource("Resource_igefk")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
@@ -102,9 +227,21 @@ OptionName = "Accept the figure's invitation"
 BranchContinuation = Array[ExtResource("2_4o3s8")]([SubResource("Resource_fnrm0"), SubResource("Resource_n8mto")])
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
+[sub_resource type="Resource" id="Resource_afior"]
+script = ExtResource("4_fnrm0")
+Text = "The town seems almost empty, the gates of ship open, as the deffening sound of them hitting the ground bellow ends no sound follows."
+
+[sub_resource type="Resource" id="Resource_qwh1g"]
+script = ExtResource("4_fnrm0")
+Text = "Once the dust setles down you see a lonely figure waiting for you. Checking the suroundings you make sure its safe an make your way to the figure."
+
+[sub_resource type="Resource" id="Resource_6vrue"]
+script = ExtResource("4_fnrm0")
+Text = "\"The Baron wishes to see you master\", the figure's voice withered almost like the hiss of a snake."
+
 [sub_resource type="Resource" id="Resource_5oj2u"]
 script = ExtResource("2_4o3s8")
-HappeningTexts = Array[String](["The town seems almost empty, the gates of ship open, as the deffening sound of them hitting the ground bellow ends no sound follows.", "Once the dust setles down you see a lonely figure waiting for you. Checking the suroundings you make sure its safe an make your way to the figure.", "\"The Baron wishes to see you master\", the figure's voice withered almost like the hiss of a snake."])
+Texts = Array[ExtResource("4_fnrm0")]([SubResource("Resource_afior"), SubResource("Resource_qwh1g"), SubResource("Resource_6vrue")])
 Options = Array[ExtResource("3_fnrm0")]([SubResource("Resource_w6kjy"), SubResource("Resource_2dd2n")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 

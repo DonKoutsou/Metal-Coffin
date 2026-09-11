@@ -5,14 +5,35 @@
 [ext_resource type="Script" uid="uid://ii12ceb6fgif" path="res://Scenes/Map/MapSpot/Happenings/StringHappeningOption.gd" id="3_y0x4t"]
 [ext_resource type="Script" uid="uid://c1epge81bse84" path="res://Scenes/Map/MapSpot/Happenings/LockTownHappeningOption.gd" id="4_8a2hk"]
 [ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scenes/Map/MapSpot/Happenings/Happening.gd" id="4_p8xji"]
+[ext_resource type="Script" uid="uid://cj6lgkawdqkd8" path="res://Scenes/Map/MapSpot/Happenings/HappeningText.gd" id="4_y0x4t"]
 
 [sub_resource type="Resource" id="Resource_juo3c"]
 script = ExtResource("3_y0x4t")
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
+[sub_resource type="Resource" id="Resource_w26td"]
+script = ExtResource("4_y0x4t")
+Text = "The speaker is stunned for a second, he seems to be trying to find a way to shift the situation. He takes out his gun and points it at you. \"And you think i will trust this humility of yours? As far as i know you could have 5 gunmen aiming at me from the shadows. That's how you demons work!\""
+
+[sub_resource type="Resource" id="Resource_wt8m4"]
+script = ExtResource("4_y0x4t")
+Text = "You would have expected the crowd to holler at a statement like that but you start to see some second guessing on them. They seem to be slowly shifting and the words of the speaker slowly have less and less effect on them."
+
+[sub_resource type="Resource" id="Resource_20xsv"]
+script = ExtResource("4_y0x4t")
+Text = "You stand up to adress the crew, the speaker still holding the gun at your head. You start delivering the motives and the goals of your campaign. You start to talk to the people about the lies the empire has been telling them, all the while the speaker behind you screaming at you and throwing threats."
+
+[sub_resource type="Resource" id="Resource_aoquh"]
+script = ExtResource("4_y0x4t")
+Text = "After you are done an eerie silence falls into the plaza. Nothing moves, the speaker starts to laught. \"You see captain, people here know the truth. They wont be misslead by a mucky vagabond of your likes.\" As he finished his centese he notices that some of the crowd had already came up to the stage and had slowly started to circle him."
+
+[sub_resource type="Resource" id="Resource_rr7ri"]
+script = ExtResource("4_y0x4t")
+Text = "\"You are welcome no more here.\" As he finishes his sentence 5 men jump on him and manage to impobilise him. You grab your crewmate from the pole and make your way towards the ship. You dont want to know what they might do to him."
+
 [sub_resource type="Resource" id="Resource_5vtuv"]
 script = ExtResource("1_fu0io")
-HappeningTexts = Array[String](["The speaker is stunned for a second, he seems to be trying to find a way to shift the situation. He takes out his gun and points it at you. \"And you think i will trust this humility of yours? As far as i know you could have 5 gunmen aiming at me from the shadows. That's how you demons work!\"", "You would have expected the crowd to holler at a statement like that but you start to see some second guessing on them. They seem to be slowly shifting and the words of the speaker slowly have less and less effect on them.", "You stand up to adress the crew, the speaker still holding the gun at your head. You start delivering the motives and the goals of your campaign. You start to talk to the people about the lies the empire has been telling them, all the while the speaker behind you screaming at you and throwing threats.", "After you are done an eerie silence falls into the plaza. Nothing moves, the speaker starts to laught. \"You see captain, people here know the truth. They wont be misslead by a mucky vagabond of your likes.\" As he finished his centese he notices that some of the crowd had already came up to the stage and had slowly started to circle him.", "\"You are welcome no more here.\" As he finishes his sentence 5 men jump on him and manage to impobilise him. You grab your crewmate from the pole and make your way towards the ship. You dont want to know what they might do to him."])
+Texts = Array[ExtResource("4_y0x4t")]([SubResource("Resource_w26td"), SubResource("Resource_wt8m4"), SubResource("Resource_20xsv"), SubResource("Resource_aoquh"), SubResource("Resource_rr7ri")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_y0q7m"]
@@ -24,9 +45,17 @@ WorldviewEffect = 3
 WorldviewEffectAmm = 10
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
+[sub_resource type="Resource" id="Resource_mrjpg"]
+script = ExtResource("4_y0x4t")
+Text = "You sneak from the back and jump on the stage. You put your hands up to show that you are unarmed. The speaker sees you and reaches into his clothing, he then sees your hands and pauses for a second."
+
+[sub_resource type="Resource" id="Resource_uosof"]
+script = ExtResource("4_y0x4t")
+Text = "The situation "
+
 [sub_resource type="Resource" id="Resource_2pv5p"]
 script = ExtResource("1_fu0io")
-HappeningTexts = Array[String](["You sneak from the back and jump on the stage. You put your hands up to show that you are unarmed. The speaker sees you and reaches into his clothing, he then sees your hands and pauses for a second.", "The situation "])
+Texts = Array[ExtResource("4_y0x4t")]([SubResource("Resource_mrjpg"), SubResource("Resource_uosof")])
 Options = Array[ExtResource("2_8a2hk")]([SubResource("Resource_juo3c"), SubResource("Resource_y0q7m")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
@@ -47,15 +76,79 @@ WorldviewEffect = 4
 WorldviewEffectAmm = 10
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
+[sub_resource type="Resource" id="Resource_syhwh"]
+script = ExtResource("4_y0x4t")
+Text = "As you step out of ship you are met with a surprising silence. The usual trafic that is seen in these ports is gone. On of the guardsmen in the gate receives a radio transmission."
+
+[sub_resource type="Resource" id="Resource_yjgv2"]
+script = ExtResource("4_y0x4t")
+Text = "\"Most of the villages population seems to be gathered at the square. There seems to be a talk going. Will investigate further. Out...\""
+
+[sub_resource type="Resource" id="Resource_nu3v1"]
+script = ExtResource("4_y0x4t")
+Text = "The gruardsman looks at you. You turn around and start heading towards the square, you hear the guard following closely behind you."
+
+[sub_resource type="Resource" id="Resource_vqe16"]
+script = ExtResource("4_y0x4t")
+Text = "As you slowly reach clother to the square you can hear the comotion, you hear alot of people scream what seem like a chants. The crowd seems to be angry about something."
+
+[sub_resource type="Resource" id="Resource_jm6ac"]
+script = ExtResource("4_y0x4t")
+Text = "You feel a hand reach out and grab your shoulder. A voice behind you. \"Captain, lets not go further\". Its the guard that was following you, and he is pointing at an overreaching stage. 2 men seem to be standing there."
+
+[sub_resource type="Resource" id="Resource_82las"]
+script = ExtResource("4_y0x4t")
+Text = "As you watch closer you start to notice something familiar about one of the men. That is one of your crew, he seems to be tied up to a pole. You signal the guard and you hide trying to listen to what the other man is saying."
+
+[sub_resource type="Resource" id="Resource_ib0m3"]
+script = ExtResource("4_y0x4t")
+Text = "\"Machine lovers on our step people! What? They think we will just sit around and let them bring humanity to its demise ? We have the lesson of the past. Would you let those things around those kids?\""
+
+[sub_resource type="Resource" id="Resource_kd71w"]
+script = ExtResource("4_y0x4t")
+Text = "This seems to be one of the regimes propagandists talking. You find it hard to belive even all the way out here their influence has reached, but even the crowd seems to be buying into it. Raising their fist and repeating everything the man says.\""
+
+[sub_resource type="Resource" id="Resource_568jj"]
+script = ExtResource("4_y0x4t")
+Text = "We will need to act on it. You turn to speak with your guard. The worry in his eyes is the same as your own. \"We need to go back to the ship captain\" you hear him say. And you slowly start figuring out your options."
+
 [sub_resource type="Resource" id="Resource_y0x4t"]
 script = ExtResource("1_fu0io")
-HappeningTexts = Array[String](["As you step out of ship you are met with a surprising silence. The usual trafic that is seen in these ports is gone. On of the guardsmen in the gate receives a radio transmission.", "\"Most of the villages population seems to be gathered at the square. There seems to be a talk going. Will investigate further. Out...\"", "The gruardsman looks at you. You turn around and start heading towards the square, you hear the guard following closely behind you.", "As you slowly reach clother to the square you can hear the comotion, you hear alot of people scream what seem like a chants. The crowd seems to be angry about something.", "You feel a hand reach out and grab your shoulder. A voice behind you. \"Captain, lets not go further\". Its the guard that was following you, and he is pointing at an overreaching stage. 2 men seem to be standing there.", "As you watch closer you start to notice something familiar about one of the men. That is one of your crew, he seems to be tied up to a pole. You signal the guard and you hide trying to listen to what the other man is saying.", "\"Machine lovers on our step people! What? They think we will just sit around and let them bring humanity to its demise ? We have the lesson of the past. Would you let those things around those kids?\"", "This seems to be one of the regimes propagandists talking. You find it hard to belive even all the way out here their influence has reached, but even the crowd seems to be buying into it. Raising their fist and repeating everything the man says.\"", "We will need to act on it. You turn to speak with your guard. The worry in his eyes is the same as your own. \"We need to go back to the ship captain\" you hear him say. And you slowly start figuring out your options."])
+Texts = Array[ExtResource("4_y0x4t")]([SubResource("Resource_syhwh"), SubResource("Resource_yjgv2"), SubResource("Resource_nu3v1"), SubResource("Resource_vqe16"), SubResource("Resource_jm6ac"), SubResource("Resource_82las"), SubResource("Resource_ib0m3"), SubResource("Resource_kd71w"), SubResource("Resource_568jj")])
 Options = Array[ExtResource("2_8a2hk")]([SubResource("Resource_fu0io"), SubResource("Resource_8a2hk")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
+[sub_resource type="Resource" id="Resource_k8tr1"]
+script = ExtResource("4_y0x4t")
+Text = "You step onto the stage and the speaker seems stunned for a second but then returns back to his chant."
+
+[sub_resource type="Resource" id="Resource_xrppe"]
+script = ExtResource("4_y0x4t")
+Text = "\"The demons have feelings in the end, dont they. They wouldn't really leave on of theirs behind. Almost brings a tear in my eye.\""
+
+[sub_resource type="Resource" id="Resource_8nolr"]
+script = ExtResource("4_y0x4t")
+Text = "As he finished the sentence, he pauses for a second and you see him make quick move, before realising what happened you feel a sharp pain comming from your upper body. You are on your knees before realising."
+
+[sub_resource type="Resource" id="Resource_1jrlf"]
+script = ExtResource("4_y0x4t")
+Text = "You start drifting off. All you hear around is gunshots and people screaming. You try to muster all your last streangth to scream something, as you open your mouth you drift of completely."
+
+[sub_resource type="Resource" id="Resource_xsgdd"]
+script = ExtResource("4_y0x4t")
+Text = "You wake up at your ship. You look around and trying to read the enviroment. The ship seems to be landed. You get the news from a guard staying at the entrance of your room. "
+
+[sub_resource type="Resource" id="Resource_7desd"]
+script = ExtResource("4_y0x4t")
+Text = "The speaker aprently carried a concealed firearm and had at you. As that happened he was almost instantly gunned down by your crew. The shooting caused the crowd to go on a big panick but thankfully nobody was hurt."
+
+[sub_resource type="Resource" id="Resource_sxxs3"]
+script = ExtResource("4_y0x4t")
+Text = "You reflect on the situation for a bit before standing up and heading to your pilots stand."
+
 [sub_resource type="Resource" id="Resource_np7wd"]
 script = ExtResource("1_fu0io")
-HappeningTexts = Array[String](["You step onto the stage and the speaker seems stunned for a second but then returns back to his chant.", "\"The demons have feelings in the end, dont they. They wouldn't really leave on of theirs behind. Almost brings a tear in my eye.\"", "As he finished the sentence, he pauses for a second and you see him make quick move, before realising what happened you feel a sharp pain comming from your upper body. You are on your knees before realising.", "You start drifting off. All you hear around is gunshots and people screaming. You try to muster all your last streangth to scream something, as you open your mouth you drift of completely.", "You wake up at your ship. You look around and trying to read the enviroment. The ship seems to be landed. You get the news from a guard staying at the entrance of your room. ", "The speaker aprently carried a concealed firearm and had at you. As that happened he was almost instantly gunned down by your crew. The shooting caused the crowd to go on a big panick but thankfully nobody was hurt.", "You reflect on the situation for a bit before standing up and heading to your pilots stand."])
+Texts = Array[ExtResource("4_y0x4t")]([SubResource("Resource_k8tr1"), SubResource("Resource_xrppe"), SubResource("Resource_8nolr"), SubResource("Resource_1jrlf"), SubResource("Resource_xsgdd"), SubResource("Resource_7desd"), SubResource("Resource_sxxs3")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_qvm6c"]
@@ -65,9 +158,17 @@ OptionName = "Encircle the square"
 BranchContinuation = Array[ExtResource("1_fu0io")]([SubResource("Resource_np7wd")])
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
+[sub_resource type="Resource" id="Resource_o1bjv"]
+script = ExtResource("4_y0x4t")
+Text = "The crew grabs the captured solider and head out of stage. Withing seconds you are all gone from the square and are back to the ship. On your way out you hear the speaker get up and keep going. Probably we had now given him more fuel."
+
+[sub_resource type="Resource" id="Resource_myqyu"]
+script = ExtResource("4_y0x4t")
+Text = "Dont matter tho, we are all safe at least. The speaker will most likely report that we are in this town. We should maybe make all our preparations and head out as soon as possible."
+
 [sub_resource type="Resource" id="Resource_4811d"]
 script = ExtResource("1_fu0io")
-HappeningTexts = Array[String](["The crew grabs the captured solider and head out of stage. Withing seconds you are all gone from the square and are back to the ship. On your way out you hear the speaker get up and keep going. Probably we had now given him more fuel.", "Dont matter tho, we are all safe at least. The speaker will most likely report that we are in this town. We should maybe make all our preparations and head out as soon as possible."])
+Texts = Array[ExtResource("4_y0x4t")]([SubResource("Resource_o1bjv"), SubResource("Resource_myqyu")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_qklod"]
@@ -79,15 +180,35 @@ WorldviewEffect = 1
 WorldviewEffectAmm = -10
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
+[sub_resource type="Resource" id="Resource_30geo"]
+script = ExtResource("4_y0x4t")
+Text = "You get lost in thought for a split second. Do you have a plan? Do you jump straight at a bunch of villigers, what is going to be the resault of that. A bloodbath! There must be a way to avoid that."
+
 [sub_resource type="Resource" id="Resource_k6bax"]
 script = ExtResource("1_fu0io")
-HappeningTexts = Array[String](["You get lost in thought for a split second. Do you have a plan? Do you jump straight at a bunch of villigers, what is going to be the resault of that. A bloodbath! There must be a way to avoid that."])
+Texts = Array[ExtResource("4_y0x4t")]([SubResource("Resource_30geo")])
 Options = Array[ExtResource("2_8a2hk")]([SubResource("Resource_qvm6c"), SubResource("Resource_qklod")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
+[sub_resource type="Resource" id="Resource_4g7vh"]
+script = ExtResource("4_y0x4t")
+Text = "You deliver the info of your captured comrade, you fail to keep in your anger and it's transfered to your crew. They all seem to be angered by the situation. The crew slowly disperses and start moving towards the square, screaming and shooting on the sky. No matter how much you scream at them its already to late."
+
+[sub_resource type="Resource" id="Resource_s1nf0"]
+script = ExtResource("4_y0x4t")
+Text = "You follow them and witness the situation unfold without any kind of control over it. You crew riled up pushing themselves through the crowd, clubbering anybody standing in their way. The speaker after wittnessing the crew comming closer scream. \"Do you see the demons?! With no care in the world. Hiting their own like its nothing. You all deserve to boil for this.\""
+
+[sub_resource type="Resource" id="Resource_byj3l"]
+script = ExtResource("4_y0x4t")
+Text = " As he turns and makes to flee one of your crew had already your sights on him. A lowd bang and the speaker was on the ground. The crowd starts to panic and screaming heads to all different directions."
+
+[sub_resource type="Resource" id="Resource_7cy2l"]
+script = ExtResource("4_y0x4t")
+Text = "The crew is back at the ship with the rescued captive. Some seem to have regreted their actions, this is not only a physical war we are fighting, the prpaganda war is as important and we lost it today. To the people of these village we are demons."
+
 [sub_resource type="Resource" id="Resource_23p60"]
 script = ExtResource("1_fu0io")
-HappeningTexts = Array[String](["You deliver the info of your captured comrade, you fail to keep in your anger and it's transfered to your crew. They all seem to be angered by the situation. The crew slowly disperses and start moving towards the square, screaming and shooting on the sky. No matter how much you scream at them its already to late.", "You follow them and witness the situation unfold without any kind of control over it. You crew riled up pushing themselves through the crowd, clubbering anybody standing in their way. The speaker after wittnessing the crew comming closer scream. \"Do you see the demons?! With no care in the world. Hiting their own like its nothing. You all deserve to boil for this.\"", " As he turns and makes to flee one of your crew had already your sights on him. A lowd bang and the speaker was on the ground. The crowd starts to panic and screaming heads to all different directions.", "The crew is back at the ship with the rescued captive. Some seem to have regreted their actions, this is not only a physical war we are fighting, the prpaganda war is as important and we lost it today. To the people of these village we are demons."])
+Texts = Array[ExtResource("4_y0x4t")]([SubResource("Resource_4g7vh"), SubResource("Resource_s1nf0"), SubResource("Resource_byj3l"), SubResource("Resource_7cy2l")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_p8xji"]
@@ -111,9 +232,13 @@ WorldviewEffect = 3
 WorldviewEffectAmm = 10
 metadata/_custom_type_script = "uid://c1epge81bse84"
 
+[sub_resource type="Resource" id="Resource_1gn3h"]
+script = ExtResource("4_y0x4t")
+Text = "As you make your way to the ship, some of your crew has already started gethering outside wandering what is happening."
+
 [sub_resource type="Resource" id="Resource_shlty"]
 script = ExtResource("1_fu0io")
-HappeningTexts = Array[String](["As you make your way to the ship, some of your crew has already started gethering outside wandering what is happening."])
+Texts = Array[ExtResource("4_y0x4t")]([SubResource("Resource_1gn3h")])
 Options = Array[ExtResource("2_8a2hk")]([SubResource("Resource_p8xji"), SubResource("Resource_q3kdx")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 

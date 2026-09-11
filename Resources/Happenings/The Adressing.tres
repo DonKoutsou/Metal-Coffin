@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scenes/Map/MapSpot/Happenings/HappeningStage.gd" id="1_ra7r7"]
 [ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scenes/Map/MapSpot/Happenings/HappeningOption.gd" id="2_gn3ry"]
 [ext_resource type="Script" uid="uid://ii12ceb6fgif" path="res://Scenes/Map/MapSpot/Happenings/StringHappeningOption.gd" id="3_bdoxn"]
+[ext_resource type="Script" uid="uid://cj6lgkawdqkd8" path="res://Scenes/Map/MapSpot/Happenings/HappeningText.gd" id="4_gn3ry"]
 [ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scenes/Map/MapSpot/Happenings/Happening.gd" id="4_s0wgd"]
 
 [sub_resource type="Resource" id="Resource_ra7r7"]
@@ -19,9 +20,13 @@ WorldviewEffect = 4
 WorldviewEffectAmm = 5
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
+[sub_resource type="Resource" id="Resource_s0wgd"]
+script = ExtResource("4_gn3ry")
+Text = "test"
+
 [sub_resource type="Resource" id="Resource_bdoxn"]
 script = ExtResource("1_ra7r7")
-HappeningTexts = Array[String](["test"])
+Texts = Array[ExtResource("4_gn3ry")]([SubResource("Resource_s0wgd")])
 Options = Array[ExtResource("2_gn3ry")]([SubResource("Resource_ra7r7"), SubResource("Resource_gn3ry")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 

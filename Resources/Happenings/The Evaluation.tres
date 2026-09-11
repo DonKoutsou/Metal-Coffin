@@ -3,11 +3,16 @@
 [ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scenes/Map/MapSpot/Happenings/HappeningStage.gd" id="1_d3qx6"]
 [ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scenes/Map/MapSpot/Happenings/HappeningOption.gd" id="2_r15pu"]
 [ext_resource type="Script" uid="uid://dbopqdo4787oe" path="res://Scenes/Map/MapSpot/Happenings/TownFuelHappeningOption.gd" id="3_d3qx6"]
+[ext_resource type="Script" uid="uid://cj6lgkawdqkd8" path="res://Scenes/Map/MapSpot/Happenings/HappeningText.gd" id="3_r15pu"]
 [ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scenes/Map/MapSpot/Happenings/Happening.gd" id="4_48yxy"]
+
+[sub_resource type="Resource" id="Resource_s23hq"]
+script = ExtResource("3_r15pu")
+Text = "Your acts wont work here boy.... Get back to your ship, the fuel will arrive soon. May whoever be up there help us.........."
 
 [sub_resource type="Resource" id="Resource_r15pu"]
 script = ExtResource("1_d3qx6")
-HappeningTexts = Array[String](["Your acts wont work here boy.... Get back to your ship, the fuel will arrive soon. May whoever be up there help us.........."])
+Texts = Array[ExtResource("3_r15pu")]([SubResource("Resource_s23hq")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_rgmjt"]
@@ -24,9 +29,13 @@ CheckDifficulty = 60
 WorldViewCheckFailBranch = Array[ExtResource("1_d3qx6")]([SubResource("Resource_r15pu")])
 metadata/_custom_type_script = "uid://dbopqdo4787oe"
 
+[sub_resource type="Resource" id="Resource_4qhb7"]
+script = ExtResource("3_r15pu")
+Text = "\"You are giving away your life for nothing kid. And life is a big thing to give away like that. Do as you please, but keep it away from here. Go, we'll bring the fuel...\""
+
 [sub_resource type="Resource" id="Resource_48yxy"]
 script = ExtResource("1_d3qx6")
-HappeningTexts = Array[String](["\"You are giving away your life for nothing kid. And life is a big thing to give away like that. Do as you please, but keep it away from here. Go, we'll bring the fuel...\""])
+Texts = Array[ExtResource("3_r15pu")]([SubResource("Resource_4qhb7")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [sub_resource type="Resource" id="Resource_d3qx6"]
@@ -41,9 +50,49 @@ CheckDifficulty = 40
 WorldViewCheckFailBranch = Array[ExtResource("1_d3qx6")]([SubResource("Resource_48yxy")])
 metadata/_custom_type_script = "uid://dbopqdo4787oe"
 
+[sub_resource type="Resource" id="Resource_wwp0d"]
+script = ExtResource("3_r15pu")
+Text = "As you step off the ship, you sense a lot of eyes on you. The crowd bustling around the port seems wary of your presence."
+
+[sub_resource type="Resource" id="Resource_hdwrk"]
+script = ExtResource("3_r15pu")
+Text = "People are moving left and right, carrying goods, guiding visitors, and salespeople shouting about their commerce. Suddenly, everything comes to a halt."
+
+[sub_resource type="Resource" id="Resource_bd883"]
+script = ExtResource("3_r15pu")
+Text = "As if on cue, the moment you notice this, it all goes back to normal, as though nothing ever happened."
+
+[sub_resource type="Resource" id="Resource_he0li"]
+script = ExtResource("3_r15pu")
+Text = "You make your way toward the shipyard to order some fuel for your vessel. Upon entering the shipyard, you find people moving about just like in the port."
+
+[sub_resource type="Resource" id="Resource_wjtpo"]
+script = ExtResource("3_r15pu")
+Text = "You attempt to say a word to one of the workers, but he instantly points you toward a room in the back, as if he knows exactly why you’re here."
+
+[sub_resource type="Resource" id="Resource_2n00b"]
+script = ExtResource("3_r15pu")
+Text = "Indeed, the room at the back appears to be the accountant's office. He barely looks up, seemingly busy punching numbers into a machine, with more and more paper coming out of it."
+
+[sub_resource type="Resource" id="Resource_erjjx"]
+script = ExtResource("3_r15pu")
+Text = "You gently knock on the door to get his attention. Without lifting his head, he asks you about your ship's callsign and how much fuel you will need."
+
+[sub_resource type="Resource" id="Resource_qvxbo"]
+script = ExtResource("3_r15pu")
+Text = "You request a full restock. As you mention your ship's callsign, you notice it grabs his attention momentarily. He lifts his head to take a look at you."
+
+[sub_resource type="Resource" id="Resource_terij"]
+script = ExtResource("3_r15pu")
+Text = "Behind his large goggles, you see a scrutinizing glance measuring you up and down. The man leaves his desk and steps in front of you. \"You're with the rebellion, aren't you, son?\""
+
+[sub_resource type="Resource" id="Resource_i4etl"]
+script = ExtResource("3_r15pu")
+Text = "\"What are you all even trying to do here? Do you think you're some sort of heroes? You won’t make it past the next few towns. The regime will obliterate you.\""
+
 [sub_resource type="Resource" id="Resource_hv8jm"]
 script = ExtResource("1_d3qx6")
-HappeningTexts = Array[String](["As you step off the ship, you sense a lot of eyes on you. The crowd bustling around the port seems wary of your presence.", "People are moving left and right, carrying goods, guiding visitors, and salespeople shouting about their commerce. Suddenly, everything comes to a halt.", "As if on cue, the moment you notice this, it all goes back to normal, as though nothing ever happened.", "You make your way toward the shipyard to order some fuel for your vessel. Upon entering the shipyard, you find people moving about just like in the port.", "You attempt to say a word to one of the workers, but he instantly points you toward a room in the back, as if he knows exactly why you’re here.", "Indeed, the room at the back appears to be the accountant's office. He barely looks up, seemingly busy punching numbers into a machine, with more and more paper coming out of it.", "You gently knock on the door to get his attention. Without lifting his head, he asks you about your ship's callsign and how much fuel you will need.", "You request a full restock. As you mention your ship's callsign, you notice it grabs his attention momentarily. He lifts his head to take a look at you.", "Behind his large goggles, you see a scrutinizing glance measuring you up and down. The man leaves his desk and steps in front of you. \"You're with the rebellion, aren't you, son?\"", "\"What are you all even trying to do here? Do you think you're some sort of heroes? You won’t make it past the next few towns. The regime will obliterate you.\""])
+Texts = Array[ExtResource("3_r15pu")]([SubResource("Resource_wwp0d"), SubResource("Resource_hdwrk"), SubResource("Resource_bd883"), SubResource("Resource_he0li"), SubResource("Resource_wjtpo"), SubResource("Resource_2n00b"), SubResource("Resource_erjjx"), SubResource("Resource_qvxbo"), SubResource("Resource_terij"), SubResource("Resource_i4etl")])
 Options = Array[ExtResource("2_r15pu")]([SubResource("Resource_rgmjt"), SubResource("Resource_d3qx6")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
