@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://pwoqxtfwhr2v"]
+
+[ext_resource type="Script" uid="uid://bnc8ljs1sfr3b" path="res://addons/MC_DialogueEditor/Nodes/StageDialogueNode.gd" id="1_bdjdn"]
+
+[node name="BaseDialogueNode" type="GraphNode" unique_id=462244291 node_paths=PackedStringArray("textInput", "rich", "PicPicket")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -209.0
+offset_top = -253.0
+offset_right = 209.0
+offset_bottom = 253.0
+grow_horizontal = 2
+grow_vertical = 2
+resizable = true
+slot/0/left_enabled = true
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = true
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+script = ExtResource("1_bdjdn")
+textInput = NodePath("VBoxContainer/TextEdit")
+rich = NodePath("VBoxContainer/FoldableContainer/PanelContainer/RichTextLabel")
+PicPicket = NodePath("VBoxContainer/FoldableContainer2/EditorResourcePicker")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=887160852]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=2118254818]
+layout_mode = 2
+text = "Dialogue Text"
+
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer" unique_id=598073236]
+layout_mode = 2
+size_flags_vertical = 3
+wrap_mode = 1
+autowrap_mode = 2
+
+[node name="FoldableContainer" type="FoldableContainer" parent="VBoxContainer" unique_id=1309785267]
+layout_mode = 2
+folded = true
+title = "Preview"
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/FoldableContainer" unique_id=910059848]
+visible = false
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/FoldableContainer/PanelContainer" unique_id=1326415105]
+layout_mode = 2
+bbcode_enabled = true
+
+[node name="FoldableContainer2" type="FoldableContainer" parent="VBoxContainer" unique_id=1768965431]
+layout_mode = 2
+folded = true
+title = "Stage Pic"
+
+[node name="EditorResourcePicker" type="EditorResourcePicker" parent="VBoxContainer/FoldableContainer2" unique_id=1672244101]
+visible = false
+layout_mode = 2
+base_type = "Texture"
+
+[connection signal="delete_request" from="." to="." method="_on_delete_request"]
+[connection signal="text_changed" from="VBoxContainer/TextEdit" to="." method="_on_text_edit_text_changed"]
+[connection signal="resource_changed" from="VBoxContainer/FoldableContainer2/EditorResourcePicker" to="." method="_on_editor_resource_picker_resource_changed"]

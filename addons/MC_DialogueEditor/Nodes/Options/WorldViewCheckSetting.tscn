@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://bihlx76ys3py3"]
+
+[ext_resource type="Script" uid="uid://c50nl6dgwd55" path="res://addons/MC_DialogueEditor/Nodes/Options/world_view_check_setting.gd" id="1_jj4hg"]
+
+[node name="WorldViewSetting" type="PanelContainer" unique_id=327963563 node_paths=PackedStringArray("menu", "valueLabel", "slid", "possitiveCheckBox")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -94.0
+offset_top = -32.0
+offset_right = 94.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jj4hg")
+menu = NodePath("HBoxContainer/HBoxContainer2/MenuBar/PopupMenu")
+valueLabel = NodePath("HBoxContainer/HBoxContainer/Label")
+slid = NodePath("HBoxContainer/HBoxContainer/HSlider")
+possitiveCheckBox = NodePath("HBoxContainer/HBoxContainer2/CheckBox")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="." unique_id=241001414]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer" unique_id=2113499316]
+layout_mode = 2
+
+[node name="MenuBar" type="MenuBar" parent="HBoxContainer/HBoxContainer2" unique_id=691857876]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PopupMenu" type="PopupMenu" parent="HBoxContainer/HBoxContainer2/MenuBar" unique_id=1920084348]
+title = "NONE"
+item_count = 6
+item_0/text = "NONE"
+item_0/id = 0
+item_1/text = "COMPOSURE_AGITATION"
+item_1/id = 1
+item_2/text = "LOGIC_BELIEF"
+item_2/id = 2
+item_3/text = "EMPATHY_EGO"
+item_3/id = 3
+item_4/text = "FORCE_INSPIRATION"
+item_4/id = 4
+item_5/text = "MAN_MACHINE"
+item_5/id = 5
+
+[node name="CheckBox" type="CheckBox" parent="HBoxContainer/HBoxContainer2" unique_id=852226913]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer" unique_id=988714515]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="HBoxContainer/HBoxContainer" unique_id=2123447373]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/HBoxContainer" unique_id=570348705]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "-100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="index_pressed" from="HBoxContainer/HBoxContainer2/MenuBar/PopupMenu" to="." method="_on_popup_menu_index_pressed"]
+[connection signal="pressed" from="HBoxContainer/HBoxContainer2/CheckBox" to="." method="_on_check_box_pressed"]
+[connection signal="value_changed" from="HBoxContainer/HBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]

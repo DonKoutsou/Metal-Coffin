@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://ok5fftx1n3nm"]
+
+[ext_resource type="Script" uid="uid://b31abenkebj6w" path="res://addons/MC_DialogueEditor/Nodes/Options/world_view_setting.gd" id="1_gv7u0"]
+
+[node name="WorldViewSetting" type="PanelContainer" unique_id=327963563 node_paths=PackedStringArray("menu", "valueLabel", "slid")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.0
+offset_top = -25.0
+offset_right = 59.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gv7u0")
+menu = NodePath("HBoxContainer/MenuBar/PopupMenu")
+valueLabel = NodePath("HBoxContainer/HBoxContainer/Label")
+slid = NodePath("HBoxContainer/HBoxContainer/HSlider")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="." unique_id=241001414]
+layout_mode = 2
+
+[node name="MenuBar" type="MenuBar" parent="HBoxContainer" unique_id=691857876]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PopupMenu" type="PopupMenu" parent="HBoxContainer/MenuBar" unique_id=1920084348]
+title = "World View Effect"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer" unique_id=988714515]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="HBoxContainer/HBoxContainer" unique_id=2123447373]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -100.0
+
+[node name="Label" type="Label" parent="HBoxContainer/HBoxContainer" unique_id=570348705]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "-100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="index_pressed" from="HBoxContainer/MenuBar/PopupMenu" to="." method="_on_popup_menu_index_pressed"]
+[connection signal="value_changed" from="HBoxContainer/HBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]
