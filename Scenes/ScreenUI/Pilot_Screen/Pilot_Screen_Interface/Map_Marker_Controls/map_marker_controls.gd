@@ -33,8 +33,8 @@ func _on_x_gas_range_changed(NewVal: float) -> void:
 
 #-------------------------------------------------------
 func _on_clear_lines_pressed() -> void:
-	if (!Working):
-		return
+	#if (!Working):
+		#return
 	EventHandler.OnMarkerEditorClearLinesPressed()
 
 #-------------------------------------------------------

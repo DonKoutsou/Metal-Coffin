@@ -5,6 +5,17 @@
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k1nir"]
 light_mode = 1
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rnln8"]
+content_margin_left = 2.0
+content_margin_right = 2.0
+bg_color = Color(0, 0, 0, 0.23529412)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+anti_aliasing = false
+
 [node name="Control" type="Control" unique_id=352035971 node_paths=PackedStringArray("Line", "DetailPanel", "ShipDetailLabel") groups=["ZoomAffected"]]
 z_index = 2
 material = SubResource("CanvasItemMaterial_k1nir")
@@ -28,7 +39,6 @@ use_parent_material = true
 anchors_preset = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="Control" unique_id=1308047650]
-self_modulate = Color(1, 1, 1, 0)
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 8
@@ -42,6 +52,7 @@ offset_right = 113.0
 offset_bottom = -93.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rnln8")
 
 [node name="Label" type="Label" parent="Control/PanelContainer" unique_id=1010070912 groups=["MapInfo"]]
 use_parent_material = true

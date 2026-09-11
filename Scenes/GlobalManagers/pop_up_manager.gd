@@ -37,7 +37,7 @@ func DoConfirm(Text : String, ConfirmText : String, Parent : Node) -> SignalObje
 
 var CurrentlyShownFade : Array[String]
 
-func DoFadeNotif(Text : String, Parent : Node = null, overridetime : float = 4):
+func DoFadeNotif(Text : String, Parent : Node = null, overridetime : float = 2):
 	if (CurrentlyShownFade.has(Text)):
 		return
 	

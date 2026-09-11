@@ -164,6 +164,7 @@ region_rect = Rect2(0.6666565, -2, 134.99997, 137.33334)
 
 [node name="TrailLine" parent="ColorRect" index="0" unique_id=909123147]
 position = Vector2(0, 0.1)
+points = PackedVector2Array(0, 0)
 
 [node name="CollisionShape2D" parent="ShipBody" parent_id_path=PackedInt32Array(1910492064) index="0" unique_id=243368945]
 visible = false
@@ -213,7 +214,7 @@ bus = &"Engine"
 [node name="PointLight2D" type="PointLight2D" parent="." index="10" unique_id=796806027]
 texture_filter = 4
 scale = Vector2(8, 8)
-energy = 0.5
+energy = 0.6
 blend_mode = 2
 shadow_color = Color(0.919342, 0, 0.452291, 0)
 texture = ExtResource("5_k2uly")

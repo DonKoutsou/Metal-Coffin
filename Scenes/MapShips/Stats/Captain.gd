@@ -240,6 +240,7 @@ func CopyStats(Cpt : Captain) -> void:
 	TempName = Cpt.TempName
 	CaptainPortrait = Cpt.CaptainPortrait
 	ShipIcon = Cpt.ShipIcon
+	CardFightIcons = Cpt.CardFightIcons
 	ShipCallsign = Cpt.ShipCallsign
 	Cards = Cpt.Cards
 	ProvidingFunds = Cpt.ProvidingFunds

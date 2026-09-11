@@ -46,10 +46,11 @@ func _DrawMapLines(SpotLocs : PackedVector2Array) -> void:
 			var dir = point1.direction_to(point2)
 			
 			var dist = point1.distance_to(point2)
-			var pointamm = roundi(dist / 80)
+			var pointamm = roundi(dist / 20)
 			var offsetperpoint = dist/pointamm
 			for g in pointamm:
-				var offs = (dir * (offsetperpoint * g)) + Vector2(Rand.InstanceRandom.RandFRange(-20, 20), Rand.InstanceRandom.RandFRange(-20, 20))
+				
+				var offs = (dir * (offsetperpoint * g)) + Vector2(Rand.InstanceRandom.RandFRange(-20, 20) * dir.x, Rand.InstanceRandom.RandFRange(-20, 20) * dir.y)
 				#Mut.lock()
 				Line.append(point1 + offs)
 				#Mut.unlock()
@@ -99,7 +100,7 @@ func DrawLines() -> void:
 		L.round_precision = 4
 		
 		L.use_parent_material = true
-		L.width = 20
+		L.width = 10
 		
 		if (!RoadLines):
 			L.default_color = Color(1,1,1, 1)
@@ -110,7 +111,7 @@ func DrawLines() -> void:
 			#L.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
 			#L.texture = load("res://Assets/Sand/Tiles093_1K-PNG_Color.png")
 			#L.default_color = Color(0,0,0, 1)
-			L.width = 5
+			L.width = 1
 		add_child(L)
 		L.global_position = points[0]
 		#L.default_color = Color("0ca50a")

@@ -27,8 +27,8 @@ func _updateUI() -> void:
 	if currentShip == null:
 		return
 
-	var fuelStats = currentShip.GetFuelStats()
-	var percentFuel = fuelStats["CurrentFuel"] / fuelStats["MaxFuel"] * 100
+	var percentFuel = currentShip.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) \
+		/ currentShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK) * 100
 	var percentHull = currentShip.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL) \
 		/ currentShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL) * 100
 

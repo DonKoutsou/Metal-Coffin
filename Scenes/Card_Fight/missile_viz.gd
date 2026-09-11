@@ -48,7 +48,11 @@ func _ready() -> void:
 	InitialParticle.burst()
 	await InitialParticle.Finished
 	SoundNode.play()
-	look_at(Target.global_position)
+	var pos = Target.global_position
+	if (Target is Control):
+		pos += Target.size / 2
+		
+	look_at(pos)
 	set_process(true)
 
 func _process(delta: float) -> void:
@@ -58,7 +62,11 @@ func _process(delta: float) -> void:
 	
 	counter += delta
 	
-	var direction = (Target.global_position) - global_position
+	var pos = Target.global_position
+	if (Target is Control):
+		pos += Target.size / 2
+	
+	var direction = (pos) - global_position
 	var distance = direction.length()
 	
 	# Only adjust if the missile is more than a tiny distance from the target
@@ -90,8 +98,8 @@ func _process(delta: float) -> void:
 		
 		position += Vector2(cos(rotation), sin(rotation)) * speed * delta * 80
 	
-	if (global_position.distance_squared_to(Target.global_position) < 500 or counter > 1.5):
-		global_position = Target.global_position
+	if (global_position.distance_squared_to(pos) < 500 or counter > 1.5):
+		global_position = pos
 		EndingParticle.global_position = global_position
 		EndingParticle.global_rotation = 0
 		EndingParticle.burst()

@@ -175,12 +175,14 @@ func FixLabelClipping() -> void:
 	for Info1 : Control in Mapinfos:
 		if (!Info1.is_visible_in_tree()):
 			continue
+
 		var r1 = Info1.get_global_rect()
 		for Info2 : Control in AllMapInfos:
 			if (Info1 == Info2):
 				continue
 			if (!Info2.is_visible_in_tree()):
 				continue
+
 			var r2 = Info2.get_global_rect()
 			var tries = 0
 			while (r1.intersects(r2) and tries < 20):

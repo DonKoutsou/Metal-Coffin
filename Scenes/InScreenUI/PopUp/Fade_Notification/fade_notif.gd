@@ -3,7 +3,7 @@ class_name FadeNotif
 
 @export var T : Label
 
-var alph = 8
+var alph = 2
 
 var txt : String
 
@@ -14,13 +14,13 @@ func SetText(t : String):
 	T.text = t
 	T.visible_characters = 0
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if (txt.length() > T.visible_characters):
 		T.visible_characters += 2
 		return
 	if (alph <= 0):
 		queue_free()
-	alph -= 0.1
+	alph -= delta
 	modulate.a = min(1, alph)
 
 func _exit_tree() -> void:

@@ -45,8 +45,8 @@ signal ShipTargetSelected(Marker : ShipMarker)
 signal RemoveSelf
 
 func _ready() -> void:
-	DetailPanel.visible = false
-	Line.visible = false
+	#DetailPanel.visible = false
+	#Line.visible = false
 
 	VisualContactCountdown.visible = false
 	#set_physics_process(false)
@@ -292,13 +292,9 @@ func Update(IsControlled : bool, CamPos : Vector2, delta : float) -> void:
 				#OnLandingStarted()
 				UpdateAltitude(CurrentShip.Altitude)
 			
-			if (!IsControlled):
-				return
-			var fuelstats
-			if (CurrentShip.Docked):
-				fuelstats = CurrentShip.Command.GetFuelStats()
-			else:
-				fuelstats = CurrentShip.GetFuelStats()
+			#if (!IsControlled):
+				#return
+			var fuelstats = CurrentShip.GetFuelStats()
 			UpdateDroneFuel(roundi(fuelstats["CurrentFuel"]), fuelstats["MaxFuel"])
 
 		else : if (CurrentShip is Missile):
@@ -424,8 +420,12 @@ func AltitudeChanged(_NewAlt : float) -> void:
 	add_child(LandingNotif)
 
 func ToggleShipDetails(T : bool):
-	DetailPanel.visible = T 
-	Line.visible = T
+	if (T):
+		DetailPanel.modulate.a = 1.0
+		Line.modulate.a = 1.0
+	else:
+		DetailPanel.modulate.a = 0.5
+		Line.modulate.a = 0.5
 	#Direction.visible = T
 	#set_physics_process(T)
 

@@ -5,7 +5,16 @@
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k1nir"]
 light_mode = 1
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r74yg"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rnln8"]
+content_margin_left = 2.0
+content_margin_right = 2.0
+bg_color = Color(0, 0, 0, 0.23529412)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+anti_aliasing = false
 
 [sub_resource type="Animation" id="Animation_b3nvo"]
 length = 0.001
@@ -64,7 +73,7 @@ _data = {
 &"Show_2": SubResource("Animation_v18v5")
 }
 
-[node name="ShipMarkerNotification" type="Control" unique_id=1733105763 node_paths=PackedStringArray("anim", "blinkSound", "Line", "DetailPanel", "ShipDetailLabel") groups=["Pausable", "ZoomAffected"]]
+[node name="ShipMarkerNotification" type="Control" unique_id=1733105763 node_paths=PackedStringArray("anim", "Line", "DetailPanel", "ShipDetailLabel") groups=["Pausable", "ZoomAffected"]]
 z_index = 2
 material = SubResource("CanvasItemMaterial_k1nir")
 layout_mode = 3
@@ -72,7 +81,6 @@ anchors_preset = 0
 mouse_filter = 2
 script = ExtResource("1_yijdn")
 anim = NodePath("AnimationPlayer")
-blinkSound = NodePath("")
 Line = NodePath("Line2D")
 DetailPanel = NodePath("Control")
 ShipDetailLabel = NodePath("Control/PanelContainer/Label")
@@ -105,7 +113,7 @@ offset_bottom = -95.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_r74yg")
+theme_override_styles/panel = SubResource("StyleBoxFlat_rnln8")
 
 [node name="Label" type="Label" parent="Control/PanelContainer" unique_id=1177534605 groups=["MapInfo"]]
 use_parent_material = true

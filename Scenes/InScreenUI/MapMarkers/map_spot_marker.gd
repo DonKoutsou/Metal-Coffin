@@ -105,6 +105,18 @@ func UpdateCameraZoom(NewZoom : float) -> void:
 	CurrentZoom = NewZoom
 	DetailContainer.scale = clamp(Vector2(1,1) / NewZoom, Vector2(3,3), Vector2(10,10))
 	FuelLabel.scale = clamp(Vector2(1,1) / NewZoom, Vector2(3,3), Vector2(10,10))
+	
+	##We dont want to make it fully dissapear, cause it will trigger the visibility notifier
+	var m = max(1 - NewZoom, 0.1)
+	modulate.a = m
+	if (m <= 0.1):
+		SpotNameLabel.remove_from_group("UnmovableMapInfo")
+		SpotDropPosition.remove_from_group("UnmovableMapInfo")
+	else:
+		SpotDropPosition.add_to_group("UnmovableMapInfo")
+		SpotNameLabel.add_to_group("UnmovableMapInfo")
+	#DetailContainer.modulate.a = 1 - NewZoom
+	#FuelLabel.modulate.a = 1 - 	NewZoom
 	#$AnalyzeButton.visible = NewZoom <= 1.5
 
 func EnteredScreen() -> void:

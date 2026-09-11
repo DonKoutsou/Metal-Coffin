@@ -63,16 +63,18 @@ func Update(delta: float, _unaffectedDelta : float) -> void:
 	ElintShape.UpdateElint(delta)
 	RadarShape.EvaluateRadarrPoint(Altitude)
 	
-	for g in TrailLines:
-		g.call_deferred("UpdateProjected", delta, Altitude / 10000.0)
-
 	var offset : Vector2 = GetShipSpeedVec()
 	var frontDot = offset.normalized().dot(WindVector.normalized())
 	if (frontDot < 0):
 		Crosswind.emit(abs(frontDot))
 		
 	if (SimulationManager.IsPaused()):
+		for g in TrailLines:
+			g.call_deferred("UpdateProjected", 0, Altitude / 10000.0)
 		return
+	
+	for g in TrailLines:
+		g.call_deferred("UpdateProjected", delta, Altitude / 10000.0)
 	
 	RadarShape.EvaluateRadarTargets(Altitude)
 	
@@ -373,8 +375,13 @@ func _HandleRestock(delta : float) -> void:
 #--------------------------------------------------------------
 
 func UpdateLight(LightAmm : float, Viz : float) -> void:
-	L.color = Color(1,1,1) * LightAmm
-	L.texture_scale = Viz
+	var l = Helper.mapf(LightAmm, 0, 1, 0.9, 1)
+	var c = Helper.mapf(LightAmm, 0.6, 1, 0, 1)
+	
+	var col = Color(0.83, 0.986, 1.0, 1.0).lerp(Color(1, 1, 1), c)
+
+	L.color = col * l
+	L.texture_scale = Viz * 2
 
 func ToggleLight(t : bool) -> void:
 	$PointLight2D.visible = t
