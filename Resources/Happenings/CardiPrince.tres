@@ -194,10 +194,12 @@ Text = "[color=#c19200]\"You have our eternal gratitude my child... Not many wou
 [sub_resource type="Resource" id="Resource_iry35"]
 script = ExtResource("4_uqsfa")
 Text = "[color=#c19200]\"It's my honor to take part in this sacred campaign along with you sir. Let me make this journey of yours a little less cumbersome.\""
+Pic = "res://Assets/CaptainPortraits/Captain10_1.png"
 
 [sub_resource type="Resource" id="Resource_bhyxm"]
 script = ExtResource("4_uqsfa")
 Text = "You turn and look at Amol. You didn't expect a machine into the battlefield... [color=#c19200]\"I am not able to fight for you sir but I'll provide any other service I can.\" [/color] Amol bows its head and stays there for a few seconds."
+Pic = "res://Assets/CaptainPortraits/Captain1.png"
 
 [sub_resource type="Resource" id="Resource_n2k7i"]
 script = ExtResource("4_uqsfa")
@@ -332,7 +334,6 @@ Pic = "uid://b680xs4rw5ro1"
 
 [sub_resource type="Resource" id="Resource_143ge"]
 script = ExtResource("1_afuai")
-StagePic = "uid://416d5uw306xw"
 Texts = Array[ExtResource("4_uqsfa")]([SubResource("Resource_gfjeh"), SubResource("Resource_0ee4c"), SubResource("Resource_6ciw0"), SubResource("Resource_v0mvx"), SubResource("Resource_iubow"), SubResource("Resource_4h6n1"), SubResource("Resource_qh6ik"), SubResource("Resource_iyy48"), SubResource("Resource_cuynb"), SubResource("Resource_3yygu"), SubResource("Resource_jt3qb")])
 Options = Array[ExtResource("2_ifktw")]([SubResource("Resource_7bg2p"), SubResource("Resource_wlpbn")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"

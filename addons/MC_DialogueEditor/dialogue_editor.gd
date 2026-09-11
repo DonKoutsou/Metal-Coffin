@@ -24,8 +24,7 @@ enum NodeType{
 
 func _ready() -> void:
 	UpdateDilogues()
-	#FixDialogues()
-	
+
 	SetHappening(0)
 	
 func _exit_tree() -> void:
@@ -59,35 +58,7 @@ func UpdateDilogues() -> void:
 	for g in NodeType.keys():
 		NodeMenu.add_item(g)
 
-func FixDialogues() -> void:
-	for hap : Happening in Happenings:
-		FixStage(hap.Stages)
-		
-		ResourceSaver.save(hap, hap.resource_path)
 
-func FixStage(Stages : Array[HappeningStage]) -> void:
-	for stage : HappeningStage in Stages:
-		if (stage.HappeningTexts.size() > 0):
-			for t : String in stage.HappeningTexts:
-				var text = HappeningText.new()
-				text.Text = t
-				text.Pic = stage.StagePic
-				stage.Texts.append(text)
-			stage.HappeningTexts.clear()
-		for opt in stage.Options:
-			FixStage(opt.BranchContinuation)
-			FixStage(opt.WorldViewCheckFailBranch)
-				
-	for stageIndex in range(Stages.size() - 1 , -1, -1):
-		var stage = Stages[stageIndex]
-		
-		if (stageIndex > 0):
-			var prevStage = Stages[stageIndex - 1]
-			##If prev stage has no options it means we can merge with current
-			if prevStage.Options.size() == 0:
-				Stages.remove_at(stageIndex)
-				prevStage.Texts.append_array(stage.Texts)
-				prevStage.Options.append_array(stage.Options)
 
 func SetHappening(id : int) -> void:
 	currentX = 0
@@ -267,7 +238,7 @@ func HandleNodeConnection(from_node: StringName, from_port: int, to_node: String
 			if (from.stage.Options.size() == 0):
 				var newArr : Array[Happening_Option] = [to.option]
 				from.stage.Options = newArr
-				print("thing")
+
 			else:
 				from.stage.Options.append(to.option)
 			
@@ -423,7 +394,35 @@ func RecursevlyUpdateStage(node : StageDialogueNode, newStage : HappeningStage, 
 
 
 
+#func FixDialogues() -> void:
+	#for hap : Happening in Happenings:
+		#FixStage(hap.Stages)
+		#
+		#ResourceSaver.save(hap, hap.resource_path)
 
+#func FixStage(Stages : Array[HappeningStage]) -> void:
+	#for stage : HappeningStage in Stages:
+		#if (stage.HappeningTexts.size() > 0):
+			#for t : String in stage.HappeningTexts:
+				#var text = HappeningText.new()
+				#text.Text = t
+				#text.Pic = stage.StagePic
+				#stage.Texts.append(text)
+			#stage.HappeningTexts.clear()
+		#for opt in stage.Options:
+			#FixStage(opt.BranchContinuation)
+			#FixStage(opt.WorldViewCheckFailBranch)
+				#
+	#for stageIndex in range(Stages.size() - 1 , -1, -1):
+		#var stage = Stages[stageIndex]
+		#
+		#if (stageIndex > 0):
+			#var prevStage = Stages[stageIndex - 1]
+			###If prev stage has no options it means we can merge with current
+			#if prevStage.Options.size() == 0:
+				#Stages.remove_at(stageIndex)
+				#prevStage.Texts.append_array(stage.Texts)
+				#prevStage.Options.append_array(stage.Options)
 
 
 

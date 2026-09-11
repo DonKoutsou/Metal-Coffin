@@ -65,33 +65,17 @@ func PresentHappening(Hap : Happening):
 func NextStage() -> void:
 	var Stage = CurrentBranch[CurrentStage]
 	
-	
-	if (Stage.StagePic != ""):
-		HappeningBackgroundTexture.texture = load(Stage.StagePic)
-		
-		var bTw = create_tween()
-		bTw.set_ease(Tween.EASE_OUT)
-		bTw.set_trans(Tween.TRANS_QUAD)
-		
-		bTw.tween_property($VBoxContainer/HBoxContainer2/Control, "custom_minimum_size", Vector2(320,0), 1)
-
-	else:
-		HappeningBackgroundTexture.texture = null
-		var bTw = create_tween()
-		bTw.set_ease(Tween.EASE_OUT)
-		bTw.set_trans(Tween.TRANS_QUAD)
-		
-		bTw.tween_property($VBoxContainer/HBoxContainer2/Control, "custom_minimum_size", Vector2(0,0), 1)
-	
 	CurrentText = 0
-	for z in Stage.HappeningTexts.size():
-		var Last = Stage.HappeningTexts.size() ==  z + 1
+	
+	for z in Stage.Texts.size():
+		var Last = Stage.Texts.size() ==  z + 1
 		
-		var text = Stage.HappeningTexts[z]
-		
-		HappeningText.text = text
+		var text : HappeningText = Stage.Texts[z]
+		UpdateBackground(text)
+		HappeningText.text = text.Text
 		HappeningText.visible_ratio = 0
-		if (Last and Stage.HappeningTexts.size() > 1):
+		
+		if (Last and Stage.Texts.size() > 1):
 			break
 		if (Last and Stage.Options.size() > 0):
 			break
@@ -191,7 +175,24 @@ func NextStage() -> void:
 		return
 	else:
 		call_deferred("NextStage")
+
+func UpdateBackground(text : HappeningText) -> void:
+	if (text.Pic != ""):
+		HappeningBackgroundTexture.texture = load(text.Pic)
 		
+		var bTw = create_tween()
+		bTw.set_ease(Tween.EASE_OUT)
+		bTw.set_trans(Tween.TRANS_QUAD)
+		
+		bTw.tween_property($VBoxContainer/HBoxContainer2/Control, "custom_minimum_size", Vector2(320,0), 1)
+
+	else:
+		HappeningBackgroundTexture.texture = null
+		var bTw = create_tween()
+		bTw.set_ease(Tween.EASE_OUT)
+		bTw.set_trans(Tween.TRANS_QUAD)
+		
+		bTw.tween_property($VBoxContainer/HBoxContainer2/Control, "custom_minimum_size", Vector2(0,0), 1)
 	
 func _on_option_1_pressed() -> void:
 	SelectedOption = 0
@@ -241,7 +242,7 @@ func _on_next_diag_pressed() -> void:
 
 
 func _on_skip_diag_pressed() -> void:
-	var Size = CurrentBranch[CurrentStage].HappeningTexts.size()
+	var Size = CurrentBranch[CurrentStage].Texts.size()
 	NextDiag.emit()
 	while(Size - 1 > CurrentText):
 		NextDiag.emit()

@@ -26,7 +26,7 @@ func _on_text_edit_text_changed() -> void:
 	text.Text = newText
 	if (stage == null):
 		return
-	stage.HappeningTexts[textIndex] = newText
+	stage.Texts[textIndex] = newText
 	
 	Changed.emit()
 
