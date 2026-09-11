@@ -34,7 +34,7 @@ metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 script = ExtResource("3_c5nxy")
 StringReply = "You take out your coat and place it over the boys shoulders."
 OptionName = "Offer help"
-BranchContinuation = Array[ExtResource("1_qaalc")]([SubResource("Resource_ni7lq")])
+Branch = SubResource("Resource_ni7lq")
 WorldviewEffect = 3
 WorldviewEffectAmm = 20
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
@@ -62,7 +62,7 @@ metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 script = ExtResource("3_c5nxy")
 StringReply = "You make your way to the boy, you extend your arm and place it onto its shoulder. You steal his gaze, but it looks like he sees through you and not you."
 OptionName = "Aproach the boy."
-BranchContinuation = Array[ExtResource("1_qaalc")]([SubResource("Resource_c5nxy")])
+Branch = SubResource("Resource_c5nxy")
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
 [sub_resource type="Resource" id="Resource_qurqx"]

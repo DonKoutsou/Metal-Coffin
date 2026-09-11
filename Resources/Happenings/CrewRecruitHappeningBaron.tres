@@ -15,6 +15,30 @@ OptionName = "Dismiss the figure"
 FinishDiag = true
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
+[sub_resource type="Resource" id="Resource_2dd2n"]
+script = ExtResource("4_dh2fs")
+StringReply = "\"Thank you master. Follow me...\". The figure had already turned its back on me before finishing the sentance. I follow it, soon the ship had already vanished from my vision as we get lost in the aleyways of the town."
+OptionName = "Accept the figure's invitation"
+metadata/_custom_type_script = "uid://ii12ceb6fgif"
+
+[sub_resource type="Resource" id="Resource_afior"]
+script = ExtResource("4_fnrm0")
+Text = "The town seems almost empty, the gates of ship open, as the deffening sound of them hitting the ground bellow ends no sound follows."
+
+[sub_resource type="Resource" id="Resource_qwh1g"]
+script = ExtResource("4_fnrm0")
+Text = "Once the dust setles down you see a lonely figure waiting for you. Checking the suroundings you make sure its safe an make your way to the figure."
+
+[sub_resource type="Resource" id="Resource_6vrue"]
+script = ExtResource("4_fnrm0")
+Text = "\"The Baron wishes to see you master\", the figure's voice withered almost like the hiss of a snake."
+
+[sub_resource type="Resource" id="Resource_5oj2u"]
+script = ExtResource("2_4o3s8")
+Texts = Array[ExtResource("4_fnrm0")]([SubResource("Resource_afior"), SubResource("Resource_qwh1g"), SubResource("Resource_6vrue")])
+Options = Array[ExtResource("3_fnrm0")]([SubResource("Resource_w6kjy"), SubResource("Resource_2dd2n")])
+metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
+
 [sub_resource type="Resource" id="Resource_8l24b"]
 script = ExtResource("4_dh2fs")
 StringReply = "You catch a quick smirk from him, it is almost instantly hiden as the Baron shifts the conversation."
@@ -220,34 +244,9 @@ Texts = Array[ExtResource("4_fnrm0")]([SubResource("Resource_b5c5j")])
 Options = Array[ExtResource("3_fnrm0")]([SubResource("Resource_dh2fs"), SubResource("Resource_igefk")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
-[sub_resource type="Resource" id="Resource_2dd2n"]
-script = ExtResource("4_dh2fs")
-StringReply = "\"Thank you master. Follow me...\". The figure had already turned its back on me before finishing the sentance. I follow it, soon the ship had already vanished from my vision as we get lost in the aleyways of the town."
-OptionName = "Accept the figure's invitation"
-BranchContinuation = Array[ExtResource("2_4o3s8")]([SubResource("Resource_fnrm0"), SubResource("Resource_n8mto")])
-metadata/_custom_type_script = "uid://ii12ceb6fgif"
-
-[sub_resource type="Resource" id="Resource_afior"]
-script = ExtResource("4_fnrm0")
-Text = "The town seems almost empty, the gates of ship open, as the deffening sound of them hitting the ground bellow ends no sound follows."
-
-[sub_resource type="Resource" id="Resource_qwh1g"]
-script = ExtResource("4_fnrm0")
-Text = "Once the dust setles down you see a lonely figure waiting for you. Checking the suroundings you make sure its safe an make your way to the figure."
-
-[sub_resource type="Resource" id="Resource_6vrue"]
-script = ExtResource("4_fnrm0")
-Text = "\"The Baron wishes to see you master\", the figure's voice withered almost like the hiss of a snake."
-
-[sub_resource type="Resource" id="Resource_5oj2u"]
-script = ExtResource("2_4o3s8")
-Texts = Array[ExtResource("4_fnrm0")]([SubResource("Resource_afior"), SubResource("Resource_qwh1g"), SubResource("Resource_6vrue")])
-Options = Array[ExtResource("3_fnrm0")]([SubResource("Resource_w6kjy"), SubResource("Resource_2dd2n")])
-metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
-
 [resource]
 script = ExtResource("5_igefk")
 HappeningName = "The Baron"
-Stages = Array[ExtResource("2_4o3s8")]([SubResource("Resource_5oj2u")])
+Stages = Array[ExtResource("2_4o3s8")]([SubResource("Resource_5oj2u"), SubResource("Resource_fnrm0"), SubResource("Resource_n8mto")])
 Special = true
 CrewRecruit = true

@@ -6,6 +6,7 @@ class_name Happening_Option
 @export var Event : OverworldEventData
 @export_group("Branch")
 @export var BranchContinuation : Array[HappeningStage]
+@export var Branch : HappeningStage
 @export_group("Worldview Effect")
 @export var WorldviewEffect : WorldView.WorldViews
 @export var WorldviewEffectAmm : int = 0
@@ -14,6 +15,7 @@ class_name Happening_Option
 @export var CheckPossetive : bool
 @export var CheckDifficulty : int = 20
 @export var WorldViewCheckFailBranch : Array[HappeningStage]
+@export var WorldViewFailBranch : HappeningStage
 @export var ReverseEffectOnFail :bool
 
 var CheckResault = true

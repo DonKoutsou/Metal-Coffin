@@ -160,9 +160,9 @@ func NextStage() -> void:
 		else:
 			var Possiblebranch : Array[HappeningStage] = []
 			if (!Check):
-				Possiblebranch.append_array(Option.WorldViewCheckFailBranch)
+				Possiblebranch.append(Option.WorldViewFailBranch)
 			else:
-				Possiblebranch.append_array(Option.BranchContinuation)
+				Possiblebranch.append(Option.BranchContinuation2)
 			
 			if (Possiblebranch.size() > 0):
 				CurrentBranch = Possiblebranch

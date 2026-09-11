@@ -25,7 +25,6 @@ func ConfigureOption(options : Happening_Option) -> void:
 		text2.visible = false
 	
 	if (options.WorldviewCheck !=  WorldView.WorldViews.NONE):
-		print("Thing")
 		add_child(Control.new())
 		set_slot(1, false, 0, Color(1,1,1), true, 0, Color(1,0,0))
 		worldvewCheckSet.SetWorldViewCheck(options)

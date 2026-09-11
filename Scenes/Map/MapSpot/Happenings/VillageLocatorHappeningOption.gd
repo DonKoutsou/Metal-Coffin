@@ -1,6 +1,8 @@
 extends Happening_Option
 class_name Village_Locator_Happening_Option
 
+@export var locatorRange : float = 10000
+
 func OptionResault(EventOrigin : MapSpot) -> String:
 	var ClosestRecruitLoc = FindClosestRecruit(EventOrigin)
 	if (ClosestRecruitLoc == Vector2.ZERO):
@@ -14,7 +16,7 @@ func FindClosestRecruit(EventOrigin : MapSpot) -> Vector2:
 	var VillageLocations =  EventOrigin.get_tree().get_nodes_in_group("VILLAGE")
 	
 	var ClosestLoc : MapSpot
-	var ClosestDist : float = 99999999999
+	var ClosestDist : float = INF
 	
 	for g : MapSpot in VillageLocations:
 		if (g == EventOrigin):
@@ -26,7 +28,7 @@ func FindClosestRecruit(EventOrigin : MapSpot) -> Vector2:
 			ClosestDist = dist
 			ClosestLoc = g
 		
-	if (ClosestDist < 10000):
+	if (ClosestDist < locatorRange):
 		return ClosestLoc.global_position
 	
 	return Vector2.ZERO

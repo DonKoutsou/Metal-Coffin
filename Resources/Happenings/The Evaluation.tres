@@ -27,6 +27,7 @@ WorldviewCheck = 1
 CheckPossetive = true
 CheckDifficulty = 60
 WorldViewCheckFailBranch = Array[ExtResource("1_d3qx6")]([SubResource("Resource_r15pu")])
+WorldViewFailBranch = SubResource("Resource_r15pu")
 metadata/_custom_type_script = "uid://dbopqdo4787oe"
 
 [sub_resource type="Resource" id="Resource_4qhb7"]
@@ -48,6 +49,7 @@ WorldviewCheck = 2
 CheckPossetive = true
 CheckDifficulty = 40
 WorldViewCheckFailBranch = Array[ExtResource("1_d3qx6")]([SubResource("Resource_48yxy")])
+WorldViewFailBranch = SubResource("Resource_48yxy")
 metadata/_custom_type_script = "uid://dbopqdo4787oe"
 
 [sub_resource type="Resource" id="Resource_wwp0d"]

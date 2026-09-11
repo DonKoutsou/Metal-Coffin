@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://bimhkxi6xqud2"]
+
+[ext_resource type="PackedScene" uid="uid://bufavwhp5d2x8" path="res://addons/MC_DialogueEditor/Nodes/BaseDialogueNode.tscn" id="1_qbeot"]
+[ext_resource type="Script" uid="uid://b04qwi3kxalch" path="res://addons/MC_DialogueEditor/Nodes/Village_Location_option_dialogue_node.gd" id="2_qbeot"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_somq4"]
+bg_color = Color(0.46069676, 0.4530424, 0.13253018, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+shadow_size = 16
+
+[node name="BaseDialogueNode" unique_id=462244291 node_paths=PackedStringArray("resourceLoc") instance=ExtResource("1_qbeot")]
+offset_left = -305.0
+offset_top = -284.0
+offset_right = 305.0
+offset_bottom = 284.0
+theme_override_styles/titlebar = SubResource("StyleBoxFlat_somq4")
+script = ExtResource("2_qbeot")
+resourceLoc = NodePath("VBoxContainer/EditorResourcePicker")
+
+[node name="EditorResourcePicker" type="EditorResourcePicker" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="0" unique_id=558750175]
+layout_mode = 2
+base_type = "Village_Locator_Happening_Option"
+
+[node name="Label" type="Label" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="1" unique_id=1595516742]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Locate Village"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="resource_changed" from="VBoxContainer/EditorResourcePicker" to="." method="_on_editor_resource_picker_resource_changed"]

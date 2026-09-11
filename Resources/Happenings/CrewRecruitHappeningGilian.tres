@@ -31,10 +31,12 @@ script = ExtResource("4_ui0gd")
 Cpt = ExtResource("3_j2ryf")
 OptionName = "Ask them to join your fleet"
 BranchContinuation = Array[ExtResource("5_3u5ui")]([SubResource("Resource_gpgth")])
+Branch = SubResource("Resource_gpgth")
 WorldviewEffect = 3
 WorldviewEffectAmm = -20
 WorldviewCheck = 3
 WorldViewCheckFailBranch = Array[ExtResource("5_3u5ui")]([SubResource("Resource_j2ryf")])
+WorldViewFailBranch = SubResource("Resource_j2ryf")
 metadata/_custom_type_script = "uid://w3pbagqwci26"
 
 [sub_resource type="Resource" id="Resource_ui0gd"]

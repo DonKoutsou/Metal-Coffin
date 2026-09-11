@@ -32,7 +32,7 @@ size_flags_horizontal = 3
 
 [node name="PopupMenu" type="PopupMenu" parent="HBoxContainer/HBoxContainer2/MenuBar" unique_id=1920084348]
 title = "NONE"
-item_count = 6
+item_count = 12
 item_0/text = "NONE"
 item_0/id = 0
 item_1/text = "COMPOSURE_AGITATION"
@@ -45,6 +45,18 @@ item_4/text = "FORCE_INSPIRATION"
 item_4/id = 4
 item_5/text = "MAN_MACHINE"
 item_5/id = 5
+item_6/text = "NONE"
+item_6/id = 6
+item_7/text = "COMPOSURE_AGITATION"
+item_7/id = 7
+item_8/text = "LOGIC_BELIEF"
+item_8/id = 8
+item_9/text = "EMPATHY_EGO"
+item_9/id = 9
+item_10/text = "FORCE_INSPIRATION"
+item_10/id = 10
+item_11/text = "MAN_MACHINE"
+item_11/id = 11
 
 [node name="CheckBox" type="CheckBox" parent="HBoxContainer/HBoxContainer2" unique_id=852226913]
 layout_mode = 2
