@@ -53,5 +53,7 @@ layout_mode = 2
 base_type = "Texture"
 
 [connection signal="resource_changed" from="VBoxContainer/resPicker" to="." method="_on_res_picker_resource_changed"]
+[connection signal="resource_selected" from="VBoxContainer/resPicker" to="." method="_on_res_picker_resource_selected"]
 [connection signal="text_changed" from="VBoxContainer/TextEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="resource_changed" from="VBoxContainer/FoldableContainer2/EditorResourcePicker" to="." method="_on_editor_resource_picker_resource_changed"]
+[connection signal="resource_selected" from="VBoxContainer/FoldableContainer2/EditorResourcePicker" to="." method="_on_editor_resource_picker_resource_selected"]

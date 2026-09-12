@@ -15,19 +15,15 @@ offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_gv7u0")
-menu = NodePath("HBoxContainer/MenuBar/PopupMenu")
+menu = NodePath("HBoxContainer/OptionButton")
 valueLabel = NodePath("HBoxContainer/HBoxContainer/Label")
 slid = NodePath("HBoxContainer/HBoxContainer/HSlider")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="." unique_id=241001414]
 layout_mode = 2
 
-[node name="MenuBar" type="MenuBar" parent="HBoxContainer" unique_id=691857876]
+[node name="OptionButton" type="OptionButton" parent="HBoxContainer" unique_id=738136001]
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="PopupMenu" type="PopupMenu" parent="HBoxContainer/MenuBar" unique_id=1920084348]
-title = "World View Effect"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer" unique_id=988714515]
 layout_mode = 2
@@ -44,5 +40,5 @@ text = "-100"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="index_pressed" from="HBoxContainer/MenuBar/PopupMenu" to="." method="_on_popup_menu_index_pressed"]
+[connection signal="item_selected" from="HBoxContainer/OptionButton" to="." method="_on_popup_menu_index_pressed"]
 [connection signal="value_changed" from="HBoxContainer/HBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]

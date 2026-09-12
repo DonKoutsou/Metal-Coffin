@@ -3,7 +3,7 @@ extends EditorPlugin
 
 class_name DialogueEditorPlugin
 
-var Dock : Node
+var Dock : DialogueEditor
 
 func _enter_tree():
 	# Initialization of the plugin goes here.
@@ -11,6 +11,7 @@ func _enter_tree():
 	#add_custom_type("MyButton", "Button", preload("res://CaptainCreator/CaptainCreatorUI.gd"), preload("res://Assets/CaptainPortraits/Captain11.png"))
 	Dock = preload("res://addons/MC_DialogueEditor/DialogueEditor.tscn").instantiate()
 	
+	Dock.history = get_undo_redo()
 	EditorInterface.get_editor_main_screen().add_child(Dock)
 	Dock.visible = false
 

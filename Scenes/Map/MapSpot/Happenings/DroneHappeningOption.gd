@@ -1,3 +1,4 @@
+@tool
 extends String_Happening_Option
 class_name Drone_Happening_Option
 

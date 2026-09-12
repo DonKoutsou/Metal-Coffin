@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dqbsjishecal0"]
+
+[ext_resource type="PackedScene" uid="uid://bufavwhp5d2x8" path="res://addons/MC_DialogueEditor/Nodes/BaseDialogueNode.tscn" id="1_6hlml"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y207x"]
+bg_color = Color(0.4976594, 0.19265911, 0.99999994, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+shadow_size = 8
+
+[node name="BaseDialogueNode" unique_id=462244291 groups=["StartNode"] instance=ExtResource("1_6hlml")]
+offset_top = -44.0
+offset_bottom = 44.0
+theme_override_styles/titlebar = SubResource("StyleBoxFlat_y207x")
+slot/0/left_enabled = false
+
+[node name="Label" type="Label" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="0" unique_id=1253167445]
+layout_mode = 2
+size_flags_vertical = 3
+text = "START"
+horizontal_alignment = 1
+vertical_alignment = 1

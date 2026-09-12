@@ -40,4 +40,10 @@ script = ExtResource("1_d5jih")
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=780781293]
+visible = false
+rect = Rect2(-10, -10, 331, 466)
+
 [connection signal="delete_request" from="." to="." method="_on_delete_request"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -15,7 +15,7 @@ offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jj4hg")
-menu = NodePath("HBoxContainer/HBoxContainer2/MenuBar/PopupMenu")
+menu = NodePath("HBoxContainer/HBoxContainer2/OptionButton")
 valueLabel = NodePath("HBoxContainer/HBoxContainer/Label")
 slid = NodePath("HBoxContainer/HBoxContainer/HSlider")
 possitiveCheckBox = NodePath("HBoxContainer/HBoxContainer2/CheckBox")
@@ -26,37 +26,34 @@ layout_mode = 2
 [node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer" unique_id=2113499316]
 layout_mode = 2
 
-[node name="MenuBar" type="MenuBar" parent="HBoxContainer/HBoxContainer2" unique_id=691857876]
+[node name="OptionButton" type="OptionButton" parent="HBoxContainer/HBoxContainer2" unique_id=679066]
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="PopupMenu" type="PopupMenu" parent="HBoxContainer/HBoxContainer2/MenuBar" unique_id=1920084348]
-title = "NONE"
+selected = 0
 item_count = 12
-item_0/text = "NONE"
-item_0/id = 0
-item_1/text = "COMPOSURE_AGITATION"
-item_1/id = 1
-item_2/text = "LOGIC_BELIEF"
-item_2/id = 2
-item_3/text = "EMPATHY_EGO"
-item_3/id = 3
-item_4/text = "FORCE_INSPIRATION"
-item_4/id = 4
-item_5/text = "MAN_MACHINE"
-item_5/id = 5
-item_6/text = "NONE"
-item_6/id = 6
-item_7/text = "COMPOSURE_AGITATION"
-item_7/id = 7
-item_8/text = "LOGIC_BELIEF"
-item_8/id = 8
-item_9/text = "EMPATHY_EGO"
-item_9/id = 9
-item_10/text = "FORCE_INSPIRATION"
-item_10/id = 10
-item_11/text = "MAN_MACHINE"
-item_11/id = 11
+popup/item_0/text = "NONE"
+popup/item_0/id = 0
+popup/item_1/text = "COMPOSURE_AGITATION"
+popup/item_1/id = 1
+popup/item_2/text = "LOGIC_BELIEF"
+popup/item_2/id = 2
+popup/item_3/text = "EMPATHY_EGO"
+popup/item_3/id = 3
+popup/item_4/text = "FORCE_INSPIRATION"
+popup/item_4/id = 4
+popup/item_5/text = "MAN_MACHINE"
+popup/item_5/id = 5
+popup/item_6/text = "NONE"
+popup/item_6/id = 6
+popup/item_7/text = "COMPOSURE_AGITATION"
+popup/item_7/id = 7
+popup/item_8/text = "LOGIC_BELIEF"
+popup/item_8/id = 8
+popup/item_9/text = "EMPATHY_EGO"
+popup/item_9/id = 9
+popup/item_10/text = "FORCE_INSPIRATION"
+popup/item_10/id = 10
+popup/item_11/text = "MAN_MACHINE"
+popup/item_11/id = 11
 
 [node name="CheckBox" type="CheckBox" parent="HBoxContainer/HBoxContainer2" unique_id=852226913]
 layout_mode = 2
@@ -75,6 +72,6 @@ text = "-100"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="index_pressed" from="HBoxContainer/HBoxContainer2/MenuBar/PopupMenu" to="." method="_on_popup_menu_index_pressed"]
+[connection signal="item_selected" from="HBoxContainer/HBoxContainer2/OptionButton" to="." method="_on_popup_menu_index_pressed"]
 [connection signal="pressed" from="HBoxContainer/HBoxContainer2/CheckBox" to="." method="_on_check_box_pressed"]
 [connection signal="value_changed" from="HBoxContainer/HBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]

@@ -56,7 +56,7 @@ layout_mode = 2
 folded = true
 title = "Overworld Event"
 
-[node name="EditorResourcePicker" type="EditorResourcePicker" parent="VBoxContainer/FoldableContainer3" index="0" unique_id=1869046184]
+[node name="OptionPicker" type="EditorResourcePicker" parent="VBoxContainer/FoldableContainer3" index="0" unique_id=1869046184]
 visible = false
 layout_mode = 2
 base_type = "OverworldEventData"
@@ -80,7 +80,11 @@ visible = false
 layout_mode = 2
 
 [connection signal="resource_changed" from="VBoxContainer/EditorResourcePicker" to="." method="_on_editor_resource_picker_resource_changed"]
+[connection signal="resource_selected" from="VBoxContainer/EditorResourcePicker" to="." method="_on_editor_resource_picker_resource_selected"]
 [connection signal="text_changed" from="VBoxContainer/TextEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="text_changed" from="VBoxContainer/TextEdit2" to="." method="_on_text_edit_2_text_changed"]
+[connection signal="resource_selected" from="VBoxContainer/FoldableContainer3/OptionPicker" to="." method="_on_option_picker_resource_selected"]
 [connection signal="EffectAmmountChanged" from="VBoxContainer/FoldableContainer/WorldViewSetting" to="." method="_on_world_view_setting_effect_ammount_changed"]
 [connection signal="WorldViewChanged" from="VBoxContainer/FoldableContainer/WorldViewSetting" to="." method="_on_world_view_setting_world_view_changed"]
+[connection signal="worldviewCheckAmmountChanged" from="VBoxContainer/FoldableContainer2/WorldViewSetting2" to="." method="_on_world_view_setting_2_worldview_check_ammount_changed"]
+[connection signal="worldviewCheckChanged" from="VBoxContainer/FoldableContainer2/WorldViewSetting2" to="." method="_on_world_view_setting_2_worldview_check_changed"]

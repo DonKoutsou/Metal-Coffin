@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cc46dbpqtqa51"]
+
+[ext_resource type="PackedScene" uid="uid://du7aw36nkpvhd" path="res://addons/MC_DialogueEditor/Nodes/Option_Dialogue_Node.tscn" id="1_illsl"]
+[ext_resource type="Script" uid="uid://dvfyx6s7netn8" path="res://addons/MC_DialogueEditor/Nodes/DroneOptionDialogueNode.gd" id="2_mfiny"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mfiny"]
+bg_color = Color(0.13340001, 0.37835, 0.46, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+shadow_size = 16
+
+[node name="BaseDialogueNode" unique_id=462244291 node_paths=PackedStringArray("DronePicker") instance=ExtResource("1_illsl")]
+theme_override_styles/titlebar = SubResource("StyleBoxFlat_mfiny")
+script = ExtResource("2_mfiny")
+DronePicker = NodePath("VBoxContainer/DronPicker")
+
+[node name="DronPicker" type="EditorResourcePicker" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="1" unique_id=1393427353]
+layout_mode = 2
+base_type = "Captain"
+
+[connection signal="resource_changed" from="VBoxContainer/DronPicker" to="." method="_on_dron_picker_resource_changed"]
+[connection signal="resource_selected" from="VBoxContainer/DronPicker" to="." method="_on_dron_picker_resource_selected"]

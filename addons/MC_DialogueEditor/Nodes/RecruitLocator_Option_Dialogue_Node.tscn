@@ -12,7 +12,7 @@ corner_radius_bottom_left = 4
 corner_detail = 1
 shadow_size = 16
 
-[node name="BaseDialogueNode" unique_id=462244291 node_paths=PackedStringArray("resourceLoc") instance=ExtResource("1_5fqrr")]
+[node name="BaseDialogueNode" unique_id=462244291 node_paths=PackedStringArray("resourceLoc", "spinB") instance=ExtResource("1_5fqrr")]
 offset_left = -305.0
 offset_top = -284.0
 offset_right = 305.0
@@ -20,6 +20,7 @@ offset_bottom = 284.0
 theme_override_styles/titlebar = SubResource("StyleBoxFlat_somq4")
 script = ExtResource("2_5fqrr")
 resourceLoc = NodePath("VBoxContainer/EditorResourcePicker")
+spinB = NodePath("VBoxContainer/SpinBox")
 
 [node name="EditorResourcePicker" type="EditorResourcePicker" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="0" unique_id=558750175]
 layout_mode = 2
@@ -32,4 +33,11 @@ text = "Locate Recruits"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="SpinBox" type="SpinBox" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="2" unique_id=283227848]
+layout_mode = 2
+max_value = 1000000.0
+step = 100.0
+
 [connection signal="resource_changed" from="VBoxContainer/EditorResourcePicker" to="." method="_on_editor_resource_picker_resource_changed"]
+[connection signal="resource_selected" from="VBoxContainer/EditorResourcePicker" to="." method="_on_editor_resource_picker_resource_selected"]
+[connection signal="value_changed" from="VBoxContainer/SpinBox" to="." method="_on_spin_box_value_changed"]

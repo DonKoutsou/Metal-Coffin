@@ -5,8 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://du7aw36nkpvhd" path="res://addons/MC_DialogueEditor/Nodes/Option_Dialogue_Node.tscn" id="3_4fswy"]
 [ext_resource type="PackedScene" uid="uid://cqp8qfieoro8j" path="res://addons/MC_DialogueEditor/Nodes/RecruitLocator_Option_Dialogue_Node.tscn" id="4_d363k"]
 [ext_resource type="PackedScene" uid="uid://bimhkxi6xqud2" path="res://addons/MC_DialogueEditor/Nodes/VillageLocator_Option_Dialogue_Node.tscn" id="5_nf1pn"]
+[ext_resource type="PackedScene" uid="uid://dqbsjishecal0" path="res://addons/MC_DialogueEditor/Nodes/Start_dialogue_node.tscn" id="6_lcpc0"]
+[ext_resource type="PackedScene" uid="uid://cc46dbpqtqa51" path="res://addons/MC_DialogueEditor/Nodes/Drone_Option_Dialogue_Node.tscn" id="7_gt7ck"]
 
-[node name="DialogueEditor" type="Control" unique_id=1974082853 node_paths=PackedStringArray("graph", "Menu", "NodeMenu")]
+[node name="DialogueEditor" type="Control" unique_id=1974082853 node_paths=PackedStringArray("graph", "Menu", "NodeMenu", "CurrentHappeningLabel", "HapName", "ApearanceMenu", "MandatoryLoc", "SpecialCheck", "RecruitCheck", "AllowedApBox")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,507 +19,168 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
 script = ExtResource("1_0guqq")
-graph = NodePath("VBoxContainer/GraphEdit")
-Menu = NodePath("VBoxContainer/HBoxContainer/MenuBar/PopupMenu")
-NodeMenu = NodePath("VBoxContainer/HBoxContainer/MenuBar/PopupMenu2")
+graph = NodePath("HBoxContainer2/VBoxContainer/GraphEdit")
+Menu = NodePath("HBoxContainer2/VBoxContainer/HBoxContainer/MenuBar/PopupMenu")
+NodeMenu = NodePath("HBoxContainer2/VBoxContainer/HBoxContainer/MenuBar/PopupMenu2")
+CurrentHappeningLabel = NodePath("HBoxContainer2/VBoxContainer/GraphEdit/Label")
 NodeScenes = Dictionary[int, PackedScene]({
 0: ExtResource("2_4fswy"),
 1: ExtResource("3_4fswy"),
 2: ExtResource("4_d363k"),
-3: ExtResource("5_nf1pn")
+3: ExtResource("5_nf1pn"),
+4: ExtResource("6_lcpc0"),
+5: ExtResource("7_gt7ck")
 })
+HapName = NodePath("HBoxContainer2/PanelContainer/VBoxContainer/TextEdit")
+ApearanceMenu = NodePath("HBoxContainer2/PanelContainer/VBoxContainer/HappeningApearance")
+MandatoryLoc = NodePath("HBoxContainer2/PanelContainer/VBoxContainer/TextEdit2")
+SpecialCheck = NodePath("HBoxContainer2/PanelContainer/VBoxContainer/HBoxContainer/CheckBox")
+RecruitCheck = NodePath("HBoxContainer2/PanelContainer/VBoxContainer/HBoxContainer2/RecruitBox")
+AllowedApBox = NodePath("HBoxContainer2/PanelContainer/VBoxContainer/SpinBox")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1298548277]
+[node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=888384753]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1840866602]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer2" unique_id=1298548277]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer2/VBoxContainer" unique_id=1840866602]
 layout_mode = 2
 
-[node name="MenuBar" type="MenuBar" parent="VBoxContainer/HBoxContainer" unique_id=1886610820]
+[node name="MenuBar" type="MenuBar" parent="HBoxContainer2/VBoxContainer/HBoxContainer" unique_id=1886610820]
 layout_mode = 2
 
-[node name="PopupMenu2" type="PopupMenu" parent="VBoxContainer/HBoxContainer/MenuBar" unique_id=1890007505]
+[node name="PopupMenu2" type="PopupMenu" parent="HBoxContainer2/VBoxContainer/HBoxContainer/MenuBar" unique_id=1890007505]
 oversampling_override = 1.0
 title = "Add Node"
 size = Vector2i(217, 444)
-item_count = 4
-item_0/text = "NORMAL"
-item_0/id = 0
-item_1/text = "OPTION"
-item_1/id = 1
-item_2/text = "REC_LOC"
-item_2/id = 2
-item_3/text = "VIL_LOC"
-item_3/id = 3
 
-[node name="PopupMenu" type="PopupMenu" parent="VBoxContainer/HBoxContainer/MenuBar" unique_id=1870119649]
+[node name="PopupMenu" type="PopupMenu" parent="HBoxContainer2/VBoxContainer/HBoxContainer/MenuBar" unique_id=1870119649]
 oversampling_override = 1.0
 title = "Open Dialogue"
 size = Vector2i(217, 444)
-item_count = 21
-item_0/text = "The prince"
-item_0/id = 0
-item_1/text = "The sand hill"
-item_1/id = 1
-item_2/text = "The Baron"
-item_2/id = 2
-item_3/text = "Crew Recruit"
-item_3/id = 3
-item_4/text = "Crew Recruit"
-item_4/id = 4
-item_5/text = "The call to arms"
-item_5/id = 5
-item_6/text = "Crew Recruit"
-item_6/id = 6
-item_7/text = "The Machine"
-item_7/id = 7
-item_8/text = "Crew Recruit"
-item_8/id = 8
-item_9/text = "Crew Recruit"
-item_9/id = 9
-item_10/text = "The nomad group."
-item_10/id = 10
-item_11/text = "The nomad group."
-item_11/id = 11
-item_12/text = "Robbery"
-item_12/id = 12
-item_13/text = "Happening1"
-item_13/id = 13
-item_14/text = "The adressing"
-item_14/id = 14
-item_15/text = "The Evaluation"
-item_15/id = 15
-item_16/text = "The evangelist"
-item_16/id = 16
-item_17/text = "The execution"
-item_17/id = 17
-item_18/text = "The Khamir squad"
-item_18/id = 18
-item_19/text = "The Plague"
-item_19/id = 19
-item_20/text = "The young recruit"
-item_20/id = 20
 
-[node name="GraphEdit" type="GraphEdit" parent="VBoxContainer" unique_id=987366087]
+[node name="Button" type="Button" parent="HBoxContainer2/VBoxContainer/HBoxContainer" unique_id=268706510]
 layout_mode = 2
-size_flags_vertical = 3
-right_disconnects = true
-connections = Array[Dictionary]([{
-"from_node": &"BaseDialogueNode",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@22658",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@22658",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@22679",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@22679",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@22700",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@22700",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@22721",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@22721",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@22742",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@22742",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@22763",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@22763",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@22805",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@22763",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@22847",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@22805",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@22868",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@22847",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@22868",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@22868",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@22890",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@22890",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@22911",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@22911",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@22932",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@22932",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@22953",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@22953",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@22974",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@22974",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@22995",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@22995",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23016",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23016",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23037",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23037",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23079",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23037",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23121",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23079",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23142",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23121",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23142",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23142",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23164",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23164",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23185",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23185",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23206",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23206",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23227",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23227",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23248",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23248",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23269",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23269",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23290",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23290",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23311",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23311",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23332",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23332",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23353",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23353",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23395",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23395",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23416",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23416",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23437",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23437",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23458",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23458",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23479",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23479",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23500",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23500",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23521",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23521",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23542",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23542",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23563",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23563",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23584",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23584",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23605",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23605",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23647",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23647",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23668",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23605",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23710",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23710",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23732",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23732",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23753",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23753",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23774",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23710",
-"from_port": 1,
-"keep_alive": false,
-"to_node": &"@GraphNode@23795",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23795",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23816",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23816",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23837",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23837",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23858",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23353",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23900",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23900",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23921",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23921",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23942",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23942",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23963",
-"to_port": 0
-}, {
-"from_node": &"@GraphNode@23963",
-"from_port": 0,
-"keep_alive": false,
-"to_node": &"@GraphNode@23984",
-"to_port": 0
-}])
+text = "Import Happenings"
 
-[connection signal="index_pressed" from="VBoxContainer/HBoxContainer/MenuBar/PopupMenu2" to="." method="_on_popup_menu_2_index_pressed"]
-[connection signal="index_pressed" from="VBoxContainer/HBoxContainer/MenuBar/PopupMenu" to="." method="_on_popup_menu_index_pressed"]
-[connection signal="connection_request" from="VBoxContainer/GraphEdit" to="." method="OnNodeConnected"]
-[connection signal="connection_to_empty" from="VBoxContainer/GraphEdit" to="." method="OnNodeConectToEmpty"]
-[connection signal="delete_nodes_request" from="VBoxContainer/GraphEdit" to="." method="OnNodeDeleted"]
-[connection signal="disconnection_request" from="VBoxContainer/GraphEdit" to="." method="OnNodeDisconnected"]
-[connection signal="gui_input" from="VBoxContainer/GraphEdit" to="." method="_on_graph_edit_gui_input"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/BaseDialogueNode" to="VBoxContainer/GraphEdit/BaseDialogueNode" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@22658" to="VBoxContainer/GraphEdit/@GraphNode@22658" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@22679" to="VBoxContainer/GraphEdit/@GraphNode@22679" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@22700" to="VBoxContainer/GraphEdit/@GraphNode@22700" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@22721" to="VBoxContainer/GraphEdit/@GraphNode@22721" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@22742" to="VBoxContainer/GraphEdit/@GraphNode@22742" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@22763" to="VBoxContainer/GraphEdit/@GraphNode@22763" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@22805" to="VBoxContainer/GraphEdit/@GraphNode@22805" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@22847" to="VBoxContainer/GraphEdit/@GraphNode@22847" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@22868" to="VBoxContainer/GraphEdit/@GraphNode@22868" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@22890" to="VBoxContainer/GraphEdit/@GraphNode@22890" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@22911" to="VBoxContainer/GraphEdit/@GraphNode@22911" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@22932" to="VBoxContainer/GraphEdit/@GraphNode@22932" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@22953" to="VBoxContainer/GraphEdit/@GraphNode@22953" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@22974" to="VBoxContainer/GraphEdit/@GraphNode@22974" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@22995" to="VBoxContainer/GraphEdit/@GraphNode@22995" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23016" to="VBoxContainer/GraphEdit/@GraphNode@23016" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23037" to="VBoxContainer/GraphEdit/@GraphNode@23037" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23079" to="VBoxContainer/GraphEdit/@GraphNode@23079" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23121" to="VBoxContainer/GraphEdit/@GraphNode@23121" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23142" to="VBoxContainer/GraphEdit/@GraphNode@23142" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23164" to="VBoxContainer/GraphEdit/@GraphNode@23164" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23185" to="VBoxContainer/GraphEdit/@GraphNode@23185" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23206" to="VBoxContainer/GraphEdit/@GraphNode@23206" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23227" to="VBoxContainer/GraphEdit/@GraphNode@23227" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23248" to="VBoxContainer/GraphEdit/@GraphNode@23248" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23269" to="VBoxContainer/GraphEdit/@GraphNode@23269" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23290" to="VBoxContainer/GraphEdit/@GraphNode@23290" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23311" to="VBoxContainer/GraphEdit/@GraphNode@23311" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23332" to="VBoxContainer/GraphEdit/@GraphNode@23332" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23353" to="VBoxContainer/GraphEdit/@GraphNode@23353" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23395" to="VBoxContainer/GraphEdit/@GraphNode@23395" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23416" to="VBoxContainer/GraphEdit/@GraphNode@23416" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23437" to="VBoxContainer/GraphEdit/@GraphNode@23437" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23458" to="VBoxContainer/GraphEdit/@GraphNode@23458" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23479" to="VBoxContainer/GraphEdit/@GraphNode@23479" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23500" to="VBoxContainer/GraphEdit/@GraphNode@23500" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23521" to="VBoxContainer/GraphEdit/@GraphNode@23521" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23542" to="VBoxContainer/GraphEdit/@GraphNode@23542" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23563" to="VBoxContainer/GraphEdit/@GraphNode@23563" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23584" to="VBoxContainer/GraphEdit/@GraphNode@23584" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23605" to="VBoxContainer/GraphEdit/@GraphNode@23605" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23647" to="VBoxContainer/GraphEdit/@GraphNode@23647" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23668" to="VBoxContainer/GraphEdit/@GraphNode@23668" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23710" to="VBoxContainer/GraphEdit/@GraphNode@23710" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23732" to="VBoxContainer/GraphEdit/@GraphNode@23732" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23753" to="VBoxContainer/GraphEdit/@GraphNode@23753" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23774" to="VBoxContainer/GraphEdit/@GraphNode@23774" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23795" to="VBoxContainer/GraphEdit/@GraphNode@23795" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23816" to="VBoxContainer/GraphEdit/@GraphNode@23816" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23837" to="VBoxContainer/GraphEdit/@GraphNode@23837" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23858" to="VBoxContainer/GraphEdit/@GraphNode@23858" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23900" to="VBoxContainer/GraphEdit/@GraphNode@23900" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23921" to="VBoxContainer/GraphEdit/@GraphNode@23921" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23942" to="VBoxContainer/GraphEdit/@GraphNode@23942" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23963" to="VBoxContainer/GraphEdit/@GraphNode@23963" method="_on_delete_request"]
-[connection signal="delete_request" from="VBoxContainer/GraphEdit/@GraphNode@23984" to="VBoxContainer/GraphEdit/@GraphNode@23984" method="_on_delete_request"]
+[node name="Button2" type="Button" parent="HBoxContainer2/VBoxContainer/HBoxContainer" unique_id=523641114]
+layout_mode = 2
+text = "Fix Happenings"
+
+[node name="Button3" type="Button" parent="HBoxContainer2/VBoxContainer/HBoxContainer" unique_id=636735699]
+layout_mode = 2
+text = "TestSave"
+
+[node name="GraphEdit" type="GraphEdit" parent="HBoxContainer2/VBoxContainer" unique_id=987366087]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_offset = Vector2(-11, 0)
+show_grid = false
+snapping_distance = 40
+right_disconnects = true
+minimap_enabled = false
+
+[node name="Label" type="Label" parent="HBoxContainer2/VBoxContainer/GraphEdit" unique_id=669410848]
+z_index = 4096
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -229.5
+offset_top = 11.0
+offset_right = 229.5
+offset_bottom = 46.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 34
+text = "CURRENT HAPPENING : NONE"
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer2" unique_id=946765709]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer2/PanelContainer" unique_id=2055141460]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer2/PanelContainer/VBoxContainer" unique_id=1761063896]
+layout_mode = 2
+text = "Happening Name"
+
+[node name="TextEdit" type="TextEdit" parent="HBoxContainer2/PanelContainer/VBoxContainer" unique_id=1470739407]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+placeholder_text = "Happening Name"
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer2/PanelContainer/VBoxContainer" unique_id=1028107034]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer2/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1264339437]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SPECIAL"
+
+[node name="CheckBox" type="CheckBox" parent="HBoxContainer2/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1266194036]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer2/PanelContainer/VBoxContainer" unique_id=922968276]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer2/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=1384151600]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "RECRUIT"
+
+[node name="RecruitBox" type="CheckBox" parent="HBoxContainer2/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=443976669]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="HBoxContainer2/PanelContainer/VBoxContainer" unique_id=642233023]
+layout_mode = 2
+text = "Apearance"
+autowrap_mode = 2
+
+[node name="HappeningApearance" type="OptionButton" parent="HBoxContainer2/PanelContainer/VBoxContainer" unique_id=618636346]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="HBoxContainer2/PanelContainer/VBoxContainer" unique_id=1729665800]
+layout_mode = 2
+text = "Mandatory Location"
+autowrap_mode = 2
+
+[node name="TextEdit2" type="TextEdit" parent="HBoxContainer2/PanelContainer/VBoxContainer" unique_id=726292081]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+placeholder_text = "Mandatory Loc"
+autowrap_mode = 2
+
+[node name="Label4" type="Label" parent="HBoxContainer2/PanelContainer/VBoxContainer" unique_id=1685834425]
+layout_mode = 2
+text = "Allower Apearances"
+
+[node name="SpinBox" type="SpinBox" parent="HBoxContainer2/PanelContainer/VBoxContainer" unique_id=156686670]
+layout_mode = 2
+
+[connection signal="index_pressed" from="HBoxContainer2/VBoxContainer/HBoxContainer/MenuBar/PopupMenu2" to="." method="_on_popup_menu_2_index_pressed"]
+[connection signal="index_pressed" from="HBoxContainer2/VBoxContainer/HBoxContainer/MenuBar/PopupMenu" to="." method="_on_popup_menu_index_pressed"]
+[connection signal="pressed" from="HBoxContainer2/VBoxContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="HBoxContainer2/VBoxContainer/HBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="HBoxContainer2/VBoxContainer/HBoxContainer/Button3" to="." method="GenerateHappening"]
+[connection signal="connection_request" from="HBoxContainer2/VBoxContainer/GraphEdit" to="." method="OnNodeConnected"]
+[connection signal="connection_to_empty" from="HBoxContainer2/VBoxContainer/GraphEdit" to="." method="OnNodeConectToEmpty"]
+[connection signal="delete_nodes_request" from="HBoxContainer2/VBoxContainer/GraphEdit" to="." method="OnNodeDeleted"]
+[connection signal="disconnection_request" from="HBoxContainer2/VBoxContainer/GraphEdit" to="." method="OnNodeDisconnected"]
+[connection signal="gui_input" from="HBoxContainer2/VBoxContainer/GraphEdit" to="." method="_on_graph_edit_gui_input"]
+[connection signal="text_changed" from="HBoxContainer2/PanelContainer/VBoxContainer/TextEdit" to="." method="_on_text_edit_text_changed"]
+[connection signal="toggled" from="HBoxContainer2/PanelContainer/VBoxContainer/HBoxContainer/CheckBox" to="." method="_on_check_box_toggled"]
+[connection signal="toggled" from="HBoxContainer2/PanelContainer/VBoxContainer/HBoxContainer2/RecruitBox" to="." method="_on_recruit_box_toggled"]
+[connection signal="item_selected" from="HBoxContainer2/PanelContainer/VBoxContainer/HappeningApearance" to="." method="_on_happening_apearance_item_selected"]
+[connection signal="text_changed" from="HBoxContainer2/PanelContainer/VBoxContainer/TextEdit2" to="." method="_on_text_edit_2_text_changed"]
+[connection signal="value_changed" from="HBoxContainer2/PanelContainer/VBoxContainer/SpinBox" to="." method="_on_spin_box_value_changed"]
