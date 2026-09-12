@@ -3,13 +3,14 @@
 [ext_resource type="Script" uid="uid://bnc8ljs1sfr3b" path="res://addons/MC_DialogueEditor/Nodes/StageDialogueNode.gd" id="1_bdjdn"]
 [ext_resource type="PackedScene" uid="uid://bufavwhp5d2x8" path="res://addons/MC_DialogueEditor/Nodes/BaseDialogueNode.tscn" id="2_ywap6"]
 
-[node name="BaseDialogueNode" unique_id=462244291 node_paths=PackedStringArray("resPicker", "textInput", "rich", "PicPicket") instance=ExtResource("2_ywap6")]
+[node name="BaseDialogueNode" unique_id=462244291 node_paths=PackedStringArray("resPicker", "textPicket", "textInput", "rich", "PicPicket") instance=ExtResource("2_ywap6")]
 offset_left = -209.0
 offset_top = -348.0
 offset_right = 209.0
 offset_bottom = 348.0
 script = ExtResource("1_bdjdn")
 resPicker = NodePath("VBoxContainer/resPicker")
+textPicket = NodePath("VBoxContainer/textPicket")
 textInput = NodePath("VBoxContainer/TextEdit")
 rich = NodePath("VBoxContainer/FoldableContainer/PanelContainer/RichTextLabel")
 PicPicket = NodePath("VBoxContainer/FoldableContainer2/EditorResourcePicker")
@@ -18,17 +19,21 @@ PicPicket = NodePath("VBoxContainer/FoldableContainer2/EditorResourcePicker")
 layout_mode = 2
 base_type = "HappeningStage"
 
-[node name="Label" type="Label" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="1" unique_id=2118254818]
+[node name="textPicket" type="EditorResourcePicker" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="1" unique_id=1093170548]
+layout_mode = 2
+base_type = "HappeningText"
+
+[node name="Label" type="Label" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="2" unique_id=2118254818]
 layout_mode = 2
 text = "Dialogue Text"
 
-[node name="TextEdit" type="TextEdit" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="2" unique_id=598073236]
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="3" unique_id=598073236]
 layout_mode = 2
 size_flags_vertical = 3
 wrap_mode = 1
 autowrap_mode = 2
 
-[node name="FoldableContainer" type="FoldableContainer" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="3" unique_id=1309785267]
+[node name="FoldableContainer" type="FoldableContainer" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="4" unique_id=1309785267]
 layout_mode = 2
 folded = true
 title = "Preview"
@@ -42,7 +47,7 @@ layout_mode = 2
 layout_mode = 2
 bbcode_enabled = true
 
-[node name="FoldableContainer2" type="FoldableContainer" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="4" unique_id=1768965431]
+[node name="FoldableContainer2" type="FoldableContainer" parent="VBoxContainer" parent_id_path=PackedInt32Array(887160852) index="5" unique_id=1768965431]
 layout_mode = 2
 folded = true
 title = "Stage Pic"
@@ -54,6 +59,8 @@ base_type = "Texture"
 
 [connection signal="resource_changed" from="VBoxContainer/resPicker" to="." method="_on_res_picker_resource_changed"]
 [connection signal="resource_selected" from="VBoxContainer/resPicker" to="." method="_on_res_picker_resource_selected"]
+[connection signal="resource_changed" from="VBoxContainer/textPicket" to="." method="_on_text_picket_resource_changed"]
+[connection signal="resource_selected" from="VBoxContainer/textPicket" to="." method="_on_text_picket_resource_selected"]
 [connection signal="text_changed" from="VBoxContainer/TextEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="resource_changed" from="VBoxContainer/FoldableContainer2/EditorResourcePicker" to="." method="_on_editor_resource_picker_resource_changed"]
 [connection signal="resource_selected" from="VBoxContainer/FoldableContainer2/EditorResourcePicker" to="." method="_on_editor_resource_picker_resource_selected"]

@@ -168,10 +168,10 @@ func HandleStage(stage : HappeningStage, connection : Array[BaseDialogueNode] = 
 	var optionsSpace = 500 * stage.Options.size()
 	
 	var lastNodes : Array[BaseDialogueNode] = connection
-	for textIndex : int in stage.Texts.size():
+	for text : HappeningText in stage.Texts:
 		var newNode : StageDialogueNode = CreateDialogueNode()
 		#newNode.title = "Stage {0}".format([stageIndex])
-		newNode.ConfigureStage(stage, textIndex)
+		newNode.ConfigureStage(stage, text)
 		for g in lastNodes:
 			graph.connect_node(g.name, connectionIndex, newNode.name, 0)
 			connectionIndex = 0
@@ -286,9 +286,10 @@ func CreateDialogueNode(type : NodeType = NodeType.NORMAL, posOverride : Vector2
 	if (node is StageDialogueNode):
 		var newStage = HappeningStage.new()
 		var t : Array[HappeningText] = []
-		t.append(HappeningText.new())
+		var text = HappeningText.new()
+		t.append(text)
 		newStage.Texts = t
-		node.ConfigureStage(newStage, 0)
+		node.ConfigureStage(newStage, text)
 	
 	if (posOverride != Vector2.INF):
 		node.position_offset = posOverride
@@ -296,6 +297,7 @@ func CreateDialogueNode(type : NodeType = NodeType.NORMAL, posOverride : Vector2
 
 #--------------------------------------------------------
 func ResaveHappening() -> void:
+	GenerateHappening()
 	ResourceSaver.save(Happenings[currentHappening], Happenings[currentHappening].resource_path)
 	#graph.arrange_nodes()
 
@@ -305,16 +307,16 @@ func OnNodeSelected(node : BaseDialogueNode) -> void:
 
 #-----------------------------------------------
 func ProvedNodeSpawnOptions() -> void:
-	var bar = OptionButton.new()
+	var bar = MenuBar.new()
 	add_child(bar)
-	#var nodeSpawnMenu = PopupMenu.new()
-	#nodeSpawnMenu.title = "Spawn Node"
-	#bar.add_child(nodeSpawnMenu)
-	bar.mouse_exited.connect(bar.queue_free)
+	var nodeSpawnMenu = PopupMenu.new()
+	nodeSpawnMenu.title = "Spawn Node"
+	bar.add_child(nodeSpawnMenu)
+	nodeSpawnMenu.mouse_exited.connect(nodeSpawnMenu.queue_free)
 	for g in NodeType.keys():
-		bar.add_item(g)
-	bar.item_selected.connect(CreateDialogueAtMousePos)
-	#nodeSpawnMenu.popup()
+		nodeSpawnMenu.add_item(g)
+	nodeSpawnMenu.index_pressed.connect(CreateDialogueAtMousePos)
+	nodeSpawnMenu.popup()
 	bar.position = get_local_mouse_position()
 
 #-----------------------------------------------
@@ -331,7 +333,7 @@ func OnNodeConnected(from_node: StringName, from_port: int, to_node: StringName,
 		if (to is StageDialogueNode):
 			if (to.stage == null):
 				to.stage = from.stage
-				to.textIndex = from.textIndex + 1
+				#to.textIndex = from.textIndex + 1
 				to.stage.Texts.append(to.text)
 				var next = GetNextStage(from)
 		
@@ -362,7 +364,7 @@ func OnNodeConnected(from_node: StringName, from_port: int, to_node: StringName,
 				if (to.stage == null):
 					stage = HappeningStage.new()
 					stage.Texts.append(to.text)
-					to.ConfigureStage(stage, 0)
+					to.ConfigureStage(stage, to.text)
 				else:
 					stage = to.stage
 
@@ -376,7 +378,7 @@ func OnNodeConnected(from_node: StringName, from_port: int, to_node: StringName,
 				if (to.stage == null):
 					stage = HappeningStage.new()
 					stage.Texts.append(to.text)
-					to.ConfigureStage(stage, 0)
+					to.ConfigureStage(stage, to.text)
 				else:
 					stage = to.stage
 
@@ -462,7 +464,6 @@ func GenerateHappening() -> void:
 	stages.append(RecoverStageBranch(origin))
 	#var current : BaseDialogueNode = origin
 	Happenings[currentHappening].Stages = stages
-	ResaveHappening()
 		
 func RecoverStageBranch(origin : StageDialogueNode) -> HappeningStage:
 	var stage : HappeningStage = origin.stage
@@ -477,6 +478,7 @@ func RecoverStageBranch(origin : StageDialogueNode) -> HappeningStage:
 		
 		if (nextStage != null):
 			branch.append(nextStage)
+			nextStage.ConfigureStage(stage, nextStage.text)
 		else:
 			var next = GetNext(current)
 			var allBranches : Array[HappeningStage]
@@ -498,7 +500,6 @@ func RecoverStageBranch(origin : StageDialogueNode) -> HappeningStage:
 	
 	for g in branch:
 		texts.append(g.text)
-		
 	stage.Texts = texts
 	stage.Options = options
 	
@@ -577,7 +578,7 @@ func GetPrevStage(stage : StageDialogueNode) -> StageDialogueNode:
 			
 		var fromNode : BaseDialogueNode = graph.get_node(NodePath(from))
 		if (fromNode is StageDialogueNode):
-			if (toNode.stage == stage.stage and toNode.textIndex > stage.textIndex):
+			if (toNode.stage == stage.stage):
 				return fromNode
 		
 	return null
@@ -615,8 +616,8 @@ func OnNodeDeleted(nodes: Array[StringName]) -> void:
 		var toList : Dictionary[StringName, int]
 		
 		if (node is StageDialogueNode):
-			node.stage.Texts.remove_at(node.textIndex)
-			RecursevlyAdjustTextIndex(node, -1)
+			node.stage.Texts.erase(node.text)
+			#RecursevlyAdjustTextIndex(node, -1)
 		
 		for connectionInfo in connections:
 			var from : StringName = connectionInfo["from_node"]
@@ -657,26 +658,26 @@ func OnNodeDeleted(nodes: Array[StringName]) -> void:
 
 #------------------------------------------------------------------
 ##When removing a text from a stage or adding a text in the middle we need to go down the line and fix the indexes
-func RecursevlyAdjustTextIndex(node : StageDialogueNode, adjustment : int) -> void:
-	var connections = graph.get_connection_list_from_node(node.name)
-	for connectionInfo in connections:
-		var from : StringName = connectionInfo["from_node"]
-		var from_port : int = connectionInfo["from_port"]
-		var to : StringName = connectionInfo["to_node"]
-		var to_port : int = connectionInfo["to_port"]
-		
-		var fromNode : BaseDialogueNode = graph.get_node(NodePath(from))
-		var toNode : BaseDialogueNode = graph.get_node(NodePath(to))
-		
-		if (fromNode != node):
-			continue
-		
-		if (toNode is StageDialogueNode):
-			toNode.textIndex += adjustment
-			RecursevlyAdjustTextIndex(toNode, adjustment)
+#func RecursevlyAdjustTextIndex(node : StageDialogueNode, adjustment : int) -> void:
+	#var connections = graph.get_connection_list_from_node(node.name)
+	#for connectionInfo in connections:
+		#var from : StringName = connectionInfo["from_node"]
+		#var from_port : int = connectionInfo["from_port"]
+		#var to : StringName = connectionInfo["to_node"]
+		#var to_port : int = connectionInfo["to_port"]
+		#
+		#var fromNode : BaseDialogueNode = graph.get_node(NodePath(from))
+		#var toNode : BaseDialogueNode = graph.get_node(NodePath(to))
+		#
+		#if (fromNode != node):
+			#continue
+		#
+		#if (toNode is StageDialogueNode):
+			#toNode.textIndex += adjustment
+			#RecursevlyAdjustTextIndex(toNode, adjustment)
 
 ##Applied the new stage recursevly down
-func RecursevlyUpdateStage(node : StageDialogueNode, newStage : HappeningStage, index : int) -> void:
+func RecursevlyUpdateStage(node : StageDialogueNode, newStage : HappeningStage) -> void:
 	var connections = graph.get_connection_list_from_node(node.name)
 	for connectionInfo in connections:
 		var from : StringName = connectionInfo["from_node"]
@@ -696,9 +697,9 @@ func RecursevlyUpdateStage(node : StageDialogueNode, newStage : HappeningStage, 
 			var oldStage = toNode.stage
 			oldStage.Texts.erase(toNode.text)
 			
-			toNode.ConfigureStage(newStage, index)
+			toNode.ConfigureStage(newStage, toNode.text)
 			
-			RecursevlyUpdateStage(toNode, newStage, index + 1)
+			RecursevlyUpdateStage(toNode, newStage)
 
 
 
