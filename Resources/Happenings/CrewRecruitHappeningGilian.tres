@@ -8,25 +8,25 @@
 [ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scenes/Map/MapSpot/Happenings/HappeningStage.gd" id="5_3u5ui"]
 [ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scenes/Map/MapSpot/Happenings/Happening.gd" id="5_eghih"]
 
-[sub_resource type="Resource" id="Resource_e8rre"]
+[sub_resource type="Resource" id="Resource_3tnlt"]
 script = ExtResource("3_3tnlt")
 Text = "The Machine returns to its ship. After a while it comes back delivers you the crews answer to follow you. \"Lead the way captain\""
 
 [sub_resource type="Resource" id="Resource_gpgth"]
 script = ExtResource("5_3u5ui")
-Texts = Array[ExtResource("3_3tnlt")]([SubResource("Resource_e8rre")])
+Texts = Array[ExtResource("3_3tnlt")]([SubResource("Resource_3tnlt")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
-[sub_resource type="Resource" id="Resource_wx088"]
+[sub_resource type="Resource" id="Resource_e8rre"]
 script = ExtResource("3_3tnlt")
 Text = "The machine asks you to leave."
 
-[sub_resource type="Resource" id="Resource_j2ryf"]
+[sub_resource type="Resource" id="Resource_wx088"]
 script = ExtResource("5_3u5ui")
-Texts = Array[ExtResource("3_3tnlt")]([SubResource("Resource_wx088")])
+Texts = Array[ExtResource("3_3tnlt")]([SubResource("Resource_e8rre")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
-[sub_resource type="Resource" id="Resource_3tnlt"]
+[sub_resource type="Resource" id="Resource_qsgoq"]
 script = ExtResource("4_ui0gd")
 Cpt = ExtResource("3_j2ryf")
 OptionName = "Ask them to join your fleet"
@@ -35,49 +35,50 @@ Branch = SubResource("Resource_gpgth")
 WorldviewEffect = 3
 WorldviewEffectAmm = -20
 WorldviewCheck = 3
-WorldViewCheckFailBranch = Array[ExtResource("5_3u5ui")]([SubResource("Resource_j2ryf")])
-WorldViewFailBranch = SubResource("Resource_j2ryf")
+WorldViewCheckFailBranch = Array[ExtResource("5_3u5ui")]([SubResource("Resource_wx088")])
+WorldViewFailBranch = SubResource("Resource_wx088")
 metadata/_custom_type_script = "uid://w3pbagqwci26"
 
-[sub_resource type="Resource" id="Resource_ui0gd"]
+[sub_resource type="Resource" id="Resource_w685b"]
 script = ExtResource("4_fdmko")
 StringReply = "You take your leave"
 OptionName = "Leave"
 FinishDiag = true
 metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
-[sub_resource type="Resource" id="Resource_qsgoq"]
+[sub_resource type="Resource" id="Resource_75xed"]
 script = ExtResource("3_3tnlt")
 Text = "While aproaching the port you notice another ship just about comming down at the same time."
 
-[sub_resource type="Resource" id="Resource_w685b"]
+[sub_resource type="Resource" id="Resource_w4a3y"]
 script = ExtResource("3_3tnlt")
 Text = "The ships not very far from your location. Your commanding officer takes a good look at them, probably to make sure they dont pose any threat to you."
 
-[sub_resource type="Resource" id="Resource_75xed"]
+[sub_resource type="Resource" id="Resource_8modh"]
 script = ExtResource("3_3tnlt")
 Text = "After taking a good look though his bonoculars he smirks and turns away. You ask him about what he saw."
 
-[sub_resource type="Resource" id="Resource_w4a3y"]
+[sub_resource type="Resource" id="Resource_rodxh"]
 script = ExtResource("3_3tnlt")
 Text = "The ship surprisingly has no weapons on it. You would think a ship traversing the land at these time would have at least the minumim of deffences."
 
-[sub_resource type="Resource" id="Resource_8modh"]
+[sub_resource type="Resource" id="Resource_d0k2a"]
 script = ExtResource("3_3tnlt")
 Text = "Your commanding officer turns your atention to the ship's captain stepping out of the ship. Its one of the machines, it all starts to make sense slowly."
 
-[sub_resource type="Resource" id="Resource_rodxh"]
+[sub_resource type="Resource" id="Resource_eb2xw"]
 script = ExtResource("3_3tnlt")
 Text = "The machine is surprised to see you but after realising who you are you can see it lowers its guard."
 
-[sub_resource type="Resource" id="Resource_kk05a"]
+[sub_resource type="Resource" id="Resource_6f5ue"]
 script = ExtResource("5_3u5ui")
-Texts = Array[ExtResource("3_3tnlt")]([SubResource("Resource_qsgoq"), SubResource("Resource_w685b"), SubResource("Resource_75xed"), SubResource("Resource_w4a3y"), SubResource("Resource_8modh"), SubResource("Resource_rodxh")])
-Options = Array[ExtResource("1_x2bkw")]([SubResource("Resource_3tnlt"), SubResource("Resource_ui0gd")])
+Texts = Array[ExtResource("3_3tnlt")]([SubResource("Resource_75xed"), SubResource("Resource_w4a3y"), SubResource("Resource_8modh"), SubResource("Resource_rodxh"), SubResource("Resource_d0k2a"), SubResource("Resource_eb2xw")])
+Options = Array[ExtResource("1_x2bkw")]([SubResource("Resource_qsgoq"), SubResource("Resource_w685b")])
 
 [resource]
 script = ExtResource("5_eghih")
 HappeningName = "The Machine"
-Stages = Array[ExtResource("5_3u5ui")]([SubResource("Resource_kk05a")])
+Stages = Array[ExtResource("5_3u5ui")]([SubResource("Resource_6f5ue")])
+HappeningAppearance = 1
 Special = true
 CrewRecruit = true

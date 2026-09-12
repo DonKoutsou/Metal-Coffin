@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://mqqrbhnagjvi" path="res://Scenes/GlobalManagers/Simulation/simulation_manager.tscn" id="18_43ao6"]
 [ext_resource type="Script" uid="uid://s3ha37qvdear" path="res://Scripts/event_manager.gd" id="19_0dp8t"]
 [ext_resource type="PackedScene" uid="uid://cyujmksfffet" path="res://Scenes/Map/map.tscn" id="19_3v2l7"]
+[ext_resource type="Resource" uid="uid://c3kr3kcdnvesc" path="res://Resources/Happenings/CrewRecruitHappeningGilian.tres" id="19_v142v"]
 [ext_resource type="Resource" uid="uid://chjcgb4pp86hr" path="res://Resources/Happenings/CardiPrince.tres" id="20_7no5x"]
 [ext_resource type="Resource" uid="uid://b2cbd58y7piwy" path="res://Resources/Happenings/NomadsIntro.tres" id="20_8eeky"]
 [ext_resource type="Resource" uid="uid://cpj4icaudta0f" path="res://Resources/Happenings/The Adressing.tres" id="21_ljctt"]
@@ -67,7 +68,7 @@ Notif_File = "uid://b5vi65a1j0fjf"
 [node name="EventManager" type="Node" parent="." unique_id=998249353]
 script = ExtResource("19_0dp8t")
 EventsPerSpot = Dictionary[int, Array]({
-0: [ExtResource("20_8eeky"), ExtResource("21_ljctt"), ExtResource("22_8o37l"), ExtResource("23_43ao6"), ExtResource("24_8o37l"), ExtResource("28_32m5b"), ExtResource("17_pdcm6")],
+0: [ExtResource("20_8eeky"), ExtResource("21_ljctt"), ExtResource("22_8o37l"), ExtResource("23_43ao6"), ExtResource("24_8o37l"), ExtResource("28_32m5b"), ExtResource("17_pdcm6"), ExtResource("19_v142v")],
 1: [ExtResource("20_7no5x")],
 2: []
 })

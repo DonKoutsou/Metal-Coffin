@@ -162,7 +162,7 @@ func NextStage() -> void:
 			if (!Check):
 				Possiblebranch.append(Option.WorldViewFailBranch)
 			else:
-				Possiblebranch.append(Option.BranchContinuation2)
+				Possiblebranch.append(Option.Branch)
 			
 			if (Possiblebranch.size() > 0):
 				CurrentBranch = Possiblebranch
