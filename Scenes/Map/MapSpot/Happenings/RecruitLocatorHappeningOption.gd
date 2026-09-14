@@ -1,3 +1,4 @@
+@tool
 extends Happening_Option
 class_name Recruit_Locator_Happening_Option
 

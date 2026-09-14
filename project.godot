@@ -14,7 +14,7 @@ General/banks_path="res://FMod_Build"
 
 [addons]
 
-translations_plugin/last_edited_file_path="res://Localisations/LOC - Tutorial.csv"
+translations_plugin/last_edited_file_path="res://Localisations/LOC - FlightManual.csv"
 translations_plugin/localistation_dir="res://Localisations"
 
 [application]

@@ -40,6 +40,15 @@ layout_mode = 2
 
 [node name="OpenFile" type="PopupMenu" parent="VBoxContainer/RibbonContainer/MarginContainer/HBoxContainer/MenuBar" unique_id=1361838840]
 oversampling_override = 1.0
+item_count = 4
+item_0/text = "LOC - Cards.csv"
+item_0/id = 0
+item_1/text = "LOC - FlightManual.csv"
+item_1/id = 1
+item_2/text = "LOC - Stat.csv"
+item_2/id = 2
+item_3/text = "LOC - Tutorial.csv"
+item_3/id = 3
 
 [node name="CreateButton" type="Button" parent="VBoxContainer/RibbonContainer/MarginContainer/HBoxContainer" unique_id=991789228]
 unique_name_in_owner = true
@@ -62,16 +71,11 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Save As"
 
-[node name="RefreshFilesButton" type="Button" parent="VBoxContainer/RibbonContainer/MarginContainer/HBoxContainer" unique_id=1756043479]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Refresh Files"
-
 [node name="CurrentEditLabel" type="Label" parent="VBoxContainer/RibbonContainer/MarginContainer/HBoxContainer" unique_id=1055037446]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
-text = "Currently open: LOC - Cards.csv"
+text = "Currently open: LOC - Tutorial.csv"
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/RibbonContainer" unique_id=1275989137]
 layout_mode = 2
@@ -206,8 +210,6 @@ uppercase = true
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer" unique_id=503803138]
 layout_mode = 2
 size_flags_vertical = 3
-horizontal_scroll_mode = 3
-vertical_scroll_mode = 3
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer" unique_id=565355183]
 layout_mode = 2
@@ -217,5 +219,6 @@ bbcode_enabled = true
 fit_content = true
 autowrap_mode = 2
 
+[connection signal="about_to_popup" from="VBoxContainer/RibbonContainer/MarginContainer/HBoxContainer/MenuBar/OpenFile" to="." method="_on_open_file_about_to_popup"]
 [connection signal="index_pressed" from="VBoxContainer/RibbonContainer/MarginContainer/HBoxContainer/MenuBar/OpenFile" to="." method="_on_open_file_index_pressed"]
 [connection signal="text_changed" from="VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer/TextEdit" to="." method="_on_text_edit_text_changed"]

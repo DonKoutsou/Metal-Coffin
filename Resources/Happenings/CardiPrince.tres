@@ -352,4 +352,5 @@ script = ExtResource("3_8tlxq")
 HappeningName = "The prince"
 Stages = Array[ExtResource("1_afuai")]([SubResource("Resource_ps3tr")])
 Special = true
+CrewRecruit = true
 MandatoryLocaiton = "Cardi"

@@ -11,7 +11,7 @@ func _physics_process(_delta: float) -> void:
 
 #coverage is normalised float from 0 to 1
 func AdjustCloudCoverage(Coverage : float) -> void:
-	var mapped = Helper.mapf(Coverage, 0, 1, 0.6, 1)
+	var mapped = Helper.mapf(Coverage, 0, 1, 0.4, 1)
 	var cov = Helper.mapvalue(mapped, CloudGradient.get_offset(2), CloudGradient.get_offset(0))
 	CloudGradient.set_offset(1 ,cov)
 	#CloudMad.set_shader_parameter("density", Coverage * 3)

@@ -57,8 +57,6 @@ var __ur: EditorUndoRedoManager
 @onready var _load_button := %LoadButton as Button
 @onready var _save_button := %SaveButton as Button
 @onready var _save_as_button: Button = %SaveAsButton
-@onready var refresh_files_button: Button = %RefreshFilesButton
-
 
 @onready var _current_edit_label := %CurrentEditLabel as Label
 
@@ -112,7 +110,6 @@ func _ready() -> void:
 	_word_wrap_toggle.toggled.connect(_on_word_wrap_toggled)
 	_new_code_button.pressed.connect(_on_add_locale_button_pressed)
 	_new_entry_button.pressed.connect(_on_new_entry_pressed)
-	refresh_files_button.pressed.connect(UpdateFiles)
 	
 	_header_scroll.get_h_scroll_bar().value_changed.connect(_on_header_h_scroll)
 	_body_scroll.get_h_scroll_bar().value_changed.connect(_on_body_h_scroll)
@@ -570,16 +567,18 @@ func UpdateFiles() -> void:
 			var file_name = dir.get_next()
 			while file_name != "":
 				if dir.current_is_dir():
-					print("Found directory: " + file_name)
+					#print("Found directory: " + file_name)
 					DirsToExplore.append(g + "/" + file_name)
 				else:
-					print("Found file: " + file_name)
+					#print("Found file: " + file_name)
 					if (file_name.get_extension() == "csv"):
 						currentFiles.append(g + "/" + file_name)
 						FileMenu.add_item(file_name.get_file())
 				
 				file_name = dir.get_next()
-	EditorInterface.get_editor_toaster().push_toast("CSV Files updated")
+
+func _on_open_file_about_to_popup() -> void:
+	UpdateFiles()
 
 func _on_open_file_index_pressed(index: int) -> void:
 	_load_csv(currentFiles[index])

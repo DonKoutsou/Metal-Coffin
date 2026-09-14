@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://ckp8y8sojai4s"]
+
+[ext_resource type="Shader" uid="uid://dwpjb1dhje12t" path="res://Scenes/Map/3DTerain/3DTerrain.gdshader" id="1_4wx8l"]
+[ext_resource type="Script" uid="uid://ddhrdoab6ygk1" path="res://Scenes/Map/3DTerain/3d_terrain.gd" id="1_6gcdf"]
+[ext_resource type="Texture2D" uid="uid://b47wybtbo65q0" path="res://Noises/Ground/TEX_GroundVisualNoise.tres" id="2_s5nj2"]
+[ext_resource type="Texture2D" uid="uid://cw03v1o7v0lpp" path="res://Assets/Sand/Rock062_1K-PNG_Color.png" id="2_v1a1b"]
+[ext_resource type="Texture2D" uid="uid://4g7x31f80h3k" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="3_6gcdf"]
+[ext_resource type="Texture2D" uid="uid://bibx4kf5ern4i" path="res://Assets/Sand/Ground055S_1K-PNG_NormalGL.png" id="3_6hfsm"]
+[ext_resource type="Texture2D" uid="uid://da35h3bxjt6kx" path="res://Assets/Sand/Ice002_1K-PNG_Color.png" id="4_2m2bo"]
+[ext_resource type="Texture2D" uid="uid://blyc50aydat54" path="res://Assets/Sand/Ice002_1K-PNG_NormalGL.png" id="4_ne8gl"]
+[ext_resource type="Texture2D" uid="uid://cuyopb6vo0rnu" path="res://Assets/Sand/Rock062_1K-PNG_NormalGL.png" id="5_esxbu"]
+[ext_resource type="Texture2D" uid="uid://bih6x8swa3dhe" path="res://Noises/Ground/TEX_GroundVisualNoiseMask.png" id="5_yc30l"]
+
+[sub_resource type="Environment" id="Environment_1vivr"]
+fog_enabled = true
+fog_light_color = Color(0, 0, 0, 1)
+fog_height = 0.28
+fog_height_density = 8.0
+adjustment_enabled = true
+adjustment_brightness = 2.0
+
+[sub_resource type="World3D" id="World3D_6hfsm"]
+environment = SubResource("Environment_1vivr")
+
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_6gcdf"]
+frustum_focal_length = 30.95
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_v5gy4"]
+size = Vector2(1.8, 1.8)
+subdivide_width = 100
+subdivide_depth = 100
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ei4bn"]
+render_priority = 0
+shader = ExtResource("1_4wx8l")
+shader_parameter/GroundTexture = ExtResource("2_v1a1b")
+shader_parameter/GroundTexture2 = ExtResource("3_6gcdf")
+shader_parameter/GroundTexture3 = ExtResource("4_2m2bo")
+shader_parameter/NoiseTexture = ExtResource("5_yc30l")
+shader_parameter/GroundNormalTexture = ExtResource("5_esxbu")
+shader_parameter/GroundNormal2Texture = ExtResource("3_6hfsm")
+shader_parameter/GroundNormal3Texture = ExtResource("4_ne8gl")
+shader_parameter/heightMap = ExtResource("2_s5nj2")
+shader_parameter/H = Vector2(1, 1)
+shader_parameter/Light = 2.79
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/NoiseScale = Vector2(0.5, 0.5)
+shader_parameter/Scale1 = Vector2(10, 10)
+shader_parameter/Scale2 = Vector2(20, 20)
+shader_parameter/Scale3 = Vector2(10, 10)
+
+[node name="3dTerrain" type="SubViewportContainer" unique_id=1054221151 node_paths=PackedStringArray("terain", "cam")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+script = ExtResource("1_6gcdf")
+terain = NodePath("SubViewport/MeshInstance3D")
+cam = NodePath("SubViewport/Camera3D")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=504858315]
+own_world_3d = true
+world_3d = SubResource("World3D_6hfsm")
+handle_input_locally = false
+debug_draw = 4
+scaling_3d_mode = 5
+size = Vector2i(2324, 1307)
+size_2d_override = Vector2i(1280, 720)
+size_2d_override_stretch = true
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport" unique_id=1440828653]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5, 0)
+attributes = SubResource("CameraAttributesPhysical_6gcdf")
+current = true
+fov = 42.384827
+
+[node name="OmniLight3D" type="OmniLight3D" parent="SubViewport/Camera3D" unique_id=1355680715]
+light_energy = 10.82
+shadow_normal_bias = 10.0
+omni_range = 5.5
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport" unique_id=548692880]
+transform = Transform3D(5.1944385, 0, 0, 0, 1, 0, 0, 0, 6.2642837, 0, 0, 0)
+mesh = SubResource("PlaneMesh_v5gy4")
+surface_material_override/0 = SubResource("ShaderMaterial_ei4bn")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewport" unique_id=1896535191]
+transform = Transform3D(-0.7433574, -0.54268765, 0.39103687, 0.6077511, -0.30378968, 0.73372394, -0.27938968, 0.78307194, 0.555643, 0, 0.6427002, 0)
+visible = false
+shadow_enabled = true
+shadow_caster_mask = 4293935105
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewport" unique_id=670798626]
+environment = SubResource("Environment_1vivr")

@@ -7,6 +7,7 @@ class_name ShipCamera
 @export var C : Cloud
 @export var cloudNoise : FastNoiseLite
 @export var Ground : Control
+@export var heightBlud : Control
 @export var GroundMap : TopographyMap
 @export var WeatherMan : WeatherManage
 @export var ClickSound : AudioStreamPlayer
@@ -14,7 +15,7 @@ class_name ShipCamera
 @export var NoiseNormalTexture : NoiseTexture2D
 
 static var MinZoom = 0.1
-static var MaxZoom = 15.0
+static var MaxZoom = 6.0
 static var ZoomSwitchStage = 0.8
 
 static var Instance : ShipCamera
@@ -25,7 +26,7 @@ static var WorldBounds : Vector2
 
 var CloudMat : ShaderMaterial
 var GroundMat : ShaderMaterial
-
+var heightMat : ShaderMaterial
 var FocusedShip : PlayerDrivenShip
 # Called when the node enters the scene tree for the first time.
 
@@ -35,9 +36,12 @@ func _ready() -> void:
 	
 	CloudMat = C.material
 	GroundMat = Ground.material
-
+	heightMat = heightBlud.material
+	#GroundMat2 = Ground2.GetTerainMat()
 	CloudMat.set_shader_parameter("Camera_Offset", global_position / 1500)
 	GroundMat.set_shader_parameter("offset",( global_position / 9000))
+	heightMat.set_shader_parameter("offset",( global_position / 9000))
+	#Ground2.UpdateCamPos(global_position)
 	
 	GroundMap.ChangeOffset((global_position / 9000))
 	WeatherMan.UpdateCameraOffset((global_position / 9000))
@@ -69,7 +73,7 @@ func _HANDLE_ZOOM(zoomval : float, FromSelf : bool = true):
 	ZoomTw = create_tween()
 	ZoomTw.set_ease(Tween.EASE_OUT)
 	ZoomTw.set_trans(Tween.TRANS_QUART)
-	var newzoom = clamp(prevzoom * Vector2(1 + zoomval, 1 + zoomval), Vector2(MinZoom,MinZoom), Vector2(MaxZoom,MaxZoom))
+	var newzoom = clamp(prevzoom * Vector2(1 + zoomval, 1 + zoomval), Vector2(MinZoom,MinZoom), Vector2(3,3))
 	#ZoomTw.tween_property(self, "zoom", newzoom, 1)
 	ZoomTw.tween_method(UpdateZoom, zoom, newzoom, 1)
 
@@ -230,6 +234,8 @@ func UpdateCameraPos(relativeMovement : Vector2, Unfocus : bool = true, FromSelf
 	
 	CloudMat.set_shader_parameter("Camera_Offset", global_position / 1500)
 	GroundMat.set_shader_parameter("offset", (global_position / 9000))
+	heightMat.set_shader_parameter("offset",( global_position / 9000))
+#Ground2.UpdateCamPos(global_position / 100)
 	GroundMap.ChangeOffset((global_position / 9000))
 	WeatherMan.UpdateCameraOffset((global_position / 9000))
 	
@@ -326,6 +332,8 @@ func ForceCamPosition(Pos : Vector2) -> void:
 	position = newpos
 	CloudMat.set_shader_parameter("Camera_Offset", newpos / 1500)
 	GroundMat.set_shader_parameter("offset", (newpos / 9000))
+	heightMat.set_shader_parameter("offset",( newpos / 9000))
+	#Ground2.UpdateCamPos(newpos / 9000)
 	GroundMap.ChangeOffset((newpos / 9000))
 	WeatherMan.UpdateCameraOffset((newpos / 9000))
 	Grid.UpdateOffset(newpos)

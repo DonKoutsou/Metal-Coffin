@@ -1,3 +1,4 @@
+@tool
 extends Happening_Option
 class_name Village_Locator_Happening_Option
 

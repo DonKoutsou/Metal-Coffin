@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://dk1p1g38kvyjb"]
 
-[ext_resource type="StyleBox" uid="uid://cbl88p1pms3gq" path="res://Theme/YellowBorderPanel.tres" id="1_a6f6n"]
 [ext_resource type="Script" uid="uid://dxqn4r530yphc" path="res://Scripts/Inventory/character_inventory_Interface.gd" id="1_tgceu"]
 [ext_resource type="PackedScene" uid="uid://b1k2h35khc40y" path="res://Scenes/Inventory/InventoryBox.tscn" id="2_amhnx"]
 
@@ -21,7 +20,6 @@ InventoryBoxParent = NodePath("PanelContainer6/VBoxContainer6/Inventory")
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("1_a6f6n")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=795333504]
 layout_mode = 2
@@ -43,7 +41,6 @@ theme_override_constants/h_separation = 3
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("1_a6f6n")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer2" unique_id=253876437]
 layout_mode = 2
@@ -64,7 +61,6 @@ theme_override_constants/h_separation = 3
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("1_a6f6n")
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer3" unique_id=722470051]
 layout_mode = 2
@@ -83,7 +79,6 @@ size_flags_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("1_a6f6n")
 
 [node name="VBoxContainer4" type="VBoxContainer" parent="PanelContainer4" unique_id=802300087]
 layout_mode = 2
@@ -103,7 +98,6 @@ size_flags_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("1_a6f6n")
 
 [node name="VBoxContainer5" type="VBoxContainer" parent="PanelContainer5" unique_id=637993068]
 layout_mode = 2
@@ -123,7 +117,6 @@ size_flags_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("1_a6f6n")
 
 [node name="VBoxContainer6" type="VBoxContainer" parent="PanelContainer6" unique_id=775423269]
 layout_mode = 2

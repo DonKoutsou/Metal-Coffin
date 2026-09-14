@@ -17,7 +17,7 @@ uniform float Alpha = 1.0;
 // === SHADOW SETTINGS ===
 uniform float shadow_strength : hint_range(0.0, 1.0) = 0.15;
 uniform float shadow_parallax_amount : hint_range(-1.0, 1.0) = 0.5;
-
+uniform float shadow_blur : hint_range(0.0, 10.0) = 1.0;
 // === ROTATION ===
 uniform float rotation_angle = 0.0; // In radians
 
@@ -50,7 +50,7 @@ void fragment() {
     vec2 cloud_uv = (UV + motion);
     cloud_uv = rotate(cloud_uv - center, rotation_angle) + center;
 
-    float raw_shadow_noise = texture(noise_texture, cloud_uv).r;
+    float raw_shadow_noise = textureLod(noise_texture, cloud_uv, shadow_blur).r;
     float shadow_noise = smoothstep(0.4, 0.7, raw_shadow_noise) * 2.0 - 1.0;
     float shadow_alpha = clamp(shadow_noise, 0.0, 1.0) * density * shadow_strength;
     vec4 shadow = vec4(vec3(0.0), shadow_alpha);
