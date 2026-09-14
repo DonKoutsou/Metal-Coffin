@@ -45,11 +45,7 @@ func _ready() -> void:
 	for g in Happening.GameStage.keys():
 		ApearanceMenu.add_item(g)
 
-func _on_button_pressed() -> void:
-	UpdateDilogues()
-	
-
-func _on_button_2_pressed() -> void:
+func _on_fix_happening_pressed() -> void:
 	FixDialogues()
 	ResaveHappening()
 	SetHappening(currentHappening)
@@ -192,7 +188,7 @@ func SetHappening(id : int) -> void:
 		optionsSpace = 0
 		currentY += optionsSpace / 2
 		
-		LastNode = HandleOption(dialogueOption, LastNode)
+		LastNode = HandleOption(dialogueOption, LastNode, LastNode)
 		
 		currentY += LastNode[0].size.y + 100 + optionsSpace / 2
 	
@@ -202,7 +198,7 @@ func SetHappening(id : int) -> void:
 	SpecialCheck.set_pressed_no_signal(diag.Special)
 	AllowedApBox.set_value_no_signal(diag.AllowedAppearances)
 	RecruitCheck.set_pressed_no_signal(diag.CrewRecruit)
-	#graph.arrange_nodes()
+	graph.arrange_nodes()
 
 #-----------------------------------------------
 func HandleStage(stage : HappeningStage, connection : Array[BaseDialogueNode] = [], connectionIndex : int = 0) -> Array[BaseDialogueNode]:
@@ -227,7 +223,7 @@ func HandleStage(stage : HappeningStage, connection : Array[BaseDialogueNode] = 
 	if (stage.Options.size() > 0):
 		
 		for option : Happening_Option in stage.Options:
-			lastOptions = HandleOption(option, lastNodes)
+			lastOptions = HandleOption(option, lastNodes, lastOptions)
 			
 	if (lastOptions.size() > 0):
 		return lastOptions
@@ -235,10 +231,8 @@ func HandleStage(stage : HappeningStage, connection : Array[BaseDialogueNode] = 
 	return lastNodes
 
 #-------------------------------------------------------------------
-func HandleOption(option : Happening_Option, lastNodes : Array[BaseDialogueNode]) -> Array[BaseDialogueNode]:
+func HandleOption(option : Happening_Option, lastNodes : Array[BaseDialogueNode], lastOptions : Array[BaseDialogueNode]) -> Array[BaseDialogueNode]:
 	var optionsY = currentY - optionsSpace / 2 + 250
-	
-	var lastOptions : Array[BaseDialogueNode]
 
 	var lastOption : BaseDialogueNode
 	var newNode
@@ -358,6 +352,7 @@ func CreateDialogueNode(type : NodeType = NodeType.NORMAL, posOverride : Vector2
 func ResaveHappening() -> void:
 	GenerateHappening()
 	ResourceSaver.save(Happenings[currentHappening], Happenings[currentHappening].resource_path)
+	EditorInterface.get_editor_toaster().push_toast("Happening Saved !")
 	#graph.arrange_nodes()
 
 #--------------------------------------------------------

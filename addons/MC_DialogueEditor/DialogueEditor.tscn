@@ -84,13 +84,13 @@ size = Vector2i(217, 444)
 layout_mode = 2
 text = "Import Happenings"
 
-[node name="Button2" type="Button" parent="HBoxContainer2/VBoxContainer/HBoxContainer" unique_id=523641114]
+[node name="FixHappening" type="Button" parent="HBoxContainer2/VBoxContainer/HBoxContainer" unique_id=523641114]
 layout_mode = 2
 text = "Fix Happenings"
 
 [node name="Button3" type="Button" parent="HBoxContainer2/VBoxContainer/HBoxContainer" unique_id=636735699]
 layout_mode = 2
-text = "TestSave"
+text = "Force Save"
 
 [node name="GraphEdit" type="GraphEdit" parent="HBoxContainer2/VBoxContainer" unique_id=987366087]
 layout_mode = 2
@@ -162,7 +162,7 @@ autowrap_mode = 2
 [node name="HappeningApearance" type="OptionButton" parent="HBoxContainer2/PanelContainer/VBoxContainer" unique_id=618636346]
 layout_mode = 2
 selected = 0
-item_count = 6
+item_count = 12
 popup/item_0/text = "EARLY"
 popup/item_0/id = 0
 popup/item_1/text = "SEMI_EARLY"
@@ -175,6 +175,18 @@ popup/item_4/text = "LATE"
 popup/item_4/id = 4
 popup/item_5/text = "ANY"
 popup/item_5/id = 5
+popup/item_6/text = "EARLY"
+popup/item_6/id = 6
+popup/item_7/text = "SEMI_EARLY"
+popup/item_7/id = 7
+popup/item_8/text = "MID"
+popup/item_8/id = 8
+popup/item_9/text = "SEMI_LATE"
+popup/item_9/id = 9
+popup/item_10/text = "LATE"
+popup/item_10/id = 10
+popup/item_11/text = "ANY"
+popup/item_11/id = 11
 
 [node name="Label3" type="Label" parent="HBoxContainer2/PanelContainer/VBoxContainer" unique_id=1729665800]
 layout_mode = 2
@@ -196,9 +208,9 @@ layout_mode = 2
 
 [connection signal="index_pressed" from="HBoxContainer2/VBoxContainer/HBoxContainer/MenuBar/PopupMenu2" to="." method="_on_popup_menu_2_index_pressed"]
 [connection signal="index_pressed" from="HBoxContainer2/VBoxContainer/HBoxContainer/MenuBar/PopupMenu" to="." method="_on_popup_menu_index_pressed"]
-[connection signal="pressed" from="HBoxContainer2/VBoxContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="HBoxContainer2/VBoxContainer/HBoxContainer/Button2" to="." method="_on_button_2_pressed"]
-[connection signal="pressed" from="HBoxContainer2/VBoxContainer/HBoxContainer/Button3" to="." method="GenerateHappening"]
+[connection signal="pressed" from="HBoxContainer2/VBoxContainer/HBoxContainer/Button" to="." method="UpdateDilogues"]
+[connection signal="pressed" from="HBoxContainer2/VBoxContainer/HBoxContainer/FixHappening" to="." method="_on_fix_happening_pressed"]
+[connection signal="pressed" from="HBoxContainer2/VBoxContainer/HBoxContainer/Button3" to="." method="ResaveHappening"]
 [connection signal="connection_request" from="HBoxContainer2/VBoxContainer/GraphEdit" to="." method="OnNodeConnected"]
 [connection signal="connection_to_empty" from="HBoxContainer2/VBoxContainer/GraphEdit" to="." method="OnNodeConectToEmpty"]
 [connection signal="delete_nodes_request" from="HBoxContainer2/VBoxContainer/GraphEdit" to="." method="OnNodeDeleted"]

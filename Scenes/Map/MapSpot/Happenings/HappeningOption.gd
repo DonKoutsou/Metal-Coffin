@@ -2,20 +2,30 @@
 extends Resource
 class_name Happening_Option
 
+#--------------------------------------------------
+##Option Text on meni
 @export var OptionName : String:
 	set(value):
 		OptionName = value
 		emit_changed()
-		
+
+##Picking this option finished the dialogue
 @export var FinishDiag : bool = false :
 	set(value):
 		FinishDiag = value
 		emit_changed()
 		
+##Overworld event to take effect on leaving town
 @export var Event : OverworldEventData
+
+#--------------------------------------------------
+##Brnahc Data
 @export_group("Branch")
 @export var BranchContinuation : Array[HappeningStage]
 @export var Branch : HappeningStage
+
+#--------------------------------------------------
+##Worldview Effects
 @export_group("Worldview Effect")
 @export var WorldviewEffect : WorldView.WorldViews :
 	set(value):
@@ -26,7 +36,9 @@ class_name Happening_Option
 	set(value):
 		WorldviewEffectAmm = value
 		emit_changed()
-		
+
+#--------------------------------------------------
+##Worldview Check settings
 @export_group("Worldview Check")
 @export var WorldviewCheck : WorldView.WorldViews :
 	set(value):
@@ -51,6 +63,18 @@ class_name Happening_Option
 		emit_changed()
 
 var CheckResault = true
+
+func SameBranch(branch : HappeningStage) -> bool:
+	for g in Branch.Texts:
+		var matched : bool = false
+		for z in branch.Texts:
+			if (g.Text == z.Text):
+				matched = true
+				break
+		if (!matched):
+			return false
+	print("true")	
+	return true
 
 func OptionResault(_EventOrigin : MapSpot) -> String:
 	return ""

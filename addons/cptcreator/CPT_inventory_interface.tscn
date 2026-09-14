@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://b3x1oefmigg0c"]
+
+[ext_resource type="PackedScene" uid="uid://dk1p1g38kvyjb" path="res://Scenes/Inventory/InventoryInterface.tscn" id="1_awm0l"]
+[ext_resource type="PackedScene" uid="uid://dgwm586mmvbu8" path="res://addons/cptcreator/CPT_inventory_box.tscn" id="2_8qdt0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ha1o8"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.313329, 0.3133295, 0.31332916, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="InventoryInterface" unique_id=399381214 instance=ExtResource("1_awm0l")]
+InventoryBoxScene = ExtResource("2_8qdt0")
+
+[node name="PanelContainer" parent="." index="0" unique_id=353374630]
+theme_override_styles/panel = SubResource("StyleBoxFlat_ha1o8")
+
+[node name="PanelContainer2" parent="." index="1" unique_id=53729161]
+theme_override_styles/panel = SubResource("StyleBoxFlat_ha1o8")
+
+[node name="PanelContainer3" parent="." index="2" unique_id=1988670620]
+theme_override_styles/panel = SubResource("StyleBoxFlat_ha1o8")
+
+[node name="PanelContainer4" parent="." index="3" unique_id=465119663]
+theme_override_styles/panel = SubResource("StyleBoxFlat_ha1o8")
+
+[node name="PanelContainer5" parent="." index="4" unique_id=247784404]
+theme_override_styles/panel = SubResource("StyleBoxFlat_ha1o8")
+
+[node name="PanelContainer6" parent="." index="5" unique_id=2131025771]
+theme_override_styles/panel = SubResource("StyleBoxFlat_ha1o8")

@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://d4ib0fxcug26a" path="res://addons/cptcreator/captain_creator_stat_slider.gd" id="2_n27cf"]
 
 [node name="ShipStatContainer" unique_id=1703653256 node_paths=PackedStringArray("slider") instance=ExtResource("1_7jaut")]
+theme = null
 script = ExtResource("2_n27cf")
 slider = NodePath("HSlider")
 

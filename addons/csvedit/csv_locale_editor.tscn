@@ -1,0 +1,208 @@
+[gd_scene format=3 uid="uid://c52equsw3ndh2"]
+
+[ext_resource type="Script" uid="uid://caxkgfy4f7c8n" path="res://addons/csvedit/csv_locale_editor.gd" id="1_cgmhc"]
+[ext_resource type="PackedScene" uid="uid://ca70iefsou4ny" path="res://addons/csvedit/editor_locale_entry.tscn" id="2_22rhp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_22rhp"]
+
+[node name="CSVLocaleEditor" type="PanelContainer" unique_id=1129528086 node_paths=PackedStringArray("editText", "RichTextPreview")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_cgmhc")
+LocaleEntryScene = ExtResource("2_22rhp")
+editText = NodePath("VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer/TextEdit")
+RichTextPreview = NodePath("VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/RichTextLabel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=812454458]
+layout_mode = 2
+
+[node name="RibbonContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=635005643]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/RibbonContainer" unique_id=1781150790]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/RibbonContainer/MarginContainer" unique_id=678393244]
+layout_mode = 2
+
+[node name="CreateButton" type="Button" parent="VBoxContainer/RibbonContainer/MarginContainer/HBoxContainer" unique_id=991789228]
+unique_name_in_owner = true
+layout_mode = 2
+text = "New"
+
+[node name="LoadButton" type="Button" parent="VBoxContainer/RibbonContainer/MarginContainer/HBoxContainer" unique_id=476635302]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Open
+"
+
+[node name="SaveButton" type="Button" parent="VBoxContainer/RibbonContainer/MarginContainer/HBoxContainer" unique_id=1343349413]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save"
+
+[node name="SaveAsButton" type="Button" parent="VBoxContainer/RibbonContainer/MarginContainer/HBoxContainer" unique_id=1719036253]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save As"
+
+[node name="CurrentEditLabel" type="Label" parent="VBoxContainer/RibbonContainer/MarginContainer/HBoxContainer" unique_id=1055037446]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Currently open: LOC - FlightManual.csv"
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/RibbonContainer" unique_id=1275989137]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/RibbonContainer/MarginContainer2" unique_id=31234199]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="SearchBar" type="LineEdit" parent="VBoxContainer/RibbonContainer/MarginContainer2/HBoxContainer" unique_id=2036103497]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Search..."
+clear_button_enabled = true
+select_all_on_focus = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/RibbonContainer/MarginContainer2/HBoxContainer" unique_id=1514127645]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/RibbonContainer/MarginContainer2/HBoxContainer/HBoxContainer" unique_id=556949252]
+layout_mode = 2
+text = "Word Wrap"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WordWrapToggle" type="CheckButton" parent="VBoxContainer/RibbonContainer/MarginContainer2/HBoxContainer/HBoxContainer" unique_id=2067920021]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=844382608]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer" unique_id=1520996310]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer" unique_id=510127354]
+layout_mode = 2
+
+[node name="HeaderPanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer" unique_id=426305717]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_22rhp")
+
+[node name="HeaderScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/HeaderPanelContainer" unique_id=1514094117]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
+
+[node name="CodeLabelsContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/HeaderPanelContainer/HeaderScrollContainer" unique_id=75778985]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AddLocaleButton" type="Button" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/HeaderPanelContainer/HeaderScrollContainer/CodeLabelsContainer" unique_id=387385590]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Add New Locale"
+text = "+"
+
+[node name="BodyScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer" unique_id=1214839504]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BodyPanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/BodyScrollContainer" unique_id=957679804]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_22rhp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/BodyScrollContainer/BodyPanelContainer" unique_id=2001510956]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="EntriesContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/BodyScrollContainer/BodyPanelContainer/VBoxContainer" unique_id=937868165]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/BodyScrollContainer/BodyPanelContainer/VBoxContainer" unique_id=1662455191]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="AddNewEntryButton" type="Button" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/BodyScrollContainer/BodyPanelContainer/VBoxContainer/MarginContainer" unique_id=672629911]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_vertical = 8
+text = "Add New Entry"
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/HBoxContainer" unique_id=490843726]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer2" unique_id=856450200]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer" unique_id=180279138]
+layout_mode = 2
+text = "ENTRY EDIT"
+uppercase = true
+
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer" unique_id=1598171952]
+layout_mode = 2
+size_flags_vertical = 3
+wrap_mode = 1
+autowrap_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer" unique_id=2073539804]
+layout_mode = 2
+text = "Rich text Preview"
+uppercase = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer" unique_id=503803138]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer" unique_id=565355183]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 2
+
+[connection signal="text_changed" from="VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer/TextEdit" to="." method="_on_text_edit_text_changed"]

@@ -12,6 +12,10 @@ config_version=5
 
 General/banks_path="res://FMod_Build"
 
+[addons]
+
+translations_plugin/last_edited_file_path="res://Localisations/LOC - FlightManual.csv"
+
 [application]
 
 config/name="Metal Coffin"
@@ -40,9 +44,9 @@ TutorialManager="*res://Scenes/GlobalManagers/Tutorial/tutorial_manager.tscn"
 AchMan="*res://Scenes/GlobalManagers/Tutorial/achievement_manager.gd"
 PopupManager="*res://Scenes/GlobalManagers/PopupManager.tscn"
 DispoisitionManager="*uid://cuad168v6mleh"
+FmodManager="*uid://cds10pm7hwn3p"
 BeehaveGlobalMetrics="*uid://c3ktl6ontsdt7"
 BeehaveGlobalDebugger="*uid://bl3ma400hpvsh"
-FmodManager="*uid://cds10pm7hwn3p"
 
 [display]
 
@@ -62,7 +66,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/BurstParticles2D/plugin.cfg", "res://addons/MC_DialogueEditor/plugin.cfg", "res://addons/beehave/plugin.cfg", "res://addons/cptcreator/plugin.cfg", "res://addons/fmod/plugin.cfg", "res://addons/script-ide/plugin.cfg", "res://addons/yard/plugin.cfg")
+enabled=PackedStringArray("res://addons/BurstParticles2D/plugin.cfg", "res://addons/MC_DialogueEditor/plugin.cfg", "res://addons/beehave/plugin.cfg", "res://addons/cptcreator/plugin.cfg", "res://addons/csvedit/plugin.cfg", "res://addons/fmod/plugin.cfg", "res://addons/script-ide/plugin.cfg", "res://addons/yard/plugin.cfg")
 
 [file_customization]
 

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dgwm586mmvbu8"]
+
+[ext_resource type="PackedScene" uid="uid://b1k2h35khc40y" path="res://Scenes/Inventory/InventoryBox.tscn" id="1_shk70"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_shk70"]
+bg_color = Color(0.4085841, 0.40858412, 0.408584, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8xpfb"]
+bg_color = Color(0.32568854, 0.32568854, 0.3256885, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0a5i4"]
+bg_color = Color(0.44188052, 0.44188052, 0.44188035, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_780nc"]
+bg_color = Color(0.1443032, 0.14430341, 0.14430326, 1)
+
+[node name="InventoryBox" unique_id=1449330592 instance=ExtResource("1_shk70")]
+
+[node name="ItemButton" parent="." index="0" unique_id=1170581497]
+theme_override_styles/normal = SubResource("StyleBoxFlat_shk70")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8xpfb")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0a5i4")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_780nc")

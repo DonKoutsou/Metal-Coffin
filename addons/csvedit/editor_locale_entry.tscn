@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://ca70iefsou4ny"]
+
+[ext_resource type="Script" uid="uid://ck6d6res1qmdi" path="res://addons/csvedit/locale_entry.gd" id="1_hn3an"]
+
+[node name="EditorLocaleEntry" type="HBoxContainer" unique_id=686845993 node_paths=PackedStringArray("_delete_button")]
+custom_minimum_size = Vector2(0, 100)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 342.5
+offset_bottom = -342.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hn3an")
+_delete_button = NodePath("Button")
+metadata/_custom_type_script = "uid://ck6d6res1qmdi"
+
+[node name="Button" type="Button" parent="." unique_id=889065699]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "x"
