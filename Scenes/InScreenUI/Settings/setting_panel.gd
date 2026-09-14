@@ -12,6 +12,7 @@ class_name SettingsPanel
 @export var RainButton : BaseButton
 @export var FPSSlider : HSlider
 @export var FPSLabel : Label
+@export var colorsSlider : HSlider
 
 static var HasRain = true
 static var HasGlitch = true
@@ -29,6 +30,8 @@ func _ready() -> void:
 	FPSSlider.value = roundi(Engine.max_fps)
 	FPSLabel.text = var_to_str(roundi(Engine.max_fps))
 	
+	colorsSlider.max_value = ColorManager.COLORS.size() - 1
+	colorsSlider.value = ColorManager.COLORS.values().find(ColorManager.instance.col)
 	
 #-------------------------------------------------------------------
 ##FULLSCREEN
@@ -89,3 +92,7 @@ func _on_music_value_changed(value: float) -> void:
 func _on_fps_value_changed(value: float) -> void:
 	Engine.max_fps = value
 	$VBoxContainer/GridContainer/HBoxContainer/Label.text = var_to_str(roundi(value))
+
+
+func _on_h_slider_value_changed(value: float) -> void:
+	ColorManager.instance.col = ColorManager.COLORS.values()[roundi(value)]

@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dhax4ps6tgpc4"]
+
+[ext_resource type="Script" uid="uid://cmxdxmmqf3lou" path="res://Scripts/ColorManager.gd" id="1_okvd0"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="2_3vru3"]
+[ext_resource type="StyleBox" uid="uid://elj4u7a13oc1" path="res://Theme/YellowTopPanel.tres" id="3_b3uxo"]
+[ext_resource type="StyleBox" uid="uid://elcf43aevshf" path="res://Theme/InventoryBoxNormal.tres" id="4_kskw8"]
+[ext_resource type="StyleBox" uid="uid://ca8x8llgaf2yu" path="res://Theme/InventoryBoxHover.tres" id="5_slnnd"]
+[ext_resource type="StyleBox" uid="uid://twgjhudvlwrx" path="res://Theme/BlackBars.tres" id="6_tahk1"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="7_b3uxo"]
+[ext_resource type="StyleBox" uid="uid://cakd87dtiyrm2" path="res://Theme/ButtonNormal.tres" id="7_tahk1"]
+[ext_resource type="StyleBox" uid="uid://bjl04u3co6107" path="res://Theme/ButtonPressed.tres" id="8_8100i"]
+[ext_resource type="StyleBox" uid="uid://bdvhxvn78rd53" path="res://Theme/fade_notif_panel2.tres" id="8_fiij5"]
+[ext_resource type="StyleBox" uid="uid://bf8ldnyjyuff" path="res://Theme/ButtonHover.tres" id="9_46mna"]
+[ext_resource type="StyleBox" uid="uid://0fbvc4n3mb7l" path="res://Theme/ProgrssBarBack.tres" id="10_8100i"]
+[ext_resource type="StyleBox" uid="uid://btb67knlbjivi" path="res://Theme/FadeNotifPanel.tres" id="12_3eqqw"]
+[ext_resource type="StyleBox" uid="uid://46p0yqwfh7ud" path="res://Theme/HSlider_Grabber.tres" id="13_oncdv"]
+[ext_resource type="StyleBox" uid="uid://cjob57ldf08tq" path="res://Theme/HSlider_GrabberH.tres" id="14_snkuw"]
+
+[node name="Node" type="Node" unique_id=1401654699]
+script = ExtResource("1_okvd0")
+styleBoxes = Array[StyleBoxFlat]([ExtResource("2_3vru3"), ExtResource("3_b3uxo"), ExtResource("4_kskw8"), ExtResource("5_slnnd"), ExtResource("6_tahk1"), ExtResource("7_tahk1"), ExtResource("8_fiij5")])
+bgStyleBoxes = Array[StyleBoxFlat]([ExtResource("8_8100i"), ExtResource("9_46mna"), ExtResource("10_8100i"), ExtResource("12_3eqqw"), ExtResource("13_oncdv"), ExtResource("14_snkuw")])
+th = ExtResource("7_b3uxo")
+col = Color(1, 0.5411765, 0.078431375, 1)

@@ -1,20 +1,11 @@
 [gd_scene format=3 uid="uid://1vnrpn8q4byq"]
 
+[ext_resource type="StyleBox" uid="uid://bdvhxvn78rd53" path="res://Theme/fade_notif_panel2.tres" id="1_awoom"]
 [ext_resource type="Script" uid="uid://clk1tqw1y8r5" path="res://Scenes/InScreenUI/PopUp/Fade_Notification/fade_notif.gd" id="1_sjfyc"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xxwjh"]
-content_margin_bottom = 0.0
-bg_color = Color(0.11, 0.11, 0.11, 0.96862745)
-border_width_bottom = 46
-border_color = Color(0.4418791, 0.44188103, 0.4418803, 1)
-border_blend = true
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3j3ox"]
-bg_color = Color(1, 1, 1, 1)
+[ext_resource type="StyleBox" uid="uid://btb67knlbjivi" path="res://Theme/FadeNotifPanel.tres" id="2_6shti"]
 
 [node name="FadeNotif" type="PanelContainer" unique_id=689629442 node_paths=PackedStringArray("T") groups=["FadeNotif", "ItemNotification"]]
 process_mode = 3
-modulate = Color(1, 0.763983, 0.0812772, 1)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -29,7 +20,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_xxwjh")
+theme_override_styles/panel = ExtResource("1_awoom")
 script = ExtResource("1_sjfyc")
 T = NodePath("HBoxContainer/Label")
 
@@ -42,12 +33,11 @@ mouse_filter = 2
 custom_minimum_size = Vector2(3, 0)
 layout_mode = 2
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_3j3ox")
+theme_override_styles/panel = ExtResource("2_6shti")
 
 [node name="Label" type="Label" parent="HBoxContainer" unique_id=740365164]
 layout_mode = 2
 size_flags_horizontal = 6
-theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 0
@@ -62,4 +52,4 @@ uppercase = true
 custom_minimum_size = Vector2(3, 0)
 layout_mode = 2
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_3j3ox")
+theme_override_styles/panel = ExtResource("2_6shti")
