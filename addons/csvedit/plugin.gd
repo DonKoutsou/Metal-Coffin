@@ -5,6 +5,7 @@ const PLUGIN_NAME := "Translations"
 #const PLUGIN_ICON := null
 const SETTINGS_PREFIX := "addons/translations_plugin/"
 const LAST_EDITED_KEY := SETTINGS_PREFIX + "last_edited_file_path"
+const LOCALISATION_DIR := SETTINGS_PREFIX + "localistation_dir"
 
 const MAIN_PANEL := preload("res://addons/csvedit/csv_locale_editor.tscn")
 var _main_panel_instance: EditorCSVLocaleScreen = null
@@ -112,6 +113,15 @@ func _register_settings():
 		"",
 		TYPE_STRING,
 		PROPERTY_HINT_FILE_PATH,
+		"",
+		false
+	)
+	
+	_add_setting(
+		"localistation_dir",
+		"",
+		TYPE_STRING,
+		PROPERTY_HINT_DIR,
 		"",
 		false
 	)

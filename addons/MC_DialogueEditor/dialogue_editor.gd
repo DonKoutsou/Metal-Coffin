@@ -37,7 +37,20 @@ enum NodeType{
 	DRONE_OPTION
 }
 
+const TRANSLATIONS : PackedStringArray = [
+	"res://Localisations/LOC - Cards.english.translation",
+	"res://Localisations/LOC - Cards.greek.translation",
+	"res://Localisations/LOC - FlightManual.english.translation",
+	"res://Localisations/LOC - Stat.english.translation",
+	"res://Localisations/LOC - Tutorial.english.translation",
+]
+
 func _ready() -> void:
+	var editor_domain := TranslationServer.get_or_add_domain(&"godot.editor")
+	for locale: String in TRANSLATIONS:
+		editor_domain.add_translation(load(locale))
+	editor_domain.set_locale_override("english")
+		
 	NodeMenu.clear()
 	for g in NodeType.keys():
 		NodeMenu.add_item(g)
@@ -445,7 +458,7 @@ func OnNodeConnected(from_node: StringName, from_port: int, to_node: StringName,
 		history.commit_action(false)
 	
 	graph.connect_node(from_node, from_port, to_node, to_port)
-	ResaveHappening()
+	
 
 #---------------------------------------------------------------------
 func OnNodeConectToEmpty(from_node: StringName, from_port: int, release_position: Vector2) -> void:
@@ -478,7 +491,6 @@ func OnNodeDisconnected(from_node: StringName, from_port: int, to_node: StringNa
 		history.commit_action(false)
 	
 	graph.disconnect_node(from_node, from_port, to_node, to_port)
-	ResaveHappening()
 
 func _on_popup_menu_index_pressed(index: int) -> void:
 	SetHappening(index)
@@ -749,6 +761,8 @@ func OnNodeDeleted(nodes: Array[StringName]) -> void:
 			
 			frList[from] = from_port
 			toList[to] = to_port
+			
+		node.free()
 	
 	ResaveHappening()
 	#SetHappening(currentHappening)
@@ -842,7 +856,4 @@ func FixStage(Stages : Array[HappeningStage]) -> void:
 				#Stages.remove_at(stageIndex)
 				#prevStage.Texts.append_array(stage.Texts)
 				#prevStage.Options.append_array(stage.Options)
-
-
-
 ###

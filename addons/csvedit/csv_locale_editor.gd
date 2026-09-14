@@ -18,6 +18,7 @@ static var DELIM: String = ProjectSettings.get_setting(
 
 #region EXPORTS
 
+@export var FileMenu : PopupMenu
 @export var LocaleEntryScene : PackedScene
 @export var editText : TextEdit
 @export var RichTextPreview : RichTextLabel
@@ -45,6 +46,8 @@ var _save_as_shortcut := Shortcut.new()
 
 var _selected_entry : EditorLocaleEntry
 var _selected_index : int
+
+var currentFiles : PackedStringArray = []
 # Any methods prefixed with two underscores are for UndoRedo calls ONLY.
 var __ur: EditorUndoRedoManager
 #endregion
@@ -54,6 +57,8 @@ var __ur: EditorUndoRedoManager
 @onready var _load_button := %LoadButton as Button
 @onready var _save_button := %SaveButton as Button
 @onready var _save_as_button: Button = %SaveAsButton
+@onready var refresh_files_button: Button = %RefreshFilesButton
+
 
 @onready var _current_edit_label := %CurrentEditLabel as Label
 
@@ -107,6 +112,8 @@ func _ready() -> void:
 	_word_wrap_toggle.toggled.connect(_on_word_wrap_toggled)
 	_new_code_button.pressed.connect(_on_add_locale_button_pressed)
 	_new_entry_button.pressed.connect(_on_new_entry_pressed)
+	refresh_files_button.pressed.connect(UpdateFiles)
+	
 	_header_scroll.get_h_scroll_bar().value_changed.connect(_on_header_h_scroll)
 	_body_scroll.get_h_scroll_bar().value_changed.connect(_on_body_h_scroll)
 	
@@ -116,6 +123,8 @@ func _ready() -> void:
 			EditorTranslationsPlugin.LAST_EDITED_KEY)
 		if !path.is_empty():
 			_load_csv(path)
+	
+	UpdateFiles()
 
 
 func _exit_tree() -> void:
@@ -546,6 +555,35 @@ func __update_header_data(p_index: int, p_value: String) -> void:
 #endregion
 
 #region LOADING
+func UpdateFiles() -> void:
+	FileMenu.clear()
+	currentFiles.clear()
+	
+	var path := ProjectSettings.get_setting(
+			EditorTranslationsPlugin.LOCALISATION_DIR)
+	
+	var DirsToExplore :Array[String] = [path]
+	for g in DirsToExplore:
+		var dir = DirAccess.open(g)
+		if dir:
+			dir.list_dir_begin()
+			var file_name = dir.get_next()
+			while file_name != "":
+				if dir.current_is_dir():
+					print("Found directory: " + file_name)
+					DirsToExplore.append(g + "/" + file_name)
+				else:
+					print("Found file: " + file_name)
+					if (file_name.get_extension() == "csv"):
+						currentFiles.append(g + "/" + file_name)
+						FileMenu.add_item(file_name.get_file())
+				
+				file_name = dir.get_next()
+	EditorInterface.get_editor_toaster().push_toast("CSV Files updated")
+
+func _on_open_file_index_pressed(index: int) -> void:
+	_load_csv(currentFiles[index])
+
 func _on_load_pressed(p_path: String = "") -> void:
 	if !_dirty:
 		_handle_load_request(p_path)

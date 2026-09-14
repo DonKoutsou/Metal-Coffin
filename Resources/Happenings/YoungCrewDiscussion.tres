@@ -88,21 +88,17 @@ Text = "Looking away you realise the boy is in a state of panic, you gaze is tho
 
 [sub_resource type="Resource" id="Resource_fp7aa"]
 script = ExtResource("3_3td2i")
-Text = "teste2123"
-
-[sub_resource type="Resource" id="Resource_xyjb8"]
-script = ExtResource("3_3td2i")
 Text = "His look is lost into the void, you can see his chest going in and out but his expression shows that he is suffocating."
 
-[sub_resource type="Resource" id="Resource_t8u56"]
+[sub_resource type="Resource" id="Resource_xyjb8"]
 script = ExtResource("1_qaalc")
-Texts = Array[ExtResource("3_3td2i")]([SubResource("Resource_de3xx"), SubResource("Resource_wqtgw"), SubResource("Resource_52361"), SubResource("Resource_fp7aa"), SubResource("Resource_xyjb8")])
+Texts = Array[ExtResource("3_3td2i")]([SubResource("Resource_de3xx"), SubResource("Resource_wqtgw"), SubResource("Resource_52361"), SubResource("Resource_fp7aa")])
 Options = Array[ExtResource("2_3td2i")]([SubResource("Resource_3td2i"), SubResource("Resource_jayp1")])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [resource]
 script = ExtResource("4_ni7lq")
 HappeningName = "The young recruit"
-Stages = Array[ExtResource("1_qaalc")]([SubResource("Resource_t8u56")])
+Stages = Array[ExtResource("1_qaalc")]([SubResource("Resource_xyjb8")])
 HappeningAppearance = 1
 Special = true

@@ -4,15 +4,28 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_shk70"]
 bg_color = Color(0.4085841, 0.40858412, 0.408584, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8xpfb"]
 bg_color = Color(0.32568854, 0.32568854, 0.3256885, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0a5i4"]
 bg_color = Color(0.44188052, 0.44188052, 0.44188035, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_780nc"]
 bg_color = Color(0.1443032, 0.14430341, 0.14430326, 1)
+corner_detail = 4
 
 [node name="InventoryBox" unique_id=1449330592 instance=ExtResource("1_shk70")]
 

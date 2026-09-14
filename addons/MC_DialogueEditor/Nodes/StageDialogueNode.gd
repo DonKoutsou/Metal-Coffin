@@ -26,7 +26,8 @@ func ConfigureStage(st : HappeningStage, t : HappeningText) -> void:
 		resPicker.edited_resource = st
 
 	textInput.text = text.Text
-	rich.text = text.Text
+	
+	rich.text = TranslationServer.get_or_add_domain(&"godot.editor").translate(text.Text)
 	
 	if (text.Pic != ""):
 		PicPicket.edited_resource = load(text.Pic)
@@ -38,14 +39,14 @@ func TextChanged(t : HappeningText) -> void:
 		
 	print("thing")
 	textInput.text = t.Text
-	rich.text = t.Text
+	rich.text = TranslationServer.get_or_add_domain(&"godot.editor").translate(t.Text)
 
 #------------------------------------------------------------------------
 func _on_text_edit_text_changed() -> void:
 	var newText = textInput.text
 	currentlyChanging = true
 	text.Text = newText
-	rich.text = newText
+	rich.text = TranslationServer.get_or_add_domain(&"godot.editor").translate(newText)
 	currentlyChanging = false
 
 	Changed.emit()

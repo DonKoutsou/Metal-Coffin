@@ -31,3 +31,15 @@ func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 #
 #func get_input_port_position(port : int) -> Vector2:
 	#return Vector2(size.x, size.y / 2)
+
+func translate(text: String) -> String:
+	var localized_text: String
+	if Engine.is_editor_hint():
+		var translation: Translation = TranslationServer.get_translation_object("english")
+		localized_text = translation.get_message(text)
+	else:
+		localized_text = tr(text)
+
+	if localized_text == "":
+		return text
+	return localized_text
