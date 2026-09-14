@@ -7,6 +7,8 @@ class_name DroneOptionDialogueNode
 
 func ConfigureOption(options : Happening_Option) -> void:
 	super(options)
+	if (options is not Drone_Happening_Option):
+		print_stack()
 	var op : Drone_Happening_Option = options
 	DronePicker.edited_resource = op.Cpt
 

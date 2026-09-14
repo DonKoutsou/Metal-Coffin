@@ -24,6 +24,7 @@ var currentHappening : int = 0
 
 var currentY : float = 0
 var currentX : float = 0
+var optionsSpace : float = 0
 
 var history : EditorUndoRedoManager
 
@@ -131,27 +132,67 @@ func UpdateDilogues() -> void:
 				file_name = dir.get_next()
 
 #-----------------------------------------------
+##Spawns the happening's graph
 func SetHappening(id : int) -> void:
+	#store the index
+	currentHappening = id
+	
+	#initialise the position variables
 	currentX = 0
 	currentY = 0
 	
+	#clean graph
 	graph.clear_connections()
 	for g in graph.get_children():
 		if (g is GraphElement):
 			g.free()
 	
-	currentHappening = id
+	#load happening
 	var diag : Happening = Happenings[id].duplicate(true)
+	
+	#update UI
 	CurrentHappeningLabel.text = "Current Happening : {0}".format([diag.HappeningName])
+	
+	#spawn start node
 	var LastNode : Array[BaseDialogueNode] = [CreateDialogueNode(NodeType.START)]
+	
+	
 	for dialogueStageIndex : int in diag.Stages.size():
 		var dialogueStage : HappeningStage = diag.Stages[dialogueStageIndex]
 		
 		currentX = 0
-		var optionsSpace = 500 * dialogueStage.Options.size()
+		optionsSpace = 500 * dialogueStage.Options.size()
 		currentY += optionsSpace / 2
 		
 		LastNode = HandleStage(dialogueStage, LastNode)
+		
+		currentY += LastNode[0].size.y + 100 + optionsSpace / 2
+	
+	LastNode.clear()
+	
+	for dialogueStageIndex : int in diag.StrayBranches.size():
+		
+		var dialogueStage : HappeningStage = diag.StrayBranches[dialogueStageIndex]
+		
+		currentX = 0
+		optionsSpace = 500 * dialogueStage.Options.size()
+		currentY += optionsSpace / 2
+		
+		LastNode = HandleStage(dialogueStage, LastNode)
+		
+		currentY += LastNode[0].size.y + 100 + optionsSpace / 2
+	
+	LastNode.clear()
+	
+	for dialogueStageIndex : int in diag.StrayOptions.size():
+		
+		var dialogueOption : Happening_Option = diag.StrayOptions[dialogueStageIndex]
+		
+		currentX = 0
+		optionsSpace = 0
+		currentY += optionsSpace / 2
+		
+		LastNode = HandleOption(dialogueOption, LastNode)
 		
 		currentY += LastNode[0].size.y + 100 + optionsSpace / 2
 	
@@ -161,7 +202,7 @@ func SetHappening(id : int) -> void:
 	SpecialCheck.set_pressed_no_signal(diag.Special)
 	AllowedApBox.set_value_no_signal(diag.AllowedAppearances)
 	RecruitCheck.set_pressed_no_signal(diag.CrewRecruit)
-	graph.arrange_nodes()
+	#graph.arrange_nodes()
 
 #-----------------------------------------------
 func HandleStage(stage : HappeningStage, connection : Array[BaseDialogueNode] = [], connectionIndex : int = 0) -> Array[BaseDialogueNode]:
@@ -184,78 +225,87 @@ func HandleStage(stage : HappeningStage, connection : Array[BaseDialogueNode] = 
 	
 	var lastOptions : Array[BaseDialogueNode]
 	if (stage.Options.size() > 0):
-		var optionsY = currentY - optionsSpace / 2 + 250
 		
 		for option : Happening_Option in stage.Options:
-			var lastOption : BaseDialogueNode
-			var newNode
-			if (option is Drone_Happening_Option):
-				newNode = CreateDialogueNode(NodeType.DRONE_OPTION)
-			else: if (option is String_Happening_Option):
-				newNode = CreateDialogueNode(NodeType.OPTION)
-			else: if (option is Recruit_Locator_Happening_Option):
-				newNode = CreateDialogueNode(NodeType.REC_LOC)
-			else: if (option is Village_Locator_Happening_Option):
-				newNode = CreateDialogueNode(NodeType.VIL_LOC)
-
-			
-			newNode.ConfigureOption(option)
-			for g in lastNodes:
-				graph.connect_node(g.name, 0, newNode.name, 0)
-				
-			newNode.position_offset = Vector2(currentX, optionsY)
-			lastOption = newNode
-			
-			var branchSpace = 0
-			if (option.WorldviewCheck != WorldView.WorldViews.NONE):
-				branchSpace = 500
-			
-			var lastY = currentY
-			var lastX = currentX
-			
-			currentX += lastOption.size.x + 100
-			currentY = optionsY - branchSpace / 2
-			
-			
-			var lastBranch : BaseDialogueNode = lastOption
-			
-			var found : bool = false
-			for g : OptionDialogueNode in lastOptions:
-				if (g.option.Branch == option.Branch):
-					var conenctedStage = GetNextStage(g)
-					if (conenctedStage != null):
-						graph.connect_node(lastOption.name, 0, conenctedStage.name, 0)
-						found = true
-						break
-			
-			if (!found and option.Branch != null):
-				lastBranch = HandleStage(option.Branch, [lastBranch])[0]
-			
-			currentY = lastY
-			currentX = lastX
-				
-
-			if (option.WorldviewCheck != WorldView.WorldViews.NONE):
-				currentX += lastOption.size.x + 100
-				currentY = optionsY + branchSpace / 2
-				
-				lastBranch = lastOption
-				
-				if (option.WorldViewFailBranch != null):
-					lastBranch = HandleStage(option.WorldViewFailBranch, [lastBranch], 1)[0]
-				
-				currentY = lastY
-				currentX = lastX
-				
-			if (!lastOption.option.FinishDiag):
-				lastOptions.append(lastOption)
-			optionsY += lastOption.size.y + 100
+			lastOptions = HandleOption(option, lastNodes)
 			
 	if (lastOptions.size() > 0):
 		return lastOptions
 		
 	return lastNodes
 
+#-------------------------------------------------------------------
+func HandleOption(option : Happening_Option, lastNodes : Array[BaseDialogueNode]) -> Array[BaseDialogueNode]:
+	var optionsY = currentY - optionsSpace / 2 + 250
+	
+	var lastOptions : Array[BaseDialogueNode]
+
+	var lastOption : BaseDialogueNode
+	var newNode
+	if (option is Drone_Happening_Option):
+		print("thing")
+		newNode = CreateDialogueNode(NodeType.DRONE_OPTION)
+	else: if (option is String_Happening_Option):
+		newNode = CreateDialogueNode(NodeType.OPTION)
+	else: if (option is Recruit_Locator_Happening_Option):
+		newNode = CreateDialogueNode(NodeType.REC_LOC)
+	else: if (option is Village_Locator_Happening_Option):
+		newNode = CreateDialogueNode(NodeType.VIL_LOC)
+	else:
+		newNode = CreateDialogueNode(NodeType.OPTION)
+		
+	
+	newNode.ConfigureOption(option)
+	for g in lastNodes:
+		graph.connect_node(g.name, 0, newNode.name, 0)
+		
+	newNode.position_offset = Vector2(currentX, optionsY)
+	lastOption = newNode
+	
+	var branchSpace = 0
+	if (option.WorldviewCheck != WorldView.WorldViews.NONE):
+		branchSpace = 500
+	
+	var lastY = currentY
+	var lastX = currentX
+	
+	currentX += lastOption.size.x + 100
+	currentY = optionsY - branchSpace / 2
+	
+	var lastBranch : BaseDialogueNode = lastOption
+	
+	var found : bool = false
+	for g : OptionDialogueNode in lastOptions:
+		if (g.option.Branch == option.Branch):
+			var conenctedStage = GetNextStage(g)
+			if (conenctedStage != null):
+				graph.connect_node(lastOption.name, 0, conenctedStage.name, 0)
+				found = true
+				break
+	
+	if (!found and option.Branch != null):
+		lastBranch = HandleStage(option.Branch, [lastBranch])[0]
+	
+	currentY = lastY
+	currentX = lastX
+		
+	if (option.WorldviewCheck != WorldView.WorldViews.NONE):
+		currentX += lastOption.size.x + 100
+		currentY = optionsY + branchSpace / 2
+		
+		lastBranch = lastOption
+		
+		if (option.WorldViewFailBranch != null):
+			lastBranch = HandleStage(option.WorldViewFailBranch, [lastBranch], 1)[0]
+		
+		currentY = lastY
+		currentX = lastX
+		
+	if (!lastOption.option.FinishDiag):
+		lastOptions.append(lastOption)
+	optionsY += lastOption.size.y + 100
+	
+	return lastOptions
 #---------------------------------------------------------
 ##Merges Stages into 1
 func MergeStages(Stages : Array[HappeningStage]) -> void:
@@ -273,23 +323,32 @@ func MergeStages(Stages : Array[HappeningStage]) -> void:
 #--------------------------------------------------------
 func CreateDialogueAtMousePos(type : NodeType = NodeType.NORMAL) -> void:
 	var pos = (graph.get_local_mouse_position() + graph.scroll_offset) / graph.zoom
-	CreateDialogueNode(type, pos)
+	CreateDialogueNode(type, pos, true)
+	ResaveHappening()
 
 #--------------------------------------------------------
-func CreateDialogueNode(type : NodeType = NodeType.NORMAL, posOverride : Vector2 = Vector2.INF) -> BaseDialogueNode:
+func CreateDialogueNode(type : NodeType = NodeType.NORMAL, posOverride : Vector2 = Vector2.INF, init : bool = false) -> BaseDialogueNode:
 	var node : BaseDialogueNode = NodeScenes[type].instantiate()
 	graph.add_child(node)
 	node.node_selected.connect(OnNodeSelected.bind(node))
 	
 	#node.Changed.connect(ResaveHappening)
 	
-	if (node is StageDialogueNode):
-		var newStage = HappeningStage.new()
-		var t : Array[HappeningText] = []
-		var text = HappeningText.new()
-		t.append(text)
-		newStage.Texts = t
-		node.ConfigureStage(newStage, text)
+	if (init):
+		if (node is StageDialogueNode):
+			var newStage = HappeningStage.new()
+			var t : Array[HappeningText] = []
+			var text = HappeningText.new()
+			t.append(text)
+			newStage.Texts = t
+			node.ConfigureStage(newStage, text)
+		
+		else: if (node is DroneOptionDialogueNode):
+			var newOption = Drone_Happening_Option.new()
+			node.ConfigureOption(newOption)
+		else: if (node is OptionDialogueNode):
+			var newOption = Happening_Option.new()
+			node.ConfigureOption(newOption)
 	
 	if (posOverride != Vector2.INF):
 		node.position_offset = posOverride
@@ -393,11 +452,11 @@ func OnNodeConnected(from_node: StringName, from_port: int, to_node: StringName,
 	graph.connect_node(from_node, from_port, to_node, to_port)
 	ResaveHappening()
 
-
+#---------------------------------------------------------------------
 func OnNodeConectToEmpty(from_node: StringName, from_port: int, release_position: Vector2) -> void:
 	pass # Replace with function body.
 
-
+#----------------------------------------------------------------------
 func OnNodeDisconnected(from_node: StringName, from_port: int, to_node: StringName, to_port: int, addToHistory : bool = true) -> void:
 	#pass
 	var from : BaseDialogueNode = graph.get_node(NodePath(from_node))
@@ -424,13 +483,14 @@ func OnNodeDisconnected(from_node: StringName, from_port: int, to_node: StringNa
 		history.commit_action(false)
 	
 	graph.disconnect_node(from_node, from_port, to_node, to_port)
+	ResaveHappening()
 
 func _on_popup_menu_index_pressed(index: int) -> void:
 	SetHappening(index)
 
 
 func _on_popup_menu_2_index_pressed(index: int) -> void:
-	CreateDialogueNode(index)
+	CreateDialogueNode(index, Vector2.INF, true)
 
 #func GetStageOwner(stage : StageDialogueNode) -> Array[HappeningStage]:
 	#var prev = GetPrevStage(stage)
@@ -450,7 +510,8 @@ func _on_popup_menu_2_index_pressed(index: int) -> void:
 #------------------------------------------------------------------
 func GenerateHappening() -> void:
 	var stages : Array[HappeningStage] = []
-	
+	var strays : Array[HappeningStage] = []
+	var strayOptions : Array[Happening_Option] = []
 	var start = get_tree().get_nodes_in_group("StartNode")
 	if (start.size() > 1):
 		printerr("More than one starting node exist")
@@ -462,11 +523,52 @@ func GenerateHappening() -> void:
 	
 	var origin : StageDialogueNode = GetNextStage(start[0])
 	stages.append(RecoverStageBranch(origin))
+	
+	var nodes = graph.get_children()
+
+	for node in nodes:
+		if (node is not BaseDialogueNode):
+			continue
+		if (!IsConnectedToBranch(node)):
+			if (node is StageDialogueNode):
+				var strayBranch = RecoverStageBranch(node)
+				strays.append(strayBranch)
+				
+			else: if (node is OptionDialogueNode):
+				var branchOrigin = GetNextStage(node)
+				if (branchOrigin != null):
+					var branch = RecoverStageBranch(branchOrigin)
+					node.option.Branch = branch
+				var worldviewBranchOrigin = GetNextStage(node, 1)
+				if (worldviewBranchOrigin != null):
+					var worldviewBranch = RecoverStageBranch(worldviewBranchOrigin)
+					node.option.WorldViewFailBranch = worldviewBranch
+					
+				strayOptions.append(node.option)
+			
 	#var current : BaseDialogueNode = origin
 	Happenings[currentHappening].Stages = stages
+	Happenings[currentHappening].StrayBranches = strays
+	Happenings[currentHappening].StrayOptions = strayOptions
 		
+func IsConnectedToBranch(node : BaseDialogueNode) -> bool:
+	var connections = graph.get_connection_list_from_node(node.name) 
+	for connectionInfo in connections:
+		var from : StringName = connectionInfo["from_node"]
+		var from_port : int = connectionInfo["from_port"]
+		var to : StringName = connectionInfo["to_node"]
+		var to_port : int = connectionInfo["to_port"]
+		
+		if (to == node.name):
+			return true
+	
+	return false	
+	
+
 func RecoverStageBranch(origin : StageDialogueNode) -> HappeningStage:
 	var stage : HappeningStage = origin.stage
+	if (stage == null):
+		print_stack()
 	var texts : Array[HappeningText] = []
 	var options : Array[Happening_Option]
 	

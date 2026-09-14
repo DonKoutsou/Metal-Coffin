@@ -22,6 +22,8 @@ func ConfigureOption(options : Happening_Option) -> void:
 	
 	if (options is String_Happening_Option):
 		text2.text = options.StringReply
+		$VBoxContainer/Label2.visible = true
+		text2.visible = true
 	else:
 		$VBoxContainer/Label2.visible = false
 		text2.visible = false

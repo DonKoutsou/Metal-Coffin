@@ -12,7 +12,7 @@ corner_radius_bottom_left = 4
 corner_detail = 1
 shadow_size = 16
 
-[node name="BaseDialogueNode" unique_id=462244291 node_paths=PackedStringArray("resourceLoc", "spinB") instance=ExtResource("1_qbeot")]
+[node name="BaseDialogueNode" unique_id=462244291 node_paths=PackedStringArray("resourceLoc", "spinB") groups=["DialogueNode"] instance=ExtResource("1_qbeot")]
 offset_left = -305.0
 offset_top = -284.0
 offset_right = 305.0

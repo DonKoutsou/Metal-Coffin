@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bnc8ljs1sfr3b" path="res://addons/MC_DialogueEditor/Nodes/StageDialogueNode.gd" id="1_bdjdn"]
 [ext_resource type="PackedScene" uid="uid://bufavwhp5d2x8" path="res://addons/MC_DialogueEditor/Nodes/BaseDialogueNode.tscn" id="2_ywap6"]
 
-[node name="BaseDialogueNode" unique_id=462244291 node_paths=PackedStringArray("resPicker", "textPicket", "textInput", "rich", "PicPicket") instance=ExtResource("2_ywap6")]
+[node name="BaseDialogueNode" unique_id=462244291 node_paths=PackedStringArray("resPicker", "textPicket", "textInput", "rich", "PicPicket") groups=["DialogueNode"] instance=ExtResource("2_ywap6")]
 offset_left = -209.0
 offset_top = -348.0
 offset_right = 209.0

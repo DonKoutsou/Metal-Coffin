@@ -4,7 +4,8 @@ class_name Happening
 
 @export var HappeningName : String
 @export var Stages : Array[HappeningStage]
-
+@export var StrayBranches : Array[HappeningStage]
+@export var StrayOptions : Array[Happening_Option]
 @export var HappeningAppearance : GameStage
 @export var Special : bool = false
 @export var CrewRecruit : bool = false
