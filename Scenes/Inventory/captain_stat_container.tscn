@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="6_uviis"]
 [ext_resource type="PackedScene" uid="uid://dk1p1g38kvyjb" path="res://Scenes/Inventory/InventoryInterface.tscn" id="7_qyvw6"]
 [ext_resource type="PackedScene" uid="uid://muscxdppqdat" path="res://Scenes/Inventory/CaptainsDispotitionUI.tscn" id="8_7pj6b"]
+[ext_resource type="StyleBox" uid="uid://cmk8a60qvg41" path="res://Theme/StatLegendPanel.tres" id="9_w2nvp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_12j2j"]
 content_margin_left = 8.0
@@ -30,20 +31,6 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.282501, 0.267741, 0.268801, 1)
-border_blend = true
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-corner_detail = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gxgtf"]
-bg_color = Color(1, 0.763983, 0.0812772, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.423551, 0.31482, 2.40654e-07, 1)
 border_blend = true
 corner_radius_top_left = 6
 corner_radius_top_right = 6
@@ -257,7 +244,7 @@ alignment = 1
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_gxgtf")
+theme_override_styles/panel = ExtResource("9_w2nvp")
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer2" unique_id=670223122]
 layout_mode = 2

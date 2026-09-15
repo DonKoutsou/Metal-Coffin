@@ -1,0 +1,142 @@
+[gd_scene format=3 uid="uid://7ijgqxojpl66"]
+
+[ext_resource type="Script" uid="uid://cmmdbw6m6vvlx" path="res://Scenes/ScreenUI/chain.gd" id="1_4vis4"]
+[ext_resource type="AudioStream" uid="uid://dav21tobj6piv" path="res://Assets/Sounds/ButtonIn2.mp3" id="2_4vis4"]
+[ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_7y50o"]
+[ext_resource type="AudioStream" uid="uid://52ga378orxqr" path="res://Assets/Sounds/ButtonOut2.mp3" id="3_reoc1"]
+[ext_resource type="Texture2D" uid="uid://b8rndami8lv7w" path="res://Assets/UIPiecies/Screen/ball.png" id="4_2v2ax"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1vivr"]
+height = 63.13748
+
+[node name="Chain" type="Node2D" unique_id=1069143228 node_paths=PackedStringArray("Line", "shadowLine") groups=["Shakable"]]
+position = Vector2(90, 53.999992)
+script = ExtResource("1_4vis4")
+Line = NodePath("PinJoint2D/Line2D")
+shadowLine = NodePath("PinJoint2D/Line2D/Line2D2")
+UIm = ExtResource("2_7y50o")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="." unique_id=900413356]
+position = Vector2(-3.8146973e-06, 31)
+node_a = NodePath("../RigidBody2D")
+node_b = NodePath("../RigidBody2D2")
+softness = 0.1
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="PinJoint2D" unique_id=115532384]
+position = Vector2(0, -31)
+stream = ExtResource("2_4vis4")
+volume_db = -5.0
+pitch_scale = 3.0
+bus = &"MapSounds"
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="PinJoint2D" unique_id=1166560084]
+position = Vector2(0, -31)
+stream = ExtResource("3_reoc1")
+volume_db = -5.0
+pitch_scale = 3.0
+bus = &"MapSounds"
+
+[node name="Line2D" type="Line2D" parent="PinJoint2D" unique_id=795949256]
+show_behind_parent = true
+texture_filter = 3
+texture_repeat = 2
+position = Vector2(0, -31)
+texture = ExtResource("4_2v2ax")
+texture_mode = 1
+
+[node name="Line2D2" type="Line2D" parent="PinJoint2D/Line2D" unique_id=1755414619]
+modulate = Color(0, 0, 0, 0.5058824)
+texture_filter = 3
+texture_repeat = 2
+position = Vector2(-7, 5.0000076)
+texture = ExtResource("4_2v2ax")
+texture_mode = 1
+
+[node name="RigidBody2D" type="StaticBody2D" parent="." unique_id=1109605505]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=34340262]
+shape = SubResource("CapsuleShape2D_1vivr")
+
+[node name="Control" type="Control" parent="RigidBody2D" unique_id=726742540]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -10.0
+offset_top = -29.999992
+offset_right = 10.0
+offset_bottom = 30.000008
+mouse_filter = 2
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="." unique_id=607885538]
+position = Vector2(0, 64.00001)
+input_pickable = true
+mass = 25.063
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D2" unique_id=1223409180]
+shape = SubResource("CapsuleShape2D_1vivr")
+
+[node name="Control" type="Control" parent="RigidBody2D2" unique_id=1374505926]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -10.0
+offset_top = -30.0
+offset_right = 10.0
+offset_bottom = 30.0
+mouse_filter = 2
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="." unique_id=1136337319]
+position = Vector2(1.5258789e-05, 98.00001)
+node_a = NodePath("../RigidBody2D2")
+node_b = NodePath("../RigidBody2D3")
+softness = 0.1
+
+[node name="RigidBody2D3" type="RigidBody2D" parent="." unique_id=463368646]
+position = Vector2(0, 129)
+input_pickable = true
+mass = 25.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D3" unique_id=1398065625]
+shape = SubResource("CapsuleShape2D_1vivr")
+
+[node name="Control" type="Control" parent="RigidBody2D3" unique_id=524029652]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -10.0
+offset_top = -30.0
+offset_right = 10.0
+offset_bottom = 30.0
+mouse_filter = 2
+
+[node name="PinJoint2D3" type="PinJoint2D" parent="." unique_id=1310925721]
+position = Vector2(1.5258789e-05, 162)
+node_a = NodePath("../RigidBody2D3")
+node_b = NodePath("../RigidBody2D4")
+softness = 0.1
+
+[node name="RigidBody2D4" type="RigidBody2D" parent="." unique_id=819224093]
+position = Vector2(0, 194)
+input_pickable = true
+mass = 25.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D4" unique_id=873395672]
+shape = SubResource("CapsuleShape2D_1vivr")
+
+[node name="Control" type="Control" parent="RigidBody2D4" unique_id=873524342]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -10.0
+offset_top = -30.0
+offset_right = 10.0
+offset_bottom = 30.0
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D4" unique_id=859851352]
+texture_filter = 3
+rotation = 1.5707964
+scale = Vector2(0.3181286, 0.3181286)
+texture = ExtResource("4_2v2ax")
+
+[node name="Sprite2D2" type="Sprite2D" parent="RigidBody2D4/Sprite2D" unique_id=1097477964]
+modulate = Color(0, 0, 0, 0.52156866)
+show_behind_parent = true
+texture_filter = 3
+position = Vector2(32.000015, 24.000011)
+texture = ExtResource("4_2v2ax")

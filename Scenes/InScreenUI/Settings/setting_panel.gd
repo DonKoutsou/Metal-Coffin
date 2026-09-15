@@ -31,7 +31,7 @@ func _ready() -> void:
 	FPSLabel.text = var_to_str(roundi(Engine.max_fps))
 	
 	colorsSlider.max_value = ColorManager.COLORS.size() - 1
-	colorsSlider.value = ColorManager.COLORS.values().find(ColorManager.instance.col)
+	colorsSlider.set_value_no_signal(ColorManager.CurrentColor)
 	
 #-------------------------------------------------------------------
 ##FULLSCREEN
@@ -95,4 +95,4 @@ func _on_fps_value_changed(value: float) -> void:
 
 
 func _on_h_slider_value_changed(value: float) -> void:
-	ColorManager.instance.col = ColorManager.COLORS.values()[roundi(value)]
+	ColorManager.CurrentColor = roundi(value)

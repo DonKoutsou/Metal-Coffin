@@ -89,7 +89,6 @@ layout_mode = 2
 
 [node name="FriendlyCombatants" type="RichTextLabel" parent="VBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=965869961]
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(0.291151, 0.212503, 4.81308e-08, 1)
 theme_override_font_sizes/normal_font_size = 26
 bbcode_enabled = true
 text = "[color=#ffc315]FRIENDLY COMBATANTS[/color]"
@@ -108,7 +107,7 @@ metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_colors/font_outline_color = Color(0.291151, 0.212503, 4.81308e-08, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 26
 bbcode_enabled = true
 fit_content = true
@@ -125,7 +124,6 @@ layout_mode = 2
 
 [node name="FriendlyCasualties" type="RichTextLabel" parent="VBoxContainer/VBoxContainer/PanelContainer4/VBoxContainer" unique_id=653519772]
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(0.291151, 0.212503, 4.81308e-08, 1)
 theme_override_font_sizes/normal_font_size = 26
 bbcode_enabled = true
 text = "[color=#ffc315]FRIENDLY CASUALTIES[/color]"
@@ -144,7 +142,7 @@ metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_colors/font_outline_color = Color(0.291151, 0.212503, 4.81308e-08, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 26
 bbcode_enabled = true
 fit_content = true
@@ -161,7 +159,6 @@ layout_mode = 2
 
 [node name="EnemyCombatants" type="RichTextLabel" parent="VBoxContainer/VBoxContainer/PanelContainer3/VBoxContainer" unique_id=805497251]
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(0.291151, 0.212503, 4.81308e-08, 1)
 theme_override_font_sizes/normal_font_size = 26
 bbcode_enabled = true
 text = "[color=#ffc315]ENEMY COMBATANTS[/color]"
@@ -180,7 +177,7 @@ metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_colors/font_outline_color = Color(0.291151, 0.212503, 4.81308e-08, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 26
 bbcode_enabled = true
 fit_content = true
@@ -197,7 +194,6 @@ layout_mode = 2
 
 [node name="EnemyCasualties" type="RichTextLabel" parent="VBoxContainer/VBoxContainer/PanelContainer5/VBoxContainer" unique_id=1599593591]
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(0.291151, 0.212503, 4.81308e-08, 1)
 theme_override_font_sizes/normal_font_size = 26
 bbcode_enabled = true
 text = "[color=#ffc315]ENEMY CASUALTIES[/color]"
@@ -216,7 +212,7 @@ metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_colors/font_outline_color = Color(0.291151, 0.212503, 4.81308e-08, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 26
 bbcode_enabled = true
 fit_content = true

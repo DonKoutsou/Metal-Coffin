@@ -2,17 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dgovu7lhdjrjv" path="res://Scripts/Inventory/ItemDescriptor.gd" id="1_2v1h2"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Card_Fight/Card/Card.tscn" id="3_40o7a"]
+[ext_resource type="StyleBox" uid="uid://0fbvc4n3mb7l" path="res://Theme/ProgrssBarBack.tres" id="4_si1ht"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="4_ytvfy"]
 [ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scenes/Card_Fight/External_UI/CardHandContainer.gd" id="5_si1ht"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jut7c"]
-bg_color = Color(1, 0.763983, 0.0812772, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0, 0, 1)
-border_blend = true
 
 [node name="ItemDesc" type="PanelContainer" unique_id=784805534 node_paths=PackedStringArray("ItemName", "ItemDesc", "TransferButton", "UpgradeButton", "CancelUpgradeButton", "CancelInstallButton", "AddItemButton", "IncreaseItemButton", "RemoveItemButton", "UpgradeLabel", "CardSection", "CardPlecement", "CloseButton") groups=["ItemDescriptor"]]
 anchors_preset = 15
@@ -82,7 +74,7 @@ size_flags_vertical = 3
 visible = false
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_jut7c")
+theme_override_styles/panel = ExtResource("4_si1ht")
 
 [node name="Label" type="RichTextLabel" parent="HBoxContainer/InputScroll/VBoxContainer" unique_id=1157459895]
 clip_contents = false
@@ -117,7 +109,7 @@ layout_mode = 2
 visible = false
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_jut7c")
+theme_override_styles/panel = ExtResource("4_si1ht")
 
 [node name="CardsSection" type="VBoxContainer" parent="HBoxContainer/InputScroll/VBoxContainer/VBoxContainer" unique_id=861473671]
 layout_mode = 2
@@ -141,7 +133,7 @@ metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 visible = false
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_jut7c")
+theme_override_styles/panel = ExtResource("4_si1ht")
 
 [node name="ShipPartActions" type="HBoxContainer" parent="HBoxContainer" unique_id=596959331]
 layout_mode = 2

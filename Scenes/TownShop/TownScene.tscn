@@ -80,7 +80,7 @@ canvas_item_default_texture_filter = 2
 gui_disable_input = true
 gui_snap_controls_to_pixels = false
 oversampling = false
-size = Vector2i(1587, 893)
+size = Vector2i(2812, 1582)
 size_2d_override = Vector2i(1280, 720)
 size_2d_override_stretch = true
 render_target_update_mode = 4
@@ -102,7 +102,7 @@ show_behind_parent = true
 position = Vector2(0, 15)
 points = PackedVector2Array(0, 0, 0, 45.15)
 width = 2.0
-default_color = Color(1, 0.763983, 0.0812772, 1)
+default_color = Color(0.078431375, 0.078431375, 0.078431375, 1)
 
 [node name="Button2" type="Button" parent="." unique_id=1637034197 groups=["DigitalButtons"]]
 layout_mode = 0
@@ -121,7 +121,7 @@ show_behind_parent = true
 position = Vector2(0, 15)
 points = PackedVector2Array(0, 0, 0, 45.15)
 width = 2.0
-default_color = Color(1, 0.763983, 0.0812772, 1)
+default_color = Color(0.078431375, 0.078431375, 0.078431375, 1)
 
 [node name="Button3" type="Button" parent="." unique_id=889283665 groups=["DigitalButtons"]]
 layout_mode = 0
@@ -140,7 +140,7 @@ show_behind_parent = true
 position = Vector2(0, 15)
 points = PackedVector2Array(0, 0, 0, 45.15)
 width = 2.0
-default_color = Color(1, 0.763983, 0.0812772, 1)
+default_color = Color(0.078431375, 0.078431375, 0.078431375, 1)
 
 [node name="Button4" type="Button" parent="." unique_id=1157279868 groups=["DigitalButtons"]]
 layout_mode = 0
@@ -159,7 +159,7 @@ show_behind_parent = true
 position = Vector2(0, 15)
 points = PackedVector2Array(0, 0, 0, 45.15)
 width = 2.0
-default_color = Color(1, 0.763983, 0.0812772, 1)
+default_color = Color(0.078431375, 0.078431375, 0.078431375, 1)
 
 [node name="Button5" type="Button" parent="." unique_id=540197795 groups=["DigitalButtons"]]
 layout_mode = 0
@@ -178,7 +178,7 @@ show_behind_parent = true
 position = Vector2(0, 15)
 points = PackedVector2Array(0, 0, 0, 45.15)
 width = 2.0
-default_color = Color(1, 0.763983, 0.0812772, 1)
+default_color = Color(0.078431375, 0.078431375, 0.078431375, 1)
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=57633186]
 layout_mode = 1

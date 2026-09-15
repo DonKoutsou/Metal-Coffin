@@ -7,33 +7,40 @@ class_name ColorManager
 @export var bgStyleBoxes : Array[StyleBoxFlat]
 @export var th : Theme
 
-static var COLORS : Dictionary[String, Color] = {
-	"ORANGE" : Color("ff8a14"),
-	"YELLOW" : Color("ffc315"),
-	"WHITE" : Color(1,1,1),
-}
+static var COLORS : Array[Color] = [
+	Color("ff8a14"),
+	Color("ffc315"),
+	Color(1,1,1),
+	Color(0.486, 0.597, 0.669, 1.0),
+	Color(0.779, 1.0, 0.22, 1.0),
+	Color(0.48, 0.515, 1.0, 1.0)
+]
 
-
-
-@export_color_no_alpha var col : Color = Color(1,1,1):
+static var CurrentColor : int = 3:
 	set(value):
-		col = value
-		UpdateColors()
+		CurrentColor = value
+		instance.UpdateColors()
 
 static var instance : ColorManager
+
+static func GetCurrentColor() -> Color:
+	return COLORS[CurrentColor]
 
 func _ready() -> void:
 	instance = self
 	UpdateColors()
 		
 func UpdateColors()-> void:
+	var col = COLORS[CurrentColor]
+	
 	for g in styleBoxes:
 		g.border_color = col
 	
 	for g in bgStyleBoxes:
 		g.bg_color = col
-	
+		
 	th.set_color("font_color", "Label", col)
+	th.set_color("default_color", "RichTextLabel", col)
 	
 	th.set_color("caret_color", "LineEdit", col)
 	th.set_color("clear_button_color", "LineEdit", col)

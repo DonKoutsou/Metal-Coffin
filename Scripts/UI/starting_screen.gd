@@ -187,6 +187,8 @@ func LoadSavedSettings() -> void:
 	ScreenCamera.ShakeEffects = sav.ShakeEffect
 	SettingsPanel.HasRain = sav.Rain
 
+	ColorManager.CurrentColor = sav.UI_Color
+
 #-----------------------------------------------------------------------------------
 func UpdateSavedSettings() -> void:
 	var save = Saved_Settings.new()
@@ -201,4 +203,6 @@ func UpdateSavedSettings() -> void:
 	save.ShakeEffect = ScreenCamera.ShakeEffects
 	save.GameVersion = ProjectSettings.get_setting("application/config/version")
 	save.FPS = Engine.max_fps
+	save.UI_Color = ColorManager.CurrentColor
+
 	ResourceSaver.save(save, "user://Settings.tres")

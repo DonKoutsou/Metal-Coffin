@@ -9,6 +9,7 @@ class_name ScreenCamera
 @export var LightPivot1 : Node2D
 @export var ShakeSound : AudioStreamPlayer
 @export var BoomSound : AudioStreamPlayer
+@export var Ch : Chain
 
 #Starting Position of camera
 var OriginalPos : Vector2
@@ -20,7 +21,8 @@ var GoDownValue = 1
 var Shake = false
 var GoingDown = false
 var shakestr = 1.5
-
+var lightState : bool = true
+var lastLightStage : float = 0.0
 static var ShakeEffects : bool = true
 
 func _ready() -> void:
@@ -29,6 +31,7 @@ func _ready() -> void:
 	EventHandler.DamageShake.connect(EnableDamageShake)
 	EventHandler.Storm.connect(EnableStormShake)
 	EventHandler.MissileShake.connect(EnableMissileShake)
+	EventHandler.LightToggled.connect(_on_chain_clicked)
 	ShakeSound.play()
 	PauseShake(true)
 	OriginalPos = position
@@ -146,6 +149,16 @@ func _physics_process(delta: float) -> void:
 			PauseShake(true)
 		var of = RandomOffset()
 		offset += of
+	
+	var l = WeatherManage.GetLightAmm()
+	var mappedLight = Helper.mapf(l, 0.6, 1, 0.08, 0.9)
+	$CanvasModulate.color = Color(0.9 * mappedLight, 0.9 * mappedLight, mappedLight)
+	#return
+	if (l > 0.9 and lastLightStage < 0.9):
+		ToggleLights(false) 
+	else: if (l < 0.8 and lastLightStage > 0.8):
+		ToggleLights(true)
+	lastLightStage = l
 
 func _input(event: InputEvent) -> void:
 	if (Locked):
@@ -168,6 +181,9 @@ func _input(event: InputEvent) -> void:
 			#position = Vector2(newx, newy)
 
 func ToggleLights(t : bool) -> void:
+	if (lightState == t):
+		return
+	lightState = t
 	if (t):
 		Anim.play("TurnOn")
 	$AudioStreamPlayer2.play()
@@ -215,3 +231,7 @@ func get_breath_offset() -> float:
 func RandomOffset()-> Vector2:
 	return Vector2(randf_range(-shakestr, shakestr), randf_range(-shakestr, shakestr))
 var stattween : Tween
+
+
+func _on_chain_clicked() -> void:
+	ToggleLights(!lightState)

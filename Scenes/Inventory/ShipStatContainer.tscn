@@ -2,6 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_netfp"]
 [ext_resource type="Script" uid="uid://ba6i2l3wt1dop" path="res://Scripts/UI/ShipStatContainer.gd" id="2_hehea"]
+[ext_resource type="StyleBox" uid="uid://0fbvc4n3mb7l" path="res://Theme/ProgrssBarBack.tres" id="3_q8fht"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jvfpq"]
 content_margin_left = 2.0
@@ -24,19 +25,6 @@ corner_detail = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jokjb"]
 bg_color = Color(0, 0, 0, 0.3)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5v3x0"]
-bg_color = Color(1, 0.763983, 0.0812772, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.291151, 0.212503, 4.81308e-08, 1)
-corner_radius_top_left = 1
-corner_radius_top_right = 1
-corner_radius_bottom_right = 1
-corner_radius_bottom_left = 1
-corner_detail = 1
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ueh8q"]
 
@@ -110,7 +98,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_jokjb")
-theme_override_styles/fill = SubResource("StyleBoxFlat_5v3x0")
+theme_override_styles/fill = ExtResource("3_q8fht")
 show_percentage = false
 
 [node name="ItemNegBar" type="ProgressBar" parent="ProgressBar" unique_id=1067938817]

@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://mxfnm7hywo4f" path="res://Scenes/Old/damage_floater.tscn" id="3_ej477"]
 [ext_resource type="StyleBox" uid="uid://cq66xt1psso06" path="res://Theme/GreyPanel.tres" id="4_0orxy"]
 [ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scenes/Card_Fight/External_UI/CardHandContainer.gd" id="4_cmntb"]
+[ext_resource type="StyleBox" uid="uid://c4acir3ta8dwv" path="res://Theme/viz_HP_Bar.tres" id="6_0f0kg"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="6_wmwbv"]
 [ext_resource type="Texture2D" uid="uid://de1cx0wwuxx0x" path="res://Assets/smoke_09.png" id="7_cmntb"]
 [ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/ShipTextures/Hull3.png" id="7_ej477"]
@@ -14,19 +15,6 @@
 [ext_resource type="AudioStream" uid="uid://iiqji6xlmffd" path="res://Assets/Sounds/Explosion.wav" id="8_r755l"]
 [ext_resource type="PackedScene" uid="uid://rjp78jwbs17y" path="res://Scenes/Card_Fight/Ship_Visuals/Fire.tscn" id="12_2rekq"]
 [ext_resource type="Shader" uid="uid://bf1f6mjy34nt" path="res://Scenes/Card_Fight/Ship_Visuals/Shield.gdshader" id="13_spb5j"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0orxy"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-content_margin_right = 5.0
-content_margin_bottom = 5.0
-bg_color = Color(1, 0.763983, 0.0812772, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0, 0, 0, 1)
-border_blend = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_avrvh"]
 bg_color = Color(0, 0, 0, 1)
@@ -41,28 +29,10 @@ expand_margin_top = 1.0
 expand_margin_right = 1.0
 expand_margin_bottom = 1.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mg5jy"]
-bg_color = Color(1, 0.763983, 0.0812772, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0, 0, 0, 1)
-border_blend = true
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_avrvh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wmwbv"]
 bg_color = Color(0.421311, 0.88706, 0.915024, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0, 0, 0, 1)
-border_blend = true
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rmogf"]
-bg_color = Color(1, 0.763983, 0.0812772, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -234,7 +204,7 @@ self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_0orxy")
+theme_override_styles/panel = ExtResource("6_0f0kg")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/PanelContainer2/VBoxContainer/PanelContainer3" unique_id=2042759143]
 layout_mode = 2
@@ -287,7 +257,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_avrvh")
-theme_override_styles/fill = SubResource("StyleBoxFlat_mg5jy")
+theme_override_styles/fill = ExtResource("6_0f0kg")
 value = 24.37
 show_percentage = false
 
@@ -310,7 +280,7 @@ show_percentage = false
 custom_minimum_size = Vector2(2.965, 0)
 layout_mode = 2
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_rmogf")
+theme_override_styles/panel = ExtResource("6_0f0kg")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/PanelContainer2/VBoxContainer" unique_id=47076504]
 layout_mode = 2

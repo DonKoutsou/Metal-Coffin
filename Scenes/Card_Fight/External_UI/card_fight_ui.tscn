@@ -12,6 +12,7 @@
 [ext_resource type="StyleBox" uid="uid://bog4o82ggjqwb" path="res://Theme/Buttons/ButtonOrange.tres" id="14_80dwx"]
 [ext_resource type="StyleBox" uid="uid://bxfwfq0uxu1w1" path="res://Theme/Buttons/ButtonOrange_Pressed.tres" id="15_lf8xs"]
 [ext_resource type="StyleBox" uid="uid://bj8tmjsnlmj0" path="res://Theme/Buttons/ButtonBlack.tres" id="16_ksx0p"]
+[ext_resource type="PackedScene" uid="uid://7ijgqxojpl66" path="res://Scenes/ScreenUI/Chain.tscn" id="17_ii2qb"]
 [ext_resource type="StyleBox" uid="uid://g2ic8um6hit" path="res://Theme/Buttons/ButtonBlack_Pressed.tres" id="17_w6rgp"]
 [ext_resource type="PackedScene" uid="uid://buuo261afg6tg" path="res://Scenes/Card_Fight/External_UI/Deck.tscn" id="19_1bbav"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="22_lf8xs"]
@@ -108,6 +109,7 @@ offset_top = 180.0
 offset_right = 621.0
 offset_bottom = 206.0
 grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.7647059, 0.08235294, 1)
 theme_override_font_sizes/font_size = 18
 text = "?"
 horizontal_alignment = 1
@@ -346,6 +348,11 @@ offset_bottom = -407.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+
+[node name="Chain" parent="." unique_id=1069143228 instance=ExtResource("17_ii2qb")]
+position = Vector2(994, -1)
+frequency = 10.0
+phase_offset = 1.5
 
 [connection signal="mouse_entered" from="PlayerCardPlacement" to="." method="MouseIn"]
 [connection signal="mouse_exited" from="PlayerCardPlacement" to="." method="MouseOut"]

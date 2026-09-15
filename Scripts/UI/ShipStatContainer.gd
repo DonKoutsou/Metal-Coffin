@@ -120,7 +120,11 @@ func _on_mouse_entered() -> void:
 	Tooltip.global_position = get_global_mouse_position() - Vector2(0, Tooltip.size.y)
 	Ingame_UIManager.GetInstance().add_child(Tooltip)
 	Tooltip.set_deferred("size", Vector2(Tooltip.size.x,0))
-	Tooltip.get_child(0).text = "[color=#ffc315][font_size=22]{0}[/font_size][/color]\n{1}".format([STAT_CONST.STATS.keys()[STName].replace("_", " ") ,STAT_CONST.GetTooltip(STName)])
+	
+	var col = ColorManager.GetCurrentColor().to_html()
+	var tooptipText = STAT_CONST.GetTooltip(STName).replace("#ffc315", "{0}".format([col]))
+	
+	Tooltip.get_child(0).text = "[color={2}][font_size=22]{0}[/font_size][/color]\n{1}".format([STAT_CONST.STATS.keys()[STName].replace("_", " ") ,tooptipText, col])
 	
 	PositionTooltip()
 	set_process(true)

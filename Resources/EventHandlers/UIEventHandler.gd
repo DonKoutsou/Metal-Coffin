@@ -15,6 +15,7 @@ signal ElevationForced(Value : float)
 
 signal WindCorrectionToggled(t : bool)
 
+signal LightToggled
 #signal AccelerationForced(ForceVal : float)
 #signal DroneButtonPressed()
 signal MissileButtonPressed()
@@ -179,7 +180,8 @@ func OnOpenHatchPressed() -> void:
 
 #func OnSimPausePressed() -> void:
 	#SimPausePressed.emit()
-
+func OnLightToggled() -> void:
+	LightToggled.emit()
 
 func OnInventoryPressed() -> void:
 	InventoryPressed.emit()

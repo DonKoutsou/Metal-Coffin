@@ -20,7 +20,7 @@ translations_plugin/localistation_dir="res://Localisations"
 [application]
 
 config/name="Metal Coffin"
-config/version="0.7.407"
+config/version="0.8"
 run/main_scene="uid://cqxnjihcai1kd"
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.7", "Mobile")
@@ -48,6 +48,7 @@ DispoisitionManager="*uid://cuad168v6mleh"
 FmodManager="*uid://cds10pm7hwn3p"
 BeehaveGlobalMetrics="*uid://c3ktl6ontsdt7"
 BeehaveGlobalDebugger="*uid://bl3ma400hpvsh"
+ColorManagerial="*uid://dhax4ps6tgpc4"
 
 [display]
 

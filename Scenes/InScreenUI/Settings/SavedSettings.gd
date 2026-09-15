@@ -10,3 +10,4 @@ class_name Saved_Settings
 @export var Glitch : bool
 @export var GameVersion : float
 @export var FPS : int
+@export var UI_Color : int

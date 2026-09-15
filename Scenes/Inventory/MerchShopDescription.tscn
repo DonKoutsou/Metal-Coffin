@@ -3,21 +3,13 @@
 [ext_resource type="Script" uid="uid://dgovu7lhdjrjv" path="res://Scripts/Inventory/ItemDescriptor.gd" id="2_1gff0"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Card_Fight/Card/Card.tscn" id="3_c5c2l"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="4_ji6lp"]
+[ext_resource type="StyleBox" uid="uid://0fbvc4n3mb7l" path="res://Theme/ProgrssBarBack.tres" id="4_uhv8j"]
 [ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="5_tvvk2"]
 [ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scenes/Card_Fight/External_UI/CardHandContainer.gd" id="6_pe6aq"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jut7c"]
 content_margin_left = 4.0
 content_margin_right = 4.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uhv8j"]
-bg_color = Color(1, 0.763983, 0.0812772, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0, 0, 1)
-border_blend = true
 
 [node name="ItemDesc" type="PanelContainer" unique_id=249389669 node_paths=PackedStringArray("ItemName", "ItemDesc", "TransferButton", "UpgradeButton", "CancelUpgradeButton", "CancelInstallButton", "AddItemButton", "IncreaseItemButton", "RemoveItemButton", "UpgradeLabel", "CardSection", "CardPlecement", "CloseButton")]
 clip_contents = true
@@ -61,7 +53,7 @@ mouse_filter = 2
 [node name="Panel3" type="Panel" parent="VBoxContainer/HBoxContainer" unique_id=927307814]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_uhv8j")
+theme_override_styles/panel = ExtResource("4_uhv8j")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=1718625062]
 layout_mode = 2
@@ -146,7 +138,7 @@ text = "Transfer"
 [node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer" unique_id=1951460165]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_uhv8j")
+theme_override_styles/panel = ExtResource("4_uhv8j")
 
 [node name="Label" type="RichTextLabel" parent="VBoxContainer/HBoxContainer" unique_id=383859877]
 clip_contents = false
@@ -177,7 +169,7 @@ autowrap_mode = 2
 [node name="Panel2" type="Panel" parent="VBoxContainer/HBoxContainer" unique_id=1325199886]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_uhv8j")
+theme_override_styles/panel = ExtResource("4_uhv8j")
 
 [node name="CardsSection" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=242254743]
 layout_mode = 2
@@ -199,7 +191,7 @@ metadata/_custom_type_script = "uid://bm68ow8pgjukx"
 [node name="Panel4" type="Panel" parent="VBoxContainer/HBoxContainer" unique_id=287541155]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_uhv8j")
+theme_override_styles/panel = ExtResource("4_uhv8j")
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ShipPartActions/Upgrade" to="." method="_on_upgrade_pressed"]

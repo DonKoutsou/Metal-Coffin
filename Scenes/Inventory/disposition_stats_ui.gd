@@ -3,8 +3,6 @@ extends Control
 
 class_name DispositionStatsUI
 
-@export var DispositionColors : PackedColorArray = []
-
 var points : PackedVector2Array
 var ItemPoints : PackedVector2Array
 
@@ -33,8 +31,8 @@ func _draw() -> void:
 	
 	for point in ItemPoints:
 		finalItemPoints.append((size / 2).slerp(point, offset))
-	
-	draw_polygon(finalItemPoints, DispositionColors)
+	var col : PackedColorArray = [ColorManager.COLORS[ColorManager.CurrentColor]]
+	draw_polygon(finalItemPoints, col)
 	draw_polygon(finalPoints, [Color(1,1,1)])
 	
 	for g in finalPoints.size():

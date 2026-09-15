@@ -74,13 +74,16 @@ func SetWorkShopData(Box : Inventory_Box_Res, CanUpgrade : bool, Owner : Captain
 	var It = DescribedContainer.GetContainedItem()
 	#ItemIcon.texture = It.ItemIcon
 	ItemDesc.visible = true
-	ItemDesc.text = It.GetItemDesc()
+	
+	var col = ColorManager.GetCurrentColor().to_html()
+	
+	ItemDesc.text = It.GetItemDesc().replace("#ffc315", "{0}".format([col]))
 	#TransferButton.visible = It.CanTransfer
 	TransferButton.visible = false
 	AddItemButton.visible = false
 	UpgradeButton.visible = true
 	CancelUpgradeButton.visible = false
-	ItemName.text = It.GetItemName()
+	ItemName.text = It.GetItemName().replace("#ffc315", "{0}".format([col]))
 	RemoveItemButton.visible = true
 	#Ship Parts
 	if (It is ShipPart):
@@ -108,7 +111,7 @@ func SetWorkShopData(Box : Inventory_Box_Res, CanUpgrade : bool, Owner : Captain
 					UpTime *= 0.75
 					UpCost *= 0.75
 				var timeString = Clock.MinutesToHours(UpTime)
-				UpgradeLabel.text = "[color=#ffc315]Upgrade Time[/color] : {0}\n[color=#ffc315]Upgrade Cost[/color] : {1}".format([timeString, roundi(UpCost)])
+				UpgradeLabel.text = "[color={2}]Upgrade Time[/color] : {0}\n[color={2}]Upgrade Cost[/color] : {1}".format([timeString, roundi(UpCost), col])
 	else : if (It is  PlaceHolderItem):
 		var inv = Owner.GetCharacterInventory()
 		
@@ -150,14 +153,16 @@ func SetMerchData(Itm : Item, Ships : Array[MapShip], ShowDesc : bool = false) -
 	DescribedItem = Itm
 	#ItemIcon.texture = It.ItemIcon
 	#ItemDesc.text = It.GetItemDesc()
-	ItemDesc.text = Itm.GetItemDesc()
+	
+	var col = ColorManager.GetCurrentColor().to_html()
+	ItemDesc.text = Itm.GetItemDesc().replace("#ffc315", "{0}".format([col]))
 	#TransferButton.visible = It.CanTransfer
 	TransferButton.visible = false
 	if (!ShowDesc):
-		ItemDesc.text = Itm.GetMerchItemDesc(Ships)
+		ItemDesc.text = Itm.GetMerchItemDesc(Ships).replace("#ffc315", "{0}".format([col]))
 	else:
-		ItemDesc.text = Itm.GetWorkshopItemDesc()
-	ItemName.text = Itm.GetItemName()
+		ItemDesc.text = Itm.GetWorkshopItemDesc().replace("#ffc315", "{0}".format([col]))
+	ItemName.text = Itm.GetItemName().replace("#ffc315", "{0}".format([col]))
 	#Ship Parts
 	#if (Itm is ShipPart):
 	UpgradeButton.visible = false
@@ -202,8 +207,10 @@ func SetData(Box : Inventory_Box_Res, CanUpgrade : bool, CanTransfer : bool, Can
 	DescribedContainer = Box
 	var It = DescribedContainer.GetContainedItem()
 	
-	ItemName.text = It.GetItemName()
-	ItemDesc.text = It.GetItemDesc()
+	var col = ColorManager.GetCurrentColor().to_html()
+
+	ItemName.text = It.GetItemName().replace("#ffc315", "{0}".format([col]))
+	ItemDesc.text = It.GetItemDesc().replace("#ffc315", "{0}".format([col]))
 	ItemDesc.visible = ShowDescription
 	
 	TransferButton.visible = CanTransfer and !DescribedContainer.IsEmpty() and It is not PlaceHolderItem
@@ -236,7 +243,7 @@ func SetData(Box : Inventory_Box_Res, CanUpgrade : bool, CanTransfer : bool, Can
 					UpCost /= 2
 				
 				var timeString = Clock.MinutesToHours(UpTime)
-				UpgradeLabel.text = "[color=#ffc315]Upgrade Time[/color] : {0}\n[color=#ffc315]Upgrade Cost[/color] : {1}\n[color=#ffc315]-------------".format([timeString, UpCost])
+				UpgradeLabel.text = "[color={2}]Upgrade Time[/color] : {0}\n[color=#ffc315]Upgrade Cost[/color] : {1}\n[color={2}]-------------".format([timeString, UpCost, col])
 	else : if (It is  PlaceHolderItem):
 		var inv = Box.GetParentInventory()
 		var TimeLeft = Clock.MinutesToHours(roundi(inv.GetEquipTimeLeft()))

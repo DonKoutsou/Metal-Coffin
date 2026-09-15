@@ -80,6 +80,7 @@ const StatShouldStack : Dictionary = {
 }
 
 static func GetTooltip(Stat : STATS) -> String:
+	
 	return StatToolTips[Stat]
 
 static func StringToEnum(Stat : String) -> STATS:

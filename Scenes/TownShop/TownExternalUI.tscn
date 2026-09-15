@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://iilvk0u0kfff" path="res://Assets/Sounds/CoinSlide.mp3" id="5_yen4x"]
 [ext_resource type="Texture2D" uid="uid://dffx8j71s8nk4" path="res://Assets/UIPiecies/Screen/SidePanels/Town_Cover.png" id="6_ahhdo"]
 [ext_resource type="Texture2D" uid="uid://cghnkjw6wxy7c" path="res://Assets/UIPiecies/Screen/Coin_FullQuality.png" id="6_j05jt"]
+[ext_resource type="PackedScene" uid="uid://7ijgqxojpl66" path="res://Scenes/ScreenUI/Chain.tscn" id="9_2eg4n"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_acv7r"]
 draw_center = false
@@ -172,5 +173,10 @@ show_behind_parent = true
 custom_minimum_size = Vector2(0, 19.715)
 layout_mode = 2
 mouse_filter = 2
+
+[node name="Chain" parent="." unique_id=1069143228 instance=ExtResource("9_2eg4n")]
+position = Vector2(1248, -1)
+frequency = 10.0
+phase_offset = 1.5
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

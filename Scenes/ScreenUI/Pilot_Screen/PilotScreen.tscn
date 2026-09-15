@@ -29,6 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://b5847pm3qa860" path="res://Assets/UIPiecies/Screen/Buttons/Nob.png" id="27_h6xln"]
 [ext_resource type="Texture2D" uid="uid://lhupseg00i2j" path="res://Assets/UIPiecies/Screen/SidePanels/Left.png" id="28_188si"]
 [ext_resource type="PackedScene" uid="uid://dmmhk1exrryca" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/ControlledShipUI/ControlledShipSelection.tscn" id="28_hc833"]
+[ext_resource type="PackedScene" uid="uid://7ijgqxojpl66" path="res://Scenes/ScreenUI/Chain.tscn" id="30_8mt3t"]
 
 [node name="PilotScreen" type="Control" unique_id=1109053421 node_paths=PackedStringArray("mapMarkerControls", "thrust", "elevationThrust", "steer", "pilotScreenSet", "SonarUI", "speedSimulationButton", "pauseSimulationButton", "ControlledShipSelector", "landButton", "hatchButton", "regroupButton", "shipDockButton", "zoomDial", "yDial", "xDial", "missileUI")]
 texture_filter = 2
@@ -428,17 +429,17 @@ theme_override_styles/hover = ExtResource("21_188si")
 
 [node name="ThrustLever" parent="." unique_id=1806408407 instance=ExtResource("3_ecvfe")]
 layout_mode = 1
-offset_left = -261.0
-offset_top = -338.0
-offset_right = -160.0
-offset_bottom = -148.00049
+offset_left = -282.0
+offset_top = -334.0
+offset_right = -181.0
+offset_bottom = -144.00049
 
 [node name="ElevationLever" parent="." unique_id=833959843 instance=ExtResource("6_jqinv")]
 layout_mode = 1
-offset_left = -109.0
-offset_top = -338.0
-offset_right = -8.0
-offset_bottom = -147.99976
+offset_left = -126.0
+offset_top = -334.0
+offset_right = -25.0
+offset_bottom = -143.99976
 
 [node name="SteeringWheel" parent="." unique_id=760456773 instance=ExtResource("10_w258d")]
 layout_mode = 1
@@ -519,6 +520,11 @@ scale = Vector2(0.7198156, 0.8739407)
 position = Vector2(41, 601.8287)
 rotation = -4.712389
 scale = Vector2(0.7198156, 0.8739407)
+
+[node name="Chain" parent="." unique_id=1069143228 instance=ExtResource("30_8mt3t")]
+position = Vector2(88, -1)
+frequency = 10.0
+phase_offset = 1.5
 
 [connection signal="toggled" from="SpeedSimulation" to="." method="_on_speed_simulation_toggled"]
 [connection signal="toggled" from="SimulationButton" to="." method="simPauseToggled"]

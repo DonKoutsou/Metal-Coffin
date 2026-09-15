@@ -385,10 +385,12 @@ func _on_button_mouse_entered() -> void:
 #--------------------------------------------------------------
 func ShowToolTip() -> void:
 	#TooltipPos.rotation = -rotation
-	var tips = CardStats.FindTooltips(CStats)
+	var tips : PackedStringArray = CardStats.FindTooltips(CStats)
 	for g in range(tips.size() - 1, -1, -1):
 		var tip : Control = TooltipScene.instantiate()
-		tip.get_child(0).text = TranslationServer.translate(tips[g])
+		var col = ColorManager.GetCurrentColor().to_html()
+		var fixedColorText = TranslationServer.translate(tips[g]).replace("#ffc315", "{0}".format([col]))
+		tip.get_child(0).text = fixedColorText
 		TooltipPos.add_child(tip)
 		tip.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	

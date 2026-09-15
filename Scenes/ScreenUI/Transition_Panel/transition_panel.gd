@@ -13,6 +13,11 @@ signal PanelOpened
 
 static var Transitioning : bool
 
+func _ready() -> void:
+	var l = WeatherManage.GetLightAmm()
+	var mappedLight = Helper.mapf(l, 0.6, 1, 0.08, 0.9)
+	$CanvasModulate.color = Color(0.9 * mappedLight, 0.9 * mappedLight, mappedLight)
+
 func Close() -> void:
 	Anim.play("Close")
 
