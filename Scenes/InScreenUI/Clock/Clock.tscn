@@ -10,6 +10,7 @@ offset_bottom = 50.0
 grow_horizontal = 2
 mouse_filter = 2
 script = ExtResource("1_io0le")
+StartingHour = 6
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1519941522]
 layout_mode = 1

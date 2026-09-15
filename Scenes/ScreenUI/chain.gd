@@ -43,7 +43,8 @@ func _physics_process(delta: float) -> void:
 		var shape = $RigidBody2D4
 		if (shape is RigidBody2D):
 			if (shape.position.y < 230):
-				shape.linear_velocity = shape.global_position.direction_to(get_global_mouse_position()) * 300
+				var dist = min(400, shape.global_position.distance_squared_to(get_global_mouse_position()))
+				shape.linear_velocity = shape.linear_velocity.move_toward(shape.global_position.direction_to(get_global_mouse_position()) * dist, delta * 4000)
 				if (shape.position.y > 220 and !streched):
 					streched = true
 					$PinJoint2D/AudioStreamPlayer2D.play()
