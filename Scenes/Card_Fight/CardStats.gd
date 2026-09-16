@@ -57,11 +57,11 @@ func GetCost() -> int:
 
 #-------------------------------------------------------
 func GetCardName() ->String:
-	var n : String = ""
-	if (Tier > 0 and AllowTier):
-		n = CardName + " +{0}".format([Tier])
-	else:
-		n = CardName
+	var n : String = CardName
+	if (AllowTier):
+		for g in Tier:
+			n += "+"
+
 	if (PutOnTop):
 		n = "[color=#ffc315]SW[/color] " + n
 	return n
