@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://dil6hywhdoauc"]
+
+[ext_resource type="Script" uid="uid://c407gsr2ima44" path="res://Scripts/Inventory/ship_deck.gd" id="1_jeerh"]
+[ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Card_Fight/Card/Card.tscn" id="2_uhxpx"]
+[ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="3_1oiif"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uuft3"]
+content_margin_top = 20.0
+content_margin_bottom = 50.0
+
+[node name="ShipDeck" type="VBoxContainer" unique_id=611219555 node_paths=PackedStringArray("OffensiveCardPosition", "DeffencsiveCardPosition", "UtilityCardPosition", "PowerCardPosition", "sizeLabel")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_jeerh")
+CardScene = ExtResource("2_uhxpx")
+OffensiveCardPosition = NodePath("ScrollContainer/VBoxContainer/HFlowContainer")
+DeffencsiveCardPosition = NodePath("ScrollContainer/VBoxContainer/HFlowContainer2")
+UtilityCardPosition = NodePath("ScrollContainer/VBoxContainer/HFlowContainer3")
+PowerCardPosition = NodePath("ScrollContainer/VBoxContainer/HFlowContainer4")
+sizeLabel = NodePath("ScrollContainer/VBoxContainer/DeckSize")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1584325243]
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_uuft3")
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+script = ExtResource("3_1oiif")
+metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=319099398]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="DeckSize" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=300674791]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "DECK SIZE : 25"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=110841095]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "offensive"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="HFlowContainer" type="HFlowContainer" parent="ScrollContainer/VBoxContainer" unique_id=717642337]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = -20
+theme_override_constants/v_separation = -131
+alignment = 1
+last_wrap_alignment = 2
+
+[node name="Label2" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=688982376]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "deffensive"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="HFlowContainer2" type="HFlowContainer" parent="ScrollContainer/VBoxContainer" unique_id=1461148346]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = -20
+theme_override_constants/v_separation = -131
+alignment = 1
+last_wrap_alignment = 2
+
+[node name="Label3" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=1338330464]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "utility"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="HFlowContainer3" type="HFlowContainer" parent="ScrollContainer/VBoxContainer" unique_id=34322343]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = -20
+theme_override_constants/v_separation = -131
+alignment = 1
+last_wrap_alignment = 2
+
+[node name="Label4" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=1669937792]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="HFlowContainer4" type="HFlowContainer" parent="ScrollContainer/VBoxContainer" unique_id=573173004]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = -131
+alignment = 1
+last_wrap_alignment = 2

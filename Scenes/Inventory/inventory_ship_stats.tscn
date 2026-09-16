@@ -2,21 +2,6 @@
 
 [ext_resource type="Script" uid="uid://djaksgs7n1q3d" path="res://Scripts/Inventory/InventoryShipStats.gd" id="1_oud7i"]
 [ext_resource type="PackedScene" uid="uid://r8hnhjq1f0q0" path="res://Scenes/Inventory/ShipStatContainer.tscn" id="2_82v18"]
-[ext_resource type="StyleBox" uid="uid://cmk8a60qvg41" path="res://Theme/StatLegendPanel.tres" id="3_oud7i"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ky1yx"]
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.282501, 0.267741, 0.268801, 1)
-border_blend = true
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-corner_detail = 1
 
 [node name="InventoryShipStats" type="VBoxContainer" unique_id=826388942]
 offset_right = 303.0
@@ -28,56 +13,6 @@ script = ExtResource("1_oud7i")
 ShipStatScene = ExtResource("2_82v18")
 StatsShown = Array[int]([4, 0, 1, 2, 9, 6, 7, 3, 5, 22])
 
-[node name="Legend" type="HBoxContainer" parent="." unique_id=948479179]
-layout_mode = 2
-alignment = 1
-
-[node name="VBoxContainer" type="HBoxContainer" parent="Legend" unique_id=1199180011]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Legend/VBoxContainer" unique_id=1177119062]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 3
-theme_override_constants/separation = 20
-alignment = 1
-
-[node name="Panel2" type="Panel" parent="Legend/VBoxContainer/HBoxContainer" unique_id=1456020470]
-custom_minimum_size = Vector2(15, 15)
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_ky1yx")
-
-[node name="Label2" type="Label" parent="Legend/VBoxContainer/HBoxContainer" unique_id=1693731232]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 16
-text = "Base Stats"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Legend/VBoxContainer" unique_id=54657979]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 3
-theme_override_constants/separation = 20
-alignment = 1
-
-[node name="Panel" type="Panel" parent="Legend/VBoxContainer/HBoxContainer2" unique_id=815045265]
-custom_minimum_size = Vector2(15, 15)
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/panel = ExtResource("3_oud7i")
-
-[node name="Label" type="Label" parent="Legend/VBoxContainer/HBoxContainer2" unique_id=1978544067]
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-text = "Ship Part Buffs"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="GridContainer" type="GridContainer" parent="." unique_id=1698529357]
 layout_mode = 2
 size_flags_vertical = 3
@@ -85,29 +20,29 @@ theme_override_constants/v_separation = 4
 
 [connection signal="mouse_entered" from="GridContainer/ShipStatContainer" to="GridContainer/ShipStatContainer" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="GridContainer/ShipStatContainer" to="GridContainer/ShipStatContainer" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="GridContainer/@VBoxContainer@47291" to="GridContainer/@VBoxContainer@47291" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="GridContainer/@VBoxContainer@47291" to="GridContainer/@VBoxContainer@47291" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="GridContainer/@VBoxContainer@47292" to="GridContainer/@VBoxContainer@47292" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="GridContainer/@VBoxContainer@47292" to="GridContainer/@VBoxContainer@47292" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="GridContainer/@VBoxContainer@47293" to="GridContainer/@VBoxContainer@47293" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="GridContainer/@VBoxContainer@47293" to="GridContainer/@VBoxContainer@47293" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="GridContainer/@VBoxContainer@47294" to="GridContainer/@VBoxContainer@47294" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="GridContainer/@VBoxContainer@47294" to="GridContainer/@VBoxContainer@47294" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="GridContainer/@VBoxContainer@47295" to="GridContainer/@VBoxContainer@47295" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="GridContainer/@VBoxContainer@47295" to="GridContainer/@VBoxContainer@47295" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="GridContainer/@VBoxContainer@47296" to="GridContainer/@VBoxContainer@47296" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="GridContainer/@VBoxContainer@47296" to="GridContainer/@VBoxContainer@47296" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="GridContainer/@VBoxContainer@47297" to="GridContainer/@VBoxContainer@47297" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="GridContainer/@VBoxContainer@47297" to="GridContainer/@VBoxContainer@47297" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="GridContainer/@VBoxContainer@47298" to="GridContainer/@VBoxContainer@47298" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="GridContainer/@VBoxContainer@47298" to="GridContainer/@VBoxContainer@47298" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="GridContainer/@VBoxContainer@47299" to="GridContainer/@VBoxContainer@47299" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="GridContainer/@VBoxContainer@47299" to="GridContainer/@VBoxContainer@47299" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="GridContainer/@VBoxContainer@47300" to="GridContainer/@VBoxContainer@47300" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="GridContainer/@VBoxContainer@47300" to="GridContainer/@VBoxContainer@47300" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="GridContainer/@VBoxContainer@47301" to="GridContainer/@VBoxContainer@47301" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="GridContainer/@VBoxContainer@47301" to="GridContainer/@VBoxContainer@47301" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="GridContainer/@VBoxContainer@47302" to="GridContainer/@VBoxContainer@47302" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="GridContainer/@VBoxContainer@47302" to="GridContainer/@VBoxContainer@47302" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="GridContainer/@VBoxContainer@47303" to="GridContainer/@VBoxContainer@47303" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="GridContainer/@VBoxContainer@47303" to="GridContainer/@VBoxContainer@47303" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="GridContainer/@VBoxContainer@148454" to="GridContainer/@VBoxContainer@148454" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="GridContainer/@VBoxContainer@148454" to="GridContainer/@VBoxContainer@148454" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="GridContainer/@VBoxContainer@148455" to="GridContainer/@VBoxContainer@148455" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="GridContainer/@VBoxContainer@148455" to="GridContainer/@VBoxContainer@148455" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="GridContainer/@VBoxContainer@148456" to="GridContainer/@VBoxContainer@148456" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="GridContainer/@VBoxContainer@148456" to="GridContainer/@VBoxContainer@148456" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="GridContainer/@VBoxContainer@148457" to="GridContainer/@VBoxContainer@148457" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="GridContainer/@VBoxContainer@148457" to="GridContainer/@VBoxContainer@148457" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="GridContainer/@VBoxContainer@148458" to="GridContainer/@VBoxContainer@148458" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="GridContainer/@VBoxContainer@148458" to="GridContainer/@VBoxContainer@148458" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="GridContainer/@VBoxContainer@148459" to="GridContainer/@VBoxContainer@148459" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="GridContainer/@VBoxContainer@148459" to="GridContainer/@VBoxContainer@148459" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="GridContainer/@VBoxContainer@148460" to="GridContainer/@VBoxContainer@148460" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="GridContainer/@VBoxContainer@148460" to="GridContainer/@VBoxContainer@148460" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="GridContainer/@VBoxContainer@148461" to="GridContainer/@VBoxContainer@148461" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="GridContainer/@VBoxContainer@148461" to="GridContainer/@VBoxContainer@148461" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="GridContainer/@VBoxContainer@148462" to="GridContainer/@VBoxContainer@148462" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="GridContainer/@VBoxContainer@148462" to="GridContainer/@VBoxContainer@148462" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="GridContainer/@VBoxContainer@148463" to="GridContainer/@VBoxContainer@148463" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="GridContainer/@VBoxContainer@148463" to="GridContainer/@VBoxContainer@148463" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="GridContainer/@VBoxContainer@148464" to="GridContainer/@VBoxContainer@148464" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="GridContainer/@VBoxContainer@148464" to="GridContainer/@VBoxContainer@148464" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="GridContainer/@VBoxContainer@148465" to="GridContainer/@VBoxContainer@148465" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="GridContainer/@VBoxContainer@148465" to="GridContainer/@VBoxContainer@148465" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="GridContainer/@VBoxContainer@148466" to="GridContainer/@VBoxContainer@148466" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="GridContainer/@VBoxContainer@148466" to="GridContainer/@VBoxContainer@148466" method="_on_mouse_exited"]

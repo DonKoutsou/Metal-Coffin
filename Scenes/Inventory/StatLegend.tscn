@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://nq26hffakumm"]
+
+[ext_resource type="StyleBox" uid="uid://cmk8a60qvg41" path="res://Theme/StatLegendPanel.tres" id="1_a4sqj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7pj6b"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.282501, 0.267741, 0.268801, 1)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 1
+
+[node name="VBoxContainer" type="HBoxContainer" unique_id=1235533073]
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1737978227]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Panel2" type="Panel" parent="HBoxContainer" unique_id=1713337656]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_7pj6b")
+
+[node name="Label2" type="Label" parent="HBoxContainer" unique_id=890788787]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "Base Stats"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=141233957]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Panel" type="Panel" parent="HBoxContainer2" unique_id=978931151]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("1_a4sqj")
+
+[node name="Label" type="Label" parent="HBoxContainer2" unique_id=1317804793]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Ship Part Buffs"
+horizontal_alignment = 1
+vertical_alignment = 1

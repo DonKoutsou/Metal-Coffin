@@ -2,7 +2,6 @@ extends VBoxContainer
 
 class_name ShipDeckViz
 
-@export var CharPortrait : TextureRect
 @export var CardScene : PackedScene
 @export var OffensiveCardPosition : Control
 @export var DeffencsiveCardPosition : Control
@@ -13,6 +12,8 @@ class_name ShipDeckViz
 var CurrentlyShownCharacter : Captain
 
 var PooledCards : Array[Card] = []
+var CardToMake : Dictionary[CardStats, int] = {}
+var deckSize : int = 0
 
 func InventoryUpdated() -> void:
 	if (!visible):
@@ -26,8 +27,9 @@ func _exit_tree() -> void:
 func SetDeck(Ch : Captain) -> void:
 	#var msBefore = Time.get_ticks_msec()
 	var Inv = Ch.GetCharacterInventory()
-
-	var deck : Dictionary[CardStats, int]
+	
+	deckSize = 0
+	CardToMake.clear()
 	
 	if (Inv != null):
 		if (CurrentlyShownCharacter != Ch):
@@ -35,16 +37,16 @@ func SetDeck(Ch : Captain) -> void:
 				CurrentlyShownCharacter.GetCharacterInventory().InventoryUpdated.disconnect(InventoryUpdated)
 			CurrentlyShownCharacter = Ch
 			Inv.InventoryUpdated.connect(InventoryUpdated)
-		deck = Inv.GetCardDictionary()
+		CardToMake = Inv.GetCardDictionary()
 		var dispositionCards : Dictionary[CardStats, int] = DispositionManager.Instance.GetRewards(Ch)
 	
 		for g in dispositionCards:
-			if (deck.has(g)):
-				deck[g] += dispositionCards[g]
+			if (CardToMake.has(g)):
+				CardToMake[g] += dispositionCards[g]
 			else:
-				deck[g] = dispositionCards[g]
+				CardToMake[g] = dispositionCards[g]
 	else:
-		deck = Ch.GetStartingDeck()
+		CardToMake = Ch.GetStartingDeck()
 
 	
 	for g in OffensiveCardPosition.get_children():
@@ -61,32 +63,34 @@ func SetDeck(Ch : Captain) -> void:
 		PooledCards.append(g)
 		#PowerCardPosition.remove_child(g)
 	
-	var deckSize : int = 0
-	for card : CardStats in deck:
+	for g in PooledCards:
+			var parent = g.get_parent()
+			if (parent):
+				g.get_parent().remove_child(g)
+
+func _physics_process(delta: float) -> void:
+	if (CardToMake.size() > 0):
+		
+		var card = CardToMake.keys().pop_back()
 		var c : Card
-		deckSize += deck[card]
+		deckSize += CardToMake[card]
 		if (PooledCards.size() > 0):
 			c = PooledCards.pop_back()
-			var parent = c.get_parent()
-			if (parent):
-				c.reparent(GetParentForCard(card))
-			else:
-				GetParentForCard(card).add_child(c)
+
+			GetParentForCard(card).add_child(c)
 		else:
 			c = CardScene.instantiate()
 			GetParentForCard(card).add_child(c)
-		c.SetCardStats(card, deck[card])
+		c.SetCardStats(card, CardToMake[card])
 		c.Dissable()
-	
-	for g in PooledCards:
-		var parent = g.get_parent()
-		if (parent):
-			g.get_parent().remove_child(g)
-	
-	sizeLabel.text = "Deck Size : {0}".format([deckSize])
-	#print("Pooled = {0}".format([PooledCards.size()]))
-	#var msAfter = Time.get_ticks_msec()
-	#print("Card Setting took {0}".format([msAfter - msBefore]))
+		
+		CardToMake.erase(card)
+		
+		
+		sizeLabel.text = "Deck Size : {0}".format([deckSize])
+		#print("Pooled = {0}".format([PooledCards.size()]))
+		#var msAfter = Time.get_ticks_msec()
+		#print("Card Setting took {0}".format([msAfter - msBefore]))
 
 func GetParentForCard(C : CardStats) -> Control:
 	match C.Type:

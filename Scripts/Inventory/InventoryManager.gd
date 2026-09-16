@@ -7,16 +7,19 @@ class_name InventoryManager
 @export var ItemDescriptorScene : PackedScene
 @export var ItemTransferScene : PackedScene
 @export var ItemNotifScene : PackedScene
+@export_file("*.tscn") var CaptainStatScene : String
 @export_group("Nodes")
 @export var CharacterPlace : Control
 @export var DescriptorPlace : Control
-@export var CaptainStats : CaptainStatContainer
+@export var CaptainStatsPlace : Control
+
 @export_group("Event Handlers")
 @export var MissileDockEventH : MissileDockEventHandler
 @export var DroneDockEventH : DroneDockEventHandler
 @export var ControlledEventH : ShipControllerEventHandler
 
 var controller : PlayerDrivenShip
+var CaptainStats : CaptainStatContainer
 
 var _CharacterInventories : Dictionary
 var SimPaused : bool = false
@@ -50,8 +53,11 @@ func ControllerChanged(NewController : PlayerDrivenShip) -> void:
 	controller = NewController
 	var squad : Array[Captain] = NewController.GetSquadCaptains()
 	squad.append(NewController.Cpt)
-	InspectCharacter(squad[0])
-	CaptainStats.ShowStats()
+	
+	if (CaptainStats != null):
+		InspectCharacter(squad[0])
+		CaptainStats.ShowStats()
+		
 	for g in _CharacterInventories:
 		var inv : CharacterInventory = _CharacterInventories[g]
 		inv.visible = g in squad
@@ -162,7 +168,7 @@ func BoxSelected(Box : Inventory_Box_Res, OwnerInventory : CharacterInventory) -
 		DescriptorPlace.remove_child(desc)
 		desc.queue_free()
 		if (desc.DescribedContainer == Box):
-			CaptainStats.get_parent().visible = true
+			CaptainStatsPlace.visible = true
 			return
 	
 	CurrentDesc = ItemDescriptorScene.instantiate() as ItemDescriptor
@@ -170,7 +176,7 @@ func BoxSelected(Box : Inventory_Box_Res, OwnerInventory : CharacterInventory) -
 	CurrentDesc.Closed.connect(RemoveDescriptor)
 	DescriptorPlace.add_child(CurrentDesc)
 	DescriptorPlace.move_child(CurrentDesc, 0)
-	CaptainStats.get_parent().visible = false
+	CaptainStatsPlace.visible = false
 	#var cpt = GetBoxOwner(Box)
 	#var HasUp = false
 	#if (cpt.CurrentPort != ""):
@@ -186,7 +192,7 @@ func BoxSelected(Box : Inventory_Box_Res, OwnerInventory : CharacterInventory) -
 
 #-------------------------------------------------------
 func RemoveDescriptor() -> void:
-	CaptainStats.get_parent().visible = true
+	CaptainStatsPlace.visible = true
 	CurrentDesc.queue_free()
 
 #-------------------------------------------------------
@@ -364,7 +370,7 @@ func LoadCharacter(Data : SD_CharacterInventory) -> void:
 func OnItemAdded(It : Item, Owner : Captain) -> void:
 	if (It is MissileItem):
 		MissileDockEventH.OnMissileAdded(It, Owner)
-	if (visible):
+	if (CaptainStats != null):
 		CaptainStats.UpdateValues()
 	
 #-------------------------------------------------------
@@ -372,7 +378,7 @@ func OnItemRemoved(It : Item, Owner : Captain) -> void:
 	if (It is MissileItem):
 		MissileDockEventH.OnMissileRemoved(It, Owner)
 	CloseDescriptor()
-	if (visible):
+	if (CaptainStats != null):
 		CaptainStats.UpdateValues()
 
 #-------------------------------------------------------
@@ -383,21 +389,18 @@ func InspectCharacter(Cha : Captain) -> void:
 	#ShipStats.visible = true
 	#ShipDeck.visible = false
 
+
+func ShowStats() -> void:
+	CaptainStats.ShowStats()
 #-------------------------------------------------------
-func InspectCharacterDeck(Cha : Captain) -> void:
-	CloseDescriptor()
-	CaptainStats.SetCaptain(Cha)
+func ShowDeck() -> void:
 	CaptainStats.ShowDeck()
 
 #-------------------------------------------------------
-func InspectCharacterInventory(Cha : Captain) -> void:
-	CloseDescriptor()
-	CaptainStats.SetCaptain(Cha)
+func ShowInventory() -> void:
 	CaptainStats.ShowInvetory()
 
-func InspectCharacterDisposition(Cha : Captain) -> void:
-	CloseDescriptor()
-	CaptainStats.SetCaptain(Cha)
+func ShowDisposition() -> void:
 	CaptainStats.ShowDisposition()
 
 #-------------------------------------------------------
@@ -406,7 +409,8 @@ func CloseDescriptor() -> void:
 	if (descriptors.size() > 0):
 		DescriptorPlace.remove_child(descriptors[0])
 		descriptors[0].queue_free()
-	CaptainStats.get_parent().visible = true
+	
+	CaptainStatsPlace.visible = true
 
 #-------------------------------------------------------
 func GenerateCaptainSaveData(Cpt: Captain, Inv : CharacterInventory) -> SD_CharacterInventory:
@@ -458,6 +462,9 @@ func ToggleInventory() -> void:
 	$AudioStreamPlayer.play()
 	ToggleTween = create_tween()
 	if (visible):
+		var statsScene : PackedScene = load(CaptainStatScene)
+		CaptainStats = statsScene.instantiate()
+		CaptainStatsPlace.add_child(CaptainStats)
 		if (CaptainStats.CurrentlyShownCaptain == null):
 			CaptainStats.SetCaptain(_CharacterInventories.keys()[0])
 			CaptainStats.ShowStats()
@@ -473,6 +480,7 @@ func ToggleInventory() -> void:
 		ActionTracker.OnActionCompleted(ActionTracker.Action.INVENTORY_OPEN)
 		
 	else:
+		CaptainStats.queue_free()
 		#print(global_position.y)
 		visible = !visible
 		ToggleTween.set_ease(Tween.EASE_OUT)

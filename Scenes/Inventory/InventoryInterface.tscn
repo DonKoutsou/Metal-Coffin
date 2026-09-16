@@ -7,6 +7,8 @@
 [node name="InventoryInterface" type="VBoxContainer" unique_id=399381214 node_paths=PackedStringArray("EngineInventoryBoxParent", "SensorInventoryBoxParent", "FuelTankInventoryBoxParent", "WeaponInventoryBoxParent", "ShieldInventoryBoxParent", "InventoryBoxParent")]
 offset_right = 189.0
 offset_bottom = 278.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("1_tgceu")
 InventoryBoxScene = ExtResource("2_amhnx")
