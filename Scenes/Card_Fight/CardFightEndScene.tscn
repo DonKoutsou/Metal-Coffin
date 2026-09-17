@@ -22,6 +22,7 @@ FriendlyCasualtiesLabel = NodePath("MarginContainer/VBoxContainer/VBoxContainer/
 EnemyCasualtiesLabal = NodePath("MarginContainer/VBoxContainer/VBoxContainer/PanelContainer5/VBoxContainer/InputScroll/EnemyCasualties")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1125739618]
+propagate_maximum_size = false
 layout_mode = 2
 theme_override_constants/margin_left = 44
 theme_override_constants/margin_top = 44
@@ -81,6 +82,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 26
 text = "FRIENDLY COMBATANTS"
 horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="InputScroll" type="ScrollContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=1241656463]
 layout_mode = 2
@@ -114,6 +116,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 26
 text = "FRIENDLY CASUALTIES"
 horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="InputScroll" type="ScrollContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/PanelContainer4/VBoxContainer" unique_id=1639597903]
 layout_mode = 2
@@ -147,6 +150,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 26
 text = "ENEMY COMBATANTS"
 horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="InputScroll" type="ScrollContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/PanelContainer3/VBoxContainer" unique_id=1220983473]
 layout_mode = 2
@@ -180,6 +184,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 26
 text = "ENEMY CASUALTIES"
 horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="InputScroll" type="ScrollContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/PanelContainer5/VBoxContainer" unique_id=176781665]
 layout_mode = 2

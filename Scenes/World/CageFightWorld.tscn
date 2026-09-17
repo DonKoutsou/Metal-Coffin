@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dc1y0qs5n466n" path="res://Scenes/Card_Fight/CagefightTeamSetup.tscn" id="3_fhjeu"]
 [ext_resource type="Environment" uid="uid://bkmqb06466wvr" path="res://Enviroments/Env.tres" id="5_7lsfd"]
 [ext_resource type="PackedScene" uid="uid://ijv7nlfv5kot" path="res://Scenes/InScreenUI/Cagefight_in_screen_ui.tscn" id="5_fhjeu"]
+[ext_resource type="Texture2D" uid="uid://35kvw1j73e85" path="res://Assets/UIPiecies/Screen/ScreenFrames/ScreenLight.png" id="7_fnbne"]
 [ext_resource type="PackedScene" uid="uid://biel8sjt8vy5t" path="res://Scenes/ScreenUI/screen_ui.tscn" id="8_6fcln"]
 
 [node name="CageFight" type="Control" unique_id=96047136 node_paths=PackedStringArray("ScrUI")]
@@ -22,6 +23,7 @@ ScrUI = NodePath("ScreenUI")
 TeamComp = ExtResource("3_fhjeu")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1576467064]
+light_mask = 0
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -44,7 +46,7 @@ handle_input_locally = false
 snap_2d_vertices_to_pixel = true
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 512
-size = Vector2i(1148, 798)
+size = Vector2i(713, 495)
 size_2d_override = Vector2i(926, 643)
 size_2d_override_stretch = true
 render_target_update_mode = 4
@@ -55,3 +57,12 @@ render_target_update_mode = 4
 environment = ExtResource("5_7lsfd")
 
 [node name="ScreenUI" parent="." unique_id=1869325632 instance=ExtResource("8_6fcln")]
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1004306889]
+position = Vector2(517.5001, 367)
+scale = Vector2(3.5794868, 3.8341715)
+color = Color(1, 0.87733334, 0.68, 1)
+blend_mode = 2
+range_layer_max = 254
+texture = ExtResource("7_fnbne")
+texture_scale = 1.95

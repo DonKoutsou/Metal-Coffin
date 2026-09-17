@@ -26,12 +26,14 @@
 [ext_resource type="StyleBox" uid="uid://g2ic8um6hit" path="res://Theme/Buttons/ButtonBlack_Pressed.tres" id="27_pmm2a"]
 [ext_resource type="StyleBox" uid="uid://cpq6h2wwtgr07" path="res://Theme/Buttons/ButtonBlue.tres" id="28_23r0g"]
 [ext_resource type="StyleBox" uid="uid://chq4sdt1mihdh" path="res://Theme/Buttons/ButtonBlue_Pressed.tres" id="29_t54ed"]
+[ext_resource type="PackedScene" uid="uid://7ijgqxojpl66" path="res://Scenes/ScreenUI/Chain.tscn" id="32_23r0g"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="34_aa43b"]
 [ext_resource type="Texture2D" uid="uid://ben2ixlvxo42b" path="res://Assets/UIPiecies/Screen/Buttons/Button10_Camera 1_FullQuality.png" id="35_xqmn8"]
 [ext_resource type="Texture2D" uid="uid://dg8jbhrloh84u" path="res://Assets/UIPiecies/LightCone2.png" id="36_j43p8"]
 [ext_resource type="Texture2D" uid="uid://cfwm15q52gd55" path="res://Assets/UIPiecies/Screen/Buttons/Button10_Camera 1_FullQuality_pressed.png" id="36_sjyyd"]
 [ext_resource type="StyleBox" uid="uid://c5x3vcw8x46rj" path="res://Theme/Buttons/ButtonRed.tres" id="37_xqmn8"]
 [ext_resource type="StyleBox" uid="uid://bvwu33dvi8506" path="res://Theme/Buttons/ButtonRed_Pressed.tres" id="38_sjyyd"]
+[ext_resource type="Texture2D" uid="uid://35kvw1j73e85" path="res://Assets/UIPiecies/Screen/ScreenFrames/ScreenLight.png" id="38_t54ed"]
 [ext_resource type="PackedScene" uid="uid://dwhre3xvmvjwf" path="res://Scenes/ScreenUI/Fan.tscn" id="39_nthvp"]
 [ext_resource type="Texture2D" uid="uid://jo4d26lfwv65" path="res://Assets/UIPiecies/cables2_Camera 1.png" id="40_xqmn8"]
 [ext_resource type="Script" uid="uid://c11sqafe6873w" path="res://Scripts/Cables.gd" id="41_sjyyd"]
@@ -64,6 +66,7 @@ VersionLabel = NodePath("SubViewportContainer/SubViewport/VBoxContainer/PanelCon
 cloudNoise = ExtResource("3_t54ed")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=2040979612]
+light_mask = 524288
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -83,7 +86,7 @@ canvas_item_default_texture_filter = 2
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 0
 positional_shadow_atlas_16_bits = false
-size = Vector2i(1679, 1169)
+size = Vector2i(1262, 879)
 size_2d_override = Vector2i(925, 644)
 size_2d_override_stretch = true
 render_target_update_mode = 4
@@ -614,7 +617,11 @@ theme_override_styles/pressed = ExtResource("38_sjyyd")
 theme_override_styles/hover = ExtResource("37_xqmn8")
 action_mode = 0
 
+[node name="Chain" parent="." unique_id=1069143228 instance=ExtResource("32_23r0g")]
+position = Vector2(22, 0)
+
 [node name="Fan" parent="." unique_id=238039746 instance=ExtResource("39_nthvp")]
+z_index = 1
 position = Vector2(915, -14)
 scale = Vector2(0.8749995, 0.8749995)
 frame_progress = 0.96041
@@ -706,16 +713,29 @@ texture = ExtResource("42_67h1o")
 expand_mode = 1
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=826289740]
-color = Color(0.23537055, 0.2353706, 0.23537052, 1)
+color = Color(0.055147856, 0.05514788, 0.05514785, 1)
 
 [node name="AlarmLight2" type="PointLight2D" parent="." unique_id=368259133]
+unique_name_in_owner = true
 texture_filter = 2
-position = Vector2(657, -700)
+position = Vector2(667, -700)
+color = Color(1, 0.87733334, 0.68, 1)
 energy = 2.0
 blend_mode = 2
+range_item_cull_mask = 524289
 texture = ExtResource("36_j43p8")
 offset = Vector2(0, 1000)
-texture_scale = 7.25
+texture_scale = 7.0
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=429726999]
+position = Vector2(521, 377)
+scale = Vector2(3.6438746, 3.5380638)
+color = Color(1, 0.87733334, 0.68, 1)
+blend_mode = 2
+range_z_max = 0
+range_item_cull_mask = 524289
+texture = ExtResource("38_t54ed")
+texture_scale = 1.95
 
 [connection signal="pressed" from="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/Cancel" to="." method="_on_cancel_pressed"]
 [connection signal="pressed" from="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/VBoxContainer/HBoxContainer/ShowTutorial" to="." method="_on_show_tutorial_pressed"]
@@ -731,3 +751,4 @@ texture_scale = 7.25
 [connection signal="pressed" from="Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
+[connection signal="Toggled" from="Chain" to="." method="_on_chain_toggled"]

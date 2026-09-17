@@ -79,6 +79,8 @@ func _ready() -> void:
 	_InScreenUI.GetInventory().InventoryToggled.connect(HideWorld)
 	MapPointerMan.TargetSelected.connect(MoveTargetSelected)
 	MapPointerMan.TargetSpotSelected.connect(MoveTargetSpotSelected)
+	
+	_ScreenUI.ConnectMap($SubViewportContainer/SubViewport)
 
 func Update(delta : float) -> void:
 	_ScreenUI.Update(delta)
@@ -939,6 +941,9 @@ func ToggleFullScreen(NewState : ScreenUI.ScreenState) -> void:
 		$SubViewportContainer.size = FullSize
 		$SubViewportContainer.global_position = ScreenPos
 		
+		$PointLight2D.position = ScreenPos + FullSize / 2.0
+		$PointLight2D.scale = FullSize / 220 + Vector2(0, 1.5)
+		
 		#$SubViewportContainer._queue_recalc_force_viewport_sizes()
 		_InScreenUI.ToggleCrtEffect(true)
 		_InScreenUI.SetScreenRes(FullSize)
@@ -947,12 +952,18 @@ func ToggleFullScreen(NewState : ScreenUI.ScreenState) -> void:
 		$SubViewportContainer.size = OriginalSize
 		$SubViewportContainer.global_position = ScreenPos
 		
+		$PointLight2D.position = ScreenPos + OriginalSize / 2.0
+		$PointLight2D.scale = OriginalSize / 220 + Vector2(0, 1.5)
+		
 		#$SubViewportContainer._queue_recalc_force_viewport_sizes()
 		_InScreenUI.ToggleCrtEffect(true)
 		_InScreenUI.SetScreenRes(OriginalSize)
 	else: if (NewState == ScreenUI.ScreenState.PILOT_SCREEN):
 		$SubViewportContainer.size = PilotSize
 		$SubViewportContainer.global_position = PilotPos
+		
+		$PointLight2D.position = PilotPos + PilotSize / 2.0
+		$PointLight2D.scale = PilotSize / 220 + Vector2(0, 1.5)
 		
 		#$SubViewportContainer._queue_recalc_force_viewport_sizes()
 		_InScreenUI.ToggleCrtEffect(true)
@@ -961,12 +972,17 @@ func ToggleFullScreen(NewState : ScreenUI.ScreenState) -> void:
 		$SubViewportContainer.size = OriginalSize
 		$SubViewportContainer.global_position = ScreenPos
 		
+		$PointLight2D.position = ScreenPos + OriginalSize / 2.0
+		$PointLight2D.scale = OriginalSize / 220 + Vector2(0, 1.5)
+		
 		#$SubViewportContainer._queue_recalc_force_viewport_sizes()
 		_InScreenUI.ToggleCrtEffect(true)
 		_InScreenUI.SetScreenRes(OriginalSize)
 	else:
 		$SubViewportContainer.size = get_viewport().get_visible_rect().size
 		$SubViewportContainer.global_position = Vector2.ZERO
+		$PointLight2D.position = get_viewport().get_visible_rect().size / 2.0
+		$PointLight2D.scale = get_viewport().get_visible_rect().size / 20
 		
 		_InScreenUI.ToggleCrtEffect(false)
 	$SubViewportContainer.visible = true

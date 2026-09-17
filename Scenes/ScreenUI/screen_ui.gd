@@ -26,6 +26,11 @@ signal StateSwitched(newState : ScreenState)
 func _ready() -> void:
 	Instance = self
 
+func ConnectMap(map : SubViewport) -> void:
+	return
+	var t : ViewportTexture = $TextureRect.texture
+	t.viewport_path = t.get_local_scene().get_path_to(map)
+
 func Update(delta : float) -> void:
 	if (PilotScreen != null):
 		PilotScreen.Update(delta)

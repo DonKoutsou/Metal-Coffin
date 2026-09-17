@@ -15,6 +15,8 @@ var StartingPos : Vector2
 var streched : bool = false
 var attached : bool = false
 
+signal Toggled
+
 func _ready() -> void:
 	phase_offset = randf_range(0.0, TAU)
 	
@@ -49,6 +51,7 @@ func _physics_process(delta: float) -> void:
 					streched = true
 					$PinJoint2D/AudioStreamPlayer2D.play()
 					UIm.OnLightToggled()
+					Toggled.emit()
 				
 	for g in chainLinks.size():
 		var pos = chainLinks[g].position

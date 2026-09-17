@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dnjccg1nj4bm6" path="res://Scenes/Map/ship_camera.tscn" id="17_6an1p"]
 [ext_resource type="Script" uid="uid://c1kbreeob7tf2" path="res://Scenes/InScreenUI/MapMarkers/map_pointer_manager.gd" id="19_ccpfd"]
 [ext_resource type="PackedScene" uid="uid://c3l8v8l2e2pkt" path="res://Scenes/InScreenUI/MapMarkers/ShipMarker.tscn" id="20_anlpp"]
+[ext_resource type="Texture2D" uid="uid://35kvw1j73e85" path="res://Assets/UIPiecies/Screen/ScreenFrames/ScreenLight.png" id="20_w3xn6"]
 [ext_resource type="PackedScene" uid="uid://bgsgcnyyv1gxm" path="res://Scenes/Map/MapSpotMarker.tscn" id="21_oyi6l"]
 [ext_resource type="Script" uid="uid://c2ufjbkhk6v0q" path="res://Scripts/UI/CircleDrawer.gd" id="22_fa7wu"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="22_n73so"]
@@ -55,6 +56,7 @@ UIEventH = ExtResource("25_8mjbw")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=177781806]
 process_mode = 3
+light_mask = 524288
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -79,7 +81,7 @@ positional_shadow_atlas_quad_0 = 0
 positional_shadow_atlas_quad_1 = 0
 positional_shadow_atlas_quad_2 = 0
 positional_shadow_atlas_quad_3 = 0
-size = Vector2i(2324, 1307)
+size = Vector2i(815, 459)
 size_2d_override = Vector2i(1280, 720)
 size_2d_override_stretch = true
 render_target_update_mode = 4
@@ -152,5 +154,14 @@ layer = 2
 environment = ExtResource("16_8uruf")
 
 [node name="ScreenUI" parent="." unique_id=1211286395 instance=ExtResource("24_e5um8")]
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1286099337]
+position = Vector2(517.5001, 367)
+scale = Vector2(3.5794868, 3.8341715)
+color = Color(1, 0.87733334, 0.68, 1)
+blend_mode = 2
+range_layer_max = 2
+texture = ExtResource("20_w3xn6")
+texture_scale = 1.95
 
 [connection signal="gui_input" from="SubViewportContainer" to="." method="_MAP_INPUT"]

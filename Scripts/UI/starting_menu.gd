@@ -11,6 +11,7 @@ class_name StartingMenu
 @export var VersionLabel : Label
 @export var cloudNoise : FastNoiseLite
 
+
 var SpawnedCredits : Credits
 
 var Selecting : bool
@@ -28,12 +29,14 @@ func _ready() -> void:
 	Settings.visible = false
 	$CanvasModulate.color = Color(0,0,0,1)
 	$AlarmLight2.energy = 0
+	$PointLight2D.energy = 0
 	#Black.color = Color(0,0,0,1)
 	var tw = create_tween()
 	tw.set_ease(Tween.EASE_IN)
 	tw.set_trans(Tween.TRANS_EXPO)
-	tw.tween_property($CanvasModulate, "color", Color(0.2,0.2,0.2,1), 2)
+	tw.tween_property($CanvasModulate, "color", Color("0e0e0eff"), 2)
 	tw.set_parallel(true)
+	tw.tween_property($PointLight2D, "energy", 1, 2)
 	tw.tween_property($AlarmLight2, "energy", 2, 2)
 	
 	call_deferred("DoLights")
@@ -201,3 +204,7 @@ func _on_command_line_start_prologue(SkipStory: bool, customSeed : int) -> void:
 #
 #func MouseOut() -> void:
 	#$SubViewportContainer/SubViewport/InScreenMouse.MouseOut().
+
+
+func _on_chain_toggled() -> void:
+	%AlarmLight2.visible = !%AlarmLight2.visible

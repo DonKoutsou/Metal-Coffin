@@ -113,6 +113,8 @@ func ToggleFullScreen(NewState : ScreenUI.ScreenState) -> void:
 		$SubViewportContainer.size = FullSize
 		$SubViewportContainer.position = ScreenPos
 		
+		$PointLight2D.position = ScreenPos + FullSize / 2.0
+		$PointLight2D.scale = FullSize / 220 + Vector2(0, 1.5)
 		#$SubViewportContainer._queue_recalc_force_viewport_sizes()
 		$SubViewportContainer/ViewPort/InScreenUI.ToggleCrtEffect(true)
 		$SubViewportContainer/ViewPort/InScreenUI.SetScreenRes(FullSize)
@@ -121,12 +123,18 @@ func ToggleFullScreen(NewState : ScreenUI.ScreenState) -> void:
 		$SubViewportContainer.size = OriginalSize
 		$SubViewportContainer.position = ScreenPos
 		
+		$PointLight2D.position = ScreenPos + OriginalSize / 2.0
+		$PointLight2D.scale = OriginalSize / 220 + Vector2(0, 1.5)
+		
 		#$SubViewportContainer._queue_recalc_force_viewport_sizes()
 		$SubViewportContainer/ViewPort/InScreenUI.ToggleCrtEffect(true)
 		$SubViewportContainer/ViewPort/InScreenUI.SetScreenRes(OriginalSize)
 	else:
 		$SubViewportContainer.size = get_viewport().get_visible_rect().size
 		$SubViewportContainer.position = Vector2.ZERO
+		
+		$PointLight2D.position = get_viewport().get_visible_rect().size / 2.0
+		$PointLight2D.scale = get_viewport().get_visible_rect().size / 220 + Vector2(0, 1.5)
 		
 		#$SubViewportContainer._queue_recalc_force_viewport_sizes()
 		$SubViewportContainer/ViewPort/InScreenUI.ToggleCrtEffect(false)

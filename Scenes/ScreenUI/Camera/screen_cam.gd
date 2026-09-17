@@ -156,7 +156,7 @@ func _physics_process(delta: float) -> void:
 	#return
 	if (l > 0.9 and lastLightStage < 0.9):
 		ToggleLights(false) 
-	else: if (l < 0.8 and lastLightStage > 0.8):
+	else: if (l < 0.75 and lastLightStage > 0.75):
 		ToggleLights(true)
 	lastLightStage = l
 

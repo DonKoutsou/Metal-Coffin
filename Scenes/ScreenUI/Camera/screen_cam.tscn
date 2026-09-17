@@ -317,6 +317,7 @@ texture = ExtResource("6_7vs4e")
 texture_scale = 13.0
 
 [node name="AlarmLight2" type="PointLight2D" parent="LightPivot1/LightPivot2" unique_id=696037205]
+unique_name_in_owner = true
 texture_filter = 4
 position = Vector2(0, 48.999943)
 color = Color(1, 0.87733334, 0.68, 1)
