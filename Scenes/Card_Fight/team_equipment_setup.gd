@@ -21,7 +21,7 @@ var CurrentDescriptor : ItemDescriptor
 
 func _ready() -> void:
 	CaptainStatCont.InventoryBoxSelected.connect(ItemSelected) 
-	CaptainStatCont.ShipInventory.KeepBoxesActive = true
+	#CaptainStatCont.ShipInventory.KeepBoxesActive = true
 	#var b = CaptainB.instantiate() as CaptainButton
 	#var Cpt = load("res://Resources/Captains/PlayerCaptains/Craden.tres") as Captain
 	#b.SetCpt(Cpt)
@@ -238,6 +238,7 @@ func _on_deck_pressed() -> void:
 
 func _on_inventory_pressed() -> void:
 	CaptainStatCont.ShowInvetory()
+	CaptainStatCont.ShipInventory.KeepBoxesActive = true
 
 
 func _on_disposition_pressed() -> void:

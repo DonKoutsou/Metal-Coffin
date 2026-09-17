@@ -23,6 +23,9 @@ class_name CardStats
 ##Modules applied once card is performed, mostly used for attacks. (Applied mostly to AI since players use attacks immidietly)
 @export var OnPerformModule : CardModule
 
+##Modules applied once turn is finished with card left in hand
+@export var OnLeftOnHandModule : CardModule
+
 ##Passive abilities
 @export var Passive : Card_Passive
 
@@ -33,6 +36,9 @@ class_name CardStats
 
 ##If burned can't be used no more
 @export var Burned : bool = false
+
+##Block for dissallowing manual discard, mostly to be used on cand that have OnLoftOnHand effects
+@export var CanManuallyDiscard : bool = true
 
 ##Weapon that this card needs to be able to be used
 @export var WeapT : WeaponType
@@ -78,6 +84,12 @@ func GetDescription() -> String:
 	if is_instance_valid(OnPerformModule):
 		Desc += OnPerformModule.GetDesc(RealTier)
 		Desc += "\n"
+	
+	if (is_instance_valid(OnLeftOnHandModule)):
+		Desc += "[color=#ffc315][[CT_ONLEFT]][/color] : "
+		Desc += OnLeftOnHandModule.GetDesc(RealTier)
+		Desc += "\n"
+	
 	if (OnUseModules.size() > 0):
 		Desc += "[color=#ffc315][[CT_ONUSE]][/color] : "
 		for g in OnUseModules:
@@ -92,7 +104,10 @@ func GetDescription() -> String:
 	if (Passive != null):
 		Desc += Passive.GetDesc(RealTier)
 		Desc += "\n"
-		
+	
+	if (!CanManuallyDiscard):
+		Desc += "[color=#ffc315]CAN'T DISCARD[/color]"
+	
 	return Helper.Translate(Desc)
 
 #-------------------------------------------------------
@@ -108,6 +123,12 @@ func GetBattleDescription(User : BattleShipStats) -> String:
 	if is_instance_valid(OnPerformModule):
 		Desc += OnPerformModule.GetBattleDesc(User, RealTier)
 		Desc += "\n"
+	
+	if (is_instance_valid(OnLeftOnHandModule)):
+		Desc += "[color=#ffc315][[CT_ONLEFT]][/color] : "
+		Desc += OnLeftOnHandModule.GetBattleDesc(User, RealTier)
+		Desc += "\n"
+	
 	if (OnUseModules.size() > 0):
 		Desc += "[color=#ffc315][[CT_ONUSE]][/color] : "
 		for g in OnUseModules:
@@ -123,6 +144,9 @@ func GetBattleDescription(User : BattleShipStats) -> String:
 	if (Passive != null):
 		Desc += Passive.GetBattleDesc(User, RealTier)
 		Desc += "\n"
+	
+	if (!CanManuallyDiscard):
+		Desc += "[color=#ffc315]CAN'T DISCARD[/color]"
 	
 	return Helper.Translate(Desc)
 

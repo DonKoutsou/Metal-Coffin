@@ -687,7 +687,10 @@ func OnCardDiscarded(C : Card, manually : bool = false) -> bool:
 	if (Shuffling):
 		PopUpManager.GetInstance().DoFadeNotif("Shuffling in progress")
 		return false
-	
+	if (manually and !C.CStats.CanManuallyDiscard):
+		PopUpManager.GetInstance().DoFadeNotif("Card can't be manually discarded")
+		return false
+		
 	var Ship = GetCurrentShip()
 	
 	Ship.deck.Hand.erase(C.CStats)
@@ -1038,8 +1041,11 @@ func PlayerActionSelectionEnded() -> void:
 	ship.SetReserves(ship.EnergyReserves + en)
 	
 	for g : Card in ExternalUI.GetPlayerCardPlecement().get_children():
-		await ExternalUI.InsertCardToDiscard(g, true)
-		ship.deck.DiscardCard(g.CStats)
+		await ExternalUI.InsertCardToDiscard(g, true, false)
+		if (is_instance_valid(g.CStats.OnLeftOnHandModule)):
+			await HandleOnLeftOnHandModules(ship, g.CStats)
+		#ship.deck.DiscardCard(g.CStats)
+		
 	ExternalUI.ToggleHandInput(true)
 		
 	ship.deck.Hand.clear()
@@ -1365,6 +1371,22 @@ func HandleDiscardModules(Performer : BattleShipStats, C : CardStats) -> void:
 			
 		if (Data != null):
 			AnimData.append(Data)
+		
+	if (AnimData.size() > 0):
+		await DoCardAnim(C, AnimData, Performer, true)
+
+##----------------------------------------------------------------------##
+func HandleOnLeftOnHandModules(Performer : BattleShipStats, C : CardStats) -> void:
+	var AnimData : Array[AnimationData]
+	var Mod = C.OnLeftOnHandModule
+
+	var Data : AnimationData
+	
+	var targets = await HandleTargets(Mod, Performer)
+	Data = HandleModule(Performer, C ,Mod, targets)
+		
+	if (Data != null):
+		AnimData.append(Data)
 		
 	if (AnimData.size() > 0):
 		await DoCardAnim(C, AnimData, Performer, true)

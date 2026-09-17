@@ -164,7 +164,6 @@ func ReleaseCard() -> void:
 	else: if (HeldCard.get_parent() == DiscardInsert):
 		##IMPLEMENT DISCARD LOGIC
 		InsertCardToDiscard(HeldCard, true)
-		FightScene.OnCardDiscarded(HeldCard, true)
 		
 	else: if (HeldCard.get_parent() == PlayCardInsert):
 		InserCardtoPlay(HeldCard, true)
@@ -242,7 +241,7 @@ func ToggleHandInput(t : bool) -> void:
 		PlayerCardPlecement.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	PlayerCardPlacementInputBlocker.visible = !t
 
-func InsertCardToDiscard(C : Card, skipTransition : bool = false) -> void:
+func InsertCardToDiscard(C : Card, skipTransition : bool = false, manually : bool = true) -> void:
 	AllowEnd = false
 	C.Dissable(true)
 	C.rotation = 0
@@ -279,6 +278,25 @@ func InsertCardToDiscard(C : Card, skipTransition : bool = false) -> void:
 	PlayCardInsertSound(CardSoundType.DISCARD)
 	await tw.finished
 	PlayCardInsertSound(CardSoundType.BEEP)
+	
+	if (!FightScene.OnCardDiscarded(C, manually)):
+		PlayCardInsertSound(CardSoundType.BEEPNO)
+		PlayCardInsertSound(CardSoundType.EXIT)
+		C.TogglePerspective(false, 1)
+		C.scale = Vector2(1,1)
+		
+		#TWEEN
+		var tw2 = create_tween()
+		tw.set_ease(Tween.EASE_OUT)
+		tw2.set_trans(Tween.TRANS_QUAD)
+		tw2.tween_property(Cont, "size", Vector2(DiscardInsert.size), 0.55)
+		await tw2.finished
+		
+		Cont.remove_child(C)
+
+		PlayerCardPlecement.add_child(C)
+		PlayCardSound()
+	
 	C.Enable()
 	Cont.queue_free()
 	AllowEnd = true
