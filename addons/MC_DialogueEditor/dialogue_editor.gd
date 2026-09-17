@@ -121,6 +121,7 @@ func _exit_tree() -> void:
 ##Checks happening directory and pulls all of them out
 func UpdateDilogues() -> void:
 	Menu.clear()
+	Happenings.clear()
 	var DirsToExplore :Array[String] = ["res://Resources/Happenings/"]
 	for g in DirsToExplore:
 		var dir = DirAccess.open(g)
@@ -163,10 +164,12 @@ func SetHappening(id : int) -> void:
 	CurrentHappeningLabel.text = "Current Happening : {0}".format([diag.HappeningName])
 	
 	#spawn start node
-	var LastNode : Array[BaseDialogueNode] = [CreateDialogueNode(NodeType.START)]
-	
+	var LastNode : Array[BaseDialogueNode] = []
 	
 	for dialogueStageIndex : int in diag.Stages.size():
+		LastNode.clear()
+		LastNode.append(CreateDialogueNode(NodeType.START))
+		
 		var dialogueStage : HappeningStage = diag.Stages[dialogueStageIndex]
 		
 		currentX = 0
@@ -176,9 +179,7 @@ func SetHappening(id : int) -> void:
 		LastNode = HandleStage(dialogueStage, LastNode)
 		
 		currentY += LastNode[0].size.y + 100 + optionsSpace / 2
-	
-	LastNode.clear()
-	
+
 	for dialogueStageIndex : int in diag.StrayBranches.size():
 		
 		var dialogueStage : HappeningStage = diag.StrayBranches[dialogueStageIndex]
@@ -519,38 +520,38 @@ func GenerateHappening() -> void:
 	var strays : Array[HappeningStage] = []
 	var strayOptions : Array[Happening_Option] = []
 	var start = get_tree().get_nodes_in_group("StartNode")
-	if (start.size() > 1):
-		printerr("More than one starting node exist")
-		return
+	#if (start.size() > 1):
+		#printerr("More than one starting node exist")
+		#return
 	if (start.size() == 0):
 		printerr("Can't locate starting node")
 		return
 	
-	
-	var origin : StageDialogueNode = GetNextStage(start[0])
-	stages.append(RecoverStageBranch(origin))
-	
-	var nodes = graph.get_children()
+	for g in start:
+		var origin : StageDialogueNode = GetNextStage(g)
+		stages.append(RecoverStageBranch(origin))
+		
+		var nodes = graph.get_children()
 
-	for node in nodes:
-		if (node is not BaseDialogueNode):
-			continue
-		if (!IsConnectedToBranch(node)):
-			if (node is StageDialogueNode):
-				var strayBranch = RecoverStageBranch(node)
-				strays.append(strayBranch)
-				
-			else: if (node is OptionDialogueNode):
-				var branchOrigin = GetNextStage(node)
-				if (branchOrigin != null):
-					var branch = RecoverStageBranch(branchOrigin)
-					node.option.Branch = branch
-				var worldviewBranchOrigin = GetNextStage(node, 1)
-				if (worldviewBranchOrigin != null):
-					var worldviewBranch = RecoverStageBranch(worldviewBranchOrigin)
-					node.option.WorldViewFailBranch = worldviewBranch
+		for node in nodes:
+			if (node is not BaseDialogueNode):
+				continue
+			if (!IsConnectedToBranch(node)):
+				if (node is StageDialogueNode):
+					var strayBranch = RecoverStageBranch(node)
+					strays.append(strayBranch)
 					
-				strayOptions.append(node.option)
+				else: if (node is OptionDialogueNode):
+					var branchOrigin = GetNextStage(node)
+					if (branchOrigin != null):
+						var branch = RecoverStageBranch(branchOrigin)
+						node.option.Branch = branch
+					var worldviewBranchOrigin = GetNextStage(node, 1)
+					if (worldviewBranchOrigin != null):
+						var worldviewBranch = RecoverStageBranch(worldviewBranchOrigin)
+						node.option.WorldViewFailBranch = worldviewBranch
+						
+					strayOptions.append(node.option)
 			
 	#var current : BaseDialogueNode = origin
 	Happenings[currentHappening].Stages = stages

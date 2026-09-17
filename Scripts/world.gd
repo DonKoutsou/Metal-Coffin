@@ -23,10 +23,8 @@ class_name World
 @export var IsPrologue : bool = false
 @export var StartingFuel : float = 100
 @export_group("Dialogues")
-@export_multiline var IntroDialogues : Array[String]
-@export_multiline var IntroDialogue2 : Array[String]
-@export_multiline var PrologueDialgues : Array[String]
-@export_multiline var PrologueDialogues2 : Array[String]
+@export_file("*.tres") var IntroDialogues : String
+@export_file("*.tres") var PrologueDialgues : String
 @export_group("UpdateSettings")
 @export var WeatherManagerUpdateRate : float = 0.2
 ################ WORLD STATE #################
@@ -236,7 +234,10 @@ func PlayPrologue():
 	GetMap().GetScreenUi().GetCamera().ResetPosition()
 	GetMap().GetScreenUi().GetCamera().LockPosition(true)
 	GetMap().GetScreenUi().GetCamera().ToggleLights(false)
-	Ingame_UIManager.GetInstance().CallbackDiag(PrologueDialgues, null, "Seg", PrologueDialogueEnded, true)
+	
+	var prologueHap : Happening = load(PrologueDialgues)
+	var stage : HappeningStage = prologueHap.Stages[0]
+	Ingame_UIManager.GetInstance().CallbackDiag(stage.GetTexts(), null, "Seg", PrologueDialogueEnded, true)
 
 func PrologueDialogueEnded() -> void:
 	SimulationManager.GetInstance().TogglePause(false)
@@ -246,7 +247,9 @@ func PrologueDialogueEnded() -> void:
 	SteerTut()
 
 func ShowArmak():
-	Ingame_UIManager.GetInstance().CallbackDiag(PrologueDialogues2, null, "Seg", ReturnCamToPlayer, true)
+	var prologueHap : Happening = load(PrologueDialgues)
+	var stage : HappeningStage = prologueHap.Stages[1]
+	Ingame_UIManager.GetInstance().CallbackDiag(stage.GetTexts(), null, "Seg", ReturnCamToPlayer, true)
 	GetMap().GetCamera().FrameCamToPos(Helper.GetCityByName("Armak").global_position, 6)
 
 func SteerTut() -> void:
@@ -256,10 +259,14 @@ func SteerTut() -> void:
 
 func PlayIntro():
 	#GetMap().PlayIntroFadeInt()
-	Ingame_UIManager.GetInstance().CallbackDiag(IntroDialogues, load("res://Assets/artificial-hive.png"), "Seg", ShowStation, true)
+	var introHap : Happening = load(IntroDialogues)
+	var stage : HappeningStage = introHap.Stages[0]
+	Ingame_UIManager.GetInstance().CallbackDiag(stage.GetTexts(), load("res://Assets/artificial-hive.png"), "Seg", ShowStation, true)
 
 func ShowStation():
-	Ingame_UIManager.GetInstance().CallbackDiag(IntroDialogue2, load("res://Assets/artificial-hive.png"), "Seg", ReturnCamToPlayer, true)
+	var introHap : Happening = load(IntroDialogues)
+	var stage : HappeningStage = introHap.Stages[1]
+	Ingame_UIManager.GetInstance().CallbackDiag(stage.GetTexts(), load("res://Assets/artificial-hive.png"), "Seg", ReturnCamToPlayer, true)
 	GetMap().GetCamera().FrameCamToPos(Helper.GetCityByName("Dormak").global_position, 6)
 
 

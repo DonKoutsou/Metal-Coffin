@@ -25,6 +25,9 @@ signal ShipSold(Ship : MapShip)
 
 var AvailableShips : Array[MapShip]
 
+func _ready() -> void:
+	UISoundMan.Instance.Refresh()
+
 func _physics_process(_delta: float) -> void:
 	#Going through and seeing wich Merch is closer to middle of screen and connect UI Descriptor to it
 	var midpoint = get_viewport_rect().size/2

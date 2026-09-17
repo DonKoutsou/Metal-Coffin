@@ -1,0 +1,56 @@
+[gd_resource type="Resource" script_class="Happening" format=3 uid="uid://bp2fjcc2ddc5x"]
+
+[ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scenes/Map/MapSpot/Happenings/HappeningStage.gd" id="1_beos2"]
+[ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scenes/Map/MapSpot/Happenings/HappeningOption.gd" id="2_7543m"]
+[ext_resource type="Script" uid="uid://cj6lgkawdqkd8" path="res://Scenes/Map/MapSpot/Happenings/HappeningText.gd" id="3_7543m"]
+[ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scenes/Map/MapSpot/Happenings/Happening.gd" id="3_x0d12"]
+
+[sub_resource type="Resource" id="Resource_x0d12"]
+script = ExtResource("3_7543m")
+Text = "Operator....."
+
+[sub_resource type="Resource" id="Resource_7543m"]
+script = ExtResource("3_7543m")
+Text = "Are you awake ?..."
+
+[sub_resource type="Resource" id="Resource_bnaoy"]
+script = ExtResource("3_7543m")
+Text = "We've almost arrived ar Cardi. We are slowly entering enemy territory, i advise caution.\", \"Our journey is comming to an end slowly..."
+
+[sub_resource type="Resource" id="Resource_yn780"]
+script = ExtResource("3_7543m")
+Text = "I recomend staying out of the cities, there are heave patrols checking the roads to and from each city."
+
+[sub_resource type="Resource" id="Resource_a6fj8"]
+script = ExtResource("1_beos2")
+Texts = Array[ExtResource("3_7543m")]([SubResource("Resource_x0d12"), SubResource("Resource_7543m"), SubResource("Resource_bnaoy"), SubResource("Resource_yn780")])
+
+[sub_resource type="Resource" id="Resource_whi2r"]
+script = ExtResource("3_7543m")
+Text = "Dormak is a few killometers away."
+
+[sub_resource type="Resource" id="Resource_xnc2y"]
+script = ExtResource("3_7543m")
+Text = "Lets be cautious and slowly make our way there."
+
+[sub_resource type="Resource" id="Resource_beu47"]
+script = ExtResource("3_7543m")
+Text = "Multiple cities exist on the way there but i'd advise against visiting unless on great need."
+
+[sub_resource type="Resource" id="Resource_q563n"]
+script = ExtResource("3_7543m")
+Text = "Multiple cities exist on the way there but i'd advise against visiting unless on great need."
+
+[sub_resource type="Resource" id="Resource_vrlwb"]
+script = ExtResource("3_7543m")
+Text = "Most of the cities in this are are inhabited by enemy troops, even if we dont stumble on a patrol, occupants of the cities might report our location to the enemy."
+
+[sub_resource type="Resource" id="Resource_6kmsi"]
+script = ExtResource("1_beos2")
+Texts = Array[ExtResource("3_7543m")]([SubResource("Resource_whi2r"), SubResource("Resource_xnc2y"), SubResource("Resource_beu47"), SubResource("Resource_q563n"), SubResource("Resource_vrlwb")])
+
+[resource]
+script = ExtResource("3_x0d12")
+HappeningName = "Campaign Intro"
+Stages = Array[ExtResource("1_beos2")]([SubResource("Resource_a6fj8"), SubResource("Resource_6kmsi")])
+metadata/_custom_type_script = "uid://dje5vrjyps8mt"

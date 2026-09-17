@@ -13,21 +13,21 @@ class_name CardFightEndScene
 signal ContinuePressed
 
 func _ready() -> void:
-	UISoundMan.GetInstance().AddSelf($VBoxContainer/ContinueButton)
+	UISoundMan.GetInstance().AddSelf($MarginContainer/VBoxContainer/ContinueButton)
 
 func _on_continue_button_pressed() -> void:
 	ContinuePressed.emit()
 
 func SetData(Data : BattleReportData) -> void:
-
+	var col = ColorManager.GetCurrentColor().to_html()
 	var text = ""
 	if (Data.Won):
-		text += "[center][color=#ffc315]Funds Earned[/color] : {0}\n".format([Data.FundWon])
+		text += "[center][color={1}]Funds Earned[/color] : {0}\n".format([Data.FundWon, col])
 	else:
-		text += "[center][color=#ffc315]Funds Earned[/color] : {0}\n".format([0])
-	text += "[color=#ffc315]Damage Dealt[/color] : {0}\n".format([roundi(Data.DamageDone)])
-	text += "[color=#ffc315]Damage Received [/color]: {0}\n".format([roundi(Data.DamageGot)])
-	text += "[color=#ffc315]Damage Negated[/color] : {0}\n".format([roundi(Data.DamageNegated)])
+		text += "[center][color={1}]Funds Earned[/color] : {0}\n".format([0, col])
+	text += "[color={1}]Damage Dealt[/color] : {0}\n".format([roundi(Data.DamageDone), col])
+	text += "[color={1}]Damage Received [/color]: {0}\n".format([roundi(Data.DamageGot), col])
+	text += "[color={1}]Damage Negated[/color] : {0}\n".format([roundi(Data.DamageNegated), col])
 	DataLabel.text = text
 	
 	for g in Data.FriendlyCasualties:

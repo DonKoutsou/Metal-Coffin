@@ -1,0 +1,56 @@
+[gd_resource type="Resource" script_class="Happening" format=3 uid="uid://dbpg7tbyy6xmc"]
+
+[ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://Scenes/Map/MapSpot/Happenings/HappeningOption.gd" id="1_68cjl"]
+[ext_resource type="Script" uid="uid://cj6lgkawdqkd8" path="res://Scenes/Map/MapSpot/Happenings/HappeningText.gd" id="2_vf2u1"]
+[ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://Scenes/Map/MapSpot/Happenings/Happening.gd" id="3_68cjl"]
+[ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://Scenes/Map/MapSpot/Happenings/HappeningStage.gd" id="3_xlvoq"]
+
+[sub_resource type="Resource" id="Resource_vf2u1"]
+script = ExtResource("2_vf2u1")
+Text = "You open your eyes, it seems that you fell asleep. "
+
+[sub_resource type="Resource" id="Resource_xlvoq"]
+script = ExtResource("2_vf2u1")
+Text = "The dream slowly fades away, but before it doese you have a moment to apreciate your early days in the pilot academy."
+
+[sub_resource type="Resource" id="Resource_1mrb5"]
+script = ExtResource("2_vf2u1")
+Text = "Life was different back then."
+
+[sub_resource type="Resource" id="Resource_8bl17"]
+script = ExtResource("2_vf2u1")
+Text = "Your illusion is broken by a loud voice from outside your door."
+
+[sub_resource type="Resource" id="Resource_lfi87"]
+script = ExtResource("2_vf2u1")
+Text = "Captain ! We are almost at Cardi. ETA 10 minutes..."
+
+[sub_resource type="Resource" id="Resource_pqw4c"]
+script = ExtResource("2_vf2u1")
+Text = "We should make this stop fast and head back you think to yourself. Patrols dont frequent around here but we shouldn't play with our luck."
+
+[sub_resource type="Resource" id="Resource_yf60k"]
+script = ExtResource("3_xlvoq")
+Texts = Array[ExtResource("2_vf2u1")]([SubResource("Resource_vf2u1"), SubResource("Resource_xlvoq"), SubResource("Resource_1mrb5"), SubResource("Resource_8bl17"), SubResource("Resource_lfi87"), SubResource("Resource_pqw4c")])
+
+[sub_resource type="Resource" id="Resource_8cvxs"]
+script = ExtResource("2_vf2u1")
+Text = "Armak is a few days away. Lets be cautious and slowly make our way there."
+
+[sub_resource type="Resource" id="Resource_gfd5m"]
+script = ExtResource("2_vf2u1")
+Text = "Multiple cities exist on the way. Most of them occupied by the regime. We need to make sure not to raise any alarms. Doing so will atract the regime's patrols."
+
+[sub_resource type="Resource" id="Resource_wqcpv"]
+script = ExtResource("2_vf2u1")
+Text = "Lets take it slow and study our every move. One slip and we fall."
+
+[sub_resource type="Resource" id="Resource_5rg4g"]
+script = ExtResource("3_xlvoq")
+Texts = Array[ExtResource("2_vf2u1")]([SubResource("Resource_8cvxs"), SubResource("Resource_gfd5m"), SubResource("Resource_wqcpv"), SubResource("Resource_wqcpv")])
+
+[resource]
+script = ExtResource("3_68cjl")
+HappeningName = "Prologue Intro"
+Stages = Array[ExtResource("3_xlvoq")]([SubResource("Resource_yf60k"), SubResource("Resource_5rg4g")])
+metadata/_custom_type_script = "uid://dje5vrjyps8mt"

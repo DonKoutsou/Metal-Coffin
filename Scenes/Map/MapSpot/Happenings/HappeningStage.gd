@@ -15,3 +15,9 @@ func FindText(t : String) -> HappeningText:
 		if (g.Text == t):
 			return g
 	return null
+
+func GetTexts() -> Array[String]:
+	var textList : Array[String] = []
+	for g in Texts:
+		textList.append(g.Text)
+	return textList

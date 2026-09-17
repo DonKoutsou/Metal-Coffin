@@ -73,25 +73,25 @@ size_flags_horizontal = 3
 [node name="HBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=108343989]
 layout_mode = 2
 
-[node name="StatsButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=511749095]
+[node name="StatsButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=511749095 groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 icon = ExtResource("10_hfjff")
 
-[node name="DeckButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=735396897]
+[node name="DeckButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=735396897 groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 icon = ExtResource("11_orplh")
 
-[node name="InventoryButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=47939498]
+[node name="InventoryButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=47939498 groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 icon = ExtResource("11_pjo8k")
 
-[node name="DispositionButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=404931635]
+[node name="DispositionButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=404931635 groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -99,7 +99,6 @@ icon = ExtResource("12_pjo8k")
 
 [node name="CaptainStatContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1727051882 instance=ExtResource("9_gy23n")]
 layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=339938003]
 visible = false
@@ -191,12 +190,12 @@ theme_override_styles/panel = ExtResource("1_p28a8")
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer3" unique_id=954170155]
 layout_mode = 2
 
-[node name="Sell" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer3/VBoxContainer" unique_id=789824842]
+[node name="Sell" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer3/VBoxContainer" unique_id=789824842 groups=["DigitalButtons"]]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Sell Ship"
 
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer3/VBoxContainer" unique_id=1965928851]
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer3/VBoxContainer" unique_id=1965928851 groups=["DigitalButtons"]]
 layout_mode = 2
 text = "Close"
 

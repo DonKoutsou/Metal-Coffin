@@ -45,6 +45,7 @@ func _ready() -> void:
 	SimulationManager.GetInstance().SimulationToggled.connect(OnSimulationPaused)
 	controller = ControlledEventH.CurrentControlled
 	
+	
 	Instance = self
 
 #-------------------------------------------------------
