@@ -36,7 +36,6 @@ func ConfigureOption(options : Happening_Option) -> void:
 func OptionChanged(opt : Happening_Option) -> void:
 	if (currentlyUpdating):
 		return
-	print("thing")
 	currentlyUpdating = true
 	textInput.text = opt.OptionName
 	text2.text = option.StringReply

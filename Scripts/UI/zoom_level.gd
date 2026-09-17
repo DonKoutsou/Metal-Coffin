@@ -7,7 +7,7 @@ class_name ZoomLvevel
 @export var MaxStep : float = 10.0
 
 const NUMBER_OFFSET : int = 10
-const TEXT_COLOR : Color = Color(100, 0.764, 0.081)
+var TEXT_COLOR : Color = Color(100, 0.764, 0.081)
 
 var CurrentZoom : float = 0.5
 var Working : bool = true
@@ -27,6 +27,7 @@ func zoom_to_ui(zoom_value: float) -> float:
 	return lerp(ShipCamera.MinZoom, ShipCamera.MaxZoom, t)
 
 func _draw() -> void:
+	TEXT_COLOR = ColorManager.GetCurrentColor()
 	#Size of UI element
 	var ContainerSize = size.y
 

@@ -36,8 +36,7 @@ func ConfigureStage(st : HappeningStage, t : HappeningText) -> void:
 func TextChanged(t : HappeningText) -> void:
 	if (currentlyChanging):
 		return
-		
-	print("thing")
+
 	textInput.text = t.Text
 	rich.text = TranslationServer.get_or_add_domain(&"godot.editor").translate(t.Text)
 

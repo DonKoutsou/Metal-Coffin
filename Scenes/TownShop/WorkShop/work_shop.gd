@@ -82,8 +82,7 @@ func OnShipSelected(ShipIndex : int) -> void:
 	
 	ShipStats.SetCaptain(CurrentShip.Cpt)
 	#ShipStats.ShowStats()
-	ShipStats.ShipInventory.SetBoxedSelectable()
-	ShipStats.ShipInventory.KeepBoxesActive = true
+	
 
 
 func GetTypeOfBox(Box : Inventory_Box_Res) -> ShipPart.ShipPartType:
@@ -426,3 +425,5 @@ func _on_distr_pressed() -> void:
 
 func _on_inventory_button_pressed() -> void:
 	ShipStats.ShowInvetory()
+	ShipStats.ShipInventory.SetBoxedSelectable()
+	ShipStats.ShipInventory.KeepBoxesActive = true

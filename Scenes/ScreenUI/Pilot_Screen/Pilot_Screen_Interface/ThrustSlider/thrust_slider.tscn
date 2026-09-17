@@ -8,6 +8,12 @@
 [ext_resource type="AudioStream" uid="uid://bw32ea80qadx8" path="res://Assets/Sounds/MetalClick.mp3" id="4_150ym"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="4_yx2h4"]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fn3x1"]
+random_pitch = 1.0293022
+random_volume_offset_db = 0.5
+streams_count = 1
+stream_0/stream = ExtResource("4_150ym")
+
 [node name="ThrustSlider" type="Control" unique_id=1806408407 node_paths=PackedStringArray("handle")]
 layout_mode = 3
 anchors_preset = 3
@@ -60,7 +66,7 @@ expand_mode = 1
 flip_h = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1516683677]
-stream = ExtResource("4_150ym")
+stream = SubResource("AudioStreamRandomizer_fn3x1")
 pitch_scale = 4.0
 bus = &"MapSounds"
 

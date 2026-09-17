@@ -44,6 +44,7 @@ func _ready() -> void:
 	ControlledEventH.OnControlledShipChanged.connect(ControllerChanged)
 	SimulationManager.GetInstance().SimulationToggled.connect(OnSimulationPaused)
 	controller = ControlledEventH.CurrentControlled
+	
 	Instance = self
 
 #-------------------------------------------------------
@@ -399,6 +400,7 @@ func ShowDeck() -> void:
 #-------------------------------------------------------
 func ShowInventory() -> void:
 	CaptainStats.ShowInvetory()
+	
 
 func ShowDisposition() -> void:
 	CaptainStats.ShowDisposition()
@@ -470,6 +472,7 @@ func ToggleInventory() -> void:
 			CaptainStats.ShowStats()
 		else:
 			CaptainStats.UpdateValues()
+		CaptainStats.InventoryBoxSelected.connect(BoxSelected)
 		size = Vector2(size.x, 0)
 		ToggleTween.set_ease(Tween.EASE_OUT)
 		ToggleTween.set_trans(Tween.TRANS_QUAD)

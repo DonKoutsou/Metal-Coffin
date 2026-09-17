@@ -8,7 +8,7 @@ class_name AltitudeLvevel
 @export var MaxStep : float = 10.0
 
 const NUMBER_OFFSET : int = 0
-const TEXT_COLOR : Color = Color(100, 0.764, 0.081)
+var TEXT_COLOR : Color = Color(100, 0.764, 0.081)
 
 var Working : bool = true
 
@@ -36,6 +36,7 @@ func Toggle(t) -> void:
 	visible = t
 
 func _draw() -> void:
+	TEXT_COLOR = ColorManager.GetCurrentColor()
 	#Size of UI element
 	var ContainerSize = size.y
 

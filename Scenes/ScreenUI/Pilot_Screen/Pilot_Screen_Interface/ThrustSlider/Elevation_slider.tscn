@@ -8,6 +8,12 @@
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="4_losf5"]
 [ext_resource type="Texture2D" uid="uid://cj1ixutk56tb0" path="res://Assets/UIPiecies/Screen/SidePanels/handle_Camera.png" id="5_nlov8"]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fn3x1"]
+random_pitch = 1.0293022
+random_volume_offset_db = 0.5
+streams_count = 1
+stream_0/stream = ExtResource("4_08ohp")
+
 [node name="ThrustSlider" type="Control" unique_id=1806408407 node_paths=PackedStringArray("handle")]
 layout_mode = 3
 anchors_preset = 3
@@ -58,7 +64,7 @@ texture = ExtResource("3_borvm")
 expand_mode = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1516683677]
-stream = ExtResource("4_08ohp")
+stream = SubResource("AudioStreamRandomizer_fn3x1")
 pitch_scale = 4.0
 bus = &"MapSounds"
 

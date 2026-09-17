@@ -188,6 +188,8 @@ static func FindTooltips(card : CardStats) -> PackedStringArray:
 			
 	if (card.OnUseModules.size() > 0):
 		tips.append("TLTP_ONUSE")
+	if (is_instance_valid(card.OnLeftOnHandModule)):
+		tips.append("TLTP_ONLEFT")
 	if (card.OnDiscardModules.size() > 0):
 		tips.append("TLTP_ONDISC")
 	if (card.UseConditions.has(CardStats.CardUseCondition.ENERGY_DEPENDANT)):

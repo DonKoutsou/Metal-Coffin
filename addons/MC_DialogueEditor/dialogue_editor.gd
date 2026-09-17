@@ -250,7 +250,6 @@ func HandleOption(option : Happening_Option, lastNodes : Array[BaseDialogueNode]
 	var lastOption : BaseDialogueNode
 	var newNode
 	if (option is Drone_Happening_Option):
-		print("thing")
 		newNode = CreateDialogueNode(NodeType.DRONE_OPTION)
 	else: if (option is String_Happening_Option):
 		newNode = CreateDialogueNode(NodeType.OPTION)

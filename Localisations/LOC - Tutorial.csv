@@ -95,3 +95,4 @@ TLTP_SWIFT,[color=#ffc315]SWIFT[/color]\nThis card will be placed at the top of 
 TLTP_DISPOSITION,[color=#ffc315]Disposition[/color]\nThis card is provided by the ships disposition.,
 TLTP_POWER,[color=#ffc315]Power[/color] cards provide permanent abilities that remain until the end of the fight.,
 TLTP_BURNED,[color=#ffc315]Burned[/color] cards are unusable until the end of the fight,
+TLTP_ONLEFT,[color=#ffc315]IF LEFT ON HAND[/color] effects are performed if the card stays in the user's hand in the end of their turn.,

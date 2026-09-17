@@ -1,21 +1,7 @@
 [gd_scene format=3 uid="uid://dtym0y7dgx7iv"]
 
 [ext_resource type="Script" uid="uid://c0aqmcmnsa888" path="res://Scripts/UI/zoom_level.gd" id="1_a2q7o"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a2q7o"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-content_margin_right = 10.0
-content_margin_bottom = 5.0
-draw_center = false
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(100, 0.764, 0.081, 1)
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_detail = 1
+[ext_resource type="StyleBox" uid="uid://cv6e2082iuddy" path="res://Theme/ZoomPanel.tres" id="2_ua54k"]
 
 [node name="VBoxContainer" type="Control" unique_id=3025055 node_paths=PackedStringArray("Text") groups=["ZoomAffected"]]
 custom_minimum_size = Vector2(60, 0)
@@ -44,12 +30,11 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_a2q7o")
+theme_override_styles/panel = ExtResource("2_ua54k")
 
 [node name="Label" type="Label" parent="PanelContainer" unique_id=1393173706]
 layout_mode = 2
 size_flags_vertical = 1
-theme_override_colors/font_color = Color(100, 0.764, 0.081, 1)
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 14
 text = "4x"

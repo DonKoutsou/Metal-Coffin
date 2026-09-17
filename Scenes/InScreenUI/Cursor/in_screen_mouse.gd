@@ -1,4 +1,4 @@
-extends TextureRect
+extends Panel
 
 class_name InScreenCursor
 
@@ -18,19 +18,20 @@ func _ready() -> void:
 	Instance = self
 
 func SwitchMouse(Mode : MouseMode) -> void:
-	if (Mode == CurrentMode):
-		return
-	if (World.WORLDST != World.WORLDSTATE.NORMAL):
-		CurrentMode = MouseMode.NORMAL
-		texture = ResourceLoader.load(NormalPointer)
-		return
-	match (Mode):
-		MouseMode.NORMAL:
-			CurrentMode = MouseMode.NORMAL
-			texture = ResourceLoader.load(NormalPointer)
-		MouseMode.DIRECTIONAL:
-			CurrentMode = MouseMode.DIRECTIONAL
-			texture = ResourceLoader.load(DirectionalPointer)
+	return
+	#if (Mode == CurrentMode):
+		#return
+	#if (World.WORLDST != World.WORLDSTATE.NORMAL):
+		#CurrentMode = MouseMode.NORMAL
+		#texture = ResourceLoader.load(NormalPointer)
+		#return
+	#match (Mode):
+		#MouseMode.NORMAL:
+			#CurrentMode = MouseMode.NORMAL
+			#texture = ResourceLoader.load(NormalPointer)
+		#MouseMode.DIRECTIONAL:
+			#CurrentMode = MouseMode.DIRECTIONAL
+			#texture = ResourceLoader.load(DirectionalPointer)
 
 func ToggleMouse(t : bool) -> void:
 	set_process(t)

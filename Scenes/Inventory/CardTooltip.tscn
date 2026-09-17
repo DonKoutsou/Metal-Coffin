@@ -11,6 +11,7 @@ mouse_filter = 2
 [node name="Label" type="RichTextLabel" parent="." unique_id=442661117]
 layout_mode = 2
 mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 bbcode_enabled = true
 fit_content = true
 scroll_active = false
