@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://brinqcu2jdpo8" path="res://Scenes/GlobalManagers/DispositionLevel.gd" id="3_2mlnm"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="4_1jc4x"]
 [ext_resource type="Resource" uid="uid://odkwy5rk0vxe" path="res://Resources/Cards/Powers/ShieldOnDraw.tres" id="5_46o2s"]
+[ext_resource type="Resource" uid="uid://dkb51gffoau73" path="res://Resources/Cards/Powers/ShieldOnDrawOffensive.tres" id="6_2mlnm"]
 [ext_resource type="Resource" uid="uid://barj6en5mlnje" path="res://Resources/Cards/Powers/Thorns.tres" id="6_pt5js"]
 [ext_resource type="Resource" uid="uid://w0powsomsqvs" path="res://Resources/Cards/Powers/FireHeal.tres" id="7_f6e7l"]
 [ext_resource type="Resource" uid="uid://ccj7o7kccax76" path="res://Resources/Cards/Self_Combustion.tres" id="8_in2jj"]
@@ -13,7 +14,8 @@
 [sub_resource type="Resource" id="Resource_s7tc1"]
 script = ExtResource("3_2mlnm")
 Rewards = Dictionary[ExtResource("4_1jc4x"), int]({
-ExtResource("5_46o2s"): 1
+ExtResource("5_46o2s"): 1,
+ExtResource("6_2mlnm"): 1
 })
 metadata/_custom_type_script = "uid://brinqcu2jdpo8"
 

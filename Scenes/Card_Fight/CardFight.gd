@@ -390,6 +390,19 @@ func CardPlayed(Ship : BattleShipStats, C : CardStats) -> void:
 	if (AnimData.size() > 0):
 		for g in AnimData:
 			HandlePassiveModules(g.Performer, g.OriginalCard, g.Targets)
+	
+	var data2 : Dictionary = {
+		"actionType" : Card_Passive.ActionType.CARD_TYPE_IN_ROW_PLAYED,
+		"Friendly" : GetShipsTeam(Ship),
+		"Enemy" : GetShipEnemyTeam(Ship),
+		"Performer" : Ship,
+		"Card" : C
+	}
+	var AnimData2 = PassiveList.OnActionPerformed(data2)
+	if (AnimData2.size() > 0):
+		for g in AnimData2:
+			HandlePassiveModules(g.Performer, g.OriginalCard, g.Targets)
+	
 
 ##----------------------------------------------------------------------##
 func CardDrawn(C : CardStats, Manually : bool) -> void:
@@ -759,19 +772,19 @@ func OnCardSelected(C : Card, target : BattleShipStats = null) -> bool:
 					ActionList.AddAction(Ship, ShipAction)
 					
 					await DoCardPlecementAnimation(Ship, c, CardPosition)
-			else:
-				var Action : CardStats
-				Action = C.CStats
-				
-				var CardPosition = C.global_position
-				
-				var c = CardScene.instantiate() as Card
-				c.SetCardBattleStats(Ship, Action)
-				c.connect("OnCardPressed", RemoveCard)
-			
-				SelectedCardPlecement.add_child(c)
-
-				await DoCardPlecementAnimation(Ship, c, CardPosition)
+			#else:
+				#var Action : CardStats
+				#Action = C.CStats
+				#
+				#var CardPosition = C.global_position
+				#
+				#var c = CardScene.instantiate() as Card
+				#c.SetCardBattleStats(Ship, Action)
+				#c.connect("OnCardPressed", RemoveCard)
+			#
+				#SelectedCardPlecement.add_child(c)
+#
+				#await DoCardPlecementAnimation(Ship, c, CardPosition)
 				
 			C.get_parent().queue_free()
 		else:

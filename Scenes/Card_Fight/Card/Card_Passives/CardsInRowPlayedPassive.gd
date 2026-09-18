@@ -1,17 +1,40 @@
 extends Card_Passive
 
-class_name OnCardPlayedPassive
+class_name CardInRowPlayedPassive
+
+@export var Type : CardStats.CardType = CardStats.CardType.OFFENSIVE
+
+var lastCard : CardStats
+var User : BattleShipStats
 
 func OnActionPerformed(data : Dictionary, _C : CardStats, PassiveOwner : BattleShipStats) -> PassiveAnimationData:
 	var card : CardStats = data["Card"]
-	if (card.OnPerformModule != null and card.OnPerformModule is not OffensiveCardModule):
-		return null
-		
-	var actionReceiver : BattleShipStats = data["Receiver"]
+	
+	if (card.Type != Type):
+		#reset
+		User = null
+		lastCard = null
+		return
+	
+	var Instigator : BattleShipStats = data["Performer"]
 	
 	var possibleReceivers : Array[BattleShipStats] = GetPossibleReceivers(data, PassiveOwner)
-	if (!possibleReceivers.has(actionReceiver)):
+	if (!possibleReceivers.has(Instigator)):
 		return null
+	
+	if (User != Instigator):
+		User = Instigator
+		lastCard = card
+		return
+
+	#if a card has been stored by the same user
+	if (lastCard == null):
+		lastCard = card
+		return
+	
+	#reset
+	User = null
+	lastCard = null
 	
 	var targets : Array[BattleShipStats] = GetPossibleTargets(data, PassiveOwner)
 	
@@ -24,6 +47,7 @@ func OnActionPerformed(data : Dictionary, _C : CardStats, PassiveOwner : BattleS
 
 	return dat
 
+#------------------------------------------------------
 func GetPossibleReceivers(data : Dictionary, PassiveOwner : BattleShipStats) -> Array[BattleShipStats]:
 	var actionReceiver : BattleShipStats = data["Performer"]
 	var sameTeam = actionReceiver.Friendly == PassiveOwner.Friendly
@@ -61,5 +85,11 @@ func GetPossibleReceivers(data : Dictionary, PassiveOwner : BattleShipStats) -> 
 		
 	return targets
 
+func GetTrigerString() -> String:
+	var triggerString : String = ActionType.keys()[GetTrigger()].replace("_", " ")
+	var receiverString : String = ReceiverType.keys()[Receiver].replace("_", " ")
+	
+	return "[color=#ffc315]ON 2 {2} CARDS PLAYED IN A ROW BY {1}[/color]".format([triggerString, receiverString, CardStats.CardType.keys()[Type]])
+
 func GetTrigger() -> ActionType:
-	return ActionType.CARD_PLAYED
+	return ActionType.CARD_TYPE_IN_ROW_PLAYED
