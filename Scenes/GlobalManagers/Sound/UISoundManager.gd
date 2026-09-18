@@ -165,7 +165,7 @@ func Refresh() -> void:
 			
 		DigitalButton.connect("button_down", PlayButton.bind(2))
 		
-		DigitalButton.mouse_entered.connect(PlayButton.bind(2))
+		DigitalButton.mouse_entered.connect(PlayButton.bind(3))
 		DigitalButton.mouse_exited.connect(OnButtonHoverEnded)
 		#Digibuttons[g].connect("focus_entered", OnButtonHovered);
 	

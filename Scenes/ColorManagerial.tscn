@@ -26,6 +26,6 @@
 
 [node name="Node" type="Node" unique_id=1401654699]
 script = ExtResource("1_okvd0")
-styleBoxes = Array[StyleBoxFlat]([ExtResource("2_3vru3"), ExtResource("3_b3uxo"), ExtResource("4_kskw8"), ExtResource("5_slnnd"), ExtResource("6_tahk1"), ExtResource("7_tahk1"), ExtResource("8_fiij5"), ExtResource("9_snkuw"), ExtResource("10_4cb0o"), ExtResource("11_42tvj"), ExtResource("12_t361a"), ExtResource("13_t361a")])
-bgStyleBoxes = Array[StyleBoxFlat]([ExtResource("8_8100i"), ExtResource("9_46mna"), ExtResource("10_8100i"), ExtResource("12_3eqqw"), ExtResource("13_oncdv"), ExtResource("14_snkuw"), ExtResource("16_vplee"), ExtResource("17_d7nib"), ExtResource("22_8x7wn")])
+styleBoxes = Array[StyleBoxFlat]([ExtResource("2_3vru3"), ExtResource("3_b3uxo"), ExtResource("4_kskw8"), ExtResource("6_tahk1"), ExtResource("7_tahk1"), ExtResource("8_fiij5"), ExtResource("9_snkuw"), ExtResource("10_4cb0o"), ExtResource("11_42tvj"), ExtResource("12_t361a"), ExtResource("13_t361a")])
+bgStyleBoxes = Array[StyleBoxFlat]([ExtResource("8_8100i"), ExtResource("9_46mna"), ExtResource("10_8100i"), ExtResource("12_3eqqw"), ExtResource("13_oncdv"), ExtResource("14_snkuw"), ExtResource("16_vplee"), ExtResource("17_d7nib"), ExtResource("22_8x7wn"), ExtResource("5_slnnd")])
 th = ExtResource("7_b3uxo")

@@ -87,25 +87,25 @@ size_flags_horizontal = 3
 [node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer" unique_id=133740933]
 layout_mode = 2
 
-[node name="StatsButton" type="Button" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1041466533]
+[node name="StatsButton" type="Button" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1041466533 groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 icon = ExtResource("11_oglie")
 
-[node name="DeckButton" type="Button" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=502606399]
+[node name="DeckButton" type="Button" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=502606399 groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 icon = ExtResource("12_3d65x")
 
-[node name="InventoryButton" type="Button" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1975341829]
+[node name="InventoryButton" type="Button" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1975341829 groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 icon = ExtResource("13_1sr3f")
 
-[node name="DispositionButton" type="Button" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1951854749]
+[node name="DispositionButton" type="Button" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1951854749 groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

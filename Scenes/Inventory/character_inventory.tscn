@@ -20,7 +20,7 @@ mouse_filter = 2
 script = ExtResource("1_i6whi")
 CaptainNameLabel = NodePath("Button/CharacterName")
 
-[node name="Button" type="Button" parent="." unique_id=587787046]
+[node name="Button" type="Button" parent="." unique_id=587787046 groups=["DigitalButtons"]]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -44,7 +44,7 @@ max_length = 20
 caret_blink = true
 caret_blink_interval = 0.28
 
-[node name="Button2" type="Button" parent="." unique_id=1358540188]
+[node name="Button2" type="Button" parent="." unique_id=1358540188 groups=["DigitalButtons"]]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 

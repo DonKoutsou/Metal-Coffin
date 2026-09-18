@@ -50,7 +50,7 @@ Butto = NodePath("ItemButton")
 txt = NodePath("ItemButton/HBoxContainer/ItemName")
 AmmountLabel = NodePath("ItemButton/HBoxContainer/PanelContainer/Label")
 
-[node name="ItemButton" type="Button" parent="." unique_id=1170581497 groups=["DigitalBouncingButton"]]
+[node name="ItemButton" type="Button" parent="." unique_id=1170581497 groups=["DigitalButtons"]]
 layout_mode = 2
 focus_mode = 0
 mouse_filter = 2
@@ -89,7 +89,9 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = 0
+theme_override_constants/outline_size = 4
 text = "adwdaw"
 horizontal_alignment = 1
 vertical_alignment = 1
