@@ -11,3 +11,6 @@ It = ExtResource("1_gmykh")
 [resource]
 script = ExtResource("3_6aqpa")
 Merch = SubResource("Resource_jrb8f")
+Cost = 600
+MaxAmmPerStage = 4
+DontGenerateBefore = 4

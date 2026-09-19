@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://52ga378orxqr" path="res://Assets/Sounds/ButtonOut2.mp3" id="3_76ni5"]
 [ext_resource type="AudioStream" uid="uid://sejltidjhhr8" path="res://Assets/Sounds/ButtonOut.wav" id="3_tx5of"]
 [ext_resource type="AudioStream" uid="uid://ups7egvp1xc5" path="res://Assets/Sounds/Hover.mp3" id="4_llfjl"]
-[ext_resource type="AudioStream" uid="uid://dheen5r8o7qd" path="res://Assets/Sounds/glass_002.mp3" id="7_3uwd3"]
+[ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="7_3uwd3"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3uwd3"]
 random_pitch = 1.005793

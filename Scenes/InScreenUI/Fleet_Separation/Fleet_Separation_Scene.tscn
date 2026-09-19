@@ -165,7 +165,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 text = "Range : 155 km"
 
-[node name="Button" type="Button" parent="VBoxContainer" unique_id=87464557]
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=87464557 groups=["DigitalButtons"]]
 layout_mode = 2
 text = "FINISH"
 

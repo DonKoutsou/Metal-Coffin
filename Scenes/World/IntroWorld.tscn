@@ -9,18 +9,24 @@
 [ext_resource type="PackedScene" uid="uid://ccmwul4ncd4dx" path="res://Scenes/Enemies/commander.tscn" id="14_m5d6e"]
 [ext_resource type="Script" uid="uid://db4epchvprg0h" path="res://Scripts/DialogueProgressHolder.gd" id="15_g1jcv"]
 [ext_resource type="Script" uid="uid://sp6oe17wqrga" path="res://Scenes/InScreenUI/WorldView/worldview_manager.gd" id="17_18b7g"]
-[ext_resource type="Resource" uid="uid://dr3ro5kl2ebvq" path="res://Resources/Happenings/The_Plague.tres" id="17_pdcm6"]
 [ext_resource type="PackedScene" uid="uid://mqqrbhnagjvi" path="res://Scenes/GlobalManagers/Simulation/simulation_manager.tscn" id="18_43ao6"]
-[ext_resource type="Script" uid="uid://s3ha37qvdear" path="res://Scripts/event_manager.gd" id="19_0dp8t"]
+[ext_resource type="Script" uid="uid://s3ha37qvdear" path="res://Scripts/EventManager/event_manager.gd" id="19_0dp8t"]
 [ext_resource type="PackedScene" uid="uid://cyujmksfffet" path="res://Scenes/Map/map.tscn" id="19_3v2l7"]
-[ext_resource type="Resource" uid="uid://c3kr3kcdnvesc" path="res://Resources/Happenings/CrewRecruitHappeningGilian.tres" id="19_v142v"]
-[ext_resource type="Resource" uid="uid://chjcgb4pp86hr" path="res://Resources/Happenings/CardiPrince.tres" id="20_7no5x"]
-[ext_resource type="Resource" uid="uid://b2cbd58y7piwy" path="res://Resources/Happenings/NomadsIntro.tres" id="20_8eeky"]
-[ext_resource type="Resource" uid="uid://cpj4icaudta0f" path="res://Resources/Happenings/The Adressing.tres" id="21_ljctt"]
-[ext_resource type="Resource" uid="uid://bwwb3anxj624k" path="res://Resources/Happenings/The evangelist.tres" id="22_8o37l"]
-[ext_resource type="Resource" uid="uid://c5n56ywx45ilm" path="res://Resources/Happenings/The execution.tres" id="23_43ao6"]
-[ext_resource type="Resource" uid="uid://cxkj2k4llta37" path="res://Resources/Happenings/YoungCrewDiscussion.tres" id="24_8o37l"]
-[ext_resource type="Resource" uid="uid://bcorxmnws22bw" path="res://Resources/Happenings/The Evaluation.tres" id="28_32m5b"]
+[ext_resource type="Script" uid="uid://bqhtiqcy7irvm" path="res://Scripts/EventManager/HappeningList.gd" id="21_h18kb"]
+
+[sub_resource type="Resource" id="Resource_qs546"]
+script = ExtResource("21_h18kb")
+list = Array[String](["uid://b2cbd58y7piwy", "uid://cpj4icaudta0f", "uid://bwwb3anxj624k", "uid://c5n56ywx45ilm", "uid://cxkj2k4llta37", "uid://bcorxmnws22bw", "uid://dr3ro5kl2ebvq", "uid://c3kr3kcdnvesc"])
+metadata/_custom_type_script = "uid://bqhtiqcy7irvm"
+
+[sub_resource type="Resource" id="Resource_41ig8"]
+script = ExtResource("21_h18kb")
+list = Array[String](["uid://chjcgb4pp86hr"])
+metadata/_custom_type_script = "uid://bqhtiqcy7irvm"
+
+[sub_resource type="Resource" id="Resource_hlwfy"]
+script = ExtResource("21_h18kb")
+metadata/_custom_type_script = "uid://bqhtiqcy7irvm"
 
 [node name="World" type="Control" unique_id=327614426 node_paths=PackedStringArray("_Map", "_Command", "Controller")]
 process_mode = 3
@@ -65,10 +71,10 @@ Notif_File = "uid://b5vi65a1j0fjf"
 
 [node name="EventManager" type="Node" parent="." unique_id=998249353]
 script = ExtResource("19_0dp8t")
-EventsPerSpot = Dictionary[int, Array]({
-0: [ExtResource("20_8eeky"), ExtResource("21_ljctt"), ExtResource("22_8o37l"), ExtResource("23_43ao6"), ExtResource("24_8o37l"), ExtResource("28_32m5b"), ExtResource("17_pdcm6"), ExtResource("19_v142v")],
-1: [ExtResource("20_7no5x")],
-2: []
+EventList = Dictionary[int, Object]({
+0: SubResource("Resource_qs546"),
+1: SubResource("Resource_41ig8"),
+2: SubResource("Resource_hlwfy")
 })
 metadata/_custom_type_script = "uid://s3ha37qvdear"
 

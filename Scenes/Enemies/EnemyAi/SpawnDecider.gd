@@ -3,20 +3,21 @@ extends Resource
 
 class_name SpawnDecider
 
-@export var CaptainList : Array[CaptainSpawnInfo]
-@export var GroundUnits : Array[CaptainSpawnInfo]
-@export var ConvoyUnits : Array[CaptainSpawnInfo]
+@export_file("*.tres") var CaptainFileList : Array[String]
+@export_file("*.tres") var GroundUnitFileList : Array[String]
+@export_file("*.tres") var ConvoyUnitFileList : Array[String]
+@export_file("*.tres") var RecruitFileList : Array[String]
 
-@export var MerchList : Array[MerchandiseInfo]
-@export var WorkshopList : Array[MerchandiseInfo]
-@export var RecruitList : Array[CaptainSpawnInfo]
+@export_file("*.tres") var MerchFileList : Array[String]
+@export_file("*.tres") var WorkshopFileList : Array[String]
 
 const LowestPrice : int = 50
 const MerchLowest : int = 2
 const RECRUIT_LOWEST : int = 25
-var sorted_captain_list
-var sorted_ground_captain_list
-var sorted_convoy_captain_list
+
+var sorted_captain_list : Array[CaptainSpawnInfo] = []
+var sorted_ground_captain_list : Array[CaptainSpawnInfo] = []
+var sorted_convoy_captain_list : Array[CaptainSpawnInfo] = []
 
 @export_tool_button("Refresh") var RefreshAction = RefrshExistingItems 
 
@@ -24,6 +25,8 @@ var sorted_convoy_captain_list
 func RefrshExistingItems() -> void:
 	#WorkshopList.clear()
 	#MerchList.clear()
+	MerchFileList.clear()
+	WorkshopFileList.clear()
 	if (!Engine.is_editor_hint()):
 		return
 	var DirsToExplore : PackedStringArray = ["res://Resources/Items"]
@@ -45,38 +48,44 @@ func RefrshExistingItems() -> void:
 
 #------------------------------------------------------------------------
 func AddMerchToLists(It : Item, FileName :String) -> void:
-	var MerInfo = MerchandiseInfo.new()
-	var Mer = Merchandise.new()
-	MerInfo.Merch = Mer
-	Mer.It = It
-	if (It is ShipPart):
-		for g in WorkshopList.size():
-			if (WorkshopList[g].Merch.It.IsSame(It)):
-				ResourceSaver.save(WorkshopList[g], "res://Resources/Merch/" + FileName)
-				WorkshopList.remove_at(g)
-				WorkshopList.insert(g, load("res://Resources/Merch/" + FileName))
-				return
+	var MerInfo : MerchandiseInfo
+	if (!FileAccess.file_exists("res://Resources/Merch/" + FileName)):
+		MerInfo = MerchandiseInfo.new()
+		var Mer = Merchandise.new()
+		MerInfo.Merch = Mer
+		Mer.It = It
+		ResourceSaver.save(MerInfo, "res://Resources/Merch/" + FileName)
 		
-		ResourceSaver.save(MerInfo, "res://Resources/Merch/" + FileName)
-		WorkshopList.append(load("res://Resources/Merch/" + FileName))
+	if (It is ShipPart):
+		WorkshopFileList.append("res://Resources/Merch/" + FileName)
 	else:
-		for g in MerchList.size():
-			if (MerchList[g].Merch.It.IsSame(It)):
-				ResourceSaver.save(MerchList[g], "res://Resources/Merch/" + FileName)
-				MerchList.remove_at(g)
-				MerchList.insert(g, load("res://Resources/Merch/" + FileName))
-				return
-		ResourceSaver.save(MerInfo, "res://Resources/Merch/" + FileName)
-		MerchList.append(load("res://Resources/Merch/" + FileName))
+		MerchFileList.append("res://Resources/Merch/" + FileName)
+
+func LoadAndSort() -> void:
+	# Sort CaptainList by cost descending to prioritize more powerful ships
+	
+	sorted_captain_list.clear()
+	for file in CaptainFileList:
+		sorted_captain_list.append(ResourceLoader.load(file))
+	sorted_captain_list.sort_custom(SortByCostDescending)
+	
+	sorted_ground_captain_list.clear()
+	for file in GroundUnitFileList:
+		sorted_ground_captain_list.append(ResourceLoader.load(file))
+	sorted_ground_captain_list.sort_custom(SortByCostDescending)
+	
+	sorted_convoy_captain_list.clear()
+	for file in ConvoyUnitFileList:
+		sorted_convoy_captain_list.append(ResourceLoader.load(file))
+	sorted_convoy_captain_list.sort_custom(SortByCostDescending)
+	
+func Unload() -> void:
+	sorted_captain_list.clear()
+	sorted_ground_captain_list.clear()
+	sorted_convoy_captain_list.clear()
 
 func Init() -> void:
-	# Sort CaptainList by cost descending to prioritize more powerful ships
-	sorted_captain_list = CaptainList.duplicate()
-	sorted_ground_captain_list = GroundUnits.duplicate()
-	sorted_convoy_captain_list = ConvoyUnits.duplicate()
-	sorted_captain_list.sort_custom(SortByCostDescending)
-	sorted_ground_captain_list.sort_custom(SortByCostDescending)
-	sorted_convoy_captain_list.sort_custom(SortByCostDescending)
+	LoadAndSort()
 	
 #------------------------------------------------------------------------
 func GetMerchForPosition(YPos: float, HasUp : bool, capital : bool) -> Array[Merchandise]:
@@ -92,8 +101,8 @@ func GetMerchForPosition(YPos: float, HasUp : bool, capital : bool) -> Array[Mer
 		
 	# Iterate through the MerchList to select merchandise based on points
 	while points > MerchLowest:
-		var randomIndex = Rand.InstanceRandom.RandIRange(0, MerchList.size() - 1) 
-		var m = MerchList[randomIndex] as MerchandiseInfo
+		var randomIndex = Rand.InstanceRandom.RandIRange(0, MerchFileList.size() - 1) 
+		var m = ResourceLoader.load(MerchFileList[randomIndex]) as MerchandiseInfo
 		if (m.DontGenerateBefore > stage):
 				continue
 		var M : Merchandise
@@ -123,12 +132,12 @@ func GetRecruitsForPosition(YPos: float, _HasRec : bool, capital : bool) -> Arra
 		
 	#print("Picking recruits for pos {0} with points {1}".format([YPos, points]))
 	var stage = Happening.GetStageForYPos(YPos)
-	var recs = RecruitList.duplicate()
+	var recs = RecruitFileList.duplicate()
 	
 	# Iterate through the MerchList to select merchandise based on points
 	while points > RECRUIT_LOWEST and recs.size() > 0:
 		var randomIndex = Rand.InstanceRandom.RandIRange(0, recs.size() - 1)
-		var RandomRec : CaptainSpawnInfo = recs[randomIndex]
+		var RandomRec : CaptainSpawnInfo = ResourceLoader.load(recs[randomIndex])
 		
 		if (RandomRec.DontGenerateBefore > stage):
 			continue
@@ -136,7 +145,7 @@ func GetRecruitsForPosition(YPos: float, _HasRec : bool, capital : bool) -> Arra
 		#Check if surpassing max ammount in fleet
 		var ammInFleet = available_Recruits.count(RandomRec.Cpt)
 		if (ammInFleet >= RandomRec.MaxAmmInFleet):
-			recs.erase(RandomRec)
+			recs.remove_at(randomIndex)
 			continue
 		
 		#If cost allows add it to available recruits
@@ -159,8 +168,8 @@ func GetWorkshopMerchForPosition(YPos: float, HasUp : bool, capital : bool) -> A
 
 	# Iterate through the MerchList to select merchandise based on points
 	while points > MerchLowest:
-		var randomIndex = Rand.InstanceRandom.RandIRange(0, WorkshopList.size() - 1)
-		var m = WorkshopList[randomIndex] as MerchandiseInfo
+		var randomIndex = Rand.InstanceRandom.RandIRange(0, WorkshopFileList.size() - 1)
+		var m = ResourceLoader.load(WorkshopFileList[randomIndex]) as MerchandiseInfo
 		
 		if (m.DontGenerateBefore > stage):
 			continue

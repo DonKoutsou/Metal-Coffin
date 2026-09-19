@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MerchandiseInfo" format=3 uid="uid://c7p1mubsgqalr"]
+
+[ext_resource type="Resource" uid="uid://byk8ikxmio8k1" path="res://Resources/Items/ShipParts/Sonar/LongSonar.tres" id="1_2duiu"]
+[ext_resource type="Script" uid="uid://ymki3tqy3opd" path="res://Scenes/TownShop/merchandise.gd" id="2_ahi8t"]
+[ext_resource type="Script" uid="uid://bpenulp2lk361" path="res://Scenes/TownShop/merchandise_info.gd" id="3_wtdqt"]
+
+[sub_resource type="Resource" id="Resource_2duiu"]
+script = ExtResource("2_ahi8t")
+It = ExtResource("1_2duiu")
+
+[resource]
+script = ExtResource("3_wtdqt")
+Merch = SubResource("Resource_2duiu")

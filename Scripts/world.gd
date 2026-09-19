@@ -298,8 +298,6 @@ func TerminateWorld() -> void:
 	var PlShips = get_tree().get_nodes_in_group("PlayerShips")
 	for g : MapShip in PlShips:
 		g.Kill()
-			
-
 
 #ShipTrade
 func StartShipTrade(ControlledShip : PlayerDrivenShip) -> void:

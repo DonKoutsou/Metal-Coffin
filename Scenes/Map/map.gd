@@ -752,6 +752,7 @@ func SpawnTownEnemiesThreaded(Towns : Array[Town]) -> void:
 
 func SpawnFin() -> void:
 	call_deferred("FGenerationFinished")
+	EnSpawner.Unload()
 
 func SpawnSpotFleet(Spot : MapSpot, Patrol : bool, Convoy : bool,  Pos : Vector2) -> void:
 	#print("Spawning for {0}".format([Spot.GetSpotName()]))
@@ -849,6 +850,7 @@ func GetMissileSaveData() -> SaveData:
 
 func EnemySpawnFinished() -> void:
 	EnemySpawnTh.wait_to_finish()
+	EnSpawner.Unload()
 	#set_physics_process(true)
 	
 	

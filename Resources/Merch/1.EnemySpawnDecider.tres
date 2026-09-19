@@ -1,77 +1,12 @@
 [gd_resource type="Resource" script_class="SpawnDecider" format=3 uid="uid://c1buiwym6qkh8"]
 
-[ext_resource type="Script" uid="uid://ci53582k6iewi" path="res://Scenes/Enemies/EnemyAi/CaptainSpawnInfo.gd" id="1_87ibq"]
-[ext_resource type="Resource" uid="uid://ctb0bey42ck18" path="res://Resources/Captains/SpawnInfos/FireshipLvl1.tres" id="2_wdg75"]
-[ext_resource type="Resource" uid="uid://brklxjupl0rch" path="res://Resources/Captains/SpawnInfos/FireshipLvl2.tres" id="3_2eb0g"]
-[ext_resource type="Resource" uid="uid://brutfvbqof8br" path="res://Resources/Captains/SpawnInfos/FireshipLvl3.tres" id="4_r0vc0"]
-[ext_resource type="Resource" uid="uid://dcgnt16mqufga" path="res://Resources/Captains/SpawnInfos/FireshipLvl4.tres" id="5_c68la"]
-[ext_resource type="Resource" uid="uid://blavi3f1ur507" path="res://Resources/Captains/SpawnInfos/MissileCLvl1.tres" id="6_iqlvy"]
-[ext_resource type="Resource" uid="uid://bc8tkbx0lm76l" path="res://Resources/Captains/SpawnInfos/MissileCLvl2.tres" id="7_n8h36"]
-[ext_resource type="Resource" uid="uid://bgcudxjcbwqho" path="res://Resources/Captains/SpawnInfos/MissileCLvl3.tres" id="8_dofu4"]
-[ext_resource type="Resource" uid="uid://dcvoc8bgq8ctq" path="res://Resources/Captains/SpawnInfos/MissileCLvl4.tres" id="9_exmfb"]
-[ext_resource type="Resource" uid="uid://cl0a8poce0hjq" path="res://Resources/Captains/SpawnInfos/RadarLvl1.tres" id="10_pui15"]
-[ext_resource type="Resource" uid="uid://qk63uojn4d3u" path="res://Resources/Captains/SpawnInfos/RadarLvl2.tres" id="11_h16mj"]
-[ext_resource type="Resource" uid="uid://cib15c8a1rw34" path="res://Resources/Captains/SpawnInfos/RadarLvl3.tres" id="12_0su1b"]
-[ext_resource type="Resource" uid="uid://b8rk3y5wevyap" path="res://Resources/Captains/SpawnInfos/RadarLvl4.tres" id="13_ns8om"]
-[ext_resource type="Resource" uid="uid://bjwc7eir6wdlu" path="res://Resources/Captains/SpawnInfos/TankerLvl1.tres" id="14_hn1fl"]
-[ext_resource type="Resource" uid="uid://bcsspmo5nnyvm" path="res://Resources/Captains/SpawnInfos/TankerLvl2.tres" id="15_1pv0s"]
-[ext_resource type="Resource" uid="uid://g2a8jt5yrgwr" path="res://Resources/Captains/SpawnInfos/TankerLvl3.tres" id="16_oscns"]
-[ext_resource type="Resource" uid="uid://d17h4a7ifln30" path="res://Resources/Captains/SpawnInfos/TankerLvl4.tres" id="17_fdaa0"]
-[ext_resource type="Resource" uid="uid://bjtu5mgi855ge" path="res://Resources/Captains/SpawnInfos/CorveteLvl1.tres" id="18_3hc0a"]
-[ext_resource type="Resource" uid="uid://di5eydm5e8bvx" path="res://Resources/Captains/SpawnInfos/ConvoyLvl1.tres" id="18_5ajvh"]
-[ext_resource type="Resource" uid="uid://1dcxgrpt06te" path="res://Resources/Captains/SpawnInfos/LandFireshipLvl1.tres" id="19_4glqq"]
-[ext_resource type="Resource" uid="uid://clant8bk2jbqh" path="res://Resources/Captains/SpawnInfos/CorveteLvl2.tres" id="19_hvwho"]
-[ext_resource type="Resource" uid="uid://cmf0n4eco02nt" path="res://Resources/Captains/SpawnInfos/CorveteLvl3.tres" id="20_ahk72"]
-[ext_resource type="Resource" uid="uid://dx7unrtjdflj2" path="res://Resources/Captains/SpawnInfos/LandFireshipLvl2.tres" id="20_u7j23"]
-[ext_resource type="Script" uid="uid://bpenulp2lk361" path="res://Scenes/TownShop/merchandise_info.gd" id="21_0l8w1"]
-[ext_resource type="Resource" uid="uid://2ii8eoq0203v" path="res://Resources/Captains/SpawnInfos/CorveteLvl4.tres" id="21_12d78"]
-[ext_resource type="Resource" uid="uid://2r8sbt2ykylv" path="res://Resources/Merch/APAmmoMagazine100mm.tres" id="22_n5x2f"]
-[ext_resource type="Resource" uid="uid://pru1dyotl5qk" path="res://Resources/Merch/APAmmoMagazine180mm.tres" id="23_e0tbx"]
-[ext_resource type="Resource" uid="uid://da8lhovbqgu36" path="res://Resources/Merch/ClusterMissile.tres" id="24_7csm4"]
-[ext_resource type="Resource" uid="uid://dtsgrchftsfnf" path="res://Resources/Merch/CruiseMissile.tres" id="25_1jucq"]
-[ext_resource type="Resource" uid="uid://b2v5jwe0vywxa" path="res://Resources/Merch/FireAmmoMagazine100mm.tres" id="26_fxbmr"]
-[ext_resource type="Resource" uid="uid://c2ju7tm25b42y" path="res://Resources/Merch/FireAmmoMagazine180mm.tres" id="27_eko6l"]
-[ext_resource type="Resource" uid="uid://5sv1k3mk5rmg" path="res://Resources/Merch/FireSuppressionUnit.tres" id="28_ndjdo"]
-[ext_resource type="Resource" uid="uid://juvthmu80ouk" path="res://Resources/Merch/Flares.tres" id="29_5gpoi"]
-[ext_resource type="Resource" uid="uid://cirdai3bi4cde" path="res://Resources/Merch/HeatSeekingMissile.tres" id="30_mbacr"]
-[ext_resource type="Resource" uid="uid://lkysbc2nuqdf" path="res://Resources/Merch/LaserGuidedAmmoMagazine100mm.tres" id="31_2npr6"]
-[ext_resource type="Resource" uid="uid://76ap120n4m0t" path="res://Resources/Merch/LaserGuidedAmmoMagazine180mm.tres" id="32_472ag"]
-[ext_resource type="Resource" uid="uid://b3udwkndbqukv" path="res://Resources/Merch/Long-RangeMissile.tres" id="33_4ck5a"]
-[ext_resource type="Resource" uid="uid://b3xjmb23iyo5" path="res://Resources/Merch/ProxyFuseAmmoMagazine100mm.tres" id="34_0mi3x"]
-[ext_resource type="Resource" uid="uid://bww138fvog6ub" path="res://Resources/Merch/ProxyFuseAmmoMagazine180mm.tres" id="35_6tuc6"]
-[ext_resource type="Resource" uid="uid://ddianchuh5iur" path="res://Resources/Merch/TacticalMissile.tres" id="36_e63t2"]
-[ext_resource type="Resource" uid="uid://blsmdai2hgyx8" path="res://Resources/Merch/ShortCoil.tres" id="39_nwwh6"]
-[ext_resource type="Resource" uid="uid://c4245ovobbj7l" path="res://Resources/Merch/DroneDock.tres" id="40_ymg10"]
-[ext_resource type="Resource" uid="uid://cyxsxf83kgi0g" path="res://Resources/Merch/HollowAmmoMagazine100mm.tres" id="41_ahk72"]
-[ext_resource type="Resource" uid="uid://dmn0k3yxa4l05" path="res://Resources/Merch/HollowAmmoMagazine180mm.tres" id="42_12d78"]
-[ext_resource type="Resource" uid="uid://cgsdyow8lpjef" path="res://Resources/Captains/RecruitInfo/CorveteLvl1.tres" id="43_kopns"]
-[ext_resource type="Resource" uid="uid://odg6w24dh016" path="res://Resources/Captains/RecruitInfo/FireshipLvl1.tres" id="44_6jbkn"]
-[ext_resource type="Resource" uid="uid://blqrwd5l8ie24" path="res://Resources/Captains/RecruitInfo/MissileCLvl1.tres" id="45_2f0bv"]
-[ext_resource type="Resource" uid="uid://bih2oy6q0lw16" path="res://Resources/Merch/ShortElint.tres" id="45_rfrj6"]
-[ext_resource type="Resource" uid="uid://62phff5wwq66" path="res://Resources/Captains/RecruitInfo/RadarLvl1.tres" id="46_dff1w"]
-[ext_resource type="Resource" uid="uid://kxip48nrnfjx" path="res://Resources/Captains/RecruitInfo/TankerLvl1.tres" id="47_2wsf7"]
-[ext_resource type="Resource" uid="uid://scamsw4s17r2" path="res://Resources/Captains/RecruitInfo/Worker.tres" id="48_u12mm"]
-[ext_resource type="Resource" uid="uid://cfrm7gd27ssgm" path="res://Resources/Merch/ShortMachinegun100mm.tres" id="50_mdoiy"]
-[ext_resource type="Resource" uid="uid://0xk7wf3trfkp" path="res://Resources/Merch/ShortMachinegun180mm.tres" id="51_u2hn7"]
-[ext_resource type="Resource" uid="uid://cojlsut62exlt" path="res://Resources/Merch/ShortMissilePod.tres" id="54_wjgph"]
-[ext_resource type="Resource" uid="uid://cfsvj1gty2thk" path="res://Resources/Merch/ShortRadar.tres" id="57_adowj"]
-[ext_resource type="Resource" uid="uid://bqpuuxe8s87wc" path="res://Resources/Merch/SGP-1 Ship Barrier.tres" id="59_4akpv"]
-[ext_resource type="Resource" uid="uid://cbjfuhajoaepk" path="res://Resources/Merch/ShortFlameThrower.tres" id="62_e0tbx"]
-[ext_resource type="Resource" uid="uid://ckec7gk7u8deb" path="res://Resources/Merch/SPK-25 Ship Barrier.tres" id="63_1c3sd"]
-[ext_resource type="Resource" uid="uid://8cds15m853c4" path="res://Resources/Merch/Engine.tres" id="65_3oetp"]
-[ext_resource type="Resource" uid="uid://x86gvpjm4hsj" path="res://Resources/Merch/ShortSonar.tres" id="65_6jbkn"]
-[ext_resource type="Resource" uid="uid://lxwxme7j6jy5" path="res://Resources/Merch/Engine2.tres" id="68_gv8v6"]
-[ext_resource type="Resource" uid="uid://dw0bitpaoxkxh" path="res://Resources/Merch/FuelTank.tres" id="72_lsbtd"]
-[ext_resource type="Resource" uid="uid://e6mu0egpi3h7" path="res://Resources/Merch/ShortCheapRadar.tres" id="74_e63t2"]
-[ext_resource type="Resource" uid="uid://dfkuuikjxrlsx" path="res://Resources/Merch/FuelTank2.tres" id="75_wb6f4"]
-[ext_resource type="Resource" uid="uid://dpv1xl8cl3dei" path="res://Resources/Merch/TitaniumPlates.tres" id="78_nwwh6"]
 [ext_resource type="Script" uid="uid://orkurt2hukf6" path="res://Scenes/Enemies/EnemyAi/SpawnDecider.gd" id="78_yg7ff"]
 
 [resource]
 script = ExtResource("78_yg7ff")
-CaptainList = Array[ExtResource("1_87ibq")]([ExtResource("2_wdg75"), ExtResource("3_2eb0g"), ExtResource("4_r0vc0"), ExtResource("5_c68la"), ExtResource("6_iqlvy"), ExtResource("7_n8h36"), ExtResource("8_dofu4"), ExtResource("9_exmfb"), ExtResource("10_pui15"), ExtResource("11_h16mj"), ExtResource("12_0su1b"), ExtResource("13_ns8om"), ExtResource("14_hn1fl"), ExtResource("15_1pv0s"), ExtResource("16_oscns"), ExtResource("17_fdaa0"), ExtResource("18_3hc0a"), ExtResource("19_hvwho"), ExtResource("20_ahk72"), ExtResource("21_12d78")])
-GroundUnits = Array[ExtResource("1_87ibq")]([ExtResource("19_4glqq"), ExtResource("20_u7j23")])
-ConvoyUnits = Array[ExtResource("1_87ibq")]([ExtResource("18_5ajvh")])
-MerchList = Array[ExtResource("21_0l8w1")]([ExtResource("22_n5x2f"), ExtResource("23_e0tbx"), ExtResource("24_7csm4"), ExtResource("25_1jucq"), ExtResource("26_fxbmr"), ExtResource("27_eko6l"), ExtResource("28_ndjdo"), ExtResource("29_5gpoi"), ExtResource("30_mbacr"), ExtResource("31_2npr6"), ExtResource("32_472ag"), ExtResource("33_4ck5a"), ExtResource("34_0mi3x"), ExtResource("35_6tuc6"), ExtResource("36_e63t2"), ExtResource("41_ahk72"), ExtResource("42_12d78")])
-WorkshopList = Array[ExtResource("21_0l8w1")]([ExtResource("39_nwwh6"), ExtResource("40_ymg10"), ExtResource("45_rfrj6"), ExtResource("50_mdoiy"), ExtResource("51_u2hn7"), ExtResource("54_wjgph"), ExtResource("57_adowj"), ExtResource("59_4akpv"), ExtResource("63_1c3sd"), ExtResource("65_3oetp"), ExtResource("68_gv8v6"), ExtResource("72_lsbtd"), ExtResource("75_wb6f4"), ExtResource("62_e0tbx"), ExtResource("78_nwwh6"), ExtResource("74_e63t2"), ExtResource("65_6jbkn")])
-RecruitList = Array[ExtResource("1_87ibq")]([ExtResource("43_kopns"), ExtResource("44_6jbkn"), ExtResource("45_2f0bv"), ExtResource("46_dff1w"), ExtResource("47_2wsf7"), ExtResource("48_u12mm")])
+CaptainFileList = Array[String](["uid://bjtu5mgi855ge", "uid://clant8bk2jbqh", "uid://cmf0n4eco02nt", "uid://2ii8eoq0203v", "uid://ctb0bey42ck18", "uid://brklxjupl0rch", "uid://brutfvbqof8br", "uid://dcgnt16mqufga", "uid://blavi3f1ur507", "uid://bc8tkbx0lm76l", "uid://bgcudxjcbwqho", "uid://dcvoc8bgq8ctq", "uid://cl0a8poce0hjq", "uid://qk63uojn4d3u", "uid://cib15c8a1rw34", "uid://b8rk3y5wevyap", "uid://bjwc7eir6wdlu", "uid://bcsspmo5nnyvm", "uid://g2a8jt5yrgwr", "uid://d17h4a7ifln30"])
+GroundUnitFileList = Array[String](["uid://1dcxgrpt06te", "uid://dx7unrtjdflj2"])
+ConvoyUnitFileList = Array[String](["uid://di5eydm5e8bvx"])
+RecruitFileList = Array[String](["uid://cgsdyow8lpjef", "uid://odg6w24dh016", "uid://blqrwd5l8ie24", "uid://62phff5wwq66", "uid://kxip48nrnfjx", "uid://scamsw4s17r2"])
+MerchFileList = Array[String](["res://Resources/Merch/APAmmoMagazine100mm.tres", "res://Resources/Merch/APAmmoMagazine180mm.tres", "res://Resources/Merch/ClusterMissile.tres", "res://Resources/Merch/CruiseMissile.tres", "uid://0km40duhdlcp", "res://Resources/Merch/FireAmmoMagazine100mm.tres", "res://Resources/Merch/FireAmmoMagazine180mm.tres", "res://Resources/Merch/FireSuppressionUnit.tres", "res://Resources/Merch/Flares.tres", "res://Resources/Merch/HeatSeekingMissile.tres", "res://Resources/Merch/HollowAmmoMagazine100mm.tres", "res://Resources/Merch/HollowAmmoMagazine180mm.tres", "res://Resources/Merch/LaserGuidedAmmoMagazine100mm.tres", "res://Resources/Merch/LaserGuidedAmmoMagazine180mm.tres", "res://Resources/Merch/Long-RangeMissile.tres", "res://Resources/Merch/ProxyFuseAmmoMagazine100mm.tres", "res://Resources/Merch/ProxyFuseAmmoMagazine180mm.tres", "res://Resources/Merch/TacticalMissile.tres"])
+WorkshopFileList = Array[String](["res://Resources/Merch/LargeCoil.tres", "res://Resources/Merch/MediumCoil.tres", "res://Resources/Merch/ShortCoil.tres", "res://Resources/Merch/DroneDock.tres", "res://Resources/Merch/LargeDroneDock.tres", "uid://ct2827d4e42y6", "res://Resources/Merch/LargeElint.tres", "res://Resources/Merch/MediumElint.tres", "res://Resources/Merch/ShortElint.tres", "uid://cwfnrd7tfdbnt", "res://Resources/Merch/MediumFlameThrower.tres", "res://Resources/Merch/ShortFlameThrower.tres", "res://Resources/Merch/LargeMachinegun100mm.tres", "res://Resources/Merch/LargeMachinegun180mm.tres", "res://Resources/Merch/MediumMachinegun100mm.tres", "res://Resources/Merch/MediumMachinegun180mm.tres", "res://Resources/Merch/ShortMachinegun100mm.tres", "res://Resources/Merch/ShortMachinegun180mm.tres", "uid://c6kig306wf1hu", "uid://v7sy2bs0ah53", "uid://cojlsut62exlt", "uid://bqjyvh0lp7fxm", "uid://dqby7xao7xqoe", "uid://8h0appdsfp2i", "uid://cbiga5p81ib0f", "uid://e6mu0egpi3h7", "uid://cfsvj1gty2thk", "uid://dkyenptmoni41", "uid://bhevqygxeb34e", "uid://dxu2cc5e0jj4d", "uid://bqpuuxe8s87wc", "uid://rxirhgrytwlp", "uid://cnrk727cubsak", "uid://ctv63dwijmrkf", "uid://ckec7gk7u8deb", "uid://crebovxe0bgiv", "uid://dpv1xl8cl3dei", "uid://c7p1mubsgqalr", "uid://dc6874kye14u7", "uid://x86gvpjm4hsj", "uid://8cds15m853c4", "uid://x66yawmjduwi", "uid://cgtu2tdm70ksr", "uid://lxwxme7j6jy5", "uid://ginmhn3nabrc", "uid://c508m6pxnd6bc", "uid://dh4w4jv302qmv", "uid://b2slgmaa6j2kx", "uid://ntkrb1sbkhtu", "uid://cxmyjlbpc807t", "res://Resources/Merch/SPT-100.tres", "res://Resources/Merch/SPT-200.tres", "res://Resources/Merch/SPT-300.tres"])
