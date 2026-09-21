@@ -1,6 +1,5 @@
 [gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://b2ykcfrjmixps"]
 
-[ext_resource type="Texture2D" uid="uid://bv3vkwi5obsul" path="res://Assets/Cards/BarrageReload.png" id="1_73p2o"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="2_5jj34"]
 [ext_resource type="Script" uid="uid://ckmhix4w7rxv5" path="res://Scenes/Card_Fight/Card/Card_Modules/BuffCardModule.gd" id="3_5jj34"]
 [ext_resource type="Script" uid="uid://credtpxpn7llw" path="res://Scenes/Card_Fight/Card/Card_Passives/OnTurnStartedPassive.gd" id="4_1cjgn"]
@@ -21,7 +20,7 @@ metadata/_custom_type_script = "uid://credtpxpn7llw"
 
 [resource]
 script = ExtResource("5_v8bm8")
-Icon = ExtResource("1_73p2o")
+txFile = "uid://bv3vkwi5obsul"
 CardName = "Momentum"
 Energy = 2
 OnUsed = 2

@@ -1,6 +1,5 @@
 [gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://c8reou7hykm77"]
 
-[ext_resource type="Texture2D" uid="uid://dep7qqw6mipy7" path="res://Assets/Cards/EnergyConvert.png" id="1_4d6nm"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="2_7qc3q"]
 [ext_resource type="Script" uid="uid://b3ik3ixt10qr1" path="res://Scenes/Card_Fight/Card/Card_Modules/ReserveConversionModule.gd" id="3_4d6nm"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="5_vyo1w"]
@@ -19,7 +18,7 @@ metadata/_custom_type_script = "uid://b3ik3ixt10qr1"
 
 [resource]
 script = ExtResource("5_vyo1w")
-Icon = ExtResource("1_4d6nm")
+txFile = "uid://dep7qqw6mipy7"
 CardName = "Reserve Conversion"
 AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_7qc3q")]([SubResource("Resource_7qc3q")])

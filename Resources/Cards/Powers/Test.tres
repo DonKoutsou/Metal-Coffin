@@ -1,7 +1,6 @@
 [gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://dodbhtu4orn01"]
 
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="1_tckwd"]
-[ext_resource type="Texture2D" uid="uid://cpmyx11pwxw5n" path="res://Assets/Cards/Flame.png" id="1_wljg3"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="2_gbmu4"]
 [ext_resource type="Script" uid="uid://bcb7fsgw7n04o" path="res://Scenes/Card_Fight/Card/Card_Passives/OnFirePassive.gd" id="3_vl6c0"]
 [ext_resource type="Script" uid="uid://cxqm0ly7x6xpc" path="res://Scenes/Card_Fight/Card/Card_Modules/ShieldCardModule.gd" id="3_wljg3"]
@@ -19,7 +18,7 @@ metadata/_custom_type_script = "uid://bcb7fsgw7n04o"
 
 [resource]
 script = ExtResource("2_gbmu4")
-Icon = ExtResource("1_wljg3")
+txFile = "uid://cpmyx11pwxw5n"
 OnUsed = 2
 Passive = SubResource("Resource_ri5s0")
 Type = 3

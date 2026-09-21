@@ -864,7 +864,7 @@ func RemoveCard(C : Card) -> void:
 		var ShipCards = CurrentShip.Cards
 		ShipCards.append(Stats)
 
-	CurrentShip.ShipViz.ActionRemoved(Stats.Icon)
+	CurrentShip.ShipViz.ActionRemoved(ResourceLoader.load(Stats.txFile))
 	ActionList.RemoveActionFromShip(CurrentShip, Stats)
 	
 	var PerformModule = Stats.OnPerformModule
@@ -1261,7 +1261,7 @@ func RefundUnusedCards() -> void:
 			#if (!ShipAction.Action.ShouldConsume()):
 				#continue
 			RefundCardToShip(ShipAction.Action, Ship)
-			Ship.ShipViz.ActionRemoved(ShipAction.Action.Icon)
+			Ship.ShipViz.ActionRemoved(ResourceLoader.load(ShipAction.Action.txFile))
 	for Ship in EnemyCombatants:
 		if (Ship == null):
 			continue
@@ -1271,7 +1271,7 @@ func RefundUnusedCards() -> void:
 			#if (!ShipAction.Action.ShouldConsume()):
 				#continue
 			RefundCardToShip(ShipAction.Action, Ship)
-			Ship.ShipViz.ActionRemoved(ShipAction.Action.Icon)
+			Ship.ShipViz.ActionRemoved(ResourceLoader.load(ShipAction.Action.txFile))
 ##----------------------------------------------------------------------##
 func RefundCardToShip(C : CardStats, Ship : BattleShipStats):
 	print("{0} got refunded a {1} card for not using it.".format([Ship.Name, C.GetCardName()]))
@@ -1546,7 +1546,9 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 					TargetShips.clear()
 					TargetShips.append(enemy)
 					var TargetViz = enemy.ShipViz
-					TargetViz.ActionRemoved(Act.Action.Icon)
+					
+					
+					TargetViz.ActionRemoved(ResourceLoader.load(Act.Action.txFile))
 					ActionList.RemoveActionFromShip(enemy, Act.Action)
 					enemy.deck.DiscardCard(Act.Action)
 					PopUpManager.GetInstance().DoFadeNotif("Attack Intercepted")
@@ -1572,7 +1574,7 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 		TargetList[g] = Data
 	
 	#remove attack action from UI, only relevany for enemies
-	Performer.ShipViz.ActionRemoved(Action.Icon)
+	Performer.ShipViz.ActionRemoved(ResourceLoader.load(Action.txFile))
 	
 	var AtackData = OffensiveAnimationData.NewData(Mod, TargetList)
 	AnimData.append(AtackData)
@@ -1588,7 +1590,8 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 		if (TargetList[g]["Def"] != null):
 			
 			var TargetViz = g.ShipViz
-			TargetViz.ActionRemoved(Def.Icon)
+			
+			TargetViz.ActionRemoved(ResourceLoader.load(Def.txFile))
 			ActionList.RemoveActionFromShip(g, Def)
 			if (Def.ShouldConsume()):
 				pass

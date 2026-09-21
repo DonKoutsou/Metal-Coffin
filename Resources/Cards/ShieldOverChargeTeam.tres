@@ -1,6 +1,5 @@
 [gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://dr3fmkjvlgj4l"]
 
-[ext_resource type="Texture2D" uid="uid://bq8q6bblntmdr" path="res://Assets/Cards/TeamShield.png" id="1_ywkdi"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="2_ywkdi"]
 [ext_resource type="Script" uid="uid://cxqm0ly7x6xpc" path="res://Scenes/Card_Fight/Card/Card_Modules/ShieldCardModule.gd" id="3_yun5d"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="5_io2tw"]
@@ -15,7 +14,7 @@ metadata/_custom_type_script = "uid://cxqm0ly7x6xpc"
 
 [resource]
 script = ExtResource("5_io2tw")
-Icon = ExtResource("1_ywkdi")
+txFile = "uid://bq8q6bblntmdr"
 CardName = "Team Shield Overcharge"
 Energy = 3
 AllowDuplicates = true

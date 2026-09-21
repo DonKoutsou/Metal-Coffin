@@ -1,6 +1,5 @@
 [gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://dbjcp32py84ba"]
 
-[ext_resource type="Texture2D" uid="uid://rwsuhwjsb2ti" path="res://Assets/Cards/ShieldSurge.png" id="1_vjant"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="2_skuv8"]
 [ext_resource type="Script" uid="uid://ddob0fen8r2j2" path="res://Scenes/Card_Fight/Card/Card_Modules/MaxShieldCardModule.gd" id="3_vo1ml"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="5_6ufsw"]
@@ -11,7 +10,7 @@ metadata/_custom_type_script = "uid://ddob0fen8r2j2"
 
 [resource]
 script = ExtResource("5_6ufsw")
-Icon = ExtResource("1_vjant")
+txFile = "uid://rwsuhwjsb2ti"
 CardName = "Shield Surge"
 AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_skuv8")]([SubResource("Resource_w7l7e")])

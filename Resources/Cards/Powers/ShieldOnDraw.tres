@@ -1,6 +1,5 @@
 [gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://odkwy5rk0vxe"]
 
-[ext_resource type="Texture2D" uid="uid://w2odhvsxkpx0" path="res://Assets/Cards/DrawShield.png" id="1_0wfkp"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="2_0wfkp"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="2_ahpd2"]
 [ext_resource type="Script" uid="uid://cct7paebscrse" path="res://Scenes/Card_Fight/Card/Card_Passives/On_DrawPassive.gd" id="3_0eqit"]
@@ -19,7 +18,7 @@ metadata/_custom_type_script = "uid://cct7paebscrse"
 
 [resource]
 script = ExtResource("2_ahpd2")
-Icon = ExtResource("1_0wfkp")
+txFile = "uid://w2odhvsxkpx0"
 CardName = "Shield Draw"
 Energy = 2
 OnUsed = 2

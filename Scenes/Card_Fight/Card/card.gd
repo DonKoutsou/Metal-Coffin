@@ -180,7 +180,7 @@ func SetCardStats(Stats : CardStats, Amm : int = 0) -> void:
 		
 
 	CardName.text = Stats.GetCardName().to_upper()
-	CardTex.texture = Stats.Icon
+	CardTex.texture = ResourceLoader.load(Stats.txFile)
 	
 	$Amm.visible = Amm > 1
 	AmmountLabel.text = "{0}x".format([Amm])
@@ -233,7 +233,7 @@ func SetCardBattleStats(User : BattleShipStats, Stats : CardStats, Amm : int = 0
 		CardName.text = Stats.GetCardName().to_upper()
 		CardDesc.text = DescText
 		CardCost.text = "{0}".format([ShownCost])
-		CardTex.texture = Stats.Icon
+		CardTex.texture = ResourceLoader.load(Stats.txFile)
 
 	$Amm.visible = Amm > 1
 	AmmountLabel.text = "{0}x".format([Amm])

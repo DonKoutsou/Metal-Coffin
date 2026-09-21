@@ -1,6 +1,5 @@
 [gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://bx0i03i2fgvwm"]
 
-[ext_resource type="Texture2D" uid="uid://cuuwarc38ibrn" path="res://Assets/Cards/Safeguard.png" id="1_1pspy"]
 [ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="2_moyrk"]
 [ext_resource type="Script" uid="uid://ckmhix4w7rxv5" path="res://Scenes/Card_Fight/Card/Card_Modules/BuffCardModule.gd" id="3_c3yq2"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="5_jwjcs"]
@@ -16,7 +15,7 @@ metadata/_custom_type_script = "uid://ckmhix4w7rxv5"
 
 [resource]
 script = ExtResource("5_jwjcs")
-Icon = ExtResource("1_1pspy")
+txFile = "uid://cuuwarc38ibrn"
 CardName = "Safeguard"
 Energy = 2
 AllowDuplicates = true

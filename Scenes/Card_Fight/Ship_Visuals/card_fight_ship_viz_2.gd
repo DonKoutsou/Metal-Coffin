@@ -367,7 +367,7 @@ func GetShipPos() -> Vector2:
 func ActionPicked(C : CardStats, Targets : Array[BattleShipStats] = []) -> void:
 	#ActionParent.visible = true
 	var TexNode = TextureRect.new()
-	TexNode.texture = C.Icon
+	TexNode.texture = ResourceLoader.load(C.txFile)
 	TexNode.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	TexNode.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 
@@ -379,7 +379,7 @@ func ActionPicked(C : CardStats, Targets : Array[BattleShipStats] = []) -> void:
 
 func PassiveAdded(C : CardStats) -> void:
 	var TexNode = TextureRect.new()
-	TexNode.texture = C.Icon
+	TexNode.texture = ResourceLoader.load(C.txFile)
 	TexNode.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	TexNode.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	
