@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="3_8k8jt"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_nbkb4"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scenes/MapShips/Stats/Captain.gd" id="4_yo37a"]
-[ext_resource type="Texture2D" uid="uid://bx78x3avxyhmf" path="res://Assets/ShipTextures/Hull5.png" id="9_4c3qg"]
 [ext_resource type="Resource" uid="uid://ctlms8do0piak" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/MediumEngine2.tres" id="21_43hmj"]
 [ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FT-1000.tres" id="22_jopff"]
 [ext_resource type="Resource" uid="uid://hncmt3swcqbu" path="res://Resources/Items/ShipParts/MG/MediumMachinegun100mm.tres" id="24_eha28"]
@@ -125,7 +124,6 @@ resource_local_to_scene = true
 script = ExtResource("4_yo37a")
 CaptainName = "Tick3"
 ShipIconFile = "uid://bx78x3avxyhmf"
-ShipIcon = ExtResource("9_4c3qg")
 CaptainStats = Array[ExtResource("2_qj8tl")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_mcdo0"), SubResource("Resource_yl52l"), SubResource("Resource_7g4dd"), SubResource("Resource_4p6v8"), SubResource("Resource_66526"), SubResource("Resource_h3q7u"), SubResource("Resource_4c3qg"), SubResource("Resource_hacy1"), SubResource("Resource_43hmj"), SubResource("Resource_jopff"), SubResource("Resource_7nshw"), SubResource("Resource_eha28"), SubResource("Resource_wnvao"), SubResource("Resource_4ox3q"), SubResource("Resource_cbum1"), SubResource("Resource_pk8jp"), SubResource("Resource_7qhjw"), SubResource("Resource_tkw6d"), SubResource("Resource_goy68"), SubResource("Resource_toag1"), SubResource("Resource_opwxs")])
 ShipCallsign = "P3"
 StartingItems = Array[ExtResource("3_nbkb4")]([ExtResource("21_43hmj"), ExtResource("22_jopff"), ExtResource("26_opwxs"), ExtResource("26_opwxs"), ExtResource("26_opwxs"), ExtResource("26_opwxs"), ExtResource("26_opwxs"), ExtResource("26_opwxs"), ExtResource("27_ldiu3"), ExtResource("27_ldiu3"), ExtResource("27_ldiu3"), ExtResource("27_ldiu3"), ExtResource("27_ldiu3"), ExtResource("27_ldiu3"), ExtResource("28_2msfs"), ExtResource("28_2msfs"), ExtResource("28_2msfs"), ExtResource("28_2msfs"), ExtResource("29_g0yap"), ExtResource("29_g0yap"), ExtResource("29_g0yap"), ExtResource("29_g0yap"), ExtResource("30_utbuk"), ExtResource("30_utbuk"), ExtResource("30_utbuk"), ExtResource("30_utbuk"), ExtResource("30_utbuk"), ExtResource("30_utbuk"), ExtResource("24_eha28")])

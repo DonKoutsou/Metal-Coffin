@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="3_4bm2g"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="3_syr2p"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scenes/MapShips/Stats/Captain.gd" id="4_02u6x"]
-[ext_resource type="Texture2D" uid="uid://w4t57uq2b86c" path="res://Assets/ShipTextures/Hull8.png" id="5_1opqv"]
 [ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FT-500.tres" id="8_i6t26"]
 [ext_resource type="Resource" uid="uid://c77l5prboewm2" path="res://Resources/Items/Ammo/ClusterMissile.tres" id="10_lhmlk"]
 [ext_resource type="Resource" uid="uid://cs6mrrxnafmbt" path="res://Resources/Items/ShipParts/Shield/SGP-2 Ship Barrier.tres" id="13_1opqv"]
@@ -125,7 +124,6 @@ resource_local_to_scene = true
 script = ExtResource("4_02u6x")
 CaptainName = "M2"
 ShipIconFile = "uid://cxjy6hrsj65pg"
-ShipIcon = ExtResource("5_1opqv")
 CaptainStats = Array[ExtResource("2_en1ly")]([SubResource("Resource_k7kt8"), SubResource("Resource_nn3aw"), SubResource("Resource_0a6up"), SubResource("Resource_he0oc"), SubResource("Resource_q78cv"), SubResource("Resource_rpqpm"), SubResource("Resource_vhm23"), SubResource("Resource_lqay8"), SubResource("Resource_jc4ql"), SubResource("Resource_i6t26"), SubResource("Resource_1opqv"), SubResource("Resource_lhmlk"), SubResource("Resource_gwtb6"), SubResource("Resource_nxmgj"), SubResource("Resource_yjsxi"), SubResource("Resource_5yg2s"), SubResource("Resource_2dbl5"), SubResource("Resource_35q6t"), SubResource("Resource_yb83p"), SubResource("Resource_j54o0"), SubResource("Resource_a0urq"), SubResource("Resource_p30kp"), SubResource("Resource_51jmi")])
 ShipCallsign = "M2"
 StartingItems = Array[ExtResource("3_4bm2g")]([ExtResource("14_1opqv"), ExtResource("8_i6t26"), ExtResource("13_i6t26"), ExtResource("13_1opqv"), ExtResource("14_i6t26"), ExtResource("13_yjsxi"), ExtResource("13_yjsxi"), ExtResource("13_yjsxi"), ExtResource("13_yjsxi"), ExtResource("10_lhmlk"), ExtResource("10_lhmlk"), ExtResource("10_lhmlk"), ExtResource("10_lhmlk"), ExtResource("14_lhmlk"), ExtResource("15_1opqv")])

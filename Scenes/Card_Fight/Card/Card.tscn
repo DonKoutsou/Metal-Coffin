@@ -41,7 +41,7 @@ point_count = 4
 [sub_resource type="Gradient" id="Gradient_rd7hj"]
 colors = PackedColorArray(0, 0, 0, 1, 0.421311, 0.88706, 0.915024, 1)
 
-[node name="Card" type="Control" unique_id=1687597269 node_paths=PackedStringArray("CardName", "CardDesc", "CardCost", "CardTex", "But", "CardTypeEmblem", "FrontSide", "BackSide", "Line", "AmmountLabel", "TooltipPos") groups=["Card"]]
+[node name="Card" type="Control" unique_id=1687597269 node_paths=PackedStringArray("CardName", "CardDesc", "CardCost", "CardTex", "But", "CardTypeEmblem", "FrontSide", "BackSide", "Line", "AmmountLabel", "TooltipPos", "CardPos") groups=["Card"]]
 texture_filter = 3
 custom_minimum_size = Vector2(160, 220)
 layout_mode = 3
@@ -72,6 +72,7 @@ BackSide = NodePath("TextureRect")
 Line = NodePath("Line2D")
 AmmountLabel = NodePath("Amm/Label")
 TooltipPos = NodePath("Control/VBoxContainer")
+CardPos = NodePath("Control/HBoxContainer")
 NormalCardColors = ExtResource("4_22va6")
 DispositionCardColors = ExtResource("5_oc32p")
 PowerCardColors = ExtResource("6_cedgx")
@@ -102,7 +103,7 @@ transparent_bg = true
 handle_input_locally = false
 scaling_3d_mode = 5
 canvas_item_default_texture_filter = 4
-size = Vector2i(174, 239)
+size = Vector2i(372, 512)
 size_2d_override = Vector2i(186, 256)
 size_2d_override_stretch = true
 render_target_update_mode = 1
@@ -363,6 +364,16 @@ offset_bottom = -75.0
 grow_horizontal = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 offset_transform_enabled = true
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control" unique_id=896711967]
+layout_mode = 0
+offset_left = 62.0
+offset_top = -311.0
+offset_right = 209.2124
+offset_bottom = -103.76521
+scale = Vector2(0.5, 0.5)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 mouse_filter = 2
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=952484273]

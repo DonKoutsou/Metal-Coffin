@@ -242,6 +242,16 @@ static func GetTooltipsForModule(mod : CardModule) -> PackedStringArray:
 	
 	return tips
 
+#-------------------------------------------------------
+
+func GetExtraCards() -> Array[CardStats]:
+	var extras : Array[CardStats] = []
+	
+	for g in OnUseModules:
+		if (g is CardInjectCardModule):
+			extras.append(g.CardToInject)
+	
+	return extras
 
 enum WeaponType{
 	NONE,

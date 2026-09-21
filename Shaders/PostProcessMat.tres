@@ -11,6 +11,7 @@ shader_parameter/DitherRes = Vector2(1280, 720)
 shader_parameter/threshold = 1.0
 shader_parameter/warp = Vector2(-100, -40)
 shader_parameter/D = 0.01999999955296
+shader_parameter/dither_pixel_size = -4.36
 shader_parameter/hr = 0.5
 shader_parameter/vr = 1.0
 shader_parameter/hfov = 65.0000030875

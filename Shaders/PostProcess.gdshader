@@ -7,6 +7,7 @@ uniform float threshold : hint_range(0.0, 1.0);
 uniform vec2 warp = vec2(64.0, 24.0);
 uniform float D : hint_range(0.0, 1.0, 0.01);
 
+uniform float dither_pixel_size = 2.0;
 uniform float hr: hint_range(0.0, 1.0) = 0.5;
 uniform float vr: hint_range(0.0, 1.0) = 1.0;
 uniform float hfov: hint_range(0.0, 360.0) = 180.0;
@@ -70,8 +71,10 @@ void fragment(){
     o.x = radians(hfov);
     o.y = radians(vfov);
 
-    float aspect = 0.5625;
-
+    //float aspect = 0.5625;
+	float aspect = SCREEN_PIXEL_SIZE.x / SCREEN_PIXEL_SIZE.y;
+	//float aspect = VIEWPORT_SIZE.y / VIEWPORT_SIZE.x;
+	
     vec2 fov;
     fov.y = o.y * vr;
     fov.x = atan(1.0 / (aspect / tan(fov.y * 0.5))) * 2.0;
@@ -112,7 +115,9 @@ void fragment(){
 	{
 		// Map the dither texture onto the screen pixels with tiling and repeating
 		vec2 dither_size = vec2(textureSize(dither_texture, 0));
-		vec2 dither_uv = mod(newCoord * DitherRes, dither_size) / dither_size;
+		//vec2 dither_pos = mod(FRAGCOORD.xy, dither_pixel_size);
+		//vec2 dither_uv = (dither_pos) / dither_size;
+		vec2 dither_uv = mod(SCREEN_UV.xy * DitherRes, dither_size) / dither_size;
 		
 		// Sample the screen pixel
 		vec3 screen_col = texture(TEXTURE, newCoord).rgb;

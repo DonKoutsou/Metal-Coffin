@@ -15,6 +15,7 @@ class_name Card
 @export var Line : Line2D
 @export var AmmountLabel : Label
 @export var TooltipPos : Control
+@export var CardPos : Control
 
 @export_group("CardTypes")
 @export var NormalCardColors : StyleBox
@@ -81,21 +82,7 @@ func _physics_process(delta: float) -> void:
 
 #--------------------------------------------------------------
 func _process(delta: float) -> void:
-	var endPos = global_position.x + size.x + TooltipPos.size.x + 20
-	var endPosy = global_position.y + TooltipPos.size.y + 30
-	var off : float = 0
-	if (get_viewport_rect().size.x < endPos):
-		TooltipPos.get_parent().scale.x = -1
-		TooltipPos.offset_transform_scale.x = -1
-	else:
-		TooltipPos.get_parent().scale.x = 1
-		TooltipPos.offset_transform_scale.x = 1
-	if (get_viewport_rect().size.y < endPosy):
-		var dif = endPosy - get_viewport_rect().size.y
-		off = dif
-	
-	TooltipPos.get_parent().global_position = Line.global_position - Vector2(0, off)
-	TooltipPos.get_parent().rotation = rotation
+	UpdateTooltipPosition()
 	
 	if (TrackMouse):
 		var pos = global_position + (size/2)
@@ -106,6 +93,28 @@ func _process(delta: float) -> void:
 		var Newx = lerpf(currentx, offset.y / 8, delta * 6.0)
 		mat.set_shader_parameter("y_rot", Newy)
 		mat.set_shader_parameter("x_rot", Newx)
+
+func UpdateTooltipPosition() -> void:
+	var toolTip_endPos = global_position.x + size.x + TooltipPos.size.x + 20
+	var toolTip_endPosy = global_position.y + TooltipPos.size.y + 30
+	
+	var off : float = 0
+	
+	if (get_viewport_rect().size.x < toolTip_endPos):
+		TooltipPos.get_parent().scale.x = -1
+		TooltipPos.offset_transform_scale.x = -1
+		CardPos.offset_transform_scale.x = -1
+	else:
+		TooltipPos.get_parent().scale.x = 1
+		TooltipPos.offset_transform_scale.x = 1
+		CardPos.offset_transform_scale.x = 1
+		
+	if (get_viewport_rect().size.y < toolTip_endPosy):
+		var dif = toolTip_endPosy - get_viewport_rect().size.y
+		off = dif
+	
+	TooltipPos.get_parent().global_position = Line.global_position - Vector2(0, off)
+	TooltipPos.get_parent().rotation = rotation
 
 #--------------------------------------------------------------
 func UpdateLine() -> void:
@@ -394,6 +403,13 @@ func ShowToolTip() -> void:
 		TooltipPos.add_child(tip)
 		tip.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	
+	var extraCard : Array[CardStats] = CStats.GetExtraCards()
+	for card : CardStats in extraCard:
+		var newCard_Scene : PackedScene = ResourceLoader.load(scene_file_path)
+		var newCard : Card = newCard_Scene.instantiate()
+		newCard.SetCardStats(card)
+		CardPos.add_child(newCard)
+	#if (CStats.)
 	#TrackMouse = true
 
 #--------------------------------------------------------------
@@ -417,6 +433,9 @@ func _on_button_mouse_exited() -> void:
 	dirTw.tween_method(SetCardDiretion, Vector2(currentx, currenty), Vector2(0, 0), 0.25)
 	
 	for g in TooltipPos.get_children():
+		g.queue_free()
+	
+	for g in CardPos.get_children():
 		g.queue_free()
 
 #--------------------------------------------------------------
