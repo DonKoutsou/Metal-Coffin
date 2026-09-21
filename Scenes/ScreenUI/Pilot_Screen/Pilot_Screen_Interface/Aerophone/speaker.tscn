@@ -1,22 +1,57 @@
 [gd_scene format=3 uid="uid://b7cgarcbvixw6"]
 
 [ext_resource type="Script" uid="uid://jj8scn4ef501" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Aerophone/speaker.gd" id="1_mivq8"]
-[ext_resource type="AudioStream" uid="uid://bymb44f8ge1q3" path="res://Assets/Sounds/VoiceLines/LandingStart.mp3" id="2_kxl5j"]
-[ext_resource type="AudioStream" uid="uid://byqrdeh8f56vh" path="res://Assets/Sounds/VoiceLines/LandingComplete.mp3" id="3_pipuo"]
-[ext_resource type="AudioStream" uid="uid://l3irygo540pg" path="res://Assets/Sounds/VoiceLines/Damaged.mp3" id="4_n8my6"]
-[ext_resource type="AudioStream" uid="uid://dkx2t35x5b2a3" path="res://Assets/Sounds/VoiceLines/LiftOff.mp3" id="5_46ffk"]
-[ext_resource type="AudioStream" uid="uid://bftr7v2col3rw" path="res://Assets/Sounds/VoiceLines/RadarDetected.mp3" id="6_evbrg"]
-[ext_resource type="AudioStream" uid="uid://by3alnfngj2q6" path="res://Assets/Sounds/VoiceLines/RadarDetected2.mp3" id="7_0ng0v"]
-[ext_resource type="AudioStream" uid="uid://blg7dow3gycjv" path="res://Assets/Sounds/VoiceLines/RadarDetected3.mp3" id="8_nicw5"]
-[ext_resource type="AudioStream" uid="uid://c5tf6ammmexey" path="res://Assets/Sounds/VoiceLines/RadioDetected.mp3" id="9_gm48c"]
-[ext_resource type="AudioStream" uid="uid://bm6ss6aupjt2y" path="res://Assets/Sounds/VoiceLines/VisualContact.mp3" id="10_3smau"]
-[ext_resource type="AudioStream" uid="uid://ceoxpuch57wsg" path="res://Assets/Sounds/VoiceLines/TargetDestr.mp3" id="11_cotvj"]
-[ext_resource type="AudioStream" uid="uid://bgg5wwdq877gi" path="res://Assets/Sounds/VoiceLines/Aproaching.mp3" id="12_4ylf7"]
-[ext_resource type="AudioStream" uid="uid://cb8ocm3v0c4rx" path="res://Assets/Sounds/statics.mp3" id="13_mivq8"]
+[ext_resource type="Script" uid="uid://bykjc06msc71o" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Aerophone/SoundInfo.gd" id="2_4mixu"]
 [ext_resource type="Texture2D" uid="uid://cbg33obslhrhy" path="res://Assets/UIPiecies/Screen/SidePanels/Speaker_FullQuality.png" id="13_xhvq3"]
-[ext_resource type="AudioStream" uid="uid://7crsokjngvxo" path="res://Assets/Sounds/beepNoLoop.mp3" id="14_kxl5j"]
 [ext_resource type="PackedScene" uid="uid://c812ersqwg8p1" path="res://Scenes/ScreenUI/light.tscn" id="15_3b7e2"]
-[ext_resource type="AudioStream" uid="uid://dnpagykktvaa6" path="res://Assets/Sounds/toggle_003.mp3" id="15_qecpw"]
+
+[sub_resource type="Resource" id="Resource_7thj3"]
+script = ExtResource("2_4mixu")
+soundFiles = Array[String](["uid://bymb44f8ge1q3"])
+
+[sub_resource type="Resource" id="Resource_p5tep"]
+script = ExtResource("2_4mixu")
+soundFiles = Array[String](["uid://byqrdeh8f56vh"])
+
+[sub_resource type="Resource" id="Resource_ra0yf"]
+script = ExtResource("2_4mixu")
+soundFiles = Array[String](["uid://l3irygo540pg"])
+
+[sub_resource type="Resource" id="Resource_ivk4d"]
+script = ExtResource("2_4mixu")
+soundFiles = Array[String](["uid://dkx2t35x5b2a3"])
+
+[sub_resource type="Resource" id="Resource_gnf48"]
+script = ExtResource("2_4mixu")
+soundFiles = Array[String](["uid://bftr7v2col3rw", "uid://by3alnfngj2q6", "uid://blg7dow3gycjv"])
+
+[sub_resource type="Resource" id="Resource_q1776"]
+script = ExtResource("2_4mixu")
+soundFiles = Array[String](["uid://c5tf6ammmexey"])
+
+[sub_resource type="Resource" id="Resource_pyh63"]
+script = ExtResource("2_4mixu")
+soundFiles = Array[String](["uid://bm6ss6aupjt2y"])
+
+[sub_resource type="Resource" id="Resource_ikgvq"]
+script = ExtResource("2_4mixu")
+soundFiles = Array[String](["uid://ceoxpuch57wsg"])
+
+[sub_resource type="Resource" id="Resource_kh63e"]
+script = ExtResource("2_4mixu")
+soundFiles = Array[String](["uid://bgg5wwdq877gi"])
+
+[sub_resource type="Resource" id="Resource_3rmxy"]
+script = ExtResource("2_4mixu")
+soundFiles = Array[String](["uid://cb8ocm3v0c4rx"])
+
+[sub_resource type="Resource" id="Resource_d63sn"]
+script = ExtResource("2_4mixu")
+soundFiles = Array[String](["uid://7crsokjngvxo"])
+
+[sub_resource type="Resource" id="Resource_ha8d1"]
+script = ExtResource("2_4mixu")
+soundFiles = Array[String](["uid://dnpagykktvaa6"])
 
 [node name="Speaker" type="Control" unique_id=9267803 node_paths=PackedStringArray("L") groups=["Shakable"]]
 layout_mode = 3
@@ -25,22 +60,25 @@ offset_left = 20.0
 offset_top = -118.0
 offset_right = 60.0
 offset_bottom = -78.0
+rotation = 3.3696593e-05
 pivot_offset = Vector2(40, 20)
 script = ExtResource("1_mivq8")
-SoundList = Dictionary[int, Array]({
-0: [ExtResource("2_kxl5j")],
-1: [ExtResource("3_pipuo")],
-2: [ExtResource("4_n8my6")],
-3: [ExtResource("5_46ffk")],
-4: [ExtResource("6_evbrg"), ExtResource("7_0ng0v"), ExtResource("8_nicw5")],
-5: [ExtResource("9_gm48c")],
-6: [ExtResource("10_3smau")],
-7: [ExtResource("11_cotvj")],
-8: [ExtResource("12_4ylf7")],
-9: [ExtResource("13_mivq8")],
-10: [ExtResource("14_kxl5j")],
-11: [ExtResource("15_qecpw")]
+SoundFileList = Dictionary[int, ExtResource("2_4mixu")]({
+0: SubResource("Resource_7thj3"),
+1: SubResource("Resource_p5tep"),
+2: SubResource("Resource_ra0yf"),
+3: SubResource("Resource_ivk4d"),
+4: SubResource("Resource_gnf48"),
+5: SubResource("Resource_q1776"),
+6: SubResource("Resource_pyh63"),
+7: SubResource("Resource_ikgvq"),
+8: SubResource("Resource_kh63e"),
+9: SubResource("Resource_3rmxy"),
+10: SubResource("Resource_d63sn"),
+11: SubResource("Resource_ha8d1")
 })
+phase_offset = 1.0278505966122031
+max_rotation = 0.003
 L = NodePath("Light")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1172595586]

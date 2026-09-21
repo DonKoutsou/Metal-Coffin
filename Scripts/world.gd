@@ -332,6 +332,8 @@ func ShipSeparationFinished() -> void:
 var FighingFriendlyUnits : Array[MapShip] = []
 var FighingEnemyUnits : Array[MapShip] = []
 func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip], Missiles : Array[Missile], EnemyMissiles : Array[Missile]):
+	if (WORLDST == WORLDSTATE.INITIAL):
+		return
 	if (WORLDST == WORLDSTATE.FIGHT):
 		return
 	

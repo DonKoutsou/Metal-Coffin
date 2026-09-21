@@ -11,7 +11,7 @@ var AvailableShips : Array[MapShip]
 signal ItemSold(It : Item)
 signal ItemBought(It : Item)
 
-func Init(LandedShips : Array[MapShip], Merch : Array[Merchandise]) -> void:
+func Init(LandedShips : Array[MapShip], Merch : Dictionary[String, int]) -> void:
 	var Itms : Dictionary[Item, int]
 	AvailableShips.append_array(LandedShips)
 	for ship in LandedShips:
@@ -26,22 +26,25 @@ func Init(LandedShips : Array[MapShip], Merch : Array[Merchandise]) -> void:
 	ItemPlecement.add_child(C)
 	C.custom_minimum_size.y = 150
 	
-	for m : Merchandise in Merch:
+	for itFile : String in Merch:
+		var amm : int = Merch[itFile]
 		#If neither player or shop has any of selected Merch dont add the UI for it
-		if (m.Amm == 0 and !Itms.has(m.It)):
+		var it : Item = ResourceLoader.load(itFile)
+		if (amm == 0 and !Itms.has(it)):
 			continue
 		
 		var ItScene = ItemScene.instantiate() as TownShopItem
 		
 		var AmmountPlayerHas : int
-		if (Itms.has(m.It)):
-			AmmountPlayerHas = Itms[m.It]
+		if (Itms.has(it)):
+			AmmountPlayerHas = Itms[it]
 		else:
 			AmmountPlayerHas = 0
-		Itms.erase(m.It)
-		ItScene.Init(m.It, m.It.Cost, m.Amm, AmmountPlayerHas, LandedShips)
-		ItScene.OnItemBought.connect(OnItemBought.bind( m.It.Cost))
-		ItScene.OnItemSold.connect(OnItemSold.bind( m.It.Cost))
+			
+		Itms.erase(it)
+		ItScene.Init(it, it.Cost, amm, AmmountPlayerHas, LandedShips)
+		ItScene.OnItemBought.connect(OnItemBought.bind(it.Cost))
+		ItScene.OnItemSold.connect(OnItemSold.bind(it.Cost))
 
 		ItemPlecement.visible = true
 		ItemPlecement.add_child(ItScene)

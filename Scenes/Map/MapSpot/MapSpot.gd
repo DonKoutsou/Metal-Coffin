@@ -18,8 +18,11 @@ var Region : MapSpotCompleteInfo.REGIONS
 #@export var Event : Happening
 var EnemyCity : bool = false
 var PossibleDrops : Array[Item]
-var Merch : Array[Merchandise] = []
-var WorkShopMerch : Array[Merchandise] = []
+
+##files
+var Merch : Dictionary[String, int] = {}
+var WorkShopMerch : Dictionary[String, int] = {}
+
 var Recruits : Array[Captain] = []
 var Pos : Vector2
 

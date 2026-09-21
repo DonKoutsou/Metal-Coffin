@@ -460,7 +460,7 @@ func CancelInstall() -> void:
 func ItemUpgradeFinished() -> void:
 	var Part = _ItemBeingUpgraded.GetContainedItem() as ShipPart
 	RemoveItemFromBox(_ItemBeingUpgraded)
-	var UpgradedItem = Part.UpgradeVersion.duplicate(true)
+	var UpgradedItem = Part.UpgradeVersion
 	for g in Part.Upgrades.size():
 		UpgradedItem.Upgrades[g].CurrentValue = Part.Upgrades[g].CurrentValue
 	AddItem(UpgradedItem)
@@ -487,9 +487,9 @@ func ForceUpgradeItem(Box : Inventory_Box_Res) -> bool:
 	
 	RemoveItemFromBox(Box)
 	
-	var UpgradedItem = Part.UpgradeVersion.duplicate(true)
-	for g in Part.Upgrades.size():
-		UpgradedItem.CurrentValue = Part.Upgrades[g].CurrentValue
+	var UpgradedItem = Part.UpgradeVersion
+	#for g in Part.Upgrades.size():
+		#UpgradedItem.CurrentValue = Part.Upgrades[g].CurrentValue
 	AddItem(UpgradedItem)
 	
 	return true

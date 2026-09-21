@@ -30,7 +30,7 @@ func SetVisuals(Cap : Captain) -> void:
 	CapName.text = Cap.GetCaptainName()
 
 func SetVisuals2(Cap : Captain) -> void:
-	CapPortrait.texture = Cap.ShipIcon
+	CapPortrait.texture = ResourceLoader.load(Cap.ShipIconFile)
 
 	CapName.text = Cap.GetCaptainName()
 

@@ -121,6 +121,7 @@ StatName = 22
 resource_local_to_scene = true
 script = ExtResource("5_v4b18")
 CaptainName = "LF2"
+ShipIconFile = "uid://cpyoxyvvrjbnk"
 ShipIcon = ExtResource("4_m30fi")
 CaptainStats = Array[ExtResource("2_i3g1h")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_mcdo0"), SubResource("Resource_yl52l"), SubResource("Resource_7g4dd"), SubResource("Resource_4p6v8"), SubResource("Resource_66526"), SubResource("Resource_h3q7u"), SubResource("Resource_fpso5"), SubResource("Resource_e20g8"), SubResource("Resource_o15ad"), SubResource("Resource_62i66"), SubResource("Resource_8m2j3"), SubResource("Resource_1cheq"), SubResource("Resource_2a4ws"), SubResource("Resource_mrxgg"), SubResource("Resource_xng7e"), SubResource("Resource_o66ax"), SubResource("Resource_e77jl"), SubResource("Resource_kpj03"), SubResource("Resource_55wvb"), SubResource("Resource_cjukq"), SubResource("Resource_da8ii")])
 ShipCallsign = "LP2"

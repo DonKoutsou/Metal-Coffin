@@ -55,9 +55,10 @@ func GetSaveData() -> TownSaveData:
 	datas.Spots = spotdata
 	return datas
 
-func SetMerch(Merch : Array[Merchandise], WorkShopMerch : Array[Merchandise]) -> void:
-	GetSpot().Merch = Merch
-	GetSpot().WorkShopMerch = WorkShopMerch
+func SetMerch(Merch : Dictionary[String, int], WorkShopMerch : Dictionary[String, int]) -> void:
+	var spot = GetSpot()
+	spot.Merch = Merch
+	spot.WorkShopMerch = WorkShopMerch
 
 func SetRecruits(Recruits : Array[Captain]) -> void:
 	GetSpot().Recruits = Recruits

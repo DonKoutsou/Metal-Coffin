@@ -16,7 +16,7 @@ class_name WorkShop
 var CurrentShip : MapShip
 var CurrentShipIndex : int = -1
 
-var WorkShopMerch : Array[Merchandise]
+var WorkShopMerch : Dictionary[String, int]
 var WorkshopDescriptor : ItemDescriptor
 var HasUpgradeBuff : bool = false
 
@@ -45,7 +45,7 @@ func _physics_process(_delta: float) -> void:
 	if (Descr.DescribedItem != Closest.It):
 		Descr.SetMerchData(Closest.It, [], true)
 
-func Init(Ships : Array[MapShip], HasUpgrade : bool, Merch : Array[Merchandise]) -> void:
+func Init(Ships : Array[MapShip], HasUpgrade : bool, Merch : Dictionary[String, int]) -> void:
 	HasUpgradeBuff = HasUpgrade
 	WorkShopMerch = Merch
 	
@@ -146,15 +146,11 @@ func RemoveItem(Box : Inventory_Box_Res) -> void:
 	CurrentShip.Cpt.GetCharacterInventory().RemoveItemFromBox(Box)
 
 	CloseDescriptor()
-	for g in WorkShopMerch:
-		if (g.It.IsSame(It)):
-			g.Amm += 1
-			return
 	
-	var NewMerch = Merchandise.new()
-	NewMerch.It = It
-	NewMerch.Amm = 1
-	WorkShopMerch.append(NewMerch)
+	if (WorkShopMerch.has(It.resource_path)):
+		WorkShopMerch[It.resource_path] += 1
+	else:
+		WorkShopMerch[It.resource_path] = 1
 
 func AddItem(Box : Inventory_Box_Res) -> void:
 	var Type = GetTypeOfBox(Box)
@@ -165,14 +161,17 @@ func AddItem(Box : Inventory_Box_Res) -> void:
 	c1.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 	var Amm : int = 0
-	for g in WorkShopMerch:
-		if (g.Amm == 0):
+	for itFile in WorkShopMerch:
+		var amm : int = WorkShopMerch[itFile]
+		
+		if (amm == 0):
 			continue
-		var It = g.It as ShipPart
+			
+		var It : ShipPart = ResourceLoader.load(itFile)
 		if (Type == It.PartType):
 			var B = WorkshopItemUI.instantiate() as WorkShopItem
-			B.Init(g)
-			B.OnItemBought.connect(ItemToAddSelected.bind(g, Box))
+			B.Init(It, amm)
+			B.OnItemBought.connect(ItemToAddSelected.bind(It, Box))
 			ItemParent.add_child(B)
 			Amm += 1
 	
@@ -190,15 +189,15 @@ func AddItem(Box : Inventory_Box_Res) -> void:
 	ItemParent.add_child(c2)
 	c2.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
-func ItemToAddSelected(M : Merchandise, Box : Inventory_Box_Res) -> void:
-	var OriginalItem : ShipPart = M.It
+func ItemToAddSelected(it : Item, Box : Inventory_Box_Res) -> void:
+	var OriginalItem : ShipPart = it
 
 	
 	var OriginalCap = CurrentShip.Cpt
 	var OriginalInv = OriginalCap._CharInv
 
 
-	var Cost = M.It.Cost
+	var Cost = it.Cost
 
 	var PLWallet = World.GetInstance().PlayerWallet
 	
@@ -248,8 +247,8 @@ func ItemToAddSelected(M : Merchandise, Box : Inventory_Box_Res) -> void:
 	if (!Resault):
 		
 		return
-
-	M.Amm -= 1
+	
+	WorkShopMerch[it.resource_path] -= 1
 	
 	PLWallet.AddFunds(-Cost)
 	Map.GetInstance().GetScreenUi().TownUi.DropCoins(roundi(Cost / 100.0))
@@ -259,12 +258,12 @@ func ItemToAddSelected(M : Merchandise, Box : Inventory_Box_Res) -> void:
 	for g in ItemParent.get_children():
 		g.queue_free()
 	
-	var box = CurrentShip.Cpt.GetCharacterInventory().StartEquip(Box, M.It)
+	var box = CurrentShip.Cpt.GetCharacterInventory().StartEquip(Box, it)
 	var placeholder = PlaceHolderItem.new()
-	placeholder.ContainedItem = M.It
+	placeholder.ContainedItem = it
 	CurrentShip.Cpt.GetCharacterInventory().AddItemToBox(placeholder, box)
 	
-	PopUpManager.GetInstance().DoFadeNotif("{0} Added".format([M.It.GetItemName()]))
+	PopUpManager.GetInstance().DoFadeNotif("{0} Added".format([it.GetItemName()]))
 	CloseDescriptor()
 
 
@@ -282,16 +281,11 @@ func CancelInstall(Box : Inventory_Box_Res) -> void:
 
 	CloseDescriptor()
 
-	
-	for g in WorkShopMerch:
-		if (g.It.IsSame(placeholderItem.ContainedItem)):
-			g.Amm += 1
-			return
-	
-	var NewMerch = Merchandise.new()
-	NewMerch.It = placeholderItem.ContainedItem
-	NewMerch.Amm = 1
-	WorkShopMerch.append(NewMerch)
+	if (WorkShopMerch.has(placeholderItem.ContainedItem.resource_path)):
+		WorkShopMerch[placeholderItem.ContainedItem.resource_path] += 1
+	else:
+		WorkShopMerch[placeholderItem.ContainedItem.resource_path] = 1
+		
 
 func CancelUpgrade(Box : Inventory_Box_Res) -> void:
 	var Inv = CurrentShip.Cpt.GetCharacterInventory()

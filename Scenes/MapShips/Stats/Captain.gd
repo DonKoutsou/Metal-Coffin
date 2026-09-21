@@ -4,8 +4,9 @@ class_name Captain
 
 @export var CaptainName : String
 @export_file("*.png") var CaptainPortrait : String
-@export var ShipIcon : Texture
-@export var CardFightIcons : Array[Texture]
+
+@export_file() var ShipIconFile : String
+@export_file() var CardFightIconsFiles : Array[String]
 
 @export var CaptainStats : Array[ShipStat]
 #var MappedStats : Array[STAT_CONST.STATS]
@@ -73,6 +74,12 @@ func SetUpStats() -> void:
 				_GetStat(st.UpgradeName).AddShipPartPenalty(st.PenaltyAmmount)
 				FullyRefilStat(st.UpgradeName)
 
+func LoadCardFightTextures() -> Array[Texture]:
+	var texts : Array[Texture] = []
+	for g in CardFightIconsFiles:
+		texts.append(ResourceLoader.load(g))
+	return texts
+
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
 	var Hull = GetStatBaseValue(STAT_CONST.STATS.HULL)
@@ -81,8 +88,8 @@ func GetBattleStats() -> BattleShipStats:
 	var Fp = GetStatBaseValue(STAT_CONST.STATS.FIREPOWER)
 	var MaxShield = GetStatBaseValue(STAT_CONST.STATS.MAX_SHIELD)
 	
-	stats.ShipIcon = ShipIcon
-	stats.cardFightIcons = CardFightIcons
+	stats.ShipIcon = ResourceLoader.load(ShipIconFile)
+	stats.cardFightIcons = LoadCardFightTextures()
 	stats.CaptainIcon = CaptainPortrait
 	stats.Name = GetCaptainName()
 	var c : Array[CardStats]
@@ -239,8 +246,8 @@ func CopyStats(Cpt : Captain) -> void:
 	CaptainName = Cpt.CaptainName
 	TempName = Cpt.TempName
 	CaptainPortrait = Cpt.CaptainPortrait
-	ShipIcon = Cpt.ShipIcon
-	CardFightIcons = Cpt.CardFightIcons
+	ShipIconFile = Cpt.ShipIconFile
+	CardFightIconsFiles = Cpt.CardFightIconsFiles
 	ShipCallsign = Cpt.ShipCallsign
 	Cards = Cpt.Cards
 	ProvidingFunds = Cpt.ProvidingFunds
@@ -272,6 +279,8 @@ func OnShipPartAddedToInventory(It : ShipPart) -> void:
 	for Up in It.Upgrades:
 		_GetStat(Up.UpgradeName).AddShipPartBuff(Up.UpgradeAmmount)
 		_GetStat(Up.UpgradeName).AddShipPartPenalty(Up.PenaltyAmmount)
+		
+		#TODO fix this
 		RefillResource(Up.UpgradeName, Up.CurrentValue)
 	ShipPartChanged.emit(It)
 

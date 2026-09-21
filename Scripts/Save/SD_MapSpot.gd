@@ -19,5 +19,5 @@ class_name  MapSpotSaveData
 @export var SpotInfo : MapSpotCompleteInfo
 @export var AlarmRaised : bool
 @export var AlarmProgress : float
-@export var Merch : Array[Merchandise]
-@export var WorkShopMerch : Array[Merchandise]
+@export var Merch : Dictionary[String,int]
+@export var WorkShopMerch : Dictionary[String,int]

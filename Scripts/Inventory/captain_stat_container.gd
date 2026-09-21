@@ -41,7 +41,7 @@ func SetCaptain(Cha : Captain) -> void:
 	
 	if (DispositionScreen != null):
 		DispositionScreen.SetStats(Cha)
-	CaptainIcon.texture = Cha.ShipIcon
+	CaptainIcon.texture = ResourceLoader.load(Cha.ShipIconFile)
 	if (Cha.CaptainPortrait != ""):
 		CaptainIcon2.texture = load(Cha.CaptainPortrait)
 	else:

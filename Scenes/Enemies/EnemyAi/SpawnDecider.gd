@@ -37,10 +37,10 @@ func RefrshExistingItems() -> void:
 			var file_name = dir.get_next()
 			while file_name != "":
 				if dir.current_is_dir():
-					#print("Found directory: " + file_name)
+					print("Found directory: " + file_name)
 					DirsToExplore.append(g + "/" + file_name)
 				else:
-					#print("Found file: " + file_name)
+					print("Found file: " + file_name)
 					var It = load(g + "/" + file_name)
 					AddMerchToLists(It, file_name)
 					
@@ -48,18 +48,32 @@ func RefrshExistingItems() -> void:
 
 #------------------------------------------------------------------------
 func AddMerchToLists(It : Item, FileName :String) -> void:
-	var MerInfo : MerchandiseInfo
 	if (!FileAccess.file_exists("res://Resources/Merch/" + FileName)):
-		MerInfo = MerchandiseInfo.new()
-		var Mer = Merchandise.new()
-		MerInfo.Merch = Mer
-		Mer.It = It
+		var MerInfo = MerchandiseInfo.new()
+		#var Mer = Merchandise.new()
+		#MerInfo.Merch = Mer
+		#Mer.It = It
+		MerInfo.It = It.resource_path
+		#ResourceSaver.save(Mer, "res://Resources/Merch/" + "M_" +FileName)
 		ResourceSaver.save(MerInfo, "res://Resources/Merch/" + FileName)
+		#MerInfo.Merch = ResourceLoader.load("res://Resources/Merch/" + "M_" +FileName)
 		
 	if (It is ShipPart):
+		#var merchInfo : MerchandiseInfo = ResourceLoader.load("res://Resources/Merch/" + FileName)
+		#if (!FileAccess.file_exists(merchInfo.Merch.resource_path)):
+			#ResourceSaver.save(merchInfo.Merch, "res://Resources/Merch/" + "M_" +FileName)
+		#merchInfo.Merch = ResourceLoader.load("res://Resources/Merch/" + "M_" +FileName)
+		#merchInfo.It = merchInfo.Merch.It.resource_path
 		WorkshopFileList.append("res://Resources/Merch/" + FileName)
+		#ResourceSaver.save(merchInfo, "res://Resources/Merch/" + FileName)
 	else:
+		#var merchInfo : MerchandiseInfo = ResourceLoader.load("res://Resources/Merch/" + FileName)
+		#if (!FileAccess.file_exists(merchInfo.Merch.resource_path)):
+		#	ResourceSaver.save(merchInfo.Merch, "res://Resources/Merch/" + "M_" +FileName)
+		#merchInfo.Merch = ResourceLoader.load("res://Resources/Merch/" + "M_" +FileName)
+		#merchInfo.It = merchInfo.Merch.It.resource_path
 		MerchFileList.append("res://Resources/Merch/" + FileName)
+		#ResourceSaver.save(merchInfo, "res://Resources/Merch/" + FileName)
 
 func LoadAndSort() -> void:
 	# Sort CaptainList by cost descending to prioritize more powerful ships
@@ -88,8 +102,9 @@ func Init() -> void:
 	LoadAndSort()
 	
 #------------------------------------------------------------------------
-func GetMerchForPosition(YPos: float, HasUp : bool, capital : bool) -> Array[Merchandise]:
-	var available_merch: Array[Merchandise] = []
+#Returns a dictonary containing the filepath to the item as key and the ammount in the value
+func GetMerchForPosition(YPos: float, HasUp : bool, capital : bool) -> Dictionary[String, int]:
+	var available_merch: Dictionary[String, int] = {}
 	var points = GetMerchPointsForPosition(abs(YPos))
 	var stage = Happening.GetStageForYPos(YPos)
 	
@@ -102,24 +117,23 @@ func GetMerchForPosition(YPos: float, HasUp : bool, capital : bool) -> Array[Mer
 	# Iterate through the MerchList to select merchandise based on points
 	while points > MerchLowest:
 		var randomIndex = Rand.InstanceRandom.RandIRange(0, MerchFileList.size() - 1) 
-		var m = ResourceLoader.load(MerchFileList[randomIndex]) as MerchandiseInfo
+		var m : MerchandiseInfo = ResourceLoader.load(MerchFileList[randomIndex])
 		if (m.DontGenerateBefore > stage):
 				continue
-		var M : Merchandise
-		for g in available_merch:
-			if (m.Merch.It.GetItemName() == g.It.GetItemName()):
-				M = g
+				
+		var it : String
+		
+		for itFile : String in available_merch:
+			if (m.It == itFile):
+				it = itFile
 				break
 		
 		if (points > m.Cost):
-			if (M != null):
-				#if (M.Amm >= m.MaxAmmPerStage):
-					#continue
-				M.Amm += 1
+			if (!it.is_empty()):
+				available_merch[it] += 1
 			else:
-				var NewMerch = m.Merch.duplicate(false)
-				NewMerch.Amm = 1
-				available_merch.append(NewMerch)
+				available_merch[m.It] = 1
+	
 			points -= m.Cost
 	return available_merch
 	
@@ -156,10 +170,12 @@ func GetRecruitsForPosition(YPos: float, _HasRec : bool, capital : bool) -> Arra
 	return available_Recruits
 
 #------------------------------------------------------------------------
-func GetWorkshopMerchForPosition(YPos: float, HasUp : bool, capital : bool) -> Array[Merchandise]:
-	var available_merch: Array[Merchandise] = []
+#Returns a dictonary containing the filepath to the item as key and the ammount in the value
+func GetWorkshopMerchForPosition(YPos: float, HasUp : bool, capital : bool) -> Dictionary[String, int]:
+	var available_merch: Dictionary[String, int] = {}
 	if (!HasUp):
 		return available_merch
+		
 	var points = GetWorkshopMerchPointsForPosition(abs(YPos))
 	if (capital):
 		points *= 1.5
@@ -173,21 +189,21 @@ func GetWorkshopMerchForPosition(YPos: float, HasUp : bool, capital : bool) -> A
 		
 		if (m.DontGenerateBefore > stage):
 			continue
-		var M : Merchandise
-		for g in available_merch:
-			if (m.Merch.It == g.It):
-				M = g
+		
+		var it : String
+		
+		for itFile : String in available_merch:
+			if (m.It == itFile):
+				it = itFile
 				break
 		
 		if (points > m.Cost):
-			if (M != null):
-				#if (M.Amm >= m.MaxAmmPerStage):
-					#continue
-				M.Amm += 1
+			if (!it.is_empty()):
+				available_merch[it] += 1
+
 			else:
-				var NewMerch = m.Merch.duplicate(false)
-				NewMerch.Amm = 1
-				available_merch.append(NewMerch)
+				available_merch[it] = 1
+				
 			points -= m.Cost
 	return available_merch
 

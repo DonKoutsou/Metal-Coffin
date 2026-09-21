@@ -69,12 +69,12 @@ func Update(delta: float, _unaffectedDelta : float) -> void:
 		Crosswind.emit(abs(frontDot))
 		
 	if (SimulationManager.IsPaused()):
-		for g in TrailLines:
-			g.call_deferred("UpdateProjected", 0, Altitude / 10000.0)
+		#for g in TrailLines:
+			#g.call_deferred("UpdateProjected", 0, Altitude / 10000.0)
 		return
 	
-	for g in TrailLines:
-		g.call_deferred("UpdateProjected", delta, Altitude / 10000.0)
+	#for g in TrailLines:
+		#g.call_deferred("UpdateProjected", delta, Altitude / 10000.0)
 	
 	RadarShape.EvaluateRadarTargets(Altitude)
 	
@@ -315,8 +315,8 @@ func Steer(Rotation : float) -> void:
 		return
 	StoredSteer = wrap(StoredSteer + (Rotation / 50), -PI, PI)
 	#StoredSteer = wrap(StoredSteer, -PI, PI)
-	var Mat = ShipSprite.material as ShaderMaterial
-	Mat.set_shader_parameter("sprite_rotation", ShipSprite.global_rotation)
+	#var Mat = ShipSprite.material as ShaderMaterial
+	#Mat.set_shader_parameter("sprite_rotation", ShipSprite.global_rotation)
 
 	SteerForced.emit(rotation + StoredSteer)
 

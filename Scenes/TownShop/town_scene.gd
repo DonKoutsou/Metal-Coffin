@@ -131,6 +131,7 @@ func OnUpgradeShopPressed() -> void:
 	var WShop = WorkshopScene.instantiate() as WorkShop
 	add_child(WShop)
 	WShop.ShipSold.connect(OnShipSold)
+		
 	WShop.Init(LandedShips, TownSpot.HasUpgrade(), TownSpot.WorkShopMerch)
 	ActionTracker.OnActionCompleted(ActionTracker.Action.UPGRADE_SHOP)
 
@@ -139,6 +140,7 @@ func OnMunitionShopToggled() -> void:
 	add_child(Scene)
 	Scene.ItemSold.connect(OnItemSold)
 	Scene.ItemBought.connect(OnItemBought)
+	
 	Scene.Init(LandedShips, TownSpot.Merch)
 	ActionTracker.OnActionCompleted(ActionTracker.Action.MERCH_SHOP)
 
@@ -168,14 +170,11 @@ func OnItemSold(It : Item) -> void:
 		if (inv.HasItem(It)):
 			inv.RemoveItem(It)
 			break
-	for g in TownSpot.Merch:
-		if (g.It == It):
-			g.Amm += 1
-			return
-	var Merch = Merchandise.new()
-	Merch.It = It
-	Merch.Amm = 1
-	TownSpot.Merch.append(Merch)
+	
+	if (TownSpot.Merch.has(It.resource_path)):
+		TownSpot.Merch[It.resource_path] += 1
+	else:
+		TownSpot.Merch[It.resource_path] = 1
 	
 func OnItemBought(It : Item) -> void:
 	PopupManager.DoFadeNotif("{0} bought".format([It.GetItemName()]))
@@ -201,10 +200,7 @@ func OnItemBought(It : Item) -> void:
 				inv.AddItem(It)
 				break
 
-	for g in TownSpot.Merch:
-		if (g.It == It):
-			g.Amm -= 1
-			break
+	TownSpot.Merch[It.resource_path] -= 1
 
 func _on_town_background_position_changed() -> void:
 	var WorkshopNode = TownBG.GetNodeForPosition(TownBackground.Location.WORKSHOP)

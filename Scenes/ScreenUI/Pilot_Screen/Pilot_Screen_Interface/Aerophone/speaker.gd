@@ -1,7 +1,8 @@
+@tool
 extends Control
 
 class_name RadioSpeaker
-@export var SoundList: Dictionary[RadioSound, Array]
+@export var SoundFileList: Dictionary[RadioSound, SoundInfo]
 @export var frequency: float = 1.0  # Wiggle speed
 @export var phase_offset: float = 0.0  # Phase offset for randomness
 @export var max_rotation: float = 0.1  # Maximum angle in radians for rotation
@@ -13,6 +14,7 @@ static var CurrentlyPlayed : Dictionary[RadioSound, DeletableSound]
 static var Instance : RadioSpeaker
 
 signal Clicked
+
 
 func _ready() -> void:
 	Instance = self
@@ -34,8 +36,8 @@ func PlaySound(Sound : RadioSound, Volume : float = 0) -> void:
 	if (SoundsOnCooldown.has(Sound)):
 		return
 
-	var List = SoundList[Sound]
-	var SoundStream = List.pick_random() as AudioStream
+	var List : SoundInfo = SoundFileList[Sound]
+	var SoundStream = ResourceLoader.load(List.soundFiles.pick_random()) as AudioStream
 	var DelSound = DeletableSound.new()
 	CurrentlyPlayed[Sound] = DelSound
 	DelSound.stream = SoundStream

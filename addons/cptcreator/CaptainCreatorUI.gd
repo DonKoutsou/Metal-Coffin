@@ -134,7 +134,7 @@ func SetCaptain(C : Captain) -> void:
 	
 	CurrentlySelectedCap = C
 	CaptainName.text = C.GetCaptainName()
-	ShipIcon.texture = C.ShipIcon
+	ShipIcon.texture = ResourceLoader.load(C.ShipIconFile)
 	
 	print(C.ProvidingFunds)
 
@@ -323,9 +323,9 @@ func _on_change_ship_icon_pressed() -> void:
 
 #------------------------------------------------------------
 func NewShipPicSelected(NewPic) -> void:
-	CurrentlySelectedCap.ShipIcon = load(NewPic)
+	CurrentlySelectedCap.ShipIconFile = NewPic
 	SaveCurrentCap()
-	ShipIcon.texture = CurrentlySelectedCap.ShipIcon
+	ShipIcon.texture = ResourceLoader.load(CurrentlySelectedCap.ShipIconFile)
 
 #------------------------------------------------------------
 func _on_show_it_stats_toggled(toggled_on: bool) -> void:

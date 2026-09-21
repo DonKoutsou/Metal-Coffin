@@ -123,7 +123,7 @@ func UndockShip(Ship : MapShip):
 		if (trans.remote_path == Ship.get_path()):
 			trans.free()
 			Ship.ToggleDocked(false)
-			return
+			break
 	RepositionDocks()
 
 #----------------------------------------

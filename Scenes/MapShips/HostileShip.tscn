@@ -4,9 +4,7 @@
 [ext_resource type="Script" uid="uid://qu6263wmeh50" path="res://Scenes/MapShips/Hostile_Ship.gd" id="1_dinuw"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scenes/MapShips/Stats/ShipStat.gd" id="3_ksaka"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="4_xbxhh"]
-[ext_resource type="Shader" uid="uid://cqgk0egpp8vmb" path="res://Shaders/ShipVisualTest.gdshader" id="5_7v2kq"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://Scenes/MapShips/Stats/Captain.gd" id="5_ghxqh"]
-[ext_resource type="Texture2D" uid="uid://bx78x3avxyhmf" path="res://Assets/ShipTextures/Hull5.png" id="6_tlfh0"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="7_5qtwm"]
 [ext_resource type="PackedScene" uid="uid://dv64iu4t4ja87" path="res://Scenes/MapShips/DroneDock/HostileDroneDock.tscn" id="7_hahnw"]
 [ext_resource type="Resource" uid="uid://c8wthdbwacfhe" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/Engine2.tres" id="8_ubtua"]
@@ -118,49 +116,38 @@ MaxStackCount = 99
 CardProviding = Array[ExtResource("4_xbxhh")]([ExtResource("11_goor5")])
 Cost = 200
 
-[sub_resource type="Resource" id="Resource_jiih6"]
+[sub_resource type="Resource" id="Resource_8xx4v"]
 resource_local_to_scene = true
 script = ExtResource("5_ghxqh")
 CaptainName = "Tick"
-ShipIcon = ExtResource("6_tlfh0")
+ShipIconFile = "uid://bx78x3avxyhmf"
 CaptainStats = Array[ExtResource("3_ksaka")]([SubResource("Resource_jvup1"), SubResource("Resource_bf8ot"), SubResource("Resource_mcdo0"), SubResource("Resource_ovl1h"), SubResource("Resource_7g4dd"), SubResource("Resource_hxdnx"), SubResource("Resource_4p6v8"), SubResource("Resource_2ft0v"), SubResource("Resource_h3q7u"), SubResource("Resource_xmlya"), SubResource("Resource_j0vsk"), SubResource("Resource_mphws"), SubResource("Resource_rjpe7"), SubResource("Resource_mil77"), SubResource("Resource_xx2gh"), SubResource("Resource_bewff"), SubResource("Resource_aqvi6"), SubResource("Resource_lav7j")])
 ShipCallsign = "P1"
 StartingItems = Array[ExtResource("7_5qtwm")]([ExtResource("8_ubtua"), ExtResource("9_ixrgj"), ExtResource("9_ixrgj"), ExtResource("10_7bp8q"), SubResource("Resource_fukcl"), SubResource("Resource_fukcl"), SubResource("Resource_fukcl"), ExtResource("12_lrb77"), ExtResource("12_lrb77"), ExtResource("12_lrb77"), ExtResource("13_lp55k"), ExtResource("13_lp55k"), ExtResource("13_lp55k")])
 ProvidingFunds = 25000
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hnpap"]
-resource_local_to_scene = true
-shader = ExtResource("5_7v2kq")
-shader_parameter/ShipSize = 0.08
-shader_parameter/shadow_parallax_amount = 0.5
-shader_parameter/sprite_rotation = -1.57
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_avs2p"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_t4fx1"]
 resource_local_to_scene = true
 radius = 150.0
 
-[node name="HostileShip" unique_id=974765209 node_paths=PackedStringArray("TrailLines", "Dock") groups=["Enemy"] instance=ExtResource("1_8a48r")]
+[node name="HostileShip" unique_id=974765209 node_paths=PackedStringArray("Dock") groups=["Enemy"] instance=ExtResource("1_8a48r")]
 script = ExtResource("1_dinuw")
 Direction = -1
 ShipName = ""
 Patrol = true
 Convoy = false
 BT = ExtResource("8_w8ob0")
-Cpt = SubResource("Resource_jiih6")
-TrailLines = []
+Cpt = SubResource("Resource_8xx4v")
 Dock = NodePath("DroneDock")
 
-[node name="ColorRect" parent="." index="1" unique_id=1708187202]
-material = SubResource("ShaderMaterial_hnpap")
-
-[node name="Radar" parent="." index="3" unique_id=1177421846]
+[node name="Radar" parent="." index="2" unique_id=1177421846]
 script = ExtResource("17_jiih6")
 
 [node name="CollisionShape2D" parent="Radar" index="0" unique_id=689109080]
-shape = SubResource("CircleShape2D_avs2p")
+shape = SubResource("CircleShape2D_t4fx1")
 
-[node name="Elint" parent="." index="4" unique_id=268938013]
+[node name="Elint" parent="." index="3" unique_id=268938013]
 script = ExtResource("18_hnpap")
 
-[node name="DroneDock" parent="." index="5" unique_id=2097404777 instance=ExtResource("7_hahnw")]
+[node name="DroneDock" parent="." index="4" unique_id=2097404777 instance=ExtResource("7_hahnw")]
 collision_layer = 8

@@ -15,14 +15,14 @@ class_name MapShip
 @export var LowStatsToNotifyAbout : Array[String]
 @export var Cpt : Captain
 
-@export var TrailLines : Array[TrailLine]
+#@export var TrailLines : Array[TrailLine]
 @export_group("Nodes")
 @export var RadarShape : Radar
 @export var ElintShape : Elint
 @export var SonarShape : Sonar
 @export var BodyShape : Area2D
 @export var Dock : Node2D
-@export var ShipSprite : Sprite2D
+#@export var ShipSprite : Sprite2D
 @export var Acceleration : Node2D	
 #var SimulationSpeed : float = 1
 var CurrentPort : MapSpot
@@ -79,7 +79,7 @@ func _ready() -> void:
 	ElintShape.ElintStat = Cpt._GetStat(STAT_CONST.STATS.ELINT)
 	if (SonarShape != null):
 		SonarShape.SonarStat = Cpt._GetStat(STAT_CONST.STATS.AEROSONAR_RANGE)
-	_UpdateShipIcon(Cpt.ShipIcon)
+	#_UpdateShipIcon(ResourceLoader.load(Cpt.ShipIconFile))
 	for g in Cpt.CaptainStats:
 		g.ForceMaxValue()
 
@@ -321,10 +321,10 @@ func OnStatLow(StatName : String) -> void:
 
 var ParalaxMulti : float
 
-func _UpdateShipIcon(Tex : Texture2D) -> void:
-	ParalaxMulti = 2000 / Tex.get_size().x
-	ShipSprite.texture = Tex
-	UpdateAltitude(Altitude)
+#func _UpdateShipIcon(Tex : Texture2D) -> void:
+	#ParalaxMulti = 2000 / Tex.get_size().x
+	#ShipSprite.texture = Tex
+	#UpdateAltitude(Altitude)
 #///////////////////////////////////////////////
 #███████ ██   ██ ██ ██████       ██████  ██████  ███    ██ ████████ ██████   ██████  ██      ██      ██ ███    ██  ██████  
 #██      ██   ██ ██ ██   ██     ██      ██    ██ ████   ██    ██    ██   ██ ██    ██ ██      ██      ██ ████   ██ ██       
@@ -364,8 +364,8 @@ func AccelerationChanged(value: float, forced : bool = false) -> void:
 func Steer(Rotation : float) -> void:
 	rotation = wrap(rotation + (Rotation / 50), -PI, PI)
 	
-	var Mat = ShipSprite.material as ShaderMaterial
-	Mat.set_shader_parameter("sprite_rotation", ShipSprite.global_rotation)
+	#var Mat = ShipSprite.material as ShaderMaterial
+	#Mat.set_shader_parameter("sprite_rotation", ShipSprite.global_rotation)
 
 	for g in GetSquad():
 		g.ForceSteer(rotation)
@@ -374,8 +374,8 @@ func ForceSteer(Rotation : float) -> void:
 	rotation = wrap(Rotation, -PI, PI)
 
 	#print("{0}'s new rotation is {1}".format([Cpt.GetCaptainName(), rotation]))
-	var Mat = ShipSprite.material as ShaderMaterial
-	Mat.set_shader_parameter("sprite_rotation", ShipSprite.global_rotation)
+	#var Mat = ShipSprite.material as ShaderMaterial
+	#Mat.set_shader_parameter("sprite_rotation", ShipSprite.global_rotation)
 	for g in GetSquad():
 		g.ForceSteer(rotation)
 		
@@ -383,16 +383,16 @@ func ShipLookAt(pos : Vector2) -> void:
 	if (is_equal_approx(global_position.angle_to_point(pos), global_rotation)):
 		return
 	look_at(pos)
-	var Mat = ShipSprite.material as ShaderMaterial
-	Mat.set_shader_parameter("sprite_rotation", ShipSprite.global_rotation)
+	#var Mat = ShipSprite.material as ShaderMaterial
+	#Mat.set_shader_parameter("sprite_rotation", ShipSprite.global_rotation)
 
 	for g in GetSquad():
 		g.ForceSteer(rotation)
 
 func SetShipPosition(pos : Vector2) -> void:
 	global_position = pos
-	for g in TrailLines:
-		g.Init()
+	#for g in TrailLines:
+	#	g.Init()
 	Teleported.emit()
 #///////////////////////////////////////////////////
 #██████   █████  ███    ███  █████   ██████  ██ ███    ██  ██████  
@@ -456,9 +456,9 @@ func UpdateAltitude(NewAlt : float) -> void:
 	#var S = lerp(0.05, 0.1, Altitude / 10000.0)
 	#ShipSprite.scale = Vector2(lerp(0.05, 0.1, Altitude / 10000.0), lerp(0.05, 0.1, Altitude / 10000.0))
 	
-	var Mat = ShipSprite.material as ShaderMaterial
-	Mat.set_shader_parameter("shadow_parallax_amount", lerp(0.0, ParalaxMulti, Altitude / 10000.0))
-	Mat.set_shader_parameter("ShipSize", lerp(0.001, 0.008, Altitude / 10000.0))
+	#var Mat = ShipSprite.material as ShaderMaterial
+	#Mat.set_shader_parameter("shadow_parallax_amount", lerp(0.0, ParalaxMulti, Altitude / 10000.0))
+	#Mat.set_shader_parameter("ShipSize", lerp(0.001, 0.008, Altitude / 10000.0))
 
 	for g in GetSquad():
 		g.TargetAltitude = TargetAltitude
@@ -550,8 +550,8 @@ func GetShipAcelerationNode() -> Node2D:
 	return Acceleration
 
 #-------------------------------------------------
-func GetShipIcon() -> Node2D:
-	return ShipSprite
+#func GetShipIcon() -> Node2D:
+	#return ShipSprite
 
 #-------------------------------------------------
 func GetFuelStats() -> Dictionary[String, float]:

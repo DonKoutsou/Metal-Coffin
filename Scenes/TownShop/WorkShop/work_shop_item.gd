@@ -17,10 +17,10 @@ func _ready() -> void:
 	ItPriceT.text = var_to_str(ItPrice).replace(".0", "")
 	ShopOwnedT.text = var_to_str(ShopAmm)
 
-func Init(M : Merchandise) -> void:
-	It = M.It
-	ItPrice = M.It.Cost
-	ShopAmm = M.Amm
+func Init(it : Item, amm : int) -> void:
+	It = it
+	ItPrice = it.Cost
+	ShopAmm = amm
 
 var Accum : float = 0
 func InstallButtonPressed() -> void:

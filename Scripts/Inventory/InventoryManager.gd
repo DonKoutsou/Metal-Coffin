@@ -50,8 +50,8 @@ func _ready() -> void:
 
 #-------------------------------------------------------
 func ControllerChanged(NewController : PlayerDrivenShip) -> void:
-	if (controller == NewController):
-		return
+	#if (controller == NewController):
+		#return
 	controller = NewController
 	var squad : Array[Captain] = NewController.GetSquadCaptains()
 	squad.append(NewController.Cpt)
@@ -310,10 +310,10 @@ func AddCharacter(Cha : Captain) -> void:
 	
 	for g in Cha.StartingItems:
 		if (g is ShipPart):
-			var Part = g.duplicate(true) as ShipPart
-			for Up in Part.Upgrades:
-				Up.CurrentValue = Up.UpgradeAmmount
-			CharInv.AddItem(Part)
+			#var Part = g.duplicate(true) as ShipPart
+			#for Up in Part.Upgrades:
+				#Up.CurrentValue = Up.UpgradeAmmount
+			CharInv.AddItem(g)
 		else:
 			CharInv.AddItem(g)
 			
@@ -358,7 +358,7 @@ func LoadCharacter(Data : SD_CharacterInventory) -> void:
 	for g in Data.Items:
 		for z in g.Ammount:
 			if (g.ItemType is ShipPart):
-				CharInv.AddItem(g.ItemType.duplicate(true))
+				CharInv.AddItem(g.ItemType)
 			else:
 				CharInv.AddItem(g.ItemType)
 	

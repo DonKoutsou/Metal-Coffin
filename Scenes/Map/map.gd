@@ -466,8 +466,8 @@ func GenerateMapThreaded() -> void:
 	
 	for g in GeneratedSpots:
 		var isCapital = g.GetSpot().SpotType.SpotK == MapSpotType.SpotKind.CAPITAL
-		var workShopMerch : Array[Merchandise] = EnSpawner.GetWorkshopMerchForPosition(g.Pos.y, g.GetSpot().HasUpgrade(), isCapital)
-		var merch : Array[Merchandise] = EnSpawner.GetMerchForPosition(g.Pos.y, g.GetSpot().HasUpgrade(), isCapital)
+		var workShopMerch : Dictionary[String, int] = EnSpawner.GetWorkshopMerchForPosition(g.Pos.y, g.GetSpot().HasUpgrade(), isCapital)
+		var merch : Dictionary[String, int] = EnSpawner.GetMerchForPosition(g.Pos.y, g.GetSpot().HasUpgrade(), isCapital)
 		g.call_deferred("SetMerch", merch, workShopMerch)
 		
 		var Recruits = EnSpawner.GetRecruitsForPosition(g.Pos.y, g.GetSpot().HasRecruit(), isCapital)
