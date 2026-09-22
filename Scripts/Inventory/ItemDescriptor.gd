@@ -152,7 +152,7 @@ func SetMerchData(Itm : Item, Ships : Array[MapShip], ShowDesc : bool = false) -
 	#set_physics_process(false)
 	DescribedItem = Itm
 	#ItemIcon.texture = It.ItemIcon
-	#ItemDesc.text = It.GetItemDesc()
+	#ItemDesc.text = Itm.GetItemDesc()
 	
 	var col = ColorManager.GetCurrentColor().to_html()
 	ItemDesc.text = Itm.GetItemDesc().replace("#ffc315", "{0}".format([col]))
@@ -165,6 +165,7 @@ func SetMerchData(Itm : Item, Ships : Array[MapShip], ShowDesc : bool = false) -
 	ItemName.text = Itm.GetItemName().replace("#ffc315", "{0}".format([col]))
 	#Ship Parts
 	#if (Itm is ShipPart):
+	ItemDesc.visible = true
 	UpgradeButton.visible = false
 	CancelUpgradeButton.visible = false
 	UpgradeLabel.visible = false

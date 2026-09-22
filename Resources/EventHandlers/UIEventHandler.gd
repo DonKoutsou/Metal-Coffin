@@ -42,7 +42,8 @@ signal RegroupPressed()
 signal LandPressed()
 signal OpenHatchPressed()
 #signal SimPausePressed()
-signal InventoryPressed()
+signal InventoryForceClosed()
+signal InventoryToggled(t : bool)
 signal PausePressed()
 signal FleetSeparationPressed()
 #signal SimStepChanged(NewStep : float)
@@ -183,8 +184,11 @@ func OnOpenHatchPressed() -> void:
 func OnLightToggled() -> void:
 	LightToggled.emit()
 
-func OnInventoryPressed() -> void:
-	InventoryPressed.emit()
+func OnInventoryForceClosed() -> void:
+	InventoryForceClosed.emit()
+
+func OnInventoryToggled(t : bool) -> void:
+	InventoryToggled.emit(t)
 
 func OnFleetSeparationPressed() -> void:
 	FleetSeparationPressed.emit()

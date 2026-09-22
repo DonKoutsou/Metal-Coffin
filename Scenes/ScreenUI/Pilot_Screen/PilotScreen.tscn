@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dxr40jficax1" path="res://Assets/UIPiecies/Screen/SidePanels/Pilot_Cover.png" id="4_8mt3t"]
 [ext_resource type="StyleBox" uid="uid://bc1y4hhkl7ce6" path="res://Theme/Buttons/NobButton.tres" id="6_bpouu"]
 [ext_resource type="PackedScene" uid="uid://k7pqywm80h3m" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/ThrustSlider/Elevation_slider.tscn" id="6_jqinv"]
+[ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="6_q2jn7"]
 [ext_resource type="Script" uid="uid://b8qcw65lt8fkh" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Pilot_Screen_Settings/PilotScreenSettings.gd" id="7_h6xln"]
 [ext_resource type="PackedScene" uid="uid://cwnxxystgxrjm" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/MissileTab/MissileTab.tscn" id="7_ojc6g"]
 [ext_resource type="StyleBox" uid="uid://21mi6l2i2tkk" path="res://Theme/Buttons/NobButton_Pressed.tres" id="7_yjfdw"]
@@ -15,7 +16,9 @@
 [ext_resource type="PackedScene" uid="uid://hiw68h8srifm" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Steer/SteeringWheelUI.tscn" id="10_w258d"]
 [ext_resource type="PackedScene" uid="uid://cvhgybnbwc0e4" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Aerophone/Aerophone.tscn" id="11_jqinv"]
 [ext_resource type="Theme" uid="uid://cgma68ateq86o" path="res://Theme/DarkBlueButton.tres" id="14_ce8jv"]
+[ext_resource type="Texture2D" uid="uid://dbu0peqoate2l" path="res://Assets/UIPiecies/Screen/Buttons/toggle_but_Off.png" id="14_cl2tq"]
 [ext_resource type="StyleBox" uid="uid://cpq6h2wwtgr07" path="res://Theme/Buttons/ButtonBlue.tres" id="15_h6xln"]
+[ext_resource type="Texture2D" uid="uid://4jk7ytvslvyi" path="res://Assets/UIPiecies/Screen/Buttons/toggle_but_On.png" id="15_l44l1"]
 [ext_resource type="StyleBox" uid="uid://chq4sdt1mihdh" path="res://Theme/Buttons/ButtonBlue_Pressed.tres" id="16_188si"]
 [ext_resource type="PackedScene" uid="uid://dj4mdtpd50mk1" path="res://Scenes/ScreenUI/Pilot_Screen/open_hatch_button.tscn" id="20_8mt3t"]
 [ext_resource type="BitMap" uid="uid://c2ivt2vwjpttm" path="res://Assets/UIPiecies/Screen/Buttons/NobMask2.png" id="20_h6xln"]
@@ -31,7 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://dmmhk1exrryca" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/ControlledShipUI/ControlledShipSelection.tscn" id="28_hc833"]
 [ext_resource type="PackedScene" uid="uid://7ijgqxojpl66" path="res://Scenes/ScreenUI/Chain.tscn" id="30_8mt3t"]
 
-[node name="PilotScreen" type="Control" unique_id=1109053421 node_paths=PackedStringArray("mapMarkerControls", "thrust", "elevationThrust", "steer", "pilotScreenSet", "SonarUI", "speedSimulationButton", "pauseSimulationButton", "ControlledShipSelector", "landButton", "hatchButton", "regroupButton", "shipDockButton", "zoomDial", "yDial", "xDial", "missileUI")]
+[node name="PilotScreen" type="Control" unique_id=1109053421 node_paths=PackedStringArray("mapMarkerControls", "thrust", "elevationThrust", "steer", "pilotScreenSet", "SonarUI", "speedSimulationButton", "pauseSimulationButton", "ControlledShipSelector", "landButton", "hatchButton", "regroupButton", "shipDockButton", "inventoryButton", "zoomDial", "yDial", "xDial", "missileUI")]
 texture_filter = 2
 layout_mode = 3
 anchors_preset = 15
@@ -42,23 +45,24 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_fq67n")
 uiEventHandler = ExtResource("2_ecvfe")
-mapMarkerControls = NodePath("VBoxContainer/MapMarkerControls")
+mapMarkerControls = NodePath("InputScroll/VBoxContainer/MapMarkerControls")
 thrust = NodePath("ThrustLever")
 elevationThrust = NodePath("ElevationLever")
 steer = NodePath("SteeringWheel")
 pilotScreenSet = NodePath("Pilot_Screen_Settings")
-SonarUI = NodePath("VBoxContainer/Sonar")
+SonarUI = NodePath("InputScroll/VBoxContainer/Sonar")
 speedSimulationButton = NodePath("SpeedSimulation")
 pauseSimulationButton = NodePath("SimulationButton")
-ControlledShipSelector = NodePath("VBoxContainer/ControledShipSelector")
+ControlledShipSelector = NodePath("InputScroll/VBoxContainer/ControledShipSelector")
 landButton = NodePath("LandButton")
 hatchButton = NodePath("OpenHatchButton")
 regroupButton = NodePath("Regroup")
 shipDockButton = NodePath("ShipDockButton")
+inventoryButton = NodePath("InventoryButton")
 zoomDial = NodePath("ZoomDial")
 yDial = NodePath("YDial")
 xDial = NodePath("XDial")
-missileUI = NodePath("VBoxContainer/Missile Tab")
+missileUI = NodePath("InputScroll/VBoxContainer/Missile Tab")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=659012758]
 layout_mode = 1
@@ -94,27 +98,34 @@ scale = Vector2(0.757, 0.8)
 frame_progress = 0.96041
 frequency = 40.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=986818194]
+[node name="InputScroll" type="ScrollContainer" parent="." unique_id=456856989]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
-offset_left = -273.0
+offset_left = -274.0
 grow_vertical = 2
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+script = ExtResource("6_q2jn7")
+metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InputScroll" unique_id=986818194]
+layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Sonar" parent="VBoxContainer" unique_id=1555836270 instance=ExtResource("11_jqinv")]
+[node name="Sonar" parent="InputScroll/VBoxContainer" unique_id=1555836270 instance=ExtResource("11_jqinv")]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Missile Tab" parent="VBoxContainer" unique_id=1968593876 instance=ExtResource("7_ojc6g")]
+[node name="Missile Tab" parent="InputScroll/VBoxContainer" unique_id=1968593876 instance=ExtResource("7_ojc6g")]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MapMarkerControls" parent="VBoxContainer" unique_id=329577773 instance=ExtResource("9_yjfdw")]
+[node name="MapMarkerControls" parent="InputScroll/VBoxContainer" unique_id=329577773 instance=ExtResource("9_yjfdw")]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ControledShipSelector" parent="VBoxContainer" unique_id=397832360 instance=ExtResource("28_hc833")]
+[node name="ControledShipSelector" parent="InputScroll/VBoxContainer" unique_id=397832360 instance=ExtResource("28_hc833")]
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -148,9 +159,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -60.0
-offset_top = -485.0
+offset_top = -490.0
 offset_right = -21.0
-offset_bottom = -408.34485
+offset_bottom = -413.34485
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
@@ -162,26 +173,28 @@ texture_click_mask = ExtResource("20_h6xln")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="InventoryButton" type="Button" parent="." unique_id=1655197087 groups=["Buttons"]]
+[node name="InventoryButton" type="TextureButton" parent="." unique_id=1482044127 groups=["Buttons"]]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -105.0
-offset_top = -14.0
-offset_right = -61.0
-offset_bottom = 29.0
+offset_left = -93.0
+offset_top = -41.0
+offset_right = -11.0
+offset_bottom = 2.0
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 focus_mode = 0
-theme_override_styles/normal = ExtResource("20_uojtp")
-theme_override_styles/pressed = ExtResource("21_hc833")
-theme_override_styles/hover = ExtResource("20_uojtp")
+toggle_mode = true
 action_mode = 0
+texture_normal = ExtResource("14_cl2tq")
+texture_pressed = ExtResource("15_l44l1")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="Regroup" type="Button" parent="." unique_id=5366913 groups=["Buttons"]]
 layout_mode = 1
@@ -190,10 +203,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -219.0
-offset_top = 1.0
-offset_right = -175.0
-offset_bottom = 26.0
+offset_left = -216.0
+offset_top = -197.0
+offset_right = -172.0
+offset_bottom = -172.0
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 0
@@ -230,10 +243,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -168.0
-offset_top = -359.0
-offset_right = -124.0
-offset_bottom = -333.0
+offset_left = -204.0
+offset_top = -373.0
+offset_right = -160.0
+offset_bottom = -347.0
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
@@ -295,9 +308,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1106.0
-offset_top = 99.464294
+offset_top = 93.0
 offset_right = 1150.0
-offset_bottom = 183.5357
+offset_bottom = 177.07141
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
@@ -313,9 +326,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1113.0
+offset_left = 1103.0
 offset_top = 193.0
-offset_right = 1151.0
+offset_right = 1141.0
 offset_bottom = 267.21875
 grow_horizontal = 0
 grow_vertical = 0
@@ -334,10 +347,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1111.0
-offset_top = 242.0
-offset_right = 1151.0
-offset_bottom = 318.4286
+offset_left = 1101.0
+offset_top = 240.0
+offset_right = 1141.0
+offset_bottom = 316.4286
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
@@ -355,10 +368,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1045.0
-offset_top = 242.0
-offset_right = 1085.0
-offset_bottom = 318.4286
+offset_left = 1035.0
+offset_top = 240.0
+offset_right = 1075.0
+offset_bottom = 316.4286
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
@@ -376,9 +389,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1046.0
+offset_left = 1036.0
 offset_top = 194.0
-offset_right = 1084.0
+offset_right = 1074.0
 offset_bottom = 266.6071
 grow_horizontal = 0
 grow_vertical = 0
@@ -398,9 +411,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1206.0
-offset_top = 99.464294
+offset_top = 93.0
 offset_right = 1250.0
-offset_bottom = 183.5357
+offset_bottom = 177.07141
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
@@ -430,16 +443,16 @@ theme_override_styles/hover = ExtResource("21_188si")
 [node name="ThrustLever" parent="." unique_id=1806408407 instance=ExtResource("3_ecvfe")]
 layout_mode = 1
 offset_left = -282.0
-offset_top = -334.0
+offset_top = -312.0
 offset_right = -181.0
-offset_bottom = -144.00049
+offset_bottom = -139.00049
 
 [node name="ElevationLever" parent="." unique_id=833959843 instance=ExtResource("6_jqinv")]
 layout_mode = 1
 offset_left = -126.0
-offset_top = -334.0
+offset_top = -312.0
 offset_right = -25.0
-offset_bottom = -143.99976
+offset_bottom = -138.99976
 
 [node name="SteeringWheel" parent="." unique_id=760456773 instance=ExtResource("10_w258d")]
 layout_mode = 1
@@ -528,7 +541,7 @@ phase_offset = 1.5
 
 [connection signal="toggled" from="SpeedSimulation" to="." method="_on_speed_simulation_toggled"]
 [connection signal="toggled" from="SimulationButton" to="." method="simPauseToggled"]
-[connection signal="pressed" from="InventoryButton" to="." method="inventoryPressed"]
+[connection signal="toggled" from="InventoryButton" to="." method="_on_inventory_button_toggled"]
 [connection signal="pressed" from="Regroup" to="." method="regroupPressed"]
 [connection signal="pressed" from="MarkerEditorButton" to="." method="markerEditorButtonPressed"]
 [connection signal="pressed" from="ShipDockButton" to="." method="shipDockButtonPressed"]

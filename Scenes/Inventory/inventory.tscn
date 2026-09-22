@@ -52,87 +52,94 @@ ItemDescriptorScene = ExtResource("4_8j1nc")
 ItemTransferScene = ExtResource("5_pqw7i")
 ItemNotifScene = ExtResource("6_q7t14")
 CaptainStatScene = "uid://bnonfp8ywr3vl"
-CharacterPlace = NodePath("VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2/VBoxContainer/PanelContainer2/ScrollContainer/VBoxContainer")
-DescriptorPlace = NodePath("VBoxContainer2/PanelContainer/HBoxContainer")
-CaptainStatsPlace = NodePath("VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer")
+CharacterPlace = NodePath("MarginContainer/VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2/VBoxContainer/PanelContainer2/ScrollContainer/VBoxContainer")
+DescriptorPlace = NodePath("MarginContainer/VBoxContainer2/PanelContainer/HBoxContainer")
+CaptainStatsPlace = NodePath("MarginContainer/VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer")
 MissileDockEventH = ExtResource("7_ffxnd")
 DroneDockEventH = ExtResource("8_0fcos")
 ControlledEventH = ExtResource("8_37qp6")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=774366542]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1420524392]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 51
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer" unique_id=774366542]
+layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer2" unique_id=1403107467]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer2" unique_id=1403107467]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("8_n1gkd")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/PanelContainer" unique_id=1348223640]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer2/PanelContainer" unique_id=1348223640]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/PanelContainer" unique_id=696212813]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer2/PanelContainer" unique_id=696212813]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer" unique_id=366693959]
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer2/PanelContainer/HBoxContainer" unique_id=366693959]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer" unique_id=133740933]
+[node name="HBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer" unique_id=133740933]
 layout_mode = 2
 
-[node name="StatsButton" type="Button" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1041466533 groups=["DigitalButtons"]]
+[node name="StatsButton" type="Button" parent="MarginContainer/VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1041466533 groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 icon = ExtResource("11_oglie")
 
-[node name="DeckButton" type="Button" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=502606399 groups=["DigitalButtons"]]
+[node name="DeckButton" type="Button" parent="MarginContainer/VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=502606399 groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 icon = ExtResource("12_3d65x")
 
-[node name="InventoryButton" type="Button" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1975341829 groups=["DigitalButtons"]]
+[node name="InventoryButton" type="Button" parent="MarginContainer/VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1975341829 groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 icon = ExtResource("13_1sr3f")
 
-[node name="DispositionButton" type="Button" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1951854749 groups=["DigitalButtons"]]
+[node name="DispositionButton" type="Button" parent="MarginContainer/VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1951854749 groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 icon = ExtResource("14_vv4sd")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer" unique_id=864552121]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer2/PanelContainer/HBoxContainer" unique_id=864552121]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2" unique_id=1746959925]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2" unique_id=1746959925]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2/VBoxContainer" unique_id=1077640922]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2/VBoxContainer" unique_id=1077640922]
 layout_mode = 2
 
-[node name="Fund_Container2" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2/VBoxContainer/PanelContainer" unique_id=1956462459 instance=ExtResource("11_37qp6")]
+[node name="Fund_Container2" parent="MarginContainer/VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2/VBoxContainer/PanelContainer" unique_id=1956462459 instance=ExtResource("11_37qp6")]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2/VBoxContainer" unique_id=20501166]
+[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2/VBoxContainer" unique_id=20501166]
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2/VBoxContainer/PanelContainer2" unique_id=85486460]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2/VBoxContainer/PanelContainer2" unique_id=85486460]
 clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -143,17 +150,17 @@ vertical_scroll_mode = 3
 script = ExtResource("9_ubet6")
 metadata/_custom_type_script = "uid://bcrnrsyr12m2a"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2/VBoxContainer/PanelContainer2/ScrollContainer" unique_id=1779502213]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2/VBoxContainer/PanelContainer2/ScrollContainer" unique_id=1779502213]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 
-[node name="Button" type="Button" parent="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2/VBoxContainer" unique_id=1204593624]
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2/VBoxContainer" unique_id=1204593624]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "CLOSE"
 
-[node name="Panel2" type="Panel" parent="VBoxContainer2/PanelContainer/HBoxContainer" unique_id=375629562]
+[node name="Panel2" type="Panel" parent="MarginContainer/VBoxContainer2/PanelContainer/HBoxContainer" unique_id=375629562]
 visible = false
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
@@ -163,8 +170,8 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_4fam5")
 stream = ExtResource("13_jjw7x")
 bus = &"Sounds"
 
-[connection signal="pressed" from="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer/StatsButton" to="." method="ShowStats"]
-[connection signal="pressed" from="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer/DeckButton" to="." method="ShowDeck"]
-[connection signal="pressed" from="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer/InventoryButton" to="." method="ShowInventory"]
-[connection signal="pressed" from="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer/DispositionButton" to="." method="ShowDisposition"]
-[connection signal="pressed" from="VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer/StatsButton" to="." method="ShowStats"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer/DeckButton" to="." method="ShowDeck"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer/InventoryButton" to="." method="ShowInventory"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer/DispositionButton" to="." method="ShowDisposition"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer2/VBoxContainer/Button" to="." method="_on_button_pressed"]

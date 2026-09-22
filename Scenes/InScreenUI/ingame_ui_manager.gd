@@ -30,7 +30,10 @@ static func GetInstance() -> Ingame_UIManager:
 func _ready() -> void:
 	Instance = self
 	EventHandler.PausePressed.connect(Pause)
-	EventHandler.InventoryPressed.connect(GetInventory().ToggleInventory)
+	
+	EventHandler.InventoryToggled.connect(GetInventory().ToggleInventory)
+	GetInventory().InventoryForceClosed.connect(EventHandler.OnInventoryForceClosed)
+	
 	GetInventory().InventoryToggled.connect(EventHandler.OnScreenUIToggled)
 	EventHandler.DrawLinePressed.connect(_MapMarkerEditor._on_drone_button_pressed)
 	EventHandler.DrawTextPressed.connect(_MapMarkerEditor._OnTextButtonPressed)

@@ -1,19 +1,18 @@
-[gd_scene format=3 uid="uid://b4yumrb4c0xyd"]
+[gd_scene format=3 uid="uid://ci5gff86vno50"]
 
-[ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scenes/Card_Fight/Card/card.gd" id="1_utwiq"]
-[ext_resource type="PackedScene" uid="uid://xuequw4xcwgf" path="res://Scenes/Inventory/CardTooltip.tscn" id="2_paso5"]
-[ext_resource type="Texture2D" uid="uid://bf3p61os8mhr7" path="res://Assets/UIPiecies/Bolt.png" id="4_5n23x"]
-[ext_resource type="StyleBox" uid="uid://nx2m88wohluk" path="res://Scenes/Card_Fight/Card/Base_Card_Colors.tres" id="4_22va6"]
-[ext_resource type="StyleBox" uid="uid://c4g6yr1eejnwc" path="res://Scenes/Card_Fight/Card/Disposition_Card_Colors.tres" id="5_oc32p"]
-[ext_resource type="Texture2D" uid="uid://c1d4jybs1oolg" path="res://Assets/Cards/BarraceIncendiery.png" id="5_p48hs"]
-[ext_resource type="Material" uid="uid://dwvsafe1eaxbk" path="res://Shaders/Card.tres" id="6_btfbu"]
-[ext_resource type="StyleBox" uid="uid://bkhv2od4pe3up" path="res://Scenes/Card_Fight/Card/Power_Card_Colors.tres" id="6_cedgx"]
-[ext_resource type="Texture2D" uid="uid://cwbo84yj0q3om" path="res://Assets/Cards/CardBack.png" id="7_ucyjg"]
-[ext_resource type="StyleBox" uid="uid://barkkuipmovom" path="res://Theme/CardAmmPanel.tres" id="10_1l6da"]
-[ext_resource type="Material" uid="uid://b0dysksj8403q" path="res://Shaders/Card/Bolt.tres" id="10_mchus"]
+[ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scenes/Card_Fight/Card/card.gd" id="1_i0ur2"]
+[ext_resource type="PackedScene" uid="uid://xuequw4xcwgf" path="res://Scenes/Inventory/CardTooltip.tscn" id="2_6upq6"]
+[ext_resource type="Texture2D" uid="uid://buffodrv1xn4a" path="res://Assets/Cards/card.png" id="4_k04bh"]
+[ext_resource type="Texture2D" uid="uid://bf3p61os8mhr7" path="res://Assets/UIPiecies/Bolt.png" id="5_2o14k"]
+[ext_resource type="Material" uid="uid://dwvsafe1eaxbk" path="res://Shaders/Card.tres" id="7_34pwi"]
+[ext_resource type="Texture2D" uid="uid://cwbo84yj0q3om" path="res://Assets/Cards/CardBack.png" id="8_2rd7a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4v2x1"]
 bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
 border_blend = true
 corner_radius_top_left = 5
@@ -22,7 +21,66 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 shadow_size = 10
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_oc32p"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yh81d"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.11, 0.11, 0.11, 1)
+border_width_left = 2
+border_width_top = 42
+border_width_right = 2
+border_width_bottom = 103
+border_color = Color(0.46, 0.46, 0.46, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 4
+anti_aliasing_size = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7mr5f"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 0.763983, 0.0812772, 1)
+border_width_left = 2
+border_width_top = 42
+border_width_right = 2
+border_width_bottom = 97
+border_color = Color(0.11435, 0.205627, 0.212156, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 4
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_58ae4"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3yyhe"]
+bg_color = Color(1, 1, 1, 0)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nilbr"]
 bg_color = Color(1, 1, 1, 1)
@@ -41,8 +99,21 @@ point_count = 4
 [sub_resource type="Gradient" id="Gradient_rd7hj"]
 colors = PackedColorArray(0, 0, 0, 1, 0.421311, 0.88706, 0.915024, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4r8q"]
+content_margin_top = 6.0
+bg_color = Color(0.11435, 0.205627, 0.212156, 1)
+border_width_left = 1
+border_width_top = 4
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.763983, 0.0812772, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_detail = 2
+shadow_size = 8
+anti_aliasing_size = 2.0
+
 [node name="Card" type="Control" unique_id=1687597269 node_paths=PackedStringArray("CardName", "CardDesc", "CardCost", "CardTex", "But", "CardTypeEmblem", "FrontSide", "BackSide", "Line", "AmmountLabel", "TooltipPos", "CardPos") groups=["Card"]]
-texture_filter = 3
 custom_minimum_size = Vector2(160, 220)
 layout_mode = 3
 anchors_preset = 8
@@ -60,7 +131,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-script = ExtResource("1_utwiq")
+script = ExtResource("1_i0ur2")
 CardName = NodePath("SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer/Label")
 CardDesc = NodePath("SubViewportContainer/SubViewport/VBoxContainer/CardDesc")
 CardCost = NodePath("SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer/CardCost")
@@ -73,16 +144,9 @@ Line = NodePath("Line2D")
 AmmountLabel = NodePath("Amm/Label")
 TooltipPos = NodePath("Control/VBoxContainer")
 CardPos = NodePath("Control/HBoxContainer")
-NormalCardColors = ExtResource("4_22va6")
-DispositionCardColors = ExtResource("5_oc32p")
-PowerCardColors = ExtResource("6_cedgx")
-NormalCardTexture = "uid://buffodrv1xn4a"
-DispositionCardTexture = "uid://xd6axehcm6jm"
-PowerCardTexture = "uid://bnprfsht41v2n"
-TooltipScene = ExtResource("2_paso5")
+TooltipScene = ExtResource("2_6upq6")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=2087537965]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -93,7 +157,6 @@ offset_right = 13.0
 offset_bottom = 18.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1413988983]
@@ -101,12 +164,11 @@ disable_3d = true
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
-scaling_3d_mode = 5
 canvas_item_default_texture_filter = 4
-size = Vector2i(338, 465)
+oversampling = false
+size = Vector2i(307, 423)
 size_2d_override = Vector2i(186, 256)
 size_2d_override_stretch = true
-render_target_update_mode = 1
 
 [node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport" unique_id=1329688651]
 anchors_preset = 15
@@ -121,20 +183,6 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4v2x1")
 
-[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport" unique_id=61408993]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 6.0
-offset_top = 10.0
-offset_right = -6.0
-offset_bottom = -13.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = SubResource("CompressedTexture2D_oc32p")
-expand_mode = 1
-
 [node name="Button" type="Button" parent="SubViewportContainer/SubViewport" unique_id=110634723 groups=["DigitalButtons"]]
 anchors_preset = 15
 anchor_right = 1.0
@@ -148,14 +196,46 @@ grow_vertical = 2
 focus_mode = 0
 mouse_filter = 1
 theme_override_font_sizes/font_size = 26
-theme_override_styles/normal = ExtResource("4_22va6")
-theme_override_styles/disabled = ExtResource("4_22va6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_yh81d")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7mr5f")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yh81d")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_yh81d")
+theme_override_styles/focus = SubResource("StyleBoxFlat_58ae4")
 action_mode = 0
 keep_pressed_outside = true
 autowrap_mode = 3
 icon_alignment = 1
 vertical_icon_alignment = 2
 expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport" unique_id=61408993]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 10.0
+offset_right = -6.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_k04bh")
+expand_mode = 1
+
+[node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport/TextureRect" unique_id=879423676]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_right = -4.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3yyhe")
 
 [node name="Panel2" type="Panel" parent="SubViewportContainer/SubViewport" unique_id=1580813051]
 anchors_preset = 2
@@ -173,9 +253,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_nilbr")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 15.0
-offset_top = 14.0
-offset_right = -15.0
+offset_left = 14.0
+offset_top = 15.0
+offset_right = -14.0
 offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -183,16 +263,14 @@ mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport/VBoxContainer" unique_id=388063333]
-custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = -5
-alignment = 1
 
 [node name="CardCost" type="Label" parent="SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer" unique_id=1986374705]
 custom_minimum_size = Vector2(30.26, 27.33)
 layout_mode = 2
-size_flags_vertical = 1
+size_flags_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
@@ -201,7 +279,7 @@ theme_override_constants/shadow_outline_size = 2
 theme_override_font_sizes/font_size = 18
 text = "1"
 horizontal_alignment = 1
-vertical_alignment = 1
+vertical_alignment = 2
 autowrap_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer/CardCost" unique_id=1348593253]
@@ -212,28 +290,27 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -8.624819
-offset_top = -64.11102
-offset_right = 43.798035
-offset_bottom = -11.6881695
+offset_left = -9.13
+offset_top = -52.33
+offset_right = 46.87
+offset_bottom = 3.67
 grow_horizontal = 2
 grow_vertical = 0
 rotation = 0.619955
 scale = Vector2(1.16834, 1.15055)
 mouse_filter = 2
-texture = ExtResource("4_5n23x")
+texture = ExtResource("5_2o14k")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Label" type="RichTextLabel" parent="SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer" unique_id=641413289]
-custom_minimum_size = Vector2(0, 40)
+custom_minimum_size = Vector2(0, 42)
 clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.21176471, 0.14901961, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/line_separation = -2
+theme_override_constants/line_separation = 3
 theme_override_constants/shadow_outline_size = 2
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
@@ -246,17 +323,15 @@ autowrap_mode = 2
 vertical_alignment = 1
 
 [node name="CardText" type="TextureRect" parent="SubViewportContainer/SubViewport/VBoxContainer" unique_id=403974655]
-custom_minimum_size = Vector2(0, 81)
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 mouse_filter = 2
-texture = ExtResource("5_p48hs")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="CardDesc" type="RichTextLabel" parent="SubViewportContainer/SubViewport/VBoxContainer" unique_id=2019122254]
-custom_minimum_size = Vector2(0, 103)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -272,21 +347,17 @@ theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "Throws a barragge on the enemy.
 CAN'T BE AVOIDED
-dwadwa
-dwadwadwawdadwa daw d d aw d  dwaddsssdaw w aad w a w dwa dw a  dwadsad wa daw
 "
 fit_content = true
-scroll_active = false
 autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
-resize_font_to_fit = true
-maximum_font_size = 16
 visible_characters_behavior = 1
 
 [node name="TextureButton" type="TextureButton" parent="." unique_id=2008636766]
+visible = false
 texture_filter = 4
-material = ExtResource("6_btfbu")
+material = ExtResource("7_34pwi")
 layout_mode = 0
 offset_left = -12.0
 offset_top = -17.0
@@ -306,7 +377,7 @@ offset_left = -4.0
 offset_top = -8.0
 offset_right = 163.0
 offset_bottom = 225.0
-texture = ExtResource("7_ucyjg")
+texture = ExtResource("8_2rd7a")
 expand_mode = 1
 
 [node name="Line2D" type="Line2D" parent="." unique_id=798469361]
@@ -327,7 +398,7 @@ offset_right = 21.0
 offset_bottom = 18.0
 grow_vertical = 0
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("10_1l6da")
+theme_override_styles/panel = SubResource("StyleBoxFlat_t4r8q")
 
 [node name="Label" type="Label" parent="Amm" unique_id=445580958]
 use_parent_material = true
@@ -340,7 +411,7 @@ vertical_alignment = 1
 
 [node name="Control" type="Control" parent="." unique_id=1949510751]
 top_level = true
-z_index = 10
+z_index = 1
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -350,7 +421,6 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(-1, 1)
-mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=823324047]
 layout_mode = 1
@@ -366,7 +436,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 offset_transform_enabled = true
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control" unique_id=896711967]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control" unique_id=983030158]
 layout_mode = 0
 offset_left = 62.0
 offset_top = -311.0
@@ -375,15 +445,6 @@ offset_bottom = -103.76521
 scale = Vector2(0.5, 0.5)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 mouse_filter = 2
-
-[node name="ColorRect" type="ColorRect" parent="." unique_id=952484273]
-visible = false
-material = ExtResource("10_mchus")
-layout_mode = 0
-offset_left = -197.0
-offset_top = -182.01004
-offset_right = 353.0
-offset_bottom = 397.01004
 
 [connection signal="button_down" from="SubViewportContainer/SubViewport/Button" to="." method="OnButtonPressed"]
 [connection signal="button_up" from="SubViewportContainer/SubViewport/Button" to="." method="OnButtonReleased"]

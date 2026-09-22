@@ -5,13 +5,13 @@ class_name  Clock
 @export var StartingDay : int = 10
 @export var StartingMonth : int = 4
 @export var StartingYear : int = 6129
-@export var StartingHour : int = 13
+@export var StartingHour : int = 6
 @export var StartingMin : float = 0
 
 static var CurrentDay : int = 10
 static var CurrentMonth : int = 4
 static var CurrentYear : int = 6129
-static var currentHour : int = 13
+static var currentHour : int = 6
 static var currentMin : float = 0
 
 

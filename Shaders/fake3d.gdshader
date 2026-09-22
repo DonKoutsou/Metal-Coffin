@@ -66,3 +66,15 @@ void fragment(){
 	COLOR.rgb = mix(new_burn_color2, main_texture.rgb, border);
 	COLOR.a *= threshold;
 }
+
+void light() {
+    // 1. Get the normal contribution of the current light
+    vec4 current_light = LIGHT_COLOR * LIGHT_ENERGY;
+    
+    // 2. Add it to the existing accumulated light
+    vec4 total_light = clamp(LIGHT + current_light, 0.0, 1.0);
+    
+    // 3. Cap the maximum value (e.g., maximum brightness of 1.0)
+    // You can adjust vec4(1.0) to lower values like vec4(0.8) for dimmer maximums
+    LIGHT = total_light * COLOR;
+}

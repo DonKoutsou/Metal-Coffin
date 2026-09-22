@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://d2ti0qbbb8k8k"]
+
+[ext_resource type="Shader" uid="uid://cpt2ucst7yrx0" path="res://Scenes/Card_Fight/BlurMap BG.gdshader" id="1_x2yjy"]
+[ext_resource type="Texture2D" uid="uid://c6v67mlofey4g" path="res://Noises/Ground/TEX_GroundVisualNoise_Normal.tres" id="2_0fqms"]
+
+[resource]
+shader = ExtResource("1_x2yjy")
+shader_parameter/heightInfo = ExtResource("2_0fqms")
+shader_parameter/LOD = 5.000000074506
+shader_parameter/offset = Vector2(0, 0)

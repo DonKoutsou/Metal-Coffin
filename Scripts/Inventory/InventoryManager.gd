@@ -28,6 +28,7 @@ var SimPaused : bool = false
 var CurrentDesc : ItemDescriptor
 
 signal InventoryToggled(t : bool)
+signal InventoryForceClosed()
 
 static var Instance : InventoryManager
 
@@ -457,7 +458,11 @@ func LoadSaveData(Data : SaveData) -> void:
 #-------------------------------------------------------
 var ToggleTween : Tween
 
-func ToggleInventory() -> void:
+func CloseInventory() -> void:
+	InventoryForceClosed.emit()
+	ToggleInventory(false)
+
+func ToggleInventory(t : bool) -> void:
 	if (is_instance_valid(ToggleTween)):
 		ToggleTween.kill()
 	visible = !visible
@@ -495,4 +500,4 @@ func ToggleInventory() -> void:
 
 
 func _on_button_pressed() -> void:
-	ToggleInventory()
+	CloseInventory()

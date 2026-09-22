@@ -326,6 +326,7 @@ blend_mode = 2
 range_z_min = 0
 range_layer_min = 2
 range_layer_max = 4
+range_item_cull_mask = 524289
 texture = ExtResource("7_8q2j3")
 offset = Vector2(0, 900)
 texture_scale = 7.0
@@ -336,7 +337,7 @@ volume_db = -20.0
 bus = &"Sounds"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1225392723]
-color = Color(0.52008533, 0.52008504, 0.5200852, 1)
+color = Color(0.269249, 0.2692491, 0.26924914, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1309732375]
 stream = ExtResource("8_d4jit")

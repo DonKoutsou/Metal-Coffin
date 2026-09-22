@@ -18,7 +18,9 @@ class_name TeamEquipmentSetup
 
 var CurrentCpt : Captain
 var CurrentDescriptor : ItemDescriptor
+var SelectedContainer : Inventory_Box_Res
 
+#----------------------------------------------------------------------
 func _ready() -> void:
 	CaptainStatCont.InventoryBoxSelected.connect(ItemSelected) 
 	#CaptainStatCont.ShipInventory.KeepBoxesActive = true
@@ -29,9 +31,11 @@ func _ready() -> void:
 	#PlayerCaptainLocation.add_child(b)
 	#OnCaptainSelected()
 
+#----------------------------------------------------------------------
 func _exit_tree() -> void:
 	Clear()
 
+#----------------------------------------------------------------------
 func Clear() -> void:
 	for g : CaptainButton in PlayerCaptainLocation.get_children():
 		g.queue_free()
@@ -53,6 +57,12 @@ func Clear() -> void:
 	for g in ItemParent.get_children():
 		g.queue_free()
 
+#----------------------------------------------------------------------
+func ClearItems() -> void:
+	for g in ItemParent.get_children():
+		g.queue_free()
+
+#----------------------------------------------------------------------
 func Init(PlayerCaptains : Array[Captain], EnemyCaptains : Array[Captain]) -> void:
 
 	for g in PlayerCaptains:
@@ -66,7 +76,8 @@ func Init(PlayerCaptains : Array[Captain], EnemyCaptains : Array[Captain]) -> vo
 		b.SetCpt(g)
 		b.OnShipSelected.connect(OnCaptainSelected.bind(g))
 		EnemyCaptainLocation.add_child(b)
-	
+
+#----------------------------------------------------------------------
 func OnCaptainSelected(Cpt : Captain) -> void:
 	if (Cpt == CurrentCpt):
 		return
@@ -86,11 +97,12 @@ func OnCaptainSelected(Cpt : Captain) -> void:
 	CaptainStatCont.ShowStats()
 	CurrentCpt = Cpt
 
-
+#----------------------------------------------------------------------
 func GetTypeOfBox(Box : Inventory_Box_Res) -> ShipPart.ShipPartType:
 	var Type : ShipPart.ShipPartType = CurrentCpt.GetCharacterInventory().GetBoxType(Box)
 	return Type
 
+#----------------------------------------------------------------------
 func ItemSelected(Box : Inventory_Box_Res, _inv : CharacterInventory) -> void:
 	if (CurrentDescriptor != null):
 		#var desc = descriptors[0] as ItemDescriptor
@@ -117,10 +129,12 @@ func ItemSelected(Box : Inventory_Box_Res, _inv : CharacterInventory) -> void:
 	CurrentDescriptor.set_physics_process(false)
 	CurrentDescriptor.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
+#----------------------------------------------------------------------
 func UpdateDescriptor(Box : Inventory_Box_Res) -> void:
 	if (CurrentDescriptor != null):
 		CurrentDescriptor.SetData(Box, true, false, true, true, true)
 
+#----------------------------------------------------------------------
 func UpgradeItem(Box : Inventory_Box_Res) -> void:
 	var OriginalItem = Box.GetContainedItem() as ShipPart
 	CurrentCpt.StartingItems.erase(OriginalItem)
@@ -136,34 +150,35 @@ func UpgradeItem(Box : Inventory_Box_Res) -> void:
 	UpdateDescriptor(Box)
 	PopUpManager.GetInstance().DoFadeNotif("{0} Upgraded".format([OriginalItem.GetItemName()]))
 
-var SelectedContainer : Inventory_Box_Res
+#----------------------------------------------------------------------
+##Called when user chooses an empty box to add item, we find matching items and present them for user to pick one
 func AddItem(Box : Inventory_Box_Res) -> void:
 	SelectedContainer = Box
 	var Type = GetTypeOfBox(Box)
 	
+	#Spacer
 	var c1 = Control.new()
-	c1.custom_minimum_size.y = 200
+	c1.custom_minimum_size.y = 250
 	ItemParent.add_child(c1)
 	c1.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
-	
-	var Amm : int = 0
+	var Amm : int = 0 #Keep count to see if any items of this kind exist
 	for g in Equipment:
-		if (g is ShipPart and Type != g.PartType):
+		if (g is ShipPart and Type != g.PartType): #check if its ship part and matches our type
 			continue
-		if (g is not ShipPart and Type != ShipPart.ShipPartType.INVENTORY):
+		if (g is not ShipPart and Type != ShipPart.ShipPartType.INVENTORY): #if we are looking for normal inventory items we exclude ship parts
 			continue
 		
+		#Add the UI for the item
 		var B = CagefightItemUI.instantiate() as CageFightItem
 		B.Init(g)
 		B.OnItemBought.connect(OnItemSelected.bind(g))
 		ItemParent.add_child(B)
 		Amm += 1
 	
-	if (Amm == 0):
+	if (Amm == 0): #If no matching items found
 		PopUpManager.GetInstance().DoFadeNotif("No available parts for slot found")
-		for g in ItemParent.get_children():
-			g.queue_free()
+		ClearItems()
 		return
 		
 	PopUpManager.GetInstance().DoFadeNotif("{0} combatible parts found".format([Amm]))
@@ -173,17 +188,17 @@ func AddItem(Box : Inventory_Box_Res) -> void:
 	ItemParent.add_child(c2)
 	c2.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
+#----------------------------------------------------------------------
 func IncreaseItem(Box : Inventory_Box_Res) -> void:
 	PopUpManager.GetInstance().DoFadeNotif("{0} Added".format([Box.GetContainedItem().GetItemName()]))
 	CurrentCpt.StartingItems.append(Box.GetContainedItem())
 	CurrentCpt.GetCharacterInventory().AddItem(Box.GetContainedItem())
 	#DeckUI.SetDeck2(CurrentCpt)
-	
 
+#----------------------------------------------------------------------
 func OnItemSelected(It : Item) -> void:
 	ItemCatalogue.visible = false
-	for g in ItemParent.get_children():
-		g.queue_free()
+	ClearItems()
 		
 	CurrentCpt.StartingItems.append(It)
 	CurrentCpt.GetCharacterInventory().AddItemToBox(It, SelectedContainer)
@@ -192,6 +207,7 @@ func OnItemSelected(It : Item) -> void:
 	UpdateDescriptor(SelectedContainer)
 	PopUpManager.GetInstance().DoFadeNotif("{0} Added".format([It.GetItemName()]))
 
+#----------------------------------------------------------------------
 func RemoveItem(Box : Inventory_Box_Res) -> void:
 	PopUpManager.GetInstance().DoFadeNotif("{0} Removed".format([Box.GetContainedItem().GetItemName()]))
 	var OriginalItem = Box.GetContainedItem()
@@ -205,11 +221,12 @@ func RemoveItem(Box : Inventory_Box_Res) -> void:
 	if (Box.IsEmpty()):
 		ItemSelected(Box, null)
 
+#----------------------------------------------------------------------
 func _physics_process(_delta: float) -> void:
 	#Going through and seeing wich Merch is closer to middle of screen and connect UI Descriptor to it
 	var midpoint = get_viewport_rect().size/2
 	var Closest : Control
-	var Dist : float = 9999999999999999
+	var Dist : float = INF
 	for g : Control in ItemParent.get_children():
 		if (g is not CageFightItem):
 			continue
@@ -220,27 +237,28 @@ func _physics_process(_delta: float) -> void:
 	if (Closest == null):
 		return
 	if (Desc.DescribedItem != Closest.Itm):
-		Desc.SetMerchData(Closest.Itm, [])
+		Desc.SetMerchData(Closest.Itm, [], true)
 
+#----------------------------------------------------------------------
 func _on_cancel_button_pressed() -> void:
 	ItemCatalogue.visible = false
 	for g in ItemParent.get_children():
 		g.queue_free()
 
-
+#----------------------------------------------------------------------
 func _on_stats_pressed() -> void:
 	CaptainStatCont.ShowStats()
 
-
+#----------------------------------------------------------------------
 func _on_deck_pressed() -> void:
 	CaptainStatCont.ShowDeck()
 
-
+#----------------------------------------------------------------------
 func _on_inventory_pressed() -> void:
 	CaptainStatCont.ShowInvetory()
 	CaptainStatCont.ShipInventory.KeepBoxesActive = true
 	CaptainStatCont.ShipInventory.SetBoxedSelectable()
 
-
+#----------------------------------------------------------------------
 func _on_disposition_pressed() -> void:
 	CaptainStatCont.ShowDisposition()

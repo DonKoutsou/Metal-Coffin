@@ -101,8 +101,14 @@ func _on_ready_pressed() -> void:
 	if (EnemyTeam.size() == 0):
 		PopUpManager.GetInstance().DoFadeNotif("Can't start fight\n Enemy Team is empty")
 		return
-	TeamReady.emit(PlayerTeam, EnemyTeam)
+	
+	var s = PopUpManager.GetInstance().DoConfirm("Start Fight ?", "Yes", self)
+	s.Sign.connect(StartConfirmed)
 
+
+func StartConfirmed(t : bool) -> void:
+	if (t):
+		TeamReady.emit(PlayerTeam, EnemyTeam)
 
 func _on_random_pressed() -> void:
 	PlayerTeam.clear()
@@ -124,3 +130,4 @@ func _on_team_comp_pressed() -> void:
 	TeamComp.visible = true
 	EquipmentComp.visible = false
 	EquipmentComp.Clear()
+	

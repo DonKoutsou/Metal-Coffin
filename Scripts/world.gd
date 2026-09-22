@@ -511,7 +511,7 @@ func OnLandingFinished(Ship : MapShip) -> void:
 func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 	var Inventory = InventoryManager.GetInstance()
 	if (Inventory.visible):
-		Inventory.ToggleInventory()
+		Inventory.CloseInventory()
 	GetMap().HideWorld(false)
 	SimulationManager.GetInstance().TogglePause(true)
 	WORLDST = WORLDSTATE.TOWN

@@ -21,6 +21,7 @@ class_name PilotScreenUI
 @export var hatchButton : Button
 @export var regroupButton: Button
 @export var shipDockButton: Button
+@export var inventoryButton : BaseButton
 @export var zoomDial: Dial
 @export var yDial: Dial
 @export var xDial: Dial
@@ -33,7 +34,7 @@ func _ready() -> void:
 	uiEventHandler.YChangedFromScreen.connect(yDial.addCustomMovement)
 	uiEventHandler.XChangedFromScreen.connect(xDial.addCustomMovement)
 	uiEventHandler.RadarUpdated.connect(radarToggled)
-	
+	uiEventHandler.InventoryForceClosed.connect(inventoryButton.set_pressed_no_signal.bind(false))
 	UISoundMan.GetInstance().Refresh()
 	
 	speedSimulationButton.set_pressed_no_signal(SimulationManager.SimSpeed() > 1)
@@ -97,8 +98,12 @@ func elevationChanged(value: float) -> void:
 	elevationThrust.UpdateHandle(value)
 
 #-----------------------------------------------------------------------------------
-func inventoryPressed() -> void:
-	uiEventHandler.OnInventoryPressed()
+#func inventoryPressed() -> void:
+	#uiEventHandler.OnInventoryPressed()
+
+#-----------------------------------------------------------------------------------
+func _on_inventory_button_toggled(toggled_on: bool) -> void:
+	uiEventHandler.OnInventoryToggled(toggled_on)
 
 #-----------------------------------------------------------------------------------
 func regroupPressed() -> void:
