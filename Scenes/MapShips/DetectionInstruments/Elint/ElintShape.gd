@@ -6,7 +6,7 @@ class_name Elint
 
 var ElintStat : ShipStat
 
-signal ElintTriggered(T : bool, Lvl : int, Dir : float)
+#signal ElintTriggered(T : bool, Lvl : int, Dir : float)
 signal ElintRangeChanged
 
 ##Key = Ship Value = Elint Level

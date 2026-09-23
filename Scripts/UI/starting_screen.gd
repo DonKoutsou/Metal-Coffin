@@ -41,14 +41,14 @@ func _ready() -> void:
 		var IsRunning = Steam.isSteamRunning()
 		
 		if (!IsRunning):
-			printerr("Steam Is Not Running")
+			CommandLine.AddErr("Steam Is Not Running")
 		else:
-			print("Steam Is Running")
+			CommandLine.AddText("Steam Is Running")
 			var ID = Steam.getSteamID()
 			var n = Steam.getFriendPersonaName(ID)
-			print("Username : ", str(n))
+			CommandLine.AddText("Username : " + str(n))
 			AchievementManager.GetInstance().SteamRunning = true
-			print("Achievement Tracking Enabled")
+			CommandLine.AddText("Achievement Tracking Enabled")
 			
 	await Start()
 

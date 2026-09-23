@@ -2,16 +2,14 @@
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_5owba"]
 [ext_resource type="Script" uid="uid://djw0qatbronxr" path="res://Scenes/InScreenUI/Commande_Line/command_line.gd" id="2_3camo"]
+[ext_resource type="AudioStream" uid="uid://b5cb3530xjcon" path="res://Assets/Sounds/minimize_003.ogg" id="3_3camo"]
+[ext_resource type="AudioStream" uid="uid://b4u5muin6mjj3" path="res://Assets/Sounds/maximize_003.ogg" id="3_5kdy4"]
 
 [node name="CommandLine" type="PanelContainer" unique_id=1154400603 node_paths=PackedStringArray("Text")]
-anchors_preset = 14
-anchor_top = 0.5
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -37.5
-offset_bottom = 37.5
+offset_bottom = 173.95
 grow_horizontal = 2
-grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_5owba")
@@ -31,6 +29,7 @@ PackedStringArray("CardFightTypeSwitch"): "CardFightTypeSwitch"
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1833009837]
+visible = false
 layout_mode = 2
 
 [node name="Button" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=504438264]
@@ -45,12 +44,19 @@ theme_override_font_sizes/font_size = 10
 text = "X"
 icon_alignment = 1
 
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer" unique_id=296971418]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+scroll_following = true
+
 [node name="TextEdit" type="TextEdit" parent="VBoxContainer" unique_id=740363938]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 8
 theme_override_font_sizes/font_size = 24
-placeholder_text = "Cheat Code Here"
+placeholder_text = "Enter Command"
 scroll_fit_content_height = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TextEdit" unique_id=1536794461]
@@ -60,6 +66,18 @@ anchor_right = 1.0
 offset_top = 50.0
 offset_bottom = 50.0
 grow_horizontal = 2
+
+[node name="In" type="AudioStreamPlayer" parent="." unique_id=1096894166]
+stream = ExtResource("3_5kdy4")
+volume_db = -5.0
+pitch_scale = 2.55
+bus = &"MapSounds"
+
+[node name="Out" type="AudioStreamPlayer" parent="." unique_id=954481863]
+stream = ExtResource("3_3camo")
+volume_db = -5.0
+pitch_scale = 2.55
+bus = &"MapSounds"
 
 [connection signal="button_down" from="VBoxContainer/HBoxContainer/Button" to="." method="OnMoveButtonDown"]
 [connection signal="button_up" from="VBoxContainer/HBoxContainer/Button" to="." method="OnMoveButtonUp"]

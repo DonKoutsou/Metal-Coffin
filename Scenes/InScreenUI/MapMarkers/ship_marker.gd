@@ -543,3 +543,4 @@ func _on_icon_gui_input(event: InputEvent) -> void:
 	else : if (event is InputEventMouseButton):
 		if (event.button_index == MOUSE_BUTTON_RIGHT and event.pressed):
 			ShipTargetSelected.emit(self)
+			#get_viewport().set_input_as_handled()

@@ -387,7 +387,10 @@ func MoveTargetSelected(Target : MapShip) -> void:
 	if (GetMapMarkerEditor().visible):
 		return
 	ControllerEvH.OnTargetShipSelected(Target)
-	PopUpManager.GetInstance().DoFadeNotif("Updating Course")
+	if (Target is PlayerDrivenShip):
+		PopUpManager.GetInstance().DoFadeNotif("Merging fleets")
+	else:
+		PopUpManager.GetInstance().DoFadeNotif("Setting Intercepting Course")
 
 #/////////////////////////////////////////////////////////////
 #███    ███  █████  ██████       ██████  ███████ ███    ██ ███████ ██████   █████  ████████ ██  ██████  ███    ██ 

@@ -47,7 +47,7 @@ func _process(_delta: float) -> void:
 	
 	
 	#var Local = Helper.mapv2(get_global_mouse_position(), Vector2.ZERO, get_window().size, Vector2.ZERO, Vector2(1280, 720))
-	var mpos = get_global_mouse_position()
+	#var mpos = get_global_mouse_position()
 	#print(mpos)
 	var Local = get_global_mouse_position()
 	#print(vp)

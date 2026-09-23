@@ -106,7 +106,7 @@ func _draw() -> void:
 		else:
 			point = Vector2(y * PointRatio, ContainerSize.y / 2 + x)
 		if y > 0:
-			draw_line(prev_point, point, Col, LineWidth, true)
+			draw_line(prev_point, point, ColorManager.GetCurrentColor(), LineWidth, true)
 		
 		prev_point = point
 	

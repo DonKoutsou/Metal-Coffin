@@ -28,13 +28,16 @@ func _on_return_sound_trigger_area_entered(area: Area2D) -> void:
 		RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.APROACHING)
 
 func Regroup(NewCommander : MapShip):
-	AddTargetShip(NewCommander)
+	TargetLocations.clear()
+	TargetShip = NewCommander
+	TargetShipPos = IntersectShip(TargetShip)
+	NewCommander.OnShipDestroyed.connect(TargetShipDestroyed)
+	
+	AccelerationChanged(GetShipMaxSpeed(), true)
 	SetSpeed(GetShipMaxSpeed())
-	#rotation = 0.0
 	CommingBack = true
 	DroneReturning.emit()
-	TargetLocations.clear()
-	#Docked = false
+
 
 func GetSaveData() -> DroneSaveData:
 	var dat = DroneSaveData.new()
@@ -291,12 +294,16 @@ func AddTargetLocation(pos : Vector2) -> void:
 	TargetLocations.append(pos)
 
 func AddTargetShip(Target : MapShip) -> void:
-	if (CommingBack):
-		CommingBack = false
-	AccelerationChanged(GetShipMaxSpeed(), true)
-	TargetLocations.clear()
-	TargetShip = Target
-	Target.OnShipDestroyed.connect(TargetShipDestroyed)
+	if (Target is PlayerDrivenShip):
+		Regroup(Target)
+	else:
+		if (CommingBack):
+			CommingBack = false
+		AccelerationChanged(GetShipMaxSpeed(), true)
+		TargetLocations.clear()
+		TargetShip = Target
+		TargetShipPos = IntersectShip(TargetShip)
+		Target.OnShipDestroyed.connect(TargetShipDestroyed)
 
 func ClearTargetShip() -> void:
 	if (TargetShip != null):
@@ -305,9 +312,10 @@ func ClearTargetShip() -> void:
 	TargetShipPos = Vector2.ZERO
 
 func TargetShipDestroyed(_Sh : MapShip) -> void:
+	CommingBack = false
 	TargetLocations.append(TargetShip.global_position)
 	ClearTargetShip()
-
+	
 #------------------------------------------------------------
 
 func Steer(Rotation : float) -> void:

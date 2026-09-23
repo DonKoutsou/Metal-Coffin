@@ -85,7 +85,7 @@ func shuffle_array(arr: Array) -> void:
 static func NewRand(state : Dictionary = {}) -> Rand:
 	var rand = Rand.new()
 	rand.Init(state)
-	print("Started new random with state {0}".format([rand.GetState()]))
+	CommandLine.AddText("Started new random with state {0}".format([rand.GetState()]))
 	return rand
 
 #----------------------------------------
@@ -93,4 +93,4 @@ static func NewStaticRand(state : Dictionary = {}) -> void:
 	var rand = Rand.new()
 	rand.Init(state)
 	InstanceRandom = rand
-	print("Started new static random with state {0}".format([rand.GetState()]))
+	CommandLine.AddText("Started new static random with state {0}".format([rand.GetState()]))

@@ -2,7 +2,6 @@
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_4chtb"]
 resource_name = "Reverb"
-damping = 1.0
 hipass = 0.1
 
 [resource]

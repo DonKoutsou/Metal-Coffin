@@ -22,7 +22,7 @@ signal PositionChanged
 func UpdateCameraZoom(NewZoom : Vector2) -> void:
 	Camera.zoom = NewZoom
 	Camera.position.y = 360.0 * NewZoom.x
-	print("UpdatedZoom")
+	#print("UpdatedZoom")
 
 func _ready() -> void:
 	if (Engine.is_editor_hint()):

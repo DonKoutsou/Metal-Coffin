@@ -63,7 +63,3 @@ func UpdateColors()-> void:
 	th.set_color("font_focus_color", "Button", col)
 	
 	th.set_color("font_color", "ProgressBar", col)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

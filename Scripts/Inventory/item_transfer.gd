@@ -14,7 +14,7 @@ var SelectedCharacter : Captain
 func SetData(Characters : Array[Captain], HeaderText : String = "Transfer To") -> void:
 	for g : Captain in Characters:
 		var B = CptnButton.instantiate() as CaptainButton
-		B.SetVisuals(g)
+		B.SetVisuals2(g)
 		ButtonPlecements.add_child(B)
 		B.connect("OnShipSelected", OnCharacterSelected.bind(g))
 
@@ -26,7 +26,7 @@ func SetData(Characters : Array[Captain], HeaderText : String = "Transfer To") -
 func SetTransferData(Characters : Array[Captain], OwnedAmm : int, It : Item, HeaderText : String = "Transfer To") -> void:
 	for g : Captain in Characters:
 		var B = CptnButton.instantiate() as CaptainButton
-		B.SetVisuals(g)
+		B.SetVisuals2(g)
 		ButtonPlecements.add_child(B)
 		B.connect("OnShipSelected", OnCharacterSelected.bind(g))
 	

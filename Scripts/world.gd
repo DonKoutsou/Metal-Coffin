@@ -196,7 +196,8 @@ func  _ready() -> void:
 	WORLDST = WORLDSTATE.NORMAL
 	WeatherManage.Instance.Update(0)
 	
-	print("World generation ended with random state of {0}".format([Rand.InstanceRandom.GetState()]))
+	CommandLine.AddText("World generation ended with random state of {0}".format([Rand.InstanceRandom.GetState()]))
+	#print("World generation ended with random state of {0}".format([Rand.InstanceRandom.GetState()]))
 	
 	
 var WeatherManagerUpdate : float

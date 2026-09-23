@@ -2029,7 +2029,7 @@ func ShipDestroyed(Ship : BattleShipStats) -> bool:
 	var Friendly = IsShipFriendly(Ship)
 		
 	if (!Ship.Friendly):
-		FundsToWin += snapped(Rand.InstanceRandom.RandIRange(2000, Ship.Funds * 0.5), 1000)
+		FundsToWin += snappedi(Rand.InstanceRandom.RandIRange(2000, roundi(Ship.Funds * 0.5)), 1000)
 	
 	var TurnPosition = ShipTurns.find(Ship)
 	#var Index = ShipTurns.find(Ship)

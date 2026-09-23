@@ -89,7 +89,7 @@ func On_Credits_Pressed() -> void:
 	else:
 		var cr : PackedScene = load(CreditsScene)
 		SpawnedCredits = cr.instantiate()
-		$SubViewportContainer/SubViewport/VBoxContainer.add_child(SpawnedCredits)
+		$SubViewportContainer/SubViewport/CanvasLayer/VBoxContainer.add_child(SpawnedCredits)
 		SpawnedCredits.OnButtonPressed.connect(On_Credits_Pressed)
 		NormalUI.visible = false
 		Settings.visible = false

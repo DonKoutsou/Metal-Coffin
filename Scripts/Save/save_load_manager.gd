@@ -12,7 +12,7 @@ static func GetInstance() -> SaveLoadManager:
 func DeleteSave() -> void:
 	DirAccess.remove_absolute("user://SavedGame.tres")
 	DirAccess.remove_absolute("user://PrologueSavedGame.tres")
-	TutorialManager.DeleteSave()
+	ActionTracker.Instance.DeleteSave()
 
 static func SaveExists(Sav : String) -> bool:
 	if (!FileAccess.file_exists(Sav)):

@@ -66,19 +66,19 @@ func UpdateBiggestElint() -> void:
 			newBiggest = g
 	if (biggestElint != newBiggest):
 		biggestElint.ElintShape.ElintRangeChanged.disconnect(CheckIfWorking)
-		biggestElint.ElintShape.ElintTriggered.disconnect(TargetFound)
+		#biggestElint.ElintShape.ElintTriggered.disconnect(TargetFound)
 		newBiggest.ElintShape.ElintRangeChanged.connect(CheckIfWorking)
-		newBiggest.ElintShape.ElintTriggered.connect(TargetFound)
+		#newBiggest.ElintShape.ElintTriggered.connect(TargetFound)
 		biggestElint = newBiggest
 
 func _onControlledShipUpdated(ship: MapShip) -> void:
 	controller = ship
 	if (biggestElint != null):
 		biggestElint.ElintShape.ElintRangeChanged.disconnect(CheckIfWorking)
-		biggestElint.ElintShape.ElintTriggered.disconnect(TargetFound)
+		#biggestElint.ElintShape.ElintTriggered.disconnect(TargetFound)
 	biggestElint = controller
 	biggestElint.ElintShape.ElintRangeChanged.connect(CheckIfWorking)
-	biggestElint.ElintShape.ElintTriggered.connect(TargetFound)
+	#biggestElint.ElintShape.ElintTriggered.connect(TargetFound)
 	
 	UpdateBiggestElint()
 	CheckIfWorking()

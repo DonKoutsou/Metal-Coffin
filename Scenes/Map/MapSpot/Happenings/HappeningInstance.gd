@@ -72,7 +72,7 @@ func NextStage() -> void:
 		
 		var text : HappeningText = Stage.Texts[z]
 		UpdateBackground(text)
-		HappeningText.text = text.Text
+		HappeningText.text = text.Text.replace("ffc315", ColorManager.GetCurrentColor().to_html())
 		HappeningText.visible_ratio = 0
 		
 		if (Last and Stage.Texts.size() > 1):
@@ -141,7 +141,7 @@ func NextStage() -> void:
 			Events.append(Option.Event)
 		
 		if (Check):
-			HappeningText.text = Option.OptionResault(EventSpot)
+			HappeningText.text = Option.OptionResault(EventSpot).replace("ffc315", ColorManager.GetCurrentColor().to_html())
 			HappeningText.visible_ratio = 0
 			DiagButtons.visible = true
 			SkipDialogueButton.visible = false
@@ -238,6 +238,9 @@ func _physics_process(delta: float) -> void:
 		#$VBoxContainer/LineDrawer.amplitude = 0
 
 func _on_next_diag_pressed() -> void:
+	if (HappeningText.visible_ratio < 1):
+		HappeningText.visible_ratio = 1
+		return
 	NextDiag.emit()
 
 

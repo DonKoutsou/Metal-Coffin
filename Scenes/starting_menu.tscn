@@ -59,10 +59,10 @@ script = ExtResource("1_y40tw")
 CreditsScene = "uid://dxkoglcdnoen2"
 LoadPrologueLight = NodePath("PrologueLight")
 LoadLight = NodePath("CampaignLight")
-HintDialogue = NodePath("SubViewportContainer/SubViewport/NormalUI/HintDialogue")
-Settings = NodePath("SubViewportContainer/SubViewport/SettingPanel")
-NormalUI = NodePath("SubViewportContainer/SubViewport/NormalUI")
-VersionLabel = NodePath("SubViewportContainer/SubViewport/VBoxContainer/PanelContainer3/VersionLabel")
+HintDialogue = NodePath("SubViewportContainer/SubViewport/CanvasLayer/NormalUI/HintDialogue")
+Settings = NodePath("SubViewportContainer/SubViewport/CanvasLayer/SettingPanel")
+NormalUI = NodePath("SubViewportContainer/SubViewport/CanvasLayer/NormalUI")
+VersionLabel = NodePath("SubViewportContainer/SubViewport/CanvasLayer/VBoxContainer/PanelContainer3/VersionLabel")
 cloudNoise = ExtResource("3_t54ed")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=2040979612]
@@ -86,7 +86,7 @@ canvas_item_default_texture_filter = 2
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 0
 positional_shadow_atlas_16_bits = false
-size = Vector2i(1388, 966)
+size = Vector2i(1043, 726)
 size_2d_override = Vector2i(925, 644)
 size_2d_override_stretch = true
 render_target_update_mode = 4
@@ -258,27 +258,6 @@ size_flags_vertical = 6
 texture = ExtResource("14_61hxs")
 expand_mode = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SubViewportContainer/SubViewport" unique_id=1381371197]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/separation = 0
-
-[node name="PanelContainer3" type="PanelContainer" parent="SubViewportContainer/SubViewport/VBoxContainer" unique_id=1403655150]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-theme_override_styles/panel = ExtResource("14_xop3l")
-
-[node name="VersionLabel" type="Label" parent="SubViewportContainer/SubViewport/VBoxContainer/PanelContainer3" unique_id=524740930]
-layout_mode = 2
-size_flags_vertical = 8
-text = "Demo Version 0.61"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="CanvasModulate" type="CanvasModulate" parent="SubViewportContainer/SubViewport" unique_id=1434908220]
 color = Color(0, 0, 0, 1)
 
@@ -291,7 +270,33 @@ texture = ExtResource("15_7x35f")
 texture_scale = 5.0
 height = 355.0
 
-[node name="NormalUI" type="Control" parent="SubViewportContainer/SubViewport" unique_id=916121772]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport" unique_id=1406036585]
+environment = ExtResource("22_xop3l")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="SubViewportContainer/SubViewport" unique_id=1256734610]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewportContainer/SubViewport/CanvasLayer" unique_id=1381371197]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="PanelContainer3" type="PanelContainer" parent="SubViewportContainer/SubViewport/CanvasLayer/VBoxContainer" unique_id=1403655150]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("14_xop3l")
+
+[node name="VersionLabel" type="Label" parent="SubViewportContainer/SubViewport/CanvasLayer/VBoxContainer/PanelContainer3" unique_id=524740930]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Demo Version 0.61"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NormalUI" type="Control" parent="SubViewportContainer/SubViewport/CanvasLayer" unique_id=916121772]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -299,14 +304,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" parent="SubViewportContainer/SubViewport/NormalUI" unique_id=755058510 instance=ExtResource("21_srpg8")]
+[node name="Button" parent="SubViewportContainer/SubViewport/CanvasLayer/NormalUI" unique_id=755058510 instance=ExtResource("21_srpg8")]
 layout_mode = 1
 offset_left = -293.0
 offset_top = -70.0
 offset_right = -25.0
 offset_bottom = -27.0
 
-[node name="HintDialogue" type="Control" parent="SubViewportContainer/SubViewport/NormalUI" unique_id=1587002589]
+[node name="HintDialogue" type="Control" parent="SubViewportContainer/SubViewport/CanvasLayer/NormalUI" unique_id=1587002589]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -315,7 +320,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue" unique_id=1979379147]
+[node name="PanelContainer" type="PanelContainer" parent="SubViewportContainer/SubViewport/CanvasLayer/NormalUI/HintDialogue" unique_id=1979379147]
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 8
@@ -330,7 +335,7 @@ offset_bottom = 94.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Cancel" type="Button" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer" unique_id=2087269759 groups=["DigitalBouncingButton"]]
+[node name="Cancel" type="Button" parent="SubViewportContainer/SubViewport/CanvasLayer/NormalUI/HintDialogue/PanelContainer" unique_id=2087269759 groups=["DigitalBouncingButton"]]
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 10
@@ -338,12 +343,12 @@ size_flags_vertical = 0
 theme_override_font_sizes/font_size = 24
 text = "x"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer" unique_id=1295373498]
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewportContainer/SubViewport/CanvasLayer/NormalUI/HintDialogue/PanelContainer" unique_id=1295373498]
 use_parent_material = true
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/VBoxContainer" unique_id=1997034343]
+[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/CanvasLayer/NormalUI/HintDialogue/PanelContainer/VBoxContainer" unique_id=1997034343]
 use_parent_material = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -352,26 +357,26 @@ text = "Show Hints ?"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/VBoxContainer" unique_id=1849744011]
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport/CanvasLayer/NormalUI/HintDialogue/PanelContainer/VBoxContainer" unique_id=1849744011]
 use_parent_material = true
 layout_mode = 2
 mouse_filter = 2
 
-[node name="ShowTutorial" type="Button" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/VBoxContainer/HBoxContainer" unique_id=2118259799 groups=["DigitalBouncingButton"]]
+[node name="ShowTutorial" type="Button" parent="SubViewportContainer/SubViewport/CanvasLayer/NormalUI/HintDialogue/PanelContainer/VBoxContainer/HBoxContainer" unique_id=2118259799 groups=["DigitalBouncingButton"]]
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 34
 text = "Yes"
 
-[node name="DontShowTutorial" type="Button" parent="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1962805735 groups=["DigitalBouncingButton"]]
+[node name="DontShowTutorial" type="Button" parent="SubViewportContainer/SubViewport/CanvasLayer/NormalUI/HintDialogue/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1962805735 groups=["DigitalBouncingButton"]]
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 34
 text = "No"
 
-[node name="LinkButton" type="LinkButton" parent="SubViewportContainer/SubViewport/NormalUI" unique_id=1204925577]
+[node name="LinkButton" type="LinkButton" parent="SubViewportContainer/SubViewport/CanvasLayer/NormalUI" unique_id=1204925577]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -394,7 +399,7 @@ underline = 1
 uri = "https://discord.gg/srMt8dGRWW"
 language = "w"
 
-[node name="Button" type="TextureRect" parent="SubViewportContainer/SubViewport/NormalUI/LinkButton" unique_id=1341467663]
+[node name="Button" type="TextureRect" parent="SubViewportContainer/SubViewport/CanvasLayer/NormalUI/LinkButton" unique_id=1341467663]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -407,7 +412,7 @@ texture = ExtResource("21_xqmn8")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport/NormalUI" unique_id=965143308]
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport/CanvasLayer/NormalUI" unique_id=965143308]
 material = SubResource("CanvasItemMaterial_yrlew")
 layout_mode = 1
 anchors_preset = 2
@@ -420,17 +425,17 @@ offset_bottom = -15.0
 grow_vertical = 0
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport/NormalUI/HBoxContainer" unique_id=1471011218]
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport/CanvasLayer/NormalUI/HBoxContainer" unique_id=1471011218]
 use_parent_material = true
 layout_mode = 2
 texture = ExtResource("2_q14vk")
 
-[node name="TextureRect2" type="TextureRect" parent="SubViewportContainer/SubViewport/NormalUI/HBoxContainer" unique_id=985508431]
+[node name="TextureRect2" type="TextureRect" parent="SubViewportContainer/SubViewport/CanvasLayer/NormalUI/HBoxContainer" unique_id=985508431]
 use_parent_material = true
 layout_mode = 2
 texture = ExtResource("3_s86m3")
 
-[node name="SettingPanel" parent="SubViewportContainer/SubViewport" unique_id=1258850840 instance=ExtResource("22_nthvp")]
+[node name="SettingPanel" parent="SubViewportContainer/SubViewport/CanvasLayer" unique_id=1258850840 instance=ExtResource("22_nthvp")]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -438,24 +443,21 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -182.0
-offset_top = -92.0
+offset_top = -140.0
 offset_right = 182.0
-offset_bottom = 92.0
+offset_bottom = 140.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CommandLine" parent="SubViewportContainer/SubViewport" unique_id=277886953 instance=ExtResource("23_t54ed")]
+[node name="CommandLine" parent="SubViewportContainer/SubViewport/CanvasLayer" unique_id=277886953 instance=ExtResource("23_t54ed")]
 visible = false
-offset_left = 70.0
-offset_top = -108.5
-offset_right = -70.0
-offset_bottom = -16.5
+offset_bottom = 186.0
 StartingMen = true
 
-[node name="InScreenMouse" parent="SubViewportContainer/SubViewport" unique_id=804818995 instance=ExtResource("24_rh5bc")]
+[node name="InScreenMouse" parent="SubViewportContainer/SubViewport/CanvasLayer" unique_id=804818995 instance=ExtResource("24_rh5bc")]
 z_index = 1
 
-[node name="CRTEffect" type="ColorRect" parent="SubViewportContainer/SubViewport" unique_id=210530036]
+[node name="CRTEffect" type="ColorRect" parent="SubViewportContainer/SubViewport/CanvasLayer" unique_id=210530036]
 process_mode = 3
 z_index = 1
 material = ExtResource("22_jns0o")
@@ -465,9 +467,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport" unique_id=1406036585]
-environment = ExtResource("22_xop3l")
 
 [node name="ScreenFrame" type="TextureRect" parent="." unique_id=2087125541]
 custom_minimum_size = Vector2(0, 38.045)
@@ -735,11 +734,11 @@ range_item_cull_mask = 524289
 texture = ExtResource("38_t54ed")
 texture_scale = 1.95
 
-[connection signal="pressed" from="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/Cancel" to="." method="_on_cancel_pressed"]
-[connection signal="pressed" from="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/VBoxContainer/HBoxContainer/ShowTutorial" to="." method="_on_show_tutorial_pressed"]
-[connection signal="pressed" from="SubViewportContainer/SubViewport/NormalUI/HintDialogue/PanelContainer/VBoxContainer/HBoxContainer/DontShowTutorial" to="." method="_on_dont_show_tutorial_pressed"]
-[connection signal="StartCampaign" from="SubViewportContainer/SubViewport/CommandLine" to="." method="_on_command_line_start_campaign"]
-[connection signal="StartPrologue" from="SubViewportContainer/SubViewport/CommandLine" to="." method="_on_command_line_start_prologue"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/CanvasLayer/NormalUI/HintDialogue/PanelContainer/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/CanvasLayer/NormalUI/HintDialogue/PanelContainer/VBoxContainer/HBoxContainer/ShowTutorial" to="." method="_on_show_tutorial_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/CanvasLayer/NormalUI/HintDialogue/PanelContainer/VBoxContainer/HBoxContainer/DontShowTutorial" to="." method="_on_dont_show_tutorial_pressed"]
+[connection signal="StartCampaign" from="SubViewportContainer/SubViewport/CanvasLayer/CommandLine" to="." method="_on_command_line_start_campaign"]
+[connection signal="StartPrologue" from="SubViewportContainer/SubViewport/CanvasLayer/CommandLine" to="." method="_on_command_line_start_prologue"]
 [connection signal="pressed" from="Prologue" to="." method="_on_prologue_pressed"]
 [connection signal="pressed" from="LoadPrologue" to="." method="_on_load_prologue_pressed"]
 [connection signal="pressed" from="Play2" to="." method="_on_play_pressed"]

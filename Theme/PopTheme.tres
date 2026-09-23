@@ -1340,72 +1340,6 @@ content_margin_top = 0.0
 content_margin_right = 0.0
 content_margin_bottom = 0.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xwr5s"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(1, 0.763983, 0.0812772, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0, 0, 1)
-border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-corner_detail = 1
-expand_margin_top = 8.0
-expand_margin_bottom = 8.0
-shadow_color = Color(0, 0, 0, 1)
-shadow_size = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xu7sv"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(1, 0.763983, 0.0812772, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 1)
-border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-corner_detail = 1
-expand_margin_top = 8.0
-expand_margin_bottom = 8.0
-shadow_color = Color(0, 0, 0, 1)
-shadow_size = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cnwjf"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.066982, 0.133257, 0.137998, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 0.763983, 0.0812772, 1)
-border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-corner_detail = 4
-expand_margin_left = 2.0
-expand_margin_right = 2.0
-shadow_size = 5
-anti_aliasing_size = 2.0
-
 [resource]
 default_font = ExtResource("14_xwr5s")
 AcceptDialog/colors/title_color = Color(1, 1, 1, 1)
@@ -1596,10 +1530,10 @@ TextEdit/fonts/font = ExtResource("14_xwr5s")
 TextEdit/styles/focus = ExtResource("9_udhci")
 TextEdit/styles/normal = ExtResource("9_udhci")
 TextEdit/styles/read_only = ExtResource("9_udhci")
-VScrollBar/styles/grabber = SubResource("StyleBoxFlat_xwr5s")
-VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_xu7sv")
-VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_xu7sv")
-VScrollBar/styles/scroll = SubResource("StyleBoxFlat_cnwjf")
+VScrollBar/styles/grabber = ExtResource("4_o6tu3")
+VScrollBar/styles/grabber_highlight = ExtResource("4_o6tu3")
+VScrollBar/styles/grabber_pressed = ExtResource("4_o6tu3")
+VScrollBar/styles/scroll = ExtResource("9_udhci")
 VSlider/icons/grabber = null
 VSlider/icons/grabber_disabled = null
 VSlider/icons/grabber_highlight = null

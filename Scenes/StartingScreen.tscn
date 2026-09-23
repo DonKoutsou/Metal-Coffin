@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://8du0534sf0gr" path="res://Scripts/UI/starting_screen.gd" id="1_kry56"]
 [ext_resource type="Material" uid="uid://dxt6oe4rhk3du" path="res://Shaders/PostProcessMat.tres" id="3_62h02"]
+[ext_resource type="PackedScene" uid="uid://d2srq1vxysnra" path="res://Scenes/GlobalManagers/Tutorial/tutorial_manager.tscn" id="3_3551w"]
 [ext_resource type="PackedScene" uid="uid://cneeylrqurx2q" path="res://Scenes/InScreenUI/Cursor/CursorReal.tscn" id="3_vb6t2"]
 
 [sub_resource type="Gradient" id="Gradient_7bhdu"]
@@ -62,10 +63,12 @@ positional_shadow_atlas_quad_0 = 0
 positional_shadow_atlas_quad_1 = 0
 positional_shadow_atlas_quad_2 = 0
 positional_shadow_atlas_quad_3 = 0
-size = Vector2i(854, 480)
+size = Vector2i(1084, 610)
 size_2d_override = Vector2i(1280, 720)
 size_2d_override_stretch = true
 render_target_update_mode = 4
+
+[node name="TutorialManager" parent="SubViewportContainer/SubViewport" unique_id=526988957 instance=ExtResource("3_3551w")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="SubViewportContainer/SubViewport" unique_id=880871465]
 layer = 7051

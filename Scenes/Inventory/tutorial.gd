@@ -23,7 +23,7 @@ signal Completed
 
 func SetData(Title : String, Text : String, TutorialSubjects : Array[ScreenUI.UI_ELEMENT]) -> void:
 	TitleLabel.text = Title
-	TextLabel.text = Text
+	TextLabel.text = Text.replace("ffc315", ColorManager.GetCurrentColor().to_html())
 	if (TutorialSubjects.size() > 0):
 		Target = ScreenUI.Instance.GetUIElement(TutorialSubjects[0])
 		if (Map.GetInstance() != null):

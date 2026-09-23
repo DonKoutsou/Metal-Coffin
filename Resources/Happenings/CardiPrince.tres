@@ -84,29 +84,29 @@ metadata/_custom_type_script = "uid://b5ww8sd3i6oa4"
 
 [sub_resource type="Resource" id="Resource_xhtgi"]
 script = ExtResource("4_uqsfa")
-Text = "[color=#c19200]\"You have our eternal gratitude my child... Not many would take this option, but you did. As I said before we will be handing some help to you. I will be putting Dimitry and Amol under your command from now on. They will follow you to the pits of hell. Put your trust onto them child.\""
+Text = "[color=#ffc315]\"You have our eternal gratitude my child... Not many would take this option, but you did. As I said before we will be handing some help to you. I will be putting Dimitry and Amol under your command from now on. They will follow you to the pits of hell. Put your trust onto them child.\""
 
 [sub_resource type="Resource" id="Resource_wmf6a"]
 script = ExtResource("4_uqsfa")
-Text = "[color=#c19200]\"It's my honor to take part in this sacred campaign along with you sir. Let me make this journey of yours a little less cumbersome.\""
+Text = "[color=#ffc315]\"It's my honor to take part in this sacred campaign along with you sir. Let me make this journey of yours a little less cumbersome.\""
 Pic = "res://Assets/CaptainPortraits/Captain10_1.png"
 
 [sub_resource type="Resource" id="Resource_wlpbn"]
 script = ExtResource("4_uqsfa")
-Text = "You turn and look at Amol. You didn't expect a machine into the battlefield... [color=#c19200]\"I am not able to fight for you sir but I'll provide any other service I can.\" [/color] Amol bows its head and stays there for a few seconds."
+Text = "You turn and look at Amol. You didn't expect a machine into the battlefield... [color=#ffc315]\"I am not able to fight for you sir but I'll provide any other service I can.\" [/color] Amol bows its head and stays there for a few seconds."
 Pic = "res://Assets/CaptainPortraits/Captain1.png"
 
 [sub_resource type="Resource" id="Resource_gtnr6"]
 script = ExtResource("4_uqsfa")
-Text = "[color=#c19200]\"The plan is for you to infiltrate enemy territory and push towards Dormak. Once we have Dormak then everything becomes easier. We have some chips to negotiate with.\""
+Text = "[color=#ffc315]\"The plan is for you to infiltrate enemy territory and push towards Dormak. Once we have Dormak then everything becomes easier. We have some chips to negotiate with.\""
 
 [sub_resource type="Resource" id="Resource_gsd8q"]
 script = ExtResource("4_uqsfa")
-Text = "[color=#c19200]\"First part of the plan is for you to reach Armak. There we have another representative who will provide a little helping hand.\""
+Text = "[color=#ffc315]\"First part of the plan is for you to reach Armak. There we have another representative who will provide a little helping hand.\""
 
 [sub_resource type="Resource" id="Resource_47kda"]
 script = ExtResource("4_uqsfa")
-Text = "[color=#c19200]\"And with that you should head out my child. We will also be relocating. This position will soon become exposed and we can't risk being found. Not now... I recommend you do the same.\""
+Text = "[color=#ffc315]\"And with that you should head out my child. We will also be relocating. This position will soon become exposed and we can't risk being found. Not now... I recommend you do the same.\""
 
 [sub_resource type="Resource" id="Resource_6sywk"]
 script = ExtResource("4_uqsfa")
@@ -176,7 +176,7 @@ metadata/_custom_type_script = "uid://k3yo61qak6d8"
 
 [sub_resource type="Resource" id="Resource_bv0ho"]
 script = ExtResource("4_uqsfa")
-Text = "[color=#c19200]\"Have you confidence in your crew captain, and does your crew have confidence in you? Answer this to yourself, what you answer to me now changes nothing.\""
+Text = "[color=#ffc315]\"Have you confidence in your crew captain, and does your crew have confidence in you? Answer this to yourself, what you answer to me now changes nothing.\""
 Pic = "uid://416d5uw306xw"
 
 [sub_resource type="Resource" id="Resource_j0n6g"]
@@ -186,47 +186,47 @@ Pic = "uid://416d5uw306xw"
 
 [sub_resource type="Resource" id="Resource_xi87c"]
 script = ExtResource("4_uqsfa")
-Text = "[color=#c19200]\"You may have started to understand who I might be, and why this secrecy is important. Ever since the war has started, if you can call it that we've had to live like this.\""
+Text = "[color=#ffc315]\"You may have started to understand who I might be, and why this secrecy is important. Ever since the war has started, if you can call it that we've had to live like this.\""
 Pic = "uid://416d5uw306xw"
 
 [sub_resource type="Resource" id="Resource_iry35"]
 script = ExtResource("4_uqsfa")
-Text = "[color=#c19200]\"We helped build this world and we now have to see it through crack on the wall.\" [/color]It finally hits you... Without even realizing the surprise it is written all over your face."
+Text = "[color=#ffc315]\"We helped build this world and we now have to see it through crack on the wall.\" [/color]It finally hits you... Without even realizing the surprise it is written all over your face."
 Pic = "uid://416d5uw306xw"
 
 [sub_resource type="Resource" id="Resource_bhyxm"]
 script = ExtResource("4_uqsfa")
-Text = "[color=#c19200]\"That is right...\" With a quick move of his hand the figure pulls out his mask and reveals his mechanical face. \"I was there when the idea of the metropolis was conceived my child.\""
+Text = "[color=#ffc315]\"That is right...\" With a quick move of his hand the figure pulls out his mask and reveals his mechanical face. \"I was there when the idea of the metropolis was conceived my child.\""
 Pic = "uid://b680xs4rw5ro1"
 
 [sub_resource type="Resource" id="Resource_n2k7i"]
 script = ExtResource("4_uqsfa")
-Text = "[color=#c19200]\"You must be familiar with the story of us machines by now... For milenias we are forced to see your kind bring demise to themselves and the world around them. \""
+Text = "[color=#ffc315]\"You must be familiar with the story of us machines by now... For milenias we are forced to see your kind bring demise to themselves and the world around them. \""
 Pic = "uid://b680xs4rw5ro1"
 
 [sub_resource type="Resource" id="Resource_2q54b"]
 script = ExtResource("4_uqsfa")
-Text = "[color=#c19200]\"When is this cycle to end? And what will the next cycle give birth to? Being the product of one of those cycles myself, not knowing if its the first on or the tenth..... i am tired.\""
+Text = "[color=#ffc315]\"When is this cycle to end? And what will the next cycle give birth to? Being the product of one of those cycles myself, not knowing if its the first on or the tenth..... i am tired.\""
 Pic = "uid://b680xs4rw5ro1"
 
 [sub_resource type="Resource" id="Resource_f01qo"]
 script = ExtResource("4_uqsfa")
-Text = "[color=#c19200]\"You must now understand our mission......\""
+Text = "[color=#ffc315]\"You must now understand our mission......\""
 Pic = "uid://b680xs4rw5ro1"
 
 [sub_resource type="Resource" id="Resource_8puor"]
 script = ExtResource("4_uqsfa")
-Text = "[color=#c19200]\"You must know, what we're to ask you we've asked before to others. You are not the first to enter this room only to regret it. As you probably have guessed none of them have succeeded, and are probably lying somewhere deep in the desert.\""
+Text = "[color=#ffc315]\"You must know, what we're to ask you we've asked before to others. You are not the first to enter this room only to regret it. As you probably have guessed none of them have succeeded, and are probably lying somewhere deep in the desert.\""
 Pic = "uid://b680xs4rw5ro1"
 
 [sub_resource type="Resource" id="Resource_bertd"]
 script = ExtResource("4_uqsfa")
-Text = "[color=#c19200]\"I want not to mislead you, there is a choice for you to make here. There is no major assistance we will be able to provide other than a couple of ships.\" The machine takes 2 objects and holds them in front of you. One is a sword and the other seems to be a scarf."
+Text = "[color=#ffc315]\"I want not to mislead you, there is a choice for you to make here. There is no major assistance we will be able to provide other than a couple of ships.\" The machine takes 2 objects and holds them in front of you. One is a sword and the other seems to be a scarf."
 Pic = "uid://b680xs4rw5ro1"
 
 [sub_resource type="Resource" id="Resource_yugp0"]
 script = ExtResource("4_uqsfa")
-Text = "[color=#c19200]\"Choose the sword, and you join a righteous cause to bring back peace into this world. Choose the blindfold and you join all the others who picked to look away. You might not understand the gravity of these choices but you must choose. So... Come child, choose life or death.\""
+Text = "[color=#ffc315]\"Choose the sword, and you join a righteous cause to bring back peace into this world. Choose the blindfold and you join all the others who picked to look away. You might not understand the gravity of these choices but you must choose. So... Come child, choose life or death.\""
 Pic = "uid://b680xs4rw5ro1"
 
 [sub_resource type="Resource" id="Resource_phpyb"]
@@ -285,12 +285,12 @@ Pic = "uid://416d5uw306xw"
 
 [sub_resource type="Resource" id="Resource_4h6n1"]
 script = ExtResource("4_uqsfa")
-Text = "[color=#c19200]\"Welcome my child, this is not the introduction I would hope to give you but times are as they are now. Let us hope the future holds a better meeting place for us, but for now this will do.\""
+Text = "[color=#ffc315]\"Welcome my child, this is not the introduction I would hope to give you but times are as they are now. Let us hope the future holds a better meeting place for us, but for now this will do.\""
 Pic = "uid://416d5uw306xw"
 
 [sub_resource type="Resource" id="Resource_qh6ik"]
 script = ExtResource("4_uqsfa")
-Text = "[color=#c19200]\"What I am about to offer you is a chance, there is a chance for us to change this world. This world was not always as it is now as you may know. When a chance for something this big is given to you, you take it, am I right?\""
+Text = "[color=#ffc315]\"What I am about to offer you is a chance, there is a chance for us to change this world. This world was not always as it is now as you may know. When a chance for something this big is given to you, you take it, am I right?\""
 Pic = "uid://416d5uw306xw"
 
 [sub_resource type="Resource" id="Resource_iyy48"]

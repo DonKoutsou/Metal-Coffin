@@ -68,8 +68,10 @@ static func GetAltitudeAtGlobalPosition(pos: Vector2) -> float:
 
 	var Normalisedx = Helper.normalize_value(wrap(RoundedPos.x, 0, 36000), 0, 36000)
 	var Normalisedy = Helper.normalize_value(wrap(RoundedPos.y, 0, 36000), 0, 36000)
-
-	var PixelCoords = Vector2i(Normalisedx * GROUND_TEXTURE_RESOLUTION, Normalisedy * GROUND_TEXTURE_RESOLUTION)
+	
+	var pixelX = floori(Normalisedx * GROUND_TEXTURE_RESOLUTION)
+	var pixelY = floori(Normalisedy * GROUND_TEXTURE_RESOLUTION)
+	var PixelCoords = Vector2i(pixelX, pixelY)
 		
 	var Alt = DataTexture.get_pixelv(PixelCoords).r
 	#Bring to -1/1 range

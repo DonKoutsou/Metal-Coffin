@@ -13,9 +13,11 @@ var ZoomState : bool = false
 @export var TopoButton : BaseButton
 static var TopoState : bool = false
 @export var WindCorrectionButton : BaseButton
+@export var WindCorrectionLight : Light
 static var WindCorrectionState : bool = true
 
 @export var RadarButton : BaseButton
+@export var RadarLight : Light
 static var RadarState : bool = true
 
 signal ForecastToggled(t : bool)
@@ -38,9 +40,11 @@ func _ready() -> void:
 	ZoomButton.set_pressed_no_signal(ZoomState)
 	ZoomToggled.emit(ZoomState)
 	WindCorrectionButton.set_pressed_no_signal(WindCorrectionState)
+	WindCorrectionLight.ToggleNoAnim(true, WindCorrectionState)
 	WindCorrectionToggled.emit(WindCorrectionState)
 	
 	RadarButton.set_pressed_no_signal(RadarState)
+	RadarLight.ToggleNoAnim(true, RadarState)
 	
 
 func _on_forecast_button_toggled(toggled_on: bool) -> void:
@@ -71,11 +75,14 @@ func _on_zoom_level_button_toggled(toggled_on: bool) -> void:
 func _on_wind_correction_toggled(toggled_on: bool) -> void:
 	WindCorrectionState = toggled_on
 	WindCorrectionToggled.emit(toggled_on)
+	WindCorrectionLight.ToggleNoAnim(true, toggled_on)
 
 func set_Radar(t : bool) ->void:
 	RadarState = t
 	RadarButton.set_pressed_no_signal(t)
+	RadarLight.ToggleNoAnim(true, t)
 
 func _on_radar_button_toggled(toggled_on: bool) -> void:
 	RadarState = toggled_on
 	RadarToggled.emit(toggled_on)
+	RadarLight.ToggleNoAnim(true, toggled_on)

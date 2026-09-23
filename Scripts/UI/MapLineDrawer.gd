@@ -28,8 +28,8 @@ func Generate(SpotLocs : PackedVector2Array) -> void:
 
 func _DrawMapLines(SpotLocs : PackedVector2Array) -> void:
 	var time = Time.get_ticks_msec()
-	if (OS.is_debug_build()):
-		print("Started generating paths between cities")
+
+	CommandLine.AddText("Started generating paths between cities")
 		
 	Lines = _prim_mst_optimized(SpotLocs)
 	Lines = AddExtraLines(SpotLocs, Lines.duplicate())
@@ -58,9 +58,9 @@ func _DrawMapLines(SpotLocs : PackedVector2Array) -> void:
 		
 		
 	call_deferred("GenerationFinished")
-	
-	if (OS.is_debug_build()):
-		print("Generating paths finished in " + var_to_str(Time.get_ticks_msec() - time) + " ms")
+
+	CommandLine.AddText("Generating paths finished in " + var_to_str(Time.get_ticks_msec() - time) + " ms")
+
 
 func GenerationFinished() -> void:
 	GenerationThread.wait_to_finish()

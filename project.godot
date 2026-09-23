@@ -14,7 +14,7 @@ General/banks_path="res://FMod_Build"
 
 [addons]
 
-translations_plugin/last_edited_file_path="res://Localisations/LOC - FlightManual.csv"
+translations_plugin/last_edited_file_path="res://Localisations/LOC - Tutorial.csv"
 translations_plugin/localistation_dir="res://Localisations"
 
 [application]
@@ -41,7 +41,6 @@ MusicMan="*res://Scenes/GlobalManagers/Sound/music_manager.tscn"
 UiSoundManager="*res://Scenes/GlobalManagers/Sound/ui_sound_manager.tscn"
 Help="*res://Scenes/GlobalManagers/Helper/helper.tscn"
 Save="*res://Scripts/Save/save_load_manager.gd"
-TutorialManager="*res://Scenes/GlobalManagers/Tutorial/tutorial_manager.tscn"
 AchMan="*res://Scenes/GlobalManagers/Tutorial/achievement_manager.gd"
 PopupManager="*res://Scenes/GlobalManagers/PopupManager.tscn"
 DispoisitionManager="*uid://cuad168v6mleh"

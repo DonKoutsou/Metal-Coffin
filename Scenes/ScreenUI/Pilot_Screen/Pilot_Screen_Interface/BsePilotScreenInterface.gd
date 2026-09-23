@@ -13,7 +13,7 @@ func _ready() -> void:
 	droneDockEventHandler.DroneUndocked.connect(_onDroneRemoved)
 	controllerEventHandler.OnControlledShipChanged.connect(_onControlledShipUpdated)
 	_onControlledShipUpdated(controllerEventHandler.CurrentControlled)
-	print("{0} initialised.".format([_getInterfaceName()]))
+	CommandLine.AddText("{0} initialised.".format([_getInterfaceName()]))
 
 func _onDroneAdded(_drone: PlayerDrivenShip, _target: MapShip) -> void:
 	pass

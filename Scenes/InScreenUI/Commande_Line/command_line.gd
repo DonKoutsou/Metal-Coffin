@@ -12,23 +12,53 @@ var Items : Array[Item]
 signal StartPrologue(SkipStory : bool, customSeed : int)
 signal StartCampaign(SkipStory : bool, customSeed : int)
 
+static var instance : CommandLine
 static var Typing : bool = false
+static var History : PackedStringArray = []
+
+func UpdateText() -> void:
+	var t : String = ""
+	for g in History:
+		t += g + "\n"
+	$VBoxContainer/RichTextLabel.text = t
+	#$VBoxContainer/RichTextLabel.scroll_following
+
+func _exit_tree() -> void:
+	instance = null
+
+static func AddText(t : String) -> void:
+	History.append(t)
+	if (History.size() > 50):
+		History.remove_at(0)
+	if (is_instance_valid(instance)):
+		instance.UpdateText()
+
+static func AddErr(t : String) -> void:
+	History.append("[color=#f35033]{0}[/color]".format(t))
+	if (History.size() > 50):
+		History.remove_at(0)
+	if (instance != null):
+		instance.UpdateText()
 
 func _ready() -> void:
 	#if (!OS.is_debug_build() or OS.get_name() != "Windows"):
 		#queue_free()
 		#return
+	instance = self
 	Typing = false
 	visible = false
 	set_physics_process(false)
 	RefrshExistingItems()
+	UpdateText()
 
 func OnCommandEntered() -> void:
 	var Command = Text.text
-
+	
 	if (Command.substr(Command.length() - 1, Command.length()) == "\n"):
 		Command = Command.replace("\n", "")
+		CommandLine.AddText(Command)
 		var response = HandleCommand(Command)
+		CommandLine.AddText(response)
 		if (StartingMen):
 			PopUpManager.GetInstance().DoFadeNotif(response, get_parent())
 		else:
@@ -385,9 +415,26 @@ func AddRecomendation(RecText : String) -> void:
 func ClearRecomendations() -> void:
 	for g in $VBoxContainer/TextEdit/VBoxContainer.get_children():
 		g.queue_free()
-	
+
+var toggleTw : Tween
+
 func _input(event: InputEvent) -> void:
 	if (event.is_action_pressed("CommandLine")):
-		visible = !visible
-		Typing = visible
-		call_deferred("Focus")
+		if (toggleTw != null and toggleTw.is_valid()):
+			toggleTw.kill()
+		$VBoxContainer.visible = false
+		if (!visible):
+			visible = true
+			toggleTw = create_tween()
+			toggleTw.tween_property(self, "size", Vector2(size.x, 250), 0.1)
+			toggleTw.finished.connect($VBoxContainer.show)
+			toggleTw.finished.connect(Focus)
+			Typing = true
+			$In.play()
+		else:
+			toggleTw = create_tween()
+			toggleTw.tween_property(self, "size", Vector2(size.x, 0), 0.1)
+			toggleTw.finished.connect(hide)
+			Typing = false
+			$Out.play()
+			

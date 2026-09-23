@@ -227,7 +227,7 @@ func _update_pushback(delta: float) -> void:
 	damage_wobble = move_toward(damage_wobble, 0.0, damage_wobble_decay * delta)
 
 
-func apply_damage_pushback(amm : float, shieldamm : float, Instigator : BattleShipStats, direct : bool) -> void:
+func apply_damage_pushback(amm : float, _shieldamm : float, Instigator : BattleShipStats, _direct : bool) -> void:
 	if (Instigator == null):
 		return
 	var my_center := ShipIcon.global_position
