@@ -195,7 +195,15 @@ func ItemToAddSelected(it : Item, Box : Inventory_Box_Res) -> void:
 	
 	var OriginalCap = CurrentShip.Cpt
 	var OriginalInv = OriginalCap._CharInv
-
+	
+	if (OriginalInv._ItemBeingUpgraded != null):
+		PopUpManager.GetInstance().DoFadeNotif("Ship is already upgrading a part")
+		#print("Ship is already upgrading a part. Wait for it to finish first.")
+		return
+	if (OriginalInv._ItemBeingEquipped != null):
+		PopUpManager.GetInstance().DoFadeNotif("Ship having a part equipped to it")
+		#print("Ship is already upgrading a part. Wait for it to finish first.")
+		return
 
 	var Cost = it.Cost
 

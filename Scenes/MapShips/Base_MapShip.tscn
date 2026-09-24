@@ -2,8 +2,18 @@
 
 [ext_resource type="Script" uid="uid://b1v6aeesflsrh" path="res://Scenes/MapShips/MapShip.gd" id="1_2mwka"]
 [ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyFireship1.tres" id="3_hup4s"]
+[ext_resource type="Shader" uid="uid://cqgk0egpp8vmb" path="res://Shaders/ShipVisualTest.gdshader" id="4_ql18u"]
+[ext_resource type="PackedScene" uid="uid://bhkb6xo1tkk6l" path="res://Scenes/MapShips/ShipTrailLine.tscn" id="5_hi2nu"]
+[ext_resource type="Texture2D" uid="uid://bx78x3avxyhmf" path="res://Assets/ShipTextures/Hull5.png" id="5_oe1x5"]
 [ext_resource type="Script" uid="uid://7kme48vf7smt" path="res://Scenes/MapShips/DetectionInstruments/Radar/Radar.gd" id="6_ubqfg"]
 [ext_resource type="Script" uid="uid://bk57mr2q3tq7q" path="res://Scenes/MapShips/DetectionInstruments/Elint/ElintShape.gd" id="7_hi2nu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7v2kq"]
+resource_local_to_scene = true
+shader = ExtResource("4_ql18u")
+shader_parameter/ShipSize = 0.08
+shader_parameter/shadow_parallax_amount = 0.5
+shader_parameter/sprite_rotation = -1.57
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jc744"]
 radius = 14.035668
@@ -15,17 +25,30 @@ radius = 150.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_t084r"]
 radius = 1000.0
 
-[node name="BaseShip" type="Node2D" unique_id=974765209 node_paths=PackedStringArray("RadarShape", "ElintShape", "BodyShape", "Acceleration") groups=["Ships"]]
+[node name="BaseShip" type="Node2D" unique_id=974765209 node_paths=PackedStringArray("TrailLines", "RadarShape", "ElintShape", "BodyShape", "ShipSprite", "Acceleration") groups=["Ships"]]
 process_mode = 1
 z_index = 1
 script = ExtResource("1_2mwka")
 Cpt = ExtResource("3_hup4s")
+TrailLines = [NodePath("ColorRect/TrailLine")]
 RadarShape = NodePath("Radar")
 ElintShape = NodePath("Elint")
 BodyShape = NodePath("ShipBody")
+ShipSprite = NodePath("ColorRect")
 Acceleration = NodePath("Aceleration")
 
 [node name="Aceleration" type="Node2D" parent="." unique_id=2079415444]
+
+[node name="ColorRect" type="Sprite2D" parent="." unique_id=1708187202]
+z_index = -2
+texture_filter = 3
+material = SubResource("ShaderMaterial_7v2kq")
+rotation = -1.5708
+texture = ExtResource("5_oe1x5")
+
+[node name="TrailLine" parent="ColorRect" unique_id=909123147 instance=ExtResource("5_hi2nu")]
+position = Vector2(0, -1)
+width = 10.0
 
 [node name="ShipBody" type="Area2D" parent="." unique_id=1910492064]
 collision_mask = 5

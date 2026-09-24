@@ -120,17 +120,10 @@ func GetMerchForPosition(YPos: float, HasUp : bool, capital : bool) -> Dictionar
 		var m : MerchandiseInfo = ResourceLoader.load(MerchFileList[randomIndex])
 		if (m.DontGenerateBefore > stage):
 				continue
-				
-		var it : String
-		
-		for itFile : String in available_merch:
-			if (m.It == itFile):
-				it = itFile
-				break
 		
 		if (points > m.Cost):
-			if (!it.is_empty()):
-				available_merch[it] += 1
+			if (available_merch.has(m.It)):
+				available_merch[m.It] += 1
 			else:
 				available_merch[m.It] = 1
 	
@@ -190,19 +183,11 @@ func GetWorkshopMerchForPosition(YPos: float, HasUp : bool, capital : bool) -> D
 		if (m.DontGenerateBefore > stage):
 			continue
 		
-		var it : String
-		
-		for itFile : String in available_merch:
-			if (m.It == itFile):
-				it = itFile
-				break
-		
 		if (points > m.Cost):
-			if (!it.is_empty()):
-				available_merch[it] += 1
-
+			if (available_merch.has(m.It)):
+				available_merch[m.It] += 1
 			else:
-				available_merch[it] = 1
+				available_merch[m.It] = 1
 				
 			points -= m.Cost
 	return available_merch

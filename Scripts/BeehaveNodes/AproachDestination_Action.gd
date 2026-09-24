@@ -11,6 +11,9 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 	var DestinationPos = MainShip.GetCurrentDestination()
 	var MainShipMaxSpeed = MainShip.GetShipMaxSpeed()
 	
+	if (MainShip.Landed() and MainShip.StormValue > 0.8):
+		return SUCCESS
+	
 	if (MainShip.Altitude != 10000):
 		MainShip._HandleLanding(SimulationSpeed * TickRate * 0.01)
 		MainShip.UpdateTargetAltitude(10000)

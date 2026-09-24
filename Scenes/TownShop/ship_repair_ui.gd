@@ -38,7 +38,7 @@ func Init(Ship : Captain, HasRepair : bool) -> void:
 		
 	var t = CurrentShip.Repair_Parts/ TimeMulti / 6
 	
-	ReprairTimeLabel.text = Clock.MinutesToHours(t)
+	ReprairTimeLabel.text = Clock.MinutesToHours(t, true)
 
 func SetHullData(Ship : Captain):
 	PlMaxHull += Ship.GetStatFinalValue(STAT_CONST.STATS.HULL)
@@ -89,7 +89,7 @@ func UpdateRepairBar(AddedRepair : float):
 		
 	var t = CurrentShip.Repair_Parts/ TimeMulti / 6
 	
-	ReprairTimeLabel.text = Clock.MinutesToHours(t)
+	ReprairTimeLabel.text = Clock.MinutesToHours(t, true)
 
 func RepairBar_gui_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click") or event is InputEventScreenDrag):

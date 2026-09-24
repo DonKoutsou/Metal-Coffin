@@ -114,7 +114,7 @@ func InitialiseShip() -> void:
 	
 	Commander.GetInstance().RegisterSelf(self)
 	
-	#_UpdateShipIcon(ResourceLoader.load(Cpt.ShipIconFile))
+	_UpdateShipIcon(ResourceLoader.load(Cpt.ShipIconFile))
 	var ElintRange = Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT)
 	if (ElintRange == 0):
 		ElintShape.ToggleElint(false)
@@ -141,8 +141,8 @@ func _Update(delta: float) -> void:
 		#print("{0} is reloading a their missiles".format([Cpt.GetCaptainName()]))
 		Reloading = max(0, Reloading - (delta * SimulationSpeed))
 	
-	#for g in TrailLines:
-		#g.UpdateProjected(delta, 1)
+	for g in TrailLines:
+		g.UpdateProjected(delta, 1)
 	
 	if (VisibleBy.size() > 0):
 		ExposedValue += delta
@@ -189,8 +189,8 @@ func Steer(Rotation : float) -> void:
 		rotation += 180
 	rotation += Rotation
 	
-	#var Mat = ShipSprite.material as ShaderMaterial
-	#Mat.set_shader_parameter("sprite_rotation", ShipSprite.global_rotation)
+	var Mat = ShipSprite.material as ShaderMaterial
+	Mat.set_shader_parameter("sprite_rotation", ShipSprite.global_rotation)
 
 	for g in GetDock().GetDockedShips():
 		g.ForceSteer(rotation)

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://4pq5t6l3c55k"]
 
-[ext_resource type="PackedScene" uid="uid://wtmojbpjfelb" path="res://Scenes/MapShips/Base_MapShip.tscn" id="1_airq3"]
+[ext_resource type="PackedScene" uid="uid://c73us34mdxw5p" path="res://Scenes/MapShips/Base_MapShip.tscn" id="1_airq3"]
 [ext_resource type="Script" uid="uid://cj1p2x5gvfvgf" path="res://Scenes/MapShips/player_driven_ship.gd" id="2_vq5gh"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://Scenes/MapShips/Stats/ShipStat.gd" id="3_2ygm8"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="4_25k7t"]
@@ -16,6 +16,7 @@
 [ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FT-500.tres" id="10_o0thl"]
 [ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="11_e2mx5"]
 [ext_resource type="Resource" uid="uid://f8x3cqxrqo6s" path="res://Resources/Items/Ammo/Flares.tres" id="12_kp2wg"]
+[ext_resource type="Shader" uid="uid://cqgk0egpp8vmb" path="res://Shaders/ShipVisualTest.gdshader" id="13_2ygm8"]
 [ext_resource type="Resource" uid="uid://cnrek2mbia331" path="res://Resources/Items/Ammo/ProxyFuseAmmoMagazine100mm.tres" id="13_8huau"]
 [ext_resource type="Script" uid="uid://5xjgi2kvis2v" path="res://Scenes/MapShips/DetectionInstruments/Radar/Player_Radar.gd" id="16_2ygm8"]
 [ext_resource type="Script" uid="uid://bwvnvc0jhwiwu" path="res://Scenes/MapShips/DetectionInstruments/Elint/PlayerElintShape.gd" id="17_25k7t"]
@@ -120,7 +121,7 @@ MaxStackCount = 99
 CardProviding = Array[ExtResource("4_25k7t")]([ExtResource("11_e2mx5")])
 Cost = 200
 
-[sub_resource type="Resource" id="Resource_qjc7u"]
+[sub_resource type="Resource" id="Resource_2ygm8"]
 resource_local_to_scene = true
 script = ExtResource("5_vq5gh")
 CaptainName = "Tick"
@@ -129,7 +130,14 @@ ShipCallsign = "P1"
 StartingItems = Array[ExtResource("7_lb1bt")]([ExtResource("8_03i86"), ExtResource("9_06s8f"), ExtResource("9_06s8f"), ExtResource("10_o0thl"), SubResource("Resource_lb1bt"), SubResource("Resource_lb1bt"), SubResource("Resource_lb1bt"), ExtResource("12_kp2wg"), ExtResource("12_kp2wg"), ExtResource("12_kp2wg"), ExtResource("13_8huau"), ExtResource("13_8huau"), ExtResource("13_8huau")])
 ProvidingFunds = 25000
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_2ygm8"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_25k7t"]
+resource_local_to_scene = true
+shader = ExtResource("13_2ygm8")
+shader_parameter/ShipSize = 0.08
+shader_parameter/shadow_parallax_amount = 0.5
+shader_parameter/sprite_rotation = -1.57
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vq5gh"]
 resource_local_to_scene = true
 radius = 150.0
 
@@ -144,21 +152,24 @@ script = ExtResource("2_vq5gh")
 AccelerationAudio = NodePath("AudioStreamPlayer2D")
 L = NodePath("PointLight2D")
 MissileD = NodePath("MissileDock")
-Cpt = SubResource("Resource_qjc7u")
+Cpt = SubResource("Resource_2ygm8")
 SonarShape = NodePath("Sonar")
 Dock = NodePath("DroneDock")
+
+[node name="ColorRect" parent="." index="1" unique_id=1708187202]
+material = SubResource("ShaderMaterial_25k7t")
+
+[node name="TrailLine" parent="ColorRect" index="0" unique_id=909123147]
+points = PackedVector2Array(0, 0)
 
 [node name="CollisionShape2D" parent="ShipBody" parent_id_path=PackedInt32Array(1910492064) index="0" unique_id=243368945]
 visible = false
 
-[node name="Radar" parent="." index="2" unique_id=1177421846]
+[node name="Radar" parent="." index="3" unique_id=1177421846]
 script = ExtResource("16_2ygm8")
 
 [node name="CollisionShape2D" parent="Radar" index="0" unique_id=689109080]
-shape = SubResource("CircleShape2D_2ygm8")
-
-[node name="Elint" parent="." index="3" unique_id=268938013]
-script = ExtResource("17_25k7t")
+shape = SubResource("CircleShape2D_vq5gh")
 
 [node name="ReturnSoundTrigger" type="Area2D" parent="." index="4" unique_id=1936282381]
 collision_layer = 0
@@ -202,3 +213,6 @@ shadow_color = Color(0.919342, 0, 0.452291, 0)
 texture = ExtResource("5_k2uly")
 texture_scale = 0.8
 height = 180.0
+
+[node name="Elint" parent="." index="10" unique_id=268938013]
+script = ExtResource("17_25k7t")

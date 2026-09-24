@@ -188,7 +188,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="CommandLine" parent="." unique_id=969171667 instance=ExtResource("17_aessx")]
-z_index = 2
+z_index = 100
 offset_bottom = 186.0
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1581311938]
@@ -243,6 +243,7 @@ mouse_filter = 2
 [node name="Screen" type="ColorRect" parent="CanvasLayer" unique_id=1451653030]
 process_mode = 3
 z_index = 100
+texture_filter = 3
 material = ExtResource("19_j7r7e")
 anchors_preset = 15
 anchor_right = 1.0

@@ -28,7 +28,8 @@ func Generate(SpotLocs : PackedVector2Array) -> void:
 
 func _DrawMapLines(SpotLocs : PackedVector2Array) -> void:
 	var time = Time.get_ticks_msec()
-
+	
+	
 	CommandLine.AddText("Started generating paths between cities")
 		
 	Lines = _prim_mst_optimized(SpotLocs)

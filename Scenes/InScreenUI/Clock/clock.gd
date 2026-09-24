@@ -38,19 +38,37 @@ func TimePassedInMinutes() -> int:
 	
 	return MinPassed
 
-static func MinutesToHours(mins : int) -> String:
+static func MinutesToHours(mins : int, short : bool = false) -> String:
 	var finalHours : int = 0
 	
 	while (mins >= 60):
 		finalHours += 1
 		mins -= 60
+	
+	var minString = "{0}".format([mins])
+	if (mins < 9):
+		minString = "0{0}".format([mins])	
+
 	if (mins == 0):
-		return "{0} hours".format([finalHours])
+		if (short):
+			return "{0}h".format([finalHours])
+		else:
+			return "{0} hours".format([finalHours])
 	else:
-		return "{0} hours and {1} minutes".format([finalHours, mins])
+		if (short):
+			return "{0}h {1}m".format([finalHours, minString])
+		else:
+			return "{0} hours and {1} minutes".format([finalHours, minString])
 
 static func GetDateTimeString() -> String:
-	return "{0}/{1}/{2} {3}:{4}".format([CurrentDay, CurrentMonth, CurrentYear, currentHour, roundi(currentMin)])
+	var minString = "{0}".format([roundi(currentMin)])
+	if (currentMin < 9):
+		minString = "0{0}".format([roundi(currentMin)])
+	var hourString = "{0}".format([currentHour])
+	if (currentHour < 9):
+		hourString = "0{0}".format([currentHour])
+		
+	return "{0}/{1}/{2} {3}:{4}".format([CurrentDay, CurrentMonth, CurrentYear, hourString, minString])
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

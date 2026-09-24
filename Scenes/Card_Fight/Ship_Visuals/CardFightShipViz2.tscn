@@ -488,6 +488,7 @@ layout_mode = 3
 anchors_preset = 0
 
 [node name="Fire" parent="HBoxContainer/Control/ShipPivot/TextureRect/Control" unique_id=1440653444 instance=ExtResource("12_2rekq")]
+z_index = 1
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

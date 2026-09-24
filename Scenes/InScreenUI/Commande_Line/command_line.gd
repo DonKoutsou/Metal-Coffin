@@ -7,6 +7,10 @@ class_name CommandLine
 
 @export var CommandListConfiguration : Dictionary[PackedStringArray, String]
 
+@export_group("Nodes")
+@export var RecomendationParent : Control
+@export var HistoryLabel : RichTextLabel
+
 var Items : Array[Item]
 
 signal StartPrologue(SkipStory : bool, customSeed : int)
@@ -16,30 +20,36 @@ static var instance : CommandLine
 static var Typing : bool = false
 static var History : PackedStringArray = []
 
+var update : bool = false
+
+func _process(delta: float) -> void:
+	if (update):
+		UpdateText()
+		update = false
+
 func UpdateText() -> void:
 	var t : String = " \n \n \n \n \n \n \n \n \n \n \n"
 	for g in History:
-		t += g + "\n"
-	$VBoxContainer/RichTextLabel.text = t
+		t += "\n" + g
+	HistoryLabel.text = t
 	#$VBoxContainer/RichTextLabel.scroll_following
 
-func _exit_tree() -> void:
-	instance = null
-
 static func AddText(t : String) -> void:
+	print(t)
 	History.append(t)
 	if (History.size() > 50):
 		History.remove_at(0)
 	if (is_instance_valid(instance)):
-		instance.UpdateText()
+		instance.update = true
 
 static func AddErr(t : String) -> void:
+	printerr(t)
 	var st = "[color=#f35033]{0}[/color]".format([t])
 	History.append(st)
 	if (History.size() > 50):
 		History.remove_at(0)
 	if (instance != null):
-		instance.UpdateText()
+		instance.update = true
 
 func _ready() -> void:
 	#if (!OS.is_debug_build() or OS.get_name() != "Windows"):
@@ -59,11 +69,16 @@ func OnCommandEntered() -> void:
 		Command = Command.replace("\n", "")
 		CommandLine.AddText(Command)
 		var response = HandleCommand(Command)
-		CommandLine.AddText(response)
-		if (StartingMen):
-			PopUpManager.GetInstance().DoFadeNotif(response, get_parent())
+		if (">" in response):
+			response = response.substr(1, response.length())
+			CommandLine.AddErr("ERROR: " + response)
 		else:
-			PopUpManager.GetInstance().DoFadeNotif(response, null)
+			CommandLine.AddText(response)
+			
+		#if (StartingMen):
+			#PopUpManager.GetInstance().DoFadeNotif(response, get_parent())
+		#else:
+			#PopUpManager.GetInstance().DoFadeNotif(response, null)
 		
 		Text.text = ""
 	UpdateRecomendations()
@@ -78,7 +93,7 @@ func HandleCommand(Command : String) -> String:
 	var CommandList = Command.split(" ")
 	
 	if (CommandList.size() == 0):
-		return "Error"
+		return ">Error"
 	
 	for command in CommandListConfiguration:
 		var Match : bool = false
@@ -111,7 +126,7 @@ func HandleCommand(Command : String) -> String:
 			#if (get_method_argument_count(commandToExecute) != args.size()):
 				#return "Missing arguments.\nFailed to call command"
 			if (!DoArgumentMatch(commandToExecute, args)):
-				return "Error matching arguments"
+				return ">Error matching arguments"
 			return callv(commandToExecute, args)
 			#call(commandToExecute, args)
 	
@@ -125,7 +140,7 @@ func HandleCommand(Command : String) -> String:
 		#"loc":
 			#return HandleLocationCommand(CommandList)
 	
-	return "Couldnt match command"
+	return ">Couldnt match command"
 
 func DoArgumentMatch(methodName : String, methodArgs : Array[Variant]) -> bool:
 	var m = get_method_list()
@@ -143,6 +158,8 @@ func DoArgumentMatch(methodName : String, methodArgs : Array[Variant]) -> bool:
 		
 		for arg in range(incommingArgs.size(), args.size()):
 			var defaultIndex : int = arg - dif
+			if (defaultIndex < 0):
+				continue
 			incommingArgs.append(def[defaultIndex])
 
 		if (incommingArgs.size() != args.size()):
@@ -175,20 +192,20 @@ func HandlePrologueCommand(Command) -> String:
 			StartPrologue.emit(true, customSeed)
 			return "Starting Prologue\nSkipping Story"
 	
-	return "Error Handling Location Command"
+	return ">Error Handling Location Command"
 
 func Prologue(skip : bool = false, customSeed : int = -1) -> String:
 	if (World.Instance != null):
-		return "Can only apply while in main menu"
+		return ">Can only apply while in main menu"
 
 	StartPrologue.emit(skip, customSeed)
 	return "Starting Prologue"
 
 func CardFightTypeSwitch(newType : Card_Fight.CardFightTurnType) -> String:
 	if (get_tree().get_nodes_in_group("CardFight").size() > 0):
-		return "Can't change type of fight while a fight is happening"
+		return ">Can't change type of fight while a fight is happening"
 	if (newType > Card_Fight.CardFightTurnType.size()):
-		return "Invalid type"
+		return ">Invalid type"
 	Card_Fight.TurnType = newType
 	return "Card fight turn type\nchanged to {0}".format([Card_Fight.CardFightTurnType.keys()[newType]])
 #func HandleCampaignCommand(Command) -> String:
@@ -221,7 +238,7 @@ func CardFightTypeSwitch(newType : Card_Fight.CardFightTurnType) -> String:
 
 func Teleport(CharName : String, Locx : int, Locy : int) -> String:
 	if (World.Instance == null or World.WORLDST != World.WORLDSTATE.NORMAL):
-		return "Can only apply while in map"
+		return ">Can only apply while in map"
 
 	for g in get_tree().get_nodes_in_group("PlayerShips"):
 		var ship = g as MapShip
@@ -229,7 +246,7 @@ func Teleport(CharName : String, Locx : int, Locy : int) -> String:
 			ship.global_position = Vector2(Locx, Locy) * 10
 			return "Successfully teleported\n{0} to pos\n|{1}|".format([CharName, ship.global_position])
 	
-	return "Teleport failed"
+	return ">Teleport failed"
 
 func EnemyDebug(t : bool) -> String:
 	Commander.GetInstance().ToggleEnemyDebug(t)
@@ -241,35 +258,35 @@ func PrintLocations(CharName : String) -> String:
 		if ship.Cpt.GetCaptainName().to_lower() == CharName.to_lower():
 			return "{0}'s position is |x: {1}, y : {2}|".format([CharName, ship.global_position.x, ship.global_position.y])
 	
-	return "Location Print Failed"
+	return ">Location Print Failed"
 
 func InventoryAdd(CapName : String, ItemName : String, ItemAmmount : int = 1) -> String:
 	if (World.Instance == null or World.WORLDST != World.WORLDSTATE.NORMAL):
-		return "Can only apply while in map"
+		return ">Can only apply while in map"
 	var Inv = InventoryManager.GetInstance()
 	var inv = Inv.GetCharacterInventoryByName(CapName)
 	if (inv == null):
-		return "Couldn't find captain name"
+		return ">Couldn't find captain name"
 
 	return HandleInventoryItemAddCommand(inv, CapName, ItemName, ItemAmmount)
 
 func StatRefill(CapName : String, StatName : String) -> String:
 	if (World.Instance == null or World.WORLDST != World.WORLDSTATE.NORMAL):
-		return "Can only apply while in map"
+		return ">Can only apply while in map"
 	for g in get_tree().get_nodes_in_group("PlayerShips"):
 		var ship = g as MapShip
 		if ship.Cpt.GetCaptainName().to_lower() == CapName.to_lower():
 			return HandleStatCommand(ship.Cpt, StatName)
 
-	return "Couldn't find captain name"
+	return ">Couldn't find captain name"
 
 func InventoryUpgrade(CapName : String, ItemName : String) -> String:
 	if (World.Instance == null or World.WORLDST != World.WORLDSTATE.NORMAL):
-		return "Can only apply while in map"
+		return ">Can only apply while in map"
 	var Inv = InventoryManager.GetInstance()
 	var inv = Inv.GetCharacterInventoryByName(CapName)
 	if (inv == null):
-		return "Couldn't find captain name"
+		return ">Couldn't find captain name"
 	return HandleItemUpgrade(inv, ItemName)
 
 func HandleInventoryItemAddCommand(Inv : CharacterInventory, InventoryOwnerName : String, ItemName : String, ItAmm : int) -> String:
@@ -280,7 +297,7 @@ func HandleInventoryItemAddCommand(Inv : CharacterInventory, InventoryOwnerName 
 				Inv.AddItem(g)
 			return "Added {0}X of {1} to {2}'s inventory".format([ItAmm, g.GetItemName(), InventoryOwnerName])
 	
-	return "Error Adding Item"
+	return ">Error Adding Item"
 	
 func HandleItemUpgrade(Inv : CharacterInventory, ItemName : String) -> String:
 	for It in Inv._GetInventoryBoxes():
@@ -291,14 +308,14 @@ func HandleItemUpgrade(Inv : CharacterInventory, ItemName : String) -> String:
 			if (success):
 				return "{0} upgraded succesfully".format([ItemName])
 			else:
-				return "Couldnt upgrade Item"
+				return ">Couldnt upgrade Item"
 			
-	return "Error Upgrading Item"
+	return ">Error Upgrading Item"
 	
 func HandleStatCommand(Char : Captain, statName : String) -> String:
 	var key = STAT_CONST.STATS.keys().find(statName.to_upper())
 	if (key == -1):
-		return "Invalid stat name"
+		return ">Invalid stat name"
 	Char.FullyRefilStat(key)
 	
 	return "{0}'s {1} was refilled".format([Char.CaptainName, statName])
@@ -408,13 +425,13 @@ func AddRecomendation(RecText : String) -> void:
 	var butn = Button.new()
 	butn.alignment = HORIZONTAL_ALIGNMENT_LEFT
 	butn.autowrap_mode = TextServer.AUTOWRAP_WORD
-	butn.custom_minimum_size.x = size.x - 20
+	#butn.custom_minimum_size.x = RecomendationParent.size.x - 80
 	butn.connect("pressed", RecomendationPressed.bind(RecText))
-	$VBoxContainer/TextEdit/VBoxContainer.add_child(butn)
+	RecomendationParent.add_child(butn)
 	butn.text = RecText
 
 func ClearRecomendations() -> void:
-	for g in $VBoxContainer/TextEdit/VBoxContainer.get_children():
+	for g in RecomendationParent.get_children():
 		g.queue_free()
 
 var toggleTw : Tween
@@ -423,12 +440,12 @@ func _input(event: InputEvent) -> void:
 	if (event.is_action_pressed("CommandLine")):
 		if (toggleTw != null and toggleTw.is_valid()):
 			toggleTw.kill()
-		$VBoxContainer.visible = false
+		get_child(0).visible = false
 		if (!visible):
 			visible = true
 			toggleTw = create_tween()
 			toggleTw.tween_property(self, "size", Vector2(size.x, 250), 0.1)
-			toggleTw.finished.connect($VBoxContainer.show)
+			toggleTw.finished.connect(get_child(0).show)
 			toggleTw.finished.connect(Focus)
 			Typing = true
 			$In.play()

@@ -897,7 +897,7 @@ func CheckIfToDraw(Ship : BattleShipStats, Acts : Array[CardStats]) -> Array[Car
 func EnemyActionSelection(Ship : BattleShipStats) -> void:
 	#Add the energy to the current ship
 	
-	var outNumberedBonus : float = Helper.normalize_value(max(0, PlayerCombatants.size() - EnemyCombatants.size()), 0, 2)
+	var outNumberedBonus : float = max(0, PlayerCombatants.size() - EnemyCombatants.size())
 	if (outNumberedBonus > 0):
 		PopUpManager.GetInstance().DoFadeNotif("Ship outnumbered\nBonus Energy Provided")
 	#since max fleet ammount is 3 this number can't be more than 2, and since we normalise it we
@@ -1286,7 +1286,7 @@ func RestartCards() -> void:
 	#for each outnumbered ammount we add energy
 	#this function is used only for player so we dont need to check if friendly
 	#cap it at 0 so that we don't remove energy when you are part of bigger fleet
-	var outNumberedBonus : float = Helper.normalize_value(max(0, EnemyCombatants.size() - PlayerCombatants.size()), 0, 2)
+	var outNumberedBonus : float = max(0, EnemyCombatants.size() - PlayerCombatants.size())
 	if (outNumberedBonus > 0):
 		PopUpManager.GetInstance().DoFadeNotif("Ship outnumbered\nBonus Energy Provided")
 		ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_OUTNUMER_BONUS)
