@@ -17,7 +17,7 @@ static var Typing : bool = false
 static var History : PackedStringArray = []
 
 func UpdateText() -> void:
-	var t : String = ""
+	var t : String = " \n \n \n \n \n \n \n \n \n \n \n"
 	for g in History:
 		t += g + "\n"
 	$VBoxContainer/RichTextLabel.text = t
@@ -34,7 +34,8 @@ static func AddText(t : String) -> void:
 		instance.UpdateText()
 
 static func AddErr(t : String) -> void:
-	History.append("[color=#f35033]{0}[/color]".format(t))
+	var st = "[color=#f35033]{0}[/color]".format([t])
+	History.append(st)
 	if (History.size() > 50):
 		History.remove_at(0)
 	if (instance != null):

@@ -118,8 +118,6 @@ func Update(delta: float, _unaffectedDelta : float) -> void:
 			CorrectionExtra = neededFuel
 			
 			var sidecorrection = abs(offset.rotated(PI/2).normalized().dot(WindVector.normalized())) * WindVector.length() * SideWindage
-			
-			
 				
 			var frontcorrection = frontDot * WindVector.length() * Windage
 			

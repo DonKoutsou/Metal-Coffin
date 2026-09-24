@@ -101,11 +101,13 @@ func _physics_process(delta: float) -> void:
 	var IncommingCollision : Vector3
 	var Collided : bool = false
 	if (CurrentTarget != null):
-		IncommingCollision = TopographyMap.GetCollisionPoint3(global_position, Altitude, CurrentTarget.global_position, CurrentTarget.Altitude)
-		Collided = Vector2(IncommingCollision.x, IncommingCollision.y) != CurrentTarget.global_position
+		var traceData : TraceData = TopographyMap.Trace(global_position, Altitude, CurrentTarget.global_position, CurrentTarget.Altitude)
+		IncommingCollision = Vector3(traceData.CollisionPos.x, traceData.CollisionPos.y, traceData.CollisionHeight)
+		Collided = traceData.Collided
 	else:
-		IncommingCollision = TopographyMap.GetCollisionPoint3(global_position, Altitude, CollisionDetector.global_position, Altitude)
-		Collided = Vector2(IncommingCollision.x, IncommingCollision.y) != CollisionDetector.global_position
+		var traceData : TraceData = TopographyMap.Trace(global_position, Altitude, CollisionDetector.global_position, Altitude)
+		IncommingCollision = Vector3(traceData.CollisionPos.x, traceData.CollisionPos.y, traceData.CollisionHeight)
+		Collided = traceData.Collided
 	
 	if (Vector2(IncommingCollision.x, IncommingCollision.y) == global_position):
 		Kill()

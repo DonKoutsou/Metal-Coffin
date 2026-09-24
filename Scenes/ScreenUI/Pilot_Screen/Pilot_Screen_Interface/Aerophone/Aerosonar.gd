@@ -159,7 +159,8 @@ func _updateElintContacts(ControllerInfo : ElintTargetInfo ,ContactInfo : Array[
 		#make sure we dont register ships from the controllers fleed
 		
 		#terain collision
-		if not TopographyMap.WithinLineOfSight(ControllerInfo.Position, ControllerInfo.Altitude, target.Position, target.Altitude):
+		var traceData : TraceData = TopographyMap.Trace(ControllerInfo.Position, ControllerInfo.Altitude, target.Position, target.Altitude)
+		if traceData.Collided:
 			continue
 			
 		#take the direction to the target
@@ -202,7 +203,8 @@ func _updateContacts(ControllerInfo : SonarTargetInfo ,ContactInfo : Array[Sonar
 		#make sure we dont register ships from the controllers fleed
 		
 		#terain collision
-		if not TopographyMap.WithinLineOfSight(ControllerInfo.Position, ControllerInfo.Altitude, target.Position, target.Altitude):
+		var traceData : TraceData = TopographyMap.Trace(ControllerInfo.Position, ControllerInfo.Altitude, target.Position, target.Altitude)
+		if traceData.Collided:
 			continue
 			
 		#take the direction to the target

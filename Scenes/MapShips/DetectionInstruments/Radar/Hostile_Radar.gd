@@ -9,7 +9,8 @@ var Landed : bool = false
 
 func EvaluateRadarTargets(Altitude : float) -> void:
 	for g in InsideRadar:
-		if (TopographyMap.WithinLineOfSight(global_position, Altitude, g.global_position, g.Altitude)):
+		var traceData : TraceData = TopographyMap.Trace(global_position, Altitude, g.global_position, g.Altitude)
+		if (!traceData.Collided):
 			if (Landed):
 				GarissonVisualContact(g)
 			else:

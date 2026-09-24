@@ -27,7 +27,8 @@ func UpdateVizRange():
 	
 func EvaluateRadarTargets(Altitude : float) -> void:
 	for g in InsideRadar:
-		if (TopographyMap.WithinLineOfSight(global_position, Altitude, g.global_position, g.Altitude)):
+		var traceData : TraceData = TopographyMap.Trace(global_position, Altitude, g.global_position, g.Altitude)
+		if (!traceData.Collided):
 			g.OnShipSeen(get_parent())
 		else:
 			g.OnShipUnseen(get_parent())
@@ -38,8 +39,9 @@ func EvaluateRadarrPoint(Altitude : float) -> void:
 		var Dir = GetPointInCircle(CurrentRadarPointToEvaluate, 80)
 		var MaxPoint = Dir * CurrentVisualRange
 		var GlobalPoint = global_position + MaxPoint
-		var EvaluatedPoint = TopographyMap.GetCollisionPoint(global_position, Altitude, GlobalPoint, 10000)
-		RadarCircle[CurrentRadarPointToEvaluate] = EvaluatedPoint - global_position
+		var traceData : TraceData = TopographyMap.Trace(global_position, Altitude, GlobalPoint, 10000)
+		
+		RadarCircle[CurrentRadarPointToEvaluate] = traceData.CollisionPos - global_position
 		CurrentRadarPointToEvaluate = wrap(CurrentRadarPointToEvaluate + 1, 0, RadarCircle.size())
 
 func GetShipRadarLine() -> PackedVector2Array:
