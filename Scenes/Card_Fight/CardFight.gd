@@ -800,6 +800,7 @@ func OnCardSelected(C : Card, target : BattleShipStats = null) -> bool:
 			S.stream = RemoveCardSound
 			S.autoplay = true
 			add_child(S)
+			print("Burn2")
 			#S.volume_db = -10
 	else:
 		var pos = C.global_position
@@ -814,6 +815,7 @@ func OnCardSelected(C : Card, target : BattleShipStats = null) -> bool:
 		S.stream = RemoveCardSound
 		S.autoplay = true
 		add_child(S)
+		print("Burn2")
 		#S.volume_db = -10
 	
 	ExternalUI.UpdateCardsInHandAmm(Ship.deck.Hand.size(), MaxCardsInHand)
@@ -1191,7 +1193,7 @@ func PerformActions(Ship : BattleShipStats) -> void:
 		await PerformTurnFinished(Ship)
 		return
 		
-	Ship.ShipViz.Pop(true)
+	#Ship.ShipViz.Pop(true)
 	#viz.Enable()
 	PerformNextActionForShip(Ship, 0)
 ##----------------------------------------------------------------------##
@@ -1247,8 +1249,8 @@ func PerformTurnFinished(Ship : BattleShipStats) -> void:
 	for g in ReplacingAmm:
 		await ShipReplecementFinished
 		
-	if (Ship != null):
-		Ship.ShipViz.Pop(false)
+	#if (Ship != null):
+		#Ship.ShipViz.Pop(false)
 	CurrentTurn = CurrentTurn + 1
 	StartCurrentShipsPerformTurn()
 ##----------------------------------------------------------------------##
@@ -1576,7 +1578,7 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 	#remove attack action from UI, only relevany for enemies
 	Performer.ShipViz.ActionRemoved(ResourceLoader.load(Action.txFile))
 	
-	var AtackData = OffensiveAnimationData.NewData(Mod, TargetList)
+	var AtackData = OffensiveAnimationData.NewData(Mod, Performer.ShipViz.ShipIcon, TargetList)
 	AnimData.append(AtackData)
 	
 	var DamageCallables : Array[Callable]
@@ -1841,6 +1843,14 @@ func HandleDrawCard(Performer : BattleShipStats, ConsumeEnergy : bool = false) -
 #██   ██ ██  ██ ██ ██ ██  ██  ██ ██   ██    ██    ██ ██    ██ ██  ██ ██ 
 #██   ██ ██   ████ ██ ██      ██ ██   ██    ██    ██  ██████  ██   ████
 #//////////////////////////////////////////////////////////////////////
+
+func BurnSound() -> void:
+	print("Burn")
+	var S = DeletableSoundGlobal.new()
+	S.stream = RemoveCardSound
+	S.autoplay = true
+	add_child(S)
+
 ##----------------------------------------------------------------------##
 func DoCardAnim(Action : CardStats, Data : Array[AnimationData], Performer : BattleShipStats, _FriendShip : bool) -> void:
 	print("Starting Def Anim")
@@ -1848,7 +1858,10 @@ func DoCardAnim(Action : CardStats, Data : Array[AnimationData], Performer : Bat
 	var anim = ActionAnim.instantiate() as CardOffensiveAnimation
 	AnimationPlecement.add_child(anim)
 	AnimationPlecement.move_child(anim, 1)
+	anim.AtackCardDestroyed.connect(BurnSound)
+	anim.DeffenceCardDestroyed.connect(BurnSound)
 	anim.DoAnimation(Action, Data, Performer, _FriendShip)
+	
 	if (!Action.Burned):
 		for g in Data:
 			for C in g.Callables:

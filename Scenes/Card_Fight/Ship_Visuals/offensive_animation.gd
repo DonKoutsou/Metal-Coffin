@@ -78,7 +78,7 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 							DamageReductionCard = DefCard
 					
 					if (Mod is OffensiveCardModule):
-						call_deferred("SpawnVisual", Viz, card, DefC, "")
+						call_deferred("SpawnVisual", Viz, AnimData.instigator, DefC, "")
 						Called = true
 					else : if (Mod is RecoilDamageModule):
 						call_deferred("SpawnVisual", Viz, card, DefC, "Recoil")
@@ -184,31 +184,37 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 				await Helper.wait(0.2)
 			
 		card.KillCard(0.5, false)
+		AtackCardDestroyed.emit()
 		if (Data.size() == 0 or Null or !Called):
 			card.CardKilled.connect(AnimEnded)
 	else:
 		card.KillCard(0.5, false)
+		AtackCardDestroyed.emit()
 		card.CardKilled.connect(AnimEnded)
 		#AnimEnded()
 
 #-----------------------------------------------------------------------------------
-func SpawnVisual(Target : Node, AtackCard : Card, DeffenceCard : Card, FloaterText : String) -> void:
-	AtackCardDestroyed.emit(AtackCard.global_position + (AtackCard.size / 2))
+func SpawnVisual(Target : Node, AttackOrigin : Node, DeffenceCard : Card, FloaterText : String) -> void:
+	var attackOriginPosition : Vector2
+	if (AttackOrigin is Control):
+		attackOriginPosition = AttackOrigin.global_position + (AttackOrigin.size / 2)
+
+	else:if (AttackOrigin is Node2D):
+		attackOriginPosition = AttackOrigin.global_position
+		
 	var AtackVisual : PackedScene = ResourceLoader.load(AtackVisualFile)
 	var Visual = AtackVisual.instantiate() as MissileViz
 	if (DeffenceCard != null):
 		Visual.Target = DeffenceCard
 	else:
 		Visual.Target = Target
-	Visual.SpawnPos = AtackCard.global_position + (AtackCard.size / 2)
+	Visual.SpawnPos = attackOriginPosition
 	add_child(Visual)
 	
 	Visual.connect("Reached", TweenEnded.bind(Target , DeffenceCard, FloaterText))
 
 #-----------------------------------------------------------------------------------
 func SpawnShieldVisual(Target : Node, DefCard : Card, FloaterText : String) -> void:
-	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
-	
 	var ShieldVisual : PackedScene = ResourceLoader.load(ShieldVisualFile)
 	var Visual = ShieldVisual.instantiate() as MissileViz
 	Visual.Target = Target
@@ -219,8 +225,6 @@ func SpawnShieldVisual(Target : Node, DefCard : Card, FloaterText : String) -> v
 
 #-----------------------------------------------------------------------------------
 func SpawnFlameVisual(Target : Node, DefCard : Card, FloaterText : String) -> void:
-	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
-	
 	var ShieldVisual : PackedScene = ResourceLoader.load(FlameVisualFile)
 	var Visual = ShieldVisual.instantiate() as MissileViz
 	Visual.Target = Target
@@ -231,8 +235,6 @@ func SpawnFlameVisual(Target : Node, DefCard : Card, FloaterText : String) -> vo
 
 #-----------------------------------------------------------------------------------
 func SpawnCardVisual(Target : Node, DefCard : Card, FloaterText : String) -> void:
-	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
-	
 	var ShieldVisual : PackedScene = ResourceLoader.load(CardVisualFile)
 	var Visual = ShieldVisual.instantiate() as CardViz
 	Visual.Target = Target
@@ -243,8 +245,6 @@ func SpawnCardVisual(Target : Node, DefCard : Card, FloaterText : String) -> voi
 
 #-----------------------------------------------------------------------------------
 func SpawnEnergyVisual(Target : Node, DefCard : Card, FloaterText : String) -> void:
-	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
-	
 	var EnergyVisual : PackedScene = ResourceLoader.load(EnergyVisualFile)
 	var Visual = EnergyVisual.instantiate() as MissileViz
 	Visual.Target = Target
@@ -255,7 +255,6 @@ func SpawnEnergyVisual(Target : Node, DefCard : Card, FloaterText : String) -> v
 
 #-----------------------------------------------------------------------------------
 func SpawnUpVisual(Target : Node, DefCard : Card, FloaterText : String) -> void:
-	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
 	var BuffVisual : PackedScene = ResourceLoader.load(BuffVisualFile)
 	var Visual = BuffVisual.instantiate() as MissileViz
 	Visual.Target = Target
@@ -266,7 +265,6 @@ func SpawnUpVisual(Target : Node, DefCard : Card, FloaterText : String) -> void:
 
 #-----------------------------------------------------------------------------------
 func SpawnDownVisual(Target : Node, DefCard : Card, FloaterText : String) -> void:
-	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
 	var DeBuffVisual : PackedScene = ResourceLoader.load(DebuffVisualFile)
 	var Visual = DeBuffVisual.instantiate() as MissileViz
 	Visual.Target = Target
@@ -277,7 +275,6 @@ func SpawnDownVisual(Target : Node, DefCard : Card, FloaterText : String) -> voi
 
 #-----------------------------------------------------------------------------------
 func SpawnBurnVisual(Target : Node, DefCard : Card, FloaterText : String) -> void:
-	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
 	var DeBuffVisual : PackedScene = ResourceLoader.load(DebuffVisualFile)
 	var Visual = DeBuffVisual.instantiate() as MissileViz
 	Visual.Target = Target
@@ -288,9 +285,6 @@ func SpawnBurnVisual(Target : Node, DefCard : Card, FloaterText : String) -> voi
 
 #-----------------------------------------------------------------------------------
 func SpawnUpDamageVisual(Target : Node, DefCard : Card, FloaterText : String) -> void:
-	#await wait (0.2)
-	
-	DeffenceCardDestroyed.emit(DefCard.global_position + (DefCard.size / 2))
 	var BuffVisual : PackedScene = ResourceLoader.load(BuffVisualFile)
 	var Visual = BuffVisual.instantiate() as MissileViz
 	Visual.Target = Target
@@ -312,7 +306,7 @@ func TweenEnded(Target : Node, DeffenceCard : Card, FloaterText : String) -> voi
 
 		if (DamageReductionCard != null):
 			DamageReductionCard.KillCard(0.5, false)
-			DeffenceCardDestroyed.emit(DamageReductionCard.global_position + (DamageReductionCard.size / 2))
+			DeffenceCardDestroyed.emit()
 	else :
 		var d = DamageFloater.instantiate()
 		d.text = "Blocked"
@@ -322,7 +316,7 @@ func TweenEnded(Target : Node, DeffenceCard : Card, FloaterText : String) -> voi
 		add_child(d)
 		d.global_position = (DeffenceCard.global_position + (DeffenceCard.size / 2)) - d.size / 2
 		DeffenceCard.KillCard(0.5, false)
-		DeffenceCardDestroyed.emit(DeffenceCard.global_position + (DeffenceCard.size / 2))
+		DeffenceCardDestroyed.emit()
 		var DefVisual : PackedScene = ResourceLoader.load(DefVisualFile)
 		var ShieldEff = DefVisual.instantiate() as BurstParticleGroup2D
 		add_child(ShieldEff)
