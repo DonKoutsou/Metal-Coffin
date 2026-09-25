@@ -21,13 +21,68 @@ const APPID = DEMO_APP_ID
 
  #Called when the node enters the scene tree for the first time.
 #-----------------------------------------------------------------------------------
+
+static func GetModLoc() -> String:
+	return OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS) + "/My Games/MetalCoffin/Mods"
+
 func _init() -> void:
 	if (OS.get_name() == "Windows"):
 		OS.set_environment("SteamAppID", APPID)
 		OS.set_environment("SteamGameID", APPID)
 
+const DIR_ERROR = 'ERROR: Failed to create directory "%s". Error code %s.'
+
+# This is only needed for potential solution 1.
+func try_to_create_dir(path):
+	if not DirAccess.dir_exists_absolute(path):
+		var error_code = DirAccess.make_dir_absolute(path)
+		if error_code != OK:
+			printerr(DIR_ERROR % [path, error_code])
+		else:
+			"Mods Directory Created"
+	else:
+		print("Mods Directory Found")
+
 #-----------------------------------------------------------------------------------
 func _ready() -> void:
+	var documents_path = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
+	
+	var dir : DirAccess = DirAccess.open(documents_path)
+	if dir:
+		#print("Successfully accessed Documents folder!")
+		if (dir.dir_exists("My Games")):
+			dir = DirAccess.open(documents_path + "/My Games")
+		else:
+			dir.make_dir("My Games")
+			dir = DirAccess.open(documents_path + "/My Games")
+		
+		if (dir.dir_exists("MetalCoffin")):
+			dir = DirAccess.open(documents_path +"/My Games" + "/MetalCoffin")
+		else:
+			dir.make_dir("MetalCoffin")
+			dir = DirAccess.open(documents_path + "/My Games" + "/MetalCoffin")
+		
+		#Create Save directory
+		if (!dir.dir_exists("Save")):
+			dir.make_dir("Save")
+		
+		#Create Mod Directory
+		if (!dir.dir_exists("Mods")):
+			dir.make_dir("Mods")
+			
+	else:
+		print("Failed to access path. Check permissions.")
+	
+	var l = ProjectSettings.load_resource_pack(GetModLoc() + "/Mod.pck")
+	if (l):
+		print("Mods Loaded")
+		var tx = TextureRect.new()
+		add_child(tx)
+		tx.texture = load("res://Assets/CaptainPortraits/Captain11.png")
+		
+	else:
+		printerr("Failed to load mods")
+		
 	LoadSavedSettings()
 	get_viewport().disable_3d = true
 	TranslationServer.set_locale("english")

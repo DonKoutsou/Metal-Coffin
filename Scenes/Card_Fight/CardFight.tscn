@@ -6,6 +6,7 @@
 [ext_resource type="FastNoiseLite" uid="uid://djv3ki2j68hy4" path="res://Shaders/Clouds/CloudStartingMenuNoise.tres" id="6_fwh7v"]
 [ext_resource type="Gradient" uid="uid://4hsb2urypw75" path="res://Shaders/Clouds/CardFightGradient.tres" id="6_lgbdq"]
 [ext_resource type="PackedScene" uid="uid://mxfnm7hywo4f" path="res://Scenes/Old/damage_floater.tscn" id="8_yl0qx"]
+[ext_resource type="Texture2D" uid="uid://d24ikjv6c1ht8" path="res://Assets/UIPiecies/white.png" id="9_fkta7"]
 [ext_resource type="StyleBox" uid="uid://cbl88p1pms3gq" path="res://Theme/YellowBorderPanel.tres" id="9_umcqi"]
 [ext_resource type="Material" uid="uid://cv6dg3o3grw2k" path="res://Shaders/Ground/CardFight_ground.tres" id="10_fkta7"]
 [ext_resource type="Shader" uid="uid://bjf2i5xyoaxa3" path="res://Scenes/Card_Fight/Blur BG.gdshader" id="11_hm5ka"]
@@ -17,7 +18,6 @@
 [ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scenes/Card_Fight/External_UI/CardHandContainer.gd" id="24_d8sco"]
 [ext_resource type="Script" uid="uid://c1adplamkw577" path="res://Scenes/Card_Fight/CardFightTargetSelection.gd" id="26_712dp"]
 [ext_resource type="Script" uid="uid://bfjh8yj7umbiw" path="res://Scenes/Card_Fight/CardFightDiscardSelection.gd" id="27_rbthh"]
-[ext_resource type="Texture2D" uid="uid://b3ph2qb17s1h2" path="res://Assets/MapElements/plane_γροθνδτεχτ_BaseColor.png" id="32_1im06"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1vivr"]
 shader = ExtResource("11_hm5ka")
@@ -71,9 +71,12 @@ energy = 0.8
 blend_mode = 2
 range_layer_max = 3
 range_item_cull_mask = 524288
-texture = ExtResource("32_1im06")
-texture_scale = 9.37
-height = 222.0
+shadow_color = Color(0, 0, 0, 1)
+shadow_filter = 1
+shadow_filter_smooth = 38.0
+texture = ExtResource("9_fkta7")
+texture_scale = 8.0
+height = 200.0
 
 [node name="Ground" type="ColorRect" parent="." unique_id=1742857488]
 light_mask = 524289

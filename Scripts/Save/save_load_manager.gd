@@ -4,14 +4,17 @@ class_name SaveLoadManager
 
 static var Instance : SaveLoadManager
 
+static func GetSaveLoc() -> String:
+	return OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS) + "/My Games/MetalCoffin/Save"
+
 func _ready() -> void:
 	Instance = self
 static func GetInstance() -> SaveLoadManager:
 	return Instance
 
 func DeleteSave() -> void:
-	DirAccess.remove_absolute("user://SavedGame.tres")
-	DirAccess.remove_absolute("user://PrologueSavedGame.tres")
+	DirAccess.remove_absolute(SaveLoadManager.GetSaveLoc() + "/SavedGame.tres")
+	DirAccess.remove_absolute(SaveLoadManager.GetSaveLoc() + "/PrologueSavedGame.tres")
 	ActionTracker.Instance.DeleteSave()
 
 static func SaveExists(Sav : String) -> bool:
@@ -72,10 +75,12 @@ func Save() -> void:
 	WorldView.SaveWorldview()
 	
 	if (world.IsPrologue):
-		SaveName = "user://PrologueSavedGame.tres"
+		SaveName = SaveLoadManager.GetSaveLoc() + "/PrologueSavedGame.tres"
 	else:
-		SaveName = "user://SavedGame.tres"
+		SaveName = SaveLoadManager.GetSaveLoc() + "/SavedGame.tres"
 	
+	#FileAccess.open(SaveName, FileAccess.WRITE)
+	#FileAccess.
 	ResourceSaver.save(sav, SaveName)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -85,9 +90,9 @@ func Load(world : World) ->Dictionary:
 	
 	var SaveName : String
 	if (world.IsPrologue):
-		SaveName = "user://PrologueSavedGame.tres"
+		SaveName = SaveLoadManager.GetSaveLoc() + "/PrologueSavedGame.tres"
 	else:
-		SaveName = "user://SavedGame.tres"
+		SaveName = SaveLoadManager.GetSaveLoc() + "/SavedGame.tres"
 		
 	if (!FileAccess.file_exists(SaveName)):
 		Resaults["Succsess"] = false

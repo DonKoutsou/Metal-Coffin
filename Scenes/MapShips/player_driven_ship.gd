@@ -68,7 +68,7 @@ func Update(delta: float, _unaffectedDelta : float) -> void:
 	
 	var offset : Vector2 = GetShipSpeedVec()
 	var frontDot = offset.normalized().dot(WindVector.normalized())
-	if (frontDot < 0):
+	if (frontDot < 0 and WindVector.length() > 0.4):
 		Crosswind.emit(abs(frontDot))
 		
 	if (SimulationManager.IsPaused()):

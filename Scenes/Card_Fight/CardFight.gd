@@ -796,12 +796,7 @@ func OnCardSelected(C : Card, target : BattleShipStats = null) -> bool:
 			C.global_position = pos
 			C.KillCard(0.5, true)
 			
-			var S = DeletableSoundGlobal.new()
-			S.stream = RemoveCardSound
-			S.autoplay = true
-			add_child(S)
-			print("Burn2")
-			#S.volume_db = -10
+			BurnSound()
 	else:
 		var pos = C.global_position
 		var parent = C.get_parent()
@@ -811,11 +806,7 @@ func OnCardSelected(C : Card, target : BattleShipStats = null) -> bool:
 		C.global_position = pos
 		C.KillCard(0.5, true)
 		
-		var S = DeletableSoundGlobal.new()
-		S.stream = RemoveCardSound
-		S.autoplay = true
-		add_child(S)
-		print("Burn2")
+		BurnSound()
 		#S.volume_db = -10
 	
 	ExternalUI.UpdateCardsInHandAmm(Ship.deck.Hand.size(), MaxCardsInHand)
@@ -1708,6 +1699,10 @@ func IsTargetValid(card : CardStats, User : BattleShipStats, target : BattleShip
 			if (IsShipFriendly(target)):
 				return false
 	
+	if (card.Passive != null):
+		if (User != target):
+			return false
+	
 	return true
 
 
@@ -1843,7 +1838,7 @@ func HandleDrawCard(Performer : BattleShipStats, ConsumeEnergy : bool = false) -
 #██   ██ ██  ██ ██ ██ ██  ██  ██ ██   ██    ██    ██ ██    ██ ██  ██ ██ 
 #██   ██ ██   ████ ██ ██      ██ ██   ██    ██    ██  ██████  ██   ████
 #//////////////////////////////////////////////////////////////////////
-
+##----------------------------------------------------------------------##
 func BurnSound() -> void:
 	print("Burn")
 	var S = DeletableSoundGlobal.new()

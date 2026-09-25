@@ -474,7 +474,7 @@ func ToggleInventory(t : bool) -> void:
 		CaptainStats = statsScene.instantiate()
 		CaptainStatsPlace.add_child(CaptainStats)
 		if (CaptainStats.CurrentlyShownCaptain == null):
-			CaptainStats.SetCaptain(_CharacterInventories.keys()[0])
+			CaptainStats.SetCaptain(controller.Cpt)
 			CaptainStats.ShowStats()
 		else:
 			CaptainStats.UpdateValues()
