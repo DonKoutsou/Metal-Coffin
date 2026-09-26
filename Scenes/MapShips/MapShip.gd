@@ -622,6 +622,11 @@ func GetFuelRange() -> float:
 	# Calculate average efficiency for the group
 	return total_fuel * effective_efficiency / fleetsize
 
+static func RangeFunction(FuelCap : float, FuelEf : float, w : float) -> float:
+	var rng =  500 * pow(FuelCap * FuelEf, 0.3)
+	rng = FuelCap * ((FuelEf / pow(w, 0.5)) * 10)
+	return rng
+
 #-------------------------------------------------
 func GetFuelRangeWithExtraFuel(ExtraFuel : float) -> float:
 	if (Command != null):

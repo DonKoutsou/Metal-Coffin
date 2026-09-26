@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://h6l78xy6duvo" path="res://Scripts/parallax_background.gd" id="1_y52c6"]
 [ext_resource type="Texture2D" uid="uid://bvxgotu4e723h" path="res://Assets/TownBackgrounds/IndustrialLayer-2.png" id="2_eg41f"]
-[ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/smoke_02.png" id="3_kl0cj"]
+[ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/Particles/smoke_02.png" id="3_kl0cj"]
 [ext_resource type="Texture2D" uid="uid://d1p7ntae2wlxa" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame2.png" id="4_cjb24"]
 [ext_resource type="Texture2D" uid="uid://dsgqqj48iwm8p" path="res://Assets/TownBackgrounds/IndustrialLayer-1.png" id="4_coxqh"]
-[ext_resource type="Texture2D" uid="uid://de1cx0wwuxx0x" path="res://Assets/smoke_09.png" id="5_6jamx"]
+[ext_resource type="Texture2D" uid="uid://de1cx0wwuxx0x" path="res://Assets/Particles/smoke_09.png" id="5_6jamx"]
 [ext_resource type="Texture2D" uid="uid://84c6n4dbdx5h" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame3.png" id="5_s3kbl"]
 [ext_resource type="Texture2D" uid="uid://dflyqldu2cv8n" path="res://Assets/TownBackgrounds/IndustrialLayer0.png" id="6_iecnu"]
 [ext_resource type="Texture2D" uid="uid://mkxoebe40ppx" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame4.png" id="6_qnoug"]

@@ -73,19 +73,22 @@ func _ready() -> void:
 	else:
 		print("Failed to access path. Check permissions.")
 	
-	var l = ProjectSettings.load_resource_pack(GetModLoc() + "/Mod.pck")
-	if (l):
-		print("Mods Loaded")
-		var tx = TextureRect.new()
-		add_child(tx)
-		tx.texture = load("res://Assets/CaptainPortraits/Captain11.png")
+	var modDir : DirAccess = DirAccess.open(GetModLoc())
+	modDir.list_dir_begin()
+	var file_name = modDir.get_next()
+	while file_name != "":
+		var l = ProjectSettings.load_resource_pack(GetModLoc() + "/" + file_name)
+		if (l):
+			print("{0} Mod Loaded".format([file_name.get_file()]))
+		else:
+			print("Failed to load {0} Mod".format([file_name.get_file()]))
 		
-	else:
-		printerr("Failed to load mods")
+		file_name = modDir.get_next()
 		
 	LoadSavedSettings()
 	get_viewport().disable_3d = true
 	TranslationServer.set_locale("english")
+
 	#var siz =  DisplayServer.screen_get_size()
 	#siz.x = min(siz.x, 1920)
 	#siz.y = min(siz.y, 1080)

@@ -35,9 +35,9 @@
 [ext_resource type="StyleBox" uid="uid://bvwu33dvi8506" path="res://Theme/Buttons/ButtonRed_Pressed.tres" id="38_sjyyd"]
 [ext_resource type="Texture2D" uid="uid://35kvw1j73e85" path="res://Assets/UIPiecies/Screen/ScreenFrames/ScreenLight.png" id="38_t54ed"]
 [ext_resource type="PackedScene" uid="uid://dwhre3xvmvjwf" path="res://Scenes/ScreenUI/Fan.tscn" id="39_nthvp"]
-[ext_resource type="Texture2D" uid="uid://jo4d26lfwv65" path="res://Assets/UIPiecies/cables2_Camera 1.png" id="40_xqmn8"]
+[ext_resource type="Texture2D" uid="uid://jo4d26lfwv65" path="res://Assets/UIPiecies/Screen/cables2_Camera 1.png" id="40_xqmn8"]
 [ext_resource type="Script" uid="uid://c11sqafe6873w" path="res://Scripts/Cables.gd" id="41_sjyyd"]
-[ext_resource type="Texture2D" uid="uid://b2mw4mnl7ag4s" path="res://Assets/UIPiecies/cables_Camera 1.png" id="42_67h1o"]
+[ext_resource type="Texture2D" uid="uid://b2mw4mnl7ag4s" path="res://Assets/UIPiecies/Screen/cables_Camera 1.png" id="42_67h1o"]
 
 [sub_resource type="Curve" id="Curve_1p5b6"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.997413, 0.585293), 0.0, 0.0, 0, 0]

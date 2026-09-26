@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://brq7ewum13pdr"]
+
+[ext_resource type="Script" uid="uid://d0d2cfsqktua1" path="res://Scenes/Fuel_ConsumptionVisual/fuel_consumption_Visuals.gd" id="1_5e4a8"]
+[ext_resource type="Script" uid="uid://cyhpkby5g24t1" path="res://Scenes/Fuel_ConsumptionVisual/test.gd" id="1_al02q"]
+
+[node name="Control" type="Control" unique_id=1703086178 node_paths=PackedStringArray("viz", "start_eff", "eff_Escalation", "start_cap", "cap_Escalation", "W", "w_Escalation")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5e4a8")
+viz = NodePath("HBoxContainer/Control")
+start_eff = NodePath("HBoxContainer/VBoxContainer/EffStart")
+eff_Escalation = NodePath("HBoxContainer/VBoxContainer/EffEsc")
+start_cap = NodePath("HBoxContainer/VBoxContainer/CapStart")
+cap_Escalation = NodePath("HBoxContainer/VBoxContainer/CapEsc")
+W = NodePath("HBoxContainer/VBoxContainer/WStart")
+w_Escalation = NodePath("HBoxContainer/VBoxContainer/WEsc")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=872214468]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="HBoxContainer" unique_id=1336390213]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("1_al02q")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1105772235]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=1195696894]
+layout_mode = 2
+text = "Efficiency Start"
+
+[node name="EffStart" type="SpinBox" parent="HBoxContainer/VBoxContainer" unique_id=850155909]
+layout_mode = 2
+min_value = 1.0
+value = 1.0
+select_all_on_focus = true
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=1399714100]
+layout_mode = 2
+text = "Efficiency Escalation"
+
+[node name="EffEsc" type="SpinBox" parent="HBoxContainer/VBoxContainer" unique_id=2056441260]
+layout_mode = 2
+min_value = 1.0
+value = 1.0
+select_all_on_focus = true
+
+[node name="Label3" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=221804598]
+layout_mode = 2
+text = "Cap Start"
+
+[node name="CapStart" type="SpinBox" parent="HBoxContainer/VBoxContainer" unique_id=565279295]
+layout_mode = 2
+min_value = 1.0
+max_value = 500.0
+value = 1.0
+select_all_on_focus = true
+
+[node name="Label4" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=222254658]
+layout_mode = 2
+text = "Cap Escalation"
+
+[node name="CapEsc" type="SpinBox" parent="HBoxContainer/VBoxContainer" unique_id=294073207]
+layout_mode = 2
+min_value = 1.0
+value = 1.0
+select_all_on_focus = true
+
+[node name="Label5" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=1486236502]
+layout_mode = 2
+text = "Weight Start"
+
+[node name="WStart" type="SpinBox" parent="HBoxContainer/VBoxContainer" unique_id=132748392]
+layout_mode = 2
+min_value = 1.0
+max_value = 500.0
+value = 1.0
+select_all_on_focus = true
+
+[node name="Label6" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=1893622024]
+layout_mode = 2
+text = "Weight Escalation"
+
+[node name="WEsc" type="SpinBox" parent="HBoxContainer/VBoxContainer" unique_id=1343783556]
+layout_mode = 2
+min_value = 1.0
+value = 1.0
+select_all_on_focus = true
+
+[connection signal="value_changed" from="HBoxContainer/VBoxContainer/EffStart" to="." method="_on_eff_start_value_changed"]
+[connection signal="value_changed" from="HBoxContainer/VBoxContainer/EffEsc" to="." method="_on_eff_esc_value_changed"]
+[connection signal="value_changed" from="HBoxContainer/VBoxContainer/CapStart" to="." method="_on_cap_start_value_changed"]
+[connection signal="value_changed" from="HBoxContainer/VBoxContainer/CapEsc" to="." method="_on_cap_esc_value_changed"]
+[connection signal="value_changed" from="HBoxContainer/VBoxContainer/WStart" to="." method="_on_w_start_value_changed"]
+[connection signal="value_changed" from="HBoxContainer/VBoxContainer/WEsc" to="." method="_on_w_esc_value_changed"]

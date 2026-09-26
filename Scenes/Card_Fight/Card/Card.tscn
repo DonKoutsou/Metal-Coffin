@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://blvrkfxa5b1t6" path="res://Scenes/Card_Fight/Card/card.gd" id="1_utwiq"]
 [ext_resource type="PackedScene" uid="uid://xuequw4xcwgf" path="res://Scenes/Inventory/CardTooltip.tscn" id="2_paso5"]
-[ext_resource type="Texture2D" uid="uid://bf3p61os8mhr7" path="res://Assets/UIPiecies/Bolt.png" id="4_5n23x"]
+[ext_resource type="Texture2D" uid="uid://bf3p61os8mhr7" path="res://Assets/UIPiecies/UI_Icons/Bolt.png" id="4_5n23x"]
 [ext_resource type="StyleBox" uid="uid://nx2m88wohluk" path="res://Scenes/Card_Fight/Card/Base_Card_Colors.tres" id="4_22va6"]
 [ext_resource type="StyleBox" uid="uid://c4g6yr1eejnwc" path="res://Scenes/Card_Fight/Card/Disposition_Card_Colors.tres" id="5_oc32p"]
 [ext_resource type="Texture2D" uid="uid://c1d4jybs1oolg" path="res://Assets/Cards/BarraceIncendiery.png" id="5_p48hs"]

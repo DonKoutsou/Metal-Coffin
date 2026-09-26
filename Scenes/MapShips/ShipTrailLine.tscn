@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bhkb6xo1tkk6l"]
 
-[ext_resource type="Texture2D" uid="uid://bjngt28xdoq47" path="res://Assets/Zoin's Flame Trail 5.png" id="1_gnyon"]
+[ext_resource type="Texture2D" uid="uid://bjngt28xdoq47" path="res://Assets/Particles/Zoin's Flame Trail 5.png" id="1_gnyon"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scenes/MapShips/Trail_Line/trail_line.gd" id="2_tr6me"]
 
 [sub_resource type="Curve" id="Curve_tr6me"]

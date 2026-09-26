@@ -7,7 +7,6 @@
 [ext_resource type="Gradient" uid="uid://4hsb2urypw75" path="res://Shaders/Clouds/CardFightGradient.tres" id="6_lgbdq"]
 [ext_resource type="PackedScene" uid="uid://mxfnm7hywo4f" path="res://Scenes/Old/damage_floater.tscn" id="8_yl0qx"]
 [ext_resource type="Texture2D" uid="uid://d24ikjv6c1ht8" path="res://Assets/UIPiecies/white.png" id="9_fkta7"]
-[ext_resource type="StyleBox" uid="uid://cbl88p1pms3gq" path="res://Theme/YellowBorderPanel.tres" id="9_umcqi"]
 [ext_resource type="Material" uid="uid://cv6dg3o3grw2k" path="res://Shaders/Ground/CardFight_ground.tres" id="10_fkta7"]
 [ext_resource type="Shader" uid="uid://bjf2i5xyoaxa3" path="res://Scenes/Card_Fight/Blur BG.gdshader" id="11_hm5ka"]
 [ext_resource type="Material" uid="uid://cc8eddj1vvy7u" path="res://Shaders/Clouds/CloudsCardFight.tres" id="11_lgbdq"]
@@ -267,7 +266,6 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="TargetSelect" type="PanelContainer" parent="." unique_id=1032550551 node_paths=PackedStringArray("ShipVizContainer")]
-visible = false
 z_index = 2
 layout_mode = 1
 anchors_preset = 8
@@ -284,12 +282,12 @@ grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("9_umcqi")
 script = ExtResource("26_712dp")
 ShipVizScene = ExtResource("3_n2sfr")
 ShipVizContainer = NodePath("VBoxContainer/HBoxContainer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TargetSelect" unique_id=835310415]
+visible = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="TargetSelect/VBoxContainer" unique_id=69944086]
@@ -310,7 +308,6 @@ layout_mode = 2
 text = "Cancel"
 
 [node name="CardSelect" type="PanelContainer" parent="." unique_id=647099741 node_paths=PackedStringArray("Title", "CardContainer")]
-visible = false
 z_index = 2
 layout_mode = 1
 anchors_preset = 8
@@ -327,7 +324,6 @@ grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("9_umcqi")
 script = ExtResource("27_rbthh")
 CardScene = ExtResource("2_yc7d8")
 Title = NodePath("VBoxContainer/Label")

@@ -9,7 +9,7 @@
 [ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="8_2uwot"]
 [ext_resource type="PackedScene" uid="uid://b3igywymiutks" path="res://Minigames/MissileCommand/MissileCommandMain.tscn" id="8_plrk5"]
 [ext_resource type="Texture2D" uid="uid://d1yk65ppopgv7" path="res://Assets/Items/Fuel.png" id="11_7xkt0"]
-[ext_resource type="Texture2D" uid="uid://c7wkqvg4osdjt" path="res://Assets/UIPiecies/cardboard-box.png" id="12_0uykb"]
+[ext_resource type="Texture2D" uid="uid://c7wkqvg4osdjt" path="res://Assets/UIPiecies/UI_Icons/cardboard-box.png" id="12_0uykb"]
 [ext_resource type="Texture2D" uid="uid://3q376ia6bctu" path="res://Assets/Items/Wrench.png" id="13_baphb"]
 [ext_resource type="Texture2D" uid="uid://dwwluk8xikvpe" path="res://Assets/Items/cubeforcesmol.png" id="14_baphb"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="15_baphb"]
