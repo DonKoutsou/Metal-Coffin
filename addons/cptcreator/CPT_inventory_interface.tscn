@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b3x1oefmigg0c"]
 
-[ext_resource type="PackedScene" uid="uid://dk1p1g38kvyjb" path="res://Scenes/Inventory/InventoryInterface.tscn" id="1_awm0l"]
+[ext_resource type="PackedScene" uid="uid://dk1p1g38kvyjb" path="res://MetalEngineBase/Inventory/InventoryInterface.tscn" id="1_awm0l"]
 [ext_resource type="PackedScene" uid="uid://dgwm586mmvbu8" path="res://addons/cptcreator/CPT_inventory_box.tscn" id="2_8qdt0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ha1o8"]

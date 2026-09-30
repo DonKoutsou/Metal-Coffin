@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="1_css3b"]
 [ext_resource type="Resource" uid="uid://burrn73775vpk" path="res://Resources/Cards/Barrage/HollowBarrage180mm.tres" id="2_css3b"]
-[ext_resource type="Script" uid="uid://b01o81rjpfdvw" path="res://Scripts/Inventory/AmmoItem.gd" id="3_itrs3"]
+[ext_resource type="Script" uid="uid://b01o81rjpfdvw" path="res://MetalEngineBase/Inventory/Scripts/AmmoItem.gd" id="3_itrs3"]
 
 [resource]
 script = ExtResource("3_itrs3")

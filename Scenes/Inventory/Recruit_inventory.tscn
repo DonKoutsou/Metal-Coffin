@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cqig7ufwah6je"]
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_ukrk7"]
-[ext_resource type="Script" uid="uid://jgplvqx2dscs" path="res://Scripts/Inventory/character_inventory.gd" id="2_xxes0"]
-[ext_resource type="PackedScene" uid="uid://dk1p1g38kvyjb" path="res://Scenes/Inventory/InventoryInterface.tscn" id="3_kws25"]
+[ext_resource type="Script" uid="uid://jgplvqx2dscs" path="res://MetalEngineBase/Inventory/CharacterInventory/character_inventory.gd" id="2_xxes0"]
+[ext_resource type="PackedScene" uid="uid://dk1p1g38kvyjb" path="res://MetalEngineBase/Inventory/InventoryInterface.tscn" id="3_kws25"]
 
 [node name="CharacterInventoryUI" type="PanelContainer" unique_id=1843118128 node_paths=PackedStringArray("interface")]
 anchors_preset = 14

@@ -2,9 +2,9 @@
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_p5w00"]
 [ext_resource type="Script" uid="uid://bn6vwqvcv5ebb" path="res://Scenes/Card_Fight/team_equipment_setup.gd" id="1_xpgoa"]
-[ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://Scripts/Inventory/Item.gd" id="4_c6o7f"]
+[ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://MetalEngineBase/Inventory/Scripts/Item.gd" id="4_c6o7f"]
 [ext_resource type="PackedScene" uid="uid://dci144io03ffa" path="res://Scenes/CaptainButton.tscn" id="4_em7yw"]
-[ext_resource type="PackedScene" uid="uid://cgs0u1j4mhhx5" path="res://Scenes/Inventory/ItemDescriptor.tscn" id="4_mgcdj"]
+[ext_resource type="PackedScene" uid="uid://cgs0u1j4mhhx5" path="res://MetalEngineBase/Inventory/ItemDescriptor.tscn" id="4_mgcdj"]
 [ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FT-500.tres" id="5_xd74m"]
 [ext_resource type="Resource" uid="uid://8kvrf75vxyp3" path="res://Resources/Items/ShipParts/MG/ShortMachinegun180mm.tres" id="6_wydj4"]
 [ext_resource type="Resource" uid="uid://dlrxjlssarqit" path="res://Resources/Items/Ammo/APAmmoMagazine100mm.tres" id="6_yjy3u"]
@@ -59,7 +59,7 @@
 [ext_resource type="Resource" uid="uid://byk8ikxmio8k1" path="res://Resources/Items/ShipParts/Sonar/LongSonar.tres" id="51_hnfoc"]
 [ext_resource type="Resource" uid="uid://yvvekkrks7h7" path="res://Resources/Items/ShipParts/FlameThrower/ShortFlameThrower.tres" id="52_t8pcj"]
 [ext_resource type="Resource" uid="uid://cdjjdfdrhljqx" path="res://Resources/Items/ShipParts/FlameThrower/MediumFlameThrower.tres" id="53_lgh08"]
-[ext_resource type="PackedScene" uid="uid://bnonfp8ywr3vl" path="res://Scenes/Inventory/captain_stat_container.tscn" id="53_ux45k"]
+[ext_resource type="PackedScene" uid="uid://bnonfp8ywr3vl" path="res://MetalEngineBase/Inventory/Stats/CaptainStatContainer/captain_stat_container.tscn" id="53_ux45k"]
 [ext_resource type="Resource" uid="uid://bdo3te0i8x0f" path="res://Resources/Items/ShipParts/FlameThrower/LargeFlameThrower.tres" id="54_3oixj"]
 [ext_resource type="PackedScene" uid="uid://blgxtaj45pjfs" path="res://Scenes/Inventory/MerchShopDescription.tscn" id="55_mn77v"]
 

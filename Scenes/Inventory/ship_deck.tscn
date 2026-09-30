@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://dil6hywhdoauc"]
 
-[ext_resource type="Script" uid="uid://c407gsr2ima44" path="res://Scripts/Inventory/ship_deck.gd" id="1_jeerh"]
+[ext_resource type="Script" uid="uid://c407gsr2ima44" path="res://MetalEngineBase/Inventory/Scripts/ship_deck.gd" id="1_jeerh"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://Scenes/Card_Fight/Card/Card.tscn" id="2_uhxpx"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="3_1oiif"]
+
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uuft3"]
 content_margin_top = 20.0

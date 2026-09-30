@@ -18,29 +18,21 @@ func _ready() -> void:
 	cap_Escalation.value = viz.cap_Escalation
 	W.value = viz.W
 	w_Escalation.value = viz.w_Escalation
-	
-
-
 
 func _on_eff_start_value_changed(value: float) -> void:
 	viz.start_eff = value
 
-
 func _on_eff_esc_value_changed(value: float) -> void:
 	viz.eff_Escalation = value
-
 
 func _on_cap_start_value_changed(value: float) -> void:
 	viz.start_cap = value
 
-
 func _on_cap_esc_value_changed(value: float) -> void:
 	viz.cap_Escalation = value
 
-
 func _on_w_start_value_changed(value: float) -> void:
 	viz.W = value
-
 
 func _on_w_esc_value_changed(value: float) -> void:
 	viz.w_Escalation = value

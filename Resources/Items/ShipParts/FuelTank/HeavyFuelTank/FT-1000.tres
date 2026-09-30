@@ -4,8 +4,8 @@
 [ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="2_n880c"]
 [ext_resource type="Resource" uid="uid://0glrophqko3g" path="res://Resources/Cards/EnergyReserveAOE.tres" id="3_2lr1f"]
 [ext_resource type="Resource" uid="uid://bwwby1vknkefj" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FT-2000.tres" id="4_4grpg"]
-[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="5_qpol5"]
-[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="6_53f87"]
+[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://MetalEngineBase/Inventory/Scripts/ShipPartUpgrade.gd" id="5_qpol5"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://MetalEngineBase/Inventory/Scripts/ShipPartItem.gd" id="6_53f87"]
 
 [sub_resource type="Resource" id="Resource_mdpmd"]
 resource_local_to_scene = true

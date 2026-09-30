@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dslxdgbana1k1"]
 
-[ext_resource type="Script" uid="uid://de8gy2g6upjg4" path="res://Scripts/Inventory/InventoryManager.gd" id="2_n8wv5"]
-[ext_resource type="PackedScene" uid="uid://cmvl7w65kwp5a" path="res://Scenes/Inventory/character_inventory.tscn" id="3_5gkpo"]
-[ext_resource type="PackedScene" uid="uid://cgs0u1j4mhhx5" path="res://Scenes/Inventory/ItemDescriptor.tscn" id="4_8j1nc"]
+[ext_resource type="Script" uid="uid://de8gy2g6upjg4" path="res://MetalEngineBase/Inventory/Scripts/InventoryManager.gd" id="2_n8wv5"]
+[ext_resource type="PackedScene" uid="uid://cmvl7w65kwp5a" path="res://MetalEngineBase/Inventory/CharacterInventory/character_inventory.tscn" id="3_5gkpo"]
+[ext_resource type="PackedScene" uid="uid://cgs0u1j4mhhx5" path="res://MetalEngineBase/Inventory/ItemDescriptor.tscn" id="4_8j1nc"]
 [ext_resource type="PackedScene" uid="uid://d3361rn6kikh1" path="res://Scenes/Inventory/ItemTransfer.tscn" id="5_pqw7i"]
 [ext_resource type="PackedScene" uid="uid://bxog70dwnkaal" path="res://Scenes/InScreenUI/ItemsAddedNotif.tscn" id="6_q7t14"]
 [ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/EventHandlers/MissileDockEventHandler.tres" id="7_ffxnd"]

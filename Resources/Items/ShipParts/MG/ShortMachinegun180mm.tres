@@ -5,8 +5,8 @@
 [ext_resource type="Resource" uid="uid://bvqg5vwgfx247" path="res://Resources/Cards/Barrage/DrawRandomBarrage180.tres" id="3_70g5e"]
 [ext_resource type="Resource" uid="uid://ts2dsdg3gbw8" path="res://Resources/Cards/Barrage/EngineShot.tres" id="4_4rjku"]
 [ext_resource type="Resource" uid="uid://ckmgfamc421e2" path="res://Resources/Items/ShipParts/MG/MediumMachinegun180mm.tres" id="4_70g5e"]
-[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="5_dexum"]
-[ext_resource type="Script" uid="uid://dx8pydv0k6k3t" path="res://Scripts/Inventory/WeaponShipPartItem.gd" id="6_3qpgv"]
+[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://MetalEngineBase/Inventory/Scripts/ShipPartUpgrade.gd" id="5_dexum"]
+[ext_resource type="Script" uid="uid://dx8pydv0k6k3t" path="res://MetalEngineBase/Inventory/Scripts/WeaponShipPartItem.gd" id="6_3qpgv"]
 
 [sub_resource type="Resource" id="Resource_fmxhr"]
 script = ExtResource("5_dexum")

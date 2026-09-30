@@ -4,8 +4,8 @@
 [ext_resource type="Resource" uid="uid://dyc7jktln3i74" path="res://Resources/Cards/Barrage/TeslaCoil.tres" id="2_aagpo"]
 [ext_resource type="Resource" uid="uid://yxu4yok1d0e" path="res://Resources/Cards/Barrage/DisCharge.tres" id="3_j17v7"]
 [ext_resource type="Resource" uid="uid://gcxghv6bm43p" path="res://Resources/Items/ShipParts/Coil/MediumCoil.tres" id="4_j17v7"]
-[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="7_yug86"]
-[ext_resource type="Script" uid="uid://dx8pydv0k6k3t" path="res://Scripts/Inventory/WeaponShipPartItem.gd" id="8_7eamt"]
+[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://MetalEngineBase/Inventory/Scripts/ShipPartUpgrade.gd" id="7_yug86"]
+[ext_resource type="Script" uid="uid://dx8pydv0k6k3t" path="res://MetalEngineBase/Inventory/Scripts/WeaponShipPartItem.gd" id="8_7eamt"]
 
 [sub_resource type="Resource" id="Resource_fmxhr"]
 script = ExtResource("7_yug86")

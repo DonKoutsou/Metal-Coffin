@@ -4,8 +4,8 @@
 [ext_resource type="Resource" uid="uid://cuhyegxnhjaq4" path="res://Resources/Cards/DrawDiscard.tres" id="2_37mfe"]
 [ext_resource type="Resource" uid="uid://bohupsgl50ar7" path="res://Resources/Cards/EmergencyRepairs.tres" id="3_37mfe"]
 [ext_resource type="Resource" uid="uid://p0sngnrp8hgi" path="res://Resources/Items/ShipParts/ELINT/MediumElint.tres" id="5_rphxy"]
-[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://Scripts/Inventory/ShipPartItem.gd" id="6_ecw7k"]
-[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="6_yy2hs"]
+[ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://MetalEngineBase/Inventory/Scripts/ShipPartItem.gd" id="6_ecw7k"]
+[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://MetalEngineBase/Inventory/Scripts/ShipPartUpgrade.gd" id="6_yy2hs"]
 
 [sub_resource type="Resource" id="Resource_k0n8b"]
 script = ExtResource("6_yy2hs")

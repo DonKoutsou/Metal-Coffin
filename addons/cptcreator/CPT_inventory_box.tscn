@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dgwm586mmvbu8"]
 
-[ext_resource type="PackedScene" uid="uid://b1k2h35khc40y" path="res://Scenes/Inventory/InventoryBox.tscn" id="1_shk70"]
+[ext_resource type="PackedScene" uid="uid://b1k2h35khc40y" path="res://MetalEngineBase/Inventory/InventoryBox.tscn" id="1_shk70"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_shk70"]
 bg_color = Color(0.4085841, 0.40858412, 0.408584, 1)

@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://cl0fuirqabjb0" path="res://Scenes/TownShop/WorkShop/work_shop.gd" id="1_4uhfw"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_p28a8"]
-[ext_resource type="PackedScene" uid="uid://b1k2h35khc40y" path="res://Scenes/Inventory/InventoryBox.tscn" id="2_bpcd3"]
+[ext_resource type="PackedScene" uid="uid://b1k2h35khc40y" path="res://MetalEngineBase/Inventory/InventoryBox.tscn" id="2_bpcd3"]
 [ext_resource type="PackedScene" uid="uid://iv5o83jfm5t6" path="res://Scenes/TownShop/WorkShopItem.tscn" id="2_gy23n"]
 [ext_resource type="PackedScene" uid="uid://mcrp4chqoake" path="res://Scenes/TownShop/StatComperator.tscn" id="4_r5mim"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="7_itsvt"]
-[ext_resource type="PackedScene" uid="uid://bnonfp8ywr3vl" path="res://Scenes/Inventory/captain_stat_container.tscn" id="9_gy23n"]
+[ext_resource type="PackedScene" uid="uid://bnonfp8ywr3vl" path="res://MetalEngineBase/Inventory/Stats/CaptainStatContainer/captain_stat_container.tscn" id="9_gy23n"]
 [ext_resource type="PackedScene" uid="uid://blgxtaj45pjfs" path="res://Scenes/Inventory/MerchShopDescription.tscn" id="9_itsvt"]
 [ext_resource type="Texture2D" uid="uid://bk3hmnxkvr5ab" path="res://Assets/UIPiecies/UI_Icons/network-bars.png" id="10_hfjff"]
 [ext_resource type="AudioStream" uid="uid://tc32omtm74y7" path="res://Assets/Sounds/workshop.mp3" id="10_itsvt"]

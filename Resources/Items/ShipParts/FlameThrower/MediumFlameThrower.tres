@@ -4,9 +4,9 @@
 [ext_resource type="Resource" uid="uid://b3fntysvgjvac" path="res://Resources/Cards/Barrage/Scorch.tres" id="2_be5yu"]
 [ext_resource type="Resource" uid="uid://by26q40v5vobx" path="res://Resources/Cards/Barrage/Pyroclasm.tres" id="3_nryit"]
 [ext_resource type="Resource" uid="uid://bdo3te0i8x0f" path="res://Resources/Items/ShipParts/FlameThrower/LargeFlameThrower.tres" id="4_be5yu"]
-[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://Scripts/Inventory/ShipPartUpgrade.gd" id="4_bekuy"]
+[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://MetalEngineBase/Inventory/Scripts/ShipPartUpgrade.gd" id="4_bekuy"]
 [ext_resource type="Resource" uid="uid://0qs3wdvlodp1" path="res://Resources/Cards/EnemyBurn.tres" id="4_nryit"]
-[ext_resource type="Script" uid="uid://dx8pydv0k6k3t" path="res://Scripts/Inventory/WeaponShipPartItem.gd" id="5_3r5l2"]
+[ext_resource type="Script" uid="uid://dx8pydv0k6k3t" path="res://MetalEngineBase/Inventory/Scripts/WeaponShipPartItem.gd" id="5_3r5l2"]
 
 [sub_resource type="Resource" id="Resource_fmxhr"]
 script = ExtResource("4_bekuy")
