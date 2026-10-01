@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bt6th215x5s5m"]
 
-[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_7pcmt"]
-[ext_resource type="Script" uid="uid://dic8mxk80agpa" path="res://Scripts/cage_fight_item.gd" id="2_7pcmt"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://MetalEngineBase/Inventory/YellowPanel.tres" id="1_7pcmt"]
+[ext_resource type="Script" uid="uid://dic8mxk80agpa" path="res://MetalEngineBase/cage_fight_item.gd" id="2_7pcmt"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="3_imkj1"]
 [ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="4_uulej"]
 

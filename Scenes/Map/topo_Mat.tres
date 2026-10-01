@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://lm8ajdrv60kh"]
 
 [ext_resource type="Shader" uid="uid://mwyc08pgqsiw" path="res://testlines.gdshader" id="1_vy4qr"]
-[ext_resource type="Texture2D" uid="uid://btlu085d2rk0u" path="res://Noises/Ground/TEX_GroundVisualNoise.png" id="2_uroiy"]
+[ext_resource type="Texture2D" uid="uid://btlu085d2rk0u" path="res://Scenes/Map/WeatherMan/Noises/Ground/TEX_GroundVisualNoise.png" id="2_uroiy"]
 
 [resource]
 shader = ExtResource("1_vy4qr")

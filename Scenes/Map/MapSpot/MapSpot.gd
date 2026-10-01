@@ -3,6 +3,7 @@ class_name MapSpot
 
 #@export var CityFuelReserves : float = 1000
 @export var AlarmVisual : PackedScene
+@export var EventM : MapSpotEventManager
 
 var PlayerFuelReserves : float = 0
 
@@ -44,6 +45,9 @@ var Event : Happening
 var VisitingShips : Array[MapShip] = []
 var VisitingHostiles : Array[MapShip] = []
 
+func RewardFuel(amm : float) -> void:
+	PopUpManager.GetInstance().DoFadeNotif("{0} tons of fuel added to {1}'s reserve.".format([amm, GetSpotName()]))
+	PlayerFuelReserves += amm
 
 func _ready() -> void:
 	#set_physics_process(false)
@@ -189,12 +193,9 @@ func PlaySound():
 	add_child(sound)
 	sound.play()
 
-
-
-
 func OnSpotAproached(AproachedBy : MapShip) -> void:
 	# if ship is hostile we return
-	if (AproachedBy is HostileShip):
+	if (!AproachedBy.Friendly()):
 		VisitingHostiles.append(AproachedBy)
 		if (VisitingShips.size() > 0):
 			SpotAproached.emit(self)
@@ -208,7 +209,7 @@ func OnSpotAproached(AproachedBy : MapShip) -> void:
 		if (AproachedBy.Command == null):
 			# stop simulation speeding and frame camera to player to let them know
 			SimulationManager.GetInstance().SpeedToggle(false)
-			Map.GetInstance().GetCamera().FrameCamToPos(global_position, 1, false)
+			ShipCamera.GetInstance().FrameCamToPos(global_position, 1, false)
 			SpotAproached.emit(self)
 		#else:
 			#AproachedBy.GetDock()
@@ -219,28 +220,28 @@ func OnSpotAproached(AproachedBy : MapShip) -> void:
 		
 		if (EnemyCity):
 			if (AlarmRaised):
-				Commander.GetInstance().OnEnemySeen(AproachedBy, null)
+				EventM.OnEnemySeen(AproachedBy)
 
 
 func OnSpotDeparture(DepartingShip : MapShip) -> void:
-	if (DepartingShip is HostileShip):
+	if (!DepartingShip.Friendly()):
 		VisitingHostiles.erase(DepartingShip)
 		return
 	
 	VisitingShips.erase(DepartingShip)
 	if (EnemyCity):
 		if (AlarmRaised):
-			Commander.GetInstance().OnEnemyVisualLost(DepartingShip, null)
+			EventM.OnEnemyVisualLost(DepartingShip)
 			
 func OnAlarmRaised(Notify : bool = false) -> void:
 	var AlarmViz = AlarmVisual.instantiate()
 	add_child(AlarmViz)
 	SimulationManager.GetInstance().SpeedToggle(false)
-	Map.GetInstance().GetCamera().FrameCamToPos(global_position)
+	ShipCamera.GetInstance().FrameCamToPos(global_position)
 	SpotAlarmRaised.emit(Notify)
 	AlarmRaised = true
 	for g in VisitingShips:
-		Commander.GetInstance().OnEnemySeen(g, null)
+		EventM.OnEnemySeen(g)
 
 func SetFuelReserves(NewAmm : float) -> void:
 	PlayerFuelReserves = NewAmm

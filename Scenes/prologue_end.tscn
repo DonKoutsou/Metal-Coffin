@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://btb0vs0eaeg0m"]
 
-[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_q4e73"]
-[ext_resource type="Script" uid="uid://bhysuyag4bovu" path="res://Scripts/prologue_end.gd" id="2_m2qla"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://MetalEngineBase/Inventory/YellowPanel.tres" id="1_q4e73"]
+[ext_resource type="Script" uid="uid://bhysuyag4bovu" path="res://MetalEngineBase/prologue_end.gd" id="2_m2qla"]
 [ext_resource type="PackedScene" uid="uid://bagsk7yyq8sv1" path="res://Scenes/WishlistButton.tscn" id="2_pxhpw"]
 
 [node name="PrologueEnd" type="PanelContainer" unique_id=1056866112]

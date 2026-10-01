@@ -185,7 +185,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if (bod == FiredBy):
 		return
 	
-	if (bod is HostileShip):
+	if (bod is MapShip and !bod.Friendly()):
 		if (bod.Destroyed):
 			return
 		
@@ -196,21 +196,27 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		else : if (bod is Missile):
 			bod.connect("OnShipDestroyed" ,OnMissDest)
 		if (Friendly):
-			if (bod is HostileShip):
+			if (bod is MapShip and !bod.Friendly()):
 				bod.OnShipSeen(self)
 				
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	if (Killed):
 		return
-	if (FoundShips.has(area.get_parent())):
-		FoundShips.erase(area.get_parent())
-		if (area.get_parent() is MapShip):
-			area.get_parent().disconnect("OnShipDestroyed" ,OnShipDest)
-		else : if (area.get_parent() is Missile):
-			area.get_parent().disconnect("OnShipDestroyed" ,OnMissDest)
-		if (Friendly):
-			if (area.get_parent() is HostileShip):
-				area.get_parent().OnShipUnseen(self)
+	var parent = area.get_parent()
+	
+	if (FoundShips.has(parent)):
+		FoundShips.erase(parent)
+		if (parent is MapShip):
+			parent.disconnect("OnShipDestroyed" ,OnShipDest)
+			
+			if (Friendly):
+				if (!parent.Friendly()):
+					parent.OnShipUnseen(self)
+					
+		else : if (parent is Missile):
+			parent.disconnect("OnShipDestroyed" ,OnMissDest)
+			
+		
 				
 func _on_missile_body_area_entered(area: Area2D) -> void:
 	if (area.get_parent() == FiredBy):
@@ -226,14 +232,15 @@ func _on_missile_body_area_entered(area: Area2D) -> void:
 		
 	if (abs(Altitude - Bod.Altitude) > 200):
 		return
-		
-	if (Bod is HostileShip):
-		if (!Friendly):
-			Bod.Damage(Damage)
-			Kill()
-			return
-		if (Bod.Destroyed):
-			return
+	
+	if (Bod is MapShip):
+		if (!Bod.Friendly()):
+			if (!Friendly):
+				Bod.Damage(Damage)
+				Kill()
+				return
+			if (Bod.Destroyed):
+				return
 	#if (area.get_parent() is Missile):
 		#Bod.Kill()
 		#Kill()
@@ -255,7 +262,7 @@ func _on_missile_body_area_entered(area: Area2D) -> void:
 		var Squad : Array[MapShip]
 		Squad.append(Command)
 		Squad.append_array(Command.GetDock().GetDockedShips())
-		if (Command is HostileShip):
+		if (!Command.Friendly()):
 			HostileSquad = Squad
 		else:
 			PlSquad = Squad
@@ -286,10 +293,9 @@ func _on_missile_body_area_entered(area: Area2D) -> void:
 func _on_missile_body_area_exited(area: Area2D) -> void:
 	var IsRadar = area.get_collision_layer_value(2)
 	if (IsRadar):
-		if (area.get_parent() is PlayerDrivenShip):
+		var parent = area.get_parent()
+		if (parent is MapShip and parent.Friendly()):
 			OnShipUnseen(area.get_parent())
-func _exit_tree() -> void:
-	MapPointerManager.GetInstance().RemoveShip(self)
 
 func HoneAtEnemy(Ship : Node2D, delta : float):
 	

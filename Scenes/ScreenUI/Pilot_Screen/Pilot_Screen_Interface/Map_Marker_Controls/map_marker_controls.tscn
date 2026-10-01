@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cugmsxkuwcfc4"]
 
 [ext_resource type="Script" uid="uid://bdyul5l380bmt" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Map_Marker_Controls/map_marker_controls.gd" id="1_67mm3"]
-[ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_djntk"]
+[ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Scenes/EventHandlers/UIEventH.tres" id="2_djntk"]
 [ext_resource type="Texture2D" uid="uid://ckbklcaxep2gf" path="res://Assets/UIPiecies/Screen/Marker_FullQuality.png" id="3_eviu5"]
 [ext_resource type="PackedScene" uid="uid://ox4pbwakfxs1" path="res://Scenes/ScreenUI/Dial/Dial_NoPanel.tscn" id="4_eviu5"]
 [ext_resource type="StyleBox" uid="uid://b132qs50nums8" path="res://Theme/Buttons/NobButtonL.tres" id="5_v7o4i"]

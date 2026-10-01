@@ -671,7 +671,7 @@ func FigureOutMandatoryEvents(events : Array[Happening], spots : Array) -> void:
 	for event in range(events.size() - 1, -1, -1):
 		var hap : Happening = events[event]
 		if (hap.MandatoryLocaiton != ""):
-			var spot = Helper.GetCityByName(hap.MandatoryLocaiton)
+			var spot = MapHelper.GetCityByName(hap.MandatoryLocaiton)
 			if (spot != null):
 				spot.Event = hap
 				hap.PickedBy.append(spot)

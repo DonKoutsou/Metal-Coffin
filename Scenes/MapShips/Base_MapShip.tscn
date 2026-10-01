@@ -48,6 +48,7 @@ texture = ExtResource("5_oe1x5")
 
 [node name="TrailLine" parent="ColorRect" unique_id=909123147 instance=ExtResource("5_hi2nu")]
 position = Vector2(0, -1)
+points = PackedVector2Array(0, 0)
 width = 10.0
 
 [node name="ShipBody" type="Area2D" parent="." unique_id=1910492064]

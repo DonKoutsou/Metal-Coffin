@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://delsjvmgmdgcn"]
 
-[ext_resource type="Script" uid="uid://dwk0yagfurdqj" path="res://Scripts/UI/starting_menu.gd" id="1_y40tw"]
+[ext_resource type="Script" uid="uid://dwk0yagfurdqj" path="res://Scenes/UI/starting_menu.gd" id="1_y40tw"]
 [ext_resource type="Texture2D" uid="uid://cfhxio5jbr8r1" path="res://Assets/Logos/ΜΧΨLogoTrans.png" id="2_q14vk"]
 [ext_resource type="Texture2D" uid="uid://bgvp50nvwckpp" path="res://Assets/Logos/icon_monochrome_light.png" id="3_s86m3"]
 [ext_resource type="FastNoiseLite" uid="uid://djv3ki2j68hy4" path="res://Shaders/Clouds/CloudStartingMenuNoise.tres" id="3_t54ed"]
 [ext_resource type="Material" uid="uid://2l428k4wukko" path="res://Shaders/Ground/StartingMenu_ground.tres" id="4_t54ed"]
-[ext_resource type="Script" uid="uid://dnjdy3xj0atfy" path="res://Scripts/intro_menu_ships.gd" id="6_yrlew"]
+[ext_resource type="Script" uid="uid://dnjdy3xj0atfy" path="res://Scenes/UI/intro_menu_ships.gd" id="6_yrlew"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scenes/MapShips/Trail_Line/trail_line.gd" id="8_eb1s8"]
 [ext_resource type="Texture2D" uid="uid://ev8n5tjqls2e" path="res://Assets/ShipTextures/Hull2.png" id="9_j43p8"]
 [ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/ShipTextures/Hull3.png" id="11_23r0g"]
@@ -36,7 +36,7 @@
 [ext_resource type="Texture2D" uid="uid://35kvw1j73e85" path="res://Assets/UIPiecies/Screen/ScreenFrames/ScreenLight.png" id="38_t54ed"]
 [ext_resource type="PackedScene" uid="uid://dwhre3xvmvjwf" path="res://Scenes/ScreenUI/Fan.tscn" id="39_nthvp"]
 [ext_resource type="Texture2D" uid="uid://jo4d26lfwv65" path="res://Assets/UIPiecies/Screen/cables2_Camera 1.png" id="40_xqmn8"]
-[ext_resource type="Script" uid="uid://c11sqafe6873w" path="res://Scripts/Cables.gd" id="41_sjyyd"]
+[ext_resource type="Script" uid="uid://c11sqafe6873w" path="res://MetalEngineBase/Cables.gd" id="41_sjyyd"]
 [ext_resource type="Texture2D" uid="uid://b2mw4mnl7ag4s" path="res://Assets/UIPiecies/Screen/cables_Camera 1.png" id="42_67h1o"]
 
 [sub_resource type="Curve" id="Curve_1p5b6"]
@@ -86,7 +86,7 @@ canvas_item_default_texture_filter = 2
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 0
 positional_shadow_atlas_16_bits = false
-size = Vector2i(1043, 726)
+size = Vector2i(925, 644)
 size_2d_override = Vector2i(925, 644)
 size_2d_override_stretch = true
 render_target_update_mode = 4
@@ -737,8 +737,6 @@ texture_scale = 1.95
 [connection signal="pressed" from="SubViewportContainer/SubViewport/CanvasLayer/NormalUI/HintDialogue/PanelContainer/Cancel" to="." method="_on_cancel_pressed"]
 [connection signal="pressed" from="SubViewportContainer/SubViewport/CanvasLayer/NormalUI/HintDialogue/PanelContainer/VBoxContainer/HBoxContainer/ShowTutorial" to="." method="_on_show_tutorial_pressed"]
 [connection signal="pressed" from="SubViewportContainer/SubViewport/CanvasLayer/NormalUI/HintDialogue/PanelContainer/VBoxContainer/HBoxContainer/DontShowTutorial" to="." method="_on_dont_show_tutorial_pressed"]
-[connection signal="StartCampaign" from="SubViewportContainer/SubViewport/CanvasLayer/CommandLine" to="." method="_on_command_line_start_campaign"]
-[connection signal="StartPrologue" from="SubViewportContainer/SubViewport/CanvasLayer/CommandLine" to="." method="_on_command_line_start_prologue"]
 [connection signal="pressed" from="Prologue" to="." method="_on_prologue_pressed"]
 [connection signal="pressed" from="LoadPrologue" to="." method="_on_load_prologue_pressed"]
 [connection signal="pressed" from="Play2" to="." method="_on_play_pressed"]

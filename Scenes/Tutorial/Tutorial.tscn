@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://b8oenywljdoe2"]
+
+[ext_resource type="Script" uid="uid://b3kpitqta8cq6" path="res://Scenes/Tutorial/tutorial.gd" id="1_tesn2"]
+[ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="2_qxowp"]
+[ext_resource type="AudioStream" uid="uid://cmalipflqp1uv" path="res://Assets/Sounds/UI_out.mp3" id="3_qvre0"]
+[ext_resource type="Shader" uid="uid://bnlp28msbn21o" path="res://Scenes/Tutorial/TutorialFocusArea.gdshader" id="4_fc3hj"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://MetalEngineBase/Inventory/YellowPanel.tres" id="5_1tefs"]
+[ext_resource type="FontFile" uid="uid://crgk2e3gswnr3" path="res://Fonts/DINEngschriftStd.otf" id="6_bccxl"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k6wjy"]
+light_mode = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ygs4n"]
+shader = ExtResource("4_fc3hj")
+shader_parameter/rect1_pos = Vector2(0.25, 0.25)
+shader_parameter/rect1_size = Vector2(0.3, 0.4)
+shader_parameter/rect2_pos = Vector2(0.55, 0.5)
+shader_parameter/rect2_size = Vector2(0.3, 0.3)
+shader_parameter/darkness = 0.50000002375
+shader_parameter/feather = 0.010000000475
+
+[node name="Tutorial" type="Control" unique_id=1159867214 node_paths=PackedStringArray("Pan", "TitleLabel", "TextLabel")]
+process_mode = 3
+z_index = 130
+material = SubResource("CanvasItemMaterial_k6wjy")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_tesn2")
+Pan = NodePath("VBoxContainer")
+TitleLabel = NodePath("VBoxContainer/PanelContainer/VBoxContainer2/Label")
+TextLabel = NodePath("VBoxContainer/PanelContainer/VBoxContainer2/HBoxContainer/Label")
+InSound = ExtResource("2_qxowp")
+OutSound = ExtResource("3_qvre0")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1846351667]
+material = SubResource("ShaderMaterial_ygs4n")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=965129877]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -252.0
+offset_top = -45.0
+offset_right = 252.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = -5
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=716385856]
+use_parent_material = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("5_1tefs")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/PanelContainer" unique_id=1615479839]
+use_parent_material = true
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer2" unique_id=2054468136]
+use_parent_material = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Captain Inventory"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer2" unique_id=1881589102]
+use_parent_material = true
+layout_mode = 2
+
+[node name="Label" type="RichTextLabel" parent="VBoxContainer/PanelContainer/VBoxContainer2/HBoxContainer" unique_id=2091802626]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("6_bccxl")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "fwfwa
+fwaf
+wafw
+af
+wfw
+a"
+fit_content = true
+autowrap_mode = 2
+visible_characters_behavior = 1
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=1586374127 groups=["DigitalButtons"]]
+process_mode = 1
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Understood"
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

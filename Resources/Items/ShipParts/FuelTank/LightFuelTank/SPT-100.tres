@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://cwoay1furrmi7"]
 
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="1_5kv6q"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://MetalEngineBase/Cardfight/Card/CardStats.gd" id="1_qenk7"]
 [ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="2_vlra8"]
 [ext_resource type="Resource" uid="uid://d0a5l4aegq46m" path="res://Resources/Items/ShipParts/FuelTank/LightFuelTank/SPT-200.tres" id="3_o7sn3"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://MetalEngineBase/Inventory/Scripts/ShipPartUpgrade.gd" id="4_nw4kc"]
@@ -33,7 +33,7 @@ UpgradeVersion = ExtResource("3_o7sn3")
 UpgradeTime = 600.0
 ItemName = "SPT-100"
 ItemDesc = "A light weight fuel tank with reduced size. Constructed from lightweight materials for reliability in combat operations. Finds its uses in smaller and more adgile ships."
-CardProviding = Array[ExtResource("1_5kv6q")]([ExtResource("2_vlra8"), ExtResource("2_vlra8"), ExtResource("2_vlra8"), ExtResource("5_udr7u"), ExtResource("4_ry7j3")])
+CardProviding = Array[ExtResource("1_qenk7")]([ExtResource("2_vlra8"), ExtResource("2_vlra8"), ExtResource("2_vlra8"), ExtResource("5_udr7u"), ExtResource("4_ry7j3")])
 CanTransfer = false
 Cost = 7500
 PartType = 3

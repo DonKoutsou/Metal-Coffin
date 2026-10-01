@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ijv7nlfv5kot"]
 
 [ext_resource type="Script" uid="uid://ymkdxuvpfpww" path="res://Scenes/InScreenUI/Cage_Fight_IngameUI.gd" id="1_agi46"]
-[ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Resources/EventHandlers/UIEventH.tres" id="2_wgin8"]
+[ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Scenes/EventHandlers/UIEventH.tres" id="2_wgin8"]
 [ext_resource type="PackedScene" uid="uid://bq1ns0us14bn3" path="res://Scenes/InScreenUI/Cursor/Cursor.tscn" id="3_36708"]
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRT_Mat.tres" id="3_munnc"]
 [ext_resource type="PackedScene" uid="uid://d0iiqaijsg1y1" path="res://Scenes/InScreenUI/Commande_Line/command_line.tscn" id="14_cqdt6"]

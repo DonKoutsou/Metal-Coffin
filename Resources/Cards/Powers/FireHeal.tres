@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://w0powsomsqvs"]
 
-[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="2_4nj0o"]
-[ext_resource type="Script" uid="uid://cxqm0ly7x6xpc" path="res://Scenes/Card_Fight/Card/Card_Modules/ShieldCardModule.gd" id="3_jtve2"]
-[ext_resource type="Script" uid="uid://dii0601eue75s" path="res://Scenes/Card_Fight/Card/Card_Passives/On_FireTickPassive.gd" id="4_u67ox"]
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="5_a11ci"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://MetalEngineBase/Cardfight/Card/Card_Modules/CardModule.gd" id="2_4nj0o"]
+[ext_resource type="Script" uid="uid://cxqm0ly7x6xpc" path="res://MetalEngineBase/Cardfight/Card/Card_Modules/ShieldCardModule.gd" id="3_jtve2"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://MetalEngineBase/Cardfight/Card/CardStats.gd" id="4_no3k5"]
+[ext_resource type="Script" uid="uid://dii0601eue75s" path="res://MetalEngineBase/Cardfight/Card/Card_Passives/On_FireTickPassive.gd" id="4_u67ox"]
 
 [sub_resource type="Resource" id="Resource_2ia5w"]
 script = ExtResource("3_jtve2")
@@ -16,7 +16,7 @@ Receiver = 3
 metadata/_custom_type_script = "uid://dii0601eue75s"
 
 [resource]
-script = ExtResource("5_a11ci")
+script = ExtResource("4_no3k5")
 txFile = "uid://btpk7ot0qwksh"
 CardName = "Fire Heal"
 Energy = 2

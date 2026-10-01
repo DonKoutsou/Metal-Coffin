@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://mxfnm7hywo4f"]
 
-[ext_resource type="Script" uid="uid://cdwrypr6ltbch" path="res://Scripts/UI/Damage_Floater.gd" id="1_nmcop"]
+[ext_resource type="Script" uid="uid://cdwrypr6ltbch" path="res://MetalEngineBase/Utils/Damage_Floater.gd" id="1_nmcop"]
 
 [node name="DamageFloater" type="Label" unique_id=1327449243]
 anchors_preset = 8

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://c2tp3xgyap8ar"]
 
 [ext_resource type="Script" uid="uid://fn1kaffx2hk3" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Elint/e_lint.gd" id="1_n0goy"]
-[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="2_ca4np"]
-[ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="3_oilva"]
+[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Scenes/EventHandlers/ShipControllerEventHandler.tres" id="2_ca4np"]
+[ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Scenes/EventHandlers/DroneDockEventH.tres" id="3_oilva"]
 [ext_resource type="Texture2D" uid="uid://bbq0mj44rwwoi" path="res://Assets/UIPiecies/Elint/transparent/Opacity4.png" id="5_2ueie"]
 [ext_resource type="Texture2D" uid="uid://bg3txpouwra6w" path="res://Assets/UIPiecies/Elint/transparent/Opacity17.png" id="5_fn607"]
 [ext_resource type="Texture2D" uid="uid://bltupetrpqvj6" path="res://Assets/UIPiecies/Elint/transparent/Opacity16.png" id="6_heli2"]

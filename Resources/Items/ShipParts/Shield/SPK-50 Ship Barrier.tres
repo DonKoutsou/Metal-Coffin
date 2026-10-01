@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://carmmqiu3rn2f"]
 
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="2_hyayd"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://MetalEngineBase/Cardfight/Card/CardStats.gd" id="1_o58x0"]
 [ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="2_va7jv"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://MetalEngineBase/Inventory/Scripts/ShipPartUpgrade.gd" id="3_30ir8"]
 [ext_resource type="Resource" uid="uid://dr3fmkjvlgj4l" path="res://Resources/Cards/ShieldOverChargeTeam.tres" id="3_385cy"]
@@ -42,7 +42,7 @@ disp = 3
 DispositionAmm = 0.25
 ItemName = "SPK-50 Ship Barrier"
 ItemDesc = "The SPK-50 enhances barrier technology with a fortified energy lattice, expanding its coverage and strength. Capable of withstanding greater impacts, it ensures superior defense against concentrated missile volleys and sustained heavy weapons fire. Ideal for medium-class ships requiring enhanced survivability in high-stakes confrontations."
-CardProviding = Array[ExtResource("2_hyayd")]([ExtResource("2_va7jv"), ExtResource("3_385cy"), ExtResource("2_va7jv"), ExtResource("3_385cy"), ExtResource("2_va7jv"), ExtResource("3_385cy"), ExtResource("4_o58x0"), ExtResource("4_385cy")])
+CardProviding = Array[ExtResource("1_o58x0")]([ExtResource("2_va7jv"), ExtResource("3_385cy"), ExtResource("2_va7jv"), ExtResource("3_385cy"), ExtResource("2_va7jv"), ExtResource("3_385cy"), ExtResource("4_o58x0"), ExtResource("4_385cy")])
 Tier = 1
 CanTransfer = false
 Cost = 70000

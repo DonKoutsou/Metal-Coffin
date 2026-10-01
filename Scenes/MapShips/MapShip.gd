@@ -57,7 +57,6 @@ var LastRecordedOffset : Vector2
 
 signal PortChanged()
 
-
 var StormValue : float = 0
 var WindVector : Vector2
 var FuelWindEffect : float
@@ -73,8 +72,6 @@ func _ready() -> void:
 	
 	MapPointerManager.GetInstance().AddShip(self, true)
 
-	#TODO probably a better way to do this
-	Cpt.CaptainShip = self
 	RadarShape.VisStat = Cpt._GetStat(STAT_CONST.STATS.VISUAL_RANGE)
 	ElintShape.ElintStat = Cpt._GetStat(STAT_CONST.STATS.ELINT)
 	if (SonarShape != null):
@@ -197,6 +194,9 @@ func Upgrade(delta : float) -> float:
 	for g in GetSquad():
 		timeLeft = max(timeLeft, g.Upgrade(delta))
 	
+	if (CurrentPort.HasUpgrade()):
+		timeLeft /= 2
+			
 	return timeLeft
 	
 func Install(delta :float) -> float:
@@ -230,25 +230,16 @@ func PartChanged(It : ShipPart) -> void:
 			#UpdateELINTTRange(Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT))
 
 func GetSonarTargets() -> Array[Node2D]:
-	var Targets : Array[Node2D] = SonarShape.GetSonarTargets()
-	for g : PlayerDrivenShip in GetSquad():
-		Targets.append_array(g.SonarShape.GetSonarTargets())
-	return Targets
+	return [];
 
 func GetSonarTargetInfo() -> Array[SonarTargetInfo]:
-	var Targets : Array[SonarTargetInfo] = SonarShape.GetSonarTargetInfo()
-	for g : PlayerDrivenShip in GetSquad():
-		Targets.append_array(g.SonarShape.GetSonarTargetInfo())
-	return Targets
+	return [];
 
 func OnSonarRangeChanged() -> void:
 	SonarRangeChanged.emit()
 
 func GetElintTargetInfo() -> Array[ElintTargetInfo]:
-	var Targets : Array[ElintTargetInfo] = ElintShape.GetELintTargetInfo()
-	for g : PlayerDrivenShip in GetSquad():
-		Targets.append_array(g.ElintShape.GetELintTargetInfo())
-	return Targets
+	return [];
 
 func GetClosestElint() -> Vector2:
 	var closest : Vector2 = ElintShape.GetClosestElint()
@@ -271,6 +262,9 @@ func OnElintRangeChanged() -> void:
 
 func ToggleFuelRangeVisibility(t : bool) -> void:
 	ShowFuelRange = t
+
+func Friendly() -> bool:
+	return true
 
 func SetCurrentPort(Port : MapSpot):
 	CurrentPort = Port
@@ -297,11 +291,11 @@ func _HandleLanding(delta : float) -> void:
 	if (Altitude != NewAltitude):
 		UpdateAltitude(move_toward(Altitude, NewAltitude, delta * 1000))
 		var landed = Landed()
-		if (landed and self is PlayerDrivenShip):
-			PopUpManager.GetInstance().DoFadeNotif("{0} has landed".format([Cpt.GetCaptainName()]))
-			RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.LANDING_END)
-		else: if (landed and self is HostileShip):
-			RadarShape.Landed = landed
+		if (landed):
+			OnLanded()
+
+func OnLanded() -> void:
+	pass
 
 func RemovePort():
 	ShipDeparted.emit(CurrentPort)
@@ -339,27 +333,7 @@ func HaltShip():
 var AccelChanged = false
 
 func AccelerationChanged(value: float, forced : bool = false) -> void:
-	if (Docked):
-		return
-	if (value > 0):
-		if (GetFuelRange() <= 0):
-			HaltShip()
-			PopUpManager.GetInstance().DoFadeNotif("You have run out of fuel.")
-			return
-
-	AccelChanged = true
-	
-	var NewSpeed = max(0,min(value,1) * GetShipMaxSpeed())
-	
-	SetSpeed(NewSpeed)
-	if (forced):
-		AForced.emit(NewSpeed)
-	else:
-		AChanged.emit(NewSpeed)
-	
-	for g in GetSquad():
-		g.SetSpeed(max(0,min(value,1) * GetShipMaxSpeed()) )
-		g.AccelChanged = true
+	pass
 	
 func Steer(Rotation : float) -> void:
 	rotation = wrap(rotation + (Rotation / 50), -PI, PI)
@@ -409,7 +383,6 @@ func Damage(amm : float, ShowVisuals : bool = true) -> void:
 
 func Kill() -> void:
 	InventoryManager.GetInstance().OnCharacterRemoved(Cpt)
-	MapPointerManager.GetInstance().RemoveShip(self)
 	OnShipDestroyed.emit(self)
 	queue_free()
 	get_parent().remove_child(self)
@@ -506,28 +479,11 @@ func ToggleElint(t : bool):
 
 #-------------------------------------------------
 func BodyEnteredBody(Body : Area2D) -> void:
-	if (Docked):
-		return
-	var Parent = Body.get_parent()
-	if (Parent is MapSpot):
-		ActionTracker.OnActionCompleted(ActionTracker.Action.LANDING)
-		SetCurrentPort(Parent)
-		Parent.OnSpotAproached(self)
-		for g in GetSquad():
-			g.SetCurrentPort(Parent)
-			Parent.OnSpotAproached(g)
+	pass
 
 #-------------------------------------------------
 func BodyLeftBody(Body : Area2D) -> void:
-	if (Docked):
-		return
-	var Parent = Body.get_parent()
-	if (Parent is MapSpot):
-		RemovePort()
-		Parent.OnSpotDeparture(self)
-		for g in GetSquad():
-			g.RemovePort()
-			Parent.OnSpotDeparture(g)
+	pass
 
 #//////////////////////////////////////////////////////
  #██████  ███████ ████████ ████████ ███████ ██████  ███████ 

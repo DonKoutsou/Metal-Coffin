@@ -14,6 +14,7 @@ colors = PackedColorArray(1, 1, 1, 1, 0.63811576, 0.63811576, 0.6381157, 1, 1, 1
 
 [node name="TrailLine" type="Line2D" unique_id=909123147]
 texture_filter = 3
+points = PackedVector2Array(0, 0)
 width = 7.47
 width_curve = SubResource("Curve_tr6me")
 gradient = SubResource("Gradient_wgwlc")

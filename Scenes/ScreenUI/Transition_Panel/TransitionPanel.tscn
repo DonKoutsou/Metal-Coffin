@@ -233,4 +233,4 @@ randomness = 0.5
 process_material = SubResource("ParticleProcessMaterial_bqtfu")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1865753901]
-color = Color(0.36308, 0.36308, 0.36308, 1)
+color = Color(-1.035, -1.035, -1.15, 1)

@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://c2xdu0g24g84o"]
 
-[ext_resource type="Script" uid="uid://cal2o02w6vol6" path="res://Scenes/Card_Fight/Card/Card_Modules/DamageReductionCardModule.gd" id="2_dcwc3"]
-[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="3_x7h2e"]
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="4_ftjex"]
+[ext_resource type="Script" uid="uid://cal2o02w6vol6" path="res://MetalEngineBase/Cardfight/Card/Card_Modules/DamageReductionCardModule.gd" id="2_dcwc3"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://MetalEngineBase/Cardfight/Card/CardStats.gd" id="3_gcvdo"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://MetalEngineBase/Cardfight/Card/Card_Modules/CardModule.gd" id="3_x7h2e"]
 
 [sub_resource type="Resource" id="Resource_4hc72"]
 script = ExtResource("2_dcwc3")
@@ -13,7 +13,7 @@ TierUpgradeMethod = 1
 metadata/_custom_type_script = "uid://cal2o02w6vol6"
 
 [resource]
-script = ExtResource("4_ftjex")
+script = ExtResource("3_gcvdo")
 txFile = "uid://chpdhvnha7hih"
 CardName = "Deceleration Field"
 Energy = 1

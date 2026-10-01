@@ -58,36 +58,42 @@ func _ready() -> void:
 func Init(Ship : Node2D) -> void:
 	CurrentShip = Ship
 	
-	if (Ship is HostileShip):
-		#if (Commander.ENEMY_DEBUG):
-			#HOSTILE_SHIP_DEBUG
-			#marker.ToggleFriendlyShipDetails(true)
-			#////
-		
-		ToggleShipDetails(true)
-		if (Ship.Destroyed):
-			OnHostileShipDestroyed()
-		else:
-			if (Commander.ENEMY_DEBUG):
-				SetMarkerDetails(Ship.ShipName + " LOD : {0}".format([Ship.currentLOD]), Ship.Cpt.ShipCallsign ,Ship.GetShipSpeed())
+	if (Ship is MapShip):
+		if (!Ship.Friendly()):
+			#if (Commander.ENEMY_DEBUG):
+				#HOSTILE_SHIP_DEBUG
+				#marker.ToggleFriendlyShipDetails(true)
+				#////
+			
+			ToggleShipDetails(true)
+			if (Ship.Destroyed):
+				OnHostileShipDestroyed()
 			else:
-				SetMarkerDetails(Ship.ShipName, Ship.Cpt.ShipCallsign ,Ship.GetShipSpeed())
+				if (Helper.ENEMY_DEBUG):
+					SetMarkerDetails(Ship.ShipName + " LOD : {0}".format([Ship.currentLOD]), Ship.Cpt.ShipCallsign ,Ship.GetShipSpeed())
+				else:
+					SetMarkerDetails(Ship.ShipName, Ship.Cpt.ShipCallsign ,Ship.GetShipSpeed())
+				SetType("Ship")
+				Ship.connect("ShipWrecked", OnHostileShipDestroyed)
+			
+			Ship.RadarShape.VisualContactCountdownStarted.connect(VisualCountountStarted)
+			ToggleVisualContactProgress(true)
+			Ship.Alarmed.connect(DoAlarm)
+			Ship.AltitudeChanged.connect(AltitudeChanged)
+			
+		else:
+			Ship.ShipDockActions.connect(ToggleShowRefuel)
+			Ship.ShipDeparted.connect(OnShipDeparted)
+			#Ship.ElintShape.ElintTriggered.connect(ToggleShowElint)
+			Ship.Cpt.OnNameChanged.connect(OnCaptainNameChanged)
+			Ship.AltitudeChanged.connect(AltitudeChanged)
+			#Ship.SonarToggled.connect(ToggleRadarRange)
+			#Ship.SonarDirectionChanged.connect(UpdateRadarDir)
+			Ship.DroneReturning.connect(DroneReturning)
+			
+			call_deferred("ToggleShipDetails", true)
+			SetMarkerDetails(Ship.Cpt.GetCaptainName(), "F",Ship.GetShipSpeed())
 			SetType("Ship")
-			Ship.connect("ShipWrecked", OnHostileShipDestroyed)
-		
-	else : if (Ship is PlayerDrivenShip):
-		Ship.ShipDockActions.connect(ToggleShowRefuel)
-		Ship.ShipDeparted.connect(OnShipDeparted)
-		#Ship.ElintShape.ElintTriggered.connect(ToggleShowElint)
-		Ship.Cpt.OnNameChanged.connect(OnCaptainNameChanged)
-		Ship.AltitudeChanged.connect(AltitudeChanged)
-		#Ship.SonarToggled.connect(ToggleRadarRange)
-		#Ship.SonarDirectionChanged.connect(UpdateRadarDir)
-		Ship.DroneReturning.connect(DroneReturning)
-		
-		call_deferred("ToggleShipDetails", true)
-		SetMarkerDetails(Ship.Cpt.GetCaptainName(), "F",Ship.GetShipSpeed())
-		SetType("Ship")
 		
 	else : if (Ship is Missile):
 		if (!Ship.Friendly):
@@ -96,13 +102,7 @@ func Init(Ship : Node2D) -> void:
 		SetMarkerDetails(Ship.MissileName, "M",Ship.GetSpeed())
 		Ship.AltitudeChanged.connect(AltitudeChanged)
 		SetType("Missile")
-	
-	if (Ship is HostileShip):
-		Ship.RadarShape.VisualContactCountdownStarted.connect(VisualCountountStarted)
-		ToggleVisualContactProgress(true)
-		Ship.Alarmed.connect(DoAlarm)
-		Ship.AltitudeChanged.connect(AltitudeChanged)
-	
+
 	if (Ship is Missile):
 		RadarRange.visible = Ship.Friendly
 	else:
@@ -199,73 +199,72 @@ func Update(IsControlled : bool, CamPos : Vector2, delta : float) -> void:
 		LandingNotif.queue_free()
 	
 	
-	
-	if (CurrentShip is HostileShip):
-		if (CurrentShip.Docked):
-			visible = false
-			return
-		else:
-			visible = true
-		ToggleShipDetails(!CurrentShip.Docked)
-		ToggleVisualContactProgress(CurrentShip.RadarShape.VisualContactCountdown < 20)
-		if (CurrentShip.RadarShape.VisualContactCountdown < 20):
-			UpdateVisualContactProgress(CurrentShip.RadarShape.VisualContactCountdown)
-		#if (EnemyDebug):
-			#global_position = ship.GetShipParalaxPosition(CamPos, Zoom)
-			#UpdateSpeed(ship.GetShipSpeed())
-			#
-			#Marker.ClearTime()
-			#var fuelstats
-			#if (ship.Docked):
-				#fuelstats = ship.Command.GetFuelStats()
+	if (CurrentShip is MapShip):
+		if (!CurrentShip.Friendly()):
+			if (CurrentShip.Docked):
+				visible = false
+				return
+			else:
+				visible = true
+			ToggleShipDetails(!CurrentShip.Docked)
+			ToggleVisualContactProgress(CurrentShip.RadarShape.VisualContactCountdown < 20)
+			if (CurrentShip.RadarShape.VisualContactCountdown < 20):
+				UpdateVisualContactProgress(CurrentShip.RadarShape.VisualContactCountdown)
+			#if (EnemyDebug):
+				#global_position = ship.GetShipParalaxPosition(CamPos, Zoom)
+				#UpdateSpeed(ship.GetShipSpeed())
+				#
+				#Marker.ClearTime()
+				#var fuelstats
+				#if (ship.Docked):
+					#fuelstats = ship.Command.GetFuelStats()
+				#else:
+					#fuelstats = ship.GetFuelStats()
+				#Marker.UpdateDroneFuel(roundi(fuelstats["CurrentFuel"]), fuelstats["MaxFuel"])
+				#Marker.UpdateTrajectory(ship.global_rotation)
 			#else:
-				#fuelstats = ship.GetFuelStats()
-			#Marker.UpdateDroneFuel(roundi(fuelstats["CurrentFuel"]), fuelstats["MaxFuel"])
-			#Marker.UpdateTrajectory(ship.global_rotation)
-		#else:
-		ClearFuel()
-		modulate.a = 1
-		if (CurrentShip.Destroyed):
-			SetMarkerDetails("Ship Debris", "" ,0)
-			global_position = SavedPosition
-		else: if (CurrentShip.VisibleBy.size() > 0 or Commander.ENEMY_DEBUG):
-			#if (ship.StormValue > 0.9):
-				#var newpos = ship.GetShipParalaxPosition(CamPos, CurrentZoom)
-				#newpos += Vector2(randf_range(20, -20), randf_range(20, -20))
-				#global_position = newpos
-				#UpdateTrajectory(randf_range(PI * 2, PI * -2))
-			#else:
-			if (Commander.ENEMY_DEBUG):
-				OnCaptainNameChanged(CurrentShip.ShipName + " LOD : {0}".format([CurrentShip.currentLOD]))
-				
-			global_position = CurrentShip.GetShipParalaxPosition(CamPos, CurrentZoom)
-			SavedPosition = global_position
-			if (Commander.ENEMY_DEBUG):
-				if (LandingNotif != null):
-					UpdateAltitude(CurrentShip.Altitude)
-			
-			if (CurrentShip.ExposedValue > 4 or Commander.ENEMY_DEBUG):
-				UpdateSpeed(CurrentShip.GetShipSpeed())
-			else:
-				SetSpeedUnknown()
-				
-			if (CurrentShip.ExposedValue > 2 or Commander.ENEMY_DEBUG):
-				UpdateTrajectory(CurrentShip.global_rotation)
-			else:
-				HideTrajectory()
-				
-			ClearTime()
-			SetTime()
-		else :
-			modulate.a = 0.5
-			var timepast = Clock.GetHoursSince(TimeLastSeen)
-			if (timepast > 24):
-				RemoveSelf.emit()
-			else:
-				UpdateTime(timepast)
+			ClearFuel()
+			modulate.a = 1
+			if (CurrentShip.Destroyed):
+				SetMarkerDetails("Ship Debris", "" ,0)
 				global_position = SavedPosition
-	else:
-		if (CurrentShip is PlayerDrivenShip):
+			else: if (CurrentShip.VisibleBy.size() > 0 or Helper.ENEMY_DEBUG):
+				#if (ship.StormValue > 0.9):
+					#var newpos = ship.GetShipParalaxPosition(CamPos, CurrentZoom)
+					#newpos += Vector2(randf_range(20, -20), randf_range(20, -20))
+					#global_position = newpos
+					#UpdateTrajectory(randf_range(PI * 2, PI * -2))
+				#else:
+				if (Helper.ENEMY_DEBUG):
+					OnCaptainNameChanged(CurrentShip.ShipName + " LOD : {0}".format([CurrentShip.currentLOD]))
+					
+				global_position = CurrentShip.GetShipParalaxPosition(CamPos, CurrentZoom)
+				SavedPosition = global_position
+				if (Helper.ENEMY_DEBUG):
+					if (LandingNotif != null):
+						UpdateAltitude(CurrentShip.Altitude)
+				
+				if (CurrentShip.ExposedValue > 4 or Helper.ENEMY_DEBUG):
+					UpdateSpeed(CurrentShip.GetShipSpeed())
+				else:
+					SetSpeedUnknown()
+					
+				if (CurrentShip.ExposedValue > 2 or Helper.ENEMY_DEBUG):
+					UpdateTrajectory(CurrentShip.global_rotation)
+				else:
+					HideTrajectory()
+					
+				ClearTime()
+				SetTime()
+			else :
+				modulate.a = 0.5
+				var timepast = Clock.GetHoursSince(TimeLastSeen)
+				if (timepast > 24):
+					RemoveSelf.emit()
+				else:
+					UpdateTime(timepast)
+					global_position = SavedPosition
+		else:
 			if (CurrentShip.Docked):
 				visible = false
 				return
@@ -297,28 +296,28 @@ func Update(IsControlled : bool, CamPos : Vector2, delta : float) -> void:
 			var fuelstats = CurrentShip.GetFuelStats()
 			UpdateDroneFuel(roundi(fuelstats["CurrentFuel"]), fuelstats["MaxFuel"])
 
-		else : if (CurrentShip is Missile):
-			if (CurrentShip.Friendly or CurrentShip.VisibleBy.size() > 0):
-				RadarRange.rotation = CurrentShip.rotation
-				global_position = CurrentShip.global_position
-				SavedPosition = global_position
-				if (LandingNotif != null):
-					#OnLandingStarted()
-					UpdateAltitude(CurrentShip.Altitude)
-				visible = true
-				ClearTime()
-				UpdateTrajectory(CurrentShip.global_rotation)
-				UpdateSpeed(CurrentShip.GetAffectedSpeed())
-				ClearTime()
-				SetTime()
-			else :
-				modulate.a = 0.5
-				var timepast = Clock.GetHoursSince(TimeLastSeen)
-				if (timepast > 2):
-					RemoveSelf.emit()
-				else:
-					UpdateTime(timepast)
-					global_position = SavedPosition
+	else : if (CurrentShip is Missile):
+		if (CurrentShip.Friendly or CurrentShip.VisibleBy.size() > 0):
+			RadarRange.rotation = CurrentShip.rotation
+			global_position = CurrentShip.global_position
+			SavedPosition = global_position
+			if (LandingNotif != null):
+				#OnLandingStarted()
+				UpdateAltitude(CurrentShip.Altitude)
+			visible = true
+			ClearTime()
+			UpdateTrajectory(CurrentShip.global_rotation)
+			UpdateSpeed(CurrentShip.GetAffectedSpeed())
+			ClearTime()
+			SetTime()
+		else :
+			modulate.a = 0.5
+			var timepast = Clock.GetHoursSince(TimeLastSeen)
+			if (timepast > 2):
+				RemoveSelf.emit()
+			else:
+				UpdateTime(timepast)
+				global_position = SavedPosition
 	
 	
 	UpdateTexts()

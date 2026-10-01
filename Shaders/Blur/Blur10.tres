@@ -5,3 +5,4 @@
 [resource]
 shader = ExtResource("1_ebje2")
 shader_parameter/offset = 2.000000095
+shader_parameter/col = Color(1, 1, 1, 1)

@@ -1,12 +1,13 @@
 [gd_resource type="Resource" script_class="MissileItem" format=3 uid="uid://cn37ky4htb58u"]
 
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="1_72gep"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://MetalEngineBase/Cardfight/Card/CardStats.gd" id="1_72gep"]
 [ext_resource type="Resource" uid="uid://7uk8xj2yft8v" path="res://Resources/Cards/Missile/HeatSeekingMissile.tres" id="2_mdy32"]
 [ext_resource type="Script" uid="uid://joaef3hf1eps" path="res://MetalEngineBase/Inventory/Scripts/MissileItem.gd" id="3_mdy32"]
 
 [resource]
 script = ExtResource("3_mdy32")
 MissileFile = "uid://dvdaxeaw05g4k"
+Distance = 1500
 Speed = 2.0
 Damage = 50
 Type = 1
@@ -14,4 +15,7 @@ ItemName = "Heat Seeking Missile"
 ItemDesc = "A balanced missile system offering medium range and speed. Suited for general-purpose combat where flexibility and reliability matter most."
 MaxStackCount = 99
 CardProviding = Array[ExtResource("1_72gep")]([ExtResource("2_mdy32")])
+Tier = 0
+CanTransfer = true
 Cost = 800
+PartType = 0

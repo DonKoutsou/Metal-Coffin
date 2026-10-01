@@ -29,6 +29,8 @@ static func GetInstance() -> Ingame_UIManager:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Instance = self
+	
+	Helper.PopupPlacement = PopupPlecement
 	EventHandler.PausePressed.connect(Pause)
 	
 	EventHandler.InventoryToggled.connect(GetInventory().ToggleInventory)

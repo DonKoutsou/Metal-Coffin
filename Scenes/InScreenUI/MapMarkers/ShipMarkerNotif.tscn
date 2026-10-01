@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d2vlvv0emlupr"]
 
-[ext_resource type="Script" uid="uid://lmbe765mf315" path="res://Scenes/InScreenUI/MapMarkers/ShipMarkerNotif.gd" id="1_yijdn"]
+[ext_resource type="Script" uid="uid://lmbe765mf315" path="res://Scenes/InScreenUI/MapMarkers/ShipMarkerNotif.gd" id="1_bej76"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k1nir"]
 light_mode = 1
@@ -79,7 +79,7 @@ material = SubResource("CanvasItemMaterial_k1nir")
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 2
-script = ExtResource("1_yijdn")
+script = ExtResource("1_bej76")
 anim = NodePath("AnimationPlayer")
 Line = NodePath("Line2D")
 DetailPanel = NodePath("Control")

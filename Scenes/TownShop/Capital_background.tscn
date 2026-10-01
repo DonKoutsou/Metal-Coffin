@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d0ujbu68jgisw"]
 
-[ext_resource type="Script" uid="uid://h6l78xy6duvo" path="res://Scripts/parallax_background.gd" id="1_y52c6"]
+[ext_resource type="Script" uid="uid://h6l78xy6duvo" path="res://MetalEngineBase/parallax_background.gd" id="1_y52c6"]
 [ext_resource type="Texture2D" uid="uid://bvxgotu4e723h" path="res://Assets/TownBackgrounds/IndustrialLayer-2.png" id="2_eg41f"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/Particles/smoke_02.png" id="3_kl0cj"]
 [ext_resource type="Texture2D" uid="uid://d1p7ntae2wlxa" path="res://Assets/TownBackgrounds/CapitalAnimation/IndustrialLayer-2_Frame2.png" id="4_cjb24"]

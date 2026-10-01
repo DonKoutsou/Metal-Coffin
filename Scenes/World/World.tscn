@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://cbhf8nh85npqq"]
 
-[ext_resource type="Script" uid="uid://bjsxahv83w2pm" path="res://Scripts/world.gd" id="1_sc0wx"]
+[ext_resource type="Script" uid="uid://bjsxahv83w2pm" path="res://Scenes/World/world.gd" id="1_sc0wx"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="3_inc6i"]
 [ext_resource type="PackedScene" uid="uid://o2g164rxtchr" path="res://Scenes/GlobalManagers/Controller/ship_controller.tscn" id="3_w0bku"]
 [ext_resource type="Resource" uid="uid://caroffy3ubxip" path="res://Resources/Captains/PlayerCaptains/Craden.tres" id="4_lqys3"]
-[ext_resource type="Script" uid="uid://db4epchvprg0h" path="res://Scripts/DialogueProgressHolder.gd" id="8_6vv6u"]
 [ext_resource type="PackedScene" uid="uid://ccmwul4ncd4dx" path="res://Scenes/Enemies/commander.tscn" id="10_15dwo"]
+[ext_resource type="Script" uid="uid://bhjvlymp807sj" path="res://MetalEngineBase/Clock/clock.gd" id="12_0d0er"]
 [ext_resource type="PackedScene" uid="uid://cyujmksfffet" path="res://Scenes/Map/map.tscn" id="12_11aq8"]
-[ext_resource type="Script" uid="uid://sp6oe17wqrga" path="res://Scenes/InScreenUI/WorldView/worldview_manager.gd" id="15_kwl8l"]
-[ext_resource type="PackedScene" uid="uid://mqqrbhnagjvi" path="res://Scenes/GlobalManagers/Simulation/simulation_manager.tscn" id="16_mq4nq"]
-[ext_resource type="Script" uid="uid://s3ha37qvdear" path="res://Scripts/EventManager/event_manager.gd" id="19_b5aes"]
-[ext_resource type="Script" uid="uid://bqhtiqcy7irvm" path="res://Scripts/EventManager/HappeningList.gd" id="22_qs546"]
+[ext_resource type="Script" uid="uid://sp6oe17wqrga" path="res://MetalEngineBase/WorldView/worldview_manager.gd" id="15_kwl8l"]
+[ext_resource type="PackedScene" uid="uid://mqqrbhnagjvi" path="res://Simulation/simulation_manager.tscn" id="16_mq4nq"]
+[ext_resource type="Script" uid="uid://s3ha37qvdear" path="res://Scenes/GlobalManagers/EventManager/event_manager.gd" id="19_b5aes"]
+[ext_resource type="Script" uid="uid://bqhtiqcy7irvm" path="res://Scenes/GlobalManagers/EventManager/HappeningList.gd" id="22_qs546"]
 
 [sub_resource type="Resource" id="Resource_tlnwl"]
 script = ExtResource("22_qs546")
@@ -25,7 +25,7 @@ metadata/_custom_type_script = "uid://bqhtiqcy7irvm"
 script = ExtResource("22_qs546")
 metadata/_custom_type_script = "uid://bqhtiqcy7irvm"
 
-[node name="World" type="Control" unique_id=1553865631 node_paths=PackedStringArray("_Map", "_Command", "Controller")]
+[node name="World" type="Control" unique_id=1553865631 node_paths=PackedStringArray("_Map", "_Command", "Controller", "time")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -38,6 +38,7 @@ script = ExtResource("1_sc0wx")
 _Map = NodePath("Map")
 _Command = NodePath("Commander")
 Controller = NodePath("ShipController")
+time = NodePath("Clock")
 CardFightScene = "uid://bg4oh7r4qnxy8"
 LoadingScene = "uid://bas2hvjynjr05"
 FleetSeparationScene = "uid://cwjp7q1w18u4p"
@@ -52,10 +53,11 @@ PrologueDialgues = "uid://dbpg7tbyy6xmc"
 [node name="ShipController" parent="." unique_id=1833243847 instance=ExtResource("3_w0bku")]
 PlayerCaptain = ExtResource("4_lqys3")
 
-[node name="Commander" parent="." unique_id=505803959 instance=ExtResource("10_15dwo")]
+[node name="Clock" type="Node" parent="." unique_id=772525275]
+script = ExtResource("12_0d0er")
+metadata/_custom_type_script = "uid://bhjvlymp807sj"
 
-[node name="DialogueProgressHolder" type="Node" parent="." unique_id=1756460440]
-script = ExtResource("8_6vv6u")
+[node name="Commander" parent="." unique_id=505803959 instance=ExtResource("10_15dwo")]
 
 [node name="SimulationManager" parent="." unique_id=1179049765 instance=ExtResource("16_mq4nq")]
 

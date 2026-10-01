@@ -1,15 +1,16 @@
 [gd_scene format=3 uid="uid://dslxdgbana1k1"]
 
-[ext_resource type="Script" uid="uid://de8gy2g6upjg4" path="res://MetalEngineBase/Inventory/Scripts/InventoryManager.gd" id="2_n8wv5"]
+[ext_resource type="Script" uid="uid://de8gy2g6upjg4" path="res://Scenes/Inventory/InventoryManager.gd" id="2_n8wv5"]
 [ext_resource type="PackedScene" uid="uid://cmvl7w65kwp5a" path="res://MetalEngineBase/Inventory/CharacterInventory/character_inventory.tscn" id="3_5gkpo"]
-[ext_resource type="PackedScene" uid="uid://cgs0u1j4mhhx5" path="res://MetalEngineBase/Inventory/ItemDescriptor.tscn" id="4_8j1nc"]
+[ext_resource type="PackedScene" uid="uid://cgs0u1j4mhhx5" path="res://Scenes/Inventory/ItemDescriptor.tscn" id="4_8j1nc"]
 [ext_resource type="PackedScene" uid="uid://d3361rn6kikh1" path="res://Scenes/Inventory/ItemTransfer.tscn" id="5_pqw7i"]
 [ext_resource type="PackedScene" uid="uid://bxog70dwnkaal" path="res://Scenes/InScreenUI/ItemsAddedNotif.tscn" id="6_q7t14"]
-[ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/EventHandlers/MissileDockEventHandler.tres" id="7_ffxnd"]
-[ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="8_0fcos"]
-[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="8_37qp6"]
-[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="8_n1gkd"]
-[ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="9_ubet6"]
+[ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Scenes/EventHandlers/MissileDockEventHandler.tres" id="7_ffxnd"]
+[ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Scenes/EventHandlers/DroneDockEventH.tres" id="8_0fcos"]
+[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Scenes/EventHandlers/ShipControllerEventHandler.tres" id="8_37qp6"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://MetalEngineBase/Inventory/YellowPanel.tres" id="8_n1gkd"]
+[ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="9_oglie"]
+[ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://MetalEngineBase/Utils/InputScroll.gd" id="9_ubet6"]
 [ext_resource type="PackedScene" uid="uid://5eroibth7was" path="res://Resources/Funds/FundsDisplay_Inventory.tscn" id="11_37qp6"]
 [ext_resource type="Texture2D" uid="uid://bk3hmnxkvr5ab" path="res://Assets/UIPiecies/UI_Icons/network-bars.png" id="11_oglie"]
 [ext_resource type="Texture2D" uid="uid://dw7al4e4pdao4" path="res://Assets/UIPiecies/UI_Icons/Card.png" id="12_3d65x"]
@@ -58,6 +59,7 @@ CaptainStatsPlace = NodePath("MarginContainer/VBoxContainer2/PanelContainer/HBox
 MissileDockEventH = ExtResource("7_ffxnd")
 DroneDockEventH = ExtResource("8_0fcos")
 ControlledEventH = ExtResource("8_37qp6")
+PlayerWallet = ExtResource("9_oglie")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1420524392]
 layout_mode = 1

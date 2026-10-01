@@ -550,11 +550,11 @@ func _on_panel_container_2_mouse_exited() -> void:
 
 var animTween : Tween
 
-func PlayAnim(type : AnimatioType) -> void:
+func PlayAnim(type : CardStats.AnimatioType) -> void:
 	if (animTween != null):
 		return
 		
-	if (type == AnimatioType.EVASIVE):
+	if (type == CardStats.AnimatioType.EVASIVE):
 		#animOffset = Vector2.ZERO
 		animTween = create_tween()
 		animTween.set_ease(Tween.EASE_IN_OUT)
@@ -589,7 +589,3 @@ func PlayAnim(type : AnimatioType) -> void:
 		#drift_speed = 0.7
 		#drift_speed = 0.7
 	
-enum AnimatioType{
-	NONE,
-	EVASIVE,
-}

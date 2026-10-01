@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://dyc7jktln3i74"]
 
-[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="2_duro0"]
-[ext_resource type="Script" uid="uid://c4p5ur132vdkj" path="res://Scenes/Card_Fight/DamageInfo.gd" id="3_h0k6c"]
-[ext_resource type="Script" uid="uid://kct7kkjke6ao" path="res://Scenes/Card_Fight/Card/Card_Modules/EnergyOffensiveCardModule.gd" id="4_q7bqr"]
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="6_gqsau"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://MetalEngineBase/Cardfight/Card/Card_Modules/CardModule.gd" id="2_duro0"]
+[ext_resource type="Script" uid="uid://c4p5ur132vdkj" path="res://MetalEngineBase/Cardfight/DamageInfo.gd" id="3_h0k6c"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://MetalEngineBase/Cardfight/Card/CardStats.gd" id="4_4pr6j"]
+[ext_resource type="Script" uid="uid://kct7kkjke6ao" path="res://MetalEngineBase/Cardfight/Card/Card_Modules/EnergyOffensiveCardModule.gd" id="4_q7bqr"]
 
 [sub_resource type="Resource" id="Resource_1x6pr"]
 script = ExtResource("4_q7bqr")
@@ -14,7 +14,7 @@ TierUpgradeMethod = 1
 metadata/_custom_type_script = "uid://kct7kkjke6ao"
 
 [resource]
-script = ExtResource("6_gqsau")
+script = ExtResource("4_4pr6j")
 txFile = "uid://b6k631ygnoe06"
 CardName = "Tesla Coil"
 AllowDuplicates = true

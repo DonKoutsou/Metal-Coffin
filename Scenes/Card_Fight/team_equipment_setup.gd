@@ -117,7 +117,7 @@ func ItemSelected(Box : Inventory_Box_Res, _inv : CharacterInventory) -> void:
 	if (Box.IsEmpty()):
 		CurrentDescriptor.SetEmptyShopData(GetTypeOfBox(Box))
 	else:
-		CurrentDescriptor.SetData(Box, true, false, true, true, true)
+		CurrentDescriptor.SetData(Box, true, false, true, true, true, false)
 	
 	CurrentDescriptor.ItemAdd.connect(AddItem)
 	CurrentDescriptor.ItemUpgraded.connect(UpgradeItem)
@@ -132,7 +132,7 @@ func ItemSelected(Box : Inventory_Box_Res, _inv : CharacterInventory) -> void:
 #----------------------------------------------------------------------
 func UpdateDescriptor(Box : Inventory_Box_Res) -> void:
 	if (CurrentDescriptor != null):
-		CurrentDescriptor.SetData(Box, true, false, true, true, true)
+		CurrentDescriptor.SetData(Box, true, false, true, true, true, false)
 
 #----------------------------------------------------------------------
 func UpgradeItem(Box : Inventory_Box_Res) -> void:
@@ -252,6 +252,7 @@ func _on_stats_pressed() -> void:
 #----------------------------------------------------------------------
 func _on_deck_pressed() -> void:
 	CaptainStatCont.ShowDeck()
+	
 
 #----------------------------------------------------------------------
 func _on_inventory_pressed() -> void:

@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://c7wkqvg4osdjt" path="res://Assets/UIPiecies/UI_Icons/cardboard-box.png" id="12_0uykb"]
 [ext_resource type="Texture2D" uid="uid://3q376ia6bctu" path="res://Assets/Items/Wrench.png" id="13_baphb"]
 [ext_resource type="Texture2D" uid="uid://dwwluk8xikvpe" path="res://Assets/Items/cubeforcesmol.png" id="14_baphb"]
-[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="15_baphb"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://MetalEngineBase/Inventory/YellowPanel.tres" id="15_baphb"]
 [ext_resource type="Texture2D" uid="uid://s2ao6bntsnmw" path="res://Assets/Items/upgrade.png" id="15_cp5cc"]
 [ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="16_baphb"]
 [ext_resource type="PackedScene" uid="uid://dhbyfc1rfad2f" path="res://Scenes/TownShop/WorkShop/work_shop.tscn" id="17_t244x"]
@@ -80,7 +80,7 @@ canvas_item_default_texture_filter = 2
 gui_disable_input = true
 gui_snap_controls_to_pixels = false
 oversampling = false
-size = Vector2i(2812, 1582)
+size = Vector2i(1280, 720)
 size_2d_override = Vector2i(1280, 720)
 size_2d_override_stretch = true
 render_target_update_mode = 4

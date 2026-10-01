@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cqxnjihcai1kd"]
 
-[ext_resource type="Script" uid="uid://8du0534sf0gr" path="res://Scripts/UI/starting_screen.gd" id="1_kry56"]
+[ext_resource type="Script" uid="uid://8du0534sf0gr" path="res://Scenes/UI/starting_screen.gd" id="1_kry56"]
 [ext_resource type="Material" uid="uid://dxt6oe4rhk3du" path="res://Shaders/PostProcessMat.tres" id="3_62h02"]
-[ext_resource type="PackedScene" uid="uid://d2srq1vxysnra" path="res://Scenes/GlobalManagers/Tutorial/tutorial_manager.tscn" id="3_3551w"]
+[ext_resource type="PackedScene" uid="uid://d2srq1vxysnra" path="res://Scenes/Tutorial/tutorial_manager.tscn" id="3_3551w"]
 [ext_resource type="PackedScene" uid="uid://cneeylrqurx2q" path="res://Scenes/InScreenUI/Cursor/CursorReal.tscn" id="3_vb6t2"]
 
 [sub_resource type="Gradient" id="Gradient_7bhdu"]

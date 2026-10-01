@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://dsw1gh7af04md"]
 
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_bai2p"]
-[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="2_sjwff"]
-[ext_resource type="Script" uid="uid://br1hagurf546d" path="res://Scripts/amp.gd" id="3_xg1e4"]
-[ext_resource type="Script" uid="uid://bukudf4qdqxak" path="res://Scripts/UI/eq.gd" id="4_obufj"]
-[ext_resource type="StyleBox" uid="uid://0fbvc4n3mb7l" path="res://Theme/ProgrssBarBack.tres" id="5_sjwff"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://MetalEngineBase/Inventory/YellowPanel.tres" id="2_sjwff"]
+[ext_resource type="Script" uid="uid://br1hagurf546d" path="res://MetalEngineBase/amp.gd" id="3_xg1e4"]
+[ext_resource type="Script" uid="uid://bukudf4qdqxak" path="res://Scenes/UI/eq.gd" id="4_obufj"]
+[ext_resource type="StyleBox" uid="uid://0fbvc4n3mb7l" path="res://MetalEngineBase/Inventory/Stats/StatContainer/ProgrssBarBack.tres" id="5_sjwff"]
 
 [node name="Control" type="PanelContainer" unique_id=992997414 node_paths=PackedStringArray("Eqs")]
 custom_minimum_size = Vector2(100, 0)

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Captain" format=3 uid="uid://22pk1grsmvjx"]
 
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://MetalEngineBase/Inventory/Stats/ShipStat.gd" id="2_5r51y"]
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="3_hg1bf"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://MetalEngineBase/Cardfight/Card/CardStats.gd" id="2_x2bgs"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://MetalEngineBase/Inventory/Stats/Captain.gd" id="4_b2ula"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://MetalEngineBase/Inventory/Scripts/Item.gd" id="5_62pqv"]
 

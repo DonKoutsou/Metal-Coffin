@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://b5vi65a1j0fjf"]
 
-[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_s8djp"]
-[ext_resource type="Script" uid="uid://cs5fudgijb2eo" path="res://Scenes/InScreenUI/WorldView/worldview_notif.gd" id="2_5vett"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://MetalEngineBase/Inventory/YellowPanel.tres" id="1_s8djp"]
+[ext_resource type="Script" uid="uid://cs5fudgijb2eo" path="res://MetalEngineBase/WorldView/worldview_notif.gd" id="2_5vett"]
 [ext_resource type="PackedScene" uid="uid://mxfnm7hywo4f" path="res://Scenes/Old/damage_floater.tscn" id="3_gdonq"]
 [ext_resource type="StyleBox" uid="uid://54vphqglxfyk" path="res://Theme/ProgressBarFill.tres" id="4_gdonq"]
-[ext_resource type="StyleBox" uid="uid://0fbvc4n3mb7l" path="res://Theme/ProgrssBarBack.tres" id="5_il4on"]
+[ext_resource type="StyleBox" uid="uid://0fbvc4n3mb7l" path="res://MetalEngineBase/Inventory/Stats/StatContainer/ProgrssBarBack.tres" id="5_il4on"]
 
 [node name="WorldviewNotif" type="PanelContainer" unique_id=2089384312 node_paths=PackedStringArray("Negativebar", "Possetivebar")]
 anchors_preset = 1

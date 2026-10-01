@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://bv1syjs12hg14"]
 
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="1_inhi8"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://MetalEngineBase/Cardfight/Card/CardStats.gd" id="1_0rxww"]
 [ext_resource type="Resource" uid="uid://fc28s5epe4ye" path="res://Resources/Cards/RadarBuffSingle.tres" id="3_dxt6t"]
 [ext_resource type="Resource" uid="uid://cnet3bjwptmp7" path="res://Resources/Cards/VitalSpot.tres" id="4_jg2as"]
 [ext_resource type="Resource" uid="uid://dn2krxo3cw830" path="res://Resources/Items/ShipParts/Radar/MediumCheapRadar.tres" id="5_jg2as"]
@@ -31,6 +31,6 @@ UpgradeVersion = ExtResource("5_jg2as")
 UpgradeTime = 600.0
 ItemName = "BT-1"
 ItemDesc = "A fundamental radar system offering basic detection capabilities. Ideal for identifying nearby low-profile threats in standard operational conditions."
-CardProviding = Array[ExtResource("1_inhi8")]([ExtResource("3_dxt6t"), ExtResource("3_dxt6t"), ExtResource("4_jg2as"), ExtResource("4_jg2as")])
+CardProviding = Array[ExtResource("1_0rxww")]([ExtResource("3_dxt6t"), ExtResource("3_dxt6t"), ExtResource("4_jg2as"), ExtResource("4_jg2as")])
 Cost = 50000
 PartType = 2

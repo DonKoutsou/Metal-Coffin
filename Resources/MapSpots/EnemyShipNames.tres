@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="StringList" format=3 uid="uid://cqn4njtiebgrb"]
 
-[ext_resource type="Script" uid="uid://dap782a014k12" path="res://Scripts/UI/StringList.gd" id="1_0prjw"]
+[ext_resource type="Script" uid="uid://dap782a014k12" path="res://Scenes/UI/StringList.gd" id="1_0prjw"]
 
 [resource]
 script = ExtResource("1_0prjw")

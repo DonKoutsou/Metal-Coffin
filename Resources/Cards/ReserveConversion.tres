@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://c8reou7hykm77"]
 
-[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="2_7qc3q"]
-[ext_resource type="Script" uid="uid://b3ik3ixt10qr1" path="res://Scenes/Card_Fight/Card/Card_Modules/ReserveConversionModule.gd" id="3_4d6nm"]
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="5_vyo1w"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://MetalEngineBase/Cardfight/Card/Card_Modules/CardModule.gd" id="2_7qc3q"]
+[ext_resource type="Script" uid="uid://b3ik3ixt10qr1" path="res://MetalEngineBase/Cardfight/Card/Card_Modules/ReserveConversionModule.gd" id="3_4d6nm"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://MetalEngineBase/Cardfight/Card/CardStats.gd" id="5_vyo1w"]
 
 [sub_resource type="Curve" id="Curve_4d6nm"]
 _limits = [0.0, 2.0, 0.0, 50.0]

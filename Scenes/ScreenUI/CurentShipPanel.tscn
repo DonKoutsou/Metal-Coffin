@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://df70pkcnq556g"]
 
-[ext_resource type="Script" uid="uid://b2b2y5d4ayiko" path="res://Scripts/UI/curent_ship_panel.gd" id="1_aaq8a"]
+[ext_resource type="Script" uid="uid://b2b2y5d4ayiko" path="res://Scenes/UI/curent_ship_panel.gd" id="1_aaq8a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mxjk1"]
 content_margin_left = 10.0

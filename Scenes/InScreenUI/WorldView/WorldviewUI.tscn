@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://biiakq2r2vasn"]
 
-[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_b325w"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://MetalEngineBase/Inventory/YellowPanel.tres" id="1_b325w"]
 [ext_resource type="Script" uid="uid://bg5rdvie6bf4v" path="res://Scenes/InScreenUI/WorldView/worldview_ui.gd" id="2_omcf4"]
 [ext_resource type="PackedScene" uid="uid://dlkrd1kwoocdb" path="res://Scenes/InScreenUI/WorldView/worldviewUIContainer.tscn" id="3_ratq7"]
 

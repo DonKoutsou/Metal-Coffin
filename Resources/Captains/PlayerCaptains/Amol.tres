@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://MetalEngineBase/Inventory/Stats/Captain.gd" id="1_phe2p"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://MetalEngineBase/Inventory/Stats/ShipStat.gd" id="2_7h107"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://MetalEngineBase/Cardfight/Card/CardStats.gd" id="2_lcv25"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://MetalEngineBase/Inventory/Scripts/Item.gd" id="3_q3468"]
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="3_x13ps"]
 [ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/Engine.tres" id="8_0otar"]
 [ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FT-500.tres" id="9_cqbt2"]
 [ext_resource type="Resource" uid="uid://b5mce733abxqu" path="res://Resources/Items/Ammo/FireSuppressionUnit.tres" id="11_cqbt2"]

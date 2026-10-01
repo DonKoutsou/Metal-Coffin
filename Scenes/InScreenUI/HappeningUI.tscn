@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bkl2a6ey2cxpg"]
 
-[ext_resource type="Script" uid="uid://rvtufow2elj7" path="res://Scenes/Map/MapSpot/Happenings/HappeningInstance.gd" id="2_nimax"]
+[ext_resource type="Script" uid="uid://rvtufow2elj7" path="res://MetalEngineBase/Happenings/HappeningInstance.gd" id="2_nimax"]
 [ext_resource type="PackedScene" uid="uid://mxfnm7hywo4f" path="res://Scenes/Old/damage_floater.tscn" id="4_6q6vd"]
-[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="4_gqhsy"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://MetalEngineBase/Inventory/YellowPanel.tres" id="4_gqhsy"]
 [ext_resource type="PackedScene" uid="uid://dsw1gh7af04md" path="res://Scenes/Dialogue/Equalizer.tscn" id="5_fjydm"]
 [ext_resource type="PackedScene" uid="uid://dp5ghsxs3xitl" path="res://Scenes/Dialogue/linetest.tscn" id="5_ylhno"]
 [ext_resource type="AudioStream" uid="uid://bmcuncv0xwe2k" path="res://Assets/Sounds/TextSound.mp3" id="6_6q6vd"]
@@ -53,7 +53,7 @@ disable_3d = true
 own_world_3d = true
 world_3d = SubResource("World3D_kvmkw")
 handle_input_locally = false
-size = Vector2i(1312, 738)
+size = Vector2i(1280, 720)
 size_2d_override = Vector2i(1280, 720)
 size_2d_override_stretch = true
 render_target_update_mode = 4

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dmtr88wf7mpm3"]
 
-[ext_resource type="Script" uid="uid://yjwsivbwy68k" path="res://Scripts/prologue_end_trigger.gd" id="1_xooj2"]
+[ext_resource type="Script" uid="uid://yjwsivbwy68k" path="res://MetalEngineBase/prologue_end_trigger.gd" id="1_xooj2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xooj2"]
 radius = 500.0

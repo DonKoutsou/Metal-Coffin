@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dtym0y7dgx7iv"]
 
-[ext_resource type="Script" uid="uid://c0aqmcmnsa888" path="res://Scripts/UI/zoom_level.gd" id="1_a2q7o"]
+[ext_resource type="Script" uid="uid://c0aqmcmnsa888" path="res://Scenes/UI/zoom_level.gd" id="1_a2q7o"]
 [ext_resource type="StyleBox" uid="uid://cv6e2082iuddy" path="res://Theme/ZoomPanel.tres" id="2_ua54k"]
 
 [node name="VBoxContainer" type="Control" unique_id=3025055 node_paths=PackedStringArray("Text") groups=["ZoomAffected"]]

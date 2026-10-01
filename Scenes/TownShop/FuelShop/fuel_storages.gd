@@ -114,7 +114,7 @@ func GetFuelRangeWithExtraFuel(ExtraFuel : float) -> float:
 func Init(BoughtFuel : float, FuelPrice : float, LandedShips : Array[MapShip], Pos : MapSpot) -> void:
 	Spot = Pos
 	var CenterSpot = Pos.global_position
-	var SpotsInRange = Helper.GetSpotsCloserThan(Pos.global_position, 64000000)
+	var SpotsInRange = MapHelper.GetSpotsCloserThan(Pos.global_position, 64000000)
 	Spots[Pos] = get_viewport_rect().size / 2
 	for g in SpotsInRange:
 		if (g == Pos):

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://byk8ikxmio8k1"]
 
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="1_nbth7"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://MetalEngineBase/Cardfight/Card/CardStats.gd" id="1_nbth7"]
 [ext_resource type="Resource" uid="uid://cfcixcsymvkwg" path="res://Resources/Cards/CardInject.tres" id="2_ykqd2"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://MetalEngineBase/Inventory/Scripts/ShipPartUpgrade.gd" id="3_hlaoa"]
 [ext_resource type="Script" uid="uid://bu82128dhcpyg" path="res://MetalEngineBase/Inventory/Scripts/ShipPartItem.gd" id="4_mwar8"]

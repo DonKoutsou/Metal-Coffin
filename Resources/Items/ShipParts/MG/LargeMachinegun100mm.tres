@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="WeaponShipPart" format=3 uid="uid://d3ll4cruuw7vf"]
 
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://MetalEngineBase/Cardfight/Card/CardStats.gd" id="1_w7x0r"]
 [ext_resource type="Resource" uid="uid://b03hciwbxqb2s" path="res://Resources/Cards/Barrage/Barrage100mm.tres" id="2_7no4a"]
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="2_cejtf"]
 [ext_resource type="Resource" uid="uid://bl7mvgrw6tyes" path="res://Resources/Cards/Barrage/DrawRandomBarrage.tres" id="3_caxlu"]
 [ext_resource type="Script" uid="uid://dx8pydv0k6k3t" path="res://MetalEngineBase/Inventory/Scripts/WeaponShipPartItem.gd" id="4_7no4a"]
 [ext_resource type="Resource" uid="uid://b25yneeytw20f" path="res://Resources/Cards/Barrage/DrawRandomOffensive.tres" id="4_a1df5"]
@@ -33,7 +33,7 @@ Upgrades = Array[ExtResource("6_oaj4l")]([SubResource("Resource_fmxhr"), SubReso
 UpgradeTime = 1000.0
 ItemName = "MG-30 \"Tempest\" 100mm"
 ItemDesc = "the elite choice for those requiring ultimate firepower in critical scenarios. Featuring cutting-edge targeting and stabilization technology, 'Tempest' supports continuous and dynamic fire, overwhelming even the staunchest defenses with relentless precision and unmatched rate of fire."
-CardProviding = Array[ExtResource("2_cejtf")]([ExtResource("2_7no4a"), ExtResource("2_7no4a"), ExtResource("2_7no4a"), ExtResource("4_a1df5"), ExtResource("3_caxlu"), ExtResource("4_a1df5"), ExtResource("5_a1df5"), ExtResource("6_w7x0r")])
+CardProviding = Array[ExtResource("1_w7x0r")]([ExtResource("2_7no4a"), ExtResource("2_7no4a"), ExtResource("2_7no4a"), ExtResource("4_a1df5"), ExtResource("3_caxlu"), ExtResource("4_a1df5"), ExtResource("5_a1df5"), ExtResource("6_w7x0r")])
 Tier = 2
 CanTransfer = false
 Cost = 62000

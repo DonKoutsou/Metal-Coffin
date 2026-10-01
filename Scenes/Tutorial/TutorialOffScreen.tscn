@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://c5nqa1b7hofcs"]
+
+[ext_resource type="Script" uid="uid://b3kpitqta8cq6" path="res://Scenes/Tutorial/tutorial.gd" id="1_c2716"]
+[ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="2_gkxsm"]
+[ext_resource type="AudioStream" uid="uid://cmalipflqp1uv" path="res://Assets/Sounds/UI_out.mp3" id="3_5qs15"]
+[ext_resource type="Shader" uid="uid://bnlp28msbn21o" path="res://Scenes/Tutorial/TutorialFocusArea.gdshader" id="4_me2a2"]
+[ext_resource type="StyleBox" uid="uid://elj4u7a13oc1" path="res://Theme/YellowTopPanel.tres" id="5_nktic"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ybrb6"]
+shader = ExtResource("4_me2a2")
+shader_parameter/rect1_pos = Vector2(0.15, 0.25)
+shader_parameter/rect1_size = Vector2(0.25, 0.4)
+shader_parameter/rect2_pos = Vector2(0.645, 0.5)
+shader_parameter/rect2_size = Vector2(0.205, 0.3)
+shader_parameter/darkness = 1.0
+shader_parameter/feather = 0.050000002375
+
+[node name="Tutorial" type="Control" unique_id=1937603570 node_paths=PackedStringArray("Pan", "TitleLabel", "TextLabel")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_c2716")
+Pan = NodePath("VBoxContainer")
+TitleLabel = NodePath("VBoxContainer/PanelContainer/VBoxContainer2/Label")
+TextLabel = NodePath("VBoxContainer/PanelContainer/VBoxContainer2/HBoxContainer/Label")
+InSound = ExtResource("2_gkxsm")
+OutSound = ExtResource("3_5qs15")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=547434568]
+material = SubResource("ShaderMaterial_ybrb6")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=282141562]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -252.0
+offset_top = -45.0
+offset_right = 252.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=952852243]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("5_nktic")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/PanelContainer" unique_id=1455678652]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer2" unique_id=810350338]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Captain Inventory"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer2" unique_id=1332461594]
+layout_mode = 2
+
+[node name="Label" type="RichTextLabel" parent="VBoxContainer/PanelContainer/VBoxContainer2/HBoxContainer" unique_id=1625003274]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 2
+visible_characters_behavior = 1
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=907575995 groups=["DigitalButtons"]]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Close"
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

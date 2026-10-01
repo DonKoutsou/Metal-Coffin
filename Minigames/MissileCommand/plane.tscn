@@ -6,16 +6,16 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_6ebbn"]
 radius = 3.0
 
-[node name="Plane" type="Node2D"]
+[node name="Plane" type="Node2D" unique_id=1784560966]
 script = ExtResource("1_ly0hq")
 Speed = 25.0
 Points = 200
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1063704824]
 scale = Vector2(0.428572, 0.428571)
 texture = ExtResource("1_6ebbn")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=260248722]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1465769391]
 shape = SubResource("CircleShape2D_6ebbn")

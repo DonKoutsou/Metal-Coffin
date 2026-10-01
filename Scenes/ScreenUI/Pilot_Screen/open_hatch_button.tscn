@@ -4,7 +4,7 @@
 [ext_resource type="StyleBox" uid="uid://bxivhwo53gugb" path="res://Theme/Buttons/LandingNob_Pressed.tres" id="2_iayxb"]
 [ext_resource type="Script" uid="uid://shhingcl3pnl" path="res://Scenes/ScreenUI/Pilot_Screen/open_hatch_button.gd" id="4_jl4mq"]
 [ext_resource type="StyleBox" uid="uid://i0ndhcxsegbl" path="res://Theme/Buttons/LandingNob_Dissabled.tres" id="4_yt4t3"]
-[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="5_iayxb"]
+[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Scenes/EventHandlers/ShipControllerEventHandler.tres" id="5_iayxb"]
 
 [node name="OpenHatchButton" type="Button" unique_id=1709871514 groups=["Buttons2"]]
 anchors_preset = 8

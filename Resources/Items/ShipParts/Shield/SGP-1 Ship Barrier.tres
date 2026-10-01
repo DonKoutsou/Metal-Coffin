@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://bja0tfjegmyxx"]
 
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="1_sh338"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://MetalEngineBase/Cardfight/Card/CardStats.gd" id="1_qi5xg"]
 [ext_resource type="Resource" uid="uid://b4y2rot7doyj3" path="res://Resources/Cards/ShieldOverCharge.tres" id="2_qi5xg"]
 [ext_resource type="Resource" uid="uid://c2xdu0g24g84o" path="res://Resources/Cards/DecelerationField.tres" id="3_qi5xg"]
 [ext_resource type="Resource" uid="uid://cs6mrrxnafmbt" path="res://Resources/Items/ShipParts/Shield/SGP-2 Ship Barrier.tres" id="3_sh338"]
@@ -39,7 +39,7 @@ UpgradeTime = 120.0
 disp = 3
 ItemName = "SGP-1 Ship Barrier"
 ItemDesc = "A reliable entry-level barrier system designed to provide essential protection against incoming threats. Utilizing a compact energy field generator, it effectively neutralizes missiles and deflects heavy caliber rounds, offering robust frontline defense for smaller vessels engaged in skirmishes."
-CardProviding = Array[ExtResource("1_sh338")]([ExtResource("2_qi5xg"), ExtResource("2_qi5xg"), ExtResource("3_qi5xg")])
+CardProviding = Array[ExtResource("1_qi5xg")]([ExtResource("2_qi5xg"), ExtResource("2_qi5xg"), ExtResource("3_qi5xg")])
 CanTransfer = false
 Cost = 20000
 PartType = 5

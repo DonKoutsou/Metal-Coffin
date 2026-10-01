@@ -129,7 +129,7 @@ func onLaunchPressed() -> void:
 	var missilesToLaunch: Array[MissileItem]
 	for _i in amount:
 		missilesToLaunch.append(currentlySelectedMissile)
-	missileDockEventH.OnMissileLaunched(missilesToLaunch, controller.Cpt, controller.Cpt)
+	missileDockEventH.OnMissileLaunched(missilesToLaunch, controller, controller)
 	AchievementManager.GetInstance().UlockAchievement("MC_MISSILEFIRE")
 	MissileLaunched.emit()
 	dissarmMiss()

@@ -32,7 +32,7 @@ static func GetInstance() -> MapPointerManager:
 
 static var Instance : MapPointerManager
 
-var ControlledShip : PlayerDrivenShip
+var ControlledShip : MapShip
 
 signal TargetSelected(Ship : MapShip)
 signal TargetSpotSelected(Target : SpotMarker)
@@ -52,7 +52,7 @@ func UpdateCameraPosition(_NewPos : Vector2) -> void:
 	pass
 	#CircleDr.queue_redraw()
 
-func OnControlledShipChanged(Ship : PlayerDrivenShip) -> void:
+func OnControlledShipChanged(Ship : MapShip) -> void:
 	ControlledShip = Ship
 
 func OnShipTargetSelected(Marker : ShipMarker) -> void:
@@ -85,13 +85,15 @@ func RemoveOrder(Order : Resource) -> void:
 
 func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> ShipMarker:
 	if (Ships.has(Ship)):
-		if (Ship is HostileShip and !Ship.Destroyed and notify):
-			if (Ship.Convoy):
-				_ShipMarkers[Ships.find(Ship)].PlayHostileShipNotif("Convoy\nLocated")
-			else:
-				_ShipMarkers[Ships.find(Ship)].PlayHostileShipNotif("Hostile Ship\nLocated")
+		if (Ship is MapShip):
+			if (!Ship.Friendly() and !Ship.Destroyed and notify):
+				if (Ship.Convoy):
+					_ShipMarkers[Ships.find(Ship)].PlayHostileShipNotif("Convoy\nLocated")
+				else:
+					_ShipMarkers[Ships.find(Ship)].PlayHostileShipNotif("Hostile Ship\nLocated")
 		return
-		
+	
+	Ship.tree_exited.connect(RemoveShip)
 	Ships.append(Ship)
 	var marker = MarkerScene.instantiate() as ShipMarker
 
@@ -105,18 +107,20 @@ func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> ShipMarker:
 	else:
 		marker.modulate = EnemyColor
 		#_ShipMarkers[Ships.find(Ship)].PlayHostileShipNotif()
-	if (Ship is HostileShip):
-		if (Ship.Convoy):
-			marker.modulate = ConvoyColor
-		
-		marker.ShipTargetSelected.connect(OnShipTargetSelected)
-		
-		if (!Ship.Destroyed and notify):
-			marker.PlayHostileShipNotif("Hostile Ship\nLocated")
-	else : if (Ship is PlayerDrivenShip):
-		marker.ShipTargetSelected.connect(OnShipTargetSelected)
-		marker.ShipSelected.connect(ControllerEventHandler.ShipChanged.bind(Ship))
-		Ship.Crosswind.connect(marker.PlayCounterWindNotif)
+	
+	if (Ship is MapShip):
+		if (!Ship.Friendly()):
+			if (Ship.Convoy):
+				marker.modulate = ConvoyColor
+			
+			marker.ShipTargetSelected.connect(OnShipTargetSelected)
+			
+			if (!Ship.Destroyed and notify):
+				marker.PlayHostileShipNotif("Hostile Ship\nLocated")
+		else :
+			marker.ShipTargetSelected.connect(OnShipTargetSelected)
+			marker.ShipSelected.connect(ControllerEventHandler.ShipChanged.bind(Ship))
+			Ship.Crosswind.connect(marker.PlayCounterWindNotif)
 		
 	marker.Init(Ship)
 	
@@ -143,6 +147,8 @@ func AddSpot(Spot : MapSpot, PlayAnim : bool) -> void:
 func RemoveShip(Ship : Node2D) -> void:
 	if (!Ships.has(Ship)):
 		return
+	
+	Ship.tree_exited.disconnect(RemoveShip)
 	var index = Ships.find(Ship)
 	_ShipMarkers[index].queue_free()
 	_ShipMarkers.remove_at(index)
@@ -201,8 +207,8 @@ func _process(delta: float) -> void:
 	#var LightAmm = WeatherManage.GetLightAmm()
 	for g in _ShipMarkers.size():
 		var Ship = Ships[g]
-		if (Ship is PlayerDrivenShip):
-			if (Ship.Command == null):
+		if (Ship is MapShip):
+			if (Ship.Friendly() and Ship.Command == null):
 				hulls.append(Ship.GetBiggestRadarCicle())
 			#var visibility = WeatherManage.GetVisibilityInPosition(Ship.global_position, LightAmm)
 			#var Radius : float
@@ -225,16 +231,17 @@ func GetSaveData() -> SaveData:
 		var ship = Ships[g]
 		var Marker = _ShipMarkers[g]
 		
-		if (ship is HostileShip):
-			if (!ship.Destroyed and ship.VisibleBy.size() == 0):
-				Dat.Datas.append(Marker.GetSaveData())
+		if (ship is MapShip):
+			if (!ship.Friendly()):
+				if (!ship.Destroyed and ship.VisibleBy.size() == 0):
+					Dat.Datas.append(Marker.GetSaveData())
 	return Dat
 
 func LoadSaveData(Data : SaveData) -> void:
 	var Enemies = get_tree().get_nodes_in_group("Enemy")
 	for D : SD_ShipMarker in Data.Datas:
 		var SavedName = D.ShipName
-		for S : HostileShip in Enemies:
+		for S : MapShip in Enemies:
 			var Name = S.GetShipName()
 			if (SavedName == Name):
 				var marker = AddShip(S, false, false)

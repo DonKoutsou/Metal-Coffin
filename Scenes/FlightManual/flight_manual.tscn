@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://db0e2caembxle"]
 
-[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_sdl3v"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://MetalEngineBase/Inventory/YellowPanel.tres" id="1_sdl3v"]
 [ext_resource type="Script" uid="uid://ysm54y3gb5lt" path="res://Scenes/FlightManual/flight_manual.gd" id="1_xll1p"]
 [ext_resource type="Script" uid="uid://cvx22oa8uksuj" path="res://Scenes/FlightManual/flight_manual_entry.gd" id="2_x06mv"]
 [ext_resource type="Resource" uid="uid://dthctvjanglms" path="res://Scenes/FlightManual/Entries/Ports.tres" id="3_3gukv"]
 [ext_resource type="Resource" uid="uid://d150lv6nflbgq" path="res://Scenes/FlightManual/Entries/Simulation.tres" id="4_82ypx"]
-[ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="4_lm06n"]
+[ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://MetalEngineBase/Utils/InputScroll.gd" id="4_lm06n"]
 [ext_resource type="Resource" uid="uid://b4wu5sag14tkv" path="res://Scenes/FlightManual/Entries/MapMarkerEditor.tres" id="5_yadiy"]
 [ext_resource type="Resource" uid="uid://c5y6h7d0jsj15" path="res://Scenes/FlightManual/Entries/MissileTab.tres" id="6_7fhkt"]
 [ext_resource type="Resource" uid="uid://dx6k7ujf6hpkg" path="res://Scenes/FlightManual/Entries/MissileTypes.tres" id="7_u7g5t"]

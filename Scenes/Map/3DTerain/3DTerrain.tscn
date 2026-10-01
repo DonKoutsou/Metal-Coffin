@@ -2,14 +2,14 @@
 
 [ext_resource type="Shader" uid="uid://dwpjb1dhje12t" path="res://Scenes/Map/3DTerain/3DTerrain.gdshader" id="1_4wx8l"]
 [ext_resource type="Script" uid="uid://ddhrdoab6ygk1" path="res://Scenes/Map/3DTerain/3d_terrain.gd" id="1_6gcdf"]
-[ext_resource type="Texture2D" uid="uid://b47wybtbo65q0" path="res://Noises/Ground/TEX_GroundVisualNoise.tres" id="2_s5nj2"]
+[ext_resource type="Texture2D" uid="uid://b47wybtbo65q0" path="res://Scenes/Map/WeatherMan/Noises/Ground/TEX_GroundVisualNoise.tres" id="2_s5nj2"]
 [ext_resource type="Texture2D" uid="uid://cw03v1o7v0lpp" path="res://Assets/Sand/Rock062_1K-PNG_Color.png" id="2_v1a1b"]
 [ext_resource type="Texture2D" uid="uid://4g7x31f80h3k" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="3_6gcdf"]
 [ext_resource type="Texture2D" uid="uid://bibx4kf5ern4i" path="res://Assets/Sand/Ground055S_1K-PNG_NormalGL.png" id="3_6hfsm"]
 [ext_resource type="Texture2D" uid="uid://da35h3bxjt6kx" path="res://Assets/Sand/Ice002_1K-PNG_Color.png" id="4_2m2bo"]
 [ext_resource type="Texture2D" uid="uid://blyc50aydat54" path="res://Assets/Sand/Ice002_1K-PNG_NormalGL.png" id="4_ne8gl"]
 [ext_resource type="Texture2D" uid="uid://cuyopb6vo0rnu" path="res://Assets/Sand/Rock062_1K-PNG_NormalGL.png" id="5_esxbu"]
-[ext_resource type="Texture2D" uid="uid://bih6x8swa3dhe" path="res://Noises/Ground/TEX_GroundVisualNoiseMask.png" id="5_yc30l"]
+[ext_resource type="Texture2D" uid="uid://bih6x8swa3dhe" path="res://Scenes/Map/WeatherMan/Noises/Ground/TEX_GroundVisualNoiseMask.png" id="5_yc30l"]
 
 [sub_resource type="Environment" id="Environment_1vivr"]
 fog_enabled = true
@@ -66,7 +66,7 @@ world_3d = SubResource("World3D_6hfsm")
 handle_input_locally = false
 debug_draw = 4
 scaling_3d_mode = 5
-size = Vector2i(2324, 1307)
+size = Vector2i(1280, 720)
 size_2d_override = Vector2i(1280, 720)
 size_2d_override_stretch = true
 

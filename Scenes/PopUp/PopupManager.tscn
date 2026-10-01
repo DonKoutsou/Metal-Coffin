@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://buwov1b0meqd1"]
+
+[ext_resource type="Script" uid="uid://cpu5xsyrg37ql" path="res://Scenes/PopUp/pop_up_manager.gd" id="1_jmupm"]
+[ext_resource type="PackedScene" uid="uid://tvbauwn0211y" path="res://Scenes/PopUp/Custom_Confirm/CustomConfirm.tscn" id="3_vcr0a"]
+[ext_resource type="PackedScene" uid="uid://1vnrpn8q4byq" path="res://Scenes/PopUp/Fade_Notification/FadeNotif.tscn" id="4_g5eyu"]
+
+[node name="Node" type="Node" unique_id=1183035406]
+process_mode = 3
+script = ExtResource("1_jmupm")
+customConfirm = ExtResource("3_vcr0a")
+FadNot = ExtResource("4_g5eyu")

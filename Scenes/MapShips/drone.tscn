@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://wtmojbpjfelb" path="res://Scenes/MapShips/Base_MapShip.tscn" id="1_airq3"]
 [ext_resource type="Script" uid="uid://cj1p2x5gvfvgf" path="res://Scenes/MapShips/player_driven_ship.gd" id="2_vq5gh"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://MetalEngineBase/Inventory/Stats/ShipStat.gd" id="3_2ygm8"]
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="4_25k7t"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://MetalEngineBase/Cardfight/Card/CardStats.gd" id="4_25k7t"]
 [ext_resource type="AudioStream" uid="uid://18n3m3gw8twb" path="res://Assets/Sounds/turbine_01.wav" id="4_g6qkr"]
 [ext_resource type="Texture2D" uid="uid://b3g3ju4xwuygm" path="res://Assets/UIPiecies/Light.png" id="5_k2uly"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://MetalEngineBase/Inventory/Stats/Captain.gd" id="5_vq5gh"]
@@ -12,7 +12,7 @@
 [ext_resource type="Resource" uid="uid://css6e78uhfsfa" path="res://Resources/Items/ShipParts/MG/ShortMachinegun100mm.tres" id="9_06s8f"]
 [ext_resource type="PackedScene" uid="uid://cw6nos06km7b3" path="res://Scenes/MapShips/DroneDock/PlayerDock.tscn" id="9_82ju4"]
 [ext_resource type="Script" uid="uid://dn2ybl8146b6t" path="res://Scenes/MapShips/missile_dock.gd" id="9_f4h60"]
-[ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Resources/EventHandlers/MissileDockEventHandler.tres" id="10_ilnq0"]
+[ext_resource type="Resource" uid="uid://cl8a6o13748s8" path="res://Scenes/EventHandlers/MissileDockEventHandler.tres" id="10_ilnq0"]
 [ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FT-500.tres" id="10_o0thl"]
 [ext_resource type="Resource" uid="uid://bihbbkeg0k2sc" path="res://Resources/Cards/Extringuish.tres" id="11_e2mx5"]
 [ext_resource type="Resource" uid="uid://f8x3cqxrqo6s" path="res://Resources/Items/Ammo/Flares.tres" id="12_kp2wg"]
@@ -20,7 +20,7 @@
 [ext_resource type="Resource" uid="uid://cnrek2mbia331" path="res://Resources/Items/Ammo/ProxyFuseAmmoMagazine100mm.tres" id="13_8huau"]
 [ext_resource type="Script" uid="uid://5xjgi2kvis2v" path="res://Scenes/MapShips/DetectionInstruments/Radar/Player_Radar.gd" id="16_2ygm8"]
 [ext_resource type="Script" uid="uid://bwvnvc0jhwiwu" path="res://Scenes/MapShips/DetectionInstruments/Elint/PlayerElintShape.gd" id="17_25k7t"]
-[ext_resource type="Script" uid="uid://bskcd0e6ljc5w" path="res://Scenes/MapShips/SonarShape.gd" id="20_vq5gh"]
+[ext_resource type="Script" uid="uid://bskcd0e6ljc5w" path="res://Scenes/MapShips/DetectionInstruments/Sona/SonarShape.gd" id="20_vq5gh"]
 
 [sub_resource type="Resource" id="Resource_jvup1"]
 script = ExtResource("3_2ygm8")
@@ -158,9 +158,6 @@ Dock = NodePath("DroneDock")
 
 [node name="ColorRect" parent="." index="1" unique_id=1708187202]
 material = SubResource("ShaderMaterial_25k7t")
-
-[node name="TrailLine" parent="ColorRect" index="0" unique_id=909123147]
-points = PackedVector2Array(0, 0)
 
 [node name="CollisionShape2D" parent="ShipBody" parent_id_path=PackedInt32Array(1910492064) index="0" unique_id=243368945]
 visible = false

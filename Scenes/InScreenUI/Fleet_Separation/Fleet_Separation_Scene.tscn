@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cwjp7q1w18u4p"]
 
 [ext_resource type="Script" uid="uid://dai8r8wn5redq" path="res://Scenes/InScreenUI/Fleet_Separation/fleet_sparation_scene.gd" id="1_mh7sl"]
-[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_mxuxe"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://MetalEngineBase/Inventory/YellowPanel.tres" id="1_mxuxe"]
 [ext_resource type="PackedScene" uid="uid://dci144io03ffa" path="res://Scenes/CaptainButton.tscn" id="2_mxuxe"]
-[ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="4_wglh3"]
+[ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://MetalEngineBase/Utils/InputScroll.gd" id="4_wglh3"]
 [ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scenes/Card_Fight/External_UI/CardHandContainer.gd" id="5_wfwr5"]
 
 [node name="FleetSeparationScene" type="PanelContainer" unique_id=1170944527 node_paths=PackedStringArray("CurrentFleetRangeText", "CurrentFleetFuelBar", "CurrentFleetCommanderPlecemenet", "CurrentFleetShipPlecement", "NewFleetRangeText", "NewFleetFuelBar", "NewFleetShipPlecement", "NewFleetCommanderPlecemenet") groups=["FleetSep"]]

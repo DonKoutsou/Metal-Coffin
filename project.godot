@@ -21,7 +21,7 @@ translations_plugin/localistation_dir="res://Localisations"
 
 config/name="Metal Coffin"
 config/version="0.8"
-run/main_scene="uid://bni46rep6ub0v"
+run/main_scene="uid://cqxnjihcai1kd"
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.7", "Mobile")
 run/max_fps=120
@@ -38,11 +38,11 @@ buses/default_bus_layout="uid://c3nyxeslcljc8"
 [autoload]
 
 MusicMan="*res://Scenes/GlobalManagers/Sound/music_manager.tscn"
-UiSoundManager="*res://Scenes/GlobalManagers/Sound/ui_sound_manager.tscn"
+UiSoundManager="*res://MetalEngineBase/Audio/ui_sound_manager.tscn"
 Help="*res://MetalEngineBase/Helper/helper.tscn"
-Save="*res://Scripts/Save/save_load_manager.gd"
+Save="*res://Scenes/Save/save_load_manager.gd"
 AchMan="*res://Scenes/GlobalManagers/Tutorial/achievement_manager.gd"
-PopupManager="*res://Scenes/GlobalManagers/PopupManager.tscn"
+PopupManager="*res://Scenes/PopUp/PopupManager.tscn"
 DispoisitionManager="*uid://cuad168v6mleh"
 FmodManager="*uid://cds10pm7hwn3p"
 BeehaveGlobalMetrics="*uid://c3ktl6ontsdt7"

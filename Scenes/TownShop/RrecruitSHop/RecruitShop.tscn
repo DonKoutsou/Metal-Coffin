@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://cusvhc52y626a" path="res://Scenes/TownShop/RrecruitSHop/recruit_shop.gd" id="1_avlo7"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="2_8k3dn"]
 [ext_resource type="StyleBox" uid="uid://elj4u7a13oc1" path="res://Theme/YellowTopPanel.tres" id="4_8rciy"]
-[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="6_xjf37"]
-[ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://Scripts/UI/InputScroll.gd" id="7_ensoj"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://MetalEngineBase/Inventory/YellowPanel.tres" id="6_xjf37"]
+[ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://MetalEngineBase/Utils/InputScroll.gd" id="7_ensoj"]
 [ext_resource type="Texture2D" uid="uid://bk3hmnxkvr5ab" path="res://Assets/UIPiecies/UI_Icons/network-bars.png" id="7_irqbf"]
 [ext_resource type="Texture2D" uid="uid://dw7al4e4pdao4" path="res://Assets/UIPiecies/UI_Icons/Card.png" id="8_ti3qq"]
 [ext_resource type="Texture2D" uid="uid://c7wkqvg4osdjt" path="res://Assets/UIPiecies/UI_Icons/cardboard-box.png" id="9_154xo"]
@@ -81,7 +81,6 @@ icon = ExtResource("10_xeu44")
 
 [node name="CaptainStatContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1727051882 instance=ExtResource("9_n5htp")]
 layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1292178761]
 custom_minimum_size = Vector2(200, 0)

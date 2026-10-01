@@ -5,5 +5,5 @@
 [resource]
 shader = ExtResource("1_uj5q3")
 shader_parameter/frequency = 0.0
-shader_parameter/size = 0.012000000569999999
+shader_parameter/size = 0.01200000056999999
 shader_parameter/refraction_strength = 0.00999999977648

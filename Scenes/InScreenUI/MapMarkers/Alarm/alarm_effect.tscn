@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://buaaiy1bjp87q"]
+
+[ext_resource type="Script" uid="uid://b2ogrmsyy136g" path="res://Scenes/InScreenUI/MapMarkers/Alarm/alarm_effect.gd" id="1_hw0fa"]
+[ext_resource type="AudioStream" uid="uid://cgv5pjrrq85xp" path="res://Assets/Sounds/beep-beep-beep-beep-80262.mp3" id="2_nm0eq"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bronl"]
+light_mode = 1
+
+[node name="AlarmEffect" type="Node2D" unique_id=1815319040]
+material = SubResource("CanvasItemMaterial_bronl")
+script = ExtResource("1_hw0fa")
+TimesPlayed = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1690106546]
+stream = ExtResource("2_nm0eq")
+volume_db = -22.0
+pitch_scale = 0.8
+autoplay = true
+bus = &"MapSounds"

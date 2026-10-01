@@ -61,6 +61,50 @@ func GetSaveData() -> DroneSaveData:
 func _exit_tree() -> void:
 	WeatherManage.UnregisterShip(self)
 
+func GetSonarTargets() -> Array[Node2D]:
+	var Targets : Array[Node2D] = SonarShape.GetSonarTargets()
+	for g : PlayerDrivenShip in GetSquad():
+		Targets.append_array(g.SonarShape.GetSonarTargets())
+	return Targets
+
+func GetSonarTargetInfo() -> Array[SonarTargetInfo]:
+	var Targets : Array[SonarTargetInfo] = SonarShape.GetSonarTargetInfo()
+	for g : PlayerDrivenShip in GetSquad():
+		Targets.append_array(g.SonarShape.GetSonarTargetInfo())
+	return Targets
+
+func GetElintTargetInfo() -> Array[ElintTargetInfo]:
+	var Targets : Array[ElintTargetInfo] = ElintShape.GetELintTargetInfo()
+	for g : PlayerDrivenShip in GetSquad():
+		Targets.append_array(g.ElintShape.GetELintTargetInfo())
+	return Targets
+
+func OnLanded() -> void:
+	PopUpManager.GetInstance().DoFadeNotif("{0} has landed".format([Cpt.GetCaptainName()]))
+	RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.LANDING_END)
+
+func AccelerationChanged(value: float, forced : bool = false) -> void:
+	if (Docked):
+		return
+	if (value > 0):
+		if (GetFuelRange() <= 0):
+			HaltShip()
+			PopUpManager.GetInstance().DoFadeNotif("You have run out of fuel.")
+			return
+
+	AccelChanged = true
+	
+	var NewSpeed = max(0,min(value,1) * GetShipMaxSpeed())
+	
+	SetSpeed(NewSpeed)
+	if (forced):
+		AForced.emit(NewSpeed)
+	else:
+		AChanged.emit(NewSpeed)
+	
+	for g in GetSquad():
+		g.SetSpeed(max(0,min(value,1) * GetShipMaxSpeed()) )
+		g.AccelChanged = true
 
 func Update(delta: float, _unaffectedDelta : float) -> void:
 	ElintShape.UpdateElint(delta)
@@ -229,6 +273,37 @@ func GetBiggestVisRange() -> float:
 		if g.RadarShape.CurrentVisualRange > Biggest:
 			Biggest = g.RadarShape.CurrentVisualRange
 	return Biggest
+
+func SetCurrentPort(Port : Node2D):
+	CurrentPort = Port
+	Cpt.CurrentPort = Port.GetSpotName()
+	#Cpt.GetCharacterInventory().CurrentPort = CurrentPort
+	for g in GetSquad():
+		g.SetCurrentPort(Port)
+	PortChanged.emit(0)
+
+func BodyEnteredBody(Body : Area2D) -> void:
+	if (Docked):
+		return
+	var Parent = Body.get_parent()
+	if (Parent is MapSpot):
+		ActionTracker.OnActionCompleted(ActionTracker.Action.LANDING)
+		SetCurrentPort(Parent)
+		Parent.OnSpotAproached(self)
+		for g in GetSquad():
+			g.SetCurrentPort(Parent)
+			Parent.OnSpotAproached(g)
+
+func BodyLeftBody(Body : Area2D) -> void:
+	if (Docked):
+		return
+	var Parent = Body.get_parent()
+	if (Parent is MapSpot):
+		RemovePort()
+		Parent.OnSpotDeparture(self)
+		for g in GetSquad():
+			g.RemovePort()
+			Parent.OnSpotDeparture(g)
 #------------------------------------------------------------
 #Autopilot stuff
 

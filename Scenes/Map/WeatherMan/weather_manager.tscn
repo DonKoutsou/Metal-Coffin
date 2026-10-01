@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://ch28kdo2pv6ta"]
+
+[ext_resource type="Shader" uid="uid://yrc40y0r8y6y" path="res://Scenes/Map/StormShader.gdshader" id="1_8ickh"]
+[ext_resource type="Texture2D" uid="uid://bpghre0s4hi8" path="res://Scenes/Map/WeatherMan/Noises/Weather/weathernoise.tres" id="2_8ickh"]
+[ext_resource type="Script" uid="uid://bdn5v3wan8hys" path="res://Scenes/Map/WeatherMan/weather_manager.gd" id="4_3wj3p"]
+[ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Scenes/EventHandlers/UIEventH.tres" id="5_0w5h3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7nfft"]
+shader = ExtResource("1_8ickh")
+shader_parameter/NoiseTexture2 = ExtResource("2_8ickh")
+shader_parameter/C = 0.60000000894072
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/z = 0.125
+shader_parameter/colors = 8
+
+[node name="WeatherManager" type="ColorRect" unique_id=2099502434]
+texture_filter = 3
+material = SubResource("ShaderMaterial_7nfft")
+custom_minimum_size = Vector2(41.6, 40.6)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3000.0
+offset_top = -3000.0
+offset_right = 3000.0
+offset_bottom = 3000.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_3wj3p")
+EventHandler = ExtResource("5_0w5h3")
+WindChangeMinimumTime_Minutes = 120.0
+NoiseFile = "uid://0k2jw1bl3ndm"

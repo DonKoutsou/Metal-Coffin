@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cw03v1o7v0lpp" path="res://Assets/Sand/Rock062_1K-PNG_Color.png" id="5_2jq5r"]
 [ext_resource type="Texture2D" uid="uid://4g7x31f80h3k" path="res://Assets/Sand/Ground033_1K-PNG_Color.png" id="6_slijr"]
 [ext_resource type="Texture2D" uid="uid://da35h3bxjt6kx" path="res://Assets/Sand/Ice002_1K-PNG_Color.png" id="7_3l5b5"]
-[ext_resource type="Texture2D" uid="uid://bih6x8swa3dhe" path="res://Noises/Ground/TEX_GroundVisualNoiseMask.png" id="8_djccu"]
+[ext_resource type="Texture2D" uid="uid://bih6x8swa3dhe" path="res://Scenes/Map/WeatherMan/Noises/Ground/TEX_GroundVisualNoiseMask.png" id="8_djccu"]
 
 [resource]
 shader = ExtResource("1_430q4")

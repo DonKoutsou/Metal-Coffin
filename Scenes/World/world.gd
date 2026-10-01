@@ -1,0 +1,716 @@
+extends Control
+class_name World
+
+@export_group("Nodes")
+@export var _Map : Map
+@export var _Command : Commander
+@export var Controller : ShipContoller
+@export var time : Clock
+
+@export_group("Scenes")
+@export_file(".tscn") var CardFightScene : String = "res://Scenes/Cards/CardFight.tscn"
+@export_file(".tscn") var LoadingScene : String = "res://Scenes/InScreenUI/loading_screen.tscn"
+@export_file(".tscn") var FleetSeparationScene : String = "res://Scenes/InScreenUI/FleetSparationScene.tscn"
+@export_file(".tscn") var HappeningUI : String = "res://Scenes/InScreenUI/HappeningUI.tscn"
+@export_file(".tscn") var WorldViewQuestionairScene : String = "res://Scenes/WorldViewQuestionair.tscn"
+@export_file(".tscn") var TownSceneFile : String = "res://Scenes/TownShop/TownScene.tscn"
+#@export var IntroText : String
+@export_group("Prologue")
+@export var PrologueTrigger : PackedScene
+@export var PrologueEndScreen : PackedScene
+@export_group("Wallet")
+@export var StartingFunds : int = 500000
+@export var PlayerWallet : Wallet
+@export_group("Settings")
+@export var IsPrologue : bool = false
+@export var StartingFuel : float = 100
+@export_group("Dialogues")
+@export_file("*.tres") var IntroDialogues : String
+@export_file("*.tres") var PrologueDialgues : String
+@export_group("UpdateSettings")
+@export var WeatherManagerUpdateRate : float = 0.2
+################ WORLD STATE #################
+
+static var WORLDST : WORLDSTATE = WORLDSTATE.INITIAL
+
+enum WORLDSTATE{
+	INITIAL,
+	NORMAL,
+	FIGHT,
+	TRADE,
+	TOWN,
+	FINISHED,
+}
+
+# array holding the strings of the stats that we have already notified the player that are getting low
+var StatsNotifiedLow : Array[String] = []
+var SkipStory : bool
+
+signal WRLD_OnGameEnded
+signal WRLD_WorldReady
+signal WorldSpawnTransitionFinished
+#signal WRLD_StatsUpdated(StatN : String)
+#signal WRLD_StatGotLow(StatN : String)
+
+var OverworldEventsToShow : Array[OverworldEventData]
+var TutorialsToShow : Array[ActionTracker.Action]
+
+var Loading = false
+
+static var Instance : World
+
+static func GetInstance() -> World:
+	return Instance
+
+
+func GetMap() -> Map:
+	return _Map
+	
+func GetCommander() -> Commander:
+	return _Command
+
+func  _ready() -> void:
+	WORLDST = WORLDSTATE.INITIAL
+	SimulationManager.GetInstance().TogglePause(true)
+	Instance = self
+	Rand.NewStaticRand()
+	
+	#Switch screen
+	GetMap().GetScreenUi().DoIntroFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
+	await GetMap().GetScreenUi().FullScreenToggleStarted
+	WorldSpawnTransitionFinished.emit()
+	
+	#Add loading screen
+	var Loadingscr = load(LoadingScene).instantiate() as LoadingScreen
+	Ingame_UIManager.GetInstance().AddUI(Loadingscr, false, false)
+
+	#TODO needs fix
+	if (!Loading):
+		# Generate Map Spots
+		Loadingscr.ProcessStarted("Generating Map Spot Plecement")
+		GetMap().GenerateMap()
+		await GetMap().GenerationFinished
+		Loadingscr.ProcesFinished("Generating Map Spot Plecement")
+		Loadingscr.UpdateProgress(10)
+		await Helper.wait(1)
+		
+		# Generate Events
+		Loadingscr.ProcessStarted("Generating Events")
+		GetMap().GenerateEvents()
+		await GetMap().GenerationFinished
+		Loadingscr.ProcesFinished("Generating Events")
+		Loadingscr.UpdateProgress(20)
+		await Helper.wait(1)
+		
+	else:
+		Loadingscr.DissableText()
+	
+	# Roads
+	Loadingscr.ProcessStarted("Generating Road Networks")
+	GetMap().GenerateRoads()
+	await GetMap().GenerationFinished
+	Loadingscr.ProcesFinished("Generating Road Networks")
+	Loadingscr.UpdateProgress(30)
+	
+	Loadingscr.ProcessStarted("Generating Spot Connections")
+	Loadingscr.UpdateProgress(40)
+	await GetMap().GenerationFinished
+	Loadingscr.ProcesFinished("Generating Spot Connections")
+	Loadingscr.UpdateProgress(60)
+	await Helper.wait(1)
+	
+	if (!Loading):
+		# Enemy Spawn
+		Loadingscr.ProcessStarted("Spawning Enemy Fleets")
+		GetMap().SpawnTownEnemies()
+		await GetMap().GenerationFinished
+		Loadingscr.ProcesFinished("Creating Enemy Fleets")
+		GetMap().EnemySpawnFinished()
+		await Helper.wait(1)
+		
+		# Enemy placement
+		Loadingscr.ProcessStarted("Placing Fleets In World")
+		Loadingscr.UpdateProgress(80)
+		#await GetMap().GenerationFinished
+		Loadingscr.ProcesFinished("Placing Fleets In World")
+		await Helper.wait(1)
+		
+	Loadingscr.UpdateProgress(100)
+	await Helper.wait(1)
+	
+	Loadingscr.StartDest()
+	await Loadingscr.IntroFinished
+	GetMap().GetScreenUi().CloseScreen()
+	await GetMap().GetScreenUi().FullScreenToggleStarted
+	Loadingscr.queue_free()
+	
+	Controller.SpawnInitialShip()
+	UISoundMan.GetInstance().Refresh()
+	await Helper.wait(1)
+	WRLD_WorldReady.emit()
+	
+	if (!Loading):
+		
+		GetMap()._InitialPlayerPlacament(StartingFuel, IsPrologue)
+		GetMap().GetCamera().FrameCamToPlayer()
+
+		
+		if (IsPrologue):
+			var Trigger = PrologueTrigger.instantiate() as PrologueEnd_Trigger
+			var Armak = MapHelper.GetSpotByName("Armak")
+			Armak.add_child(Trigger)
+			
+			if (!SkipStory): #First we need the questionair
+				#var Questionair = load(WorldViewQuestionairScene).instantiate() as WorldViewQuestionair
+				#Ingame_UIManager.GetInstance().AddUI(Questionair, true, false)
+				#Questionair.Init()
+				#GetMap().GetScreenUi().OpenScreen(ScreenUI.ScreenState.FULL_SCREEN)
+#
+				#await Questionair.Ended #wait for player to end it
+				#
+				#GetMap().GetScreenUi().CloseScreen()
+				#await GetMap().GetScreenUi().FullScreenToggleStarted
+				#Questionair.queue_free()
+				PlayPrologue()
+
+			else:
+				var Cardi = MapHelper.GetSpotByName("Cardi")
+				var Pl = get_tree().get_nodes_in_group("PlayerShips")[0]
+				Pl.SetShipPosition(Cardi.global_position)
+				if (Cardi.Event != null):
+					Cardi.Event.SkipStory(Pl)
+				else:
+					printerr("ISSUE")
+				Cardi.OnSpotVisited(false)
+				
+		else:
+			#Load worldview from prologue
+			#WorldView.GetInstance().Load()
+			PlayIntro()
+
+		PlayerWallet.SetFunds( StartingFunds)
+	#else:
+		#WorldView.GetInstance().Load()
+		
+	GetMap().GetScreenUi().OpenScreen(ScreenUI.ScreenState.PILOT_SCREEN)
+	WORLDST = WORLDSTATE.NORMAL
+	WeatherManage.Instance.Update(0)
+	
+	CommandLine.AddText("World generation ended with random state of {0}".format([Rand.InstanceRandom.GetState()]))
+	#print("World generation ended with random state of {0}".format([Rand.InstanceRandom.GetState()]))
+	
+	
+var WeatherManagerUpdate : float
+
+func _physics_process(delta: float) -> void:
+	if (World.WORLDST != World.WORLDSTATE.NORMAL):
+		return
+	
+	if get_tree().paused:
+		return
+	
+	Controller.Update()
+	
+	var CurrentDelta = delta * SimulationManager.SimSpeed()
+	
+	time.Update(CurrentDelta)
+	
+	UpdatePlayerShips(CurrentDelta, delta)
+	
+	if (!SimulationManager.Paused):
+		_Map.Update(delta)
+		WeatherManagerUpdate -= CurrentDelta
+		if (WeatherManagerUpdate <= 0):
+			WeatherManagerUpdate = WeatherManagerUpdateRate
+			WeatherManage.Instance.Update(WeatherManagerUpdateRate)
+		
+		_Command.Update(CurrentDelta)
+		UpdateCities(CurrentDelta)
+
+func UpdatePlayerShips(delta : float, unaffectedDelta : float) -> void:
+	get_tree().call_group("PlayerShips", "Update", delta, unaffectedDelta)
+
+func UpdateCities(delta : float) -> void:
+	get_tree().call_group("City", "Update", delta)
+
+func PlayPrologue():
+	GetMap().GetScreenUi().GetCamera().ResetPosition()
+	GetMap().GetScreenUi().GetCamera().LockPosition(true)
+	GetMap().GetScreenUi().GetCamera().ToggleLights(false)
+	
+	var prologueHap : Happening = load(PrologueDialgues)
+	var stage : HappeningStage = prologueHap.Stages[0]
+	Ingame_UIManager.GetInstance().CallbackDiag(stage.GetTexts(), null, "Seg", PrologueDialogueEnded, true)
+
+func PrologueDialogueEnded() -> void:
+	SimulationManager.GetInstance().TogglePause(false)
+	GetMap().GetScreenUi().GetCamera().ToggleLights(true)
+	GetMap().GetScreenUi().GetCamera().LockPosition(false)
+	await Helper.wait(2)
+	SteerTut()
+
+func ShowArmak():
+	var prologueHap : Happening = load(PrologueDialgues)
+	var stage : HappeningStage = prologueHap.Stages[1]
+	Ingame_UIManager.GetInstance().CallbackDiag(stage.GetTexts(), null, "Seg", ReturnCamToPlayer, true)
+	GetMap().GetCamera().FrameCamToPos(MapHelper.GetCityByName("Armak").global_position, 6)
+
+func SteerTut() -> void:
+	ActionTracker.OnActionCompleted(ActionTracker.Action.CAMERA_CONTROL)
+	ActionTracker.OnActionCompleted(ActionTracker.Action.STEER)
+	
+
+func PlayIntro():
+	#GetMap().PlayIntroFadeInt()
+	var introHap : Happening = load(IntroDialogues)
+	var stage : HappeningStage = introHap.Stages[0]
+	Ingame_UIManager.GetInstance().CallbackDiag(stage.GetTexts(), load("res://Assets/artificial-hive.png"), "Seg", ShowStation, true)
+
+func ShowStation():
+	var introHap : Happening = load(IntroDialogues)
+	var stage : HappeningStage = introHap.Stages[1]
+	Ingame_UIManager.GetInstance().CallbackDiag(stage.GetTexts(), load("res://Assets/artificial-hive.png"), "Seg", ReturnCamToPlayer, true)
+	GetMap().GetCamera().FrameCamToPos(MapHelper.GetCityByName("Dormak").global_position, 6)
+
+
+func ReturnCamToPlayer():
+	#EnableBackUI()
+	
+	GetMap().GetCamera().FrameCamToPlayer()
+	
+
+func _enter_tree() -> void:
+	var map = GetMap()
+	
+	map.connect("MAP_EnemyArrival", StartDogFight)
+	Controller.connect("FleetSeperationRequested", StartShipTrade)
+	Controller.connect("LandingRequested", OnLandRequested)
+	Controller.OpenHatchRequested.connect(OnOpenHatchRequested)
+	#var statp = GetStatPanel()
+	##connect("WRLD_StatsUpdated", statp.StatsUp)
+	#connect("WRLD_StatGotLow", statp.StatsLow)
+	
+	#GetMap().GetPlayerShip().SetShipType(StartingShip)
+	#CurrentShip = StartingShip
+
+func _exit_tree() -> void:
+	WORLDST = WORLDSTATE.INITIAL
+
+func TerminateWorld() -> void:
+	#GetMap().GetInScreenUI().GetInventory().FlushInventory()
+	var PlShips = get_tree().get_nodes_in_group("PlayerShips")
+	for g : MapShip in PlShips:
+		g.Kill()
+
+#ShipTrade
+func StartShipTrade(ControlledShip : PlayerDrivenShip) -> void:
+	if (get_tree().get_nodes_in_group("FleetSep").size() > 0):
+		ShipSeparationFinished()
+		return
+	SimulationManager.GetInstance().TogglePause(true)
+	var CurrentFleet : Array[PlayerDrivenShip] = [ControlledShip]
+	for S in ControlledShip.GetDock().DockedShips:
+		CurrentFleet.append(S)
+	
+	if (CurrentFleet.size() == 1):
+		PopUpManager.GetInstance().DoFadeNotif("Cant separate current fleet")
+		return
+	GetMap().HideWorld(false)
+	var sc = load(FleetSeparationScene).instantiate() as FleetSeparation
+	sc.CurrentFleet = CurrentFleet
+	
+	WORLDST = WORLDSTATE.TRADE
+	Ingame_UIManager.GetInstance().AddUI(sc)
+	
+	sc.connect("SeperationFinished", ShipSeparationFinished)
+	ActionTracker.OnActionCompleted(ActionTracker.Action.FLEET_SEPARATION)
+	
+#-----------------------------------------------------------
+func ShipSeparationFinished() -> void:
+	GetMap().HideWorld(true)
+	WORLDST = WORLDSTATE.NORMAL
+	ActionTracker.OnActionCompleted(ActionTracker.Action.SHIP_MANAGER)
+
+#Dogfight-----------------------------------------------
+var FighingFriendlyUnits : Array[MapShip] = []
+var FighingEnemyUnits : Array[MapShip] = []
+func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip], Missiles : Array[Missile], EnemyMissiles : Array[Missile]):
+	if (WORLDST == WORLDSTATE.INITIAL):
+		return
+	if (WORLDST == WORLDSTATE.FIGHT):
+		return
+	
+	var windDir = WeatherManage.WindDirection
+	var PlDir = windDir
+	
+	var availbableFriendly : Node2D
+	var availableEnemy : Node2D
+	
+	if (Friendlies.size() > 0):
+		availbableFriendly = Friendlies[0]
+	else: if (Missiles.size() > 0):
+		availbableFriendly = Missiles[0]
+	
+	if (Enemies.size() > 0):
+		availableEnemy = Enemies[0]
+	else: if (EnemyMissiles.size() > 0):
+		availableEnemy = EnemyMissiles[0]
+	else: if (Missiles.size() > 0):
+		availableEnemy = Missiles[0]
+		
+	
+	PlDir = availbableFriendly.global_position.direction_to(availableEnemy.global_position)
+	var dot = PlDir.dot(windDir)
+	
+	
+	#Temp solution to stop fight starting twice
+	WORLDST = WORLDSTATE.FIGHT
+	SimulationManager.GetInstance().TogglePause(true)
+	
+	#Screen transition
+	await GetMap().GetScreenUi().CloseScreen()
+	GetMap().HideWorld(false)
+	
+	#spawn fight
+	var FightScene = await Helper.LoadThreaded(CardFightScene).Sign
+	var CardF = FightScene.instantiate() as Card_Fight
+	CardF.CardFightEnded.connect(CardFightEnded)
+	CardF.CardFightDestroyed.connect(CardFightDestroyed)
+	
+	#Player battle stats
+	var FBattleStats : Array[BattleShipStats] = []
+	for g in Friendlies:
+		FighingFriendlyUnits.append(g)
+		FBattleStats.append(g.GetBattleStats())
+	
+	#Enemy battle stats
+	var EBattleStats : Array[BattleShipStats] = []
+	for g : HostileShip in Enemies:
+		if (g.Destroyed):
+			continue
+		FighingEnemyUnits.append(g)
+		EBattleStats.append(g.GetBattleStats())
+	
+	#If both arrays have missiles then this is a strictly missile fight
+	if (Missiles.size() > 0 and EnemyMissiles.size() > 0):
+		for g in Missiles:
+			FBattleStats.append(g.GetBattleStats())
+
+		for g in EnemyMissiles:
+			EBattleStats.append(g.GetBattleStats())
+	
+	#if not we need to shift the aliance of missiles
+	else:
+		if (FBattleStats.size() > 0):
+			for g in Missiles:
+				EBattleStats.append(g.GetBattleStats())
+
+			for g in EnemyMissiles:
+				EBattleStats.append(g.GetBattleStats())
+		else:
+			for g in Missiles:
+				FBattleStats.append(g.GetBattleStats())
+
+			for g in EnemyMissiles:
+				FBattleStats.append(g.GetBattleStats())
+	
+	CardF.PlayerReserves = FBattleStats
+	CardF.EnemyReserves = EBattleStats
+	CardF.WindAdvantage = dot
+	
+	var actualDir = WeatherManage.WindDirection.rotated(-availbableFriendly.global_rotation)
+	CardF.ActualWindDir = actualDir
+	#Store location of fight to add the location at the ending screen
+	var AveragePos : Vector2 = Vector2.ZERO
+	for g in Enemies:
+		AveragePos += g.global_position
+	for g in Friendlies:
+		AveragePos += g.global_position
+	AveragePos /= Friendlies.size() + Enemies.size()
+	
+	CardF.FightLoc = AveragePos
+	
+	await GetMap().GetScreenUi().ToggleCardFightUI(true)
+	Ingame_UIManager.GetInstance().AddUI(CardF, false, true)
+	GetMap().GetScreenUi().OpenScreen(ScreenUI.ScreenState.HALF_SCREEN)
+	UISoundMan.GetInstance().Refresh()
+
+#------------------------------------------------------------------
+func CardFightEnded(Survivors : Array[BattleShipStats], won : bool, wondFunds : int) -> void:
+	var AllUnits : Array[MapShip]
+	AllUnits.append_array(FighingFriendlyUnits)
+	AllUnits.append_array(FighingEnemyUnits)
+	for Unit in AllUnits:
+		var Survived = false
+		for Surv in Survivors:
+			var Nam = Surv.Name
+			if (Unit.GetShipName() == Nam):
+				Unit.Damage(Unit.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL) - Surv.CurrentHull, false)
+				if (Unit is PlayerDrivenShip):
+					FigureOutInventory(Unit.Cpt.GetCharacterInventory(), Surv.Cards)
+				else: if (Unit.IsDead()):
+					Unit.DestroyEnemyDebry()
+					
+				Survived = true
+				break
+		if (!Survived):
+			Unit.Damage(9999999, false)
+			if (Unit is HostileShip):
+				Unit.DestroyEnemyDebry()
+	if (won):
+		if (wondFunds > 0):
+			PlayerWallet.AddFunds(wondFunds)
+			PopUpManager.GetInstance().DoFadeNotif("{0} drahma added".format([wondFunds]))
+	GetMap().HideWorld(true)
+	FighingEnemyUnits.clear()
+	FighingFriendlyUnits.clear()
+
+#------------------------------------------------------------------
+func CardFightDestroyed() -> void:
+	#GetMap().GetScreenUi().ToggleControllCover(false)
+	GetMap().HideWorld(true)
+	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.PILOT_SCREEN)
+	await GetMap().GetScreenUi().FullScreenToggleStarted
+	#GetMap().GetScreenUi().ToggleScreenUI(true)
+	GetMap().GetScreenUi().ToggleCardFightUI(false)
+	get_tree().get_nodes_in_group("CardFight")[0].queue_free()
+	
+	WORLDST = WORLDSTATE.NORMAL
+
+#------------------------------------------------------------------
+##LANDING
+func OnLandRequested(ControlledShip : MapShip) -> void:
+	RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.LANDING_START)
+	PopUpManager.GetInstance().DoFadeNotif("Landing sequence initiated")
+	ControlledShip.UpdateTargetAltitude(-1000)
+
+#------------------------------------------------------------------
+func OnOpenHatchRequested(ControlledShip : MapShip) -> void:
+	var Instigator = ControlledShip
+	if (ControlledShip.Docked):
+		Instigator = ControlledShip.Command
+
+	if (!Instigator.Landed()):
+		PopUpManager.GetInstance().DoFadeNotif("Can't open hatch\nship is not landed")
+		return
+	
+	OnShipLanded(Instigator)
+
+#------------------------------------------------------------------
+func OnLandingCanceled(Ship : MapShip) -> void:
+	PopUpManager.GetInstance().DoFadeNotif("Landing sequence canceled")
+	Ship.disconnect("LandingEnded", OnLandingFinished)
+	Ship.disconnect("LandingCanceled", OnLandingCanceled)
+
+#------------------------------------------------------------------
+func OnLandingFinished(Ship : MapShip) -> void:
+	RadioSpeaker.GetInstance().PlaySound(RadioSpeaker.RadioSound.LANDING_END)
+	if (Ship.is_connected("LandingEnded", OnLandingFinished)):
+		Ship.disconnect("LandingEnded", OnLandingFinished)
+	if (Ship.is_connected("LandingCanceled", OnLandingCanceled)):
+		Ship.disconnect("LandingCanceled", OnLandingCanceled)
+
+#------------------------------------------------------------------
+func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
+	var Inventory = InventoryManager.GetInstance()
+	if (Inventory.visible):
+		Inventory.CloseInventory()
+	GetMap().HideWorld(false)
+	SimulationManager.GetInstance().TogglePause(true)
+	WORLDST = WORLDSTATE.TOWN
+	
+	var spot = Ship.CurrentPort as MapSpot
+	var PlayedEvent = await Land(spot, Ship)
+	if (PlayedEvent):
+		return
+	
+	var TownSc = await Helper.LoadThreaded(TownSceneFile).Sign
+	var sc = TownSc as PackedScene
+	var fuel = sc.instantiate() as TownScene
+	#fuel.TownMerch = spot.SpotInfo.Merchendise
+	#fuel.HasFuel = spot.HasFuel()
+	#fuel.HasRepair = spot.HasRepair()
+	#fuel.TownFuel = spot.CityFuelReserves
+	fuel.BoughtFuel = spot.PlayerFuelReserves
+	fuel.connect("TransactionFinished", FuelTransactionFinished)
+	fuel.LandedShips.append_array(spot.VisitingShips)
+	fuel.TownSpot = spot
+	if (!skiptransition):
+		GetMap().GetScreenUi().CloseScreen()
+		await GetMap().GetScreenUi().FullScreenToggleStarted
+		
+	Ingame_UIManager.GetInstance().AddUI(fuel, true)
+	await GetMap().GetScreenUi().ToggleTownUI(true)
+	
+	GetMap().GetScreenUi().OpenScreen(ScreenUI.ScreenState.HALF_SCREEN)
+	await GetMap().GetScreenUi().FullScreenToggleFinished
+		
+	ActionTracker.OnActionCompleted(ActionTracker.Action.TOWN_SHOP)
+	#UIEventH.OnScreenUIToggled(false)
+	#UIEventH.OnButtonCoverToggled(true)
+	
+#----------------------------------------------------------------------
+func FuelTransactionFinished(BFuel : float, Ships : Array[MapShip], Scene : TownScene):
+	var spot = Ships[0].CurrentPort as MapSpot
+	if (BFuel < 0):
+		for ship : MapShip in Ships:
+			var CurrentValue = ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
+			
+			var CurrentFuelToRemove = min(CurrentValue, abs(BFuel))
+			
+			ship.Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, CurrentFuelToRemove)
+			
+			#we add cause fuel to remove should be negative
+			BFuel += CurrentFuelToRemove
+			
+			if (BFuel == 0):
+				break
+
+		#if (Ship is PlayerShip):
+			#ShipData.GetInstance().ConsumeResource("FUEL", -BFuel)
+		#else:
+		#Ship.Cpt.RefillResource(STAT_CONST.STATS.FUEL_TANK, BFuel)
+	
+	GetMap().HideWorld(true)
+	
+	spot.SetFuelReserves(BFuel)
+	
+	GetMap().GetScreenUi().CloseScreen()
+	await GetMap().GetScreenUi().FullScreenToggleStarted
+	Scene.queue_free()
+	await GetMap().GetScreenUi().ToggleTownUI(false)
+	
+	GetMap().GetScreenUi().OpenScreen(ScreenUI.ScreenState.PILOT_SCREEN)
+	#Play events saved from happening
+	for g in OverworldEventsToShow:
+		var Pos = g.GetFocusPos()
+		if (Pos != Vector2.ZERO):
+			GetMap().GetCamera().FrameCamToPos(Pos, 4.0, true)
+			Ingame_UIManager.GetInstance().CallbackDiag(g.Dialogues, null, "", ReturnCamToPlayer, true)
+	OverworldEventsToShow.clear()
+	
+	for g in TutorialsToShow:
+		if (g == ActionTracker.Action.RECRUIT):
+			#TutorialsToShow.append(ActionTracker.Action.RECRUIT)
+			ActionTracker.OnActionCompleted(ActionTracker.Action.RECRUIT)
+			
+	TutorialsToShow.clear()
+	
+	WORLDST = WORLDSTATE.NORMAL
+
+#-------------------------------------------------------
+func Land(Spot : MapSpot, ControlledShip : MapShip) -> bool:
+	var Instigator = ControlledShip
+	if (ControlledShip.Docked):
+		Instigator = ControlledShip.Command
+	#ControlledShip.HaltShip()
+	var PlayedEvent = false
+	if (Spot.Event != null and !Spot.Visited):
+		var happeningui = ResourceLoader.load(HappeningUI).instantiate() as HappeningInstance
+		happeningui.EventSpot = Spot
+		happeningui.HappeningInstigator = Instigator
+		
+		GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.FULL_SCREEN)
+		await GetMap().GetScreenUi().FullScreenToggleStarted
+		Ingame_UIManager.GetInstance().AddUI(happeningui, true)
+		happeningui.PresentHappening(Spot.Event)
+		#UIEventH.OnScreenUIToggled(false)
+		#UIEventH.OnButtonCoverToggled(true)
+		happeningui.HappeningFinished.connect(HappeningFinished.bind(ControlledShip))
+		PlayedEvent = true
+	Spot.OnSpotVisited()
+	return PlayedEvent
+
+#--------------------------------------------------------
+func HappeningFinished(Recruited : bool, CapmaignFin : bool, Events : Array[OverworldEventData], Ship : MapShip) -> void:
+	
+	GetMap().GetScreenUi().CloseScreen()
+	await GetMap().GetScreenUi().FullScreenToggleStarted
+
+	get_tree().get_nodes_in_group("Happening")[0].queue_free()
+	#await GetMap().GetScreenUi().FullScreenToggleFinished
+	if (Recruited):
+		TutorialsToShow.append(ActionTracker.Action.RECRUIT)
+	if (CapmaignFin):
+		Ingame_UIManager.GetInstance().CallbackDiag(["Time to head back people. The package has been delivered."], null, "", EndGame, true)
+		GetMap().GetScreenUi().OpenScreen(ScreenUI.ScreenState.PILOT_SCREEN)
+		return
+	
+	#Save events to play once we left town
+	OverworldEventsToShow.append_array(Events)
+		
+	OnShipLanded(Ship, true)
+
+#--------------------------------------------------------
+#Make sure to remove all items that their cards have been used
+func FigureOutInventory(CharInv : CharacterInventory, Cards : Array[CardStats]):
+	#get inventory contents, make sure to duplicate so that removing elements doesent fuck with this
+	var Contents = CharInv.GetInventoryContents().duplicate()
+	for It : Item in Contents.keys():
+		if (It is AmmoItem and !CharInv.HasWeapon(It.WType)):
+			continue
+			
+		for g in Contents[It]:
+			#if item doesent provide a card then it def didnt get used
+			if (It.CardProviding.size() > 0):
+				for c in It.CardProviding:
+				#if it did remove it from dictionary and leave ininside inventory
+					var CartToCompare = c.duplicate() as CardStats
+					CartToCompare.Tier = It.Tier
+					
+					var CardToRemove : CardStats
+					for C in Cards:
+						if (C.IsSame(CartToCompare)):
+							CardToRemove = C
+							break
+					if (CardToRemove != null):
+						Cards.erase(CardToRemove)
+					
+				#if it was used and we cant find it in the dictionary then remove it from inventory
+					else:
+						CharInv.RemoveItem(It)
+
+#---------------------------------------------------
+#Save data
+func GetSaveData() -> SaveData:
+	var Data = SaveData.new()
+	Data.DataName = "Wallet"
+	Data.Datas.append(PlayerWallet.duplicate())
+	var randData = RandomSaveData.new()
+	randData.customSeed = Rand.customSeed
+	randData.state = Rand.InstanceRandom.GetState()
+	Data.Datas.append(randData)
+	return Data
+
+#---------------------------------------------------
+func LoadSaveData(data : SaveData) -> void:
+	var PlWallet : Wallet = data.Datas[0]
+	PlayerWallet.SetFunds(PlWallet.Funds)
+	var randData : RandomSaveData = data.Datas[1]
+	Rand.customSeed = randData.customSeed
+	Rand.NewStaticRand(randData.state)
+
+#--------------------------------------------------------
+func GameLost(reason : String):
+	World.WORLDST = World.WORLDSTATE.FINISHED
+	get_tree().paused = true
+	$Map/SubViewportContainer/ViewPort/InScreenUI/PanelContainer.visible = true
+	$Map/SubViewportContainer/ViewPort/InScreenUI/PanelContainer/VBoxContainer/Label.text = reason
+
+#--------------------------------------------------------
+func EndGame() -> void:
+	#GetMap().GetScreenUi().CloseScreen()
+	#await GetMap().GetScreenUi().FullScreenToggleStarted
+	WRLD_OnGameEnded.emit()
+
+#--------------------------------------------------------
+func EndPrologue() -> void:
+	ActionTracker.GetInstance().OnPrologueFinished()
+	GetMap().GetScreenUi().CloseScreen()
+	await GetMap().GetScreenUi().FullScreenToggleStarted
+	
+	var ProgEnd = PrologueEndScreen.instantiate() as PrologueEnd
+	AchievementManager.GetInstance().IncrementStatInt("PROFIN", 1)
+	GetMap().GetScreenUi().add_child(ProgEnd)
+	await ProgEnd.Finished
+	WRLD_OnGameEnded.emit()

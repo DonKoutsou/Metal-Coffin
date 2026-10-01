@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d0ie3g0lfeiie"]
 
-[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="1_cj4kj"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://MetalEngineBase/Inventory/YellowPanel.tres" id="1_cj4kj"]
 
 [node name="PanelContainer" type="PanelContainer" unique_id=2109229134]
 anchors_preset = 15

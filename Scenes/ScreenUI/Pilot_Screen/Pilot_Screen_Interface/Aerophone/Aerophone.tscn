@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bxtv6l5octf8v" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Aerophone/Aerosonar.gd" id="1_5vs2h"]
 [ext_resource type="Script" uid="uid://cvjx6yhssr224" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Aerophone/Aerosonal_Line.gd" id="1_u0q8c"]
-[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="2_6e8xg"]
-[ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Resources/EventHandlers/DroneDockEventH.tres" id="3_fw736"]
+[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Scenes/EventHandlers/ShipControllerEventHandler.tres" id="2_6e8xg"]
+[ext_resource type="Resource" uid="uid://daboq4ltk4k55" path="res://Scenes/EventHandlers/DroneDockEventH.tres" id="3_fw736"]
 [ext_resource type="Texture2D" uid="uid://d06m2rqiyiblu" path="res://Assets/UIPiecies/Screen/Buttons/Nob22.png" id="6_8d64h"]
 [ext_resource type="PackedScene" uid="uid://b7cgarcbvixw6" path="res://Scenes/ScreenUI/Pilot_Screen/Pilot_Screen_Interface/Aerophone/speaker.tscn" id="6_jiwdy"]
 [ext_resource type="Texture2D" uid="uid://tn4p1eepg00y" path="res://Assets/UIPiecies/Screen/Buttons/Nob02.png" id="7_kirju"]
@@ -155,8 +155,9 @@ offset_left = -6.5
 offset_top = -106.0
 offset_right = 33.5
 offset_bottom = -66.0
+rotation = 0.002995899
 frequency = 15.0
-max_rotation = 0.02
+phase_offset = 2.200935492357285
 
 [connection signal="toggled" from="Mode" to="." method="_on_mode_toggled"]
 [connection signal="RangeSnappedChanged" from="DroneGas" to="." method="_on_gein_control_range_snapped_changed"]

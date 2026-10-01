@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://2bb3b4gg4kjn"]
+
+[ext_resource type="PackedScene" uid="uid://r8hnhjq1f0q0" path="res://MetalEngineBase/Inventory/Stats/StatContainer/ShipStatContainer.tscn" id="1_g24vu"]
+[ext_resource type="Script" uid="uid://521w0k1jglf0" path="res://Scenes/Inventory/StatContainer/MC_ShipStatContainer.gd" id="2_uju6j"]
+
+[node name="ShipStatContainer" unique_id=1703653256 instance=ExtResource("1_g24vu")]
+script = ExtResource("2_uju6j")
+Tooltipscene = ""
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -1,16 +1,16 @@
 [gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://44kuvcefuj6x"]
 
-[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://Scenes/Card_Fight/Card/Card_Modules/CardModule.gd" id="2_es6ig"]
-[ext_resource type="Script" uid="uid://c4p5ur132vdkj" path="res://Scenes/Card_Fight/DamageInfo.gd" id="3_vm2ur"]
-[ext_resource type="Script" uid="uid://cdrx0lnf7xlv7" path="res://Scenes/Card_Fight/Card/Card_Modules/OffensiveCardModule.gd" id="4_88gjj"]
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="5_nxv04"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://MetalEngineBase/Cardfight/Card/Card_Modules/CardModule.gd" id="2_es6ig"]
+[ext_resource type="Script" uid="uid://c4p5ur132vdkj" path="res://MetalEngineBase/Cardfight/DamageInfo.gd" id="3_vm2ur"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://MetalEngineBase/Cardfight/Card/CardStats.gd" id="4_1u5i7"]
+[ext_resource type="Script" uid="uid://cdrx0lnf7xlv7" path="res://MetalEngineBase/Cardfight/Card/Card_Modules/OffensiveCardModule.gd" id="4_88gjj"]
 
 [sub_resource type="Resource" id="Resource_tpj2d"]
 script = ExtResource("4_88gjj")
 metadata/_custom_type_script = "uid://cdrx0lnf7xlv7"
 
 [resource]
-script = ExtResource("5_nxv04")
+script = ExtResource("4_1u5i7")
 txFile = "uid://cln0pmvmp4m00"
 CardName = "Hollow Barragge"
 AllowDuplicates = true

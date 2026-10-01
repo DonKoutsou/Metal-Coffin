@@ -317,6 +317,9 @@ func ShipFell(vis : CardFightShipViz2) -> void:
 ##----------------------------------------------------------------------##
 func OnShuffling(t : bool) -> void:
 	Shuffling = t
+	var Performer = GetCurrentShip()
+	if (t and Performer.Friendly):
+		PopUpManager.GetInstance().DoFadeNotif("Shuffling Deck")
 
 func TurnStarted(Performer : BattleShipStats) -> void:
 	var data : Dictionary = {
@@ -361,9 +364,14 @@ func CreateDecks() -> void:
 		
 		D.Shuffling.connect(OnShuffling)
 		D.OnCardDrawn.connect(CardDrawn)
+		D.OnCardExhausted.connect(CardExhausted)
+		
 		D.OnCardDiscarded.connect(CardDiscarded)
 		D.MultiCardDrawn.connect(MultiCardDrawn)
 		D.MultiSpecificDrawn.connect(MultiSpcificCardDrawn)
+		
+
+
 
 func FireTicked(Ship : BattleShipStats) -> void:
 	var data : Dictionary = {
@@ -433,10 +441,17 @@ func CardDrawn(C : CardStats, Manually : bool) -> void:
 		if (!Placed):
 			c.queue_free()
 
+func CardExhausted() -> void:
+	var Performer = GetCurrentShip()
+	if (Performer.Friendly):
+		PopUpManager.GetInstance().DoFadeNotif("Card Exhausted")
 
 ##----------------------------------------------------------------------##
 func CardDiscarded(C : CardStats, Manually : bool) -> void:
 	var Performer = GetCurrentShip()
+	if (Performer.Friendly):
+		PopUpManager.GetInstance().DoFadeNotif("Card Discarded")
+		
 	var data : Dictionary = {
 		"actionType" : Card_Passive.ActionType.CARD_DISCARDED,
 		"Friendly" : GetShipsTeam(Performer),

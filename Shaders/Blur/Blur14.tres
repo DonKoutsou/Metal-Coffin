@@ -5,3 +5,4 @@
 [resource]
 shader = ExtResource("1_vegb6")
 shader_parameter/offset = 3.0000001425
+shader_parameter/col = Color(1, 1, 1, 1)

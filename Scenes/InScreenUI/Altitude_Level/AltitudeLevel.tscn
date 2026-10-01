@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cba7o3slmlft0"]
 
 [ext_resource type="Script" uid="uid://bxodsfaf51bba" path="res://Scenes/InScreenUI/Altitude_Level/Altitude_Level.gd" id="1_cdu52"]
-[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Resources/EventHandlers/ShipControllerEventHandler.tres" id="2_0wjrb"]
+[ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Scenes/EventHandlers/ShipControllerEventHandler.tres" id="2_0wjrb"]
 [ext_resource type="StyleBox" uid="uid://ggk50tpqf74r" path="res://Theme/Alt_Panel.tres" id="3_8ae1h"]
 
 [node name="VBoxContainer" type="Control" unique_id=1339738195 node_paths=PackedStringArray("Text")]

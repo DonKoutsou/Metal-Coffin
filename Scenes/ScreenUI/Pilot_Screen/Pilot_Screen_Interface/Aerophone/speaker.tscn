@@ -77,7 +77,7 @@ SoundFileList = Dictionary[int, ExtResource("2_4mixu")]({
 10: SubResource("Resource_d63sn"),
 11: SubResource("Resource_ha8d1")
 })
-phase_offset = 1.0278505966122031
+phase_offset = 3.597146684653234
 max_rotation = 0.003
 L = NodePath("Light")
 

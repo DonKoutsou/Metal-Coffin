@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dk3dum3bl1yhq" path="res://Scenes/InScreenUI/MapMarkers/map_marker_editor.gd" id="1_8dwjq"]
 [ext_resource type="PackedScene" uid="uid://dd26j51u4ni6g" path="res://Scenes/InScreenUI/MapMarkers/MapMarkerLine.tscn" id="2_5eayg"]
 [ext_resource type="PackedScene" uid="uid://dvnr81a8uogh4" path="res://Scenes/InScreenUI/MapMarkers/TextMarker.tscn" id="3_ikfwh"]
-[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://Theme/YellowPanel.tres" id="5_3d6hg"]
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://MetalEngineBase/Inventory/YellowPanel.tres" id="5_3d6hg"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="6_i7jhj"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0ok87"]

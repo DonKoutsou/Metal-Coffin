@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://da5wwxg8h0n50" path="res://Resources/Items/Ammo/TacticalMissile.tres" id="3_n65wb"]
 [ext_resource type="Resource" uid="uid://ds7viiermptuq" path="res://Resources/Items/Ammo/Long-RangeMissile.tres" id="4_0ik2s"]
 [ext_resource type="Script" uid="uid://8hn4kne15ac5" path="res://addons/beehave/nodes/composites/selector.gd" id="4_2bbgj"]
+[ext_resource type="Resource" uid="uid://hgtjvfrjcjnp" path="res://Scenes/Map/MapSpot/MapSpotEventM.tres" id="6_agsp1"]
 [ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="6_smsg2"]
 [ext_resource type="Script" uid="uid://dyxwpkc3fr5yh" path="res://Scripts/BeehaveNodes/UnhandledEnemies_Condition.gd" id="7_3q3c6"]
 [ext_resource type="Script" uid="uid://bc848p65pfktw" path="res://Scripts/BeehaveNodes/FindCloseShipAndOrderForPursuit_Action.gd" id="8_xcs4j"]
@@ -25,6 +26,7 @@ ExtResource("2_fb4ti"): 2,
 ExtResource("3_n65wb"): 1,
 ExtResource("4_0ik2s"): 3
 })
+SpotEventM = ExtResource("6_agsp1")
 layers_2d_physics = 1
 
 [node name="BeehaveTree" type="Node" parent="." unique_id=92991087 node_paths=PackedStringArray("blackboard", "actor")]

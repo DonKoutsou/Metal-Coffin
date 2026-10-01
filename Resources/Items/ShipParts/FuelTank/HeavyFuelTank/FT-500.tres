@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://33sxgbk0di7b"]
 
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="1_1bgl8"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://MetalEngineBase/Cardfight/Card/CardStats.gd" id="1_1bgl8"]
 [ext_resource type="Resource" uid="uid://b3gyn3343cp4u" path="res://Resources/Cards/Energy.tres" id="2_yb4av"]
 [ext_resource type="Resource" uid="uid://0glrophqko3g" path="res://Resources/Cards/EnergyReserveAOE.tres" id="3_e2imw"]
 [ext_resource type="Resource" uid="uid://n1uvu44r7eyd" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FT-1000.tres" id="4_i1mcj"]

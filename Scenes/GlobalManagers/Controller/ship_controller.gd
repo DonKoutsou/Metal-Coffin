@@ -297,12 +297,12 @@ func RegroupPressed() -> void:
 		#return
 	
 	var ShipList = get_tree().get_nodes_in_group("PlayerShips")
-	var CapList : Array[Captain]
+	var CapList : Array[MapShip]
 	for Ship in ShipList:
 		if (Ship.Docked or Ship == ControlledShip or Ship == ControlledShip.Command):
 			continue
 			
-		CapList.append(Ship.Cpt)
+		CapList.append(Ship)
 	
 	if (CapList.size() == 0):
 		PopupManager.GetInstance().DoFadeNotif("No available captains\nto regroup with")
@@ -316,7 +316,7 @@ func RegroupPressed() -> void:
 	
 	await CaptainSelect.CharacterSelected
 	if (CaptainSelect.SelectedCharacter != null):
-		ControlledShip.Regroup(CaptainSelect.SelectedCharacter.CaptainShip)
+		ControlledShip.Regroup(CaptainSelect.SelectedCharacter)
 			
 func GetSaveData() -> PlayerSaveData:
 	var pldata = PlayerSaveData.new()

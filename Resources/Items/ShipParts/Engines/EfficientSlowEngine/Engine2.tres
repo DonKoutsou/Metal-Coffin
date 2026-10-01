@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ShipPart" format=3 uid="uid://c8wthdbwacfhe"]
 
 [ext_resource type="Resource" uid="uid://sf8ron8y7g0l" path="res://Resources/Cards/Evasive.tres" id="1_66jjj"]
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://Scenes/Card_Fight/CardStats.gd" id="2_6o1ql"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://MetalEngineBase/Cardfight/Card/CardStats.gd" id="1_q2ctq"]
 [ext_resource type="Resource" uid="uid://x7tg2mqpgqxm" path="res://Resources/Cards/Bash.tres" id="4_32fsc"]
 [ext_resource type="Resource" uid="uid://ctlms8do0piak" path="res://Resources/Items/ShipParts/Engines/EfficientSlowEngine/MediumEngine2.tres" id="4_q0elo"]
 [ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://MetalEngineBase/Inventory/Scripts/ShipPartUpgrade.gd" id="5_awpny"]
@@ -37,7 +37,7 @@ UpgradeTime = 800.0
 disp = 1
 ItemName = "EcoDrive-100q \"Conserve\""
 ItemDesc = "Conserve is the entry-level model in the EcoDrive series, designed for maximum fuel efficiency without the need for high-speed travel. Ideal for long-distance voyages where fuel conservation is paramount, Conserve offers a balanced compromise for steady pacing over extended durations."
-CardProviding = Array[ExtResource("2_6o1ql")]([ExtResource("1_66jjj"), ExtResource("1_66jjj"), ExtResource("4_32fsc")])
+CardProviding = Array[ExtResource("1_q2ctq")]([ExtResource("1_66jjj"), ExtResource("1_66jjj"), ExtResource("4_32fsc")])
 CanTransfer = false
 Cost = 34000
 PartType = 1

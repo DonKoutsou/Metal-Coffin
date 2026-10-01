@@ -89,7 +89,7 @@ func  _ready() -> void:
 	call_deferred("InitialiseShip")
 	
 	#ENABLE FOR DEBUG PURPOSES
-	if (Commander.ENEMY_DEBUG):
+	if (Helper.ENEMY_DEBUG):
 		MapPointerManager.GetInstance().AddShip(self, false)
 	
 	if (!Patrol and !Convoy):
@@ -288,9 +288,9 @@ func FigureOutPath() -> void:
 		if (CurrentPort.NeighboringCities.size() == 0):
 			await Map.GetInstance().MAP_NeighborsSet
 			
-		Path = Helper.FindPath(port.GetSpotName(), cities[nextcity].GetSpotName())
+		Path = MapHelper.FindPath(port.GetSpotName(), cities[nextcity].GetSpotName())
 		if (Path.size() == 0):
-			Path = Helper.FindPath(port.GetSpotName(), cities[nextcity].GetSpotName())
+			Path = MapHelper.FindPath(port.GetSpotName(), cities[nextcity].GetSpotName())
 		PathPart = 1
 	
 	BTree = BT.instantiate() as BeehaveTree
@@ -325,24 +325,27 @@ func ToFarFromRefuel() -> bool:
 	return true
 
 func SetNewDestination(DistName : String) -> void:
-	Path = Helper.FindPath(CurrentPort.GetSpotName(), DistName)
+	Path = MapHelper.FindPath(CurrentPort.GetSpotName(), DistName)
 	PathPart = 1
 
 func FindPursuitPath(Pos : Vector2) -> void:
-	var ClosestToPosition = Helper.GetClosestSpot(Pos)
+	var ClosestToPosition = MapHelper.GetClosestSpot(Pos)
 	var Closest : MapSpot
 	if (CurrentPort != null):
 		Closest = CurrentPort
 	else:
-		Closest = Helper.GetClosestSpot(global_position)
-	Path = Helper.FindPath(Closest.GetSpotName(), ClosestToPosition.GetSpotName())
+		Closest = MapHelper.GetClosestSpot(global_position)
+	Path = MapHelper.FindPath(Closest.GetSpotName(), ClosestToPosition.GetSpotName())
 	print("{0} has created a pursuit path from {1} to {2}".format([GetShipName(), Closest.GetSpotName(), ClosestToPosition.GetSpotName()]))
 	PathPart = 1
 
-func SetCurrentPort(P : MapSpot) -> void:
+func SetCurrentPort(P : Node2D) -> void:
 	CurrentPort = P
 	for g in GetDock().GetDockedShips():
 		g.SetCurrentPort(P)
+
+func Friendly() -> bool:
+	return false
 
 func RemovePort():
 	if (Docked):
@@ -438,7 +441,7 @@ func GetCurrentDestination() -> Vector2:
 		destination = IntersectPusruing()
 	else : if(PositionToInvestigate != Vector2.ZERO):
 		if (PursuitPath.size() - 1 > PursuitPathPart):
-			destination = Helper.GetCityByName(PursuitPath[PursuitPathPart]).global_position
+			destination = MapHelper.GetCityByName(PursuitPath[PursuitPathPart]).global_position
 		else:
 			destination = PositionToInvestigate
 			if (PositionToInvestigate.distance_squared_to(global_position) <= 20):
@@ -446,7 +449,7 @@ func GetCurrentDestination() -> Vector2:
 	else: if(RefugeSpot != null) :
 		destination = RefugeSpot.global_position
 	else : if (Path.size() > 0):
-		destination = Helper.GetCityByName(Path[PathPart]).global_position
+		destination = MapHelper.GetCityByName(Path[PathPart]).global_position
 	else : 
 		destination = global_position
 	return destination
@@ -634,10 +637,12 @@ func Evaporate() -> void:
 	if (CurrentPort != null):
 		CurrentPort.OnSpotDeparture(self)
 	ToggleRadar(false)
-	MapPointerManager.GetInstance().RemoveShip(self)
 	queue_free()
 	#get_parent().remove_child(self)
-	
+
+func OnLanded() -> void:
+	RadarShape.Landed = true
+
 func Kill() -> void:
 	OnShipDestroyed.emit(self)
 	Destroyed = true
@@ -650,7 +655,6 @@ func Kill() -> void:
 		CurrentPort.OnSpotDeparture(self)
 	
 func DestroyEnemyDebry() -> void:
-	MapPointerManager.GetInstance().RemoveShip(self)
 	get_parent().remove_child(self)
 	queue_free()
 	

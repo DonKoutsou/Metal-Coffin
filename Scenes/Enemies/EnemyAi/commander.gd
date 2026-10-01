@@ -13,11 +13,12 @@ class_name Commander
 
 @export var Armaments : Dictionary[MissileItem, int]
 @export var SimulationRange : int = 10000
+@export var SpotEventM : MapSpotEventManager
 
 @export_flags_2d_physics var layers_2d_physics
 
 static var Instance : Commander
-static var ENEMY_DEBUG : bool = false
+
 
 var Fleet : Array[HostileShip] = []
 
@@ -32,9 +33,11 @@ var Alarmed : bool = false
 
 func _ready() -> void:
 	Instance = self
+	SpotEventM.EnemyVisualLost.connect(OnEnemyVisualLost)
+	SpotEventM.EnemySeen.connect(OnEnemySeen)
 
 func ToggleEnemyDebug(t : bool) -> void:
-	ENEMY_DEBUG = t
+	Helper.ENEMY_DEBUG = t
 	for g in InvestigationOrders:
 		if (t):
 			MapPointerManager.GetInstance().AddOrder(g)
@@ -160,7 +163,7 @@ func OrderShipToPursue(Ship : HostileShip, Target : MapShip) -> void:
 	Order.Target = Target
 	Target.connect("OnShipDestroyed", PursuitOrderCompleted)
 	PursuitOrders.append(Order)
-	if (ENEMY_DEBUG):
+	if (Helper.ENEMY_DEBUG):
 		MapPointerManager.Instance.AddOrder(Order)
 #completing pusuit mission means ships has been killed
 #remove mission from list and make sure all assigned ships know about it
@@ -170,7 +173,7 @@ func PursuitOrderCompleted(TargetShip : MapShip) -> void:
 			for z in g.Receivers:
 				z.PursuingShips.clear()
 			PursuitOrders.erase(g)
-			if (ENEMY_DEBUG):
+			if (Helper.ENEMY_DEBUG):
 				MapPointerManager.Instance.RemoveOrder(g)
 			TargetShip.disconnect("OnShipDestroyed", PursuitOrderCompleted)
 			return
@@ -181,7 +184,7 @@ func PursuitOrderCanceled(TargetShip : MapShip) -> void:
 			for z in g.Receivers:
 				z.PursuingShips.clear()
 			PursuitOrders.erase(g)
-			if (ENEMY_DEBUG):
+			if (Helper.ENEMY_DEBUG):
 				MapPointerManager.Instance.RemoveOrder(g)
 			TargetShip.disconnect("OnShipDestroyed", PursuitOrderCompleted)
 			return
@@ -200,7 +203,7 @@ func OrderShipToInvestigate(Ship : HostileShip, Target : Vector2, SignalOrigin :
 	Order.Target = Target
 	Order.ShipTrigger = SignalOrigin
 	InvestigationOrders.append(Order)
-	if (ENEMY_DEBUG):
+	if (Helper.ENEMY_DEBUG):
 		MapPointerManager.Instance.AddOrder(Order)
 	print(Ship.ShipName + " has been ordered to investigate position : " + var_to_str(Target) + " for potential enemies.")
 
@@ -220,7 +223,7 @@ func InvestigationOrderComplete(Pos : Vector2) -> void:
 				z.SetPositionToInvestigate(Vector2.ZERO)
 				#z.ShipLookAt(z.GetCurrentDestination())
 			InvestigationOrders.erase(g)
-			if (ENEMY_DEBUG):
+			if (Helper.ENEMY_DEBUG):
 				MapPointerManager.Instance.RemoveOrder(g)
 			CancelInvestigation(g.ShipTrigger)
 			print("Position : " + var_to_str(Pos) + "has been investigated.")
@@ -279,10 +282,10 @@ func OnShipDestroyed(Ship : HostileShip) -> void:
 		PursuitOrderCanceled(g.Target)
 	for g in IOrdersToErase:
 		InvestigationOrders.erase(g)
-		if (ENEMY_DEBUG):
+		if (Helper.ENEMY_DEBUG):
 			MapPointerManager.Instance.RemoveOrder(g)
 		
-func OnEnemySeen(Ship : MapShip, SeenBy : HostileShip) -> void:
+func OnEnemySeen(Ship : MapShip, SeenBy : HostileShip = null) -> void:
 	#if an enemy that had its location investigated is seen 
 	#make sure to call of all investigation on its previusly known location
 	
@@ -309,7 +312,7 @@ func OnEnemySeen(Ship : MapShip, SeenBy : HostileShip) -> void:
 		print(Ship.GetShipName() + " location has been exposed.")
 		
 	
-func OnEnemyVisualLost(Ship : MapShip, _LostBy : HostileShip) -> void:
+func OnEnemyVisualLost(Ship : MapShip, _LostBy : HostileShip = null) -> void:
 	if (KnownEnemies.has(Ship)):
 		KnownEnemies.erase(Ship)
 		if (IsShipBeingPursued(Ship)):
