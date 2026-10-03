@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bb2xsv1qpwei"]
 
-[ext_resource type="StyleBox" uid="uid://elj4u7a13oc1" path="res://Theme/YellowTopPanel.tres" id="1_wos5w"]
+[ext_resource type="StyleBox" uid="uid://elj4u7a13oc1" path="res://MetalEngineBase/Theme/YellowTopPanel.tres" id="1_wos5w"]
 [ext_resource type="Script" uid="uid://bp1bu8mlf6f3p" path="res://Scenes/InScreenUI/Settings/setting_panel.gd" id="2_clx0a"]
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRT_Mat.tres" id="3_os1sx"]
 

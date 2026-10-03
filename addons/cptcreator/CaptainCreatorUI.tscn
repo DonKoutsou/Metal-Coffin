@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dwwluk8xikvpe" path="res://Assets/Items/cubeforcesmol.png" id="6_onoap"]
 [ext_resource type="Texture2D" uid="uid://s2ao6bntsnmw" path="res://Assets/Items/upgrade.png" id="6_tnq84"]
 [ext_resource type="Texture2D" uid="uid://d1yk65ppopgv7" path="res://Assets/Items/Fuel.png" id="6_wirb8"]
-[ext_resource type="FontFile" uid="uid://mwyuu26jo0fk" path="res://Fonts/Bank Gothic Light Regular.otf" id="7_2tpp3"]
+[ext_resource type="FontFile" uid="uid://mwyuu26jo0fk" path="res://MetalEngineBase/Fonts/Bank Gothic Light Regular.otf" id="7_2tpp3"]
 [ext_resource type="Texture2D" uid="uid://3q376ia6bctu" path="res://Assets/Items/Wrench.png" id="8_tnq84"]
 [ext_resource type="PackedScene" uid="uid://b3x1oefmigg0c" path="res://addons/cptcreator/CPT_inventory_interface.tscn" id="9_tnq84"]
 [ext_resource type="PackedScene" uid="uid://muscxdppqdat" path="res://MetalEngineBase/Disposition/DispositionUI/CaptainsDispotitionUI.tscn" id="11_vd57e"]

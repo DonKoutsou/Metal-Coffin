@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d3361rn6kikh1"]
 
 [ext_resource type="Script" uid="uid://ct6jtj6oya27k" path="res://MetalEngineBase/Inventory/Scripts/item_transfer.gd" id="1_jxlxb"]
-[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_vvfaq"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://MetalEngineBase/Theme/PopTheme.tres" id="1_vvfaq"]
 [ext_resource type="PackedScene" uid="uid://dci144io03ffa" path="res://Scenes/CaptainButton.tscn" id="3_ucstj"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://MetalEngineBase/Inventory/YellowPanel.tres" id="4_lsd4b"]
 

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Captain" format=3 uid="uid://disqw5cbdncos"]
+[gd_resource type="Resource" script_class="Captain" format=3 uid="uid://dhn4rjb7xn7m1"]
 
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://MetalEngineBase/Cardfight/Card/CardStats.gd" id="2_1jxhd"]
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://MetalEngineBase/Inventory/Stats/ShipStat.gd" id="2_ufoo0"]

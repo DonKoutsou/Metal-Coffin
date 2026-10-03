@@ -3,8 +3,8 @@
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://MetalEngineBase/Inventory/YellowPanel.tres" id="1_ac0ke"]
 [ext_resource type="Script" uid="uid://y4a4umcapt0y" path="res://Scenes/TownShop/FuelShop/fuel_storages.gd" id="2_tywce"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="3_tywce"]
-[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="4_jvdwb"]
-[ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://Fonts/DOTMBold.TTF" id="4_tywce"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://MetalEngineBase/Theme/PopTheme.tres" id="4_jvdwb"]
+[ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://MetalEngineBase/Fonts/DOTMBold.TTF" id="4_tywce"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8vrlf"]
 content_margin_left = 10.0

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c5hyg3hdjc568" path="res://Scenes/InScreenUI/MapMarkers/OrderMarker.gd" id="1_y8q8p"]
 [ext_resource type="Texture2D" uid="uid://bbvfo5xkwu8pg" path="res://Assets/MapElements/triangle-target.png" id="6_yl3nc"]
-[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="9_usdfn"]
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://MetalEngineBase/Fonts/Play-Bold.ttf" id="9_usdfn"]
 
 [node name="OrderMarker" type="Node2D" unique_id=443548216 node_paths=PackedStringArray("Icon", "text")]
 use_parent_material = true

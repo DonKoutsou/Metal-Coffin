@@ -55,6 +55,7 @@ mouse_filter = 2
 
 [node name="CommandLine" parent="." unique_id=969171667 instance=ExtResource("14_cqdt6")]
 visible = false
+anchors_preset = 10
 offset_left = 222.0
 offset_top = -173.5
 offset_right = -222.0

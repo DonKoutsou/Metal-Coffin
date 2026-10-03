@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dsw1gh7af04md"]
 
-[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_bai2p"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://MetalEngineBase/Theme/PopTheme.tres" id="1_bai2p"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://MetalEngineBase/Inventory/YellowPanel.tres" id="2_sjwff"]
 [ext_resource type="Script" uid="uid://br1hagurf546d" path="res://MetalEngineBase/amp.gd" id="3_xg1e4"]
 [ext_resource type="Script" uid="uid://bukudf4qdqxak" path="res://Scenes/UI/eq.gd" id="4_obufj"]

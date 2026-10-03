@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dowbg3bpia1ny"]
 
-[ext_resource type="StyleBox" uid="uid://bf0mhefk82lu6" path="res://Theme/MapBorder.tres" id="1_pprcb"]
-[ext_resource type="StyleBox" uid="uid://ch5t6gi4cvjc2" path="res://Theme/MapBorder2.tres" id="2_k25hx"]
+[ext_resource type="StyleBox" uid="uid://bf0mhefk82lu6" path="res://MetalEngineBase/Theme/MapBorder.tres" id="1_pprcb"]
+[ext_resource type="StyleBox" uid="uid://ch5t6gi4cvjc2" path="res://MetalEngineBase/Theme/MapBorder2.tres" id="2_k25hx"]
 
 [node name="Control" type="Panel" unique_id=615768557]
 modulate = Color(1, 1, 1, 0.6666667)

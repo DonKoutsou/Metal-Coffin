@@ -84,7 +84,11 @@ func _ready() -> void:
 			print("Failed to load {0} Mod".format([file_name.get_file()]))
 		
 		file_name = modDir.get_next()
-		
+	
+	#var h = load("res://Resources/Happenings/CardiPrince.tres")
+	#print(h)
+	#return
+	
 	LoadSavedSettings()
 	get_viewport().disable_3d = true
 	TranslationServer.set_locale("english")

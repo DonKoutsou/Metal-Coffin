@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c1sbundk0bsc7"]
 
-[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://Fonts/Play-Bold.ttf" id="1_qagpn"]
+[ext_resource type="FontFile" uid="uid://d3evvotf2wqa3" path="res://MetalEngineBase/Fonts/Play-Bold.ttf" id="1_qagpn"]
 [ext_resource type="Script" uid="uid://chqpdutgcuhsm" path="res://Scenes/IntroScenes/IntroScene.gd" id="1_xwylp"]
 
 [node name="Control" type="Control" unique_id=279580399]

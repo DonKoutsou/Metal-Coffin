@@ -1,6 +1,6 @@
 [gd_resource type="Theme" format=3 uid="uid://dy681431wlejp"]
 
-[ext_resource type="FontFile" uid="uid://3s7pcillpbu0" path="res://Fonts/Monocraft.ttf" id="1_q20lf"]
+[ext_resource type="FontFile" uid="uid://3s7pcillpbu0" path="res://MetalEngineBase/Fonts/Monocraft.ttf" id="1_q20lf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q20lf"]
 bg_color = Color(0.44188055, 0.44188046, 0.44188043, 1)

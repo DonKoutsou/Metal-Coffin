@@ -150,6 +150,8 @@ func Load() -> void:
 	var sav = load("user://TutorialData.tres") as TutorialSaveData
 	
 	if (sav == null):
+
+		DirAccess.remove_absolute(ProjectSettings.globalize_path("user://TutorialData.tres"))
 		return
 	
 	print("Loaded found tutorial data")

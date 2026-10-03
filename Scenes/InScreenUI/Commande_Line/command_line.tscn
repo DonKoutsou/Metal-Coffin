@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d0iiqaijsg1y1"]
 
-[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_5owba"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://MetalEngineBase/Theme/PopTheme.tres" id="1_5owba"]
 [ext_resource type="Script" uid="uid://djw0qatbronxr" path="res://Scenes/InScreenUI/Commande_Line/command_line.gd" id="2_3camo"]
 [ext_resource type="AudioStream" uid="uid://b5cb3530xjcon" path="res://Assets/Sounds/minimize_003.ogg" id="3_3camo"]
 [ext_resource type="AudioStream" uid="uid://b4u5muin6mjj3" path="res://Assets/Sounds/maximize_003.ogg" id="3_5kdy4"]
@@ -97,5 +97,5 @@ bus = &"Sounds"
 [connection signal="button_up" from="MarginContainer/VBoxContainer/HBoxContainer/Button" to="." method="OnMoveButtonUp"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Button2" to="." method="OnCloseButtonPressed"]
 [connection signal="focus_entered" from="MarginContainer/VBoxContainer/TextEdit" to="." method="OnCommandLineFocused"]
-[connection signal="gui_input" from="MarginContainer/VBoxContainer/TextEdit" to="." method="_on_text_edit_gui_input"]
 [connection signal="text_changed" from="MarginContainer/VBoxContainer/TextEdit" to="." method="OnCommandEntered"]
+[connection signal="text_set" from="MarginContainer/VBoxContainer/TextEdit" to="." method="HandleCommand"]

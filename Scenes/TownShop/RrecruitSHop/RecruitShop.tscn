@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cusvhc52y626a" path="res://Scenes/TownShop/RrecruitSHop/recruit_shop.gd" id="1_avlo7"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="2_8k3dn"]
-[ext_resource type="StyleBox" uid="uid://elj4u7a13oc1" path="res://Theme/YellowTopPanel.tres" id="4_8rciy"]
+[ext_resource type="StyleBox" uid="uid://elj4u7a13oc1" path="res://MetalEngineBase/Theme/YellowTopPanel.tres" id="4_8rciy"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://MetalEngineBase/Inventory/YellowPanel.tres" id="6_xjf37"]
 [ext_resource type="Script" uid="uid://bcrnrsyr12m2a" path="res://MetalEngineBase/Utils/InputScroll.gd" id="7_ensoj"]
 [ext_resource type="Texture2D" uid="uid://bk3hmnxkvr5ab" path="res://Assets/UIPiecies/UI_Icons/network-bars.png" id="7_irqbf"]

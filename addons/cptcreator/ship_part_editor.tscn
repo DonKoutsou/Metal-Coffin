@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://jd5tk3wf16gt"]
 
-[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_02akb"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://MetalEngineBase/Theme/PopTheme.tres" id="1_02akb"]
 [ext_resource type="Script" uid="uid://tfxg61k3n7qu" path="res://addons/cptcreator/ship_part_editor.gd" id="1_c0ovd"]
 [ext_resource type="Texture2D" uid="uid://dwwluk8xikvpe" path="res://Assets/Items/cubeforcesmol.png" id="2_c0ovd"]
 [ext_resource type="Texture2D" uid="uid://d1yk65ppopgv7" path="res://Assets/Items/Fuel.png" id="3_02akb"]
@@ -210,22 +210,23 @@ layout_mode = 2
 [node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=379393699]
 layout_mode = 2
 theme_override_font_sizes/font_size = 34
-text = "Flamethrower +1"
+text = "MG-20 \"Fury\" 100mm"
 
 [node name="Label2" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=974608444]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "WEAPON TYPE : [color=#ffc315]FLAME_THROWER[/color]
+text = "WEAPON TYPE : [color=#ffc315]MG_100mm[/color]
 [color=#ffc315]-------------[/color]
 [color=#ffc315]Ship Part Type[/color] : WEAPON
-[color=#ffc315]DISPOSITION[/color] : THERMAL
+[color=#ffc315]DISPOSITION[/color] : KINETIC
 [color=#ffc315]-------------[/color]
-WIP 
+Fury builds upon its predecessor with enhanced rate of fire and targeting accuracy. Its reinforced stabilization system supports more prolonged engagements, delivering sustained barrages that can repel determined attacks or suppress enemy positions with greater efficacy. 
 [color=#ffc315]-------------[/color]
 PROVIDING STATS
-[color=#ffc315]FIREPOWER[/color] : + 1.0 
-[color=#ffc315]REPAIR PRICE[/color] : + 15.0 Drahma"
+[color=#ffc315]FIREPOWER[/color] : + 1.25 
+[color=#ffc315]REPAIR PRICE[/color] : + 8.0 Drahma
+[color=#ffc315]WEIGHT[/color] : + 6.0 tons"
 fit_content = true
 autowrap_mode = 2
 

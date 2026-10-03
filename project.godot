@@ -73,11 +73,11 @@ enabled=PackedStringArray("res://addons/BurstParticles2D/plugin.cfg", "res://add
 folder_colors={
 "res://Assets/": "green",
 "res://Enviroments/": "pink",
-"res://Fonts/": "teal",
 "res://MetalEngineBase/": "yellow",
+"res://MetalEngineBase/Fonts/": "teal",
+"res://MetalEngineBase/Theme/": "blue",
 "res://Minigames/": "red",
 "res://Resources/": "purple",
-"res://Theme/": "blue",
 "res://addons/": "yellow"
 }
 

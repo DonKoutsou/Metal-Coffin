@@ -7,7 +7,6 @@
 [resource]
 script = ExtResource("3_mdy32")
 MissileFile = "uid://dvdaxeaw05g4k"
-Distance = 1500
 Speed = 2.0
 Damage = 50
 Type = 1
@@ -15,7 +14,4 @@ ItemName = "Heat Seeking Missile"
 ItemDesc = "A balanced missile system offering medium range and speed. Suited for general-purpose combat where flexibility and reliability matter most."
 MaxStackCount = 99
 CardProviding = Array[ExtResource("1_72gep")]([ExtResource("2_mdy32")])
-Tier = 0
-CanTransfer = true
 Cost = 800
-PartType = 0

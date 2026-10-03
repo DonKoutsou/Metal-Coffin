@@ -45,7 +45,7 @@ texture = ExtResource("7_aalg5")
 
 [node name="Node2D" type="Node2D" parent="Sprite2D7" unique_id=951806083]
 position = Vector2(0, -30.00003)
-rotation = -0.56921816
+rotation = -0.580394
 script = ExtResource("8_d47s1")
 
 [node name="Sprite2D" type="Sprite2D" parent="Sprite2D7/Node2D" unique_id=1522173140]

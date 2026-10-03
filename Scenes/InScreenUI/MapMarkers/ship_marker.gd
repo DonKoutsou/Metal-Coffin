@@ -127,7 +127,7 @@ func _draw() -> void:
 	var distancetotravel : float = 0.0
 	
 	var fontsize = 15.0 / CurrentZoom
-	var f = load("res://Fonts/Bank Gothic Light Regular.otf")
+	var f = load("res://MetalEngineBase/Fonts/Bank Gothic Light Regular.otf")
 	var LinesToDraw : Array[Array]
 	if (TargetShip != null):
 		var origin = to_local(CurrentShip.global_position)

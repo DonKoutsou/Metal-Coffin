@@ -82,7 +82,7 @@ func _DrawingEnded() -> void:
 		
 		var l = Label.new()
 		l.text = MapSpotCompleteInfo.REGIONS.keys()[g]
-		l.add_theme_font_override("font", load("res://Fonts/Caudex-Bold.ttf"))
+		l.add_theme_font_override("font", load("res://MetalEngineBase/Fonts/Caudex-Bold.ttf"))
 		Labels.append(l)
 		add_child(l)
 		l.use_parent_material = true

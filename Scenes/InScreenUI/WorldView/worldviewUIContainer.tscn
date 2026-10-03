@@ -2,7 +2,7 @@
 
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://MetalEngineBase/Inventory/YellowPanel.tres" id="1_rbex0"]
 [ext_resource type="Script" uid="uid://c6pk6gqsxutl2" path="res://Scenes/InScreenUI/WorldView/worldview_ui_container.gd" id="2_6pg0c"]
-[ext_resource type="StyleBox" uid="uid://54vphqglxfyk" path="res://Theme/ProgressBarFill.tres" id="3_r2c7u"]
+[ext_resource type="StyleBox" uid="uid://54vphqglxfyk" path="res://MetalEngineBase/Theme/ProgressBarFill.tres" id="3_r2c7u"]
 [ext_resource type="StyleBox" uid="uid://0fbvc4n3mb7l" path="res://MetalEngineBase/Inventory/Stats/StatContainer/ProgrssBarBack.tres" id="4_eiy2p"]
 
 [node name="WorldviewNotif" type="PanelContainer" unique_id=1397958000 node_paths=PackedStringArray("Negativebar", "Possetivebar")]

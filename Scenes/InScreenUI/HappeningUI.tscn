@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dsw1gh7af04md" path="res://Scenes/Dialogue/Equalizer.tscn" id="5_fjydm"]
 [ext_resource type="PackedScene" uid="uid://dp5ghsxs3xitl" path="res://Scenes/Dialogue/linetest.tscn" id="5_ylhno"]
 [ext_resource type="AudioStream" uid="uid://bmcuncv0xwe2k" path="res://Assets/Sounds/TextSound.mp3" id="6_6q6vd"]
-[ext_resource type="StyleBox" uid="uid://ejo4cwqpxtwg" path="res://Theme/TransparentGreyBackground.tres" id="7_qx7ak"]
+[ext_resource type="StyleBox" uid="uid://ejo4cwqpxtwg" path="res://MetalEngineBase/Theme/TransparentGreyBackground.tres" id="7_qx7ak"]
 [ext_resource type="PackedScene" uid="uid://biiakq2r2vasn" path="res://Scenes/InScreenUI/WorldView/WorldviewUI.tscn" id="8_gqhsy"]
 
 [sub_resource type="Environment" id="Environment_vaeb3"]

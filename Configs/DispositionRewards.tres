@@ -1,0 +1,73 @@
+[gd_resource type="Resource" script_class="DispositionRewards" format=3 uid="uid://dh0lb1cwkicqb"]
+
+[ext_resource type="Script" uid="uid://b440ymk6opetf" path="res://MetalEngineBase/Disposition/Dispotition.gd" id="1_e5t6q"]
+[ext_resource type="Script" uid="uid://brinqcu2jdpo8" path="res://MetalEngineBase/Disposition/DispositionLevel.gd" id="2_32n8u"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://MetalEngineBase/Cardfight/Card/CardStats.gd" id="3_ns7cl"]
+[ext_resource type="Resource" uid="uid://odkwy5rk0vxe" path="res://Resources/Cards/Powers/ShieldOnDraw.tres" id="4_ohnbb"]
+[ext_resource type="Resource" uid="uid://barj6en5mlnje" path="res://Resources/Cards/Powers/Thorns.tres" id="5_3vyj8"]
+[ext_resource type="Resource" uid="uid://w0powsomsqvs" path="res://Resources/Cards/Powers/FireHeal.tres" id="6_gayhd"]
+[ext_resource type="Resource" uid="uid://ccj7o7kccax76" path="res://Resources/Cards/Self_Combustion.tres" id="7_6vwls"]
+[ext_resource type="Resource" uid="uid://bubqxvuk4i0ow" path="res://Resources/Cards/Powers/Pyromania.tres" id="8_vbogg"]
+[ext_resource type="Script" uid="uid://7vx0cscgmihh" path="res://MetalEngineBase/Disposition/DispositionRewards.gd" id="9_fl3ly"]
+
+[sub_resource type="Resource" id="Resource_s7tc1"]
+script = ExtResource("2_32n8u")
+Rewards = Dictionary[ExtResource("3_ns7cl"), int]({
+ExtResource("4_ohnbb"): 1
+})
+metadata/_custom_type_script = "uid://brinqcu2jdpo8"
+
+[sub_resource type="Resource" id="Resource_5owba"]
+script = ExtResource("2_32n8u")
+DispoistionStage = 0.6
+Rewards = Dictionary[ExtResource("3_ns7cl"), int]({
+ExtResource("5_3vyj8"): 1
+})
+metadata/_custom_type_script = "uid://brinqcu2jdpo8"
+
+[sub_resource type="Resource" id="Resource_hdcf2"]
+script = ExtResource("1_e5t6q")
+Levels = Array[ExtResource("2_32n8u")]([SubResource("Resource_s7tc1"), SubResource("Resource_5owba")])
+metadata/_custom_type_script = "uid://b440ymk6opetf"
+
+[sub_resource type="Resource" id="Resource_w74s6"]
+script = ExtResource("1_e5t6q")
+metadata/_custom_type_script = "uid://b440ymk6opetf"
+
+[sub_resource type="Resource" id="Resource_4nj0o"]
+script = ExtResource("2_32n8u")
+Rewards = Dictionary[ExtResource("3_ns7cl"), int]({
+ExtResource("6_gayhd"): 1,
+ExtResource("7_6vwls"): 3
+})
+metadata/_custom_type_script = "uid://brinqcu2jdpo8"
+
+[sub_resource type="Resource" id="Resource_2e8ie"]
+script = ExtResource("2_32n8u")
+DispoistionStage = 0.4
+Rewards = Dictionary[ExtResource("3_ns7cl"), int]({
+ExtResource("8_vbogg"): 1
+})
+metadata/_custom_type_script = "uid://brinqcu2jdpo8"
+
+[sub_resource type="Resource" id="Resource_sk3h7"]
+script = ExtResource("1_e5t6q")
+Levels = Array[ExtResource("2_32n8u")]([SubResource("Resource_4nj0o"), SubResource("Resource_2e8ie")])
+metadata/_custom_type_script = "uid://b440ymk6opetf"
+
+[sub_resource type="Resource" id="Resource_dvowk"]
+script = ExtResource("1_e5t6q")
+metadata/_custom_type_script = "uid://b440ymk6opetf"
+
+[sub_resource type="Resource" id="Resource_dnouy"]
+script = ExtResource("1_e5t6q")
+metadata/_custom_type_script = "uid://b440ymk6opetf"
+
+[sub_resource type="Resource" id="Resource_bbv8w"]
+script = ExtResource("1_e5t6q")
+metadata/_custom_type_script = "uid://b440ymk6opetf"
+
+[resource]
+script = ExtResource("9_fl3ly")
+DispositionRewards = Array[ExtResource("1_e5t6q")]([SubResource("Resource_hdcf2"), SubResource("Resource_w74s6"), SubResource("Resource_sk3h7"), SubResource("Resource_dvowk"), SubResource("Resource_dnouy"), SubResource("Resource_bbv8w")])
+metadata/_custom_type_script = "uid://7vx0cscgmihh"

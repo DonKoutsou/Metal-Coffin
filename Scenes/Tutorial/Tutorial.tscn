@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://cmalipflqp1uv" path="res://Assets/Sounds/UI_out.mp3" id="3_qvre0"]
 [ext_resource type="Shader" uid="uid://bnlp28msbn21o" path="res://Scenes/Tutorial/TutorialFocusArea.gdshader" id="4_fc3hj"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://MetalEngineBase/Inventory/YellowPanel.tres" id="5_1tefs"]
-[ext_resource type="FontFile" uid="uid://crgk2e3gswnr3" path="res://Fonts/DINEngschriftStd.otf" id="6_bccxl"]
+[ext_resource type="FontFile" uid="uid://crgk2e3gswnr3" path="res://MetalEngineBase/Fonts/DINEngschriftStd.otf" id="6_bccxl"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k6wjy"]
 light_mode = 1

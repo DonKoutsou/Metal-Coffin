@@ -332,9 +332,10 @@ func RefrshExistingItems() -> void:
 					#print("Found directory: " + file_name)
 					DirsToExplore.append(g + "/" + file_name)
 				else:
-					#printraw("Found file: " + file_name)
-					var It = load(g + "/" + file_name)
-					Items.append(It)
+					#print("Found file: " + file_name)
+					if (file_name.ends_with(".tres")):
+						var It = load(g + "/" + file_name)
+						Items.append(It)
 				
 				file_name = dir.get_next()
 

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dmq4aarkkp044"]
 
-[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://Theme/PopTheme.tres" id="1_3u5gi"]
+[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://MetalEngineBase/Theme/PopTheme.tres" id="1_3u5gi"]
 [ext_resource type="Script" uid="uid://c1614nt44tmoh" path="res://Scenes/Card_Fight/Ship_Visuals/card_fight_ship_viz.gd" id="2_qce1f"]
 [ext_resource type="Texture2D" uid="uid://cyqs71v0yadm1" path="res://Assets/ShipTextures/Hull1.png" id="3_fr3fp"]
 

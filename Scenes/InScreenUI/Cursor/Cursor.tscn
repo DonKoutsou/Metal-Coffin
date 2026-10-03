@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bq1ns0us14bn3"]
 
-[ext_resource type="StyleBox" uid="uid://cmi7qcd7l2j52" path="res://Theme/CursorPanel.tres" id="1_b4bqg"]
+[ext_resource type="StyleBox" uid="uid://cmi7qcd7l2j52" path="res://MetalEngineBase/Theme/CursorPanel.tres" id="1_b4bqg"]
 [ext_resource type="Script" uid="uid://c17vceihgcxrj" path="res://Scenes/InScreenUI/Cursor/in_screen_mouse.gd" id="2_ibfsr"]
 
 [node name="InScreenMouse" type="Panel" unique_id=976934690]

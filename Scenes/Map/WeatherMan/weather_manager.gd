@@ -18,7 +18,7 @@ static var Instance : WeatherManage
 static var WindDirection : Vector2 = Vector2.RIGHT
 static var WindSpeed : float = 50
 
-static var LighAmm : Curve = preload("res://MetalEngineBase/WeatherMan/LightCurve.tres")
+static var LighAmm : Curve = preload("res://Scenes/Map/WeatherMan/LightCurve.tres")
 static var ShipsToUpdate : Array[MapShip]
 
 var Mat : ShaderMaterial

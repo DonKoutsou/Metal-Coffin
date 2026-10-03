@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bbq0mj44rwwoi" path="res://Assets/UIPiecies/Elint/transparent/Opacity4.png" id="5_2ueie"]
 [ext_resource type="Texture2D" uid="uid://bg3txpouwra6w" path="res://Assets/UIPiecies/Elint/transparent/Opacity17.png" id="5_fn607"]
 [ext_resource type="Texture2D" uid="uid://bltupetrpqvj6" path="res://Assets/UIPiecies/Elint/transparent/Opacity16.png" id="6_heli2"]
-[ext_resource type="StyleBox" uid="uid://cicae3yqgxkcm" path="res://Theme/MetalPanel.tres" id="6_piamo"]
+[ext_resource type="StyleBox" uid="uid://cicae3yqgxkcm" path="res://MetalEngineBase/Theme/MetalPanel.tres" id="6_piamo"]
 [ext_resource type="Texture2D" uid="uid://bup8en533m0y3" path="res://Assets/UIPiecies/Elint/transparent/Opacity3.png" id="6_xuume"]
 [ext_resource type="Texture2D" uid="uid://caq853r3telqr" path="res://Assets/UIPiecies/Elint/elintMarkers_Camera 1_FullQuality.png" id="17_bii6e"]
 [ext_resource type="AudioStream" uid="uid://7crsokjngvxo" path="res://Assets/Sounds/beepNoLoop.mp3" id="20_7y4w8"]

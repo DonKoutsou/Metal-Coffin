@@ -11,7 +11,7 @@
 [ext_resource type="Shader" uid="uid://bjf2i5xyoaxa3" path="res://Scenes/Card_Fight/Blur BG.gdshader" id="11_hm5ka"]
 [ext_resource type="Material" uid="uid://cc8eddj1vvy7u" path="res://Shaders/Clouds/CloudsCardFight.tres" id="11_lgbdq"]
 [ext_resource type="AudioStream" uid="uid://i74iqvk0qddm" path="res://Assets/Sounds/CardSound.mp3" id="12_xtulq"]
-[ext_resource type="StyleBox" uid="uid://twgjhudvlwrx" path="res://Theme/BlackBars.tres" id="13_fkta7"]
+[ext_resource type="StyleBox" uid="uid://twgjhudvlwrx" path="res://MetalEngineBase/Theme/BlackBars.tres" id="13_fkta7"]
 [ext_resource type="AudioStream" uid="uid://cn48skwuytprm" path="res://Assets/Sounds/BurnSound.mp3" id="15_8bqim"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Scenes/EventHandlers/UIEventH.tres" id="16_734e5"]
 [ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scenes/Card_Fight/External_UI/CardHandContainer.gd" id="24_d8sco"]

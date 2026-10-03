@@ -28,7 +28,6 @@ bg_color = Color(0.1443032, 0.14430341, 0.14430326, 1)
 corner_detail = 4
 
 [node name="InventoryBox" unique_id=1449330592 instance=ExtResource("1_shk70")]
-anchors_preset = 15
 
 [node name="ItemButton" parent="." index="0" unique_id=1170581497]
 theme_override_styles/normal = SubResource("StyleBoxFlat_shk70")

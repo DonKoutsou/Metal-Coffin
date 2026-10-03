@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://dj4mdtpd50mk1"]
 
-[ext_resource type="StyleBox" uid="uid://cxk2dch12sje7" path="res://Theme/Buttons/LandingNob_Normal.tres" id="1_jl4mq"]
-[ext_resource type="StyleBox" uid="uid://bxivhwo53gugb" path="res://Theme/Buttons/LandingNob_Pressed.tres" id="2_iayxb"]
+[ext_resource type="StyleBox" uid="uid://cxk2dch12sje7" path="res://MetalEngineBase/Theme/Buttons/LandingNob_Normal.tres" id="1_jl4mq"]
+[ext_resource type="StyleBox" uid="uid://bxivhwo53gugb" path="res://MetalEngineBase/Theme/Buttons/LandingNob_Pressed.tres" id="2_iayxb"]
 [ext_resource type="Script" uid="uid://shhingcl3pnl" path="res://Scenes/ScreenUI/Pilot_Screen/open_hatch_button.gd" id="4_jl4mq"]
-[ext_resource type="StyleBox" uid="uid://i0ndhcxsegbl" path="res://Theme/Buttons/LandingNob_Dissabled.tres" id="4_yt4t3"]
+[ext_resource type="StyleBox" uid="uid://i0ndhcxsegbl" path="res://MetalEngineBase/Theme/Buttons/LandingNob_Dissabled.tres" id="4_yt4t3"]
 [ext_resource type="Resource" uid="uid://056ui1umqqh0" path="res://Scenes/EventHandlers/ShipControllerEventHandler.tres" id="5_iayxb"]
 
 [node name="OpenHatchButton" type="Button" unique_id=1709871514 groups=["Buttons2"]]

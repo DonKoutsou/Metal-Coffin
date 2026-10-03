@@ -4,7 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="2_gkxsm"]
 [ext_resource type="AudioStream" uid="uid://cmalipflqp1uv" path="res://Assets/Sounds/UI_out.mp3" id="3_5qs15"]
 [ext_resource type="Shader" uid="uid://bnlp28msbn21o" path="res://Scenes/Tutorial/TutorialFocusArea.gdshader" id="4_me2a2"]
-[ext_resource type="StyleBox" uid="uid://elj4u7a13oc1" path="res://Theme/YellowTopPanel.tres" id="5_nktic"]
+[ext_resource type="StyleBox" uid="uid://elj4u7a13oc1" path="res://MetalEngineBase/Theme/YellowTopPanel.tres" id="5_nktic"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ybrb6"]
 shader = ExtResource("4_me2a2")
