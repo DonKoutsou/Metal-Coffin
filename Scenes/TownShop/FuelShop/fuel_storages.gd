@@ -26,7 +26,7 @@ var Ships : Array[MapShip]
 var Rng = 0
 
 func _draw() -> void:
-	var font = load("res://Fonts/DOTMBold.TTF") as Font
+	var font = load("res://MetalEngineBase/Fonts/DOTMBold.TTF") as Font
 	
 	var Lines : PackedVector2Array
 	

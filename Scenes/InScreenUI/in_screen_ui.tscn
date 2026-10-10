@@ -189,7 +189,6 @@ mouse_filter = 2
 
 [node name="CommandLine" parent="." unique_id=969171667 instance=ExtResource("17_aessx")]
 z_index = 100
-anchors_preset = 10
 offset_bottom = 186.0
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1581311938]

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bkl2a6ey2cxpg"]
 
-[ext_resource type="Script" uid="uid://rvtufow2elj7" path="res://MetalEngineBase/Happenings/HappeningInstance.gd" id="2_nimax"]
+[ext_resource type="Script" uid="uid://rvtufow2elj7" path="res://Scenes/HappeningInstance.gd" id="2_nimax"]
 [ext_resource type="PackedScene" uid="uid://mxfnm7hywo4f" path="res://Scenes/Old/damage_floater.tscn" id="4_6q6vd"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://MetalEngineBase/Inventory/YellowPanel.tres" id="4_gqhsy"]
 [ext_resource type="PackedScene" uid="uid://dsw1gh7af04md" path="res://Scenes/Dialogue/Equalizer.tscn" id="5_fjydm"]

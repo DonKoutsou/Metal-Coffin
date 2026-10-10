@@ -115,7 +115,8 @@ func SetWorkShopData(Box : Inventory_Box_Res, CanUpgrade : bool, Owner : Captain
 					UpTime *= 0.75
 					UpCost *= 0.75
 				var timeString = Clock.MinutesToHours(UpTime)
-				UpgradeLabel.text = "[color={2}]Upgrade Time[/color] : {0}\n[color={2}]Upgrade Cost[/color] : {1}".format([timeString, roundi(UpCost), col])
+				var upText = "[color={2}]Upgrade Time[/color] : {0}\n[color={2}]Upgrade Cost[/color] : {1}".format([timeString, roundi(UpCost), col])
+				UpgradeLabel.text = upText
 	else : if (It is  PlaceHolderItem):
 		var inv = Owner.GetCharacterInventory()
 		
@@ -283,7 +284,8 @@ func SetData(Box : Inventory_Box_Res, CanUpgrade : bool, CanTransfer : bool, Can
 					UpCost /= 2
 				
 				var timeString = Clock.MinutesToHours(UpTime)
-				UpgradeLabel.text = "[color={2}]Upgrade Time[/color] : {0}\n[color=#ffc315]Upgrade Cost[/color] : {1}\n[color={2}]-------------".format([timeString, UpCost, col])
+				var upText = "[color={2}]Upgrade Time[/color] : {0}\n[color=#ffc315]Upgrade Cost[/color] : {1}\n[color={2}]-------------".format([timeString, UpCost, col])
+				UpgradeLabel.text = upText.replace("#ffc315", "{0}".format([col]))
 	else : if (It is  PlaceHolderItem):
 		var inv = Box.GetParentInventory()
 		var TimeLeft = Clock.MinutesToHours(roundi(inv.GetEquipTimeLeft()))
