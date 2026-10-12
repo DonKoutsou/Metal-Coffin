@@ -25,5 +25,5 @@ CardName = "Laser Guided Barragge"
 Energy = 2
 AllowDuplicates = true
 OnUsed = 1
-OnPerformModule = SubResource("Resource_tpj2d")
+OnUseModules = Array[ExtResource("2_ehtx6")]([SubResource("Resource_tpj2d")])
 WeapT = 4

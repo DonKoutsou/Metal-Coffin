@@ -20,6 +20,6 @@ script = ExtResource("4_xc63n")
 txFile = "uid://dwhpuw3ihrhq6"
 CardName = "Scorch"
 AllowDuplicates = true
-OnPerformModule = SubResource("Resource_wkg4j")
+OnUseModules = Array[ExtResource("2_5rdqt")]([SubResource("Resource_wkg4j")])
 WeapT = 6
 UseConditions = Array[int]([2])

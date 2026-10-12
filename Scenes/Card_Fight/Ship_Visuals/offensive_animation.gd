@@ -48,6 +48,7 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 				var DeffenceList = AnimData.DeffenceList
 				for g in DeffenceList.values().size():
 					var Def = DeffenceList.values()[g]["Def"] as CardStats
+					var DefMod = DeffenceList.values()[g]["DefMod"] as CardModule
 					var Viz = DeffenceList.values()[g]["Viz"] as Sprite2D
 					var DefC
 					if (Def != null):
@@ -70,8 +71,7 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 						
 						var tw2 = create_tween()
 						tw2.tween_property(DefCard, "modulate", Color(1,1,1,1), 0.2)
-						
-						var DefMod = Def.OnPerformModule
+
 						if (DefMod is CounterCardModule):
 							DefC = DefCard
 						else:

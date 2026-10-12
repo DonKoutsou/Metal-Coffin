@@ -25,5 +25,5 @@ CardName = "AP Barragge"
 Energy = 1
 AllowDuplicates = true
 OnUsed = 1
-OnPerformModule = SubResource("Resource_fktga")
+OnUseModules = Array[ExtResource("2_e3knc")]([SubResource("Resource_fktga")])
 WeapT = 1

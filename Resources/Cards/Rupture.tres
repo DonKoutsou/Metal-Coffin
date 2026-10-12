@@ -30,5 +30,5 @@ txFile = "uid://c8q224j8pwjre"
 CardName = "Rupture"
 Energy = 2
 AllowDuplicates = true
-OnPerformModule = SubResource("Resource_4hsju")
+OnUseModules = Array[ExtResource("2_nulkh")]([SubResource("Resource_4hsju")])
 UseConditions = Array[int]([5])

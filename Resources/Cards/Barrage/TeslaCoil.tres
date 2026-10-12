@@ -18,6 +18,6 @@ script = ExtResource("4_4pr6j")
 txFile = "uid://b6k631ygnoe06"
 CardName = "Tesla Coil"
 AllowDuplicates = true
-OnPerformModule = SubResource("Resource_1x6pr")
+OnUseModules = Array[ExtResource("2_duro0")]([SubResource("Resource_1x6pr")])
 WeapT = 3
 UseConditions = Array[int]([2])

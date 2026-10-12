@@ -23,6 +23,6 @@ txFile = "uid://cln0pmvmp4m00"
 CardName = "Barragge"
 Energy = 1
 AllowDuplicates = true
-OnPerformModule = SubResource("Resource_h2u8p")
+OnUseModules = Array[ExtResource("2_7xnsh")]([SubResource("Resource_h2u8p")])
 WeapT = 1
 AllowTier = false

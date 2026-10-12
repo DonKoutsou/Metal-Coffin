@@ -6,3 +6,4 @@ func _ready() -> void:
 	Instance = self
 	EventHandler.PausePressed.connect(Pause)
 	ToggleScreenGlitches(SettingsPanel.GetGlitch())
+	Helper.PopupPlacement = PopupPlecement

@@ -25,5 +25,5 @@ CardName = "Prox Fuse Barragge"
 Energy = 1
 AllowDuplicates = true
 OnUsed = 1
-OnPerformModule = SubResource("Resource_b1127")
+OnUseModules = Array[ExtResource("3_b1127")]([SubResource("Resource_b1127")])
 WeapT = 1

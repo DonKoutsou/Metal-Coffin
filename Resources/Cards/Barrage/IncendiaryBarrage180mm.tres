@@ -25,5 +25,5 @@ CardName = "Incendiary Barragge"
 Energy = 2
 AllowDuplicates = true
 OnUsed = 1
-OnPerformModule = SubResource("Resource_0a432")
+OnUseModules = Array[ExtResource("2_uvov1")]([SubResource("Resource_0a432")])
 WeapT = 4

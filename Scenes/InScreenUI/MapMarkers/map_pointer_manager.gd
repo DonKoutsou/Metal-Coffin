@@ -93,7 +93,7 @@ func AddShip(Ship : Node2D, Friend : bool, notify : bool = false) -> ShipMarker:
 					_ShipMarkers[Ships.find(Ship)].PlayHostileShipNotif("Hostile Ship\nLocated")
 		return
 	
-	Ship.tree_exited.connect(RemoveShip)
+	Ship.tree_exited.connect(RemoveShip.bind(Ship))
 	Ships.append(Ship)
 	var marker = MarkerScene.instantiate() as ShipMarker
 
@@ -148,7 +148,6 @@ func RemoveShip(Ship : Node2D) -> void:
 	if (!Ships.has(Ship)):
 		return
 	
-	Ship.tree_exited.disconnect(RemoveShip)
 	var index = Ships.find(Ship)
 	_ShipMarkers[index].queue_free()
 	_ShipMarkers.remove_at(index)

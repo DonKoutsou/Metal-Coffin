@@ -18,5 +18,5 @@ txFile = "uid://chpdhvnha7hih"
 CardName = "Deceleration Field"
 Energy = 1
 AllowDuplicates = true
-OnPerformModule = SubResource("Resource_4hc72")
+OnUseModules = Array[ExtResource("3_x7h2e")]([SubResource("Resource_4hc72")])
 Type = 1

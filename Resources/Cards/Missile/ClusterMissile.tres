@@ -25,6 +25,6 @@ txFile = "uid://2djtv7wks71n"
 CardName = "Cluster Missile"
 Energy = 4
 AllowDuplicates = true
-OnPerformModule = SubResource("Resource_8ua7m")
+OnUseModules = Array[ExtResource("2_n7xos")]([SubResource("Resource_8ua7m")])
 WeapT = 2
 AllowTier = false

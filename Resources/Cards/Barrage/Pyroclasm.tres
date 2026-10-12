@@ -20,6 +20,6 @@ script = ExtResource("4_odrhw")
 txFile = "uid://cnxsee5g6ie7q"
 CardName = "Pyroclasm"
 AllowDuplicates = true
-OnPerformModule = SubResource("Resource_1x6pr")
+OnUseModules = Array[ExtResource("2_jjf80")]([SubResource("Resource_1x6pr")])
 WeapT = 6
 UseConditions = Array[int]([2])

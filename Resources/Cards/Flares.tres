@@ -15,6 +15,6 @@ txFile = "uid://cbd6as3e4rwp6"
 CardName = "Flare"
 Energy = 1
 AllowDuplicates = true
-OnPerformModule = SubResource("Resource_v8m8y")
+OnUseModules = Array[ExtResource("2_6wv8y")]([SubResource("Resource_v8m8y")])
 Type = 1
 AllowTier = false

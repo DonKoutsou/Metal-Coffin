@@ -30,5 +30,5 @@ txFile = "uid://bhlgeictwnfyl"
 CardName = "Bash"
 Energy = 5
 AllowDuplicates = true
-OnPerformModule = SubResource("Resource_rnijg")
+OnUseModules = Array[ExtResource("2_6sfhm")]([SubResource("Resource_rnijg")])
 UseConditions = Array[int]([4])

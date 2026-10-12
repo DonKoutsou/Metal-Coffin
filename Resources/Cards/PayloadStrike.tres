@@ -25,5 +25,5 @@ txFile = "uid://bf87fw1lx0wdp"
 CardName = "Payload Strike"
 Energy = 2
 AllowDuplicates = true
-OnPerformModule = SubResource("Resource_ucqm7")
+OnUseModules = Array[ExtResource("2_b68rr")]([SubResource("Resource_ucqm7")])
 WeapT = 5
