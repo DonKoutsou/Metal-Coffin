@@ -16,5 +16,6 @@ Energy = 1
 AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_nlrrw")]([SubResource("Resource_0wgrv")])
 Type = 1
+UseConditions = Array[int]([11])
 AllowTier = false
 PlayAnimation = 1

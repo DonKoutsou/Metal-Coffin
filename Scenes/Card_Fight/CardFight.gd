@@ -270,6 +270,7 @@ func ReplaceShip(Ship : BattleShipStats, TurnPosition : int, Friendly : bool) ->
 	ActionList.RemoveShip(Ship)
 	#Save the ships index in the turns array so that we can add this ship on same position
 	var Position = ShipTurns.find(Ship)
+	ShipTurns.erase(Ship)
 	
 	var NewCombatant : BattleShipStats
 	
@@ -441,7 +442,7 @@ func CardDrawn(C : CardStats, Manually : bool) -> void:
 		if (!Placed):
 			c.queue_free()
 
-func CardExhausted() -> void:
+func CardExhausted(C, Manual) -> void:
 	var Performer = GetCurrentShip()
 	if (Performer.Friendly):
 		PopUpManager.GetInstance().DoFadeNotif("Card Exhausted")
@@ -774,7 +775,7 @@ func OnCardSelected(C : Card, target : BattleShipStats = null) -> bool:
 	C.global_position = pos
 	C.KillCard(0.5, true)
 	
-	BurnSound()
+	#BurnSound()
 		#S.volume_db = -10
 	
 	ExternalUI.UpdateCardsInHandAmm(Ship.deck.Hand.size(), MaxCardsInHand)
@@ -912,7 +913,11 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 			actionLog.append("{0} cant use {1}, it's hull is too low.".format([Ship.Name, Action.GetCardName()]))
 			AvailableActions.erase(Action)
 			AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
-			
+		##NOT_LAST
+		else : if (Action.UseConditions.has(CardStats.CardUseCondition.NOT_LAST) and CurrentTurn == ShipTurns.size() - 1):
+			actionLog.append("{0} cant use {1}, it's hull is too low.".format([Ship.Name, Action.GetCardName()]))
+			AvailableActions.erase(Action)
+			AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
 		else:
 			actionLog.append("{0} uses {1}".format([Ship.Name, Action.GetCardName()]))
 			var SelectedAction : CardStats = Action.duplicate()
@@ -1120,8 +1125,10 @@ func RefundUnusedCards() -> void:
 ##----------------------------------------------------------------------##
 func RefundCardToShip(C : CardStats, Ship : BattleShipStats):
 	print("{0} got refunded a {1} card for not using it.".format([Ship.Name, C.GetCardName()]))
-	Ship.deck.DiscardCard(C)
-	HandleDiscardModules(Ship, C)
+	Ship.deck.DiscardPile.append(C)
+	C.EnergyReduction = 0
+	Ship.deck.DiscardChanged.emit(true)
+	#HandleDiscardModules(Ship, C)
 ##----------------------------------------------------------------------##
 func RestartCards() -> void:
 	ClearCards()
@@ -1666,8 +1673,8 @@ func DoCardAnim(Action : CardStats, Data : Array[AnimationData], Performer : Bat
 	var anim = ActionAnim.instantiate() as CardOffensiveAnimation
 	AnimationPlecement.add_child(anim)
 	AnimationPlecement.move_child(anim, 1)
-	anim.AtackCardDestroyed.connect(BurnSound)
-	anim.DeffenceCardDestroyed.connect(BurnSound)
+	#anim.AtackCardDestroyed.connect(BurnSound)
+	#anim.DeffenceCardDestroyed.connect(BurnSound)
 	anim.DoAnimation(Action, Data, Performer, _FriendShip)
 	
 	if (!Action.Burned):
@@ -1854,7 +1861,7 @@ func ShipDestroyed(Ship : BattleShipStats) -> bool:
 	
 	var TurnPosition = ShipTurns.find(Ship)
 	#var Index = ShipTurns.find(Ship)
-	ShipTurns.erase(Ship)
+	
 	
 	if (Friendly):
 		PlayerCombatants.erase(Ship)
@@ -1869,6 +1876,8 @@ func ShipDestroyed(Ship : BattleShipStats) -> bool:
 	GameOver = !EnemiesAlive or !PlayerAlive
 	
 	ReplaceShip(Ship, TurnPosition, Friendly)
+	
+	
 	#if (CurrentTurn > Index):
 		#CurrentTurn -= 1
 		

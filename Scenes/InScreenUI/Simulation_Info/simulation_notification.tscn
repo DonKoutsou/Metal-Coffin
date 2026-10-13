@@ -20,7 +20,7 @@ script = ExtResource("2_nf2y7")
 SimText = NodePath("VBoxContainer2/SimulationNotification")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=1022027959]
-modulate = Color(100, 0, 0.163, 1)
+modulate = Color(1, 0, 0.163, 1)
 layout_mode = 0
 offset_left = -74.0
 offset_top = -52.5

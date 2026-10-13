@@ -98,4 +98,3 @@ bus = &"Sounds"
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Button2" to="." method="OnCloseButtonPressed"]
 [connection signal="focus_entered" from="MarginContainer/VBoxContainer/TextEdit" to="." method="OnCommandLineFocused"]
 [connection signal="text_changed" from="MarginContainer/VBoxContainer/TextEdit" to="." method="OnCommandEntered"]
-[connection signal="text_set" from="MarginContainer/VBoxContainer/TextEdit" to="." method="HandleCommand"]

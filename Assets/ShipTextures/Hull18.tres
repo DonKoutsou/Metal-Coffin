@@ -1,0 +1,20 @@
+[gd_resource type="AnimatedTexture" format=3 uid="uid://dofyrc4gefufi"]
+
+[ext_resource type="Texture2D" uid="uid://bpb6p6550hakj" path="res://Assets/ShipTextures/Hull18.png" id="1_puukc"]
+[ext_resource type="Texture2D" uid="uid://bhj11klfr3qf3" path="res://Assets/ShipTextures/Hull18_Frame.png" id="2_li3td"]
+[ext_resource type="Texture2D" uid="uid://coh2073a45k8y" path="res://Assets/ShipTextures/Hull18_Frame2.png" id="3_utwiv"]
+[ext_resource type="Texture2D" uid="uid://c1say2la5oxl6" path="res://Assets/ShipTextures/Hull18_Frame3.png" id="4_a2ir7"]
+[ext_resource type="Texture2D" uid="uid://de5b3374jkgaa" path="res://Assets/ShipTextures/Hull18_Frame4.png" id="5_uwxwt"]
+
+[resource]
+frames = 5
+frame_0/texture = ExtResource("1_puukc")
+frame_0/duration = 0.2
+frame_1/texture = ExtResource("2_li3td")
+frame_1/duration = 0.2
+frame_2/texture = ExtResource("3_utwiv")
+frame_2/duration = 0.2
+frame_3/texture = ExtResource("4_a2ir7")
+frame_3/duration = 0.2
+frame_4/texture = ExtResource("5_uwxwt")
+frame_4/duration = 0.6

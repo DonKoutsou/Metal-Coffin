@@ -172,7 +172,7 @@ func DrawRuller() -> void:
 		vizrange *= WeatherManage.GetVisibilityInPosition(ControlledShipPos, WeatherManage.GetLightAmm())
 
 	for g in 3:
-		draw_circle(ControlledShipPos, vizrange / 3 * (g + 1), Color(100, 100, 100, 0.3), false, LineW, false)
+		draw_circle(ControlledShipPos, vizrange / 3 * (g + 1), Color(1, 1, 1, 0.3), false, LineW, false)
 
 	var Next = rotation_degrees
 	var Num = 90
@@ -208,7 +208,7 @@ func DrawRuller() -> void:
 		#if Num == 0:
 			#Num = 360
 
-	draw_multiline(Lines, Color(100, 100, 100, 0.3), LineW, false)
+	draw_multiline(Lines, Color(1, 1, 1, 0.3), LineW, false)
 
 # Optionally: provide a helper to generate circle polygon points
 func get_circle_polygon(center: Vector2, rad : float, samples:int = 100) -> PackedVector2Array:
