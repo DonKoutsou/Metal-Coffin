@@ -14,7 +14,7 @@
 [ext_resource type="StyleBox" uid="uid://twgjhudvlwrx" path="res://MetalEngineBase/Theme/BlackBars.tres" id="13_fkta7"]
 [ext_resource type="AudioStream" uid="uid://cn48skwuytprm" path="res://Assets/Sounds/BurnSound.mp3" id="15_8bqim"]
 [ext_resource type="Resource" uid="uid://dblsu2gs81rs6" path="res://Scenes/EventHandlers/UIEventH.tres" id="16_734e5"]
-[ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scenes/Card_Fight/External_UI/CardHandContainer.gd" id="24_d8sco"]
+[ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://MetalEngineBase/Utils/CardHandContainer.gd" id="24_d8sco"]
 [ext_resource type="Script" uid="uid://c1adplamkw577" path="res://Scenes/Card_Fight/CardFightTargetSelection.gd" id="26_712dp"]
 [ext_resource type="Script" uid="uid://bfjh8yj7umbiw" path="res://Scenes/Card_Fight/CardFightDiscardSelection.gd" id="27_rbthh"]
 

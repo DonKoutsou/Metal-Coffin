@@ -15,6 +15,8 @@ signal IntroFinished
 
 var Tw : Tween
 
+var autoSkip : bool = false
+
 func _on_skip_button_pressed() -> void:
 	#Tw.kill()
 	Tw.finished.emit()
@@ -40,6 +42,7 @@ func StartTextScroll() -> void:
 
 func DissableText() -> void:
 	TextPar.visible = false
+	autoSkip = true
 
 func ProcessStarted(ProcessName : String) -> void:
 	var l = Label.new()

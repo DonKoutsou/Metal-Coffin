@@ -332,7 +332,7 @@ func HaltShip():
 
 var AccelChanged = false
 
-func AccelerationChanged(value: float, forced : bool = false) -> void:
+func AccelerationChanged(_value: float, _forced : bool = false) -> void:
 	pass
 	
 func Steer(Rotation : float) -> void:
@@ -478,11 +478,11 @@ func ToggleElint(t : bool):
 
 
 #-------------------------------------------------
-func BodyEnteredBody(Body : Area2D) -> void:
+func BodyEnteredBody(_Body : Area2D) -> void:
 	pass
 
 #-------------------------------------------------
-func BodyLeftBody(Body : Area2D) -> void:
+func BodyLeftBody(_Body : Area2D) -> void:
 	pass
 
 #//////////////////////////////////////////////////////

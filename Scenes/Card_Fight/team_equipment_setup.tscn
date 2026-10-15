@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bn6vwqvcv5ebb" path="res://Scenes/Card_Fight/team_equipment_setup.gd" id="1_xpgoa"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://MetalEngineBase/Inventory/Scripts/Item.gd" id="4_c6o7f"]
 [ext_resource type="PackedScene" uid="uid://dci144io03ffa" path="res://Scenes/CaptainButton.tscn" id="4_em7yw"]
-[ext_resource type="PackedScene" uid="uid://cgs0u1j4mhhx5" path="res://Scenes/Inventory/ItemDescriptor.tscn" id="4_mgcdj"]
+[ext_resource type="PackedScene" uid="uid://cgs0u1j4mhhx5" path="res://MetalEngineBase/Inventory/ItemDescriptor/ItemDescriptor.tscn" id="4_mgcdj"]
 [ext_resource type="Resource" uid="uid://33sxgbk0di7b" path="res://Resources/Items/ShipParts/FuelTank/HeavyFuelTank/FT-500.tres" id="5_xd74m"]
 [ext_resource type="Resource" uid="uid://8kvrf75vxyp3" path="res://Resources/Items/ShipParts/MG/ShortMachinegun180mm.tres" id="6_wydj4"]
 [ext_resource type="Resource" uid="uid://dlrxjlssarqit" path="res://Resources/Items/Ammo/APAmmoMagazine100mm.tres" id="6_yjy3u"]

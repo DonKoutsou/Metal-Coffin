@@ -145,7 +145,7 @@ static func get_color_at_global_position(pos: Vector2) -> Color:
 	var Normalisedx = Helper.normalize_value(wrap(RoundedPos.x, 0, 72000), 0, 72000)
 	var Normalisedy = Helper.normalize_value(wrap(RoundedPos.y, 0, 72000), 0, 72000)
 	
-	var PixelCoords = Vector2i(Normalisedx * TEXTURE_SIZE, Normalisedy * TEXTURE_SIZE)
+	var PixelCoords = Vector2i(floor(Normalisedx * TEXTURE_SIZE), floor(Normalisedy * TEXTURE_SIZE))
 	M.lock()
 	var col = DataTexture.get_pixelv(PixelCoords)
 	M.unlock()

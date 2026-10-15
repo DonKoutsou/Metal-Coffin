@@ -67,7 +67,7 @@ func FindLinks(origin : Node2D) -> Array[Node2D]:
 func ApplyShake(amm : float = 1) -> void:
 	max_rotation = max(max_rotation, 0.04 * amm)
 
-func _on_control_3_gui_input(event: InputEvent, shape : RigidBody2D) -> void:
+func _on_control_3_gui_input(event: InputEvent, _shape : RigidBody2D) -> void:
 	if (event.is_action_pressed("Click")):
 		attached = true
 		

@@ -179,7 +179,6 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 					call_deferred("SpawnUpDamageVisual", card, card, "Damage +")
 					Called = true
 				
-					
 			if (Data.size() > 1):
 				await Helper.wait(0.2)
 			

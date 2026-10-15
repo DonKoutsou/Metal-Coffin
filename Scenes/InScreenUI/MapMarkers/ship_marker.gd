@@ -140,7 +140,7 @@ func _draw() -> void:
 		var Col = Color(1,1,1)
 		
 		if (distancetotravel > Fuel_Range):
-			Col = (Color(100,0,0))
+			Col = (Color(1,0,0))
 			
 		draw_dashed_line(origin, topos, Col, 1 / CurrentZoom, 10 / CurrentZoom)
 		
@@ -166,7 +166,7 @@ func _draw() -> void:
 		var Col = Color(1,1,1)
 		
 		if (distancetotravel > Fuel_Range):
-			Col = (Color(100,0,0))
+			Col = (Color(1,0,0))
 		
 		draw_dashed_line(LineOrigin, topos, Col, 1 / CurrentZoom, 10 / CurrentZoom)
 		

@@ -21,3 +21,4 @@ class_name  MapSpotSaveData
 @export var AlarmProgress : float
 @export var Merch : Dictionary[String,int]
 @export var WorkShopMerch : Dictionary[String,int]
+@export var Recruits : Array[Captain]

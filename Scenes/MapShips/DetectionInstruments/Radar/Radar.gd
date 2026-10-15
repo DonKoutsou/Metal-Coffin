@@ -45,8 +45,8 @@ func EvaluateRadarrPoint(_Altitude : float) -> void:
 func EvaluateRadarTargets(_Altitude : float) -> void:
 	pass
 
-func BodyEnteredRadar(Body : Area2D) -> void:
+func BodyEnteredRadar(_Body : Area2D) -> void:
 	pass
 
-func BodyLeftRadar(Body : Area2D) -> void:
+func BodyLeftRadar(_Body : Area2D) -> void:
 	pass

@@ -45,19 +45,20 @@ var Event : Happening
 var VisitingShips : Array[MapShip] = []
 var VisitingHostiles : Array[MapShip] = []
 
+#---------------------------------------------------------
 func RewardFuel(amm : float) -> void:
 	PopUpManager.GetInstance().DoFadeNotif("{0} tons of fuel added to {1}'s reserve.".format([amm, GetSpotName()]))
 	PlayerFuelReserves += amm
 
+#---------------------------------------------------------
 func _ready() -> void:
-	#set_physics_process(false)
-	#SimSpeed = SimulationManager.SimSpeed()
 	global_rotation = 0
 	if (Pos != Vector2.ZERO):
 		position = Pos
 	if (SpotType.VisibleOnStart):
 		OnSpotSeen(false)
 
+#---------------------------------------------------------
 func Update(delta: float) -> void:
 	if (EnemyCity and !AlarmRaised and VisitingShips.size() > 0):
 		AlarmProgress += delta
@@ -65,35 +66,16 @@ func Update(delta: float) -> void:
 		if (AlarmProgress > 600):
 			OnAlarmRaised(true)
 
+#---------------------------------------------------------
 func _exit_tree() -> void:
 	if (Event != null):
 		Event.PickedBy.erase(self)
 
-
+#---------------------------------------------------------
 func SetNeighbord(N : Array) -> void:
 	NeighboringCities = N
 
-
-#//////////////////////////////////////////////////////////////////
-func GetSaveData() -> Resource:
-	var datas = MapSpotSaveData.new()
-	datas.Population = Population
-	datas.SpotType = SpotType
-	datas.SpotLoc = position
-	datas.Seen = Seen
-	datas.Visited = Visited
-	datas.PlayerFuelReserves = PlayerFuelReserves
-	datas.SpotName =SpotName
-	datas.Region = Region
-	datas.EnemyCity = EnemyCity
-	datas.PossibleDrops = PossibleDrops
-	datas.AlarmRaised = AlarmRaised
-	datas.AlarmProgress = AlarmProgress
-	datas.Merch = Merch
-	datas.WorkShopMerch = WorkShopMerch
-	datas.Evnt = Event
-	return datas
-
+#---------------------------------------------------------
 func SetSpotData(Type : MapSpotType, Data : MapSpotCustomData_CompleteInfo) -> void:
 	SpotType = Type
 
@@ -114,6 +96,7 @@ func SetSpotData(Type : MapSpotType, Data : MapSpotCustomData_CompleteInfo) -> v
 
 	add_to_group(SpotType.GetSpotEnumString())
 
+#---------------------------------------------------------
 func InitPopulation() -> void:
 	if (SpotType.SpotK == MapSpotType.SpotKind.CITY_CENTER):
 		Population = Rand.InstanceRandom.RandIRange(10000, 50000)
@@ -124,16 +107,22 @@ func InitPopulation() -> void:
 	
 	SetSize()
 
+#---------------------------------------------------------
 func SetSize() -> void:
 	var sizething = (Population / 150000.0) as float
 	var collider = $AreaNotif/CollisionShape2D.shape as CircleShape2D
 	collider.radius = lerp(30, 250, sizething)
 
+#---------------------------------------------------------
 func GetSpotName() -> String:
 	return SpotName
+
+############SERVICES#####################
+#---------------------------------------------------------
 func GetPossibleDrops() -> Array:
 	return PossibleDrops
-	
+
+#---------------------------------------------------------
 func HasFuel() -> bool:
 	var hasf = false
 	
@@ -144,6 +133,7 @@ func HasFuel() -> bool:
 	
 	return hasf
 	
+#---------------------------------------------------------
 func HasRepair() -> bool:
 	var hasf = false
 	for g in PossibleDrops:
@@ -152,6 +142,7 @@ func HasRepair() -> bool:
 			break
 	return hasf
 	
+#---------------------------------------------------------
 func HasUpgrade() -> bool:
 	var hasu = false
 	for g in PossibleDrops:
@@ -160,6 +151,7 @@ func HasUpgrade() -> bool:
 			break
 	return hasu
 
+#---------------------------------------------------------
 func HasRecruit() -> bool:
 	var hasr = false
 	for g in PossibleDrops:
@@ -167,24 +159,20 @@ func HasRecruit() -> bool:
 			hasr = true
 			break
 	return hasr
+	
 #//////////////////////////////////////////////////////////////////
-func OnSpotVisited(PlayAnim : bool = true) -> void:
-	#if (!Analyzed):
-		#OnSpotAnalyzed(PlayAnim)
-	if (!Visited):
-		SpotLanded.emit(self)
-	if (!Seen):
-		OnSpotSeen(PlayAnim)
-	Visited = true
+#---------------------------------------------------------
 #Called when radar sees a mapspot
 func OnSpotSeen(PlayAnim : bool = true) -> void:
 	call_deferred("AddMapSpot", PlayAnim)
 	
+#---------------------------------------------------------
 func AddMapSpot(PlayAnim : bool) -> void:
 	MapPointerManager.GetInstance().AddSpot( self, PlayAnim)
 	Seen = true
 	SimulationManager.GetInstance().SpeedToggle(false)
 
+#---------------------------------------------------------
 func PlaySound():
 	var sound = AudioStreamPlayer2D.new()
 	sound.bus = "MapSounds"
@@ -193,6 +181,18 @@ func PlaySound():
 	add_child(sound)
 	sound.play()
 
+#---------------------------------------------------------
+##When player actually visits town, landing it not enough
+func OnSpotVisited(PlayAnim : bool = true) -> void:
+	#if (!Analyzed):
+		#OnSpotAnalyzed(PlayAnim)
+	if (!Visited):
+		SpotLanded.emit(self)
+	if (!Seen):
+		OnSpotSeen(PlayAnim)
+	Visited = true
+	
+#---------------------------------------------------------
 func OnSpotAproached(AproachedBy : MapShip) -> void:
 	# if ship is hostile we return
 	if (!AproachedBy.Friendly()):
@@ -222,7 +222,7 @@ func OnSpotAproached(AproachedBy : MapShip) -> void:
 			if (AlarmRaised):
 				EventM.OnEnemySeen(AproachedBy)
 
-
+#---------------------------------------------------------
 func OnSpotDeparture(DepartingShip : MapShip) -> void:
 	if (!DepartingShip.Friendly()):
 		VisitingHostiles.erase(DepartingShip)
@@ -232,7 +232,8 @@ func OnSpotDeparture(DepartingShip : MapShip) -> void:
 	if (EnemyCity):
 		if (AlarmRaised):
 			EventM.OnEnemyVisualLost(DepartingShip)
-			
+
+#---------------------------------------------------------	
 func OnAlarmRaised(Notify : bool = false) -> void:
 	var AlarmViz = AlarmVisual.instantiate()
 	add_child(AlarmViz)
@@ -243,13 +244,62 @@ func OnAlarmRaised(Notify : bool = false) -> void:
 	for g in VisitingShips:
 		EventM.OnEnemySeen(g)
 
+#---------------------------------------------------------
 func SetFuelReserves(NewAmm : float) -> void:
 	PlayerFuelReserves = NewAmm
 	FuelReservesChanged.emit(PlayerFuelReserves)
 
+#---------------------------------------------------------
 func AddToFuelReserves(Amm : float) -> void:
 	PlayerFuelReserves = max(0, PlayerFuelReserves + Amm)
 	FuelReservesChanged.emit(PlayerFuelReserves)
 
+#---------------------------------------------------------
 func PlayerHasFuelReserves() -> bool:
 	return PlayerFuelReserves > 0
+
+#//////////////////////////////////////////////////////////////////
+#---------------------------------------------------------
+func GetSaveData() -> Resource:
+	var datas = MapSpotSaveData.new()
+	datas.Population = Population
+	datas.SpotType = SpotType
+	datas.SpotLoc = position
+	datas.Seen = Seen
+	datas.Visited = Visited
+	datas.PlayerFuelReserves = PlayerFuelReserves
+	datas.SpotName =SpotName
+	datas.Region = Region
+	datas.EnemyCity = EnemyCity
+	datas.PossibleDrops = PossibleDrops
+	datas.AlarmRaised = AlarmRaised
+	datas.AlarmProgress = AlarmProgress
+	datas.Merch = Merch
+	datas.WorkShopMerch = WorkShopMerch
+	datas.Evnt = Event
+	datas.Recruits = Recruits
+	return datas
+
+#---------------------------------------------------------
+func LoadSaveData(datas : MapSpotSaveData) -> void:
+	Population = datas.Population
+	SpotType = datas.SpotType
+	position = datas.SpotLoc
+	Seen = datas.Seen
+	Visited = datas.Visited
+	PlayerFuelReserves = datas.PlayerFuelReserves
+	SpotName = datas.SpotName
+	Region = datas.Region
+	EnemyCity = datas.EnemyCity
+	PossibleDrops = datas.PossibleDrops
+	AlarmRaised = datas.AlarmRaised
+	AlarmProgress = datas.AlarmProgress
+	Merch = datas.Merch
+	WorkShopMerch =datas. WorkShopMerch
+	Event = datas.Event
+	Recruits = datas.Recruits
+
+enum Services {
+	FUEL_DEPOT,
+	
+}

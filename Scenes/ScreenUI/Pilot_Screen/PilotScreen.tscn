@@ -570,7 +570,6 @@ phase_offset = 1.5
 [connection signal="ForecastToggled" from="Pilot_Screen_Settings" to="." method="_on_forecast_button_toggled"]
 [connection signal="GridToggled" from="Pilot_Screen_Settings" to="." method="_on_grid_button_toggled"]
 [connection signal="RadarToggled" from="Pilot_Screen_Settings" to="." method="radarButtonToggled"]
-[connection signal="SteerToggled" from="Pilot_Screen_Settings" to="." method="_onSteerButtonToggled"]
 [connection signal="TopologyTogled" from="Pilot_Screen_Settings" to="." method="_on_topo_button_toggled"]
 [connection signal="WindCorrectionToggled" from="Pilot_Screen_Settings" to="." method="_on_wind_correction_toggled"]
 [connection signal="ZoomToggled" from="Pilot_Screen_Settings" to="." method="_on_zoom_level_button_toggled"]

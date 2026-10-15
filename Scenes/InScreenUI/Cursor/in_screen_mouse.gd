@@ -17,7 +17,7 @@ static var Instance : InScreenCursor
 func _ready() -> void:
 	Instance = self
 
-func SwitchMouse(Mode : MouseMode) -> void:
+func SwitchMouse(_Mode : MouseMode) -> void:
 	return
 	#if (Mode == CurrentMode):
 		#return

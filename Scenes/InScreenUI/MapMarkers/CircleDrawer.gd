@@ -151,8 +151,8 @@ func DrawRuller() -> void:
 		var FRange = ControlledShip.GetFuelRange()
 		var LineOrigin = ControlledShipPos + Vector2(max(0, FRange - 50), 0).rotated(ControlledShip.rotation)
 		var LineEnd = ControlledShipPos + Vector2(FRange, 0).rotated(ControlledShip.rotation)
-		draw_circle(ControlledShipPos, FRange, Color(0.3, 0.7, 0.915), false, LineW, false)
-		draw_line(LineOrigin, LineEnd, Color(0.3, 0.7, 0.915), LineW, false)
+		draw_circle(ControlledShipPos, FRange, Color(0.3, 0.7, 9.915), false, LineW, false)
+		draw_line(LineOrigin, LineEnd, Color(0.3, 0.7, 9.915), LineW, false)
 	
 	if (ControlledShip.MissileD.ArmedMissile != null):
 		var MisRange = ControlledShip.MissileD.ArmedMissile.Distance

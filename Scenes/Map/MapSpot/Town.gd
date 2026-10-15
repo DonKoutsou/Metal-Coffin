@@ -80,21 +80,8 @@ func LoadSaveData(Dat : TownSaveData) -> void:
 		var CSpot = $CitySpot
 		CSpot.replace_by(sc)
 		Spot = sc
-		sc.position = spotdat.SpotLoc
-		sc.Population = spotdat.Population
-		sc.SpotType = spotdat.SpotType
-		#sc.SpotLoc = spotdat.position
-		sc.SpotName = spotdat.SpotName
-		sc.EnemyCity = spotdat.EnemyCity
-		sc.PossibleDrops = spotdat.PossibleDrops
-		sc.Region = spotdat.Region
-		sc.PlayerFuelReserves = spotdat.PlayerFuelReserves
-		sc.AlarmRaised = spotdat.AlarmRaised
-		sc.AlarmProgress = spotdat.AlarmProgress
-		sc.Merch = spotdat.Merch
-		sc.WorkShopMerch = spotdat.WorkShopMerch
-		sc.Event = spotdat.Evnt
-		
+		sc.LoadSaveData(spotdat)
+
 		sc.SetSize()
 		SetSize()
 		if (sc.Event != null and spotdat.Evnt.CrewRecruit):
@@ -103,24 +90,8 @@ func LoadSaveData(Dat : TownSaveData) -> void:
 
 		if (spotdat.Seen):
 			sc.OnSpotSeen(false)
-			
-		if (spotdat.Visited):
-			sc.Visited = true
 		
 func _TownSpotApreached(spot : MapSpot):
 	TownSpotAproached.emit(spot)
 func _TownSpotLanded(spot : MapSpot):
 	TownSpotLanded.emit(spot)
-
-#func _physics_process(delta: float) -> void:
-	#if (!Engine.is_editor_hint()):
-		#return
-	#var Data =  $CitySpot.MapSpotTypes[0].Data as MapSpotCustomData_CompleteInfo
-	#for g : MapSpotCompleteInfo in Data.PossibleIds:
-		#if (g.PossibleDrops.size() == 0):
-			#g.PossibleDrops.append(GetRandomDrop())
-			#print("Added drop")
-		#
-#func GetRandomDrop() -> Item:
-	#var Itms = [load("res://Resources/Items/Radioactive.tres"), load("res://Resources/Items/Materials.tres"), load("res://Resources/Items/Supply.tres")]
-	#return Itms.pick_random()

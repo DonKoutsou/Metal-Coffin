@@ -79,15 +79,13 @@ func _ready() -> void:
 	_InScreenUI.GetInventory().InventoryToggled.connect(HideWorld)
 	MapPointerMan.TargetSelected.connect(MoveTargetSelected)
 	MapPointerMan.TargetSpotSelected.connect(MoveTargetSpotSelected)
-	
-	_ScreenUI.ConnectMap($SubViewportContainer/SubViewport)
 
 func Update(delta : float) -> void:
 	_ScreenUI.Update(delta)
 
 func HideWorld(t : bool) -> void:
-	WorldParent.visible = t
-	MapPointerMan.visible = t
+	WorldParent.visible = !t
+	MapPointerMan.visible = !t
 
 func _exit_tree() -> void:
 	if (Roadt != null):

@@ -33,6 +33,6 @@ UpgradeTime = 1200.0
 disp = 3
 ItemName = "RA-20"
 ItemDesc = "A fundamental radar system offering basic detection capabilities. Ideal for identifying nearby low-profile threats in standard operational conditions."
+PartType = 2
 CardProviding = Array[ExtResource("1_2yc6c")]([ExtResource("2_fcjh6"), ExtResource("3_y4qj5"), ExtResource("4_2yc6c")])
 Cost = 120000
-PartType = 2

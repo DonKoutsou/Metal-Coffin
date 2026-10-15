@@ -30,6 +30,6 @@ disp = 3
 DispositionAmm = 0.4
 ItemName = "AIRH-315"
 ItemDesc = "A fundamental radar system offering basic detection capabilities. Ideal for identifying nearby low-profile threats in standard operational conditions."
+PartType = 2
 CardProviding = Array[ExtResource("1_nbth7")]([ExtResource("2_ykqd2"), ExtResource("2_ykqd2")])
 Cost = 96000
-PartType = 2

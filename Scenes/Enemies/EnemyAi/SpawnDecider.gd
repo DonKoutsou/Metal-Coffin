@@ -136,7 +136,8 @@ func GetRecruitsForPosition(YPos: float, _HasRec : bool, capital : bool) -> Arra
 	var points = GetRecruitPointsForPosition(abs(YPos))
 	if (capital):
 		points *= 1.5
-		
+	
+	var MaxRecruits : int = 8
 	#print("Picking recruits for pos {0} with points {1}".format([YPos, points]))
 	var stage = Happening.GetStageForYPos(YPos)
 	var recs = RecruitFileList.duplicate()
@@ -159,6 +160,9 @@ func GetRecruitsForPosition(YPos: float, _HasRec : bool, capital : bool) -> Arra
 		if (points > RandomRec.Cost):
 			available_Recruits.append(RandomRec.Cpt.duplicate())
 			points -= RandomRec.Cost
+		
+		if (available_Recruits.size() == MaxRecruits):
+			break
 
 	return available_Recruits
 
@@ -223,7 +227,7 @@ func GetWorkshopMerchPointsForPosition(YPos : float) -> int:
 
 #------------------------------------------------------------------------
 func GetRecruitPointsForPosition(YPos : float) -> int:
-	return roundi(max(50, YPos / 100.0))
+	return roundi(max(50, YPos / 100.0) * 3)
 
 #------------------------------------------------------------------------
 func generate_fleet(points: int, Patrol : bool, Convoy : bool, stage : Happening.GameStage) -> Array[CaptainSpawnInfo]:

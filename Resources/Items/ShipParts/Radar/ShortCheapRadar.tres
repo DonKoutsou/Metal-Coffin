@@ -31,6 +31,6 @@ UpgradeVersion = ExtResource("5_jg2as")
 UpgradeTime = 600.0
 ItemName = "BT-1"
 ItemDesc = "A fundamental radar system offering basic detection capabilities. Ideal for identifying nearby low-profile threats in standard operational conditions."
+PartType = 2
 CardProviding = Array[ExtResource("1_0rxww")]([ExtResource("3_dxt6t"), ExtResource("3_dxt6t"), ExtResource("4_jg2as"), ExtResource("4_jg2as")])
 Cost = 50000
-PartType = 2

@@ -252,7 +252,7 @@ func LoadSavedSettings() -> void:
 	ColorManager.CurrentColor = sav.UI_Color
 
 #-----------------------------------------------------------------------------------
-func UpdateSavedSettings() -> void:
+static func UpdateSavedSettings() -> void:
 	var save = Saved_Settings.new()
 	save.FullScreen = DisplayServer.window_get_mode(0) == DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN
 	save.Glitch = SettingsPanel.HasGlitch

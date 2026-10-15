@@ -138,8 +138,9 @@ func  _ready() -> void:
 	Loadingscr.UpdateProgress(100)
 	await Helper.wait(1)
 	
-	Loadingscr.StartDest()
-	await Loadingscr.IntroFinished
+	if (!Loading):
+		Loadingscr.StartDest()
+		await Loadingscr.IntroFinished
 	GetMap().GetScreenUi().CloseScreen()
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	Loadingscr.queue_free()
@@ -213,11 +214,12 @@ func _physics_process(delta: float) -> void:
 	
 	var CurrentDelta = delta * SimulationManager.SimSpeed()
 	
-	time.Update(CurrentDelta)
+	
 	
 	UpdatePlayerShips(CurrentDelta, delta)
 	
 	if (!SimulationManager.Paused):
+		time.Update(CurrentDelta)
 		_Map.Update(delta)
 		WeatherManagerUpdate -= CurrentDelta
 		if (WeatherManagerUpdate <= 0):
@@ -315,7 +317,7 @@ func StartShipTrade(ControlledShip : PlayerDrivenShip) -> void:
 	if (CurrentFleet.size() == 1):
 		PopUpManager.GetInstance().DoFadeNotif("Cant separate current fleet")
 		return
-	GetMap().HideWorld(false)
+	GetMap().HideWorld(true)
 	var sc = load(FleetSeparationScene).instantiate() as FleetSeparation
 	sc.CurrentFleet = CurrentFleet
 	
@@ -327,7 +329,7 @@ func StartShipTrade(ControlledShip : PlayerDrivenShip) -> void:
 	
 #-----------------------------------------------------------
 func ShipSeparationFinished() -> void:
-	GetMap().HideWorld(true)
+	GetMap().HideWorld(false)
 	WORLDST = WORLDSTATE.NORMAL
 	ActionTracker.OnActionCompleted(ActionTracker.Action.SHIP_MANAGER)
 
@@ -369,7 +371,7 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip], Missil
 	
 	#Screen transition
 	await GetMap().GetScreenUi().CloseScreen()
-	GetMap().HideWorld(false)
+	GetMap().HideWorld(true)
 	
 	#spawn fight
 	var FightScene = await Helper.LoadThreaded(CardFightScene).Sign
@@ -461,14 +463,14 @@ func CardFightEnded(Survivors : Array[BattleShipStats], won : bool, wondFunds : 
 		if (wondFunds > 0):
 			PlayerWallet.AddFunds(wondFunds)
 			PopUpManager.GetInstance().DoFadeNotif("{0} drahma added".format([wondFunds]))
-	GetMap().HideWorld(true)
+	GetMap().HideWorld(false)
 	FighingEnemyUnits.clear()
 	FighingFriendlyUnits.clear()
 
 #------------------------------------------------------------------
 func CardFightDestroyed() -> void:
 	#GetMap().GetScreenUi().ToggleControllCover(false)
-	GetMap().HideWorld(true)
+	GetMap().HideWorld(false)
 	GetMap().GetScreenUi().ToggleFullScreen(ScreenUI.ScreenState.PILOT_SCREEN)
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	#GetMap().GetScreenUi().ToggleScreenUI(true)
@@ -515,7 +517,7 @@ func OnShipLanded(Ship : MapShip, skiptransition : bool = false) -> void:
 	var Inventory = InventoryManager.GetInstance()
 	if (Inventory.visible):
 		Inventory.CloseInventory()
-	GetMap().HideWorld(false)
+	GetMap().HideWorld(true)
 	SimulationManager.GetInstance().TogglePause(true)
 	WORLDST = WORLDSTATE.TOWN
 	
@@ -571,7 +573,7 @@ func FuelTransactionFinished(BFuel : float, Ships : Array[MapShip], Scene : Town
 		#else:
 		#Ship.Cpt.RefillResource(STAT_CONST.STATS.FUEL_TANK, BFuel)
 	
-	GetMap().HideWorld(true)
+	GetMap().HideWorld(false)
 	
 	spot.SetFuelReserves(BFuel)
 	

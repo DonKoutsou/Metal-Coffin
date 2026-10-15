@@ -95,6 +95,8 @@ func DoFloater(text : String, col : Color = Color(1,1,1)) -> void:
 	DFloater.global_position = (global_position + (size / 2)) - DFloater.size / 2
 
 func Destroy() -> void:
+	if (Destroyed):
+		return
 	if (ShipIcon.texture is AnimatedTexture):
 		ShipIcon.texture.pause = true
 	

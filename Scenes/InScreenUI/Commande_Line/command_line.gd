@@ -22,7 +22,7 @@ static var History : PackedStringArray = []
 
 var update : bool = false
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if (update):
 		UpdateText()
 		update = false
@@ -200,6 +200,12 @@ func Prologue(skip : bool = false, customSeed : int = -1) -> String:
 
 	StartPrologue.emit(skip, customSeed)
 	return "Starting Prologue"
+
+func Campaign(skip : bool = false, customSeed : int = -1) -> String:
+	if (World.Instance != null):
+		return ">Can only apply while in main menu"
+	StartCampaign.emit(skip, customSeed)
+	return "Starting Campaign"
 
 func CardFightTypeSwitch(newType : Card_Fight.CardFightTurnType) -> String:
 	if (get_tree().get_nodes_in_group("CardFight").size() > 0):

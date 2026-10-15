@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://b870cywtujqjn" path="res://Assets/Cards/Arrow.png" id="3_avrvh"]
 [ext_resource type="PackedScene" uid="uid://mxfnm7hywo4f" path="res://Scenes/Old/damage_floater.tscn" id="3_ej477"]
 [ext_resource type="StyleBox" uid="uid://cq66xt1psso06" path="res://MetalEngineBase/Theme/GreyPanel.tres" id="4_0orxy"]
-[ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://Scenes/Card_Fight/External_UI/CardHandContainer.gd" id="4_cmntb"]
+[ext_resource type="Script" uid="uid://bm68ow8pgjukx" path="res://MetalEngineBase/Utils/CardHandContainer.gd" id="4_cmntb"]
 [ext_resource type="StyleBox" uid="uid://c4acir3ta8dwv" path="res://MetalEngineBase/Theme/viz_HP_Bar.tres" id="6_0f0kg"]
 [ext_resource type="Texture2D" uid="uid://dic62egg7dtn4" path="res://Assets/Particles/smoke_02.png" id="6_wmwbv"]
 [ext_resource type="Texture2D" uid="uid://de1cx0wwuxx0x" path="res://Assets/Particles/smoke_09.png" id="7_cmntb"]

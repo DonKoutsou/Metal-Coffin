@@ -228,13 +228,13 @@ func IntroDeclarationFinished() -> void:
 		Declaration("Favorable Winds", 1.5).ActionDeclarationFinished.connect(WindDeclarationFinished)
 		for g in PlayerCombatants:
 			g.PermaBuffSpeed(1 + g.WindPenalty)
-			g.ShipViz.DoFloater("Speed +", Color(0.483, 100.0, 0.381))
+			g.ShipViz.DoFloater("Speed +", Color(0.483, 1.0, 0.381))
 		for g in PlayerReserves:
 			g.PermaBuffSpeed(1 + g.WindPenalty)
 		
 		for g in EnemyCombatants:
 			g.PermaDeBuffSpeed(g.WindPenalty)
-			g.ShipViz.DoFloater("Speed -", Color(100.0, 0.0, 0.163))
+			g.ShipViz.DoFloater("Speed -", Color(1.0, 0.0, 0.163))
 		for g in EnemyReserves:
 			g.PermaDeBuffSpeed(g.WindPenalty)
 			
@@ -242,13 +242,13 @@ func IntroDeclarationFinished() -> void:
 		Declaration("Crosswind", 1.5).ActionDeclarationFinished.connect(WindDeclarationFinished)
 		for g in PlayerCombatants:
 			g.PermaDeBuffSpeed(g.WindPenalty)
-			g.ShipViz.DoFloater("Speed -", Color(100.0, 0.0, 0.163))
+			g.ShipViz.DoFloater("Speed -", Color(1.0, 0.0, 0.163))
 		for g in PlayerReserves:
 			g.PermaDeBuffSpeed(g.WindPenalty)
 		
 		for g in EnemyCombatants:
 			g.PermaBuffSpeed(1 + g.WindPenalty)
-			g.ShipViz.DoFloater("Speed +", Color(0.483, 100.0, 0.381))
+			g.ShipViz.DoFloater("Speed +", Color(0.483, 1.0, 0.381))
 		for g in EnemyReserves:
 			g.PermaBuffSpeed(1 + g.WindPenalty)
 	else:
@@ -442,7 +442,7 @@ func CardDrawn(C : CardStats, Manually : bool) -> void:
 		if (!Placed):
 			c.queue_free()
 
-func CardExhausted(C, Manual) -> void:
+func CardExhausted(_C : CardStats, _Manual : bool) -> void:
 	var Performer = GetCurrentShip()
 	if (Performer.Friendly):
 		PopUpManager.GetInstance().DoFadeNotif("Card Exhausted")
@@ -1331,7 +1331,7 @@ func HandlePassiveModules(Performer : BattleShipStats, C : CardStats, targets : 
 			Performer.SetEnergy(0)
 			C.Passive.Module = NewMod
 
-		await HandleOffensiveModule(Performer, C ,C.Passive.Module, targets, false)
+		HandleOffensiveModule(Performer, C ,C.Passive.Module, targets, false)
 	else:
 		var Mod = C.Passive.Module
 		var Data : AnimationData
@@ -1462,11 +1462,15 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 			var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Performer,Action.Tier), direct, Mod.CauseFile, Mod.SkipShield, Performer)
 			DamageCallables.append(c)
 		
-		#Apply effects based on if card was connected or not
-		if (currentConnected and Mod.forEachHit):
-			for SAtMod in Mod.OnSuccesfullAtackModules:
-				AnimData.append(HandleModule(Performer, Action, SAtMod, TargetList.keys()))
-		else: if (!currentConnected and Mod.forEachMis):
+		if (currentConnected):
+			var attackData = HandleModule(Performer, Action, Mod, TargetList.keys())
+			if (attackData):
+				AnimData.append(attackData)
+			#Apply effects based on if card was connected or not
+			if (Mod.forEachHit):
+				for SAtMod in Mod.OnSuccesfullAtackModules:
+					AnimData.append(HandleModule(Performer, Action, SAtMod, TargetList.keys()))
+		else: if (Mod.forEachMis):
 			for SAtMod in Mod.OnUnSuccesfullAtackModules:
 				AnimData.append(HandleModule(Performer, Action, SAtMod, TargetList.keys()))
 	

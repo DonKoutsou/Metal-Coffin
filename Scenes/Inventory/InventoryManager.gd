@@ -466,11 +466,11 @@ func CloseInventory() -> void:
 func ToggleInventory(t : bool) -> void:
 	if (is_instance_valid(ToggleTween)):
 		ToggleTween.kill()
-	visible = !visible
-	InventoryToggled.emit(!visible)
+	visible = t
+	InventoryToggled.emit(t)
 	$AudioStreamPlayer.play()
 	ToggleTween = create_tween()
-	if (visible):
+	if (t):
 		var statsScene : PackedScene = load(CaptainStatScene)
 		CaptainStats = statsScene.instantiate()
 		CaptainStatsPlace.add_child(CaptainStats)

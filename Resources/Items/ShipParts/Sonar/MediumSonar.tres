@@ -32,6 +32,6 @@ disp = 3
 DispositionAmm = 0.2
 ItemName = "AIRH-128"
 ItemDesc = "A fundamental radar system offering basic detection capabilities. Ideal for identifying nearby low-profile threats in standard operational conditions."
+PartType = 2
 CardProviding = Array[ExtResource("1_ox81u")]([ExtResource("2_uk22i"), ExtResource("2_uk22i")])
 Cost = 82000
-PartType = 2

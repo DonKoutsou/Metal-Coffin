@@ -24,7 +24,7 @@ signal ForecastToggled(t : bool)
 signal GridToggled(t : bool)
 signal TopologyTogled(t : bool)
 signal ZoomToggled(t : bool)
-signal SteerToggled(t : bool)
+#signal SteerToggled(t : bool)
 signal WindCorrectionToggled(t : bool)
 signal RadarToggled(t : bool)
 

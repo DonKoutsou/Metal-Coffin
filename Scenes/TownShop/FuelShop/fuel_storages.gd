@@ -92,8 +92,8 @@ func RedrawThing() -> void:
 
 func GetFuelRangeWithExtraFuel(ExtraFuel : float) -> float:
 
-	var Weight : float
-	var fuel_ef : float
+	#var Weight : float
+	#var fuel_ef : float
 	var fleetsize = Ships.size()
 	var total_fuel = ExtraFuel
 	var inverse_ef_sum : float = 0

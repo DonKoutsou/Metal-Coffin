@@ -149,6 +149,7 @@ func _physics_process(delta: float) -> void:
 			PauseShake(true)
 		var of = RandomOffset()
 		offset += of
+		
 	
 	var l = WeatherManage.GetLightAmm()
 	var mappedLight = Helper.mapf(l, 0.6, 1, 0.08, 0.9)
@@ -158,6 +159,7 @@ func _physics_process(delta: float) -> void:
 		ToggleLights(false) 
 	else: if (l < 0.75 and lastLightStage > 0.75):
 		ToggleLights(true)
+		
 	lastLightStage = l
 
 func _input(event: InputEvent) -> void:
