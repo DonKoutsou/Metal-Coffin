@@ -651,7 +651,7 @@ func GenerateEventsThreaded() -> void:
 		while Events.size() > 0 and Spots.size() > 0:
 			var randomIndex = Rand.InstanceRandom.RandIRange(0, Spots.size() - 1)
 			var Sp = Spots[randomIndex]
-			if (Sp.Event != null):
+			if (Sp.Event == null):
 				var Hap = FigureOutEvent(Sp.get_parent().Pos.y, Events)
 				if (Hap != null):
 					if (Hap.MandatoryLocaiton != "" and Hap.MandatoryLocaiton != Sp.GetSpotName()):

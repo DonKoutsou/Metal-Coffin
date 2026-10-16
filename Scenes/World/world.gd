@@ -141,6 +141,7 @@ func  _ready() -> void:
 	if (!Loading):
 		Loadingscr.StartDest()
 		await Loadingscr.IntroFinished
+		
 	GetMap().GetScreenUi().CloseScreen()
 	await GetMap().GetScreenUi().FullScreenToggleStarted
 	Loadingscr.queue_free()

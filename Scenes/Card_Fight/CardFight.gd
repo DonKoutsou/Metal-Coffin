@@ -651,7 +651,7 @@ func PickPhaseStart() -> void:
 	
 	if (TurnType == CardFightTurnType.SET):
 		ShipTurns.sort_custom(speed_comparator)
-	ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ACTION_PICK)
+	#ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_ACTION_PICK)
 
 	CurrentPlayerLabel.visible = true
 	
@@ -1147,7 +1147,7 @@ func RestartCards() -> void:
 	#if (stormLevel > 4):
 		#currentTurnEnergy -= 1
 	#since max fleet ammount is 3 this number can't be more than 2, and since we normalise it we
-	var finalTurnEnergy = currentTurnEnergy + roundi(currentTurnEnergy * outNumberedBonus)
+	var finalTurnEnergy = currentTurnEnergy + outNumberedBonus
 	
 	ExternalUI.GetEnergyBar().ChangeSegmentAmm(finalTurnEnergy)
 	ExternalUI.GetReserveBar().ChangeSegmentAmm(currentship.EnergyReserves)
@@ -1238,7 +1238,7 @@ func HandleDiscardModules(Performer : BattleShipStats, C : CardStats) -> void:
 			AnimData.append(Data)
 		
 	if (AnimData.size() > 0):
-		await DoCardAnim(C, AnimData, Performer, true)
+		await DoCardAnim(C, AnimData, Performer, Performer.Friendly)
 
 ##----------------------------------------------------------------------##
 func HandleOnLeftOnHandModules(Performer : BattleShipStats, C : CardStats) -> void:
@@ -1254,7 +1254,7 @@ func HandleOnLeftOnHandModules(Performer : BattleShipStats, C : CardStats) -> vo
 		AnimData.append(Data)
 		
 	if (AnimData.size() > 0):
-		await DoCardAnim(C, AnimData, Performer, true)
+		await DoCardAnim(C, AnimData, Performer, Performer.Friendly)
 
 ##----------------------------------------------------------------------##
 func HandleModules(Performer : BattleShipStats, C : CardStats, targetOverride : BattleShipStats = null) -> bool:
@@ -1316,7 +1316,7 @@ func HandleModules(Performer : BattleShipStats, C : CardStats, targetOverride : 
 		AnimData.append(DeffensiveAnimationData.new())
 	
 	if (AnimData.size() > 0):
-		await DoCardAnim(C, AnimData, Performer, true)
+		await DoCardAnim(C, AnimData, Performer, Performer.Friendly)
 		
 	Performer.ShipViz.PlayAnim(C.PlayAnimation)
 	
@@ -1331,7 +1331,9 @@ func HandlePassiveModules(Performer : BattleShipStats, C : CardStats, targets : 
 			Performer.SetEnergy(0)
 			C.Passive.Module = NewMod
 
-		HandleOffensiveModule(Performer, C ,C.Passive.Module, targets, false)
+		var data = HandleOffensiveModule(Performer, C ,C.Passive.Module, targets, false)
+		if (data):
+			DoCardAnim(C, data, Performer, Performer.Friendly)
 	else:
 		var Mod = C.Passive.Module
 		var Data : AnimationData
@@ -1339,7 +1341,7 @@ func HandlePassiveModules(Performer : BattleShipStats, C : CardStats, targets : 
 		Data = HandleModule(Performer, C ,Mod, targets)
 
 		if (Data != null):
-			DoCardAnim(C, [Data], Performer, true)
+			DoCardAnim(C, [Data], Performer, Performer.Friendly)
 
 ##----------------------------------------------------------------------##
 ##Handles offensive logic, checks for enemy counter cards and plays offensive animation
@@ -1426,7 +1428,7 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 				HandleDiscardModules(Performer, Def)
 				
 			if (!Friendly):
-				DamageNeg += Mod.GetFinalDamage(Performer, Action.Tier)
+				DamageNeg += Mod.GetFinalDamage(Performer, Action.GetTier())
 				
 			var CounterMod : CardModule = TargetList[g]["DefMod"]
 			
@@ -1436,8 +1438,8 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 					tar.append(g)
 				else:
 					tar.append(Performer)
-				var DamageReduction = Mod.GetFinalDamage(Performer,Action.Tier) * CounterMod.GetReductionPercent(Def.Tier)
-				var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Performer,Action.Tier) - DamageReduction, direct, Mod.CauseFile, Mod.SkipShield, Performer)
+				var DamageReduction = Mod.GetFinalDamage(Performer,Action.GetTier()) * CounterMod.GetReductionPercent(Def.GetTier())
+				var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Performer,Action.GetTier()) - DamageReduction, direct, Mod.CauseFile, Mod.SkipShield, Performer)
 				DamageCallables.append(c)
 				for SDefMod in CounterMod.OnSuccesfullDeffenceModules:
 					AnimData.append(HandleModule(g, Def, SDefMod, tar))
@@ -1454,12 +1456,12 @@ func HandleOffensiveModule(Performer : BattleShipStats, Action : CardStats , Mod
 					AnimData.append(HandleModule(g, Def, SDefMod, tar))
 					
 			else:
-				var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Performer,Action.Tier), direct, Mod.CauseFile, Mod.SkipShield, Performer)
+				var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Performer,Action.GetTier()), direct, Mod.CauseFile, Mod.SkipShield, Performer)
 				DamageCallables.append(c)
 		else:
 			AtackConnected = true
 			currentConnected = true
-			var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Performer,Action.Tier), direct, Mod.CauseFile, Mod.SkipShield, Performer)
+			var c = Callable.create(g, "DamageShip").bind(Mod.GetFinalDamage(Performer,Action.GetTier()), direct, Mod.CauseFile, Mod.SkipShield, Performer)
 			DamageCallables.append(c)
 		
 		if (currentConnected):
@@ -1671,7 +1673,7 @@ func BurnSound() -> void:
 	add_child(S)
 
 ##----------------------------------------------------------------------##
-func DoCardAnim(Action : CardStats, Data : Array[AnimationData], Performer : BattleShipStats, _FriendShip : bool) -> void:
+func DoCardAnim(Action : CardStats, Data : Array[AnimationData], Performer : BattleShipStats, FriendShip : bool) -> void:
 	print("Starting Def Anim")
 	var ActionAnim : PackedScene = ResourceLoader.load(ActionAnimFile)
 	var anim = ActionAnim.instantiate() as CardOffensiveAnimation
@@ -1679,7 +1681,7 @@ func DoCardAnim(Action : CardStats, Data : Array[AnimationData], Performer : Bat
 	AnimationPlecement.move_child(anim, 1)
 	#anim.AtackCardDestroyed.connect(BurnSound)
 	#anim.DeffenceCardDestroyed.connect(BurnSound)
-	anim.DoAnimation(Action, Data, Performer, _FriendShip)
+	anim.DoAnimation(Action, Data, Performer, FriendShip)
 	
 	if (!Action.Burned):
 		for g in Data:
@@ -1812,6 +1814,9 @@ func IsShipFriendly(Ship : BattleShipStats) -> bool:
 #////////////////////////////////////////////////////////////////////////////
 ##----------------------------------------------------------------------##
 func ShipDamaged(amm : float, shieldAmm : float, Instigator : BattleShipStats, direct : bool, Ship : BattleShipStats) -> void:
+	if (Ship.IsDestroyed):
+		return
+		
 	if (IsShipFriendly(Ship)):
 		
 		if (Ship.CurrentHull < 40):
@@ -1859,7 +1864,9 @@ func ShipSetOnFire(Instigator : BattleShipStats, Ship : BattleShipStats) -> void
 # RETURN TRUE IF FIGHT IS OVER
 func ShipDestroyed(Ship : BattleShipStats) -> bool:
 	var Friendly = IsShipFriendly(Ship)
-		
+	
+	Ship.IsDestroyed = true
+	
 	if (!Ship.Friendly):
 		FundsToWin += snappedi(Rand.InstanceRandom.RandIRange(2000, roundi(Ship.Funds * 0.5)), 1000)
 	

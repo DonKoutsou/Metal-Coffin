@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://MetalEngineBase/Inventory/Stats/ShipStat.gd" id="2_mq2gw"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://MetalEngineBase/Inventory/Scripts/Item.gd" id="3_506nn"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://MetalEngineBase/Inventory/Stats/Captain.gd" id="3_aa2jg"]
-[ext_resource type="Resource" uid="uid://b1e5ovklwmp7v" path="res://Resources/Captains/PlayerCaptains/Amol.tres" id="5_1pd72"]
 [ext_resource type="Resource" uid="uid://c6j0y0r05rijg" path="res://Resources/Items/ShipParts/Radar/ShortRadar.tres" id="9_6k00j"]
 [ext_resource type="Resource" uid="uid://f8x3cqxrqo6s" path="res://Resources/Items/Ammo/Flares.tres" id="10_lgywl"]
 [ext_resource type="Resource" uid="uid://bh0113ts576au" path="res://Resources/Items/ShipParts/ELINT/ShortElint.tres" id="11_fxpub"]
@@ -129,4 +128,3 @@ CaptainStats = Array[ExtResource("2_mq2gw")]([SubResource("Resource_hejd0"), Sub
 StartingItems = Array[ExtResource("3_506nn")]([ExtResource("12_1pd72"), ExtResource("13_jvyia"), ExtResource("13_jvyia"), ExtResource("9_6k00j"), ExtResource("11_fxpub"), ExtResource("10_lgywl"), ExtResource("10_lgywl"), ExtResource("10_lgywl"), ExtResource("10_lgywl"), ExtResource("13_ciy03"), ExtResource("13_ciy03"), ExtResource("13_ciy03"), ExtResource("13_ciy03")])
 CheckForErrors = true
 ProvidingFunds = 20000
-ProvidingCaptains = Array[ExtResource("3_aa2jg")]([ExtResource("5_1pd72")])

@@ -295,8 +295,8 @@ func LoadSaveData(datas : MapSpotSaveData) -> void:
 	AlarmRaised = datas.AlarmRaised
 	AlarmProgress = datas.AlarmProgress
 	Merch = datas.Merch
-	WorkShopMerch =datas. WorkShopMerch
-	Event = datas.Event
+	WorkShopMerch = datas.WorkShopMerch
+	Event = datas.Evnt
 	Recruits = datas.Recruits
 
 enum Services {

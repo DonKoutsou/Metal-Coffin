@@ -20,7 +20,7 @@ translations_plugin/localistation_dir="res://Localisations"
 [application]
 
 config/name="Metal Coffin"
-config/version="0.8"
+config/version="0.8.006"
 run/main_scene="uid://cqxnjihcai1kd"
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.7", "Mobile")

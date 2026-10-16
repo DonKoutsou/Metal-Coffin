@@ -1,84 +1,119 @@
-[gd_resource type="Resource" script_class="Happening" format=3 uid="uid://c3kr3kcdnvesc"]
+[gd_resource type="Resource" script_class="Happening" format=3]
 
-[ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://MetalEngineBase/Happenings/HappeningOption.gd" id="1_x2bkw"]
-[ext_resource type="Script" uid="uid://cj6lgkawdqkd8" path="res://MetalEngineBase/Happenings/HappeningText.gd" id="3_3tnlt"]
-[ext_resource type="Resource" uid="uid://c75as8yglsqcy" path="res://Resources/Captains/PlayerCaptains/Gilian.tres" id="3_j2ryf"]
-[ext_resource type="Script" uid="uid://ii12ceb6fgif" path="res://MetalEngineBase/Happenings/StringHappeningOption.gd" id="4_fdmko"]
-[ext_resource type="Script" uid="uid://w3pbagqwci26" path="res://MetalEngineBase/Happenings/DroneHappeningOption.gd" id="4_ui0gd"]
-[ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://MetalEngineBase/Happenings/HappeningStage.gd" id="5_3u5ui"]
-[ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://MetalEngineBase/Happenings/Happening.gd" id="5_eghih"]
+[ext_resource type="Script" path="res://MetalEngineBase/Happenings/HappeningStage.gd" id="1"]
+[ext_resource type="Script" path="res://MetalEngineBase/Happenings/HappeningOption.gd" id="2"]
+[ext_resource type="Script" path="res://MetalEngineBase/Happenings/HappeningText.gd" id="3"]
+[ext_resource type="Resource" path="res://Resources/Captains/PlayerCaptains/Gilian.tres" id="5_c131y"]
+[ext_resource type="Script" path="res://MetalEngineBase/Happenings/StringHappeningOption.gd" id="6"]
+[ext_resource type="Script" path="res://MetalEngineBase/Happenings/DroneHappeningOption.gd" id="6_bpru2"]
+[ext_resource type="Script" path="res://MetalEngineBase/Happenings/Happening.gd" id="7"]
 
-[sub_resource type="Resource" id="Resource_3tnlt"]
-script = ExtResource("3_3tnlt")
-Text = "The Machine returns to its ship. After a while it comes back delivers you the crews answer to follow you. \"Lead the way captain\""
-
-[sub_resource type="Resource" id="Resource_gpgth"]
-script = ExtResource("5_3u5ui")
-Texts = Array[ExtResource("3_3tnlt")]([SubResource("Resource_3tnlt")])
-metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
-
-[sub_resource type="Resource" id="Resource_e8rre"]
-script = ExtResource("3_3tnlt")
-Text = "The machine asks you to leave."
-
-[sub_resource type="Resource" id="Resource_wx088"]
-script = ExtResource("5_3u5ui")
-Texts = Array[ExtResource("3_3tnlt")]([SubResource("Resource_e8rre")])
-metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
-
-[sub_resource type="Resource" id="Resource_qsgoq"]
-script = ExtResource("4_ui0gd")
-Cpt = ExtResource("3_j2ryf")
-OptionName = "Ask them to join your fleet"
-BranchContinuation = Array[ExtResource("5_3u5ui")]([SubResource("Resource_gpgth")])
-Branch = SubResource("Resource_gpgth")
-WorldviewEffect = 3
-WorldviewEffectAmm = -20
-WorldviewCheck = 3
-WorldViewCheckFailBranch = Array[ExtResource("5_3u5ui")]([SubResource("Resource_wx088")])
-WorldViewFailBranch = SubResource("Resource_wx088")
-metadata/_custom_type_script = "uid://w3pbagqwci26"
-
-[sub_resource type="Resource" id="Resource_w685b"]
-script = ExtResource("4_fdmko")
-StringReply = "You take your leave"
+[sub_resource type="Resource" id="Resource_c131y"]
+script = ExtResource("6")
+StringReply = "You take your leave..."
 OptionName = "Leave"
-FinishDiag = true
-metadata/_custom_type_script = "uid://ii12ceb6fgif"
 
-[sub_resource type="Resource" id="Resource_75xed"]
-script = ExtResource("3_3tnlt")
+[sub_resource type="Resource" id="Resource_bpru2"]
+script = ExtResource("3")
+Text = "The machine mumbles their name [color=#ffc315]\"Gilian\"[/color]...
+It bows its head and returns to their ship, your new comrade is ready for war!"
+Pic = "res://Assets/CaptainPortraits/Captain5.png"
+
+[sub_resource type="Resource" id="Resource_tx7ye"]
+script = ExtResource("1")
+Texts = Array[ExtResource("3")]([SubResource("Resource_bpru2")])
+
+[sub_resource type="Resource" id="Resource_m3ffl"]
+script = ExtResource("3")
+Text = "The machine gives you a long look and departs without shaying a word..."
+
+[sub_resource type="Resource" id="Resource_v4hq8"]
+script = ExtResource("1")
+Texts = Array[ExtResource("3")]([SubResource("Resource_m3ffl")])
+
+[sub_resource type="Resource" id="Resource_ohb7t"]
+script = ExtResource("6_bpru2")
+Cpt = ExtResource("5_c131y")
+StringReply = "You ask the machine to join your campaign. You share your dreams and aspirations hoping to persuade it."
+OptionName = "Ask the machine to join you"
+Branch = SubResource("Resource_tx7ye")
+WorldviewEffect = 5
+WorldviewEffectAmm = 5
+WorldviewCheck = 5
+CheckPossetive = true
+CheckDifficulty = 5
+WorldViewFailBranch = SubResource("Resource_v4hq8")
+
+[sub_resource type="Resource" id="Resource_wt2mo"]
+script = ExtResource("3")
+Text = "You sense a fighting spirit in this machine. It would make for a great ally."
+Pic = "res://Assets/CaptainPortraits/Captain5.png"
+
+[sub_resource type="Resource" id="Resource_4q6l4"]
+script = ExtResource("1")
+Texts = Array[ExtResource("3")]([SubResource("Resource_wt2mo")])
+Options = Array[ExtResource("2")]([SubResource("Resource_c131y"), SubResource("Resource_ohb7t")])
+
+[sub_resource type="Resource" id="Resource_uojx1"]
+script = ExtResource("6")
+StringReply = "The machine is unfased, its as if it never heard you."
+OptionName = "Do you recognise me machine?"
+Branch = SubResource("Resource_4q6l4")
+WorldviewEffect = 5
+WorldviewEffectAmm = -5
+
+[sub_resource type="Resource" id="Resource_mi20c"]
+script = ExtResource("6")
+StringReply = "[color=#ffc315]Your kind has sufferend for too long... from my side as a human you have my humblest apologie...[/color][p]The machine bows its head, it seems to accept your apology.
+"
+OptionName = "Bow your head..."
+Branch = SubResource("Resource_4q6l4")
+WorldviewEffect = 5
+WorldviewEffectAmm = 5
+
+[sub_resource type="Resource" id="Resource_4adfd"]
+script = ExtResource("3")
+Text = "The winds are crashing hard on your ship while you wait for the gates to open. Slowly more and more light is starting to shine through through them."
+
+[sub_resource type="Resource" id="Resource_a16u1"]
+script = ExtResource("3")
 Text = "While aproaching the port you notice another ship just about comming down at the same time."
 
-[sub_resource type="Resource" id="Resource_w4a3y"]
-script = ExtResource("3_3tnlt")
-Text = "The ships not very far from your location. Your commanding officer takes a good look at them, probably to make sure they dont pose any threat to you."
+[sub_resource type="Resource" id="Resource_ung8y"]
+script = ExtResource("3")
+Text = "The ship's not very far from your location. An officer takes a good look at them, probably to make sure they dont pose any threat to you."
 
-[sub_resource type="Resource" id="Resource_8modh"]
-script = ExtResource("3_3tnlt")
-Text = "After taking a good look though his bonoculars he smirks and turns away. You ask him about what he saw."
+[sub_resource type="Resource" id="Resource_hvg8t"]
+script = ExtResource("3")
+Text = "After taking a good look though his binoculars he smirks and turns away. You ask him about what he saw."
 
-[sub_resource type="Resource" id="Resource_rodxh"]
-script = ExtResource("3_3tnlt")
-Text = "The ship surprisingly has no weapons on it. You would think a ship traversing the land at these time would have at least the minumim of deffences."
+[sub_resource type="Resource" id="Resource_3futu"]
+script = ExtResource("3")
+Text = "[color=#ffc315]\"The ship surprisingly has no weapons on it. You would think a ship traversing the land at these time would have at least the minumim of deffences.\"[/color]"
 
-[sub_resource type="Resource" id="Resource_d0k2a"]
-script = ExtResource("3_3tnlt")
-Text = "Your commanding officer turns your atention to the ship's captain stepping out of the ship. Its one of the machines, it all starts to make sense slowly."
+[sub_resource type="Resource" id="Resource_7qw1y"]
+script = ExtResource("3")
+Text = "The officer turns your atention to the ship's captain stepping out of the ship..."
 
-[sub_resource type="Resource" id="Resource_eb2xw"]
-script = ExtResource("3_3tnlt")
+[sub_resource type="Resource" id="Resource_c34te"]
+script = ExtResource("3")
+Text = "Its one of the machines, it all starts to make sense slowly."
+Pic = "res://Assets/CaptainPortraits/Captain5.png"
+
+[sub_resource type="Resource" id="Resource_0k3fm"]
+script = ExtResource("3")
 Text = "The machine is surprised to see you but after realising who you are you can see it lowers its guard."
+Pic = "res://Assets/CaptainPortraits/Captain5.png"
 
-[sub_resource type="Resource" id="Resource_6f5ue"]
-script = ExtResource("5_3u5ui")
-Texts = Array[ExtResource("3_3tnlt")]([SubResource("Resource_75xed"), SubResource("Resource_w4a3y"), SubResource("Resource_8modh"), SubResource("Resource_rodxh"), SubResource("Resource_d0k2a"), SubResource("Resource_eb2xw")])
-Options = Array[ExtResource("1_x2bkw")]([SubResource("Resource_qsgoq"), SubResource("Resource_w685b")])
+[sub_resource type="Resource" id="Resource_mvsi8"]
+script = ExtResource("1")
+Texts = Array[ExtResource("3")]([SubResource("Resource_4adfd"), SubResource("Resource_a16u1"), SubResource("Resource_ung8y"), SubResource("Resource_hvg8t"), SubResource("Resource_3futu"), SubResource("Resource_7qw1y"), SubResource("Resource_c34te"), SubResource("Resource_0k3fm")])
+Options = Array[ExtResource("2")]([SubResource("Resource_uojx1"), SubResource("Resource_mi20c")])
 
 [resource]
-script = ExtResource("5_eghih")
+script = ExtResource("7")
 HappeningName = "The Machine"
-Stages = Array[ExtResource("5_3u5ui")]([SubResource("Resource_6f5ue")])
+Stages = Array[ExtResource("1")]([SubResource("Resource_mvsi8")])
 HappeningAppearance = 1
 Special = true
 CrewRecruit = true

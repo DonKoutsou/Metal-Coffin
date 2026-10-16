@@ -18,12 +18,12 @@ signal SquadElintRangeChanged
 func AddCaptain(Cpt : Captain, _Notify : bool = true) -> MapShip:
 	InventoryManager.GetInstance().PlayerWallet.AddFunds(Cpt.ProvidingFunds)
 	var ship = (load(Ship_Scene) as PackedScene).instantiate() as MapShip
-	ship.Cpt = Cpt
+	ship.Cpt = Cpt.duplicate(true)
 	AddShip(ship, false) 
 	
 	for Crew in Cpt.ProvidingCaptains:
 		var NewShip = (load(Ship_Scene) as PackedScene).instantiate() as MapShip
-		NewShip.Cpt = Crew
+		NewShip.Cpt = Crew.duplicate(true)
 		AddShip(NewShip, false)
 	return ship
 

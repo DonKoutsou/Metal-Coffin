@@ -185,7 +185,9 @@ func BoxSelected(Box : Inventory_Box_Res, OwnerInventory : CharacterInventory) -
 	#if (cpt.CurrentPort != ""):
 		#var cit = GetCity(cpt.CurrentPort)
 		#HasUp = cit.HasUpgrade()
-	var HasUp = controller.CurrentPort.HasUpgrade()
+	var HasUp : bool = false
+	if (controller.CurrentPort):
+		HasUp = controller.CurrentPort.HasUpgrade()
 	CurrentDesc.SetData(Box, false, Box.GetContainedItem().CanTransfer, false, false, true, HasUp)
 	#Descriptor.connect("ItemUsed", UseItem)
 	CurrentDesc.ItemUpgraded.connect(OwnerInventory.UpgradeItem)
