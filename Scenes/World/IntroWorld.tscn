@@ -16,7 +16,7 @@
 
 [sub_resource type="Resource" id="Resource_qs546"]
 script = ExtResource("21_h18kb")
-list = Array[String](["uid://b2cbd58y7piwy", "uid://cpj4icaudta0f", "uid://bwwb3anxj624k", "uid://c5n56ywx45ilm", "uid://cxkj2k4llta37", "uid://bcorxmnws22bw", "uid://dr3ro5kl2ebvq", "uid://c3kr3kcdnvesc"])
+list = Array[String](["uid://b2cbd58y7piwy", "uid://cpj4icaudta0f", "uid://bwwb3anxj624k", "uid://c5n56ywx45ilm", "uid://cxkj2k4llta37", "uid://bcorxmnws22bw", "uid://dr3ro5kl2ebvq", "uid://brda1d347wxjv"])
 metadata/_custom_type_script = "uid://bqhtiqcy7irvm"
 
 [sub_resource type="Resource" id="Resource_41ig8"]

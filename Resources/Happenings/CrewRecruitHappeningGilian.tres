@@ -1,39 +1,39 @@
-[gd_resource type="Resource" script_class="Happening" format=3]
+[gd_resource type="Resource" script_class="Happening" format=3 uid="uid://brda1d347wxjv"]
 
-[ext_resource type="Script" path="res://MetalEngineBase/Happenings/HappeningStage.gd" id="1"]
-[ext_resource type="Script" path="res://MetalEngineBase/Happenings/HappeningOption.gd" id="2"]
-[ext_resource type="Script" path="res://MetalEngineBase/Happenings/HappeningText.gd" id="3"]
-[ext_resource type="Resource" path="res://Resources/Captains/PlayerCaptains/Gilian.tres" id="5_c131y"]
-[ext_resource type="Script" path="res://MetalEngineBase/Happenings/StringHappeningOption.gd" id="6"]
-[ext_resource type="Script" path="res://MetalEngineBase/Happenings/DroneHappeningOption.gd" id="6_bpru2"]
-[ext_resource type="Script" path="res://MetalEngineBase/Happenings/Happening.gd" id="7"]
+[ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://MetalEngineBase/Happenings/HappeningStage.gd" id="1"]
+[ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://MetalEngineBase/Happenings/HappeningOption.gd" id="2"]
+[ext_resource type="Script" uid="uid://ii12ceb6fgif" path="res://MetalEngineBase/Happenings/StringHappeningOption.gd" id="3"]
+[ext_resource type="Script" uid="uid://cj6lgkawdqkd8" path="res://MetalEngineBase/Happenings/HappeningText.gd" id="4"]
+[ext_resource type="Resource" uid="uid://c75as8yglsqcy" path="res://Resources/Captains/PlayerCaptains/Gilian.tres" id="5"]
+[ext_resource type="Script" uid="uid://w3pbagqwci26" path="res://MetalEngineBase/Happenings/DroneHappeningOption.gd" id="6"]
+[ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://MetalEngineBase/Happenings/Happening.gd" id="7"]
 
 [sub_resource type="Resource" id="Resource_c131y"]
-script = ExtResource("6")
+script = ExtResource("3")
 StringReply = "You take your leave..."
 OptionName = "Leave"
 
 [sub_resource type="Resource" id="Resource_bpru2"]
-script = ExtResource("3")
+script = ExtResource("4")
 Text = "The machine mumbles their name [color=#ffc315]\"Gilian\"[/color]...
 It bows its head and returns to their ship, your new comrade is ready for war!"
 Pic = "res://Assets/CaptainPortraits/Captain5.png"
 
 [sub_resource type="Resource" id="Resource_tx7ye"]
 script = ExtResource("1")
-Texts = Array[ExtResource("3")]([SubResource("Resource_bpru2")])
+Texts = Array[ExtResource("4")]([SubResource("Resource_bpru2")])
 
 [sub_resource type="Resource" id="Resource_m3ffl"]
-script = ExtResource("3")
+script = ExtResource("4")
 Text = "The machine gives you a long look and departs without shaying a word..."
 
 [sub_resource type="Resource" id="Resource_v4hq8"]
 script = ExtResource("1")
-Texts = Array[ExtResource("3")]([SubResource("Resource_m3ffl")])
+Texts = Array[ExtResource("4")]([SubResource("Resource_m3ffl")])
 
 [sub_resource type="Resource" id="Resource_ohb7t"]
-script = ExtResource("6_bpru2")
-Cpt = ExtResource("5_c131y")
+script = ExtResource("6")
+Cpt = ExtResource("5")
 StringReply = "You ask the machine to join your campaign. You share your dreams and aspirations hoping to persuade it."
 OptionName = "Ask the machine to join you"
 Branch = SubResource("Resource_tx7ye")
@@ -45,17 +45,17 @@ CheckDifficulty = 5
 WorldViewFailBranch = SubResource("Resource_v4hq8")
 
 [sub_resource type="Resource" id="Resource_wt2mo"]
-script = ExtResource("3")
+script = ExtResource("4")
 Text = "You sense a fighting spirit in this machine. It would make for a great ally."
 Pic = "res://Assets/CaptainPortraits/Captain5.png"
 
 [sub_resource type="Resource" id="Resource_4q6l4"]
 script = ExtResource("1")
-Texts = Array[ExtResource("3")]([SubResource("Resource_wt2mo")])
+Texts = Array[ExtResource("4")]([SubResource("Resource_wt2mo")])
 Options = Array[ExtResource("2")]([SubResource("Resource_c131y"), SubResource("Resource_ohb7t")])
 
 [sub_resource type="Resource" id="Resource_uojx1"]
-script = ExtResource("6")
+script = ExtResource("3")
 StringReply = "The machine is unfased, its as if it never heard you."
 OptionName = "Do you recognise me machine?"
 Branch = SubResource("Resource_4q6l4")
@@ -63,7 +63,7 @@ WorldviewEffect = 5
 WorldviewEffectAmm = -5
 
 [sub_resource type="Resource" id="Resource_mi20c"]
-script = ExtResource("6")
+script = ExtResource("3")
 StringReply = "[color=#ffc315]Your kind has sufferend for too long... from my side as a human you have my humblest apologie...[/color][p]The machine bows its head, it seems to accept your apology.
 "
 OptionName = "Bow your head..."
@@ -72,42 +72,42 @@ WorldviewEffect = 5
 WorldviewEffectAmm = 5
 
 [sub_resource type="Resource" id="Resource_4adfd"]
-script = ExtResource("3")
+script = ExtResource("4")
 Text = "The winds are crashing hard on your ship while you wait for the gates to open. Slowly more and more light is starting to shine through through them."
 
 [sub_resource type="Resource" id="Resource_a16u1"]
-script = ExtResource("3")
+script = ExtResource("4")
 Text = "While aproaching the port you notice another ship just about comming down at the same time."
 
 [sub_resource type="Resource" id="Resource_ung8y"]
-script = ExtResource("3")
+script = ExtResource("4")
 Text = "The ship's not very far from your location. An officer takes a good look at them, probably to make sure they dont pose any threat to you."
 
 [sub_resource type="Resource" id="Resource_hvg8t"]
-script = ExtResource("3")
+script = ExtResource("4")
 Text = "After taking a good look though his binoculars he smirks and turns away. You ask him about what he saw."
 
 [sub_resource type="Resource" id="Resource_3futu"]
-script = ExtResource("3")
+script = ExtResource("4")
 Text = "[color=#ffc315]\"The ship surprisingly has no weapons on it. You would think a ship traversing the land at these time would have at least the minumim of deffences.\"[/color]"
 
 [sub_resource type="Resource" id="Resource_7qw1y"]
-script = ExtResource("3")
+script = ExtResource("4")
 Text = "The officer turns your atention to the ship's captain stepping out of the ship..."
 
 [sub_resource type="Resource" id="Resource_c34te"]
-script = ExtResource("3")
+script = ExtResource("4")
 Text = "Its one of the machines, it all starts to make sense slowly."
 Pic = "res://Assets/CaptainPortraits/Captain5.png"
 
 [sub_resource type="Resource" id="Resource_0k3fm"]
-script = ExtResource("3")
+script = ExtResource("4")
 Text = "The machine is surprised to see you but after realising who you are you can see it lowers its guard."
 Pic = "res://Assets/CaptainPortraits/Captain5.png"
 
 [sub_resource type="Resource" id="Resource_mvsi8"]
 script = ExtResource("1")
-Texts = Array[ExtResource("3")]([SubResource("Resource_4adfd"), SubResource("Resource_a16u1"), SubResource("Resource_ung8y"), SubResource("Resource_hvg8t"), SubResource("Resource_3futu"), SubResource("Resource_7qw1y"), SubResource("Resource_c34te"), SubResource("Resource_0k3fm")])
+Texts = Array[ExtResource("4")]([SubResource("Resource_4adfd"), SubResource("Resource_a16u1"), SubResource("Resource_ung8y"), SubResource("Resource_hvg8t"), SubResource("Resource_3futu"), SubResource("Resource_7qw1y"), SubResource("Resource_c34te"), SubResource("Resource_0k3fm")])
 Options = Array[ExtResource("2")]([SubResource("Resource_uojx1"), SubResource("Resource_mi20c")])
 
 [resource]
