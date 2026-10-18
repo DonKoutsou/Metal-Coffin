@@ -73,31 +73,6 @@ func _ready() -> void:
 	else:
 		print("Failed to access path. Check permissions.")
 	
-	var modDir : DirAccess = DirAccess.open(GetModLoc())
-	modDir.list_dir_begin()
-	var file_name = modDir.get_next()
-	while file_name != "":
-		var l = ProjectSettings.load_resource_pack(GetModLoc() + "/" + file_name)
-		if (l):
-			print("{0} Mod Loaded".format([file_name.get_file()]))
-		else:
-			print("Failed to load {0} Mod".format([file_name.get_file()]))
-		
-		file_name = modDir.get_next()
-	
-	#var h = load("res://Resources/Happenings/CardiPrince.tres")
-	#print(h)
-	#return
-	
-	LoadSavedSettings()
-	get_viewport().disable_3d = true
-	TranslationServer.set_locale("english")
-
-	#var siz =  DisplayServer.screen_get_size()
-	#siz.x = min(siz.x, 1920)
-	#siz.y = min(siz.y, 1080)
-	#DitherShader.set_shader_parameter("ScreenSize",siz)
-	#print("Screen Size = {0}".format([siz]))
 	if (OS.get_name() == "Windows"):
 		Steam.steamInit()
 		var IsRunning = Steam.isSteamRunning()
@@ -111,8 +86,70 @@ func _ready() -> void:
 			CommandLine.AddText("Username : " + str(n))
 			AchievementManager.GetInstance().SteamRunning = true
 			CommandLine.AddText("Achievement Tracking Enabled")
-			
+	
+	var modDir : DirAccess = DirAccess.open(GetModLoc())
+	modDir.list_dir_begin()
+	var file_name = modDir.get_next()
+	while file_name != "":
+		var l = ProjectSettings.load_resource_pack(GetModLoc() + "/" + file_name)
+		if (l):
+			print("Loaded mod: {0}".format([file_name.get_file()]))
+		else:
+			print("Failed to load mod: {0}".format([file_name.get_file()]))
+		
+		file_name = modDir.get_next()
+	
+	load_all_workshop_mods()
+	#var h = load("res://Resources/Happenings/CardiPrince.tres")
+	#print(h)
+	#return
+	
+	LoadSavedSettings()
+	get_viewport().disable_3d = true
+	TranslationServer.set_locale("english")
+
+	#var siz =  DisplayServer.screen_get_size()
+	#siz.x = min(siz.x, 1920)
+	#siz.y = min(siz.y, 1080)
+	#DitherShader.set_shader_parameter("ScreenSize",siz)
+	#print("Screen Size = {0}".format([siz]))
+	
 	await Start()
+
+func load_all_workshop_mods() -> void:
+	var subscribed_ids = Steam.getSubscribedItems()
+
+	for mod_id in subscribed_ids:
+		var info: Dictionary = Steam.getItemInstallInfo(mod_id)
+
+		# Skip mods that aren't installed yet.
+		if not info.get("ret", false):
+			continue
+
+		var mod_dir: String = info.get("folder", "")
+		if mod_dir.is_empty():
+			continue
+
+		# Find PCK files in this mod's folder.
+		var dir := DirAccess.open(mod_dir)
+		if dir == null:
+			continue
+
+		dir.list_dir_begin()
+		var file_name := dir.get_next()
+
+		while file_name != "":
+			if not dir.current_is_dir() and file_name.ends_with(".pck"):
+				var pck_path := mod_dir.path_join(file_name)
+
+				if ProjectSettings.load_resource_pack(pck_path):
+					print("Loaded mod: ", file_name)
+				else:
+					push_warning("Failed to load mod: " + pck_path)
+
+			file_name = dir.get_next()
+
+		dir.list_dir_end()
 
 #-----------------------------------------------------------------------------------
 func Start() -> void:

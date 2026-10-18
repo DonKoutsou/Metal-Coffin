@@ -116,13 +116,14 @@ func UndockShip(Ship : MapShip):
 	Ship.OnShipDestroyed.disconnect(DroneDischarged)
 	Ship.SonarRangeChanged.disconnect(OnSonarRangeChanged)
 	Ship.ElintRangeChanged.disconnect(OnElintRangeChanged)
-
+	Ship.ToggleDocked(false)
+	
 	var docks = $DroneSpots.get_children()
 	for g in docks:
 		var trans = g as RemoteTransform2D
 		if (trans.remote_path == Ship.get_path()):
 			trans.free()
-			Ship.ToggleDocked(false)
+			
 			break
 	RepositionDocks()
 

@@ -831,7 +831,7 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 	
 	var actionLog : PackedStringArray
 	
-	while (AvailableActions.size() > 0):
+	while (AvailableActions.size() > 0 and !GameOver):
 		var randomActionIndex : int = Rand.InstanceRandom.RandIRange(0, AvailableActions.size() -1)
 		var Action : CardStats = AvailableActions[randomActionIndex]
 		
@@ -1592,11 +1592,15 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats, _targetOverride : B
 					Targets.append(Target)
 				SelectingTarget = false
 			else:
-				Targets.append(GetBestTargetForAtack(EnemyTeam, Mod))
+				var t = GetBestTargetForAtack(EnemyTeam, Mod)
+				if (t):
+					Targets.append(t)
 	
 	return Targets
 ##----------------------------------------------------------------------##
 func GetBestTargetForAtack(Candidates : Array[BattleShipStats], attack : CardModule) -> BattleShipStats:
+	if (Candidates.size() == 0):
+		return null
 	#find the ship with bigger firepower
 	var biggestAttack : float = 0
 	for g in Candidates:

@@ -367,8 +367,12 @@ func AddTargetLocation(pos : Vector2) -> void:
 	TargetLocations.append(pos)
 
 func AddTargetShip(Target : MapShip) -> void:
+	if (Target == self):
+		PopUpManager.GetInstance().DoFadeNotif("Can't regroup with self")
+		return
 	if (Target is PlayerDrivenShip):
 		Regroup(Target)
+		PopUpManager.GetInstance().DoFadeNotif("Merging fleets")
 	else:
 		if (CommingBack):
 			CommingBack = false
@@ -377,6 +381,7 @@ func AddTargetShip(Target : MapShip) -> void:
 		TargetShip = Target
 		TargetShipPos = IntersectShip(TargetShip)
 		Target.OnShipDestroyed.connect(TargetShipDestroyed)
+		PopUpManager.GetInstance().DoFadeNotif("Setting Intercepting Course")
 
 func ClearTargetShip() -> void:
 	if (TargetShip != null):

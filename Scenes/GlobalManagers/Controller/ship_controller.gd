@@ -197,7 +197,6 @@ func OnShipDestroyed(Sh : PlayerDrivenShip):
 		if (Sh.GetDock().GetDockedShips().size() > 0):
 			NewCommander = Sh.GetDock().GetDockedShips()[0]
 			Sh.GetDock().UndockShip(NewCommander)
-			NewCommander.Command = null
 			NewCommander.TargetLocations = Sh.TargetLocations
 			NewCommander.TargetShip = Sh.TargetShip
 

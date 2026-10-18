@@ -385,7 +385,19 @@ func Kill() -> void:
 	InventoryManager.GetInstance().OnCharacterRemoved(Cpt)
 	OnShipDestroyed.emit(self)
 	queue_free()
+	
+	#var docked = GetDock().GetDockedShips()
+	#if (docked > 0):
+		#var newCommander : MapShip = docked.pop_front()
+		#newCommander.Command = null
+		#GetDock().UndockShip(newCommander)
+		#for g in docked:
+			#GetDock().UndockShip(g)
+			#newCommander.GetDock().DockShip(g)
+	
 	get_parent().remove_child(self)
+	
+	
 	if (CurrentPort != null):
 		CurrentPort.OnSpotDeparture(self)
 
