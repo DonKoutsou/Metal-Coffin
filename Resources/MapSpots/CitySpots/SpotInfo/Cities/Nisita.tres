@@ -10,3 +10,4 @@ SpotName = "Nisita"
 Region = 2
 EnemyCity = true
 PossibleDrops = Array[ExtResource("1_68sk7")]([ExtResource("2_p20qu")])
+PossibleServices = Array[int]([1])

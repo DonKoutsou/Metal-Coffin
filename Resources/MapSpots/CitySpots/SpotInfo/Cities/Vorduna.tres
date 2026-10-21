@@ -10,3 +10,4 @@ SpotName = "Vorduna"
 Region = 1
 EnemyCity = true
 PossibleDrops = Array[ExtResource("1_56lqd")]([ExtResource("2_wbhte")])
+PossibleServices = Array[int]([1])

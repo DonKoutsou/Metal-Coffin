@@ -73,6 +73,18 @@ func _ready() -> void:
 	else:
 		print("Failed to access path. Check permissions.")
 	
+	var modDir : DirAccess = DirAccess.open(GetModLoc())
+	modDir.list_dir_begin()
+	var file_name = modDir.get_next()
+	while file_name != "":
+		var l = ProjectSettings.load_resource_pack(GetModLoc() + "/" + file_name)
+		if (l):
+			CommandLine.AddText("Loaded mod: {0}".format([file_name.get_file()]))
+		else:
+			CommandLine.AddErr("Failed to load mod: {0}".format([file_name.get_file()]))
+		
+		file_name = modDir.get_next()
+		
 	if (OS.get_name() == "Windows"):
 		Steam.steamInit()
 		var IsRunning = Steam.isSteamRunning()
@@ -86,20 +98,10 @@ func _ready() -> void:
 			CommandLine.AddText("Username : " + str(n))
 			AchievementManager.GetInstance().SteamRunning = true
 			CommandLine.AddText("Achievement Tracking Enabled")
-	
-	var modDir : DirAccess = DirAccess.open(GetModLoc())
-	modDir.list_dir_begin()
-	var file_name = modDir.get_next()
-	while file_name != "":
-		var l = ProjectSettings.load_resource_pack(GetModLoc() + "/" + file_name)
-		if (l):
-			print("Loaded mod: {0}".format([file_name.get_file()]))
-		else:
-			print("Failed to load mod: {0}".format([file_name.get_file()]))
+			
+			load_all_workshop_mods()
+			CommandLine.AddText("Loaded Workshop Mods")
 		
-		file_name = modDir.get_next()
-	
-	load_all_workshop_mods()
 	#var h = load("res://Resources/Happenings/CardiPrince.tres")
 	#print(h)
 	#return
@@ -143,9 +145,9 @@ func load_all_workshop_mods() -> void:
 				var pck_path := mod_dir.path_join(file_name)
 
 				if ProjectSettings.load_resource_pack(pck_path):
-					print("Loaded mod: ", file_name)
+					CommandLine.AddText("Loaded mod: {0}".format([file_name]))
 				else:
-					push_warning("Failed to load mod: " + pck_path)
+					CommandLine.AddErr("Failed to load mod: {0}".format([pck_path]))
 
 			file_name = dir.get_next()
 

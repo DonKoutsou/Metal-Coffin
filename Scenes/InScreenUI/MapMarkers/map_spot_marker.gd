@@ -34,14 +34,14 @@ func SetMarkerDetails(Spot : MapSpot, PlayAnim : bool):
 	
 	call_deferred("SetSize", Spot)
 	
-	if (Spot.PossibleDrops.size() == 0):
+	if (Spot.PossibleServices.size() == 0):
 		print(Spot.GetSpotName() + " has no drops")
-	for g in Spot.PossibleDrops:
+	for g in Spot.PossibleServices:
 		var text = TextureRect.new()
 		text.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		text.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		text.custom_minimum_size = Vector2(18,18)
-		text.texture = g.ItemIcon
+		text.texture = ResourceLoader.load(MapSpotCompleteInfo.SERVICE_ICONS[g])
 		#text.modulate.a = 0.3
 		text.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		#SpotNameLabel.modulate.a = 0.3

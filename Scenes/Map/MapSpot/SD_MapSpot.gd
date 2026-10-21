@@ -13,7 +13,7 @@ class_name  MapSpotSaveData
 @export var SpotName : String
 @export var Region : MapSpotCompleteInfo.REGIONS
 @export var EnemyCity : bool = false
-@export var PossibleDrops : Array[Item]
+@export var PossibleServices: Array[MapSpotCompleteInfo.SERVICES]
 #@export var EnemyCity : bool
 #@export var PossibleDrops : Array[Item]
 @export var SpotInfo : MapSpotCompleteInfo

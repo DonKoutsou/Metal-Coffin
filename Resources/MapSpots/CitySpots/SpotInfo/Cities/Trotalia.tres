@@ -10,3 +10,4 @@ SpotName = "Trotalia"
 Region = 1
 EnemyCity = true
 PossibleDrops = Array[ExtResource("1_u0hqa")]([ExtResource("2_kxtac")])
+PossibleServices = Array[int]([1])

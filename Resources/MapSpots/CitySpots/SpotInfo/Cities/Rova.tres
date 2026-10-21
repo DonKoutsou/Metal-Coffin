@@ -10,3 +10,4 @@ SpotName = "Rova"
 Region = 1
 EnemyCity = true
 PossibleDrops = Array[ExtResource("1_qcwkr")]([ExtResource("2_vgme0")])
+PossibleServices = Array[int]([3])

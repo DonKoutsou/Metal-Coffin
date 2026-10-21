@@ -13,3 +13,4 @@ SpotName = "Cirkari"
 Region = 1
 EnemyCity = true
 PossibleDrops = Array[ExtResource("4_wlpxv")]([ExtResource("5_50l7f"), ExtResource("6_36t7x"), ExtResource("7_gc4lx"), ExtResource("5_me4ss")])
+PossibleServices = Array[int]([0, 1, 2, 3])

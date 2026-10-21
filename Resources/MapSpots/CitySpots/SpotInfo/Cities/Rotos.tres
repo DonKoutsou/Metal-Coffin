@@ -9,3 +9,4 @@ script = ExtResource("1_cpbqy")
 SpotName = "Rotos"
 EnemyCity = true
 PossibleDrops = Array[ExtResource("2_qmcv0")]([ExtResource("3_qmcv0")])
+PossibleServices = Array[int]([3])

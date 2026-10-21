@@ -10,3 +10,4 @@ SpotName = "Krasty"
 Region = 1
 EnemyCity = true
 PossibleDrops = Array[ExtResource("2_u3p7l")]([ExtResource("3_u3p7l")])
+PossibleServices = Array[int]([3])

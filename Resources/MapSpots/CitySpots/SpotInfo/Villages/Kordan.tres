@@ -8,3 +8,4 @@
 script = ExtResource("1_tkf35")
 SpotName = "Kordan"
 PossibleDrops = Array[ExtResource("1_hpc2o")]([ExtResource("2_4uvgl")])
+PossibleServices = Array[int]([0])

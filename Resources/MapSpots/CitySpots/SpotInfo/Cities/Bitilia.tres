@@ -10,3 +10,4 @@ SpotName = "Bitilia"
 Region = 1
 EnemyCity = true
 PossibleDrops = Array[ExtResource("1_y7cwe")]([ExtResource("2_jwgua")])
+PossibleServices = Array[int]([3])

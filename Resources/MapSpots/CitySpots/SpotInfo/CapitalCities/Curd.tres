@@ -13,3 +13,4 @@ SpotName = "Curd"
 Region = 2
 EnemyCity = true
 PossibleDrops = Array[ExtResource("4_h6aeu")]([ExtResource("5_yr5w5"), ExtResource("6_pxiw7"), ExtResource("7_7jqsr"), ExtResource("5_w3bdc")])
+PossibleServices = Array[int]([0, 1, 2, 3])

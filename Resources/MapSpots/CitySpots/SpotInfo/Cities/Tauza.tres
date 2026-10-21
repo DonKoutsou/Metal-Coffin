@@ -10,3 +10,4 @@ SpotName = "Tauza"
 Region = 2
 EnemyCity = true
 PossibleDrops = Array[ExtResource("1_ilmb3")]([ExtResource("2_vmvcf")])
+PossibleServices = Array[int]([2])

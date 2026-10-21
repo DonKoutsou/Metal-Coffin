@@ -13,3 +13,4 @@ SpotName = "Kalicard"
 Region = 2
 EnemyCity = true
 PossibleDrops = Array[ExtResource("3_h6c6e")]([ExtResource("4_3jnnw"), ExtResource("5_0c6oi"), ExtResource("6_k2gyf"), ExtResource("5_woxkd")])
+PossibleServices = Array[int]([0, 1, 2, 3])

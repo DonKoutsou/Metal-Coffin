@@ -10,3 +10,4 @@ SpotName = "Tsard"
 Region = 1
 EnemyCity = true
 PossibleDrops = Array[ExtResource("2_e67pm")]([ExtResource("3_synvh")])
+PossibleServices = Array[int]([0])

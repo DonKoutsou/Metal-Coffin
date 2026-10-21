@@ -9,3 +9,4 @@ script = ExtResource("2_xa4ci")
 SpotName = "Kartra"
 EnemyCity = true
 PossibleDrops = Array[ExtResource("1_asrd1")]([ExtResource("3_jrc07")])
+PossibleServices = Array[int]([3])

@@ -9,3 +9,4 @@ script = ExtResource("2_eytgd")
 SpotName = "Armak"
 Region = 2
 PossibleDrops = Array[ExtResource("2_vytmo")]([ExtResource("3_o7gig")])
+PossibleServices = Array[int]([0])

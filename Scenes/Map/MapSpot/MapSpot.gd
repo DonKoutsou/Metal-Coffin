@@ -18,7 +18,8 @@ var SpotName : String
 var Region : MapSpotCompleteInfo.REGIONS
 #@export var Event : Happening
 var EnemyCity : bool = false
-var PossibleDrops : Array[Item]
+#var PossibleDrops : Array[Item]
+var PossibleServices : Array[MapSpotCompleteInfo.SERVICES]
 
 ##files
 var Merch : Dictionary[String, int] = {}
@@ -86,7 +87,7 @@ func SetSpotData(Type : MapSpotType, Data : MapSpotCustomData_CompleteInfo) -> v
 		SpotName = z.SpotName
 		Region = z.Region
 		EnemyCity = z.EnemyCity
-		PossibleDrops = z.PossibleDrops
+		PossibleServices = z.PossibleServices
 
 		if (EnemyCity):
 			add_to_group("EnemyDestinations")
@@ -120,45 +121,23 @@ func GetSpotName() -> String:
 ############SERVICES#####################
 #---------------------------------------------------------
 func GetPossibleDrops() -> Array:
-	return PossibleDrops
+	return PossibleServices
 
 #---------------------------------------------------------
 func HasFuel() -> bool:
-	var hasf = false
-	
-	for g in PossibleDrops:
-		if g is UsableItem and g.StatUseName == STAT_CONST.STATS.FUEL_TANK:
-			hasf = true
-			break
-	
-	return hasf
+	return PossibleServices.has(MapSpotCompleteInfo.SERVICES.FUEL)
 	
 #---------------------------------------------------------
 func HasRepair() -> bool:
-	var hasf = false
-	for g in PossibleDrops:
-		if g is UsableItem and g.StatUseName == STAT_CONST.STATS.HULL:
-			hasf = true
-			break
-	return hasf
+	return PossibleServices.has(MapSpotCompleteInfo.SERVICES.REPAIR)
 	
 #---------------------------------------------------------
 func HasUpgrade() -> bool:
-	var hasu = false
-	for g in PossibleDrops:
-		if g.GetItemName() == "Material":
-			hasu = true
-			break
-	return hasu
+	return PossibleServices.has(MapSpotCompleteInfo.SERVICES.SHOP)
 
 #---------------------------------------------------------
 func HasRecruit() -> bool:
-	var hasr = false
-	for g in PossibleDrops:
-		if g.GetItemName() == "Recruitment":
-			hasr = true
-			break
-	return hasr
+	return PossibleServices.has(MapSpotCompleteInfo.SERVICES.RECRUIT)
 	
 #//////////////////////////////////////////////////////////////////
 #---------------------------------------------------------
@@ -271,7 +250,7 @@ func GetSaveData() -> Resource:
 	datas.SpotName =SpotName
 	datas.Region = Region
 	datas.EnemyCity = EnemyCity
-	datas.PossibleDrops = PossibleDrops
+	datas.PossibleServices = PossibleServices
 	datas.AlarmRaised = AlarmRaised
 	datas.AlarmProgress = AlarmProgress
 	datas.Merch = Merch
@@ -291,7 +270,7 @@ func LoadSaveData(datas : MapSpotSaveData) -> void:
 	SpotName = datas.SpotName
 	Region = datas.Region
 	EnemyCity = datas.EnemyCity
-	PossibleDrops = datas.PossibleDrops
+	PossibleServices = datas.PossibleServices
 	AlarmRaised = datas.AlarmRaised
 	AlarmProgress = datas.AlarmProgress
 	Merch = datas.Merch

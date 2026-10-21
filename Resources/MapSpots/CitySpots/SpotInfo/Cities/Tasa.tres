@@ -10,3 +10,4 @@ SpotName = "Tasa"
 Region = 2
 EnemyCity = true
 PossibleDrops = Array[ExtResource("2_pgggp")]([ExtResource("3_pgggp")])
+PossibleServices = Array[int]([3])

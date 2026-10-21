@@ -10,3 +10,4 @@ SpotName = "Monpi"
 Region = 2
 EnemyCity = true
 PossibleDrops = Array[ExtResource("2_kl2m0")]([ExtResource("3_kl2m0")])
+PossibleServices = Array[int]([3])

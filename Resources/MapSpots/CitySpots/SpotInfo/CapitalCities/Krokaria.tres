@@ -13,3 +13,4 @@ SpotName = "Krokaria"
 Region = 2
 EnemyCity = true
 PossibleDrops = Array[ExtResource("3_wykv5")]([ExtResource("4_xi5bn"), ExtResource("5_33fax"), ExtResource("6_l7vk7"), ExtResource("5_lw67w")])
+PossibleServices = Array[int]([0, 1, 2, 3])

@@ -10,3 +10,4 @@ SpotName = "Lakadi"
 Region = 1
 EnemyCity = true
 PossibleDrops = Array[ExtResource("1_72r43")]([ExtResource("2_fnhcf")])
+PossibleServices = Array[int]([2])

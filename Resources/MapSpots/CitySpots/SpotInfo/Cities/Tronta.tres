@@ -10,3 +10,4 @@ SpotName = "Tronta"
 Region = 2
 EnemyCity = true
 PossibleDrops = Array[ExtResource("1_7hbpv")]([ExtResource("2_k7bca")])
+PossibleServices = Array[int]([3])

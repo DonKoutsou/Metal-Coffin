@@ -9,3 +9,4 @@ script = ExtResource("2_7vwqj")
 SpotName = "Azimva"
 EnemyCity = true
 PossibleDrops = Array[ExtResource("2_u3weo")]([ExtResource("3_654ur")])
+PossibleServices = Array[int]([3])
