@@ -1,7 +1,5 @@
 [gd_resource type="Resource" script_class="MapSpotCompleteInfo" format=3 uid="uid://dd8qwufafqdn8"]
 
-[ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://MetalEngineBase/Inventory/Scripts/Item.gd" id="1_asnb0"]
-[ext_resource type="Resource" uid="uid://cf3nxx0s2bsn5" path="res://Resources/Items/Supply.tres" id="2_jfepl"]
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scenes/Map/MapSpot/MapSpotCompleteInfo.gd" id="3_7vmlk"]
 
 [resource]
@@ -9,5 +7,4 @@ script = ExtResource("3_7vmlk")
 SpotName = "Karit"
 Region = 2
 EnemyCity = true
-PossibleDrops = Array[ExtResource("1_asnb0")]([ExtResource("2_jfepl")])
 PossibleServices = Array[int]([1])

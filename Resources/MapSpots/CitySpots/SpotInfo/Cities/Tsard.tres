@@ -1,13 +1,10 @@
 [gd_resource type="Resource" script_class="MapSpotCompleteInfo" format=3 uid="uid://cymxwbov1pdsm"]
 
-[ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://MetalEngineBase/Inventory/Scripts/Item.gd" id="2_e67pm"]
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scenes/Map/MapSpot/MapSpotCompleteInfo.gd" id="2_p81b1"]
-[ext_resource type="Resource" uid="uid://c62pqy44otdor" path="res://Resources/Items/Radioactive.tres" id="3_synvh"]
 
 [resource]
 script = ExtResource("2_p81b1")
 SpotName = "Tsard"
 Region = 1
 EnemyCity = true
-PossibleDrops = Array[ExtResource("2_e67pm")]([ExtResource("3_synvh")])
 PossibleServices = Array[int]([0])

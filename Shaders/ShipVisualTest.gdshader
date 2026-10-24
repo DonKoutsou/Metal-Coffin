@@ -4,8 +4,14 @@ uniform float ShipSize : hint_range(0.001, 1.0) = 0.08;
 //uniform float shadow_strength : hint_range(0.0, 1.0) = 0.15;
 uniform float shadow_parallax_amount : hint_range(0.0, 5.0) = 0.5;
 
+
+uniform sampler2D palette_texture : filter_nearest, repeat_disable;
+
 // Must be set from GDScript with sprite's rotation (in radians)
 uniform float sprite_rotation = 0.0;
+//uniform int palette_index : hint_range(0, 15) = 1;
+//uniform float color_T = 0.0;
+//const int PALETTE_SIZE = 9;
 
 vec2 rotate(vec2 v, float angle) {
 	float c = cos(angle);
@@ -50,6 +56,22 @@ void fragment() {
 	vec4 Ship = sample_texture_no_extend(TEXTURE, shadow_uv);
 	vec4 ShadowSource = sample_texture_no_extend(TEXTURE, base_uv);
 	vec4 Shadow = vec4(0.0, 0.0, 0.0, ShadowSource.a * 0.5);
+	/*
+	for (int i = 0; i < PALETTE_SIZE; i++) {
+        // Sample the center of each palette pixel.
+        float x = (float(i) + 0.5) / float(PALETTE_SIZE);
 
+        vec3 original_color = texture(palette_texture,vec2(x, 0.5 / float(textureSize(palette_texture, 0).y))).rgb;
+
+        if (abs(Ship.r - original_color.r) <= color_T) {
+            float y = (float(palette_index) + 0.5) / float(textureSize(palette_texture, 0).y);
+
+            vec3 replacement_color = texture(palette_texture,vec2(x, y)).rgb;
+			
+			Ship = vec4(replacement_color, Ship.a);
+            break;
+        }
+    }
+	*/
 	COLOR = mix(Shadow, Ship, Ship.a);
 }

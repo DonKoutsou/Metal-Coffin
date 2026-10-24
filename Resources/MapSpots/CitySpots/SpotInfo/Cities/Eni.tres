@@ -1,7 +1,5 @@
 [gd_resource type="Resource" script_class="MapSpotCompleteInfo" format=3 uid="uid://ctkprd5b88wnk"]
 
-[ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://MetalEngineBase/Inventory/Scripts/Item.gd" id="1_cxxrl"]
-[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="2_kxc4o"]
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scenes/Map/MapSpot/MapSpotCompleteInfo.gd" id="3_qkmen"]
 
 [resource]
@@ -9,5 +7,4 @@ script = ExtResource("3_qkmen")
 SpotName = "Eni"
 Region = 1
 EnemyCity = true
-PossibleDrops = Array[ExtResource("1_cxxrl")]([ExtResource("2_kxc4o")])
 PossibleServices = Array[int]([3])

@@ -8,6 +8,6 @@
 script = ExtResource("3_itrs3")
 WType = 4
 ItemName = "Hollow Ammo Magazine 180mm"
-MaxStackCount = 99
 CardProviding = Array[ExtResource("1_css3b")]([ExtResource("2_css3b")])
 Cost = 150
+MaxStackCount = 99

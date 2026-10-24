@@ -1,19 +1,19 @@
 [gd_resource type="Resource" script_class="CardStats" format=3 uid="uid://bihbbkeg0k2sc"]
 
-[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://MetalEngineBase/Cardfight/Card/Card_Modules/CardModule.gd" id="2_0cpai"]
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://MetalEngineBase/Cardfight/Card/CardStats.gd" id="3_7633t"]
-[ext_resource type="Script" uid="uid://civogvyka6amw" path="res://MetalEngineBase/Cardfight/Card/Card_Modules/FireExtinguishModule.gd" id="3_peqcn"]
+[ext_resource type="Script" uid="uid://bw3dl4f88d2ri" path="res://MetalEngineBase/Cardfight/Card/Card_Modules/CardModule.gd" id="1"]
+[ext_resource type="Script" uid="uid://civogvyka6amw" path="res://MetalEngineBase/Cardfight/Card/Card_Modules/FireExtinguishModule.gd" id="2"]
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://MetalEngineBase/Cardfight/Card/CardStats.gd" id="3"]
 
 [sub_resource type="Resource" id="Resource_gl0km"]
-script = ExtResource("3_peqcn")
+script = ExtResource("2")
 metadata/_custom_type_script = "uid://civogvyka6amw"
 
 [resource]
-script = ExtResource("3_7633t")
+script = ExtResource("3")
 txFile = "uid://p6qnpajpo06p"
 CardName = "Extinguish fires"
 Energy = 1
-OnUseModules = Array[ExtResource("2_0cpai")]([SubResource("Resource_gl0km")])
+OnUseModules = Array[ExtResource("1")]([SubResource("Resource_gl0km")])
 Type = 1
 UseConditions = Array[int]([10])
 AllowTier = false

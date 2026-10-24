@@ -1,41 +1,34 @@
 [gd_resource type="Resource" script_class="Happening" format=3 uid="uid://b8kumsjf70n22"]
 
-[ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://MetalEngineBase/Happenings/HappeningStage.gd" id="1_myfjk"]
-[ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://MetalEngineBase/Happenings/HappeningOption.gd" id="2_27cmu"]
-[ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://MetalEngineBase/Happenings/Happening.gd" id="3_57k1v"]
-[ext_resource type="Script" uid="uid://ccd5qmxeujy5i" path="res://MetalEngineBase/Happenings/RecruitLocatorHappeningOption.gd" id="3_ni65v"]
-[ext_resource type="Script" uid="uid://diwf2l5h75sxb" path="res://MetalEngineBase/Happenings/VillageLocatorHappeningOption.gd" id="4_31pqe"]
-[ext_resource type="Script" uid="uid://cj6lgkawdqkd8" path="res://MetalEngineBase/Happenings/HappeningText.gd" id="5_ni65v"]
+[ext_resource type="Script" uid="uid://d4i4t1fv5kyee" path="res://MetalEngineBase/Happenings/HappeningStage.gd" id="1"]
+[ext_resource type="Script" uid="uid://dambs06xmyhgk" path="res://MetalEngineBase/Happenings/HappeningOption.gd" id="2"]
+[ext_resource type="Script" uid="uid://cj6lgkawdqkd8" path="res://MetalEngineBase/Happenings/HappeningText.gd" id="3"]
+[ext_resource type="Script" uid="uid://dje5vrjyps8mt" path="res://MetalEngineBase/Happenings/Happening.gd" id="4"]
 
-[sub_resource type="Resource" id="Resource_c4s21"]
-script = ExtResource("3_ni65v")
-OptionName = "You ask them about possible recruits in nearby villages."
-FinishDiag = true
-metadata/_custom_type_script = "uid://ccd5qmxeujy5i"
+[sub_resource type="Resource" id="Resource_0muq5"]
+script = ExtResource("3")
+Text = "Reaching the city you are met with a very busy port. Within all the ruckous you catch a glimpse of a nomad group resting."
+Pic = ""
 
-[sub_resource type="Resource" id="Resource_ukikf"]
-script = ExtResource("4_31pqe")
-OptionName = "You ask them of any nearby rebel villages."
-FinishDiag = true
-metadata/_custom_type_script = "uid://diwf2l5h75sxb"
-
-[sub_resource type="Resource" id="Resource_ni65v"]
-script = ExtResource("5_ni65v")
-Text = "Reaching the city you are met with a verry busy port. Within all the ruckous you catch a glimpse of a nomad group resting."
-
-[sub_resource type="Resource" id="Resource_31pqe"]
-script = ExtResource("5_ni65v")
+[sub_resource type="Resource" id="Resource_gs2gd"]
+script = ExtResource("3")
 Text = "You make your way to them hoping to get some information of any nearby happenings."
+Pic = ""
 
-[sub_resource type="Resource" id="Resource_tahtp"]
-script = ExtResource("1_myfjk")
-Texts = Array[ExtResource("5_ni65v")]([SubResource("Resource_ni65v"), SubResource("Resource_31pqe")])
-Options = Array[ExtResource("2_27cmu")]([SubResource("Resource_c4s21"), SubResource("Resource_ukikf")])
+[sub_resource type="Resource" id="Resource_gvwcy"]
+script = ExtResource("1")
+Texts = Array[ExtResource("3")]([SubResource("Resource_0muq5"), SubResource("Resource_gs2gd")])
+Options = Array[ExtResource("2")]([])
 metadata/_custom_type_script = "uid://d4i4t1fv5kyee"
 
 [resource]
-script = ExtResource("3_57k1v")
+script = ExtResource("4")
 HappeningName = "The nomad group."
-Stages = Array[ExtResource("1_myfjk")]([SubResource("Resource_tahtp")])
+Stages = Array[ExtResource("1")]([SubResource("Resource_gvwcy")])
+StrayBranches = Array[ExtResource("1")]([])
+StrayOptions = Array[ExtResource("2")]([])
 HappeningAppearance = 5
+Special = false
+CrewRecruit = false
+MandatoryLocaiton = ""
 AllowedAppearances = 8

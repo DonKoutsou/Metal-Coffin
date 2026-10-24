@@ -68,8 +68,8 @@ resource_local_to_scene = true
 script = ExtResource("4_c6o7f")
 ItemName = "Fire Suppression Unit"
 ItemDesc = "A dependable propulsion unit, optimized for low-maintenance operation. Suitable for basic fleet configurations, it ensures reliable function under standard conditions."
-MaxStackCount = 99
 CardProviding = Array[ExtResource("11_mgcdj")]([ExtResource("12_8ng8e")])
+MaxStackCount = 99
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6g7se"]
 content_margin_left = 5.0

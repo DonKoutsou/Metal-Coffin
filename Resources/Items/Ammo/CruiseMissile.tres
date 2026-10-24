@@ -10,5 +10,5 @@ Speed = 900.0
 Damage = 50
 ItemName = "Cruise Missile"
 ItemDesc = "A balanced missile system offering medium range and speed. Suited for general-purpose combat where flexibility and reliability matter most."
-MaxStackCount = 99
 Cost = 1200
+MaxStackCount = 99

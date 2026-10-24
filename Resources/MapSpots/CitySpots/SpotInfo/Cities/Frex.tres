@@ -1,12 +1,9 @@
 [gd_resource type="Resource" script_class="MapSpotCompleteInfo" format=3 uid="uid://c61p2sn8f460h"]
 
-[ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://MetalEngineBase/Inventory/Scripts/Item.gd" id="1_ir33d"]
-[ext_resource type="Resource" uid="uid://clyeusyxaqgda" path="res://Resources/Items/Materials.tres" id="2_rh3ij"]
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scenes/Map/MapSpot/MapSpotCompleteInfo.gd" id="3_l22vi"]
 
 [resource]
 script = ExtResource("3_l22vi")
 SpotName = "Frex"
 EnemyCity = true
-PossibleDrops = Array[ExtResource("1_ir33d")]([ExtResource("2_rh3ij")])
 PossibleServices = Array[int]([3])

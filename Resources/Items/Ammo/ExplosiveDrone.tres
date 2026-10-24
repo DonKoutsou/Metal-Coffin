@@ -9,6 +9,6 @@ script = ExtResource("3_ok3oc")
 WType = 5
 ItemName = "Explosive Drone"
 ItemDesc = "WIP"
-MaxStackCount = 99
 CardProviding = Array[ExtResource("1_vo5t0")]([ExtResource("2_vo5t0")])
 Cost = 600
+MaxStackCount = 99

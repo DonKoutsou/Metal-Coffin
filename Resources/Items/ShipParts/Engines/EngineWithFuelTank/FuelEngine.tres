@@ -27,6 +27,6 @@ UpgradeTime = 300.0
 DispositionAmm = 0.2
 ItemName = "EF 100"
 ItemDesc = "'Conserve' is the entry-level model in the EcoDrive series, designed for maximum fuel efficiency without the need for high-speed travel. Ideal for long-distance voyages where fuel conservation is paramount, 'Conserve' offers a balanced compromise for steady pacing over extended durations."
+PartType = 1
 CardProviding = Array[ExtResource("1_e7ymj")]([ExtResource("2_syodc")])
 CanTransfer = false
-PartType = 1

@@ -157,7 +157,7 @@ offset_right = 33.5
 offset_bottom = -66.0
 rotation = 0.0029723502
 frequency = 15.0
-phase_offset = 0.18446457549972933
+phase_offset = 3.511120511447303
 
 [connection signal="toggled" from="Mode" to="." method="_on_mode_toggled"]
 [connection signal="RangeSnappedChanged" from="DroneGas" to="." method="_on_gein_control_range_snapped_changed"]

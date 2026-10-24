@@ -1,34 +1,34 @@
 [gd_resource type="Resource" script_class="WeaponShipPart" format=3 uid="uid://b0oy34hfyku06"]
 
-[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://MetalEngineBase/Cardfight/Card/CardStats.gd" id="1_j17v7"]
-[ext_resource type="Resource" uid="uid://dyc7jktln3i74" path="res://Resources/Cards/Barrage/TeslaCoil.tres" id="2_aagpo"]
-[ext_resource type="Resource" uid="uid://yxu4yok1d0e" path="res://Resources/Cards/Barrage/DisCharge.tres" id="3_j17v7"]
-[ext_resource type="Resource" uid="uid://gcxghv6bm43p" path="res://Resources/Items/ShipParts/Coil/MediumCoil.tres" id="4_j17v7"]
-[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://MetalEngineBase/Inventory/Scripts/ShipPartUpgrade.gd" id="7_yug86"]
-[ext_resource type="Script" uid="uid://dx8pydv0k6k3t" path="res://MetalEngineBase/Inventory/Scripts/WeaponShipPartItem.gd" id="8_7eamt"]
-
-[sub_resource type="Resource" id="Resource_fmxhr"]
-script = ExtResource("7_yug86")
-UpgradeName = 3
-UpgradeAmmount = 1.0
+[ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://MetalEngineBase/Cardfight/Card/CardStats.gd" id="1"]
+[ext_resource type="Resource" uid="uid://dyc7jktln3i74" path="res://Resources/Cards/Barrage/TeslaCoil.tres" id="2"]
+[ext_resource type="Resource" uid="uid://yxu4yok1d0e" path="res://Resources/Cards/Barrage/DisCharge.tres" id="3"]
+[ext_resource type="Resource" uid="uid://gcxghv6bm43p" path="res://Resources/Items/ShipParts/Coil/MediumCoil.tres" id="4"]
+[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://MetalEngineBase/Inventory/Scripts/ShipPartUpgrade.gd" id="5"]
+[ext_resource type="Script" uid="uid://dx8pydv0k6k3t" path="res://MetalEngineBase/Inventory/Scripts/WeaponShipPartItem.gd" id="6"]
 
 [sub_resource type="Resource" id="Resource_j17v7"]
-script = ExtResource("7_yug86")
+script = ExtResource("5")
 UpgradeName = 16
 UpgradeAmmount = 8.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
+[sub_resource type="Resource" id="Resource_fmxhr"]
+script = ExtResource("5")
+UpgradeName = 3
+UpgradeAmmount = 1.0
+
 [resource]
-script = ExtResource("8_7eamt")
+script = ExtResource("6")
 WType = 3
-Upgrades = Array[ExtResource("7_yug86")]([SubResource("Resource_fmxhr"), SubResource("Resource_j17v7")])
-UpgradeVersion = ExtResource("4_j17v7")
+Upgrades = Array[ExtResource("5")]([SubResource("Resource_j17v7"), SubResource("Resource_fmxhr")])
+UpgradeVersion = ExtResource("4")
 UpgradeTime = 600.0
 disp = 1
 DispositionAmm = 0.2
 ItemName = "Coil"
 ItemDesc = "WIP"
 PartType = 4
-CardProviding = Array[ExtResource("1_j17v7")]([ExtResource("2_aagpo"), ExtResource("2_aagpo"), ExtResource("3_j17v7")])
+CardProviding = Array[ExtResource("1")]([ExtResource("2"), ExtResource("2"), ExtResource("3")])
 Cost = 45000
 CanTransfer = false

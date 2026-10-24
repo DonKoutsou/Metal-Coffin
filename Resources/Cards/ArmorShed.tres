@@ -31,3 +31,4 @@ Energy = 2
 AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_ybmh8")]([SubResource("Resource_r7uwp"), SubResource("Resource_y46tu")])
 Type = 2
+UseConditions = Array[int]([1])

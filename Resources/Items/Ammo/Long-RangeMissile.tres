@@ -11,5 +11,5 @@ Speed = 200.0
 Damage = 200
 ItemName = "Long-Range Missile"
 ItemDesc = "Low-speed, high-range projectile optimized for distant bombardments. Lacks agility, but when it hits—ships feel it. Best used in large-scale engagements or siege scenarios."
-MaxStackCount = 99
 Cost = 1300
+MaxStackCount = 99

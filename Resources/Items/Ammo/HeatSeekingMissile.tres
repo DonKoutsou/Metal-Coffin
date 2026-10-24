@@ -12,6 +12,6 @@ Damage = 50
 Type = 1
 ItemName = "Heat Seeking Missile"
 ItemDesc = "A balanced missile system offering medium range and speed. Suited for general-purpose combat where flexibility and reliability matter most."
-MaxStackCount = 99
 CardProviding = Array[ExtResource("1_72gep")]([ExtResource("2_mdy32")])
 Cost = 800
+MaxStackCount = 99
