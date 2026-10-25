@@ -114,7 +114,7 @@ func InitialiseShip() -> void:
 	
 	Commander.GetInstance().RegisterSelf(self)
 	
-	_UpdateShipIcon(ResourceLoader.load(Cpt.ShipIconFile))
+	_UpdateShipIcon(Cpt.GetHullData(), Cpt.col)
 	var ElintRange = Cpt.GetStatFinalValue(STAT_CONST.STATS.ELINT)
 	if (ElintRange == 0):
 		ElintShape.ToggleElint(false)
@@ -555,8 +555,10 @@ func GetBattleStats() -> BattleShipStats:
 	stats.CurrentHull = Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
 	stats.FirePower = Cpt.GetStatFinalValue(STAT_CONST.STATS.FIREPOWER)
 	stats.Speed = (Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * 1000) / Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
-	stats.ShipIcon = ResourceLoader.load(Cpt.ShipIconFile)
-	for g in Cpt.CardFightIconsFiles:
+	stats.ShipIcon = ResourceLoader.load(Cpt.GetHullData().hullTexture)
+	stats.col = Cpt.col
+	stats.pallete = Cpt.GetHullData().hull_Pallete
+	for g in Cpt.GetHullData().cardFightHullTextures:
 		stats.cardFightIcons.append(ResourceLoader.load(g))
 	stats.CaptainIcon = Cpt.CaptainPortrait
 	stats.Name = GetShipName()

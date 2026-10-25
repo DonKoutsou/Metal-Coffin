@@ -272,6 +272,11 @@ func SetStats(S : BattleShipStats, Friendly : bool, ) -> void:
 	Fr = Friendly
 	ShipNameLabel.text = S.Name
 	
+	var shader : ShaderMaterial = ShipIcon.material
+	shader.set_shader_parameter("palette_index", S.col)
+	if (!S.pallete.is_empty()):
+		shader.set_shader_parameter("palette_texture", ResourceLoader.load(S.pallete))
+	
 	if (S.cardFightIcons.size() > 0):
 		ShipIcon.texture = S.cardFightIcons[0]
 		ShadowPivot.get_child(0).texture = S.cardFightIcons[0]
@@ -293,6 +298,7 @@ func SetStats(S : BattleShipStats, Friendly : bool, ) -> void:
 			var partIcon = Sprite2D.new()
 			partIcon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST_WITH_MIPMAPS
 			partIcon.texture = S.cardFightIcons[icon]
+			partIcon.material = ShipIcon.material
 			pivot.add_child(partIcon)
 			pivot.position.y = -lastSpriteSize
 			partIcon.position.y = -partIcon.texture.get_size().y / 2

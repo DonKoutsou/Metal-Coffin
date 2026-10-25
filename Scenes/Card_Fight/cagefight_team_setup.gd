@@ -33,6 +33,7 @@ func OnCptButtonPressed(Cpt : Captain) -> void:
 	FloatingButton = CharButton.instantiate() as CaptainButton
 	
 	var NewCpt = Cpt.duplicate(true)
+	NewCpt.col = randi_range(0, Cpt.GetPalletSize())
 	NewCpt.SetUpStats()
 	FloatingButton.SetCpt(NewCpt)
 	add_child(FloatingButton)

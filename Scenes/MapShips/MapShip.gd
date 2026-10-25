@@ -76,7 +76,7 @@ func _ready() -> void:
 	ElintShape.ElintStat = Cpt._GetStat(STAT_CONST.STATS.ELINT)
 	if (SonarShape != null):
 		SonarShape.SonarStat = Cpt._GetStat(STAT_CONST.STATS.AEROSONAR_RANGE)
-	_UpdateShipIcon(ResourceLoader.load(Cpt.ShipIconFile))
+	_UpdateShipIcon(Cpt.GetHullData(), Cpt.col)
 	for g in Cpt.CaptainStats:
 		g.ForceMaxValue()
 
@@ -315,8 +315,13 @@ func OnStatLow(StatName : String) -> void:
 
 var ParalaxMulti : float
 
-func _UpdateShipIcon(Tex : Texture2D) -> void:
+func _UpdateShipIcon(data : HullData, col : int) -> void:
+	var Tex = ResourceLoader.load(data.hullTexture)
 	ParalaxMulti = 2000 / Tex.get_size().x
+	var shader : ShaderMaterial = ShipSprite.material
+	shader.set_shader_parameter("color_T", col)
+	shader.set_shader_parameter("palette_texture", ResourceLoader.load(data.hull_Pallete))
+
 	ShipSprite.texture = Tex
 	UpdateAltitude(Altitude)
 #///////////////////////////////////////////////
@@ -628,9 +633,11 @@ func GetBattleStats() -> BattleShipStats:
 	stats.Hull = Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL)
 	stats.CurrentHull = Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
 	stats.Speed = (Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * 1000) / Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
+	stats.col = Cpt.col
+	stats.pallete = Cpt.GetHullData().hull_Pallete
 	stats.FirePower = Cpt.GetStatFinalValue(STAT_CONST.STATS.FIREPOWER)
-	stats.ShipIcon = ResourceLoader.load(Cpt.ShipIconFile)
-	for g in Cpt.CardFightIconsFiles:
+	stats.ShipIcon = ResourceLoader.load(Cpt.GetHullData().hullTexture)
+	for g in Cpt.GetHullData().cardFightHullTextures:
 		stats.cardFightIcons.append(ResourceLoader.load(g))
 	stats.CaptainIcon = Cpt.CaptainPortrait
 	stats.Name = GetShipName()

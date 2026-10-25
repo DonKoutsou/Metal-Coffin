@@ -1,12 +1,21 @@
 [gd_scene format=3 uid="uid://dci144io03ffa"]
 
 [ext_resource type="Script" uid="uid://dvx4hdp7fvbi0" path="res://Scenes/InScreenUI/Fleet_Separation/fleet_separation_ship_viz.gd" id="2_f1v6n"]
+[ext_resource type="Shader" uid="uid://dy6uaiuajknfy" path="res://MetalEngineBase/Ship/ShipColorPallete.gdshader" id="2_ydicf"]
+[ext_resource type="Texture2D" uid="uid://db63st22ip6cl" path="res://Assets/ShipTextures/Pallete.png" id="3_p8sth"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g6ucl"]
 content_margin_left = 10.0
 content_margin_top = 10.0
 content_margin_right = 10.0
 content_margin_bottom = 10.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cc0hf"]
+resource_local_to_scene = true
+shader = ExtResource("2_ydicf")
+shader_parameter/palette_texture = ExtResource("3_p8sth")
+shader_parameter/palette_index = 1
+shader_parameter/color_T = 0.1
 
 [node name="FleetSeparationShipViz" type="PanelContainer" unique_id=315251339 node_paths=PackedStringArray("CapPortrait", "CapName")]
 custom_minimum_size = Vector2(150, 0)
@@ -40,6 +49,7 @@ text = "Craden"
 
 [node name="CapPortrait" type="TextureRect" parent="." unique_id=575248650]
 texture_filter = 3
+material = SubResource("ShaderMaterial_cc0hf")
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 10

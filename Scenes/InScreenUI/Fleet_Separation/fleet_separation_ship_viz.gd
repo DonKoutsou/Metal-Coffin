@@ -26,12 +26,14 @@ func SetCpt(Cpt : Captain) -> void:
 
 func SetVisuals(Cap : Captain) -> void:
 	CapPortrait.texture = load(Cap.CaptainPortrait)
-
+	
 	CapName.text = Cap.GetCaptainName()
 
 func SetVisuals2(Cap : Captain) -> void:
-	CapPortrait.texture = ResourceLoader.load(Cap.ShipIconFile)
-
+	CapPortrait.texture = ResourceLoader.load(Cap.GetHullData().hullTexture)
+	var shader : ShaderMaterial = CapPortrait.material
+	shader.set_shader_parameter("palette_texture", ResourceLoader.load(Cap.GetHullData().hull_Pallete))
+	shader.set_shader_parameter("palette_index", Cap.col)
 	CapName.text = Cap.GetCaptainName()
 
 func _on_button_pressed() -> void:

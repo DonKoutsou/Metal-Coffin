@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="HullData" format=3 uid="uid://daw2ymua71lxk"]
+
+[ext_resource type="Script" uid="uid://c4yha6c6o132m" path="res://MetalEngineBase/Ship/Hull_Data.gd" id="1_28ijo"]
+
+[resource]
+script = ExtResource("1_28ijo")
+hullTexture = "uid://cxjy6hrsj65pg"
+hull_Pallete = "uid://cpvdi38x4j0rd"
+metadata/_custom_type_script = "uid://c4yha6c6o132m"
