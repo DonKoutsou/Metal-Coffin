@@ -3,8 +3,8 @@
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://MetalEngineBase/Inventory/YellowPanel.tres" id="1_1k1nx"]
 [ext_resource type="Texture2D" uid="uid://cabyq8qd4qe5y" path="res://Assets/CaptainPortraits/Captain1.png" id="1_67igm"]
 [ext_resource type="Script" uid="uid://c3h40cgun3it3" path="res://Scenes/Card_Fight/Ship_Visuals/card_fight_ship_info.gd" id="1_dmg4y"]
-[ext_resource type="Texture2D" uid="uid://b7dafanmawwi0" path="res://Assets/ShipTextures/Hull4.png" id="2_yr62a"]
 [ext_resource type="PackedScene" uid="uid://b4yumrb4c0xyd" path="res://MetalEngineBase/Cardfight/Card/Card.tscn" id="3_yr62a"]
+[ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/ShipTextures/Hull3.png" id="5_r1q4n"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dmg4y"]
 content_margin_left = 10.0
@@ -83,7 +83,7 @@ custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
-texture = ExtResource("2_yr62a")
+texture = ExtResource("5_r1q4n")
 expand_mode = 1
 
 [node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer/HBoxContainer" unique_id=20349211]

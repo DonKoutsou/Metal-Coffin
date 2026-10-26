@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b1v6aeesflsrh" path="res://Scenes/MapShips/MapShip.gd" id="1_2mwka"]
 [ext_resource type="Resource" uid="uid://d02w2y7dmmv6c" path="res://Resources/Captains/EnemyCaptains/EnemyFireship1.tres" id="3_hup4s"]
 [ext_resource type="Shader" uid="uid://cqgk0egpp8vmb" path="res://Shaders/ShipVisualTest.gdshader" id="4_ql18u"]
-[ext_resource type="Texture2D" uid="uid://c37e3n2syiped" path="res://Assets/ShipTextures/Hull_2_Pallete.png" id="4_qvo35"]
+[ext_resource type="Texture2D" uid="uid://c37e3n2syiped" path="res://Assets/ShipTextures/Hull2_Palette.png" id="4_qvo35"]
 [ext_resource type="PackedScene" uid="uid://bhkb6xo1tkk6l" path="res://Scenes/MapShips/ShipTrailLine.tscn" id="5_hi2nu"]
 [ext_resource type="Texture2D" uid="uid://ev8n5tjqls2e" path="res://Assets/ShipTextures/Hull2.png" id="5_qvo35"]
 [ext_resource type="Script" uid="uid://7kme48vf7smt" path="res://Scenes/MapShips/DetectionInstruments/Radar/Radar.gd" id="6_ubqfg"]

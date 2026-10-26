@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://cmor560rv0qcn" path="res://Assets/ShipTextures/Hull11.png" id="7_x62tc"]
 [ext_resource type="Texture2D" uid="uid://bhg24g7ywfqe8" path="res://Assets/ShipTextures/Hull6.png" id="8_k2oqf"]
 [ext_resource type="Texture2D" uid="uid://b63k578u1lf5e" path="res://Assets/ShipTextures/Hull3.png" id="9_2so6o"]
-[ext_resource type="Texture2D" uid="uid://b7dafanmawwi0" path="res://Assets/ShipTextures/Hull4.png" id="10_2so6o"]
 [ext_resource type="Texture2D" uid="uid://w4t57uq2b86c" path="res://Assets/ShipTextures/Hull8.png" id="11_t2rfa"]
 
 [node name="ShipSizeTest" type="Node2D" unique_id=1312695390]
@@ -51,10 +50,6 @@ texture = ExtResource("8_k2oqf")
 [node name="Sprite2D9" type="Sprite2D" parent="." unique_id=1865357995]
 position = Vector2(784, 2)
 texture = ExtResource("9_2so6o")
-
-[node name="Sprite2D10" type="Sprite2D" parent="." unique_id=1360580850]
-position = Vector2(902, 0)
-texture = ExtResource("10_2so6o")
 
 [node name="Sprite2D11" type="Sprite2D" parent="." unique_id=1337914732]
 position = Vector2(1041, 0)

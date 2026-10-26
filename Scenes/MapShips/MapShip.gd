@@ -316,11 +316,11 @@ func OnStatLow(StatName : String) -> void:
 var ParalaxMulti : float
 
 func _UpdateShipIcon(data : HullData, col : int) -> void:
-	var Tex = ResourceLoader.load(data.hullTexture)
+	var Tex = data.hulTx
 	ParalaxMulti = 2000 / Tex.get_size().x
 	var shader : ShaderMaterial = ShipSprite.material
 	shader.set_shader_parameter("color_T", col)
-	shader.set_shader_parameter("palette_texture", ResourceLoader.load(data.hull_Pallete))
+	shader.set_shader_parameter("palette_texture", data.hullPallete)
 
 	ShipSprite.texture = Tex
 	UpdateAltitude(Altitude)
@@ -634,11 +634,11 @@ func GetBattleStats() -> BattleShipStats:
 	stats.CurrentHull = Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
 	stats.Speed = (Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * 1000) / Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	stats.col = Cpt.col
-	stats.pallete = Cpt.GetHullData().hull_Pallete
+	stats.pallete = Cpt.GetHullData().hullPallete
 	stats.FirePower = Cpt.GetStatFinalValue(STAT_CONST.STATS.FIREPOWER)
-	stats.ShipIcon = ResourceLoader.load(Cpt.GetHullData().hullTexture)
-	for g in Cpt.GetHullData().cardFightHullTextures:
-		stats.cardFightIcons.append(ResourceLoader.load(g))
+	stats.ShipIcon = Cpt.GetHullData().hulTx
+	for g in Cpt.GetHullData().cardFightHullTx:
+		stats.cardFightIcons.append(g)
 	stats.CaptainIcon = Cpt.CaptainPortrait
 	stats.Name = GetShipName()
 	stats.Cards = Cpt.GetCharacterInventory().GetCards()
