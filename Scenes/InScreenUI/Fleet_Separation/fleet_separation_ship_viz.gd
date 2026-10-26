@@ -30,9 +30,9 @@ func SetVisuals(Cap : Captain) -> void:
 	CapName.text = Cap.GetCaptainName()
 
 func SetVisuals2(Cap : Captain) -> void:
-	CapPortrait.texture = Cap.GetHullData().hulTx
+	CapPortrait.texture = ResourceLoader.load(Cap.GetHullData().hullTexture)
 	var shader : ShaderMaterial = CapPortrait.material
-	shader.set_shader_parameter("palette_texture", Cap.GetHullData().hullPallete)
+	shader.set_shader_parameter("palette_texture", ResourceLoader.load(Cap.GetHullData().hull_Pallete))
 	shader.set_shader_parameter("palette_index", Cap.col)
 	CapName.text = Cap.GetCaptainName()
 

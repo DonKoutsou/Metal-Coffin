@@ -433,3 +433,7 @@ func _on_inventory_button_pressed() -> void:
 	ShipStats.ShowInvetory()
 	ShipStats.ShipInventory.SetBoxedSelectable()
 	ShipStats.ShipInventory.KeepBoxesActive = true
+
+
+func _on_spraw_button_pressed() -> void:
+	ShipStats.ShipPaintShop()

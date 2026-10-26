@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://tc32omtm74y7" path="res://Assets/Sounds/workshop.mp3" id="10_itsvt"]
 [ext_resource type="Texture2D" uid="uid://dw7al4e4pdao4" path="res://Assets/UIPiecies/UI_Icons/Card.png" id="11_orplh"]
 [ext_resource type="Texture2D" uid="uid://c7wkqvg4osdjt" path="res://Assets/UIPiecies/UI_Icons/cardboard-box.png" id="11_pjo8k"]
+[ext_resource type="Texture2D" uid="uid://rkgwhd3lf33b" path="res://Assets/UIPiecies/UI_Icons/spray.png" id="11_wk7hq"]
 [ext_resource type="Texture2D" uid="uid://c2v600qe1d181" path="res://Assets/UIPiecies/UI_Icons/nested-hexagons.png" id="12_pjo8k"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gy23n"]
@@ -96,6 +97,12 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 icon = ExtResource("12_pjo8k")
+
+[node name="SprawButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=1861645451 groups=["DigitalButtons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+icon = ExtResource("11_wk7hq")
 
 [node name="CaptainStatContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1727051882 instance=ExtResource("9_gy23n")]
 layout_mode = 2
@@ -208,6 +215,7 @@ bus = &"Sounds"
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/DeckButton" to="." method="_on_deck_button_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/InventoryButton" to="." method="_on_inventory_button_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/DispositionButton" to="." method="_on_distr_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/SprawButton" to="." method="_on_spraw_button_pressed"]
 [connection signal="InventoryBoxSelected" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/CaptainStatContainer" to="." method="ItemSelected"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer2/VBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer3/VBoxContainer/Sell" to="." method="_on_sell_pressed"]

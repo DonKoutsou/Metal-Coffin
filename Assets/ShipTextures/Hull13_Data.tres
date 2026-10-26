@@ -6,5 +6,5 @@
 script = ExtResource("1_e46gd")
 hullTexture = "uid://7h4uf5rwddw6"
 cardFightHullTextures = Array[String](["uid://cfdvwoeixqqn4", "uid://cwangywjpsjvb", "uid://buysn41idx8n"])
-hull_Pallete = "uid://cpvdi38x4j0rd"
+hull_Pallete = "uid://iw5beh3sjcpl"
 metadata/_custom_type_script = "uid://c4yha6c6o132m"

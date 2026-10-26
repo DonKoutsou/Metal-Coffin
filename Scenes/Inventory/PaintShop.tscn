@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://dbskgetr0s4i8"]
+
+[ext_resource type="Script" uid="uid://cj1pw8pde0q2" path="res://Scenes/Inventory/paint_shop.gd" id="1_fdarc"]
+
+[node name="PaintShop" type="Control" unique_id=34166614 node_paths=PackedStringArray("priceLabel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fdarc")
+priceLabel = NodePath("VBoxContainer/Label2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=354099814]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=888128880]
+visible = false
+layout_mode = 2
+text = "REPAINT SHIP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1306037832]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Prev" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1032991878]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 4
+text = "<"
+
+[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer" unique_id=1863086100]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Next" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=581280009]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+text = ">"
+
+[node name="Label2" type="Label" parent="VBoxContainer" unique_id=1295124563]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cost : 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=829670921]
+visible = false
+layout_mode = 2
+text = "Confirm"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Prev" to="." method="_on_prev_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Next" to="." method="_on_next_pressed"]

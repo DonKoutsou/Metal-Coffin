@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dowk5dl1ujud8"
-path="res://.godot/imported/Hull14_Pallete.png-4d4229ea7762c813352f0c4e3241b9c6.ctex"
+path="res://.godot/imported/Hull14_Palette.png-d19590ebe9aa53e31afb36f7c7d1be0e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/ShipTextures/Hull14_Pallete.png"
-dest_files=["res://.godot/imported/Hull14_Pallete.png-4d4229ea7762c813352f0c4e3241b9c6.ctex"]
+source_file="res://Assets/ShipTextures/Hull14_Palette.png"
+dest_files=["res://.godot/imported/Hull14_Palette.png-d19590ebe9aa53e31afb36f7c7d1be0e.ctex"]
 
 [params]
 
