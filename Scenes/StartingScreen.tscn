@@ -4,10 +4,11 @@
 [ext_resource type="Material" uid="uid://dxt6oe4rhk3du" path="res://Shaders/PostProcessMat.tres" id="3_62h02"]
 [ext_resource type="PackedScene" uid="uid://d2srq1vxysnra" path="res://Scenes/Tutorial/tutorial_manager.tscn" id="3_3551w"]
 [ext_resource type="PackedScene" uid="uid://cneeylrqurx2q" path="res://Scenes/InScreenUI/Cursor/CursorReal.tscn" id="3_vb6t2"]
+[ext_resource type="PackedScene" uid="uid://d0iiqaijsg1y1" path="res://Scenes/InScreenUI/Commande_Line/command_line.tscn" id="4_3551w"]
 
 [sub_resource type="Gradient" id="Gradient_7bhdu"]
 offsets = PackedFloat32Array(0, 0.9474836, 1)
-colors = PackedColorArray(0.0030234603, 0.0030234596, 0.0030234596, 1, 0.97382116, 0.9244849, 0.8959218, 1, 1, 0.9493333, 0.92, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.97382116, 0.9244849, 0.8959218, 1, 1, 0.9493333, 0.92, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_7bhdu"]
 gradient = SubResource("Gradient_7bhdu")
@@ -18,8 +19,6 @@ background_mode = 3
 background_canvas_max_layer = 217
 ambient_light_source = 1
 reflected_light_source = 1
-tonemap_agx_white = 16.5
-tonemap_agx_contrast = 1.38
 glow_intensity = 1.17
 glow_bloom = 1.0
 glow_hdr_luminance_cap = 0.1
@@ -64,7 +63,7 @@ positional_shadow_atlas_quad_0 = 0
 positional_shadow_atlas_quad_1 = 0
 positional_shadow_atlas_quad_2 = 0
 positional_shadow_atlas_quad_3 = 0
-size = Vector2i(1280, 720)
+size = Vector2i(2112, 1189)
 size_2d_override = Vector2i(1280, 720)
 size_2d_override_stretch = true
 render_target_update_mode = 4
@@ -77,6 +76,10 @@ layer = 7051
 [node name="InScreenMouse" parent="SubViewportContainer/SubViewport/CanvasLayer" unique_id=804818995 instance=ExtResource("3_vb6t2")]
 top_level = true
 z_index = 4096
+offset_right = 694.0
+offset_bottom = 348.0
 
 [node name="FmodBankLoader" type="FmodBankLoader" parent="." unique_id=1161966533]
 bank_paths = ["res://FMod_Build/Master.bank"]
+
+[node name="CommandLine" parent="." unique_id=1154400603 instance=ExtResource("4_3551w")]

@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://c12cf7okh46o5"]
+
+[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://MetalEngineBase/Inventory/YellowPanel.tres" id="1_ts8nb"]
+[ext_resource type="Script" uid="uid://cl6aujs3tsr5x" path="res://Scenes/UI/text_spin_box.gd" id="2_jacst"]
+
+[node name="PanelContainer" type="PanelContainer" unique_id=1217248031 node_paths=PackedStringArray("label")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 345.0
+offset_bottom = -345.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_ts8nb")
+script = ExtResource("2_jacst")
+label = NodePath("HBoxContainer/Label")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=392765816]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=182228309]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1071253570]
+layout_mode = 2
+
+[node name="Previous" type="Button" parent="HBoxContainer/VBoxContainer" unique_id=158964220]
+custom_maximum_size = Vector2(-1, 9)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 9
+text = "<"
+icon_alignment = 1
+expand_icon = true
+
+[node name="Next" type="Button" parent="HBoxContainer/VBoxContainer" unique_id=1152053621]
+custom_maximum_size = Vector2(-1, 9)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 9
+text = ">"
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Previous" to="." method="_on_previous_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Next" to="." method="_on_next_pressed"]

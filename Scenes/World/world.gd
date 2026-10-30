@@ -360,7 +360,6 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip], Missil
 		availableEnemy = EnemyMissiles[0]
 	else: if (Missiles.size() > 0):
 		availableEnemy = Missiles[0]
-		
 	
 	PlDir = availbableFriendly.global_position.direction_to(availableEnemy.global_position)
 	var dot = PlDir.dot(windDir)
@@ -383,6 +382,7 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip], Missil
 	#Player battle stats
 	var FBattleStats : Array[BattleShipStats] = []
 	for g in Friendlies:
+		MapPointerManager.Instance.AddShip(g, true)
 		FighingFriendlyUnits.append(g)
 		FBattleStats.append(g.GetBattleStats())
 	
@@ -391,6 +391,7 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip], Missil
 	for g : HostileShip in Enemies:
 		if (g.Destroyed):
 			continue
+		MapPointerManager.Instance.AddShip(g, false)
 		FighingEnemyUnits.append(g)
 		EBattleStats.append(g.GetBattleStats())
 	

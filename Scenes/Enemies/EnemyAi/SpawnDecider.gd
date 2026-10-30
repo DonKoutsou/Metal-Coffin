@@ -159,7 +159,7 @@ func GetRecruitsForPosition(YPos: float, _HasRec : bool, capital : bool) -> Arra
 		#If cost allows add it to available recruits
 		if (points > RandomRec.Cost):
 			var newCpt = RandomRec.Cpt.duplicate()
-			newCpt.col = Rand.InstanceRandom.RandIRange(0, newCpt.GetPalletSize())
+			newCpt.col = Rand.InstanceRandom.RandIRange(0, newCpt.GetPalletSize() - 1)
 			available_Recruits.append(newCpt)
 			points -= RandomRec.Cost
 		
@@ -211,7 +211,8 @@ func GetSpawnsForLocation(YPos : float, Patrol : bool, Convoy : bool, capital : 
 	for g in CptnInfo:
 		var cpt = Captain.new()
 		cpt.call_deferred("CopyStats", g.Cpt)
-		cpt.col = Rand.InstanceRandom.RandIRange(0, g.Cpt.GetPalletSize())
+		var randomCol = Rand.InstanceRandom.RandIRange(0, g.Cpt.GetPalletSize() - 1)
+		cpt.col = randomCol
 		Fleet.append(cpt)
 
 	return Fleet

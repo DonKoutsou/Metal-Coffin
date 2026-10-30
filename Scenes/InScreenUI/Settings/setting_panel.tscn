@@ -3,8 +3,9 @@
 [ext_resource type="StyleBox" uid="uid://elj4u7a13oc1" path="res://MetalEngineBase/Theme/YellowTopPanel.tres" id="1_wos5w"]
 [ext_resource type="Script" uid="uid://bp1bu8mlf6f3p" path="res://Scenes/InScreenUI/Settings/setting_panel.gd" id="2_clx0a"]
 [ext_resource type="Material" uid="uid://camvvfprrteei" path="res://Shaders/CRT_Mat.tres" id="3_os1sx"]
+[ext_resource type="PackedScene" uid="uid://c12cf7okh46o5" path="res://Scenes/UI/TextSpinBo.tscn" id="4_um23h"]
 
-[node name="SettingPanel" type="PanelContainer" unique_id=1258850840 node_paths=PackedStringArray("GlitchButton", "FullScreenButton", "SoundSlider", "MusicSlider", "ShakeEffectButton", "RainButton", "FPSSlider", "FPSLabel", "colorsSlider")]
+[node name="SettingPanel" type="PanelContainer" unique_id=1258850840 node_paths=PackedStringArray("GlitchButton", "FullScreenButton", "SoundSlider", "MusicSlider", "ShakeEffectButton", "RainButton", "FPSSlider", "FPSLabel", "colorsSlider", "resolutionOptions")]
 use_parent_material = true
 offset_right = 330.0
 offset_bottom = 232.0
@@ -21,6 +22,7 @@ RainButton = NodePath("VBoxContainer/GridContainer/RainCheckBox")
 FPSSlider = NodePath("VBoxContainer/GridContainer/HBoxContainer/FPS")
 FPSLabel = NodePath("VBoxContainer/GridContainer/HBoxContainer/Label")
 colorsSlider = NodePath("VBoxContainer/GridContainer/HSlider")
+resolutionOptions = NodePath("VBoxContainer/GridContainer/Resolution")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=475330512]
 use_parent_material = true
@@ -47,6 +49,15 @@ text = "Full Screen"
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 10
+
+[node name="Label9" type="Label" parent="VBoxContainer/GridContainer" unique_id=207414276]
+visible = false
+layout_mode = 2
+text = "Resolution"
+
+[node name="Resolution" parent="VBoxContainer/GridContainer" unique_id=1217248031 instance=ExtResource("4_um23h")]
+visible = false
+layout_mode = 2
 
 [node name="Label4" type="Label" parent="VBoxContainer/GridContainer" unique_id=94233844]
 use_parent_material = true
@@ -129,6 +140,7 @@ layout_mode = 2
 max_value = 2.0
 
 [connection signal="toggled" from="VBoxContainer/GridContainer/FullScreenCheckBox" to="." method="_on_full_screen_check_box_toggled"]
+[connection signal="OptionPicked" from="VBoxContainer/GridContainer/Resolution" to="." method="_on_resolution_option_picked"]
 [connection signal="toggled" from="VBoxContainer/GridContainer/GlitchesCheckBox" to="." method="_on_glitches_check_box_toggled"]
 [connection signal="toggled" from="VBoxContainer/GridContainer/ShakeCheckBox" to="." method="_on_shake_check_box_toggled"]
 [connection signal="toggled" from="VBoxContainer/GridContainer/RainCheckBox" to="." method="_on_rain_check_box_toggled"]

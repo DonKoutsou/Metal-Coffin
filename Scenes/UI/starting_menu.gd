@@ -102,7 +102,7 @@ func _on_settings_pressed() -> void:
 		SpawnedCredits.queue_free()
 	NormalUI.visible = !t
 	if (!t):
-		StartingScreen.UpdateSavedSettings()
+		Saved_Settings.UpdateSavedSettings()
 
 
 func _on_prologue_pressed() -> void:

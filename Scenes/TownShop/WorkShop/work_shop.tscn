@@ -99,6 +99,7 @@ size_flags_vertical = 3
 icon = ExtResource("12_pjo8k")
 
 [node name="SprawButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=1861645451 groups=["DigitalButtons"]]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

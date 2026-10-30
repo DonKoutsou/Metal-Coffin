@@ -61,7 +61,7 @@ void fragment() {
     // === FINAL OUTPUT ===
     COLOR = mix(shadow, cloud, cloud.a);
 	COLOR.rgb *= Light;
-	COLOR.a *= Alpha;
+	COLOR.a = min(1, COLOR.a * Alpha);
     NORMAL_MAP = normal_noise;
     NORMAL_MAP_DEPTH = NormalStr;
 }

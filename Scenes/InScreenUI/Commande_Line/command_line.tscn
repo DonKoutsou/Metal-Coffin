@@ -15,7 +15,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_5owba")
 script = ExtResource("2_3camo")
-Text = NodePath("MarginContainer/VBoxContainer/TextEdit")
+Text = NodePath("VBoxContainer/TextEdit")
 CommandListConfiguration = Dictionary[PackedStringArray, String]({
 PackedStringArray("Inventory", "Add"): "InventoryAdd",
 PackedStringArray("prologue"): "Prologue",
@@ -25,39 +25,34 @@ PackedStringArray("Enemy", "Debug"): "EnemyDebug",
 PackedStringArray("Stat", "Refill"): "StatRefill",
 PackedStringArray("CardFightTypeSwitch"): "CardFightTypeSwitch"
 })
-RecomendationParent = NodePath("MarginContainer/VBoxContainer/TextEdit/VBoxContainer")
-HistoryLabel = NodePath("MarginContainer/VBoxContainer/PanelContainer/RichTextLabel")
+RecomendationParent = NodePath("VBoxContainer/TextEdit/VBoxContainer")
+HistoryLabel = NodePath("VBoxContainer/PanelContainer/RichTextLabel")
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1490083418]
-layout_mode = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_right = 15
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=259234709]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=259234709]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1833009837]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1833009837]
 visible = false
 layout_mode = 2
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=504438264]
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=504438264]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 
-[node name="Button2" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1103346464]
+[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1103346464]
 layout_mode = 2
 focus_mode = 0
 theme_override_font_sizes/font_size = 10
 text = "X"
 icon_alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=371588058]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=371588058]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("3_yi2x7")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/PanelContainer" unique_id=296971418]
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/PanelContainer" unique_id=296971418]
 custom_minimum_size = Vector2(0, 130)
 layout_mode = 2
 size_flags_vertical = 3
@@ -65,7 +60,7 @@ theme_override_constants/paragraph_separation = 10
 bbcode_enabled = true
 scroll_following = true
 
-[node name="TextEdit" type="TextEdit" parent="MarginContainer/VBoxContainer" unique_id=740363938]
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer" unique_id=740363938]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
@@ -73,7 +68,7 @@ theme_override_font_sizes/font_size = 24
 placeholder_text = "Enter Command"
 scroll_fit_content_height = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TextEdit" unique_id=1536794461]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TextEdit" unique_id=1536794461]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -93,8 +88,8 @@ volume_db = -5.0
 pitch_scale = 2.55
 bus = &"Sounds"
 
-[connection signal="button_down" from="MarginContainer/VBoxContainer/HBoxContainer/Button" to="." method="OnMoveButtonDown"]
-[connection signal="button_up" from="MarginContainer/VBoxContainer/HBoxContainer/Button" to="." method="OnMoveButtonUp"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Button2" to="." method="OnCloseButtonPressed"]
-[connection signal="focus_entered" from="MarginContainer/VBoxContainer/TextEdit" to="." method="OnCommandLineFocused"]
-[connection signal="text_changed" from="MarginContainer/VBoxContainer/TextEdit" to="." method="OnCommandEntered"]
+[connection signal="button_down" from="VBoxContainer/HBoxContainer/Button" to="." method="OnMoveButtonDown"]
+[connection signal="button_up" from="VBoxContainer/HBoxContainer/Button" to="." method="OnMoveButtonUp"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Button2" to="." method="OnCloseButtonPressed"]
+[connection signal="focus_entered" from="VBoxContainer/TextEdit" to="." method="OnCommandLineFocused"]
+[connection signal="text_changed" from="VBoxContainer/TextEdit" to="." method="OnCommandEntered"]
