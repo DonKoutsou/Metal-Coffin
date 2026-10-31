@@ -359,4 +359,5 @@ libraries/ = SubResource("AnimationLibrary_i8scw")
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=1334327405]
 stream = ExtResource("11_8q2j3")
+volume_db = 5.0
 bus = &"MapSounds"

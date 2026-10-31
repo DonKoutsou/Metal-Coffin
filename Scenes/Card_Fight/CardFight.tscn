@@ -355,4 +355,9 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=6887416]
+z_index = 284
+position = Vector2(459, 327)
+current = true
+
 [connection signal="pressed" from="TargetSelect/VBoxContainer/Button" to="TargetSelect" method="_on_button_pressed"]

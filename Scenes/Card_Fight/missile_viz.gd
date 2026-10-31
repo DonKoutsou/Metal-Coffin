@@ -16,7 +16,7 @@ class_name MissileViz
 @export var endParticle : PackedScene
 
 @export_group("Nodes")
-@export var SoundNode : AudioStreamPlayer
+@export var SoundNode : AudioStreamPlayer2D
 @export var Trail : TrailLine
 
 
@@ -36,11 +36,12 @@ func _ready() -> void:
 	Going = true
 	
 	SoundNode.pitch_scale = randf_range(0.8, 1.2)
-	
-	var S = DeletableSoundGlobal.new()
+	SoundNode.play()
+	var S = DeletableSound.new()
 	S.stream = FireSound
 	get_parent().get_parent().add_child(S)
-	#S.volume_db = - 20
+	S.attenuation = SoundNode.attenuation
+	S.volume_db = 5
 	S.play()
 	S.pitch_scale = randf_range(0.8, 1.2)
 	
@@ -51,7 +52,7 @@ func _ready() -> void:
 	initialParticle.burst()
 	await initialParticle.Finished
 	initialParticle.queue_free()
-	SoundNode.play()
+	
 	var pos = Target.global_position
 	if (Target is Control):
 		pos += Target.size / 2

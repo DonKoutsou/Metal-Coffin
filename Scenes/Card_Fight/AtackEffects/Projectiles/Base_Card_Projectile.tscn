@@ -8,7 +8,7 @@
 [ext_resource type="Gradient" uid="uid://d4miprpqrdwuy" path="res://Scenes/Card_Fight/AtackEffects/Trail.tres" id="5_d0go3"]
 [ext_resource type="Texture2D" uid="uid://bjngt28xdoq47" path="res://Assets/Particles/Zoin's Flame Trail 5.png" id="6_ml670"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scenes/MapShips/Trail_Line/trail_line.gd" id="7_hf0d6"]
-[ext_resource type="AudioStream" uid="uid://c4iof3ou2x8m4" path="res://Assets/Sounds/beam-fire-282361.mp3" id="8_e7kpe"]
+[ext_resource type="AudioStream" uid="uid://drpu3d0pjexug" path="res://Assets/Sounds/MissileCruise.mp3" id="9_047ox"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_uinv6"]
 streams_count = 3
@@ -48,8 +48,10 @@ trail_fade_speed = 0.02
 ManualInit = true
 metadata/_custom_type_script = "uid://cmkc6lix20rjb"
 
-[node name="MissileCruise" type="AudioStreamPlayer" parent="." unique_id=2064028885]
-stream = ExtResource("8_e7kpe")
-volume_db = -5.0
-pitch_scale = 1.13803
+[node name="MissileCruise" type="AudioStreamPlayer2D" parent="." unique_id=1439822007]
+stream = ExtResource("9_047ox")
+volume_db = 5.0
+pitch_scale = 0.8
+autoplay = true
+attenuation = 4.594792
 bus = &"Sounds"
