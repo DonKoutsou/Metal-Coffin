@@ -12,10 +12,10 @@ class_name MissileViz
 
 @export var ExplosionSound : AudioStream
 @export var FireSound : AudioStream
+@export var endParticle : PackedScene
 
 @export_group("Nodes")
 @export var InitialParticle : BurstParticleGroup2D
-@export var EndingParticle : BurstParticleGroup2D
 @export var SoundNode : AudioStreamPlayer
 @export var Trail : TrailLine
 
@@ -100,6 +100,8 @@ func _process(delta: float) -> void:
 	
 	if (global_position.distance_squared_to(pos) < 500 or counter > 1.5):
 		global_position = pos
+		var EndingParticle : BurstParticleGroup2D = endParticle.instantiate()
+		add_child(EndingParticle)
 		EndingParticle.global_position = global_position
 		EndingParticle.global_rotation = 0
 		EndingParticle.burst()

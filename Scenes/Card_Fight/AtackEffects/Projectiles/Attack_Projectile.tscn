@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cqejjvj1hassq"]
+
+[ext_resource type="PackedScene" uid="uid://dx71hkif8fjp5" path="res://Scenes/Card_Fight/AtackEffects/Projectiles/Base_Card_Projectile.tscn" id="1_0o86j"]
+[ext_resource type="PackedScene" uid="uid://mvhv44x16efi" path="res://Scenes/Card_Fight/AtackEffects/ImpactEffects/Attack_Impact.tscn" id="2_4qfbj"]
+
+[node name="MissileThing" unique_id=1959528193 instance=ExtResource("1_0o86j")]
+endParticle = ExtResource("2_4qfbj")

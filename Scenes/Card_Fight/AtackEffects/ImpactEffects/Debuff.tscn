@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cdipbu2scota7"]
+
+[ext_resource type="PackedScene" uid="uid://5tjx6x3nbk1e" path="res://Scenes/Card_Fight/AtackEffects/ImpactEffects/Buff.tscn" id="1_ysvmo"]
+
+[node name="MultiParticleExample2" unique_id=146758228 instance=ExtResource("1_ysvmo")]
+
+[node name="Ring" parent="." index="2" unique_id=649579718]
+rotation = 3.1415927

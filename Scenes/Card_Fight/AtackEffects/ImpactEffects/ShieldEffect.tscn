@@ -5,15 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://vwe34itxqa37" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb_soft.png" id="3_l7ile"]
 [ext_resource type="Texture2D" uid="uid://ovw18l4dc1fv" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb.png" id="4_w1pge"]
 [ext_resource type="Texture2D" uid="uid://c7fenkw1dbam" path="res://Assets/Cards/shield.svg" id="5_8p2dm"]
-[ext_resource type="Texture2D" uid="uid://cpxai80e7ddcg" path="res://Scenes/Card_Fight/AtackEffects/OrbGradient.tres" id="5_dewoe"]
-
-[sub_resource type="Gradient" id="Gradient_bclkm"]
-interpolation_mode = 2
-offsets = PackedFloat32Array(0, 0.194529, 0.398176, 0.731707, 1)
-colors = PackedColorArray(1, 0.180392, 0.0705882, 0, 0.686275, 0.482353, 0.478431, 0.858824, 0.366124, 0.88341, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_o8dmu"]
-gradient = SubResource("Gradient_bclkm")
+[ext_resource type="Texture2D" uid="uid://ds5hrnehspyny" path="res://Scenes/Card_Fight/AtackEffects/OrbGradient_Blue.tres" id="5_kd8sa"]
 
 [sub_resource type="Curve" id="Curve_c8u8r"]
 _data = [Vector2(0, 0), 0.0, 5.75758, 0, 0, Vector2(0.178947, 0.672727), 1.33724, 1.33724, 0, 0, Vector2(1, 1), 3.4668e-07, 0.0, 0, 0]
@@ -101,7 +93,7 @@ lifetime = 0.5
 autostart = false
 texture = ExtResource("3_l7ile")
 image_scale = 0.02
-gradient = SubResource("GradientTexture1D_o8dmu")
+gradient = ExtResource("5_kd8sa")
 blend_mode = 1
 direction = Vector2(0, 1)
 distance = 0.0
@@ -123,7 +115,7 @@ autostart = false
 texture = ExtResource("4_w1pge")
 image_scale = 0.03
 image_scale_randomness = 0.64
-gradient = ExtResource("5_dewoe")
+gradient = ExtResource("5_kd8sa")
 blend_mode = 1
 angle_degrees = 197.5
 angle_randomness = 1.0
@@ -148,7 +140,7 @@ lifetime = 0.5
 autostart = false
 texture = ExtResource("5_8p2dm")
 image_scale = 0.01
-gradient = ExtResource("5_dewoe")
+gradient = ExtResource("5_kd8sa")
 blend_mode = 1
 distance = 0.0
 align_sprite_rotation = false

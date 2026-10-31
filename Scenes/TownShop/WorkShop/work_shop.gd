@@ -19,6 +19,7 @@ var CurrentShipIndex : int = -1
 var WorkShopMerch : Dictionary[String, int]
 var WorkshopDescriptor : ItemDescriptor
 var HasUpgradeBuff : bool = false
+var HasRapairBuff : bool = false
 
 signal WorkshopClosed
 signal ShipSold(Ship : MapShip)
@@ -46,8 +47,9 @@ func _physics_process(_delta: float) -> void:
 		var arr : Array[MapShip] = []
 		Descr.SetMerchData(Closest.It, arr, true)
 
-func Init(Ships : Array[MapShip], HasUpgrade : bool, Merch : Dictionary[String, int]) -> void:
+func Init(Ships : Array[MapShip], HasUpgrade : bool, HasRepair : bool, Merch : Dictionary[String, int]) -> void:
 	HasUpgradeBuff = HasUpgrade
+	HasRapairBuff = HasRepair
 	WorkShopMerch = Merch
 	
 	AvailableShips = Ships
@@ -437,3 +439,6 @@ func _on_inventory_button_pressed() -> void:
 
 func _on_spraw_button_pressed() -> void:
 	ShipStats.ShipPaintShop()
+
+func _on_repair_button_pressed() -> void:
+	ShipStats.ShowRepair(HasRapairBuff)

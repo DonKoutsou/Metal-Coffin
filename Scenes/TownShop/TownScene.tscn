@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://d1yk65ppopgv7" path="res://Assets/Items/Fuel.png" id="11_7xkt0"]
 [ext_resource type="Texture2D" uid="uid://c7wkqvg4osdjt" path="res://Assets/UIPiecies/UI_Icons/cardboard-box.png" id="12_0uykb"]
 [ext_resource type="Texture2D" uid="uid://3q376ia6bctu" path="res://Assets/Items/Wrench.png" id="13_baphb"]
-[ext_resource type="Texture2D" uid="uid://dwwluk8xikvpe" path="res://Assets/Items/cubeforcesmol.png" id="14_baphb"]
 [ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://MetalEngineBase/Inventory/YellowPanel.tres" id="15_baphb"]
 [ext_resource type="Texture2D" uid="uid://s2ao6bntsnmw" path="res://Assets/Items/upgrade.png" id="15_cp5cc"]
 [ext_resource type="AudioStream" uid="uid://boauqd30g14sd" path="res://Assets/Sounds/UI_in.mp3" id="16_baphb"]
@@ -30,7 +29,7 @@ adjustment_enabled = true
 [sub_resource type="World3D" id="World3D_oyy4e"]
 environment = SubResource("Environment_t244x")
 
-[node name="TownScene" type="Control" unique_id=1363066493 node_paths=PackedStringArray("PortName", "Population", "PortBuffText", "MerchendiseButton", "MerchendiseButton2", "WorkshopButton", "WorkshopButton2", "FuelButton", "FuelButton2", "RepairButton", "RepairButton2", "RecruitButton", "RecruitButton2")]
+[node name="TownScene" type="Control" unique_id=1363066493 node_paths=PackedStringArray("PortName", "Population", "PortBuffText", "MerchendiseButton", "MerchendiseButton2", "WorkshopButton", "WorkshopButton2", "FuelButton", "FuelButton2", "RecruitButton", "RecruitButton2")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,8 +49,6 @@ WorkshopButton = NodePath("Button3")
 WorkshopButton2 = NodePath("PanelContainer/VBoxContainer2/VBoxContainer/Workshop")
 FuelButton = NodePath("Button4")
 FuelButton2 = NodePath("PanelContainer/VBoxContainer2/VBoxContainer/FuelStorage")
-RepairButton = NodePath("Button5")
-RepairButton2 = NodePath("PanelContainer/VBoxContainer2/VBoxContainer/Repair")
 RecruitButton = NodePath("Button6")
 RecruitButton2 = NodePath("PanelContainer/VBoxContainer2/VBoxContainer/Recruit")
 MerchShopScene = ExtResource("17_vaeb3")
@@ -80,7 +77,7 @@ canvas_item_default_texture_filter = 2
 gui_disable_input = true
 gui_snap_controls_to_pixels = false
 oversampling = false
-size = Vector2i(1280, 720)
+size = Vector2i(2112, 1189)
 size_2d_override = Vector2i(1280, 720)
 size_2d_override_stretch = true
 render_target_update_mode = 4
@@ -161,25 +158,6 @@ points = PackedVector2Array(0, 0, 0, 45.15)
 width = 2.0
 default_color = Color(0.078431375, 0.078431375, 0.078431375, 1)
 
-[node name="Button5" type="Button" parent="." unique_id=540197795 groups=["DigitalButtons"]]
-layout_mode = 0
-offset_left = 462.0
-offset_top = 528.0
-offset_right = 762.0
-offset_bottom = 561.0
-size_flags_horizontal = 3
-size_flags_vertical = 2
-theme = ExtResource("1_ca22g")
-theme_override_font_sizes/font_size = 16
-text = "REPAIR BAY"
-
-[node name="Line2D" type="Line2D" parent="Button5" unique_id=1134968368]
-show_behind_parent = true
-position = Vector2(0, 15)
-points = PackedVector2Array(0, 0, 0, 45.15)
-width = 2.0
-default_color = Color(0.078431375, 0.078431375, 0.078431375, 1)
-
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=57633186]
 layout_mode = 1
 anchors_preset = 1
@@ -218,18 +196,11 @@ size_flags_vertical = 3
 icon = ExtResource("12_0uykb")
 icon_alignment = 1
 
-[node name="Repair" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer" unique_id=1670241402 groups=["DigitalButtons"]]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-icon = ExtResource("13_baphb")
-icon_alignment = 1
-
 [node name="Workshop" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer" unique_id=202699530 groups=["DigitalButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-icon = ExtResource("14_baphb")
+icon = ExtResource("13_baphb")
 icon_alignment = 1
 
 [node name="Recruit" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer" unique_id=1553071965 groups=["DigitalButtons"]]
@@ -381,10 +352,8 @@ bus = &"MapSounds"
 [connection signal="pressed" from="Button2" to="." method="OnMunitionShopToggled"]
 [connection signal="pressed" from="Button3" to="." method="OnUpgradeShopPressed"]
 [connection signal="pressed" from="Button4" to="." method="OnRefuelShopPressed"]
-[connection signal="pressed" from="Button5" to="." method="OnRepairStationPressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer2/VBoxContainer/FuelStorage" to="." method="OnRefuelShopPressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer2/VBoxContainer/Merch" to="." method="OnMunitionShopToggled"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer2/VBoxContainer/Repair" to="." method="OnRepairStationPressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer2/VBoxContainer/Workshop" to="." method="OnUpgradeShopPressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer2/VBoxContainer/Recruit" to="." method="On_Recruit_Pressed"]
 [connection signal="pressed" from="HBoxContainer2/Button" to="." method="_on_button_pressed"]

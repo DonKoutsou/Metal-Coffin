@@ -18,9 +18,6 @@ class_name TownScene
 @export var FuelButton : Button
 @export var FuelButton2 : Button
 
-@export var RepairButton : Button
-@export var RepairButton2 : Button
-
 @export var RecruitButton : Button
 @export var RecruitButton2 : Button
 
@@ -132,7 +129,7 @@ func OnUpgradeShopPressed() -> void:
 	add_child(WShop)
 	WShop.ShipSold.connect(OnShipSold)
 		
-	WShop.Init(LandedShips, TownSpot.HasUpgrade(), TownSpot.WorkShopMerch)
+	WShop.Init(LandedShips, TownSpot.HasUpgrade(), TownSpot.HasRepair(), TownSpot.WorkShopMerch)
 	ActionTracker.OnActionCompleted(ActionTracker.Action.UPGRADE_SHOP)
 
 func OnMunitionShopToggled() -> void:
@@ -217,11 +214,6 @@ func _on_town_background_position_changed() -> void:
 	FuelButton.global_position = FuelNode.global_position
 	var FuelLine : Line2D = FuelButton.get_child(0)
 	FuelLine.set_point_position(1, FuelLine.to_local(FuelNode.get_child(0).global_position))
-
-	var RepairNode = TownBG.GetNodeForPosition(TownBackground.Location.REPAIR)
-	RepairButton.global_position = RepairNode.global_position
-	var RepairLine : Line2D = RepairButton.get_child(0)
-	RepairLine.set_point_position(1, RepairLine.to_local(RepairNode.get_child(0).global_position))
 	
 	var RecruitNode = TownBG.GetNodeForPosition(TownBackground.Location.RECRUIT)
 	RecruitButton.global_position = RecruitNode.global_position

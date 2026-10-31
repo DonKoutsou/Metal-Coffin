@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://dx71hkif8fjp5"]
+
+[ext_resource type="Script" uid="uid://d0hiwp6l4fyyy" path="res://Scenes/Card_Fight/missile_viz.gd" id="1_1j2pp"]
+[ext_resource type="AudioStream" uid="uid://dtvbu1dtsfivv" path="res://Assets/Sounds/Shield.mp3" id="2_i1h6c"]
+[ext_resource type="AudioStream" uid="uid://bma0gkj3wnxec" path="res://Assets/Sounds/BeamRev.mp3" id="3_lmh2p"]
+[ext_resource type="PackedScene" uid="uid://dlkjo56vcapoo" path="res://Scenes/Card_Fight/AtackEffects/RevEf.tscn" id="4_ngubu"]
+[ext_resource type="Gradient" uid="uid://d4miprpqrdwuy" path="res://Scenes/Card_Fight/AtackEffects/Trail.tres" id="5_d0go3"]
+[ext_resource type="Texture2D" uid="uid://bjngt28xdoq47" path="res://Assets/Particles/Zoin's Flame Trail 5.png" id="6_ml670"]
+[ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scenes/MapShips/Trail_Line/trail_line.gd" id="7_hf0d6"]
+[ext_resource type="AudioStream" uid="uid://c4iof3ou2x8m4" path="res://Assets/Sounds/beam-fire-282361.mp3" id="8_e7kpe"]
+
+[sub_resource type="Curve" id="Curve_5lbu3"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="MissileThing" type="Node2D" unique_id=1959528193 node_paths=PackedStringArray("InitialParticle", "SoundNode", "Trail")]
+rotation = -1.5708
+script = ExtResource("1_1j2pp")
+speed = 30
+base_curve_intensity = 0.2
+wiggle_amplitude = 0.0
+wiggle_frequency = 0.0
+ExplosionSound = ExtResource("2_i1h6c")
+FireSound = ExtResource("3_lmh2p")
+InitialParticle = NodePath("MultiParticleExample1")
+SoundNode = NodePath("MissileCruise")
+Trail = NodePath("TrailLine")
+
+[node name="MultiParticleExample1" parent="." unique_id=1279494245 instance=ExtResource("4_ngubu")]
+
+[node name="TrailLine" type="Line2D" parent="." unique_id=1978868476]
+texture_repeat = 2
+width = 40.0
+width_curve = SubResource("Curve_5lbu3")
+gradient = ExtResource("5_d0go3")
+texture = ExtResource("6_ml670")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+round_precision = 32
+antialiased = true
+script = ExtResource("7_hf0d6")
+trail_fade_speed = 0.02
+ManualInit = true
+metadata/_custom_type_script = "uid://cmkc6lix20rjb"
+
+[node name="MissileCruise" type="AudioStreamPlayer" parent="." unique_id=2064028885]
+stream = ExtResource("8_e7kpe")
+volume_db = -5.0
+pitch_scale = 1.13803
+bus = &"Sounds"

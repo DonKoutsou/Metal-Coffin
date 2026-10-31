@@ -1,10 +1,131 @@
 [gd_scene format=3 uid="uid://d0iiqaijsg1y1"]
 
-[ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://MetalEngineBase/Theme/PopTheme.tres" id="1_5owba"]
 [ext_resource type="Script" uid="uid://djw0qatbronxr" path="res://Scenes/InScreenUI/Commande_Line/command_line.gd" id="2_3camo"]
+[ext_resource type="FontFile" uid="uid://mco7gna0bipp" path="res://MetalEngineBase/Fonts/microsoft_sans_serif.ttf" id="2_5kdy4"]
 [ext_resource type="AudioStream" uid="uid://b5cb3530xjcon" path="res://Assets/Sounds/minimize_003.ogg" id="3_3camo"]
 [ext_resource type="AudioStream" uid="uid://b4u5muin6mjj3" path="res://Assets/Sounds/maximize_003.ogg" id="3_5kdy4"]
-[ext_resource type="StyleBox" uid="uid://ci3yyoa54a17w" path="res://MetalEngineBase/Inventory/YellowPanel.tres" id="3_yi2x7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjyrp"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.3)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j5g1t"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f8rsq"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.225, 0.225, 0.225, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kywhl"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3uf44"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="Theme" id="Theme_5kdy4"]
+Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
+Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
+Button/colors/icon_focus_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_normal_color = Color(1, 1, 1, 1)
+Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
+Button/constants/align_to_largest_stylebox = 0
+Button/constants/h_separation = 4
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 16
+Button/fonts/font = ExtResource("2_5kdy4")
+Button/styles/disabled = SubResource("StyleBoxFlat_mjyrp")
+Button/styles/focus = SubResource("StyleBoxFlat_j5g1t")
+Button/styles/hover = SubResource("StyleBoxFlat_f8rsq")
+Button/styles/normal = SubResource("StyleBoxFlat_kywhl")
+Button/styles/pressed = SubResource("StyleBoxFlat_3uf44")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5kdy4"]
+bg_color = Color(0.6, 0.6, 0.6, 0.34901962)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bhfm8"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 0.6745098)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sh42j"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 0.42745098)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
 
 [node name="CommandLine" type="PanelContainer" unique_id=1154400603 node_paths=PackedStringArray("Text", "RecomendationParent", "HistoryLabel")]
 anchors_preset = 10
@@ -13,7 +134,8 @@ offset_bottom = 194.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("1_5owba")
+theme = SubResource("Theme_5kdy4")
+theme_override_styles/panel = SubResource("StyleBoxFlat_5kdy4")
 script = ExtResource("2_3camo")
 Text = NodePath("VBoxContainer/TextEdit")
 CommandListConfiguration = Dictionary[PackedStringArray, String]({
@@ -30,41 +152,44 @@ HistoryLabel = NodePath("VBoxContainer/PanelContainer/RichTextLabel")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=259234709]
 layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1833009837]
-visible = false
-layout_mode = 2
-
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=504438264]
-layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 0
-
-[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1103346464]
-layout_mode = 2
-focus_mode = 0
-theme_override_font_sizes/font_size = 10
-text = "X"
-icon_alignment = 1
+theme_override_constants/separation = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=371588058]
+clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("3_yi2x7")
+theme_override_styles/panel = SubResource("StyleBoxFlat_bhfm8")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/PanelContainer" unique_id=296971418]
 custom_minimum_size = Vector2(0, 130)
+clip_contents = false
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/paragraph_separation = 10
+theme_override_colors/default_color = Color(0.8678352, 0.8678352, 0.86783516, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 0
+theme_override_fonts/normal_font = ExtResource("2_5kdy4")
 bbcode_enabled = true
+scroll_active = false
 scroll_following = true
 
 [node name="TextEdit" type="TextEdit" parent="VBoxContainer" unique_id=740363938]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 24
+theme_override_colors/caret_color = Color(0.7993578, 0.7993577, 0.7993577, 1)
+theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.8678352, 0.8678352, 0.86783516, 1)
+theme_override_colors/font_placeholder_color = Color(0.8277695, 0.8277695, 0.82776946, 1)
+theme_override_constants/caret_width = 2
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("2_5kdy4")
+theme_override_styles/normal = SubResource("StyleBoxFlat_sh42j")
+theme_override_styles/focus = SubResource("StyleBoxFlat_sh42j")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_sh42j")
 placeholder_text = "Enter Command"
 scroll_fit_content_height = true
 
@@ -72,8 +197,8 @@ scroll_fit_content_height = true
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 40.0
-offset_bottom = 40.0
+offset_top = 33.0
+offset_bottom = 33.0
 grow_horizontal = 2
 
 [node name="In" type="AudioStreamPlayer" parent="." unique_id=1096894166]
@@ -88,8 +213,5 @@ volume_db = -5.0
 pitch_scale = 2.55
 bus = &"Sounds"
 
-[connection signal="button_down" from="VBoxContainer/HBoxContainer/Button" to="." method="OnMoveButtonDown"]
-[connection signal="button_up" from="VBoxContainer/HBoxContainer/Button" to="." method="OnMoveButtonUp"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/Button2" to="." method="OnCloseButtonPressed"]
 [connection signal="focus_entered" from="VBoxContainer/TextEdit" to="." method="OnCommandLineFocused"]
 [connection signal="text_changed" from="VBoxContainer/TextEdit" to="." method="OnCommandEntered"]

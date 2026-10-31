@@ -1,22 +1,11 @@
-[gd_scene format=3 uid="uid://cqejjvj1hassq"]
+[gd_scene format=3 uid="uid://mvhv44x16efi"]
 
-[ext_resource type="Script" uid="uid://d0hiwp6l4fyyy" path="res://Scenes/Card_Fight/missile_viz.gd" id="1_5lbu3"]
-[ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scenes/MapShips/Trail_Line/trail_line.gd" id="2_28kke"]
-[ext_resource type="Script" uid="uid://7udmjg5dc1n8" path="res://addons/BurstParticles2D/BurstParticleGroup2D.gd" id="3_6elwd"]
-[ext_resource type="PackedScene" uid="uid://dlkjo56vcapoo" path="res://Scenes/Card_Fight/AtackEffects/RevEf.tscn" id="3_n0kd1"]
-[ext_resource type="Script" uid="uid://dda30cxipibam" path="res://addons/BurstParticles2D/BurstParticles2D.gd" id="3_pof7x"]
-[ext_resource type="AudioStream" uid="uid://bma0gkj3wnxec" path="res://Assets/Sounds/BeamRev.mp3" id="3_q07tg"]
-[ext_resource type="Texture2D" uid="uid://ovw18l4dc1fv" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb.png" id="4_6elwd"]
-[ext_resource type="Texture2D" uid="uid://vwe34itxqa37" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb_soft.png" id="5_ex23e"]
-[ext_resource type="Gradient" uid="uid://d4miprpqrdwuy" path="res://Scenes/Card_Fight/AtackEffects/Trail.tres" id="5_q1nye"]
-[ext_resource type="Texture2D" uid="uid://d2lceccxwhwet" path="res://addons/BurstParticles2D/BurstParticles2D-demo/ring.png" id="7_1fv0c"]
-[ext_resource type="AudioStream" uid="uid://iiqji6xlmffd" path="res://Assets/Sounds/Explosion.wav" id="9_hv3nu"]
-[ext_resource type="AudioStream" uid="uid://c4iof3ou2x8m4" path="res://Assets/Sounds/beam-fire-282361.mp3" id="9_n0kd1"]
-[ext_resource type="Texture2D" uid="uid://cpxai80e7ddcg" path="res://Scenes/Card_Fight/AtackEffects/OrbGradient.tres" id="10_qbkhg"]
-
-[sub_resource type="Curve" id="Curve_5lbu3"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
+[ext_resource type="Script" uid="uid://7udmjg5dc1n8" path="res://addons/BurstParticles2D/BurstParticleGroup2D.gd" id="1_6htnq"]
+[ext_resource type="Script" uid="uid://dda30cxipibam" path="res://addons/BurstParticles2D/BurstParticles2D.gd" id="2_kvsav"]
+[ext_resource type="Texture2D" uid="uid://vwe34itxqa37" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb_soft.png" id="3_2evd8"]
+[ext_resource type="Texture2D" uid="uid://ovw18l4dc1fv" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb.png" id="4_e31aq"]
+[ext_resource type="Texture2D" uid="uid://cpxai80e7ddcg" path="res://Scenes/Card_Fight/AtackEffects/OrbGradient.tres" id="5_2ux6t"]
+[ext_resource type="Texture2D" uid="uid://d2lceccxwhwet" path="res://addons/BurstParticles2D/BurstParticles2D-demo/ring.png" id="6_eqxsh"]
 
 [sub_resource type="Gradient" id="Gradient_bclkm"]
 interpolation_mode = 2
@@ -130,46 +119,18 @@ point_count = 3
 _data = [Vector2(0, 1), 0.0, 0.0597402, 0, 0, Vector2(1, 0), -0.904178, 0.0, 0, 0]
 point_count = 2
 
-[node name="MissileThing" type="Node2D" unique_id=848528312 node_paths=PackedStringArray("InitialParticle", "EndingParticle", "SoundNode", "Trail")]
-rotation = -1.5708
-script = ExtResource("1_5lbu3")
-speed = 30
-base_curve_intensity = 0.25
-wiggle_amplitude = 0.0
-wiggle_frequency = 0.0
-ExplosionSound = ExtResource("9_hv3nu")
-FireSound = ExtResource("3_q07tg")
-InitialParticle = NodePath("MultiParticleExample1")
-EndingParticle = NodePath("MultiParticleExample2")
-SoundNode = NodePath("MissileCruise")
-Trail = NodePath("TrailLine")
-
-[node name="MultiParticleExample1" parent="." unique_id=923935223 instance=ExtResource("3_n0kd1")]
-
-[node name="TrailLine" type="Line2D" parent="." unique_id=15096855]
-width_curve = SubResource("Curve_5lbu3")
-gradient = ExtResource("5_q1nye")
-joint_mode = 2
-begin_cap_mode = 2
-round_precision = 32
-antialiased = true
-script = ExtResource("2_28kke")
-trail_fade_speed = 0.02
-ManualInit = true
-metadata/_custom_type_script = "uid://cmkc6lix20rjb"
-
-[node name="MultiParticleExample2" type="Node2D" parent="." unique_id=1948313486]
+[node name="MultiParticleExample2" type="Node2D" unique_id=2008354758]
 scale = Vector2(0.052, 0.052)
-script = ExtResource("3_6elwd")
+script = ExtResource("1_6htnq")
 repeat = false
 autostart = false
 
-[node name="Flash" type="Node2D" parent="MultiParticleExample2" unique_id=602912315]
-script = ExtResource("3_pof7x")
+[node name="Flash" type="Node2D" parent="." unique_id=2085384373]
+script = ExtResource("2_kvsav")
 num_particles = 1
 lifetime = 0.75
 autostart = false
-texture = ExtResource("5_ex23e")
+texture = ExtResource("3_2evd8")
 image_scale = 0.5
 gradient = SubResource("GradientTexture1D_o8dmu")
 blend_mode = 1
@@ -184,16 +145,16 @@ scale_curve = SubResource("Curve_whlsl")
 color_offset_curve = SubResource("Curve_bvb0m")
 alpha_curve = SubResource("Curve_g0j12")
 
-[node name="Orb" type="Node2D" parent="MultiParticleExample2" unique_id=1359511634]
-script = ExtResource("3_pof7x")
+[node name="Orb" type="Node2D" parent="." unique_id=1057124982]
+script = ExtResource("2_kvsav")
 num_particles = 16
 lifetime = 0.75
 lifetime_randomness = 0.113
 autostart = false
-texture = ExtResource("4_6elwd")
+texture = ExtResource("4_e31aq")
 image_scale = 0.2
 image_scale_randomness = 0.64
-gradient = ExtResource("10_qbkhg")
+gradient = ExtResource("5_2ux6t")
 blend_mode = 1
 angle_degrees = 197.5
 angle_randomness = 1.0
@@ -213,15 +174,15 @@ y_scale_curve = SubResource("Curve_hxrsk")
 color_offset_curve = SubResource("Curve_nvnu3")
 alpha_curve = SubResource("Curve_4xw1d")
 
-[node name="Orb2" type="Node2D" parent="MultiParticleExample2" unique_id=388333849]
-script = ExtResource("3_pof7x")
+[node name="Orb2" type="Node2D" parent="." unique_id=59531834]
+script = ExtResource("2_kvsav")
 num_particles = 16
 lifetime = 0.75
 lifetime_randomness = 0.113
 autostart = false
-texture = ExtResource("4_6elwd")
+texture = ExtResource("4_e31aq")
 image_scale = 0.1
-gradient = ExtResource("10_qbkhg")
+gradient = ExtResource("5_2ux6t")
 blend_mode = 1
 angle_degrees = 197.5
 angle_randomness = 1.0
@@ -241,16 +202,16 @@ y_scale_curve = SubResource("Curve_hxrsk")
 color_offset_curve = SubResource("Curve_nvnu3")
 alpha_curve = SubResource("Curve_4xw1d")
 
-[node name="Orb3" type="Node2D" parent="MultiParticleExample2" unique_id=474992174]
-script = ExtResource("3_pof7x")
+[node name="Orb3" type="Node2D" parent="." unique_id=118054815]
+script = ExtResource("2_kvsav")
 num_particles = 32
 lifetime = 0.75
 lifetime_randomness = 0.653
 autostart = false
-texture = ExtResource("4_6elwd")
+texture = ExtResource("4_e31aq")
 image_scale = 0.2
 image_scale_randomness = 0.64
-gradient = ExtResource("10_qbkhg")
+gradient = ExtResource("5_2ux6t")
 blend_mode = 1
 angle_degrees = 197.5
 angle_randomness = 1.0
@@ -268,16 +229,16 @@ y_scale_curve = SubResource("Curve_hxrsk")
 color_offset_curve = SubResource("Curve_nvnu3")
 alpha_curve = SubResource("Curve_4xw1d")
 
-[node name="Orb4" type="Node2D" parent="MultiParticleExample2" unique_id=1197109951]
-script = ExtResource("3_pof7x")
+[node name="Orb4" type="Node2D" parent="." unique_id=2115270991]
+script = ExtResource("2_kvsav")
 num_particles = 6
 lifetime = 0.75
 lifetime_randomness = 0.407
 autostart = false
-texture = ExtResource("4_6elwd")
+texture = ExtResource("4_e31aq")
 image_scale = 0.4
 image_scale_randomness = 0.193
-gradient = ExtResource("10_qbkhg")
+gradient = ExtResource("5_2ux6t")
 blend_mode = 1
 angle_degrees = 197.5
 angle_randomness = 1.0
@@ -295,13 +256,13 @@ y_scale_curve = SubResource("Curve_wv4ag")
 color_offset_curve = SubResource("Curve_nvnu3")
 alpha_curve = SubResource("Curve_4xw1d")
 
-[node name="Ring" type="Node2D" parent="MultiParticleExample2" unique_id=1473983548]
+[node name="Ring" type="Node2D" parent="." unique_id=1268876011]
 modulate = Color(1, 1, 1, 0.505882)
-script = ExtResource("3_pof7x")
+script = ExtResource("2_kvsav")
 num_particles = 1
 lifetime = 0.5
 autostart = false
-texture = ExtResource("7_1fv0c")
+texture = ExtResource("6_eqxsh")
 image_scale = 0.5
 gradient = SubResource("GradientTexture1D_y6tk6")
 blend_mode = 1
@@ -317,9 +278,3 @@ angle_curve = SubResource("Curve_p482y")
 scale_curve = SubResource("Curve_b4wgj")
 color_offset_curve = SubResource("Curve_pdtjb")
 alpha_curve = SubResource("Curve_2rqx3")
-
-[node name="MissileCruise" type="AudioStreamPlayer" parent="." unique_id=2087139778]
-stream = ExtResource("9_n0kd1")
-volume_db = -5.0
-pitch_scale = 0.857948
-bus = &"Sounds"

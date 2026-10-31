@@ -11,7 +11,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 330.5
-offset_bottom = -330.5
+offset_bottom = -283.5
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
@@ -20,24 +20,31 @@ size_flags_vertical = 4
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("1_k73m2")
 script = ExtResource("2_k73m2")
-RepairPriceLabel = NodePath("VBoxContainer2/VBoxContainer/HBoxContainer3/RepairPrice")
-CurrentHullLabel = NodePath("VBoxContainer2/VBoxContainer2/HBoxContainer2/HullAmm")
-HullBar = NodePath("VBoxContainer2/ProgressBar")
-CaptainNameLabel = NodePath("VBoxContainer2/VBoxContainer2/Label")
-ReprairTimeLabel = NodePath("VBoxContainer2/VBoxContainer/HBoxContainer4/RepairTime")
+RepairPriceLabel = NodePath("MarginContainer/VBoxContainer2/VBoxContainer/HBoxContainer3/RepairPrice")
+CurrentHullLabel = NodePath("MarginContainer/VBoxContainer2/VBoxContainer2/HBoxContainer2/HullAmm")
+HullBar = NodePath("MarginContainer/VBoxContainer2/VBoxContainer3/ProgressBar")
+CaptainNameLabel = NodePath("MarginContainer/VBoxContainer2/VBoxContainer2/Label")
+ReprairTimeLabel = NodePath("MarginContainer/VBoxContainer2/VBoxContainer/HBoxContainer4/RepairTime")
 PlayerWallet = ExtResource("3_0m2lf")
 
-[node name="VBoxContainer2" type="HBoxContainer" parent="." unique_id=611197967]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=285089885]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="VBoxContainer2" type="HBoxContainer" parent="MarginContainer" unique_id=611197967]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer2" unique_id=1223383127]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer2" unique_id=1223383127]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="VBoxContainer2/VBoxContainer2" unique_id=230578061]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer2/VBoxContainer2" unique_id=230578061]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
@@ -47,12 +54,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="HBoxContainer2" type="VBoxContainer" parent="VBoxContainer2/VBoxContainer2" unique_id=505051986]
+[node name="HBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer2/VBoxContainer2" unique_id=505051986]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 3
 
-[node name="Label2" type="Label" parent="VBoxContainer2/VBoxContainer2/HBoxContainer2" unique_id=229031892]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer2/VBoxContainer2/HBoxContainer2" unique_id=229031892]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -60,23 +67,23 @@ theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 16
 text = "Hull Integrity"
 
-[node name="HullAmm" type="Label" parent="VBoxContainer2/VBoxContainer2/HBoxContainer2" unique_id=935500527]
+[node name="HullAmm" type="Label" parent="MarginContainer/VBoxContainer2/VBoxContainer2/HBoxContainer2" unique_id=935500527]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "100"
 horizontal_alignment = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2" unique_id=609539318]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer2" unique_id=609539318]
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer" unique_id=2017209200]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer2/VBoxContainer" unique_id=2017209200]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 2
 
-[node name="Label3" type="Label" parent="VBoxContainer2/VBoxContainer/HBoxContainer3" unique_id=1034113116]
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer2/VBoxContainer/HBoxContainer3" unique_id=1034113116]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -84,17 +91,17 @@ theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 16
 text = "Repair Price:"
 
-[node name="RepairPrice" type="Label" parent="VBoxContainer2/VBoxContainer/HBoxContainer3" unique_id=415369690]
+[node name="RepairPrice" type="Label" parent="MarginContainer/VBoxContainer2/VBoxContainer/HBoxContainer3" unique_id=415369690]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "202"
 
-[node name="HBoxContainer4" type="VBoxContainer" parent="VBoxContainer2/VBoxContainer" unique_id=1313427357]
+[node name="HBoxContainer4" type="VBoxContainer" parent="MarginContainer/VBoxContainer2/VBoxContainer" unique_id=1313427357]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label2" type="Label" parent="VBoxContainer2/VBoxContainer/HBoxContainer4" unique_id=479458978]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer2/VBoxContainer/HBoxContainer4" unique_id=479458978]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -102,14 +109,17 @@ theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 16
 text = "Repair Time"
 
-[node name="RepairTime" type="Label" parent="VBoxContainer2/VBoxContainer/HBoxContainer4" unique_id=2058038433]
+[node name="RepairTime" type="Label" parent="MarginContainer/VBoxContainer2/VBoxContainer/HBoxContainer4" unique_id=2058038433]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 22
 text = "10h 30m"
 horizontal_alignment = 2
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer2" unique_id=1876089438]
+[node name="VBoxContainer3" type="VBoxContainer" parent="MarginContainer/VBoxContainer2" unique_id=1156826479]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer2/VBoxContainer3" unique_id=1876089438]
 custom_minimum_size = Vector2(400, 25)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -117,10 +127,23 @@ size_flags_vertical = 3
 value = 27.12
 show_percentage = false
 
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer2/VBoxContainer3" unique_id=1071941662]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer2/VBoxContainer3/HBoxContainer" unique_id=550844837]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "<"
+
+[node name="Button2" type="Button" parent="MarginContainer/VBoxContainer2/VBoxContainer3/HBoxContainer" unique_id=308740752]
+layout_mode = 2
+size_flags_horizontal = 3
+text = ">"
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=53776335]
 stream = ExtResource("5_tw0o4")
 volume_db = -10.0
 pitch_scale = 3.06
 bus = &"MapSounds"
 
-[connection signal="gui_input" from="VBoxContainer2/ProgressBar" to="." method="RepairBar_gui_input"]
+[connection signal="gui_input" from="MarginContainer/VBoxContainer2/VBoxContainer3/ProgressBar" to="." method="RepairBar_gui_input"]

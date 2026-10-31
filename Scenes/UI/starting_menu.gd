@@ -15,7 +15,7 @@ class_name StartingMenu
 var SpawnedCredits : Credits
 
 var Selecting : bool
-
+static var instance : StartingMenu
 
 signal GameStart(Load : bool, SkipStory : bool)
 signal PrologueStart(Load : bool, SkipStory : bool)
@@ -25,6 +25,7 @@ signal DelSave
 signal ShowTutorial(i : int)
 
 func _ready() -> void:
+	instance = self
 	HintDialogue.visible = false
 	Settings.visible = false
 	$CanvasModulate.color = Color(0,0,0,1)
@@ -181,7 +182,7 @@ func _on_cancel_pressed() -> void:
 	
 
 
-func _on_command_line_start_campaign(SkipStory: bool) -> void:
+func _on_command_line_start_campaign(SkipStory: bool, customSeed : int) -> void:
 	if (Selecting):
 		return
 		

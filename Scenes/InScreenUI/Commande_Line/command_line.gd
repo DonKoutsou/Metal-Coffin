@@ -13,9 +13,6 @@ class_name CommandLine
 
 var Items : Array[Item]
 
-signal StartPrologue(SkipStory : bool, customSeed : int)
-signal StartCampaign(SkipStory : bool, customSeed : int)
-
 static var instance : CommandLine
 static var Typing : bool = false
 static var History : PackedStringArray = []
@@ -180,7 +177,7 @@ func DoArgumentMatch(methodName : String, methodArgs : Array[Variant]) -> bool:
 
 func HandlePrologueCommand(Command) -> String:
 	if (Command.size() == 1):
-		StartPrologue.emit(false)
+		StartingMenu.instance._on_command_line_start_prologue(false, -1)
 		return "Starting Prologue"
 	
 	var customSeed : int = -1
@@ -189,7 +186,7 @@ func HandlePrologueCommand(Command) -> String:
 	
 	match (Command[1].to_lower()):
 		"skip":
-			StartPrologue.emit(true, customSeed)
+			StartingMenu.instance._on_command_line_start_prologue(true, customSeed)
 			return "Starting Prologue\nSkipping Story"
 	
 	return ">Error Handling Location Command"
@@ -198,13 +195,13 @@ func Prologue(skip : bool = false, customSeed : int = -1) -> String:
 	if (World.Instance != null):
 		return ">Can only apply while in main menu"
 
-	StartPrologue.emit(skip, customSeed)
+	StartingMenu.instance._on_command_line_start_prologue(skip, customSeed)
 	return "Starting Prologue"
 
 func Campaign(skip : bool = false, customSeed : int = -1) -> String:
 	if (World.Instance != null):
 		return ">Can only apply while in main menu"
-	StartCampaign.emit(skip, customSeed)
+	StartingMenu.instance._on_command_line_start_campaign(skip, customSeed)
 	return "Starting Campaign"
 
 func CardFightTypeSwitch(newType : Card_Fight.CardFightTurnType) -> String:
@@ -436,6 +433,7 @@ func AddRecomendation(RecText : String) -> void:
 	butn.connect("pressed", RecomendationPressed.bind(RecText))
 	RecomendationParent.add_child(butn)
 	butn.text = RecText
+	#butn.theme = theme
 
 func ClearRecomendations() -> void:
 	for g in RecomendationParent.get_children():
