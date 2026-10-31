@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://dx71hkif8fjp5" path="res://Scenes/Card_Fight/AtackEffects/Projectiles/Base_Card_Projectile.tscn" id="1_m6qqa"]
 [ext_resource type="PackedScene" uid="uid://cdipbu2scota7" path="res://Scenes/Card_Fight/AtackEffects/ImpactEffects/Debuff.tscn" id="2_edwhe"]
+[ext_resource type="PackedScene" uid="uid://dlkjo56vcapoo" path="res://Scenes/Card_Fight/AtackEffects/RevUpEffects/Base_Revup.tscn" id="2_rmo3g"]
 
 [node name="MissileThing" unique_id=1959528193 instance=ExtResource("1_m6qqa")]
+startParticle = ExtResource("2_rmo3g")
 endParticle = ExtResource("2_edwhe")

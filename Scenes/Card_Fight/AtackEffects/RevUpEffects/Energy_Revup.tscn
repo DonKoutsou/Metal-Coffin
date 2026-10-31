@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cpwdcpspd14cn"]
+
+[ext_resource type="PackedScene" uid="uid://dlkjo56vcapoo" path="res://Scenes/Card_Fight/AtackEffects/RevUpEffects/Base_Revup.tscn" id="1_83gkg"]
+[ext_resource type="Texture2D" uid="uid://d1572b7csqlws" path="res://Scenes/Card_Fight/AtackEffects/OrbGradient_Yello.tres" id="2_bgqp3"]
+
+[node name="MultiParticleExample2" unique_id=840921557 instance=ExtResource("1_83gkg")]
+
+[node name="Flash" parent="." index="0" unique_id=1089305532]
+gradient = ExtResource("2_bgqp3")
+
+[node name="Orb3" parent="." index="1" unique_id=347077696]
+gradient = ExtResource("2_bgqp3")

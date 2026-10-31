@@ -2,6 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://dx71hkif8fjp5" path="res://Scenes/Card_Fight/AtackEffects/Projectiles/Base_Card_Projectile.tscn" id="1_id3ur"]
 [ext_resource type="PackedScene" uid="uid://5ubeqcn5eqt5" path="res://Scenes/Card_Fight/AtackEffects/ImpactEffects/ShieldEffect.tscn" id="2_ar3jy"]
+[ext_resource type="PackedScene" uid="uid://ck6wfu6yvy4ic" path="res://Scenes/Card_Fight/AtackEffects/RevUpEffects/Shield_Revup.tscn" id="2_geecn"]
 
 [node name="MissileThing" unique_id=1959528193 instance=ExtResource("1_id3ur")]
+modulate = Color(0.59722394, 0.7434654, 1, 1)
+startParticle = ExtResource("2_geecn")
 endParticle = ExtResource("2_ar3jy")

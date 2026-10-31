@@ -1,19 +1,10 @@
 [gd_scene format=3 uid="uid://dlkjo56vcapoo"]
 
-[ext_resource type="Script" uid="uid://7udmjg5dc1n8" path="res://addons/BurstParticles2D/BurstParticleGroup2D.gd" id="1_p26ww"]
-[ext_resource type="Script" uid="uid://dda30cxipibam" path="res://addons/BurstParticles2D/BurstParticles2D.gd" id="2_esykf"]
-[ext_resource type="Texture2D" uid="uid://vwe34itxqa37" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb_soft.png" id="3_xiof4"]
-[ext_resource type="Texture2D" uid="uid://ovw18l4dc1fv" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb.png" id="4_m40so"]
-[ext_resource type="Texture2D" uid="uid://cpxai80e7ddcg" path="res://Scenes/Card_Fight/AtackEffects/OrbGradient.tres" id="5_eiu4j"]
-
-[sub_resource type="Gradient" id="Gradient_a1hsf"]
-interpolation_mode = 2
-offsets = PackedFloat32Array(0, 0.194529, 0.398176, 0.731707, 1)
-colors = PackedColorArray(1, 0.180392, 0.0705882, 0, 0.8499129, 0.38817257, 0.11047376, 0.858824, 0.366124, 0.88341, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_dewoe"]
-gradient = SubResource("Gradient_a1hsf")
-width = 16
+[ext_resource type="Script" uid="uid://7udmjg5dc1n8" path="res://addons/BurstParticles2D/BurstParticleGroup2D.gd" id="1_llmsk"]
+[ext_resource type="Script" uid="uid://dda30cxipibam" path="res://addons/BurstParticles2D/BurstParticles2D.gd" id="2_tprkl"]
+[ext_resource type="Texture2D" uid="uid://vwe34itxqa37" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb_soft.png" id="3_7wave"]
+[ext_resource type="Texture2D" uid="uid://ovw18l4dc1fv" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb.png" id="4_o7rsd"]
+[ext_resource type="Texture2D" uid="uid://m4y6e4axx7xy" path="res://Scenes/Card_Fight/AtackEffects/OrbGradient_White.tres" id="5_llmsk"]
 
 [sub_resource type="Curve" id="Curve_c8u8r"]
 _data = [Vector2(1e-05, 1), 3.4668e-07, 0.0, 0, 0, Vector2(0.807965, 0.593832), -1.34717, -1.34717, 0, 0, Vector2(1, 0), -3.21025, 5.75758, 0, 0]
@@ -77,18 +68,20 @@ _data = [Vector2(1e-05, 0), -0.0743434, 4.0269, 0, 0, Vector2(0.29823, 0.764712)
 point_count = 3
 
 [node name="MultiParticleExample2" type="Node2D" unique_id=840921557]
-script = ExtResource("1_p26ww")
+self_modulate = Color(1, 0, 0, 1)
+script = ExtResource("1_llmsk")
 repeat = false
 autostart = false
 
 [node name="Flash" type="Node2D" parent="." unique_id=1089305532]
-script = ExtResource("2_esykf")
+script = ExtResource("2_tprkl")
 num_particles = 1
 lifetime = 0.75
 autostart = false
-texture = ExtResource("3_xiof4")
+texture = ExtResource("3_7wave")
 image_scale = 0.04
-gradient = SubResource("GradientTexture1D_dewoe")
+gradient = ExtResource("5_llmsk")
+share_material = true
 direction = Vector2(0, 1)
 distance = 0.0
 spread_degrees = 0.0
@@ -101,15 +94,15 @@ color_offset_curve = SubResource("Curve_bvb0m")
 alpha_curve = SubResource("Curve_g0j12")
 
 [node name="Orb3" type="Node2D" parent="." unique_id=347077696]
-script = ExtResource("2_esykf")
+script = ExtResource("2_tprkl")
 num_particles = 32
 lifetime = 0.75
 lifetime_randomness = 0.653
 autostart = false
-texture = ExtResource("4_m40so")
+texture = ExtResource("4_o7rsd")
 image_scale = 0.03
 image_scale_randomness = 0.64
-gradient = ExtResource("5_eiu4j")
+gradient = ExtResource("5_llmsk")
 blend_mode = 1
 angle_degrees = 197.5
 angle_randomness = 1.0

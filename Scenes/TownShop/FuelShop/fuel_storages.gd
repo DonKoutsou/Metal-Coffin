@@ -182,6 +182,8 @@ func UpdateFuelBar(AddedFuel : float):
 
 	PlayerWallet.AddFunds(-MoneySpent)
 	if (MoneySpent > 0):
+		if (!$AudioStreamPlayer.playing):
+			$AudioStreamPlayer.play()
 		AchievementManager.GetInstance().IncrementStatFloat("FUELAM", MoneySpent)
 	
 	RedrawThing()

@@ -208,7 +208,8 @@ func _process(delta: float) -> void:
 	CloudNoise.offset.z += 0.01
 ##----------------------------------------------------------------------##
 func StartFight() -> void:
-	Declaration("Fight Start", 1.5).ActionDeclarationFinished.connect(IntroDeclarationFinished)
+	IntroDeclarationFinished()
+	#Declaration("Fight Start", 1.5).ActionDeclarationFinished.connect(IntroDeclarationFinished)
 	
 ##----------------------------------------------------------------------##
 func Declaration(text : String, duration : float = 1.5) -> ActionDeclarationUI:
@@ -252,14 +253,14 @@ func IntroDeclarationFinished() -> void:
 		for g in EnemyReserves:
 			g.PermaBuffSpeed(1 + g.WindPenalty)
 	else:
-		call_deferred("WindDeclarationFinishedurn")
+		call_deferred("WindDeclarationFinished")
 
 func WindDeclarationFinished() -> void:
 	ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_WIND)
-	if (stormLevel > 0):
-		Declaration("Storm Level : {0}".format([stormLevel]), 2).ActionDeclarationFinished.connect(StormDeclarationFinished)
-	else:
-		call_deferred("RunTurn")
+	#if (stormLevel > 0):
+		#Declaration("Storm Level : {0}".format([stormLevel]), 2).ActionDeclarationFinished.connect(StormDeclarationFinished)
+	#else:
+	call_deferred("RunTurn")
 	
 func StormDeclarationFinished() -> void:
 	ActionTracker.OnActionCompleted(ActionTracker.Action.CARD_FIGHT_STORM)

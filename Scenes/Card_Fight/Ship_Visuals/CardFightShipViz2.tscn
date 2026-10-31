@@ -14,7 +14,7 @@
 [ext_resource type="Shader" uid="uid://dy6uaiuajknfy" path="res://MetalEngineBase/Ship/ShipColorPallete.gdshader" id="8_5a1tl"]
 [ext_resource type="Material" uid="uid://bkekcc6fxt5w" path="res://Shaders/Blur/BludShipShadow.tres" id="8_kccki"]
 [ext_resource type="AudioStream" uid="uid://iiqji6xlmffd" path="res://Assets/Sounds/Explosion.wav" id="8_r755l"]
-[ext_resource type="Texture2D" uid="uid://db63st22ip6cl" path="res://Assets/ShipTextures/Pallete.png" id="9_uinv6"]
+[ext_resource type="Texture2D" uid="uid://iw5beh3sjcpl" path="res://Assets/ShipTextures/Hull13_Palette.png" id="9_5a1tl"]
 [ext_resource type="PackedScene" uid="uid://rjp78jwbs17y" path="res://Scenes/Card_Fight/Ship_Visuals/Fire.tscn" id="12_2rekq"]
 [ext_resource type="Shader" uid="uid://bf1f6mjy34nt" path="res://Scenes/Card_Fight/Ship_Visuals/Shield.gdshader" id="13_spb5j"]
 
@@ -73,8 +73,8 @@ color_ramp = SubResource("GradientTexture1D_mg5jy")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ydicf"]
 resource_local_to_scene = true
 shader = ExtResource("8_5a1tl")
-shader_parameter/palette_texture = ExtResource("9_uinv6")
-shader_parameter/palette_index = 1
+shader_parameter/palette_texture = ExtResource("9_5a1tl")
+shader_parameter/palette_index = 2
 shader_parameter/color_T = 0.1
 
 [sub_resource type="Gradient" id="Gradient_wmwbv"]

@@ -17,6 +17,7 @@ bg_color = Color(0, 0, 0, 0.7254902)
 bg_color = Color(1, 0.7647059, 0.08235294, 1)
 
 [node name="Credits" type="Control" unique_id=392640743]
+clip_contents = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -330,11 +331,3 @@ stretch_mode = 5
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="Button" type="Button" parent="VBoxContainer" unique_id=1545940802]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-text = "CLOSE"
-
-[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

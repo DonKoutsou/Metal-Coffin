@@ -98,14 +98,16 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 				
 				if (Mod is BuffModule):
 					var BuffText = "{0} +".format([CardModule.Stat.keys()[Mod.StatToBuff]])
+					var col = CardModule.GetColorForStat(Mod.StatToBuff)
 					for Ship in TargetShips:
-						call_deferred("SpawnUpVisual", Ship, card, BuffText)
+						call_deferred("SpawnUpVisual", Ship, card, BuffText, col)
 						Called = true
 				
 				if (Mod is BuffNextAttackModule):
 					var BuffText = "Firepower +"
+					var col = CardModule.GetColorForStat(CardModule.Stat.FIREPOWER)
 					for Ship in TargetShips:
-						call_deferred("SpawnUpVisual", Ship, card, BuffText)
+						call_deferred("SpawnUpVisual", Ship, card, BuffText, col)
 						Called = true
 				
 				else: if (Mod is NullCardModule):
@@ -128,8 +130,9 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 				
 				else : if (Mod is LoseBuffSelfModule):
 					var BuffText = "{0}\nRemoved".format([CardModule.Stat.keys()[Mod.StatToStrip]])
+					var col = CardModule.GetColorForStat(Mod.StatToStrip)
 					for Ship in TargetShips:
-						call_deferred("SpawnDownVisual", Ship, card, BuffText)
+						call_deferred("SpawnDownVisual", Ship, card, BuffText, col)
 						Called = true
 				
 				else : if (Mod is CauseFireModule):
@@ -159,8 +162,9 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 						
 				else : if (Mod is DeBuffEnemyModule or Mod is DeBuffSelfModule):
 					var BuffText = "{0} -".format([CardModule.Stat.keys()[Mod.StatToDeBuff]])
+					var col = CardModule.GetColorForStat(Mod.StatToDeBuff)
 					for Ship in TargetShips:
-						call_deferred("SpawnDownVisual", Ship, card, BuffText)
+						call_deferred("SpawnDownVisual", Ship, card, BuffText, col)
 						Called = true
 						
 				else : if (Mod is BurnEnemyCardModule):
@@ -250,27 +254,29 @@ func SpawnEnergyVisual(Target : Node, DefCard : Card, FloaterText : String) -> v
 	Visual.SpawnPos = DefCard.global_position + (DefCard.size / 2)
 	add_child(Visual)
 
-	Visual.connect("Reached", ShieldTweenEnded.bind(Target, FloaterText))
+	Visual.connect("Reached", BuffTweenEnded.bind(Target, FloaterText, Color("ffd500")))
 
 #-----------------------------------------------------------------------------------
-func SpawnUpVisual(Target : Node, DefCard : Card, FloaterText : String) -> void:
+func SpawnUpVisual(Target : Node, DefCard : Card, FloaterText : String, col : Color) -> void:
 	var BuffVisual : PackedScene = ResourceLoader.load(BuffVisualFile)
 	var Visual = BuffVisual.instantiate() as MissileViz
+	Visual.modulate = col
 	Visual.Target = Target
 	Visual.SpawnPos = DefCard.global_position + (DefCard.size / 2)
 	add_child(Visual)
 
-	Visual.connect("Reached", BuffTweenEnded.bind(Target, FloaterText))
+	Visual.connect("Reached", BuffTweenEnded.bind(Target, FloaterText, col))
 
 #-----------------------------------------------------------------------------------
-func SpawnDownVisual(Target : Node, DefCard : Card, FloaterText : String) -> void:
+func SpawnDownVisual(Target : Node, DefCard : Card, FloaterText : String, col : Color) -> void:
 	var DeBuffVisual : PackedScene = ResourceLoader.load(DebuffVisualFile)
 	var Visual = DeBuffVisual.instantiate() as MissileViz
+	Visual.modulate = col
 	Visual.Target = Target
 	Visual.SpawnPos = DefCard.global_position + (DefCard.size / 2)
 	add_child(Visual)
 
-	Visual.connect("Reached", BuffTweenEnded.bind(Target, FloaterText))
+	Visual.connect("Reached", BuffTweenEnded.bind(Target, FloaterText, col))
 
 #-----------------------------------------------------------------------------------
 func SpawnBurnVisual(Target : Node, DefCard : Card, FloaterText : String) -> void:
@@ -280,7 +286,7 @@ func SpawnBurnVisual(Target : Node, DefCard : Card, FloaterText : String) -> voi
 	Visual.SpawnPos = DefCard.global_position + (DefCard.size / 2)
 	add_child(Visual)
 
-	Visual.connect("Reached", BuffTweenEnded.bind(Target, FloaterText))
+	Visual.connect("Reached", BuffTweenEnded.bind(Target, FloaterText, CardModule.GetColorForStat(CardModule.Stat.FIREPOWER)))
 
 #-----------------------------------------------------------------------------------
 func SpawnUpDamageVisual(Target : Node, DefCard : Card, FloaterText : String) -> void:
@@ -290,7 +296,7 @@ func SpawnUpDamageVisual(Target : Node, DefCard : Card, FloaterText : String) ->
 	Visual.SpawnPos = DefCard.global_position + (DefCard.size / 2)
 	add_child(Visual)
 
-	Visual.connect("Reached", BuffTweenEnded.bind(Target, FloaterText))
+	Visual.connect("Reached", BuffTweenEnded.bind(Target, FloaterText, CardModule.GetColorForStat(CardModule.Stat.FIREPOWER)))
 
 #-----------------------------------------------------------------------------------
 func TweenEnded(Target : Node, DeffenceCard : Card, FloaterText : String) -> void:
@@ -327,17 +333,17 @@ func ShieldTweenEnded(target : Node, FloaterText : String) -> void:
 	Connected.emit()
 	var DFloater = DamageFloater.instantiate() as Floater
 	DFloater.text = FloaterText
-	DFloater.modulate = Color(1,1,1,1)
+	DFloater.modulate = Color(0.56, 0.765, 1.0, 1.0)
 	add_child(DFloater)
 	DFloater.global_position = (target.global_position) - DFloater.size / 2
 	DFloater.Ended.connect(AnimEnded)
 
 #-----------------------------------------------------------------------------------
-func BuffTweenEnded(target : Node, FloaterText : String) -> void:
+func BuffTweenEnded(target : Node, FloaterText : String, col : Color) -> void:
 	Connected.emit()
 	var DFloater = DamageFloater.instantiate() as Floater
 	DFloater.text = FloaterText
-	DFloater.modulate = Color(1,1,1,1)
+	DFloater.modulate = col
 	add_child(DFloater)
 	DFloater.global_position = (target.global_position) - DFloater.size / 2
 	DFloater.Ended.connect(AnimEnded)

@@ -5,6 +5,7 @@
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="3_tywce"]
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://MetalEngineBase/Theme/PopTheme.tres" id="4_jvdwb"]
 [ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://MetalEngineBase/Fonts/DOTMBold.TTF" id="4_tywce"]
+[ext_resource type="AudioStream" uid="uid://cejabfoaluemx" path="res://Assets/Sounds/gas-pump-29700.mp3" id="6_0u4od"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8vrlf"]
 content_margin_left = 10.0
@@ -147,6 +148,10 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "Wind Direction : SW"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=525511726]
+stream = ExtResource("6_0u4od")
+bus = &"MapSounds"
 
 [connection signal="gui_input" from="VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/ProgressBar" to="." method="FuelBar_gui_input"]
 [connection signal="mouse_entered" from="VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/ProgressBar" to="." method="_on_progress_bar_mouse_entered"]

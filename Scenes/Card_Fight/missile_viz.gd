@@ -12,10 +12,10 @@ class_name MissileViz
 
 @export var ExplosionSound : AudioStream
 @export var FireSound : AudioStream
+@export var startParticle : PackedScene
 @export var endParticle : PackedScene
 
 @export_group("Nodes")
-@export var InitialParticle : BurstParticleGroup2D
 @export var SoundNode : AudioStreamPlayer
 @export var Trail : TrailLine
 
@@ -45,8 +45,12 @@ func _ready() -> void:
 	S.pitch_scale = randf_range(0.8, 1.2)
 	
 	set_process(false)
-	InitialParticle.burst()
-	await InitialParticle.Finished
+	
+	var initialParticle : BurstParticleGroup2D = startParticle.instantiate()
+	add_child(initialParticle)
+	initialParticle.burst()
+	await initialParticle.Finished
+	initialParticle.queue_free()
 	SoundNode.play()
 	var pos = Target.global_position
 	if (Target is Control):

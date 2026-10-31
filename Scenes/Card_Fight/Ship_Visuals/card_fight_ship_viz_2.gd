@@ -275,7 +275,7 @@ func SetStats(S : BattleShipStats, Friendly : bool, ) -> void:
 	var shader : ShaderMaterial = ShipIcon.material
 	shader.set_shader_parameter("palette_index", S.col)
 	if (!S.pallete.is_empty()):
-		shader.set_shader_parameter("palette_texture", S.pallete)
+		shader.set_shader_parameter("palette_texture", load(S.pallete))
 	
 	if (S.cardFightIcons.size() > 0):
 		ShipIcon.texture = S.cardFightIcons[0]

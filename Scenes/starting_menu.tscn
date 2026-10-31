@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bgvp50nvwckpp" path="res://Assets/Logos/icon_monochrome_light.png" id="3_s86m3"]
 [ext_resource type="FastNoiseLite" uid="uid://djv3ki2j68hy4" path="res://Shaders/Clouds/CloudStartingMenuNoise.tres" id="3_t54ed"]
 [ext_resource type="Material" uid="uid://2l428k4wukko" path="res://Shaders/Ground/StartingMenu_ground.tres" id="4_t54ed"]
+[ext_resource type="Texture2D" uid="uid://bjngt28xdoq47" path="res://Assets/Particles/Zoin's Flame Trail 5.png" id="6_t54ed"]
 [ext_resource type="Script" uid="uid://dnjdy3xj0atfy" path="res://Scenes/UI/intro_menu_ships.gd" id="6_yrlew"]
 [ext_resource type="Script" uid="uid://cmkc6lix20rjb" path="res://Scenes/MapShips/Trail_Line/trail_line.gd" id="8_eb1s8"]
 [ext_resource type="Texture2D" uid="uid://ev8n5tjqls2e" path="res://Assets/ShipTextures/Hull2.png" id="9_j43p8"]
@@ -86,7 +87,7 @@ canvas_item_default_texture_filter = 2
 audio_listener_enable_2d = true
 positional_shadow_atlas_size = 0
 positional_shadow_atlas_16_bits = false
-size = Vector2i(784, 546)
+size = Vector2i(1679, 1169)
 size_2d_override = Vector2i(925, 644)
 size_2d_override_stretch = true
 render_target_update_mode = 4
@@ -153,11 +154,13 @@ expand_mode = 1
 
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect3" unique_id=971039501]
 show_behind_parent = true
+texture_filter = 3
 position = Vector2(15, 7)
 points = PackedVector2Array(0, 0)
-width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
+texture = ExtResource("6_t54ed")
+texture_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 script = ExtResource("8_eb1s8")
@@ -199,11 +202,13 @@ expand_mode = 1
 
 [node name="TrailLine2" type="Line2D" parent="SubViewportContainer/SubViewport/IntroMenuShips/TextureRect4" unique_id=620173937]
 show_behind_parent = true
+texture_filter = 3
 position = Vector2(30, 9.00005)
 points = PackedVector2Array(0, 0)
-width = 4.0
 width_curve = SubResource("Curve_1p5b6")
 gradient = SubResource("Gradient_srpg8")
+texture = ExtResource("6_t54ed")
+texture_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 script = ExtResource("8_eb1s8")
