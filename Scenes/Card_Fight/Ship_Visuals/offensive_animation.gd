@@ -15,6 +15,7 @@ signal AnimationFinished
 @export_file("*.tscn") var CardVisualFile : String
 @export_file("*.tscn") var ShieldVisualFile : String
 @export_file("*.tscn") var FlameVisualFile : String
+@export_file("*.tscn") var FlameExtVisualFile : String
 @export_file("*.tscn") var EnergyVisualFile : String
 @export_file("*.tscn") var BuffVisualFile : String
 @export_file("*.tscn") var DebuffVisualFile : String
@@ -87,27 +88,19 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 			if (AnimData is DeffensiveAnimationData):
 
 				var TargetShips = AnimData.Targets
-				
-				#if (Passive is ShieldOnDraw_Passive):
-					#for Ship in TargetShips:
-						#call_deferred("SpawnShieldVisual", Ship, card, "Shield +")
-				#if (Passive is Thorns_Passive):
-					#for Ship in TargetShips:
-						#call_deferred("SpawnVisual", Ship, card, null, "Recoil")
-				#
-				
+
 				if (Mod is BuffModule):
 					var BuffText = "{0} +".format([CardModule.Stat.keys()[Mod.StatToBuff]])
 					var col = CardModule.GetColorForStat(Mod.StatToBuff)
 					for Ship in TargetShips:
-						call_deferred("SpawnUpVisual", Ship, card, BuffText, col)
+						call_deferred("SpawnDefVisual", Ship, card, BuffText, BuffVisualFile, col)
 						Called = true
 				
 				if (Mod is BuffNextAttackModule):
 					var BuffText = "Firepower +"
 					var col = CardModule.GetColorForStat(CardModule.Stat.FIREPOWER)
 					for Ship in TargetShips:
-						call_deferred("SpawnUpVisual", Ship, card, BuffText, col)
+						call_deferred("SpawnDefVisual", Ship, card, BuffText, BuffVisualFile, col)
 						Called = true
 				
 				else: if (Mod is NullCardModule):
@@ -115,72 +108,73 @@ func DoAnimation(AnimationCard : CardStats, Data : Array[AnimationData],Performe
 				
 				else: if (Mod is ShieldCardModule or Mod is MaxShieldCardModule):
 					for Ship in TargetShips:
-						call_deferred("SpawnShieldVisual", Ship, card, "Shield +")
+						call_deferred("SpawnDefVisual", Ship, card, "Shield +", ShieldVisualFile, Color(0.56, 0.765, 1.0, 1.0))
 						Called = true
 						
 				else : if (Mod is FireExtinguishModule):
 					for Ship in TargetShips:
-						call_deferred("SpawnShieldVisual", Ship, card, "Fire\nExtinguished")
+						call_deferred("SpawnDefVisual", Ship, card, "Fire\nExtinguished", FlameExtVisualFile, Color(1,1,1))
 						Called = true
 						
 				else : if (Mod is CleanseDebuffModule):
 					for Ship in TargetShips:
-						call_deferred("SpawnShieldVisual", Ship, card, "Debuffs\nCleansed")
+						call_deferred("SpawnDefVisual", Ship, card, "Debuffs\nCleansed", ShieldVisualFile, Color(0.56, 0.765, 1.0, 1.0))
 						Called = true
 				
 				else : if (Mod is LoseBuffSelfModule):
 					var BuffText = "{0}\nRemoved".format([CardModule.Stat.keys()[Mod.StatToStrip]])
 					var col = CardModule.GetColorForStat(Mod.StatToStrip)
 					for Ship in TargetShips:
-						call_deferred("SpawnDownVisual", Ship, card, BuffText, col)
+						call_deferred("SpawnDefVisual", Ship, card, BuffText, DebuffVisualFile, col)
 						Called = true
 				
 				else : if (Mod is CauseFireModule):
 					for Ship in TargetShips:
-						call_deferred("SpawnFlameVisual", Ship, card, "Fire")
+						call_deferred("SpawnDefVisual", Ship, card, "Fire", FlameVisualFile, Color(1.0, 0.356, 0.16, 1.0))
 						Called = true
 				
 				else : if (Mod is ResupplyModule or Mod is ReserveConversionModule):
 					for Ship in TargetShips:
-						call_deferred("SpawnEnergyVisual", Ship, card, "Energy +")
+						call_deferred("SpawnDefVisual", Ship, card, "Energy +", EnergyVisualFile, Color("ffd500"))
 						Called = true
 
 				else : if (Mod is ReserveModule or Mod is MaxReserveModule):
 					for Ship in TargetShips:
-						call_deferred("SpawnEnergyVisual", Ship, card, "Energy\nReserve +")
+						call_deferred("SpawnDefVisual", Ship, card, "Energy\nReserve +", EnergyVisualFile, Color("ffd500"))
 						Called = true
 						
 				else : if (Mod is HandCardEnergyReduceModule):
 					for Ship in TargetShips:
-						call_deferred("SpawnEnergyVisual", Ship, card, "Cost -")
+						call_deferred("SpawnDefVisual", Ship, card, "Cost -", EnergyVisualFile, Color("ffd500"))
 						Called = true
 						
 				else : if (Mod is InterceptModule):
 					for Ship in TargetShips:
-						call_deferred("SpawnShieldVisual", Ship, card, "Interceptor")
+						call_deferred("SpawnDefVisual", Ship, card, "Interceptor", ShieldVisualFile, Color(0.56, 0.765, 1.0, 1.0))
 						Called = true
 						
 				else : if (Mod is DeBuffEnemyModule or Mod is DeBuffSelfModule):
 					var BuffText = "{0} -".format([CardModule.Stat.keys()[Mod.StatToDeBuff]])
 					var col = CardModule.GetColorForStat(Mod.StatToDeBuff)
 					for Ship in TargetShips:
-						call_deferred("SpawnDownVisual", Ship, card, BuffText, col)
+						call_deferred("SpawnDefVisual", Ship, card, BuffText, DebuffVisualFile, col)
 						Called = true
 						
 				else : if (Mod is BurnEnemyCardModule):
 					var BuffText = "Cards Burned"
 					for Ship in TargetShips:
-						call_deferred("SpawnFlameVisual", Ship, card, BuffText)
+						call_deferred("SpawnDefVisual", Ship, card, BuffText, FlameVisualFile, Color(1.0, 0.356, 0.16, 1.0))
 						Called = true
 				
 				else : if (Mod is CardInjectCardModule):
 					var BuffText = "Cards\nInjected"
 					for Ship in TargetShips:
-						call_deferred("SpawnCardVisual", Ship, card, BuffText)
+						call_deferred("SpawnDefVisual", Ship, card, BuffText, CardVisualFile, Color(1,1,1))
 						Called = true
 				
 				else : if (Mod is StackDamageCardModule):
-					call_deferred("SpawnUpDamageVisual", card, card, "Damage +")
+					var col = CardModule.GetColorForStat(CardModule.Stat.FIREPOWER)
+					call_deferred("SpawnDefVisual", card, card, "Damage +", BuffVisualFile, col)
 					Called = true
 				
 			if (Data.size() > 1):
@@ -217,86 +211,14 @@ func SpawnVisual(Target : Node, AttackOrigin : Node, DeffenceCard : Card, Floate
 	Visual.connect("Reached", TweenEnded.bind(Target , DeffenceCard, FloaterText))
 
 #-----------------------------------------------------------------------------------
-func SpawnShieldVisual(Target : Node, DefCard : Card, FloaterText : String) -> void:
-	var ShieldVisual : PackedScene = ResourceLoader.load(ShieldVisualFile)
-	var Visual = ShieldVisual.instantiate() as MissileViz
-	Visual.Target = Target
-	Visual.SpawnPos = DefCard.global_position + (DefCard.size / 2)
-	add_child(Visual)
-
-	Visual.connect("Reached", ShieldTweenEnded.bind(Target, FloaterText))
-
-#-----------------------------------------------------------------------------------
-func SpawnFlameVisual(Target : Node, DefCard : Card, FloaterText : String) -> void:
-	var ShieldVisual : PackedScene = ResourceLoader.load(FlameVisualFile)
-	var Visual = ShieldVisual.instantiate() as MissileViz
-	Visual.Target = Target
-	Visual.SpawnPos = DefCard.global_position + (DefCard.size / 2)
-	add_child(Visual)
-
-	Visual.connect("Reached", ShieldTweenEnded.bind(Target, FloaterText))
-
-#-----------------------------------------------------------------------------------
-func SpawnCardVisual(Target : Node, DefCard : Card, FloaterText : String) -> void:
-	var ShieldVisual : PackedScene = ResourceLoader.load(CardVisualFile)
-	var Visual = ShieldVisual.instantiate() as CardViz
-	Visual.Target = Target
-	Visual.SpawnPos = DefCard.global_position + (DefCard.size / 2)
-	add_child(Visual)
-
-	Visual.connect("Reached", ShieldTweenEnded.bind(Target, FloaterText))
-
-#-----------------------------------------------------------------------------------
-func SpawnEnergyVisual(Target : Node, DefCard : Card, FloaterText : String) -> void:
-	var EnergyVisual : PackedScene = ResourceLoader.load(EnergyVisualFile)
-	var Visual = EnergyVisual.instantiate() as MissileViz
-	Visual.Target = Target
-	Visual.SpawnPos = DefCard.global_position + (DefCard.size / 2)
-	add_child(Visual)
-
-	Visual.connect("Reached", BuffTweenEnded.bind(Target, FloaterText, Color("ffd500")))
-
-#-----------------------------------------------------------------------------------
-func SpawnUpVisual(Target : Node, DefCard : Card, FloaterText : String, col : Color) -> void:
-	var BuffVisual : PackedScene = ResourceLoader.load(BuffVisualFile)
-	var Visual = BuffVisual.instantiate() as MissileViz
-	Visual.modulate = col
+func SpawnDefVisual(Target : Node, DefCard : Card, FloaterText : String, visualFile : String, col : Color) -> void:
+	var visualScene : PackedScene = ResourceLoader.load(visualFile)
+	var Visual = visualScene.instantiate() as MissileViz
 	Visual.Target = Target
 	Visual.SpawnPos = DefCard.global_position + (DefCard.size / 2)
 	add_child(Visual)
 
 	Visual.connect("Reached", BuffTweenEnded.bind(Target, FloaterText, col))
-
-#-----------------------------------------------------------------------------------
-func SpawnDownVisual(Target : Node, DefCard : Card, FloaterText : String, col : Color) -> void:
-	var DeBuffVisual : PackedScene = ResourceLoader.load(DebuffVisualFile)
-	var Visual = DeBuffVisual.instantiate() as MissileViz
-	Visual.modulate = col
-	Visual.Target = Target
-	Visual.SpawnPos = DefCard.global_position + (DefCard.size / 2)
-	add_child(Visual)
-
-	Visual.connect("Reached", BuffTweenEnded.bind(Target, FloaterText, col))
-
-#-----------------------------------------------------------------------------------
-func SpawnBurnVisual(Target : Node, DefCard : Card, FloaterText : String) -> void:
-	var DeBuffVisual : PackedScene = ResourceLoader.load(DebuffVisualFile)
-	var Visual = DeBuffVisual.instantiate() as MissileViz
-	Visual.Target = Target
-	Visual.SpawnPos = DefCard.global_position + (DefCard.size / 2)
-	add_child(Visual)
-
-	Visual.connect("Reached", BuffTweenEnded.bind(Target, FloaterText, CardModule.GetColorForStat(CardModule.Stat.FIREPOWER)))
-
-#-----------------------------------------------------------------------------------
-func SpawnUpDamageVisual(Target : Node, DefCard : Card, FloaterText : String) -> void:
-	var BuffVisual : PackedScene = ResourceLoader.load(BuffVisualFile)
-	var Visual = BuffVisual.instantiate() as MissileViz
-	Visual.Target = Target
-	Visual.SpawnPos = DefCard.global_position + (DefCard.size / 2)
-	add_child(Visual)
-
-	Visual.connect("Reached", BuffTweenEnded.bind(Target, FloaterText, CardModule.GetColorForStat(CardModule.Stat.FIREPOWER)))
 
 #-----------------------------------------------------------------------------------
 func TweenEnded(Target : Node, DeffenceCard : Card, FloaterText : String) -> void:
@@ -327,16 +249,6 @@ func TweenEnded(Target : Node, DeffenceCard : Card, FloaterText : String) -> voi
 		add_child(ShieldEff)
 		ShieldEff.global_position = (DeffenceCard.global_position + (DeffenceCard.size / 2))
 		ShieldEff.burst()
-
-#-----------------------------------------------------------------------------------
-func ShieldTweenEnded(target : Node, FloaterText : String) -> void:
-	Connected.emit()
-	var DFloater = DamageFloater.instantiate() as Floater
-	DFloater.text = FloaterText
-	DFloater.modulate = Color(0.56, 0.765, 1.0, 1.0)
-	add_child(DFloater)
-	DFloater.global_position = (target.global_position) - DFloater.size / 2
-	DFloater.Ended.connect(AnimEnded)
 
 #-----------------------------------------------------------------------------------
 func BuffTweenEnded(target : Node, FloaterText : String, col : Color) -> void:

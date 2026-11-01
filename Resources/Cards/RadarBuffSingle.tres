@@ -21,3 +21,4 @@ Energy = 2
 AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_deq30")]([SubResource("Resource_fjbey")])
 Type = 2
+UseConditions = Array[int]([12])

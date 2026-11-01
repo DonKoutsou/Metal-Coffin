@@ -39,9 +39,9 @@ func _ready() -> void:
 	SoundNode.play()
 	var S = DeletableSound.new()
 	S.stream = FireSound
-	get_parent().get_parent().add_child(S)
-	S.attenuation = SoundNode.attenuation
-	S.volume_db = 5
+	add_child(S)
+	#S.attenuation = SoundNode.attenuation
+	S.volume_db = -5
 	S.play()
 	S.pitch_scale = randf_range(0.8, 1.2)
 	

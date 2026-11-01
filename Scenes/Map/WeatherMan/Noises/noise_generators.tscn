@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://wegfneoi242m" path="res://Scenes/Map/WeatherMan/Noises/Topography/TopoggraphyNoise.tres" id="4_3xvvx"]
 [ext_resource type="Texture2D" uid="uid://c17sbm8pdhw2" path="res://Scenes/Map/WeatherMan/Noises/Topography/TopoggraphyNoiseBase.tres" id="5_xqntd"]
 [ext_resource type="Texture2D" uid="uid://0k2jw1bl3ndm" path="res://Scenes/Map/WeatherMan/Noises/Weather/weathernoise_base.tres" id="6_0m7in"]
+[ext_resource type="Texture2D" uid="uid://d3c4tw88s1qvf" path="res://Scenes/Map/WeatherMan/Noises/Topography/TopoggraphyNoise2.tres" id="6_5761p"]
 [ext_resource type="Texture2D" uid="uid://bpghre0s4hi8" path="res://Scenes/Map/WeatherMan/Noises/Weather/weathernoise.tres" id="7_duapv"]
 
 [node name="NoiseGenerators" type="TextureRect" unique_id=1822932877]
@@ -22,6 +23,7 @@ GroundVisualNoise = ExtResource("2_lbgf0")
 GroundVisualNoiseMask = ExtResource("3_iptyo")
 TopographyVisualNoise = ExtResource("4_3xvvx")
 TopoVisualNoiseSize = 2048
+TopographyVisualNoise2 = ExtResource("6_5761p")
 TopographyDataNoise = ExtResource("5_xqntd")
 WeatherDataNoise = ExtResource("6_0m7in")
 WeatherDataNoiseSize = 256

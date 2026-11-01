@@ -7,3 +7,6 @@
 [node name="MissileThing" unique_id=1959528193 instance=ExtResource("1_41ior")]
 startParticle = ExtResource("2_e2x02")
 endParticle = ExtResource("2_wy01x")
+
+[node name="MissileCruise" parent="." index="1" unique_id=1439822007]
+attenuation = 2.7320805

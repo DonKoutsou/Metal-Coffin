@@ -7,8 +7,9 @@ uniform vec3 high_color : source_color = vec3(1);
 uniform float line_width = 1.0;
 uniform vec4 line_color : source_color = vec4(1.0);
 
+
 void fragment() {
-    float height = texture(t, UV).r;
+    float height = texture(TEXTURE, UV).r;
     
     // Mod pixel height into a single line's range
     float dist = mod(height, line_step);
@@ -25,4 +26,3 @@ void fragment() {
     vec3 c = mix(low_color, high_color, floor( height /line_step)*line_step );
 	COLOR.rgb = mix(c, line_color.rgb, line * line_color.a);
 }
-

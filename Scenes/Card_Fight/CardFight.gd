@@ -599,6 +599,7 @@ var GameOver : bool = false
 signal NewTurnStarted
 signal PlayerActionPickingEnded
 signal EnemyActionPickedEnded
+
 ##----------------------------------------------------------------------##
 func RunTurn() -> void:
 	if (GameOver):
@@ -608,7 +609,6 @@ func RunTurn() -> void:
 	else: if (TurnType == CardFightTurnType.TURN):
 		Declaration("Enemy Pick Phase", 1.5).ActionDeclarationFinished.connect(PickPhase)
 		
-
 ##----------------------------------------------------------------------##
 func PickPhase() -> void:
 	if (GameOver):
@@ -619,6 +619,7 @@ func PickPhase() -> void:
 	NewTurnStarted.emit()
 	
 	ProgressBuffsForCurrentShip()
+	
 ##----------------------------------------------------------------------##
 func ProgressBuffsForCurrentShip() -> void:
 	if (GameOver):
@@ -644,6 +645,7 @@ func ProgressBuffsForCurrentShip() -> void:
 		UpdateShipStats(CurrentShip)
 	else:
 		PickPhaseStart()
+		
 ##----------------------------------------------------------------------##
 func PickPhaseStart() -> void:
 	if (GameOver):
@@ -657,6 +659,7 @@ func PickPhaseStart() -> void:
 	CurrentPlayerLabel.visible = true
 	
 	StartCurrentShipsPickTurn()
+	
 ##----------------------------------------------------------------------##
 func StartCurrentShipsPickTurn() -> void:
 	if (GameOver):
@@ -670,6 +673,7 @@ func StartCurrentShipsPickTurn() -> void:
 		EnemyPickingMove = !IsShipFriendly(Ship)
 	else:
 		StartActionPerform()
+		
 ##----------------------------------------------------------------------##
 func RunShipsTurn(Ship : BattleShipStats) -> void:
 	if (GameOver):
@@ -704,7 +708,8 @@ func RunShipsTurn(Ship : BattleShipStats) -> void:
 		EnemyPickingMove = true
 		await Ship.deck.DrawCard()
 		EnemyActionSelection(Ship)
-	
+
+##----------------------------------------------------------------------##
 func OnCardDiscarded(C : Card, manually : bool = false) -> bool:
 	if (GameOver):
 		return false
@@ -727,6 +732,7 @@ func OnCardDiscarded(C : Card, manually : bool = false) -> bool:
 	Ship.deck.DiscardCard(C.CStats, manually)
 	ExternalUI.UpdateCardsInHandAmm(Ship.deck.Hand.size(), MaxCardsInHand)
 	return true
+	
 ##----------------------------------------------------------------------##
 func OnCardSelected(C : Card, target : BattleShipStats = null) -> bool:
 	if (GameOver):
@@ -807,6 +813,8 @@ func CheckIfToDraw(Ship : BattleShipStats, Acts : Array[CardStats]) -> Array[Car
 		Acts.clear()
 		return Ship.deck.Hand.duplicate()
 	return Acts
+
+##----------------------------------------------------------------------##
 #Function used by enemies to pick moves
 func EnemyActionSelection(Ship : BattleShipStats) -> void:
 	#Add the energy to the current ship
@@ -821,7 +829,7 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 	Ship.Energy = finalTurnEnergy + Ship.EnergyReserves
 	Ship.EnergyReserves = 0
 	#Store the fire extinguish to always use it at the end. We want to avoid having enemy extinguish fires and then start them again
-	var FireExtinguishToUse : CardStats
+	var endTurnActions : Array[CardStats]
 	
 	var AvailableActions = Ship.deck.Hand.duplicate()
 	#Print ships actions
@@ -835,118 +843,109 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 	while (AvailableActions.size() > 0 and !GameOver):
 		var randomActionIndex : int = Rand.InstanceRandom.RandIRange(0, AvailableActions.size() -1)
 		var Action : CardStats = AvailableActions[randomActionIndex]
-		
+		 
 		var ActionCost = Action.Energy
 		if (Action.Burned):
 			ActionCost = 0
 			
 		actionLog.append("{0} tries to player card {1}".format([Ship.Name, Action.GetCardName()]))
+		AvailableActions.erase(Action)
 		
-		if (!Action.AllowDuplicates and ActionList.ShipHasAction(Ship, Action)):
-			AvailableActions.erase(Action)
-			AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
-			
-		##ENERGY
-		else: if (ActionCost > Ship.Energy):
-			actionLog.append("{0} cant use {1}, not enough energy".format([Ship.Name, Action.GetCardName()]))
-			#Ship.deck.Hand.erase(Action)
-			#Ship.deck.DiscardCard(Action, true)
-			AvailableActions.erase(Action)
-			AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
-		##ON FIRE
-		else : if (Action.UseConditions.has(CardStats.CardUseCondition.ON_FIRE)):
-			if (Ship.IsOnFire):
-				#We want to store the extinguish fire action for the end of the turn to avoid setting self on fire again
-				Ship.Energy -= ActionCost
-				FireExtinguishToUse = Action
-				
-				actionLog.append("{0} has been added to {1}'s discard pile.".format([Action.GetCardName(), Ship.Name]))
-				Ship.deck.Hand.erase(Action)
-				Ship.deck.DiscardPile.append(Action)
-				AvailableActions.erase(Action)
-				AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
-			else:
-				actionLog.append("{0} cant use {1}, not on fire".format([Ship.Name, Action.GetCardName()]))
-				AvailableActions.erase(Action)
-				AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
-		##NO SOLO
-		else: if (Action.UseConditions.has(CardStats.CardUseCondition.NO_SOLO) and EnemyCombatants.size() == 1):
-			actionLog.append("{0} cant use {1}, team too small".format([Ship.Name, Action.GetCardName()]))
-			AvailableActions.erase(Action)
-			AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
-		##ENERGY DEPENDANT
-		else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENERGY_DEPENDANT) and Ship.Energy == 0):
-			actionLog.append("{0} cant use {1}, card is scales with energy and ship has none".format([Ship.Name, Action.GetCardName()]))
-			AvailableActions.erase(Action)
-			AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
-		##RESERVE DEPENDANT
-		else : if (Action.UseConditions.has(CardStats.CardUseCondition.RESERVE_DEPENDANT) and Ship.EnergyReserves == 0):
-			actionLog.append("{0} cant use {1}, card is scales with reserve and ship has none".format([Ship.Name, Action.GetCardName()]))
-			AvailableActions.erase(Action)
-			AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
-		##ENOUGH TURNS
-		else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENOUGH_TURNS_PASSED) and CurrentTurn > ShipTurns.size() / 2.0):
-			actionLog.append("{0} cant use {1}, not enought turns passed".format([Ship.Name, Action.GetCardName()]))
-			AvailableActions.erase(Action)
-			AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
-		##HAS DEBUFF
-		else : if (Action.UseConditions.has(CardStats.CardUseCondition.HAS_DEBUFF) and !Ship.HasDebuff()):
-			actionLog.append("{0} cant use {1}, card is cleansing debuffs and ship has none".format([Ship.Name, Action.GetCardName()]))
-			AvailableActions.erase(Action)
-			AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
-		##ENOUGH HP
-		else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENOUGH_HP) and (Ship.CurrentHull / Ship.Hull) * 100 < 10):
-			actionLog.append("{0} cant use {1}, it's hull is too low.".format([Ship.Name, Action.GetCardName()]))
-			AvailableActions.erase(Action)
-			AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
-		##ENOUGH DEF
-		else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENOUGH_DEF) and Ship.GetDef() <= 0):
-			actionLog.append("{0} cant use {1}, it's defense is too low.".format([Ship.Name, Action.GetCardName()]))
-			AvailableActions.erase(Action)
-			AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
-		##ENOUGH FP
-		else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENOUGH_FP) and Ship.GetFirePower() <= 0):
-			actionLog.append("{0} cant use {1}, it's hull is too low.".format([Ship.Name, Action.GetCardName()]))
-			AvailableActions.erase(Action)
-			AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
-		##ENOUGH SPEED
-		else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENOUGHT_SPEED) and Ship.GetSpeed() <= 0):
-			actionLog.append("{0} cant use {1}, it's hull is too low.".format([Ship.Name, Action.GetCardName()]))
-			AvailableActions.erase(Action)
-			AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
-		##NOT_LAST
-		else : if (Action.UseConditions.has(CardStats.CardUseCondition.NOT_LAST) and CurrentTurn == ShipTurns.size() - 1):
-			actionLog.append("{0} cant use {1}, it's hull is too low.".format([Ship.Name, Action.GetCardName()]))
-			AvailableActions.erase(Action)
-			AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
-		else:
-			actionLog.append("{0} uses {1}".format([Ship.Name, Action.GetCardName()]))
-			var SelectedAction : CardStats = Action.duplicate()
-			
+		if (CheckConditions(Action, ActionCost, Ship)): #Check if can be played
 			Ship.Energy -= ActionCost
 			Ship.deck.Hand.erase(Action)
-			#Cards are discarded when actually played so we dont discard them here
-			#EnemyDeck.DiscardPile.append(Action)
-			AvailableActions.erase(Action)
 			
-			await HandleModules(Ship, SelectedAction)
-			
-			CardPlayed(Ship, SelectedAction)
-			
-			
-
-			AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
+			if (Action.ForceUseAtEnd):
+				endTurnActions.append(Action)
+				Ship.deck.DiscardPile.append(Action)
+			else:
+				actionLog.append("{0} uses {1}".format([Ship.Name, Action.GetCardName()]))
+				var SelectedAction : CardStats = Action.duplicate()
 	
-	if (FireExtinguishToUse != null):
-		await HandleModules(Ship, FireExtinguishToUse)
+				await HandleModules(Ship, SelectedAction)
+				CardPlayed(Ship, SelectedAction)
 		
-		CardPlayed(Ship, FireExtinguishToUse)
+		AvailableActions = await CheckIfToDraw(Ship, AvailableActions)
+	
+	for g in endTurnActions:
+		await HandleModules(Ship, g)
+		CardPlayed(Ship, g)
 		
 	actionLog.append("{0} ended their turn with {1} exess energy".format([Ship.Name, Ship.Energy]))
 	if (LOG_ENEMY_LOGIC):
 		print(actionLog)
 		
 	EnemyActionPickedEnded.emit()
+
+##----------------------------------------------------------------------##
+func CheckConditions(Action : CardStats, Cost : int, Ship : BattleShipStats) -> bool:
+	var conditionCheck : bool = true
+	var conditionFailReason : String = ""
+	if (!Action.AllowDuplicates and ActionList.ShipHasAction(Ship, Action)):
+		conditionFailReason = "can't play multiple of this card in same turn"
+		conditionCheck = false
+	else: if (Cost > Ship.Energy):
+		conditionFailReason = "Reason : not enough energy"
+		conditionCheck = false
+	else: if (Action.UseConditions.has(CardStats.CardUseCondition.ON_FIRE) and !Ship.IsOnFire):
+		conditionFailReason = "not on fire"
+		conditionCheck = false
+	##NO SOLO
+	else: if (Action.UseConditions.has(CardStats.CardUseCondition.NO_SOLO) and EnemyCombatants.size() == 1):
+		conditionFailReason = "Is alone"
+		conditionCheck = false
+	##ENERGY DEPENDANT
+	else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENERGY_DEPENDANT) and Ship.Energy == 0):
+		conditionFailReason = "card is energy dependant and user has no energy"
+		conditionCheck = false
+	##RESERVE DEPENDANT
+	else : if (Action.UseConditions.has(CardStats.CardUseCondition.RESERVE_DEPENDANT) and Ship.EnergyReserves == 0):
+		conditionFailReason = "no Reserves"
+		conditionCheck = false
+	##ENOUGH TURNS
+	else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENOUGH_TURNS_PASSED) and CurrentTurn > ShipTurns.size() / 2.0):
+		conditionFailReason = ""
+		conditionCheck = false
+	##HAS DEBUFF
+	else : if (Action.UseConditions.has(CardStats.CardUseCondition.HAS_DEBUFF) and !Ship.HasDebuff()):
+		conditionFailReason = "No Debuffs"
+		conditionCheck = false
+	##ENOUGH HP
+	else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENOUGH_HP) and (Ship.CurrentHull / Ship.Hull) * 100 < 10):
+		conditionFailReason = "Not enough HP"
+		conditionCheck = false
+	##ENOUGH DEF
+	else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENOUGH_DEF) and Ship.GetDef() <= 0):
+		conditionFailReason = "Not enough Deffence"
+		conditionCheck = false
+	##ENOUGH FP
+	else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENOUGH_FP) and Ship.GetFirePower() <= 0):
+		conditionFailReason = "Not enough Firepower"
+		conditionCheck = false
+	##ENOUGH SPEED
+	else : if (Action.UseConditions.has(CardStats.CardUseCondition.ENOUGHT_SPEED) and Ship.GetSpeed() <= 0):
+		conditionFailReason = "Not enough speed"
+		conditionCheck = false
+	##NOT_LAST
+	else : if (Action.UseConditions.has(CardStats.CardUseCondition.NOT_LAST) and CurrentTurn == ShipTurns.size() - 1):
+		conditionFailReason = "Is playing last"
+		conditionCheck = false
+	##TEAM ENOUGH FP // At least one ship with non zero firepower
+	else : if (Action.UseConditions.has(CardStats.CardUseCondition.TEAM_ENOUGH_FP) and !TeamHasFP(GetShipsTeam(Ship))):
+		conditionFailReason = "No team member with non zero Firepower"
+		conditionCheck = false
+		
+	if (!conditionCheck):
+		print("{0} | CANT PLAY {1} | Reason : {2}".format([Ship.Name, Action.GetCardName(), conditionFailReason]))
+	return conditionCheck
+
+##----------------------------------------------------------------------##
+func TeamHasFP(team : Array[BattleShipStats]) -> bool:
+	for g in team:
+		if (g.GetFirePower() > 0):
+			return true
+	return false
+
 ##----------------------------------------------------------------------##
 func PlayerActionSelectionEnded() -> void:
 	if (GameOver):
@@ -982,6 +981,7 @@ func PlayerActionSelectionEnded() -> void:
 	ship.deck.Hand.clear()
 	#GetShipViz(ShipTurns[CurrentTurn]).Dissable()
 	PlayerActionPickingEnded.emit()
+	
 ##----------------------------------------------------------------------##
 func CurrentEnemyTurnEnded() -> void:
 	var Ship = GetCurrentShip()
@@ -1001,6 +1001,7 @@ func CurrentEnemyTurnEnded() -> void:
 			StartCurrentShipsPickTurn()
 	else:
 		StartCurrentShipsPickTurn()
+		
 ##----------------------------------------------------------------------##
 func CurrentPlayerTurnEnded() -> void:
 	ClearCards()
@@ -1014,6 +1015,7 @@ func CurrentPlayerTurnEnded() -> void:
 	CurrentTurn = CurrentTurn + 1
 	TurnEnded(Ship)
 	StartCurrentShipsPickTurn()
+	
 ##----------------------------------------------------------------------##
 func StartActionPerform() -> void:
 	CurrentPlayerLabel.visible = false
@@ -1035,6 +1037,7 @@ func StartActionPerform() -> void:
 	#CurrentTurn = 0
 	#
 	#StartCurrentShipsPerformTurn()
+	
 ##----------------------------------------------------------------------##
 #func StartCurrentShipsPerformTurn() -> void:
 	#if (GameOver):
@@ -1060,6 +1063,7 @@ func StartActionPerform() -> void:
 	#CurrentTurn = 0
 	#
 	#DoShipFireDamage()
+	
 ##----------------------------------------------------------------------##
 func DoShipFireDamage() -> void:
 	#Itterate through all ships
@@ -1093,6 +1097,7 @@ func DoShipFireDamage() -> void:
 			
 
 	FireDamageFinished()
+	
 ##----------------------------------------------------------------------##
 func FireDamageFinished() -> void:
 	if (GameOver):
@@ -1123,6 +1128,7 @@ func RefundUnusedCards() -> void:
 				#continue
 			RefundCardToShip(ShipAction.Action, Ship)
 			Ship.ShipViz.ActionRemoved(ResourceLoader.load(ShipAction.Action.txFile))
+			
 ##----------------------------------------------------------------------##
 func RefundCardToShip(C : CardStats, Ship : BattleShipStats):
 	print("{0} got refunded a {1} card for not using it.".format([Ship.Name, C.GetCardName()]))
@@ -1130,6 +1136,7 @@ func RefundCardToShip(C : CardStats, Ship : BattleShipStats):
 	C.EnergyReduction = 0
 	Ship.deck.DiscardChanged.emit(true)
 	#HandleDiscardModules(Ship, C)
+	
 ##----------------------------------------------------------------------##
 func RestartCards() -> void:
 	ClearCards()
@@ -1532,7 +1539,7 @@ func IsTargetValid(card : CardStats, User : BattleShipStats, target : BattleShip
 	
 	return true
 
-
+##----------------------------------------------------------------------##
 func HandleTargets(Mod : CardModule, User : BattleShipStats, _targetOverride : BattleShipStats = null) -> Array[BattleShipStats]:
 	var Targets : Array[BattleShipStats]
 	if (!Mod.NeedsTargetSelect()):
@@ -1598,6 +1605,7 @@ func HandleTargets(Mod : CardModule, User : BattleShipStats, _targetOverride : B
 					Targets.append(t)
 	
 	return Targets
+	
 ##----------------------------------------------------------------------##
 func GetBestTargetForAtack(Candidates : Array[BattleShipStats], attack : CardModule) -> BattleShipStats:
 	if (Candidates.size() == 0):
@@ -1630,6 +1638,7 @@ func GetBestTargetForAtack(Candidates : Array[BattleShipStats], attack : CardMod
 	var pickedIndex = Rand.InstanceRandom.RandWeighted(points_list)
 
 	return Candidates[pickedIndex]
+	
 ##----------------------------------------------------------------------##
 func GetTargetWithBiggestStat(Candidates : Array[BattleShipStats], St : CardModule.Stat) -> BattleShipStats:
 	var CurrentBiggestStat: float = 0
@@ -1662,6 +1671,7 @@ func HandleDrawCard(Performer : BattleShipStats, ConsumeEnergy : bool = false) -
 		#TODO add tutorial for discarding cards
 
 	return true
+	
 ##----------------------------------------------------------------------##
 #//////////////////////////////////////////////////////////////////////
 #██   ██ ████   ██ ██ ████  ████ ██   ██    ██    ██ ██    ██ ████   ██ 
@@ -1698,6 +1708,7 @@ func DoCardAnim(Action : CardStats, Data : Array[AnimationData], Performer : Bat
 	print("finished anim")
 	anim.visible = false
 	anim.queue_free()
+	
 ##----------------------------------------------------------------------##
 func DoCardSelectAnimation(Action : CardStats, Performer : BattleShipStats, User : Control) -> void:
 	var ActionAnim : PackedScene = ResourceLoader.load(ActionAnimFile)
@@ -1716,6 +1727,7 @@ func DoCardSelectAnimation(Action : CardStats, Performer : BattleShipStats, User
 	
 	await(anim.AnimationFinished)
 	anim.queue_free()
+	
 ##----------------------------------------------------------------------##
 func DoCardDrawAnimation(User : Control) -> void:
 	var ActionAnim : PackedScene = ResourceLoader.load(ActionAnimFile)
@@ -1777,6 +1789,7 @@ func GetCurrentShip() -> BattleShipStats:
 	if (ShipTurns.size() - 1 < CurrentTurn):
 		return null
 	return ShipTurns[CurrentTurn]
+	
 ##----------------------------------------------------------------------##
 func GetShipsTeam(Ship : BattleShipStats) -> Array[BattleShipStats]:
 	var Team : Array[BattleShipStats]
@@ -1787,6 +1800,7 @@ func GetShipsTeam(Ship : BattleShipStats) -> Array[BattleShipStats]:
 		for g in EnemyCombatants:
 			Team.append(g)
 	return Team
+	
 ##----------------------------------------------------------------------##
 func GetShipEnemyTeam(Ship : BattleShipStats) -> Array[BattleShipStats]:
 	var Team : Array[BattleShipStats]
@@ -1797,6 +1811,7 @@ func GetShipEnemyTeam(Ship : BattleShipStats) -> Array[BattleShipStats]:
 		for g in PlayerCombatants:
 			Team.append(g)
 	return Team
+	
 ##----------------------------------------------------------------------##
 func GetFightingUnitAmmount(Ships : Array[BattleShipStats]) -> int:
 	var CombatantAmmount = 0
@@ -1806,9 +1821,11 @@ func GetFightingUnitAmmount(Ships : Array[BattleShipStats]) -> int:
 		if (!g.Convoy):
 			CombatantAmmount += 1
 	return CombatantAmmount
+	
 ##----------------------------------------------------------------------##
 func IsShipFriendly(Ship : BattleShipStats) -> bool:
 	return Ship.Friendly
+	
 ##----------------------------------------------------------------------##
 #////////////////////////////////////////////////////////////////////////////
 #███████ ████████  █████  ████████     ███    ███  █████  ███    ██ ██ ██████  ██    ██ ██       █████  ████████ ██  ██████  ███    ██ 
@@ -2165,6 +2182,7 @@ func _on_switch_ship_pressed() -> void:
 	#CreateDecks()
 	
 	PlayerActionSelectionEnded()
+	
 ##----------------------------------------------------------------------##
 func PlaceCardInPlayerHand(Performer : BattleShipStats,C : Card) -> bool:
 	var CanPlace : bool = false
@@ -2217,6 +2235,7 @@ func PlaceCardInPlayerHand(Performer : BattleShipStats,C : Card) -> bool:
 	C.call_deferred("UpdateBattleStats", Performer)
 	ExternalUI.UpdateCardsInHandAmm(Performer.deck.Hand.size(), MaxCardsInHand)
 	return true
+	
 ##----------------------------------------------------------------------##
 func PlaceCardInEnemyHand(Performer : BattleShipStats, C : CardStats) -> bool:
 	var CanPlace : bool = false

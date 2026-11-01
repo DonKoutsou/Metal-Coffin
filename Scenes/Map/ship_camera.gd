@@ -28,6 +28,7 @@ var CloudMat : ShaderMaterial
 var GroundMat : ShaderMaterial
 var heightMat : ShaderMaterial
 var FocusedShip : MapShip
+var FocusingShip : bool = false
 # Called when the node enters the scene tree for the first time.
 
 #----------------------------------------------------
@@ -205,6 +206,8 @@ func MoveCameraX(value : float) -> void:
 
 func UpdateCameraPos(relativeMovement : Vector2, Unfocus : bool = true, FromSelf : bool = true):
 	if (Unfocus):
+		if (FocusingShip):
+			return
 		FocusedShip = null
 	
 	Grid.UpdateOffset(position)
@@ -260,6 +263,8 @@ func _physics_process(delta: float) -> void:
 	if (FocusedShip != null):
 		var pos = (global_position - FocusedShip.global_position) * delta * zoom.x * 10
 		UpdateCameraPos(pos, false, true)
+		if (global_position.distance_squared_to(FocusedShip.global_position) <= (8 - zoom.x) * 10000):
+			FocusingShip = false
 		#ForceCamPosition(FocusedShip.global_position)
 
 	var rel : Vector2
@@ -317,6 +322,7 @@ func FrameCamToShip(Ship : MapShip, _OverrideTime : float = 1, _Unzoom : bool = 
 	if (FrameTween != null):
 		FrameTween.kill()
 	FocusedShip = Ship
+	FocusingShip = true
 
 
 func ForceCamPosition(Pos : Vector2) -> void:
