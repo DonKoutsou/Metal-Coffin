@@ -13,7 +13,7 @@ static var SERVICE_ICONS : Dictionary[SERVICES, String] = {
 	SERVICES.REPAIR : "res://Assets/Items/Wrench.png",
 	SERVICES.RECRUIT : "res://Assets/Items/upgrade.png",
 	SERVICES.SHOP : "res://Assets/Items/cubeforcesmol.png",
-} 
+}
 
 enum SERVICES{
 	FUEL,

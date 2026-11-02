@@ -28,7 +28,7 @@ var CloudMat : ShaderMaterial
 var GroundMat : ShaderMaterial
 var heightMat : ShaderMaterial
 var FocusedShip : MapShip
-var FocusingShip : bool = false
+var FocusingShipCD : float = 0.0
 # Called when the node enters the scene tree for the first time.
 
 #----------------------------------------------------
@@ -206,7 +206,7 @@ func MoveCameraX(value : float) -> void:
 
 func UpdateCameraPos(relativeMovement : Vector2, Unfocus : bool = true, FromSelf : bool = true):
 	if (Unfocus):
-		if (FocusingShip):
+		if (FocusingShipCD > 0):
 			return
 		FocusedShip = null
 	
@@ -260,11 +260,11 @@ func _physics_process(delta: float) -> void:
 		#NoiseNormalTexture.noise.fractal_lacunarity = clamp(NoiseNormalTexture.noise.fractal_lacunarity + (randf_range(-0.001,0.001) * SimulationManager.SimSpeed()), 1, 2)
 		#CloudMat.set_shader_parameter("fractal_lacunarity", clamp(l + randf_range(-0.01,0.01), 1,2))
 	
+	FocusingShipCD = max(0, FocusingShipCD - delta)
 	if (FocusedShip != null):
 		var pos = (global_position - FocusedShip.global_position) * delta * zoom.x * 10
 		UpdateCameraPos(pos, false, true)
-		if (global_position.distance_squared_to(FocusedShip.global_position) <= (8 - zoom.x) * 10000):
-			FocusingShip = false
+		
 		#ForceCamPosition(FocusedShip.global_position)
 
 	var rel : Vector2
@@ -322,7 +322,7 @@ func FrameCamToShip(Ship : MapShip, _OverrideTime : float = 1, _Unzoom : bool = 
 	if (FrameTween != null):
 		FrameTween.kill()
 	FocusedShip = Ship
-	FocusingShip = true
+	FocusingShipCD = 0.2
 
 
 func ForceCamPosition(Pos : Vector2) -> void:

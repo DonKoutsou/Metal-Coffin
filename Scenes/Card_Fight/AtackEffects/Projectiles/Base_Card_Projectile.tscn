@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dx71hkif8fjp5"]
 
-[ext_resource type="Script" uid="uid://d0hiwp6l4fyyy" path="res://Scenes/Card_Fight/missile_viz.gd" id="1_1j2pp"]
+[ext_resource type="Script" uid="uid://d0hiwp6l4fyyy" path="res://Scenes/Card_Fight/AtackEffects/Card_Projectile.gd" id="1_1j2pp"]
 [ext_resource type="AudioStream" uid="uid://dtvbu1dtsfivv" path="res://Assets/Sounds/Shield.mp3" id="2_i1h6c"]
 [ext_resource type="AudioStream" uid="uid://clfevsm44irty" path="res://Assets/Sounds/MetalCoffin_RevUp_01.wav" id="3_dfmix"]
 [ext_resource type="AudioStream" uid="uid://bqfiuoggahfqd" path="res://Assets/Sounds/MetalCoffin_RevUp_01(2).wav" id="4_vc0ep"]

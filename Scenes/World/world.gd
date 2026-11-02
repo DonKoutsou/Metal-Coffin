@@ -382,7 +382,6 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip], Missil
 	#Player battle stats
 	var FBattleStats : Array[BattleShipStats] = []
 	for g in Friendlies:
-		MapPointerManager.Instance.AddShip(g, true)
 		FighingFriendlyUnits.append(g)
 		FBattleStats.append(g.GetBattleStats())
 	

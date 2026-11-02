@@ -200,7 +200,7 @@ func SpawnVisual(Target : Node, AttackOrigin : Node, DeffenceCard : Card, Floate
 		attackOriginPosition = AttackOrigin.global_position
 		
 	var AtackVisual : PackedScene = ResourceLoader.load(AtackVisualFile)
-	var Visual = AtackVisual.instantiate() as MissileViz
+	var Visual = AtackVisual.instantiate() as CardProjectile
 	if (DeffenceCard != null):
 		Visual.Target = DeffenceCard
 	else:
@@ -213,7 +213,7 @@ func SpawnVisual(Target : Node, AttackOrigin : Node, DeffenceCard : Card, Floate
 #-----------------------------------------------------------------------------------
 func SpawnDefVisual(Target : Node, DefCard : Card, FloaterText : String, visualFile : String, col : Color) -> void:
 	var visualScene : PackedScene = ResourceLoader.load(visualFile)
-	var Visual = visualScene.instantiate() as MissileViz
+	var Visual = visualScene.instantiate() as CardProjectile
 	Visual.Target = Target
 	Visual.SpawnPos = DefCard.global_position + (DefCard.size / 2)
 	add_child(Visual)

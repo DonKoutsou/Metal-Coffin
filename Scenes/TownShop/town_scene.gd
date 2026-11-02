@@ -178,19 +178,24 @@ func OnItemBought(It : Item) -> void:
 	
 	var Added = false
 	
+	var possibleReceivers : Array[MapShip] = []
+	
 	for g in LandedShips:
 		var inv = g.Cpt.GetCharacterInventory()
 		if (!inv.HasSpaceForItem(It)):
 			continue
+			
 		if (It is AmmoItem and inv.HasWeapon(It.WType)):
-			inv.AddItem(It)
-			Added = true
-			break
+			possibleReceivers.append(g)
+
 		else : if (It is MissileItem and inv.HasWeapon(CardStats.WeaponType.ML)):
-			inv.AddItem(It)
-			Added = true
-			break
-	if (!Added):
+			possibleReceivers.append(g)
+
+	if (possibleReceivers.size() > 0):
+		var receiver = possibleReceivers.pick_random()
+		var inv = receiver.Cpt.GetCharacterInventory()
+		inv.AddItem(It)
+	else:
 		for g in LandedShips:
 			var inv = g.Cpt.GetCharacterInventory()
 			if (inv.HasSpaceForItem(It)):

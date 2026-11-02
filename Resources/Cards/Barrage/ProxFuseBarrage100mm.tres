@@ -23,7 +23,6 @@ script = ExtResource("4_6a4mq")
 txFile = "uid://c85gq1kvhbjny"
 CardName = "Prox Fuse Barragge"
 Energy = 1
-AllowDuplicates = true
 OnUsed = 1
 OnUseModules = Array[ExtResource("3_b1127")]([SubResource("Resource_b1127")])
 WeapT = 1

@@ -37,6 +37,5 @@ script = ExtResource("5_h1h8a")
 txFile = "uid://bhlgeictwnfyl"
 CardName = "Collision Course"
 Energy = 2
-AllowDuplicates = true
 OnUseModules = Array[ExtResource("3_edcp3")]([SubResource("Resource_dubgi")])
 UseConditions = Array[int]([4])

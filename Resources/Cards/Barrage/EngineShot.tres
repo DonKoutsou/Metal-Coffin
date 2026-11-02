@@ -33,7 +33,6 @@ script = ExtResource("5_djg75")
 txFile = "uid://drb64t40olejm"
 CardName = "EngineShot"
 Energy = 2
-AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_hkqdl")]([SubResource("Resource_vw6o3")])
 WeapT = 1
 AllowTier = false

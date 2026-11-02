@@ -23,7 +23,6 @@ script = ExtResource("4_m1k05")
 txFile = "uid://bcfvlyr0bu56d"
 CardName = "Laser Guided Barragge"
 Energy = 1
-AllowDuplicates = true
 OnUsed = 1
 OnUseModules = Array[ExtResource("2_bvpgo")]([SubResource("Resource_tpj2d")])
 WeapT = 1

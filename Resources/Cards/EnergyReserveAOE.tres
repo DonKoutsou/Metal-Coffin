@@ -16,7 +16,6 @@ script = ExtResource("3_ykrok")
 txFile = "uid://byddt6l0jgquw"
 CardName = "Energy Share"
 Energy = 3
-AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_hgi3i")]([SubResource("Resource_vivg1")])
 Type = 2
 UseConditions = Array[int]([1])

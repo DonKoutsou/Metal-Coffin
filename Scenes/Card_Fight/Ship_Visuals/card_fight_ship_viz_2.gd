@@ -232,6 +232,10 @@ func _update_pushback(delta: float) -> void:
 func apply_damage_pushback(amm : float, _shieldamm : float, Instigator : BattleShipStats, _direct : bool) -> void:
 	if (Instigator == null):
 		return
+	
+	if (amm == 0):
+		return
+	
 	var my_center := ShipIcon.global_position
 
 	var center = get_viewport_rect().size / 2
@@ -246,8 +250,8 @@ func apply_damage_pushback(amm : float, _shieldamm : float, Instigator : BattleS
 		direction = Vector2.RIGHT
 
 	direction = direction.normalized()
-
-	pushback_velocity += direction * 40 * min(amm, 50)
+	var percent = abs(amm / Ship.Hull) * 100 # Push dependant on max health, pushing heavier ships less
+	pushback_velocity += direction * 40 * min(percent, 50)
 	damage_wobble = 1.0
 
 func Pop(t : bool):

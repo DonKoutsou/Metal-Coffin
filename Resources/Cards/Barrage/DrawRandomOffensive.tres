@@ -13,7 +13,6 @@ script = ExtResource("3_xwfdn")
 txFile = "uid://c2h6ewbftgoy8"
 CardName = "Weapon Cache"
 Energy = 1
-AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_0dtqw")]([SubResource("Resource_gb7g0")])
 Type = 2
 AllowTier = false

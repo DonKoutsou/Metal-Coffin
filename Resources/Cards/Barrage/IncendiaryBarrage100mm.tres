@@ -23,7 +23,6 @@ script = ExtResource("4_gyikv")
 txFile = "uid://c1d4jybs1oolg"
 CardName = "Incendiary Barragge"
 Energy = 1
-AllowDuplicates = true
 OnUsed = 1
 OnUseModules = Array[ExtResource("3_0a432")]([SubResource("Resource_0a432")])
 WeapT = 1

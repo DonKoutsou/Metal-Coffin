@@ -5,6 +5,7 @@ class_name TownFuelStorages
 @export var FuelPriceLabel : Label
 @export var CurrentFuelLabel : Label
 @export var FuelBar : ProgressBar
+@export var FuelAddedBar : ProgressBar
 @export var PlayerWallet : Wallet
 @export var rangeLabel : Label
 @export var refuelTimeLabel : Label
@@ -45,11 +46,17 @@ func _draw() -> void:
 		var SpotString = g.GetSpotName()
 		
 		draw_string(font, textpos, SpotString, HORIZONTAL_ALIGNMENT_CENTER, -1, 16,  Color(1, 1,1))
-		if (g.HasFuel()):
-			draw_texture_rect(load("res://Assets/Items/Fuel.png"), Rect2(Vector2(textpos.x - 20, textpos.y - 14), Vector2(16,16)), false, Color("a29752"))
+		var offset = 20
+		for service in g.PossibleServices:
+			var icon = MapSpotCompleteInfo.SERVICE_ICONS[service]
+			if (service == MapSpotCompleteInfo.SERVICES.FUEL):
+				draw_texture_rect(load(icon), Rect2(Vector2(textpos.x - offset, textpos.y - 14), Vector2(16,16)), false, Color("a29752"))
+			else:
+				draw_texture_rect(load(icon), Rect2(Vector2(textpos.x - offset, textpos.y - 14), Vector2(16,16)), false)
+			offset += 20
 			#draw_string(font, Vector2(textpos.x - 18, textpos.y + 16), "Fuel Depot", HORIZONTAL_ALIGNMENT_CENTER, -1, 16,  Color(1, 1,1))
 	Rng = GetFuelRangeWithExtraFuel(PlayerBoughtFuel)
-	draw_circle(get_viewport_rect().size / 2.0, Rng / 15.0, Color(0.3, 0.7, 0.915), false, 4)
+	draw_circle(get_viewport_rect().size / 2.0, Rng / 15.0, Color("4db3e9ff"), false, 4)
 	draw_multiline(Lines, Color(1, 1, 1, 0.1), 3, true)
 
 func UpdateRefuelTime() -> void:
@@ -143,7 +150,9 @@ func Init(BoughtFuel : float, FuelPrice : float, LandedShips : Array[MapShip], P
 	SetFuelData(LandedShips)
 	CurrentFuelLabel.text = var_to_str(roundi(PlFuel + BoughtFuel))
 	FuelBar.max_value = PlMaxFuel
-	FuelBar.value = PlFuel + BoughtFuel
+	FuelAddedBar.max_value = PlMaxFuel
+	FuelBar.value = min(PlFuel, PlFuel + PlayerBoughtFuel)
+	FuelAddedBar.value = PlFuel + BoughtFuel
 	FuelPriceLabel.text = var_to_str(FuelPricePerTon)
 
 func SetFuelData(ShipsToSet : Array[MapShip]):
@@ -188,7 +197,8 @@ func UpdateFuelBar(AddedFuel : float):
 	
 	RedrawThing()
 	#PlayerWallet.AddFunds(-(AddedFuel * FuelPricePerTon))
-	FuelBar.value = PlFuel + PlayerBoughtFuel
+	FuelBar.value = min(PlFuel, PlFuel + PlayerBoughtFuel)
+	FuelAddedBar.value = PlFuel + PlayerBoughtFuel
 	#FundAmm.text = var_to_str(roundi(PlayerWallet.Funds)) + " ₯"
 	CurrentFuelLabel.text = var_to_str(roundi(PlFuel + PlayerBoughtFuel))
 

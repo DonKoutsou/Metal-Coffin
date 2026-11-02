@@ -23,7 +23,6 @@ script = ExtResource("4_bngio")
 txFile = "uid://dop4330od2vo6"
 CardName = "AP Barragge"
 Energy = 1
-AllowDuplicates = true
 OnUsed = 1
 OnUseModules = Array[ExtResource("2_e3knc")]([SubResource("Resource_fktga")])
 WeapT = 1

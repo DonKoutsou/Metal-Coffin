@@ -2,8 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://dx71hkif8fjp5" path="res://Scenes/Card_Fight/AtackEffects/Projectiles/Base_Card_Projectile.tscn" id="1_23auh"]
 [ext_resource type="PackedScene" uid="uid://dlkjo56vcapoo" path="res://Scenes/Card_Fight/AtackEffects/RevUpEffects/Base_Revup.tscn" id="2_23auh"]
+[ext_resource type="AudioStream" uid="uid://bma0gkj3wnxec" path="res://Assets/Sounds/BeamRev.mp3" id="2_djks0"]
 [ext_resource type="PackedScene" uid="uid://bnb8npxm778d2" path="res://Scenes/Card_Fight/AtackEffects/ImpactEffects/FlameExtEffect.tscn" id="3_djks0"]
 
 [node name="MissileThing" unique_id=1959528193 instance=ExtResource("1_23auh")]
+FireSound = ExtResource("2_djks0")
 startParticle = ExtResource("2_23auh")
 endParticle = ExtResource("3_djks0")

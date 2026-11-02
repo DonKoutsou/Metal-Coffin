@@ -851,7 +851,7 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 		actionLog.append("{0} tries to player card {1}".format([Ship.Name, Action.GetCardName()]))
 		AvailableActions.erase(Action)
 		
-		if (CheckConditions(Action, ActionCost, Ship)): #Check if can be played
+		if (CheckConditions(Action, ActionCost, Ship, endTurnActions)): #Check if can be played
 			Ship.Energy -= ActionCost
 			Ship.deck.Hand.erase(Action)
 			
@@ -878,13 +878,11 @@ func EnemyActionSelection(Ship : BattleShipStats) -> void:
 	EnemyActionPickedEnded.emit()
 
 ##----------------------------------------------------------------------##
-func CheckConditions(Action : CardStats, Cost : int, Ship : BattleShipStats) -> bool:
+func CheckConditions(Action : CardStats, Cost : int, Ship : BattleShipStats, endTurnActions : Array[CardStats] ) -> bool:
 	var conditionCheck : bool = true
 	var conditionFailReason : String = ""
-	if (!Action.AllowDuplicates and ActionList.ShipHasAction(Ship, Action)):
-		conditionFailReason = "can't play multiple of this card in same turn"
-		conditionCheck = false
-	else: if (Cost > Ship.Energy):
+	
+	if (Cost > Ship.Energy):
 		conditionFailReason = "Reason : not enough energy"
 		conditionCheck = false
 	else: if (Action.UseConditions.has(CardStats.CardUseCondition.ON_FIRE) and !Ship.IsOnFire):
@@ -933,6 +931,9 @@ func CheckConditions(Action : CardStats, Cost : int, Ship : BattleShipStats) -> 
 	##TEAM ENOUGH FP // At least one ship with non zero firepower
 	else : if (Action.UseConditions.has(CardStats.CardUseCondition.TEAM_ENOUGH_FP) and !TeamHasFP(GetShipsTeam(Ship))):
 		conditionFailReason = "No team member with non zero Firepower"
+		conditionCheck = false
+	else : if (Action.UseConditions.has(CardStats.CardUseCondition.NO_DUPLICATES) and (ActionList.ShipHasAction(Ship, Action) or endTurnActions.has(Action))):
+		conditionFailReason = "can't play multiple of this card in same turn"
 		conditionCheck = false
 		
 	if (!conditionCheck):

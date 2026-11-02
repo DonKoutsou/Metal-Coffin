@@ -14,7 +14,13 @@ content_margin_right = 10.0
 content_margin_bottom = 10.0
 bg_color = Color(0, 0, 0, 0.34509805)
 
-[node name="Fuel Storages" type="PanelContainer" unique_id=1154589013 node_paths=PackedStringArray("FuelPriceLabel", "CurrentFuelLabel", "FuelBar", "rangeLabel", "refuelTimeLabel")]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0u4od"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0u4od"]
+bg_color = Color(0.3019608, 0.7019608, 0.9137255, 1)
+border_color = Color(1, 0.763983, 0.0812772, 1)
+
+[node name="Fuel Storages" type="PanelContainer" unique_id=1154589013 node_paths=PackedStringArray("FuelPriceLabel", "CurrentFuelLabel", "FuelBar", "FuelAddedBar", "rangeLabel", "refuelTimeLabel")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -26,6 +32,7 @@ script = ExtResource("2_tywce")
 FuelPriceLabel = NodePath("VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer2/TonPrice")
 CurrentFuelLabel = NodePath("VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer/FuelAmm")
 FuelBar = NodePath("VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/ProgressBar")
+FuelAddedBar = NodePath("VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/ProgressBar/ProgressBar")
 PlayerWallet = ExtResource("3_tywce")
 rangeLabel = NodePath("VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/Label2")
 refuelTimeLabel = NodePath("VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/Label3")
@@ -132,7 +139,21 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 offset_transform_enabled = true
+theme_override_styles/background = SubResource("StyleBoxEmpty_0u4od")
 value = 27.12
+show_percentage = false
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/ProgressBar" unique_id=1219622960]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_0u4od")
+value = 45.65
 show_percentage = false
 
 [node name="Control" type="Control" parent="VBoxContainer" unique_id=2002483963]

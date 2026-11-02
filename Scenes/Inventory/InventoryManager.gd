@@ -239,16 +239,20 @@ func ItemTranfer(Box : Inventory_Box_Res) -> void:
 	var It = Box.GetContainedItem()
 	
 	#TODO figure out a better design for landing so i can implement transfering of ship parts only on cities
-	#if (It is ShipPart and Cpt.CaptainShip.CurrentPort == null and !Cpt.CaptainShip.Landed()):
-		#PopUpManager.GetInstance().DoFadeNotif("Land ship to city to")
-		#return
+	if (It is ShipPart and controller.CurrentPort != null and !controller.Landed()):
+		PopUpManager.GetInstance().DoFadeNotif("Land ship to city\nto be able to tranfer ship parts")
+		return
 	
-	var fleet = Cpt.CaptainShip.GetFleet()
+	var fleet = controller.GetFleet()
+	fleet.append(controller)
+	var fleetCaptains : Array[Captain]
+	for g in fleet:
+		fleetCaptains.append(g.Cpt)
 	var AvailableCaptains : Array[Captain]
 	for g : Captain in _CharacterInventories.keys():
 		if (g == Cpt):
 			continue
-		if (!fleet.has(g.CaptainShip)):
+		if (!fleetCaptains.has(g)):
 			continue
 		var inv = _CharacterInventories[g]
 		if (inv.HasSpaceForItem(It)):
@@ -267,7 +271,7 @@ func ItemTranfer(Box : Inventory_Box_Res) -> void:
 	for i in amm:
 		SelectedCharInventory.AddItem(It)
 		OwnerInventory.RemoveItemFromBox(Box)
-	PopUpManager.GetInstance().DoFadeNotif("Transfered {2}x of {0} to {1}'s inventory".format([It.ItemName, SelectedChar.GetCaptainName(), amm]))
+	PopUpManager.GetInstance().DoFadeNotif("Transfered {2}x\nof {0} to \n{1}'s inventory".format([It.ItemName, SelectedChar.GetCaptainName(), amm]))
 
 #-------------------------------------------------------
 func GetBoxOwner(Box : Inventory_Box_Res) -> Captain:

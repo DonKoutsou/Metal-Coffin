@@ -1,24 +1,27 @@
 extends Node2D
 
-class_name MissileViz
-# Speed of the missile
+class_name CardProjectile
+## Speed of the missile
 @export var speed = 200
-
-# Adjust this value for more or less curvature
+## Adjust this value for more or less curvature
 @export var base_curve_intensity = 0.1
-# Wiggle amplitude and speed
+## Wiggle amplitude and speed
 @export var wiggle_amplitude = 5.0
 @export var wiggle_frequency = 3.0
 
+##Impact sound
 @export var ExplosionSound : AudioStream
-@export var FireSound : AudioStream
-@export var startParticle : PackedScene
+##Impact projectile
 @export var endParticle : PackedScene
+
+##Launch sound
+@export var FireSound : AudioStream
+##Launch particle
+@export var startParticle : PackedScene
 
 @export_group("Nodes")
 @export var SoundNode : AudioStreamPlayer2D
 @export var Trail : TrailLine
-
 
 signal Finished
 signal Reached
@@ -47,6 +50,7 @@ func _ready() -> void:
 	
 	set_process(false)
 	
+	#Spawn launch particle and wait for it to finish
 	var initialParticle : BurstParticleGroup2D = startParticle.instantiate()
 	add_child(initialParticle)
 	initialParticle.burst()
@@ -54,14 +58,13 @@ func _ready() -> void:
 	initialParticle.queue_free()
 	
 	var pos = Target.global_position
-	if (Target is Control):
+	if (Target is Control): #if control center it
 		pos += Target.size / 2
 		
 	look_at(pos)
 	set_process(true)
 
 func _process(delta: float) -> void:
-	
 	if (!Going or Target == null):
 		return
 	

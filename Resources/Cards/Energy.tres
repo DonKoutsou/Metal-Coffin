@@ -12,6 +12,5 @@ metadata/_custom_type_script = "uid://h6mrpid3a2ps"
 script = ExtResource("3_its6l")
 txFile = "uid://cngvmnworwmqg"
 CardName = "Resupply"
-AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_wqvsm")]([SubResource("Resource_o5gji")])
 Type = 2

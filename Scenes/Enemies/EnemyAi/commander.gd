@@ -331,7 +331,8 @@ func SetShipUnderInvestigation(Ship : MapShip) -> void:
 	Ship.OnShipDestroyed.connect(CancelInvestigation)
 
 func CancelInvestigation(Ship : MapShip) -> void:
-	Ship.OnShipDestroyed.disconnect(CancelInvestigation)
+	if (Ship.OnShipDestroyed.is_connected(CancelInvestigation)):
+		Ship.OnShipDestroyed.disconnect(CancelInvestigation)
 	EnemyPositionsToInvestigate.erase(Ship)
 #/////////////////////////////////////////////////////////////
 

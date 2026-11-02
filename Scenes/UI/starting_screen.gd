@@ -109,7 +109,15 @@ func _ready() -> void:
 	get_viewport().disable_3d = true
 	TranslationServer.set_locale("english")
 	
+	get_tree().root.size_changed.connect(on_viewport_size_changed)
+	
 	await Start()
+
+func on_viewport_size_changed():
+	var mat : ShaderMaterial = $SubViewportContainer.material
+	var s = get_tree().root.size / 3.0
+	print(s)
+	mat.set_shader_parameter("DitherRes", s)
 
 func load_all_workshop_mods() -> void:
 	var subscribed_ids = Steam.getSubscribedItems()
