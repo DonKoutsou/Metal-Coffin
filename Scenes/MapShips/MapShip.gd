@@ -61,6 +61,8 @@ var StormValue : float = 0
 var WindVector : Vector2
 var FuelWindEffect : float
 
+const BASE_SHIP_VIZ : int = 90
+
 func _ready() -> void:
 	BodyShape.connect("area_entered", BodyEnteredBody)
 	BodyShape.connect("area_exited", BodyLeftBody)

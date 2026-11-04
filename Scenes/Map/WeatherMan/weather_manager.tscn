@@ -13,6 +13,16 @@ shader_parameter/offset = Vector2(0, 0)
 shader_parameter/z = 0.125
 shader_parameter/colors = 8
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ubxa3"]
+frequency = 0.0617
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xydrg"]
+height = 1
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_ubxa3")
+seamless = true
+
 [node name="WeatherManager" type="ColorRect" unique_id=2099502434]
 texture_filter = 3
 material = SubResource("ShaderMaterial_7nfft")
@@ -30,3 +40,4 @@ script = ExtResource("4_3wj3p")
 EventHandler = ExtResource("5_0w5h3")
 WindChangeMinimumTime_Minutes = 120.0
 NoiseFile = "uid://0k2jw1bl3ndm"
+WindSpeedNoise = SubResource("NoiseTexture2D_xydrg")

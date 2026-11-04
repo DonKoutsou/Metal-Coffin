@@ -18,6 +18,5 @@ script = ExtResource("3_4i3fr")
 txFile = "uid://cuuwarc38ibrn"
 CardName = "Safeguard"
 Energy = 2
-AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_moyrk")]([SubResource("Resource_r7uwp")])
 Type = 1

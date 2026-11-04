@@ -9,7 +9,7 @@ var VisStat : ShipStat
 var Working : bool = true
 var Detectable = true
 
-var CurrentVisualRange : float = 110
+var CurrentVisualRange : float = MapShip.BASE_SHIP_VIZ
 var StormPenalty : float = 1
 var VisualRangePenalty : float = 1
 
@@ -29,9 +29,9 @@ func ToggleRadar(t : bool):
 func UpdateVizRange():
 	var NewRange : float
 	if (!Working):
-		NewRange = 110 * VisualRangePenalty
+		NewRange = MapShip.BASE_SHIP_VIZ * VisualRangePenalty * StormPenalty
 	else:
-		NewRange = max(110 * VisualRangePenalty, VisStat.GetFinalValue()) * StormPenalty
+		NewRange = max(MapShip.BASE_SHIP_VIZ * VisualRangePenalty, VisStat.GetFinalValue()) * StormPenalty
 	NewRange = roundi(NewRange)
 	if (NewRange == CurrentVisualRange):
 		return

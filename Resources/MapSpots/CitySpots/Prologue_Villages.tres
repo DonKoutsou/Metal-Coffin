@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MapSpotType" format=3 uid="uid://5ebx3v7wga5p"]
+
+[ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scenes/Map/MapSpot/MapSpotCompleteInfo.gd" id="1_1m5vc"]
+[ext_resource type="Resource" uid="uid://dymr3kp27n5to" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Cardi.tres" id="3_mt4up"]
+[ext_resource type="Resource" uid="uid://cj1ic1tc1y86i" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Sazma.tres" id="4_p4neu"]
+[ext_resource type="Resource" uid="uid://ck7jx6746yvdp" path="res://Resources/MapSpots/CitySpots/SpotInfo/Villages/Sirkan.tres" id="5_5y47p"]
+[ext_resource type="Script" uid="uid://bqgyl8uqmo3sl" path="res://Scenes/Map/MapSpot/MapSpotCustomData_CompletePlaceInfo.gd" id="18_xx82x"]
+[ext_resource type="Script" uid="uid://dcqkyn7a6scl0" path="res://Scenes/Map/MapSpot/MapSpotType.gd" id="19_uv58u"]
+
+[sub_resource type="Resource" id="Resource_3mffu"]
+script = ExtResource("18_xx82x")
+PossibleIds = Array[ExtResource("1_1m5vc")]([ExtResource("3_mt4up"), ExtResource("4_p4neu"), ExtResource("5_5y47p")])
+
+[resource]
+script = ExtResource("19_uv58u")
+SpotK = 1
+BackgroundFile = "uid://dw6dy4uoxiju5"
+Data = SubResource("Resource_3mffu")

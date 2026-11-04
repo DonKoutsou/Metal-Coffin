@@ -19,7 +19,6 @@ metadata/_custom_type_script = "uid://kct7kkjke6ao"
 script = ExtResource("4_odrhw")
 txFile = "uid://cnxsee5g6ie7q"
 CardName = "Pyroclasm"
-AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_jjf80")]([SubResource("Resource_1x6pr")])
 WeapT = 6
 UseConditions = Array[int]([2])

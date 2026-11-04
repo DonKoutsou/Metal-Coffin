@@ -22,7 +22,6 @@ script = ExtResource("4_mwgrq")
 txFile = "uid://bi0eebl0i1oyo"
 CardName = "Unguided Missile"
 Energy = 3
-AllowDuplicates = true
 OnUseModules = Array[ExtResource("3_30ydj")]([SubResource("Resource_nciiu")])
 WeapT = 2
 AllowTier = false

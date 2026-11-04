@@ -21,7 +21,6 @@ script = ExtResource("2_rb3yp")
 txFile = "uid://bv3vkwi5obsul"
 CardName = "Emergency Reload!"
 Energy = 1
-AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_57tt1")]([SubResource("Resource_e2oaq")])
 Type = 2
 AllowTier = false

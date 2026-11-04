@@ -15,6 +15,5 @@ script = ExtResource("3_8vv6a")
 txFile = "uid://cvdow8jdssnac"
 CardName = "Draw Discard"
 Energy = 1
-AllowDuplicates = true
 OnUseModules = Array[ExtResource("1_8vv6a")]([SubResource("Resource_agq3e")])
 Type = 2

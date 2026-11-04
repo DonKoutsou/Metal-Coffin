@@ -215,8 +215,6 @@ func _physics_process(delta: float) -> void:
 	
 	var CurrentDelta = delta * SimulationManager.SimSpeed()
 	
-	
-	
 	UpdatePlayerShips(CurrentDelta, delta)
 	
 	if (!SimulationManager.Paused):
@@ -714,6 +712,11 @@ func EndPrologue() -> void:
 	
 	var ProgEnd = PrologueEndScreen.instantiate() as PrologueEnd
 	AchievementManager.GetInstance().IncrementStatInt("PROFIN", 1)
-	GetMap().GetScreenUi().add_child(ProgEnd)
+	
+	SimulationManager.GetInstance().TogglePause(true)
+	GetMap().HideWorld(true)
+	GetMap().GetInScreenUI().AddUI(ProgEnd, false, true)
+	GetMap().GetScreenUi().OpenScreen(ScreenUI.ScreenState.FULL_SCREEN)
+	World.WORLDST = World.WORLDSTATE.FINISHED
 	await ProgEnd.Finished
 	WRLD_OnGameEnded.emit()

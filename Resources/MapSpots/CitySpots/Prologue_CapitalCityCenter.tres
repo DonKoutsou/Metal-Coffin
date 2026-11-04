@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="MapSpotType" format=3 uid="uid://blpmhsq248l33"]
+
+[ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scenes/Map/MapSpot/MapSpotCompleteInfo.gd" id="1_3r8wx"]
+[ext_resource type="Resource" uid="uid://cau8rjgorpmtu" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Alivia.tres" id="2_dtms6"]
+[ext_resource type="Resource" uid="uid://dobir15ooa8uf" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Cirkari.tres" id="3_u6cn1"]
+[ext_resource type="Resource" uid="uid://kjwdfwc0h4uf" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Kalicard.tres" id="4_66fvk"]
+[ext_resource type="Script" uid="uid://bqgyl8uqmo3sl" path="res://Scenes/Map/MapSpot/MapSpotCustomData_CompletePlaceInfo.gd" id="17_p82um"]
+[ext_resource type="Script" uid="uid://dcqkyn7a6scl0" path="res://Scenes/Map/MapSpot/MapSpotType.gd" id="18_rrsqp"]
+
+[sub_resource type="Resource" id="Resource_k4o2w"]
+script = ExtResource("17_p82um")
+PossibleIds = Array[ExtResource("1_3r8wx")]([ExtResource("2_dtms6"), ExtResource("3_u6cn1"), ExtResource("4_66fvk")])
+
+[resource]
+script = ExtResource("18_rrsqp")
+SpotK = 2
+VisibleOnStart = true
+BackgroundFile = "uid://d0ujbu68jgisw"
+Data = SubResource("Resource_k4o2w")

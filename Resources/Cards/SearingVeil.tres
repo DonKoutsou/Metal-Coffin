@@ -23,6 +23,5 @@ script = ExtResource("4_cwd6u")
 txFile = "uid://cpmyx11pwxw5n"
 CardName = "Searing Veil"
 Energy = 1
-AllowDuplicates = true
 OnUseModules = Array[ExtResource("3_5mdem")]([SubResource("Resource_4hc72")])
 Type = 1

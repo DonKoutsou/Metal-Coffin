@@ -12,7 +12,6 @@ metadata/_custom_type_script = "uid://crxgf35d0q8o1"
 script = ExtResource("3_khypd")
 txFile = "uid://c6lfs6imu7yx0"
 CardName = "Flux Converter"
-AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_5uqf0")]([SubResource("Resource_5uqf0")])
 Type = 2
 UseConditions = Array[int]([2])

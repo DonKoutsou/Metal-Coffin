@@ -101,6 +101,7 @@ autowrap_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 bbcode_enabled = true
 fit_content = true
 scroll_active = false

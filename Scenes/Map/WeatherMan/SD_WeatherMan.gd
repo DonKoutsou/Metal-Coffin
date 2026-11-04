@@ -8,3 +8,4 @@ class_name SD_WeatherMan
 @export var LastTimeWindChanged : float
 @export var WindDirectionOffset : int = 1
 @export var state : Dictionary
+@export var speed_offset : float

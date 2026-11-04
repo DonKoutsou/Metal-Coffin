@@ -77,6 +77,7 @@ func OnBuyConfirmed(t : bool) -> void:
 		CurrentShip._CharInv.queue_free()
 		AvailableCaptains.remove_at(currentIndex)
 		CurrentShip = null
+		currentIndex = -1
 		if (AvailableCaptains.size() == 0):
 			_on_close_pressed()
 		else:

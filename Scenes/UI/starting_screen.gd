@@ -215,9 +215,9 @@ func StartCageFight() -> void:
 #-----------------------------------------------------------------------------------
 func StartGame(Load : bool, _SkipStory : bool = false) -> void:
 	#TODO enable on full release
-	if (!ActionTracker.GetInstance().DidPrologue()):
-		PopupManager.DoFadeNotif("Prologue needs to be completed before moving to the campaign", StMenu.GetVp())
-		return
+	#if (!ActionTracker.GetInstance().DidPrologue()):
+		#PopupManager.DoFadeNotif("Prologue needs to be completed\nbefore moving to the campaign", StMenu.GetVp())
+		#return
 		
 	if (!OS.is_debug_build()):
 		PopupManager.DoFadeNotif("Not available on Demo", StMenu.GetVp())

@@ -14,5 +14,4 @@ script = ExtResource("4_khq0h")
 txFile = "uid://dwhpuw3ihrhq6"
 CardName = "Burn"
 Energy = 2
-AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_fqnt1")]([SubResource("Resource_lftj1")])

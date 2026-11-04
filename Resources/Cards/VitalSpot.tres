@@ -20,5 +20,4 @@ script = ExtResource("4_mdbhu")
 txFile = "uid://d3mqr34v3ispw"
 CardName = "Weak Point Id"
 Energy = 1
-AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_612g0")]([SubResource("Resource_612g0")])

@@ -13,10 +13,10 @@ func _ready() -> void:
 func UpdateVizRange():
 	var NewRange : float
 	if (!Working):
-		NewRange = 110 * VisualRangePenalty
+		NewRange = MapShip.BASE_SHIP_VIZ * VisualRangePenalty * StormPenalty
 	else:
-		NewRange = max(110 * VisualRangePenalty, VisStat.GetFinalValue()) * StormPenalty
-	NewRange = roundi(NewRange)
+		NewRange = max(MapShip.BASE_SHIP_VIZ * VisualRangePenalty, VisStat.GetFinalValue()) * StormPenalty
+	NewRange = roundi(NewRange) 
 	if (NewRange == CurrentVisualRange):
 		return
 	CurrentVisualRange = NewRange

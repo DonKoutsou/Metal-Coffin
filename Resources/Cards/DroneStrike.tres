@@ -23,6 +23,5 @@ script = ExtResource("4_mnke7")
 txFile = "uid://co2rqhx2gyqvu"
 CardName = "Drone Strike"
 Energy = 2
-AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_4oqqa")]([SubResource("Resource_mo274")])
 WeapT = 5

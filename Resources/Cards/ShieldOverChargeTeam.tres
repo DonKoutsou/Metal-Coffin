@@ -17,7 +17,6 @@ script = ExtResource("3_1k2fb")
 txFile = "uid://bq8q6bblntmdr"
 CardName = "Team Shield Overcharge"
 Energy = 3
-AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_ywkdi")]([SubResource("Resource_plv6y")])
 Type = 1
 UseConditions = Array[int]([2])

@@ -330,8 +330,6 @@ func _MAP_INPUT(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion):
 		if (GetMapMarkerEditor().visible):
 			GetMapMarkerEditor().UpdatePosCustom()
-			#return
-	
 	
 	if (event is InputEventScreenTouch):
 		_Camera._HANDLE_TOUCH(event)
@@ -405,14 +403,26 @@ func GenerateMap() -> void:
 func GenerateMapThreaded() -> void:
 	print("||||||||||||||||||||||| SPAWNING SPOTS |||||||||||||||||||||||")
 	
+	var town_positions = poisson_disk_sampling(SpawningBounds, MapSize)
+	var sorted_positions = sort_positions_by_y(town_positions)
+	
 	var time = Time.get_ticks_msec()
 	
+	#City Spots
+	var CitySpots : Array[int] = []
+	
+	for z in sorted_positions.size():
+		CitySpots.append(z)
+	
+	#Capital City Spots
 	var CapitalCitySpots : Array[int] = []
-
+	
 	for z in CapitalAmm:
 		var spot = roundi(MapSize/CapitalAmm * (z + 1)) - Rand.InstanceRandom.RandIRange(2, 5)
 		CapitalCitySpots.append(spot)
-
+		CitySpots.erase(spot)
+	
+	#Vilage Spots
 	var VillageSpots : Array[int] = []
 
 	for z in VillageAmm:
@@ -420,29 +430,35 @@ func GenerateMapThreaded() -> void:
 		if (CapitalCitySpots.has(spot)):
 			spot += 1
 		VillageSpots.append(spot)
+		CitySpots.erase(spot)
 	
 	var WorldSize : float = 100000
 	
-	var FinalCitySpotType = ResourceLoader.load(FinalCityType, "", ResourceLoader.CACHE_MODE_REUSE) as MapSpotType
+	var FinalCitySpotType = ResourceLoader.load(FinalCityType) as MapSpotType
 	var FinalCityData = FinalCitySpotType.GetData()
-	var CapitalSpotType = ResourceLoader.load(CapitalType, "", ResourceLoader.CACHE_MODE_REUSE) as MapSpotType
+	var CapitalSpotType = ResourceLoader.load(CapitalType) as MapSpotType
 	var CapitalData = CapitalSpotType.GetData()
-	var VillageSpotType = ResourceLoader.load(VillageType, "", ResourceLoader.CACHE_MODE_REUSE) as MapSpotType
+	var VillageSpotType = ResourceLoader.load(VillageType) as MapSpotType
 	var VillageData = VillageSpotType.GetData()
-	var CitySpotType = ResourceLoader.load(CityType, "", ResourceLoader.CACHE_MODE_REUSE) as MapSpotType
+	var CitySpotType = ResourceLoader.load(CityType) as MapSpotType
 	var CityData = CitySpotType.GetData()
-	
-	var town_positions = poisson_disk_sampling(SpawningBounds, MapSize)
-	var sorted_positions = sort_positions_by_y(town_positions)
+
+	var finalCitySpot #Place final city a few spots before the end
+	#Find spot that matches the final spot type and replace it
+	if (FinalCitySpotType.SpotK == MapSpotType.SpotKind.VILLAGE):
+		finalCitySpot = VillageSpots.pop_back()
+	else: if (FinalCitySpotType.SpotK == MapSpotType.SpotKind.CAPITAL):
+		finalCitySpot = CapitalCitySpots.pop_back()
+	else: 
+		finalCitySpot = CitySpots.pop_back()
 	
 	var GeneratedSpots : Array[Town] = []
 	for g in sorted_positions.size() :
-
-		#SET THE TYPE
 		var sc = TownSpotScene.instantiate() as Town
 		var pos = sorted_positions[g]
 		
-		if (g == sorted_positions.size() - 1):
+		#SET THE TYPE
+		if (g == finalCitySpot):
 			sc.GenerateCity(FinalCitySpotType, FinalCityData)
 		else : if (CapitalCitySpots.has(g)):
 			sc.GenerateCity(CapitalSpotType, CapitalData)

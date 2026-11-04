@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d0iiqaijsg1y1"]
 
 [ext_resource type="Script" uid="uid://djw0qatbronxr" path="res://Scenes/InScreenUI/Commande_Line/command_line.gd" id="2_3camo"]
-[ext_resource type="FontFile" uid="uid://mco7gna0bipp" path="res://MetalEngineBase/Fonts/microsoft_sans_serif.ttf" id="2_5kdy4"]
+[ext_resource type="FontFile" uid="uid://bg3sfwfdyi3c" path="res://MetalEngineBase/Fonts/microsoft_sans_serif.ttf" id="2_5kdy4"]
 [ext_resource type="AudioStream" uid="uid://b5cb3530xjcon" path="res://Assets/Sounds/minimize_003.ogg" id="3_3camo"]
 [ext_resource type="AudioStream" uid="uid://b4u5muin6mjj3" path="res://Assets/Sounds/maximize_003.ogg" id="3_5kdy4"]
 

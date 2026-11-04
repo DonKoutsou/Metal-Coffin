@@ -5,10 +5,11 @@ class_name WeatherManage
 @export var EventHandler : UIEventHandler
 @export var WindChangeMinimumTime_Minutes : float = 20.0
 @export_file(".tres") var NoiseFile : String
-
+@export var WindSpeedNoise : NoiseTexture2D
 #@export var G : Gradient
 static var DataTexture : Image
 var N : NoiseTexture2D
+var windSpeedTexture : Image
 
 const TEXTURE_SIZE : int = 256
 const SIZE : Vector2 = Vector2(9000,9000)
@@ -26,6 +27,7 @@ var CurrentCamOffset : Vector2
 var LastTimeWindChanged : float
 var WindDirectionOffset : int = 1
 var rand : Rand
+var speedOffset : float
 
 static var M : Mutex #Use mutex to allow texture to be read through thread
 
@@ -53,6 +55,10 @@ func _ready() -> void:
 	Instance = self
 	LastTimeWindChanged = 0
 	WindDirectionOffset = 1
+	
+	
+	windSpeedTexture = WindSpeedNoise.get_image()
+	speedOffset = rand.RandFRange(0, windSpeedTexture.get_width())
 	
 	#Prepare noise
 	N = ResourceLoader.load(NoiseFile)
@@ -84,7 +90,11 @@ func Update(delta: float) -> void:
 	#Update wind direction and speed
 	var WindRotation = rand.RandFRange(0, 0.01) * WindDirectionOffset
 	WindDirection = WindDirection.rotated(WindRotation * (delta * 10))
-	WindSpeed = clamp(WindSpeed + rand.RandFRange(-0.2, 0.2), 0, MAX_WIND_SPEED)
+	
+	speedOffset += delta
+	var speedPos = Vector2(wrap(speedOffset, 0, DataTexture.get_width()), 0)
+	var speed = windSpeedTexture.get_pixelv(speedPos).r
+	WindSpeed = speed * MAX_WIND_SPEED
 	
 	#Update noise
 	#CurrentOffset -= Vector2(WindDirection.x, WindDirection.y) * (delta * 0.01) * (WindSpeed * 0.005)
@@ -178,6 +188,7 @@ func GetSaveData() -> SaveData:
 	Data.WindDirectionOffset = WindDirectionOffset
 	Data.LastTimeWindChanged = LastTimeWindChanged
 	Data.state = rand.GetState()
+	Data.speed_offset = speedOffset
 	Sav.Datas.append(Data)
 	return Sav
 
@@ -188,4 +199,5 @@ func LoadSaveData(Data : SD_WeatherMan) -> void:
 	LastTimeWindChanged = Data.LastTimeWindChanged
 	N.noise.offset = Data.Offset
 	rand = Rand.NewRand(Data.state)
+	speedOffset = Data.speed_offset
 	#tx = texture.get_image()

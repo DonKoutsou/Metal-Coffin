@@ -13,7 +13,6 @@ metadata/_custom_type_script = "uid://ddob0fen8r2j2"
 script = ExtResource("3_mecxl")
 txFile = "uid://droreje2r3m31"
 CardName = "Team Shield Surge"
-AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_602bs")]([SubResource("Resource_w7l7e")])
 Type = 1
 UseConditions = Array[int]([1, 2])

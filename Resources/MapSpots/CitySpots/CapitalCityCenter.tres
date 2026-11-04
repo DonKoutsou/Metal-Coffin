@@ -1,11 +1,8 @@
 [gd_resource type="Resource" script_class="MapSpotType" format=3 uid="uid://dyvpncg7tolc7"]
 
 [ext_resource type="Script" uid="uid://cugrtcud2y06w" path="res://Scenes/Map/MapSpot/MapSpotCompleteInfo.gd" id="2_khihf"]
-[ext_resource type="Resource" uid="uid://cau8rjgorpmtu" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Alivia.tres" id="3_u02hr"]
 [ext_resource type="Resource" uid="uid://bkwipbinmxddr" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Curd.tres" id="4_mjh1h"]
 [ext_resource type="Script" uid="uid://bqgyl8uqmo3sl" path="res://Scenes/Map/MapSpot/MapSpotCustomData_CompletePlaceInfo.gd" id="4_xevlw"]
-[ext_resource type="Resource" uid="uid://dobir15ooa8uf" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Cirkari.tres" id="6_esr4f"]
-[ext_resource type="Resource" uid="uid://kjwdfwc0h4uf" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Kalicard.tres" id="7_bot42"]
 [ext_resource type="Resource" uid="uid://ltonn44hg1kq" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Krokaria.tres" id="8_2jrjj"]
 [ext_resource type="Resource" uid="uid://bscbp2mebv4e4" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Jud.tres" id="8_xhovg"]
 [ext_resource type="Resource" uid="uid://doth1htx3jgkk" path="res://Resources/MapSpots/CitySpots/SpotInfo/CapitalCities/Xenda.tres" id="9_ye5xf"]
@@ -21,7 +18,7 @@
 
 [sub_resource type="Resource" id="Resource_k4o2w"]
 script = ExtResource("4_xevlw")
-PossibleIds = Array[ExtResource("2_khihf")]([ExtResource("3_u02hr"), ExtResource("6_esr4f"), ExtResource("7_bot42"), ExtResource("4_mjh1h"), ExtResource("8_2jrjj"), ExtResource("11_3f67x"), ExtResource("8_xhovg"), ExtResource("12_pf3wa"), ExtResource("9_ye5xf"), ExtResource("16_gt6sk"), ExtResource("17_4mqq2"), ExtResource("14_m0i82"), ExtResource("10_n2cne"), ExtResource("13_l2gax"), ExtResource("13_67tdm")])
+PossibleIds = Array[ExtResource("2_khihf")]([ExtResource("4_mjh1h"), ExtResource("8_2jrjj"), ExtResource("11_3f67x"), ExtResource("8_xhovg"), ExtResource("12_pf3wa"), ExtResource("9_ye5xf"), ExtResource("16_gt6sk"), ExtResource("17_4mqq2"), ExtResource("14_m0i82"), ExtResource("10_n2cne"), ExtResource("13_l2gax"), ExtResource("13_67tdm")])
 
 [resource]
 script = ExtResource("10_jgsae")

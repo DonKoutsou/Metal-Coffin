@@ -23,6 +23,5 @@ script = ExtResource("4_cu3x3")
 txFile = "uid://cpt821tvil66d"
 CardName = "Overheat"
 Energy = 2
-AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_l7hmv")]([SubResource("Resource_r7uwp"), SubResource("Resource_l7hmv")])
 Type = 2

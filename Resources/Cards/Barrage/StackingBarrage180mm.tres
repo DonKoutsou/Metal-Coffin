@@ -30,7 +30,6 @@ script = ExtResource("5_gadxq")
 txFile = "uid://dwdtpo85obuku"
 CardName = "Stacking Barragge"
 Energy = 2
-AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_n2how")]([SubResource("Resource_tpj2d")])
 WeapT = 4
 AllowTier = false

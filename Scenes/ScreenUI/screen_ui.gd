@@ -17,7 +17,7 @@ var TownUi : TownExternalUI
 var PilotScreen : PilotScreenUI
 var FullScreen : Control
 static var Instance : ScreenUI
-var CurrentScreenState : ScreenState
+static var CurrentScreenState : ScreenState
 
 signal FullScreenToggleStarted()
 signal FullScreenToggleFinished()

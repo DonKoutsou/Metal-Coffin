@@ -80,8 +80,11 @@ EventList = Dictionary[int, Object]({
 })
 
 [node name="Map" parent="." unique_id=94153298 instance=ExtResource("19_3v2l7")]
-VillageType = "uid://d1ccujxqp1ci3"
+VillageType = "uid://5ebx3v7wga5p"
+CityType = "uid://d0f50js6ffgrf"
+CapitalType = "uid://blpmhsq248l33"
 FinalCityType = "uid://q6pvyblp3f1r"
+EnemyShipNameList = "uid://sc5761fpr0df"
 MapSize = 35
 VillageAmm = 3
 MaxDistance = 2500.0

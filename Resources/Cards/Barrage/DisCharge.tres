@@ -17,7 +17,6 @@ metadata/_custom_type_script = "uid://kct7kkjke6ao"
 script = ExtResource("4_nb0ph")
 txFile = "uid://dh6wd06k2k65r"
 CardName = "Discharge"
-AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_48pk0")]([SubResource("Resource_1x6pr")])
 WeapT = 3
 UseConditions = Array[int]([2])

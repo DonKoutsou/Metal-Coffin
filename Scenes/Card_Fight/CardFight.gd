@@ -932,13 +932,19 @@ func CheckConditions(Action : CardStats, Cost : int, Ship : BattleShipStats, end
 	else : if (Action.UseConditions.has(CardStats.CardUseCondition.TEAM_ENOUGH_FP) and !TeamHasFP(GetShipsTeam(Ship))):
 		conditionFailReason = "No team member with non zero Firepower"
 		conditionCheck = false
-	else : if (Action.UseConditions.has(CardStats.CardUseCondition.NO_DUPLICATES) and (ActionList.ShipHasAction(Ship, Action) or endTurnActions.has(Action))):
+	else : if (Action.UseConditions.has(CardStats.CardUseCondition.NO_DUPLICATES) and (ActionList.ShipHasAction(Ship, Action) or ActionIn(endTurnActions, Action))):
 		conditionFailReason = "can't play multiple of this card in same turn"
 		conditionCheck = false
 		
 	if (!conditionCheck):
 		print("{0} | CANT PLAY {1} | Reason : {2}".format([Ship.Name, Action.GetCardName(), conditionFailReason]))
 	return conditionCheck
+
+func ActionIn(endTurnActions : Array[CardStats], action : CardStats) -> bool:
+	for g in endTurnActions:
+		if (g.GetCardName() == action.GetCardName()):
+			return true
+	return false
 
 ##----------------------------------------------------------------------##
 func TeamHasFP(team : Array[BattleShipStats]) -> bool:

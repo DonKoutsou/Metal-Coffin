@@ -16,6 +16,5 @@ script = ExtResource("3_gb1i2")
 txFile = "uid://c221vevim2qk3"
 CardName = "Shield Overcharge"
 Energy = 2
-AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_okst8")]([SubResource("Resource_jt02s")])
 Type = 1

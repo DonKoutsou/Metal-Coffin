@@ -166,6 +166,9 @@ func _input(event: InputEvent) -> void:
 	if (Locked):
 		return
 	
+	if (CommandLine.Typing):
+		return
+	
 	if (World.WORLDST == World.WORLDSTATE.NORMAL):
 		if (event is InputEventMouseMotion):
 			if (get_global_mouse_position().x < 20 and position.x != 370):

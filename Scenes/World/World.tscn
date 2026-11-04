@@ -14,7 +14,7 @@
 
 [sub_resource type="Resource" id="Resource_tlnwl"]
 script = ExtResource("22_qs546")
-list = Array[String](["uid://b8kumsjf70n22", "uid://bi5laknt8ktr6", "uid://mhuc4oqjjoph", "uid://byx81bxds55dv", "uid://cjywrm3yoyv76", "uid://c3kr3kcdnvesc", "uid://boanhwedl2f1l", "uid://cewy7vds2cnh8", "uid://dijsq004n7ouw", "uid://cbe4h0paqjgm4", "uid://gvu43lp4i4y6", "uid://r5k7lwi7y3wa"])
+list = Array[String](["uid://b8kumsjf70n22", "uid://bi5laknt8ktr6", "uid://mhuc4oqjjoph", "uid://byx81bxds55dv", "uid://cjywrm3yoyv76", "uid://boanhwedl2f1l", "uid://cewy7vds2cnh8", "uid://dijsq004n7ouw", "uid://cbe4h0paqjgm4", "uid://gvu43lp4i4y6", "uid://r5k7lwi7y3wa"])
 metadata/_custom_type_script = "uid://bqhtiqcy7irvm"
 
 [sub_resource type="Resource" id="Resource_fhvmr"]
@@ -73,3 +73,6 @@ EventList = Dictionary[int, Object]({
 })
 
 [node name="Map" parent="." unique_id=1572158328 instance=ExtResource("12_11aq8")]
+VillageAmm = 10
+CapitalAmm = 6
+SpawningBounds = Vector2(15000, 250000)

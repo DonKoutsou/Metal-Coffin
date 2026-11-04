@@ -17,6 +17,5 @@ script = ExtResource("3_gcvdo")
 txFile = "uid://chpdhvnha7hih"
 CardName = "Deceleration Field"
 Energy = 1
-AllowDuplicates = true
 OnUseModules = Array[ExtResource("3_x7h2e")]([SubResource("Resource_4hc72")])
 Type = 1
