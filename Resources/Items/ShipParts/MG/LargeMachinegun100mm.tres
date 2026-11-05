@@ -40,6 +40,7 @@ script = ExtResource("4_7no4a")
 WType = 1
 Upgrades = Array[ExtResource("6_oaj4l")]([SubResource("Resource_fmxhr"), SubResource("Resource_l3wxu"), SubResource("Resource_w7x0r"), SubResource("Resource_32tci")])
 UpgradeTime = 1000.0
+Repair_Parts = null
 ItemName = "MG-30 \"Tempest\" 100mm"
 ItemDesc = "the elite choice for those requiring ultimate firepower in critical scenarios. Featuring cutting-edge targeting and stabilization technology, 'Tempest' supports continuous and dynamic fire, overwhelming even the staunchest defenses with relentless precision and unmatched rate of fire."
 PartType = 4

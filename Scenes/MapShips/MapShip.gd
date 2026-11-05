@@ -158,7 +158,7 @@ func Refuel() -> float:
 func Repair() -> float:
 	var timeLeft : float = 0
 	
-	if (!Cpt.IsResourceFull(STAT_CONST.STATS.HULL) and Cpt.Repair_Parts > 0):
+	if (!Cpt.IsResourceFull(STAT_CONST.STATS.HULL) and Cpt.GetRepairParts() > 0):
 		var Simulationp = 0
 		if (!SimulationManager.IsPaused()):
 			Simulationp = 1
@@ -167,27 +167,34 @@ func Repair() -> float:
 		
 		if (CurrentPort.HasRepair()):
 			TimeMulti = 0.10
-		timeLeft = (Cpt.Repair_Parts / TimeMulti / 6)
+		
+		var biggestTimeLeft = (Cpt.Repair_Parts / TimeMulti / 6)
+
 		#ShipDockActions.emit("Repairing", true, roundi(timeleft))
 		
 		var repairAmm : float = TimeMulti * SimulationSpeed
-		var remainingRepair : float = repairAmm
-		
+	
 		var damagedShipPart : Array[ShipPart] = Cpt.GetCharacterInventory().GetDagamedShipParts()
 		
-		while (remainingRepair > 0 and damagedShipPart.size() > 0):
-			var shipPartToRepair = damagedShipPart.pick_random()
-			if (shipPartToRepair.GetPartConditionNormalised() >= 1):
-				damagedShipPart.erase(shipPartToRepair)
+		for shipPartToRepair in damagedShipPart:
+			if (shipPartToRepair.Repair_Parts <= 0):
 				continue
 				
-			var neededRepair = shipPartToRepair.GetPartMaxCondition() - shipPartToRepair.GetPartCondition()
-			var partRepairAmm = Rand.InstanceRandom.RandFRange(0 , min(neededRepair, remainingRepair))
+			if (shipPartToRepair.GetPartConditionNormalised() >= 1):
+				continue
+
+			var partRepairAmm = min(repairAmm, shipPartToRepair.Repair_Parts)
 			shipPartToRepair.Repair(partRepairAmm)
-			remainingRepair -= partRepairAmm
+			shipPartToRepair.Repair_Parts -= partRepairAmm
+			var partRepairTime = (shipPartToRepair.Repair_Parts / TimeMulti / 6)
+			if (partRepairTime > biggestTimeLeft):
+				biggestTimeLeft = partRepairTime
 		
-		Cpt.RefillResource(STAT_CONST.STATS.HULL , remainingRepair)
-		Cpt.Repair_Parts -= repairAmm
+		var hullRepair = min(repairAmm, Cpt.Repair_Parts)
+		Cpt.RefillResource(STAT_CONST.STATS.HULL , hullRepair)
+		Cpt.Repair_Parts -= hullRepair
+		
+		timeLeft = biggestTimeLeft
 		
 	for g in GetSquad():
 		timeLeft = max(timeLeft, g.Repair())

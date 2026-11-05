@@ -28,7 +28,10 @@ func Init(Ship : Captain, HasRepair : bool) -> void:
 	SetHullData(Ship)
 	CurrentHullLabel.text = var_to_str(roundi(PlHull))
 	HullBar.max_value = PlMaxHull
-	HullBar.set_value_no_signal(PlHull + Ship.Repair_Parts)
+	
+	var parts = Ship.GetRepairParts()
+	
+	HullBar.set_value_no_signal(PlHull + parts)
 	RepairPriceLabel.text = var_to_str(RepairPricePerUnit)
 	
 	var TimeMulti = 0.025
@@ -36,7 +39,7 @@ func Init(Ship : Captain, HasRepair : bool) -> void:
 	if (hasRepair):
 		TimeMulti = 0.10
 		
-	var t = CurrentShip.Repair_Parts/ TimeMulti / 6
+	var t = parts / TimeMulti / 6
 	
 	ReprairTimeLabel.text = Clock.MinutesToHours(t, true)
 
@@ -46,19 +49,24 @@ func SetHullData(Ship : Captain):
 
 func UpdateRepairBar(AddedRepair : float):
 	#$AudioStreamPlayer.play()
+	var currentRepair = CurrentShip.GetRepairParts()
+	
 	if (AddedRepair * RepairPricePerUnit > PlayerWallet.Funds):
 		AddedRepair = PlayerWallet.Funds / RepairPricePerUnit
-	var NewPlRepair = PlHull + CurrentShip.Repair_Parts + AddedRepair
+	var NewPlRepair = PlHull + currentRepair + AddedRepair
 	
 	if (NewPlRepair < PlHull):
 		AddedRepair = 0
-		NewPlRepair = PlHull + CurrentShip.Repair_Parts
+		NewPlRepair = PlHull + currentRepair
 
 	if (NewPlRepair > PlMaxHull):
-		AddedRepair = PlMaxHull - (PlHull + CurrentShip.Repair_Parts)
+		AddedRepair = PlMaxHull - (PlHull + currentRepair)
 		NewPlRepair = PlMaxHull
-
-	CurrentShip.Repair_Parts += AddedRepair
+	
+	if (AddedRepair > 0):
+		CurrentShip.AddRepairParts(AddedRepair)
+	else:
+		CurrentShip.RemoveRepairParts(-AddedRepair)
 	
 	var MoneySpent = AddedRepair * RepairPricePerUnit
 	if (MoneySpent > 0):
@@ -78,16 +86,18 @@ func UpdateRepairBar(AddedRepair : float):
 	
 	PlayerWallet.AddFunds(-MoneySpent)
 	#PlayerWallet.AddFunds(-(AddedRepair * RepairpricePerRepairValue))
-	HullBar.value = PlHull + CurrentShip.Repair_Parts
+	currentRepair = CurrentShip.GetRepairParts()
+	
+	HullBar.value = PlHull + currentRepair
 	#FundAmm.text = var_to_str(roundi(PlFunds)) + " ₯"
-	CurrentHullLabel.text = var_to_str(roundi(PlHull + CurrentShip.Repair_Parts))
+	CurrentHullLabel.text = var_to_str(roundi(PlHull + currentRepair))
 	
 	var TimeMulti = 0.025
 		
 	if (hasRepair):
 		TimeMulti = 0.10
 		
-	var t = CurrentShip.Repair_Parts/ TimeMulti / 6
+	var t = currentRepair / TimeMulti / 6
 	
 	ReprairTimeLabel.text = Clock.MinutesToHours(t, true)
 

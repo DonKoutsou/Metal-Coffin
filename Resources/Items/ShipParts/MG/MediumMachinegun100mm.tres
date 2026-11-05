@@ -42,6 +42,7 @@ WType = 1
 Upgrades = Array[ExtResource("6_gbk8t")]([SubResource("Resource_fmxhr"), SubResource("Resource_xjd8d"), SubResource("Resource_odqxh"), SubResource("Resource_iqi6i")])
 UpgradeVersion = ExtResource("3_q5ys8")
 UpgradeTime = 800.0
+Repair_Parts = null
 ItemName = "MG-20 \"Fury\" 100mm"
 ItemDesc = "Fury builds upon its predecessor with enhanced rate of fire and targeting accuracy. Its reinforced stabilization system supports more prolonged engagements, delivering sustained barrages that can repel determined attacks or suppress enemy positions with greater efficacy."
 PartType = 4
