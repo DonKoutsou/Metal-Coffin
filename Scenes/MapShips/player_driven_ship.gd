@@ -173,7 +173,7 @@ func Update(delta: float, _unaffectedDelta : float) -> void:
 		offset = GetShipAffectedSpeedVec()
 	
 	var ShipWeight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
-	var ShipEfficiency = (Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) / pow(ShipWeight, 0.5)) * 10
+	var ShipEfficiency = (Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_EFFICIENCY) / pow(ShipWeight, 0.5)) * 10
 	var FuelConsumtion = (Acceleration.position.x + CorrectionExtra) / ShipEfficiency
 
 	FuelConsumtion *= SimulationManager.SimSpeed()
@@ -193,7 +193,7 @@ func Update(delta: float, _unaffectedDelta : float) -> void:
 		var Cap = g.Cpt as Captain
 		
 		var droneWeight = Cap.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
-		var droneEfficiency = (Cap.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY) / pow(droneWeight, 0.5)) * 10
+		var droneEfficiency = (Cap.GetStatCurrentValue(STAT_CONST.STATS.FUEL_EFFICIENCY) / pow(droneWeight, 0.5)) * 10
 		var droneCorrectionExtra : float = 0.0
 		if (CorrectionExtra > 0):
 			var Windage = Cap.GetStatFinalValue(STAT_CONST.STATS.WINDAGE) * 0.0001
@@ -324,10 +324,12 @@ func _HandleAutoPilot(delta : float) -> void:
 			if (Distance < 30):
 				TargetShip.GetDock().DockShip(self)
 				var MyDock = GetDock()
-				for g in MyDock.DockedShips:
+				var dockedShips = MyDock.DockedShips.duplicate()
+				for g in dockedShips:
 					MyDock.UndockShip(g)
 					TargetShip.GetDock().DockShip(g)
-				for g in MyDock.Captives:
+				var captives = MyDock.Captives.duplicate()
+				for g in captives:
 					MyDock.UndockCaptive(g)
 					TargetShip.GetDock().DockCaptive(g)
 
@@ -395,7 +397,41 @@ func TargetShipDestroyed(_Sh : MapShip) -> void:
 	ClearTargetShip()
 	
 #------------------------------------------------------------
+func Damage(amm : float, ShowVisuals : bool = true) -> void:
+	var shipPartWeights : PackedFloat32Array = []
+	var shipParts : Array[ShipPart] = Cpt.GetCharacterInventory().GetShipParts()
+	for g in shipParts:
+		shipPartWeights.append(g.GetPartCondition()) #Use condition as weight, to apply damage to the most healthy ship parts more frequently
+	
+	var currentHull = Cpt._GetStat(STAT_CONST.STATS.HULL).CurrentValue
+	shipPartWeights.append(currentHull)
+	
+	var remainingDamage : float = amm
+	
+	while (remainingDamage > 0 and shipParts.size() > 1):
+		var index = Rand.InstanceRandom.RandWeighted(shipPartWeights)
+		if (index >= shipParts.size()):
+			var damageAmm = min(Rand.InstanceRandom.RandFRange(min(remainingDamage, 5) ,20), currentHull) #Damage between 5 and 20
+			currentHull -= damageAmm
+			shipPartWeights[index] = currentHull
+			Cpt.ConsumeResource(STAT_CONST.STATS.HULL, damageAmm)
+			remainingDamage -= damageAmm
+		else:
+			var shipPartToDamage = shipParts[index]
+			var damageAmm = min(Rand.InstanceRandom.RandFRange(min(remainingDamage, 5) ,20), shipPartToDamage.GetPartCondition()) #Damage between 5 and 20
+			if (damageAmm == 0):
+				shipParts.remove_at(index)
+			else:
+				shipPartToDamage.Damage(damageAmm)
+				shipPartWeights[index] -= damageAmm
+				remainingDamage -= damageAmm
+	
+	OnShipDamaged.emit(amm, ShowVisuals)
+	
+	if (IsDead()):
+		Kill()
 
+#------------------------------------------------------------
 func Steer(Rotation : float) -> void:
 	if (CommingBack or Docked):
 		return

@@ -13,27 +13,37 @@
 script = ExtResource("6_kd1ru")
 UpgradeName = 1
 UpgradeAmmount = 15.0
+CurrentValue = 15.0
 
 [sub_resource type="Resource" id="Resource_qf4d6"]
 script = ExtResource("6_kd1ru")
 UpgradeName = 2
 UpgradeAmmount = 35.0
+CurrentValue = 35.0
 
 [sub_resource type="Resource" id="Resource_hehup"]
 script = ExtResource("6_kd1ru")
 UpgradeName = 9
 UpgradeAmmount = 100.0
+CurrentValue = 100.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [sub_resource type="Resource" id="Resource_nw0c3"]
 script = ExtResource("6_kd1ru")
 UpgradeName = 16
 UpgradeAmmount = 40.0
+CurrentValue = 40.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
+[sub_resource type="Resource" id="Resource_lax30"]
+script = ExtResource("6_kd1ru")
+UpgradeName = 4
+UpgradeAmmount = 30.0
+CurrentValue = 30.0
 
 [resource]
 script = ExtResource("3_qr78f")
-Upgrades = Array[ExtResource("6_kd1ru")]([SubResource("Resource_nj3b7"), SubResource("Resource_qf4d6"), SubResource("Resource_hehup"), SubResource("Resource_nw0c3")])
+Upgrades = Array[ExtResource("6_kd1ru")]([SubResource("Resource_nj3b7"), SubResource("Resource_qf4d6"), SubResource("Resource_hehup"), SubResource("Resource_nw0c3"), SubResource("Resource_lax30")])
 UpgradeVersion = ExtResource("3_u0cql")
 UpgradeTime = 1400.0
 DispositionAmm = 0.2

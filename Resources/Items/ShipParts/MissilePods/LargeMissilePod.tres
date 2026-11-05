@@ -10,23 +10,32 @@
 script = ExtResource("6_g1ywd")
 UpgradeName = 3
 UpgradeAmmount = 3.0
+CurrentValue = 3.0
 
 [sub_resource type="Resource" id="Resource_x71d7"]
 script = ExtResource("6_g1ywd")
 UpgradeName = 16
 UpgradeAmmount = 20.0
+CurrentValue = 20.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [sub_resource type="Resource" id="Resource_gvpjr"]
 script = ExtResource("6_g1ywd")
 UpgradeName = 9
 UpgradeAmmount = 15.0
+CurrentValue = 15.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
+[sub_resource type="Resource" id="Resource_3pe7t"]
+script = ExtResource("6_g1ywd")
+UpgradeName = 4
+UpgradeAmmount = 30.0
+CurrentValue = 30.0
 
 [resource]
 script = ExtResource("3_y540g")
 WType = 2
-Upgrades = Array[ExtResource("6_g1ywd")]([SubResource("Resource_fmxhr"), SubResource("Resource_x71d7"), SubResource("Resource_gvpjr")])
+Upgrades = Array[ExtResource("6_g1ywd")]([SubResource("Resource_fmxhr"), SubResource("Resource_x71d7"), SubResource("Resource_gvpjr"), SubResource("Resource_3pe7t")])
 UpgradeTime = 1600.0
 ItemName = "MP-9 \"Maelstrom\""
 ItemDesc = "Maelstrom represents the pinnacle of missile pod technology, offering advanced targeting algorithms and maximum payload flexibility. Capable of deploying a wide array of specialized missiles, Maelstrom delivers precise strikes against both single and multiple targets, making it indispensable for advanced combat operations."

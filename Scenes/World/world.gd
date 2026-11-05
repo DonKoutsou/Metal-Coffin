@@ -367,16 +367,6 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip], Missil
 	WORLDST = WORLDSTATE.FIGHT
 	SimulationManager.GetInstance().TogglePause(true)
 	
-	#Screen transition
-	await GetMap().GetScreenUi().CloseScreen()
-	GetMap().HideWorld(true)
-	
-	#spawn fight
-	var FightScene = await Helper.LoadThreaded(CardFightScene).Sign
-	var CardF = FightScene.instantiate() as Card_Fight
-	CardF.CardFightEnded.connect(CardFightEnded)
-	CardF.CardFightDestroyed.connect(CardFightDestroyed)
-	
 	#Player battle stats
 	var FBattleStats : Array[BattleShipStats] = []
 	for g in Friendlies:
@@ -414,6 +404,16 @@ func StartDogFight(Friendlies : Array[MapShip], Enemies : Array[MapShip], Missil
 
 			for g in EnemyMissiles:
 				FBattleStats.append(g.GetBattleStats())
+	
+	#Screen transition
+	await GetMap().GetScreenUi().CloseScreen()
+	GetMap().HideWorld(true)
+
+	#spawn fight
+	var FightScene = await Helper.LoadThreaded(CardFightScene).Sign
+	var CardF = FightScene.instantiate() as Card_Fight
+	CardF.CardFightEnded.connect(CardFightEnded)
+	CardF.CardFightDestroyed.connect(CardFightDestroyed)
 	
 	CardF.PlayerReserves = FBattleStats
 	CardF.EnemyReserves = EBattleStats

@@ -316,10 +316,10 @@ func AddCharacter(Cha : Captain) -> void:
 	
 	for g in Cha.StartingItems:
 		if (g is ShipPart):
-			#var Part = g.duplicate(true) as ShipPart
-			#for Up in Part.Upgrades:
-				#Up.CurrentValue = Up.UpgradeAmmount
-			CharInv.AddItem(g)
+			var Part = g.duplicate(true) as ShipPart
+			for Up in Part.Upgrades:
+				Up.CurrentValue = Up.UpgradeAmmount
+			CharInv.AddItem(Part)
 		else:
 			CharInv.AddItem(g)
 			
@@ -364,7 +364,10 @@ func LoadCharacter(Data : SD_CharacterInventory) -> void:
 	for g in Data.Items:
 		for z in g.Ammount:
 			if (g.ItemType is ShipPart):
-				CharInv.AddItem(g.ItemType)
+				var Part = g.ItemType.duplicate(true) as ShipPart
+				for Up in Part.Upgrades:
+					Up.CurrentValue = Up.UpgradeAmmount
+				CharInv.AddItem(Part)
 			else:
 				CharInv.AddItem(g.ItemType)
 	

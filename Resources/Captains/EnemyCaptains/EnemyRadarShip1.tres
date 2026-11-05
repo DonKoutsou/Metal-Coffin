@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cu0lfdj4ci6bo" path="res://MetalEngineBase/Inventory/Stats/ShipStat.gd" id="2_31e7m"]
 [ext_resource type="Script" uid="uid://cg2tajspojecm" path="res://MetalEngineBase/Cardfight/Card/CardStats.gd" id="2_jjv71"]
+[ext_resource type="Script" uid="uid://dfaauelrksdv8" path="res://MetalEngineBase/Inventory/Scripts/ShipPartUpgrade.gd" id="2_vi5vs"]
 [ext_resource type="Script" uid="uid://bwut58f7k5pk1" path="res://MetalEngineBase/Inventory/Scripts/Item.gd" id="3_ucdyq"]
 [ext_resource type="Script" uid="uid://dqled6iv7xaxp" path="res://MetalEngineBase/Inventory/Stats/Captain.gd" id="4_nkros"]
 [ext_resource type="Resource" uid="uid://732b0m15lc18" path="res://Resources/Items/ShipParts/Engines/BaseEngineLineup/Engine.tres" id="18_bid2u"]
@@ -31,7 +32,7 @@ StatName = 3
 resource_local_to_scene = true
 script = ExtResource("2_31e7m")
 StatName = 4
-StatBase = 100.0
+StatBase = 80.0
 
 [sub_resource type="Resource" id="Resource_do68y"]
 script = ExtResource("2_31e7m")

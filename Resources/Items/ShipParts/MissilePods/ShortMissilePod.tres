@@ -11,23 +11,32 @@
 script = ExtResource("6_eoxlf")
 UpgradeName = 3
 UpgradeAmmount = 1.0
+CurrentValue = 1.0
 
 [sub_resource type="Resource" id="Resource_a5n0p"]
 script = ExtResource("6_eoxlf")
 UpgradeName = 16
 UpgradeAmmount = 10.0
+CurrentValue = 10.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [sub_resource type="Resource" id="Resource_2ff3n"]
 script = ExtResource("6_eoxlf")
 UpgradeName = 9
 UpgradeAmmount = 10.0
+CurrentValue = 10.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
+[sub_resource type="Resource" id="Resource_ksbfo"]
+script = ExtResource("6_eoxlf")
+UpgradeName = 4
+UpgradeAmmount = 30.0
+CurrentValue = 30.0
 
 [resource]
 script = ExtResource("3_1oqec")
 WType = 2
-Upgrades = Array[ExtResource("6_eoxlf")]([SubResource("Resource_fmxhr"), SubResource("Resource_a5n0p"), SubResource("Resource_2ff3n")])
+Upgrades = Array[ExtResource("6_eoxlf")]([SubResource("Resource_fmxhr"), SubResource("Resource_a5n0p"), SubResource("Resource_2ff3n"), SubResource("Resource_ksbfo")])
 UpgradeVersion = ExtResource("2_74rgq")
 UpgradeTime = 1000.0
 ItemName = "MP-3 \"Gale\""

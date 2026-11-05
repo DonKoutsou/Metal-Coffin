@@ -11,7 +11,7 @@ signal AerosonarRangeChanged
 
 #----------------------------------------
 func UpdateSonarRange():
-	var sonarValue = SonarStat.GetFinalValue()
+	var sonarValue = SonarStat.GetCurrentValue()
 	(collision_shape_2d.shape as CircleShape2D).radius = sonarValue
 	collision_shape_2d.disabled = sonarValue == 0
 	AerosonarRangeChanged.emit()

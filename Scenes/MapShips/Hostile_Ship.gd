@@ -198,7 +198,7 @@ func Steer(Rotation : float) -> void:
 func GetFuelRange() -> float:
 	var Weight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	var fuel = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
-	var fuel_ef = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
+	var fuel_ef = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
 	
 	var docked := GetDock().GetDockedShips()
 	
@@ -209,7 +209,7 @@ func GetFuelRange() -> float:
 	# Group ships fuel and efficiency calculations
 	for g in docked:
 		var ship_fuel = g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
-		var ship_efficiency = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
+		var ship_efficiency = g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
 		var ship_weight = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 		total_fuel += ship_fuel
 		inverse_ef_sum += 1.0 / ((ship_efficiency / pow(ship_weight, 0.5)) * 10)
@@ -551,10 +551,10 @@ func BodyLeftBody(Body : Area2D) -> void:
 
 func GetBattleStats() -> BattleShipStats:
 	var stats = BattleShipStats.new()
-	stats.Hull = Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL)
+	stats.Hull = Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
 	stats.CurrentHull = Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
-	stats.FirePower = Cpt.GetStatFinalValue(STAT_CONST.STATS.FIREPOWER)
-	stats.Speed = (Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * 1000) / Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
+	stats.FirePower = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FIREPOWER)
+	stats.Speed = (Cpt.GetStatCurrentValue(STAT_CONST.STATS.THRUST) * 1000) / Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	stats.ShipIcon = ResourceLoader.load(Cpt.GetHullData().hullTexture)
 	stats.col = Cpt.col
 	stats.pallete = Cpt.GetHullData().hull_Pallete
@@ -564,7 +564,7 @@ func GetBattleStats() -> BattleShipStats:
 	stats.Name = GetShipName()
 	stats.Funds = Cpt.GetValue()
 	stats.Weight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
-	stats.MaxShield =  Cpt.GetStatFinalValue(STAT_CONST.STATS.MAX_SHIELD)
+	stats.MaxShield =  Cpt.GetStatCurrentValue(STAT_CONST.STATS.MAX_SHIELD)
 	UpdateShipWindManipulationModifier()
 	stats.WindPenalty = GetWindPenalty()
 	stats.Convoy = Convoy

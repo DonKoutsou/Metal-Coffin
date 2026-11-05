@@ -26,11 +26,11 @@ func _physics_process(delta: float) -> void:
 func _updateUI() -> void:
 	if currentShip == null:
 		return
-
-	var percentFuel = currentShip.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) \
-		/ currentShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK) * 100
-	var percentHull = currentShip.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL) \
-		/ currentShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL) * 100
+	
+	var currentMaxFuel = currentShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK) - currentShip.Cpt.GetStatShipPartDamage(STAT_CONST.STATS.FUEL_TANK)
+	var percentFuel = currentShip.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) / currentMaxFuel * 100
+	var currentMaxHull = currentShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL) - currentShip.Cpt.GetStatShipPartDamage(STAT_CONST.STATS.HULL)
+	var percentHull = currentShip.Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL) / currentMaxHull * 100
 
 	captainFuelLabel.text = "F:%d%%" % roundi(percentFuel)
 	captainHullLabel.text = "H:%d%%" % roundi(percentHull)

@@ -10,11 +10,18 @@
 script = ExtResource("4_aol0t")
 UpgradeName = 3
 UpgradeAmmount = 3.0
+CurrentValue = 3.0
+
+[sub_resource type="Resource" id="Resource_e7eyc"]
+script = ExtResource("4_aol0t")
+UpgradeName = 4
+UpgradeAmmount = 30.0
+CurrentValue = 30.0
 
 [resource]
 script = ExtResource("5_n6yym")
 WType = 5
-Upgrades = Array[ExtResource("4_aol0t")]([SubResource("Resource_fmxhr")])
+Upgrades = Array[ExtResource("4_aol0t")]([SubResource("Resource_fmxhr"), SubResource("Resource_e7eyc")])
 UpgradeTime = 600.0
 ItemName = "Drone Dock + 2"
 ItemDesc = "WIP"

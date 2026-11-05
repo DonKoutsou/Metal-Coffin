@@ -12,27 +12,37 @@
 script = ExtResource("5_0moyl")
 UpgradeName = 1
 UpgradeAmmount = 17.5
+CurrentValue = 17.5
 
 [sub_resource type="Resource" id="Resource_uftnd"]
 script = ExtResource("5_0moyl")
 UpgradeName = 2
 UpgradeAmmount = 40.0
+CurrentValue = 40.0
 
 [sub_resource type="Resource" id="Resource_j5fk8"]
 script = ExtResource("5_0moyl")
 UpgradeName = 9
 UpgradeAmmount = 120.0
+CurrentValue = 120.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [sub_resource type="Resource" id="Resource_tq668"]
 script = ExtResource("5_0moyl")
 UpgradeName = 16
 UpgradeAmmount = 50.0
+CurrentValue = 50.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
+[sub_resource type="Resource" id="Resource_7xfp7"]
+script = ExtResource("5_0moyl")
+UpgradeName = 4
+UpgradeAmmount = 30.0
+CurrentValue = 30.0
 
 [resource]
 script = ExtResource("3_s64vj")
-Upgrades = Array[ExtResource("5_0moyl")]([SubResource("Resource_1w3hf"), SubResource("Resource_uftnd"), SubResource("Resource_j5fk8"), SubResource("Resource_tq668")])
+Upgrades = Array[ExtResource("5_0moyl")]([SubResource("Resource_1w3hf"), SubResource("Resource_uftnd"), SubResource("Resource_j5fk8"), SubResource("Resource_tq668"), SubResource("Resource_7xfp7")])
 UpgradeTime = 2000.0
 DispositionAmm = 0.3
 ItemName = "EN-500"

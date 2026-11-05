@@ -12,18 +12,20 @@
 script = ExtResource("2_xiw0n")
 UpgradeName = 4
 UpgradeAmmount = 150.0
-CurrentValue = 200.0
+CurrentValue = 150.0
 
 [sub_resource type="Resource" id="Resource_fj2g5"]
 script = ExtResource("2_xiw0n")
 UpgradeName = 16
 UpgradeAmmount = 8.0
+CurrentValue = 8.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [sub_resource type="Resource" id="Resource_4nvt2"]
 script = ExtResource("2_xiw0n")
 UpgradeName = 9
 UpgradeAmmount = 40.0
+CurrentValue = 40.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [resource]

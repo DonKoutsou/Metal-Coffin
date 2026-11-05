@@ -9,10 +9,17 @@
 script = ExtResource("5_gbrn0")
 UpgradeName = 6
 UpgradeAmmount = 1400.0
+CurrentValue = 1400.0
+
+[sub_resource type="Resource" id="Resource_7ixj0"]
+script = ExtResource("5_gbrn0")
+UpgradeName = 4
+UpgradeAmmount = 30.0
+CurrentValue = 30.0
 
 [resource]
 script = ExtResource("4_6tjws")
-Upgrades = Array[ExtResource("5_gbrn0")]([SubResource("Resource_l8s17")])
+Upgrades = Array[ExtResource("5_gbrn0")]([SubResource("Resource_l8s17"), SubResource("Resource_7ixj0")])
 UpgradeTime = 500.0
 disp = 3
 DispositionAmm = 0.5

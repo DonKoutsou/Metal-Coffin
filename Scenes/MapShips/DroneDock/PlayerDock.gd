@@ -97,7 +97,7 @@ func DroneRangeChanged(NewRange : float, Target : MapShip) -> void:
 
 func LaunchDrone(Dr : PlayerDrivenShip, Target : MapShip) -> void:
 	if (Target == get_parent()):
-		var fueltoconsume = $Line2D.get_point_position(1).x / 10 / Dr.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
+		var fueltoconsume = $Line2D.get_point_position(1).x / 10 / Dr.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
 		var neededfuel = fueltoconsume - Dr.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 		if (neededfuel > 0):
 			#if (Target is Drone):
@@ -110,7 +110,7 @@ func LaunchDrone(Dr : PlayerDrivenShip, Target : MapShip) -> void:
 		UndockShip(Dr)
 		Dr.global_rotation = $Line2D.global_rotation
 		Dr.global_position = global_position
-		var RefilAmm = Dr.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) - ($Line2D.get_point_position(1).x / 10 / Dr.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY))
+		var RefilAmm = Dr.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) - ($Line2D.get_point_position(1).x / 10 / Dr.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_EFFICIENCY))
 		Dr.Cpt.RefillResource(STAT_CONST.STATS.FUEL_TANK, abs(RefilAmm))
 		Dr.EnableDrone()
 

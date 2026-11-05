@@ -11,23 +11,32 @@
 script = ExtResource("5_sqkwa")
 UpgradeName = 3
 UpgradeAmmount = 1.0
+CurrentValue = 1.0
 
 [sub_resource type="Resource" id="Resource_7gwi0"]
 script = ExtResource("5_sqkwa")
 UpgradeName = 16
 UpgradeAmmount = 5.0
+CurrentValue = 5.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [sub_resource type="Resource" id="Resource_4vvqw"]
 script = ExtResource("5_sqkwa")
 UpgradeName = 9
 UpgradeAmmount = 4.0
+CurrentValue = 4.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
+[sub_resource type="Resource" id="Resource_notyd"]
+script = ExtResource("5_sqkwa")
+UpgradeName = 4
+UpgradeAmmount = 30.0
+CurrentValue = 30.0
 
 [resource]
 script = ExtResource("6_1ught")
 WType = 1
-Upgrades = Array[ExtResource("5_sqkwa")]([SubResource("Resource_fmxhr"), SubResource("Resource_7gwi0"), SubResource("Resource_4vvqw")])
+Upgrades = Array[ExtResource("5_sqkwa")]([SubResource("Resource_fmxhr"), SubResource("Resource_7gwi0"), SubResource("Resource_4vvqw"), SubResource("Resource_notyd")])
 UpgradeVersion = ExtResource("4_o0tk6")
 UpgradeTime = 600.0
 ItemName = "MG-10 \"Squall\" 100mm"

@@ -26,7 +26,7 @@ func ToggleElint(t : bool):
 
 #-----------------------------------------------------------------------------------
 func UpdateELINTTRange():
-	(collision_shape_2d.shape as CircleShape2D).radius = ElintStat.GetFinalValue()
+	(collision_shape_2d.shape as CircleShape2D).radius = ElintStat.GetCurrentValue()
 	ElintRangeChanged.emit()
 
 var d = 0.4
@@ -43,7 +43,7 @@ func UpdateElint(delta: float) -> void:
 		var lvl = ElintContacts[ship]
 		var radarRange = MapShip.BASE_SHIP_VIZ
 		if (ship.RadarWorking()):
-			radarRange = ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE)
+			radarRange = ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.VISUAL_RANGE)
 		var Newlvl = GetElintLevel(global_position.distance_squared_to(ship.global_position), radarRange)
 		#if (Newlvl > BiggestLevel):
 			#BiggestLevel = Newlvl
@@ -100,14 +100,14 @@ func GetClosestElintLevel() -> int:
 	var closestdist : float = 9999999999999999
 	for g in ElintContacts.size():
 		var ship = ElintContacts.keys()[g]
-		if (ship.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE) <= MapShip.BASE_SHIP_VIZ):
+		if (ship.Cpt.GetStatCurrentValue(STAT_CONST.STATS.VISUAL_RANGE) <= MapShip.BASE_SHIP_VIZ):
 			continue
 		var dist = global_position.distance_squared_to(ship.global_position)
 		if (closestdist > dist):
 			closest = ship
 			closestdist = dist
 	
-	var Newlvl = GetElintLevel(closestdist, closest.Cpt.GetStatFinalValue(STAT_CONST.STATS.VISUAL_RANGE))
+	var Newlvl = GetElintLevel(closestdist, closest.Cpt.GetStatCurrentValue(STAT_CONST.STATS.VISUAL_RANGE))
 	
 	return Newlvl
 	
@@ -115,7 +115,7 @@ func GetClosestElintLevel() -> int:
 func GetElintLevel(DistSq : float, RadarL : float) -> int:
 	var Lvl = -1
 	var RadarLSq = RadarL * RadarL
-	var ElintDist = ElintStat.GetFinalValue()
+	var ElintDist = ElintStat.GetCurrentValue()
 	if (ElintDist == 0 or RadarL <= MapShip.BASE_SHIP_VIZ):
 		return Lvl
 	if (DistSq < RadarLSq):

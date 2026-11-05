@@ -11,23 +11,32 @@
 script = ExtResource("6_uw0hq")
 UpgradeName = 3
 UpgradeAmmount = 2.0
+CurrentValue = 2.0
 
 [sub_resource type="Resource" id="Resource_8ycu5"]
 script = ExtResource("6_uw0hq")
 UpgradeName = 16
 UpgradeAmmount = 15.0
+CurrentValue = 15.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [sub_resource type="Resource" id="Resource_kaj4b"]
 script = ExtResource("6_uw0hq")
 UpgradeName = 9
 UpgradeAmmount = 12.0
+CurrentValue = 12.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
+[sub_resource type="Resource" id="Resource_gan0e"]
+script = ExtResource("6_uw0hq")
+UpgradeName = 4
+UpgradeAmmount = 30.0
+CurrentValue = 30.0
 
 [resource]
 script = ExtResource("3_mhnw5")
 WType = 2
-Upgrades = Array[ExtResource("6_uw0hq")]([SubResource("Resource_fmxhr"), SubResource("Resource_8ycu5"), SubResource("Resource_kaj4b")])
+Upgrades = Array[ExtResource("6_uw0hq")]([SubResource("Resource_fmxhr"), SubResource("Resource_8ycu5"), SubResource("Resource_kaj4b"), SubResource("Resource_gan0e")])
 UpgradeVersion = ExtResource("2_7gwui")
 UpgradeTime = 1300.0
 ItemName = "MP-6 \"Cyclone\""

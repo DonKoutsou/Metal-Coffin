@@ -247,10 +247,22 @@ func Teleport(CharName : String, Locx : int, Locy : int) -> String:
 		var ship = g as MapShip
 		if ship.Cpt.GetCaptainName().to_lower() == CharName.to_lower():
 			ship.global_position = Vector2(Locx, Locy) * 10
-			return "Successfully teleported\n{0} to pos\n|{1}|".format([CharName, ship.global_position])
+			return "Successfully teleported {0} to pos |{1}|".format([CharName, ship.global_position])
 	
 	return ">Teleport failed"
 
+func Damage(CharName : String, amm : int) -> String:
+	
+	if (World.Instance == null or World.WORLDST != World.WORLDSTATE.NORMAL):
+		return ">Can only apply while in map"
+		
+	for g in get_tree().get_nodes_in_group("PlayerShips"):
+		var ship = g as MapShip
+		ship.Damage(amm)
+		return "Successfully damaged {0} for |{1}|".format([CharName, amm])
+	
+	return ">Damage failed"
+	
 func EnemyDebug(t : bool) -> String:
 	Commander.GetInstance().ToggleEnemyDebug(t)
 	return "Enemy debug toggled"

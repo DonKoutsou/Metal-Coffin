@@ -12,17 +12,25 @@
 script = ExtResource("4_bekuy")
 UpgradeName = 3
 UpgradeAmmount = 1.0
+CurrentValue = 1.0
 
 [sub_resource type="Resource" id="Resource_be5yu"]
 script = ExtResource("4_bekuy")
 UpgradeName = 16
 UpgradeAmmount = 15.0
+CurrentValue = 15.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
+[sub_resource type="Resource" id="Resource_wp4yl"]
+script = ExtResource("4_bekuy")
+UpgradeName = 4
+UpgradeAmmount = 30.0
+CurrentValue = 30.0
 
 [resource]
 script = ExtResource("5_3r5l2")
 WType = 6
-Upgrades = Array[ExtResource("4_bekuy")]([SubResource("Resource_fmxhr"), SubResource("Resource_be5yu")])
+Upgrades = Array[ExtResource("4_bekuy")]([SubResource("Resource_fmxhr"), SubResource("Resource_be5yu"), SubResource("Resource_wp4yl")])
 UpgradeVersion = ExtResource("4_be5yu")
 UpgradeTime = 1200.0
 disp = 2

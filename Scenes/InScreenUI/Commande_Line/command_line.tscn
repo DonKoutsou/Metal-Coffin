@@ -145,7 +145,8 @@ PackedStringArray("Inventory", "Upgrade"): "InventoryUpgrade",
 PackedStringArray("Teleport"): "Teleport",
 PackedStringArray("Enemy", "Debug"): "EnemyDebug",
 PackedStringArray("Stat", "Refill"): "StatRefill",
-PackedStringArray("CardFightTypeSwitch"): "CardFightTypeSwitch"
+PackedStringArray("CardFightTypeSwitch"): "CardFightTypeSwitch",
+PackedStringArray("Damage"): "Damage"
 })
 RecomendationParent = NodePath("VBoxContainer/TextEdit/VBoxContainer")
 HistoryLabel = NodePath("VBoxContainer/PanelContainer/RichTextLabel")

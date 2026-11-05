@@ -117,7 +117,7 @@ func Refuel() -> float:
 		for g in ShipsToRefuel:
 			var Capt = g.Cpt
 		
-			var maxfuelcap = Capt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
+			var maxfuelcap = Capt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK) - Capt.GetStatShipPartDamage(STAT_CONST.STATS.FUEL_TANK)
 			var currentfuel = Capt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 			var AmmountUntilFull = maxfuelcap - currentfuel
 			if (AmmountUntilFull == 0):
@@ -134,7 +134,7 @@ func Refuel() -> float:
 		while (!is_equal_approx(excessFuel, 0) and unsatisfiedShips.size() > 1):
 			var deservedFuel = excessFuel / unsatisfiedShips.size()
 			for g in unsatisfiedShips:
-				var maxfuelcap = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
+				var maxfuelcap = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK) - g.Cpt.GetStatShipPartDamage(STAT_CONST.STATS.FUEL_TANK)
 				var currentfuel = g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK) + unsatisfiedShips[g]
 				var neededFuel = maxfuelcap - currentfuel
 
@@ -147,7 +147,7 @@ func Refuel() -> float:
 					excessFuel -= deservedFuel
 		
 		var biggestFuelShip : MapShip = unsatisfiedShips.keys()[0]
-		var maxFuel = biggestFuelShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
+		var maxFuel = biggestFuelShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK) - biggestFuelShip.Cpt.GetStatShipPartDamage(STAT_CONST.STATS.FUEL_TANK)
 		var currentFuel = biggestFuelShip.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
 		var biggestFuel = min(unsatisfiedShips[biggestFuelShip] + excessFuel, maxFuel - currentFuel)
 		
@@ -169,8 +169,25 @@ func Repair() -> float:
 			TimeMulti = 0.10
 		timeLeft = (Cpt.Repair_Parts / TimeMulti / 6)
 		#ShipDockActions.emit("Repairing", true, roundi(timeleft))
-		Cpt.RefillResource(STAT_CONST.STATS.HULL ,TimeMulti * SimulationSpeed)
-		Cpt.Repair_Parts -= TimeMulti * SimulationSpeed
+		
+		var repairAmm : float = TimeMulti * SimulationSpeed
+		var remainingRepair : float = repairAmm
+		
+		var damagedShipPart : Array[ShipPart] = Cpt.GetCharacterInventory().GetDagamedShipParts()
+		
+		while (remainingRepair > 0 and damagedShipPart.size() > 0):
+			var shipPartToRepair = damagedShipPart.pick_random()
+			if (shipPartToRepair.GetPartConditionNormalised() >= 1):
+				damagedShipPart.erase(shipPartToRepair)
+				continue
+				
+			var neededRepair = shipPartToRepair.GetPartMaxCondition() - shipPartToRepair.GetPartCondition()
+			var partRepairAmm = Rand.InstanceRandom.RandFRange(0 , min(neededRepair, remainingRepair))
+			shipPartToRepair.Repair(partRepairAmm)
+			remainingRepair -= partRepairAmm
+		
+		Cpt.RefillResource(STAT_CONST.STATS.HULL , remainingRepair)
+		Cpt.Repair_Parts -= repairAmm
 		
 	for g in GetSquad():
 		timeLeft = max(timeLeft, g.Repair())
@@ -533,19 +550,19 @@ func GetFuelStats() -> Dictionary[String, float]:
 	var Stats : Dictionary[String, float]
 	
 	var Fleet = GetSquad()
-	var fuel_ef = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
+	var fuel_ef = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
 	var Weight =  Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	
 	var fleetsize = 1 + Fleet.size()
 	var total_fuel = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
-	var total_maxfuel = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
+	var total_maxfuel = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK) - Cpt.GetStatShipPartDamage(STAT_CONST.STATS.FUEL_TANK)
 	var inverse_ef_sum = 1.0 / ((fuel_ef / pow(Weight, 0.5)) * 10)
 	
 	# Group ships fuel and efficiency calculations
 	for g in Fleet:
 		var ship_fuel = g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
-		var ship_maxfuel = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK)
-		var ship_efficiency = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
+		var ship_maxfuel = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK) - g.Cpt.GetStatShipPartDamage(STAT_CONST.STATS.FUEL_TANK)
+		var ship_efficiency = g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
 		var ship_weight = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 		
 		total_fuel += ship_fuel
@@ -579,7 +596,7 @@ func GetFuelRange() -> float:
 	
 	var Weight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	var fuel = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
-	var fuel_ef = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
+	var fuel_ef = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
 	var fleetsize = 1 + Fleet.size()
 	var total_fuel = fuel
 	var inverse_ef_sum = 1.0 / ((fuel_ef / pow(Weight, 0.5)) * 10)
@@ -587,7 +604,7 @@ func GetFuelRange() -> float:
 	# Group ships fuel and efficiency calculations
 	for g in Fleet:
 		var ship_fuel = g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
-		var ship_efficiency = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
+		var ship_efficiency = g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
 		var ship_weight = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 		total_fuel += ship_fuel
 		inverse_ef_sum += 1.0 / ((ship_efficiency / pow(ship_weight, 0.5)) * 10)
@@ -610,7 +627,7 @@ func GetFuelRangeWithExtraFuel(ExtraFuel : float) -> float:
 	
 	var Weight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	var fuel = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
-	var fuel_ef = Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
+	var fuel_ef = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
 	var fleetsize = 1 + Fleet.size()
 	var total_fuel = fuel + ExtraFuel
 	var inverse_ef_sum = 1.0 / ((fuel_ef / pow(Weight, 0.5)) * 10)
@@ -618,7 +635,7 @@ func GetFuelRangeWithExtraFuel(ExtraFuel : float) -> float:
 	# Group ships fuel and efficiency calculations
 	for g in Fleet:
 		var ship_fuel = g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_TANK)
-		var ship_efficiency = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
+		var ship_efficiency = g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.FUEL_EFFICIENCY)
 		var ship_weight = g.Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 		total_fuel += ship_fuel
 		inverse_ef_sum += 1.0 / ((ship_efficiency / pow(ship_weight, 0.5)) * 10)
@@ -632,12 +649,12 @@ func GetFuelRangeWithExtraFuel(ExtraFuel : float) -> float:
 func GetBattleStats() -> BattleShipStats:
 	
 	var stats = BattleShipStats.new()
-	stats.Hull = Cpt.GetStatFinalValue(STAT_CONST.STATS.HULL)
+	stats.Hull = Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
 	stats.CurrentHull = Cpt.GetStatCurrentValue(STAT_CONST.STATS.HULL)
-	stats.Speed = (Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * 1000) / Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
+	stats.Speed = (Cpt.GetStatCurrentValue(STAT_CONST.STATS.THRUST) * 1000) / Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	stats.col = Cpt.col
 	stats.pallete = Cpt.GetHullData().hull_Pallete
-	stats.FirePower = Cpt.GetStatFinalValue(STAT_CONST.STATS.FIREPOWER)
+	stats.FirePower = Cpt.GetStatCurrentValue(STAT_CONST.STATS.FIREPOWER)
 	stats.ShipIcon = ResourceLoader.load(Cpt.GetHullData().hullTexture)
 	for g in Cpt.GetHullData().cardFightHullTextures:
 		stats.cardFightIcons.append(ResourceLoader.load(g))
@@ -645,7 +662,7 @@ func GetBattleStats() -> BattleShipStats:
 	stats.Name = GetShipName()
 	stats.Cards = Cpt.GetCharacterInventory().GetCards()
 	stats.Weight = Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
-	stats.MaxShield =  Cpt.GetStatFinalValue(STAT_CONST.STATS.MAX_SHIELD)
+	stats.MaxShield =  Cpt.GetStatCurrentValue(STAT_CONST.STATS.MAX_SHIELD)
 	stats.WindPenalty = GetWindPenalty()
 	#stats.Ammo = Cpt.GetCharacterInventory().GetCardAmmo()
 	stats.Funds = Cpt.GetValue()
@@ -659,9 +676,9 @@ func GetShipMaxSpeed() -> float:
 	if (Docked):
 		Spd = Command.GetShipMaxSpeed()
 	else:
-		Spd = (Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * 1000) / Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
+		Spd = (Cpt.GetStatCurrentValue(STAT_CONST.STATS.THRUST) * 1000) / Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 		for g in GetSquad():
-			var DroneSpd = (g.Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * 1000) / g.Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
+			var DroneSpd = (g.Cpt.GetStatCurrentValue(STAT_CONST.STATS.THRUST) * 1000) / g.Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 			if (DroneSpd < Spd):
 				Spd = DroneSpd
 
@@ -693,7 +710,7 @@ func GetShipAffectedSpeedVec() -> Vector2:
 	return AffectedSpeed
 
 func GetWindPenalty() -> float:
-	var MaxSpeed = (Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST) * 1000) / Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
+	var MaxSpeed = (Cpt.GetStatCurrentValue(STAT_CONST.STATS.THRUST) * 1000) / Cpt.GetStatFinalValue(STAT_CONST.STATS.WEIGHT)
 	var Windage = Cpt.GetStatFinalValue(STAT_CONST.STATS.WINDAGE) * 0.0001
 	var Penalty : float = (WindVector * Windage).length() * 360
 	return Penalty / MaxSpeed
@@ -710,7 +727,7 @@ func UpdateShipWindManipulationModifier() -> void:
 		g.WindVector = (StormAffectedWind * droneWeightModifier * Height) * WindProt
 #-------------------------------------------------
 func GetShipThrust() -> float:
-	var Thrust = Cpt.GetStatFinalValue(STAT_CONST.STATS.THRUST)
+	var Thrust = Cpt.GetStatCurrentValue(STAT_CONST.STATS.THRUST)
 	return Thrust
 
 #-------------------------------------------------

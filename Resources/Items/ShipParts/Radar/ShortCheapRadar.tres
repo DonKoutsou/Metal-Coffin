@@ -11,22 +11,31 @@
 script = ExtResource("7_2t8pf")
 UpgradeName = 6
 UpgradeAmmount = 180.0
+CurrentValue = 180.0
 
 [sub_resource type="Resource" id="Resource_pqt5y"]
 script = ExtResource("7_2t8pf")
 UpgradeName = 16
 UpgradeAmmount = 10.0
+CurrentValue = 10.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [sub_resource type="Resource" id="Resource_0rxww"]
 script = ExtResource("7_2t8pf")
 UpgradeName = 9
 UpgradeAmmount = 5.0
+CurrentValue = 5.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
+[sub_resource type="Resource" id="Resource_un83j"]
+script = ExtResource("7_2t8pf")
+UpgradeName = 4
+UpgradeAmmount = 30.0
+CurrentValue = 30.0
 
 [resource]
 script = ExtResource("8_jwtns")
-Upgrades = Array[ExtResource("7_2t8pf")]([SubResource("Resource_fmxhr"), SubResource("Resource_pqt5y"), SubResource("Resource_0rxww")])
+Upgrades = Array[ExtResource("7_2t8pf")]([SubResource("Resource_fmxhr"), SubResource("Resource_pqt5y"), SubResource("Resource_0rxww"), SubResource("Resource_un83j")])
 UpgradeVersion = ExtResource("5_jg2as")
 UpgradeTime = 600.0
 ItemName = "BT-1"

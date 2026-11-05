@@ -194,12 +194,27 @@ func OnItemBought(It : Item) -> void:
 	if (possibleReceivers.size() > 0):
 		var receiver = possibleReceivers.pick_random()
 		var inv = receiver.Cpt.GetCharacterInventory()
-		inv.AddItem(It)
+		
+		if (It is ShipPart):
+			var Part = It.duplicate(true) as ShipPart
+			for Up in Part.Upgrades:
+				Up.CurrentValue = Up.UpgradeAmmount
+				
+			inv.AddItem(Part)
+		else:
+			inv.AddItem(It)
 	else:
 		for g in LandedShips:
 			var inv = g.Cpt.GetCharacterInventory()
 			if (inv.HasSpaceForItem(It)):
-				inv.AddItem(It)
+				if (It is ShipPart):
+					var Part = It.duplicate(true) as ShipPart
+					for Up in Part.Upgrades:
+						Up.CurrentValue = Up.UpgradeAmmount
+						
+					inv.AddItem(Part)
+				else:
+					inv.AddItem(It)
 				break
 
 	TownSpot.Merch[It.resource_path] -= 1

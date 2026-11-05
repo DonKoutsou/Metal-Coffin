@@ -12,23 +12,32 @@
 script = ExtResource("6_e766p")
 UpgradeName = 3
 UpgradeAmmount = 1.5
+CurrentValue = 1.5
 
 [sub_resource type="Resource" id="Resource_ycg0w"]
 script = ExtResource("6_e766p")
 UpgradeName = 16
 UpgradeAmmount = 15.0
+CurrentValue = 15.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
 
 [sub_resource type="Resource" id="Resource_30lwi"]
 script = ExtResource("6_e766p")
 UpgradeName = 9
 UpgradeAmmount = 12.0
+CurrentValue = 12.0
 metadata/_custom_type_script = "uid://dfaauelrksdv8"
+
+[sub_resource type="Resource" id="Resource_4fjvg"]
+script = ExtResource("6_e766p")
+UpgradeName = 4
+UpgradeAmmount = 30.0
+CurrentValue = 30.0
 
 [resource]
 script = ExtResource("7_3u26k")
 WType = 4
-Upgrades = Array[ExtResource("6_e766p")]([SubResource("Resource_fmxhr"), SubResource("Resource_ycg0w"), SubResource("Resource_30lwi")])
+Upgrades = Array[ExtResource("6_e766p")]([SubResource("Resource_fmxhr"), SubResource("Resource_ycg0w"), SubResource("Resource_30lwi"), SubResource("Resource_4fjvg")])
 UpgradeTime = 1000.0
 ItemName = "KPH -06 \"Garpa\" 100mm"
 ItemDesc = "the elite choice for those requiring ultimate firepower in critical scenarios. Featuring cutting-edge targeting and stabilization technology, 'Tempest' supports continuous and dynamic fire, overwhelming even the staunchest defenses with relentless precision and unmatched rate of fire."

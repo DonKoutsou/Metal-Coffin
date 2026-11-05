@@ -151,6 +151,7 @@ func RemoveShip(Ship : Node2D) -> void:
 	var index = Ships.find(Ship)
 	_ShipMarkers[index].queue_free()
 	_ShipMarkers.remove_at(index)
+	Ship.tree_exited.connect(RemoveShip.bind(Ship))
 	Ships.remove_at(index)
 
 func FixMarkerClipping() -> void:

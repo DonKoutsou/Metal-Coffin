@@ -11,11 +11,18 @@
 script = ExtResource("5_732nf")
 UpgradeName = 3
 UpgradeAmmount = 1.0
+CurrentValue = 1.0
+
+[sub_resource type="Resource" id="Resource_tpg1n"]
+script = ExtResource("5_732nf")
+UpgradeName = 4
+UpgradeAmmount = 30.0
+CurrentValue = 30.0
 
 [resource]
 script = ExtResource("6_s2jcy")
 WType = 5
-Upgrades = Array[ExtResource("5_732nf")]([SubResource("Resource_fmxhr")])
+Upgrades = Array[ExtResource("5_732nf")]([SubResource("Resource_fmxhr"), SubResource("Resource_tpg1n")])
 UpgradeVersion = ExtResource("4_3704d")
 UpgradeTime = 600.0
 ItemName = "Drone Dock"
