@@ -118,7 +118,7 @@ CardProviding = Array[ExtResource("4_xbxhh")]([ExtResource("11_goor5")])
 Cost = 200
 MaxStackCount = 99
 
-[sub_resource type="Resource" id="Resource_hnpap"]
+[sub_resource type="Resource" id="Resource_jiih6"]
 resource_local_to_scene = true
 script = ExtResource("5_ghxqh")
 CaptainName = "Tick"
@@ -127,7 +127,7 @@ ShipCallsign = "P1"
 StartingItems = Array[ExtResource("7_5qtwm")]([ExtResource("8_ubtua"), ExtResource("9_ixrgj"), ExtResource("9_ixrgj"), ExtResource("10_7bp8q"), SubResource("Resource_fukcl"), SubResource("Resource_fukcl"), SubResource("Resource_fukcl"), ExtResource("12_lrb77"), ExtResource("12_lrb77"), ExtResource("12_lrb77"), ExtResource("13_lp55k"), ExtResource("13_lp55k"), ExtResource("13_lp55k")])
 ProvidingFunds = 25000
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_avs2p"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hnpap"]
 resource_local_to_scene = true
 shader = ExtResource("14_t4fx1")
 shader_parameter/ShipSize = 0.08
@@ -136,7 +136,7 @@ shader_parameter/sprite_rotation = -1.57
 shader_parameter/palette_index = 1
 shader_parameter/color_T = 0.1
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_yjcdp"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_avs2p"]
 resource_local_to_scene = true
 radius = 150.0
 
@@ -147,17 +147,17 @@ ShipName = ""
 Patrol = true
 Convoy = false
 BT = ExtResource("8_w8ob0")
-Cpt = SubResource("Resource_hnpap")
+Cpt = SubResource("Resource_jiih6")
 Dock = NodePath("DroneDock")
 
 [node name="ColorRect" parent="." index="1" unique_id=1708187202]
-material = SubResource("ShaderMaterial_avs2p")
+material = SubResource("ShaderMaterial_hnpap")
 
 [node name="Radar" parent="." index="3" unique_id=1177421846]
 script = ExtResource("17_jiih6")
 
 [node name="CollisionShape2D" parent="Radar" index="0" unique_id=689109080]
-shape = SubResource("CircleShape2D_yjcdp")
+shape = SubResource("CircleShape2D_avs2p")
 
 [node name="DroneDock" parent="." index="4" unique_id=2097404777 instance=ExtResource("7_hahnw")]
 collision_layer = 8

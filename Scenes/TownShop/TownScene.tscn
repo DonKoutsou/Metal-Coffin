@@ -3,8 +3,6 @@
 [ext_resource type="Theme" uid="uid://de7fb8k462lxb" path="res://MetalEngineBase/Theme/PopTheme.tres" id="1_ca22g"]
 [ext_resource type="Script" uid="uid://bagv52808c2n2" path="res://Scenes/TownShop/town_scene.gd" id="2_epy1b"]
 [ext_resource type="Resource" uid="uid://cl03ayn238giq" path="res://Resources/Funds/PlayerWallet.tres" id="3_t244x"]
-[ext_resource type="PackedScene" uid="uid://d3irrnfaw10g4" path="res://Scenes/TownShop/RepairStation.tscn" id="5_otyss"]
-[ext_resource type="PackedScene" uid="uid://bhcsc4won0txa" path="res://Scenes/TownShop/RrecruitSHop/RecruitShop.tscn" id="7_3xe8e"]
 [ext_resource type="PackedScene" uid="uid://cdocsye77jsgy" path="res://Scenes/TownShop/RrecruitSHop/Tavern.tscn" id="7_box5h"]
 [ext_resource type="FontFile" uid="uid://deh3dur6dnr3v" path="res://MetalEngineBase/Fonts/DOTMBold.TTF" id="8_2uwot"]
 [ext_resource type="PackedScene" uid="uid://b3igywymiutks" path="res://Minigames/MissileCommand/MissileCommandMain.tscn" id="8_plrk5"]
@@ -53,10 +51,8 @@ RecruitButton = NodePath("Button6")
 RecruitButton2 = NodePath("PanelContainer/VBoxContainer2/VBoxContainer/Recruit")
 MerchShopScene = ExtResource("17_vaeb3")
 FuelStorageScene = ExtResource("18_u4st4")
-RepairStationScene = ExtResource("5_otyss")
 WorkshopScene = ExtResource("17_t244x")
 TavernScene = ExtResource("7_box5h")
-RecruitShopScene = ExtResource("7_3xe8e")
 MinigameScene = ExtResource("8_plrk5")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1803057310]

@@ -28,6 +28,26 @@ func UpdateElint(delta: float) -> void:
 		else:
 			ElintContact.emit(ClosestShip ,true)
 
+#-----------------------------------------------------------------------------------
+func UpdateELINTTRange():
+	(collision_shape_2d.shape as CircleShape2D).radius = ElintStat.GetCurrentValue(false)
+	ElintRangeChanged.emit()
+
+#-----------------------------------------------------------------------------------
+func GetElintLevel(DistSq : float, RadarL : float) -> int:
+	var Lvl = -1
+	var RadarLSq = RadarL * RadarL
+	var ElintDist = ElintStat.GetCurrentValue(false)
+	if (ElintDist == 0 or RadarL <= MapShip.BASE_SHIP_VIZ):
+		return Lvl
+	if (DistSq < RadarLSq):
+		Lvl = 3
+	else : if (DistSq < RadarLSq * 2):
+		Lvl = 2
+	else : if (DistSq < RadarLSq * 10):
+		Lvl = 1
+	return Lvl
+
 func BodyEnteredElint(area: Area2D) -> void:
 	if (area.get_parent() is HostileShip):
 		return

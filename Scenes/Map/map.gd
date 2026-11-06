@@ -106,11 +106,11 @@ func _InitialPlayerPlacament(StartingFuel : float, IsPrologue : bool = false):
 	PlShip.SetShipPosition(pos)
 	#_Camera.FrameCamToPlayer()
 	PlShip.ShipLookAt(firstvilage.global_position)
-	PlShip.Cpt._GetStat(STAT_CONST.STATS.FUEL_TANK).ConsumeResource(PlShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK) - StartingFuel)
+	PlShip.Cpt.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, PlShip.Cpt.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK) - StartingFuel)
 	if (IsPrologue):
-		for g in PlShip.Cpt.ProvidingCaptains:
+		for g : Captain in PlShip.Cpt.ProvidingCaptains:
 			PlShip.GetDock().AddCaptain(g, false)
-			g._GetStat(STAT_CONST.STATS.FUEL_TANK).ConsumeResource(g.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK) - StartingFuel)
+			g.ConsumeResource(STAT_CONST.STATS.FUEL_TANK, g.GetStatFinalValue(STAT_CONST.STATS.FUEL_TANK) - StartingFuel)
 	
 		var SimulationTrigger = TutorialTrigger.instantiate() as TutTrigger
 		SimulationTrigger.Inscreen = false

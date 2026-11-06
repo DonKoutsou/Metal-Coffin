@@ -79,8 +79,7 @@ func _ready() -> void:
 	if (SonarShape != null):
 		SonarShape.SonarStat = Cpt._GetStat(STAT_CONST.STATS.AEROSONAR_RANGE)
 	_UpdateShipIcon(Cpt.GetHullData(), Cpt.col)
-	for g in Cpt.CaptainStats:
-		g.ForceMaxValue()
+	Cpt.FullyRefilAll()
 
 func IsCommander() -> bool:
 	return Command == null

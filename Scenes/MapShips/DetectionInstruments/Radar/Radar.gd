@@ -31,7 +31,7 @@ func UpdateVizRange():
 	if (!Working):
 		NewRange = MapShip.BASE_SHIP_VIZ * VisualRangePenalty * StormPenalty
 	else:
-		NewRange = max(MapShip.BASE_SHIP_VIZ * VisualRangePenalty, VisStat.GetCurrentValue()) * StormPenalty
+		NewRange = max(MapShip.BASE_SHIP_VIZ * VisualRangePenalty, VisStat.GetCurrentValue(false)) * StormPenalty
 	NewRange = roundi(NewRange)
 	if (NewRange == CurrentVisualRange):
 		return

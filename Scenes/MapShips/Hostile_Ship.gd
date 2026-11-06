@@ -105,8 +105,7 @@ func InitialiseShip() -> void:
 	ShipSpawned.emit()
 	
 	if (!LoadingSave):
-		for g in Cpt.CaptainStats:
-			g.ForceMaxValue()
+		Cpt.FullyRefilAll()
 	
 	if (Destroyed):
 		Kill()

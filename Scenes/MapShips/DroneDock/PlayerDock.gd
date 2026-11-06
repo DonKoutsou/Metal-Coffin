@@ -115,8 +115,9 @@ func LaunchDrone(Dr : PlayerDrivenShip, Target : MapShip) -> void:
 		Dr.EnableDrone()
 
 func AddShipToHierarchy(Ship : MapShip) -> void:
-	super(Ship)
 	DroneDockEventH.OnDroneAdded(Ship, get_parent())
+	super(Ship)
+	
 
 func DockShip(ship : MapShip):
 	super(ship)

@@ -26,7 +26,7 @@ func ToggleElint(t : bool):
 
 #-----------------------------------------------------------------------------------
 func UpdateELINTTRange():
-	(collision_shape_2d.shape as CircleShape2D).radius = ElintStat.GetCurrentValue()
+	(collision_shape_2d.shape as CircleShape2D).radius = ElintStat.GetCurrentValue(true)
 	ElintRangeChanged.emit()
 
 var d = 0.4
@@ -115,7 +115,7 @@ func GetClosestElintLevel() -> int:
 func GetElintLevel(DistSq : float, RadarL : float) -> int:
 	var Lvl = -1
 	var RadarLSq = RadarL * RadarL
-	var ElintDist = ElintStat.GetCurrentValue()
+	var ElintDist = ElintStat.GetCurrentValue(true)
 	if (ElintDist == 0 or RadarL <= MapShip.BASE_SHIP_VIZ):
 		return Lvl
 	if (DistSq < RadarLSq):

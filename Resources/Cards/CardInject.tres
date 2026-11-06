@@ -18,5 +18,4 @@ script = ExtResource("5_j6ta4")
 txFile = "uid://c8q224j8pwjre"
 CardName = "Card Inject"
 Energy = 2
-AllowDuplicates = true
 OnUseModules = Array[ExtResource("2_ybrsn")]([SubResource("Resource_h6qxb")])

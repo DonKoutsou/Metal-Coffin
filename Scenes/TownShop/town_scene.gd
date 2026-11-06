@@ -24,7 +24,6 @@ class_name TownScene
 @export_group("Scenes")
 @export var MerchShopScene : PackedScene
 @export var FuelStorageScene : PackedScene
-@export var RepairStationScene : PackedScene
 @export var WorkshopScene : PackedScene
 @export var TavernScene : PackedScene
 @export var RecruitShopScene : PackedScene
@@ -90,15 +89,6 @@ func OnRefuelShopPressed() -> void:
 	Scene.Init(BoughtFuel, FuelPricePerTon, LandedShips, TownSpot)
 	Scene.FuelTransactionFinished.connect(FuelExchangeFinished)
 	ActionTracker.OnActionCompleted(ActionTracker.Action.FUEL_SHOP)
-
-func OnRepairStationPressed() -> void:
-	var Scene = RepairStationScene.instantiate() as RepairStation
-	add_child(Scene)
-
-	Scene.Init(TownSpot.HasRepair(), LandedShips)
-	#Scene.FuelTransactionFinished.connect(FuelExchangeFinished)
-	ActionTracker.OnActionCompleted(ActionTracker.Action.REPAIR_SHOP)
-
 
 func FuelExchangeFinished(Fuel : float) -> void:
 	BoughtFuel = Fuel
