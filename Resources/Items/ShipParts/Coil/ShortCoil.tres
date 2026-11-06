@@ -34,7 +34,6 @@ UpgradeVersion = ExtResource("4")
 UpgradeTime = 600.0
 disp = 1
 DispositionAmm = 0.2
-Repair_Parts = null
 ItemName = "Coil"
 ItemDesc = "WIP"
 PartType = 4

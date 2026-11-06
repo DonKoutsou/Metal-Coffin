@@ -204,8 +204,13 @@ func UpdateFuelBar(AddedFuel : float):
 
 func FuelBar_gui_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion and Input.is_action_pressed("Click") or event is InputEventScreenDrag):
-		var rel = event.relative
-		var AddedFuel = roundi(((rel.x / 3) * (FuelBar.max_value / 100)))
+		
+		var bar_width = FuelBar.size.x
+		var max_value = FuelBar.max_value
+
+		var progress_per_pixel = max_value / bar_width
+
+		var AddedFuel = roundi(event.relative.x * progress_per_pixel)
 		UpdateFuelBar(AddedFuel)
 
 func _on_leave_fuel_storage_pressed() -> void:
